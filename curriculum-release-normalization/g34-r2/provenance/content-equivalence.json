@@ -1,0 +1,19 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "claim": "Every byte of instructional content copied from g34-r1 is unchanged. The only differences in any lesson record are the declared metadata fields, and applying the documented inverse reproduces the candidate's own JSONL lines byte for byte.",
+  "lessons": 1800,
+  "roundtrip_byte_identical": 1800,
+  "instructional_digest_equal": 1800,
+  "citation_sequence_equal": 1800,
+  "fields_excluded_from_the_instructional_digest": [
+    "standards",
+    "schema_version",
+    "authored_schema_version"
+  ],
+  "verbatim_files": {
+    "count": 167,
+    "byte_identical": 167
+  },
+  "per_lesson_evidence": "provenance/lesson-content-digests.csv",
+  "verbatim_file_evidence": "provenance/verbatim-files.json"
+}

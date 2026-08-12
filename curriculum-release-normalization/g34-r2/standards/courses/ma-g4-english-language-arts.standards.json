@@ -1,0 +1,967 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g4-english-language-arts",
+  "grade": 4,
+  "subject": "english-language-arts",
+  "matrix_subject_slug": "english-language-arts",
+  "standards_ref": "standards-reference.md#english-language-arts",
+  "official_source": "Michigan K-12 Standards: English Language Arts (MDE)",
+  "custody": "lane-authored standards artifact present",
+  "lane_artifacts": [
+    "standards/sources/english-language-arts/standards/standards-map.json",
+    "standards/sources/english-language-arts/standards/michigan-ela-g3.json",
+    "standards/sources/english-language-arts/standards/michigan-ela-g4.json",
+    "standards/sources/english-language-arts/standards/standards-reference.md"
+  ],
+  "projection_note": "Every entry below is a citation the lane already authored on a lesson in this course. Nothing here adds, renames, or reinterprets a standard; counts and mapping_status are derived by adapters/standards-mapping-policy.json.",
+  "totals": {
+    "citations": 338,
+    "distinct": 44,
+    "canonical": 338,
+    "unverified": 0,
+    "human-review": 0
+  },
+  "standards": [
+    {
+      "code_or_strand": "4.L.1",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 10,
+      "unit_numbers": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l13",
+        "ma-g4-english-language-arts-u01-l17",
+        "ma-g4-english-language-arts-u04-l13",
+        "ma-g4-english-language-arts-u05-l13",
+        "ma-g4-english-language-arts-u06-l13",
+        "ma-g4-english-language-arts-u06-l17",
+        "ma-g4-english-language-arts-u07-l13",
+        "ma-g4-english-language-arts-u08-l13",
+        "ma-g4-english-language-arts-u10-l13",
+        "ma-g4-english-language-arts-u10-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.L.2",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 4,
+      "unit_numbers": [
+        6,
+        9,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u06-l13",
+        "ma-g4-english-language-arts-u06-l17",
+        "ma-g4-english-language-arts-u09-l13",
+        "ma-g4-english-language-arts-u10-l13"
+      ]
+    },
+    {
+      "code_or_strand": "4.L.3",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        6,
+        7,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u06-l10",
+        "ma-g4-english-language-arts-u06-l14",
+        "ma-g4-english-language-arts-u07-l02",
+        "ma-g4-english-language-arts-u07-l08",
+        "ma-g4-english-language-arts-u08-l11",
+        "ma-g4-english-language-arts-u08-l13"
+      ]
+    },
+    {
+      "code_or_strand": "4.L.4",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 4,
+      "unit_numbers": [
+        2,
+        4,
+        8,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u02-l02",
+        "ma-g4-english-language-arts-u04-l02",
+        "ma-g4-english-language-arts-u08-l02",
+        "ma-g4-english-language-arts-u09-l02"
+      ]
+    },
+    {
+      "code_or_strand": "4.L.5",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 8,
+      "unit_numbers": [
+        3,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u03-l10",
+        "ma-g4-english-language-arts-u03-l16",
+        "ma-g4-english-language-arts-u08-l08",
+        "ma-g4-english-language-arts-u08-l09",
+        "ma-g4-english-language-arts-u08-l10",
+        "ma-g4-english-language-arts-u08-l11",
+        "ma-g4-english-language-arts-u08-l16",
+        "ma-g4-english-language-arts-u08-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.L.6",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u03-l02",
+        "ma-g4-english-language-arts-u04-l10",
+        "ma-g4-english-language-arts-u05-l02",
+        "ma-g4-english-language-arts-u06-l02",
+        "ma-g4-english-language-arts-u07-l02",
+        "ma-g4-english-language-arts-u10-l02"
+      ]
+    },
+    {
+      "code_or_strand": "4.RF.3",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 4,
+      "unit_numbers": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l02",
+        "ma-g4-english-language-arts-u02-l02",
+        "ma-g4-english-language-arts-u04-l02",
+        "ma-g4-english-language-arts-u08-l02"
+      ]
+    },
+    {
+      "code_or_strand": "4.RF.4",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 10,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l05",
+        "ma-g4-english-language-arts-u02-l05",
+        "ma-g4-english-language-arts-u03-l05",
+        "ma-g4-english-language-arts-u04-l05",
+        "ma-g4-english-language-arts-u05-l05",
+        "ma-g4-english-language-arts-u06-l05",
+        "ma-g4-english-language-arts-u07-l05",
+        "ma-g4-english-language-arts-u08-l05",
+        "ma-g4-english-language-arts-u09-l05",
+        "ma-g4-english-language-arts-u10-l05"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.1",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 22,
+      "unit_numbers": [
+        1,
+        4,
+        5,
+        7,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l01",
+        "ma-g4-english-language-arts-u01-l03",
+        "ma-g4-english-language-arts-u01-l04",
+        "ma-g4-english-language-arts-u01-l06",
+        "ma-g4-english-language-arts-u01-l07",
+        "ma-g4-english-language-arts-u01-l08",
+        "ma-g4-english-language-arts-u01-l09",
+        "ma-g4-english-language-arts-u01-l10",
+        "ma-g4-english-language-arts-u01-l11",
+        "ma-g4-english-language-arts-u01-l15",
+        "ma-g4-english-language-arts-u01-l16",
+        "ma-g4-english-language-arts-u01-l17",
+        "ma-g4-english-language-arts-u04-l04",
+        "ma-g4-english-language-arts-u04-l05",
+        "ma-g4-english-language-arts-u04-l11",
+        "ma-g4-english-language-arts-u04-l17",
+        "ma-g4-english-language-arts-u05-l04",
+        "ma-g4-english-language-arts-u05-l05",
+        "ma-g4-english-language-arts-u05-l08",
+        "ma-g4-english-language-arts-u05-l17",
+        "ma-g4-english-language-arts-u07-l05",
+        "ma-g4-english-language-arts-u09-l05"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.10",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 2,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u10-l15",
+        "ma-g4-english-language-arts-u10-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.2",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 9,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u04-l01",
+        "ma-g4-english-language-arts-u04-l03",
+        "ma-g4-english-language-arts-u04-l04",
+        "ma-g4-english-language-arts-u04-l05",
+        "ma-g4-english-language-arts-u04-l06",
+        "ma-g4-english-language-arts-u04-l09",
+        "ma-g4-english-language-arts-u04-l15",
+        "ma-g4-english-language-arts-u04-l16",
+        "ma-g4-english-language-arts-u04-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.3",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u04-l07",
+        "ma-g4-english-language-arts-u04-l08",
+        "ma-g4-english-language-arts-u04-l13",
+        "ma-g4-english-language-arts-u04-l15",
+        "ma-g4-english-language-arts-u04-l16",
+        "ma-g4-english-language-arts-u04-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.4",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 4,
+      "unit_numbers": [
+        4,
+        5
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u04-l02",
+        "ma-g4-english-language-arts-u04-l10",
+        "ma-g4-english-language-arts-u04-l18",
+        "ma-g4-english-language-arts-u05-l02"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.5",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 14,
+      "unit_numbers": [
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u05-l01",
+        "ma-g4-english-language-arts-u05-l03",
+        "ma-g4-english-language-arts-u05-l04",
+        "ma-g4-english-language-arts-u05-l05",
+        "ma-g4-english-language-arts-u05-l06",
+        "ma-g4-english-language-arts-u05-l07",
+        "ma-g4-english-language-arts-u05-l08",
+        "ma-g4-english-language-arts-u05-l09",
+        "ma-g4-english-language-arts-u05-l12",
+        "ma-g4-english-language-arts-u05-l13",
+        "ma-g4-english-language-arts-u05-l15",
+        "ma-g4-english-language-arts-u05-l16",
+        "ma-g4-english-language-arts-u05-l17",
+        "ma-g4-english-language-arts-u06-l05"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.6",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 3,
+      "unit_numbers": [
+        7
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u07-l10",
+        "ma-g4-english-language-arts-u07-l11",
+        "ma-g4-english-language-arts-u07-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.7",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 8,
+      "unit_numbers": [
+        5,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u05-l10",
+        "ma-g4-english-language-arts-u05-l11",
+        "ma-g4-english-language-arts-u05-l12",
+        "ma-g4-english-language-arts-u05-l15",
+        "ma-g4-english-language-arts-u05-l16",
+        "ma-g4-english-language-arts-u05-l17",
+        "ma-g4-english-language-arts-u05-l18",
+        "ma-g4-english-language-arts-u09-l10"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.8",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 5,
+      "unit_numbers": [
+        7
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u07-l05",
+        "ma-g4-english-language-arts-u07-l06",
+        "ma-g4-english-language-arts-u07-l09",
+        "ma-g4-english-language-arts-u07-l16",
+        "ma-g4-english-language-arts-u07-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RI.9",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 3,
+      "unit_numbers": [
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u09-l12",
+        "ma-g4-english-language-arts-u09-l16",
+        "ma-g4-english-language-arts-u09-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.1",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 17,
+      "unit_numbers": [
+        1,
+        2,
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l01",
+        "ma-g4-english-language-arts-u01-l03",
+        "ma-g4-english-language-arts-u01-l04",
+        "ma-g4-english-language-arts-u01-l05",
+        "ma-g4-english-language-arts-u01-l07",
+        "ma-g4-english-language-arts-u01-l08",
+        "ma-g4-english-language-arts-u01-l15",
+        "ma-g4-english-language-arts-u01-l16",
+        "ma-g4-english-language-arts-u01-l17",
+        "ma-g4-english-language-arts-u02-l05",
+        "ma-g4-english-language-arts-u02-l08",
+        "ma-g4-english-language-arts-u02-l11",
+        "ma-g4-english-language-arts-u02-l17",
+        "ma-g4-english-language-arts-u03-l03",
+        "ma-g4-english-language-arts-u03-l04",
+        "ma-g4-english-language-arts-u03-l05",
+        "ma-g4-english-language-arts-u03-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.10",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 5,
+      "unit_numbers": [
+        2,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u02-l15",
+        "ma-g4-english-language-arts-u10-l01",
+        "ma-g4-english-language-arts-u10-l05",
+        "ma-g4-english-language-arts-u10-l15",
+        "ma-g4-english-language-arts-u10-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.2",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 14,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u02-l01",
+        "ma-g4-english-language-arts-u02-l03",
+        "ma-g4-english-language-arts-u02-l04",
+        "ma-g4-english-language-arts-u02-l05",
+        "ma-g4-english-language-arts-u02-l06",
+        "ma-g4-english-language-arts-u02-l07",
+        "ma-g4-english-language-arts-u02-l08",
+        "ma-g4-english-language-arts-u02-l09",
+        "ma-g4-english-language-arts-u02-l10",
+        "ma-g4-english-language-arts-u02-l13",
+        "ma-g4-english-language-arts-u02-l15",
+        "ma-g4-english-language-arts-u02-l16",
+        "ma-g4-english-language-arts-u02-l17",
+        "ma-g4-english-language-arts-u02-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.3",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 9,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u03-l01",
+        "ma-g4-english-language-arts-u03-l03",
+        "ma-g4-english-language-arts-u03-l04",
+        "ma-g4-english-language-arts-u03-l05",
+        "ma-g4-english-language-arts-u03-l06",
+        "ma-g4-english-language-arts-u03-l09",
+        "ma-g4-english-language-arts-u03-l13",
+        "ma-g4-english-language-arts-u03-l16",
+        "ma-g4-english-language-arts-u03-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.4",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 7,
+      "unit_numbers": [
+        3,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u03-l10",
+        "ma-g4-english-language-arts-u08-l02",
+        "ma-g4-english-language-arts-u08-l05",
+        "ma-g4-english-language-arts-u08-l07",
+        "ma-g4-english-language-arts-u08-l08",
+        "ma-g4-english-language-arts-u08-l16",
+        "ma-g4-english-language-arts-u08-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.5",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 10,
+      "unit_numbers": [
+        2,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u02-l10",
+        "ma-g4-english-language-arts-u08-l01",
+        "ma-g4-english-language-arts-u08-l03",
+        "ma-g4-english-language-arts-u08-l04",
+        "ma-g4-english-language-arts-u08-l05",
+        "ma-g4-english-language-arts-u08-l06",
+        "ma-g4-english-language-arts-u08-l12",
+        "ma-g4-english-language-arts-u08-l13",
+        "ma-g4-english-language-arts-u08-l16",
+        "ma-g4-english-language-arts-u08-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.6",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 4,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u03-l07",
+        "ma-g4-english-language-arts-u03-l08",
+        "ma-g4-english-language-arts-u03-l16",
+        "ma-g4-english-language-arts-u03-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.7",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 3,
+      "unit_numbers": [
+        3,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u03-l11",
+        "ma-g4-english-language-arts-u03-l18",
+        "ma-g4-english-language-arts-u08-l15"
+      ]
+    },
+    {
+      "code_or_strand": "4.RL.9",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 2,
+      "unit_numbers": [
+        3,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u03-l15",
+        "ma-g4-english-language-arts-u10-l11"
+      ]
+    },
+    {
+      "code_or_strand": "4.SL.1",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 3,
+      "unit_numbers": [
+        1,
+        2,
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l14",
+        "ma-g4-english-language-arts-u02-l14",
+        "ma-g4-english-language-arts-u03-l14"
+      ]
+    },
+    {
+      "code_or_strand": "4.SL.2",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 2,
+      "unit_numbers": [
+        5,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u05-l14",
+        "ma-g4-english-language-arts-u09-l14"
+      ]
+    },
+    {
+      "code_or_strand": "4.SL.3",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 2,
+      "unit_numbers": [
+        7,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u07-l14",
+        "ma-g4-english-language-arts-u09-l14"
+      ]
+    },
+    {
+      "code_or_strand": "4.SL.4",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 3,
+      "unit_numbers": [
+        4,
+        7,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u04-l14",
+        "ma-g4-english-language-arts-u07-l14",
+        "ma-g4-english-language-arts-u10-l14"
+      ]
+    },
+    {
+      "code_or_strand": "4.SL.5",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 2,
+      "unit_numbers": [
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u08-l14",
+        "ma-g4-english-language-arts-u08-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.SL.6",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 2,
+      "unit_numbers": [
+        6,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u06-l14",
+        "ma-g4-english-language-arts-u10-l14"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.1",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 11,
+      "unit_numbers": [
+        7
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u07-l01",
+        "ma-g4-english-language-arts-u07-l03",
+        "ma-g4-english-language-arts-u07-l04",
+        "ma-g4-english-language-arts-u07-l07",
+        "ma-g4-english-language-arts-u07-l08",
+        "ma-g4-english-language-arts-u07-l09",
+        "ma-g4-english-language-arts-u07-l12",
+        "ma-g4-english-language-arts-u07-l13",
+        "ma-g4-english-language-arts-u07-l15",
+        "ma-g4-english-language-arts-u07-l16",
+        "ma-g4-english-language-arts-u07-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.10",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 5,
+      "unit_numbers": [
+        1,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l12",
+        "ma-g4-english-language-arts-u01-l18",
+        "ma-g4-english-language-arts-u08-l12",
+        "ma-g4-english-language-arts-u08-l13",
+        "ma-g4-english-language-arts-u08-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.2",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 15,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u06-l01",
+        "ma-g4-english-language-arts-u06-l02",
+        "ma-g4-english-language-arts-u06-l03",
+        "ma-g4-english-language-arts-u06-l04",
+        "ma-g4-english-language-arts-u06-l05",
+        "ma-g4-english-language-arts-u06-l06",
+        "ma-g4-english-language-arts-u06-l07",
+        "ma-g4-english-language-arts-u06-l08",
+        "ma-g4-english-language-arts-u06-l09",
+        "ma-g4-english-language-arts-u06-l10",
+        "ma-g4-english-language-arts-u06-l11",
+        "ma-g4-english-language-arts-u06-l12",
+        "ma-g4-english-language-arts-u06-l15",
+        "ma-g4-english-language-arts-u06-l16",
+        "ma-g4-english-language-arts-u06-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.3",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 11,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u10-l01",
+        "ma-g4-english-language-arts-u10-l02",
+        "ma-g4-english-language-arts-u10-l03",
+        "ma-g4-english-language-arts-u10-l04",
+        "ma-g4-english-language-arts-u10-l05",
+        "ma-g4-english-language-arts-u10-l06",
+        "ma-g4-english-language-arts-u10-l07",
+        "ma-g4-english-language-arts-u10-l08",
+        "ma-g4-english-language-arts-u10-l09",
+        "ma-g4-english-language-arts-u10-l10",
+        "ma-g4-english-language-arts-u10-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.4",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 20,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l06",
+        "ma-g4-english-language-arts-u01-l09",
+        "ma-g4-english-language-arts-u01-l10",
+        "ma-g4-english-language-arts-u01-l12",
+        "ma-g4-english-language-arts-u01-l13",
+        "ma-g4-english-language-arts-u01-l16",
+        "ma-g4-english-language-arts-u01-l17",
+        "ma-g4-english-language-arts-u02-l12",
+        "ma-g4-english-language-arts-u03-l12",
+        "ma-g4-english-language-arts-u04-l12",
+        "ma-g4-english-language-arts-u06-l04",
+        "ma-g4-english-language-arts-u06-l06",
+        "ma-g4-english-language-arts-u06-l12",
+        "ma-g4-english-language-arts-u06-l16",
+        "ma-g4-english-language-arts-u06-l17",
+        "ma-g4-english-language-arts-u07-l12",
+        "ma-g4-english-language-arts-u10-l04",
+        "ma-g4-english-language-arts-u10-l12",
+        "ma-g4-english-language-arts-u10-l16",
+        "ma-g4-english-language-arts-u10-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.5",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 21,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l13",
+        "ma-g4-english-language-arts-u01-l18",
+        "ma-g4-english-language-arts-u02-l13",
+        "ma-g4-english-language-arts-u02-l18",
+        "ma-g4-english-language-arts-u03-l13",
+        "ma-g4-english-language-arts-u03-l18",
+        "ma-g4-english-language-arts-u04-l13",
+        "ma-g4-english-language-arts-u04-l18",
+        "ma-g4-english-language-arts-u05-l13",
+        "ma-g4-english-language-arts-u05-l18",
+        "ma-g4-english-language-arts-u06-l08",
+        "ma-g4-english-language-arts-u06-l09",
+        "ma-g4-english-language-arts-u06-l13",
+        "ma-g4-english-language-arts-u06-l18",
+        "ma-g4-english-language-arts-u07-l13",
+        "ma-g4-english-language-arts-u07-l18",
+        "ma-g4-english-language-arts-u09-l13",
+        "ma-g4-english-language-arts-u10-l08",
+        "ma-g4-english-language-arts-u10-l09",
+        "ma-g4-english-language-arts-u10-l13",
+        "ma-g4-english-language-arts-u10-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.6",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 4,
+      "unit_numbers": [
+        6,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u06-l11",
+        "ma-g4-english-language-arts-u06-l18",
+        "ma-g4-english-language-arts-u10-l12",
+        "ma-g4-english-language-arts-u10-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.7",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u09-l01",
+        "ma-g4-english-language-arts-u09-l03",
+        "ma-g4-english-language-arts-u09-l04",
+        "ma-g4-english-language-arts-u09-l15",
+        "ma-g4-english-language-arts-u09-l16",
+        "ma-g4-english-language-arts-u09-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.8",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 13,
+      "unit_numbers": [
+        1,
+        7,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u01-l11",
+        "ma-g4-english-language-arts-u07-l11",
+        "ma-g4-english-language-arts-u09-l04",
+        "ma-g4-english-language-arts-u09-l05",
+        "ma-g4-english-language-arts-u09-l06",
+        "ma-g4-english-language-arts-u09-l07",
+        "ma-g4-english-language-arts-u09-l08",
+        "ma-g4-english-language-arts-u09-l09",
+        "ma-g4-english-language-arts-u09-l11",
+        "ma-g4-english-language-arts-u09-l15",
+        "ma-g4-english-language-arts-u09-l16",
+        "ma-g4-english-language-arts-u09-l17",
+        "ma-g4-english-language-arts-u09-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.9a",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        2,
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u02-l11",
+        "ma-g4-english-language-arts-u02-l12",
+        "ma-g4-english-language-arts-u02-l16",
+        "ma-g4-english-language-arts-u02-l17",
+        "ma-g4-english-language-arts-u03-l06",
+        "ma-g4-english-language-arts-u03-l12"
+      ]
+    },
+    {
+      "code_or_strand": "4.W.9b",
+      "source": "standards-reference.md#english-language-arts",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 13,
+      "unit_numbers": [
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-english-language-arts-u04-l11",
+        "ma-g4-english-language-arts-u04-l12",
+        "ma-g4-english-language-arts-u04-l16",
+        "ma-g4-english-language-arts-u05-l11",
+        "ma-g4-english-language-arts-u06-l07",
+        "ma-g4-english-language-arts-u06-l15",
+        "ma-g4-english-language-arts-u07-l04",
+        "ma-g4-english-language-arts-u07-l11",
+        "ma-g4-english-language-arts-u07-l15",
+        "ma-g4-english-language-arts-u07-l17",
+        "ma-g4-english-language-arts-u09-l12",
+        "ma-g4-english-language-arts-u09-l13",
+        "ma-g4-english-language-arts-u09-l18"
+      ]
+    }
+  ]
+}

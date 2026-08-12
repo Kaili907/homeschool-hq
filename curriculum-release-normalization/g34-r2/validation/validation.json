@@ -1,0 +1,203 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "normalized_on": "2026-08-12",
+  "overall": "PASS",
+  "verdicts": {
+    "release_contract_conformance": "PASS",
+    "normalization_integrity": "PASS",
+    "preservation": "PASS"
+  },
+  "counts": {
+    "courses": 20,
+    "units": 154,
+    "lessons": 1800,
+    "assessments": 154,
+    "scheduled_sessions": 1800
+  },
+  "standards_mapping_status": {
+    "canonical": 1210,
+    "unverified": 2850,
+    "human-review": 697
+  },
+  "external_gates": [
+    "PENDING_FINAL_HEALTH_REVIEW on ma-g{3,4}-health and ma-g{3,4}-physical-education: a named licensed reviewer has not signed off. Carried forward from the candidate, unchanged, and explicitly out of scope for normalization."
+  ],
+  "groups": {
+    "release_contract_conformance": [
+      {
+        "check": "two-grades",
+        "result": "PASS",
+        "detail": "grades present: [3, 4]"
+      },
+      {
+        "check": "ten-courses-per-grade",
+        "result": "PASS",
+        "detail": "grade 3: 10 courses, one per canonical subject; grade 4: 10 courses, one per canonical subject"
+      },
+      {
+        "check": "course-count",
+        "result": "PASS",
+        "detail": "20 courses"
+      },
+      {
+        "check": "unique-course-ids",
+        "result": "PASS",
+        "detail": "20 distinct of 20"
+      },
+      {
+        "check": "unique-unit-ids",
+        "result": "PASS",
+        "detail": "154 units, 154 distinct"
+      },
+      {
+        "check": "unique-lesson-ids",
+        "result": "PASS",
+        "detail": "1800 lessons, 1800 distinct; 0 fail the grade34 lesson-id pattern"
+      },
+      {
+        "check": "schedule-covers-every-lesson-once",
+        "result": "PASS",
+        "detail": "all 20 courses: every lesson scheduled exactly once, no unscheduled lesson"
+      },
+      {
+        "check": "week-coverage",
+        "result": "PASS",
+        "detail": "all 20 courses span exactly weeks 1-36 with no empty week"
+      },
+      {
+        "check": "lesson-schema-compatibility",
+        "result": "PASS",
+        "detail": "all 1800 lessons validate against schemas/lesson.release.v1.json"
+      },
+      {
+        "check": "lesson-schema-compatibility-against-unmodified-release-schema",
+        "result": "REPORTED",
+        "detail": "216 of 1800 lessons fail standards/sources/release/lesson-schema.json as the release-standards lane authored it. Remaining reasons: 'arts-and-music' not in enum (144); 'technology' not in enum (72). This is the stale subject enum recorded in the r1 custody report section 5, not a content defect; adapters/subject-slug-map.json translates in both directions."
+      },
+      {
+        "check": "required-standards-and-objectives",
+        "result": "PASS",
+        "detail": "learning_objectives >= 3: PASS on all 1800 lessons. standards entry carrying a mapping_status: PASS on 1800 of 1800 lessons (4757 of 4757 citations carry one)."
+      },
+      {
+        "check": "accessibility-depth",
+        "result": "PASS",
+        "detail": "0 lessons below 5 entries; minimum observed is 6"
+      },
+      {
+        "check": "no-media-path",
+        "result": "PASS",
+        "detail": "0 lessons name no text/transcript/description/demonstration fallback (keyword heuristic over accessibility_and_accommodations; human review still required)"
+      },
+      {
+        "check": "safety-privacy-depth",
+        "result": "PASS",
+        "detail": "0 lessons below 2 entries; minimum observed is 4"
+      },
+      {
+        "check": "safety-privacy-content",
+        "result": "PASS",
+        "detail": "0 non-prohibiting uses of a banned disclosure term across 1800 lessons (keyword heuristic that ignores explicit prohibitions such as 'no photo required'; human review still required)"
+      },
+      {
+        "check": "multi-occasion-mastery",
+        "result": "PASS",
+        "detail": "0 lessons whose mastery_rule does not name multiple evidence occasions (keyword heuristic; human review still required)"
+      },
+      {
+        "check": "standards-mapping-status-reported",
+        "result": "PASS",
+        "detail": "4757 standards citations across 1800 lessons; all 4757 carry a per-citation mapping_status. Rollup: canonical 1210, unverified 2850, human-review 697. Derivation: adapters/standards-mapping-policy.json; per-course detail: standards/standards-rollup.json."
+      }
+    ],
+    "normalization_integrity": [
+      {
+        "check": "input-candidate-verified",
+        "result": "PASS",
+        "detail": "g34-r1 re-hashed against its own SHA256SUMS.txt before reading: 195 files, 0 differ"
+      },
+      {
+        "check": "lesson-roundtrip-byte-identical",
+        "result": "PASS",
+        "detail": "denormalize(normalize(lesson)) re-serialized in the source file's own separator style reproduces all 1800 original JSONL lines byte for byte"
+      },
+      {
+        "check": "instructional-content-digest-equal",
+        "result": "PASS",
+        "detail": "SHA256 over every field outside ['standards', 'schema_version', 'authored_schema_version'] is identical between g34-r1 and this release on all 1800 lessons; the standards citation sequence digest is identical too"
+      },
+      {
+        "check": "normalization-surface-closed",
+        "result": "PASS",
+        "detail": "exactly 3 lesson fields are touched release-wide (standards, schema_version, authored_schema_version); every other field compares equal on all 1800 lessons"
+      },
+      {
+        "check": "verbatim-files-byte-identical",
+        "result": "PASS",
+        "detail": "167 non-lesson files carried from g34-r1 re-hashed after write; 0 differ"
+      },
+      {
+        "check": "lesson-index-identical-to-candidate",
+        "result": "PASS",
+        "detail": "lesson-index.csv regenerated from the normalized lessons is byte-identical to g34-r1's, which fixes every lesson id, course id, grade, subject, unit number, course day, phase and title in one hash"
+      },
+      {
+        "check": "sealed-1.0.0-untouched",
+        "result": "PASS",
+        "detail": "no file under curriculum-content/manuel-academy/1.0.0 is added, changed, or removed"
+      },
+      {
+        "check": "g34-r1-candidate-untouched",
+        "result": "PASS",
+        "detail": "no file under curriculum-release-candidates/g34-r1 is added, changed, or removed"
+      }
+    ],
+    "preservation": [
+      {
+        "check": "counts-preserved",
+        "result": "PASS",
+        "detail": "courses: 20 (candidate 20); units: 154 (candidate 154); lessons: 1800 (candidate 1800); assessments: 154 (candidate 154); scheduled_sessions: 1800 (candidate 1800)"
+      },
+      {
+        "check": "lesson-ids-preserved",
+        "result": "PASS",
+        "detail": "1800 lesson ids, same values in the same order as the candidate"
+      },
+      {
+        "check": "unit-ids-preserved",
+        "result": "PASS",
+        "detail": "154 unit ids unchanged"
+      },
+      {
+        "check": "course-ids-preserved",
+        "result": "PASS",
+        "detail": "20 course ids unchanged"
+      },
+      {
+        "check": "assessment-ids-preserved",
+        "result": "PASS",
+        "detail": "154 assessments, 154 distinct, all ids unchanged"
+      },
+      {
+        "check": "schedules-preserved",
+        "result": "PASS",
+        "detail": "all 20 schedule CSVs plus schedule-index.json are byte-identical to the candidate"
+      },
+      {
+        "check": "assessments-preserved",
+        "result": "PASS",
+        "detail": "all 20 assessments.json files are byte-identical to the candidate"
+      },
+      {
+        "check": "subject-slugs-canonical",
+        "result": "PASS",
+        "detail": "all 20 courses carry a subject drawn from the canonical 10-subject enum the sealed 1.0.0 package and src/curriculum-authoring/v2/contracts.ts use"
+      },
+      {
+        "check": "standards-artifact-per-course",
+        "result": "PASS",
+        "detail": "20 of 20 courses have a standalone standards artifact under standards/courses/ (8 of them projected from lesson citations because their lane shipped none)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "lesson_fields_touched": [
+    "standards",
+    "schema_version",
+    "authored_schema_version"
+  ],
+  "lesson_fields_touched_count": 3,
+  "adapters": {
+    "standards": "adapters/standards-mapping-policy.json",
+    "schema_version": "adapters/schema-version-policy.json",
+    "subject_slug": "adapters/subject-slug-map.json (no lesson field changed; the divergence is resolved in the release schema and the normalized matrix)"
+  },
+  "invertible": true,
+  "inverse_proof": "provenance/content-equivalence.json -> roundtrip_byte_identical",
+  "per_course": [
+    {
+      "course_id": "ma-g3-mathematics",
+      "lessons": 180,
+      "standards_field_normalized": 180,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-english-language-arts",
+      "lessons": 180,
+      "standards_field_normalized": 180,
+      "schema_version_pinned": 180,
+      "authored_schema_version_added": 180,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-science",
+      "lessons": 108,
+      "standards_field_normalized": 108,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-social-studies",
+      "lessons": 108,
+      "standards_field_normalized": 108,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-health",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-physical-education",
+      "lessons": 108,
+      "standards_field_normalized": 108,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-ready-for-life",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-tech-cs",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-arts-music",
+      "lessons": 72,
+      "standards_field_normalized": 72,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-mathematics",
+      "lessons": 180,
+      "standards_field_normalized": 180,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-english-language-arts",
+      "lessons": 180,
+      "standards_field_normalized": 180,
+      "schema_version_pinned": 180,
+      "authored_schema_version_added": 180,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-science",
+      "lessons": 108,
+      "standards_field_normalized": 108,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-social-studies",
+      "lessons": 108,
+      "standards_field_normalized": 108,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-health",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-physical-education",
+      "lessons": 108,
+      "standards_field_normalized": 108,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-ready-for-life",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-tech-cs",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "lessons": 72,
+      "standards_field_normalized": 72,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    },
+    {
+      "course_id": "ma-g4-financial-literacy",
+      "lessons": 36,
+      "standards_field_normalized": 36,
+      "schema_version_pinned": 0,
+      "authored_schema_version_added": 0,
+      "other_fields_changed": 0
+    }
+  ]
+}

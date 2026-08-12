@@ -1,0 +1,47 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "purpose": "Resolve the canonical-vs-matrix subject slug divergence at the release boundary instead of renaming anything. Lessons already carry the canonical slug; this map lets any consumer still keyed on the release lane's matrix slugs translate in either direction without touching content.",
+  "canonical_authority": [
+    "curriculum-content/manuel-academy/1.0.0 (sealed release directory layout)",
+    "src/curriculum-authoring/v2/contracts.ts"
+  ],
+  "stale_artifacts_using_matrix_slugs": [
+    "standards/sources/release/course-matrix.json",
+    "standards/sources/release/lesson-schema.json (subject enum)"
+  ],
+  "canonical_to_matrix": {
+    "mathematics": "mathematics",
+    "english-language-arts": "english-language-arts",
+    "science": "science",
+    "social-studies": "social-studies",
+    "health": "health",
+    "physical-education": "physical-education",
+    "ready-for-life": "ready-for-life",
+    "technology": "technology-computer-science",
+    "arts-and-music": "arts-music",
+    "financial-literacy": "financial-literacy"
+  },
+  "matrix_to_canonical": {
+    "mathematics": "mathematics",
+    "english-language-arts": "english-language-arts",
+    "science": "science",
+    "social-studies": "social-studies",
+    "health": "health",
+    "physical-education": "physical-education",
+    "ready-for-life": "ready-for-life",
+    "technology-computer-science": "technology",
+    "arts-music": "arts-and-music",
+    "financial-literacy": "financial-literacy"
+  },
+  "divergent_subjects": [
+    "technology",
+    "arts-and-music"
+  ],
+  "course_id_authored_to_matrix": {
+    "ma-g3-tech-cs": "ma-g3-technology-computer-science",
+    "ma-g4-tech-cs": "ma-g4-technology-computer-science",
+    "ma-g3-arts-music": "ma-g3-arts-music",
+    "ma-g4-arts-music": "ma-g4-arts-music"
+  },
+  "course_id_note": "Authored course IDs are preserved verbatim. ma-g{3,4}-tech-cs are the IDs 72 lesson IDs, 12 unit IDs, the schedule, and every assessment cross-reference are built from; renaming them would be a content rewrite. release/course-matrix.normalized.json carries both."
+}

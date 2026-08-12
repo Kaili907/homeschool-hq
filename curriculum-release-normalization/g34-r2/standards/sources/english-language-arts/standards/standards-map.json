@@ -1,0 +1,1920 @@
+{
+  "package_id": "manuel-academy-grades-3-4-ela-authoring-v1",
+  "version": "1.0.0",
+  "note": "Every standard in each grade's verified catalog maps to at least one lesson. Codes use the Manuel Academy house order <grade>.<strand>.<number>.",
+  "grades": {
+    "grade-3": {
+      "course_id": "ma-g3-english-language-arts",
+      "standard_count": 42,
+      "standards": {
+        "3.RL.1": {
+          "description": "Ask and answer questions, referring explicitly to the text as the basis for answers.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l01",
+            "ma-g3-english-language-arts-u01-l03",
+            "ma-g3-english-language-arts-u01-l04",
+            "ma-g3-english-language-arts-u01-l06",
+            "ma-g3-english-language-arts-u01-l09",
+            "ma-g3-english-language-arts-u01-l10",
+            "ma-g3-english-language-arts-u01-l15",
+            "ma-g3-english-language-arts-u01-l17",
+            "ma-g3-english-language-arts-u03-l04",
+            "ma-g3-english-language-arts-u03-l06",
+            "ma-g3-english-language-arts-u03-l09",
+            "ma-g3-english-language-arts-u03-l13",
+            "ma-g3-english-language-arts-u03-l17"
+          ],
+          "lesson_count": 13,
+          "unit_numbers": [
+            1,
+            3
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u03-assessment"
+          ]
+        },
+        "3.RL.2": {
+          "description": "Recount stories including fables, folktales, and myths; determine the central message, lesson, or moral.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u03-l01",
+            "ma-g3-english-language-arts-u03-l08",
+            "ma-g3-english-language-arts-u03-l10",
+            "ma-g3-english-language-arts-u03-l12",
+            "ma-g3-english-language-arts-u03-l13",
+            "ma-g3-english-language-arts-u03-l15",
+            "ma-g3-english-language-arts-u03-l17",
+            "ma-g3-english-language-arts-u03-l18"
+          ],
+          "lesson_count": 8,
+          "unit_numbers": [
+            3
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u03-assessment"
+          ]
+        },
+        "3.RL.3": {
+          "description": "Describe characters' traits, motivations, and feelings, and how their actions contribute to events.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u03-l03",
+            "ma-g3-english-language-arts-u03-l04",
+            "ma-g3-english-language-arts-u03-l06",
+            "ma-g3-english-language-arts-u03-l07",
+            "ma-g3-english-language-arts-u03-l08",
+            "ma-g3-english-language-arts-u03-l09",
+            "ma-g3-english-language-arts-u03-l15",
+            "ma-g3-english-language-arts-u03-l17"
+          ],
+          "lesson_count": 8,
+          "unit_numbers": [
+            3
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u03-assessment"
+          ]
+        },
+        "3.RL.4": {
+          "description": "Determine word and phrase meaning, distinguishing literal from nonliteral language.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u03-l11",
+            "ma-g3-english-language-arts-u08-l02",
+            "ma-g3-english-language-arts-u08-l07",
+            "ma-g3-english-language-arts-u08-l08",
+            "ma-g3-english-language-arts-u08-l09",
+            "ma-g3-english-language-arts-u08-l13",
+            "ma-g3-english-language-arts-u08-l15",
+            "ma-g3-english-language-arts-u08-l17"
+          ],
+          "lesson_count": 8,
+          "unit_numbers": [
+            3,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u08-assessment"
+          ]
+        },
+        "3.RL.5": {
+          "description": "Refer to chapters, scenes, and stanzas; describe how each part builds on earlier sections.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u08-l01",
+            "ma-g3-english-language-arts-u08-l03",
+            "ma-g3-english-language-arts-u08-l04",
+            "ma-g3-english-language-arts-u08-l06",
+            "ma-g3-english-language-arts-u08-l12",
+            "ma-g3-english-language-arts-u08-l15",
+            "ma-g3-english-language-arts-u08-l17"
+          ],
+          "lesson_count": 7,
+          "unit_numbers": [
+            8
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u08-assessment"
+          ]
+        },
+        "3.RL.6": {
+          "description": "Distinguish the reader's own point of view from that of the narrator or the characters.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u08-l15",
+            "ma-g3-english-language-arts-u08-l16"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            8
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u08-assessment"
+          ]
+        },
+        "3.RL.7": {
+          "description": "Explain how illustrations contribute to what the words convey: mood, character, and setting.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u03-l09",
+            "ma-g3-english-language-arts-u03-l18"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            3
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u03-assessment"
+          ]
+        },
+        "3.RL.9": {
+          "description": "Compare and contrast themes, settings, and plots of stories by the same author about similar characters.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u03-l16"
+          ],
+          "lesson_count": 1,
+          "unit_numbers": [
+            3
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u03-assessment"
+          ]
+        },
+        "3.RL.10": {
+          "description": "Read and comprehend literature at the high end of the grades 2-3 complexity band independently and proficiently.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u10-l01",
+            "ma-g3-english-language-arts-u10-l09",
+            "ma-g3-english-language-arts-u10-l15",
+            "ma-g3-english-language-arts-u10-l16"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.RI.1": {
+          "description": "Ask and answer questions, referring explicitly to the text as the basis for answers.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l01",
+            "ma-g3-english-language-arts-u01-l03",
+            "ma-g3-english-language-arts-u01-l04",
+            "ma-g3-english-language-arts-u01-l09",
+            "ma-g3-english-language-arts-u01-l10",
+            "ma-g3-english-language-arts-u01-l15",
+            "ma-g3-english-language-arts-u01-l16",
+            "ma-g3-english-language-arts-u01-l17",
+            "ma-g3-english-language-arts-u04-l01",
+            "ma-g3-english-language-arts-u04-l04",
+            "ma-g3-english-language-arts-u04-l08",
+            "ma-g3-english-language-arts-u04-l10",
+            "ma-g3-english-language-arts-u04-l13",
+            "ma-g3-english-language-arts-u04-l17",
+            "ma-g3-english-language-arts-u05-l13"
+          ],
+          "lesson_count": 15,
+          "unit_numbers": [
+            1,
+            4,
+            5
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u04-assessment"
+          ]
+        },
+        "3.RI.2": {
+          "description": "Determine the main idea and recount the key details that support it.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u04-l01",
+            "ma-g3-english-language-arts-u04-l03",
+            "ma-g3-english-language-arts-u04-l04",
+            "ma-g3-english-language-arts-u04-l06",
+            "ma-g3-english-language-arts-u04-l07",
+            "ma-g3-english-language-arts-u04-l08",
+            "ma-g3-english-language-arts-u04-l10",
+            "ma-g3-english-language-arts-u04-l12",
+            "ma-g3-english-language-arts-u04-l15",
+            "ma-g3-english-language-arts-u04-l16",
+            "ma-g3-english-language-arts-u04-l17",
+            "ma-g3-english-language-arts-u06-l01",
+            "ma-g3-english-language-arts-u06-l09"
+          ],
+          "lesson_count": 13,
+          "unit_numbers": [
+            4,
+            6
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u04-assessment",
+            "ma-g3-english-language-arts-u06-assessment"
+          ]
+        },
+        "3.RI.3": {
+          "description": "Describe relationships among events, ideas, or steps using language of time, sequence, and cause and effect.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u05-l01",
+            "ma-g3-english-language-arts-u05-l03",
+            "ma-g3-english-language-arts-u05-l04",
+            "ma-g3-english-language-arts-u05-l06",
+            "ma-g3-english-language-arts-u05-l07",
+            "ma-g3-english-language-arts-u05-l10",
+            "ma-g3-english-language-arts-u05-l15",
+            "ma-g3-english-language-arts-u05-l16",
+            "ma-g3-english-language-arts-u05-l17"
+          ],
+          "lesson_count": 9,
+          "unit_numbers": [
+            5
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u05-assessment"
+          ]
+        },
+        "3.RI.4": {
+          "description": "Determine the meaning of general academic and domain-specific words in a grade 3 topic or subject area.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u02-l09",
+            "ma-g3-english-language-arts-u02-l16",
+            "ma-g3-english-language-arts-u04-l02",
+            "ma-g3-english-language-arts-u04-l09",
+            "ma-g3-english-language-arts-u04-l11",
+            "ma-g3-english-language-arts-u04-l15",
+            "ma-g3-english-language-arts-u04-l17"
+          ],
+          "lesson_count": 7,
+          "unit_numbers": [
+            2,
+            4
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u02-assessment",
+            "ma-g3-english-language-arts-u04-assessment"
+          ]
+        },
+        "3.RI.5": {
+          "description": "Use text features and search tools, including key words, sidebars, and hyperlinks, to locate information.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u05-l11",
+            "ma-g3-english-language-arts-u05-l15",
+            "ma-g3-english-language-arts-u05-l17",
+            "ma-g3-english-language-arts-u09-l06"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            5,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u05-assessment",
+            "ma-g3-english-language-arts-u09-assessment"
+          ]
+        },
+        "3.RI.6": {
+          "description": "Distinguish the reader's own point of view from that of the author.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u07-l09",
+            "ma-g3-english-language-arts-u07-l18"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            7
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u07-assessment"
+          ]
+        },
+        "3.RI.7": {
+          "description": "Use illustrations such as maps and photographs together with the words to demonstrate understanding.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u04-l11",
+            "ma-g3-english-language-arts-u04-l18",
+            "ma-g3-english-language-arts-u05-l18"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            4,
+            5
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u04-assessment",
+            "ma-g3-english-language-arts-u05-assessment"
+          ]
+        },
+        "3.RI.8": {
+          "description": "Describe the logical connection between particular sentences and paragraphs.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u05-l01",
+            "ma-g3-english-language-arts-u05-l03",
+            "ma-g3-english-language-arts-u05-l07",
+            "ma-g3-english-language-arts-u05-l08",
+            "ma-g3-english-language-arts-u05-l09",
+            "ma-g3-english-language-arts-u05-l10",
+            "ma-g3-english-language-arts-u05-l16",
+            "ma-g3-english-language-arts-u05-l17",
+            "ma-g3-english-language-arts-u07-l01",
+            "ma-g3-english-language-arts-u07-l07",
+            "ma-g3-english-language-arts-u07-l08",
+            "ma-g3-english-language-arts-u07-l17"
+          ],
+          "lesson_count": 12,
+          "unit_numbers": [
+            5,
+            7
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u05-assessment",
+            "ma-g3-english-language-arts-u07-assessment"
+          ]
+        },
+        "3.RI.9": {
+          "description": "Compare and contrast the most important points and key details in two texts on the same topic.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u05-l12",
+            "ma-g3-english-language-arts-u05-l13",
+            "ma-g3-english-language-arts-u05-l15",
+            "ma-g3-english-language-arts-u05-l17",
+            "ma-g3-english-language-arts-u05-l18",
+            "ma-g3-english-language-arts-u09-l09",
+            "ma-g3-english-language-arts-u09-l17"
+          ],
+          "lesson_count": 7,
+          "unit_numbers": [
+            5,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u05-assessment",
+            "ma-g3-english-language-arts-u09-assessment"
+          ]
+        },
+        "3.RI.10": {
+          "description": "Read and comprehend informational text at the high end of the grades 2-3 complexity band independently and proficiently.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u10-l15",
+            "ma-g3-english-language-arts-u10-l16"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.RF.3": {
+          "description": "Know and apply grade-level phonics and word analysis skills in decoding words. Sub-points: (a) common prefixes and derivational suffixes; (b) words with common Latin suffixes; (c) multisyllable words; (d) grade-appropriate irregularly spelled words.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l02",
+            "ma-g3-english-language-arts-u02-l01",
+            "ma-g3-english-language-arts-u02-l02",
+            "ma-g3-english-language-arts-u02-l03",
+            "ma-g3-english-language-arts-u02-l04",
+            "ma-g3-english-language-arts-u02-l06",
+            "ma-g3-english-language-arts-u02-l07",
+            "ma-g3-english-language-arts-u02-l08",
+            "ma-g3-english-language-arts-u02-l09",
+            "ma-g3-english-language-arts-u02-l10",
+            "ma-g3-english-language-arts-u02-l15",
+            "ma-g3-english-language-arts-u02-l16",
+            "ma-g3-english-language-arts-u02-l17",
+            "ma-g3-english-language-arts-u03-l02",
+            "ma-g3-english-language-arts-u04-l02",
+            "ma-g3-english-language-arts-u05-l02",
+            "ma-g3-english-language-arts-u06-l02",
+            "ma-g3-english-language-arts-u07-l02",
+            "ma-g3-english-language-arts-u08-l02",
+            "ma-g3-english-language-arts-u09-l02",
+            "ma-g3-english-language-arts-u10-l02"
+          ],
+          "lesson_count": 21,
+          "unit_numbers": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u02-assessment"
+          ]
+        },
+        "3.RF.4": {
+          "description": "Read with sufficient accuracy and fluency to support comprehension. Sub-points: (a) purpose and understanding; (b) oral prose and poetry with accuracy, rate, and expression on successive readings; (c) context to confirm or self-correct, rereading as necessary.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l05",
+            "ma-g3-english-language-arts-u01-l06",
+            "ma-g3-english-language-arts-u01-l16",
+            "ma-g3-english-language-arts-u02-l01",
+            "ma-g3-english-language-arts-u02-l05",
+            "ma-g3-english-language-arts-u03-l05",
+            "ma-g3-english-language-arts-u04-l05",
+            "ma-g3-english-language-arts-u05-l05",
+            "ma-g3-english-language-arts-u06-l05",
+            "ma-g3-english-language-arts-u07-l05",
+            "ma-g3-english-language-arts-u08-l05",
+            "ma-g3-english-language-arts-u09-l05",
+            "ma-g3-english-language-arts-u10-l05"
+          ],
+          "lesson_count": 13,
+          "unit_numbers": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u02-assessment",
+            "ma-g3-english-language-arts-u03-assessment",
+            "ma-g3-english-language-arts-u04-assessment",
+            "ma-g3-english-language-arts-u05-assessment",
+            "ma-g3-english-language-arts-u08-assessment"
+          ]
+        },
+        "3.W.1": {
+          "description": "Write opinion pieces supporting a point of view with reasons. Sub-points: (a) introduce the topic and state an opinion in a structure that lists reasons; (b) supply reasons that support the opinion; (c) use linking words and phrases; (d) provide a concluding statement or section.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u07-l01",
+            "ma-g3-english-language-arts-u07-l03",
+            "ma-g3-english-language-arts-u07-l04",
+            "ma-g3-english-language-arts-u07-l06",
+            "ma-g3-english-language-arts-u07-l07",
+            "ma-g3-english-language-arts-u07-l08",
+            "ma-g3-english-language-arts-u07-l10",
+            "ma-g3-english-language-arts-u07-l11",
+            "ma-g3-english-language-arts-u07-l12",
+            "ma-g3-english-language-arts-u07-l13",
+            "ma-g3-english-language-arts-u07-l15",
+            "ma-g3-english-language-arts-u07-l16",
+            "ma-g3-english-language-arts-u07-l17"
+          ],
+          "lesson_count": 13,
+          "unit_numbers": [
+            7
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u07-assessment"
+          ]
+        },
+        "3.W.2": {
+          "description": "Write informative or explanatory texts that examine a topic and convey ideas clearly. Sub-points: (a) introduce the topic and group related information; (b) develop the topic with facts, definitions, and details; (c) use linking words and phrases; (d) provide a concluding statement or section.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u02-l12",
+            "ma-g3-english-language-arts-u02-l18",
+            "ma-g3-english-language-arts-u06-l01",
+            "ma-g3-english-language-arts-u06-l03",
+            "ma-g3-english-language-arts-u06-l04",
+            "ma-g3-english-language-arts-u06-l06",
+            "ma-g3-english-language-arts-u06-l07",
+            "ma-g3-english-language-arts-u06-l08",
+            "ma-g3-english-language-arts-u06-l09",
+            "ma-g3-english-language-arts-u06-l10",
+            "ma-g3-english-language-arts-u06-l11",
+            "ma-g3-english-language-arts-u06-l12",
+            "ma-g3-english-language-arts-u06-l15",
+            "ma-g3-english-language-arts-u06-l16",
+            "ma-g3-english-language-arts-u06-l17"
+          ],
+          "lesson_count": 15,
+          "unit_numbers": [
+            2,
+            6
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u02-assessment",
+            "ma-g3-english-language-arts-u06-assessment"
+          ]
+        },
+        "3.W.3": {
+          "description": "Write narratives with effective technique, descriptive details, and clear event sequences. Sub-points: (a) establish a situation and introduce a narrator or characters; (b) use dialogue and descriptions of actions, thoughts, and feelings; (c) use temporal words and phrases; (d) provide a sense of closure.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u10-l01",
+            "ma-g3-english-language-arts-u10-l03",
+            "ma-g3-english-language-arts-u10-l04",
+            "ma-g3-english-language-arts-u10-l06",
+            "ma-g3-english-language-arts-u10-l07",
+            "ma-g3-english-language-arts-u10-l08",
+            "ma-g3-english-language-arts-u10-l09",
+            "ma-g3-english-language-arts-u10-l10",
+            "ma-g3-english-language-arts-u10-l11",
+            "ma-g3-english-language-arts-u10-l17"
+          ],
+          "lesson_count": 10,
+          "unit_numbers": [
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.W.4": {
+          "description": "With guidance and support from adults, produce writing in which development and organization are appropriate to task and purpose.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u06-l04",
+            "ma-g3-english-language-arts-u06-l06",
+            "ma-g3-english-language-arts-u06-l12",
+            "ma-g3-english-language-arts-u06-l15",
+            "ma-g3-english-language-arts-u06-l16",
+            "ma-g3-english-language-arts-u06-l17",
+            "ma-g3-english-language-arts-u07-l12",
+            "ma-g3-english-language-arts-u07-l15",
+            "ma-g3-english-language-arts-u07-l17",
+            "ma-g3-english-language-arts-u09-l12",
+            "ma-g3-english-language-arts-u09-l13",
+            "ma-g3-english-language-arts-u09-l18",
+            "ma-g3-english-language-arts-u10-l04",
+            "ma-g3-english-language-arts-u10-l12",
+            "ma-g3-english-language-arts-u10-l15",
+            "ma-g3-english-language-arts-u10-l17"
+          ],
+          "lesson_count": 16,
+          "unit_numbers": [
+            6,
+            7,
+            9,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u06-assessment",
+            "ma-g3-english-language-arts-u07-assessment",
+            "ma-g3-english-language-arts-u09-assessment",
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.W.5": {
+          "description": "With guidance and support from peers and adults, plan, revise, and edit writing.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u06-l05",
+            "ma-g3-english-language-arts-u06-l08",
+            "ma-g3-english-language-arts-u06-l10",
+            "ma-g3-english-language-arts-u06-l13",
+            "ma-g3-english-language-arts-u06-l18",
+            "ma-g3-english-language-arts-u07-l04",
+            "ma-g3-english-language-arts-u07-l10",
+            "ma-g3-english-language-arts-u07-l13",
+            "ma-g3-english-language-arts-u07-l18",
+            "ma-g3-english-language-arts-u10-l05",
+            "ma-g3-english-language-arts-u10-l08",
+            "ma-g3-english-language-arts-u10-l10",
+            "ma-g3-english-language-arts-u10-l13",
+            "ma-g3-english-language-arts-u10-l18"
+          ],
+          "lesson_count": 14,
+          "unit_numbers": [
+            6,
+            7,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u06-assessment",
+            "ma-g3-english-language-arts-u07-assessment",
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.W.6": {
+          "description": "With guidance and support from adults, use technology to produce and publish writing, including some keyboarding.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u06-l18",
+            "ma-g3-english-language-arts-u10-l12",
+            "ma-g3-english-language-arts-u10-l18"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            6,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u06-assessment",
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.W.7": {
+          "description": "Conduct short research projects that build knowledge about a topic.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u09-l01",
+            "ma-g3-english-language-arts-u09-l04",
+            "ma-g3-english-language-arts-u09-l13",
+            "ma-g3-english-language-arts-u09-l15",
+            "ma-g3-english-language-arts-u09-l16",
+            "ma-g3-english-language-arts-u09-l17"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            9
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u09-assessment"
+          ]
+        },
+        "3.W.8": {
+          "description": "Recall information from experience or gather information from print and digital sources; take brief notes and sort evidence into provided categories.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u09-l03",
+            "ma-g3-english-language-arts-u09-l06",
+            "ma-g3-english-language-arts-u09-l07",
+            "ma-g3-english-language-arts-u09-l08",
+            "ma-g3-english-language-arts-u09-l10",
+            "ma-g3-english-language-arts-u09-l11",
+            "ma-g3-english-language-arts-u09-l12",
+            "ma-g3-english-language-arts-u09-l15",
+            "ma-g3-english-language-arts-u09-l16",
+            "ma-g3-english-language-arts-u09-l17",
+            "ma-g3-english-language-arts-u09-l18"
+          ],
+          "lesson_count": 11,
+          "unit_numbers": [
+            9
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u09-assessment"
+          ]
+        },
+        "3.W.10": {
+          "description": "Write routinely over extended and shorter time frames for a range of tasks, purposes, and audiences.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l12",
+            "ma-g3-english-language-arts-u01-l13",
+            "ma-g3-english-language-arts-u01-l18",
+            "ma-g3-english-language-arts-u03-l12",
+            "ma-g3-english-language-arts-u04-l12",
+            "ma-g3-english-language-arts-u04-l13",
+            "ma-g3-english-language-arts-u04-l18",
+            "ma-g3-english-language-arts-u08-l12",
+            "ma-g3-english-language-arts-u08-l13",
+            "ma-g3-english-language-arts-u08-l18"
+          ],
+          "lesson_count": 10,
+          "unit_numbers": [
+            1,
+            3,
+            4,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u03-assessment",
+            "ma-g3-english-language-arts-u04-assessment",
+            "ma-g3-english-language-arts-u08-assessment"
+          ]
+        },
+        "3.SL.1": {
+          "description": "Engage effectively in collaborative discussions on grade 3 topics and texts. Sub-points: (a) come prepared; (b) follow agreed-upon rules; (c) ask questions and link comments to the remarks of others; (d) explain one's own ideas in light of the discussion.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l01",
+            "ma-g3-english-language-arts-u01-l14",
+            "ma-g3-english-language-arts-u03-l14"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            1,
+            3
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u03-assessment"
+          ]
+        },
+        "3.SL.2": {
+          "description": "Determine the main ideas and supporting details of a text read aloud or presented in diverse media.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u04-l14"
+          ],
+          "lesson_count": 1,
+          "unit_numbers": [
+            4
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u04-assessment"
+          ]
+        },
+        "3.SL.3": {
+          "description": "Ask and answer questions about information from a speaker, offering appropriate elaboration and detail.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u09-l14"
+          ],
+          "lesson_count": 1,
+          "unit_numbers": [
+            9
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u09-assessment"
+          ]
+        },
+        "3.SL.4": {
+          "description": "Report on a topic or text, tell a story, or recount an experience with appropriate facts and relevant details.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u02-l14",
+            "ma-g3-english-language-arts-u05-l14",
+            "ma-g3-english-language-arts-u06-l14",
+            "ma-g3-english-language-arts-u07-l05",
+            "ma-g3-english-language-arts-u07-l14",
+            "ma-g3-english-language-arts-u10-l14"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            2,
+            5,
+            6,
+            7,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u02-assessment",
+            "ma-g3-english-language-arts-u07-assessment",
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.SL.5": {
+          "description": "Create engaging audio recordings of stories or poems; add visual displays when appropriate.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u08-l14",
+            "ma-g3-english-language-arts-u08-l18"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            8
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u08-assessment"
+          ]
+        },
+        "3.SL.6": {
+          "description": "Speak in complete sentences when appropriate to task and situation, to provide requested detail or clarification.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l08",
+            "ma-g3-english-language-arts-u01-l14",
+            "ma-g3-english-language-arts-u01-l18",
+            "ma-g3-english-language-arts-u06-l14",
+            "ma-g3-english-language-arts-u10-l14"
+          ],
+          "lesson_count": 5,
+          "unit_numbers": [
+            1,
+            6,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.L.1": {
+          "description": "Demonstrate command of standard English grammar and usage. Sub-points (a)-(i): functions of nouns, pronouns, verbs, adjectives, and adverbs; regular and irregular plural nouns; abstract nouns; regular and irregular verbs; simple verb tenses; subject-verb and pronoun-antecedent agreement; comparative and superlative adjectives and adverbs; coordinating and subordinating conjunctions; simple, compound, and complex sentences.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l07",
+            "ma-g3-english-language-arts-u01-l08",
+            "ma-g3-english-language-arts-u01-l11",
+            "ma-g3-english-language-arts-u01-l12",
+            "ma-g3-english-language-arts-u01-l15",
+            "ma-g3-english-language-arts-u01-l17",
+            "ma-g3-english-language-arts-u06-l13",
+            "ma-g3-english-language-arts-u06-l17",
+            "ma-g3-english-language-arts-u10-l11",
+            "ma-g3-english-language-arts-u10-l13",
+            "ma-g3-english-language-arts-u10-l17"
+          ],
+          "lesson_count": 11,
+          "unit_numbers": [
+            1,
+            6,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u06-assessment",
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.L.2": {
+          "description": "Demonstrate command of capitalization, punctuation, and spelling. Sub-points (a)-(g): capitalize words in titles; commas in addresses; commas and quotation marks in dialogue; possessives; conventional spelling of high-frequency words and of base words with suffixes added; spelling patterns and generalizations; consult reference materials to check spellings.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u01-l11",
+            "ma-g3-english-language-arts-u01-l13",
+            "ma-g3-english-language-arts-u01-l17",
+            "ma-g3-english-language-arts-u02-l08",
+            "ma-g3-english-language-arts-u02-l13",
+            "ma-g3-english-language-arts-u02-l17",
+            "ma-g3-english-language-arts-u06-l02",
+            "ma-g3-english-language-arts-u06-l13",
+            "ma-g3-english-language-arts-u06-l17",
+            "ma-g3-english-language-arts-u10-l02",
+            "ma-g3-english-language-arts-u10-l07"
+          ],
+          "lesson_count": 11,
+          "unit_numbers": [
+            1,
+            2,
+            6,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u01-assessment",
+            "ma-g3-english-language-arts-u02-assessment",
+            "ma-g3-english-language-arts-u06-assessment"
+          ]
+        },
+        "3.L.3": {
+          "description": "Use knowledge of language and its conventions. Sub-points: (a) choose words and phrases for effect; (b) recognize and observe differences between spoken and written standard English.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u06-l11",
+            "ma-g3-english-language-arts-u07-l11",
+            "ma-g3-english-language-arts-u10-l07"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            6,
+            7,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u06-assessment",
+            "ma-g3-english-language-arts-u07-assessment",
+            "ma-g3-english-language-arts-u10-assessment"
+          ]
+        },
+        "3.L.4": {
+          "description": "Determine or clarify the meaning of unknown and multiple-meaning words. Sub-points: (a) sentence-level context; (b) meaning of a new word when a known affix is added; (c) a known root word as a clue; (d) glossaries and beginning dictionaries, print and digital.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u02-l03",
+            "ma-g3-english-language-arts-u02-l04",
+            "ma-g3-english-language-arts-u02-l06",
+            "ma-g3-english-language-arts-u02-l07",
+            "ma-g3-english-language-arts-u02-l11",
+            "ma-g3-english-language-arts-u02-l12",
+            "ma-g3-english-language-arts-u02-l15",
+            "ma-g3-english-language-arts-u02-l17",
+            "ma-g3-english-language-arts-u02-l18",
+            "ma-g3-english-language-arts-u03-l02",
+            "ma-g3-english-language-arts-u07-l02",
+            "ma-g3-english-language-arts-u09-l02"
+          ],
+          "lesson_count": 12,
+          "unit_numbers": [
+            2,
+            3,
+            7,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u02-assessment",
+            "ma-g3-english-language-arts-u09-assessment"
+          ]
+        },
+        "3.L.5": {
+          "description": "Demonstrate understanding of word relationships and nuances. Sub-points: (a) literal and nonliteral meanings in context; (b) real-life connections between words and their use; (c) shades of meaning among related words describing states of mind or degrees of certainty.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u03-l11",
+            "ma-g3-english-language-arts-u08-l07",
+            "ma-g3-english-language-arts-u08-l08",
+            "ma-g3-english-language-arts-u08-l10",
+            "ma-g3-english-language-arts-u08-l11",
+            "ma-g3-english-language-arts-u08-l17"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            3,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u08-assessment"
+          ]
+        },
+        "3.L.6": {
+          "description": "Acquire and use grade-appropriate conversational, general academic, and domain-specific words and phrases, including those that signal spatial and temporal relationships.",
+          "lesson_ids": [
+            "ma-g3-english-language-arts-u05-l02",
+            "ma-g3-english-language-arts-u05-l04",
+            "ma-g3-english-language-arts-u05-l11",
+            "ma-g3-english-language-arts-u07-l11",
+            "ma-g3-english-language-arts-u09-l11"
+          ],
+          "lesson_count": 5,
+          "unit_numbers": [
+            5,
+            7,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g3-english-language-arts-u05-assessment",
+            "ma-g3-english-language-arts-u07-assessment"
+          ]
+        }
+      }
+    },
+    "grade-4": {
+      "course_id": "ma-g4-english-language-arts",
+      "standard_count": 44,
+      "standards": {
+        "4.RL.1": {
+          "description": "Refer to details and examples when explaining what the text says explicitly and when drawing inferences.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l01",
+            "ma-g4-english-language-arts-u01-l03",
+            "ma-g4-english-language-arts-u01-l04",
+            "ma-g4-english-language-arts-u01-l05",
+            "ma-g4-english-language-arts-u01-l07",
+            "ma-g4-english-language-arts-u01-l08",
+            "ma-g4-english-language-arts-u01-l15",
+            "ma-g4-english-language-arts-u01-l16",
+            "ma-g4-english-language-arts-u01-l17",
+            "ma-g4-english-language-arts-u02-l05",
+            "ma-g4-english-language-arts-u02-l08",
+            "ma-g4-english-language-arts-u02-l11",
+            "ma-g4-english-language-arts-u02-l17",
+            "ma-g4-english-language-arts-u03-l03",
+            "ma-g4-english-language-arts-u03-l04",
+            "ma-g4-english-language-arts-u03-l05",
+            "ma-g4-english-language-arts-u03-l17"
+          ],
+          "lesson_count": 17,
+          "unit_numbers": [
+            1,
+            2,
+            3
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment",
+            "ma-g4-english-language-arts-u02-assessment",
+            "ma-g4-english-language-arts-u03-assessment"
+          ]
+        },
+        "4.RL.2": {
+          "description": "Determine a theme of a story, drama, or poem from details in the text; summarize the text.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u02-l01",
+            "ma-g4-english-language-arts-u02-l03",
+            "ma-g4-english-language-arts-u02-l04",
+            "ma-g4-english-language-arts-u02-l05",
+            "ma-g4-english-language-arts-u02-l06",
+            "ma-g4-english-language-arts-u02-l07",
+            "ma-g4-english-language-arts-u02-l08",
+            "ma-g4-english-language-arts-u02-l09",
+            "ma-g4-english-language-arts-u02-l10",
+            "ma-g4-english-language-arts-u02-l13",
+            "ma-g4-english-language-arts-u02-l15",
+            "ma-g4-english-language-arts-u02-l16",
+            "ma-g4-english-language-arts-u02-l17",
+            "ma-g4-english-language-arts-u02-l18"
+          ],
+          "lesson_count": 14,
+          "unit_numbers": [
+            2
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u02-assessment"
+          ]
+        },
+        "4.RL.3": {
+          "description": "Describe in depth a character, setting, or event, drawing on specific details in the text.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u03-l01",
+            "ma-g4-english-language-arts-u03-l03",
+            "ma-g4-english-language-arts-u03-l04",
+            "ma-g4-english-language-arts-u03-l05",
+            "ma-g4-english-language-arts-u03-l06",
+            "ma-g4-english-language-arts-u03-l09",
+            "ma-g4-english-language-arts-u03-l13",
+            "ma-g4-english-language-arts-u03-l16",
+            "ma-g4-english-language-arts-u03-l17"
+          ],
+          "lesson_count": 9,
+          "unit_numbers": [
+            3
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u03-assessment"
+          ]
+        },
+        "4.RL.4": {
+          "description": "Determine the meaning of words and phrases, including those that allude to significant characters found in mythology.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u03-l10",
+            "ma-g4-english-language-arts-u08-l02",
+            "ma-g4-english-language-arts-u08-l05",
+            "ma-g4-english-language-arts-u08-l07",
+            "ma-g4-english-language-arts-u08-l08",
+            "ma-g4-english-language-arts-u08-l16",
+            "ma-g4-english-language-arts-u08-l17"
+          ],
+          "lesson_count": 7,
+          "unit_numbers": [
+            3,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.RL.5": {
+          "description": "Explain major differences between poems, drama, and prose, referring to the structural elements of each.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u02-l10",
+            "ma-g4-english-language-arts-u08-l01",
+            "ma-g4-english-language-arts-u08-l03",
+            "ma-g4-english-language-arts-u08-l04",
+            "ma-g4-english-language-arts-u08-l05",
+            "ma-g4-english-language-arts-u08-l06",
+            "ma-g4-english-language-arts-u08-l12",
+            "ma-g4-english-language-arts-u08-l13",
+            "ma-g4-english-language-arts-u08-l16",
+            "ma-g4-english-language-arts-u08-l17"
+          ],
+          "lesson_count": 10,
+          "unit_numbers": [
+            2,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.RL.6": {
+          "description": "Compare and contrast the point of view from which different stories are narrated, including first- and third-person narrations.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u03-l07",
+            "ma-g4-english-language-arts-u03-l08",
+            "ma-g4-english-language-arts-u03-l16",
+            "ma-g4-english-language-arts-u03-l17"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            3
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u03-assessment"
+          ]
+        },
+        "4.RL.7": {
+          "description": "Make connections between the text of a story or drama and a visual or oral presentation of that text.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u03-l11",
+            "ma-g4-english-language-arts-u03-l18",
+            "ma-g4-english-language-arts-u08-l15"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            3,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u03-assessment",
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.RL.9": {
+          "description": "Compare and contrast the treatment of similar themes and topics and of patterns of events across cultures.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u03-l15",
+            "ma-g4-english-language-arts-u10-l11"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            3,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u03-assessment",
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.RL.10": {
+          "description": "Read and comprehend literature in the grades 4-5 complexity band proficiently, with scaffolding as needed at the high end.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u02-l15",
+            "ma-g4-english-language-arts-u10-l01",
+            "ma-g4-english-language-arts-u10-l05",
+            "ma-g4-english-language-arts-u10-l15",
+            "ma-g4-english-language-arts-u10-l16"
+          ],
+          "lesson_count": 5,
+          "unit_numbers": [
+            2,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u02-assessment",
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.RI.1": {
+          "description": "Refer to details and examples when explaining what the text says explicitly and when drawing inferences.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l01",
+            "ma-g4-english-language-arts-u01-l03",
+            "ma-g4-english-language-arts-u01-l04",
+            "ma-g4-english-language-arts-u01-l06",
+            "ma-g4-english-language-arts-u01-l07",
+            "ma-g4-english-language-arts-u01-l08",
+            "ma-g4-english-language-arts-u01-l09",
+            "ma-g4-english-language-arts-u01-l10",
+            "ma-g4-english-language-arts-u01-l11",
+            "ma-g4-english-language-arts-u01-l15",
+            "ma-g4-english-language-arts-u01-l16",
+            "ma-g4-english-language-arts-u01-l17",
+            "ma-g4-english-language-arts-u04-l04",
+            "ma-g4-english-language-arts-u04-l05",
+            "ma-g4-english-language-arts-u04-l11",
+            "ma-g4-english-language-arts-u04-l17",
+            "ma-g4-english-language-arts-u05-l04",
+            "ma-g4-english-language-arts-u05-l05",
+            "ma-g4-english-language-arts-u05-l08",
+            "ma-g4-english-language-arts-u05-l17",
+            "ma-g4-english-language-arts-u07-l05",
+            "ma-g4-english-language-arts-u09-l05"
+          ],
+          "lesson_count": 22,
+          "unit_numbers": [
+            1,
+            4,
+            5,
+            7,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment",
+            "ma-g4-english-language-arts-u04-assessment",
+            "ma-g4-english-language-arts-u05-assessment"
+          ]
+        },
+        "4.RI.2": {
+          "description": "Determine the main idea and explain how it is supported by key details; summarize the text.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u04-l01",
+            "ma-g4-english-language-arts-u04-l03",
+            "ma-g4-english-language-arts-u04-l04",
+            "ma-g4-english-language-arts-u04-l05",
+            "ma-g4-english-language-arts-u04-l06",
+            "ma-g4-english-language-arts-u04-l09",
+            "ma-g4-english-language-arts-u04-l15",
+            "ma-g4-english-language-arts-u04-l16",
+            "ma-g4-english-language-arts-u04-l17"
+          ],
+          "lesson_count": 9,
+          "unit_numbers": [
+            4
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u04-assessment"
+          ]
+        },
+        "4.RI.3": {
+          "description": "Explain events, procedures, ideas, or concepts in a historical, scientific, or technical text, including what happened and why.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u04-l07",
+            "ma-g4-english-language-arts-u04-l08",
+            "ma-g4-english-language-arts-u04-l13",
+            "ma-g4-english-language-arts-u04-l15",
+            "ma-g4-english-language-arts-u04-l16",
+            "ma-g4-english-language-arts-u04-l17"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            4
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u04-assessment"
+          ]
+        },
+        "4.RI.4": {
+          "description": "Determine the meaning of general academic and domain-specific words or phrases in a grade 4 topic or subject area.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u04-l02",
+            "ma-g4-english-language-arts-u04-l10",
+            "ma-g4-english-language-arts-u04-l18",
+            "ma-g4-english-language-arts-u05-l02"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            4,
+            5
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u04-assessment",
+            "ma-g4-english-language-arts-u05-assessment"
+          ]
+        },
+        "4.RI.5": {
+          "description": "Describe the overall structure of a text or part of a text: chronology, comparison, cause and effect, or problem and solution.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u05-l01",
+            "ma-g4-english-language-arts-u05-l03",
+            "ma-g4-english-language-arts-u05-l04",
+            "ma-g4-english-language-arts-u05-l05",
+            "ma-g4-english-language-arts-u05-l06",
+            "ma-g4-english-language-arts-u05-l07",
+            "ma-g4-english-language-arts-u05-l08",
+            "ma-g4-english-language-arts-u05-l09",
+            "ma-g4-english-language-arts-u05-l12",
+            "ma-g4-english-language-arts-u05-l13",
+            "ma-g4-english-language-arts-u05-l15",
+            "ma-g4-english-language-arts-u05-l16",
+            "ma-g4-english-language-arts-u05-l17",
+            "ma-g4-english-language-arts-u06-l05"
+          ],
+          "lesson_count": 14,
+          "unit_numbers": [
+            5,
+            6
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u05-assessment"
+          ]
+        },
+        "4.RI.6": {
+          "description": "Compare and contrast a firsthand and a secondhand account of the same event or topic, describing the differences in focus and information provided.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u07-l10",
+            "ma-g4-english-language-arts-u07-l11",
+            "ma-g4-english-language-arts-u07-l18"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            7
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u07-assessment"
+          ]
+        },
+        "4.RI.7": {
+          "description": "Interpret information presented visually, orally, or quantitatively and explain how it contributes to understanding.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u05-l10",
+            "ma-g4-english-language-arts-u05-l11",
+            "ma-g4-english-language-arts-u05-l12",
+            "ma-g4-english-language-arts-u05-l15",
+            "ma-g4-english-language-arts-u05-l16",
+            "ma-g4-english-language-arts-u05-l17",
+            "ma-g4-english-language-arts-u05-l18",
+            "ma-g4-english-language-arts-u09-l10"
+          ],
+          "lesson_count": 8,
+          "unit_numbers": [
+            5,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u05-assessment",
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.RI.8": {
+          "description": "Explain how an author uses reasons and evidence to support particular points in a text.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u07-l05",
+            "ma-g4-english-language-arts-u07-l06",
+            "ma-g4-english-language-arts-u07-l09",
+            "ma-g4-english-language-arts-u07-l16",
+            "ma-g4-english-language-arts-u07-l17"
+          ],
+          "lesson_count": 5,
+          "unit_numbers": [
+            7
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u07-assessment"
+          ]
+        },
+        "4.RI.9": {
+          "description": "Integrate information from two texts on the same topic in order to write or speak about the subject knowledgeably.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u09-l12",
+            "ma-g4-english-language-arts-u09-l16",
+            "ma-g4-english-language-arts-u09-l17"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.RI.10": {
+          "description": "Read and comprehend informational text in the grades 4-5 complexity band proficiently, with scaffolding as needed at the high end.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u10-l15",
+            "ma-g4-english-language-arts-u10-l16"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.RF.3": {
+          "description": "Know and apply grade-level phonics and word analysis skills in decoding words. Sub-point (a) only: use combined knowledge of letter-sound correspondences, syllabication patterns, and morphology to read unfamiliar multisyllabic words in context and out of context.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l02",
+            "ma-g4-english-language-arts-u02-l02",
+            "ma-g4-english-language-arts-u04-l02",
+            "ma-g4-english-language-arts-u08-l02"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment"
+          ]
+        },
+        "4.RF.4": {
+          "description": "Read with sufficient accuracy and fluency to support comprehension. Sub-points: (a) purpose and understanding; (b) oral prose and poetry with accuracy, rate, and expression on successive readings; (c) context to confirm or self-correct, rereading as necessary.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l05",
+            "ma-g4-english-language-arts-u02-l05",
+            "ma-g4-english-language-arts-u03-l05",
+            "ma-g4-english-language-arts-u04-l05",
+            "ma-g4-english-language-arts-u05-l05",
+            "ma-g4-english-language-arts-u06-l05",
+            "ma-g4-english-language-arts-u07-l05",
+            "ma-g4-english-language-arts-u08-l05",
+            "ma-g4-english-language-arts-u09-l05",
+            "ma-g4-english-language-arts-u10-l05"
+          ],
+          "lesson_count": 10,
+          "unit_numbers": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment",
+            "ma-g4-english-language-arts-u02-assessment",
+            "ma-g4-english-language-arts-u04-assessment",
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.W.1": {
+          "description": "Write opinion pieces supporting a point of view with reasons and information. Sub-points: (a) introduce the topic clearly, state an opinion, and group related ideas to support the purpose; (b) provide reasons supported by facts and details; (c) link opinion and reasons; (d) provide a concluding statement or section related to the opinion presented.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u07-l01",
+            "ma-g4-english-language-arts-u07-l03",
+            "ma-g4-english-language-arts-u07-l04",
+            "ma-g4-english-language-arts-u07-l07",
+            "ma-g4-english-language-arts-u07-l08",
+            "ma-g4-english-language-arts-u07-l09",
+            "ma-g4-english-language-arts-u07-l12",
+            "ma-g4-english-language-arts-u07-l13",
+            "ma-g4-english-language-arts-u07-l15",
+            "ma-g4-english-language-arts-u07-l16",
+            "ma-g4-english-language-arts-u07-l17"
+          ],
+          "lesson_count": 11,
+          "unit_numbers": [
+            7
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u07-assessment"
+          ]
+        },
+        "4.W.2": {
+          "description": "Write informative or explanatory texts to examine a topic and convey ideas clearly. Sub-points: (a) introduce the topic and group related information in paragraphs and sections, including formatting and multimedia when useful; (b) develop with facts, definitions, concrete details, quotations, and examples; (c) link ideas within categories; (d) use precise language and domain-specific vocabulary; (e) provide a concluding statement or section.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u06-l01",
+            "ma-g4-english-language-arts-u06-l02",
+            "ma-g4-english-language-arts-u06-l03",
+            "ma-g4-english-language-arts-u06-l04",
+            "ma-g4-english-language-arts-u06-l05",
+            "ma-g4-english-language-arts-u06-l06",
+            "ma-g4-english-language-arts-u06-l07",
+            "ma-g4-english-language-arts-u06-l08",
+            "ma-g4-english-language-arts-u06-l09",
+            "ma-g4-english-language-arts-u06-l10",
+            "ma-g4-english-language-arts-u06-l11",
+            "ma-g4-english-language-arts-u06-l12",
+            "ma-g4-english-language-arts-u06-l15",
+            "ma-g4-english-language-arts-u06-l16",
+            "ma-g4-english-language-arts-u06-l17"
+          ],
+          "lesson_count": 15,
+          "unit_numbers": [
+            6
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u06-assessment"
+          ]
+        },
+        "4.W.3": {
+          "description": "Write narratives with effective technique, descriptive details, and clear event sequences. Sub-points: (a) orient the reader by establishing a situation and introducing a narrator or characters; (b) use dialogue and description to develop experiences and responses; (c) use a variety of transitional words and phrases to manage sequence; (d) use concrete words, phrases, and sensory details; (e) provide a conclusion that follows from the narrated experiences or events.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u10-l01",
+            "ma-g4-english-language-arts-u10-l02",
+            "ma-g4-english-language-arts-u10-l03",
+            "ma-g4-english-language-arts-u10-l04",
+            "ma-g4-english-language-arts-u10-l05",
+            "ma-g4-english-language-arts-u10-l06",
+            "ma-g4-english-language-arts-u10-l07",
+            "ma-g4-english-language-arts-u10-l08",
+            "ma-g4-english-language-arts-u10-l09",
+            "ma-g4-english-language-arts-u10-l10",
+            "ma-g4-english-language-arts-u10-l17"
+          ],
+          "lesson_count": 11,
+          "unit_numbers": [
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.W.4": {
+          "description": "Produce clear and coherent writing in which development and organization are appropriate to task, purpose, and audience.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l06",
+            "ma-g4-english-language-arts-u01-l09",
+            "ma-g4-english-language-arts-u01-l10",
+            "ma-g4-english-language-arts-u01-l12",
+            "ma-g4-english-language-arts-u01-l13",
+            "ma-g4-english-language-arts-u01-l16",
+            "ma-g4-english-language-arts-u01-l17",
+            "ma-g4-english-language-arts-u02-l12",
+            "ma-g4-english-language-arts-u03-l12",
+            "ma-g4-english-language-arts-u04-l12",
+            "ma-g4-english-language-arts-u06-l04",
+            "ma-g4-english-language-arts-u06-l06",
+            "ma-g4-english-language-arts-u06-l12",
+            "ma-g4-english-language-arts-u06-l16",
+            "ma-g4-english-language-arts-u06-l17",
+            "ma-g4-english-language-arts-u07-l12",
+            "ma-g4-english-language-arts-u10-l04",
+            "ma-g4-english-language-arts-u10-l12",
+            "ma-g4-english-language-arts-u10-l16",
+            "ma-g4-english-language-arts-u10-l17"
+          ],
+          "lesson_count": 20,
+          "unit_numbers": [
+            1,
+            2,
+            3,
+            4,
+            6,
+            7,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment",
+            "ma-g4-english-language-arts-u02-assessment",
+            "ma-g4-english-language-arts-u04-assessment",
+            "ma-g4-english-language-arts-u06-assessment",
+            "ma-g4-english-language-arts-u07-assessment",
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.W.5": {
+          "description": "With guidance and support from peers and adults, plan, revise, and edit, addressing the grade 4 language standards.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l13",
+            "ma-g4-english-language-arts-u01-l18",
+            "ma-g4-english-language-arts-u02-l13",
+            "ma-g4-english-language-arts-u02-l18",
+            "ma-g4-english-language-arts-u03-l13",
+            "ma-g4-english-language-arts-u03-l18",
+            "ma-g4-english-language-arts-u04-l13",
+            "ma-g4-english-language-arts-u04-l18",
+            "ma-g4-english-language-arts-u05-l13",
+            "ma-g4-english-language-arts-u05-l18",
+            "ma-g4-english-language-arts-u06-l08",
+            "ma-g4-english-language-arts-u06-l09",
+            "ma-g4-english-language-arts-u06-l13",
+            "ma-g4-english-language-arts-u06-l18",
+            "ma-g4-english-language-arts-u07-l13",
+            "ma-g4-english-language-arts-u07-l18",
+            "ma-g4-english-language-arts-u09-l13",
+            "ma-g4-english-language-arts-u10-l08",
+            "ma-g4-english-language-arts-u10-l09",
+            "ma-g4-english-language-arts-u10-l13",
+            "ma-g4-english-language-arts-u10-l18"
+          ],
+          "lesson_count": 21,
+          "unit_numbers": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            9,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u06-assessment",
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.W.6": {
+          "description": "With some guidance and support, use technology, including the Internet, to produce and publish writing; type a minimum of one page in a single sitting.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u06-l11",
+            "ma-g4-english-language-arts-u06-l18",
+            "ma-g4-english-language-arts-u10-l12",
+            "ma-g4-english-language-arts-u10-l18"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            6,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u06-assessment",
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.W.7": {
+          "description": "Conduct short research projects that build knowledge through investigation of different aspects of a topic.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u09-l01",
+            "ma-g4-english-language-arts-u09-l03",
+            "ma-g4-english-language-arts-u09-l04",
+            "ma-g4-english-language-arts-u09-l15",
+            "ma-g4-english-language-arts-u09-l16",
+            "ma-g4-english-language-arts-u09-l17"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.W.8": {
+          "description": "Recall relevant experience and gather relevant information from print and digital sources; take notes, categorize information, and provide a list of sources.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l11",
+            "ma-g4-english-language-arts-u07-l11",
+            "ma-g4-english-language-arts-u09-l04",
+            "ma-g4-english-language-arts-u09-l05",
+            "ma-g4-english-language-arts-u09-l06",
+            "ma-g4-english-language-arts-u09-l07",
+            "ma-g4-english-language-arts-u09-l08",
+            "ma-g4-english-language-arts-u09-l09",
+            "ma-g4-english-language-arts-u09-l11",
+            "ma-g4-english-language-arts-u09-l15",
+            "ma-g4-english-language-arts-u09-l16",
+            "ma-g4-english-language-arts-u09-l17",
+            "ma-g4-english-language-arts-u09-l18"
+          ],
+          "lesson_count": 13,
+          "unit_numbers": [
+            1,
+            7,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.W.9a": {
+          "description": "Draw evidence from literary texts to support analysis and reflection, applying the grade 4 reading standards for literature.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u02-l11",
+            "ma-g4-english-language-arts-u02-l12",
+            "ma-g4-english-language-arts-u02-l16",
+            "ma-g4-english-language-arts-u02-l17",
+            "ma-g4-english-language-arts-u03-l06",
+            "ma-g4-english-language-arts-u03-l12"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            2,
+            3
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u02-assessment",
+            "ma-g4-english-language-arts-u03-assessment"
+          ]
+        },
+        "4.W.9b": {
+          "description": "Draw evidence from informational texts to support analysis and reflection, applying the grade 4 reading standards for informational text.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u04-l11",
+            "ma-g4-english-language-arts-u04-l12",
+            "ma-g4-english-language-arts-u04-l16",
+            "ma-g4-english-language-arts-u05-l11",
+            "ma-g4-english-language-arts-u06-l07",
+            "ma-g4-english-language-arts-u06-l15",
+            "ma-g4-english-language-arts-u07-l04",
+            "ma-g4-english-language-arts-u07-l11",
+            "ma-g4-english-language-arts-u07-l15",
+            "ma-g4-english-language-arts-u07-l17",
+            "ma-g4-english-language-arts-u09-l12",
+            "ma-g4-english-language-arts-u09-l13",
+            "ma-g4-english-language-arts-u09-l18"
+          ],
+          "lesson_count": 13,
+          "unit_numbers": [
+            4,
+            5,
+            6,
+            7,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u04-assessment",
+            "ma-g4-english-language-arts-u05-assessment",
+            "ma-g4-english-language-arts-u07-assessment",
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.W.10": {
+          "description": "Write routinely over extended and shorter time frames for a range of tasks, purposes, and audiences.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l12",
+            "ma-g4-english-language-arts-u01-l18",
+            "ma-g4-english-language-arts-u08-l12",
+            "ma-g4-english-language-arts-u08-l13",
+            "ma-g4-english-language-arts-u08-l18"
+          ],
+          "lesson_count": 5,
+          "unit_numbers": [
+            1,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment",
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.SL.1": {
+          "description": "Engage effectively in collaborative discussions on grade 4 topics and texts. Sub-points: (a) come prepared and draw on that preparation; (b) follow agreed-upon rules and carry out assigned roles; (c) pose and respond to specific questions to clarify or follow up; (d) review the key ideas expressed and explain one's own understanding.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l14",
+            "ma-g4-english-language-arts-u02-l14",
+            "ma-g4-english-language-arts-u03-l14"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            1,
+            2,
+            3
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment",
+            "ma-g4-english-language-arts-u02-assessment",
+            "ma-g4-english-language-arts-u03-assessment"
+          ]
+        },
+        "4.SL.2": {
+          "description": "Paraphrase portions of a text read aloud or information presented in diverse media and formats.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u05-l14",
+            "ma-g4-english-language-arts-u09-l14"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            5,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u05-assessment",
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.SL.3": {
+          "description": "Identify the reasons and evidence a speaker provides to support particular points.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u07-l14",
+            "ma-g4-english-language-arts-u09-l14"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            7,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u07-assessment",
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.SL.4": {
+          "description": "Report on a topic or text, tell a story, or recount an experience in an organized manner, with facts and details supporting main ideas.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u04-l14",
+            "ma-g4-english-language-arts-u07-l14",
+            "ma-g4-english-language-arts-u10-l14"
+          ],
+          "lesson_count": 3,
+          "unit_numbers": [
+            4,
+            7,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u07-assessment",
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.SL.5": {
+          "description": "Add audio recordings and visual displays to presentations when appropriate to enhance main ideas or themes.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u08-l14",
+            "ma-g4-english-language-arts-u08-l18"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.SL.6": {
+          "description": "Differentiate between contexts calling for formal English and situations where informal discourse is appropriate; use formal English when appropriate.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u06-l14",
+            "ma-g4-english-language-arts-u10-l14"
+          ],
+          "lesson_count": 2,
+          "unit_numbers": [
+            6,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.L.1": {
+          "description": "Demonstrate command of standard English grammar and usage. Sub-points (a)-(g): relative pronouns and relative adverbs; progressive verb tenses; modal auxiliaries; ordering adjectives conventionally; prepositional phrases; complete sentences, correcting fragments and run-ons; frequently confused words.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u01-l13",
+            "ma-g4-english-language-arts-u01-l17",
+            "ma-g4-english-language-arts-u04-l13",
+            "ma-g4-english-language-arts-u05-l13",
+            "ma-g4-english-language-arts-u06-l13",
+            "ma-g4-english-language-arts-u06-l17",
+            "ma-g4-english-language-arts-u07-l13",
+            "ma-g4-english-language-arts-u08-l13",
+            "ma-g4-english-language-arts-u10-l13",
+            "ma-g4-english-language-arts-u10-l17"
+          ],
+          "lesson_count": 10,
+          "unit_numbers": [
+            1,
+            4,
+            5,
+            6,
+            7,
+            8,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u01-assessment",
+            "ma-g4-english-language-arts-u06-assessment",
+            "ma-g4-english-language-arts-u10-assessment"
+          ]
+        },
+        "4.L.2": {
+          "description": "Demonstrate command of capitalization, punctuation, and spelling. Sub-points (a)-(d): correct capitalization; commas and quotation marks marking direct speech and quotations from a text; a comma before a coordinating conjunction in a compound sentence; grade-appropriate spelling, consulting references as needed.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u06-l13",
+            "ma-g4-english-language-arts-u06-l17",
+            "ma-g4-english-language-arts-u09-l13",
+            "ma-g4-english-language-arts-u10-l13"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            6,
+            9,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u06-assessment"
+          ]
+        },
+        "4.L.3": {
+          "description": "Use knowledge of language and its conventions. Sub-points: (a) choose words and phrases to convey ideas precisely; (b) choose punctuation for effect; (c) differentiate contexts calling for formal English from informal discourse.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u06-l10",
+            "ma-g4-english-language-arts-u06-l14",
+            "ma-g4-english-language-arts-u07-l02",
+            "ma-g4-english-language-arts-u07-l08",
+            "ma-g4-english-language-arts-u08-l11",
+            "ma-g4-english-language-arts-u08-l13"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            6,
+            7,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u06-assessment",
+            "ma-g4-english-language-arts-u07-assessment",
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.L.4": {
+          "description": "Determine or clarify the meaning of unknown and multiple-meaning words. Sub-points: (a) context including definitions, examples, and restatements; (b) common Greek and Latin affixes and roots; (c) dictionaries, glossaries, and thesauruses, print and digital, for pronunciation and precise meaning.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u02-l02",
+            "ma-g4-english-language-arts-u04-l02",
+            "ma-g4-english-language-arts-u08-l02",
+            "ma-g4-english-language-arts-u09-l02"
+          ],
+          "lesson_count": 4,
+          "unit_numbers": [
+            2,
+            4,
+            8,
+            9
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u02-assessment",
+            "ma-g4-english-language-arts-u04-assessment",
+            "ma-g4-english-language-arts-u09-assessment"
+          ]
+        },
+        "4.L.5": {
+          "description": "Demonstrate understanding of figurative language, word relationships, and nuances. Sub-points: (a) explain simple similes and metaphors in context; (b) recognize and explain idioms, adages, and proverbs; (c) demonstrate understanding of antonyms and synonyms.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u03-l10",
+            "ma-g4-english-language-arts-u03-l16",
+            "ma-g4-english-language-arts-u08-l08",
+            "ma-g4-english-language-arts-u08-l09",
+            "ma-g4-english-language-arts-u08-l10",
+            "ma-g4-english-language-arts-u08-l11",
+            "ma-g4-english-language-arts-u08-l16",
+            "ma-g4-english-language-arts-u08-l17"
+          ],
+          "lesson_count": 8,
+          "unit_numbers": [
+            3,
+            8
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u03-assessment",
+            "ma-g4-english-language-arts-u08-assessment"
+          ]
+        },
+        "4.L.6": {
+          "description": "Acquire and use grade-appropriate general academic and domain-specific words and phrases, including those that signal precise actions, emotions, or states of being and those basic to a particular topic.",
+          "lesson_ids": [
+            "ma-g4-english-language-arts-u03-l02",
+            "ma-g4-english-language-arts-u04-l10",
+            "ma-g4-english-language-arts-u05-l02",
+            "ma-g4-english-language-arts-u06-l02",
+            "ma-g4-english-language-arts-u07-l02",
+            "ma-g4-english-language-arts-u10-l02"
+          ],
+          "lesson_count": 6,
+          "unit_numbers": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            10
+          ],
+          "assessment_ids": [
+            "ma-g4-english-language-arts-u05-assessment",
+            "ma-g4-english-language-arts-u06-assessment"
+          ]
+        }
+      }
+    }
+  }
+}

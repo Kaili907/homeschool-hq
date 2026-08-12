@@ -1,0 +1,268 @@
+{
+  "candidate_id": "manuel-academy-grades-3-4-r1",
+  "validated_on": "2026-08-12",
+  "overall": {
+    "assembly_integrity": "PASS",
+    "release_contract_conformance": "FAIL"
+  },
+  "failed_checks": {
+    "release_contract": [
+      "lesson-schema-compatibility",
+      "required-standards-and-objectives"
+    ],
+    "assembly_integrity": []
+  },
+  "counts": {
+    "grades": 2,
+    "courses": 20,
+    "units": 154,
+    "lessons": 1800,
+    "assessments": 154,
+    "scheduled_sessions": 1800,
+    "per_grade": {
+      "3": {
+        "courses": 10,
+        "units": 77,
+        "lessons": 900
+      },
+      "4": {
+        "courses": 10,
+        "units": 77,
+        "lessons": 900
+      }
+    },
+    "per_course": {
+      "ma-g3-mathematics": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g3-english-language-arts": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g3-science": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g3-social-studies": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g3-health": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g3-physical-education": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g3-ready-for-life": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g3-tech-cs": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g3-arts-music": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "ma-g3-financial-literacy": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-mathematics": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g4-english-language-arts": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g4-science": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g4-social-studies": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g4-health": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-physical-education": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g4-ready-for-life": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-tech-cs": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-arts-music": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "ma-g4-financial-literacy": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      }
+    }
+  },
+  "contract_checks": [
+    {
+      "check": "two-grades",
+      "result": "PASS",
+      "detail": "grades present: [3, 4]"
+    },
+    {
+      "check": "ten-courses-per-grade",
+      "result": "PASS",
+      "detail": "grade 3: 10 courses, one per canonical subject; grade 4: 10 courses, one per canonical subject"
+    },
+    {
+      "check": "course-count",
+      "result": "PASS",
+      "detail": "20 courses"
+    },
+    {
+      "check": "unique-course-ids",
+      "result": "PASS",
+      "detail": "20 distinct of 20"
+    },
+    {
+      "check": "unique-unit-ids",
+      "result": "PASS",
+      "detail": "154 units, 154 distinct"
+    },
+    {
+      "check": "unique-lesson-ids",
+      "result": "PASS",
+      "detail": "1800 lessons, 1800 distinct; 0 fail the grade34 lesson-id pattern"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once",
+      "result": "PASS",
+      "detail": "all 20 courses: every lesson scheduled exactly once, no unscheduled lesson"
+    },
+    {
+      "check": "week-coverage",
+      "result": "PASS",
+      "detail": "all 20 courses span exactly weeks 1-36 with no empty week"
+    },
+    {
+      "check": "lesson-schema-compatibility",
+      "result": "FAIL",
+      "detail": "1800 of 1800 lessons fail release/lesson-schema.json. Distinct reasons: standards[i]: expected object, got str (4757); schema_version: expected const '1.0' (360); subject: 'arts-and-music' not in enum (144); subject: 'technology' not in enum (72)"
+    },
+    {
+      "check": "required-standards-and-objectives",
+      "result": "FAIL",
+      "detail": "learning_objectives >= 3: PASS on all 1800 lessons. standards entry carrying a mapping_status: FAIL on 1800 lessons (0 of 4757 citations carry one). Every lane emits standards as plain strings."
+    },
+    {
+      "check": "accessibility-depth",
+      "result": "PASS",
+      "detail": "0 lessons below 5 entries; minimum observed is 6"
+    },
+    {
+      "check": "no-media-path",
+      "result": "PASS",
+      "detail": "0 lessons name no text/transcript/description/demonstration fallback (keyword heuristic over accessibility_and_accommodations; human review still required)"
+    },
+    {
+      "check": "safety-privacy-depth",
+      "result": "PASS",
+      "detail": "0 lessons below 2 entries; minimum observed is 4"
+    },
+    {
+      "check": "safety-privacy-content",
+      "result": "PASS",
+      "detail": "0 non-prohibiting uses of a banned disclosure term across 1800 lessons (keyword heuristic that ignores explicit prohibitions such as 'no photo required'; human review still required)"
+    },
+    {
+      "check": "multi-occasion-mastery",
+      "result": "PASS",
+      "detail": "0 lessons whose mastery_rule does not name multiple evidence occasions (keyword heuristic; human review still required)"
+    },
+    {
+      "check": "standards-mapping-status-reported",
+      "result": "REPORTED",
+      "detail": "4757 standards citations across 1800 lessons; 0 carry a per-citation mapping_status. The canonical/unverified/human-review rollup the contract asks for cannot be produced: no lane emits the object citation form. See standards/standards-custody-report.md."
+    }
+  ],
+  "assembly_checks": [
+    {
+      "check": "unique-assessment-ids",
+      "result": "PASS",
+      "detail": "154 assessments, 154 distinct"
+    },
+    {
+      "check": "contiguous-course-days",
+      "result": "PASS",
+      "detail": "every course numbers course_day 1..n with no gap or repeat"
+    },
+    {
+      "check": "unit-lesson-references-resolve",
+      "result": "PASS",
+      "detail": "every unit lesson_ids entry resolves to exactly one lesson; every lesson is claimed by exactly one unit"
+    },
+    {
+      "check": "unit-assessment-references-resolve",
+      "result": "PASS",
+      "detail": "every unit assessment_id resolves to an authored assessment"
+    },
+    {
+      "check": "lesson-schema-candidate-compatibility",
+      "result": "PASS",
+      "detail": "all 1800 lessons carry the 30 fields the candidate schema requires. Note: the candidate schema is derived from this same content, so this check confirms internal consistency, not conformance to an independent standard."
+    },
+    {
+      "check": "no-required-media",
+      "result": "PASS",
+      "detail": "all 1800 lessons declare media.required=false with a stated fallback"
+    },
+    {
+      "check": "content-byte-identical-to-source",
+      "result": "PASS",
+      "detail": "138 copied course files re-hashed against their pinned source commits; 0 differ"
+    },
+    {
+      "check": "sealed-1.0.0-identity-untouched",
+      "result": "PASS",
+      "detail": "no file under curriculum-content/manuel-academy/1.0.0 differs from the assembly base"
+    }
+  ],
+  "scope_limits": [
+    "Internal consistency only. No standard code is verified against a live Michigan source.",
+    "Four contract checks are keyword heuristics (no-media-path, safety-privacy-content, multi-occasion-mastery, and the fallback scan). They can miss phrasing they do not match; human review is still required.",
+    "No runtime/host integration is exercised: grades 3 and 4 are absent from AcademyGrade, PILOT_GRADES, and scripts/build-curriculum.mjs.",
+    "No licensed-educator sign-off. Health and Physical Education are marked PENDING_FINAL_HEALTH_REVIEW.",
+    "Accessibility is verified structurally in content, not against a rendered interface."
+  ]
+}

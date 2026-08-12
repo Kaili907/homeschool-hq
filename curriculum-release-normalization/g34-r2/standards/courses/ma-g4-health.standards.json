@@ -1,0 +1,313 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g4-health",
+  "grade": 4,
+  "subject": "health",
+  "matrix_subject_slug": "health",
+  "standards_ref": "standards-reference.md#health-education",
+  "official_source": "Michigan Health Education Standards Guidelines 2025 (MDE), grade span 3-5",
+  "custody": "lane-authored standards artifact present",
+  "lane_artifacts": [
+    "standards/sources/health/standards-map.md"
+  ],
+  "projection_note": "Every entry below is a citation the lane already authored on a lesson in this course. Nothing here adds, renames, or reinterprets a standard; counts and mapping_status are derived by adapters/standards-mapping-policy.json.",
+  "totals": {
+    "citations": 126,
+    "distinct": 13,
+    "canonical": 0,
+    "unverified": 126,
+    "human-review": 0
+  },
+  "standards": [
+    {
+      "code_or_strand": "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 18,
+      "unit_numbers": [
+        2,
+        3,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u02-l01",
+        "ma-g4-health-u02-l02",
+        "ma-g4-health-u02-l03",
+        "ma-g4-health-u02-l04",
+        "ma-g4-health-u02-l05",
+        "ma-g4-health-u02-l06",
+        "ma-g4-health-u03-l01",
+        "ma-g4-health-u03-l02",
+        "ma-g4-health-u03-l03",
+        "ma-g4-health-u03-l04",
+        "ma-g4-health-u03-l05",
+        "ma-g4-health-u03-l06",
+        "ma-g4-health-u06-l01",
+        "ma-g4-health-u06-l02",
+        "ma-g4-health-u06-l03",
+        "ma-g4-health-u06-l04",
+        "ma-g4-health-u06-l05",
+        "ma-g4-health-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 12,
+      "unit_numbers": [
+        3,
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u03-l01",
+        "ma-g4-health-u03-l02",
+        "ma-g4-health-u03-l03",
+        "ma-g4-health-u03-l04",
+        "ma-g4-health-u03-l05",
+        "ma-g4-health-u03-l06",
+        "ma-g4-health-u04-l01",
+        "ma-g4-health-u04-l02",
+        "ma-g4-health-u04-l03",
+        "ma-g4-health-u04-l04",
+        "ma-g4-health-u04-l05",
+        "ma-g4-health-u04-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Practice 3: Information and Resource Seeking",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 12,
+      "unit_numbers": [
+        1,
+        5
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u01-l01",
+        "ma-g4-health-u01-l02",
+        "ma-g4-health-u01-l03",
+        "ma-g4-health-u01-l04",
+        "ma-g4-health-u01-l05",
+        "ma-g4-health-u01-l06",
+        "ma-g4-health-u05-l01",
+        "ma-g4-health-u05-l02",
+        "ma-g4-health-u05-l03",
+        "ma-g4-health-u05-l04",
+        "ma-g4-health-u05-l05",
+        "ma-g4-health-u05-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Practice 4: Decision Making and Problem Solving",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 12,
+      "unit_numbers": [
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u05-l01",
+        "ma-g4-health-u05-l02",
+        "ma-g4-health-u05-l03",
+        "ma-g4-health-u05-l04",
+        "ma-g4-health-u05-l05",
+        "ma-g4-health-u05-l06",
+        "ma-g4-health-u06-l01",
+        "ma-g4-health-u06-l02",
+        "ma-g4-health-u06-l03",
+        "ma-g4-health-u06-l04",
+        "ma-g4-health-u06-l05",
+        "ma-g4-health-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Practice 5: Self-Management and Goal Setting",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 18,
+      "unit_numbers": [
+        1,
+        2,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u01-l01",
+        "ma-g4-health-u01-l02",
+        "ma-g4-health-u01-l03",
+        "ma-g4-health-u01-l04",
+        "ma-g4-health-u01-l05",
+        "ma-g4-health-u01-l06",
+        "ma-g4-health-u02-l01",
+        "ma-g4-health-u02-l02",
+        "ma-g4-health-u02-l03",
+        "ma-g4-health-u02-l04",
+        "ma-g4-health-u02-l05",
+        "ma-g4-health-u02-l06",
+        "ma-g4-health-u06-l01",
+        "ma-g4-health-u06-l02",
+        "ma-g4-health-u06-l03",
+        "ma-g4-health-u06-l04",
+        "ma-g4-health-u06-l05",
+        "ma-g4-health-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Practice 6: Advocacy and Health Promotion",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 12,
+      "unit_numbers": [
+        4,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u04-l01",
+        "ma-g4-health-u04-l02",
+        "ma-g4-health-u04-l03",
+        "ma-g4-health-u04-l04",
+        "ma-g4-health-u04-l05",
+        "ma-g4-health-u04-l06",
+        "ma-g4-health-u06-l01",
+        "ma-g4-health-u06-l02",
+        "ma-g4-health-u06-l03",
+        "ma-g4-health-u06-l04",
+        "ma-g4-health-u06-l05",
+        "ma-g4-health-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Balanced Eating and Physical Activity",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 6,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u02-l01",
+        "ma-g4-health-u02-l02",
+        "ma-g4-health-u02-l03",
+        "ma-g4-health-u02-l04",
+        "ma-g4-health-u02-l05",
+        "ma-g4-health-u02-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Community and Environmental Health",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 6,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u06-l01",
+        "ma-g4-health-u06-l02",
+        "ma-g4-health-u06-l03",
+        "ma-g4-health-u06-l04",
+        "ma-g4-health-u06-l05",
+        "ma-g4-health-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Healthy Relationships",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 6,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u04-l01",
+        "ma-g4-health-u04-l02",
+        "ma-g4-health-u04-l03",
+        "ma-g4-health-u04-l04",
+        "ma-g4-health-u04-l05",
+        "ma-g4-health-u04-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Mental and Emotional Health",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 6,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u03-l01",
+        "ma-g4-health-u03-l02",
+        "ma-g4-health-u03-l03",
+        "ma-g4-health-u03-l04",
+        "ma-g4-health-u03-l05",
+        "ma-g4-health-u03-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Personal Health and Wellness",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 6,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u01-l01",
+        "ma-g4-health-u01-l02",
+        "ma-g4-health-u01-l03",
+        "ma-g4-health-u01-l04",
+        "ma-g4-health-u01-l05",
+        "ma-g4-health-u01-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Safety and Injury Prevention",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 6,
+      "unit_numbers": [
+        5
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u05-l01",
+        "ma-g4-health-u05-l02",
+        "ma-g4-health-u05-l03",
+        "ma-g4-health-u05-l04",
+        "ma-g4-health-u05-l05",
+        "ma-g4-health-u05-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Substance Use and Misuse",
+      "source": "standards-reference.md#health-education",
+      "mapping_status": "unverified",
+      "derivation_rule": "R5-source-cited-code-unconfirmed",
+      "citation_count": 6,
+      "unit_numbers": [
+        5
+      ],
+      "lesson_ids": [
+        "ma-g4-health-u05-l01",
+        "ma-g4-health-u05-l02",
+        "ma-g4-health-u05-l03",
+        "ma-g4-health-u05-l04",
+        "ma-g4-health-u05-l05",
+        "ma-g4-health-u05-l06"
+      ]
+    }
+  ]
+}

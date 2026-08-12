@@ -1,0 +1,288 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "matrix_subject_slug": "ready-for-life",
+  "standards_ref": "standards-reference.md#ready-for-life",
+  "official_source": null,
+  "custody": "no lane standards artifact - this file is the release-boundary standalone artifact, projected from the course's own lesson citations",
+  "lane_artifacts": [],
+  "projection_note": "Every entry below is a citation the lane already authored on a lesson in this course. Nothing here adds, renames, or reinterprets a standard; counts and mapping_status are derived by adapters/standards-mapping-policy.json.",
+  "totals": {
+    "citations": 144,
+    "distinct": 9,
+    "canonical": 0,
+    "unverified": 0,
+    "human-review": 144
+  },
+  "standards": [
+    {
+      "code_or_strand": "Manuel Academy RFL G3 Unit 1 — personal and shared space care",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 6,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u01-l01",
+        "ma-g3-ready-for-life-u01-l02",
+        "ma-g3-ready-for-life-u01-l03",
+        "ma-g3-ready-for-life-u01-l04",
+        "ma-g3-ready-for-life-u01-l05",
+        "ma-g3-ready-for-life-u01-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy RFL G3 Unit 2 — clothing care and readiness routines",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 6,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u02-l01",
+        "ma-g3-ready-for-life-u02-l02",
+        "ma-g3-ready-for-life-u02-l03",
+        "ma-g3-ready-for-life-u02-l04",
+        "ma-g3-ready-for-life-u02-l05",
+        "ma-g3-ready-for-life-u02-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy RFL G3 Unit 3 — kitchen helper safety and no-heat preparation",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 6,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u03-l01",
+        "ma-g3-ready-for-life-u03-l02",
+        "ma-g3-ready-for-life-u03-l03",
+        "ma-g3-ready-for-life-u03-l04",
+        "ma-g3-ready-for-life-u03-l05",
+        "ma-g3-ready-for-life-u03-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 6,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u04-l01",
+        "ma-g3-ready-for-life-u04-l02",
+        "ma-g3-ready-for-life-u04-l03",
+        "ma-g3-ready-for-life-u04-l04",
+        "ma-g3-ready-for-life-u04-l05",
+        "ma-g3-ready-for-life-u04-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 6,
+      "unit_numbers": [
+        5
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u05-l01",
+        "ma-g3-ready-for-life-u05-l02",
+        "ma-g3-ready-for-life-u05-l03",
+        "ma-g3-ready-for-life-u05-l04",
+        "ma-g3-ready-for-life-u05-l05",
+        "ma-g3-ready-for-life-u05-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy RFL G3 Unit 6 — family contribution capstone",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 6,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u06-l01",
+        "ma-g3-ready-for-life-u06-l02",
+        "ma-g3-ready-for-life-u06-l03",
+        "ma-g3-ready-for-life-u06-l04",
+        "ma-g3-ready-for-life-u06-l05",
+        "ma-g3-ready-for-life-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Ready for Life elementary sequence — Grade 3",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u01-l01",
+        "ma-g3-ready-for-life-u01-l02",
+        "ma-g3-ready-for-life-u01-l03",
+        "ma-g3-ready-for-life-u01-l04",
+        "ma-g3-ready-for-life-u01-l05",
+        "ma-g3-ready-for-life-u01-l06",
+        "ma-g3-ready-for-life-u02-l01",
+        "ma-g3-ready-for-life-u02-l02",
+        "ma-g3-ready-for-life-u02-l03",
+        "ma-g3-ready-for-life-u02-l04",
+        "ma-g3-ready-for-life-u02-l05",
+        "ma-g3-ready-for-life-u02-l06",
+        "ma-g3-ready-for-life-u03-l01",
+        "ma-g3-ready-for-life-u03-l02",
+        "ma-g3-ready-for-life-u03-l03",
+        "ma-g3-ready-for-life-u03-l04",
+        "ma-g3-ready-for-life-u03-l05",
+        "ma-g3-ready-for-life-u03-l06",
+        "ma-g3-ready-for-life-u04-l01",
+        "ma-g3-ready-for-life-u04-l02",
+        "ma-g3-ready-for-life-u04-l03",
+        "ma-g3-ready-for-life-u04-l04",
+        "ma-g3-ready-for-life-u04-l05",
+        "ma-g3-ready-for-life-u04-l06",
+        "ma-g3-ready-for-life-u05-l01",
+        "ma-g3-ready-for-life-u05-l02",
+        "ma-g3-ready-for-life-u05-l03",
+        "ma-g3-ready-for-life-u05-l04",
+        "ma-g3-ready-for-life-u05-l05",
+        "ma-g3-ready-for-life-u05-l06",
+        "ma-g3-ready-for-life-u06-l01",
+        "ma-g3-ready-for-life-u06-l02",
+        "ma-g3-ready-for-life-u06-l03",
+        "ma-g3-ready-for-life-u06-l04",
+        "ma-g3-ready-for-life-u06-l05",
+        "ma-g3-ready-for-life-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Health/SEL connections",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u01-l01",
+        "ma-g3-ready-for-life-u01-l02",
+        "ma-g3-ready-for-life-u01-l03",
+        "ma-g3-ready-for-life-u01-l04",
+        "ma-g3-ready-for-life-u01-l05",
+        "ma-g3-ready-for-life-u01-l06",
+        "ma-g3-ready-for-life-u02-l01",
+        "ma-g3-ready-for-life-u02-l02",
+        "ma-g3-ready-for-life-u02-l03",
+        "ma-g3-ready-for-life-u02-l04",
+        "ma-g3-ready-for-life-u02-l05",
+        "ma-g3-ready-for-life-u02-l06",
+        "ma-g3-ready-for-life-u03-l01",
+        "ma-g3-ready-for-life-u03-l02",
+        "ma-g3-ready-for-life-u03-l03",
+        "ma-g3-ready-for-life-u03-l04",
+        "ma-g3-ready-for-life-u03-l05",
+        "ma-g3-ready-for-life-u03-l06",
+        "ma-g3-ready-for-life-u04-l01",
+        "ma-g3-ready-for-life-u04-l02",
+        "ma-g3-ready-for-life-u04-l03",
+        "ma-g3-ready-for-life-u04-l04",
+        "ma-g3-ready-for-life-u04-l05",
+        "ma-g3-ready-for-life-u04-l06",
+        "ma-g3-ready-for-life-u05-l01",
+        "ma-g3-ready-for-life-u05-l02",
+        "ma-g3-ready-for-life-u05-l03",
+        "ma-g3-ready-for-life-u05-l04",
+        "ma-g3-ready-for-life-u05-l05",
+        "ma-g3-ready-for-life-u05-l06",
+        "ma-g3-ready-for-life-u06-l01",
+        "ma-g3-ready-for-life-u06-l02",
+        "ma-g3-ready-for-life-u06-l03",
+        "ma-g3-ready-for-life-u06-l04",
+        "ma-g3-ready-for-life-u06-l05",
+        "ma-g3-ready-for-life-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Ready for Life v1 safety, supervision, and no-shame policy reference",
+      "source": "standards-reference.md#ready-for-life",
+      "mapping_status": "human-review",
+      "derivation_rule": "R4-ready-for-life-no-framework",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-ready-for-life-u01-l01",
+        "ma-g3-ready-for-life-u01-l02",
+        "ma-g3-ready-for-life-u01-l03",
+        "ma-g3-ready-for-life-u01-l04",
+        "ma-g3-ready-for-life-u01-l05",
+        "ma-g3-ready-for-life-u01-l06",
+        "ma-g3-ready-for-life-u02-l01",
+        "ma-g3-ready-for-life-u02-l02",
+        "ma-g3-ready-for-life-u02-l03",
+        "ma-g3-ready-for-life-u02-l04",
+        "ma-g3-ready-for-life-u02-l05",
+        "ma-g3-ready-for-life-u02-l06",
+        "ma-g3-ready-for-life-u03-l01",
+        "ma-g3-ready-for-life-u03-l02",
+        "ma-g3-ready-for-life-u03-l03",
+        "ma-g3-ready-for-life-u03-l04",
+        "ma-g3-ready-for-life-u03-l05",
+        "ma-g3-ready-for-life-u03-l06",
+        "ma-g3-ready-for-life-u04-l01",
+        "ma-g3-ready-for-life-u04-l02",
+        "ma-g3-ready-for-life-u04-l03",
+        "ma-g3-ready-for-life-u04-l04",
+        "ma-g3-ready-for-life-u04-l05",
+        "ma-g3-ready-for-life-u04-l06",
+        "ma-g3-ready-for-life-u05-l01",
+        "ma-g3-ready-for-life-u05-l02",
+        "ma-g3-ready-for-life-u05-l03",
+        "ma-g3-ready-for-life-u05-l04",
+        "ma-g3-ready-for-life-u05-l05",
+        "ma-g3-ready-for-life-u05-l06",
+        "ma-g3-ready-for-life-u06-l01",
+        "ma-g3-ready-for-life-u06-l02",
+        "ma-g3-ready-for-life-u06-l03",
+        "ma-g3-ready-for-life-u06-l04",
+        "ma-g3-ready-for-life-u06-l05",
+        "ma-g3-ready-for-life-u06-l06"
+      ]
+    }
+  ]
+}

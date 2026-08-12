@@ -1,0 +1,15 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "release_schema_version": "1.0",
+  "rule": "Every lesson in this release declares schema_version = the release-wide value. Where the authoring lane emitted a different value it is preserved verbatim in authored_schema_version, so nothing is lost and the change is invertible.",
+  "inverse": "schema_version := authored_schema_version if present, then drop the field.",
+  "observed_authored_versions": {
+    "1.0": 1440,
+    "1.1": 360
+  },
+  "affected_courses": [
+    "ma-g3-english-language-arts",
+    "ma-g4-english-language-arts"
+  ],
+  "why_not_widen_the_const": "release/lesson-schema.json pins schema_version to const '1.0'. Widening it to an enum was the alternative and is rejected here: a release package should present one schema version to its consumers. The ELA 1.1 records are a strict superset of the 1.0 field set (39 fields vs 30-38, all additive) and the schema sets additionalProperties: true, so a 1.1 record is a valid 1.0 record. The authored value stays on the record either way."
+}

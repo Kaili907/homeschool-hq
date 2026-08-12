@@ -1,0 +1,799 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "matrix_subject_slug": "mathematics",
+  "standards_ref": "standards-reference.md#mathematics",
+  "official_source": "Michigan K-12 Standards: Mathematics (MDE)",
+  "custody": "lane-authored standards artifact present",
+  "lane_artifacts": [
+    "standards/sources/mathematics/standards/standards-map.json",
+    "standards/sources/mathematics/standards/standards-map.md"
+  ],
+  "projection_note": "Every entry below is a citation the lane already authored on a lesson in this course. Nothing here adds, renames, or reinterprets a standard; counts and mapping_status are derived by adapters/standards-mapping-policy.json.",
+  "totals": {
+    "citations": 327,
+    "distinct": 34,
+    "canonical": 271,
+    "unverified": 0,
+    "human-review": 56
+  },
+  "standards": [
+    {
+      "code_or_strand": "4.G.1",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 4,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u10-l11",
+        "ma-g4-mathematics-u10-l12",
+        "ma-g4-mathematics-u10-l14",
+        "ma-g4-mathematics-u10-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.G.2",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 7,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u10-l11",
+        "ma-g4-mathematics-u10-l12",
+        "ma-g4-mathematics-u10-l13",
+        "ma-g4-mathematics-u10-l14",
+        "ma-g4-mathematics-u10-l15",
+        "ma-g4-mathematics-u10-l16",
+        "ma-g4-mathematics-u10-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.G.3",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u10-l11",
+        "ma-g4-mathematics-u10-l12",
+        "ma-g4-mathematics-u10-l13",
+        "ma-g4-mathematics-u10-l15",
+        "ma-g4-mathematics-u10-l16",
+        "ma-g4-mathematics-u10-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.MD.1",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 12,
+      "unit_numbers": [
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u09-l01",
+        "ma-g4-mathematics-u09-l02",
+        "ma-g4-mathematics-u09-l03",
+        "ma-g4-mathematics-u09-l04",
+        "ma-g4-mathematics-u09-l05",
+        "ma-g4-mathematics-u09-l08",
+        "ma-g4-mathematics-u09-l09",
+        "ma-g4-mathematics-u09-l13",
+        "ma-g4-mathematics-u09-l14",
+        "ma-g4-mathematics-u09-l15",
+        "ma-g4-mathematics-u09-l16",
+        "ma-g4-mathematics-u09-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.MD.2",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 8,
+      "unit_numbers": [
+        7,
+        8,
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u07-l11",
+        "ma-g4-mathematics-u08-l06",
+        "ma-g4-mathematics-u08-l12",
+        "ma-g4-mathematics-u09-l06",
+        "ma-g4-mathematics-u09-l10",
+        "ma-g4-mathematics-u09-l15",
+        "ma-g4-mathematics-u09-l16",
+        "ma-g4-mathematics-u09-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.MD.3",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 7,
+      "unit_numbers": [
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u09-l07",
+        "ma-g4-mathematics-u09-l09",
+        "ma-g4-mathematics-u09-l12",
+        "ma-g4-mathematics-u09-l14",
+        "ma-g4-mathematics-u09-l15",
+        "ma-g4-mathematics-u09-l16",
+        "ma-g4-mathematics-u09-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.MD.4",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        9
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u09-l11",
+        "ma-g4-mathematics-u09-l12",
+        "ma-g4-mathematics-u09-l13",
+        "ma-g4-mathematics-u09-l14",
+        "ma-g4-mathematics-u09-l15",
+        "ma-g4-mathematics-u09-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.MD.5",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 5,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u10-l01",
+        "ma-g4-mathematics-u10-l02",
+        "ma-g4-mathematics-u10-l05",
+        "ma-g4-mathematics-u10-l09",
+        "ma-g4-mathematics-u10-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.MD.6",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 8,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u10-l03",
+        "ma-g4-mathematics-u10-l04",
+        "ma-g4-mathematics-u10-l05",
+        "ma-g4-mathematics-u10-l08",
+        "ma-g4-mathematics-u10-l09",
+        "ma-g4-mathematics-u10-l14",
+        "ma-g4-mathematics-u10-l16",
+        "ma-g4-mathematics-u10-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.MD.7",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u10-l06",
+        "ma-g4-mathematics-u10-l07",
+        "ma-g4-mathematics-u10-l10",
+        "ma-g4-mathematics-u10-l14",
+        "ma-g4-mathematics-u10-l16",
+        "ma-g4-mathematics-u10-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.NBT.1",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 10,
+      "unit_numbers": [
+        1,
+        2,
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l02",
+        "ma-g4-mathematics-u01-l03",
+        "ma-g4-mathematics-u01-l05",
+        "ma-g4-mathematics-u01-l09",
+        "ma-g4-mathematics-u01-l13",
+        "ma-g4-mathematics-u01-l14",
+        "ma-g4-mathematics-u01-l15",
+        "ma-g4-mathematics-u01-l16",
+        "ma-g4-mathematics-u02-l03",
+        "ma-g4-mathematics-u04-l02"
+      ]
+    },
+    {
+      "code_or_strand": "4.NBT.2",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 13,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l03",
+        "ma-g4-mathematics-u01-l04",
+        "ma-g4-mathematics-u01-l05",
+        "ma-g4-mathematics-u01-l06",
+        "ma-g4-mathematics-u01-l07",
+        "ma-g4-mathematics-u01-l08",
+        "ma-g4-mathematics-u01-l09",
+        "ma-g4-mathematics-u01-l10",
+        "ma-g4-mathematics-u01-l13",
+        "ma-g4-mathematics-u01-l14",
+        "ma-g4-mathematics-u01-l15",
+        "ma-g4-mathematics-u01-l16",
+        "ma-g4-mathematics-u01-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.NBT.3",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 9,
+      "unit_numbers": [
+        1,
+        2
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l11",
+        "ma-g4-mathematics-u01-l12",
+        "ma-g4-mathematics-u01-l14",
+        "ma-g4-mathematics-u01-l15",
+        "ma-g4-mathematics-u01-l16",
+        "ma-g4-mathematics-u01-l17",
+        "ma-g4-mathematics-u01-l18",
+        "ma-g4-mathematics-u02-l12",
+        "ma-g4-mathematics-u02-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.NBT.4",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 15,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u02-l01",
+        "ma-g4-mathematics-u02-l02",
+        "ma-g4-mathematics-u02-l03",
+        "ma-g4-mathematics-u02-l04",
+        "ma-g4-mathematics-u02-l05",
+        "ma-g4-mathematics-u02-l06",
+        "ma-g4-mathematics-u02-l07",
+        "ma-g4-mathematics-u02-l08",
+        "ma-g4-mathematics-u02-l09",
+        "ma-g4-mathematics-u02-l10",
+        "ma-g4-mathematics-u02-l13",
+        "ma-g4-mathematics-u02-l14",
+        "ma-g4-mathematics-u02-l15",
+        "ma-g4-mathematics-u02-l16",
+        "ma-g4-mathematics-u02-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.NBT.5",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 16,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u04-l01",
+        "ma-g4-mathematics-u04-l02",
+        "ma-g4-mathematics-u04-l03",
+        "ma-g4-mathematics-u04-l04",
+        "ma-g4-mathematics-u04-l05",
+        "ma-g4-mathematics-u04-l06",
+        "ma-g4-mathematics-u04-l07",
+        "ma-g4-mathematics-u04-l08",
+        "ma-g4-mathematics-u04-l09",
+        "ma-g4-mathematics-u04-l12",
+        "ma-g4-mathematics-u04-l13",
+        "ma-g4-mathematics-u04-l14",
+        "ma-g4-mathematics-u04-l15",
+        "ma-g4-mathematics-u04-l16",
+        "ma-g4-mathematics-u04-l17",
+        "ma-g4-mathematics-u04-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.NBT.6",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 13,
+      "unit_numbers": [
+        5
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u05-l01",
+        "ma-g4-mathematics-u05-l02",
+        "ma-g4-mathematics-u05-l03",
+        "ma-g4-mathematics-u05-l04",
+        "ma-g4-mathematics-u05-l05",
+        "ma-g4-mathematics-u05-l08",
+        "ma-g4-mathematics-u05-l09",
+        "ma-g4-mathematics-u05-l11",
+        "ma-g4-mathematics-u05-l12",
+        "ma-g4-mathematics-u05-l14",
+        "ma-g4-mathematics-u05-l15",
+        "ma-g4-mathematics-u05-l16",
+        "ma-g4-mathematics-u05-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.NF.1",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 13,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u06-l01",
+        "ma-g4-mathematics-u06-l02",
+        "ma-g4-mathematics-u06-l03",
+        "ma-g4-mathematics-u06-l04",
+        "ma-g4-mathematics-u06-l05",
+        "ma-g4-mathematics-u06-l06",
+        "ma-g4-mathematics-u06-l09",
+        "ma-g4-mathematics-u06-l12",
+        "ma-g4-mathematics-u06-l13",
+        "ma-g4-mathematics-u06-l14",
+        "ma-g4-mathematics-u06-l15",
+        "ma-g4-mathematics-u06-l16",
+        "ma-g4-mathematics-u06-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.NF.2",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 11,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u06-l07",
+        "ma-g4-mathematics-u06-l08",
+        "ma-g4-mathematics-u06-l09",
+        "ma-g4-mathematics-u06-l10",
+        "ma-g4-mathematics-u06-l11",
+        "ma-g4-mathematics-u06-l12",
+        "ma-g4-mathematics-u06-l14",
+        "ma-g4-mathematics-u06-l15",
+        "ma-g4-mathematics-u06-l16",
+        "ma-g4-mathematics-u06-l17",
+        "ma-g4-mathematics-u06-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.NF.3",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 13,
+      "unit_numbers": [
+        7
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u07-l01",
+        "ma-g4-mathematics-u07-l02",
+        "ma-g4-mathematics-u07-l03",
+        "ma-g4-mathematics-u07-l04",
+        "ma-g4-mathematics-u07-l05",
+        "ma-g4-mathematics-u07-l06",
+        "ma-g4-mathematics-u07-l08",
+        "ma-g4-mathematics-u07-l09",
+        "ma-g4-mathematics-u07-l13",
+        "ma-g4-mathematics-u07-l14",
+        "ma-g4-mathematics-u07-l15",
+        "ma-g4-mathematics-u07-l16",
+        "ma-g4-mathematics-u07-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.NF.4",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 10,
+      "unit_numbers": [
+        7
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u07-l07",
+        "ma-g4-mathematics-u07-l10",
+        "ma-g4-mathematics-u07-l11",
+        "ma-g4-mathematics-u07-l12",
+        "ma-g4-mathematics-u07-l13",
+        "ma-g4-mathematics-u07-l14",
+        "ma-g4-mathematics-u07-l15",
+        "ma-g4-mathematics-u07-l16",
+        "ma-g4-mathematics-u07-l17",
+        "ma-g4-mathematics-u07-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.NF.5",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 6,
+      "unit_numbers": [
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u08-l02",
+        "ma-g4-mathematics-u08-l03",
+        "ma-g4-mathematics-u08-l12",
+        "ma-g4-mathematics-u08-l14",
+        "ma-g4-mathematics-u08-l15",
+        "ma-g4-mathematics-u08-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.NF.6",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 12,
+      "unit_numbers": [
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u08-l01",
+        "ma-g4-mathematics-u08-l04",
+        "ma-g4-mathematics-u08-l05",
+        "ma-g4-mathematics-u08-l06",
+        "ma-g4-mathematics-u08-l09",
+        "ma-g4-mathematics-u08-l12",
+        "ma-g4-mathematics-u08-l13",
+        "ma-g4-mathematics-u08-l14",
+        "ma-g4-mathematics-u08-l15",
+        "ma-g4-mathematics-u08-l16",
+        "ma-g4-mathematics-u08-l17",
+        "ma-g4-mathematics-u08-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.NF.7",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 8,
+      "unit_numbers": [
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u08-l07",
+        "ma-g4-mathematics-u08-l08",
+        "ma-g4-mathematics-u08-l10",
+        "ma-g4-mathematics-u08-l11",
+        "ma-g4-mathematics-u08-l14",
+        "ma-g4-mathematics-u08-l15",
+        "ma-g4-mathematics-u08-l16",
+        "ma-g4-mathematics-u08-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.OA.1",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 7,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u03-l01",
+        "ma-g4-mathematics-u03-l02",
+        "ma-g4-mathematics-u03-l03",
+        "ma-g4-mathematics-u03-l14",
+        "ma-g4-mathematics-u03-l15",
+        "ma-g4-mathematics-u03-l16",
+        "ma-g4-mathematics-u03-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.OA.2",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 9,
+      "unit_numbers": [
+        3,
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u03-l04",
+        "ma-g4-mathematics-u03-l05",
+        "ma-g4-mathematics-u03-l08",
+        "ma-g4-mathematics-u03-l15",
+        "ma-g4-mathematics-u03-l16",
+        "ma-g4-mathematics-u03-l17",
+        "ma-g4-mathematics-u04-l11",
+        "ma-g4-mathematics-u04-l15",
+        "ma-g4-mathematics-u04-l16"
+      ]
+    },
+    {
+      "code_or_strand": "4.OA.3",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 23,
+      "unit_numbers": [
+        2,
+        4,
+        5
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u02-l11",
+        "ma-g4-mathematics-u02-l12",
+        "ma-g4-mathematics-u02-l14",
+        "ma-g4-mathematics-u02-l15",
+        "ma-g4-mathematics-u02-l16",
+        "ma-g4-mathematics-u02-l17",
+        "ma-g4-mathematics-u02-l18",
+        "ma-g4-mathematics-u04-l10",
+        "ma-g4-mathematics-u04-l12",
+        "ma-g4-mathematics-u04-l14",
+        "ma-g4-mathematics-u04-l15",
+        "ma-g4-mathematics-u04-l16",
+        "ma-g4-mathematics-u04-l17",
+        "ma-g4-mathematics-u05-l06",
+        "ma-g4-mathematics-u05-l07",
+        "ma-g4-mathematics-u05-l10",
+        "ma-g4-mathematics-u05-l12",
+        "ma-g4-mathematics-u05-l13",
+        "ma-g4-mathematics-u05-l14",
+        "ma-g4-mathematics-u05-l15",
+        "ma-g4-mathematics-u05-l16",
+        "ma-g4-mathematics-u05-l17",
+        "ma-g4-mathematics-u05-l18"
+      ]
+    },
+    {
+      "code_or_strand": "4.OA.4",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 11,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u03-l06",
+        "ma-g4-mathematics-u03-l07",
+        "ma-g4-mathematics-u03-l08",
+        "ma-g4-mathematics-u03-l09",
+        "ma-g4-mathematics-u03-l10",
+        "ma-g4-mathematics-u03-l12",
+        "ma-g4-mathematics-u03-l13",
+        "ma-g4-mathematics-u03-l14",
+        "ma-g4-mathematics-u03-l15",
+        "ma-g4-mathematics-u03-l16",
+        "ma-g4-mathematics-u03-l17"
+      ]
+    },
+    {
+      "code_or_strand": "4.OA.5",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "canonical",
+      "derivation_rule": "R1-lane-catalog-canonical",
+      "citation_count": 3,
+      "unit_numbers": [
+        3,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u03-l11",
+        "ma-g4-mathematics-u03-l12",
+        "ma-g4-mathematics-u10-l18"
+      ]
+    },
+    {
+      "code_or_strand": "MP.1",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "human-review",
+      "derivation_rule": "R2-math-practice-house-convention",
+      "citation_count": 11,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l01",
+        "ma-g4-mathematics-u01-l12",
+        "ma-g4-mathematics-u02-l01",
+        "ma-g4-mathematics-u03-l01",
+        "ma-g4-mathematics-u04-l01",
+        "ma-g4-mathematics-u05-l01",
+        "ma-g4-mathematics-u06-l01",
+        "ma-g4-mathematics-u07-l01",
+        "ma-g4-mathematics-u08-l01",
+        "ma-g4-mathematics-u09-l01",
+        "ma-g4-mathematics-u10-l01"
+      ]
+    },
+    {
+      "code_or_strand": "MP.3",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "human-review",
+      "derivation_rule": "R2-math-practice-house-convention",
+      "citation_count": 19,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l01",
+        "ma-g4-mathematics-u01-l08",
+        "ma-g4-mathematics-u01-l12",
+        "ma-g4-mathematics-u02-l08",
+        "ma-g4-mathematics-u02-l13",
+        "ma-g4-mathematics-u03-l05",
+        "ma-g4-mathematics-u03-l08",
+        "ma-g4-mathematics-u04-l08",
+        "ma-g4-mathematics-u04-l12",
+        "ma-g4-mathematics-u05-l08",
+        "ma-g4-mathematics-u05-l11",
+        "ma-g4-mathematics-u06-l08",
+        "ma-g4-mathematics-u06-l12",
+        "ma-g4-mathematics-u07-l08",
+        "ma-g4-mathematics-u07-l12",
+        "ma-g4-mathematics-u08-l08",
+        "ma-g4-mathematics-u09-l08",
+        "ma-g4-mathematics-u10-l08",
+        "ma-g4-mathematics-u10-l15"
+      ]
+    },
+    {
+      "code_or_strand": "MP.4",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "human-review",
+      "derivation_rule": "R2-math-practice-house-convention",
+      "citation_count": 19,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l13",
+        "ma-g4-mathematics-u01-l18",
+        "ma-g4-mathematics-u02-l18",
+        "ma-g4-mathematics-u03-l13",
+        "ma-g4-mathematics-u03-l18",
+        "ma-g4-mathematics-u04-l13",
+        "ma-g4-mathematics-u04-l18",
+        "ma-g4-mathematics-u05-l13",
+        "ma-g4-mathematics-u05-l18",
+        "ma-g4-mathematics-u06-l13",
+        "ma-g4-mathematics-u06-l18",
+        "ma-g4-mathematics-u07-l13",
+        "ma-g4-mathematics-u07-l18",
+        "ma-g4-mathematics-u08-l13",
+        "ma-g4-mathematics-u08-l18",
+        "ma-g4-mathematics-u09-l13",
+        "ma-g4-mathematics-u09-l18",
+        "ma-g4-mathematics-u10-l13",
+        "ma-g4-mathematics-u10-l18"
+      ]
+    },
+    {
+      "code_or_strand": "MP.5",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "human-review",
+      "derivation_rule": "R2-math-practice-house-convention",
+      "citation_count": 2,
+      "unit_numbers": [
+        9,
+        10
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u09-l02",
+        "ma-g4-mathematics-u10-l03"
+      ]
+    },
+    {
+      "code_or_strand": "MP.6",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "human-review",
+      "derivation_rule": "R2-math-practice-house-convention",
+      "citation_count": 3,
+      "unit_numbers": [
+        1,
+        6,
+        8
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l07",
+        "ma-g4-mathematics-u06-l11",
+        "ma-g4-mathematics-u08-l11"
+      ]
+    },
+    {
+      "code_or_strand": "MP.7",
+      "source": "standards-reference.md#mathematics",
+      "mapping_status": "human-review",
+      "derivation_rule": "R2-math-practice-house-convention",
+      "citation_count": 2,
+      "unit_numbers": [
+        1,
+        4
+      ],
+      "lesson_ids": [
+        "ma-g4-mathematics-u01-l02",
+        "ma-g4-mathematics-u04-l03"
+      ]
+    }
+  ]
+}

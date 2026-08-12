@@ -1,0 +1,1125 @@
+[
+  {
+    "unit_id": "ma-g4-mathematics-u01",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 1,
+    "title": "Mathematical Habits and Place Value to One Million",
+    "days": 18,
+    "standards": [
+      "4.NBT.1",
+      "4.NBT.2",
+      "4.NBT.3",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6",
+      "MP.7"
+    ],
+    "essential_question": "How does the base-ten structure let us read, compare, and round whole numbers of any size up to one million?",
+    "topics": [
+      "problem-solving routines",
+      "ten-times place-value relationships",
+      "reading and writing multi-digit numbers",
+      "comparing multi-digit numbers",
+      "rounding to any place",
+      "estimation and reasonableness"
+    ],
+    "academic_vocabulary": [
+      "place value",
+      "period",
+      "standard form",
+      "word form",
+      "expanded form",
+      "compare",
+      "round",
+      "estimate",
+      "digit",
+      "ten times"
+    ],
+    "representations": [
+      "place-value chart with periods",
+      "base-ten reasoning in words",
+      "expanded form",
+      "open number line for rounding",
+      "comparison statements with symbols"
+    ],
+    "prerequisites": [
+      "place value to 1,000",
+      "rounding to the nearest ten and hundred",
+      "reading three-digit numbers"
+    ],
+    "fluency_target": "Read, write, compare, and round multi-digit whole numbers through the hundred thousands.",
+    "known_misconceptions": [
+      {
+        "pattern": "Compares multi-digit numbers by counting digits or by the largest single digit anywhere in the number.",
+        "probe": "Which is greater, 4,318 or 4,905? Which place actually decides?",
+        "repair": "Align both numbers in a place-value chart and compare left to right, stopping at the first place that differs."
+      },
+      {
+        "pattern": "Writes expanded form using digits rather than place values, such as 3 + 4 + 7 for 347.",
+        "probe": "What is the value of the 3 in 347?",
+        "repair": "Say each digit's value aloud in place-value words before recording the expanded form."
+      },
+      {
+        "pattern": "Rounds to the wrong place because the target place was not identified first.",
+        "probe": "Round 46,271 to the nearest thousand. Which digit is in the thousands place?",
+        "repair": "Underline the target place, then look only at the digit immediately to its right."
+      },
+      {
+        "pattern": "States the ten-times relationship backwards, saying a digit is ten times the place to its left.",
+        "probe": "Is the hundreds place ten times the tens place, or the other way around?",
+        "repair": "Move one place left on a place-value chart and confirm the value multiplies by ten."
+      },
+      {
+        "pattern": "Drops a zero placeholder when writing a number from its word name.",
+        "probe": "Write forty thousand six. How many digits should that have?",
+        "repair": "Write the place-value chart headings first and fill every place, including empty ones."
+      }
+    ],
+    "performance_task": "Build a Ten Times Bigger explainer showing place-value relationships with models, comparisons, and a rounding decision made for a stated purpose.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u01-l01",
+      "ma-g4-mathematics-u01-l02",
+      "ma-g4-mathematics-u01-l03",
+      "ma-g4-mathematics-u01-l04",
+      "ma-g4-mathematics-u01-l05",
+      "ma-g4-mathematics-u01-l06",
+      "ma-g4-mathematics-u01-l07",
+      "ma-g4-mathematics-u01-l08",
+      "ma-g4-mathematics-u01-l09",
+      "ma-g4-mathematics-u01-l10",
+      "ma-g4-mathematics-u01-l11",
+      "ma-g4-mathematics-u01-l12",
+      "ma-g4-mathematics-u01-l13",
+      "ma-g4-mathematics-u01-l14",
+      "ma-g4-mathematics-u01-l15",
+      "ma-g4-mathematics-u01-l16",
+      "ma-g4-mathematics-u01-l17",
+      "ma-g4-mathematics-u01-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u01-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [
+      "math-seq-pv-regroup-v1"
+    ],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u02",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 2,
+    "title": "Multi-Digit Addition and Subtraction",
+    "days": 18,
+    "standards": [
+      "4.OA.3",
+      "4.NBT.1",
+      "4.NBT.3",
+      "4.NBT.4",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "essential_question": "Why does the standard algorithm work, and how do we know an answer is reasonable before we check it?",
+    "topics": [
+      "the standard addition algorithm",
+      "why regrouping preserves value",
+      "the standard subtraction algorithm",
+      "subtraction across zeros",
+      "multistep problems with a letter for the unknown",
+      "reasonableness through rounding"
+    ],
+    "academic_vocabulary": [
+      "standard algorithm",
+      "regroup",
+      "compose",
+      "decompose",
+      "addend",
+      "sum",
+      "minuend",
+      "subtrahend",
+      "difference",
+      "unknown",
+      "reasonable"
+    ],
+    "representations": [
+      "place-value chart",
+      "expanded-form recording",
+      "standard algorithm",
+      "bar model for comparison",
+      "rounding number line"
+    ],
+    "prerequisites": [
+      "addition and subtraction within 1,000",
+      "place value to one million",
+      "rounding to any place"
+    ],
+    "fluency_target": "Fluently add and subtract multi-digit whole numbers using the standard algorithm.",
+    "known_misconceptions": [
+      {
+        "pattern": "Misaligns place values when writing numbers with different digit counts in a column.",
+        "probe": "Which places are lined up in your setup? Where does the ones place sit in each number?",
+        "repair": "Rewrite both numbers on a place-value grid so every column holds one place."
+      },
+      {
+        "pattern": "Regroups in addition but forgets to add the carried value into the next column.",
+        "probe": "You wrote a small 1 above the tens. Did it get added?",
+        "repair": "Say the regrouped amount aloud as the first addend of the next column."
+      },
+      {
+        "pattern": "Subtracts the smaller digit from the larger in each column regardless of position.",
+        "probe": "In this column, which number is on top? Is that what we are subtracting from?",
+        "repair": "Model the top number with place-value materials and trade before recording."
+      },
+      {
+        "pattern": "Cannot regroup across a zero and either stops or skips the column.",
+        "probe": "There are no tens to trade. What is the next larger place you could trade from?",
+        "repair": "Trade one hundred for ten tens first, record it, then trade one ten for ten ones."
+      },
+      {
+        "pattern": "Accepts an answer without checking, missing an error an estimate would have caught.",
+        "probe": "Roughly, about how big should this answer be?",
+        "repair": "Round both numbers and compare the estimate with the exact answer before finalizing."
+      }
+    ],
+    "performance_task": "Audit a set of worked addition and subtraction problems, find and explain every error, and publish a correction guide.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u02-l01",
+      "ma-g4-mathematics-u02-l02",
+      "ma-g4-mathematics-u02-l03",
+      "ma-g4-mathematics-u02-l04",
+      "ma-g4-mathematics-u02-l05",
+      "ma-g4-mathematics-u02-l06",
+      "ma-g4-mathematics-u02-l07",
+      "ma-g4-mathematics-u02-l08",
+      "ma-g4-mathematics-u02-l09",
+      "ma-g4-mathematics-u02-l10",
+      "ma-g4-mathematics-u02-l11",
+      "ma-g4-mathematics-u02-l12",
+      "ma-g4-mathematics-u02-l13",
+      "ma-g4-mathematics-u02-l14",
+      "ma-g4-mathematics-u02-l15",
+      "ma-g4-mathematics-u02-l16",
+      "ma-g4-mathematics-u02-l17",
+      "ma-g4-mathematics-u02-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u02-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [
+      "math-seq-pv-regroup-v1",
+      "math-seq-multistep-word-problems-v1"
+    ],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u03",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 3,
+    "title": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "days": 18,
+    "standards": [
+      "4.OA.1",
+      "4.OA.2",
+      "4.OA.4",
+      "4.OA.5",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "essential_question": "What does times as many mean, and what do factors, multiples, and rule-based patterns reveal about numbers?",
+    "topics": [
+      "multiplicative comparison statements",
+      "equations for comparison",
+      "additive versus multiplicative comparison",
+      "factor pairs within 100",
+      "multiples and divisibility",
+      "prime and composite numbers",
+      "number patterns generated from a rule"
+    ],
+    "academic_vocabulary": [
+      "times as many",
+      "factor",
+      "factor pair",
+      "multiple",
+      "product",
+      "prime",
+      "composite",
+      "divisible",
+      "additive comparison",
+      "multiplicative comparison"
+    ],
+    "representations": [
+      "comparison bar models",
+      "arrays showing factor pairs",
+      "factor rainbows",
+      "multiplication table",
+      "number portraits"
+    ],
+    "prerequisites": [
+      "multiplication and division within 100",
+      "arrays",
+      "meanings of the operations"
+    ],
+    "fluency_target": "Find all factor pairs for whole numbers 1 to 100 and determine whether a number is prime or composite.",
+    "known_misconceptions": [
+      {
+        "pattern": "Reads 'three times as many' as 'three more than'.",
+        "probe": "If Ann has 4 and Ben has three times as many, does Ben have 7 or 12?",
+        "repair": "Draw Ann's bar, then copy it three times for Ben, before writing any equation."
+      },
+      {
+        "pattern": "Finds some factor pairs but stops before all are found, with no system.",
+        "probe": "How do you know you have found every pair?",
+        "repair": "Test divisors in order from 1 upward and stop when the pair values meet or cross."
+      },
+      {
+        "pattern": "Confuses factors with multiples, listing 12, 24, 36 as factors of 12.",
+        "probe": "Do these numbers divide 12, or does 12 divide them?",
+        "repair": "State the definition each way and sort a mixed list into two labeled columns."
+      },
+      {
+        "pattern": "Calls every odd number prime.",
+        "probe": "Is 9 prime? What are its factor pairs?",
+        "repair": "Test each candidate against small divisors rather than relying on parity."
+      },
+      {
+        "pattern": "Treats 1 as prime.",
+        "probe": "How many different factors does 1 have?",
+        "repair": "Apply the definition, which requires exactly two distinct factors."
+      },
+      {
+        "pattern": "Continues a rule-based pattern correctly but cannot name a feature of the pattern that the rule never stated.",
+        "probe": "Your rule is add 3 starting at 1. Look at your terms. What do you notice about odd and even?",
+        "repair": "Extend the pattern several more terms, then describe one property, such as alternating odd and even, that the rule itself did not mention."
+      }
+    ],
+    "performance_task": "Build a Number Portrait set: for each chosen number show its factor pairs, several multiples, its prime or composite status, and a comparison story.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u03-l01",
+      "ma-g4-mathematics-u03-l02",
+      "ma-g4-mathematics-u03-l03",
+      "ma-g4-mathematics-u03-l04",
+      "ma-g4-mathematics-u03-l05",
+      "ma-g4-mathematics-u03-l06",
+      "ma-g4-mathematics-u03-l07",
+      "ma-g4-mathematics-u03-l08",
+      "ma-g4-mathematics-u03-l09",
+      "ma-g4-mathematics-u03-l10",
+      "ma-g4-mathematics-u03-l11",
+      "ma-g4-mathematics-u03-l12",
+      "ma-g4-mathematics-u03-l13",
+      "ma-g4-mathematics-u03-l14",
+      "ma-g4-mathematics-u03-l15",
+      "ma-g4-mathematics-u03-l16",
+      "ma-g4-mathematics-u03-l17",
+      "ma-g4-mathematics-u03-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u03-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [
+      "math-seq-mult-div-rel-v1"
+    ],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u04",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 4,
+    "title": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "days": 18,
+    "standards": [
+      "4.OA.2",
+      "4.OA.3",
+      "4.NBT.1",
+      "4.NBT.5",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.7"
+    ],
+    "essential_question": "How do area models and place value explain what happens when we multiply larger numbers?",
+    "topics": [
+      "multiplying by multiples of ten",
+      "area models",
+      "partial products",
+      "four digits by one digit",
+      "two digits by two digits",
+      "estimating products"
+    ],
+    "academic_vocabulary": [
+      "factor",
+      "product",
+      "partial product",
+      "area model",
+      "multiple of ten",
+      "place-value strategy",
+      "estimate",
+      "decompose",
+      "row",
+      "column"
+    ],
+    "representations": [
+      "open area models",
+      "partial-product recording",
+      "place-value decomposition",
+      "rounding for estimation",
+      "labeled rectangle diagrams"
+    ],
+    "prerequisites": [
+      "multiplication facts within 100",
+      "place value to one million",
+      "the distributive property"
+    ],
+    "fluency_target": "Multiply a whole number of up to four digits by a one-digit number, and multiply two two-digit numbers, using place-value strategies.",
+    "known_misconceptions": [
+      {
+        "pattern": "Multiplies by a multiple of ten by appending a zero without understanding the place-value shift.",
+        "probe": "Why does 6 x 40 give 240? Where did the ten come from?",
+        "repair": "Model 6 x 4 tens and name the product in tens before writing it in standard form."
+      },
+      {
+        "pattern": "Finds only two of the four partial products when multiplying two two-digit numbers.",
+        "probe": "Your area model has four regions. How many products did you write?",
+        "repair": "Label all four regions of the area model and check each one off as it is computed."
+      },
+      {
+        "pattern": "Records a partial product in the wrong place-value column.",
+        "probe": "This partial product came from tens times tens. What place should it start in?",
+        "repair": "Write the place value of each partial product beside it before adding."
+      },
+      {
+        "pattern": "Forgets to add the partial products after computing them.",
+        "probe": "You have three numbers written. What is the final step?",
+        "repair": "Draw the addition line as part of the setup, not after."
+      },
+      {
+        "pattern": "Accepts an unreasonable product because no estimate was made first.",
+        "probe": "About how large should 38 x 52 be? Compare that with your answer.",
+        "repair": "Round both factors and compute the estimate before the exact product."
+      }
+    ],
+    "performance_task": "Plan a supply order for a class or family event; justify every product with a model and an estimate before committing to it.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u04-l01",
+      "ma-g4-mathematics-u04-l02",
+      "ma-g4-mathematics-u04-l03",
+      "ma-g4-mathematics-u04-l04",
+      "ma-g4-mathematics-u04-l05",
+      "ma-g4-mathematics-u04-l06",
+      "ma-g4-mathematics-u04-l07",
+      "ma-g4-mathematics-u04-l08",
+      "ma-g4-mathematics-u04-l09",
+      "ma-g4-mathematics-u04-l10",
+      "ma-g4-mathematics-u04-l11",
+      "ma-g4-mathematics-u04-l12",
+      "ma-g4-mathematics-u04-l13",
+      "ma-g4-mathematics-u04-l14",
+      "ma-g4-mathematics-u04-l15",
+      "ma-g4-mathematics-u04-l16",
+      "ma-g4-mathematics-u04-l17",
+      "ma-g4-mathematics-u04-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u04-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [
+      "math-seq-mult-div-rel-v1",
+      "math-seq-multistep-word-problems-v1"
+    ],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u05",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 5,
+    "title": "Division with Remainders",
+    "days": 18,
+    "standards": [
+      "4.OA.3",
+      "4.NBT.6",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "essential_question": "What does a remainder mean, and how does the situation decide what to do with it?",
+    "topics": [
+      "division as an unknown factor",
+      "area and array models for division",
+      "partial quotients",
+      "four digits by one digit",
+      "interpreting remainders",
+      "checking quotients"
+    ],
+    "academic_vocabulary": [
+      "dividend",
+      "divisor",
+      "quotient",
+      "remainder",
+      "partial quotient",
+      "share",
+      "group",
+      "interpret",
+      "check",
+      "estimate"
+    ],
+    "representations": [
+      "area models for division",
+      "partial-quotient recording",
+      "arrays",
+      "bar models for sharing",
+      "multiplication check"
+    ],
+    "prerequisites": [
+      "multiplication facts and multi-digit multiplication",
+      "place value",
+      "meanings of division"
+    ],
+    "fluency_target": "Find whole-number quotients and remainders with up to four-digit dividends and one-digit divisors.",
+    "known_misconceptions": [
+      {
+        "pattern": "Ignores the remainder and reports only the whole-number quotient regardless of context.",
+        "probe": "There are 3 left over. In this story, do they disappear?",
+        "repair": "Reread the question and decide what the leftover amount means for the situation."
+      },
+      {
+        "pattern": "Always rounds the quotient up, or always drops the remainder, without reading the context.",
+        "probe": "Do we need enough buses for everyone, or how many full boxes we can fill?",
+        "repair": "Sort remainder problems into drop-it, round-up, and report-what-is-left-over categories."
+      },
+      {
+        "pattern": "Omits a zero in the quotient when a place cannot be divided.",
+        "probe": "How many hundreds are in your quotient? Did that place get a digit?",
+        "repair": "Record a digit for every place in the dividend, including zeros."
+      },
+      {
+        "pattern": "Writes a remainder that is larger than the divisor.",
+        "probe": "Your remainder is 7 and the divisor is 5. Could another group be made?",
+        "repair": "Check that the remainder is always less than the divisor before finishing."
+      },
+      {
+        "pattern": "Does not verify the quotient, missing an error multiplication would have caught.",
+        "probe": "Multiply your quotient by the divisor and add the remainder. What should you get?",
+        "repair": "Make the multiplication check a required final step."
+      }
+    ],
+    "performance_task": "Design a fair-distribution plan for a real situation and explain in writing why the remainder was handled the way it was.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u05-l01",
+      "ma-g4-mathematics-u05-l02",
+      "ma-g4-mathematics-u05-l03",
+      "ma-g4-mathematics-u05-l04",
+      "ma-g4-mathematics-u05-l05",
+      "ma-g4-mathematics-u05-l06",
+      "ma-g4-mathematics-u05-l07",
+      "ma-g4-mathematics-u05-l08",
+      "ma-g4-mathematics-u05-l09",
+      "ma-g4-mathematics-u05-l10",
+      "ma-g4-mathematics-u05-l11",
+      "ma-g4-mathematics-u05-l12",
+      "ma-g4-mathematics-u05-l13",
+      "ma-g4-mathematics-u05-l14",
+      "ma-g4-mathematics-u05-l15",
+      "ma-g4-mathematics-u05-l16",
+      "ma-g4-mathematics-u05-l17",
+      "ma-g4-mathematics-u05-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u05-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [
+      "math-seq-mult-div-rel-v1",
+      "math-seq-multistep-word-problems-v1"
+    ],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u06",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 6,
+    "title": "Fraction Equivalence and Comparison",
+    "days": 18,
+    "standards": [
+      "4.NF.1",
+      "4.NF.2",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "essential_question": "Why does multiplying the numerator and the denominator by the same number leave a fraction unchanged?",
+    "topics": [
+      "equivalence by further partitioning",
+      "why a/b equals (n x a)/(n x b)",
+      "generating equivalent fractions",
+      "common denominators",
+      "benchmark fractions",
+      "justifying comparisons"
+    ],
+    "academic_vocabulary": [
+      "equivalent fraction",
+      "numerator",
+      "denominator",
+      "common denominator",
+      "common numerator",
+      "benchmark",
+      "simplify",
+      "same whole",
+      "justify",
+      "compare"
+    ],
+    "representations": [
+      "area models re-partitioned",
+      "parallel number lines",
+      "fraction strips",
+      "symbolic generation of equivalents",
+      "comparison statements"
+    ],
+    "prerequisites": [
+      "fractions as numbers",
+      "unit fractions",
+      "comparing fractions with like denominators or like numerators"
+    ],
+    "fluency_target": "Generate equivalent fractions and compare two fractions with different numerators and denominators (denominators 2, 3, 4, 5, 6, 8, 10, 12, and 100).",
+    "known_misconceptions": [
+      {
+        "pattern": "Generates equivalents by adding the same number to numerator and denominator.",
+        "probe": "You turned two thirds into three fourths by adding one to each. Do the models match?",
+        "repair": "Re-partition the model and count the new parts to see that equivalence multiplies rather than adds."
+      },
+      {
+        "pattern": "Compares fractions by comparing numerators alone or denominators alone.",
+        "probe": "Which is greater, one third or five sixths? What exactly did you compare?",
+        "repair": "Rewrite both with a common denominator, or compare each to the benchmark one half."
+      },
+      {
+        "pattern": "Compares fractions that refer to different wholes and reports a result anyway.",
+        "probe": "Half of a small pizza and half of a large pizza - are those the same amount?",
+        "repair": "State the whole for each fraction before any comparison is allowed."
+      },
+      {
+        "pattern": "Believes a fraction with a larger denominator is always smaller, even when numerators differ.",
+        "probe": "Is five sixths smaller than one half because six is larger than two?",
+        "repair": "Check both fractions against the benchmark one half before generalizing."
+      },
+      {
+        "pattern": "Simplifies by dividing only the numerator.",
+        "probe": "You halved the top. What has to happen to the bottom?",
+        "repair": "Apply the same operation to both parts and verify with a model."
+      }
+    ],
+    "performance_task": "Create an equivalence proof wall where every claim is backed by a visual model and a written argument.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u06-l01",
+      "ma-g4-mathematics-u06-l02",
+      "ma-g4-mathematics-u06-l03",
+      "ma-g4-mathematics-u06-l04",
+      "ma-g4-mathematics-u06-l05",
+      "ma-g4-mathematics-u06-l06",
+      "ma-g4-mathematics-u06-l07",
+      "ma-g4-mathematics-u06-l08",
+      "ma-g4-mathematics-u06-l09",
+      "ma-g4-mathematics-u06-l10",
+      "ma-g4-mathematics-u06-l11",
+      "ma-g4-mathematics-u06-l12",
+      "ma-g4-mathematics-u06-l13",
+      "ma-g4-mathematics-u06-l14",
+      "ma-g4-mathematics-u06-l15",
+      "ma-g4-mathematics-u06-l16",
+      "ma-g4-mathematics-u06-l17",
+      "ma-g4-mathematics-u06-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u06-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [
+      "math-seq-equivalent-fractions-v1"
+    ],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u07",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 7,
+    "title": "Adding, Subtracting, and Multiplying Fractions",
+    "days": 18,
+    "standards": [
+      "4.NF.3",
+      "4.NF.4",
+      "4.MD.2",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "essential_question": "How is adding fractions simply counting unit fractions, and what happens when a fraction is multiplied by a whole number?",
+    "topics": [
+      "decomposing into unit fractions",
+      "adding and subtracting like denominators",
+      "mixed numbers",
+      "word problems with fractions",
+      "multiplying a fraction by a whole number",
+      "fractions in measurement"
+    ],
+    "academic_vocabulary": [
+      "unit fraction",
+      "decompose",
+      "mixed number",
+      "improper fraction",
+      "like denominator",
+      "sum",
+      "difference",
+      "multiple",
+      "scale",
+      "same whole"
+    ],
+    "representations": [
+      "fraction strips",
+      "number lines with unit-fraction jumps",
+      "area models",
+      "mixed-number diagrams",
+      "repeated-addition equations"
+    ],
+    "prerequisites": [
+      "fraction equivalence",
+      "unit fractions",
+      "multiplication facts"
+    ],
+    "fluency_target": "Add and subtract fractions and mixed numbers with like denominators, and multiply a fraction by a whole number.",
+    "known_misconceptions": [
+      {
+        "pattern": "Adds denominators as well as numerators, reporting one fourth plus two fourths as three eighths.",
+        "probe": "You are counting fourths. Does the size of each piece change when you count more of them?",
+        "repair": "Count unit fractions aloud on a strip; the denominator names the piece size and does not change."
+      },
+      {
+        "pattern": "Converts a mixed number to an improper fraction by adding the whole number to the numerator.",
+        "probe": "How many fourths are in 2 whole units alone?",
+        "repair": "Partition each whole into four equal parts and count all the fourths before adding the extra ones."
+      },
+      {
+        "pattern": "Subtracts mixed numbers without regrouping when the fractional part is too small.",
+        "probe": "You need to take five sixths from two sixths. What can you trade?",
+        "repair": "Trade one whole for six sixths first, then subtract."
+      },
+      {
+        "pattern": "Multiplies a fraction by a whole number by multiplying both the numerator and the denominator.",
+        "probe": "Three groups of two fifths - does the piece size change, or only how many pieces?",
+        "repair": "Model repeated addition and observe that only the count of unit fractions grows."
+      },
+      {
+        "pattern": "Decomposes a fraction in only one way and assumes it is the only decomposition.",
+        "probe": "Can three fourths be broken apart differently and still be three fourths?",
+        "repair": "List several decompositions and verify each sums to the original."
+      }
+    ],
+    "performance_task": "Build a recipe or measurement plan that combines fractional amounts and then scales the whole plan by a whole number.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u07-l01",
+      "ma-g4-mathematics-u07-l02",
+      "ma-g4-mathematics-u07-l03",
+      "ma-g4-mathematics-u07-l04",
+      "ma-g4-mathematics-u07-l05",
+      "ma-g4-mathematics-u07-l06",
+      "ma-g4-mathematics-u07-l07",
+      "ma-g4-mathematics-u07-l08",
+      "ma-g4-mathematics-u07-l09",
+      "ma-g4-mathematics-u07-l10",
+      "ma-g4-mathematics-u07-l11",
+      "ma-g4-mathematics-u07-l12",
+      "ma-g4-mathematics-u07-l13",
+      "ma-g4-mathematics-u07-l14",
+      "ma-g4-mathematics-u07-l15",
+      "ma-g4-mathematics-u07-l16",
+      "ma-g4-mathematics-u07-l17",
+      "ma-g4-mathematics-u07-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u07-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [
+      "math-seq-equivalent-fractions-v1"
+    ],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u08",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 8,
+    "title": "Decimal Notation and Fraction-Decimal Connections",
+    "days": 18,
+    "standards": [
+      "4.NF.5",
+      "4.NF.6",
+      "4.NF.7",
+      "4.MD.2",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "essential_question": "How can tenths and hundredths be written as both fractions and decimals, and how do we compare them?",
+    "topics": [
+      "tenths and hundredths as fractions",
+      "adding tenths and hundredths",
+      "decimal notation",
+      "decimals on the number line",
+      "decimals in money and measurement",
+      "comparing decimals"
+    ],
+    "academic_vocabulary": [
+      "tenth",
+      "hundredth",
+      "decimal point",
+      "decimal notation",
+      "equivalent",
+      "compare",
+      "money notation",
+      "place value",
+      "same whole",
+      "order"
+    ],
+    "representations": [
+      "tenths and hundredths grids",
+      "number lines partitioned in tenths and hundredths",
+      "money amounts",
+      "place-value chart with decimals",
+      "comparison statements"
+    ],
+    "prerequisites": [
+      "fraction equivalence",
+      "place value",
+      "comparing fractions"
+    ],
+    "fluency_target": "Write fractions with denominators 10 and 100 in decimal notation and compare two decimals to hundredths.",
+    "known_misconceptions": [
+      {
+        "pattern": "Compares decimals by digit count, concluding 0.25 is greater than 0.5.",
+        "probe": "Shade both on hundredths grids. Which covers more?",
+        "repair": "Rewrite both with the same number of decimal places and compare place by place."
+      },
+      {
+        "pattern": "Reads 0.7 as seven hundredths rather than seven tenths.",
+        "probe": "How many parts is the whole cut into when there is one digit after the point?",
+        "repair": "Name the place aloud from a place-value chart before reading the value."
+      },
+      {
+        "pattern": "Adds tenths to hundredths without rewriting to a common denominator.",
+        "probe": "Can you add three tenths and four hundredths directly? What are the piece sizes?",
+        "repair": "Rewrite tenths as hundredths, then add like units."
+      },
+      {
+        "pattern": "Treats the decimal point as separating two independent whole numbers.",
+        "probe": "Is 3.7 the same as three and seven, or three and seven tenths?",
+        "repair": "Locate the value on a number line between consecutive whole numbers."
+      },
+      {
+        "pattern": "Compares decimals attached to different wholes and reports a result anyway.",
+        "probe": "Half of one dollar and half of one meter - are those the same amount?",
+        "repair": "Identify the whole for each value before comparing."
+      }
+    ],
+    "performance_task": "Create a money-and-measurement conversion board linking fractions, decimals, models, and comparisons for the same amounts.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u08-l01",
+      "ma-g4-mathematics-u08-l02",
+      "ma-g4-mathematics-u08-l03",
+      "ma-g4-mathematics-u08-l04",
+      "ma-g4-mathematics-u08-l05",
+      "ma-g4-mathematics-u08-l06",
+      "ma-g4-mathematics-u08-l07",
+      "ma-g4-mathematics-u08-l08",
+      "ma-g4-mathematics-u08-l09",
+      "ma-g4-mathematics-u08-l10",
+      "ma-g4-mathematics-u08-l11",
+      "ma-g4-mathematics-u08-l12",
+      "ma-g4-mathematics-u08-l13",
+      "ma-g4-mathematics-u08-l14",
+      "ma-g4-mathematics-u08-l15",
+      "ma-g4-mathematics-u08-l16",
+      "ma-g4-mathematics-u08-l17",
+      "ma-g4-mathematics-u08-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u08-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u09",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 9,
+    "title": "Measurement, Conversion, and Data",
+    "days": 18,
+    "standards": [
+      "4.MD.1",
+      "4.MD.2",
+      "4.MD.3",
+      "4.MD.4",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.5"
+    ],
+    "essential_question": "How do we convert between units, apply area and perimeter formulas, and represent measurement data precisely?",
+    "topics": [
+      "relative sizes of metric units",
+      "relative sizes of customary units",
+      "two-column conversion tables",
+      "measurement word problems",
+      "area and perimeter formulas",
+      "line plots with fractional measurements"
+    ],
+    "academic_vocabulary": [
+      "convert",
+      "unit",
+      "kilometer",
+      "meter",
+      "centimeter",
+      "kilogram",
+      "gram",
+      "pound",
+      "ounce",
+      "perimeter",
+      "area",
+      "formula",
+      "line plot"
+    ],
+    "representations": [
+      "two-column conversion tables",
+      "labeled rectangles",
+      "measuring tools marked in fractions",
+      "line plots with halves, quarters, and eighths",
+      "measurement diagrams"
+    ],
+    "prerequisites": [
+      "multiplication and division",
+      "fraction operations",
+      "area and perimeter of rectangles from Grade 3"
+    ],
+    "fluency_target": "Convert measurements from a larger unit to a smaller unit within one system, and apply area and perimeter formulas for rectangles.",
+    "known_misconceptions": [
+      {
+        "pattern": "Converts in the wrong direction, dividing when the new unit is smaller.",
+        "probe": "Meters to centimeters - are the pieces getting smaller? Should the number get bigger or smaller?",
+        "repair": "Predict whether the number grows or shrinks before computing, then check."
+      },
+      {
+        "pattern": "Mixes units within a single calculation without converting first.",
+        "probe": "You added 2 meters and 40 centimeters and wrote 42. What unit is that?",
+        "repair": "Convert everything to a single unit before operating."
+      },
+      {
+        "pattern": "Substitutes into the area formula when the problem asks for perimeter, or the reverse.",
+        "probe": "Are you finding the space covered or the distance around?",
+        "repair": "Restate the question in words, then choose the matching formula."
+      },
+      {
+        "pattern": "Cannot find an unknown side length from a given area or perimeter.",
+        "probe": "If the area is 48 and one side is 6, what multiplication fact helps?",
+        "repair": "Write the formula with the unknown shown, then solve it as an unknown-factor problem."
+      },
+      {
+        "pattern": "Places fractional measurements at whole-number marks on a line plot.",
+        "probe": "Your object measured three and one eighth inches. Which mark is that?",
+        "repair": "Count the eighth-inch marks between whole numbers before plotting."
+      }
+    ],
+    "performance_task": "Measure a real space and a set of objects; publish a conversion table, an area and perimeter analysis, and a line plot in fractions of an inch.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u09-l01",
+      "ma-g4-mathematics-u09-l02",
+      "ma-g4-mathematics-u09-l03",
+      "ma-g4-mathematics-u09-l04",
+      "ma-g4-mathematics-u09-l05",
+      "ma-g4-mathematics-u09-l06",
+      "ma-g4-mathematics-u09-l07",
+      "ma-g4-mathematics-u09-l08",
+      "ma-g4-mathematics-u09-l09",
+      "ma-g4-mathematics-u09-l10",
+      "ma-g4-mathematics-u09-l11",
+      "ma-g4-mathematics-u09-l12",
+      "ma-g4-mathematics-u09-l13",
+      "ma-g4-mathematics-u09-l14",
+      "ma-g4-mathematics-u09-l15",
+      "ma-g4-mathematics-u09-l16",
+      "ma-g4-mathematics-u09-l17",
+      "ma-g4-mathematics-u09-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u09-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g4-mathematics-u10",
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unit_number": 10,
+    "title": "Angles, Geometry, and Integrated Capstone",
+    "days": 18,
+    "standards": [
+      "4.OA.5",
+      "4.MD.5",
+      "4.MD.6",
+      "4.MD.7",
+      "4.G.1",
+      "4.G.2",
+      "4.G.3",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.5"
+    ],
+    "essential_question": "How do lines, angles, and symmetry describe the shapes we design and build?",
+    "topics": [
+      "angles as fractions of a circle",
+      "measuring angles with a protractor",
+      "additive angle measure",
+      "points, lines, rays, and angle types",
+      "classifying two-dimensional figures",
+      "symmetry and generated patterns"
+    ],
+    "academic_vocabulary": [
+      "ray",
+      "vertex",
+      "degree",
+      "protractor",
+      "acute",
+      "obtuse",
+      "right",
+      "parallel",
+      "perpendicular",
+      "line of symmetry",
+      "rule",
+      "pattern"
+    ],
+    "representations": [
+      "circles partitioned into degrees",
+      "protractor diagrams",
+      "angle decomposition diagrams",
+      "shape classification charts",
+      "symmetry folds"
+    ],
+    "prerequisites": [
+      "quadrilateral categories from Grade 3",
+      "measurement",
+      "addition and subtraction"
+    ],
+    "fluency_target": "Measure and sketch angles in whole-number degrees, classify two-dimensional figures, and identify lines of symmetry.",
+    "known_misconceptions": [
+      {
+        "pattern": "Reads the wrong protractor scale, reporting 130 degrees for a 50-degree angle.",
+        "probe": "Is this angle smaller or larger than a right angle? Does your number agree?",
+        "repair": "Classify the angle as acute or obtuse first, then choose the scale that matches."
+      },
+      {
+        "pattern": "Judges angle size by the drawn length of the rays rather than the opening.",
+        "probe": "If the rays were longer, would the opening change?",
+        "repair": "Extend the rays and re-measure to confirm the measure is unchanged."
+      },
+      {
+        "pattern": "Does not align the protractor vertex and baseline with the angle.",
+        "probe": "Where is the center mark of the protractor sitting?",
+        "repair": "Place the vertex on the center mark and one ray on the zero line before reading."
+      },
+      {
+        "pattern": "Assumes any fold that halves the area is a line of symmetry.",
+        "probe": "When you fold here, do the two halves match exactly?",
+        "repair": "Physically fold and check that every point maps onto a matching point."
+      },
+      {
+        "pattern": "Continues a pattern correctly but cannot state a feature that follows from the rule.",
+        "probe": "Your rule adds 3 each time. What do you notice about whether the terms are odd or even?",
+        "repair": "Extend the pattern several terms and describe a property the rule did not state explicitly."
+      }
+    ],
+    "performance_task": "Capstone: design a symmetric plan for a garden, room, banner, or game board using measured angles, classified shapes, and a generated pattern, with a full written justification.",
+    "lesson_ids": [
+      "ma-g4-mathematics-u10-l01",
+      "ma-g4-mathematics-u10-l02",
+      "ma-g4-mathematics-u10-l03",
+      "ma-g4-mathematics-u10-l04",
+      "ma-g4-mathematics-u10-l05",
+      "ma-g4-mathematics-u10-l06",
+      "ma-g4-mathematics-u10-l07",
+      "ma-g4-mathematics-u10-l08",
+      "ma-g4-mathematics-u10-l09",
+      "ma-g4-mathematics-u10-l10",
+      "ma-g4-mathematics-u10-l11",
+      "ma-g4-mathematics-u10-l12",
+      "ma-g4-mathematics-u10-l13",
+      "ma-g4-mathematics-u10-l14",
+      "ma-g4-mathematics-u10-l15",
+      "ma-g4-mathematics-u10-l16",
+      "ma-g4-mathematics-u10-l17",
+      "ma-g4-mathematics-u10-l18"
+    ],
+    "assessment_id": "ma-g4-mathematics-u10-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      12,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  }
+]

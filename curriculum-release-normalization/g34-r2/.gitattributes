@@ -1,0 +1,4 @@
+# Preserve this release byte-for-byte across platforms, so SHA256SUMS.txt
+# and provenance/lesson-content-digests.csv stay valid on checkout.
+# Mirrors the guard the sealed curriculum-content/ release uses.
+** -text

@@ -1,0 +1,457 @@
+{
+  "schema_version": "1.0",
+  "course_id": "ma-g3-ready-for-life",
+  "grade": 3,
+  "subject": "ready-for-life",
+  "note": "Integration metadata for the existing Study Engine contracts. This file adds no new engine capability; it records how this course's lessons map onto contracts that already exist.",
+  "study_contract_refs": {
+    "lesson_plan": "src/study/types.ts :: StudyLessonPlan",
+    "mastery_authority": "src/study/types.ts :: StudyLessonPlan.masteryAuthority",
+    "calendar_entry": "src/study/types.ts :: StudyCalendarEntry",
+    "host_mapping": "src/study/curriculumAdapter.ts :: HOST_STUDY_MAPPING",
+    "learner_projection": "src/study/contracts/production/content.ts :: StudyLearnerLesson",
+    "guardian_authorized_action": "src/study/family-pilot/parent/actions.ts :: acknowledgeReview"
+  },
+  "default_mastery_authority": "completion-only",
+  "mastery_advancing_phases": [
+    "Mastery check"
+  ],
+  "policy": "Ready for Life routines record completion only. A real-world household task is certified by a household-authorized guardian action, never by a learner click alone. Official mastery still requires independent evidence on at least two occasions.",
+  "real_world_sign_off_rule": "Real-world household tasks are flagged per lesson and fall on unit 1 days 4–5; unit 2 days 4–5; unit 3 days 4–5; unit 4 days 4–5; unit 5 days 4–5; unit 6 days 4–6. Each flagged lesson requires guardian permission before the task begins and a guardian confirmation before completion is certified.",
+  "lessons": [
+    {
+      "lesson_id": "ma-g3-ready-for-life-u01-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u01-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u01-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u01-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u01-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u01-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u02-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u02-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u02-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u02-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u02-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u02-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u03-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u03-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u03-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u03-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u03-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u03-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u04-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u04-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u04-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u04-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u04-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u04-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u05-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u05-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u05-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u05-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u05-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u05-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u06-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u06-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u06-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u06-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u06-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    },
+    {
+      "lesson_id": "ma-g3-ready-for-life-u06-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": true,
+      "completion_authority": "guardian",
+      "sign_off": {
+        "requires_guardian_permission_before_start": true,
+        "requires_trusted_adult_supervision": true,
+        "certifying_actor": "household-authorized guardian",
+        "student_self_report": "recorded-but-not-certifying",
+        "evidence_types": [
+          "checklist",
+          "drawing",
+          "planning page",
+          "learner explanation",
+          "guardian confirmation"
+        ],
+        "identifiable_photo_required": false
+      }
+    }
+  ]
+}

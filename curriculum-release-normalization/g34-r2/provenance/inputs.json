@@ -1,0 +1,27 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "normalized_on": "2026-08-12",
+  "input": {
+    "tree": "curriculum-release-candidates/g34-r1",
+    "candidate_id": "manuel-academy-grades-3-4-r1",
+    "files": 195,
+    "sha256sums_sha256": "7d4e73b446a740c9099e7bbcf4e8bcb8b4ae1cfe826d00ece1042440fee482d3",
+    "verified": "every listed file re-hashed and matched before this run read it"
+  },
+  "assembly_base_commit_of_input": "656efba1",
+  "repo_head_at_normalization": "42ccafb47973aa7edf05f69a2efbba85b1ad95f5",
+  "reads_only": [
+    "curriculum-release-candidates/g34-r1/**"
+  ],
+  "writes_only": [
+    "curriculum-release-normalization/g34-r2/**"
+  ],
+  "does_not_modify": [
+    "curriculum-content/manuel-academy/1.0.0/**",
+    "curriculum-release-candidates/g34-r1/**",
+    "curriculum-authoring/full-family-grade34/**",
+    "every source curriculum branch",
+    "src/**",
+    "scripts/**"
+  ]
+}

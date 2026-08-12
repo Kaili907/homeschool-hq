@@ -1,0 +1,1861 @@
+{
+  "package_id": "manuel-academy-grade34-mathematics",
+  "version": "1.0.0",
+  "jurisdiction": "Michigan",
+  "alignment_status": "Locally authored curriculum aligned to published Michigan mathematics standards. Not a claim of state approval, accreditation, licensure, or automatic credit.",
+  "code_format": "Codes are written without cluster letters (3.OA.1, not 3.OA.A.1), matching the Michigan K-12 Standards: Mathematics document and the Manuel Academy v1.0.0 Grade 5 mathematics course.",
+  "practice_code_note": "The MP.n prefix is a Manuel Academy package convention carried over from v1.0.0. The Michigan document numbers the Standards for Mathematical Practice 1-8 under that heading and does not print the string 'MP.1'. The practice titles are quoted from the document; the prefix is not.",
+  "sources": [
+    {
+      "title": "Michigan K-12 Standards: Mathematics (Michigan Department of Education)",
+      "url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Literacy/Content-Standards/Math_Standards.pdf",
+      "role": "Source of record for every Grade 3 and Grade 4 code and paraphrase in this catalog."
+    },
+    {
+      "title": "Michigan Academic Standards (MDE service page)",
+      "url": "https://www.michigan.gov/mde/services/academic-standards",
+      "role": "Provenance page that links the mathematics standards document."
+    },
+    {
+      "title": "Michigan Mathematics Standards and Resources",
+      "url": "https://www.michigan.gov/mde/services/academic-standards/mmc/curriculum/math",
+      "role": "Cited by Manuel Academy v1.0.0; resolves, but the Academic Standards page is what actually serves the document."
+    }
+  ],
+  "grades": {
+    "3": {
+      "grade": 3,
+      "course_id": "ma-g3-mathematics",
+      "content_standards_total": 25,
+      "content_standards_covered": 25,
+      "domain_ceilings": {
+        "3.OA": 9,
+        "3.NBT": 3,
+        "3.NF": 3,
+        "3.MD": 8,
+        "3.G": 2
+      },
+      "scope_notes": [
+        "Grade 3 fractions are limited to denominators 2, 3, 4, 6, and 8.",
+        "A range of algorithms may be used for base-ten computation."
+      ],
+      "standards": [
+        {
+          "code": "3.G.1",
+          "domain": "G",
+          "domain_title": "Geometry",
+          "requirement": "Understand that shapes in different categories may share attributes that define a larger category, such as quadrilaterals.",
+          "sub_parts": [],
+          "units": [
+            10
+          ],
+          "lesson_count": 9,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u10-l18"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u10-l06",
+            "ma-g3-mathematics-u10-l07",
+            "ma-g3-mathematics-u10-l08",
+            "ma-g3-mathematics-u10-l09",
+            "ma-g3-mathematics-u10-l14",
+            "ma-g3-mathematics-u10-l15",
+            "ma-g3-mathematics-u10-l16",
+            "ma-g3-mathematics-u10-l17",
+            "ma-g3-mathematics-u10-l18"
+          ]
+        },
+        {
+          "code": "3.G.2",
+          "domain": "G",
+          "domain_title": "Geometry",
+          "requirement": "Partition shapes into parts with equal areas and express the area of each part as a unit fraction of the whole.",
+          "sub_parts": [],
+          "units": [
+            5,
+            6,
+            10
+          ],
+          "lesson_count": 8,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u05-l05",
+            "ma-g3-mathematics-u10-l10",
+            "ma-g3-mathematics-u10-l12"
+          ],
+          "assessed_in_units": [
+            5,
+            10
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u05-l02",
+            "ma-g3-mathematics-u05-l05",
+            "ma-g3-mathematics-u05-l11",
+            "ma-g3-mathematics-u05-l16",
+            "ma-g3-mathematics-u06-l03",
+            "ma-g3-mathematics-u10-l10",
+            "ma-g3-mathematics-u10-l12",
+            "ma-g3-mathematics-u10-l16"
+          ]
+        },
+        {
+          "code": "3.MD.1",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Tell and write time to the nearest minute and solve word problems involving time intervals in minutes.",
+          "sub_parts": [],
+          "units": [
+            7
+          ],
+          "lesson_count": 11,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u07-l05"
+          ],
+          "assessed_in_units": [
+            7
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u07-l01",
+            "ma-g3-mathematics-u07-l02",
+            "ma-g3-mathematics-u07-l03",
+            "ma-g3-mathematics-u07-l04",
+            "ma-g3-mathematics-u07-l05",
+            "ma-g3-mathematics-u07-l09",
+            "ma-g3-mathematics-u07-l13",
+            "ma-g3-mathematics-u07-l14",
+            "ma-g3-mathematics-u07-l15",
+            "ma-g3-mathematics-u07-l16",
+            "ma-g3-mathematics-u07-l17"
+          ]
+        },
+        {
+          "code": "3.MD.2",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Measure and estimate liquid volumes and masses of objects using grams, kilograms, and liters, and solve one-step problems.",
+          "sub_parts": [],
+          "units": [
+            7
+          ],
+          "lesson_count": 14,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u07-l10",
+            "ma-g3-mathematics-u07-l12",
+            "ma-g3-mathematics-u07-l18"
+          ],
+          "assessed_in_units": [
+            7
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u07-l01",
+            "ma-g3-mathematics-u07-l06",
+            "ma-g3-mathematics-u07-l07",
+            "ma-g3-mathematics-u07-l08",
+            "ma-g3-mathematics-u07-l09",
+            "ma-g3-mathematics-u07-l10",
+            "ma-g3-mathematics-u07-l11",
+            "ma-g3-mathematics-u07-l12",
+            "ma-g3-mathematics-u07-l13",
+            "ma-g3-mathematics-u07-l14",
+            "ma-g3-mathematics-u07-l15",
+            "ma-g3-mathematics-u07-l16",
+            "ma-g3-mathematics-u07-l17",
+            "ma-g3-mathematics-u07-l18"
+          ]
+        },
+        {
+          "code": "3.MD.3",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Draw scaled picture graphs and scaled bar graphs and solve one- and two-step problems using the information.",
+          "sub_parts": [],
+          "units": [
+            8
+          ],
+          "lesson_count": 15,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u08-l05",
+            "ma-g3-mathematics-u08-l12",
+            "ma-g3-mathematics-u08-l18"
+          ],
+          "assessed_in_units": [
+            8
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u08-l01",
+            "ma-g3-mathematics-u08-l02",
+            "ma-g3-mathematics-u08-l03",
+            "ma-g3-mathematics-u08-l04",
+            "ma-g3-mathematics-u08-l05",
+            "ma-g3-mathematics-u08-l08",
+            "ma-g3-mathematics-u08-l09",
+            "ma-g3-mathematics-u08-l11",
+            "ma-g3-mathematics-u08-l12",
+            "ma-g3-mathematics-u08-l13",
+            "ma-g3-mathematics-u08-l14",
+            "ma-g3-mathematics-u08-l15",
+            "ma-g3-mathematics-u08-l16",
+            "ma-g3-mathematics-u08-l17",
+            "ma-g3-mathematics-u08-l18"
+          ]
+        },
+        {
+          "code": "3.MD.4",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Generate measurement data by measuring lengths using rulers marked with halves and fourths of an inch and show the data on a line plot.",
+          "sub_parts": [],
+          "units": [
+            8
+          ],
+          "lesson_count": 9,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u08-l10",
+            "ma-g3-mathematics-u08-l12"
+          ],
+          "assessed_in_units": [
+            8
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u08-l06",
+            "ma-g3-mathematics-u08-l07",
+            "ma-g3-mathematics-u08-l10",
+            "ma-g3-mathematics-u08-l12",
+            "ma-g3-mathematics-u08-l13",
+            "ma-g3-mathematics-u08-l14",
+            "ma-g3-mathematics-u08-l15",
+            "ma-g3-mathematics-u08-l16",
+            "ma-g3-mathematics-u08-l17"
+          ]
+        },
+        {
+          "code": "3.MD.5",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Recognize area as an attribute of plane figures and understand concepts of area measurement.",
+          "sub_parts": [
+            {
+              "code": "3.MD.5a",
+              "requirement": "Understand that a square with side length 1 unit has one square unit of area."
+            },
+            {
+              "code": "3.MD.5b",
+              "requirement": "Understand that a plane figure covered by n unit squares without gaps or overlaps has an area of n square units."
+            }
+          ],
+          "units": [
+            9
+          ],
+          "lesson_count": 5,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u09-l05"
+          ],
+          "assessed_in_units": [
+            9
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u09-l01",
+            "ma-g3-mathematics-u09-l02",
+            "ma-g3-mathematics-u09-l05",
+            "ma-g3-mathematics-u09-l15",
+            "ma-g3-mathematics-u09-l16"
+          ]
+        },
+        {
+          "code": "3.MD.6",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Measure areas by counting unit squares in square centimeters, square meters, square inches, square feet, and improvised units.",
+          "sub_parts": [],
+          "units": [
+            9
+          ],
+          "lesson_count": 5,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u09-l05"
+          ],
+          "assessed_in_units": [
+            9
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u09-l03",
+            "ma-g3-mathematics-u09-l04",
+            "ma-g3-mathematics-u09-l05",
+            "ma-g3-mathematics-u09-l15",
+            "ma-g3-mathematics-u09-l16"
+          ]
+        },
+        {
+          "code": "3.MD.7",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Relate area to the operations of multiplication and addition.",
+          "sub_parts": [
+            {
+              "code": "3.MD.7a",
+              "requirement": "Find the area of a rectangle by tiling it and show that the area is the same as multiplying the side lengths."
+            },
+            {
+              "code": "3.MD.7b",
+              "requirement": "Multiply side lengths to find areas of rectangles in real-world and mathematical problems."
+            },
+            {
+              "code": "3.MD.7c",
+              "requirement": "Use tiling to show that the area of a rectangle with side lengths a and b + c is a x b + a x c."
+            },
+            {
+              "code": "3.MD.7d",
+              "requirement": "Recognize area as additive and find areas of rectilinear figures by decomposing them into non-overlapping rectangles."
+            }
+          ],
+          "units": [
+            9,
+            10
+          ],
+          "lesson_count": 17,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u09-l10",
+            "ma-g3-mathematics-u09-l12",
+            "ma-g3-mathematics-u09-l18",
+            "ma-g3-mathematics-u10-l12"
+          ],
+          "assessed_in_units": [
+            9
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u09-l06",
+            "ma-g3-mathematics-u09-l07",
+            "ma-g3-mathematics-u09-l08",
+            "ma-g3-mathematics-u09-l09",
+            "ma-g3-mathematics-u09-l10",
+            "ma-g3-mathematics-u09-l11",
+            "ma-g3-mathematics-u09-l12",
+            "ma-g3-mathematics-u09-l13",
+            "ma-g3-mathematics-u09-l14",
+            "ma-g3-mathematics-u09-l15",
+            "ma-g3-mathematics-u09-l16",
+            "ma-g3-mathematics-u09-l17",
+            "ma-g3-mathematics-u09-l18",
+            "ma-g3-mathematics-u10-l11",
+            "ma-g3-mathematics-u10-l12",
+            "ma-g3-mathematics-u10-l13",
+            "ma-g3-mathematics-u10-l14"
+          ]
+        },
+        {
+          "code": "3.MD.8",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Solve real-world and mathematical problems involving perimeters of polygons, including the relationship between perimeter and area.",
+          "sub_parts": [],
+          "units": [
+            10
+          ],
+          "lesson_count": 13,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u10-l05",
+            "ma-g3-mathematics-u10-l18"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u10-l01",
+            "ma-g3-mathematics-u10-l02",
+            "ma-g3-mathematics-u10-l03",
+            "ma-g3-mathematics-u10-l04",
+            "ma-g3-mathematics-u10-l05",
+            "ma-g3-mathematics-u10-l09",
+            "ma-g3-mathematics-u10-l11",
+            "ma-g3-mathematics-u10-l13",
+            "ma-g3-mathematics-u10-l14",
+            "ma-g3-mathematics-u10-l15",
+            "ma-g3-mathematics-u10-l16",
+            "ma-g3-mathematics-u10-l17",
+            "ma-g3-mathematics-u10-l18"
+          ]
+        },
+        {
+          "code": "3.NBT.1",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Use place-value understanding to round whole numbers to the nearest 10 or 100.",
+          "sub_parts": [],
+          "units": [
+            1
+          ],
+          "lesson_count": 11,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u01-l05",
+            "ma-g3-mathematics-u01-l12",
+            "ma-g3-mathematics-u01-l18"
+          ],
+          "assessed_in_units": [
+            1
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u01-l02",
+            "ma-g3-mathematics-u01-l03",
+            "ma-g3-mathematics-u01-l04",
+            "ma-g3-mathematics-u01-l05",
+            "ma-g3-mathematics-u01-l12",
+            "ma-g3-mathematics-u01-l13",
+            "ma-g3-mathematics-u01-l14",
+            "ma-g3-mathematics-u01-l15",
+            "ma-g3-mathematics-u01-l16",
+            "ma-g3-mathematics-u01-l17",
+            "ma-g3-mathematics-u01-l18"
+          ]
+        },
+        {
+          "code": "3.NBT.2",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Fluently add and subtract within 1000 using strategies and algorithms based on place value and the relationship between addition and subtraction.",
+          "sub_parts": [],
+          "units": [
+            1
+          ],
+          "lesson_count": 12,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u01-l10",
+            "ma-g3-mathematics-u01-l12"
+          ],
+          "assessed_in_units": [
+            1
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u01-l06",
+            "ma-g3-mathematics-u01-l07",
+            "ma-g3-mathematics-u01-l08",
+            "ma-g3-mathematics-u01-l09",
+            "ma-g3-mathematics-u01-l10",
+            "ma-g3-mathematics-u01-l11",
+            "ma-g3-mathematics-u01-l12",
+            "ma-g3-mathematics-u01-l13",
+            "ma-g3-mathematics-u01-l14",
+            "ma-g3-mathematics-u01-l15",
+            "ma-g3-mathematics-u01-l16",
+            "ma-g3-mathematics-u01-l17"
+          ]
+        },
+        {
+          "code": "3.NBT.3",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Multiply one-digit whole numbers by multiples of 10 in the range 10 to 90.",
+          "sub_parts": [],
+          "units": [
+            3,
+            4
+          ],
+          "lesson_count": 5,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u04-l12"
+          ],
+          "assessed_in_units": [
+            3,
+            4
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u03-l11",
+            "ma-g3-mathematics-u03-l15",
+            "ma-g3-mathematics-u03-l16",
+            "ma-g3-mathematics-u04-l12",
+            "ma-g3-mathematics-u04-l16"
+          ]
+        },
+        {
+          "code": "3.NF.1",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Understand 1/b as one part of a whole partitioned into b equal parts, and a/b as a parts of size 1/b.",
+          "sub_parts": [],
+          "units": [
+            5,
+            6,
+            10
+          ],
+          "lesson_count": 18,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u05-l05",
+            "ma-g3-mathematics-u05-l12",
+            "ma-g3-mathematics-u10-l10",
+            "ma-g3-mathematics-u10-l12"
+          ],
+          "assessed_in_units": [
+            5,
+            6
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u05-l01",
+            "ma-g3-mathematics-u05-l02",
+            "ma-g3-mathematics-u05-l03",
+            "ma-g3-mathematics-u05-l04",
+            "ma-g3-mathematics-u05-l05",
+            "ma-g3-mathematics-u05-l09",
+            "ma-g3-mathematics-u05-l11",
+            "ma-g3-mathematics-u05-l12",
+            "ma-g3-mathematics-u05-l13",
+            "ma-g3-mathematics-u05-l14",
+            "ma-g3-mathematics-u05-l15",
+            "ma-g3-mathematics-u05-l16",
+            "ma-g3-mathematics-u05-l17",
+            "ma-g3-mathematics-u06-l09",
+            "ma-g3-mathematics-u06-l15",
+            "ma-g3-mathematics-u06-l16",
+            "ma-g3-mathematics-u10-l10",
+            "ma-g3-mathematics-u10-l12"
+          ]
+        },
+        {
+          "code": "3.NF.2",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Understand a fraction as a number on the number line and represent fractions on a number-line diagram.",
+          "sub_parts": [
+            {
+              "code": "3.NF.2a",
+              "requirement": "Represent 1/b on a number line by partitioning the interval from 0 to 1 into b equal parts."
+            },
+            {
+              "code": "3.NF.2b",
+              "requirement": "Represent a/b on a number line by marking off a lengths of 1/b from 0."
+            }
+          ],
+          "units": [
+            5,
+            6
+          ],
+          "lesson_count": 12,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u05-l10",
+            "ma-g3-mathematics-u05-l18"
+          ],
+          "assessed_in_units": [
+            5,
+            6
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u05-l06",
+            "ma-g3-mathematics-u05-l07",
+            "ma-g3-mathematics-u05-l08",
+            "ma-g3-mathematics-u05-l10",
+            "ma-g3-mathematics-u05-l13",
+            "ma-g3-mathematics-u05-l14",
+            "ma-g3-mathematics-u05-l15",
+            "ma-g3-mathematics-u05-l16",
+            "ma-g3-mathematics-u05-l17",
+            "ma-g3-mathematics-u05-l18",
+            "ma-g3-mathematics-u06-l02",
+            "ma-g3-mathematics-u06-l16"
+          ]
+        },
+        {
+          "code": "3.NF.3",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Explain equivalence of fractions in special cases and compare fractions by reasoning about their size.",
+          "sub_parts": [
+            {
+              "code": "3.NF.3a",
+              "requirement": "Understand two fractions as equivalent if they are the same size or the same point on a number line."
+            },
+            {
+              "code": "3.NF.3b",
+              "requirement": "Recognize and generate simple equivalent fractions and explain why they are equivalent."
+            },
+            {
+              "code": "3.NF.3c",
+              "requirement": "Express whole numbers as fractions and recognize fractions equivalent to whole numbers."
+            },
+            {
+              "code": "3.NF.3d",
+              "requirement": "Compare two fractions with the same numerator or the same denominator and record the result with >, =, or <."
+            }
+          ],
+          "units": [
+            6
+          ],
+          "lesson_count": 18,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u06-l05",
+            "ma-g3-mathematics-u06-l10",
+            "ma-g3-mathematics-u06-l12",
+            "ma-g3-mathematics-u06-l18"
+          ],
+          "assessed_in_units": [
+            6
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u06-l01",
+            "ma-g3-mathematics-u06-l02",
+            "ma-g3-mathematics-u06-l03",
+            "ma-g3-mathematics-u06-l04",
+            "ma-g3-mathematics-u06-l05",
+            "ma-g3-mathematics-u06-l06",
+            "ma-g3-mathematics-u06-l07",
+            "ma-g3-mathematics-u06-l08",
+            "ma-g3-mathematics-u06-l09",
+            "ma-g3-mathematics-u06-l10",
+            "ma-g3-mathematics-u06-l11",
+            "ma-g3-mathematics-u06-l12",
+            "ma-g3-mathematics-u06-l13",
+            "ma-g3-mathematics-u06-l14",
+            "ma-g3-mathematics-u06-l15",
+            "ma-g3-mathematics-u06-l16",
+            "ma-g3-mathematics-u06-l17",
+            "ma-g3-mathematics-u06-l18"
+          ]
+        },
+        {
+          "code": "3.OA.1",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Interpret products of whole numbers, such as 5 x 7 as five groups of seven objects.",
+          "sub_parts": [],
+          "units": [
+            2
+          ],
+          "lesson_count": 12,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u02-l05"
+          ],
+          "assessed_in_units": [
+            2
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u02-l01",
+            "ma-g3-mathematics-u02-l02",
+            "ma-g3-mathematics-u02-l03",
+            "ma-g3-mathematics-u02-l04",
+            "ma-g3-mathematics-u02-l05",
+            "ma-g3-mathematics-u02-l08",
+            "ma-g3-mathematics-u02-l09",
+            "ma-g3-mathematics-u02-l13",
+            "ma-g3-mathematics-u02-l14",
+            "ma-g3-mathematics-u02-l15",
+            "ma-g3-mathematics-u02-l16",
+            "ma-g3-mathematics-u02-l17"
+          ]
+        },
+        {
+          "code": "3.OA.2",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Interpret whole-number quotients as equal sharing or as equal grouping.",
+          "sub_parts": [],
+          "units": [
+            2
+          ],
+          "lesson_count": 10,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u02-l10"
+          ],
+          "assessed_in_units": [
+            2
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u02-l06",
+            "ma-g3-mathematics-u02-l07",
+            "ma-g3-mathematics-u02-l08",
+            "ma-g3-mathematics-u02-l09",
+            "ma-g3-mathematics-u02-l10",
+            "ma-g3-mathematics-u02-l13",
+            "ma-g3-mathematics-u02-l14",
+            "ma-g3-mathematics-u02-l15",
+            "ma-g3-mathematics-u02-l16",
+            "ma-g3-mathematics-u02-l17"
+          ]
+        },
+        {
+          "code": "3.OA.3",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Use multiplication and division within 100 to solve word problems involving equal groups, arrays, and measurement quantities.",
+          "sub_parts": [],
+          "units": [
+            2,
+            7
+          ],
+          "lesson_count": 7,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u02-l10",
+            "ma-g3-mathematics-u02-l18",
+            "ma-g3-mathematics-u07-l12"
+          ],
+          "assessed_in_units": [
+            2
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u02-l08",
+            "ma-g3-mathematics-u02-l10",
+            "ma-g3-mathematics-u02-l14",
+            "ma-g3-mathematics-u02-l16",
+            "ma-g3-mathematics-u02-l17",
+            "ma-g3-mathematics-u02-l18",
+            "ma-g3-mathematics-u07-l12"
+          ]
+        },
+        {
+          "code": "3.OA.4",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Determine the unknown whole number in a multiplication or division equation.",
+          "sub_parts": [],
+          "units": [
+            2,
+            3
+          ],
+          "lesson_count": 3,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u03-l10"
+          ],
+          "assessed_in_units": [
+            3
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u02-l11",
+            "ma-g3-mathematics-u03-l10",
+            "ma-g3-mathematics-u03-l16"
+          ]
+        },
+        {
+          "code": "3.OA.5",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Apply properties of operations as strategies to multiply and divide; formal property names are not required.",
+          "sub_parts": [],
+          "units": [
+            3,
+            4,
+            9
+          ],
+          "lesson_count": 14,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u03-l05",
+            "ma-g3-mathematics-u04-l12"
+          ],
+          "assessed_in_units": [
+            3,
+            4
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u03-l02",
+            "ma-g3-mathematics-u03-l03",
+            "ma-g3-mathematics-u03-l04",
+            "ma-g3-mathematics-u03-l05",
+            "ma-g3-mathematics-u03-l06",
+            "ma-g3-mathematics-u03-l07",
+            "ma-g3-mathematics-u03-l11",
+            "ma-g3-mathematics-u03-l13",
+            "ma-g3-mathematics-u03-l14",
+            "ma-g3-mathematics-u03-l15",
+            "ma-g3-mathematics-u03-l16",
+            "ma-g3-mathematics-u04-l12",
+            "ma-g3-mathematics-u04-l16",
+            "ma-g3-mathematics-u09-l11"
+          ]
+        },
+        {
+          "code": "3.OA.6",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Understand division as an unknown-factor problem.",
+          "sub_parts": [],
+          "units": [
+            2,
+            3
+          ],
+          "lesson_count": 8,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u02-l12",
+            "ma-g3-mathematics-u03-l10",
+            "ma-g3-mathematics-u03-l12"
+          ],
+          "assessed_in_units": [
+            2,
+            3
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u02-l11",
+            "ma-g3-mathematics-u02-l12",
+            "ma-g3-mathematics-u02-l15",
+            "ma-g3-mathematics-u02-l16",
+            "ma-g3-mathematics-u03-l10",
+            "ma-g3-mathematics-u03-l12",
+            "ma-g3-mathematics-u03-l16",
+            "ma-g3-mathematics-u03-l17"
+          ]
+        },
+        {
+          "code": "3.OA.7",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Fluently multiply and divide within 100; know from memory all products of two one-digit numbers by the end of Grade 3.",
+          "sub_parts": [],
+          "units": [
+            3,
+            4,
+            9
+          ],
+          "lesson_count": 16,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u03-l05",
+            "ma-g3-mathematics-u03-l12",
+            "ma-g3-mathematics-u03-l18"
+          ],
+          "assessed_in_units": [
+            3
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u03-l01",
+            "ma-g3-mathematics-u03-l02",
+            "ma-g3-mathematics-u03-l03",
+            "ma-g3-mathematics-u03-l05",
+            "ma-g3-mathematics-u03-l07",
+            "ma-g3-mathematics-u03-l08",
+            "ma-g3-mathematics-u03-l09",
+            "ma-g3-mathematics-u03-l12",
+            "ma-g3-mathematics-u03-l13",
+            "ma-g3-mathematics-u03-l14",
+            "ma-g3-mathematics-u03-l15",
+            "ma-g3-mathematics-u03-l16",
+            "ma-g3-mathematics-u03-l17",
+            "ma-g3-mathematics-u03-l18",
+            "ma-g3-mathematics-u04-l09",
+            "ma-g3-mathematics-u09-l09"
+          ]
+        },
+        {
+          "code": "3.OA.8",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Solve two-step word problems using the four operations and assess the reasonableness of answers.",
+          "sub_parts": [],
+          "units": [
+            4,
+            8
+          ],
+          "lesson_count": 18,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u04-l05",
+            "ma-g3-mathematics-u04-l10",
+            "ma-g3-mathematics-u04-l18"
+          ],
+          "assessed_in_units": [
+            4
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u04-l01",
+            "ma-g3-mathematics-u04-l02",
+            "ma-g3-mathematics-u04-l03",
+            "ma-g3-mathematics-u04-l04",
+            "ma-g3-mathematics-u04-l05",
+            "ma-g3-mathematics-u04-l06",
+            "ma-g3-mathematics-u04-l07",
+            "ma-g3-mathematics-u04-l08",
+            "ma-g3-mathematics-u04-l09",
+            "ma-g3-mathematics-u04-l10",
+            "ma-g3-mathematics-u04-l13",
+            "ma-g3-mathematics-u04-l14",
+            "ma-g3-mathematics-u04-l15",
+            "ma-g3-mathematics-u04-l16",
+            "ma-g3-mathematics-u04-l17",
+            "ma-g3-mathematics-u04-l18",
+            "ma-g3-mathematics-u08-l04",
+            "ma-g3-mathematics-u08-l11"
+          ]
+        },
+        {
+          "code": "3.OA.9",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Identify and explain arithmetic patterns using properties of operations.",
+          "sub_parts": [],
+          "units": [
+            4
+          ],
+          "lesson_count": 6,
+          "independent_evidence_lessons": [
+            "ma-g3-mathematics-u04-l12"
+          ],
+          "assessed_in_units": [
+            4
+          ],
+          "lessons": [
+            "ma-g3-mathematics-u04-l11",
+            "ma-g3-mathematics-u04-l12",
+            "ma-g3-mathematics-u04-l14",
+            "ma-g3-mathematics-u04-l15",
+            "ma-g3-mathematics-u04-l16",
+            "ma-g3-mathematics-u04-l17"
+          ]
+        }
+      ],
+      "mathematical_practices": [
+        {
+          "code": "MP.1",
+          "title": "Make sense of problems and persevere in solving them",
+          "lesson_count": 13
+        },
+        {
+          "code": "MP.3",
+          "title": "Construct viable arguments and critique the reasoning of others",
+          "lesson_count": 19
+        },
+        {
+          "code": "MP.4",
+          "title": "Model with mathematics",
+          "lesson_count": 18
+        },
+        {
+          "code": "MP.5",
+          "title": "Use appropriate tools strategically",
+          "lesson_count": 2
+        },
+        {
+          "code": "MP.6",
+          "title": "Attend to precision",
+          "lesson_count": 10
+        },
+        {
+          "code": "MP.7",
+          "title": "Look for and make use of structure",
+          "lesson_count": 3
+        }
+      ]
+    },
+    "4": {
+      "grade": 4,
+      "course_id": "ma-g4-mathematics",
+      "content_standards_total": 28,
+      "content_standards_covered": 28,
+      "domain_ceilings": {
+        "4.OA": 5,
+        "4.NBT": 6,
+        "4.NF": 7,
+        "4.MD": 7,
+        "4.G": 3
+      },
+      "scope_notes": [
+        "Grade 4 fractions are limited to denominators 2, 3, 4, 5, 6, 8, 10, 12, and 100.",
+        "Grade 4 base-ten work is limited to whole numbers less than or equal to 1,000,000."
+      ],
+      "standards": [
+        {
+          "code": "4.G.1",
+          "domain": "G",
+          "domain_title": "Geometry",
+          "requirement": "Draw points, lines, line segments, rays, angles, and perpendicular and parallel lines, and identify these in two-dimensional figures.",
+          "sub_parts": [],
+          "units": [
+            10
+          ],
+          "lesson_count": 4,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u10-l12"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u10-l11",
+            "ma-g4-mathematics-u10-l12",
+            "ma-g4-mathematics-u10-l14",
+            "ma-g4-mathematics-u10-l16"
+          ]
+        },
+        {
+          "code": "4.G.2",
+          "domain": "G",
+          "domain_title": "Geometry",
+          "requirement": "Classify two-dimensional figures based on the presence of parallel or perpendicular lines or angles of a specified size.",
+          "sub_parts": [],
+          "units": [
+            10
+          ],
+          "lesson_count": 7,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u10-l12"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u10-l11",
+            "ma-g4-mathematics-u10-l12",
+            "ma-g4-mathematics-u10-l13",
+            "ma-g4-mathematics-u10-l14",
+            "ma-g4-mathematics-u10-l15",
+            "ma-g4-mathematics-u10-l16",
+            "ma-g4-mathematics-u10-l17"
+          ]
+        },
+        {
+          "code": "4.G.3",
+          "domain": "G",
+          "domain_title": "Geometry",
+          "requirement": "Recognize a line of symmetry for a two-dimensional figure, identify line-symmetric figures, and draw lines of symmetry.",
+          "sub_parts": [],
+          "units": [
+            10
+          ],
+          "lesson_count": 6,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u10-l12",
+            "ma-g4-mathematics-u10-l18"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u10-l11",
+            "ma-g4-mathematics-u10-l12",
+            "ma-g4-mathematics-u10-l13",
+            "ma-g4-mathematics-u10-l15",
+            "ma-g4-mathematics-u10-l16",
+            "ma-g4-mathematics-u10-l18"
+          ]
+        },
+        {
+          "code": "4.MD.1",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Know relative sizes of measurement units within one system and express measurements in a larger unit in terms of a smaller unit.",
+          "sub_parts": [],
+          "units": [
+            9
+          ],
+          "lesson_count": 12,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u09-l05"
+          ],
+          "assessed_in_units": [
+            9
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u09-l01",
+            "ma-g4-mathematics-u09-l02",
+            "ma-g4-mathematics-u09-l03",
+            "ma-g4-mathematics-u09-l04",
+            "ma-g4-mathematics-u09-l05",
+            "ma-g4-mathematics-u09-l08",
+            "ma-g4-mathematics-u09-l09",
+            "ma-g4-mathematics-u09-l13",
+            "ma-g4-mathematics-u09-l14",
+            "ma-g4-mathematics-u09-l15",
+            "ma-g4-mathematics-u09-l16",
+            "ma-g4-mathematics-u09-l17"
+          ]
+        },
+        {
+          "code": "4.MD.2",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Use the four operations to solve word problems involving distance, time, liquid volume, mass, and money, including simple fractions and decimals.",
+          "sub_parts": [],
+          "units": [
+            7,
+            8,
+            9
+          ],
+          "lesson_count": 8,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u08-l12",
+            "ma-g4-mathematics-u09-l10",
+            "ma-g4-mathematics-u09-l18"
+          ],
+          "assessed_in_units": [
+            9
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u07-l11",
+            "ma-g4-mathematics-u08-l06",
+            "ma-g4-mathematics-u08-l12",
+            "ma-g4-mathematics-u09-l06",
+            "ma-g4-mathematics-u09-l10",
+            "ma-g4-mathematics-u09-l15",
+            "ma-g4-mathematics-u09-l16",
+            "ma-g4-mathematics-u09-l18"
+          ]
+        },
+        {
+          "code": "4.MD.3",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Apply the area and perimeter formulas for rectangles in real-world and mathematical problems.",
+          "sub_parts": [],
+          "units": [
+            9
+          ],
+          "lesson_count": 7,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u09-l12"
+          ],
+          "assessed_in_units": [
+            9
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u09-l07",
+            "ma-g4-mathematics-u09-l09",
+            "ma-g4-mathematics-u09-l12",
+            "ma-g4-mathematics-u09-l14",
+            "ma-g4-mathematics-u09-l15",
+            "ma-g4-mathematics-u09-l16",
+            "ma-g4-mathematics-u09-l17"
+          ]
+        },
+        {
+          "code": "4.MD.4",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Make a line plot to display a data set of measurements in fractions of a unit and solve problems using the line plot.",
+          "sub_parts": [],
+          "units": [
+            9
+          ],
+          "lesson_count": 6,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u09-l12"
+          ],
+          "assessed_in_units": [
+            9
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u09-l11",
+            "ma-g4-mathematics-u09-l12",
+            "ma-g4-mathematics-u09-l13",
+            "ma-g4-mathematics-u09-l14",
+            "ma-g4-mathematics-u09-l15",
+            "ma-g4-mathematics-u09-l16"
+          ]
+        },
+        {
+          "code": "4.MD.5",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Recognize angles as geometric shapes formed wherever two rays share a common endpoint and understand concepts of angle measurement.",
+          "sub_parts": [
+            {
+              "code": "4.MD.5a",
+              "requirement": "Understand that an angle turning through 1/360 of a circle is called a one-degree angle."
+            },
+            {
+              "code": "4.MD.5b",
+              "requirement": "Understand that an angle turning through n one-degree angles has a measure of n degrees."
+            }
+          ],
+          "units": [
+            10
+          ],
+          "lesson_count": 5,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u10-l05"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u10-l01",
+            "ma-g4-mathematics-u10-l02",
+            "ma-g4-mathematics-u10-l05",
+            "ma-g4-mathematics-u10-l09",
+            "ma-g4-mathematics-u10-l16"
+          ]
+        },
+        {
+          "code": "4.MD.6",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Measure angles in whole-number degrees using a protractor and sketch angles of a specified measure.",
+          "sub_parts": [],
+          "units": [
+            10
+          ],
+          "lesson_count": 8,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u10-l05"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u10-l03",
+            "ma-g4-mathematics-u10-l04",
+            "ma-g4-mathematics-u10-l05",
+            "ma-g4-mathematics-u10-l08",
+            "ma-g4-mathematics-u10-l09",
+            "ma-g4-mathematics-u10-l14",
+            "ma-g4-mathematics-u10-l16",
+            "ma-g4-mathematics-u10-l17"
+          ]
+        },
+        {
+          "code": "4.MD.7",
+          "domain": "MD",
+          "domain_title": "Measurement and Data",
+          "requirement": "Recognize angle measure as additive and solve addition and subtraction problems to find unknown angles.",
+          "sub_parts": [],
+          "units": [
+            10
+          ],
+          "lesson_count": 6,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u10-l10"
+          ],
+          "assessed_in_units": [
+            10
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u10-l06",
+            "ma-g4-mathematics-u10-l07",
+            "ma-g4-mathematics-u10-l10",
+            "ma-g4-mathematics-u10-l14",
+            "ma-g4-mathematics-u10-l16",
+            "ma-g4-mathematics-u10-l17"
+          ]
+        },
+        {
+          "code": "4.NBT.1",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Recognize that a digit in one place represents ten times what it represents in the place to its right.",
+          "sub_parts": [],
+          "units": [
+            1,
+            2,
+            4
+          ],
+          "lesson_count": 10,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u01-l05"
+          ],
+          "assessed_in_units": [
+            1
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u01-l02",
+            "ma-g4-mathematics-u01-l03",
+            "ma-g4-mathematics-u01-l05",
+            "ma-g4-mathematics-u01-l09",
+            "ma-g4-mathematics-u01-l13",
+            "ma-g4-mathematics-u01-l14",
+            "ma-g4-mathematics-u01-l15",
+            "ma-g4-mathematics-u01-l16",
+            "ma-g4-mathematics-u02-l03",
+            "ma-g4-mathematics-u04-l02"
+          ]
+        },
+        {
+          "code": "4.NBT.2",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Read and write multi-digit whole numbers in numerals, number names, and expanded form, and compare them using >, =, and <.",
+          "sub_parts": [],
+          "units": [
+            1
+          ],
+          "lesson_count": 13,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u01-l05",
+            "ma-g4-mathematics-u01-l10"
+          ],
+          "assessed_in_units": [
+            1
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u01-l03",
+            "ma-g4-mathematics-u01-l04",
+            "ma-g4-mathematics-u01-l05",
+            "ma-g4-mathematics-u01-l06",
+            "ma-g4-mathematics-u01-l07",
+            "ma-g4-mathematics-u01-l08",
+            "ma-g4-mathematics-u01-l09",
+            "ma-g4-mathematics-u01-l10",
+            "ma-g4-mathematics-u01-l13",
+            "ma-g4-mathematics-u01-l14",
+            "ma-g4-mathematics-u01-l15",
+            "ma-g4-mathematics-u01-l16",
+            "ma-g4-mathematics-u01-l17"
+          ]
+        },
+        {
+          "code": "4.NBT.3",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Use place-value understanding to round multi-digit whole numbers to any place.",
+          "sub_parts": [],
+          "units": [
+            1,
+            2
+          ],
+          "lesson_count": 9,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u01-l12",
+            "ma-g4-mathematics-u01-l18",
+            "ma-g4-mathematics-u02-l12"
+          ],
+          "assessed_in_units": [
+            1,
+            2
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u01-l11",
+            "ma-g4-mathematics-u01-l12",
+            "ma-g4-mathematics-u01-l14",
+            "ma-g4-mathematics-u01-l15",
+            "ma-g4-mathematics-u01-l16",
+            "ma-g4-mathematics-u01-l17",
+            "ma-g4-mathematics-u01-l18",
+            "ma-g4-mathematics-u02-l12",
+            "ma-g4-mathematics-u02-l16"
+          ]
+        },
+        {
+          "code": "4.NBT.4",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Fluently add and subtract multi-digit whole numbers using the standard algorithm.",
+          "sub_parts": [],
+          "units": [
+            2
+          ],
+          "lesson_count": 15,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u02-l05",
+            "ma-g4-mathematics-u02-l10"
+          ],
+          "assessed_in_units": [
+            2
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u02-l01",
+            "ma-g4-mathematics-u02-l02",
+            "ma-g4-mathematics-u02-l03",
+            "ma-g4-mathematics-u02-l04",
+            "ma-g4-mathematics-u02-l05",
+            "ma-g4-mathematics-u02-l06",
+            "ma-g4-mathematics-u02-l07",
+            "ma-g4-mathematics-u02-l08",
+            "ma-g4-mathematics-u02-l09",
+            "ma-g4-mathematics-u02-l10",
+            "ma-g4-mathematics-u02-l13",
+            "ma-g4-mathematics-u02-l14",
+            "ma-g4-mathematics-u02-l15",
+            "ma-g4-mathematics-u02-l16",
+            "ma-g4-mathematics-u02-l17"
+          ]
+        },
+        {
+          "code": "4.NBT.5",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Multiply a whole number of up to four digits by a one-digit number, and multiply two two-digit numbers, using place-value strategies.",
+          "sub_parts": [],
+          "units": [
+            4
+          ],
+          "lesson_count": 16,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u04-l05",
+            "ma-g4-mathematics-u04-l12",
+            "ma-g4-mathematics-u04-l18"
+          ],
+          "assessed_in_units": [
+            4
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u04-l01",
+            "ma-g4-mathematics-u04-l02",
+            "ma-g4-mathematics-u04-l03",
+            "ma-g4-mathematics-u04-l04",
+            "ma-g4-mathematics-u04-l05",
+            "ma-g4-mathematics-u04-l06",
+            "ma-g4-mathematics-u04-l07",
+            "ma-g4-mathematics-u04-l08",
+            "ma-g4-mathematics-u04-l09",
+            "ma-g4-mathematics-u04-l12",
+            "ma-g4-mathematics-u04-l13",
+            "ma-g4-mathematics-u04-l14",
+            "ma-g4-mathematics-u04-l15",
+            "ma-g4-mathematics-u04-l16",
+            "ma-g4-mathematics-u04-l17",
+            "ma-g4-mathematics-u04-l18"
+          ]
+        },
+        {
+          "code": "4.NBT.6",
+          "domain": "NBT",
+          "domain_title": "Number and Operations in Base Ten",
+          "requirement": "Find whole-number quotients and remainders with up to four-digit dividends and one-digit divisors using place-value strategies.",
+          "sub_parts": [],
+          "units": [
+            5
+          ],
+          "lesson_count": 13,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u05-l05",
+            "ma-g4-mathematics-u05-l12"
+          ],
+          "assessed_in_units": [
+            5
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u05-l01",
+            "ma-g4-mathematics-u05-l02",
+            "ma-g4-mathematics-u05-l03",
+            "ma-g4-mathematics-u05-l04",
+            "ma-g4-mathematics-u05-l05",
+            "ma-g4-mathematics-u05-l08",
+            "ma-g4-mathematics-u05-l09",
+            "ma-g4-mathematics-u05-l11",
+            "ma-g4-mathematics-u05-l12",
+            "ma-g4-mathematics-u05-l14",
+            "ma-g4-mathematics-u05-l15",
+            "ma-g4-mathematics-u05-l16",
+            "ma-g4-mathematics-u05-l17"
+          ]
+        },
+        {
+          "code": "4.NF.1",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Explain why a/b equals (n x a)/(n x b) using visual fraction models and use the principle to generate equivalent fractions.",
+          "sub_parts": [],
+          "units": [
+            6
+          ],
+          "lesson_count": 13,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u06-l05",
+            "ma-g4-mathematics-u06-l12"
+          ],
+          "assessed_in_units": [
+            6
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u06-l01",
+            "ma-g4-mathematics-u06-l02",
+            "ma-g4-mathematics-u06-l03",
+            "ma-g4-mathematics-u06-l04",
+            "ma-g4-mathematics-u06-l05",
+            "ma-g4-mathematics-u06-l06",
+            "ma-g4-mathematics-u06-l09",
+            "ma-g4-mathematics-u06-l12",
+            "ma-g4-mathematics-u06-l13",
+            "ma-g4-mathematics-u06-l14",
+            "ma-g4-mathematics-u06-l15",
+            "ma-g4-mathematics-u06-l16",
+            "ma-g4-mathematics-u06-l17"
+          ]
+        },
+        {
+          "code": "4.NF.2",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Compare two fractions with different numerators and different denominators using common denominators, common numerators, or benchmarks.",
+          "sub_parts": [],
+          "units": [
+            6
+          ],
+          "lesson_count": 11,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u06-l10",
+            "ma-g4-mathematics-u06-l12",
+            "ma-g4-mathematics-u06-l18"
+          ],
+          "assessed_in_units": [
+            6
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u06-l07",
+            "ma-g4-mathematics-u06-l08",
+            "ma-g4-mathematics-u06-l09",
+            "ma-g4-mathematics-u06-l10",
+            "ma-g4-mathematics-u06-l11",
+            "ma-g4-mathematics-u06-l12",
+            "ma-g4-mathematics-u06-l14",
+            "ma-g4-mathematics-u06-l15",
+            "ma-g4-mathematics-u06-l16",
+            "ma-g4-mathematics-u06-l17",
+            "ma-g4-mathematics-u06-l18"
+          ]
+        },
+        {
+          "code": "4.NF.3",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Understand a fraction a/b with a greater than 1 as a sum of fractions 1/b.",
+          "sub_parts": [
+            {
+              "code": "4.NF.3a",
+              "requirement": "Understand addition and subtraction of fractions as joining and separating parts referring to the same whole."
+            },
+            {
+              "code": "4.NF.3b",
+              "requirement": "Decompose a fraction into a sum of fractions with the same denominator in more than one way."
+            },
+            {
+              "code": "4.NF.3c",
+              "requirement": "Add and subtract mixed numbers with like denominators."
+            },
+            {
+              "code": "4.NF.3d",
+              "requirement": "Solve word problems involving addition and subtraction of fractions with like denominators."
+            }
+          ],
+          "units": [
+            7
+          ],
+          "lesson_count": 13,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u07-l05"
+          ],
+          "assessed_in_units": [
+            7
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u07-l01",
+            "ma-g4-mathematics-u07-l02",
+            "ma-g4-mathematics-u07-l03",
+            "ma-g4-mathematics-u07-l04",
+            "ma-g4-mathematics-u07-l05",
+            "ma-g4-mathematics-u07-l06",
+            "ma-g4-mathematics-u07-l08",
+            "ma-g4-mathematics-u07-l09",
+            "ma-g4-mathematics-u07-l13",
+            "ma-g4-mathematics-u07-l14",
+            "ma-g4-mathematics-u07-l15",
+            "ma-g4-mathematics-u07-l16",
+            "ma-g4-mathematics-u07-l17"
+          ]
+        },
+        {
+          "code": "4.NF.4",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Apply and extend previous understandings of multiplication to multiply a fraction by a whole number.",
+          "sub_parts": [
+            {
+              "code": "4.NF.4a",
+              "requirement": "Understand a fraction a/b as a multiple of 1/b."
+            },
+            {
+              "code": "4.NF.4b",
+              "requirement": "Understand a multiple of a/b as a multiple of 1/b and use this to multiply a fraction by a whole number."
+            },
+            {
+              "code": "4.NF.4c",
+              "requirement": "Solve word problems involving multiplication of a fraction by a whole number."
+            }
+          ],
+          "units": [
+            7
+          ],
+          "lesson_count": 10,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u07-l10",
+            "ma-g4-mathematics-u07-l12",
+            "ma-g4-mathematics-u07-l18"
+          ],
+          "assessed_in_units": [
+            7
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u07-l07",
+            "ma-g4-mathematics-u07-l10",
+            "ma-g4-mathematics-u07-l11",
+            "ma-g4-mathematics-u07-l12",
+            "ma-g4-mathematics-u07-l13",
+            "ma-g4-mathematics-u07-l14",
+            "ma-g4-mathematics-u07-l15",
+            "ma-g4-mathematics-u07-l16",
+            "ma-g4-mathematics-u07-l17",
+            "ma-g4-mathematics-u07-l18"
+          ]
+        },
+        {
+          "code": "4.NF.5",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Express a fraction with denominator 10 as an equivalent fraction with denominator 100 and add fractions with denominators 10 and 100.",
+          "sub_parts": [],
+          "units": [
+            8
+          ],
+          "lesson_count": 6,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u08-l12"
+          ],
+          "assessed_in_units": [
+            8
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u08-l02",
+            "ma-g4-mathematics-u08-l03",
+            "ma-g4-mathematics-u08-l12",
+            "ma-g4-mathematics-u08-l14",
+            "ma-g4-mathematics-u08-l15",
+            "ma-g4-mathematics-u08-l16"
+          ]
+        },
+        {
+          "code": "4.NF.6",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Use decimal notation for fractions with denominators 10 or 100.",
+          "sub_parts": [],
+          "units": [
+            8
+          ],
+          "lesson_count": 12,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u08-l05",
+            "ma-g4-mathematics-u08-l12",
+            "ma-g4-mathematics-u08-l18"
+          ],
+          "assessed_in_units": [
+            8
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u08-l01",
+            "ma-g4-mathematics-u08-l04",
+            "ma-g4-mathematics-u08-l05",
+            "ma-g4-mathematics-u08-l06",
+            "ma-g4-mathematics-u08-l09",
+            "ma-g4-mathematics-u08-l12",
+            "ma-g4-mathematics-u08-l13",
+            "ma-g4-mathematics-u08-l14",
+            "ma-g4-mathematics-u08-l15",
+            "ma-g4-mathematics-u08-l16",
+            "ma-g4-mathematics-u08-l17",
+            "ma-g4-mathematics-u08-l18"
+          ]
+        },
+        {
+          "code": "4.NF.7",
+          "domain": "NF",
+          "domain_title": "Number and Operations - Fractions",
+          "requirement": "Compare two decimals to hundredths by reasoning about their size and record the result with >, =, or <.",
+          "sub_parts": [],
+          "units": [
+            8
+          ],
+          "lesson_count": 8,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u08-l10"
+          ],
+          "assessed_in_units": [
+            8
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u08-l07",
+            "ma-g4-mathematics-u08-l08",
+            "ma-g4-mathematics-u08-l10",
+            "ma-g4-mathematics-u08-l11",
+            "ma-g4-mathematics-u08-l14",
+            "ma-g4-mathematics-u08-l15",
+            "ma-g4-mathematics-u08-l16",
+            "ma-g4-mathematics-u08-l17"
+          ]
+        },
+        {
+          "code": "4.OA.1",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Interpret a multiplication equation as a comparison, such as 35 = 5 x 7 meaning 35 is five times as many as seven.",
+          "sub_parts": [],
+          "units": [
+            3
+          ],
+          "lesson_count": 7,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u03-l18"
+          ],
+          "assessed_in_units": [
+            3
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u03-l01",
+            "ma-g4-mathematics-u03-l02",
+            "ma-g4-mathematics-u03-l03",
+            "ma-g4-mathematics-u03-l14",
+            "ma-g4-mathematics-u03-l15",
+            "ma-g4-mathematics-u03-l16",
+            "ma-g4-mathematics-u03-l18"
+          ]
+        },
+        {
+          "code": "4.OA.2",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Multiply or divide to solve word problems involving multiplicative comparison, distinguishing it from additive comparison.",
+          "sub_parts": [],
+          "units": [
+            3,
+            4
+          ],
+          "lesson_count": 9,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u03-l05"
+          ],
+          "assessed_in_units": [
+            3,
+            4
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u03-l04",
+            "ma-g4-mathematics-u03-l05",
+            "ma-g4-mathematics-u03-l08",
+            "ma-g4-mathematics-u03-l15",
+            "ma-g4-mathematics-u03-l16",
+            "ma-g4-mathematics-u03-l17",
+            "ma-g4-mathematics-u04-l11",
+            "ma-g4-mathematics-u04-l15",
+            "ma-g4-mathematics-u04-l16"
+          ]
+        },
+        {
+          "code": "4.OA.3",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Solve multistep word problems with the four operations, including problems in which remainders must be interpreted, and assess reasonableness.",
+          "sub_parts": [],
+          "units": [
+            2,
+            4,
+            5
+          ],
+          "lesson_count": 23,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u02-l12",
+            "ma-g4-mathematics-u02-l18",
+            "ma-g4-mathematics-u04-l10",
+            "ma-g4-mathematics-u04-l12",
+            "ma-g4-mathematics-u05-l10",
+            "ma-g4-mathematics-u05-l12",
+            "ma-g4-mathematics-u05-l18"
+          ],
+          "assessed_in_units": [
+            2,
+            4,
+            5
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u02-l11",
+            "ma-g4-mathematics-u02-l12",
+            "ma-g4-mathematics-u02-l14",
+            "ma-g4-mathematics-u02-l15",
+            "ma-g4-mathematics-u02-l16",
+            "ma-g4-mathematics-u02-l17",
+            "ma-g4-mathematics-u02-l18",
+            "ma-g4-mathematics-u04-l10",
+            "ma-g4-mathematics-u04-l12",
+            "ma-g4-mathematics-u04-l14",
+            "ma-g4-mathematics-u04-l15",
+            "ma-g4-mathematics-u04-l16",
+            "ma-g4-mathematics-u04-l17",
+            "ma-g4-mathematics-u05-l06",
+            "ma-g4-mathematics-u05-l07",
+            "ma-g4-mathematics-u05-l10",
+            "ma-g4-mathematics-u05-l12",
+            "ma-g4-mathematics-u05-l13",
+            "ma-g4-mathematics-u05-l14",
+            "ma-g4-mathematics-u05-l15",
+            "ma-g4-mathematics-u05-l16",
+            "ma-g4-mathematics-u05-l17",
+            "ma-g4-mathematics-u05-l18"
+          ]
+        },
+        {
+          "code": "4.OA.4",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Find all factor pairs for a whole number from 1 to 100, recognize multiples, and determine whether a number is prime or composite.",
+          "sub_parts": [],
+          "units": [
+            3
+          ],
+          "lesson_count": 11,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u03-l10",
+            "ma-g4-mathematics-u03-l12"
+          ],
+          "assessed_in_units": [
+            3
+          ],
+          "lessons": [
+            "ma-g4-mathematics-u03-l06",
+            "ma-g4-mathematics-u03-l07",
+            "ma-g4-mathematics-u03-l08",
+            "ma-g4-mathematics-u03-l09",
+            "ma-g4-mathematics-u03-l10",
+            "ma-g4-mathematics-u03-l12",
+            "ma-g4-mathematics-u03-l13",
+            "ma-g4-mathematics-u03-l14",
+            "ma-g4-mathematics-u03-l15",
+            "ma-g4-mathematics-u03-l16",
+            "ma-g4-mathematics-u03-l17"
+          ]
+        },
+        {
+          "code": "4.OA.5",
+          "domain": "OA",
+          "domain_title": "Operations and Algebraic Thinking",
+          "requirement": "Generate a number or shape pattern from a given rule and identify features of the pattern not explicit in the rule.",
+          "sub_parts": [],
+          "units": [
+            3,
+            10
+          ],
+          "lesson_count": 3,
+          "independent_evidence_lessons": [
+            "ma-g4-mathematics-u03-l12",
+            "ma-g4-mathematics-u10-l18"
+          ],
+          "assessed_in_units": [],
+          "lessons": [
+            "ma-g4-mathematics-u03-l11",
+            "ma-g4-mathematics-u03-l12",
+            "ma-g4-mathematics-u10-l18"
+          ]
+        }
+      ],
+      "mathematical_practices": [
+        {
+          "code": "MP.1",
+          "title": "Make sense of problems and persevere in solving them",
+          "lesson_count": 11
+        },
+        {
+          "code": "MP.3",
+          "title": "Construct viable arguments and critique the reasoning of others",
+          "lesson_count": 19
+        },
+        {
+          "code": "MP.4",
+          "title": "Model with mathematics",
+          "lesson_count": 19
+        },
+        {
+          "code": "MP.5",
+          "title": "Use appropriate tools strategically",
+          "lesson_count": 2
+        },
+        {
+          "code": "MP.6",
+          "title": "Attend to precision",
+          "lesson_count": 3
+        },
+        {
+          "code": "MP.7",
+          "title": "Look for and make use of structure",
+          "lesson_count": 2
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/curriculum-lesson-grade34-v1.json",
+  "title": "Manuel Academy Curriculum Lesson — Grades 3/4 v1",
+  "description": "Grade34-scoped mirror of curriculum-content/manuel-academy/1.0.0/schemas/lesson.schema.json. The 1.0.0 file is not modified; this is a separate, additive schema for the Grades 3/4 authoring release.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lesson_id",
+    "course_id",
+    "grade",
+    "subject",
+    "course_day",
+    "unit_number",
+    "title",
+    "phase",
+    "focus",
+    "standards",
+    "learning_objectives",
+    "lesson_flow",
+    "formative_check",
+    "mastery_rule",
+    "accessibility_and_accommodations",
+    "safety_and_privacy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "lesson_id": {
+      "type": "string",
+      "pattern": "^ma-g(3|4)-[a-z-]+-u[0-9]{2}-l[0-9]{2}$"
+    },
+    "course_id": {
+      "type": "string"
+    },
+    "grade": {
+      "enum": [3, 4]
+    },
+    "subject": {
+      "enum": [
+        "mathematics",
+        "english-language-arts",
+        "science",
+        "social-studies",
+        "health",
+        "physical-education",
+        "ready-for-life",
+        "technology-computer-science",
+        "arts-music",
+        "financial-literacy"
+      ]
+    },
+    "course_day": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 180
+    },
+    "unit_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "phase": {
+      "type": "string"
+    },
+    "focus": {
+      "type": "string"
+    },
+    "standards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["code_or_strand", "source", "mapping_status"],
+        "properties": {
+          "code_or_strand": {
+            "type": "string",
+            "description": "Exact standard code when verified (e.g. '3.OA.A.1'); strand/band label when the source uses grade-span structure (e.g. 'Health 3-5 Span, Nutrition Indicator 2')."
+          },
+          "source": {
+            "type": "string",
+            "description": "Which row of release/standards-reference.md this cites."
+          },
+          "mapping_status": {
+            "enum": ["canonical", "unverified", "human-review"]
+          }
+        }
+      }
+    },
+    "learning_objectives": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string"
+      }
+    },
+    "lesson_flow": {
+      "type": "array",
+      "minItems": 5
+    },
+    "formative_check": {
+      "type": "string"
+    },
+    "mastery_rule": {
+      "type": "string"
+    },
+    "accessibility_and_accommodations": {
+      "type": "array",
+      "minItems": 5
+    },
+    "safety_and_privacy": {
+      "type": "array",
+      "minItems": 2
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,288 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "matrix_subject_slug": "financial-literacy",
+  "standards_ref": "standards-reference.md#financial-literacy",
+  "official_source": null,
+  "custody": "no lane standards artifact - this file is the release-boundary standalone artifact, projected from the course's own lesson citations",
+  "lane_artifacts": [],
+  "projection_note": "Every entry below is a citation the lane already authored on a lesson in this course. Nothing here adds, renames, or reinterprets a standard; counts and mapping_status are derived by adapters/standards-mapping-policy.json.",
+  "totals": {
+    "citations": 144,
+    "distinct": 9,
+    "canonical": 0,
+    "unverified": 0,
+    "human-review": 144
+  },
+  "standards": [
+    {
+      "code_or_strand": "Grade 3 economics and mathematics connections",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u01-l01",
+        "ma-g3-financial-literacy-u01-l02",
+        "ma-g3-financial-literacy-u01-l03",
+        "ma-g3-financial-literacy-u01-l04",
+        "ma-g3-financial-literacy-u01-l05",
+        "ma-g3-financial-literacy-u01-l06",
+        "ma-g3-financial-literacy-u02-l01",
+        "ma-g3-financial-literacy-u02-l02",
+        "ma-g3-financial-literacy-u02-l03",
+        "ma-g3-financial-literacy-u02-l04",
+        "ma-g3-financial-literacy-u02-l05",
+        "ma-g3-financial-literacy-u02-l06",
+        "ma-g3-financial-literacy-u03-l01",
+        "ma-g3-financial-literacy-u03-l02",
+        "ma-g3-financial-literacy-u03-l03",
+        "ma-g3-financial-literacy-u03-l04",
+        "ma-g3-financial-literacy-u03-l05",
+        "ma-g3-financial-literacy-u03-l06",
+        "ma-g3-financial-literacy-u04-l01",
+        "ma-g3-financial-literacy-u04-l02",
+        "ma-g3-financial-literacy-u04-l03",
+        "ma-g3-financial-literacy-u04-l04",
+        "ma-g3-financial-literacy-u04-l05",
+        "ma-g3-financial-literacy-u04-l06",
+        "ma-g3-financial-literacy-u05-l01",
+        "ma-g3-financial-literacy-u05-l02",
+        "ma-g3-financial-literacy-u05-l03",
+        "ma-g3-financial-literacy-u05-l04",
+        "ma-g3-financial-literacy-u05-l05",
+        "ma-g3-financial-literacy-u05-l06",
+        "ma-g3-financial-literacy-u06-l01",
+        "ma-g3-financial-literacy-u06-l02",
+        "ma-g3-financial-literacy-u06-l03",
+        "ma-g3-financial-literacy-u06-l04",
+        "ma-g3-financial-literacy-u06-l05",
+        "ma-g3-financial-literacy-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 6,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u01-l01",
+        "ma-g3-financial-literacy-u01-l02",
+        "ma-g3-financial-literacy-u01-l03",
+        "ma-g3-financial-literacy-u01-l04",
+        "ma-g3-financial-literacy-u01-l05",
+        "ma-g3-financial-literacy-u01-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 2 — earning and work",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 6,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u02-l01",
+        "ma-g3-financial-literacy-u02-l02",
+        "ma-g3-financial-literacy-u02-l03",
+        "ma-g3-financial-literacy-u02-l04",
+        "ma-g3-financial-literacy-u02-l05",
+        "ma-g3-financial-literacy-u02-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 3 — spending and comparing",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 6,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u03-l01",
+        "ma-g3-financial-literacy-u03-l02",
+        "ma-g3-financial-literacy-u03-l03",
+        "ma-g3-financial-literacy-u03-l04",
+        "ma-g3-financial-literacy-u03-l05",
+        "ma-g3-financial-literacy-u03-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 4 — saving and goals",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 6,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u04-l01",
+        "ma-g3-financial-literacy-u04-l02",
+        "ma-g3-financial-literacy-u04-l03",
+        "ma-g3-financial-literacy-u04-l04",
+        "ma-g3-financial-literacy-u04-l05",
+        "ma-g3-financial-literacy-u04-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 5 — money tools, privacy, and advertising",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 6,
+      "unit_numbers": [
+        5
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u05-l01",
+        "ma-g3-financial-literacy-u05-l02",
+        "ma-g3-financial-literacy-u05-l03",
+        "ma-g3-financial-literacy-u05-l04",
+        "ma-g3-financial-literacy-u05-l05",
+        "ma-g3-financial-literacy-u05-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 6 — simulated market capstone",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 6,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u06-l01",
+        "ma-g3-financial-literacy-u06-l02",
+        "ma-g3-financial-literacy-u06-l03",
+        "ma-g3-financial-literacy-u06-l04",
+        "ma-g3-financial-literacy-u06-l05",
+        "ma-g3-financial-literacy-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u01-l01",
+        "ma-g3-financial-literacy-u01-l02",
+        "ma-g3-financial-literacy-u01-l03",
+        "ma-g3-financial-literacy-u01-l04",
+        "ma-g3-financial-literacy-u01-l05",
+        "ma-g3-financial-literacy-u01-l06",
+        "ma-g3-financial-literacy-u02-l01",
+        "ma-g3-financial-literacy-u02-l02",
+        "ma-g3-financial-literacy-u02-l03",
+        "ma-g3-financial-literacy-u02-l04",
+        "ma-g3-financial-literacy-u02-l05",
+        "ma-g3-financial-literacy-u02-l06",
+        "ma-g3-financial-literacy-u03-l01",
+        "ma-g3-financial-literacy-u03-l02",
+        "ma-g3-financial-literacy-u03-l03",
+        "ma-g3-financial-literacy-u03-l04",
+        "ma-g3-financial-literacy-u03-l05",
+        "ma-g3-financial-literacy-u03-l06",
+        "ma-g3-financial-literacy-u04-l01",
+        "ma-g3-financial-literacy-u04-l02",
+        "ma-g3-financial-literacy-u04-l03",
+        "ma-g3-financial-literacy-u04-l04",
+        "ma-g3-financial-literacy-u04-l05",
+        "ma-g3-financial-literacy-u04-l06",
+        "ma-g3-financial-literacy-u05-l01",
+        "ma-g3-financial-literacy-u05-l02",
+        "ma-g3-financial-literacy-u05-l03",
+        "ma-g3-financial-literacy-u05-l04",
+        "ma-g3-financial-literacy-u05-l05",
+        "ma-g3-financial-literacy-u05-l06",
+        "ma-g3-financial-literacy-u06-l01",
+        "ma-g3-financial-literacy-u06-l02",
+        "ma-g3-financial-literacy-u06-l03",
+        "ma-g3-financial-literacy-u06-l04",
+        "ma-g3-financial-literacy-u06-l05",
+        "ma-g3-financial-literacy-u06-l06"
+      ]
+    },
+    {
+      "code_or_strand": "Michigan Personal Finance foundations — introductory",
+      "source": "standards-reference.md#financial-literacy",
+      "mapping_status": "human-review",
+      "derivation_rule": "R3-financial-literacy-gap-1",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_ids": [
+        "ma-g3-financial-literacy-u01-l01",
+        "ma-g3-financial-literacy-u01-l02",
+        "ma-g3-financial-literacy-u01-l03",
+        "ma-g3-financial-literacy-u01-l04",
+        "ma-g3-financial-literacy-u01-l05",
+        "ma-g3-financial-literacy-u01-l06",
+        "ma-g3-financial-literacy-u02-l01",
+        "ma-g3-financial-literacy-u02-l02",
+        "ma-g3-financial-literacy-u02-l03",
+        "ma-g3-financial-literacy-u02-l04",
+        "ma-g3-financial-literacy-u02-l05",
+        "ma-g3-financial-literacy-u02-l06",
+        "ma-g3-financial-literacy-u03-l01",
+        "ma-g3-financial-literacy-u03-l02",
+        "ma-g3-financial-literacy-u03-l03",
+        "ma-g3-financial-literacy-u03-l04",
+        "ma-g3-financial-literacy-u03-l05",
+        "ma-g3-financial-literacy-u03-l06",
+        "ma-g3-financial-literacy-u04-l01",
+        "ma-g3-financial-literacy-u04-l02",
+        "ma-g3-financial-literacy-u04-l03",
+        "ma-g3-financial-literacy-u04-l04",
+        "ma-g3-financial-literacy-u04-l05",
+        "ma-g3-financial-literacy-u04-l06",
+        "ma-g3-financial-literacy-u05-l01",
+        "ma-g3-financial-literacy-u05-l02",
+        "ma-g3-financial-literacy-u05-l03",
+        "ma-g3-financial-literacy-u05-l04",
+        "ma-g3-financial-literacy-u05-l05",
+        "ma-g3-financial-literacy-u05-l06",
+        "ma-g3-financial-literacy-u06-l01",
+        "ma-g3-financial-literacy-u06-l02",
+        "ma-g3-financial-literacy-u06-l03",
+        "ma-g3-financial-literacy-u06-l04",
+        "ma-g3-financial-literacy-u06-l05",
+        "ma-g3-financial-literacy-u06-l06"
+      ]
+    }
+  ]
+}

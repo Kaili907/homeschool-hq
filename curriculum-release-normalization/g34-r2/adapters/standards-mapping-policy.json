@@ -1,0 +1,93 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "purpose": "Project the plain-string standards citations every lane authored into the {code_or_strand, source, mapping_status} object form release/lesson-schema.json requires, without inventing review state.",
+  "code_or_strand": "The lane's citation string, verbatim. Never edited, reordered, deduplicated, or dropped.",
+  "source": "The anchor row of release/standards-reference.md for the lesson's subject - the same value release/course-matrix.json already assigns as standards_ref.",
+  "mapping_status": "Derived by the rules below. Each rule cites a written statement in an artifact carried in this release. canonical is issued only against a lane catalog that names the published MDE document as its source of record for the exact code; the default is unverified, the contract's own term for 'source cited, exact code not yet confirmed'.",
+  "never": "No citation is promoted to canonical on assembly judgement, and no citation is assigned a status a lane or the release contract contradicts.",
+  "enum_definitions": {
+    "canonical": "code confirmed against the cited official source",
+    "unverified": "source cited, exact code not yet confirmed",
+    "human-review": "ambiguous / no official code exists",
+    "defined_in": "standards/sources/release/standards-reference.md"
+  },
+  "rules": [
+    {
+      "id": "R1-lane-catalog-canonical",
+      "status": "canonical",
+      "applies_to": [
+        "mathematics",
+        "english-language-arts"
+      ],
+      "test": "citation string appears verbatim in a lane-shipped standards catalog whose provenance block names the published MDE document as the source of record for those codes",
+      "evidence": [
+        "standards/sources/mathematics/standards/standards-map.json -> sources[0].role: 'Source of record for every Grade 3 and Grade 4 code and paraphrase in this catalog.'",
+        "standards/sources/english-language-arts/standards/michigan-ela-g3.json and michigan-ela-g4.json -> sources[1].note: 'every Grade 3 and Grade 4 code and sub-code below was read from this text'"
+      ]
+    },
+    {
+      "id": "R2-math-practice-house-convention",
+      "status": "human-review",
+      "applies_to": [
+        "mathematics"
+      ],
+      "test": "citation is an MP.n mathematical-practice code",
+      "evidence": [
+        "standards/sources/mathematics/standards/standards-map.json -> practice_code_note: 'The MP.n prefix is a Manuel Academy package convention ... the Michigan document ... does not print the string MP.1.' No official code exists in the cited form, which is the contract's definition of human-review."
+      ]
+    },
+    {
+      "id": "R3-financial-literacy-gap-1",
+      "status": "human-review",
+      "applies_to": [
+        "financial-literacy"
+      ],
+      "test": "any citation on a Grade 3/4 financial-literacy lesson",
+      "evidence": [
+        "standards/sources/release/standards-reference.md Gap 1: 'Until that decision is made, all Financial Literacy Grade 3/4 standards entries must use mapping_status: human-review.'"
+      ]
+    },
+    {
+      "id": "R4-ready-for-life-no-framework",
+      "status": "human-review",
+      "applies_to": [
+        "ready-for-life"
+      ],
+      "test": "any citation on a Grade 3/4 ready-for-life lesson",
+      "evidence": [
+        "standards/sources/release/standards-reference.md source table: Ready for Life -> '(no discrete Michigan academic-standards page)', official URL N/A. No official code exists; every citation is a Manuel Academy internal unit anchor."
+      ]
+    },
+    {
+      "id": "R5-source-cited-code-unconfirmed",
+      "status": "unverified",
+      "applies_to": [
+        "science",
+        "social-studies",
+        "health",
+        "physical-education",
+        "arts-and-music",
+        "technology"
+      ],
+      "test": "default: a published official source is named for the subject in release/standards-reference.md, and no lane recorded a code-level confirmation against it",
+      "evidence": [
+        "standards/sources/release/standards-reference.md 'Verification method and its limits': 'No code inside a PDF was fetched and transcribed by this session.'",
+        "standards/sources/release/standards-reference.md Gap 4 directs technology/computer science to unverified explicitly.",
+        "standards/sources/{health,physical-education,arts-music,technology-computer-science}/standards-map.md each close with 'a human curriculum reviewer should confirm ... before this package is promoted' - an intent to verify, not a record of verification.",
+        "science and social-studies ship no lane standards artifact at all (r1 custody report Gap A), so no confirmation record can exist for their 1572 citations."
+      ]
+    }
+  ],
+  "subject_source_anchor": {
+    "mathematics": "standards-reference.md#mathematics",
+    "english-language-arts": "standards-reference.md#english-language-arts",
+    "science": "standards-reference.md#science",
+    "social-studies": "standards-reference.md#social-studies",
+    "health": "standards-reference.md#health-education",
+    "physical-education": "standards-reference.md#physical-education",
+    "ready-for-life": "standards-reference.md#ready-for-life",
+    "technology": "standards-reference.md#technology--computer-science",
+    "arts-and-music": "standards-reference.md#arts--music",
+    "financial-literacy": "standards-reference.md#financial-literacy"
+  }
+}

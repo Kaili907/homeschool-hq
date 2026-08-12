@@ -1,0 +1,759 @@
+{
+  "course_id": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "canonical_rule": "One correct response cannot establish mastery.",
+  "evidence_model": {
+    "instruction": "The idea is being taught. No mastery claim is possible from an instruction day.",
+    "guided-practice": "Success is supported by prompts or feedback. Recorded as supported; not weighted as independent evidence.",
+    "independent-evidence": "Unsupported, unprompted work with recorded reasoning. Usable toward a mastery claim.",
+    "retrieval": "Spaced recall without speed pressure. Informs teaching; a slow response is not a mastery failure.",
+    "project": "Extended application with revision. Contributes performance evidence.",
+    "assessment": "One evidence source among several.",
+    "reassessment": "Fresh evidence after targeted correction, separated in time from the first attempt."
+  },
+  "mastery_decision_rule": "Record a standard as secure only when the learner has produced accurate independent evidence WITH an explanation on at least two separate occasions, separated by time or by representation, and has not shown the target misconception on the later occasion. A single assessment score, a single correct answer, or guided success alone is never sufficient.",
+  "reporting_bands": [
+    "Secure",
+    "Developing",
+    "Not Yet"
+  ],
+  "pacing_note": "A pacing concern is not a mastery failure. Extended time, reduced quantity, and breaks do not change the standard being evidenced.",
+  "privacy_note": "Mastery records store the target, evidence type, completion state, adult-observed result, and next step. Raw learner responses are not required to be stored.",
+  "units": [
+    {
+      "unit_id": "ma-g4-mathematics-u01",
+      "unit_number": 1,
+      "unit_title": "Mathematical Habits and Place Value to One Million",
+      "standards": [
+        "4.NBT.1",
+        "4.NBT.2",
+        "4.NBT.3",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6",
+        "MP.7"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u01-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "expanded form and number names",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u01-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "comparing and ordering multi-digit numbers in context",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u01-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "choosing a rounding place and estimating to judge reasonableness",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u01-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "reading large numbers encountered in the world",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u01-l16",
+          "evidence_type": "assessment",
+          "focus": "multi-digit place value and rounding",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u01-l17",
+          "evidence_type": "reassessment",
+          "focus": "comparison and rounding",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u02",
+      "unit_number": 2,
+      "unit_title": "Multi-Digit Addition and Subtraction",
+      "standards": [
+        "4.OA.3",
+        "4.NBT.1",
+        "4.NBT.3",
+        "4.NBT.4",
+        "MP.1",
+        "MP.3",
+        "MP.4"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u02-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "addition inside multistep contexts",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u02-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "comparison and difference situations in context",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u02-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "multistep problems checked against a rounded estimate",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u02-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "checking a total before trusting it",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u02-l16",
+          "evidence_type": "assessment",
+          "focus": "multi-digit addition and subtraction",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u02-l17",
+          "evidence_type": "reassessment",
+          "focus": "regrouping",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u03",
+      "unit_number": 3,
+      "unit_title": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+      "standards": [
+        "4.OA.1",
+        "4.OA.2",
+        "4.OA.4",
+        "4.OA.5",
+        "MP.1",
+        "MP.3",
+        "MP.4"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u03-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "distinguishing additive from multiplicative comparison",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u03-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "recognizing multiples and reasoning about divisibility",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u03-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "prime and composite numbers, and extending a rule-based pattern",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u03-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "describing real relationships as times as many",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u03-l16",
+          "evidence_type": "assessment",
+          "focus": "comparison, factors, and multiples",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u03-l17",
+          "evidence_type": "reassessment",
+          "focus": "comparison and factoring",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u04",
+      "unit_number": 4,
+      "unit_title": "Multi-Digit Multiplication with Area Models and Partial Products",
+      "standards": [
+        "4.OA.2",
+        "4.OA.3",
+        "4.NBT.1",
+        "4.NBT.5",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.7"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u04-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "multiplying up to four digits by one digit",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u04-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "multiplication inside multistep problems",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u04-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "estimating products to check reasonableness",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u04-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "scaling a plan up with multiplication",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u04-l16",
+          "evidence_type": "assessment",
+          "focus": "multi-digit multiplication",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u04-l17",
+          "evidence_type": "reassessment",
+          "focus": "partial products and place-value alignment",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u05",
+      "unit_number": 5,
+      "unit_title": "Division with Remainders",
+      "standards": [
+        "4.OA.3",
+        "4.NBT.6",
+        "MP.1",
+        "MP.3",
+        "MP.4"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u05-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "dividing up to four digits by a one-digit divisor",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u05-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "multistep problems that involve division",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u05-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "estimating to predict the size of a quotient",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u05-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "fair sharing decisions in real situations",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u05-l16",
+          "evidence_type": "assessment",
+          "focus": "division and remainders",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u05-l17",
+          "evidence_type": "reassessment",
+          "focus": "quotients and remainders",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u06",
+      "unit_number": 6,
+      "unit_title": "Fraction Equivalence and Comparison",
+      "standards": [
+        "4.NF.1",
+        "4.NF.2",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u06-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "recognizing equivalence across models and notation",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u06-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "comparing fractions using benchmark values",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u06-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "justifying comparisons visually and symbolically",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u06-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "recognizing equivalent amounts in real settings",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u06-l16",
+          "evidence_type": "assessment",
+          "focus": "fraction equivalence and comparison",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u06-l17",
+          "evidence_type": "reassessment",
+          "focus": "comparison strategy",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u07",
+      "unit_number": 7,
+      "unit_title": "Adding, Subtracting, and Multiplying Fractions",
+      "standards": [
+        "4.NF.3",
+        "4.NF.4",
+        "4.MD.2",
+        "MP.1",
+        "MP.3",
+        "MP.4"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u07-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "adding and subtracting mixed numbers with like denominators",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u07-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "solving word problems that multiply a fraction by a whole number",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u07-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "connecting repeated addition to n times a over b",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u07-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "scaling a fractional plan for more people",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u07-l16",
+          "evidence_type": "assessment",
+          "focus": "fraction addition, subtraction, and multiplication",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u07-l17",
+          "evidence_type": "reassessment",
+          "focus": "fraction operations",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u08",
+      "unit_number": 8,
+      "unit_title": "Decimal Notation and Fraction-Decimal Connections",
+      "standards": [
+        "4.NF.5",
+        "4.NF.6",
+        "4.NF.7",
+        "4.MD.2",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u08-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "locating decimals on a number line",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u08-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "comparing and ordering decimals",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u08-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "money problems involving decimals",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u08-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "reading decimals on price tags and measuring tools",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u08-l16",
+          "evidence_type": "assessment",
+          "focus": "decimal notation and comparison",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u08-l17",
+          "evidence_type": "reassessment",
+          "focus": "decimal comparison",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u09",
+      "unit_number": 9,
+      "unit_title": "Measurement, Conversion, and Data",
+      "standards": [
+        "4.MD.1",
+        "4.MD.2",
+        "4.MD.3",
+        "4.MD.4",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.5"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u09-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "converting from a larger unit to a smaller unit",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u09-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "measurement problems involving fractions and decimals",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u09-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "finding an unknown side length from area or perimeter, and interpreting a line plot",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u09-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "measuring and converting for a real task",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u09-l16",
+          "evidence_type": "assessment",
+          "focus": "measurement, conversion, and data",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u09-l17",
+          "evidence_type": "reassessment",
+          "focus": "conversion and formulas",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g4-mathematics-u10",
+      "unit_number": 10,
+      "unit_title": "Angles, Geometry, and Integrated Capstone",
+      "standards": [
+        "4.OA.5",
+        "4.MD.5",
+        "4.MD.6",
+        "4.MD.7",
+        "4.G.1",
+        "4.G.2",
+        "4.G.3",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.5"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        11
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g4-mathematics-u10-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "measuring and drawing angles accurately",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g4-mathematics-u10-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "unknown-angle problems in diagrams",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 12,
+          "lesson_id": "ma-g4-mathematics-u10-l12",
+          "evidence_type": "independent-evidence",
+          "focus": "classifying two-dimensional figures and identifying lines of symmetry",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g4-mathematics-u10-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "symmetry and rule-based patterns in the completed design",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g4-mathematics-u10-l16",
+          "evidence_type": "assessment",
+          "focus": "angles, geometry, and symmetry",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g4-mathematics-u10-l17",
+          "evidence_type": "reassessment",
+          "focus": "angle and classification work",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    }
+  ]
+}

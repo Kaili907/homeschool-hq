@@ -1,0 +1,72 @@
+{
+  "candidate_id": "manuel-academy-grades-3-4-r1",
+  "assembled_on": "2026-08-12",
+  "assembly_branch": "mac/g34-assembly-r1",
+  "assembly_base_commit": "656efba1",
+  "resolution_rule": "Remote tip when the branch is pushed; otherwise the committed local branch tip. Content is reconciled, not branch ancestry: no source branch is merged.",
+  "sources": [
+    {
+      "lane": "release-standards",
+      "branch": "mac/g34-release-standards-r1",
+      "commit": "a51e93acaf477db41f042df0f77033e237f7e73a",
+      "tip_source": "local (no origin ref)",
+      "authored_under": "curriculum-authoring/full-family-grade34/release/",
+      "contributes": ["release contract", "standards reference", "course matrix", "proposed lesson schema", "validation contract"],
+      "courses": []
+    },
+    {
+      "lane": "mathematics",
+      "branch": "mac/g34-math-r1",
+      "commit": "64c1a5e80ea44c1da4d54a1a22c64b81be74d0ca",
+      "tip_source": "origin == local",
+      "authored_under": "curriculum-authoring/full-family-grade34/subjects/mathematics/",
+      "contributes": ["course content"],
+      "courses": ["ma-g3-mathematics", "ma-g4-mathematics"]
+    },
+    {
+      "lane": "english-language-arts",
+      "branch": "mac/g34-ela-r1",
+      "commit": "ef81511c2b582d003e397bb79daa8a26a41e3b10",
+      "tip_source": "origin == local",
+      "authored_under": "curriculum-authoring/full-family-grade34/subjects/english-language-arts/",
+      "contributes": ["course content"],
+      "courses": ["ma-g3-english-language-arts", "ma-g4-english-language-arts"]
+    },
+    {
+      "lane": "science-social-studies",
+      "branch": "mac/g34-science-social-r1",
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "tip_source": "origin == local",
+      "authored_under": "curriculum-content/manuel-academy/1.0.0/grades/grade-{3,4}/courses/ (MISPLACED - authored inside the sealed release path)",
+      "contributes": ["course content"],
+      "courses": ["ma-g3-science", "ma-g4-science", "ma-g3-social-studies", "ma-g4-social-studies"]
+    },
+    {
+      "lane": "health-physical-education",
+      "branch": "mac/g34-health-pe-r1",
+      "commit": "d0ebaa010cd01d7565967b4578d415dc7c8ee434",
+      "tip_source": "origin == local",
+      "authored_under": "curriculum-authoring/full-family-grade34/subjects/{health,physical-education}/",
+      "contributes": ["course content"],
+      "courses": ["ma-g3-health", "ma-g4-health", "ma-g3-physical-education", "ma-g4-physical-education"]
+    },
+    {
+      "lane": "ready-for-life-financial-literacy",
+      "branch": "mac/g34-rfl-finlit-r1",
+      "commit": "44e54a39c9acdb4635b09d5e56c344b784c41dc5",
+      "tip_source": "origin == local",
+      "authored_under": "curriculum-content/manuel-academy/1.0.0/grades/grade-{3,4}/courses/ (MISPLACED - authored inside the sealed release path)",
+      "contributes": ["course content"],
+      "courses": ["ma-g3-ready-for-life", "ma-g4-ready-for-life", "ma-g3-financial-literacy", "ma-g4-financial-literacy"]
+    },
+    {
+      "lane": "technology-arts",
+      "branch": "mac/g34-tech-arts-r1",
+      "commit": "a3a9d336a3033c9650b1f9fb81a7f043d7386600",
+      "tip_source": "origin == local",
+      "authored_under": "curriculum-authoring/full-family-grade34/subjects/{technology-computer-science,arts-music}/",
+      "contributes": ["course content"],
+      "courses": ["ma-g3-tech-cs", "ma-g4-tech-cs", "ma-g3-arts-music", "ma-g4-arts-music"]
+    }
+  ]
+}

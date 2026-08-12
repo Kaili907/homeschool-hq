@@ -1,0 +1,298 @@
+{
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "status": "G34_NORMALIZED_RELEASE_READY",
+  "normalized_on": "2026-08-12",
+  "supersedes": "manuel-academy-grades-3-4-r1",
+  "input": "curriculum-release-candidates/g34-r1 (unmodified)",
+  "preserves": {
+    "package": "curriculum-content/manuel-academy/1.0.0",
+    "note": "The sealed Grades 5/7/8 release keeps its own identity, version, counts and checksums. This release is a separate tree and modifies nothing under curriculum-content/, nothing under curriculum-release-candidates/, and no source curriculum branch."
+  },
+  "grades": [
+    3,
+    4
+  ],
+  "school_year": {
+    "weeks": 36,
+    "instructional_days": 180
+  },
+  "subjects": [
+    "mathematics",
+    "english-language-arts",
+    "science",
+    "social-studies",
+    "health",
+    "physical-education",
+    "ready-for-life",
+    "technology",
+    "arts-and-music",
+    "financial-literacy"
+  ],
+  "lesson_schema": {
+    "release": "schemas/lesson.release.v1.json",
+    "release_schema_version": "1.0",
+    "derived_from": "standards/sources/release/lesson-schema.json (carried verbatim)",
+    "deltas": "schemas/schema-delta.md"
+  },
+  "counts": {
+    "courses": 20,
+    "units": 154,
+    "lessons": 1800,
+    "assessments": 154,
+    "scheduled_sessions": 1800,
+    "grades": 2,
+    "per_grade": {
+      "3": {
+        "courses": 10,
+        "units": 77,
+        "lessons": 900
+      },
+      "4": {
+        "courses": 10,
+        "units": 77,
+        "lessons": 900
+      }
+    },
+    "per_course": {
+      "ma-g3-mathematics": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10,
+        "sessions": 180
+      },
+      "ma-g3-english-language-arts": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10,
+        "sessions": 180
+      },
+      "ma-g3-science": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9,
+        "sessions": 108
+      },
+      "ma-g3-social-studies": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9,
+        "sessions": 108
+      },
+      "ma-g3-health": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      },
+      "ma-g3-physical-education": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9,
+        "sessions": 108
+      },
+      "ma-g3-ready-for-life": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      },
+      "ma-g3-tech-cs": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      },
+      "ma-g3-arts-music": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6,
+        "sessions": 72
+      },
+      "ma-g3-financial-literacy": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      },
+      "ma-g4-mathematics": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10,
+        "sessions": 180
+      },
+      "ma-g4-english-language-arts": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10,
+        "sessions": 180
+      },
+      "ma-g4-science": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9,
+        "sessions": 108
+      },
+      "ma-g4-social-studies": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9,
+        "sessions": 108
+      },
+      "ma-g4-health": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      },
+      "ma-g4-physical-education": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9,
+        "sessions": 108
+      },
+      "ma-g4-ready-for-life": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      },
+      "ma-g4-tech-cs": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      },
+      "ma-g4-arts-music": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6,
+        "sessions": 72
+      },
+      "ma-g4-financial-literacy": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6,
+        "sessions": 36
+      }
+    }
+  },
+  "normalizations": [
+    {
+      "id": "N1",
+      "layer": "lesson metadata",
+      "field": "standards",
+      "from": "array of plain strings",
+      "to": "array of {code_or_strand, source, mapping_status}",
+      "lessons": 1800,
+      "citations": 4757,
+      "adapter": "adapters/standards-mapping-policy.json",
+      "invertible": true
+    },
+    {
+      "id": "N2",
+      "layer": "lesson metadata",
+      "field": "schema_version",
+      "from": "1.1 (ELA) / 1.0 (18 courses)",
+      "to": "1.0 release-wide, authored value preserved in authored_schema_version",
+      "lessons": 360,
+      "adapter": "adapters/schema-version-policy.json",
+      "invertible": true
+    },
+    {
+      "id": "N3",
+      "layer": "release schema",
+      "field": "subject enum",
+      "from": "matrix slugs technology-computer-science / arts-music",
+      "to": "canonical slugs technology / arts-and-music; both directions in the alias map",
+      "lessons": 0,
+      "adapter": "adapters/subject-slug-map.json",
+      "invertible": true
+    },
+    {
+      "id": "N4",
+      "layer": "release artifact",
+      "field": "standalone standards artifacts",
+      "from": "12 of 20 courses covered by a lane artifact",
+      "to": "20 of 20 courses carry standards/courses/<course_id>.standards.json",
+      "lessons": 0,
+      "adapter": "standards/standards-index.json",
+      "invertible": true
+    },
+    {
+      "id": "N5",
+      "layer": "release artifact",
+      "field": "course matrix and cadence",
+      "from": "release/course-matrix.json: null counts, days: 180 on every course, matrix slugs, non-existent tech-cs course ids, authoring paths",
+      "to": "release/course-matrix.normalized.json with real counts, per-course cadence, canonical slugs, authored course ids, release paths",
+      "lessons": 0,
+      "adapter": "release/course-matrix.normalized.json",
+      "invertible": true
+    }
+  ],
+  "entry_points": {
+    "course_index": "course-index.json",
+    "unit_index": "unit-index.json",
+    "lesson_index": "lesson-index.csv",
+    "course_matrix": "release/course-matrix.normalized.json",
+    "schedule_index": "schedules/schedule-index.json",
+    "lesson_schema": "schemas/lesson.release.v1.json",
+    "standards_index": "standards/standards-index.json",
+    "standards_rollup": "standards/standards-rollup.json",
+    "validation": "validation/validation.json",
+    "content_equivalence": "provenance/content-equivalence.json",
+    "source_ledger": "ledger/source-branches.json",
+    "checksums": "SHA256SUMS.txt"
+  },
+  "course_status": {
+    "ma-g3-mathematics": "RELEASE_READY",
+    "ma-g3-english-language-arts": "RELEASE_READY",
+    "ma-g3-science": "RELEASE_READY",
+    "ma-g3-social-studies": "RELEASE_READY",
+    "ma-g3-health": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g3-physical-education": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g3-ready-for-life": "RELEASE_READY",
+    "ma-g3-tech-cs": "RELEASE_READY",
+    "ma-g3-arts-music": "RELEASE_READY",
+    "ma-g3-financial-literacy": "RELEASE_READY",
+    "ma-g4-mathematics": "RELEASE_READY",
+    "ma-g4-english-language-arts": "RELEASE_READY",
+    "ma-g4-science": "RELEASE_READY",
+    "ma-g4-social-studies": "RELEASE_READY",
+    "ma-g4-health": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g4-physical-education": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g4-ready-for-life": "RELEASE_READY",
+    "ma-g4-tech-cs": "RELEASE_READY",
+    "ma-g4-arts-music": "RELEASE_READY",
+    "ma-g4-financial-literacy": "RELEASE_READY"
+  },
+  "standards_mapping_status": {
+    "canonical": 1210,
+    "unverified": 2850,
+    "human-review": 697
+  },
+  "validation": {
+    "overall": "PASS",
+    "release_contract_conformance": "PASS",
+    "normalization_integrity": "PASS",
+    "preservation": "PASS"
+  },
+  "boundaries": {
+    "owns": "curriculum-release-normalization/g34-r2/**",
+    "does_not_modify": [
+      "curriculum-release-candidates/g34-r1/**",
+      "curriculum-content/manuel-academy/1.0.0/**",
+      "curriculum-authoring/full-family-grade34/**",
+      "src/**",
+      "scripts/**"
+    ],
+    "not_yet_wired": [
+      "AcademyGrade in src/types.ts",
+      "PILOT_GRADES in src/curriculum/family-pilot/source.node.ts",
+      "EXPECTED counts in scripts/build-curriculum.mjs",
+      "a published release version for grades 3/4"
+    ]
+  },
+  "external_gates": [
+    "PENDING_FINAL_HEALTH_REVIEW on ma-g3-health, ma-g4-health, ma-g3-physical-education, ma-g4-physical-education - a named licensed reviewer has not signed off. Unchanged from the candidate and out of scope for normalization."
+  ]
+}
