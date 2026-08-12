@@ -16,6 +16,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: primary sources
 **Lesson ID:** `ma-g3-social-studies-u01-l02`  
 **Standards:** 3 – H3.0.1, 3 – H3.0.2, 3 – G1.0.1  
@@ -27,6 +29,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about primary sources; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: secondary sources
 **Lesson ID:** `ma-g3-social-studies-u01-l03`  
@@ -40,6 +44,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: evidence and inference
 **Lesson ID:** `ma-g3-social-studies-u01-l04`  
 **Standards:** 3 – H3.0.1, 3 – H3.0.2, 3 – G1.0.1  
@@ -51,6 +57,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about evidence and inference; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 5 — Concept model B: cardinal directions
 **Lesson ID:** `ma-g3-social-studies-u01-l05`  
@@ -64,6 +72,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 6 — Guided practice B: describing relative location
 **Lesson ID:** `ma-g3-social-studies-u01-l06`  
 **Standards:** 3 – H3.0.1, 3 – H3.0.2, 3 – G1.0.1  
@@ -75,6 +85,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about describing relative location; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 7 — Investigation or close reading: questions historians ask
 **Lesson ID:** `ma-g3-social-studies-u01-l07`  
@@ -88,6 +100,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 8 — Reteach and varied practice: primary sources
 **Lesson ID:** `ma-g3-social-studies-u01-l08`  
 **Standards:** 3 – H3.0.1, 3 – H3.0.2, 3 – G1.0.1  
@@ -99,6 +113,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about primary sources; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 9 — Performance task build: secondary sources
 **Lesson ID:** `ma-g3-social-studies-u01-l09`  
@@ -112,6 +128,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 10 — Synthesis and review: evidence and inference
 **Lesson ID:** `ma-g3-social-studies-u01-l10`  
 **Standards:** 3 – H3.0.1, 3 – H3.0.2, 3 – G1.0.1  
@@ -123,6 +141,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about evidence and inference; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 11 — Unit assessment: cardinal directions
 **Lesson ID:** `ma-g3-social-studies-u01-l11`  
@@ -136,6 +156,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 12 — Correction and reflection: describing relative location
 **Lesson ID:** `ma-g3-social-studies-u01-l12`  
 **Standards:** 3 – H3.0.1, 3 – H3.0.2, 3 – G1.0.1  
@@ -147,6 +169,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about describing relative location; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 2: Michigan on the Map: Location and Regions
 
@@ -162,6 +186,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: physical characteristics
 **Lesson ID:** `ma-g3-social-studies-u02-l02`  
 **Standards:** 3 – G1.0.2, 3 – G1.0.3, 3 – G2.0.1, 3 – G2.0.2  
@@ -173,6 +199,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about physical characteristics; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: human characteristics
 **Lesson ID:** `ma-g3-social-studies-u02-l03`  
@@ -186,6 +214,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: Michigan within North America
 **Lesson ID:** `ma-g3-social-studies-u02-l04`  
 **Standards:** 3 – G1.0.2, 3 – G1.0.3, 3 – G2.0.1, 3 – G2.0.2  
@@ -197,6 +227,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about Michigan within North America; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 5 — Concept model B: continents and oceans
 **Lesson ID:** `ma-g3-social-studies-u02-l05`  
@@ -210,6 +242,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 6 — Guided practice B: dividing Michigan into regions
 **Lesson ID:** `ma-g3-social-studies-u02-l06`  
 **Standards:** 3 – G1.0.2, 3 – G1.0.3, 3 – G2.0.1, 3 – G2.0.2  
@@ -221,6 +255,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about dividing Michigan into regions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 7 — Investigation or close reading: thematic maps
 **Lesson ID:** `ma-g3-social-studies-u02-l07`  
@@ -234,6 +270,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 8 — Reteach and varied practice: physical characteristics
 **Lesson ID:** `ma-g3-social-studies-u02-l08`  
 **Standards:** 3 – G1.0.2, 3 – G1.0.3, 3 – G2.0.1, 3 – G2.0.2  
@@ -245,6 +283,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about physical characteristics; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 9 — Performance task build: human characteristics
 **Lesson ID:** `ma-g3-social-studies-u02-l09`  
@@ -258,6 +298,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 10 — Synthesis and review: Michigan within North America
 **Lesson ID:** `ma-g3-social-studies-u02-l10`  
 **Standards:** 3 – G1.0.2, 3 – G1.0.3, 3 – G2.0.1, 3 – G2.0.2  
@@ -269,6 +311,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about Michigan within North America; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 11 — Unit assessment: continents and oceans
 **Lesson ID:** `ma-g3-social-studies-u02-l11`  
@@ -282,6 +326,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 12 — Correction and reflection: dividing Michigan into regions
 **Lesson ID:** `ma-g3-social-studies-u02-l12`  
 **Standards:** 3 – G1.0.2, 3 – G1.0.3, 3 – G2.0.1, 3 – G2.0.2  
@@ -293,6 +339,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about dividing Michigan into regions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 3: Environment, Resources, and Movement
 
@@ -308,6 +356,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: consequences of resource use
 **Lesson ID:** `ma-g3-social-studies-u03-l02`  
 **Standards:** 3 – G5.0.1, 3 – G5.0.2, 3 – G4.0.2, 3 – G4.0.3  
@@ -319,6 +369,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about consequences of resource use; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: adapting to the environment
 **Lesson ID:** `ma-g3-social-studies-u03-l03`  
@@ -332,6 +384,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: modifying the environment
 **Lesson ID:** `ma-g3-social-studies-u03-l04`  
 **Standards:** 3 – G5.0.1, 3 – G5.0.2, 3 – G4.0.2, 3 – G4.0.3  
@@ -343,6 +397,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about modifying the environment; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 5 — Concept model B: push and pull factors
 **Lesson ID:** `ma-g3-social-studies-u03-l05`  
@@ -356,6 +412,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 6 — Guided practice B: movement of goods, people, and jobs
 **Lesson ID:** `ma-g3-social-studies-u03-l06`  
 **Standards:** 3 – G5.0.1, 3 – G5.0.2, 3 – G4.0.2, 3 – G4.0.3  
@@ -367,6 +425,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about movement of goods, people, and jobs; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 7 — Investigation or close reading: Michigan's natural resources
 **Lesson ID:** `ma-g3-social-studies-u03-l07`  
@@ -380,6 +440,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 8 — Reteach and varied practice: consequences of resource use
 **Lesson ID:** `ma-g3-social-studies-u03-l08`  
 **Standards:** 3 – G5.0.1, 3 – G5.0.2, 3 – G4.0.2, 3 – G4.0.3  
@@ -391,6 +453,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about consequences of resource use; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 9 — Performance task build: adapting to the environment
 **Lesson ID:** `ma-g3-social-studies-u03-l09`  
@@ -404,6 +468,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 10 — Synthesis and review: modifying the environment
 **Lesson ID:** `ma-g3-social-studies-u03-l10`  
 **Standards:** 3 – G5.0.1, 3 – G5.0.2, 3 – G4.0.2, 3 – G4.0.3  
@@ -415,6 +481,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about modifying the environment; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 11 — Unit assessment: push and pull factors
 **Lesson ID:** `ma-g3-social-studies-u03-l11`  
@@ -428,6 +496,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 12 — Correction and reflection: movement of goods, people, and jobs
 **Lesson ID:** `ma-g3-social-studies-u03-l12`  
 **Standards:** 3 – G5.0.1, 3 – G5.0.2, 3 – G4.0.2, 3 – G4.0.3  
@@ -439,6 +509,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about movement of goods, people, and jobs; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 4: Indigenous Peoples of Michigan
 
@@ -454,6 +526,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: traditional stories and teachings
 **Lesson ID:** `ma-g3-social-studies-u04-l02`  
 **Standards:** 3 – H3.0.4, 3 – H3.0.5, 3 – G4.0.4  
@@ -465,6 +539,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about traditional stories and teachings; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: ways of life and environment
 **Lesson ID:** `ma-g3-social-studies-u04-l03`  
@@ -478,6 +554,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: comparing interactions with the environment
 **Lesson ID:** `ma-g3-social-studies-u04-l04`  
 **Standards:** 3 – H3.0.4, 3 – H3.0.5, 3 – G4.0.4  
@@ -489,6 +567,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about comparing interactions with the environment; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 5 — Concept model B: Indigenous Peoples in Michigan today
 **Lesson ID:** `ma-g3-social-studies-u04-l05`  
@@ -502,6 +582,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 6 — Guided practice B: tribal citizenship and treaty rights
 **Lesson ID:** `ma-g3-social-studies-u04-l06`  
 **Standards:** 3 – H3.0.4, 3 – H3.0.5, 3 – G4.0.4  
@@ -513,6 +595,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about tribal citizenship and treaty rights; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 7 — Investigation or close reading: Anishinaabek homelands
 **Lesson ID:** `ma-g3-social-studies-u04-l07`  
@@ -526,6 +610,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 8 — Reteach and varied practice: traditional stories and teachings
 **Lesson ID:** `ma-g3-social-studies-u04-l08`  
 **Standards:** 3 – H3.0.4, 3 – H3.0.5, 3 – G4.0.4  
@@ -537,6 +623,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about traditional stories and teachings; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 9 — Performance task build: ways of life and environment
 **Lesson ID:** `ma-g3-social-studies-u04-l09`  
@@ -550,6 +638,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 10 — Synthesis and review: comparing interactions with the environment
 **Lesson ID:** `ma-g3-social-studies-u04-l10`  
 **Standards:** 3 – H3.0.4, 3 – H3.0.5, 3 – G4.0.4  
@@ -561,6 +651,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about comparing interactions with the environment; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 11 — Unit assessment: Indigenous Peoples in Michigan today
 **Lesson ID:** `ma-g3-social-studies-u04-l11`  
@@ -574,6 +666,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 12 — Correction and reflection: tribal citizenship and treaty rights
 **Lesson ID:** `ma-g3-social-studies-u04-l12`  
 **Standards:** 3 – H3.0.4, 3 – H3.0.5, 3 – G4.0.4  
@@ -585,6 +679,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about tribal citizenship and treaty rights; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 5: Exploration, Settlement, and Early Michigan Life
 
@@ -600,6 +696,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: interactions and exchange
 **Lesson ID:** `ma-g3-social-studies-u05-l02`  
 **Standards:** 3 – H3.0.6, 3 – H3.0.7, 3 – H3.0.8  
@@ -611,6 +709,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about interactions and exchange; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: early settlements
 **Lesson ID:** `ma-g3-social-studies-u05-l03`  
@@ -624,6 +724,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: daily life before statehood
 **Lesson ID:** `ma-g3-social-studies-u05-l04`  
 **Standards:** 3 – H3.0.6, 3 – H3.0.7, 3 – H3.0.8  
@@ -635,6 +737,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about daily life before statehood; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 5 — Concept model B: actions of individuals
 **Lesson ID:** `ma-g3-social-studies-u05-l05`  
@@ -648,6 +752,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 6 — Guided practice B: constructing a narrative from sources
 **Lesson ID:** `ma-g3-social-studies-u05-l06`  
 **Standards:** 3 – H3.0.6, 3 – H3.0.7, 3 – H3.0.8  
@@ -659,6 +765,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about constructing a narrative from sources; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 7 — Investigation or close reading: first European explorers
 **Lesson ID:** `ma-g3-social-studies-u05-l07`  
@@ -672,6 +780,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 8 — Reteach and varied practice: interactions and exchange
 **Lesson ID:** `ma-g3-social-studies-u05-l08`  
 **Standards:** 3 – H3.0.6, 3 – H3.0.7, 3 – H3.0.8  
@@ -683,6 +793,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about interactions and exchange; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 9 — Performance task build: early settlements
 **Lesson ID:** `ma-g3-social-studies-u05-l09`  
@@ -696,6 +808,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 10 — Synthesis and review: daily life before statehood
 **Lesson ID:** `ma-g3-social-studies-u05-l10`  
 **Standards:** 3 – H3.0.6, 3 – H3.0.7, 3 – H3.0.8  
@@ -707,6 +821,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about daily life before statehood; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 11 — Unit assessment: actions of individuals
 **Lesson ID:** `ma-g3-social-studies-u05-l11`  
@@ -720,6 +836,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 12 — Correction and reflection: constructing a narrative from sources
 **Lesson ID:** `ma-g3-social-studies-u05-l12`  
 **Standards:** 3 – H3.0.6, 3 – H3.0.7, 3 – H3.0.8  
@@ -731,6 +849,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about constructing a narrative from sources; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 6: Michigan Becomes a State
 
@@ -746,6 +866,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: the path to statehood
 **Lesson ID:** `ma-g3-social-studies-u06-l02`  
 **Standards:** 3 – H3.0.3, 3 – H3.0.9, 3 – H3.0.10  
@@ -757,6 +879,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about the path to statehood; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: major eras in early Michigan
 **Lesson ID:** `ma-g3-social-studies-u06-l03`  
@@ -770,6 +894,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: sequencing a timeline
 **Lesson ID:** `ma-g3-social-studies-u06-l04`  
 **Standards:** 3 – H3.0.3, 3 – H3.0.9, 3 – H3.0.10  
@@ -781,6 +907,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about sequencing a timeline; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 5 — Concept model B: change over time
 **Lesson ID:** `ma-g3-social-studies-u06-l05`  
@@ -794,6 +922,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 6 — Guided practice B: weighing evidence
 **Lesson ID:** `ma-g3-social-studies-u06-l06`  
 **Standards:** 3 – H3.0.3, 3 – H3.0.9, 3 – H3.0.10  
@@ -805,6 +935,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about weighing evidence; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 7 — Investigation or close reading: causal relationships
 **Lesson ID:** `ma-g3-social-studies-u06-l07`  
@@ -818,6 +950,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 8 — Reteach and varied practice: the path to statehood
 **Lesson ID:** `ma-g3-social-studies-u06-l08`  
 **Standards:** 3 – H3.0.3, 3 – H3.0.9, 3 – H3.0.10  
@@ -829,6 +963,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about the path to statehood; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 9 — Performance task build: major eras in early Michigan
 **Lesson ID:** `ma-g3-social-studies-u06-l09`  
@@ -842,6 +978,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 10 — Synthesis and review: sequencing a timeline
 **Lesson ID:** `ma-g3-social-studies-u06-l10`  
 **Standards:** 3 – H3.0.3, 3 – H3.0.9, 3 – H3.0.10  
@@ -853,6 +991,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about sequencing a timeline; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 11 — Unit assessment: change over time
 **Lesson ID:** `ma-g3-social-studies-u06-l11`  
@@ -866,6 +1006,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 12 — Correction and reflection: weighing evidence
 **Lesson ID:** `ma-g3-social-studies-u06-l12`  
 **Standards:** 3 – H3.0.3, 3 – H3.0.9, 3 – H3.0.10  
@@ -877,6 +1019,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about weighing evidence; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 7: Michigan's Economy
 
@@ -892,6 +1036,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: opportunity cost
 **Lesson ID:** `ma-g3-social-studies-u07-l02`  
 **Standards:** 3 – E1.0.1, 3 – E1.0.2, 3 – E1.0.3, 3 – E1.0.4, 3 – E1.0.5, 3 – G4.0.1  
@@ -903,6 +1049,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about opportunity cost; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: incentives
 **Lesson ID:** `ma-g3-social-studies-u07-l03`  
@@ -916,6 +1064,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: location and natural resources
 **Lesson ID:** `ma-g3-social-studies-u07-l04`  
 **Standards:** 3 – E1.0.1, 3 – E1.0.2, 3 – E1.0.3, 3 – E1.0.4, 3 – E1.0.5, 3 – G4.0.1  
@@ -927,6 +1077,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about location and natural resources; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 5 — Concept model B: entrepreneurs and resources
 **Lesson ID:** `ma-g3-social-studies-u07-l05`  
@@ -940,6 +1092,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 6 — Guided practice B: major economic activities in Michigan
 **Lesson ID:** `ma-g3-social-studies-u07-l06`  
 **Standards:** 3 – E1.0.1, 3 – E1.0.2, 3 – E1.0.3, 3 – E1.0.4, 3 – E1.0.5, 3 – G4.0.1  
@@ -951,6 +1105,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about major economic activities in Michigan; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 7 — Investigation or close reading: scarcity and choice
 **Lesson ID:** `ma-g3-social-studies-u07-l07`  
@@ -964,6 +1120,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 8 — Reteach and varied practice: opportunity cost
 **Lesson ID:** `ma-g3-social-studies-u07-l08`  
 **Standards:** 3 – E1.0.1, 3 – E1.0.2, 3 – E1.0.3, 3 – E1.0.4, 3 – E1.0.5, 3 – G4.0.1  
@@ -975,6 +1133,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about opportunity cost; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 9 — Performance task build: incentives
 **Lesson ID:** `ma-g3-social-studies-u07-l09`  
@@ -988,6 +1148,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 10 — Synthesis and review: location and natural resources
 **Lesson ID:** `ma-g3-social-studies-u07-l10`  
 **Standards:** 3 – E1.0.1, 3 – E1.0.2, 3 – E1.0.3, 3 – E1.0.4, 3 – E1.0.5, 3 – G4.0.1  
@@ -999,6 +1161,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about location and natural resources; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 11 — Unit assessment: entrepreneurs and resources
 **Lesson ID:** `ma-g3-social-studies-u07-l11`  
@@ -1012,6 +1176,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 12 — Correction and reflection: major economic activities in Michigan
 **Lesson ID:** `ma-g3-social-studies-u07-l12`  
 **Standards:** 3 – E1.0.1, 3 – E1.0.2, 3 – E1.0.3, 3 – E1.0.4, 3 – E1.0.5, 3 – G4.0.1  
@@ -1023,6 +1189,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about major economic activities in Michigan; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 8: Michigan's Government and Citizenship
 
@@ -1038,6 +1206,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: representative government
 **Lesson ID:** `ma-g3-social-studies-u08-l02`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
@@ -1049,6 +1219,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about representative government; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: tribal, state, and local roles
 **Lesson ID:** `ma-g3-social-studies-u08-l03`  
@@ -1062,11 +1234,27 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 4 — Independent application A: three branches of state government
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 4 — Independent application A: state goods and services and how they are funded
 **Lesson ID:** `ma-g3-social-studies-u08-l04`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
+**Focus:** state goods and services and how they are funded  
+**Objective:** Apply state goods and services and how they are funded independently in a new representation, text, situation, or design constraint.
+
+**Student activity:** Learner completes a new application of state goods and services and how they are funded and records both the result and the reasoning, evidence, process, or design choice that produced it.
+
+**Exit ticket:** In one concise response, show or explain the most important idea about state goods and services and how they are funded; then identify one check that would catch an error or weak claim.
+
+**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 5 — Concept model B: three branches of state government
+**Lesson ID:** `ma-g3-social-studies-u08-l05`  
+**Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
 **Focus:** three branches of state government  
-**Objective:** Apply three branches of state government independently in a new representation, text, situation, or design constraint.
+**Objective:** Build a clear mental model of three branches of state government through an explicit worked example, demonstration, text, or phenomenon.
 
 **Student activity:** Learner completes a new application of three branches of state government and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1074,11 +1262,13 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 5 — Concept model B: how state courts resolve conflict
-**Lesson ID:** `ma-g3-social-studies-u08-l05`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 6 — Guided practice B: how state courts resolve conflict
+**Lesson ID:** `ma-g3-social-studies-u08-l06`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
 **Focus:** how state courts resolve conflict  
-**Objective:** Build a clear mental model of how state courts resolve conflict through an explicit worked example, demonstration, text, or phenomenon.
+**Objective:** Practice how state courts resolve conflict with prompts, feedback, and gradually reduced support.
 
 **Student activity:** Learner completes a new application of how state courts resolve conflict and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1086,23 +1276,41 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 6 — Guided practice B: rights and responsibilities
-**Lesson ID:** `ma-g3-social-studies-u08-l06`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 7 — Investigation or close reading: the purpose of the Michigan Constitution
+**Lesson ID:** `ma-g3-social-studies-u08-l07`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
-**Focus:** rights and responsibilities  
-**Objective:** Practice rights and responsibilities with prompts, feedback, and gradually reduced support.
+**Focus:** the purpose of the Michigan Constitution  
+**Objective:** Gather and analyze evidence related to the purpose of the Michigan Constitution, then record a defensible interpretation.
 
-**Student activity:** Learner completes a new application of rights and responsibilities and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**Student activity:** Learner completes a new application of the purpose of the Michigan Constitution and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
-**Exit ticket:** In one concise response, show or explain the most important idea about rights and responsibilities; then identify one check that would catch an error or weak claim.
+**Exit ticket:** In one concise response, show or explain the most important idea about the purpose of the Michigan Constitution; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 7 — Investigation or close reading: purposes of government
-**Lesson ID:** `ma-g3-social-studies-u08-l07`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 8 — Reteach and varied practice: rights and responsibilities of citizenship
+**Lesson ID:** `ma-g3-social-studies-u08-l08`  
+**Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
+**Focus:** rights and responsibilities of citizenship  
+**Objective:** Use error evidence to choose a different representation or strategy for rights and responsibilities of citizenship, then demonstrate corrected understanding.
+
+**Student activity:** Learner completes a new application of rights and responsibilities of citizenship and records both the result and the reasoning, evidence, process, or design choice that produced it.
+
+**Exit ticket:** In one concise response, show or explain the most important idea about rights and responsibilities of citizenship; then identify one check that would catch an error or weak claim.
+
+**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 9 — Performance task build: purposes of government
+**Lesson ID:** `ma-g3-social-studies-u08-l09`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
 **Focus:** purposes of government  
-**Objective:** Gather and analyze evidence related to purposes of government, then record a defensible interpretation.
+**Objective:** Create, test, or revise a meaningful product that applies purposes of government and the unit standards.
 
 **Student activity:** Learner completes a new application of purposes of government and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1110,11 +1318,13 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 8 — Reteach and varied practice: representative government
-**Lesson ID:** `ma-g3-social-studies-u08-l08`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 10 — Synthesis and review: representative government
+**Lesson ID:** `ma-g3-social-studies-u08-l10`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
 **Focus:** representative government  
-**Objective:** Use error evidence to choose a different representation or strategy for representative government, then demonstrate corrected understanding.
+**Objective:** Connect representative government to the unit’s other ideas and select evidence that shows readiness for assessment.
 
 **Student activity:** Learner completes a new application of representative government and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1122,53 +1332,35 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 9 — Performance task build: tribal, state, and local roles
-**Lesson ID:** `ma-g3-social-studies-u08-l09`  
-**Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
-**Focus:** tribal, state, and local roles  
-**Objective:** Create, test, or revise a meaningful product that applies tribal, state, and local roles and the unit standards.
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
-**Student activity:** Learner completes a new application of tribal, state, and local roles and records both the result and the reasoning, evidence, process, or design choice that produced it.
-
-**Exit ticket:** In one concise response, show or explain the most important idea about tribal, state, and local roles; then identify one check that would catch an error or weak claim.
-
-**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
-
-### Day 10 — Synthesis and review: three branches of state government
-**Lesson ID:** `ma-g3-social-studies-u08-l10`  
-**Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
-**Focus:** three branches of state government  
-**Objective:** Connect three branches of state government to the unit’s other ideas and select evidence that shows readiness for assessment.
-
-**Student activity:** Learner completes a new application of three branches of state government and records both the result and the reasoning, evidence, process, or design choice that produced it.
-
-**Exit ticket:** In one concise response, show or explain the most important idea about three branches of state government; then identify one check that would catch an error or weak claim.
-
-**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
-
-### Day 11 — Unit assessment: how state courts resolve conflict
+### Day 11 — Unit assessment: tribal, state, and local roles
 **Lesson ID:** `ma-g3-social-studies-u08-l11`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
-**Focus:** how state courts resolve conflict  
-**Objective:** Demonstrate current mastery of how state courts resolve conflict through selected-response, constructed-response, and applied evidence.
+**Focus:** tribal, state, and local roles  
+**Objective:** Demonstrate current mastery of tribal, state, and local roles through selected-response, constructed-response, and applied evidence.
 
-**Student activity:** Complete the unit assessment evidence for how state courts resolve conflict independently. Supports may preserve access but may not supply the answer, interpretation, or final product.
+**Student activity:** Complete the unit assessment evidence for tribal, state, and local roles independently. Supports may preserve access but may not supply the answer, interpretation, or final product.
 
-**Exit ticket:** Rate confidence in how state courts resolve conflict, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation.
+**Exit ticket:** Rate confidence in tribal, state, and local roles, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 12 — Correction and reflection: rights and responsibilities
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 12 — Correction and reflection: state goods and services and how they are funded
 **Lesson ID:** `ma-g3-social-studies-u08-l12`  
 **Standards:** 3 – C1.0.1, 3 – C2.0.1, 3 – C3.0.1, 3 – C3.0.2, 3 – C3.0.3, 3 – C3.0.4, 3 – C3.0.5, 3 – C5.0.1  
-**Focus:** rights and responsibilities  
-**Objective:** Use error evidence to choose a different representation or strategy for rights and responsibilities, then demonstrate corrected understanding.
+**Focus:** state goods and services and how they are funded  
+**Objective:** Use error evidence to choose a different representation or strategy for state goods and services and how they are funded, then demonstrate corrected understanding.
 
-**Student activity:** Learner completes a new application of rights and responsibilities and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**Student activity:** Learner completes a new application of state goods and services and how they are funded and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
-**Exit ticket:** In one concise response, show or explain the most important idea about rights and responsibilities; then identify one check that would catch an error or weak claim.
+**Exit ticket:** In one concise response, show or explain the most important idea about state goods and services and how they are funded; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ## Unit 9: Capstone: Taking Informed Action on a Michigan Public Issue
 
@@ -1184,6 +1376,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 2 — Concept model A: products from other countries
 **Lesson ID:** `ma-g3-social-studies-u09-l02`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
@@ -1195,6 +1389,8 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about products from other countries; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
 
 ### Day 3 — Guided practice A: identifying a public issue
 **Lesson ID:** `ma-g3-social-studies-u09-l03`  
@@ -1208,6 +1404,8 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
 ### Day 4 — Independent application A: analyzing data about an issue
 **Lesson ID:** `ma-g3-social-studies-u09-l04`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
@@ -1220,11 +1418,27 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 5 — Concept model B: stating and justifying a position
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 5 — Concept model B: conflicts over democratic values
 **Lesson ID:** `ma-g3-social-studies-u09-l05`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
+**Focus:** conflicts over democratic values  
+**Objective:** Build a clear mental model of conflicts over democratic values through an explicit worked example, demonstration, text, or phenomenon.
+
+**Student activity:** Learner completes a new application of conflicts over democratic values and records both the result and the reasoning, evidence, process, or design choice that produced it.
+
+**Exit ticket:** In one concise response, show or explain the most important idea about conflicts over democratic values; then identify one check that would catch an error or weak claim.
+
+**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 6 — Guided practice B: stating and justifying a position
+**Lesson ID:** `ma-g3-social-studies-u09-l06`  
+**Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
 **Focus:** stating and justifying a position  
-**Objective:** Build a clear mental model of stating and justifying a position through an explicit worked example, demonstration, text, or phenomenon.
+**Objective:** Practice stating and justifying a position with prompts, feedback, and gradually reduced support.
 
 **Student activity:** Learner completes a new application of stating and justifying a position and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1232,23 +1446,41 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 6 — Guided practice B: planning to inform others
-**Lesson ID:** `ma-g3-social-studies-u09-l06`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 7 — Investigation or close reading: planning an action
+**Lesson ID:** `ma-g3-social-studies-u09-l07`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
-**Focus:** planning to inform others  
-**Objective:** Practice planning to inform others with prompts, feedback, and gradually reduced support.
+**Focus:** planning an action  
+**Objective:** Gather and analyze evidence related to planning an action, then record a defensible interpretation.
 
-**Student activity:** Learner completes a new application of planning to inform others and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**Student activity:** Learner completes a new application of planning an action and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
-**Exit ticket:** In one concise response, show or explain the most important idea about planning to inform others; then identify one check that would catch an error or weak claim.
+**Exit ticket:** In one concise response, show or explain the most important idea about planning an action; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 7 — Investigation or close reading: specialization and interdependence
-**Lesson ID:** `ma-g3-social-studies-u09-l07`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 8 — Reteach and varied practice: informing others
+**Lesson ID:** `ma-g3-social-studies-u09-l08`  
+**Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
+**Focus:** informing others  
+**Objective:** Use error evidence to choose a different representation or strategy for informing others, then demonstrate corrected understanding.
+
+**Student activity:** Learner completes a new application of informing others and records both the result and the reasoning, evidence, process, or design choice that produced it.
+
+**Exit ticket:** In one concise response, show or explain the most important idea about informing others; then identify one check that would catch an error or weak claim.
+
+**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 9 — Performance task build: specialization and interdependence
+**Lesson ID:** `ma-g3-social-studies-u09-l09`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
 **Focus:** specialization and interdependence  
-**Objective:** Gather and analyze evidence related to specialization and interdependence, then record a defensible interpretation.
+**Objective:** Create, test, or revise a meaningful product that applies specialization and interdependence and the unit standards.
 
 **Student activity:** Learner completes a new application of specialization and interdependence and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1256,11 +1488,13 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 8 — Reteach and varied practice: products from other countries
-**Lesson ID:** `ma-g3-social-studies-u09-l08`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 10 — Synthesis and review: products from other countries
+**Lesson ID:** `ma-g3-social-studies-u09-l10`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
 **Focus:** products from other countries  
-**Objective:** Use error evidence to choose a different representation or strategy for products from other countries, then demonstrate corrected understanding.
+**Objective:** Connect products from other countries to the unit’s other ideas and select evidence that shows readiness for assessment.
 
 **Student activity:** Learner completes a new application of products from other countries and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1268,23 +1502,27 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 9 — Performance task build: identifying a public issue
-**Lesson ID:** `ma-g3-social-studies-u09-l09`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 11 — Unit assessment: identifying a public issue
+**Lesson ID:** `ma-g3-social-studies-u09-l11`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
 **Focus:** identifying a public issue  
-**Objective:** Create, test, or revise a meaningful product that applies identifying a public issue and the unit standards.
+**Objective:** Demonstrate current mastery of identifying a public issue through selected-response, constructed-response, and applied evidence.
 
-**Student activity:** Learner completes a new application of identifying a public issue and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**Student activity:** Complete the unit assessment evidence for identifying a public issue independently. Supports may preserve access but may not supply the answer, interpretation, or final product.
 
-**Exit ticket:** In one concise response, show or explain the most important idea about identifying a public issue; then identify one check that would catch an error or weak claim.
+**Exit ticket:** Rate confidence in identifying a public issue, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation.
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 10 — Synthesis and review: analyzing data about an issue
-**Lesson ID:** `ma-g3-social-studies-u09-l10`  
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.
+
+### Day 12 — Correction and reflection: analyzing data about an issue
+**Lesson ID:** `ma-g3-social-studies-u09-l12`  
 **Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
 **Focus:** analyzing data about an issue  
-**Objective:** Connect analyzing data about an issue to the unit’s other ideas and select evidence that shows readiness for assessment.
+**Objective:** Use error evidence to choose a different representation or strategy for analyzing data about an issue, then demonstrate corrected understanding.
 
 **Student activity:** Learner completes a new application of analyzing data about an issue and records both the result and the reasoning, evidence, process, or design choice that produced it.
 
@@ -1292,26 +1530,4 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
-### Day 11 — Unit assessment: stating and justifying a position
-**Lesson ID:** `ma-g3-social-studies-u09-l11`  
-**Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
-**Focus:** stating and justifying a position  
-**Objective:** Demonstrate current mastery of stating and justifying a position through selected-response, constructed-response, and applied evidence.
-
-**Student activity:** Complete the unit assessment evidence for stating and justifying a position independently. Supports may preserve access but may not supply the answer, interpretation, or final product.
-
-**Exit ticket:** Rate confidence in stating and justifying a position, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation.
-
-**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
-
-### Day 12 — Correction and reflection: planning to inform others
-**Lesson ID:** `ma-g3-social-studies-u09-l12`  
-**Standards:** 3 – E2.0.1, 3 – E3.0.1, 3 – P3.1.1, 3 – P3.1.2, 3 – P3.1.3, 3 – P3.3.1, 3 – P4.2.1, 3 – P4.2.2  
-**Focus:** planning to inform others  
-**Objective:** Use error evidence to choose a different representation or strategy for planning to inform others, then demonstrate corrected understanding.
-
-**Student activity:** Learner completes a new application of planning to inform others and records both the result and the reasoning, evidence, process, or design choice that produced it.
-
-**Exit ticket:** In one concise response, show or explain the most important idea about planning to inform others; then identify one check that would catch an error or weak claim.
-
-**Mastery rule:** Do not mark mastery from one answer. Use source analysis, map or timeline, discussion, evidence-based claim, and inquiry product; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+**Source integrity:** All sources are provided, real, and cited, or are learner-collected from a cited real source. Quotations and documents are never invented or reconstructed from memory. When a source is unavailable, the lesson states that plainly rather than substituting an imagined one.

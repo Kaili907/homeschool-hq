@@ -16,6 +16,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: testable questions
 **Lesson ID:** `ma-g4-science-u01-l02`  
 **Standards:** 3-5-ETS1-1, 3-5-ETS1-2, 3-5-ETS1-3  
@@ -27,6 +31,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about testable questions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: models and diagrams
 **Lesson ID:** `ma-g4-science-u01-l03`  
@@ -40,6 +48,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: fair tests
 **Lesson ID:** `ma-g4-science-u01-l04`  
 **Standards:** 3-5-ETS1-1, 3-5-ETS1-2, 3-5-ETS1-3  
@@ -51,6 +63,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about fair tests; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: measuring and recording data
 **Lesson ID:** `ma-g4-science-u01-l05`  
@@ -64,6 +80,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: criteria and constraints
 **Lesson ID:** `ma-g4-science-u01-l06`  
 **Standards:** 3-5-ETS1-1, 3-5-ETS1-2, 3-5-ETS1-3  
@@ -75,6 +95,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about criteria and constraints; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: careful observations
 **Lesson ID:** `ma-g4-science-u01-l07`  
@@ -88,6 +112,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: testable questions
 **Lesson ID:** `ma-g4-science-u01-l08`  
 **Standards:** 3-5-ETS1-1, 3-5-ETS1-2, 3-5-ETS1-3  
@@ -99,6 +127,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about testable questions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: models and diagrams
 **Lesson ID:** `ma-g4-science-u01-l09`  
@@ -112,6 +144,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: fair tests
 **Lesson ID:** `ma-g4-science-u01-l10`  
 **Standards:** 3-5-ETS1-1, 3-5-ETS1-2, 3-5-ETS1-3  
@@ -123,6 +159,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about fair tests; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: measuring and recording data
 **Lesson ID:** `ma-g4-science-u01-l11`  
@@ -136,6 +176,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: criteria and constraints
 **Lesson ID:** `ma-g4-science-u01-l12`  
 **Standards:** 3-5-ETS1-1, 3-5-ETS1-2, 3-5-ETS1-3  
@@ -147,6 +191,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about criteria and constraints; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 2: Energy and Speed
 
@@ -162,6 +210,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: speed and energy
 **Lesson ID:** `ma-g4-science-u02-l02`  
 **Standards:** 4-PS3-1, 4-PS3-3  
@@ -173,6 +225,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about speed and energy; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: evidence and explanation
 **Lesson ID:** `ma-g4-science-u02-l03`  
@@ -186,6 +242,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: collisions
 **Lesson ID:** `ma-g4-science-u02-l04`  
 **Standards:** 4-PS3-1, 4-PS3-3  
@@ -197,6 +257,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about collisions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: predicting outcomes
 **Lesson ID:** `ma-g4-science-u02-l05`  
@@ -210,6 +274,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: asking scientific questions
 **Lesson ID:** `ma-g4-science-u02-l06`  
 **Standards:** 4-PS3-1, 4-PS3-3  
@@ -221,6 +289,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about asking scientific questions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: energy of motion
 **Lesson ID:** `ma-g4-science-u02-l07`  
@@ -234,6 +306,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: speed and energy
 **Lesson ID:** `ma-g4-science-u02-l08`  
 **Standards:** 4-PS3-1, 4-PS3-3  
@@ -245,6 +321,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about speed and energy; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: evidence and explanation
 **Lesson ID:** `ma-g4-science-u02-l09`  
@@ -258,6 +338,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: collisions
 **Lesson ID:** `ma-g4-science-u02-l10`  
 **Standards:** 4-PS3-1, 4-PS3-3  
@@ -269,6 +353,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about collisions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: predicting outcomes
 **Lesson ID:** `ma-g4-science-u02-l11`  
@@ -282,6 +370,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: asking scientific questions
 **Lesson ID:** `ma-g4-science-u02-l12`  
 **Standards:** 4-PS3-1, 4-PS3-3  
@@ -293,6 +385,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about asking scientific questions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 3: Energy Transfer
 
@@ -308,6 +404,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: light energy
 **Lesson ID:** `ma-g4-science-u03-l02`  
 **Standards:** 4-PS3-2  
@@ -319,6 +419,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about light energy; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: heat transfer
 **Lesson ID:** `ma-g4-science-u03-l03`  
@@ -332,6 +436,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: electric currents
 **Lesson ID:** `ma-g4-science-u03-l04`  
 **Standards:** 4-PS3-2  
@@ -343,6 +451,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about electric currents; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: observing transfer
 **Lesson ID:** `ma-g4-science-u03-l05`  
@@ -356,6 +468,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: tracing energy paths
 **Lesson ID:** `ma-g4-science-u03-l06`  
 **Standards:** 4-PS3-2  
@@ -367,6 +483,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about tracing energy paths; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: sound energy
 **Lesson ID:** `ma-g4-science-u03-l07`  
@@ -380,6 +500,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: light energy
 **Lesson ID:** `ma-g4-science-u03-l08`  
 **Standards:** 4-PS3-2  
@@ -391,6 +515,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about light energy; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: heat transfer
 **Lesson ID:** `ma-g4-science-u03-l09`  
@@ -404,6 +532,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: electric currents
 **Lesson ID:** `ma-g4-science-u03-l10`  
 **Standards:** 4-PS3-2  
@@ -415,6 +547,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about electric currents; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: observing transfer
 **Lesson ID:** `ma-g4-science-u03-l11`  
@@ -428,6 +564,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: tracing energy paths
 **Lesson ID:** `ma-g4-science-u03-l12`  
 **Standards:** 4-PS3-2  
@@ -439,6 +579,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about tracing energy paths; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 4: Designing an Energy Converter
 
@@ -454,6 +598,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: design criteria
 **Lesson ID:** `ma-g4-science-u04-l02`  
 **Standards:** 4-PS3-4, 3-5-ETS1-2  
@@ -465,6 +613,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about design criteria; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: generating solutions
 **Lesson ID:** `ma-g4-science-u04-l03`  
@@ -478,6 +630,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: building a device
 **Lesson ID:** `ma-g4-science-u04-l04`  
 **Standards:** 4-PS3-4, 3-5-ETS1-2  
@@ -489,6 +645,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about building a device; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: testing and refining
 **Lesson ID:** `ma-g4-science-u04-l05`  
@@ -502,6 +662,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: comparing designs
 **Lesson ID:** `ma-g4-science-u04-l06`  
 **Standards:** 4-PS3-4, 3-5-ETS1-2  
@@ -513,6 +677,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about comparing designs; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: energy conversion
 **Lesson ID:** `ma-g4-science-u04-l07`  
@@ -526,6 +694,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: design criteria
 **Lesson ID:** `ma-g4-science-u04-l08`  
 **Standards:** 4-PS3-4, 3-5-ETS1-2  
@@ -537,6 +709,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about design criteria; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: generating solutions
 **Lesson ID:** `ma-g4-science-u04-l09`  
@@ -550,6 +726,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: building a device
 **Lesson ID:** `ma-g4-science-u04-l10`  
 **Standards:** 4-PS3-4, 3-5-ETS1-2  
@@ -561,6 +741,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about building a device; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: testing and refining
 **Lesson ID:** `ma-g4-science-u04-l11`  
@@ -574,6 +758,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: comparing designs
 **Lesson ID:** `ma-g4-science-u04-l12`  
 **Standards:** 4-PS3-4, 3-5-ETS1-2  
@@ -585,6 +773,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about comparing designs; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 5: Waves and Information
 
@@ -600,6 +792,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: amplitude
 **Lesson ID:** `ma-g4-science-u05-l02`  
 **Standards:** 4-PS4-1, 4-PS4-3  
@@ -611,6 +807,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about amplitude; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: wavelength
 **Lesson ID:** `ma-g4-science-u05-l03`  
@@ -624,6 +824,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: waves and motion
 **Lesson ID:** `ma-g4-science-u05-l04`  
 **Standards:** 4-PS4-1, 4-PS4-3  
@@ -635,6 +839,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about waves and motion; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: patterns that carry information
 **Lesson ID:** `ma-g4-science-u05-l05`  
@@ -648,6 +856,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: comparing communication solutions
 **Lesson ID:** `ma-g4-science-u05-l06`  
 **Standards:** 4-PS4-1, 4-PS4-3  
@@ -659,6 +871,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about comparing communication solutions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: wave patterns
 **Lesson ID:** `ma-g4-science-u05-l07`  
@@ -672,6 +888,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: amplitude
 **Lesson ID:** `ma-g4-science-u05-l08`  
 **Standards:** 4-PS4-1, 4-PS4-3  
@@ -683,6 +903,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about amplitude; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: wavelength
 **Lesson ID:** `ma-g4-science-u05-l09`  
@@ -696,6 +920,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: waves and motion
 **Lesson ID:** `ma-g4-science-u05-l10`  
 **Standards:** 4-PS4-1, 4-PS4-3  
@@ -707,6 +935,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about waves and motion; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: patterns that carry information
 **Lesson ID:** `ma-g4-science-u05-l11`  
@@ -720,6 +952,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: comparing communication solutions
 **Lesson ID:** `ma-g4-science-u05-l12`  
 **Standards:** 4-PS4-1, 4-PS4-3  
@@ -731,6 +967,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about comparing communication solutions; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 6: Light, Vision, and the Senses
 
@@ -746,6 +986,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: how we see
 **Lesson ID:** `ma-g4-science-u06-l02`  
 **Standards:** 4-PS4-2, 4-LS1-2  
@@ -757,6 +1001,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about how we see; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: modeling light paths
 **Lesson ID:** `ma-g4-science-u06-l03`  
@@ -770,6 +1018,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: senses and information
 **Lesson ID:** `ma-g4-science-u06-l04`  
 **Standards:** 4-PS4-2, 4-LS1-2  
@@ -781,6 +1033,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about senses and information; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: the brain and response
 **Lesson ID:** `ma-g4-science-u06-l05`  
@@ -794,6 +1050,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: modeling information processing
 **Lesson ID:** `ma-g4-science-u06-l06`  
 **Standards:** 4-PS4-2, 4-LS1-2  
@@ -805,6 +1065,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about modeling information processing; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: light reflection
 **Lesson ID:** `ma-g4-science-u06-l07`  
@@ -818,6 +1082,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: how we see
 **Lesson ID:** `ma-g4-science-u06-l08`  
 **Standards:** 4-PS4-2, 4-LS1-2  
@@ -829,6 +1097,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about how we see; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: modeling light paths
 **Lesson ID:** `ma-g4-science-u06-l09`  
@@ -842,6 +1114,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: senses and information
 **Lesson ID:** `ma-g4-science-u06-l10`  
 **Standards:** 4-PS4-2, 4-LS1-2  
@@ -853,6 +1129,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about senses and information; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: the brain and response
 **Lesson ID:** `ma-g4-science-u06-l11`  
@@ -866,6 +1146,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: modeling information processing
 **Lesson ID:** `ma-g4-science-u06-l12`  
 **Standards:** 4-PS4-2, 4-LS1-2  
@@ -877,6 +1161,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about modeling information processing; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 7: Structures That Support Survival
 
@@ -892,6 +1180,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: internal structures
 **Lesson ID:** `ma-g4-science-u07-l02`  
 **Standards:** 4-LS1-1  
@@ -903,6 +1195,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about internal structures; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: structure and function
 **Lesson ID:** `ma-g4-science-u07-l03`  
@@ -916,6 +1212,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: plant structures
 **Lesson ID:** `ma-g4-science-u07-l04`  
 **Standards:** 4-LS1-1  
@@ -927,6 +1227,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about plant structures; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: animal structures
 **Lesson ID:** `ma-g4-science-u07-l05`  
@@ -940,6 +1244,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: evidence-based arguments
 **Lesson ID:** `ma-g4-science-u07-l06`  
 **Standards:** 4-LS1-1  
@@ -951,6 +1259,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about evidence-based arguments; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: external structures
 **Lesson ID:** `ma-g4-science-u07-l07`  
@@ -964,6 +1276,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: internal structures
 **Lesson ID:** `ma-g4-science-u07-l08`  
 **Standards:** 4-LS1-1  
@@ -975,6 +1291,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about internal structures; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: structure and function
 **Lesson ID:** `ma-g4-science-u07-l09`  
@@ -988,6 +1308,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: plant structures
 **Lesson ID:** `ma-g4-science-u07-l10`  
 **Standards:** 4-LS1-1  
@@ -999,6 +1323,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about plant structures; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: animal structures
 **Lesson ID:** `ma-g4-science-u07-l11`  
@@ -1012,6 +1340,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: evidence-based arguments
 **Lesson ID:** `ma-g4-science-u07-l12`  
 **Standards:** 4-LS1-1  
@@ -1023,6 +1355,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about evidence-based arguments; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 8: Earth's Changing Landscape
 
@@ -1038,6 +1374,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: fossils in rock layers
 **Lesson ID:** `ma-g4-science-u08-l02`  
 **Standards:** 4-ESS1-1, 4-ESS2-1, 4-ESS2-2  
@@ -1049,6 +1389,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about fossils in rock layers; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: weathering
 **Lesson ID:** `ma-g4-science-u08-l03`  
@@ -1062,6 +1406,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: rate of erosion
 **Lesson ID:** `ma-g4-science-u08-l04`  
 **Standards:** 4-ESS1-1, 4-ESS2-1, 4-ESS2-2  
@@ -1073,6 +1421,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about rate of erosion; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: maps of Earth's features
 **Lesson ID:** `ma-g4-science-u08-l05`  
@@ -1086,6 +1438,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: Michigan's geological change
 **Lesson ID:** `ma-g4-science-u08-l06`  
 **Standards:** 4-ESS1-1, 4-ESS2-1, 4-ESS2-2  
@@ -1097,6 +1453,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about Michigan's geological change; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: rock layers
 **Lesson ID:** `ma-g4-science-u08-l07`  
@@ -1110,6 +1470,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: fossils in rock layers
 **Lesson ID:** `ma-g4-science-u08-l08`  
 **Standards:** 4-ESS1-1, 4-ESS2-1, 4-ESS2-2  
@@ -1121,6 +1485,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about fossils in rock layers; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: weathering
 **Lesson ID:** `ma-g4-science-u08-l09`  
@@ -1134,6 +1502,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: rate of erosion
 **Lesson ID:** `ma-g4-science-u08-l10`  
 **Standards:** 4-ESS1-1, 4-ESS2-1, 4-ESS2-2  
@@ -1145,6 +1517,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about rate of erosion; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: maps of Earth's features
 **Lesson ID:** `ma-g4-science-u08-l11`  
@@ -1158,6 +1534,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: Michigan's geological change
 **Lesson ID:** `ma-g4-science-u08-l12`  
 **Standards:** 4-ESS1-1, 4-ESS2-1, 4-ESS2-2  
@@ -1169,6 +1549,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about Michigan's geological change; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ## Unit 9: Capstone: Energy Resources and Michigan Hazards
 
@@ -1184,6 +1568,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 2 — Concept model A: fuels and the environment
 **Lesson ID:** `ma-g4-science-u09-l02`  
 **Standards:** 4-ESS3-1, 4-ESS3-2, 3-5-ETS1-1, 3-5-ETS1-3  
@@ -1195,6 +1583,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about fuels and the environment; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 3 — Guided practice A: natural Earth processes
 **Lesson ID:** `ma-g4-science-u09-l03`  
@@ -1208,6 +1600,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 4 — Independent application A: reducing hazard impacts
 **Lesson ID:** `ma-g4-science-u09-l04`  
 **Standards:** 4-ESS3-1, 4-ESS3-2, 3-5-ETS1-1, 3-5-ETS1-3  
@@ -1219,6 +1615,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about reducing hazard impacts; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 5 — Concept model B: comparing solutions
 **Lesson ID:** `ma-g4-science-u09-l05`  
@@ -1232,6 +1632,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 6 — Guided practice B: Michigan's people and places
 **Lesson ID:** `ma-g4-science-u09-l06`  
 **Standards:** 4-ESS3-1, 4-ESS3-2, 3-5-ETS1-1, 3-5-ETS1-3  
@@ -1243,6 +1647,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about Michigan's people and places; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 7 — Investigation or close reading: energy from natural resources
 **Lesson ID:** `ma-g4-science-u09-l07`  
@@ -1256,6 +1664,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 8 — Reteach and varied practice: fuels and the environment
 **Lesson ID:** `ma-g4-science-u09-l08`  
 **Standards:** 4-ESS3-1, 4-ESS3-2, 3-5-ETS1-1, 3-5-ETS1-3  
@@ -1267,6 +1679,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about fuels and the environment; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 9 — Performance task build: natural Earth processes
 **Lesson ID:** `ma-g4-science-u09-l09`  
@@ -1280,6 +1696,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 10 — Synthesis and review: reducing hazard impacts
 **Lesson ID:** `ma-g4-science-u09-l10`  
 **Standards:** 4-ESS3-1, 4-ESS3-2, 3-5-ETS1-1, 3-5-ETS1-3  
@@ -1291,6 +1711,10 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about reducing hazard impacts; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
 
 ### Day 11 — Unit assessment: comparing solutions
 **Lesson ID:** `ma-g4-science-u09-l11`  
@@ -1304,6 +1728,10 @@
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
 
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
+
 ### Day 12 — Correction and reflection: Michigan's people and places
 **Lesson ID:** `ma-g4-science-u09-l12`  
 **Standards:** 4-ESS3-1, 4-ESS3-2, 3-5-ETS1-1, 3-5-ETS1-3  
@@ -1315,3 +1743,7 @@
 **Exit ticket:** In one concise response, show or explain the most important idea about Michigan's people and places; then identify one check that would catch an error or weak claim.
 
 **Mastery rule:** Do not mark mastery from one answer. Use notebook entry, model, data display, claim-evidence-reasoning explanation, and investigation or design performance; require accurate independent evidence and successful transfer or retrieval on at least two occasions when feasible.
+
+**Safety (guardian-visible):** A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised. Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell.
+
+**Text-only alternative:** Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.

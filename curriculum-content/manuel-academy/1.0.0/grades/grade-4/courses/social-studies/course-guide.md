@@ -27,7 +27,8 @@ Each unit follows a recurring 12-day arc: low-stakes launch and diagnostic; expl
 ## Mastery and grading
 
 - One correct answer never establishes mastery.
-- Each unit standard is revisited on twelve separate instructional occasions within its unit, and again in the course capstone; the mastery rule requires accurate independent evidence on at least two occasions.
+- Each unit standard is carried across all twelve lessons of its unit, and every unit topic is the explicit focus of at least one lesson and is named in the unit assessment.
+- Separate evidence occasions come from the investigation day, the performance-task build, the unit assessment, and the correction day; the mastery rule requires accurate independent evidence on at least two of them.
 - Unit assessments combine concept, representation/source use, application, error or claim analysis, connection, performance evidence, and reflection.
 - Suggested reporting: **Secure**, **Developing**, or **Not Yet**, supported by evidence rather than a single percentage.
 - Reassessment uses fresh items or a new application after targeted instruction.
@@ -47,7 +48,7 @@ Each unit follows a recurring 12-day arc: low-stakes launch and diagnostic; expl
 | 5 | Work, Freedom, and Industry in Michigan | 12 | 4 – H3.0.3, 4 – H3.0.5, 4 – H3.0.6, 4 – H3.0.7 | Construct a source-based historical narrative about the automobile industry and the labor movement, and describe past and current efforts to protect Michigan's natural resources. |
 | 6 | Purposes and Principles of Government | 12 | 4 – C1.0.1, 4 – C1.0.2, 4 – C2.0.1, 4 – C2.0.2 | Describe the purposes of government named in the Preamble and explain how a constitutional principle limits federal power in an everyday situation. |
 | 7 | Structure of the Federal Government | 12 | 4 – C3.0.1, 4 – C3.0.2, 4 – C3.0.3, 4 – C3.0.4, 4 – C3.0.5, 4 – C3.0.6, 4 – C3.0.7 | Diagram the three branches, give an example of checks and balances, and explain how the federal government uses taxes and spending to serve a purpose of government. |
-| 8 | How a Market Economy Works | 12 | 4 – E1.0.2, 4 – E1.0.3, 4 – E1.0.4, 4 – E1.0.5, 4 – E1.0.6, 4 – E1.0.7, 4 – E1.0.8 | Explain how price, incentives, competition, and specialization shape decisions in a market economy, and list goods and services governments provide and how they are funded. |
+| 8 | How a Market Economy Works | 12 | 4 – E1.0.1, 4 – E1.0.2, 4 – E1.0.3, 4 – E1.0.4, 4 – E1.0.5, 4 – E1.0.6, 4 – E1.0.7, 4 – E1.0.8 | Explain how price, incentives, competition, and specialization shape decisions in a market economy, and list goods and services governments provide and how they are funded. |
 | 9 | Capstone: Citizenship and Public Issues | 12 | 4 – C5.0.1, 4 – C5.0.2, 4 – C5.0.3, 4 – E2.0.1, 4 – E3.0.1, 4 – P3.1.1, 4 – P3.1.2, 4 – P3.1.3, 4 – P3.3.1, 4 – P4.2.1, 4 – P4.2.2 | Identify a United States public issue, analyze graphic data and sources about it, compose a justified brief essay position, and carry out a plan to inform others. |
 
 ## 36-week schedule
@@ -65,6 +66,17 @@ Three sessions per week for 36 weeks. Each unit spans four weeks (12 sessions).
 | 25–28 | 7. Structure of the Federal Government |
 | 29–32 | 8. How a Market Economy Works |
 | 33–36 | 9. Capstone: Citizenship and Public Issues |
+
+## Standards provenance
+
+Every standards code in this course was taken from the official Michigan Department of Education standards document and verified against its text; none was recalled or inferred.
+
+| Subject | Official source |
+| --- | --- |
+| Science | Michigan K-12 Science Standards (MDE) |
+| Social Studies | Michigan K-12 Social Studies Standards, v 6/19 (MDE) |
+
+**Source-document note:** the official PDF prints the first economics expectation as `4 – E1.01`, omitting a dot. It is written here as `4 – E1.0.1` to match the document’s own numbering scheme for every other code. The expectation text is unchanged.
 
 ## Core resources
 

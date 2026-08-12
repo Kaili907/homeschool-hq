@@ -27,7 +27,8 @@ Each unit follows a recurring 12-day arc: low-stakes launch and diagnostic; expl
 ## Mastery and grading
 
 - One correct answer never establishes mastery.
-- Each unit standard is revisited on twelve separate instructional occasions within its unit, and again in the course capstone; the mastery rule requires accurate independent evidence on at least two occasions.
+- Each unit standard is carried across all twelve lessons of its unit, and every unit topic is the explicit focus of at least one lesson and is named in the unit assessment.
+- Separate evidence occasions come from the investigation day, the performance-task build, the unit assessment, and the correction day; the mastery rule requires accurate independent evidence on at least two of them.
 - Unit assessments combine concept, representation/source use, application, error or claim analysis, connection, performance evidence, and reflection.
 - Suggested reporting: **Secure**, **Developing**, or **Not Yet**, supported by evidence rather than a single percentage.
 - Reassessment uses fresh items or a new application after targeted instruction.
@@ -65,6 +66,16 @@ Three sessions per week for 36 weeks. Each unit spans four weeks (12 sessions).
 | 25–28 | 7. Fossils and Environments Long Ago |
 | 29–32 | 8. Weather Patterns and World Climates |
 | 33–36 | 9. Capstone: Weather Hazards and Changing Habitats |
+
+## Standards provenance
+
+Every standards code in this course was taken from the official Michigan Department of Education standards document and verified against its text; none was recalled or inferred.
+
+| Subject | Official source |
+| --- | --- |
+| Science | Michigan K-12 Science Standards (MDE) |
+| Social Studies | Michigan K-12 Social Studies Standards, v 6/19 (MDE) |
+
 
 ## Core resources
 
