@@ -1,0 +1,396 @@
+[
+  {
+    "unit_id": "ma-g11-health-u01",
+    "course_id": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "unit_number": 1,
+    "title": "Evaluating Health Information, Products, and Services",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.3.PHW] Personal Health and Wellness — Information and Resource Seeking"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.3.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "What separates a health claim that holds up from one that only sounds like it does?",
+    "topics": [
+      "evidence hierarchy in plain language: anecdote, observation, trial, review",
+      "reading a study summary without over-reading it",
+      "regulated versus unregulated products and what a label legally means",
+      "evaluating a health service: credential, scope, cost, and accountability",
+      "conflict of interest and funding disclosure",
+      "the cost of being wrong: how to size a risk before acting"
+    ],
+    "performance_task": "Produce a consumer-grade evaluation of three fictional health products or services, ranking them on evidence, safety, cost, and accountability, and stating the one piece of missing information that would change the ranking.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "course-supplied fictional product and service descriptions",
+      "guardian-approved reference sources"
+    ],
+    "inclusive_adaptation": "Evaluations may be written, tabled, dictated, or completed against a supplied criteria rubric with a reduced item count.",
+    "privacy_guard": "No purchase, account creation, real product order, payment information, or personal health-product use is requested or recorded.",
+    "guardian_safety": {
+      "equipment": "None. No purchase is required at any point.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "All products and services evaluated are fictional course artifacts.",
+      "guardian_confirmation_required": false
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g11-health-u01-l01",
+      "ma-g11-health-u01-l02",
+      "ma-g11-health-u01-l03",
+      "ma-g11-health-u01-l04",
+      "ma-g11-health-u01-l05",
+      "ma-g11-health-u01-l06"
+    ],
+    "assessment_id": "ma-g11-health-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g11-health-u02",
+    "course_id": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "unit_number": 2,
+    "title": "Chronic Conditions and Long-Horizon Wellbeing",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.1.PHW] Personal Health and Wellness — Self-Awareness and Analyzing Influences",
+      "Michigan HESG 2025 Grades 9-12 [12.1.BEPA] Balanced Eating and Physical Activity — Self-Awareness and Analyzing Influences",
+      "Michigan HESG 2025 Grades 9-12 [12.5.PHW] Personal Health and Wellness — Self-Management and Goal Setting",
+      "Michigan HESG 2025 Grades 9-12 [12.5.BEPA] Balanced Eating and Physical Activity — Self-Management and Goal Setting"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.1.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.1.BEPA",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+        "topic": "Balanced Eating and Physical Activity",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.BEPA",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Balanced Eating and Physical Activity",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "How do decisions made now compound over decades, without turning that into fear or blame?",
+    "topics": [
+      "how chronic conditions develop and why single causes are rare",
+      "modifiable and non-modifiable factors, stated without moralizing",
+      "genetics, environment, access, and stress as real contributors",
+      "sleep, movement, and recovery as long-horizon inputs",
+      "screening, early detection, and routine care over a lifetime",
+      "living well with an ongoing condition, and why stigma harms outcomes"
+    ],
+    "performance_task": "Build a twenty-year wellbeing model for a fictional adult, showing which inputs are inside personal control, which are structural, and which supports change the picture most.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "course-supplied fictional case profiles"
+    ],
+    "inclusive_adaptation": "The model may be drawn, tabled, narrated, or assembled from supplied factor cards.",
+    "privacy_guard": "No family medical history, genetic information, condition, medication, or personal risk profile is requested, recorded, or inferred. The learner works only from fictional profiles.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Unit teaches chronic-condition risk without blame framing and without any body-measurement or body-size content.",
+      "guardian_confirmation_required": false
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g11-health-u02-l01",
+      "ma-g11-health-u02-l02",
+      "ma-g11-health-u02-l03",
+      "ma-g11-health-u02-l04",
+      "ma-g11-health-u02-l05",
+      "ma-g11-health-u02-l06"
+    ],
+    "assessment_id": "ma-g11-health-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g11-health-u03",
+    "course_id": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "unit_number": 3,
+    "title": "Community and Environmental Health",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.6.CEH] Community and Environmental Health — Advocacy and Health Promotion",
+      "Michigan HESG 2025 Grades 9-12 [12.1.CEH] Community and Environmental Health — Self-Awareness and Analyzing Influences"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.6.CEH",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 6: Advocacy and Health Promotion",
+        "topic": "Community and Environmental Health",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.1.CEH",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+        "topic": "Community and Environmental Health",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "Why is health so unevenly distributed across places that are only a few miles apart?",
+    "topics": [
+      "air, water, housing, and neighborhood conditions as health inputs",
+      "food access, transportation, and distance to care",
+      "environmental hazards and how communities learn about them",
+      "public health functions and how a community responds to an outbreak",
+      "reading community-level health data honestly",
+      "who has standing to change a community health condition"
+    ],
+    "performance_task": "Analyze a fictional community health dataset, identify the two conditions with the largest effect, and write a short brief proposing one realistic intervention with its likely limits.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "course-supplied fictional community dataset"
+    ],
+    "inclusive_adaptation": "Analysis may be written, charted, spoken, or completed on a supplied guided-analysis frame with the dataset pre-summarized.",
+    "privacy_guard": "The dataset is fictional. No real address, neighborhood, household income, or family circumstance is collected or discussed.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Unit discusses inequality in health outcomes factually and without assigning fault to individuals or communities.",
+      "guardian_confirmation_required": false
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g11-health-u03-l01",
+      "ma-g11-health-u03-l02",
+      "ma-g11-health-u03-l03",
+      "ma-g11-health-u03-l04",
+      "ma-g11-health-u03-l05",
+      "ma-g11-health-u03-l06"
+    ],
+    "assessment_id": "ma-g11-health-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g11-health-u04",
+    "course_id": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "unit_number": 4,
+    "title": "Navigating Health Systems, Coverage, and Confidentiality",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.3.PHW] Personal Health and Wellness — Information and Resource Seeking",
+      "Michigan HESG 2025 Grades 9-12 [12.4.PHW] Personal Health and Wellness — Decision Making and Problem Solving"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.3.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.4.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 4: Decision Making and Problem Solving",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "How does a person actually get care, and what does it cost them to try?",
+    "topics": [
+      "levels of care: self-care, primary, urgent, emergency, and specialty",
+      "insurance vocabulary in plain language: premium, deductible, copay, network",
+      "what care costs without coverage, and where low-cost options exist",
+      "preparing for an appointment and asking a clinician a real question",
+      "minor consent, confidentiality, and its limits in Michigan",
+      "medical records, portals, and who can see what"
+    ],
+    "performance_task": "Run three fictional cases through the system: choose the right level of care, estimate the cost path, prepare the questions, and identify the confidentiality rule that applies.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "course-supplied fictional coverage summaries and case files"
+    ],
+    "inclusive_adaptation": "Walkthroughs may be written, charted, narrated, or completed on a supplied decision frame with vocabulary pre-defined.",
+    "privacy_guard": "No real insurance document, policy number, member ID, medical record, portal login, or family coverage detail is used, uploaded, or recorded. Every artifact is a course-supplied fiction.",
+    "guardian_safety": {
+      "equipment": "None. No account, portal, or real document is used.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Confidentiality content is taught as general Michigan-context information, not as legal advice; guardians decide how household care decisions are actually made.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g11-health-u04-l01",
+      "ma-g11-health-u04-l02",
+      "ma-g11-health-u04-l03",
+      "ma-g11-health-u04-l04",
+      "ma-g11-health-u04-l05",
+      "ma-g11-health-u04-l06"
+    ],
+    "assessment_id": "ma-g11-health-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g11-health-u05",
+    "course_id": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "unit_number": 5,
+    "title": "Substance Use, Community Risk, and Harm-Reduction Literacy",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.3.SU] Substance Use and Misuse — Information and Resource Seeking",
+      "Michigan HESG 2025 Grades 9-12 [12.4.SU] Substance Use and Misuse — Decision Making and Problem Solving",
+      "Michigan HESG 2025 Section 1 (content required by Michigan law)"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.3.SU",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+        "topic": "Substance Use and Misuse",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.4.SU",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 4: Decision Making and Problem Solving",
+        "topic": "Substance Use and Misuse",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "Section 1",
+        "framework": "Michigan Health Education Standards Guidelines 2025",
+        "practice": null,
+        "topic": "Content required by Michigan law",
+        "mapping_status": "unverified",
+        "note": "Section 1 (HIV instruction, CPR/AED, physiology and hygiene relating to substance use) is confirmed to exist and to be legally required; its internal numbering was not read from the source."
+      }
+    ],
+    "essential_question": "What does the evidence say actually reduces harm, and what only sounds tough?",
+    "topics": [
+      "individual risk versus population-level risk",
+      "prevention approaches with evidence behind them",
+      "harm-reduction concepts and the arguments made for and against them",
+      "policy levers: access, pricing, marketing limits, and enforcement",
+      "stigma as a barrier to treatment-seeking",
+      "evaluating a prevention campaign for accuracy and effect"
+    ],
+    "performance_task": "Evaluate two fictional community prevention campaigns against stated evidence criteria, then redesign the weaker one and state how its effect would be measured.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "course-supplied fictional campaign materials"
+    ],
+    "inclusive_adaptation": "Evaluation and redesign may be written, storyboarded, dictated, or completed on a supplied criteria template.",
+    "privacy_guard": "No personal or family substance-use history is requested. Campaign artifacts are fictional.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Unit presents harm-reduction arguments on multiple sides for analysis; guardian may review materials and set the household position.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": true,
+    "lesson_ids": [
+      "ma-g11-health-u05-l01",
+      "ma-g11-health-u05-l02",
+      "ma-g11-health-u05-l03",
+      "ma-g11-health-u05-l04",
+      "ma-g11-health-u05-l05",
+      "ma-g11-health-u05-l06"
+    ],
+    "assessment_id": "ma-g11-health-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g11-health-u06",
+    "course_id": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "unit_number": 6,
+    "title": "Advocacy: Designing a Health Promotion Project",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.6.CEH] Community and Environmental Health — Advocacy and Health Promotion"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.6.CEH",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 6: Advocacy and Health Promotion",
+        "topic": "Community and Environmental Health",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "What is the smallest change I could actually cause, and how would I know it worked?",
+    "topics": [
+      "choosing a scoped, achievable health promotion goal",
+      "audience analysis and message framing without fear appeals",
+      "accuracy, citation, and avoiding overclaim in advocacy",
+      "partners, permissions, and realistic constraints",
+      "defining a measurable outcome before starting",
+      "presenting a proposal and taking critique"
+    ],
+    "performance_task": "Design a complete health promotion project proposal — goal, audience, message, partners, constraints, and measurable outcome — for a setting the learner can actually reach. Execution is optional and guardian-approved; the proposal is what is assessed.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "guardian-approved reference sources"
+    ],
+    "inclusive_adaptation": "The proposal may be written, presented as a slide outline, spoken to an adult, or built on a supplied planning template. No public presentation or published material is required.",
+    "privacy_guard": "If the guardian approves any real-world execution, no learner photograph, voice recording, video, precise location, or contact information is published as part of it.",
+    "guardian_safety": {
+      "equipment": "None for the proposal. Any real execution requires separate guardian approval.",
+      "environment": "Indoor study space; any community component is guardian-planned and supervised.",
+      "movement_hazards": "None expected for the proposal.",
+      "sensitive_content_note": "Execution beyond the proposal is optional and must be approved and supervised by the guardian, who also decides whether anything is shared outside the household.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g11-health-u06-l01",
+      "ma-g11-health-u06-l02",
+      "ma-g11-health-u06-l03",
+      "ma-g11-health-u06-l04",
+      "ma-g11-health-u06-l05",
+      "ma-g11-health-u06-l06"
+    ],
+    "assessment_id": "ma-g11-health-u06-assessment"
+  }
+]

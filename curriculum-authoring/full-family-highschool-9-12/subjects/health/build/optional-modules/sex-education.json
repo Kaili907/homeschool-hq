@@ -1,0 +1,1045 @@
+[
+  {
+    "module_id": "ma-hs-health-sex-education-optional",
+    "title": "Sex Education (Optional, Guardian-Activated)",
+    "recommended_grade": 10,
+    "days": 6,
+    "guardian_activation_required": true,
+    "scheduled_by_default": false,
+    "counts_toward_course_days": false,
+    "required_for_completion_or_credit": false,
+    "description": "A guardian-activated Michigan HESG 2025 Section 3 module. It is never scheduled automatically, never counted in a course’s 36 days, and never required for course completion or credit. A guardian must review the materials and activate the module before any lesson is delivered.",
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.2.SE] Sex Education — Social Awareness, Relationship, and Communication Skills",
+      "Michigan HESG 2025 Grades 9-12 [12.3.SE] Sex Education — Information and Resource Seeking",
+      "Michigan HESG 2025 Grades 9-12 [12.5.SE] Sex Education — Self-Management and Goal Setting"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.2.SE",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+        "topic": "Sex Education",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.3.SE",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+        "topic": "Sex Education",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.SE",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Sex Education",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.x.SE",
+        "framework": "Michigan Health Education Standards Guidelines 2025 Section 3 (Sex Education)",
+        "practice": null,
+        "topic": "Sex Education",
+        "mapping_status": "human-review",
+        "note": "Section 3 is governed by MCL 380.1507 and MCL 380.1169. Content selection is a guardian and, in a district setting, a Sex Education Advisory Board decision; it is not settled by this authoring lane."
+      }
+    ],
+    "essential_question": "How do I find medically accurate information, understand consent and boundaries, and know where to get care?",
+    "topics": [
+      "anatomy, reproduction, and development described in medically accurate terms",
+      "consent, boundaries, and communication in intimate contexts",
+      "abstinence and risk reduction presented accurately",
+      "sexually transmitted infections including HIV: transmission, prevention, testing, and treatment",
+      "locating medically accurate sources and confidential health services",
+      "recognizing coercion, exploitation, and where to report it"
+    ],
+    "performance_task": "Build a medically accurate source-and-services reference and a consent-and-boundaries script set, using fictional scenarios only.",
+    "inclusive_adaptation": "All work may be written, typed, spoken privately to an adult, or assembled from a supplied bank. No group discussion, role-play, or presentation is required.",
+    "privacy_guard": "No sexual history, activity, orientation, identity, relationship status, or any personal disclosure is requested, recorded, or shared at any point. The learner may complete every task using supplied fictional scenarios.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Private indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Michigan law requires prior notification, the right to review all materials before instruction, and opt-out without penalty (MCL 380.1507, MCL 380.1169). This module is delivered only after a guardian reviews the materials and activates it. Declining it does not reduce, delay, or alter any course.",
+      "guardian_confirmation_required": true
+    },
+    "lessons": [
+      {
+        "schema_version": "1.0",
+        "lesson_id": "ma-hs-health-sex-education-optional-l01",
+        "course_id": "ma-hs-health-sex-education-optional",
+        "grade": 10,
+        "subject": "health",
+        "course_day": 1,
+        "unit_number": 1,
+        "unit_title": "Sex Education (Optional, Guardian-Activated)",
+        "day_in_unit": 1,
+        "title": "Launch and diagnostic: anatomy, reproduction, and development described in medically accurate terms",
+        "phase": "Launch and diagnostic",
+        "focus": "anatomy, reproduction, and development described in medically accurate terms",
+        "estimated_minutes": "35–55",
+        "standards": [
+          "Michigan HESG 2025 Grades 9-12 [12.2.SE] Sex Education — Social Awareness, Relationship, and Communication Skills",
+          "Michigan HESG 2025 Grades 9-12 [12.3.SE] Sex Education — Information and Resource Seeking",
+          "Michigan HESG 2025 Grades 9-12 [12.5.SE] Sex Education — Self-Management and Goal Setting"
+        ],
+        "standards_mapping": [
+          {
+            "code": "12.2.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.3.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.5.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.x.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 Section 3 (Sex Education)",
+            "practice": null,
+            "topic": "Sex Education",
+            "mapping_status": "human-review",
+            "note": "Section 3 is governed by MCL 380.1507 and MCL 380.1169. Content selection is a guardian and, in a district setting, a Sex Education Advisory Board decision; it is not settled by this authoring lane."
+          }
+        ],
+        "essential_question": "How do I find medically accurate information, understand consent and boundaries, and know where to get care?",
+        "learning_objectives": [
+          "Explain anatomy, reproduction, and development described in medically accurate terms accurately using current, reliable health information rather than assumption or anecdote.",
+          "Apply anatomy, reproduction, and development described in medically accurate terms inside a fictional scenario, showing the reasoning, evidence, or decision process that produced the response.",
+          "Check and revise the work on anatomy, reproduction, and development described in medically accurate terms against stated success criteria and name the next step."
+        ],
+        "success_criteria": [
+          "The learner completes the central task about anatomy, reproduction, and development described in medically accurate terms without being asked for any private disclosure.",
+          "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+          "The learner checks or revises the work and can identify a next step."
+        ],
+        "materials": [
+          "course notebook or digital equivalent",
+          "guardian-reviewed medically accurate reference sources"
+        ],
+        "lesson_flow": [
+          {
+            "segment": "Welcome and retrieval",
+            "minutes": "5–8",
+            "teacher_or_tutor_action": "Open with a short accessible prompt on “anatomy, reproduction, and development described in medically accurate terms.” Ask the learner to recall, predict, or pose a question before instruction. Use a fictional example; do not ask about the learner's own situation."
+          },
+          {
+            "segment": "Model or mini-lesson",
+            "minutes": "8–15",
+            "teacher_or_tutor_action": "Teach accurate, age-appropriate content on anatomy, reproduction, and development described in medically accurate terms. Model the health skill in play — analyzing an influence, evaluating a source, running a decision, communicating a boundary, or identifying a trusted support — and name the success criteria."
+          },
+          {
+            "segment": "Guided practice",
+            "minutes": "10–18",
+            "teacher_or_tutor_action": "Work two supported scenarios about anatomy, reproduction, and development described in medically accurate terms together. After each, ask what evidence or reasoning supports the move. Fade prompting on the second scenario."
+          },
+          {
+            "segment": "Independent application",
+            "minutes": "12–22",
+            "teacher_or_tutor_action": "Learner applies anatomy, reproduction, and development described in medically accurate terms to a new fictional scenario and records the response together with the reasoning, evidence, or decision process behind it."
+          },
+          {
+            "segment": "Exit ticket and next step",
+            "minutes": "3–7",
+            "teacher_or_tutor_action": "In one concise response, show or explain the most important idea about anatomy, reproduction, and development described in medically accurate terms, then name one check that would catch a weak claim or an unsafe step."
+          }
+        ],
+        "student_activity": "Learner applies anatomy, reproduction, and development described in medically accurate terms to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
+        "formative_check": "In one concise response, show or explain the most important idea about anatomy, reproduction, and development described in medically accurate terms, then name one check that would catch a weak claim or an unsafe step.",
+        "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+        "adaptive_tutor_routes": [
+          {
+            "signal": "prerequisite gap",
+            "action": "Return to the smallest prerequisite needed for anatomy, reproduction, and development described in medically accurate terms, model it with a concrete or text-only representation, then retry one fresh scenario."
+          },
+          {
+            "signal": "procedure without understanding",
+            "action": "Ask the learner to explain why the approach to anatomy, reproduction, and development described in medically accurate terms works before continuing."
+          },
+          {
+            "signal": "correct but low confidence",
+            "action": "Confirm the reasoning specifically, offer one varied scenario about anatomy, reproduction, and development described in medically accurate terms, and avoid unnecessary remediation."
+          },
+          {
+            "signal": "repeated error pattern",
+            "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+          },
+          {
+            "signal": "learner discloses something private",
+            "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+          },
+          {
+            "signal": "mastery evidence",
+            "action": "Require accurate independent application plus explanation on a later or different occasion before marking anatomy, reproduction, and development described in medically accurate terms mastered."
+          }
+        ],
+        "mastery_rule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+        "extension": "Apply anatomy, reproduction, and development described in medically accurate terms under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
+        "accessibility_and_accommodations": [
+          "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+          "Chunk directions into one action at a time and show a worked example or model.",
+          "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+          "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+          "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+          "Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
+          "All work may be written, typed, spoken privately to an adult, or assembled from a supplied bank. No group discussion, role-play, or presentation is required."
+        ],
+        "safety_and_privacy": [
+          "Use respectful, non-shaming language.",
+          "Allow a pause, break, or alternate response mode without treating it as failure.",
+          "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+          "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+          "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+          "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+          "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+          "No sexual history, activity, orientation, identity, relationship status, or any personal disclosure is requested, recorded, or shared at any point. The learner may complete every task using supplied fictional scenarios."
+        ],
+        "guardian_safety": {
+          "equipment": "None.",
+          "environment": "Private indoor study space.",
+          "movement_hazards": "None expected.",
+          "sensitive_content_note": "Michigan law requires prior notification, the right to review all materials before instruction, and opt-out without penalty (MCL 380.1507, MCL 380.1169). This module is delivered only after a guardian reviews the materials and activates it. Declining it does not reduce, delay, or alter any course.",
+          "guardian_confirmation_required": true
+        },
+        "media": {
+          "suggestion": "Optional diagram, source excerpt, worked example, or short clip supporting anatomy, reproduction, and development described in medically accurate terms.",
+          "required": false,
+          "fallback": "Provide the same information as readable steps, alt text, a transcript, or an adult explanation. No lesson requires media to be completed."
+        },
+        "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+        "home_connection": "Invite the learner to notice one safe, optional example of anatomy, reproduction, and development described in medically accurate terms in daily life. No purchase, account creation, photograph, recording, or private disclosure is required.",
+        "optional_guardian_activated": true,
+        "scheduled_by_default": false
+      },
+      {
+        "schema_version": "1.0",
+        "lesson_id": "ma-hs-health-sex-education-optional-l02",
+        "course_id": "ma-hs-health-sex-education-optional",
+        "grade": 10,
+        "subject": "health",
+        "course_day": 2,
+        "unit_number": 1,
+        "unit_title": "Sex Education (Optional, Guardian-Activated)",
+        "day_in_unit": 2,
+        "title": "Explicit model: consent, boundaries, and communication in intimate contexts",
+        "phase": "Explicit model",
+        "focus": "consent, boundaries, and communication in intimate contexts",
+        "estimated_minutes": "35–55",
+        "standards": [
+          "Michigan HESG 2025 Grades 9-12 [12.2.SE] Sex Education — Social Awareness, Relationship, and Communication Skills",
+          "Michigan HESG 2025 Grades 9-12 [12.3.SE] Sex Education — Information and Resource Seeking",
+          "Michigan HESG 2025 Grades 9-12 [12.5.SE] Sex Education — Self-Management and Goal Setting"
+        ],
+        "standards_mapping": [
+          {
+            "code": "12.2.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.3.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.5.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.x.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 Section 3 (Sex Education)",
+            "practice": null,
+            "topic": "Sex Education",
+            "mapping_status": "human-review",
+            "note": "Section 3 is governed by MCL 380.1507 and MCL 380.1169. Content selection is a guardian and, in a district setting, a Sex Education Advisory Board decision; it is not settled by this authoring lane."
+          }
+        ],
+        "essential_question": "How do I find medically accurate information, understand consent and boundaries, and know where to get care?",
+        "learning_objectives": [
+          "Explain consent, boundaries, and communication in intimate contexts accurately using current, reliable health information rather than assumption or anecdote.",
+          "Apply consent, boundaries, and communication in intimate contexts inside a fictional scenario, showing the reasoning, evidence, or decision process that produced the response.",
+          "Check and revise the work on consent, boundaries, and communication in intimate contexts against stated success criteria and name the next step."
+        ],
+        "success_criteria": [
+          "The learner completes the central task about consent, boundaries, and communication in intimate contexts without being asked for any private disclosure.",
+          "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+          "The learner checks or revises the work and can identify a next step."
+        ],
+        "materials": [
+          "course notebook or digital equivalent",
+          "guardian-reviewed medically accurate reference sources"
+        ],
+        "lesson_flow": [
+          {
+            "segment": "Welcome and retrieval",
+            "minutes": "5–8",
+            "teacher_or_tutor_action": "Open with a short accessible prompt on “consent, boundaries, and communication in intimate contexts.” Ask the learner to recall, predict, or pose a question before instruction. Use a fictional example; do not ask about the learner's own situation."
+          },
+          {
+            "segment": "Model or mini-lesson",
+            "minutes": "8–15",
+            "teacher_or_tutor_action": "Teach accurate, age-appropriate content on consent, boundaries, and communication in intimate contexts. Model the health skill in play — analyzing an influence, evaluating a source, running a decision, communicating a boundary, or identifying a trusted support — and name the success criteria."
+          },
+          {
+            "segment": "Guided practice",
+            "minutes": "10–18",
+            "teacher_or_tutor_action": "Work two supported scenarios about consent, boundaries, and communication in intimate contexts together. After each, ask what evidence or reasoning supports the move. Fade prompting on the second scenario."
+          },
+          {
+            "segment": "Independent application",
+            "minutes": "12–22",
+            "teacher_or_tutor_action": "Learner applies consent, boundaries, and communication in intimate contexts to a new fictional scenario and records the response together with the reasoning, evidence, or decision process behind it."
+          },
+          {
+            "segment": "Exit ticket and next step",
+            "minutes": "3–7",
+            "teacher_or_tutor_action": "In one concise response, show or explain the most important idea about consent, boundaries, and communication in intimate contexts, then name one check that would catch a weak claim or an unsafe step."
+          }
+        ],
+        "student_activity": "Learner applies consent, boundaries, and communication in intimate contexts to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
+        "formative_check": "In one concise response, show or explain the most important idea about consent, boundaries, and communication in intimate contexts, then name one check that would catch a weak claim or an unsafe step.",
+        "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+        "adaptive_tutor_routes": [
+          {
+            "signal": "prerequisite gap",
+            "action": "Return to the smallest prerequisite needed for consent, boundaries, and communication in intimate contexts, model it with a concrete or text-only representation, then retry one fresh scenario."
+          },
+          {
+            "signal": "procedure without understanding",
+            "action": "Ask the learner to explain why the approach to consent, boundaries, and communication in intimate contexts works before continuing."
+          },
+          {
+            "signal": "correct but low confidence",
+            "action": "Confirm the reasoning specifically, offer one varied scenario about consent, boundaries, and communication in intimate contexts, and avoid unnecessary remediation."
+          },
+          {
+            "signal": "repeated error pattern",
+            "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+          },
+          {
+            "signal": "learner discloses something private",
+            "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+          },
+          {
+            "signal": "mastery evidence",
+            "action": "Require accurate independent application plus explanation on a later or different occasion before marking consent, boundaries, and communication in intimate contexts mastered."
+          }
+        ],
+        "mastery_rule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+        "extension": "Apply consent, boundaries, and communication in intimate contexts under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
+        "accessibility_and_accommodations": [
+          "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+          "Chunk directions into one action at a time and show a worked example or model.",
+          "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+          "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+          "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+          "Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
+          "All work may be written, typed, spoken privately to an adult, or assembled from a supplied bank. No group discussion, role-play, or presentation is required."
+        ],
+        "safety_and_privacy": [
+          "Use respectful, non-shaming language.",
+          "Allow a pause, break, or alternate response mode without treating it as failure.",
+          "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+          "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+          "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+          "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+          "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+          "No sexual history, activity, orientation, identity, relationship status, or any personal disclosure is requested, recorded, or shared at any point. The learner may complete every task using supplied fictional scenarios."
+        ],
+        "guardian_safety": {
+          "equipment": "None.",
+          "environment": "Private indoor study space.",
+          "movement_hazards": "None expected.",
+          "sensitive_content_note": "Michigan law requires prior notification, the right to review all materials before instruction, and opt-out without penalty (MCL 380.1507, MCL 380.1169). This module is delivered only after a guardian reviews the materials and activates it. Declining it does not reduce, delay, or alter any course.",
+          "guardian_confirmation_required": true
+        },
+        "media": {
+          "suggestion": "Optional diagram, source excerpt, worked example, or short clip supporting consent, boundaries, and communication in intimate contexts.",
+          "required": false,
+          "fallback": "Provide the same information as readable steps, alt text, a transcript, or an adult explanation. No lesson requires media to be completed."
+        },
+        "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+        "home_connection": "Invite the learner to notice one safe, optional example of consent, boundaries, and communication in intimate contexts in daily life. No purchase, account creation, photograph, recording, or private disclosure is required.",
+        "optional_guardian_activated": true,
+        "scheduled_by_default": false
+      },
+      {
+        "schema_version": "1.0",
+        "lesson_id": "ma-hs-health-sex-education-optional-l03",
+        "course_id": "ma-hs-health-sex-education-optional",
+        "grade": 10,
+        "subject": "health",
+        "course_day": 3,
+        "unit_number": 1,
+        "unit_title": "Sex Education (Optional, Guardian-Activated)",
+        "day_in_unit": 3,
+        "title": "Guided practice: abstinence and risk reduction presented accurately",
+        "phase": "Guided practice",
+        "focus": "abstinence and risk reduction presented accurately",
+        "estimated_minutes": "35–55",
+        "standards": [
+          "Michigan HESG 2025 Grades 9-12 [12.2.SE] Sex Education — Social Awareness, Relationship, and Communication Skills",
+          "Michigan HESG 2025 Grades 9-12 [12.3.SE] Sex Education — Information and Resource Seeking",
+          "Michigan HESG 2025 Grades 9-12 [12.5.SE] Sex Education — Self-Management and Goal Setting"
+        ],
+        "standards_mapping": [
+          {
+            "code": "12.2.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.3.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.5.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.x.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 Section 3 (Sex Education)",
+            "practice": null,
+            "topic": "Sex Education",
+            "mapping_status": "human-review",
+            "note": "Section 3 is governed by MCL 380.1507 and MCL 380.1169. Content selection is a guardian and, in a district setting, a Sex Education Advisory Board decision; it is not settled by this authoring lane."
+          }
+        ],
+        "essential_question": "How do I find medically accurate information, understand consent and boundaries, and know where to get care?",
+        "learning_objectives": [
+          "Explain abstinence and risk reduction presented accurately accurately using current, reliable health information rather than assumption or anecdote.",
+          "Apply abstinence and risk reduction presented accurately inside a fictional scenario, showing the reasoning, evidence, or decision process that produced the response.",
+          "Check and revise the work on abstinence and risk reduction presented accurately against stated success criteria and name the next step."
+        ],
+        "success_criteria": [
+          "The learner completes the central task about abstinence and risk reduction presented accurately without being asked for any private disclosure.",
+          "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+          "The learner checks or revises the work and can identify a next step."
+        ],
+        "materials": [
+          "course notebook or digital equivalent",
+          "guardian-reviewed medically accurate reference sources"
+        ],
+        "lesson_flow": [
+          {
+            "segment": "Welcome and retrieval",
+            "minutes": "5–8",
+            "teacher_or_tutor_action": "Open with a short accessible prompt on “abstinence and risk reduction presented accurately.” Ask the learner to recall, predict, or pose a question before instruction. Use a fictional example; do not ask about the learner's own situation."
+          },
+          {
+            "segment": "Model or mini-lesson",
+            "minutes": "8–15",
+            "teacher_or_tutor_action": "Teach accurate, age-appropriate content on abstinence and risk reduction presented accurately. Model the health skill in play — analyzing an influence, evaluating a source, running a decision, communicating a boundary, or identifying a trusted support — and name the success criteria."
+          },
+          {
+            "segment": "Guided practice",
+            "minutes": "10–18",
+            "teacher_or_tutor_action": "Work two supported scenarios about abstinence and risk reduction presented accurately together. After each, ask what evidence or reasoning supports the move. Fade prompting on the second scenario."
+          },
+          {
+            "segment": "Independent application",
+            "minutes": "12–22",
+            "teacher_or_tutor_action": "Learner applies abstinence and risk reduction presented accurately to a new fictional scenario and records the response together with the reasoning, evidence, or decision process behind it."
+          },
+          {
+            "segment": "Exit ticket and next step",
+            "minutes": "3–7",
+            "teacher_or_tutor_action": "In one concise response, show or explain the most important idea about abstinence and risk reduction presented accurately, then name one check that would catch a weak claim or an unsafe step."
+          }
+        ],
+        "student_activity": "Learner applies abstinence and risk reduction presented accurately to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
+        "formative_check": "In one concise response, show or explain the most important idea about abstinence and risk reduction presented accurately, then name one check that would catch a weak claim or an unsafe step.",
+        "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+        "adaptive_tutor_routes": [
+          {
+            "signal": "prerequisite gap",
+            "action": "Return to the smallest prerequisite needed for abstinence and risk reduction presented accurately, model it with a concrete or text-only representation, then retry one fresh scenario."
+          },
+          {
+            "signal": "procedure without understanding",
+            "action": "Ask the learner to explain why the approach to abstinence and risk reduction presented accurately works before continuing."
+          },
+          {
+            "signal": "correct but low confidence",
+            "action": "Confirm the reasoning specifically, offer one varied scenario about abstinence and risk reduction presented accurately, and avoid unnecessary remediation."
+          },
+          {
+            "signal": "repeated error pattern",
+            "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+          },
+          {
+            "signal": "learner discloses something private",
+            "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+          },
+          {
+            "signal": "mastery evidence",
+            "action": "Require accurate independent application plus explanation on a later or different occasion before marking abstinence and risk reduction presented accurately mastered."
+          }
+        ],
+        "mastery_rule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+        "extension": "Apply abstinence and risk reduction presented accurately under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
+        "accessibility_and_accommodations": [
+          "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+          "Chunk directions into one action at a time and show a worked example or model.",
+          "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+          "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+          "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+          "Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
+          "All work may be written, typed, spoken privately to an adult, or assembled from a supplied bank. No group discussion, role-play, or presentation is required."
+        ],
+        "safety_and_privacy": [
+          "Use respectful, non-shaming language.",
+          "Allow a pause, break, or alternate response mode without treating it as failure.",
+          "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+          "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+          "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+          "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+          "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+          "No sexual history, activity, orientation, identity, relationship status, or any personal disclosure is requested, recorded, or shared at any point. The learner may complete every task using supplied fictional scenarios."
+        ],
+        "guardian_safety": {
+          "equipment": "None.",
+          "environment": "Private indoor study space.",
+          "movement_hazards": "None expected.",
+          "sensitive_content_note": "Michigan law requires prior notification, the right to review all materials before instruction, and opt-out without penalty (MCL 380.1507, MCL 380.1169). This module is delivered only after a guardian reviews the materials and activates it. Declining it does not reduce, delay, or alter any course.",
+          "guardian_confirmation_required": true
+        },
+        "media": {
+          "suggestion": "Optional diagram, source excerpt, worked example, or short clip supporting abstinence and risk reduction presented accurately.",
+          "required": false,
+          "fallback": "Provide the same information as readable steps, alt text, a transcript, or an adult explanation. No lesson requires media to be completed."
+        },
+        "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+        "home_connection": "Invite the learner to notice one safe, optional example of abstinence and risk reduction presented accurately in daily life. No purchase, account creation, photograph, recording, or private disclosure is required.",
+        "optional_guardian_activated": true,
+        "scheduled_by_default": false
+      },
+      {
+        "schema_version": "1.0",
+        "lesson_id": "ma-hs-health-sex-education-optional-l04",
+        "course_id": "ma-hs-health-sex-education-optional",
+        "grade": 10,
+        "subject": "health",
+        "course_day": 4,
+        "unit_number": 1,
+        "unit_title": "Sex Education (Optional, Guardian-Activated)",
+        "day_in_unit": 4,
+        "title": "Application or project: sexually transmitted infections including HIV: transmission, prevention, testing, and treatment",
+        "phase": "Application or project",
+        "focus": "sexually transmitted infections including HIV: transmission, prevention, testing, and treatment",
+        "estimated_minutes": "35–55",
+        "standards": [
+          "Michigan HESG 2025 Grades 9-12 [12.2.SE] Sex Education — Social Awareness, Relationship, and Communication Skills",
+          "Michigan HESG 2025 Grades 9-12 [12.3.SE] Sex Education — Information and Resource Seeking",
+          "Michigan HESG 2025 Grades 9-12 [12.5.SE] Sex Education — Self-Management and Goal Setting"
+        ],
+        "standards_mapping": [
+          {
+            "code": "12.2.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.3.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.5.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.x.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 Section 3 (Sex Education)",
+            "practice": null,
+            "topic": "Sex Education",
+            "mapping_status": "human-review",
+            "note": "Section 3 is governed by MCL 380.1507 and MCL 380.1169. Content selection is a guardian and, in a district setting, a Sex Education Advisory Board decision; it is not settled by this authoring lane."
+          }
+        ],
+        "essential_question": "How do I find medically accurate information, understand consent and boundaries, and know where to get care?",
+        "learning_objectives": [
+          "Explain sexually transmitted infections including HIV: transmission, prevention, testing, and treatment accurately using current, reliable health information rather than assumption or anecdote.",
+          "Apply sexually transmitted infections including HIV: transmission, prevention, testing, and treatment inside a fictional scenario, showing the reasoning, evidence, or decision process that produced the response.",
+          "Check and revise the work on sexually transmitted infections including HIV: transmission, prevention, testing, and treatment against stated success criteria and name the next step."
+        ],
+        "success_criteria": [
+          "The learner completes the central task about sexually transmitted infections including HIV: transmission, prevention, testing, and treatment without being asked for any private disclosure.",
+          "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+          "The learner checks or revises the work and can identify a next step."
+        ],
+        "materials": [
+          "course notebook or digital equivalent",
+          "guardian-reviewed medically accurate reference sources"
+        ],
+        "lesson_flow": [
+          {
+            "segment": "Welcome and retrieval",
+            "minutes": "5–8",
+            "teacher_or_tutor_action": "Open with a short accessible prompt on “sexually transmitted infections including HIV: transmission, prevention, testing, and treatment.” Ask the learner to recall, predict, or pose a question before instruction. Use a fictional example; do not ask about the learner's own situation."
+          },
+          {
+            "segment": "Model or mini-lesson",
+            "minutes": "8–15",
+            "teacher_or_tutor_action": "Teach accurate, age-appropriate content on sexually transmitted infections including HIV: transmission, prevention, testing, and treatment. Model the health skill in play — analyzing an influence, evaluating a source, running a decision, communicating a boundary, or identifying a trusted support — and name the success criteria."
+          },
+          {
+            "segment": "Guided practice",
+            "minutes": "10–18",
+            "teacher_or_tutor_action": "Work two supported scenarios about sexually transmitted infections including HIV: transmission, prevention, testing, and treatment together. After each, ask what evidence or reasoning supports the move. Fade prompting on the second scenario."
+          },
+          {
+            "segment": "Independent application",
+            "minutes": "12–22",
+            "teacher_or_tutor_action": "Learner applies sexually transmitted infections including HIV: transmission, prevention, testing, and treatment to a new fictional scenario and records the response together with the reasoning, evidence, or decision process behind it."
+          },
+          {
+            "segment": "Exit ticket and next step",
+            "minutes": "3–7",
+            "teacher_or_tutor_action": "In one concise response, show or explain the most important idea about sexually transmitted infections including HIV: transmission, prevention, testing, and treatment, then name one check that would catch a weak claim or an unsafe step."
+          }
+        ],
+        "student_activity": "Learner applies sexually transmitted infections including HIV: transmission, prevention, testing, and treatment to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
+        "formative_check": "In one concise response, show or explain the most important idea about sexually transmitted infections including HIV: transmission, prevention, testing, and treatment, then name one check that would catch a weak claim or an unsafe step.",
+        "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+        "adaptive_tutor_routes": [
+          {
+            "signal": "prerequisite gap",
+            "action": "Return to the smallest prerequisite needed for sexually transmitted infections including HIV: transmission, prevention, testing, and treatment, model it with a concrete or text-only representation, then retry one fresh scenario."
+          },
+          {
+            "signal": "procedure without understanding",
+            "action": "Ask the learner to explain why the approach to sexually transmitted infections including HIV: transmission, prevention, testing, and treatment works before continuing."
+          },
+          {
+            "signal": "correct but low confidence",
+            "action": "Confirm the reasoning specifically, offer one varied scenario about sexually transmitted infections including HIV: transmission, prevention, testing, and treatment, and avoid unnecessary remediation."
+          },
+          {
+            "signal": "repeated error pattern",
+            "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+          },
+          {
+            "signal": "learner discloses something private",
+            "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+          },
+          {
+            "signal": "mastery evidence",
+            "action": "Require accurate independent application plus explanation on a later or different occasion before marking sexually transmitted infections including HIV: transmission, prevention, testing, and treatment mastered."
+          }
+        ],
+        "mastery_rule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+        "extension": "Apply sexually transmitted infections including HIV: transmission, prevention, testing, and treatment under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
+        "accessibility_and_accommodations": [
+          "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+          "Chunk directions into one action at a time and show a worked example or model.",
+          "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+          "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+          "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+          "Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
+          "All work may be written, typed, spoken privately to an adult, or assembled from a supplied bank. No group discussion, role-play, or presentation is required."
+        ],
+        "safety_and_privacy": [
+          "Use respectful, non-shaming language.",
+          "Allow a pause, break, or alternate response mode without treating it as failure.",
+          "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+          "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+          "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+          "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+          "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+          "No sexual history, activity, orientation, identity, relationship status, or any personal disclosure is requested, recorded, or shared at any point. The learner may complete every task using supplied fictional scenarios."
+        ],
+        "guardian_safety": {
+          "equipment": "None.",
+          "environment": "Private indoor study space.",
+          "movement_hazards": "None expected.",
+          "sensitive_content_note": "Michigan law requires prior notification, the right to review all materials before instruction, and opt-out without penalty (MCL 380.1507, MCL 380.1169). This module is delivered only after a guardian reviews the materials and activates it. Declining it does not reduce, delay, or alter any course.",
+          "guardian_confirmation_required": true
+        },
+        "media": {
+          "suggestion": "Optional diagram, source excerpt, worked example, or short clip supporting sexually transmitted infections including HIV: transmission, prevention, testing, and treatment.",
+          "required": false,
+          "fallback": "Provide the same information as readable steps, alt text, a transcript, or an adult explanation. No lesson requires media to be completed."
+        },
+        "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+        "home_connection": "Invite the learner to notice one safe, optional example of sexually transmitted infections including HIV: transmission, prevention, testing, and treatment in daily life. No purchase, account creation, photograph, recording, or private disclosure is required.",
+        "optional_guardian_activated": true,
+        "scheduled_by_default": false
+      },
+      {
+        "schema_version": "1.0",
+        "lesson_id": "ma-hs-health-sex-education-optional-l05",
+        "course_id": "ma-hs-health-sex-education-optional",
+        "grade": 10,
+        "subject": "health",
+        "course_day": 5,
+        "unit_number": 1,
+        "unit_title": "Sex Education (Optional, Guardian-Activated)",
+        "day_in_unit": 5,
+        "title": "Mastery check: locating medically accurate sources and confidential health services",
+        "phase": "Mastery check",
+        "focus": "locating medically accurate sources and confidential health services",
+        "estimated_minutes": "35–55",
+        "standards": [
+          "Michigan HESG 2025 Grades 9-12 [12.2.SE] Sex Education — Social Awareness, Relationship, and Communication Skills",
+          "Michigan HESG 2025 Grades 9-12 [12.3.SE] Sex Education — Information and Resource Seeking",
+          "Michigan HESG 2025 Grades 9-12 [12.5.SE] Sex Education — Self-Management and Goal Setting"
+        ],
+        "standards_mapping": [
+          {
+            "code": "12.2.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.3.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.5.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.x.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 Section 3 (Sex Education)",
+            "practice": null,
+            "topic": "Sex Education",
+            "mapping_status": "human-review",
+            "note": "Section 3 is governed by MCL 380.1507 and MCL 380.1169. Content selection is a guardian and, in a district setting, a Sex Education Advisory Board decision; it is not settled by this authoring lane."
+          }
+        ],
+        "essential_question": "How do I find medically accurate information, understand consent and boundaries, and know where to get care?",
+        "learning_objectives": [
+          "Explain locating medically accurate sources and confidential health services accurately using current, reliable health information rather than assumption or anecdote.",
+          "Apply locating medically accurate sources and confidential health services inside a fictional scenario, showing the reasoning, evidence, or decision process that produced the response.",
+          "Check and revise the work on locating medically accurate sources and confidential health services against stated success criteria and name the next step."
+        ],
+        "success_criteria": [
+          "The learner completes the central task about locating medically accurate sources and confidential health services without being asked for any private disclosure.",
+          "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+          "The learner checks or revises the work and can identify a next step."
+        ],
+        "materials": [
+          "course notebook or digital equivalent",
+          "guardian-reviewed medically accurate reference sources"
+        ],
+        "lesson_flow": [
+          {
+            "segment": "Welcome and retrieval",
+            "minutes": "5–8",
+            "teacher_or_tutor_action": "Open with a short accessible prompt on “locating medically accurate sources and confidential health services.” Ask the learner to recall, predict, or pose a question before instruction. Use a fictional example; do not ask about the learner's own situation."
+          },
+          {
+            "segment": "Model or mini-lesson",
+            "minutes": "8–15",
+            "teacher_or_tutor_action": "Teach accurate, age-appropriate content on locating medically accurate sources and confidential health services. Model the health skill in play — analyzing an influence, evaluating a source, running a decision, communicating a boundary, or identifying a trusted support — and name the success criteria."
+          },
+          {
+            "segment": "Guided practice",
+            "minutes": "10–18",
+            "teacher_or_tutor_action": "Work two supported scenarios about locating medically accurate sources and confidential health services together. After each, ask what evidence or reasoning supports the move. Fade prompting on the second scenario."
+          },
+          {
+            "segment": "Independent application",
+            "minutes": "12–22",
+            "teacher_or_tutor_action": "Learner applies locating medically accurate sources and confidential health services to a new fictional scenario and records the response together with the reasoning, evidence, or decision process behind it."
+          },
+          {
+            "segment": "Exit ticket and next step",
+            "minutes": "3–7",
+            "teacher_or_tutor_action": "In one concise response, show or explain the most important idea about locating medically accurate sources and confidential health services, then name one check that would catch a weak claim or an unsafe step."
+          }
+        ],
+        "student_activity": "Learner applies locating medically accurate sources and confidential health services to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
+        "formative_check": "In one concise response, show or explain the most important idea about locating medically accurate sources and confidential health services, then name one check that would catch a weak claim or an unsafe step.",
+        "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+        "adaptive_tutor_routes": [
+          {
+            "signal": "prerequisite gap",
+            "action": "Return to the smallest prerequisite needed for locating medically accurate sources and confidential health services, model it with a concrete or text-only representation, then retry one fresh scenario."
+          },
+          {
+            "signal": "procedure without understanding",
+            "action": "Ask the learner to explain why the approach to locating medically accurate sources and confidential health services works before continuing."
+          },
+          {
+            "signal": "correct but low confidence",
+            "action": "Confirm the reasoning specifically, offer one varied scenario about locating medically accurate sources and confidential health services, and avoid unnecessary remediation."
+          },
+          {
+            "signal": "repeated error pattern",
+            "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+          },
+          {
+            "signal": "learner discloses something private",
+            "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+          },
+          {
+            "signal": "mastery evidence",
+            "action": "Require accurate independent application plus explanation on a later or different occasion before marking locating medically accurate sources and confidential health services mastered."
+          }
+        ],
+        "mastery_rule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+        "extension": "Apply locating medically accurate sources and confidential health services under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
+        "accessibility_and_accommodations": [
+          "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+          "Chunk directions into one action at a time and show a worked example or model.",
+          "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+          "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+          "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+          "Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
+          "All work may be written, typed, spoken privately to an adult, or assembled from a supplied bank. No group discussion, role-play, or presentation is required."
+        ],
+        "safety_and_privacy": [
+          "Use respectful, non-shaming language.",
+          "Allow a pause, break, or alternate response mode without treating it as failure.",
+          "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+          "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+          "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+          "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+          "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+          "No sexual history, activity, orientation, identity, relationship status, or any personal disclosure is requested, recorded, or shared at any point. The learner may complete every task using supplied fictional scenarios."
+        ],
+        "guardian_safety": {
+          "equipment": "None.",
+          "environment": "Private indoor study space.",
+          "movement_hazards": "None expected.",
+          "sensitive_content_note": "Michigan law requires prior notification, the right to review all materials before instruction, and opt-out without penalty (MCL 380.1507, MCL 380.1169). This module is delivered only after a guardian reviews the materials and activates it. Declining it does not reduce, delay, or alter any course.",
+          "guardian_confirmation_required": true
+        },
+        "media": {
+          "suggestion": "Optional diagram, source excerpt, worked example, or short clip supporting locating medically accurate sources and confidential health services.",
+          "required": false,
+          "fallback": "Provide the same information as readable steps, alt text, a transcript, or an adult explanation. No lesson requires media to be completed."
+        },
+        "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+        "home_connection": "Invite the learner to notice one safe, optional example of locating medically accurate sources and confidential health services in daily life. No purchase, account creation, photograph, recording, or private disclosure is required.",
+        "optional_guardian_activated": true,
+        "scheduled_by_default": false
+      },
+      {
+        "schema_version": "1.0",
+        "lesson_id": "ma-hs-health-sex-education-optional-l06",
+        "course_id": "ma-hs-health-sex-education-optional",
+        "grade": 10,
+        "subject": "health",
+        "course_day": 6,
+        "unit_number": 1,
+        "unit_title": "Sex Education (Optional, Guardian-Activated)",
+        "day_in_unit": 6,
+        "title": "Correction and reflection: recognizing coercion, exploitation, and where to report it",
+        "phase": "Correction and reflection",
+        "focus": "recognizing coercion, exploitation, and where to report it",
+        "estimated_minutes": "35–55",
+        "standards": [
+          "Michigan HESG 2025 Grades 9-12 [12.2.SE] Sex Education — Social Awareness, Relationship, and Communication Skills",
+          "Michigan HESG 2025 Grades 9-12 [12.3.SE] Sex Education — Information and Resource Seeking",
+          "Michigan HESG 2025 Grades 9-12 [12.5.SE] Sex Education — Self-Management and Goal Setting"
+        ],
+        "standards_mapping": [
+          {
+            "code": "12.2.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.3.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.5.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+            "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+            "topic": "Sex Education",
+            "mapping_status": "canonical",
+            "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+          },
+          {
+            "code": "12.x.SE",
+            "framework": "Michigan Health Education Standards Guidelines 2025 Section 3 (Sex Education)",
+            "practice": null,
+            "topic": "Sex Education",
+            "mapping_status": "human-review",
+            "note": "Section 3 is governed by MCL 380.1507 and MCL 380.1169. Content selection is a guardian and, in a district setting, a Sex Education Advisory Board decision; it is not settled by this authoring lane."
+          }
+        ],
+        "essential_question": "How do I find medically accurate information, understand consent and boundaries, and know where to get care?",
+        "learning_objectives": [
+          "Explain recognizing coercion, exploitation, and where to report it accurately using current, reliable health information rather than assumption or anecdote.",
+          "Apply recognizing coercion, exploitation, and where to report it inside a fictional scenario, showing the reasoning, evidence, or decision process that produced the response.",
+          "Check and revise the work on recognizing coercion, exploitation, and where to report it against stated success criteria and name the next step."
+        ],
+        "success_criteria": [
+          "The learner completes the central task about recognizing coercion, exploitation, and where to report it without being asked for any private disclosure.",
+          "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+          "The learner checks or revises the work and can identify a next step."
+        ],
+        "materials": [
+          "course notebook or digital equivalent",
+          "guardian-reviewed medically accurate reference sources"
+        ],
+        "lesson_flow": [
+          {
+            "segment": "Welcome and retrieval",
+            "minutes": "5–8",
+            "teacher_or_tutor_action": "Open with a short accessible prompt on “recognizing coercion, exploitation, and where to report it.” Ask the learner to recall, predict, or pose a question before instruction. Use a fictional example; do not ask about the learner's own situation."
+          },
+          {
+            "segment": "Model or mini-lesson",
+            "minutes": "8–15",
+            "teacher_or_tutor_action": "Teach accurate, age-appropriate content on recognizing coercion, exploitation, and where to report it. Model the health skill in play — analyzing an influence, evaluating a source, running a decision, communicating a boundary, or identifying a trusted support — and name the success criteria."
+          },
+          {
+            "segment": "Guided practice",
+            "minutes": "10–18",
+            "teacher_or_tutor_action": "Work two supported scenarios about recognizing coercion, exploitation, and where to report it together. After each, ask what evidence or reasoning supports the move. Fade prompting on the second scenario."
+          },
+          {
+            "segment": "Independent application",
+            "minutes": "12–22",
+            "teacher_or_tutor_action": "Learner applies recognizing coercion, exploitation, and where to report it to a new fictional scenario and records the response together with the reasoning, evidence, or decision process behind it."
+          },
+          {
+            "segment": "Exit ticket and next step",
+            "minutes": "3–7",
+            "teacher_or_tutor_action": "In one concise response, show or explain the most important idea about recognizing coercion, exploitation, and where to report it, then name one check that would catch a weak claim or an unsafe step."
+          }
+        ],
+        "student_activity": "Learner applies recognizing coercion, exploitation, and where to report it to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
+        "formative_check": "In one concise response, show or explain the most important idea about recognizing coercion, exploitation, and where to report it, then name one check that would catch a weak claim or an unsafe step.",
+        "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+        "adaptive_tutor_routes": [
+          {
+            "signal": "prerequisite gap",
+            "action": "Return to the smallest prerequisite needed for recognizing coercion, exploitation, and where to report it, model it with a concrete or text-only representation, then retry one fresh scenario."
+          },
+          {
+            "signal": "procedure without understanding",
+            "action": "Ask the learner to explain why the approach to recognizing coercion, exploitation, and where to report it works before continuing."
+          },
+          {
+            "signal": "correct but low confidence",
+            "action": "Confirm the reasoning specifically, offer one varied scenario about recognizing coercion, exploitation, and where to report it, and avoid unnecessary remediation."
+          },
+          {
+            "signal": "repeated error pattern",
+            "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+          },
+          {
+            "signal": "learner discloses something private",
+            "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+          },
+          {
+            "signal": "mastery evidence",
+            "action": "Require accurate independent application plus explanation on a later or different occasion before marking recognizing coercion, exploitation, and where to report it mastered."
+          }
+        ],
+        "mastery_rule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+        "extension": "Apply recognizing coercion, exploitation, and where to report it under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
+        "accessibility_and_accommodations": [
+          "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+          "Chunk directions into one action at a time and show a worked example or model.",
+          "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+          "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+          "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+          "Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
+          "All work may be written, typed, spoken privately to an adult, or assembled from a supplied bank. No group discussion, role-play, or presentation is required."
+        ],
+        "safety_and_privacy": [
+          "Use respectful, non-shaming language.",
+          "Allow a pause, break, or alternate response mode without treating it as failure.",
+          "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+          "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+          "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+          "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+          "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+          "No sexual history, activity, orientation, identity, relationship status, or any personal disclosure is requested, recorded, or shared at any point. The learner may complete every task using supplied fictional scenarios."
+        ],
+        "guardian_safety": {
+          "equipment": "None.",
+          "environment": "Private indoor study space.",
+          "movement_hazards": "None expected.",
+          "sensitive_content_note": "Michigan law requires prior notification, the right to review all materials before instruction, and opt-out without penalty (MCL 380.1507, MCL 380.1169). This module is delivered only after a guardian reviews the materials and activates it. Declining it does not reduce, delay, or alter any course.",
+          "guardian_confirmation_required": true
+        },
+        "media": {
+          "suggestion": "Optional diagram, source excerpt, worked example, or short clip supporting recognizing coercion, exploitation, and where to report it.",
+          "required": false,
+          "fallback": "Provide the same information as readable steps, alt text, a transcript, or an adult explanation. No lesson requires media to be completed."
+        },
+        "parent_or_guardian_visibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+        "home_connection": "Invite the learner to notice one safe, optional example of recognizing coercion, exploitation, and where to report it in daily life. No purchase, account creation, photograph, recording, or private disclosure is required.",
+        "optional_guardian_activated": true,
+        "scheduled_by_default": false
+      }
+    ]
+  }
+]
