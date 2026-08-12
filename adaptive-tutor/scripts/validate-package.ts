@@ -16,6 +16,7 @@ import {
 } from "../examples/index.js";
 import { narrationFixture } from "../examples/narration.fixture.js";
 import { findUnauthorizedSubjectPackageFiles } from "./subject-package-guard.js";
+import { isAuthenticationIntegrationPath } from "./platform-boundary.js";
 
 interface CheckResult {
   name: string;
@@ -68,11 +69,12 @@ const forbiddenPatterns = [
   /^supabase\//,
   /^netlify\//,
   /^\.github\//,
-  /auth/i,
   /database/i,
   /progress-sync/i,
 ];
-const forbiddenMatches = relativeFiles.filter((file) => forbiddenPatterns.some((pattern) => pattern.test(file)));
+const forbiddenMatches = relativeFiles.filter(
+  (file) => isAuthenticationIntegrationPath(file) || forbiddenPatterns.some((pattern) => pattern.test(file)),
+);
 add("platform-boundary", forbiddenMatches.length === 0, forbiddenMatches.length === 0 ? "No GitHub, Supabase, Netlify, database, authentication, or progress-sync files." : forbiddenMatches.join(", "));
 
 const unauthorizedSubjectPackageMatches = findUnauthorizedSubjectPackageFiles(relativeFiles);
