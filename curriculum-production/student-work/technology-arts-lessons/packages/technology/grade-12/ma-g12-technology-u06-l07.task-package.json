@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g12-technology-u06-l07",
+  "unit_id": "ma-g12-technology-u06",
+  "source_course_id": "ma-g12-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 12,
+  "grade_dir": "grade-12",
+  "unit_number": 6,
+  "unit_title": "Capstone Review, Defense, and Transition",
+  "day_in_unit": 7,
+  "course_day": 43,
+  "lesson_title": "Investigation or close reading: capstone review, defense, and transition",
+  "phase": "Investigation or close reading",
+  "work_mode": "INVESTIGATE",
+  "focus": "capstone review, defense, and transition",
+  "task_type": "digital_citizenship_and_safety",
+  "task_label": "Digital citizenship and safety — Investigation",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "60–90",
+  "standards": [
+    "Michigan Computer Science: Impacts of Computing",
+    "Algorithms and Programming"
+  ],
+  "essential_question": "What does it mean to defend your own work honestly, including its limits?",
+  "learning_objectives": [
+    "Gather and analyse evidence about capstone review, defense, and transition and record a defensible interpretation.",
+    "Communicate understanding of capstone review, defense, and transition using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on capstone review, defense, and transition against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on capstone review, defense, and transition.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, runtime, and version-control tool",
+    "project milestone plan, test log, and accessibility checklist"
+  ],
+  "task_brief": "Day 7 of \"Capstone Review, Defense, and Transition\" (unit 6, grade 12) is an investigation on capstone review, defense, and transition. It is one step inside the unit — not the whole unit project — and takes about 60–90 minutes. The unit is working toward: Defend the capstone in a chosen private or public mode with complete documentation, a response to independent review, and a maintenance and transition plan. Today's work contributes to that by handling capstone review, defense, and transition at the investigation or close reading stage, against the unit's wider topics of evidence assembly and documentation, independent review and critique response, limitations and future work, and maintenance security and sunset planning. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Investigate a prepared artifact, dataset, or system description involving capstone review, defense, and transition that you did not build. Work out what it does before deciding whether it is any good: trace its behaviour on two inputs, document the actual outputs, and write a plain-language description of its logic. Then evaluate it — name one specific strength and one specific weakness, each tied to a step you traced, and propose one concrete change with the reason it would help. Evaluate only artifacts provided for this purpose; do not probe, scan, or attempt access to any live or third-party system. Anchor today's work inside its unit: this session's evidence is about capstone review, defense, and transition, and it belongs to \"Capstone Review, Defense, and Transition\", which also covers separate topics such as evidence assembly and documentation. Close out with this check before you stop: State your interpretation of capstone review, defense, and transition and the specific evidence that would change it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on capstone review, defense, and transition., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Gather and analyse evidence about capstone review, defense, and transition and record a defensible interpretation.",
+    "Produce the deliverable for an investigation: Two-input behaviour trace, plain-language logic description, a strength/weakness pair tied to traced steps, and one proposed change.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Two-input behaviour trace, plain-language logic description, a strength/weakness pair tied to traced steps, and one proposed change.",
+  "test_or_check_criteria": [
+    "The artifact's behaviour is traced on two inputs with actual outputs documented.",
+    "A plain-language description of the logic is written before any judgement of quality.",
+    "One specific strength and one specific weakness are each tied to a traced step.",
+    "A proposed change is concrete and carries a stated reason it would help.",
+    "Only artifacts supplied for this task were examined; no live, third-party, or production system was probed, scanned, or accessed."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Any model, source, or artifact under study is supplied in an accessible parallel form: text alternative or transcript, described version, and a tactile or enlarged rendering where the original is visual. The learner is never required to perceive the source in one specific channel to analyse it.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting capstone review, defense, and transition.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for capstone review, defense, and transition follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for capstone review, defense, and transition, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to capstone review, defense, and transition works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of capstone review, defense, and transition, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking capstone review, defense, and transition mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply capstone review, defense, and transition under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on capstone review, defense, and transition rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Defend the capstone in a chosen private or public mode with complete documentation, a response to independent review, and a maintenance and transition plan.",
+    "topics": [
+      "evidence assembly and documentation",
+      "independent review and critique response",
+      "limitations and future work",
+      "maintenance security and sunset planning",
+      "presentation in a chosen private or public mode",
+      "pathways portfolio and transition"
+    ],
+    "essential_question": "What does it mean to defend your own work honestly, including its limits?",
+    "assessment_id": "ma-g12-technology-u06-assessment"
+  }
+}

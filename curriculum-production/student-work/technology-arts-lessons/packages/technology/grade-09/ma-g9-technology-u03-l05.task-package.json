@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g9-technology-u03-l05",
+  "unit_id": "ma-g9-technology-u03",
+  "source_course_id": "ma-g9-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 9,
+  "grade_dir": "grade-09",
+  "unit_number": 3,
+  "unit_title": "Debugging, Testing, and Version Control",
+  "day_in_unit": 5,
+  "course_day": 17,
+  "lesson_title": "Mastery check: debugging, testing, and version control",
+  "phase": "Mastery check",
+  "work_mode": "DEMONSTRATE",
+  "focus": "debugging, testing, and version control",
+  "task_type": "debugging_and_testing",
+  "task_label": "Debugging and testing — Mastery demonstration",
+  "scoring_stance": "SUMMATIVE",
+  "estimated_minutes": "45–75",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming"
+  ],
+  "essential_question": "Why does correct-looking code fail, and what evidence proves it is actually fixed?",
+  "learning_objectives": [
+    "Demonstrate current mastery across debugging, testing, and version control, showing process or evidence for each response.",
+    "Communicate understanding of debugging, testing, and version control using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on debugging, testing, and version control against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on debugging, testing, and version control.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, runtime, and version-control tool",
+    "supplied defective sample programs; offline trace route available"
+  ],
+  "task_brief": "Day 5 of \"Debugging, Testing, and Version Control\" (unit 3, grade 9) is a mastery demonstration on debugging, testing, and version control. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Repair a supplied defective program and deliver a commit history, a defect log, a failing test that reproduces the bug, and a verified fix. Today's work contributes to that by handling debugging, testing, and version control at the mastery check stage, against the unit's wider topics of defect classes and error messages, reading traces and diagnostic output, systematic debugging strategy, and version control commits and history. This session produces graded evidence of record and must be completed independently.",
+  "primary_task": "Demonstrate debugging, testing, and version control independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen debugging, testing, and version control could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. Anchor today's work inside its unit: this session's evidence is about debugging, testing, and version control, and it belongs to \"Debugging, Testing, and Version Control\", which also covers separate topics such as defect classes and error messages. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on debugging, testing, and version control., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Demonstrate current mastery across debugging, testing, and version control, showing process or evidence for each response.",
+    "Produce the deliverable for a mastery demonstration: Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation.",
+  "test_or_check_criteria": [
+    "The solution is complete and correct with no scaffold, prompt, or worked example in view.",
+    "Expected results were stated first, then at least two cases including a boundary case were run with actual against expected shown.",
+    "The written explanation is self-contained enough for a reader unfamiliar with the topic to follow each decision.",
+    "The submission is the student's own work; assistance did not produce any graded part of it.",
+    "No real credential, real personal data, or live external system appears anywhere."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting debugging, testing, and version control.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for debugging, testing, and version control follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for debugging, testing, and version control, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to debugging, testing, and version control works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of debugging, testing, and version control, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking debugging, testing, and version control mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply debugging, testing, and version control under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on debugging, testing, and version control rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Repair a supplied defective program and deliver a commit history, a defect log, a failing test that reproduces the bug, and a verified fix.",
+    "topics": [
+      "defect classes and error messages",
+      "reading traces and diagnostic output",
+      "systematic debugging strategy",
+      "version control commits and history",
+      "test case design and edge cases",
+      "assertions and defensive input handling"
+    ],
+    "essential_question": "Why does correct-looking code fail, and what evidence proves it is actually fixed?",
+    "assessment_id": "ma-g9-technology-u03-assessment"
+  }
+}

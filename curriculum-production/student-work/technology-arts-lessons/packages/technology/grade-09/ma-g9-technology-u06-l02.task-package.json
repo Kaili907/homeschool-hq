@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g9-technology-u06-l02",
+  "unit_id": "ma-g9-technology-u06",
+  "source_course_id": "ma-g9-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 9,
+  "grade_dir": "grade-09",
+  "unit_number": 6,
+  "unit_title": "Foundations Project and Impact Review",
+  "day_in_unit": 2,
+  "course_day": 32,
+  "lesson_title": "Explicit model: version control and iterative build history",
+  "phase": "Explicit model",
+  "work_mode": "MODEL",
+  "focus": "version control and iterative build history",
+  "task_type": "debugging_and_testing",
+  "task_label": "Debugging and testing — Worked-model trace",
+  "scoring_stance": "FORMATIVE_NO_PENALTY",
+  "estimated_minutes": "45–75",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "essential_question": "What evidence should accompany software before anyone else relies on it?",
+  "learning_objectives": [
+    "Build a clear mental model of version control and iterative build history from an explicit worked example, demonstration, or source.",
+    "Communicate understanding of version control and iterative build history using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on version control and iterative build history against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on version control and iterative build history.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, runtime, and version-control tool",
+    "project milestone plan, test log, and accessibility checklist"
+  ],
+  "task_brief": "Day 2 of \"Foundations Project and Impact Review\" (unit 6, grade 9) is a worked-model trace on version control and iterative build history. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Deliver a foundations software project with version history, test evidence, an accessibility audit, and a privacy and security review. Today's work contributes to that by handling version control and iterative build history at the explicit model stage, against the unit's wider topics of project scoping and success criteria, version control and iterative build history, test evidence and defect closure, and accessibility verification. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
+  "primary_task": "Work through the provided worked model of version control and iterative build history one step at a time rather than reading it straight through. For each step, write what changed and why that step is legal. Build a trace table with one row per step showing the values or states before and after. Then change exactly one line, value, or condition in the model, predict the new result before running or re-tracing it, and record whether your prediction was right. Explain in your own words the rule that makes version control and iterative build history behave the way the model shows. Anchor today's work inside its unit: this session's evidence is about version control and iterative build history, and it belongs to \"Foundations Project and Impact Review\", which also covers separate topics such as project scoping and success criteria. Close out with this check before you stop: Explain the modelled approach to version control and iterative build history in your own words and name the step most likely to go wrong. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on version control and iterative build history., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Build a clear mental model of version control and iterative build history from an explicit worked example, demonstration, or source.",
+    "Produce the deliverable for a worked-model trace: Completed step-by-step trace table with per-step reasons, plus the one-change experiment with prediction and outcome.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Completed step-by-step trace table with per-step reasons, plus the one-change experiment with prediction and outcome.",
+  "test_or_check_criteria": [
+    "The trace table has one row per step and shows values or states both before and after that step.",
+    "Every step carries a written reason that step is legal, not just a restatement of what happened.",
+    "Exactly one deliberate change was made to the model, with a prediction recorded before the re-run and the outcome after.",
+    "The rule governing version control and iterative build history is restated in the student's own words rather than copied from the model."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Any model, source, or artifact under study is supplied in an accessible parallel form: text alternative or transcript, described version, and a tactile or enlarged rendering where the original is visual. The learner is never required to perceive the source in one specific channel to analyse it.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting version control and iterative build history.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for version control and iterative build history follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for version control and iterative build history, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to version control and iterative build history works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of version control and iterative build history, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking version control and iterative build history mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply version control and iterative build history under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on version control and iterative build history rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Deliver a foundations software project with version history, test evidence, an accessibility audit, and a privacy and security review.",
+    "topics": [
+      "project scoping and success criteria",
+      "version control and iterative build history",
+      "test evidence and defect closure",
+      "accessibility verification",
+      "privacy security and data minimization review",
+      "documentation and handoff"
+    ],
+    "essential_question": "What evidence should accompany software before anyone else relies on it?",
+    "assessment_id": "ma-g9-technology-u06-assessment"
+  }
+}

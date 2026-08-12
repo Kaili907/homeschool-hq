@@ -1,0 +1,283 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "manuel-academy/technology-arts-lessons/lesson-scoring-guide",
+  "title": "Lesson scoring guide",
+  "description": "Parent/tutor scoring path for ONE lesson. The rubric dimension set is selected by work mode, so a launch day and a correction day are not scored on the same things.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lesson_id",
+    "unit_id",
+    "subject",
+    "band",
+    "grade",
+    "grade_dir",
+    "unit_title",
+    "lesson_title",
+    "phase",
+    "work_mode",
+    "focus",
+    "scoring_authority_kind",
+    "scoring_stance",
+    "rubric",
+    "scoring_judgment_guidance",
+    "lesson_success_criteria",
+    "formative_check",
+    "mastery_rule",
+    "unit_assessment_reference",
+    "remediation_plan",
+    "extension_plan",
+    "accessibility_options",
+    "source_integrity",
+    "safety_and_privacy",
+    "standards",
+    "task_accessibility_provisions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "lesson_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "enum": [
+        "technology",
+        "arts-music"
+      ]
+    },
+    "band": {
+      "enum": [
+        "g3-4",
+        "canonical-5-7-8",
+        "hs-9-12"
+      ]
+    },
+    "grade": {
+      "enum": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "grade_dir": {
+      "type": "string",
+      "pattern": "^grade-\\d{2}$"
+    },
+    "unit_title": {
+      "type": "string"
+    },
+    "lesson_title": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "work_mode": {
+      "enum": [
+        "PROBE",
+        "MODEL",
+        "MODEL_A",
+        "MODEL_B",
+        "GUIDED",
+        "GUIDED_A",
+        "GUIDED_B",
+        "APPLY",
+        "BUILD",
+        "INVESTIGATE",
+        "RETEACH",
+        "INCREMENT",
+        "DEMONSTRATE",
+        "SYNTHESIZE",
+        "ASSESS",
+        "CORRECT"
+      ]
+    },
+    "focus": {
+      "type": "string"
+    },
+    "scoring_authority_kind": {
+      "const": "RUBRIC",
+      "description": "Project and creative work is rubric-scored; there is no fixed answer key."
+    },
+    "scoring_stance": {
+      "enum": [
+        "FORMATIVE_NO_PENALTY",
+        "PROGRESS_EVIDENCE",
+        "SUMMATIVE"
+      ]
+    },
+    "rubric": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "dimension",
+          "exceeds",
+          "meets",
+          "developing",
+          "beginning"
+        ],
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "minLength": 1
+          },
+          "exceeds": {
+            "type": "string",
+            "minLength": 20
+          },
+          "meets": {
+            "type": "string",
+            "minLength": 20
+          },
+          "developing": {
+            "type": "string",
+            "minLength": 20
+          },
+          "beginning": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    },
+    "scoring_judgment_guidance": {
+      "type": "string",
+      "minLength": 150
+    },
+    "lesson_success_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "formative_check": {
+      "type": "string"
+    },
+    "answer_or_scoring_guidance": {
+      "type": "string"
+    },
+    "mastery_rule": {
+      "type": "string"
+    },
+    "unit_assessment_reference": {
+      "type": "object",
+      "required": [
+        "assessment_id",
+        "total_points",
+        "unit_rubric_dimensions"
+      ],
+      "properties": {
+        "assessment_id": {
+          "type": "string"
+        },
+        "total_points": {
+          "type": "number"
+        },
+        "unit_rubric_dimensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mastery_interpretation": {
+          "description": "The authored unit mastery bands, carried through verbatim from the assessment record.",
+          "type": "object"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "remediation_plan": {
+      "type": "string",
+      "minLength": 100
+    },
+    "extension_plan": {
+      "type": "string",
+      "minLength": 60
+    },
+    "accommodation_note": {
+      "type": "string"
+    },
+    "accessibility_options": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "parent_or_guardian_visibility": {
+      "type": "string"
+    },
+    "source_integrity": {
+      "type": "object",
+      "required": [
+        "requires_review",
+        "status"
+      ],
+      "properties": {
+        "requires_review": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "safety_and_privacy": {
+      "type": "object",
+      "required": [
+        "requires_review",
+        "status",
+        "note"
+      ],
+      "properties": {
+        "requires_review": {
+          "const": true
+        },
+        "status": {
+          "const": "VERIFIED"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 60
+        }
+      }
+    },
+    "standards": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "task_accessibility_provisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 40
+      }
+    }
+  }
+}

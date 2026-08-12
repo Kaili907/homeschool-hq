@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g8-technology-u05-l03",
+  "unit_id": "ma-g8-technology-u05",
+  "source_course_id": "ma-g8-technology",
+  "subject": "technology",
+  "band": "canonical-5-7-8",
+  "grade": 8,
+  "grade_dir": "grade-08",
+  "unit_number": 5,
+  "unit_title": "Networks and Cybersecurity",
+  "day_in_unit": 3,
+  "course_day": 27,
+  "lesson_title": "Guided practice: authentication and authorization",
+  "phase": "Guided practice",
+  "work_mode": "GUIDED",
+  "focus": "authentication and authorization",
+  "task_type": "systems_and_hardware",
+  "task_label": "Systems and troubleshooting — Guided practice",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "40–60",
+  "standards": [
+    "Michigan Computer Science: Networks and Internet",
+    "Cybersecurity"
+  ],
+  "essential_question": "How can understanding networks and cybersecurity help us explain, decide, create, or solve something that matters?",
+  "learning_objectives": [
+    "Practice authentication and authorization with prompts, feedback, and gradually reduced support.",
+    "Use subject-appropriate evidence or representation to communicate understanding of authentication and authorization.",
+    "Check, revise, or improve work about authentication and authorization using stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task about authentication and authorization.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "pencil or accessible response tool",
+    "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
+  ],
+  "task_brief": "Day 3 of \"Networks and Cybersecurity\" (unit 5, grade 8) is a guided practice on authentication and authorization. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Complete a sandboxed or paper cybersecurity design review; never probe real systems without explicit authorization. Today's work contributes to that by handling authentication and authorization at the guided practice stage, against the unit's wider topics of internet routing concepts, encryption and certificates, authentication and authorization, and recognising and defending against common attacks and social engineering. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Complete two supported problems on authentication and authorization. On the first, work step by step with prompts available, and after each step write the one-line reason that step is correct. On the second, work without prompts and only check the reference after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. Anchor today's work inside its unit: this session's evidence is about authentication and authorization, and it belongs to \"Networks and Cybersecurity\", which also covers separate topics such as internet routing concepts. Close out with this check before you stop: In one concise response, show or explain the most important idea about authentication and authorization; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task about authentication and authorization., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
+    "Address the lesson objective: Practice authentication and authorization with prompts, feedback, and gradually reduced support.",
+    "Produce the deliverable for a guided practice: Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+  "guided_scaffold_note": "Scaffolding for authentication and authorization fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
+  "test_or_check_criteria": [
+    "Both problems show intermediate states — trace table, printed values, or labelled diagram — not only final answers.",
+    "The first problem carries a per-step reason; the second was attempted before any reference was checked.",
+    "The step where confidence dropped is named specifically, not described as general uncertainty.",
+    "Every result is traceable to authentication and authorization or another named topic from this unit."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never require a real password, private message, precise location, account credential, or identifiable image.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify, not as an authority or a substitute for learner work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, map, worked example, source image, demonstration, or short clip supporting authentication and authorization.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile/concrete model, or teacher demonstration."
+  },
+  "remediation": "Reteaching for authentication and authorization follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for authentication and authorization, model it with a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the process for authentication and authorization works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of authentication and authorization, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking authentication and authorization mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply authentication and authorization under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work. Treat this as optional depth on authentication and authorization rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Complete a sandboxed or paper cybersecurity design review; never probe real systems without explicit authorization.",
+    "topics": [
+      "internet routing concepts",
+      "encryption and certificates",
+      "authentication and authorization",
+      "common attacks and social engineering",
+      "secure development habits",
+      "incident response and ethics"
+    ],
+    "essential_question": "How can understanding networks and cybersecurity help us explain, decide, create, or solve something that matters?",
+    "assessment_id": "ma-g8-technology-u05-assessment"
+  }
+}

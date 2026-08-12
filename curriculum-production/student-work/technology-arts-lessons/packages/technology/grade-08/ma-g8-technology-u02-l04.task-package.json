@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g8-technology-u02-l04",
+  "unit_id": "ma-g8-technology-u02",
+  "source_course_id": "ma-g8-technology",
+  "subject": "technology",
+  "band": "canonical-5-7-8",
+  "grade": 8,
+  "grade_dir": "grade-08",
+  "unit_number": 2,
+  "unit_title": "Programming and Software Design",
+  "day_in_unit": 4,
+  "course_day": 10,
+  "lesson_title": "Application or project: functions or procedures",
+  "phase": "Application or project",
+  "work_mode": "BUILD",
+  "focus": "functions or procedures",
+  "task_type": "debugging_and_testing",
+  "task_label": "Debugging and testing — Build and test",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "40–60",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming"
+  ],
+  "essential_question": "How can understanding programming and software design help us explain, decide, create, or solve something that matters?",
+  "learning_objectives": [
+    "Create, test, or revise a meaningful product that applies functions or procedures and the unit standards.",
+    "Use subject-appropriate evidence or representation to communicate understanding of functions or procedures.",
+    "Check, revise, or improve work about functions or procedures using stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task about functions or procedures.",
+    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "pencil or accessible response tool",
+    "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
+  ],
+  "task_brief": "Day 4 of \"Programming and Software Design\" (unit 2, grade 8) is a build and test on functions or procedures. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Build a small application, simulation, or game that solves a defined user need. Today's work contributes to that by handling functions or procedures at the application or project stage, against the unit's wider topics of requirements and decomposition, data and variables, selection and iteration, and functions or procedures. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Build a working artifact for a stated need arising in the unit \"Programming and Software Design\", built around what this session covers: functions or procedures. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. Anchor today's work inside its unit: this session's evidence is about functions or procedures, and it belongs to \"Programming and Software Design\", which also covers separate topics such as requirements and decomposition. Close out with this check before you stop: In one concise response, show or explain the most important idea about functions or procedures; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task about functions or procedures., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
+    "Address the lesson objective: Create, test, or revise a meaningful product that applies functions or procedures and the unit standards.",
+    "Produce the deliverable for a build and test: Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+  "test_or_check_criteria": [
+    "Requirements and success conditions were written in testable form before implementation began.",
+    "A test log shows at least three cases — normal, boundary, and a deliberate break case — with actual against expected.",
+    "Every failing case was fixed and re-run, with the re-run result recorded.",
+    "A design note names one rejected alternative and the reason for rejecting it.",
+    "Nothing in the artifact uses a real credential, real personal data, or a live external system."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "Preserve the learning target while adjusting quantity, pacing, representation, or response mode."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "This work spans sessions, so supply a written milestone plan, explicit checkpoint dates, and a task breakdown. Executive-function load — sequencing, holding the plan in mind, remembering where the work stopped — must not become a silent part of what is being assessed.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never require a real password, private message, precise location, account credential, or identifiable image.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify, not as an authority or a substitute for learner work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, map, worked example, source image, demonstration, or short clip supporting functions or procedures.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile/concrete model, or teacher demonstration."
+  },
+  "remediation": "Reteaching for functions or procedures follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for functions or procedures, model it with a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the process for functions or procedures works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of functions or procedures, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking functions or procedures mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply functions or procedures under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work. Treat this as optional depth on functions or procedures rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Build a small application, simulation, or game that solves a defined user need.",
+    "topics": [
+      "requirements and decomposition",
+      "data and variables",
+      "selection and iteration",
+      "functions or procedures",
+      "testing debugging and versioning",
+      "documentation"
+    ],
+    "essential_question": "How can understanding programming and software design help us explain, decide, create, or solve something that matters?",
+    "assessment_id": "ma-g8-technology-u02-assessment"
+  }
+}

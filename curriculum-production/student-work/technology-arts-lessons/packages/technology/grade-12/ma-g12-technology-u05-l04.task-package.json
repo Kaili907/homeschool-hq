@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g12-technology-u05-l04",
+  "unit_id": "ma-g12-technology-u05",
+  "source_course_id": "ma-g12-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 12,
+  "grade_dir": "grade-12",
+  "unit_number": 5,
+  "unit_title": "Capstone Design, Build, and Test",
+  "day_in_unit": 4,
+  "course_day": 28,
+  "lesson_title": "Independent application A: verification and test evidence",
+  "phase": "Independent application A",
+  "work_mode": "APPLY",
+  "focus": "verification and test evidence",
+  "task_type": "programming_and_logic",
+  "task_label": "Programming and logic — Independent application",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "60–90",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "essential_question": "How do we build something substantial and prove, at each step, that it works?",
+  "learning_objectives": [
+    "Apply verification and test evidence independently to an unfamiliar case.",
+    "Communicate understanding of verification and test evidence using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on verification and test evidence against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on verification and test evidence.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, runtime, and version-control tool",
+    "project milestone plan, test log, and accessibility checklist"
+  ],
+  "task_brief": "Day 4 of \"Capstone Design, Build, and Test\" (unit 5, grade 12) is an independent application on verification and test evidence. It is one step inside the unit — not the whole unit project — and takes about 60–90 minutes. The unit is working toward: Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence. Today's work contributes to that by handling verification and test evidence at the independent application a stage, against the unit's wider topics of problem validation and stakeholders, requirements and success metrics, architecture and build increments, and verification and test evidence. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Work independently on verification and test evidence in a situation nobody has worked for you. Define the inputs and the expected result before you build anything. Then produce the working artifact — code, an algorithm, a configuration, a labelled design, or a documented procedure — and demonstrate it on at least two inputs you chose, one ordinary and one edge case. Record the actual result beside the expected result for each. Where they differ, fix the artifact and note what the difference revealed about verification and test evidence. Anchor today's work inside its unit: this session's evidence is about verification and test evidence, and it belongs to \"Capstone Design, Build, and Test\", which also covers separate topics such as problem validation and stakeholders. Close out with this check before you stop: State your result for verification and test evidence and the single strongest piece of evidence supporting it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on verification and test evidence., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Apply verification and test evidence independently to an unfamiliar case.",
+    "Produce the deliverable for an independent application: Working artifact, a written expected-result specification, and a two-case run log including one edge case.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Working artifact, a written expected-result specification, and a two-case run log including one edge case.",
+  "test_or_check_criteria": [
+    "Inputs and expected results were written down before the artifact was built.",
+    "The artifact runs, displays, or demonstrates correctly on at least two self-chosen inputs including one edge case.",
+    "Actual result is recorded beside expected result for every case, with differences resolved rather than ignored.",
+    "All data is invented or sandboxed — no real password, API key, precise location, or real person's information appears."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "This work spans sessions, so supply a written milestone plan, explicit checkpoint dates, and a task breakdown. Executive-function load — sequencing, holding the plan in mind, remembering where the work stopped — must not become a silent part of what is being assessed.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting verification and test evidence.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for verification and test evidence follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for verification and test evidence, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to verification and test evidence works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of verification and test evidence, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking verification and test evidence mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply verification and test evidence under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on verification and test evidence rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence.",
+    "topics": [
+      "problem validation and stakeholders",
+      "requirements and success metrics",
+      "architecture and build increments",
+      "verification and test evidence",
+      "accessibility and privacy verification",
+      "iteration from feedback"
+    ],
+    "essential_question": "How do we build something substantial and prove, at each step, that it works?",
+    "assessment_id": "ma-g12-technology-u05-assessment"
+  }
+}
