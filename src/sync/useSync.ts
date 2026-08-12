@@ -12,6 +12,7 @@ import {
   waitForAppStatePersistence,
 } from '../appState'
 import type { AppState, Profile } from '../types'
+import { adoptedLearnerCredential } from '../portableProfile'
 import { purgeVoiceCache } from '../tutor/voice'
 import {
   asSignedInUser,
@@ -145,9 +146,23 @@ function appStateWithProfiles(
   }
 }
 
-function profilesFromRows(rows: RemoteProfileRow[]): Record<string, Profile> {
+/**
+ * Adopt cloud rows as local profiles. The cloud carries EDUCATIONAL data only —
+ * a learner PIN arriving from the cloud is never authoritative, so an existing
+ * girl keeps the credential this device already trusts and a profile new to this
+ * device enrols one at first sign-in.
+ */
+function profilesFromRows(
+  rows: RemoteProfileRow[],
+  local: Record<string, Profile>,
+): Record<string, Profile> {
   const profiles: Record<string, Profile> = Object.create(null)
-  for (const row of rows) profiles[row.profile_id] = row.data
+  for (const row of rows) {
+    profiles[row.profile_id] = {
+      ...row.data,
+      pin: adoptedLearnerCredential(local[row.profile_id]),
+    }
+  }
   return profiles
 }
 
@@ -1395,7 +1410,10 @@ export function useSync(
           'A local safety backup could not be created; cloud data was not applied.',
         )
       }
-      const profiles = profilesFromRows(verifiedRows)
+      const profiles = profilesFromRows(
+        verifiedRows,
+        stateRef.current.profiles,
+      )
       const nextState = appStateWithProfiles(stateRef.current, profiles)
       const next = metaAfterSuccessfulSync(
         loadHouseholdMeta(verifiedUser.id, verifiedUser.email),

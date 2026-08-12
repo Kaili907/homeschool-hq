@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { emptyProfile } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import type { Profile } from '../types'
 import {
   applyReviewedSelection,
@@ -24,7 +25,7 @@ const profile = (id = 'p1', name = 'Ada'): Profile =>
   emptyProfile(id, name, '3')
 const row = (data: Profile, time = T1): RemoteProfileRow => ({
   profile_id: data.id,
-  data,
+  data: toWireProfile(data),
   updated_at: new Date(time).toISOString(),
 })
 const boundMeta = (

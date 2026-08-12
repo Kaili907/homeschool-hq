@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { defaultAppState, emptyProfile } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import type { Profile } from '../types'
 import { metaAfterSuccessfulSync } from './engine'
 import { emptyHouseholdMeta, type RemoteProfileRow } from './types'
@@ -14,7 +15,7 @@ const NOW = Date.parse('2026-07-24T12:00:00Z')
 const localProfiles = () => defaultAppState().profiles
 const row = (profile: Profile, time = NOW): RemoteProfileRow => ({
   profile_id: profile.id,
-  data: profile,
+  data: toWireProfile(profile),
   updated_at: new Date(time).toISOString(),
 })
 const transport = (

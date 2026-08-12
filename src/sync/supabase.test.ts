@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createClient } from '@supabase/supabase-js'
 import { defaultAppState } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import {
   getVerifiedAuthContext,
   pushProfiles,
@@ -24,7 +25,7 @@ function rows(): RemoteProfileRow[] {
   return [
     {
       profile_id: profile.id,
-      data: profile,
+      data: toWireProfile(profile),
       updated_at: '2026-07-25T12:00:00.000Z',
     },
   ]

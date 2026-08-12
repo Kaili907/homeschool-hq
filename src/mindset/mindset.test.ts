@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import type { AppState, Profile } from '../types'
 import { emptyProfile, defaultAppState, isAppState } from '../migration'
 import { serializeAllBackup } from '../appState'
+import { toWireProfile } from '../portableProfile'
 import {
   applyReviewedSelection,
   buildReconciliationPreview,
@@ -273,7 +274,7 @@ describe('PRIVACY — reflection text is never in AppState (panel / export / syn
         },
       },
     }
-    const remoteRow = { profile_id: 'p3', data: remoteProfile, updated_at: new Date(5000).toISOString() }
+    const remoteRow = { profile_id: 'p3', data: toWireProfile(remoteProfile), updated_at: new Date(5000).toISOString() }
     const preview = buildReconciliationPreview(state.profiles, [remoteRow], localMeta)
     const res = applyReviewedSelection(
       state.profiles,

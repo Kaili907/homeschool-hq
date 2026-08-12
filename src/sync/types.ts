@@ -1,9 +1,16 @@
-import type { Profile } from '../types'
+import type { WireProfile } from '../portableProfile'
 
-/** One profile row as stored in Supabase. RLS supplies and verifies household_id. */
+/**
+ * One profile row as stored in Supabase. RLS supplies and verifies household_id.
+ *
+ * `data` is a WireProfile, not a Profile: a learner PIN is a device-local
+ * credential and is never legal on the wire in either direction. The `pin` key
+ * survives because the cloud's stored contract requires it, but its type is the
+ * literal `''`, so a real Profile cannot be assigned here by accident.
+ */
 export interface RemoteProfileRow {
   profile_id: string
-  data: Profile
+  data: WireProfile
   updated_at: string
 }
 

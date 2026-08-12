@@ -10,6 +10,11 @@ import {
   validateProfileForSync,
   validateRemoteProfileRows,
 } from './provenance'
+import {
+  adoptedLearnerCredential,
+  toPortableProfile,
+  toWireProfile,
+} from '../portableProfile'
 
 const iso = (ms: number) => new Date(ms).toISOString()
 const msOf = (value: string) => Date.parse(value)
@@ -29,7 +34,10 @@ export function profileHash(profile: Profile): string {
         .map(([key, child]) => [key, canonicalize(child)]),
     )
   }
-  const text = JSON.stringify(canonicalize(profile))
+  // Hash the EDUCATIONAL profile only. A learner changing her PIN is not an
+  // educational change: it must not move this hash, so it cannot alter the
+  // cloud fingerprint, the reconciliation category, or the mutation identity.
+  const text = JSON.stringify(canonicalize(toPortableProfile(profile)))
   let hash = 2166136261
   for (let i = 0; i < text.length; i++) {
     hash ^= text.charCodeAt(i)
@@ -56,8 +64,13 @@ export function changedProfiles(
   next: Record<string, Profile>,
 ): string[] {
   const ids = new Set<string>([...Object.keys(prev), ...Object.keys(next)])
+  const educational = (profile: Profile | undefined) =>
+    profile && toPortableProfile(profile)
+  // Educational comparison only: a PIN-only edit must not schedule a sync cycle.
   return [...ids].filter(
-    (id) => JSON.stringify(prev[id]) !== JSON.stringify(next[id]),
+    (id) =>
+      JSON.stringify(educational(prev[id])) !==
+      JSON.stringify(educational(next[id])),
   )
 }
 
@@ -86,7 +99,7 @@ export function pendingRows(
     .filter((id) => local[id])
     .map((id) => ({
       profile_id: id,
-      data: local[id],
+      data: toWireProfile(local[id]),
       updated_at: iso(meta.profiles[id].updatedAt),
     }))
 }
@@ -226,14 +239,20 @@ export function applyReviewedSelection(
 
     if (choice === 'cloud') {
       if (!cloud) throw new Error(`Cloud copy for ${item.name} is unavailable.`)
-      profiles[item.id] = cloud.data
+      // Adopting the cloud copy adopts EDUCATIONAL data only. The credential
+      // stays this device's: an existing girl keeps the PIN that already gates
+      // her profile, and a profile new to this device enrols one at sign-in.
+      profiles[item.id] = {
+        ...cloud.data,
+        pin: adoptedLearnerCredential(loc),
+      }
     } else {
       if (!loc) throw new Error(`Device copy for ${item.name} is unavailable.`)
       profiles[item.id] = loc
       if (!cloud || profileHash(loc) !== profileHash(cloud.data)) {
         toPush.push({
           profile_id: item.id,
-          data: loc,
+          data: toWireProfile(loc),
           // The local metadata timestamp is stable across a lost-response
           // retry, allowing the server mutation receipt to recognize the exact
           // logical payload instead of creating a second mutation identity.

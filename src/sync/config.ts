@@ -1,4 +1,5 @@
 import type { AppState } from '../types'
+import { toPortableAppState } from '../portableProfile'
 import {
   createOperationId,
   type FinalizationDatasetExpectation,
@@ -1324,7 +1325,8 @@ export function backupLocalForHousehold(
     if (!store) return null
     const stamp = new Date().toISOString().replace(/[:.]/g, '-')
     const key = `${SYNC_BACKUP_PREFIX}${encodeURIComponent(householdId)}:${stamp}`
-    store.setItem(key, JSON.stringify(state))
+    // Parseable safety copy: educational data only, no learner credential.
+    store.setItem(key, JSON.stringify(toPortableAppState(state)))
     return key
   } catch {
     return null

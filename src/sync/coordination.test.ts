@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { emptyProfile } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import {
   executeGuardedMutation,
   mutationLeaseIsOwned,
@@ -34,7 +35,7 @@ class MemStorage implements Storage {
 
 const row = (name = 'Ada'): RemoteProfileRow => ({
   profile_id: 'p1',
-  data: { ...emptyProfile('p1', name, '3') },
+  data: toWireProfile(emptyProfile('p1', name, '3')),
   updated_at: '2026-07-24T12:00:00.000Z',
 })
 

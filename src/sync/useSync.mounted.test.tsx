@@ -14,6 +14,7 @@ import {
   waitForAppStatePersistence,
 } from '../appState'
 import { defaultAppState } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import type { AppState } from '../types'
 import {
   beginConfirmedImportInvalidation,
@@ -288,7 +289,7 @@ function pauseFinalizerAt(stage: string) {
 function rowFor(state: AppState, id = 'p1'): RemoteProfileRow {
   return {
     profile_id: id,
-    data: state.profiles[id],
+    data: toWireProfile(state.profiles[id]),
     updated_at: '2026-07-25T12:00:00.000Z',
   }
 }

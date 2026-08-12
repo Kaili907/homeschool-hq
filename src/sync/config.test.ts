@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defaultAppState } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import {
   backupLocalForHousehold,
   claimLocalData,
@@ -293,7 +294,7 @@ describe('official Supabase auth and transport', () => {
     const rows: RemoteProfileRow[] = [
       {
         profile_id: 'p1',
-        data: defaultAppState().profiles.p1,
+        data: toWireProfile(defaultAppState().profiles.p1),
         updated_at: '2026-07-24T10:00:00.000Z',
       },
     ]
