@@ -12,3 +12,6 @@ backups/
 
 # CURR-1: generated curriculum chunks (rebuilt from curriculum-content/ by scripts/build-curriculum.mjs)
 public/curriculum/
+
+# Local family-pilot seed output (scripts/family-pilot/seed-local-pilot.mjs --out)
+scripts/family-pilot/output/
