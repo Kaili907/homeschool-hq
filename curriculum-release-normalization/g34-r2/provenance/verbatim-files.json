@@ -3,6 +3,36 @@
   "note": "Files carried out of g34-r1 with no change at all. sha256 is the shared hash of the candidate file and the released file.",
   "files": [
     {
+      "source": "curriculum-release-candidates/g34-r1/.gitattributes",
+      "release_path": "upstream/g34-r1/.gitattributes",
+      "sha256": "04d047f4699f35d057c20175b45366d63a204aeec467f77d35151906382761b8",
+      "byte_identical": true
+    },
+    {
+      "source": "curriculum-release-candidates/g34-r1/MANIFEST.json",
+      "release_path": "upstream/g34-r1/MANIFEST.json",
+      "sha256": "5f42b12cbf1055ad6a424c7da82e5590750e703d2444a2bb240344953ddc150a",
+      "byte_identical": true
+    },
+    {
+      "source": "curriculum-release-candidates/g34-r1/README.md",
+      "release_path": "upstream/g34-r1/README.md",
+      "sha256": "5cbfe0c5efc55e08990e46a89c29844129b73aaee449b5ed906d9efe6d7094cd",
+      "byte_identical": true
+    },
+    {
+      "source": "curriculum-release-candidates/g34-r1/SHA256SUMS.txt",
+      "release_path": "upstream/g34-r1/SHA256SUMS.txt",
+      "sha256": "7d4e73b446a740c9099e7bbcf4e8bcb8b4ae1cfe826d00ece1042440fee482d3",
+      "byte_identical": true
+    },
+    {
+      "source": "curriculum-release-candidates/g34-r1/course-index.json",
+      "release_path": "upstream/g34-r1/course-index.json",
+      "sha256": "3bc2ff541af2490dfa8701e9466189ce7e5d81f90f7a7649952919988bdcea82",
+      "byte_identical": true
+    },
+    {
       "source": "curriculum-release-candidates/g34-r1/grades/grade-3/courses/arts-and-music/assessments.json",
       "release_path": "grades/grade-3/courses/arts-and-music/assessments.json",
       "sha256": "da69718f8f80bfd910648ef77e6fe79f10db078d1024c3019019810dddb8d1cf",
@@ -712,13 +742,13 @@
     },
     {
       "source": "curriculum-release-candidates/g34-r1/ledger/source-branch-ledger.md",
-      "release_path": "ledger/source-branch-ledger.md",
+      "release_path": "upstream/g34-r1/ledger/source-branch-ledger.md",
       "sha256": "ab8405a072c9f95b92b1787cc843359e0fb72803a2b6f606f515f663dac91b91",
       "byte_identical": true
     },
     {
       "source": "curriculum-release-candidates/g34-r1/ledger/source-branches.json",
-      "release_path": "ledger/source-branches.json",
+      "release_path": "upstream/g34-r1/ledger/source-branches.json",
       "sha256": "dbf994a775f50979086c6613dd0e40391f55a414d922b35fc012d5013c3814db",
       "byte_identical": true
     },
@@ -846,6 +876,12 @@
       "source": "curriculum-release-candidates/g34-r1/schedules/schedule-index.json",
       "release_path": "schedules/schedule-index.json",
       "sha256": "43854402a6ea42a284539444d16cf54ca6dfd56b0e81d1415302857a42911f99",
+      "byte_identical": true
+    },
+    {
+      "source": "curriculum-release-candidates/g34-r1/schemas/lesson.schema.candidate.json",
+      "release_path": "upstream/g34-r1/schemas/lesson.schema.candidate.json",
+      "sha256": "842c2abf71eb9571478751196c8a8c711fb81518a978297e072db3f3fd04a1c1",
       "byte_identical": true
     },
     {
@@ -982,25 +1018,37 @@
     },
     {
       "source": "curriculum-release-candidates/g34-r1/standards/standards-custody-report.md",
-      "release_path": "standards/upstream/standards-custody-report.md",
+      "release_path": "upstream/g34-r1/standards/standards-custody-report.md",
       "sha256": "5245889b0804d5ae1bf99db9d24094fca426d9148ac2988a33515c9fdce586d2",
       "byte_identical": true
     },
     {
       "source": "curriculum-release-candidates/g34-r1/standards/standards-inventory.json",
-      "release_path": "standards/upstream/standards-inventory.json",
+      "release_path": "upstream/g34-r1/standards/standards-inventory.json",
       "sha256": "c3416e85ce6d7aaefff2935d394f5be4338ace9564f8b7bc4187c8e1ffdadb70",
       "byte_identical": true
     },
     {
+      "source": "curriculum-release-candidates/g34-r1/tools/assemble.py",
+      "release_path": "upstream/g34-r1/tools/assemble.py",
+      "sha256": "628c6300fb828fe1b62645f91d2df29069d762fac52cb29ef0bdf03f8b6e5d8c",
+      "byte_identical": true
+    },
+    {
+      "source": "curriculum-release-candidates/g34-r1/unit-index.json",
+      "release_path": "upstream/g34-r1/unit-index.json",
+      "sha256": "7fc5d2c3779d5e1d08d19c3cd5f2effda72d0371913640f3ffdd7aa9fad2b8d6",
+      "byte_identical": true
+    },
+    {
       "source": "curriculum-release-candidates/g34-r1/validation/validation-report.md",
-      "release_path": "validation/upstream-validation-report.r1.md",
+      "release_path": "upstream/g34-r1/validation/validation-report.md",
       "sha256": "ea0888c05b7fc3e6567b3be02155a5f4d8b55e39b0eb29b818c98c50d3c9c5a3",
       "byte_identical": true
     },
     {
       "source": "curriculum-release-candidates/g34-r1/validation/validation.json",
-      "release_path": "validation/upstream-validation.r1.json",
+      "release_path": "upstream/g34-r1/validation/validation.json",
       "sha256": "8c3574caa62396447e9d08ca5743a883e553b8f0623bf999665399f9138f4e46",
       "byte_identical": true
     }

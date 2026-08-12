@@ -86,10 +86,10 @@ in the contract's own order, run against the normalized lessons.
 | `lesson-roundtrip-byte-identical` | PASS | denormalize(normalize(lesson)) re-serialized in the source file's own separator style reproduces all 1800 original JSONL lines byte for byte |
 | `instructional-content-digest-equal` | PASS | SHA256 over every field outside ['standards', 'schema_version', 'authored_schema_version'] is identical between g34-r1 and this release on all 1800 lessons; the standards citation sequence digest is identical too |
 | `normalization-surface-closed` | PASS | exactly 3 lesson fields are touched release-wide (standards, schema_version, authored_schema_version); every other field compares equal on all 1800 lessons |
-| `verbatim-files-byte-identical` | PASS | 167 non-lesson files carried from g34-r1 re-hashed after write; 0 differ |
+| `verbatim-files-byte-identical` | PASS | 175 non-lesson files carried from g34-r1 re-hashed after write; 0 differ |
 | `lesson-index-identical-to-candidate` | PASS | lesson-index.csv regenerated from the normalized lessons is byte-identical to g34-r1's, which fixes every lesson id, course id, grade, subject, unit number, course day, phase and title in one hash |
-| `sealed-1.0.0-untouched` | PASS | no file under curriculum-content/manuel-academy/1.0.0 is added, changed, or removed |
-| `g34-r1-candidate-untouched` | PASS | no file under curriculum-release-candidates/g34-r1 is added, changed, or removed |
+| `sealed-1.0.0-untouched` | PASS | the curriculum-content/manuel-academy/1.0.0 tree object at HEAD is identical to its tree object at the candidate's assembly base commit 656efba1, and the worktree is clean for that path - so no commit on this branch touched the sealed release, not merely no uncommitted edit |
+| `g34-r1-candidate-untouched` | PASS | the worktree copy of curriculum-release-candidates/g34-r1 has no uncommitted change and re-hashes to the candidate's own SHA256SUMS.txt (see input-candidate-verified), so the input is the candidate as published |
 
 ## Preservation
 

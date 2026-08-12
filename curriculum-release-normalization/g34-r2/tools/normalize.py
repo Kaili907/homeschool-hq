@@ -89,6 +89,31 @@ LANE_ARTIFACTS = {
     "financial-literacy": [],
 }
 
+# How each subject's citation strings are printed here versus how the official source prints
+# them. Only two subjects cite codes at all; the rest cite strand/band labels or internal anchors.
+CODE_FORMAT = {
+    "mathematics": {
+        "printed_in_this_release": "<grade>.<domain>.<number>, no cluster letter (3.OA.1)",
+        "printed_by_the_official_source": "the lane states this matches the Michigan K-12 "
+            "Standards: Mathematics document",
+        "join_warning": "MP.n practice codes are a Manuel Academy package convention the MDE "
+            "document does not print; they carry mapping_status human-review.",
+        "evidence": "standards/sources/mathematics/standards/standards-map.json -> code_format, "
+                    "practice_code_note",
+    },
+    "english-language-arts": {
+        "printed_in_this_release": "<grade>.<strand>.<number> (3.RL.1)",
+        "printed_by_the_official_source": "<strand>.<grade>.<number> (RL.3.1)",
+        "join_warning": "TRANSPOSE THE FIRST TWO SEGMENTS before joining these codes against an "
+            "MDE or Common Core namespace. 3.RL.1 and RL.3.1 denote the same standard. Machine "
+            "consumers must not assume a leading strand prefix.",
+        "evidence": "standards/sources/english-language-arts/standards/standards-reference.md, "
+                    "'Code order - read this before comparing against a state document'; "
+                    "michigan-ela-g{3,4}.json -> code_format_in_this_package vs "
+                    "code_format_as_published_by_mde",
+    },
+}
+
 PENDING_HEALTH_REVIEW = {
     "ma-g3-health", "ma-g4-health", "ma-g3-physical-education", "ma-g4-physical-education",
 }
@@ -150,12 +175,6 @@ def verify_input():
     return listed
 
 
-def git_head():
-    try:
-        return subprocess.run(["git", "-C", ROOT, "rev-parse", "HEAD"],
-                              capture_output=True, text=True, check=True).stdout.strip()
-    except Exception:
-        return None
 
 
 # ------------------------------------------------------- 1. read the r1 candidate
@@ -206,14 +225,32 @@ MAPPING_RULES = [
         "status": "canonical",
         "applies_to": ["mathematics", "english-language-arts"],
         "test": "citation string appears verbatim in a lane-shipped standards catalog whose "
-                "provenance block names the published MDE document as the source of record for "
-                "those codes",
+                "provenance block records that the codes were read from the published document",
         "evidence": [
-            "standards/sources/mathematics/standards/standards-map.json -> sources[0].role: "
-            "'Source of record for every Grade 3 and Grade 4 code and paraphrase in this catalog.'",
+            "standards/sources/mathematics/standards/standards-map.md: 'Verified domain ceilings: "
+            "3.G ends at 2, 3.MD ends at 8, 3.NBT ends at 3, 3.NF ends at 3, 3.OA ends at 9. Codes "
+            "beyond these do not exist and none are used.' (and the Grade 4 equivalent) - a "
+            "code-level statement about the document's contents, not just an attribution.",
+            "standards/sources/mathematics/PILOT_BLOCKERS.md section 7: 'Content was authored "
+            "against the verified MDE standards document'. Note that section's own heading is 'No "
+            "licensed-educator sign-off' - it records document verification, not educator review.",
+            "standards/sources/mathematics/standards/standards-map.json -> sources[0].role names "
+            "the MDE mathematics PDF as source of record, and -> code_format states the printed "
+            "form matches that document.",
             "standards/sources/english-language-arts/standards/michigan-ela-g3.json and "
             "michigan-ela-g4.json -> sources[1].note: 'every Grade 3 and Grade 4 code and sub-code "
-            "below was read from this text'",
+            "below was read from this text'.",
+        ],
+        "carried_caveats": [
+            "The ELA source read was a district-hosted mirror of the MDE publication, not "
+            "michigan.gov itself: the same note records 'Michigan.gov blocks automated retrieval of "
+            "its own copy.' canonical here means read from that mirror.",
+            "ELA codes are printed in the Manuel Academy house order <grade>.<strand>.<number> "
+            "(3.RL.1); MDE prints <strand>.<grade>.<number> (RL.3.1). Same standard, transposed. "
+            "See the code_format block on every standards artifact, and "
+            "standards/sources/english-language-arts/standards/standards-reference.md, 'Code order "
+            "- read this before comparing against a state document'.",
+            "Neither lane recorded a licensed-educator review, and canonical does not assert one.",
         ],
     },
     {
@@ -257,18 +294,29 @@ MAPPING_RULES = [
                        "arts-and-music", "technology"],
         "test": "default: a published official source is named for the subject in "
                 "release/standards-reference.md, and no lane recorded a code-level confirmation "
-                "against it",
+                "against it that this release accepts (see overridden_lane_claim)",
         "evidence": [
             "standards/sources/release/standards-reference.md 'Verification method and its limits': "
             "'No code inside a PDF was fetched and transcribed by this session.'",
             "standards/sources/release/standards-reference.md Gap 4 directs technology/computer "
             "science to unverified explicitly.",
-            "standards/sources/{health,physical-education,arts-music,technology-computer-science}/"
-            "standards-map.md each close with 'a human curriculum reviewer should confirm ... "
-            "before this package is promoted' - an intent to verify, not a record of verification.",
+            "standards/sources/arts-music/standards-map.md and "
+            "standards/sources/technology-computer-science/standards-map.md each close with 'A "
+            "human curriculum reviewer should confirm ... before this package is promoted out of "
+            "curriculum-authoring/' - an intent to verify, not a record of verification.",
+            "standards/sources/health/standards-map.md and "
+            "standards/sources/physical-education/standards-map.md carry an 'Official sources' "
+            "table and no mapping-status or verification section at all - they name the source and "
+            "record no code-level confirmation against it.",
             "science and social-studies ship no lane standards artifact at all (r1 custody report "
             "Gap A), so no confirmation record can exist for their 1572 citations.",
         ],
+        "overridden_lane_claim": "standards/sources/technology-computer-science/standards-map.md "
+            "states its entries use 'mapping_status: canonical-equivalent, human-authored strand "
+            "labels'. That claim is not accepted here: release/standards-reference.md Gap 4 directs "
+            "technology/computer science to unverified until the lane confirms the current live MDE "
+            "standard, and the strand labels are not codes read from the document. The release "
+            "contract overrides the lane.",
     },
 ]
 
@@ -451,7 +499,6 @@ def main():
     global MATH_CODES, MATH_PRACTICES, ELA_CODES
 
     listed = verify_input()
-    head = git_head()
 
     # wipe the output tree except the tool that generates it
     if os.path.isdir(OUT):
@@ -484,12 +531,23 @@ def main():
         for x in sorted(fs):
             rel = os.path.relpath(os.path.join(r, x), SRC).replace(os.sep, "/")
             verbatim.append((rel, rel))
-    verbatim.append(("standards/standards-custody-report.md", "standards/upstream/standards-custody-report.md"))
-    verbatim.append(("standards/standards-inventory.json", "standards/upstream/standards-inventory.json"))
-    verbatim.append(("ledger/source-branches.json", "ledger/source-branches.json"))
-    verbatim.append(("ledger/source-branch-ledger.md", "ledger/source-branch-ledger.md"))
-    verbatim.append(("validation/validation-report.md", "validation/upstream-validation-report.r1.md"))
-    verbatim.append(("validation/validation.json", "validation/upstream-validation.r1.json"))
+    # Everything else the candidate holds is carried under upstream/g34-r1/, mirroring the
+    # candidate's own relative paths so its internal links still resolve, and including its
+    # SHA256SUMS.txt so a reader holding only this release can verify the carry independently.
+    in_place = {s_rel for s_rel, _o in verbatim}
+    carried_elsewhere = {
+        "lesson-index.csv": "lesson-index.csv - byte-identical copy at the release root, not duplicated",
+    }
+    for cid in order:
+        carried_elsewhere[f"{courses[cid]['rel_dir']}/lessons.jsonl"] = (
+            f"{courses[cid]['rel_dir']}/lessons.jsonl - the normalized copy sits at the same path; "
+            "applying the inverse in adapters/ reproduces the candidate's file byte for byte, "
+            "proven per lesson in provenance/lesson-content-digests.csv. Not duplicated: it would "
+            "add 16 MB of content this release already proves it can reconstruct.")
+    for rel in sorted(listed) + ["SHA256SUMS.txt"]:
+        if rel in in_place or rel in carried_elsewhere:
+            continue
+        verbatim.append((rel, f"upstream/g34-r1/{rel}"))
     verbatim = sorted(set(verbatim))
 
     verbatim_proof = []
@@ -588,10 +646,19 @@ def main():
         "affected_courses": ["ma-g3-english-language-arts", "ma-g4-english-language-arts"],
         "why_not_widen_the_const": "release/lesson-schema.json pins schema_version to "
             "const '1.0'. Widening it to an enum was the alternative and is rejected here: a "
-            "release package should present one schema version to its consumers. The ELA 1.1 "
-            "records are a strict superset of the 1.0 field set (39 fields vs 30-38, all "
-            "additive) and the schema sets additionalProperties: true, so a 1.1 record is a "
-            "valid 1.0 record. The authored value stays on the record either way.",
+            "release package should present one schema version to its consumers. The pin is safe "
+            "because every ELA record carries all 17 fields the release schema requires and the "
+            "schema sets additionalProperties: true, so a 1.1 record validates as a 1.0 record. "
+            "The authored value stays on the record either way, and the round-trip proof shows "
+            "nothing is lost.",
+        "what_1_1_is_not": "1.1 is not a superset of what every other course emits. ELA records "
+            "carry 39 fields but lack 8 that mathematics carries (academic_vocabulary, "
+            "evidence_type, evidence_record, representations, study_adapter, support, "
+            "target_misconception, counts_toward_independent_mastery_evidence) and 2 that science "
+            "carries. No lane shipped a schema defining what 1.1 added, and none is carried here, "
+            "so this release cannot say what the version number means beyond the field sets "
+            "observed. A consumer reading schema_version 1.0 on an ELA record should read "
+            "authored_schema_version alongside it.",
     }))
 
     write("adapters/standards-mapping-policy.json", jdump({
@@ -662,6 +729,7 @@ def main():
             "matrix_subject_slug": MATRIX_SLUG[subject],
             "standards_ref": STANDARDS_REF[subject],
             "official_source": OFFICIAL_SOURCE[subject],
+            "code_format": CODE_FORMAT.get(subject),
             "custody": "lane-authored standards artifact present" if lane else
                        "no lane standards artifact - this file is the release-boundary standalone "
                        "artifact, projected from the course's own lesson citations",
@@ -989,16 +1057,32 @@ def main():
           "lesson-index.csv regenerated from the normalized lessons is byte-identical to g34-r1's, "
           "which fixes every lesson id, course id, grade, subject, unit number, course day, phase "
           "and title in one hash")
-    sealed_dirty = subprocess.run(
-        ["git", "-C", ROOT, "status", "--porcelain", "--", "curriculum-content/manuel-academy/1.0.0"],
-        capture_output=True, text=True).stdout.strip()
-    check(integrity, "sealed-1.0.0-untouched", not sealed_dirty,
-          sealed_dirty or "no file under curriculum-content/manuel-academy/1.0.0 is added, changed, or removed")
-    r1_dirty = subprocess.run(
-        ["git", "-C", ROOT, "status", "--porcelain", "--", "curriculum-release-candidates/g34-r1"],
-        capture_output=True, text=True).stdout.strip()
+    base = json.loads(src_bytes("ledger/source-branches.json"))["assembly_base_commit"]
+
+    def tree_of(rev, path):
+        r = subprocess.run(["git", "-C", ROOT, "rev-parse", f"{rev}:{path}"],
+                           capture_output=True, text=True)
+        return r.stdout.strip() if r.returncode == 0 else None
+
+    def dirty(path):
+        return subprocess.run(["git", "-C", ROOT, "status", "--porcelain", "--", path],
+                              capture_output=True, text=True).stdout.strip()
+
+    SEALED = "curriculum-content/manuel-academy/1.0.0"
+    sealed_dirty, sealed_head, sealed_base = dirty(SEALED), tree_of("HEAD", SEALED), tree_of(base, SEALED)
+    check(integrity, "sealed-1.0.0-untouched",
+          not sealed_dirty and sealed_head is not None and sealed_head == sealed_base,
+          sealed_dirty or (f"the {SEALED} tree object at HEAD is identical to its tree object at "
+                           f"the candidate's assembly base commit {base}, and the worktree is clean "
+                           f"for that path - so no commit on this branch touched the sealed release, "
+                           f"not merely no uncommitted edit"
+                           if sealed_head == sealed_base
+                           else f"tree differs from {base}: {sealed_base} -> {sealed_head}"))
+    r1_dirty = dirty("curriculum-release-candidates/g34-r1")
     check(integrity, "g34-r1-candidate-untouched", not r1_dirty,
-          r1_dirty or "no file under curriculum-release-candidates/g34-r1 is added, changed, or removed")
+          r1_dirty or "the worktree copy of curriculum-release-candidates/g34-r1 has no uncommitted "
+                      "change and re-hashes to the candidate's own SHA256SUMS.txt (see "
+                      "input-candidate-verified), so the input is the candidate as published")
 
     # ----------------------------------------------------- preservation checks
     r1_manifest = json.loads(src_bytes("MANIFEST.json"))
@@ -1050,8 +1134,18 @@ def main():
             "sha256sums_sha256": sha256_file(os.path.join(SRC, "SHA256SUMS.txt")),
             "verified": "every listed file re-hashed and matched before this run read it",
         },
+        "candidate_files_carried": len(verbatim_proof),
+        "candidate_files_not_carried": sorted(carried_elsewhere.values()),
+        "carry_note": "Every file the candidate holds is carried into this release byte for byte. "
+                      "Course content, schedules and standards/sources/ keep their paths; "
+                      "everything else is mirrored under upstream/g34-r1/, including the "
+                      "candidate's own SHA256SUMS.txt, so this release can be checked against the "
+                      "candidate without a copy of the candidate. The path mapping for every file "
+                      "is in provenance/verbatim-files.json. One consequence: links from a mirrored "
+                      "candidate document into grades/** or standards/sources/** resolve at the "
+                      "release root rather than inside upstream/g34-r1/, because those files are "
+                      "carried in place and are not duplicated.",
         "assembly_base_commit_of_input": json.loads(src_bytes("ledger/source-branches.json"))["assembly_base_commit"],
-        "repo_head_at_normalization": head,
         "reads_only": ["curriculum-release-candidates/g34-r1/**"],
         "writes_only": ["curriculum-release-normalization/g34-r2/**"],
         "does_not_modify": [
@@ -1204,12 +1298,19 @@ def main():
             "standards_rollup": "standards/standards-rollup.json",
             "validation": "validation/validation.json",
             "content_equivalence": "provenance/content-equivalence.json",
-            "source_ledger": "ledger/source-branches.json",
+            "source_ledger": "upstream/g34-r1/ledger/source-branches.json",
             "checksums": "SHA256SUMS.txt",
         },
         "course_status": {c["course_id"]: c["status"] for c in course_rows},
         "standards_mapping_status": rollup_total,
-        "validation": {"overall": overall, **verdicts},
+        "validation": {
+            "overall": overall, **verdicts,
+            "caveat": "lesson-schema-compatibility PASSes against schemas/lesson.release.v1.json, "
+                      "which this release authored. Against "
+                      "standards/sources/release/lesson-schema.json as the release-standards lane "
+                      "wrote it, 216 lessons still fail on the stale subject enum; that is reported "
+                      "as its own named check, not folded into the verdict.",
+        },
         "boundaries": {
             "owns": "curriculum-release-normalization/g34-r2/**",
             "does_not_modify": [
@@ -1417,7 +1518,7 @@ and title across all {len(L)} lessons.
 
 This release proves equivalence to `g34-r1`. `g34-r1` proved, by its own
 `content-byte-identical-to-source` check, that its 138 copied course files re-hash to the files in
-the pinned lane commits recorded in [`ledger/source-branches.json`](../ledger/source-branches.json).
+the pinned lane commits recorded in [`upstream/g34-r1/ledger/source-branches.json`](../upstream/g34-r1/ledger/source-branches.json).
 The two proofs compose: the instructional content here is the content the lanes authored.
 """)
 
@@ -1460,8 +1561,24 @@ Retargeted to this release. No constraint changes.
 
 `schema_version` keeps `const: "1.0"`. The `standards` item shape keeps its three required
 properties and the `mapping_status` enum. Every `required` field, `minItems`, `minLength`,
-`pattern`, and range is untouched. A lesson that validates against the lane's file also validates
-against this one: the only relaxation is on `subject`, and it is a widening to the canonical values.
+`pattern`, and range is untouched. The subject enum is the only constraint change in either
+direction.
+
+**It is a substitution, not a widening.** `technology-computer-science` and `arts-music` are
+*removed*, not kept alongside the canonical values, so neither schema subsumes the other: a lesson
+carrying a matrix slug would validate against the lane's file and fail this one. That case does not
+arise in this corpus - 0 of 1800 lessons carry a matrix slug - and keeping both would have made the
+release schema accept two spellings of the same subject, which is the divergence it exists to
+close. `adapters/subject-slug-map.json` is what a consumer keyed on the matrix slugs uses instead.
+
+## One inherited description to be aware of
+
+`code_or_strand`'s description is carried verbatim from the lane's file and reads "Exact standard
+code when verified (e.g. '3.OA.A.1')". No lane emits that cluster-lettered form - the mathematics
+lane states it writes `3.OA.1` deliberately, and ELA writes codes in a transposed house order. The
+description is left unedited to keep the delta minimal; what the codes actually look like, and how
+to join them against an official namespace, is recorded in the `code_format` block on every
+`standards/courses/<course_id>.standards.json`.
 
 ## Both are run
 
@@ -1474,9 +1591,11 @@ so the residual gap stays visible rather than being normalized out of sight.
     tot_cit = sum(rollup_total.values())
     write("standards/standards-custody-addendum.md", f"""# Standards Custody Addendum - Normalized Release
 
-Addendum to [`upstream/standards-custody-report.md`](upstream/standards-custody-report.md), which is
-carried here verbatim from the candidate. That report stands; this one records only what the
-normalization changed about custody, and what it deliberately did not.
+Addendum to the candidate's own custody report, carried verbatim at
+[`../upstream/g34-r1/standards/standards-custody-report.md`](../upstream/g34-r1/standards/standards-custody-report.md)
+together with every other candidate artifact, at the candidate's own relative paths so its internal
+links still resolve. That report stands; this one records only what the normalization changed about
+custody, and what it deliberately did not.
 
 ## 1. Citation form: resolved by projection, not by rewriting
 
@@ -1488,6 +1607,33 @@ Both are now produced, by projecting each string into
 `{{code_or_strand, source, mapping_status}}` where `code_or_strand` **is the lane's string,
 verbatim**. Nothing was re-cited, re-worded, dropped or added - proven per lesson by the citation
 sequence digest in [`../provenance/lesson-content-digests.csv`](../provenance/lesson-content-digests.csv).
+
+### Answering the candidate directly
+
+The candidate did not merely say the rollup was unreachable. It said, of deriving a status at all:
+
+> inferring a mapping status per citation would be inventing review state that no author asserted
+
+That objection is right about one thing and wrong about another, and this release should say which.
+
+**Right:** no per-citation review state exists, and none is manufactured here. `canonical` is issued
+only where a lane's own catalog records that the codes were read from the published document; it is
+never issued because a citation *looks* like a real code. 2850 citations are `unverified` and 697
+are `human-review` precisely because nothing in the corpus supports anything stronger.
+
+**Wrong:** `unverified` and `human-review` are not review state. Read the contract's own
+definitions - `unverified` means "source cited, exact code not yet confirmed" and `human-review`
+means "ambiguous / no official code exists". Both are statements about *the absence* of
+confirmation, which is exactly what the candidate established as fact. Leaving the field off
+asserted nothing; setting it to `unverified` asserts the finding.
+
+What remains a genuine judgement is the rule `lane-catalog membership implies canonical` (1210
+citations, R1 below). That rule is stated, its evidence is quoted, its caveats are carried on the
+rule itself, and reversing it is a one-line change in
+[`../adapters/standards-mapping-policy.json`](../adapters/standards-mapping-policy.json) - which is
+why the rule is a published artifact rather than a hard-coded default.
+
+### The rules
 
 `mapping_status` is derived by the published rules in
 [`../adapters/standards-mapping-policy.json`](../adapters/standards-mapping-policy.json). The rules
@@ -1503,6 +1649,21 @@ exist so no reader has to trust a judgement call:
 
 Rollup: **{rollup_total['canonical']} canonical, {rollup_total['unverified']} unverified,
 {rollup_total['human-review']} human-review**.
+
+### What `canonical` does and does not mean here
+
+Three caveats travel with the {rollup_total['canonical']} canonical citations and are recorded on
+rule R1 itself:
+
+1. **ELA codes are transposed.** MDE prints `<strand>.<grade>.<number>` (`RL.3.1`); this corpus
+   prints `<grade>.<strand>.<number>` (`3.RL.1`), the Manuel Academy house order already used for
+   Grade 5 in the sealed 1.0.0 package. Same standard, different string. Any join against an MDE or
+   Common Core namespace must transpose first. Every standards artifact carries a `code_format`
+   block saying so.
+2. **The ELA read was of a district-hosted mirror**, not michigan.gov - the lane records that
+   michigan.gov blocks automated retrieval of its own copy.
+3. **No licensed educator reviewed any of it.** `canonical` is a statement about a code matching a
+   document, never about pedagogical review.
 
 `canonical` is never issued on assembly judgement. {rollup_total['unverified'] + rollup_total['human-review']} of
 {tot_cit} citations still need a human before any alignment claim is made to a family. The
@@ -1578,7 +1739,7 @@ promotion session can consume. No lesson was rewritten.
 | Lessons | {got['lessons']} |
 | Unit assessments | {got['assessments']} |
 | Scheduled sessions | {got['scheduled_sessions']} (every lesson exactly once, every course weeks 1-36) |
-| Release-contract conformance | **{verdicts['release_contract_conformance']}** |
+| Release-contract conformance | **{verdicts['release_contract_conformance']}** - against this release's schema; 216 lessons still fail the lane's unmodified subject enum, reported as its own check |
 | Normalization integrity | **{verdicts['normalization_integrity']}** |
 | Preservation | **{verdicts['preservation']}** |
 
@@ -1627,10 +1788,12 @@ g34-r2/
   standards/courses/<course_id>.standards.json    20 standalone artifacts
   standards/standards-index.json, standards-rollup.json, standards-custody-addendum.md
   standards/sources/**                every lane standards artifact, verbatim
-  standards/upstream/                 the candidate's custody report and inventory, verbatim
   provenance/                         inputs, normalization ledger, content-equivalence proofs
-  validation/                         this release's report + the candidate's, verbatim
-  ledger/                             the pinned source-branch commits, verbatim
+  validation/                         this release's report
+  upstream/g34-r1/**                  every remaining candidate file, verbatim, at the candidate's
+                                      own paths - including its SHA256SUMS.txt, its custody report,
+                                      its validation report, its schema candidate, its assembler
+                                      and the pinned source-branch ledger
   tools/normalize.py                  regenerates everything above from the candidate
 ```
 
@@ -1650,7 +1813,16 @@ input produces a byte-identical tree.
   unverified, {rollup_total['human-review']} human-review** of {tot_cit} citations. The contract
   requires this rollup to be reported so convergence can judge the ratio. The ratio is not yet
   acceptable - {rollup_total['unverified'] + rollup_total['human-review']} citations need a human.
-  `canonical` was never issued on assembly judgement.
+  No citation is marked `canonical` without a lane catalog recording that the codes were read from
+  the published document; the derivation rule and its caveats are in
+  [`adapters/standards-mapping-policy.json`](adapters/standards-mapping-policy.json).
+- **`canonical` ELA codes are printed in transposed order.** MDE prints
+  `<strand>.<grade>.<number>` (`RL.3.1`); this corpus prints `<grade>.<strand>.<number>` (`3.RL.1`),
+  the house order the sealed 1.0.0 package already uses for Grade 5. Same standards, different
+  strings - **transpose before joining against an MDE or Common Core namespace.** The ELA codes were
+  read from a district-hosted mirror because michigan.gov blocks automated retrieval of its own
+  copy. Both facts are carried on rule R1 and in the `code_format` block of every standards
+  artifact. `canonical` never means an educator reviewed anything.
 - **Health and Physical Education (4 courses, 288 lessons) remain
   `PENDING_FINAL_HEALTH_REVIEW`** - an explicit external gate. They ship complete, not hidden.
 - **The release lane's own artifacts are still stale.** `release/course-matrix.json` and

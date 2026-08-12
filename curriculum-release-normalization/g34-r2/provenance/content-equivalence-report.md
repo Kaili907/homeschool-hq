@@ -55,11 +55,11 @@ adding, dropping, reordering, deduplicating or editing a single one of the
 
 ## 4. Everything that is not a lesson is byte-identical
 
-167 files - `units.json`, `assessments.json`, all 20 schedule CSVs and the
+175 files - `units.json`, `assessments.json`, all 20 schedule CSVs and the
 schedule index, every course guide, the ELA text banks and public-domain registers, the mathematics
 practice/projects/mastery-evidence files, and every lane standards artifact - are copied with no
 transformation and re-hashed after writing.
-Byte-identical: 167 of 167
+Byte-identical: 175 of 175
 ([`verbatim-files.json`](verbatim-files.json)).
 
 `lesson-index.csv`, regenerated from the *normalized* lessons, is byte-identical to the candidate's.
@@ -80,5 +80,5 @@ and title across all 1800 lessons.
 
 This release proves equivalence to `g34-r1`. `g34-r1` proved, by its own
 `content-byte-identical-to-source` check, that its 138 copied course files re-hash to the files in
-the pinned lane commits recorded in [`ledger/source-branches.json`](../ledger/source-branches.json).
+the pinned lane commits recorded in [`upstream/g34-r1/ledger/source-branches.json`](../upstream/g34-r1/ledger/source-branches.json).
 The two proofs compose: the instructional content here is the content the lanes authored.

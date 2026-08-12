@@ -134,7 +134,7 @@
       {
         "check": "verbatim-files-byte-identical",
         "result": "PASS",
-        "detail": "167 non-lesson files carried from g34-r1 re-hashed after write; 0 differ"
+        "detail": "175 non-lesson files carried from g34-r1 re-hashed after write; 0 differ"
       },
       {
         "check": "lesson-index-identical-to-candidate",
@@ -144,12 +144,12 @@
       {
         "check": "sealed-1.0.0-untouched",
         "result": "PASS",
-        "detail": "no file under curriculum-content/manuel-academy/1.0.0 is added, changed, or removed"
+        "detail": "the curriculum-content/manuel-academy/1.0.0 tree object at HEAD is identical to its tree object at the candidate's assembly base commit 656efba1, and the worktree is clean for that path - so no commit on this branch touched the sealed release, not merely no uncommitted edit"
       },
       {
         "check": "g34-r1-candidate-untouched",
         "result": "PASS",
-        "detail": "no file under curriculum-release-candidates/g34-r1 is added, changed, or removed"
+        "detail": "the worktree copy of curriculum-release-candidates/g34-r1 has no uncommitted change and re-hashes to the candidate's own SHA256SUMS.txt (see input-candidate-verified), so the input is the candidate as published"
       }
     ],
     "preservation": [

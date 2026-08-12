@@ -6,6 +6,12 @@
   "matrix_subject_slug": "mathematics",
   "standards_ref": "standards-reference.md#mathematics",
   "official_source": "Michigan K-12 Standards: Mathematics (MDE)",
+  "code_format": {
+    "printed_in_this_release": "<grade>.<domain>.<number>, no cluster letter (3.OA.1)",
+    "printed_by_the_official_source": "the lane states this matches the Michigan K-12 Standards: Mathematics document",
+    "join_warning": "MP.n practice codes are a Manuel Academy package convention the MDE document does not print; they carry mapping_status human-review.",
+    "evidence": "standards/sources/mathematics/standards/standards-map.json -> code_format, practice_code_note"
+  },
   "custody": "lane-authored standards artifact present",
   "lane_artifacts": [
     "standards/sources/mathematics/standards/standards-map.json",

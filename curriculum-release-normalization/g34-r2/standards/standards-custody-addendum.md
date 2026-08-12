@@ -1,8 +1,10 @@
 # Standards Custody Addendum - Normalized Release
 
-Addendum to [`upstream/standards-custody-report.md`](upstream/standards-custody-report.md), which is
-carried here verbatim from the candidate. That report stands; this one records only what the
-normalization changed about custody, and what it deliberately did not.
+Addendum to the candidate's own custody report, carried verbatim at
+[`../upstream/g34-r1/standards/standards-custody-report.md`](../upstream/g34-r1/standards/standards-custody-report.md)
+together with every other candidate artifact, at the candidate's own relative paths so its internal
+links still resolve. That report stands; this one records only what the normalization changed about
+custody, and what it deliberately did not.
 
 ## 1. Citation form: resolved by projection, not by rewriting
 
@@ -14,6 +16,33 @@ Both are now produced, by projecting each string into
 `{code_or_strand, source, mapping_status}` where `code_or_strand` **is the lane's string,
 verbatim**. Nothing was re-cited, re-worded, dropped or added - proven per lesson by the citation
 sequence digest in [`../provenance/lesson-content-digests.csv`](../provenance/lesson-content-digests.csv).
+
+### Answering the candidate directly
+
+The candidate did not merely say the rollup was unreachable. It said, of deriving a status at all:
+
+> inferring a mapping status per citation would be inventing review state that no author asserted
+
+That objection is right about one thing and wrong about another, and this release should say which.
+
+**Right:** no per-citation review state exists, and none is manufactured here. `canonical` is issued
+only where a lane's own catalog records that the codes were read from the published document; it is
+never issued because a citation *looks* like a real code. 2850 citations are `unverified` and 697
+are `human-review` precisely because nothing in the corpus supports anything stronger.
+
+**Wrong:** `unverified` and `human-review` are not review state. Read the contract's own
+definitions - `unverified` means "source cited, exact code not yet confirmed" and `human-review`
+means "ambiguous / no official code exists". Both are statements about *the absence* of
+confirmation, which is exactly what the candidate established as fact. Leaving the field off
+asserted nothing; setting it to `unverified` asserts the finding.
+
+What remains a genuine judgement is the rule `lane-catalog membership implies canonical` (1210
+citations, R1 below). That rule is stated, its evidence is quoted, its caveats are carried on the
+rule itself, and reversing it is a one-line change in
+[`../adapters/standards-mapping-policy.json`](../adapters/standards-mapping-policy.json) - which is
+why the rule is a published artifact rather than a hard-coded default.
+
+### The rules
 
 `mapping_status` is derived by the published rules in
 [`../adapters/standards-mapping-policy.json`](../adapters/standards-mapping-policy.json). The rules
@@ -29,6 +58,21 @@ exist so no reader has to trust a judgement call:
 
 Rollup: **1210 canonical, 2850 unverified,
 697 human-review**.
+
+### What `canonical` does and does not mean here
+
+Three caveats travel with the 1210 canonical citations and are recorded on
+rule R1 itself:
+
+1. **ELA codes are transposed.** MDE prints `<strand>.<grade>.<number>` (`RL.3.1`); this corpus
+   prints `<grade>.<strand>.<number>` (`3.RL.1`), the Manuel Academy house order already used for
+   Grade 5 in the sealed 1.0.0 package. Same standard, different string. Any join against an MDE or
+   Common Core namespace must transpose first. Every standards artifact carries a `code_format`
+   block saying so.
+2. **The ELA read was of a district-hosted mirror**, not michigan.gov - the lane records that
+   michigan.gov blocks automated retrieval of its own copy.
+3. **No licensed educator reviewed any of it.** `canonical` is a statement about a code matching a
+   document, never about pedagogical review.
 
 `canonical` is never issued on assembly judgement. 3547 of
 4757 citations still need a human before any alignment claim is made to a family. The

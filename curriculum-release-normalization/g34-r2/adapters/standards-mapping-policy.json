@@ -19,10 +19,17 @@
         "mathematics",
         "english-language-arts"
       ],
-      "test": "citation string appears verbatim in a lane-shipped standards catalog whose provenance block names the published MDE document as the source of record for those codes",
+      "test": "citation string appears verbatim in a lane-shipped standards catalog whose provenance block records that the codes were read from the published document",
       "evidence": [
-        "standards/sources/mathematics/standards/standards-map.json -> sources[0].role: 'Source of record for every Grade 3 and Grade 4 code and paraphrase in this catalog.'",
-        "standards/sources/english-language-arts/standards/michigan-ela-g3.json and michigan-ela-g4.json -> sources[1].note: 'every Grade 3 and Grade 4 code and sub-code below was read from this text'"
+        "standards/sources/mathematics/standards/standards-map.md: 'Verified domain ceilings: 3.G ends at 2, 3.MD ends at 8, 3.NBT ends at 3, 3.NF ends at 3, 3.OA ends at 9. Codes beyond these do not exist and none are used.' (and the Grade 4 equivalent) - a code-level statement about the document's contents, not just an attribution.",
+        "standards/sources/mathematics/PILOT_BLOCKERS.md section 7: 'Content was authored against the verified MDE standards document'. Note that section's own heading is 'No licensed-educator sign-off' - it records document verification, not educator review.",
+        "standards/sources/mathematics/standards/standards-map.json -> sources[0].role names the MDE mathematics PDF as source of record, and -> code_format states the printed form matches that document.",
+        "standards/sources/english-language-arts/standards/michigan-ela-g3.json and michigan-ela-g4.json -> sources[1].note: 'every Grade 3 and Grade 4 code and sub-code below was read from this text'."
+      ],
+      "carried_caveats": [
+        "The ELA source read was a district-hosted mirror of the MDE publication, not michigan.gov itself: the same note records 'Michigan.gov blocks automated retrieval of its own copy.' canonical here means read from that mirror.",
+        "ELA codes are printed in the Manuel Academy house order <grade>.<strand>.<number> (3.RL.1); MDE prints <strand>.<grade>.<number> (RL.3.1). Same standard, transposed. See the code_format block on every standards artifact, and standards/sources/english-language-arts/standards/standards-reference.md, 'Code order - read this before comparing against a state document'.",
+        "Neither lane recorded a licensed-educator review, and canonical does not assert one."
       ]
     },
     {
@@ -69,13 +76,15 @@
         "arts-and-music",
         "technology"
       ],
-      "test": "default: a published official source is named for the subject in release/standards-reference.md, and no lane recorded a code-level confirmation against it",
+      "test": "default: a published official source is named for the subject in release/standards-reference.md, and no lane recorded a code-level confirmation against it that this release accepts (see overridden_lane_claim)",
       "evidence": [
         "standards/sources/release/standards-reference.md 'Verification method and its limits': 'No code inside a PDF was fetched and transcribed by this session.'",
         "standards/sources/release/standards-reference.md Gap 4 directs technology/computer science to unverified explicitly.",
-        "standards/sources/{health,physical-education,arts-music,technology-computer-science}/standards-map.md each close with 'a human curriculum reviewer should confirm ... before this package is promoted' - an intent to verify, not a record of verification.",
+        "standards/sources/arts-music/standards-map.md and standards/sources/technology-computer-science/standards-map.md each close with 'A human curriculum reviewer should confirm ... before this package is promoted out of curriculum-authoring/' - an intent to verify, not a record of verification.",
+        "standards/sources/health/standards-map.md and standards/sources/physical-education/standards-map.md carry an 'Official sources' table and no mapping-status or verification section at all - they name the source and record no code-level confirmation against it.",
         "science and social-studies ship no lane standards artifact at all (r1 custody report Gap A), so no confirmation record can exist for their 1572 citations."
-      ]
+      ],
+      "overridden_lane_claim": "standards/sources/technology-computer-science/standards-map.md states its entries use 'mapping_status: canonical-equivalent, human-authored strand labels'. That claim is not accepted here: release/standards-reference.md Gap 4 directs technology/computer science to unverified until the lane confirms the current live MDE standard, and the strand labels are not codes read from the document. The release contract overrides the lane."
     }
   ],
   "subject_source_anchor": {

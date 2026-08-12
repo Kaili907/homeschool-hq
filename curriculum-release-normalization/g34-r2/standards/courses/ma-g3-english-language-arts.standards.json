@@ -6,6 +6,12 @@
   "matrix_subject_slug": "english-language-arts",
   "standards_ref": "standards-reference.md#english-language-arts",
   "official_source": "Michigan K-12 Standards: English Language Arts (MDE)",
+  "code_format": {
+    "printed_in_this_release": "<grade>.<strand>.<number> (3.RL.1)",
+    "printed_by_the_official_source": "<strand>.<grade>.<number> (RL.3.1)",
+    "join_warning": "TRANSPOSE THE FIRST TWO SEGMENTS before joining these codes against an MDE or Common Core namespace. 3.RL.1 and RL.3.1 denote the same standard. Machine consumers must not assume a leading strand prefix.",
+    "evidence": "standards/sources/english-language-arts/standards/standards-reference.md, 'Code order - read this before comparing against a state document'; michigan-ela-g{3,4}.json -> code_format_in_this_package vs code_format_as_published_by_mde"
+  },
   "custody": "lane-authored standards artifact present",
   "lane_artifacts": [
     "standards/sources/english-language-arts/standards/standards-map.json",

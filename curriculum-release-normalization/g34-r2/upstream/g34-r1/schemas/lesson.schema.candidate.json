@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/curriculum-lesson-grade34-candidate-v1.json",
+  "title": "Manuel Academy Curriculum Lesson - Grades 3/4 release candidate r1",
+  "description": "Schema CANDIDATE derived from the 1800 lessons actually authored by the six subject lanes, not a schema the lanes were held to. Required properties are the fields present in every authored lesson; array minimums are the minimum observed. It diverges from curriculum-authoring/full-family-grade34/release/lesson-schema.json in one substantive way: 'standards' entries are plain strings in every lane, not objects carrying mapping_status. See standards/standards-custody-report.md.",
+  "derived_from": {
+    "lessons_examined": 1800,
+    "courses_examined": 20
+  },
+  "type": "object",
+  "required": [
+    "accessibility_and_accommodations",
+    "adaptive_tutor_routes",
+    "answer_or_scoring_guidance",
+    "course_day",
+    "course_id",
+    "day_in_unit",
+    "essential_question",
+    "estimated_minutes",
+    "extension",
+    "focus",
+    "formative_check",
+    "grade",
+    "home_connection",
+    "learning_objectives",
+    "lesson_flow",
+    "lesson_id",
+    "mastery_rule",
+    "materials",
+    "media",
+    "parent_or_guardian_visibility",
+    "phase",
+    "safety_and_privacy",
+    "schema_version",
+    "standards",
+    "student_activity",
+    "subject",
+    "success_criteria",
+    "title",
+    "unit_number",
+    "unit_title"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "1.0",
+        "1.1"
+      ]
+    },
+    "lesson_id": {
+      "type": "string",
+      "pattern": "^ma-g(3|4)-[a-z-]+-u[0-9]{2}-l[0-9]{2}$"
+    },
+    "course_id": {
+      "type": "string",
+      "enum": [
+        "ma-g3-mathematics",
+        "ma-g3-english-language-arts",
+        "ma-g3-science",
+        "ma-g3-social-studies",
+        "ma-g3-health",
+        "ma-g3-physical-education",
+        "ma-g3-ready-for-life",
+        "ma-g3-tech-cs",
+        "ma-g3-arts-music",
+        "ma-g3-financial-literacy",
+        "ma-g4-mathematics",
+        "ma-g4-english-language-arts",
+        "ma-g4-science",
+        "ma-g4-social-studies",
+        "ma-g4-health",
+        "ma-g4-physical-education",
+        "ma-g4-ready-for-life",
+        "ma-g4-tech-cs",
+        "ma-g4-arts-music",
+        "ma-g4-financial-literacy"
+      ]
+    },
+    "grade": {
+      "enum": [
+        3,
+        4
+      ]
+    },
+    "subject": {
+      "enum": [
+        "mathematics",
+        "english-language-arts",
+        "science",
+        "social-studies",
+        "health",
+        "physical-education",
+        "ready-for-life",
+        "technology",
+        "arts-and-music",
+        "financial-literacy"
+      ]
+    },
+    "course_day": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 180
+    },
+    "unit_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "unit_title": {
+      "type": "string"
+    },
+    "day_in_unit": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "phase": {
+      "type": "string"
+    },
+    "focus": {
+      "type": "string"
+    },
+    "estimated_minutes": {
+      "type": "string"
+    },
+    "standards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "learning_objectives": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string"
+      }
+    },
+    "success_criteria": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string"
+      }
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 3
+    },
+    "lesson_flow": {
+      "type": "array",
+      "minItems": 5
+    },
+    "student_activity": {
+      "type": "string"
+    },
+    "formative_check": {
+      "type": "string"
+    },
+    "answer_or_scoring_guidance": {
+      "type": "string"
+    },
+    "adaptive_tutor_routes": {
+      "type": "array",
+      "minItems": 1
+    },
+    "mastery_rule": {
+      "type": "string"
+    },
+    "extension": {
+      "type": "string"
+    },
+    "accessibility_and_accommodations": {
+      "type": "array",
+      "minItems": 6
+    },
+    "safety_and_privacy": {
+      "type": "array",
+      "minItems": 4
+    },
+    "media": {
+      "type": "object",
+      "required": [
+        "required",
+        "fallback"
+      ],
+      "properties": {
+        "required": {
+          "const": false
+        }
+      }
+    },
+    "parent_or_guardian_visibility": {
+      "type": "string"
+    },
+    "home_connection": {
+      "type": "string"
+    },
+    "essential_question": {
+      "type": "string"
+    }
+  },
+  "lane_specific_optional_properties": [
+    "academic_vocabulary",
+    "adapted_alternative",
+    "adaptive_support",
+    "assessed",
+    "common_error",
+    "completion_authority",
+    "counts_toward_independent_mastery_evidence",
+    "cues",
+    "evidence_mode",
+    "evidence_record",
+    "evidence_type",
+    "fixed_answer_protection",
+    "guardian_safety_ack",
+    "guardian_safety_review",
+    "investigation_alternative",
+    "key_points",
+    "mastery",
+    "persistence",
+    "practice_scenario",
+    "real_world_action",
+    "representations",
+    "source_integrity",
+    "speaking_and_listening_alternatives",
+    "student_authorship",
+    "study_adapter",
+    "support",
+    "target_misconception",
+    "text_reference"
+  ],
+  "additionalProperties": true
+}

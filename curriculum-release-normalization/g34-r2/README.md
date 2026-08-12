@@ -13,7 +13,7 @@ promotion session can consume. No lesson was rewritten.
 | Lessons | 1800 |
 | Unit assessments | 154 |
 | Scheduled sessions | 1800 (every lesson exactly once, every course weeks 1-36) |
-| Release-contract conformance | **PASS** |
+| Release-contract conformance | **PASS** - against this release's schema; 216 lessons still fail the lane's unmodified subject enum, reported as its own check |
 | Normalization integrity | **PASS** |
 | Preservation | **PASS** |
 
@@ -37,7 +37,7 @@ Details: [`provenance/normalization-ledger.json`](provenance/normalization-ledge
   reproduces the candidate's own JSONL line **byte for byte**.
 - **1800 of 1800** lessons: SHA256 over every field outside
   the 3 normalized ones is identical to the candidate's.
-- **167 of 167** non-lesson files are
+- **175 of 175** non-lesson files are
   byte-identical to the candidate's.
 - `lesson-index.csv` is byte-identical to the candidate's, fixing every id in one hash.
 - All counts, ids, schedules and assessments preserved.
@@ -62,10 +62,12 @@ g34-r2/
   standards/courses/<course_id>.standards.json    20 standalone artifacts
   standards/standards-index.json, standards-rollup.json, standards-custody-addendum.md
   standards/sources/**                every lane standards artifact, verbatim
-  standards/upstream/                 the candidate's custody report and inventory, verbatim
   provenance/                         inputs, normalization ledger, content-equivalence proofs
-  validation/                         this release's report + the candidate's, verbatim
-  ledger/                             the pinned source-branch commits, verbatim
+  validation/                         this release's report
+  upstream/g34-r1/**                  every remaining candidate file, verbatim, at the candidate's
+                                      own paths - including its SHA256SUMS.txt, its custody report,
+                                      its validation report, its schema candidate, its assembler
+                                      and the pinned source-branch ledger
   tools/normalize.py                  regenerates everything above from the candidate
 ```
 
@@ -85,7 +87,16 @@ input produces a byte-identical tree.
   unverified, 697 human-review** of 4757 citations. The contract
   requires this rollup to be reported so convergence can judge the ratio. The ratio is not yet
   acceptable - 3547 citations need a human.
-  `canonical` was never issued on assembly judgement.
+  No citation is marked `canonical` without a lane catalog recording that the codes were read from
+  the published document; the derivation rule and its caveats are in
+  [`adapters/standards-mapping-policy.json`](adapters/standards-mapping-policy.json).
+- **`canonical` ELA codes are printed in transposed order.** MDE prints
+  `<strand>.<grade>.<number>` (`RL.3.1`); this corpus prints `<grade>.<strand>.<number>` (`3.RL.1`),
+  the house order the sealed 1.0.0 package already uses for Grade 5. Same standards, different
+  strings - **transpose before joining against an MDE or Common Core namespace.** The ELA codes were
+  read from a district-hosted mirror because michigan.gov blocks automated retrieval of its own
+  copy. Both facts are carried on rule R1 and in the `code_format` block of every standards
+  artifact. `canonical` never means an educator reviewed anything.
 - **Health and Physical Education (4 courses, 288 lessons) remain
   `PENDING_FINAL_HEALTH_REVIEW`** - an explicit external gate. They ship complete, not hidden.
 - **The release lane's own artifacts are still stale.** `release/course-matrix.json` and

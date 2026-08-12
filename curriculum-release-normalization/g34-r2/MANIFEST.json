@@ -240,7 +240,7 @@
     "standards_rollup": "standards/standards-rollup.json",
     "validation": "validation/validation.json",
     "content_equivalence": "provenance/content-equivalence.json",
-    "source_ledger": "ledger/source-branches.json",
+    "source_ledger": "upstream/g34-r1/ledger/source-branches.json",
     "checksums": "SHA256SUMS.txt"
   },
   "course_status": {
@@ -274,7 +274,8 @@
     "overall": "PASS",
     "release_contract_conformance": "PASS",
     "normalization_integrity": "PASS",
-    "preservation": "PASS"
+    "preservation": "PASS",
+    "caveat": "lesson-schema-compatibility PASSes against schemas/lesson.release.v1.json, which this release authored. Against standards/sources/release/lesson-schema.json as the release-standards lane wrote it, 216 lessons still fail on the stale subject enum; that is reported as its own named check, not folded into the verdict."
   },
   "boundaries": {
     "owns": "curriculum-release-normalization/g34-r2/**",

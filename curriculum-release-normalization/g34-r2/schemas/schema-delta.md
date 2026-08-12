@@ -37,8 +37,24 @@ Retargeted to this release. No constraint changes.
 
 `schema_version` keeps `const: "1.0"`. The `standards` item shape keeps its three required
 properties and the `mapping_status` enum. Every `required` field, `minItems`, `minLength`,
-`pattern`, and range is untouched. A lesson that validates against the lane's file also validates
-against this one: the only relaxation is on `subject`, and it is a widening to the canonical values.
+`pattern`, and range is untouched. The subject enum is the only constraint change in either
+direction.
+
+**It is a substitution, not a widening.** `technology-computer-science` and `arts-music` are
+*removed*, not kept alongside the canonical values, so neither schema subsumes the other: a lesson
+carrying a matrix slug would validate against the lane's file and fail this one. That case does not
+arise in this corpus - 0 of 1800 lessons carry a matrix slug - and keeping both would have made the
+release schema accept two spellings of the same subject, which is the divergence it exists to
+close. `adapters/subject-slug-map.json` is what a consumer keyed on the matrix slugs uses instead.
+
+## One inherited description to be aware of
+
+`code_or_strand`'s description is carried verbatim from the lane's file and reads "Exact standard
+code when verified (e.g. '3.OA.A.1')". No lane emits that cluster-lettered form - the mathematics
+lane states it writes `3.OA.1` deliberately, and ELA writes codes in a transposed house order. The
+description is left unedited to keep the delta minimal; what the codes actually look like, and how
+to join them against an official namespace, is recorded in the `code_format` block on every
+`standards/courses/<course_id>.standards.json`.
 
 ## Both are run
 
