@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l04",
+  "lessonId": "ma-g3-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Sorting accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Sorts fewer than half the tools into the correct group." },
+          { "label": "Proficient", "descriptor": "Sorts all tools correctly, with adult confirmation, into helper or adult-only." },
+          { "label": "Advanced", "descriptor": "Sorts all tools correctly and, unprompted, asks about an ambiguous tool before guessing." }
+        ]
+      },
+      {
+        "dimension": "Reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Gives no reason or an unrelated reason (size, color, favorite) for a sort." },
+          { "label": "Proficient", "descriptor": "Gives a reason grounded in sharpness, heat, or electricity for most tools." },
+          { "label": "Advanced", "descriptor": "Gives a grounded reason for every tool and names the specific hazard each adult-only tool presents." }
+        ]
+      },
+      {
+        "dimension": "Boundary respected",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Picks up or attempts to use an adult-only tool during the task." },
+          { "label": "Proficient", "descriptor": "Points to or names adult-only tools without touching them." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and independently reminds themselves aloud not to touch the tool before the adult intervenes." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner never physically operates an adult-only tool during the sort.",
+      "At least one reason cites sharpness, heat, or an electrical part specifically, not a vague 'it's dangerous.'",
+      "The reflection response names a specific tool and a specific reason for the surprise, not a generic answer."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

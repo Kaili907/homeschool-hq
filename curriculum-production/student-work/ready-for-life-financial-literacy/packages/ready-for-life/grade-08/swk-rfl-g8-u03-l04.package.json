@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: knife heat and appliance safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL Grade 8 progression"],
+  "objective": "Learners demonstrate three specific kitchen-safety behaviors under adult supervision, a claw-grip knife cut, a safe stovetop-to-counter transfer of a hot pan, and correct appliance shutoff and unplugging, then explain the specific hazard each behavior prevents.",
+  "scenario": "With a trusted adult present the whole time, the learner uses a real cutting board and a kitchen knife to cut a soft vegetable using the claw grip, transfers one hot pan from the stovetop to a trivet on the counter, and shuts off and unplugs one small appliance correctly at the end.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "drawing", "planning page", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult is present and within arm's reach for every knife, stovetop, and appliance step in this lesson.",
+    "The knife used is age-appropriate and chosen by the adult; the learner does not select or handle any knife the adult has not approved.",
+    "Stop immediately and let the adult take over for any slip, burn risk, or appliance malfunction."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If knife or stovetop use is not available, the learner instead watches an adult demonstrate all three behaviors once, then narrates each step back in their own words and identifies, for each, the specific body part or hazard the technique protects."
+  },
+  "materials": [
+    "a cutting board",
+    "an age-appropriate kitchen knife chosen by the adult",
+    "one soft vegetable",
+    "a pot or pan that can be safely heated",
+    "a trivet or heat-safe surface",
+    "one small kitchen appliance"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before starting, watch your adult demonstrate all three safety behaviors once.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the claw-grip hand position in your own words: where do the fingertips go and where does the knuckle stay?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present, perform all three behaviors: cut the vegetable using the claw grip, transfer the hot pan to the trivet, and shut off and unplug the appliance.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I curled my fingertips under and kept my knuckles as the guide while cutting." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I used potholders and moved the hot pan directly to the trivet without setting it on an unprotected surface." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I turned the appliance off before unplugging it, not the other order." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without looking back at your notes, explain each behavior to your adult in your own words.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Which of the three behaviors felt least natural to do correctly, and what made it harder than the others?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Connect each behavior to the specific hazard it prevents.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "For each of the three behaviors, name the specific injury or hazard it is designed to prevent (for example, what the claw grip protects against specifically)." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's claw grip drifts (fingertips extending forward instead of curling under), reteach with a dry run on a whole, uncut vegetable: practice the hand position and a slow pretend cutting motion five times before making a real cut.",
+  "extension": "Have the learner demonstrate the same three behaviors using a different food item and a different appliance, and explain in writing whether the technique changed at all or stayed identical.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l04.scoring.json",
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

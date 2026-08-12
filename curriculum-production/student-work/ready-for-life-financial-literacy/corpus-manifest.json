@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "generatedFrom": {
+    "grade34Canonical": "curriculum-content/manuel-academy/1.0.0/grades/{grade-3,grade-4}/courses/{ready-for-life,financial-literacy} (mac-g34-rfl-finlit-r1)",
+    "canonical578": "curriculum-content/manuel-academy/1.0.0/grades/{grade-5,grade-7,grade-8}/courses/{ready-for-life,financial-literacy} (mac-canonical-grade-authority-r1, byte-identical in this worktree)",
+    "highSchool": "curriculum-content/manuel-academy/1.1.0/grades/grade-9/courses/{ready-for-life,financial-literacy} (mac-hs912-rfl-finlit-r1)"
+  },
+  "scope": "A representative vertical slice: 2 ready-for-life lessons (one guardian-certified real-world task, one learner-authority lesson) and 2 financial-literacy lessons (one fixed-answer-key item, one judgment/reasoning item with a fixed model answer) per grade band, for grades 3, 4, 5, 7, 8, and HS grade 9 (representative of HS 9-12).",
+  "totalPackages": 24,
+  "countsByGradeAndSubject": {
+    "grade-03": { "ready-for-life": 2, "financial-literacy": 2 },
+    "grade-04": { "ready-for-life": 2, "financial-literacy": 2 },
+    "grade-05": { "ready-for-life": 2, "financial-literacy": 2 },
+    "grade-07": { "ready-for-life": 2, "financial-literacy": 2 },
+    "grade-08": { "ready-for-life": 2, "financial-literacy": 2 },
+    "grade-09-hs": { "ready-for-life": 2, "financial-literacy": 2 }
+  },
+  "completionAuthorityCounts": {
+    "guardian": 6,
+    "learner": 18
+  },
+  "scoringAuthorityCounts": {
+    "ANSWER_KEY": 12,
+    "RUBRIC": 6,
+    "SCORING_JUDGMENT": 6
+  },
+  "notCovered": {
+    "remainingLessonsPerCourse": "Each source course has 36 lessons (72 for grade-8 financial-literacy); only 2 per course are authored as production student-work here. The other 32-70 lessons per course are not yet built.",
+    "hsGrades10to12": "Only HS grade 9 is authored. Grades 10, 11, and 12 (curriculum-content 1.1.0) are not covered.",
+    "reason": "Scoped as a vertical slice demonstrating the full task-sheet + scoring + attestation + remediation/extension pattern at production quality across every requested grade band, rather than partially covering more lessons at lower fidelity. Extending coverage lesson-by-lesson is mechanical repetition of this same pattern, not open design work."
+  }
+}

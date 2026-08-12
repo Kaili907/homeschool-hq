@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u01-l02",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Taking Care of My Own Space",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: the five-minute tidy"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Ready for Life v1 Lessons 01–03"],
+  "objective": "Learners follow a four-step five-minute tidy routine (pick up floor items, clear the flat surfaces, put items back where they belong, do one last visual scan) in their own bedroom or a shared space, timing themselves so they learn what a five-minute effort actually looks like.",
+  "scenario": "The learner picks one small, real space, such as their bedroom floor or a corner of a shared playroom, sets a timer for five minutes, and runs through the four-step routine once while a family member is nearby but not doing the tidying for them.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["a timer or clock", "one real space that needs tidying"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before starting the timer, look at your space and picture how it will look when you are done.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the one spot in your space that looks the messiest right now." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Set a timer for five minutes and run the four steps in order: pick up floor items, clear flat surfaces, put items back where they belong, then do one last visual scan.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I picked up every item on the floor first, before touching surfaces." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I cleared off at least one flat surface, like a desk or dresser top." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I put items back in a specific home, not just a different pile." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I did one last visual scan of the whole space before stopping the timer." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Check the timer.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Did you finish all four steps before the timer ran out, or did you need more time? If you needed more time, which step took longest?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your space to how it looked before.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe one specific difference between your space before and after the five-minute tidy." }
+      ]
+    }
+  ],
+  "remediation": "If a learner runs out of time on step one because they stop to play with items they pick up, reteach with a one-handed rule: the picking-up hand only carries items to their home and does not stop to use them, practiced on five scattered items before returning to the full space.",
+  "extension": "Have the learner run the same five-minute tidy in a second space the next day and compare, in writing, which of the two spaces was faster to tidy and why.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u01-l02.scoring.json",
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g3-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g7-u03-l04",
+  "lessonId": "ma-g7-financial-literacy-u03-l04",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "14 weeks",
+        "verification": { "method": "recomputed", "reasoning": "84.00 / 6.00 = 14, recomputed by dividing the stated goal by the stated weekly deposit." }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$48.00",
+        "verification": { "method": "recomputed", "reasoning": "4 weeks x 6.00 = 24.00 in regular deposits, plus the 24.00 gift = 48.00 total right after the week-4 deposit and gift." }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$36.00",
+        "verification": { "method": "recomputed", "reasoning": "84.00 - 48.00 = 36.00, recomputed from the goal and the running total from t2-p1." }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "6 weeks",
+        "verification": { "method": "recomputed", "reasoning": "36.00 / 6.00 = 6, recomputed by dividing the remaining amount from t2-p2 by the unchanged weekly deposit of 6.00." }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "Week 10",
+        "verification": { "method": "recomputed", "reasoning": "4 (weeks already completed) + 6 (additional weeks from t3-p1) = week 10." }
+      },
+      {
+        "ref": "t4-p1",
+        "answer": "The gift saved Theo 4 weeks (14 weeks originally minus 10 weeks with the gift). A lump sum shortens the timeline because it replaces several weeks' worth of regular deposits all at once, so fewer weekly deposits are needed to close the remaining gap.",
+        "verification": { "method": "recomputed", "reasoning": "14 (from t1-p1) - 10 (from t3-p2) = 4 weeks saved; this is a direct recomputation from the two already-verified week counts." }
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

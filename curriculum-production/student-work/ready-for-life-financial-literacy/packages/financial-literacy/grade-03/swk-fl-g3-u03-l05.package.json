@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g3-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u03-l05",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Comparing",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: checking the pretend total"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["Michigan Personal Finance foundations", "Grade 3 economics connections"],
+  "objective": "Learners add up the pretend prices of three make-believe items to find a total, compare that total against a fixed pretend budget of ten dollars, and decide whether the pretend shopping trip fits inside the budget.",
+  "scenario": "This is a fictional, simulated scenario using pretend money only: a made-up character named Sam has $10.00 of pretend spending money for a make-believe trip to a pretend market stand. Nothing here involves real money, a real account, or a real purchase.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the pretend price list on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Sam's pretend market stand lists these pretend prices: an apple $1.25, a bookmark $2.00, and a small toy $4.50.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-numeric", "text": "What is the pretend total for all three items?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sam has $10.00 of pretend spending money.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "Does Sam's pretend total for the three items fit inside the $10.00 pretend budget?", "choices": ["Yes, it fits", "No, it does not fit"] },
+        { "ref": "t2-p2", "promptType": "fixed-numeric", "text": "How much pretend money would Sam have left over, or how much over budget would Sam be?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Sam decides to also add a pretend sticker sheet for $1.75.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-numeric", "text": "What is the new pretend total with all four items?", "unit": "USD" },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Does the new total still fit inside the $10.00 pretend budget?", "choices": ["Yes, it fits", "No, it does not fit"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about checking a total before spending.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain in your own words why it is helpful to add up a pretend total before deciding to buy something, even in a pretend shopping trip." }
+      ]
+    }
+  ],
+  "remediation": "If a learner adds the individual prices incorrectly, reteach with pretend paper coins and bills so the amounts can be physically combined and counted before returning to the written addition.",
+  "extension": "Have the learner design their own pretend three-item shopping list that comes exactly to $10.00, showing the addition that proves it, then design a second pretend list that comes to exactly $0.00 left over after four items instead of three.",
+  "scoringRef": "scoring/financial-literacy/grade-03/swk-fl-g3-u03-l05.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g3-financial-literacy-u03-l05",
+    "authoredBy": "manual"
+  }
+}

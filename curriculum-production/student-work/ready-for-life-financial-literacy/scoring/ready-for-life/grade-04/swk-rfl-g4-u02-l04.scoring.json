@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l04",
+  "lessonId": "ma-g4-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Pretreatment technique",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Detergent is applied evenly to the whole item instead of targeted at the stain, or the wait step is skipped." },
+          { "label": "Proficient", "descriptor": "Detergent is targeted at the stain and allowed to sit before washing." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the learner explains why targeting concentrates the cleaning power where it is needed." }
+        ]
+      },
+      {
+        "dimension": "Observation and next step",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Result is not checked closely, or the next-step answer is vague ('try again')." },
+          { "label": "Proficient", "descriptor": "Result is described accurately (gone, lighter, unchanged) and a specific next step is named if needed." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the reasoning explanation correctly connects targeted pretreatment to a better result than washing alone." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner did not use any stain product beyond plain detergent without checking with the adult first.",
+      "The stain-description response names a specific color and location, not a vague 'it's dirty.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

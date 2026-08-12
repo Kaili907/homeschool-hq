@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g5-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u03-l05",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Budgeting",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: simple budgets"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["Michigan Personal Finance foundations", "Grade 5 economics connections"],
+  "objective": "Learners build a simple weekly budget for a fictional character by adding fixed and flexible spending categories, subtracting the total from a stated allowance, and identifying whether the budget leaves money left over or runs short.",
+  "scenario": "This is a fictional, simulated scenario: Priya, a made-up fifth grader, receives an $8 weekly allowance. She has already decided to set aside $2 for savings every week no matter what. The rest of her budget covers pretend categories that change week to week. No real money, account, or purchase is involved anywhere in this task.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the fictional budget table on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Priya's fictional week 1 budget has these planned amounts: savings $2.00, a birthday card for a friend $1.50, and a snack $1.00. Add up her planned spending and savings.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-numeric", "text": "What is the total of Priya's week 1 savings and planned spending?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Priya's allowance for week 1 is $8.00.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-numeric", "text": "After savings and planned spending, how much of Priya's $8.00 allowance is left unplanned for week 1?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For week 2, Priya's fictional planned amounts are: savings $2.00, a used book $3.25, a small game of tag entry fee $0.75, and a pencil set $2.50. Her allowance is still $8.00.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-numeric", "text": "What is the total of Priya's week 2 savings and planned spending?", "unit": "USD" },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Compared to her $8.00 allowance, does Priya's week 2 plan leave money left over, come out exactly even, or run short?", "choices": ["Leaves money left over", "Comes out exactly even", "Runs short"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare Priya's two weeks.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "If Priya's week 2 plan runs short, name one specific category she could reduce and explain how much that would need to change to make the week balance." }
+      ]
+    }
+  ],
+  "remediation": "If a learner adds the categories correctly but subtracts from the allowance incorrectly, reteach with a number line: mark the allowance as the starting point and count backward by each spending amount one at a time before combining them into a single subtraction.",
+  "extension": "Have the learner design a third fictional week with four categories of their own choosing that comes out to exactly $0.00 left over, showing the addition that proves it.",
+  "scoringRef": "scoring/financial-literacy/grade-05/swk-fl-g5-u03-l05.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g5-financial-literacy-u03-l05",
+    "authoredBy": "manual"
+  }
+}

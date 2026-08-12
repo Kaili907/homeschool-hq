@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u05-l02",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Professional and Personal Communication",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: email and message structure"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft one real professional-style email using a four-part structure, a clear subject line, a specific greeting, a body with exactly one request stated plainly, and a closing with a name, addressed to a real fictional scenario such as asking a coach about a schedule conflict or a teacher about a missed assignment.",
+  "scenario": "The learner picks one realistic scenario they might genuinely face, such as asking a coach, teacher, or activity leader a real question, and drafts a complete email following the four-part structure, without sending it to anyone since no real account or recipient is used in this task.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This draft is never sent as part of the lesson; no real email account or recipient address is required."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the four-part structure template on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick one realistic scenario where you would genuinely need to email an adult outside your family.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the scenario and the one specific thing you need from the recipient." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft your email using all four parts: a specific subject line, a greeting, a body with exactly one clearly stated request, and a closing with your name.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My subject line describes the specific topic, not a vague word like 'Question.'" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My body states exactly one request in plain, direct language." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My closing includes my name and, if relevant, one identifying detail the recipient would need (such as which class or team)." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read your draft out loud once, then revise it if any sentence would confuse the recipient about what you are asking.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name one sentence you changed after reading it aloud, and explain why the original version could have confused the recipient." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about tone.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one specific choice you made about tone or wording because you were writing to an adult outside your family rather than to a friend." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's email buries the request inside multiple unrelated sentences, reteach by having them state the request first as a single bare sentence with no context, then build the rest of the email's structure around that one clear sentence.",
+  "extension": "Have the learner draft a second email for a different realistic scenario that requires declining a request rather than making one, using the same four-part structure.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u05-l02.scoring.json",
+  "integrity": {
+    "sourceCorpusVersion": "1.1.0",
+    "sourceLessonId": "ma-g9-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

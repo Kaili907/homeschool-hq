@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g5-u04-l06",
+  "lessonId": "ma-g5-financial-literacy-u04-l06",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "Scam attempt",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A real bank never asks a customer to reply to a message with a full account number and password; this is the unit's core rule, so Message A is fixed as a scam by design of the item."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "It asks the reader to send a real account number and password by reply.",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Any answer naming the request for account-number-and-password as the specific violated rule is correct; a bare 'it seems suspicious' without naming the specific request is not sufficient."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "Safe",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Message B requests no account or personal information of any kind, so it is fixed as safe by design of the item."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Message B never asks for any account number, password, or personal information; Message A does.",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The correct answer must name absence of any information request as the deciding difference, not an unrelated feature like message length or sender name."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "Scam attempt",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Message C requests a card number and combines it with urgency and an unexpected prize, matching the same request-for-a-number pattern flagged as unsafe in Message A."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "Any two of: (1) it asks for a real card number, (2) it claims an unexpected prize the learner did not enter to win, (3) it creates urgency with an expiration deadline tonight.",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The item is built with exactly three warning signs; any two named and correctly attributed to the message's actual wording earns full credit."
+        }
+      },
+      {
+        "ref": "t4-p1",
+        "answer": "Never type or say a real account number, password, PIN, or card number in response to any message; always show the message to a trusted adult first, before replying.",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "This is the unit's stated safety policy; an acceptable response names both the refusal rule and the show-a-trusted-adult-first step. This scoring record and the task sheet it keys never collect a real credential from any learner."
+        }
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

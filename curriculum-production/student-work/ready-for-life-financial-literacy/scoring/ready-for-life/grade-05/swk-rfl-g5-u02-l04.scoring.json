@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l04",
+  "lessonId": "ma-g5-ready-for-life-u02-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Care-label reading",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Copies part of the label but cannot restate what it means in their own words." },
+          { "label": "Proficient", "descriptor": "Copies the label accurately and restates its meaning correctly in their own words." },
+          { "label": "Advanced", "descriptor": "Restates the label's meaning and explains why the fabric or item needs that specific care." }
+        ]
+      },
+      {
+        "dimension": "Wash technique",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Completes the wash with heavy adult hands-on help at most steps." },
+          { "label": "Proficient", "descriptor": "Completes wetting, detergent, rubbing, and rinsing correctly with the adult present but not doing the steps for them." },
+          { "label": "Advanced", "descriptor": "Completes all four wash steps independently and self-corrects at least one step without adult prompting." }
+        ]
+      },
+      {
+        "dimension": "Finishing the loop",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Item is wrung and left to dry but is visibly stretched, misshapen, or hung somewhere unsafe or damp-prone." },
+          { "label": "Proficient", "descriptor": "Item is gently wrung, reshaped, and hung in a sensible, explained location." },
+          { "label": "Advanced", "descriptor": "Item is reshaped well and the learner names a specific reason their drying spot avoids drips, sun damage, or crowding." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Water temperature was cool or lukewarm, checked by the guardian.",
+      "Detergent amount was small, not poured freely.",
+      "Wringing motion was a press-and-squeeze or gentle twist, not a hard wrench.",
+      "Reflection response names a specific difficulty rather than a generic 'it was fine.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g9-u04-l04",
+  "lessonId": "ma-g9-financial-literacy-u04-l04",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      { "ref": "t1-p1", "answer": "$397.40", "verification": { "method": "recomputed", "reasoning": "312.40 + 85.00 = 397.40, recomputed from the stated beginning balance and first transaction." } },
+      { "ref": "t1-p2", "answer": "$354.65", "verification": { "method": "recomputed", "reasoning": "397.40 - 42.75 = 354.65, recomputed from the t1-p1 running balance and the second transaction." } },
+      { "ref": "t2-p1", "answer": "$370.85", "verification": { "method": "recomputed", "reasoning": "354.65 + 16.20 = 370.85, recomputed from the t1-p2 running balance and the third transaction." } },
+      { "ref": "t2-p2", "answer": "$360.86", "verification": { "method": "recomputed", "reasoning": "370.85 - 9.99 = 360.86, recomputed from the t2-p1 running balance and the fourth transaction." } },
+      { "ref": "t3-p1", "answer": "Yes, it matches", "verification": { "method": "recomputed", "reasoning": "The independently recomputed ending balance of 360.86 (from t2-p2) equals the statement's printed ending balance of 360.86 exactly." } },
+      { "ref": "t3-p2", "answer": "Not applicable in this instance, since the computed balance matches; if a mismatch ever occurred, the correct method is to recheck the running balance after each transaction in order, comparing it to a re-derived value, until the first transaction where the two disagree.", "verification": { "method": "asserted-fixed-value", "reasoning": "This item is deliberately built to match, so the correct response acknowledges the match while still stating the general recheck method the unit teaches." } },
+      { "ref": "t4-p1", "answer": "Checking only the final balance can hide an error where two mistakes happen to cancel out, or can only tell you that something is wrong without showing where; checking transaction by transaction pinpoints exactly which entry caused a discrepancy as soon as it appears.", "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must explain that transaction-by-transaction checking localizes an error, not just assert that it is 'more careful.'" } }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

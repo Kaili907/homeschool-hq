@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g8-u04-l03",
+  "lessonId": "ma-g8-financial-literacy-u04-l03",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$12.00",
+        "verification": { "method": "recomputed", "reasoning": "0.03 x 400.00 = 12.00, recomputed by converting 3% to the decimal 0.03 and multiplying by the stated balance." }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$388.00",
+        "verification": { "method": "recomputed", "reasoning": "400.00 - 12.00 = 388.00, recomputed from the starting balance and the t1-p1 payment." }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$396.00",
+        "verification": { "method": "recomputed", "reasoning": "388.00 + 8.00 = 396.00, recomputed from the t2-p1 remaining balance and the stated 8.00 interest charge." }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$4.00",
+        "verification": { "method": "recomputed", "reasoning": "400.00 - 396.00 = 4.00, recomputed from the original balance and the t2-p2 new balance." }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "Only slightly",
+        "verification": { "method": "recomputed", "reasoning": "A 4.00 decrease on a 400.00 balance is a 1% reduction, which is not a meaningful shrink; recomputed directly from the t3-p1 result." }
+      },
+      {
+        "ref": "t4-p1",
+        "answer": "Because the minimum payment (12.00) was only slightly larger than the interest charge added back (8.00), almost all of the payment was absorbed by interest, leaving only a 4.00 net reduction on a 400.00 balance; as long as interest stays close to the minimum payment amount, the balance barely moves.",
+        "verification": { "method": "recomputed", "reasoning": "This explanation follows directly from the already-verified figures in t1-p1, t2-p2, and t3-p1: a correct answer must connect the small net decrease to the interest charge nearly offsetting the minimum payment." }
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

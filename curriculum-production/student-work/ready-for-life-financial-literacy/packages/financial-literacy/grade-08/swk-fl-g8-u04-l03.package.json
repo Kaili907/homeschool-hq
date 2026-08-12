@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g8-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u04-l03",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit",
+    "dayInUnit": 3,
+    "phase": "Guided practice A",
+    "title": "Guided practice A: credit cards and minimum payments"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["PF4"],
+  "objective": "Learners calculate a fictional credit card's minimum payment as a percentage of its balance, then compute how much of the next month's balance remains if only the minimum is paid while new interest is added, showing why paying only the minimum keeps a balance from shrinking much.",
+  "scenario": "This is a fictional, simulated scenario with no real card or account involved: a made-up cardholder named Elena carries a simulated balance of $400.00 on a fictional card with a minimum-payment rule of 3% of the balance and a simulated monthly interest charge of $8.00 if any balance carries over.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the fictional card terms on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Elena's fictional card requires a minimum payment of 3% of her $400.00 balance.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-numeric", "text": "What is 3% of $400.00, rounded to the nearest cent?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Elena pays only the minimum payment from t1-p1. Her fictional card also adds $8.00 of simulated interest to whatever balance remains after her payment.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-numeric", "text": "After Elena's minimum payment, how much balance remains before interest is added?", "unit": "USD" },
+        { "ref": "t2-p2", "promptType": "fixed-numeric", "text": "After the $8.00 simulated interest is added, what is Elena's new balance for next month?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare Elena's starting balance to her new balance next month.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-numeric", "text": "By exactly how much did Elena's balance go down after making one minimum payment and one month of interest?", "unit": "USD" },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Compared to her original $400.00, did paying only the minimum meaningfully shrink Elena's balance?", "choices": ["Yes, meaningfully", "Only slightly", "It grew instead"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why minimum payments work this way.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain why paying only the minimum payment each month causes a balance to shrink very slowly, using your own numbers from this task as evidence." }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot convert 3% to a decimal correctly, reteach with a hundred-square model: shade 3 out of 100 squares, show that 3% equals 0.03, then multiply 0.03 by 400 using repeated addition of 0.03 groups of 100 before returning to direct multiplication.",
+  "extension": "Have the learner recalculate the whole scenario using a 5% minimum-payment rule instead of 3% and compare how much faster the balance shrinks, then estimate roughly how many months it would take at each rate to pay the balance down to zero if the balance never grew again.",
+  "scoringRef": "scoring/financial-literacy/grade-08/swk-fl-g8-u04-l03.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g8-financial-literacy-u04-l03",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g7-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u03-l04",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Budgeting and Saving",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: goal-based saving"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["PF3 foundations"],
+  "objective": "Learners calculate how many weeks a fictional saver needs to reach a savings goal at a fixed weekly deposit, then recalculate the timeline after a fictional one-time deposit changes, so they can see how a lump-sum contribution shortens a savings goal.",
+  "scenario": "This is a fictional, simulated scenario with no real account involved: a made-up seventh grader named Theo wants to save $84.00 for a simulated goal, depositing $6.00 of simulated money every week with no withdrawals.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the fictional savings scenario on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Theo saves $6.00 of simulated money every week toward the $84.00 simulated goal, starting from $0.00.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-numeric", "text": "How many weeks will it take Theo to reach exactly $84.00?", "unit": "weeks" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "After week 4, Theo receives a fictional $24.00 gift and deposits all of it into the same simulated savings goal on top of the regular weekly deposits.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-numeric", "text": "How much has Theo saved in total right after that week-4 deposit, including the $24.00 gift?", "unit": "USD" },
+        { "ref": "t2-p2", "promptType": "fixed-numeric", "text": "How much more does Theo still need to save to reach the full $84.00 goal after that point?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Continuing at $6.00 per week after week 4 with the gift already included.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-numeric", "text": "How many additional weeks, after week 4, does Theo need to finish reaching the $84.00 goal?", "unit": "weeks" },
+        { "ref": "t3-p2", "promptType": "fixed-numeric", "text": "In total, counting from week 1, in which week number does Theo reach the goal?", "unit": "week number" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the original plan to the plan with the gift.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain how many weeks the gift saved Theo compared to the original plan without it, and why a one-time lump sum has that effect on a savings timeline." }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides incorrectly or loses track of the running total, reteach with a week-by-week table listing the running total after each deposit, filling it in one row at a time until it reaches or passes the goal.",
+  "extension": "Have the learner design their own fictional savings goal and weekly deposit amount, calculate the weeks needed, then add their own fictional mid-plan lump sum and recalculate the new timeline.",
+  "scoringRef": "scoring/financial-literacy/grade-07/swk-fl-g7-u03-l04.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g7-financial-literacy-u03-l04",
+    "authoredBy": "manual"
+  }
+}

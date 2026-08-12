@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g4-u05-l04",
+  "lessonId": "ma-g4-financial-literacy-u05-l04",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1.00",
+        "verification": { "method": "recomputed", "reasoning": "11.00 - 10.00 = 1.00, recomputed from Offer A's stated payback and borrowed amounts." }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$0.50",
+        "verification": { "method": "recomputed", "reasoning": "10.50 - 10.00 = 0.50, recomputed from Offer B's stated payback and borrowed amounts." }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Offer B",
+        "verification": { "method": "recomputed", "reasoning": "0.50 (Offer B interest, from t2-p1) is less than 1.00 (Offer A interest, from t1-p1)." }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "Offer C is unusual; most real-world lenders charge some interest because lending has a cost and a risk, so paying back exactly the amount borrowed with no interest is not typical.",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must identify Offer C as atypical/unusual and connect it to the general pattern that borrowing normally costs something beyond the amount borrowed." }
+      },
+      {
+        "ref": "t4-p1",
+        "answer": "A lender charges interest because giving up the use of their own money for a while has a cost, and there is a chance the money will not be paid back at all, so interest compensates the lender for that wait and that risk.",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must name at least one of: compensation for the lender not having use of the money, or compensation for the risk of not being repaid; a bare 'because they want more money' without a reason is insufficient." }
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

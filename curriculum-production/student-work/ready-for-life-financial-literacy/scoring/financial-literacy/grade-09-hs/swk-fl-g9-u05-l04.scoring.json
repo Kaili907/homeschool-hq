@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g9-u05-l04",
+  "lessonId": "ma-g9-financial-literacy-u05-l04",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      { "ref": "t1-p1", "answer": "Go directly to the delivery company's official app or a phone number found independently (not from the text), and check delivery status there; it is independent because the contact method comes from a source the learner trusted before the suspicious message arrived, not from the message itself.", "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must name a contact method sourced independently of the message, not the link or number the message itself provides." } },
+      { "ref": "t2-p1", "answer": "No, a logo alone does not make it safe", "verification": { "method": "asserted-fixed-value", "reasoning": "A logo image can be copied exactly by anyone; the item is built to test whether the learner relies on visual branding instead of verification, so the correct answer rejects the logo as proof." } },
+      { "ref": "t2-p2", "answer": "Call the number printed on a real card or statement, or type the bank's known web address directly rather than clicking any link in the email, and ask the bank directly whether the message is genuine.", "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must use a contact method the learner already had before the email arrived, not any link, number, or reply address contained in the email." } },
+      { "ref": "t3-p1", "answer": "No, caller ID can be faked", "verification": { "method": "asserted-fixed-value", "reasoning": "Caller ID display can be spoofed to show any name or number; the item is built to test this specific misconception, so the correct answer rejects caller ID as proof of identity." } },
+      { "ref": "t3-p2", "answer": "Hang up and call the school back using the phone number printed on a school handbook, website, or previous official letter, not any number associated with the incoming call, and confirm the request with a known staff member.", "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must specify an independently sourced contact method (handbook, official website, prior letter), not the incoming call itself." } },
+      { "ref": "t4-p1", "answer": "Never use contact information supplied by the message, call, or caller itself to verify it; always use a separately known, already-trusted contact method to check whether the request is real, no matter how legitimate the message looks.", "verification": { "method": "asserted-fixed-value", "reasoning": "This is the single method applied identically across all three scenarios in this item; an acceptable answer must state the independent-source principle, not just 'be careful' or 'check if it's real.'" } }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/rfl-finlit-scoring-record.schema.json",
+  "title": "Ready for Life / Financial Literacy scoring record (parent/teacher-only projection)",
+  "description": "Answer authority for one lesson's task sheet. Never shipped to a learner-facing renderer.",
+  "type": "object",
+  "required": ["schemaVersion", "packageId", "lessonId", "scoringAuthority", "nonDiagnosticGuard"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "pattern": "^swk-(rfl|fl)-" },
+    "lessonId": { "type": "string" },
+    "scoringAuthority": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["ANSWER_KEY", "RUBRIC", "SCORING_JUDGMENT"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "ANSWER_KEY" } } },
+          "then": {
+            "required": ["kind", "items"],
+            "properties": {
+              "items": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["ref", "answer", "verification"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ref": { "type": "string" },
+                    "answer": { "type": "string" },
+                    "verification": {
+                      "type": "object",
+                      "required": ["method", "reasoning"],
+                      "additionalProperties": false,
+                      "properties": {
+                        "method": { "enum": ["recomputed", "asserted-fixed-value"] },
+                        "reasoning": { "type": "string", "minLength": 1 }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "enum": ["RUBRIC", "SCORING_JUDGMENT"] } } },
+          "then": {
+            "required": ["kind", "criteria"],
+            "properties": {
+              "criteria": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["dimension", "levels"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "dimension": { "type": "string" },
+                    "levels": {
+                      "type": "array",
+                      "minItems": 2,
+                      "items": {
+                        "type": "object",
+                        "required": ["label", "descriptor"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "label": { "type": "string" },
+                          "descriptor": { "type": "string", "minLength": 1 }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "lookFors": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      ]
+    },
+    "completionAuthority": { "enum": ["learner", "guardian"] },
+    "nonDiagnosticGuard": {
+      "const": "Do not infer effort, motivation, diagnosis, or character from an error."
+    }
+  }
+}

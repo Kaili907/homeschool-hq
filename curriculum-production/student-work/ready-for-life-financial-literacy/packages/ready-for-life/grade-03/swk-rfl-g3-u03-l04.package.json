@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u03-l04",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Helper Safety",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: helper tools and adult-only tools"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Ready for Life v1 Lessons 07–09"],
+  "objective": "Learners sort a set of real kitchen tools into two groups, helper tools a third grader may use alone or with light supervision (a butter knife, a plastic scraper, a whisk) and adult-only tools that require an adult's hands the whole time (a chef's knife, the stove, the oven), so they can recognize the boundary before ever reaching for a tool on their own.",
+  "scenario": "A trusted adult lays out five or six real kitchen tools on a clean counter, including at least one clearly adult-only tool. The learner points to each tool, states out loud which group it belongs in, and explains the specific reason before the adult confirms or corrects the sort.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "drawing", "planning page", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult stays in the room and handles every adult-only tool named during this task.",
+    "The learner never picks up or handles a knife with a sharp blade, the stove, the oven, or any small appliance during this lesson.",
+    "If the learner is unsure which group a tool belongs in, the correct move is to ask the adult before touching it, and that asking counts as success."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If real kitchen tools are not available to lay out, the learner instead sorts six printed or hand-drawn pictures of kitchen tools into the two groups and, for each one, writes the specific reason it belongs there (sharp edge, heat, or electrical part versus none of those)."
+  },
+  "materials": [
+    "five or six real kitchen tools, including at least one adult-only tool",
+    "a clean, clear counter or table",
+    "a trusted adult"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, look at all the tools your adult has laid out.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List the tools you see on the counter, one per line." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult watching, pick up or point to each tool one at a time, say which group it belongs in out loud, and explain your reason before moving to the next tool.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I named a group (helper tool or adult-only tool) for every tool on the counter." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I gave a reason based on sharpness, heat, or electricity, not a guess." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I did not pick up any adult-only tool myself." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without looking back at the tools on the counter, write your final two lists purely from memory, testing whether the sorting rule stuck rather than just the specific tools you saw today.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Write your helper-tools list and your adult-only-tools list, then check both lists once against what you remember from the counter before moving on." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about one tool that surprised you.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Was there a tool you thought belonged in one group but your adult said it belonged in the other? Describe the tool and what you learned about it." }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts by size or how interesting a tool looks instead of by sharpness, heat, or electricity, reteach with just two tools at a time, a butter knife and a chef's knife, and have the learner name the one physical difference between them before adding more tools back in.",
+  "extension": "Have the learner sort three additional tools from a different room, such as the bathroom or garage, into helper and adult-only groups using the same three reasons, showing the rule transfers beyond the kitchen.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u03-l04.scoring.json",
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g3-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

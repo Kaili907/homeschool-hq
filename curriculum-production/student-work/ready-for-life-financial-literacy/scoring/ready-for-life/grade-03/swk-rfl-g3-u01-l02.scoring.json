@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l02",
+  "lessonId": "ma-g3-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Step order",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Steps are done out of order, for example clearing surfaces before the floor." },
+          { "label": "Proficient", "descriptor": "All four steps are completed in the modeled order." },
+          { "label": "Advanced", "descriptor": "Steps are completed in order and the learner explains why the order matters (floor first avoids re-messing a cleared surface)." }
+        ]
+      },
+      {
+        "dimension": "Completion within time",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than two of the four steps are completed in five minutes." },
+          { "label": "Proficient", "descriptor": "All four steps are completed at or near the five-minute mark." },
+          { "label": "Advanced", "descriptor": "All four steps are completed with time to spare, and the learner identifies specifically what made it fast." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Items are placed in a specific location, not a single catch-all pile.",
+      "The before/after reflection names a specific visible change, not a vague 'it's cleaner.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g8-u06-l05",
+  "lessonId": "ma-g8-financial-literacy-u06-l05",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      { "ref": "t1-p1", "answer": "Phishing attempt", "verification": { "method": "asserted-fixed-value", "reasoning": "Contact 1 combines urgency and a direct request for a username and password, matching the unit's phishing pattern by design." } },
+      { "ref": "t1-p2", "answer": "Any two of: (1) urgent, 1-hour deadline language, (2) a direct request to enter a username and password, (3) an unverified 'click here' link.", "verification": { "method": "asserted-fixed-value", "reasoning": "The item is built with exactly three red flags; any two correctly identified from the message's actual wording earns full credit." } },
+      { "ref": "t2-p1", "answer": "Scam attempt", "verification": { "method": "asserted-fixed-value", "reasoning": "Contact 2 asks the recipient to read aloud a verification code that was sent to confirm the recipient's own identity, a request no legitimate support contact makes, by design of the item." } },
+      { "ref": "t2-p2", "answer": "A verification code sent to your phone exists to prove that only you, not the caller, can access your account; reading it to the caller hands them exactly the proof they need to get in, even if they sound official.", "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must explain that the code's purpose is to prove the account holder's identity to the account holder alone, and that sharing it defeats that purpose." } },
+      { "ref": "t3-p1", "answer": "Legitimate", "verification": { "method": "asserted-fixed-value", "reasoning": "Contact 3 requires no immediate response and directs any question to a phone number printed on the recipient's own card rather than one supplied by the sender, matching the unit's legitimate-contact pattern by design." } },
+      { "ref": "t3-p2", "answer": "In Contact 3, the learner would call a number printed on their own card, a number they control and trust; in Contacts 1 and 2, the sender supplies the link or expects the learner to respond directly to them, so the sender controls the contact point instead.", "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must identify who controls the response channel (the recipient's own trusted source versus the sender) as the deciding safety feature." } },
+      { "ref": "t4-p1", "answer": "An acceptable three-step plan: (1) do not click any link, call back, or respond with any information; (2) independently look up or use an already-known, trusted phone number or contact method, not one supplied in the message; (3) tell a trusted adult about the message before taking any further action.", "verification": { "method": "asserted-fixed-value", "reasoning": "A correct plan must include refusing to respond directly to the message, using an independently verified contact method, and involving a trusted adult; plans missing all three of these elements are incomplete." } }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g5-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u04-l06",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Saving and Banking Safety",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: fraud and password safety"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["Michigan Personal Finance foundations", "Grade 5 economics connections"],
+  "objective": "Learners read three short fictional messages that ask for banking information and decide, for each one, whether it is a safe request or a scam attempt, then write the specific rule that gave the message away, so they build a habit of never sharing account numbers, passwords, PINs, or codes no matter who is asking.",
+  "scenario": "This task never asks the learner for any real information about themselves or their family. Every account, message, and amount described below is fictional and made up for practice only. No learner should ever type a real password, PIN, account number, or card number into this or any other worksheet.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task teaches learners to refuse requests for real financial information; it never collects any.",
+    "If a learner is unsure whether a real message they received is safe, the correct response is always to show a trusted adult, not to reply."
+  ],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the three fictional messages on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read fictional Message A: 'Hi, this is your bank. To fix a problem with your account, reply with your full account number and password right away.' Decide whether this is safe or a scam.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Is Message A safe to respond to as written, or is it a scam attempt?", "choices": ["Safe to respond to as written", "Scam attempt"] },
+        { "ref": "t1-p2", "promptType": "short-response", "text": "Name the one specific rule from this unit that Message A breaks." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read fictional Message B: 'Your library book is due Friday. No account information needed, just return it to the library desk.' Decide whether this is safe or a scam.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "Is Message B safe, or is it a scam attempt?", "choices": ["Safe", "Scam attempt"] },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Explain the one specific difference between Message A and Message B that makes B safe." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read fictional Message C: 'You won a prize! Enter your card number here to claim it before it expires tonight.' Decide whether this is safe or a scam, using what you learned from Messages A and B.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Is Message C safe, or is it a scam attempt?", "choices": ["Safe", "Scam attempt"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Name at least two separate scam-warning signs present in Message C." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write the one rule you will always follow.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Write the single rule you will follow if any message, real or fictional, ever asks you for an account number, password, PIN, or card number, and explain who you would go to first before responding to any such message." }
+      ]
+    }
+  ],
+  "remediation": "If a learner marks a safe message as a scam or misses a genuine scam signal, reteach with a two-column sort: list the same four warning signs (urgency, a request for a number or password, an unexpected prize, and pressure to act before checking with an adult) and have the learner match each sign to which of the three messages contains it before retrying the classification.",
+  "extension": "Have the learner write one additional fictional message of their own that contains exactly two scam-warning signs, then trade with a family member or classmate to identify which two signs they used.",
+  "scoringRef": "scoring/financial-literacy/grade-05/swk-fl-g5-u04-l06.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g5-financial-literacy-u04-l06",
+    "authoredBy": "manual"
+  }
+}

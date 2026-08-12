@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g8-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u06-l05",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring",
+    "dayInUnit": 5,
+    "phase": "Concept model B",
+    "title": "Concept model B: identity theft and cybersecurity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["PF6"],
+  "objective": "Learners analyze three fictional contact attempts, a phishing email, a fake tech-support call, and a legitimate bank mailing, identify the specific red flags in each, and build a three-step personal response plan for any future request for financial or account information.",
+  "scenario": "This task never asks the learner for any real account, password, or personal information. Every contact attempt described below is fictional and constructed for practice only.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task teaches recognition of identity-theft attempts; it never collects any real credential from the learner.",
+    "If a learner has received a real message like any of these, the correct response is to show a trusted adult immediately, not to reply."
+  ],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the three fictional contact attempts on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read fictional Contact 1, an email: 'URGENT: Your account will be suspended in 1 hour. Click here and enter your username and password immediately to verify your identity.'",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Is Contact 1 legitimate or a phishing attempt?", "choices": ["Legitimate", "Phishing attempt"] },
+        { "ref": "t1-p2", "promptType": "short-response", "text": "Name at least two specific red flags in Contact 1's wording." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read fictional Contact 2, a phone call: 'This is tech support. We detected a virus on your account. Please read us the verification code that was just texted to your phone so we can fix it.'",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "Is Contact 2 legitimate or a scam attempt?", "choices": ["Legitimate", "Scam attempt"] },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Explain why a real verification code should never be read aloud to someone who called you, even if they say they are tech support." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read fictional Contact 3, a paper letter mailed to the house: 'Your monthly statement is enclosed. No action is needed unless you have a question, in which case call the number printed on the back of your own card.'",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Is Contact 3 legitimate or a scam attempt?", "choices": ["Legitimate", "Scam attempt"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Name the specific feature of Contact 3 that makes it safer than Contacts 1 and 2 (hint: who controls the phone number used to respond)." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Build your own three-step response plan.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Write a three-step plan for what you will do if you ever receive a message or call asking you to verify an account by giving a password, code, or card number: step 1, step 2, step 3." }
+      ]
+    }
+  ],
+  "remediation": "If a learner marks the legitimate mailed statement as a scam, or misses a red flag in the phishing email, reteach with a two-column red-flag reference sheet (urgency language, a request for a code or password, an unfamiliar link or caller-provided phone number) and have the learner check each of the three contacts against the sheet line by line.",
+  "extension": "Have the learner research, with an adult, one real published example of a common phishing or scam technique and explain, in writing, which of this lesson's red flags it used.",
+  "scoringRef": "scoring/financial-literacy/grade-08/swk-fl-g8-u06-l05.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g8-financial-literacy-u06-l05",
+    "authoredBy": "manual"
+  }
+}

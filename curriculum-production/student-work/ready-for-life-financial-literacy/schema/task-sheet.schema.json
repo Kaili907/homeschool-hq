@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/rfl-finlit-task-sheet.schema.json",
+  "title": "Ready for Life / Financial Literacy student-work task sheet (student projection)",
+  "description": "Learner-facing material for one lesson. Carries no answer, rubric criterion, or sign-off certification field — those live in the sibling scoring record referenced by scoringRef. A learner reading this file alone cannot see how the task is graded or, for a guardian-certified task, mistake their own completion for certification.",
+  "type": "object",
+  "required": [
+    "schemaVersion", "packageId", "lessonRef", "subjectFamily", "objective",
+    "scenario", "isFictionalSimulation", "completionAuthority", "realWorldAction",
+    "tasks", "remediation", "extension", "scoringRef", "integrity"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "pattern": "^swk-(rfl|fl)-" },
+    "lessonRef": {
+      "type": "object",
+      "required": ["lessonId", "courseId", "grade", "subject", "unitNumber", "unitTitle", "dayInUnit", "phase", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "lessonId": { "type": "string" },
+        "courseId": { "type": "string" },
+        "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9] },
+        "subject": { "enum": ["ready-for-life", "financial-literacy"] },
+        "unitNumber": { "type": "integer", "minimum": 1 },
+        "unitTitle": { "type": "string" },
+        "dayInUnit": { "type": "integer", "minimum": 1 },
+        "phase": { "type": "string" },
+        "title": { "type": "string" }
+      }
+    },
+    "subjectFamily": {
+      "description": "Projects directly onto src/curriculum/production-quality SubjectFamily. ready-for-life is ARTS_RFL_PE_PROJECT (rubric/judgment authority, activity carries the instructional load); financial-literacy is MATH_STRUCTURED_FINLIT (requires guided practice and a fixed answer key for its fixed-answer items).",
+      "enum": ["ARTS_RFL_PE_PROJECT", "MATH_STRUCTURED_FINLIT"]
+    },
+    "standardsRefs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "objective": { "type": "string", "minLength": 1 },
+    "scenario": { "type": "string", "minLength": 1 },
+    "isFictionalSimulation": {
+      "type": "boolean",
+      "description": "true for every financial-literacy package without exception (no real money, account, or purchase is ever involved) and for a ready-for-life package's simulationAlternative narrative; false for a ready-for-life package's primary real-world household task."
+    },
+    "completionAuthority": {
+      "enum": ["learner", "guardian"],
+      "description": "Mirrors curriculum-content study-integration.json. 'guardian' means a household-authorized guardian action certifies the task; a learner's own completion click is recorded but never certifying."
+    },
+    "realWorldAction": { "type": "boolean" },
+    "signOff": {
+      "description": "Required and non-null when completionAuthority is 'guardian'; must be null when completionAuthority is 'learner'. Shape matches the existing curriculum-content study-integration.json sign_off contract.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": [
+            "requiresGuardianPermissionBeforeStart", "requiresTrustedAdultSupervision",
+            "certifyingActor", "studentSelfReport", "evidenceTypes", "identifiablePhotoRequired"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "requiresGuardianPermissionBeforeStart": { "const": true },
+            "requiresTrustedAdultSupervision": { "type": "boolean" },
+            "certifyingActor": { "const": "household-authorized guardian" },
+            "studentSelfReport": { "const": "recorded-but-not-certifying" },
+            "evidenceTypes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "identifiablePhotoRequired": { "const": false }
+          }
+        }
+      ]
+    },
+    "safetyNotes": { "type": "array", "items": { "type": "string" } },
+    "simulationAlternative": {
+      "description": "Required and present:true whenever realWorldAction is true, so a learner without safe access to the real materials, adult supervision, or setting still has a way to complete the lesson. Optional/absent when realWorldAction is false.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["present", "description"],
+          "additionalProperties": false,
+          "properties": {
+            "present": { "const": true },
+            "description": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "materials": { "type": "array", "items": { "type": "string" } },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["taskId", "kind", "directions", "prompts"],
+        "additionalProperties": false,
+        "properties": {
+          "taskId": { "type": "string" },
+          "kind": { "enum": ["warm-up", "guided", "independent", "performance-task", "reflection"] },
+          "directions": { "type": "string", "minLength": 1 },
+          "prompts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["ref", "promptType", "text"],
+              "additionalProperties": false,
+              "properties": {
+                "ref": { "type": "string" },
+                "promptType": {
+                  "enum": ["fixed-numeric", "fixed-choice", "short-response", "extended-response", "checklist-item"]
+                },
+                "text": { "type": "string", "minLength": 1 },
+                "choices": { "type": "array", "items": { "type": "string" }, "minItems": 2, "uniqueItems": true },
+                "unit": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "remediation": { "type": "string", "minLength": 1 },
+    "extension": { "type": "string", "minLength": 1 },
+    "scoringRef": { "type": "string", "pattern": "^scoring/" },
+    "financialSafety": {
+      "description": "financial-literacy packages only.",
+      "type": "object",
+      "required": ["neverRequestsRealCredentials", "noIndividualizedAdvice"],
+      "additionalProperties": false,
+      "properties": {
+        "neverRequestsRealCredentials": { "const": true },
+        "noIndividualizedAdvice": { "const": true }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["sourceCorpusVersion", "sourceLessonId", "authoredBy"],
+      "additionalProperties": false,
+      "properties": {
+        "sourceCorpusVersion": { "type": "string" },
+        "sourceLessonId": { "type": "string" },
+        "authoredBy": { "const": "manual" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "completionAuthority": { "const": "guardian" } } },
+      "then": { "properties": { "signOff": { "type": "object" } } }
+    },
+    {
+      "if": { "properties": { "completionAuthority": { "const": "learner" } } },
+      "then": { "properties": { "signOff": { "type": "null" } } }
+    },
+    {
+      "if": { "properties": { "realWorldAction": { "const": true } } },
+      "then": { "properties": { "simulationAlternative": { "type": "object" } } }
+    }
+  ]
+}

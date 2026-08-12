@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g4-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u05-l04",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Ads, Scams, Borrowing, and Giving",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: interest as the cost of borrowing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["Michigan Personal Finance foundations", "Grade 4 economics connections"],
+  "objective": "Learners compare two fictional simulated borrowing offers for the same amount by calculating the total simulated payback for each and identifying which offer costs less in simulated interest, learning that borrowing always costs more than the amount borrowed.",
+  "scenario": "This is a fictional, simulated scenario with no real money, loan, or account involved: a made-up character named Dana wants to borrow $10.00 of simulated money from a sibling and is comparing two simulated payback offers.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the two fictional payback offers on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Simulated Offer A: borrow $10.00, pay back $11.00 after one month.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-numeric", "text": "How much simulated interest, in dollars, does Offer A cost compared to the $10.00 borrowed?", "unit": "USD" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Simulated Offer B: borrow $10.00, pay back $10.50 after one month.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-numeric", "text": "How much simulated interest, in dollars, does Offer B cost compared to the $10.00 borrowed?", "unit": "USD" },
+        { "ref": "t2-p2", "promptType": "fixed-choice", "text": "Which offer costs less in simulated interest?", "choices": ["Offer A", "Offer B", "They cost the same"] }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Imagine a third simulated Offer C: borrow $10.00, pay back exactly $10.00 after one month, no interest at all.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Is Offer C realistic for most real-world borrowing, or is it unusual? Explain your answer using what you know about how borrowing normally works." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why interest exists.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain in your own words why someone who lends money usually charges interest instead of just wanting the exact amount back." }
+      ]
+    }
+  ],
+  "remediation": "If a learner subtracts in the wrong direction and gets a negative interest amount, reteach with a simple two-step model: write the payback amount, write the borrowed amount directly underneath, then subtract the smaller from the larger, checking that the answer is always positive.",
+  "extension": "Have the learner design a third simulated offer of their own, borrowing $20.00 instead of $10.00, and calculate its simulated interest cost, then compare it to Offers A and B on a cost-per-dollar-borrowed basis.",
+  "scoringRef": "scoring/financial-literacy/grade-04/swk-fl-g4-u05-l04.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g4-financial-literacy-u05-l04",
+    "authoredBy": "manual"
+  }
+}

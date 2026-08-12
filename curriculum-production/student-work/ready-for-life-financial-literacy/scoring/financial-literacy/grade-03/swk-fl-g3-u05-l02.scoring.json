@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g3-u05-l02",
+  "lessonId": "ma-g3-financial-literacy-u05-l02",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "Okay to answer",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "A favorite color carries no card, password, or PIN information, so it is fixed as okay to answer by design of the item." }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "Private-money request",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "The item explicitly asks for the security code on a card, matching the unit's private-money category by design." }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "A trusted adult in the household (the specific adult named by the family, such as a parent or guardian).",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "Any answer naming a trusted household adult is correct; naming a stranger, an online contact, or no one is not." }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "Okay to answer",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "A favorite animal carries no money information, so it is fixed as okay to answer by design of the item." }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "Private-money request",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "The item explicitly asks for a password, matching the unit's private-money category by design." }
+      },
+      {
+        "ref": "t4-p1",
+        "answer": "The three words are card number (or code), password, and PIN; instead of answering, the learner says no and tells a trusted adult right away.",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "These are the three private-money terms taught across this unit's lessons; the response must name the refuse-and-tell-an-adult action, not just the words." }
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

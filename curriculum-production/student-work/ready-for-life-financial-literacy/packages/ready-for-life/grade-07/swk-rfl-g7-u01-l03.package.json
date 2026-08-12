@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u01-l03",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Systems and Time Management",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: preparing materials"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL middle-grades progression"],
+  "objective": "Learners build a materials checklist for one real weekly activity by listing every item, document, or piece of equipment it requires, then use the checklist to prepare for that activity twice in one week and note whether anything was missing either time.",
+  "scenario": "The learner picks one real weekly activity that requires specific materials, such as a lesson, a sport, a club, or a chore with its own tools, and builds a reusable materials checklist for it before testing the checklist across two real occurrences of that activity.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["paper or a notes app", "whatever items the chosen activity actually requires"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick one real weekly activity that needs specific materials or equipment.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the activity and one time in the past when you arrived without something you needed for it." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "List every material, document, or piece of equipment the activity requires, then note when each one should be prepared (the night before, that morning, or earlier in the week).",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I listed at least four specific materials or items required for the activity." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I noted a realistic preparation timing for each item, not the same timing for all of them." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Use your checklist to prepare for the activity twice this week, checking off each item as you gather it.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "For each of the two occurrences, note whether anything on the checklist was still missing when it was time to leave or start." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare using the checklist to how you normally prepare.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain whether the checklist changed how prepared you felt for this activity, and name one item you would add to or remove from the checklist after testing it twice." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's checklist misses items discovered only in the moment, reteach by walking backward from the activity itself: stand in the activity mentally, name every object touched or needed during it, and add each one to the checklist before trying it again.",
+  "extension": "Have the learner build a second materials checklist for a different weekly activity and compare which of the two activities required more advance preparation and why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u01-l03.scoring.json",
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

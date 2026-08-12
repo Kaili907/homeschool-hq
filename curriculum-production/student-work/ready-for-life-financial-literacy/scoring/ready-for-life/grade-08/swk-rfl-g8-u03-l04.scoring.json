@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l04",
+  "lessonId": "ma-g8-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Technique execution",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more of the three behaviors is performed unsafely, requiring adult intervention." },
+          { "label": "Proficient", "descriptor": "All three behaviors are performed correctly with the adult present." },
+          { "label": "Advanced", "descriptor": "All three are performed correctly, and the learner self-corrects at least one behavior without adult prompting." }
+        ]
+      },
+      {
+        "dimension": "Hazard reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Cannot name the specific hazard each behavior prevents." },
+          { "label": "Proficient", "descriptor": "Names a correct, specific hazard for each of the three behaviors." },
+          { "label": "Advanced", "descriptor": "Names correct hazards and explains the mechanism (why the technique specifically prevents that hazard)." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The adult remained within arm's reach for every knife, stovetop, and appliance step.",
+      "The 'least natural' response names a specific behavior and a specific reason, not a vague 'it was all hard.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

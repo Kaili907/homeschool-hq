@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u05-l02",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Work, Communication, and Career Readiness",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: résumé foundations"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL Grade 8 progression"],
+  "objective": "Learners draft a one-page skills profile listing real skills, activities, and responsibilities from their own life, organized under the same four headings a résumé uses (skills, activities, responsibilities, and interests), as a foundation for a future first résumé.",
+  "scenario": "The learner lists their own genuine skills and experiences, such as babysitting a younger sibling, a sport, a school project, or a volunteer task, and organizes them under four headings the way a résumé would, without inventing any experience they have not actually had.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["No last name, address, phone number, or other identifying contact information is required on this practice document."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the four-heading template on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before organizing, brainstorm freely for two minutes.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List as many real things you have done, learned, or been responsible for as you can think of in two minutes, without sorting them yet." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort your brainstormed list under four headings: Skills, Activities, Responsibilities, Interests. Write at least two real items under each heading.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I wrote at least two real items under each of the four headings." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "Every item is something I have actually done or am actually responsible for, not something invented to sound impressive." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Pick your strongest item overall and describe it in one specific sentence a stranger could understand.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Write one specific sentence describing your strongest item, naming what you did and one concrete result or detail." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what you noticed while brainstorming.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Was it easier or harder than you expected to list your own skills and experiences? Explain why, and name one item you had forgotten about until this task." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's items stay vague ('I'm responsible,' 'I'm good at sports'), reteach by asking three follow-up questions for one item together (what specifically, how often, what was the result) and having the learner rewrite that one item with the added specifics before revising the rest.",
+  "extension": "Have the learner rewrite their two strongest items as full résumé-style bullet points starting with an action verb, following an example the adult or lesson provides.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l02.scoring.json",
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

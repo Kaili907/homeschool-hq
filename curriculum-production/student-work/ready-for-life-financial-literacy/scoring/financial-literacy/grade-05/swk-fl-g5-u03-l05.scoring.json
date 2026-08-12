@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g5-u03-l05",
+  "lessonId": "ma-g5-financial-literacy-u03-l05",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.00 (savings) + 1.50 (card) + 1.00 (snack) = 4.50. Independently recomputed by summing the three stated week-1 amounts in the item's own scenario."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "8.00 (allowance) - 4.50 (week-1 total from t1-p1) = 3.50. Recomputed directly from the stated allowance and the week-1 total, independent of how the learner arrived at t1-p1."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$8.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.00 (savings) + 3.25 (book) + 0.75 (game) + 2.50 (pencil set) = 8.50. Independently recomputed by summing the four stated week-2 amounts."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "Runs short",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "8.00 (allowance) - 8.50 (week-2 total) = -0.50, a negative remainder, so the week-2 plan runs short by $0.50."
+        }
+      },
+      {
+        "ref": "t4-p1",
+        "answer": "Any single category reduced by at least $0.50 balances the week (for example: reduce the pencil set from $2.50 to $2.00, an exact $0.50 reduction, bringing the week-2 total to $8.00 with $0.00 left over).",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The week-2 shortfall is exactly $0.50 (from t3-p2's -0.50 remainder), so any single-category reduction of $0.50 or more closes the gap; a reviewer can check any learner's proposed reduction by re-subtracting it from 8.50 and comparing the result to 8.00."
+        }
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

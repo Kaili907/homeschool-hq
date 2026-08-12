@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u02-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: handwashing a small item"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Ready for Life v1 Lessons 04–06"],
+  "objective": "Learners handwash one small clothing item, such as a sock, washcloth, or similar, using cool or lukewarm water, a small amount of detergent, and correct rinse-and-wring technique, then hang it to dry in a way that keeps its shape, so they can care for delicate items that should never go in a washing machine.",
+  "scenario": "A trusted adult has one small item that needs handwashing instead of machine washing, for example a delicate sock, a washcloth with a stain, or a small stuffed toy whose care label says hand wash only. The learner reads the item's care label together with the adult, fills a sink or basin with cool water, and washes the item by hand before hanging it to dry.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "drawing", "planning page", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult must be present for the entire wash-and-rinse step.",
+    "Use only cool or lukewarm water, never water hot enough to be uncomfortable to the touch.",
+    "Read the care label together before starting; if it says dry-clean only or shows an X over a water basin, stop and ask the adult what to do instead.",
+    "Wring gently rather than twisting hard, since hard twisting can stretch or damage the item's shape."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no small hand-washable item is available at home, the learner instead sequences five printed or hand-drawn wash steps (wet, apply detergent, rub the stained area, rinse until the water runs clear, wring and hang) into the correct order and explains, for each step, one thing that would go wrong if that step were skipped or done out of order."
+  },
+  "materials": [
+    "a small hand-washable item with a fabric care label",
+    "a sink or basin",
+    "a small amount of mild detergent",
+    "a place to hang the item to dry"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before washing, find and read the item's care label with your adult.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Copy the exact wording or symbols from the item's care label, then write in your own words what the label is telling you to do." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present, wash the item using the four-step routine your adult modeled: wet, apply a small amount of detergent, rub the soiled area gently, and rinse until the water runs clear.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I wet the item completely in cool or lukewarm water." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I used a dime-sized amount of detergent, not a large pour." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I rubbed the soiled area gently rather than scrubbing hard." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I rinsed until the water ran clear with no visible soap." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Finish the loop on your own: wring the item gently, shape it back to its original form, and hang it to dry somewhere it will not drip on anything that could be damaged.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Where did you choose to hang the item to dry, and what made that a safe, sensible spot?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the finished loop.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe one part of handwashing this item that was harder than you expected, and explain what you would do differently next time to make that part easier or more effective." }
+      ]
+    }
+  ],
+  "remediation": "If wringing still stretches or twists the item's shape, reteach with a two-hand press-and-squeeze technique on a spare cloth first, pressing the water out against the side of the basin rather than twisting, then return to the real item once the press-and-squeeze motion is comfortable.",
+  "extension": "Have the learner handwash a second item made of a different fabric, such as wool instead of cotton, and compare in writing how the two fabrics behaved differently during washing, wringing, and drying.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u02-l04.scoring.json",
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u02-l04",
+    "authoredBy": "manual"
+  }
+}

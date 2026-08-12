@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g7-u04-l04",
+  "lessonId": "ma-g7-financial-literacy-u04-l04",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      { "ref": "t1-p1", "answer": "Secured", "verification": { "method": "asserted-fixed-value", "reasoning": "The item states the lender can take the bicycle back, which is the defining feature of a secured debt by design of the scenario." } },
+      { "ref": "t1-p2", "answer": "The bicycle.", "verification": { "method": "asserted-fixed-value", "reasoning": "The scenario names the bicycle as the specific item the fictional lender can reclaim." } },
+      { "ref": "t2-p1", "answer": "Unsecured", "verification": { "method": "asserted-fixed-value", "reasoning": "The item states no specific item backs the loan and the lender cannot automatically take belongings, the defining feature of unsecured debt by design of the scenario." } },
+      { "ref": "t2-p2", "answer": "Situation A has a specific item (the bicycle) that backs the loan and can be reclaimed; Situation B has no specific item backing it, only Jamal's promise to pay.", "verification": { "method": "asserted-fixed-value", "reasoning": "The correct answer must name the presence versus absence of a specific reclaimable item as the deciding difference." } },
+      { "ref": "t3-p1", "answer": "Situation B (unsecured)", "verification": { "method": "asserted-fixed-value", "reasoning": "With nothing to reclaim, the lender in Situation B has fewer options to recover the loan if payments stop, making it the riskier position for the lender." } },
+      { "ref": "t3-p2", "answer": "In Situation A, the lender can reclaim the bicycle to recover some value; in Situation B, the lender has no specific item to reclaim, so it faces greater risk of not recovering the money at all.", "verification": { "method": "asserted-fixed-value", "reasoning": "An acceptable answer must reference the presence or absence of a reclaimable item as the basis for the risk comparison." } },
+      { "ref": "t4-p1", "answer": "Unsecured debt typically carries a higher interest rate than secured debt, because the lender is taking on more risk with nothing specific to reclaim if payments stop, and interest is partly how a lender is compensated for taking on more risk.", "verification": { "method": "asserted-fixed-value", "reasoning": "This connects two ideas already established in the unit and this item's earlier prompts (risk to the lender, and interest as compensation for risk); an acceptable answer must name unsecured as higher-rate and connect it to risk, not just assert it without reasoning." } }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

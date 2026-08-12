@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g3-u03-l05",
+  "lessonId": "ma-g3-financial-literacy-u03-l05",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$7.75",
+        "verification": { "method": "recomputed", "reasoning": "1.25 + 2.00 + 4.50 = 7.75, recomputed by summing the three stated pretend prices in the item's own scenario." }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "Yes, it fits",
+        "verification": { "method": "recomputed", "reasoning": "7.75 (from t1-p1) is less than 10.00, so the total fits inside the pretend budget." }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2.25 left over",
+        "verification": { "method": "recomputed", "reasoning": "10.00 - 7.75 = 2.25, recomputed directly from the stated budget and the three-item total." }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$9.50",
+        "verification": { "method": "recomputed", "reasoning": "7.75 (three-item total) + 1.75 (sticker sheet) = 9.50." }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "Yes, it fits",
+        "verification": { "method": "recomputed", "reasoning": "9.50 (from t3-p1) is less than 10.00, so the four-item total still fits inside the pretend budget." }
+      },
+      {
+        "ref": "t4-p1",
+        "answer": "Adding the total before deciding lets a shopper know for certain whether they can afford everything, and avoids picking an item at the register only to find there is not enough money; any answer naming knowing in advance whether the budget is enough is correct.",
+        "verification": { "method": "asserted-fixed-value", "reasoning": "This is a short constructed-response item; an acceptable answer must state that checking the total in advance prevents an over-budget surprise, not just repeat that adding is a math skill." }
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

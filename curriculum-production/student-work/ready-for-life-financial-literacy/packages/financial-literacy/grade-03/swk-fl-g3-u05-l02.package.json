@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-fl-g3-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u05-l02",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Money Tools and Ads",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: keeping money information private"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": ["Michigan Personal Finance foundations", "Grade 3 economics connections"],
+  "objective": "Learners sort four short fictional requests into 'okay to answer' and 'always say no and tell an adult,' learning that a card number, a password, and a PIN are never shared with anyone outside a trusted adult, no matter how the request is worded.",
+  "scenario": "This task never asks the learner for any real information. Every request described below is fictional and made up for practice only, so the learner can practice the rule safely before ever meeting a real version of one of these requests.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task teaches the rule of never sharing real money information; it never collects any real information from the learner.",
+    "If the learner has ever been asked for a card number, password, or PIN in real life, the right response is always to tell a trusted adult right away, not to answer here or anywhere else."
+  ],
+  "simulationAlternative": null,
+  "materials": ["pencil or accessible response tool", "the four fictional requests on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read fictional Request 1: 'What is your favorite color?' Decide whether it is okay to answer or a private-money request.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Is Request 1 okay to answer, or is it a private-money request?", "choices": ["Okay to answer", "Private-money request"] }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read fictional Request 2: 'What is the secret code on the back of your family's card?' Decide whether it is okay to answer or a private-money request.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "Is Request 2 okay to answer, or is it a private-money request?", "choices": ["Okay to answer", "Private-money request"] },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "If a real version of Request 2 ever happened, who is the one person you would tell right away?" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Sort these two remaining fictional requests on your own: Request 3, 'What is your favorite animal?' and Request 4, 'What is the password to log in to the family account?'",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Is Request 3 okay to answer, or is it a private-money request?", "choices": ["Okay to answer", "Private-money request"] },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Is Request 4 okay to answer, or is it a private-money request?", "choices": ["Okay to answer", "Private-money request"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Name the three private-money words you learned.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Write the three words for information you will never share with anyone except a trusted adult, and say what you will do instead of answering if someone asks for one of them." }
+      ]
+    }
+  ],
+  "remediation": "If a learner marks a private-money request as okay to answer, reteach with a simple two-word test: does the request use the word code, password, or the numbers on a card? If yes, it is always a private-money request, no matter who is asking or how nicely.",
+  "extension": "Have the learner write one new fictional request of their own, either okay-to-answer or private-money, and explain which type it is and why.",
+  "scoringRef": "scoring/financial-literacy/grade-03/swk-fl-g3-u05-l02.scoring.json",
+  "financialSafety": { "neverRequestsRealCredentials": true, "noIndividualizedAdvice": true },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceLessonId": "ma-g3-financial-literacy-u05-l02",
+    "authoredBy": "manual"
+  }
+}
