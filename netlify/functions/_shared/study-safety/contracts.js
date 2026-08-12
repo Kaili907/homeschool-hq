@@ -1,4 +1,5 @@
 import { assertExactObject, boundedString, reject } from '../http.js'
+import { validUuid as validCanonicalStudyIdentity } from '../study-identity/contracts.js'
 
 export const STUDY_SAFETY_SCHEMA_VERSION = 1
 export const STUDY_SAFETY_REQUEST_LIMIT_BYTES = 8 * 1024
@@ -49,6 +50,10 @@ export const STUDY_SAFETY_REASON_CODES = Object.freeze([
 ])
 const REASON_CODE_SET = new Set(STUDY_SAFETY_REASON_CODES)
 
+// Caller-generated correlation ids only. The browser adapter manufactures both
+// requestId and sessionId as RFC-4122 v4 values (see src/study/safety/mountedPort.ts),
+// so this stricter rule matches their producer exactly and must not be relaxed.
+// Canonical Study identities are validated by validCanonicalStudyIdentity instead.
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const OPAQUE_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 const CODE = /^[a-z0-9][a-z0-9._:-]{0,127}$/
@@ -81,7 +86,17 @@ export function validateStudySafetyRequest(value) {
     reject(400, 'invalid_request')
   }
   const studentValue = boundedString(studentRef.value, { max: 128, singleLine: true })
-  if (studentRef.kind === 'academy-student-id' ? !validUuid(studentValue) : !validOpaqueId(studentValue)) {
+  // A canonical Study student id, not a caller correlation id: its source of
+  // truth is academy_students.id, which study-session-issue already accepts
+  // under the canonical contract. Re-narrowing it here to an RFC-style rule
+  // refused Postgres-valid learners a session had been issued for. This is a
+  // subject selector only; the trusted verifier still decides authority, so a
+  // wider accepted shape can only reach a refusal, never widen one.
+  if (
+    studentRef.kind === 'academy-student-id'
+      ? !validCanonicalStudyIdentity(studentValue)
+      : !validOpaqueId(studentValue)
+  ) {
     reject(400, 'invalid_request')
   }
   const sessionId = boundedString(request.sessionId, { max: 36, singleLine: true })
