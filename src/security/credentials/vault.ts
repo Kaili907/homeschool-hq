@@ -10,6 +10,7 @@ import {
   createPinVerifier,
   createUnusablePinVerifier,
   isSupportedPinCostParameters,
+  LEARNER_PIN_COST_PARAMETERS_V1,
   LEARNER_PIN_COST_PARAMETERS_VERSION,
   LEARNER_PIN_DERIVED_KEY_BYTES,
   LEARNER_PIN_SALT_BYTES,
@@ -69,6 +70,9 @@ const REQUIRED_RECORD_KEYS = Object.freeze([
   'state',
   'createdAt',
 ] as const)
+const OPTIONAL_RECORD_KEYS = Object.freeze(['rotatedAt'] as const)
+const ALLOWED_RECORD_KEYS: readonly string[] = Object.freeze([...REQUIRED_RECORD_KEYS, ...OPTIONAL_RECORD_KEYS])
+const COST_PARAMETER_KEYS: readonly string[] = Object.freeze(['iterations', 'derivedKeyBytes'])
 
 function storageFrom(options?: CredentialOperationOptions): CredentialStorage {
   if (options?.storage) return options.storage
@@ -110,51 +114,103 @@ function malformed(message: string): never {
   throw new CredentialVaultError('malformed-record', message)
 }
 
+/**
+ * Reads each own key exactly once via its property descriptor so a hostile
+ * getter/setter is never invoked, and fails closed on anything outside an
+ * exact own-enumerable-data-property shape: symbol keys, inherited keys, and
+ * unexpected or non-enumerable/accessor fields are all rejected before their
+ * value is ever read.
+ */
+function ownDataSnapshot(value: object, allowedKeys: readonly string[]): Record<string, unknown> {
+  if (Object.getOwnPropertySymbols(value).length > 0) {
+    malformed('Learner credential record contains missing or unexpected fields.')
+  }
+  const snapshot: Record<string, unknown> = {}
+  for (const name of Object.getOwnPropertyNames(value)) {
+    if (!allowedKeys.includes(name)) {
+      malformed('Learner credential record contains missing or unexpected fields.')
+    }
+    const descriptor = Object.getOwnPropertyDescriptor(value, name)
+    if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
+      malformed('Learner credential record contains missing or unexpected fields.')
+    }
+    snapshot[name] = descriptor.value
+  }
+  return snapshot
+}
+
 export function parseLearnerCredentialRecord(
   value: unknown,
   expectedProfileId?: unknown,
 ): StoredLearnerCredentialRecord {
   if (!plainRecord(value)) malformed('Learner credential record is not an object.')
 
-  validateLearnerProfileId(value.profileId)
+  const snapshot = ownDataSnapshot(value, ALLOWED_RECORD_KEYS)
+  if (!REQUIRED_RECORD_KEYS.every((key) => Object.hasOwn(snapshot, key))) {
+    malformed('Learner credential record contains missing or unexpected fields.')
+  }
+
+  validateLearnerProfileId(snapshot.profileId)
   if (expectedProfileId !== undefined) validateLearnerProfileId(expectedProfileId)
 
   if (
-    value.schemaVersion !== LEARNER_CREDENTIAL_SCHEMA_VERSION ||
-    value.verifierSchemeVersion !== LEARNER_PIN_VERIFIER_SCHEME_VERSION ||
-    value.costParametersVersion !== LEARNER_PIN_COST_PARAMETERS_VERSION
+    snapshot.schemaVersion !== LEARNER_CREDENTIAL_SCHEMA_VERSION ||
+    snapshot.verifierSchemeVersion !== LEARNER_PIN_VERIFIER_SCHEME_VERSION ||
+    snapshot.costParametersVersion !== LEARNER_PIN_COST_PARAMETERS_VERSION
   ) {
     throw new CredentialVaultError('unsupported-version', 'Learner credential record uses an unsupported version.')
   }
 
-  const allowedKeys = value.rotatedAt === undefined ? REQUIRED_RECORD_KEYS : [...REQUIRED_RECORD_KEYS, 'rotatedAt']
-  const keys = Object.keys(value)
-  if (keys.length !== allowedKeys.length || !keys.every((key) => allowedKeys.includes(key as never))) {
-    malformed('Learner credential record contains missing or unexpected fields.')
+  const costParametersValue = snapshot.costParameters
+  if (!plainRecord(costParametersValue)) {
+    malformed('Learner credential record violates the device-local credential contract.')
   }
+  const costSnapshot = ownDataSnapshot(costParametersValue, COST_PARAMETER_KEYS)
+  const supportedCostParameters =
+    COST_PARAMETER_KEYS.every((key) => Object.hasOwn(costSnapshot, key)) &&
+    isSupportedPinCostParameters(snapshot.costParametersVersion, costSnapshot)
 
   if (
-    value.storage !== 'device-local-only' ||
-    value.credentialKind !== 'learner-pin' ||
-    value.verifierScheme !== 'pbkdf2-sha256' ||
-    (expectedProfileId !== undefined && value.profileId !== expectedProfileId) ||
-    (value.state !== 'enrolled' && value.state !== 'reset-required') ||
-    !isSupportedPinCostParameters(value.costParametersVersion, value.costParameters) ||
-    !validIsoTimestamp(value.createdAt) ||
-    (value.rotatedAt !== undefined && !validIsoTimestamp(value.rotatedAt)) ||
-    (typeof value.rotatedAt === 'string' && Date.parse(value.rotatedAt) < Date.parse(value.createdAt))
+    snapshot.storage !== 'device-local-only' ||
+    snapshot.credentialKind !== 'learner-pin' ||
+    snapshot.verifierScheme !== 'pbkdf2-sha256' ||
+    (expectedProfileId !== undefined && snapshot.profileId !== expectedProfileId) ||
+    (snapshot.state !== 'enrolled' && snapshot.state !== 'reset-required') ||
+    !supportedCostParameters ||
+    !validIsoTimestamp(snapshot.createdAt) ||
+    (snapshot.rotatedAt !== undefined && !validIsoTimestamp(snapshot.rotatedAt)) ||
+    (typeof snapshot.rotatedAt === 'string' && Date.parse(snapshot.rotatedAt) < Date.parse(snapshot.createdAt))
   ) {
     malformed('Learner credential record violates the device-local credential contract.')
   }
 
   try {
-    base64ToBytes(value.saltBase64 as string, LEARNER_PIN_SALT_BYTES)
-    base64ToBytes(value.verifierBase64 as string, LEARNER_PIN_DERIVED_KEY_BYTES)
+    base64ToBytes(snapshot.saltBase64 as string, LEARNER_PIN_SALT_BYTES)
+    base64ToBytes(snapshot.verifierBase64 as string, LEARNER_PIN_DERIVED_KEY_BYTES)
   } catch {
     malformed('Learner credential record contains malformed verifier material.')
   }
 
-  return value as unknown as StoredLearnerCredentialRecord
+  const canonical: Record<string, unknown> = {
+    schemaVersion: snapshot.schemaVersion,
+    storage: snapshot.storage,
+    profileId: snapshot.profileId,
+    credentialKind: snapshot.credentialKind,
+    verifierScheme: snapshot.verifierScheme,
+    verifierSchemeVersion: snapshot.verifierSchemeVersion,
+    costParametersVersion: snapshot.costParametersVersion,
+    saltBase64: snapshot.saltBase64,
+    verifierBase64: snapshot.verifierBase64,
+    // Nested cost parameters were only ever compared for equality against this
+    // frozen canonical constant, so the returned record never carries a
+    // caller-controlled nested object.
+    costParameters: LEARNER_PIN_COST_PARAMETERS_V1,
+    state: snapshot.state,
+    createdAt: snapshot.createdAt,
+  }
+  if (Object.hasOwn(snapshot, 'rotatedAt')) canonical.rotatedAt = snapshot.rotatedAt
+
+  return Object.freeze(canonical) as unknown as StoredLearnerCredentialRecord
 }
 
 function parseStoredRecord(raw: string, profileId: ProfileId): StoredLearnerCredentialRecord {
@@ -209,7 +265,13 @@ export function readLearnerCredential(
   return raw === null ? null : parseStoredRecord(raw, profileId)
 }
 
-export function writeLearnerCredential(
+/**
+ * Internal storage-mutation primitive. No external file imports this: every
+ * write goes through the reviewed orchestration in this module (enroll,
+ * rotate, reset) so a durable overwrite always follows a verified decision,
+ * never a raw caller-supplied record. Keep this un-exported.
+ */
+function writeLearnerCredential(
   record: unknown,
   options?: CredentialOperationOptions,
 ): StoredLearnerCredentialRecord {

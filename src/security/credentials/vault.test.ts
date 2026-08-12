@@ -314,4 +314,95 @@ describe('device-local learner credential vault', () => {
     await expect(verifyLearnerCredentialRecord({ ...samePinB, profileId: 'p1' }, '1234')).resolves.toBe(false)
     expect(profileA.verifierBase64).not.toBe(samePinB.verifierBase64)
   })
+
+  describe('own-property-descriptor record parsing', () => {
+    it('rejects a getter-backed field without ever invoking the getter', () => {
+      const getter = vi.fn(() => template.profileId)
+      const hostile: Record<string, unknown> = {}
+      for (const [key, value] of Object.entries(template)) {
+        if (key === 'profileId') {
+          Object.defineProperty(hostile, key, { get: getter, enumerable: true, configurable: true })
+        } else {
+          Object.defineProperty(hostile, key, { value, enumerable: true, configurable: true, writable: true })
+        }
+      }
+
+      expect(() => parseLearnerCredentialRecord(hostile)).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({ code: 'malformed-record' }),
+      )
+      expect(getter).not.toHaveBeenCalled()
+    })
+
+    it('rejects a setter-backed field without ever invoking the setter or a matching getter', () => {
+      const getter = vi.fn(() => template.state)
+      const setter = vi.fn()
+      const hostile: Record<string, unknown> = { ...template }
+      Object.defineProperty(hostile, 'state', { get: getter, set: setter, enumerable: true, configurable: true })
+
+      expect(() => parseLearnerCredentialRecord(hostile)).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({ code: 'malformed-record' }),
+      )
+      expect(getter).not.toHaveBeenCalled()
+      expect(setter).not.toHaveBeenCalled()
+    })
+
+    it('rejects an unexpected non-enumerable field', () => {
+      const hostile: Record<string, unknown> = { ...template }
+      Object.defineProperty(hostile, 'extra', { value: 'x', enumerable: false, configurable: true })
+
+      expect(() => parseLearnerCredentialRecord(hostile)).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({ code: 'malformed-record' }),
+      )
+    })
+
+    it('rejects a symbol-keyed field', () => {
+      const hostile: Record<string, unknown> = { ...template }
+      Object.defineProperty(hostile, Symbol('extra'), { value: 'x', enumerable: true, configurable: true })
+
+      expect(() => parseLearnerCredentialRecord(hostile)).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({ code: 'malformed-record' }),
+      )
+    })
+
+    it('rejects a record inheriting from a hostile prototype', () => {
+      const hostile = Object.create({ profileId: 'p1' }) as Record<string, unknown>
+      for (const [key, value] of Object.entries(template)) hostile[key] = value
+
+      expect(() => parseLearnerCredentialRecord(hostile)).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({ code: 'malformed-record' }),
+      )
+    })
+
+    it('rejects an array in place of a credential record', () => {
+      expect(() => parseLearnerCredentialRecord([])).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({ code: 'malformed-record' }),
+      )
+    })
+
+    it('returns a frozen canonical snapshot distinct from the caller-supplied object', () => {
+      const input: Record<string, unknown> = { ...template }
+      const parsed = parseLearnerCredentialRecord(input)
+
+      expect(parsed).not.toBe(input)
+      expect(Object.isFrozen(parsed)).toBe(true)
+      expect(Object.isFrozen(parsed.costParameters)).toBe(true)
+      expect(parsed).toMatchObject({
+        profileId: template.profileId,
+        saltBase64: template.saltBase64,
+        verifierBase64: template.verifierBase64,
+      })
+    })
+
+    it('performs no PBKDF2 derivation for a structurally malformed record', async () => {
+      const importKey = vi.fn()
+      const malformedRecord = { ...template, schemaVersion: 2 as unknown as typeof template.schemaVersion }
+
+      await expect(
+        verifyLearnerCredentialRecord(malformedRecord, '1234', {
+          crypto: { getRandomValues: vi.fn(), subtle: { importKey } as unknown as SubtleCrypto },
+        }),
+      ).resolves.toBe(false)
+      expect(importKey).not.toHaveBeenCalled()
+    })
+  })
 })
