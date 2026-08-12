@@ -117,6 +117,29 @@ exist so the labs and the custody record stay reproducible. The
 vendored core's `dist/` was excluded from the recompose (A3/R7) — a
 forensic rebuild would use the vendored `scripts/build.mjs`.
 
+The vendored `adaptive-tutor-core/scripts/validate-package.ts` therefore
+still carries the pre-`platform-boundary.ts` rule — a bare `/auth/i`
+entry in `forbiddenPatterns` — and is intentionally left that way. It is
+the sealed original, not a second copy to keep in sync:
+
+- `study-engine/release/file-manifest.json` seals both it and
+  `adaptive-tutor/scripts/validate-package.ts` under the same digest
+  (`388F617E...FFF61`, 5175 bytes). The vendored file still hashes to
+  exactly that; the live validator has since drifted away from it.
+- It has one commit ever (`992b1a7`), while the live validator has taken
+  two later corrections (`6cffa72` D-MATH-2, `0609753` H2) — neither of
+  which touched the vendor tree. It also predates
+  `scripts/platform-boundary.ts` and `scripts/subject-package-guard.ts`,
+  neither of which exists in the snapshot.
+- No tsconfig includes it (`adaptive-tutor/tsconfig{,.build,.test}.json`
+  cover `core, examples, prototype, scripts, tests` only), so neither
+  `run-tests.mjs` nor `run-validation.mjs` ever compiles or runs it.
+- `src/study/production/tutorAdapterImportClosure.test.ts` fails the
+  build if production code reaches `study-engine/integration-labs`, so
+  the snapshot is executably fenced off rather than merely unused.
+
+Updating it would break the custody seal it exists to preserve.
+
 ---
 
 Last updated: A3-C (August 2026), branch `integrate/study-recompose-v1`.
