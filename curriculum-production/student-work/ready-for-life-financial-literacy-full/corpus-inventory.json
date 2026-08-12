@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "status": "BLOCKED",
+  "purpose": "Exact authored-lesson inventory for Ready for Life and Financial Literacy, derived from source rather than asserted, plus the reasons full production coverage is not certifiable from this source.",
+  "requestedGrades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "gradesWithAuthoredSource": [
+    3,
+    4,
+    5,
+    7,
+    8
+  ],
+  "gradesWithNoAuthoredSourceAnywhere": [
+    9,
+    10,
+    11,
+    12
+  ],
+  "totalAuthoredLessons": 396,
+  "courses": {
+    "grade-03/ready-for-life": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/ready-for-life/lessons.jsonl"
+    },
+    "grade-03/financial-literacy": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-04/ready-for-life": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/ready-for-life/lessons.jsonl"
+    },
+    "grade-04/financial-literacy": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-05/ready-for-life": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/ready-for-life/lessons.jsonl"
+    },
+    "grade-05/financial-literacy": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-07/ready-for-life": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/ready-for-life/lessons.jsonl"
+    },
+    "grade-07/financial-literacy": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl"
+    },
+    "grade-08/ready-for-life": {
+      "lessons": 36,
+      "units": 6,
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/ready-for-life/lessons.jsonl"
+    },
+    "grade-08/financial-literacy": {
+      "lessons": 72,
+      "units": 7,
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl"
+    }
+  },
+  "existingSliceCoverage": {
+    "path": "curriculum-production/student-work/ready-for-life-financial-literacy",
+    "packages": 24,
+    "note": "24 of the 396 authored lessons carry production student-work packages. 4 of those 24 are grade-09-hs packages whose declared source does not exist (see blockers.fabricatedHighSchoolProvenance).",
+    "answerKeyAudit": "All 12 shipped FinLit scoring records carry distinct, arithmetically verifiable fixed answer keys (12 of 12 payloads distinct). The shipped slice is genuinely authored; the gate blind spot is a scaling risk, not a defect in these 24."
+  },
+  "blockers": {
+    "noHighSchoolSource": "Grades 9-12 were requested but no ref in this repository (524 refs scanned) contains any curriculum-content for grade 9, 10, 11, or 12. There is nothing to derive lesson counts or student work from. Verified by tests/inventory.test.ts.",
+    "fabricatedHighSchoolProvenance": "The four shipped grade-09-hs packages declare integrity.sourceCorpusVersion '1.1.0' and sourceLessonId 'ma-g9-*'. curriculum-content/manuel-academy/1.1.0 has never existed in repository history, so these four packages cite a nonexistent source. corpus-manifest.json repeats the same nonexistent path under generatedFrom.highSchool.",
+    "sourceCarriesNoAnswerContent": "answer_or_scoring_guidance is byte-identical across every lesson in every course and contains no digits and no answers. materials, mastery_rule, and safety_and_privacy are likewise single-valued per course. The only per-lesson signal is focus/title/student_activity, so the 216 FinLit answer keys required by the gate cannot be derived from source and must be authored and verified individually.",
+    "gateCannotDetectThis": "evaluateLessonProductionReadiness accepts that same generic string as a valid fixed ANSWER_KEY and returns READY with no notes. Passing the Production Quality Gate is therefore necessary but not sufficient evidence of FinLit readiness; a mass-generated corpus would report READY while shipping no real answers. Pinned by tests/gateAnswerKeyBlindSpot.test.ts."
+  },
+  "whatFullCoverageActuallyRequires": {
+    "packagesToAuthor": 792,
+    "detail": "396 lessons x (1 student-facing task sheet + 1 adult-only scoring record). Per the fidelity of the shipped slice, each needs a concrete lesson-specific real task, safety notes, a simulation alternative where the task is real-world, remediation and extension, and either a verified fixed answer key (FinLit, 216 lessons) or an authored rubric (RFL, 180 lessons). This is curriculum authoring, not pipeline scaling: the pipeline in ../ready-for-life-financial-literacy/src is already grade-agnostic and needs no change."
+  }
+}
