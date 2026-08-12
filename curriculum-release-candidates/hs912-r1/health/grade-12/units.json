@@ -1,0 +1,404 @@
+[
+  {
+    "unit_id": "ma-g12-health-u01",
+    "course_id": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "unit_number": 1,
+    "title": "Independent Health Self-Management for Adulthood",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.5.PHW] Personal Health and Wellness — Self-Management and Goal Setting",
+      "Michigan HESG 2025 Grades 9-12 [12.5.BEPA] Balanced Eating and Physical Activity — Self-Management and Goal Setting"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.5.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.BEPA",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Balanced Eating and Physical Activity",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "What has to keep happening when no one reminds me?",
+    "topics": [
+      "building routines that survive a schedule change",
+      "sleep, movement, fueling, and recovery as maintained systems rather than goals",
+      "tracking what matters without measuring the body",
+      "managing a routine through illness, stress, or a heavy period",
+      "restarting after a routine collapses, without self-punishment",
+      "deciding what to keep, drop, and add each season"
+    ],
+    "performance_task": "Build an independent maintenance system with a normal-week version, a hard-week fallback version, and a written restart procedure. Progress is described in terms of behaviors kept, never body measurements.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "optional planner or calendar tool"
+    ],
+    "inclusive_adaptation": "The system may be written, tabled, built as a checklist, entered in a calendar, or described aloud to an adult. Any component the learner cannot perform is planned as a supported or adapted component and scored equally.",
+    "privacy_guard": "No weight, BMI, body-fat, measurement, calorie count, food log, step count, heart-rate export, or body-size goal is requested or recorded. Evidence is the plan and its review, not personal data.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Unit deliberately excludes all body-metric tracking and all appearance or weight goals.",
+      "guardian_confirmation_required": false
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g12-health-u01-l01",
+      "ma-g12-health-u01-l02",
+      "ma-g12-health-u01-l03",
+      "ma-g12-health-u01-l04",
+      "ma-g12-health-u01-l05",
+      "ma-g12-health-u01-l06"
+    ],
+    "assessment_id": "ma-g12-health-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g12-health-u02",
+    "course_id": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "unit_number": 2,
+    "title": "Relationships, Boundaries, and Support Networks Beyond High School",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.2.HR] Healthy Relationships — Social Awareness, Relationship, and Communication Skills"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.2.HR",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+        "topic": "Healthy Relationships",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "How do I build and keep a support network when the built-in one goes away?",
+    "topics": [
+      "the shape of adult relationships: chosen, professional, and civic",
+      "holding boundaries with roommates, coworkers, and supervisors",
+      "consent and respect in adult contexts",
+      "recognizing coercive control and financial or social pressure",
+      "leaving an unsafe situation with a plan",
+      "building a support network deliberately rather than by accident"
+    ],
+    "performance_task": "Design a named support network for a fictional graduate — who is contacted for what, what backup exists when a contact is unavailable, and what triggers escalation — then write two boundary scripts for adult settings.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "course-supplied fictional scenarios"
+    ],
+    "inclusive_adaptation": "The network may be diagrammed, listed, dictated, or built on a supplied template. Scripts may be selected from a bank and adapted rather than composed.",
+    "privacy_guard": "The network is designed for a fictional person. No sexual history, relationship history, or personal contact list is requested or recorded.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Unit names coercive control and unsafe-exit planning. Guardian may review scenarios first.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g12-health-u02-l01",
+      "ma-g12-health-u02-l02",
+      "ma-g12-health-u02-l03",
+      "ma-g12-health-u02-l04",
+      "ma-g12-health-u02-l05",
+      "ma-g12-health-u02-l06"
+    ],
+    "assessment_id": "ma-g12-health-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g12-health-u03",
+    "course_id": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "unit_number": 3,
+    "title": "Mental Health Maintenance and Sustainable Coping",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.1.MEH] Mental and Emotional Health — Self-Awareness and Analyzing Influences",
+      "Michigan HESG 2025 Grades 9-12 [12.5.MEH] Mental and Emotional Health — Self-Management and Goal Setting"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.1.MEH",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+        "topic": "Mental and Emotional Health",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.MEH",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Mental and Emotional Health",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "How do I keep myself steady through a transition that removes most of my structure?",
+    "topics": [
+      "transition stress and why capable people struggle during it",
+      "maintenance strategies versus emergency strategies",
+      "sleep, isolation, and workload as leading indicators",
+      "when to seek professional support and how to start that process as an adult",
+      "cost, access, and confidentiality of adult mental-health care",
+      "supporting others while protecting your own capacity"
+    ],
+    "performance_task": "Write a transition plan with maintenance strategies, early-warning conditions the learner will watch for, and a concrete first step for getting professional support — including how it would be paid for and accessed.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "guardian-approved adult support resource list"
+    ],
+    "inclusive_adaptation": "The plan may be written, spoken, or assembled from supplied strategy cards. General categories may be used throughout instead of specific personal detail.",
+    "privacy_guard": "No diagnosis, screening tool, score, symptom checklist, treatment history, or private reflection is requested, stored, or shared. This course does not diagnose and never asks the learner to label themselves.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Quiet indoor space with a break area available.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Unit covers seeking professional mental-health support. Guardian reviews the adult resource list before the unit.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g12-health-u03-l01",
+      "ma-g12-health-u03-l02",
+      "ma-g12-health-u03-l03",
+      "ma-g12-health-u03-l04",
+      "ma-g12-health-u03-l05",
+      "ma-g12-health-u03-l06"
+    ],
+    "assessment_id": "ma-g12-health-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g12-health-u04",
+    "course_id": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "unit_number": 4,
+    "title": "Safety, Risk, and Emergency Readiness as an Independent Adult",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.4.SAF] Safety — Decision Making and Problem Solving",
+      "Michigan HESG 2025 Grades 9-12 [12.5.SAF] Safety — Self-Management and Goal Setting",
+      "Michigan HESG 2025 Section 1 (content required by Michigan law)"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.4.SAF",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 4: Decision Making and Problem Solving",
+        "topic": "Safety",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.SAF",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Safety",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "Section 1",
+        "framework": "Michigan Health Education Standards Guidelines 2025",
+        "practice": null,
+        "topic": "Content required by Michigan law",
+        "mapping_status": "unverified",
+        "note": "Section 1 (HIV instruction, CPR/AED, physiology and hygiene relating to substance use) is confirmed to exist and to be legally required; its internal numbering was not read from the source."
+      }
+    ],
+    "essential_question": "What do I need ready before something goes wrong, not after?",
+    "topics": [
+      "maintaining CPR/AED and first-aid readiness and where to get certified",
+      "home, vehicle, workplace, and travel safety systems",
+      "risk assessment for an unfamiliar situation",
+      "impaired driving, fatigue, and transportation decisions",
+      "emergency communication, documents, and a household plan",
+      "knowing the limits of what a bystander should attempt"
+    ],
+    "performance_task": "Assemble an adult emergency-readiness package for a fictional first independent household: hazards, prevention systems, response sequences, contacts, and the certification the learner would pursue.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "optional first-aid kit inventory checklist"
+    ],
+    "inclusive_adaptation": "The package may be written, listed, charted, or narrated. All response sequences may be described rather than physically performed, and non-physical response roles are full contributions.",
+    "privacy_guard": "The household is fictional. No real address, document, insurance detail, or family contact information is entered into course records.",
+    "guardian_safety": {
+      "equipment": "Optional first-aid kit for inventory only. No live practice on another person.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None required; any optional manikin rehearsal is learner-paced and may be declined.",
+      "sensitive_content_note": "This course teaches CPR/AED awareness and readiness; it does not issue certification. Guardian decides whether to pursue an external certification course.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": true,
+    "lesson_ids": [
+      "ma-g12-health-u04-l01",
+      "ma-g12-health-u04-l02",
+      "ma-g12-health-u04-l03",
+      "ma-g12-health-u04-l04",
+      "ma-g12-health-u04-l05",
+      "ma-g12-health-u04-l06"
+    ],
+    "assessment_id": "ma-g12-health-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g12-health-u05",
+    "course_id": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "unit_number": 5,
+    "title": "Consumer Health, Coverage Literacy, and Care Navigation",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.3.PHW] Personal Health and Wellness — Information and Resource Seeking",
+      "Michigan HESG 2025 Grades 9-12 [12.4.PHW] Personal Health and Wellness — Decision Making and Problem Solving"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.3.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 3: Information and Resource Seeking",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.4.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 4: Decision Making and Problem Solving",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "How do I get the care I need without being taken advantage of?",
+    "topics": [
+      "choosing and establishing with a primary care provider",
+      "coverage options after high school and what each actually covers",
+      "reading a bill, an explanation of benefits, and a denial",
+      "appealing a denial and asking for an itemized correction",
+      "prescription cost, generics, and assistance programs",
+      "recognizing predatory health marketing aimed at young adults"
+    ],
+    "performance_task": "Work three fictional cases: establish care, decode a bill and an explanation of benefits, and draft an appeal letter for a denied claim.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "course-supplied fictional bills, benefit statements, and denial letters"
+    ],
+    "inclusive_adaptation": "Cases may be worked in writing, on annotated printouts, verbally with an adult, or on a supplied guided frame with terms pre-defined.",
+    "privacy_guard": "No real bill, benefit statement, policy number, member ID, portal login, payment method, or family financial detail is used or recorded. Every document is a course-supplied fiction.",
+    "guardian_safety": {
+      "equipment": "None. No real account or payment information is used.",
+      "environment": "Indoor study space.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Course content is general consumer education, not individualized insurance, legal, or medical advice.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g12-health-u05-l01",
+      "ma-g12-health-u05-l02",
+      "ma-g12-health-u05-l03",
+      "ma-g12-health-u05-l04",
+      "ma-g12-health-u05-l05",
+      "ma-g12-health-u05-l06"
+    ],
+    "assessment_id": "ma-g12-health-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g12-health-u06",
+    "course_id": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "unit_number": 6,
+    "title": "Capstone: Personal Health Plan and Community Advocacy",
+    "days": 6,
+    "standards": [
+      "Michigan HESG 2025 Grades 9-12 [12.6.PHW] Personal Health and Wellness — Advocacy and Health Promotion",
+      "Michigan HESG 2025 Grades 9-12 [12.6.CEH] Community and Environmental Health — Advocacy and Health Promotion",
+      "Michigan HESG 2025 Grades 9-12 [12.5.PHW] Personal Health and Wellness — Self-Management and Goal Setting",
+      "Michigan HESG 2025 Grades 9-12 [12.5.CEH] Community and Environmental Health — Self-Management and Goal Setting"
+    ],
+    "standards_mapping": [
+      {
+        "code": "12.6.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 6: Advocacy and Health Promotion",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.6.CEH",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 6: Advocacy and Health Promotion",
+        "topic": "Community and Environmental Health",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.PHW",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Personal Health and Wellness",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      },
+      {
+        "code": "12.5.CEH",
+        "framework": "Michigan Health Education Standards Guidelines 2025 (grades 9-12 band)",
+        "practice": "Michigan Health Practice 5: Self-Management and Goal Setting",
+        "topic": "Community and Environmental Health",
+        "mapping_status": "canonical",
+        "note": "Practice name and topic abbreviation verified against the official source; the band code follows the confirmed <terminal-grade>.<practice>.<TOPIC> pattern. No per-indicator number is claimed."
+      }
+    ],
+    "essential_question": "What plan would still be running a year from now, and what would I want changed for other people?",
+    "topics": [
+      "integrating four years of health learning into one working plan",
+      "stating evidence for each element of the plan",
+      "building in review points and revision triggers",
+      "choosing one advocacy commitment that is realistic",
+      "presenting a plan to a guardian without disclosing private detail",
+      "defending choices under questioning and revising after critique"
+    ],
+    "performance_task": "Present the complete personal health plan and advocacy commitment for review, defend each element with evidence and reasoning, then revise it based on the critique received.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "the learner’s Grade 9-12 health portfolio"
+    ],
+    "inclusive_adaptation": "The defense may be spoken, written, presented as annotated slides, or delivered in a one-to-one conversation with an adult. No public presentation, recording, or audience is required.",
+    "privacy_guard": "The plan is written so that it can be reviewed without exposing anything private: it shows routines, evidence, and next steps, not diagnoses, measurements, or personal disclosures. No recording of the defense is made.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Indoor space for a one-to-one review conversation.",
+      "movement_hazards": "None expected.",
+      "sensitive_content_note": "Guardian participates as reviewer. The review is a conversation, not a recorded or published artifact.",
+      "guardian_confirmation_required": true
+    },
+    "required_by_michigan_law": false,
+    "lesson_ids": [
+      "ma-g12-health-u06-l01",
+      "ma-g12-health-u06-l02",
+      "ma-g12-health-u06-l03",
+      "ma-g12-health-u06-l04",
+      "ma-g12-health-u06-l05",
+      "ma-g12-health-u06-l06"
+    ],
+    "assessment_id": "ma-g12-health-u06-assessment"
+  }
+]

@@ -1,0 +1,102 @@
+[
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-hs-science-lab-safety-card",
+  "kind": "document",
+  "title": "Manuel Academy home laboratory safety card",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/lab-safety-framework.md",
+  "rights": "Manuel Academy original; freely reusable by the family.",
+  "required": false,
+  "text_fallback": "Readable text: hazard classes, supervision levels, stop conditions, and the non-disableable prohibitions."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-hs-science-mastery-evidence-guide",
+  "kind": "document",
+  "title": "Evidence and multi-occasion mastery guide",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/policy-set.json",
+  "rights": "Manuel Academy original; freely reusable by the family.",
+  "required": false,
+  "text_fallback": "Readable text: what counts as evidence, and why one correct answer never establishes mastery."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs9-biology-investigation-guide",
+  "kind": "document",
+  "title": "Biology investigation and alternative-path guide",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs9-biology.md",
+  "rights": "Manuel Academy original; freely reusable by the family.",
+  "required": false,
+  "text_fallback": "Readable text: for each unit, the investigation, its hazards, its supervision level, and its no-special-equipment alternative."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs9-biology-data-sources",
+  "kind": "document",
+  "title": "Biology published data source list",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs9-biology.md",
+  "rights": "Names third-party sources; the family retrieves them under the sources' own terms. No third-party content is embedded.",
+  "required": false,
+  "text_fallback": "Readable text: which published dataset each unit uses, and what the learner must generate themselves."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs10-chemistry-investigation-guide",
+  "kind": "document",
+  "title": "Chemistry investigation and alternative-path guide",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs10-chemistry.md",
+  "rights": "Manuel Academy original; freely reusable by the family.",
+  "required": false,
+  "text_fallback": "Readable text: for each unit, the investigation, its hazards, its supervision level, and its no-special-equipment alternative."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs10-chemistry-data-sources",
+  "kind": "document",
+  "title": "Chemistry published data source list",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs10-chemistry.md",
+  "rights": "Names third-party sources; the family retrieves them under the sources' own terms. No third-party content is embedded.",
+  "required": false,
+  "text_fallback": "Readable text: which published dataset each unit uses, and what the learner must generate themselves."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs11-physics-investigation-guide",
+  "kind": "document",
+  "title": "Physics investigation and alternative-path guide",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs11-physics.md",
+  "rights": "Manuel Academy original; freely reusable by the family.",
+  "required": false,
+  "text_fallback": "Readable text: for each unit, the investigation, its hazards, its supervision level, and its no-special-equipment alternative."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs11-physics-data-sources",
+  "kind": "document",
+  "title": "Physics published data source list",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs11-physics.md",
+  "rights": "Names third-party sources; the family retrieves them under the sources' own terms. No third-party content is embedded.",
+  "required": false,
+  "text_fallback": "Readable text: which published dataset each unit uses, and what the learner must generate themselves."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs12-earth-space-environmental-investigation-guide",
+  "kind": "document",
+  "title": "Earth, Space, and Environmental Systems investigation and alternative-path guide",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs12-earth-space-environmental.md",
+  "rights": "Manuel Academy original; freely reusable by the family.",
+  "required": false,
+  "text_fallback": "Readable text: for each unit, the investigation, its hazards, its supervision level, and its no-special-equipment alternative."
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "resource_id": "res-ma-hs12-earth-space-environmental-data-sources",
+  "kind": "document",
+  "title": "Earth, Space, and Environmental Systems published data source list",
+  "locator": "curriculum-authoring/full-family-highschool-9-12/subjects/science/course-guides/ma-hs12-earth-space-environmental.md",
+  "rights": "Names third-party sources; the family retrieves them under the sources' own terms. No third-party content is embedded.",
+  "required": false,
+  "text_fallback": "Readable text: which published dataset each unit uses, and what the learner must generate themselves."
+ }
+]

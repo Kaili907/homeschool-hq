@@ -1,0 +1,148 @@
+{
+  "package_id": "manuel-academy-highschool-9-12-social-studies-v1",
+  "version": "1.0.0",
+  "validated_on": "2026-08-12",
+  "overall": "PASS",
+  "counts": {
+    "checks": 27,
+    "passed": 27,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "check": "four-complete-courses",
+      "result": "PASS",
+      "details": "4 courses; required artifacts present"
+    },
+    {
+      "check": "nine-units-per-course",
+      "result": "PASS",
+      "details": "{9: 9, 10: 9, 11: 9, 12: 9}"
+    },
+    {
+      "check": "lesson-count",
+      "result": "PASS",
+      "details": "432 total; {9: 108, 10: 108, 11: 108, 12: 108}"
+    },
+    {
+      "check": "twelve-lessons-per-unit",
+      "result": "PASS",
+      "details": "every unit has 12 lessons"
+    },
+    {
+      "check": "assessment-per-unit",
+      "result": "PASS",
+      "details": "9 unit assessments per course"
+    },
+    {
+      "check": "lesson-id-pattern",
+      "result": "PASS",
+      "details": "all 432 match ^ma-gNN-social-studies-uNN-lNN"
+    },
+    {
+      "check": "unique-lesson-ids",
+      "result": "PASS",
+      "details": "432 unique of 432"
+    },
+    {
+      "check": "unique-unit-ids",
+      "result": "PASS",
+      "details": "36 unique of 36"
+    },
+    {
+      "check": "unit-lesson-assessment-refs-resolve",
+      "result": "PASS",
+      "details": "all unit lesson_ids and assessment_ids resolve"
+    },
+    {
+      "check": "course-index-matches",
+      "result": "PASS",
+      "details": "['ma-g10-social-studies', 'ma-g11-social-studies', 'ma-g12-social-studies', 'ma-g9-social-studies']"
+    },
+    {
+      "check": "unit-index-complete",
+      "result": "PASS",
+      "details": "36 units indexed"
+    },
+    {
+      "check": "lesson-index-complete",
+      "result": "PASS",
+      "details": "432 rows"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once",
+      "result": "PASS",
+      "details": "4 x 108 = 432 scheduled, 36 weeks x 3 sessions each"
+    },
+    {
+      "check": "grade-8-to-9-continuity",
+      "result": "PASS",
+      "details": "Grade 8 U9 carries Michigan Grade 8 U6.1 introduction, P3, P4; Grade 9 U1 carries USHG F1; Grade 9 U2 resumes at USHG 6.1.x"
+    },
+    {
+      "check": "grade-9-era-sequence-forward-and-complete",
+      "result": "PASS",
+      "details": "Grade 9 units 2-9 traverse USHG Eras [6, 7, 8, 9] in order"
+    },
+    {
+      "check": "michigan-hs-expectation-coverage",
+      "result": "PASS",
+      "details": "162 of 162 high school expectation codes carried; gaps: none"
+    },
+    {
+      "check": "mmc-required-components",
+      "result": "PASS",
+      "details": "USHG 39/39 in grade 9; WHG 32/32 in grade 10; Civics 54/54 in grade 11 units 1-5; Economics 33/33 in grade 11 units 6-9"
+    },
+    {
+      "check": "civics-economics-credit-segmentation",
+      "result": "PASS",
+      "details": "civics units 1-5 = 60 sessions; economics units 6-9 = 48 sessions"
+    },
+    {
+      "check": "grade-12-present-and-non-repeating",
+      "result": "PASS",
+      "details": "9 units, 108 sessions, no unit title repeats grades 9-11"
+    },
+    {
+      "check": "grade-12-advances-research-and-argument",
+      "result": "PASS",
+      "details": "every Grade 12 performance task requires independent research, analysis, or defense"
+    },
+    {
+      "check": "research-and-argument-progression-documented",
+      "result": "PASS",
+      "details": "grade 8 supported inquiry -> 9 counterclaim -> 10 comparative -> 11 policy/constitutional -> 12 independent defended research"
+    },
+    {
+      "check": "multi-occasion-mastery",
+      "result": "PASS",
+      "details": "all 432 lessons require independent evidence and transfer on at least two separate occasions"
+    },
+    {
+      "check": "source-provenance-present",
+      "result": "PASS",
+      "details": "every lesson and unit names its source focus and real, repository-attributed anchor sources"
+    },
+    {
+      "check": "no-quotations-from-sources",
+      "result": "PASS",
+      "details": "only unit focus terms and one facilitator prompt appear in quotation marks; no source wording is reproduced"
+    },
+    {
+      "check": "tutor-boundary-and-static-path",
+      "result": "PASS",
+      "details": "all 432 lessons declare a static path and a route that refuses to draft graded argument"
+    },
+    {
+      "check": "lesson-schema-conformance",
+      "result": "PASS",
+      "details": "all 432 lessons conform to schemas/lesson.schema.json"
+    },
+    {
+      "check": "optional-media-and-accessible-fallback",
+      "result": "PASS",
+      "details": "all lessons: media optional with a readable fallback"
+    }
+  ]
+}

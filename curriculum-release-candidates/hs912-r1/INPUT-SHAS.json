@@ -1,0 +1,59 @@
+{
+  "inputs": [
+    {
+      "lane": "release",
+      "branch": "mac/hs912-release-r1",
+      "sha": "5150dfe484ca640f006bdda2132d476556edd93e",
+      "imported": "release/ contract artifacts, course-matrix.json, validate-high-school.mjs"
+    },
+    {
+      "lane": "mathematics",
+      "branch": "mac/hs912-math-r1",
+      "sha": "2b716171035c5f9029207bd8f5f45bc64a0eeab7",
+      "imported": "mathematics"
+    },
+    {
+      "lane": "english-language-arts",
+      "branch": "mac/hs912-ela-r1",
+      "sha": "42f2505bb04d831c4aefc195a7ce03edb2d7b1d9",
+      "imported": "english-language-arts"
+    },
+    {
+      "lane": "science",
+      "branch": "mac/hs912-science-h2",
+      "sha": "265ea3a75740ccbeea0dfa02c723514779def052",
+      "imported": "science (verbatim, PENDING_H2_REVIEW)"
+    },
+    {
+      "lane": "social-studies",
+      "branch": "mac/hs912-social-studies-r1",
+      "sha": "fa4410d70e8e91eb1f673a9d0089065fb59a9d76",
+      "imported": "social-studies"
+    },
+    {
+      "lane": "health-and-physical-education",
+      "branch": "mac/hs912-health-pe-r1",
+      "sha": "e39e2b343c41a1a800825651159e0e962d5288d7",
+      "imported": "health, physical-education"
+    },
+    {
+      "lane": "ready-for-life-and-financial-literacy",
+      "branch": "mac/hs912-rfl-finlit-r1",
+      "sha": "481296a9e794770348881b43bd0d1fa4f794db29",
+      "imported": "ready-for-life, financial-literacy"
+    },
+    {
+      "lane": "technology-and-arts",
+      "branch": "mac/hs912-tech-arts-r1",
+      "sha": "627b41c0e794ce31bc5ab7501aec1015930ccbf3",
+      "imported": "technology, arts-and-music"
+    }
+  ],
+  "rejected_inputs": [
+    {
+      "branch": "mac/hs912-science-r1",
+      "sha": "f58f7f1eec0a0f93801df4978c00511ec98cc95e",
+      "reason": "superseded by mac/hs912-science-h2; not imported"
+    }
+  ]
+}

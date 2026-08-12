@@ -1,0 +1,34 @@
+Manuel Academy 8-12 release-candidate assembly validation
+overall: BLOCKED
+blocking: 11   advisory: 11   notes: 2
+derived counts (observed, never asserted):
+  normalised_courses: 36
+  normalised_units: 276
+  normalised_lessons: 3324
+  normalised_assessments: 276
+  schedules: 4
+findings:
+  [BLOCKING] STANDARD_UNTRACEABLE — mathematics cites MP.2 in 133 place(s); it is not evidenced by the lane's own standards custody
+  [BLOCKING] STANDARD_UNTRACEABLE — mathematics cites MP.6 in 57 place(s); it is not evidenced by the lane's own standards custody
+  [BLOCKING] STANDARD_UNTRACEABLE — mathematics cites MP.7 in 152 place(s); it is not evidenced by the lane's own standards custody
+  [BLOCKING] STANDARD_UNTRACEABLE — mathematics cites MP.3 in 171 place(s); it is not evidenced by the lane's own standards custody
+  [BLOCKING] STANDARD_UNTRACEABLE — mathematics cites MP.1 in 19 place(s); it is not evidenced by the lane's own standards custody
+  [BLOCKING] STANDARD_UNTRACEABLE — mathematics cites MP.4 in 190 place(s); it is not evidenced by the lane's own standards custody
+  [BLOCKING] STANDARD_UNTRACEABLE — mathematics cites MP.5 in 57 place(s); it is not evidenced by the lane's own standards custody
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g10-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g11-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g12-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-health delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-physical-education delivers 108 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-technology delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g10-technology delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g11-technology delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g12-technology delivers 48 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-financial-literacy delivers 72 lessons against a recommended 90 sessions
+  [BLOCKING] SCIENCE_ID_SCHEME_CONFLICT — ma-hs9-biology does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json
+  [BLOCKING] SCIENCE_ID_SCHEME_CONFLICT — ma-hs10-chemistry does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json
+  [BLOCKING] SCIENCE_ID_SCHEME_CONFLICT — ma-hs11-physics does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json
+  [BLOCKING] SCIENCE_ID_SCHEME_CONFLICT — ma-hs12-earth-space-environmental does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json
+  [NOTE] SCIENCE_PENDING_H2_REVIEW — science is imported verbatim from mac/hs912-science-h2 and carries status PENDING_H2_REVIEW until the parallel read-only review passes
+  [NOTE] NOTE_VALIDATOR_POLARITY — release/validate-high-school.mjs matches the Health/PE body-assessment denylist without polarity and reports every lesson whose safety_and_privacy text forbids those practices. checkBodyAssessment here is polarity aware. The release validator is not edited by this session.

@@ -1,0 +1,50 @@
+{
+  "handoff": "Grade 8 Social Studies to Grade 9 United States History and Geography",
+  "upstream_course_id": "ma-g8-social-studies",
+  "upstream_course_path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/social-studies",
+  "upstream_final_unit": {
+    "unit_id": "ma-g8-social-studies-u09",
+    "unit_number": 9,
+    "title": "Civic Inquiry and Bridge to 1870–1898",
+    "standards": [
+      "Michigan Grade 8 U6.1 introduction",
+      "P3",
+      "P4"
+    ],
+    "topics": [
+      "industrial growth introduction",
+      "western expansion and federal policy",
+      "citizenship after Reconstruction",
+      "constitutional change",
+      "historical memory",
+      "public issue inquiry"
+    ]
+  },
+  "downstream_course_id": "ma-g9-social-studies",
+  "downstream_first_unit": {
+    "unit_id": "ma-g9-social-studies-u01",
+    "title": "Foundations of High School United States History and Geography",
+    "standards": [
+      "USHG F1.1",
+      "USHG F1.2",
+      "USHG F1.3",
+      "P1",
+      "P2"
+    ]
+  },
+  "downstream_first_content_unit": {
+    "unit_id": "ma-g9-social-studies-u02",
+    "title": "Industrial and Urban America, 1870-1900",
+    "standards": [
+      "USHG 6.1.1",
+      "USHG 6.1.2",
+      "USHG 6.1.3",
+      "USHG 6.1.4",
+      "P2"
+    ]
+  },
+  "articulation_rule": "Michigan places USHG expectation 6.1 at the boundary between Grade 8 and high school: the source document marks 6.1 as introduced in Grade 8 and as the point where high school USHG begins. Grade 8 Unit 9 introduces 1870-1898; Grade 9 Unit 1 establishes high school disciplinary foundations (USHG F1) and Grade 9 Unit 2 resumes content at USHG 6.1.1-6.1.4.",
+  "no_gap_check": "No USHG era between the Grade 8 endpoint and the Grade 9 starting point is left unaddressed.",
+  "no_duplicate_check": "Grade 9 does not re-teach Grade 8 Eras 3-5 as content. USHG F1 in Grade 9 Unit 1 is the foundations review the source document specifies for high school, framed as disciplinary practice rather than a repeat survey.",
+  "verified_on": "2026-08-12"
+}

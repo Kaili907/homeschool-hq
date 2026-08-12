@@ -1,0 +1,358 @@
+[
+  {
+    "assessment_id": "ma-g10-technology-u01-assessment",
+    "unit_number": 1,
+    "unit_title": "Data Representation and Structures",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Data and Analysis"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain numeric text and binary encoding in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of arrays and lists.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply dictionaries and records in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving stacks and queues; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how nested and tabular structures and choosing a structure for a problem relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Implement and measure two data structures for the same task and justify the selection with evidence.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-technology-u02-assessment",
+    "unit_number": 2,
+    "unit_title": "Algorithms, Efficiency, and Correctness",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain searching algorithms in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of sorting algorithms.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply recursion and base cases in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving complexity and growth rates; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how correctness arguments and invariants and empirical timing and measurement relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Compare searching and sorting approaches using complexity reasoning together with measured runtime evidence.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-technology-u03-assessment",
+    "unit_number": 3,
+    "unit_title": "Databases and Data Modeling",
+    "standards": [
+      "Michigan Computer Science: Data and Analysis"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain entities attributes and relationships in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of schema design and normalization.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply query logic and filtering in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving aggregation and grouping; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how data quality and validation and retention and data minimization relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Model and query a synthetic dataset, documenting schema decisions, data-quality checks, and retention limits.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-technology-u04-assessment",
+    "unit_number": 4,
+    "unit_title": "Networks, Protocols, and the Internet",
+    "standards": [
+      "Michigan Computer Science: Networks and the Internet"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain packets routing and addressing in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of protocol layers.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply name resolution in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving client server request and response; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how latency bandwidth and reliability and network troubleshooting relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Trace and diagram a request end to end across protocol layers using sandboxed or simulated evidence.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-technology-u05-assessment",
+    "unit_number": 5,
+    "unit_title": "Cybersecurity Foundations in a Sandbox",
+    "standards": [
+      "Michigan Computer Science: Networks and the Internet — Cybersecurity"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain confidentiality integrity and availability in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of authentication and authorization concepts.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply encryption and hashing concepts in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving common vulnerability classes; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how secure coding practices and sandboxed defensive analysis relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Write a threat model and defensive hardening plan for a fictional system inside a sandbox; no live or third-party system is probed.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-technology-u06-assessment",
+    "unit_number": 6,
+    "unit_title": "Secure Data Project and Threat-Model Review",
+    "standards": [
+      "Michigan Computer Science: Data and Analysis",
+      "Networks and the Internet — Cybersecurity"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain requirements and data inventory in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of structure and query implementation.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply validation and error handling in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving threat model and mitigations; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how privacy impact and minimization and documentation and review relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Deliver a secure data application with schema, tests, a threat model, mitigations, and a privacy impact review.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  }
+]

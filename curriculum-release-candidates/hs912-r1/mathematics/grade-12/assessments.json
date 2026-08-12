@@ -1,0 +1,695 @@
+[
+  {
+    "assessment_id": "ma-g12-mathematics-u01-assessment",
+    "unit_number": 1,
+    "unit_title": "Advanced Trigonometry: Unit Circle and Identities",
+    "standards": [
+      "F-TF.3",
+      "F-TF.4",
+      "F-TF.9",
+      "MP.7"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain special triangles and exact trigonometric values in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of expressing values for pi minus x, pi plus x, and 2pi minus x.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply symmetry and periodicity from the unit circle in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving odd and even trigonometric behavior; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect the addition and subtraction formulas with proving and applying trigonometric identities. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Prove a trigonometric identity and apply it to a problem exact values alone cannot solve.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u02-assessment",
+    "unit_number": 2,
+    "unit_title": "Inverse Trigonometric Functions and Composition",
+    "standards": [
+      "F-TF.6",
+      "F-TF.7",
+      "F-BF.5",
+      "MP.2"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain restricting a domain so an inverse can be constructed in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of inverse sine, cosine, and tangent.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply solving trigonometric equations in modeling contexts in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving evaluating solutions with technology and interpreting them; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect the inverse relationship between exponents and logarithms with verifying inverse relationships by composition. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Solve a modeling problem requiring inverse trigonometric reasoning and interpret every solution.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u03-assessment",
+    "unit_number": 3,
+    "unit_title": "Triangle Laws for Non-Right Triangles",
+    "standards": [
+      "G-SRT.9",
+      "G-SRT.10",
+      "G-SRT.11",
+      "MP.3"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain deriving the area formula using an auxiliary altitude in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of proving the Law of Sines.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply proving the Law of Cosines in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving choosing the appropriate law for a given triangle; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect the ambiguous case with surveying and resultant-force applications. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Solve a non-right triangle problem end to end and justify which law applies.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u04-assessment",
+    "unit_number": 4,
+    "unit_title": "The Complex Plane",
+    "standards": [
+      "N-CN.3",
+      "N-CN.4",
+      "N-CN.5",
+      "N-CN.6",
+      "MP.7"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain conjugates, moduli, and quotients in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of rectangular and polar form and why they agree.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply addition, subtraction, and conjugation represented geometrically in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving multiplication as rotation and scaling; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect distance and midpoint on the complex plane with computing with the geometric representation. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Build a geometric interpretation guide for complex arithmetic with worked verifications.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u05-assessment",
+    "unit_number": 5,
+    "unit_title": "Complex Solutions, Polynomials, and the Binomial Theorem",
+    "standards": [
+      "N-CN.8",
+      "N-CN.9",
+      "A-APR.5",
+      "A-APR.7",
+      "MP.3"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain extending polynomial identities to the complex numbers in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of the fundamental theorem of algebra and counting roots.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply factoring completely over the complex numbers in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving the binomial theorem and Pascal's triangle; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect expanding binomial powers with closure and arithmetic of rational expressions. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Factor a higher-degree polynomial completely over the complex numbers and verify the root count.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u06-assessment",
+    "unit_number": 6,
+    "unit_title": "Vectors",
+    "standards": [
+      "N-VM.1",
+      "N-VM.2",
+      "N-VM.3",
+      "N-VM.4",
+      "N-VM.5",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain vectors as magnitude and direction with proper notation in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of component form from initial and terminal points.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply modeling velocity, force, and displacement in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving vector addition, the parallelogram rule, and component-wise sums; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect magnitude and direction of a resultant with vector subtraction and scalar multiplication. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Model a real force or velocity situation with vectors and verify the resultant.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u07-assessment",
+    "unit_number": 7,
+    "unit_title": "Matrices, Transformations, and Systems",
+    "standards": [
+      "N-VM.6",
+      "N-VM.7",
+      "N-VM.8",
+      "N-VM.9",
+      "N-VM.10",
+      "N-VM.11",
+      "N-VM.12",
+      "A-REI.8",
+      "A-REI.9",
+      "MP.5"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain matrices as organized data and scalar multiplication in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of matrix addition, multiplication, and non-commutativity.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply the zero and identity matrices, determinants, and invertibility in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving matrices as transformations of vectors and area scaling by the determinant; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect representing a linear system as a matrix equation with solving systems with an inverse matrix and technology. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Represent a real transformation and a real system with matrices, and interpret the determinant.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u08-assessment",
+    "unit_number": 8,
+    "unit_title": "Conic Sections and Volume Arguments",
+    "standards": [
+      "G-C.4",
+      "G-GPE.3",
+      "G-GMD.2",
+      "MP.3"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain constructing a tangent line from a point outside a circle in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of deriving the ellipse from the sum of focal distances.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply deriving the hyperbola from the difference of focal distances in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving conic equations and their geometric features; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect Cavalieri's principle with volume arguments for spheres and other solids. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Derive one conic and one volume result from first principles and verify each.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u09-assessment",
+    "unit_number": 9,
+    "unit_title": "Random Variables and Probability Distributions",
+    "standards": [
+      "S-CP.8",
+      "S-CP.9",
+      "S-MD.1",
+      "S-MD.2",
+      "S-MD.3",
+      "MP.2"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain the general multiplication rule in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of permutations and combinations for counting.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply random variables and assigning probabilities to outcomes in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving graphing a probability distribution; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect expected value as a weighted average with theoretical distributions and their expected values. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Construct a probability distribution for a real random process and compute its expected value.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-mathematics-u10-assessment",
+    "unit_number": 10,
+    "unit_title": "Decision Analysis and Expected Value Capstone",
+    "standards": [
+      "S-MD.4",
+      "S-MD.5",
+      "S-MD.6",
+      "S-MD.7",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain empirical probability distributions from data in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of expected payoff of a decision.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply weighing expected value against risk in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving fair decisions and the role of randomness; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect evaluating and comparing decision strategies with analyzing real decisions, policies, and games. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Analyze a consequential real decision with expected value and defend a recommendation.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  }
+]

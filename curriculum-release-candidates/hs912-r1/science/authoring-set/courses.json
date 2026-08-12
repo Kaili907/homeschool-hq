@@ -1,0 +1,586 @@
+[
+ {
+  "schema_set_version": "2.0.0",
+  "course_id": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "title": "Biology",
+  "description": "A first high school laboratory science building directly on the Grade 8 middle-school band. The course develops molecular and cellular biology from foundations, then raises the Grade 8 heredity, natural selection, and ecosystem strands to the high school performance-expectation band. Biology is the credit Michigan names explicitly in MCL 380.1278b(1)(b), so it is placed in Grade 9 and banked first. Every investigation is household-safe, every investigation has a no-special-equipment alternative, and no activity anywhere in the course measures the learner's own body or health.",
+  "capstone": "A biodiversity engineering defense: define criteria and constraints for a real conservation problem, model and simulate a solution, evaluate trade-offs, and defend the revision history with stated limitations.",
+  "days": 108,
+  "order": 1,
+  "unit_refs": [
+   "ma-hs9-biology-u01",
+   "ma-hs9-biology-u02",
+   "ma-hs9-biology-u03",
+   "ma-hs9-biology-u04",
+   "ma-hs9-biology-u05",
+   "ma-hs9-biology-u06",
+   "ma-hs9-biology-u07",
+   "ma-hs9-biology-u08",
+   "ma-hs9-biology-u09"
+  ],
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-8",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "credit-role",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Statutory named credit under MCL 380.1278b(1)(b)"
+    }
+   },
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "placement",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Grade placement is a Manuel Academy decision. Michigan prescribes science content expectations and credit counts, not the year in which a course is taken. See sequence-design.md section 3."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "course_id": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "title": "Chemistry",
+  "description": "A household-safe laboratory chemistry course covering the full HS-PS1 band from measurement and atomic structure through bonding, reactions, stoichiometry, energy, kinetics, equilibrium, and nuclear change. Because the course is named Chemistry, it satisfies the second statutory credit directly and no department determination of benchmark equivalency is required. No investigation uses concentrated acids or bases, compressed gases, a fume hood, or any chemical needing institutional disposal, and the prohibition on mixing household cleaning products is stated in every unit and cannot be disabled.",
+  "capstone": "A chemistry engineering defense: analyse a materials or energy challenge, model a chemical solution with its energy and nuclear trade-offs, evaluate against prioritised criteria, and defend the revisions.",
+  "days": 108,
+  "order": 2,
+  "unit_refs": [
+   "ma-hs10-chemistry-u01",
+   "ma-hs10-chemistry-u02",
+   "ma-hs10-chemistry-u03",
+   "ma-hs10-chemistry-u04",
+   "ma-hs10-chemistry-u05",
+   "ma-hs10-chemistry-u06",
+   "ma-hs10-chemistry-u07",
+   "ma-hs10-chemistry-u08",
+   "ma-hs10-chemistry-u09"
+  ],
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-8",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "credit-role",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Satisfies the chemistry-or-physics credit by name under MCL 380.1278b(1)(b)"
+    }
+   },
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "placement",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Grade placement is a Manuel Academy decision. Michigan prescribes science content expectations and credit counts, not the year in which a course is taken. See sequence-design.md section 3."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "course_id": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "title": "Physics",
+  "description": "A quantitative laboratory physics course covering forces, momentum, gravitation and electrostatics, energy, thermal physics, fields and induction, waves, and electromagnetic radiation. Placed in Grade 11 so it follows Algebra I and Geometry and runs alongside Algebra II - a Manuel Academy sequencing decision, not a state requirement. All electrical work uses single low-voltage cells; mains electricity and lasers are excluded from the course entirely.",
+  "capstone": "A physics engineering defense: design, build, and refine an energy-conversion or information-transmission device, and justify it with wave and energy principles plus the learner's own trial data.",
+  "days": 108,
+  "order": 3,
+  "unit_refs": [
+   "ma-hs11-physics-u01",
+   "ma-hs11-physics-u02",
+   "ma-hs11-physics-u03",
+   "ma-hs11-physics-u04",
+   "ma-hs11-physics-u05",
+   "ma-hs11-physics-u06",
+   "ma-hs11-physics-u07",
+   "ma-hs11-physics-u08",
+   "ma-hs11-physics-u09"
+  ],
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "credit-role",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Third science credit"
+    }
+   },
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "placement",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Grade placement is a Manuel Academy decision. Michigan prescribes science content expectations and credit counts, not the year in which a course is taken. See sequence-design.md section 3."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "course_id": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "title": "Earth, Space, and Environmental Systems",
+  "description": "An integrated synthesis course covering the full HS-ESS1, HS-ESS2, and HS-ESS3 bands - the 19 performance expectations most often left uncovered by a three-year disciplinary sequence. Placed last because it genuinely depends on the other three: stellar nucleosynthesis needs Chemistry's atomic model, the carbon cycle needs Biology's photosynthesis and respiration, and climate modelling needs all three plus quantitative reasoning. The course is data-intensive and low-hazard; most investigations use published datasets the family retrieves, and the sun is never observed directly by any means.",
+  "capstone": "The Grade 12 capstone: analyse a global challenge, build a computational simulation of coupled Earth and human systems, evaluate competing solutions on prioritised criteria and trade-offs, refine, and defend with stated limitations.",
+  "days": 108,
+  "order": 4,
+  "unit_refs": [
+   "ma-hs12-earth-space-environmental-u01",
+   "ma-hs12-earth-space-environmental-u02",
+   "ma-hs12-earth-space-environmental-u03",
+   "ma-hs12-earth-space-environmental-u04",
+   "ma-hs12-earth-space-environmental-u05",
+   "ma-hs12-earth-space-environmental-u06",
+   "ma-hs12-earth-space-environmental-u07",
+   "ma-hs12-earth-space-environmental-u08",
+   "ma-hs12-earth-space-environmental-u09"
+  ],
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "credit-role",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Encouraged fourth credit; statute names Earth science, astronomy, environmental science, and geology"
+    }
+   },
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "placement",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Grade placement is a Manuel Academy decision. Michigan prescribes science content expectations and credit counts, not the year in which a course is taken. See sequence-design.md section 3."
+    }
+   }
+  ]
+ }
+]

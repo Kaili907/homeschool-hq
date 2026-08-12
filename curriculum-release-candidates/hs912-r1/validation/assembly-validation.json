@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "overall": "BLOCKED",
+  "blockingCount": 11,
+  "advisoryCount": 11,
+  "noteCount": 2,
+  "derivedCounts": {
+    "normalised_courses": 36,
+    "normalised_units": 276,
+    "normalised_lessons": 3324,
+    "normalised_assessments": 276,
+    "schedules": 4
+  },
+  "countsAsserted": false,
+  "findings": [
+    {
+      "severity": "BLOCKING",
+      "code": "STANDARD_UNTRACEABLE",
+      "message": "mathematics cites MP.2 in 133 place(s); it is not evidenced by the lane's own standards custody",
+      "context": {
+        "fam": "mathematics",
+        "code": "MP.2",
+        "occurrences": 133
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "STANDARD_UNTRACEABLE",
+      "message": "mathematics cites MP.6 in 57 place(s); it is not evidenced by the lane's own standards custody",
+      "context": {
+        "fam": "mathematics",
+        "code": "MP.6",
+        "occurrences": 57
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "STANDARD_UNTRACEABLE",
+      "message": "mathematics cites MP.7 in 152 place(s); it is not evidenced by the lane's own standards custody",
+      "context": {
+        "fam": "mathematics",
+        "code": "MP.7",
+        "occurrences": 152
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "STANDARD_UNTRACEABLE",
+      "message": "mathematics cites MP.3 in 171 place(s); it is not evidenced by the lane's own standards custody",
+      "context": {
+        "fam": "mathematics",
+        "code": "MP.3",
+        "occurrences": 171
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "STANDARD_UNTRACEABLE",
+      "message": "mathematics cites MP.1 in 19 place(s); it is not evidenced by the lane's own standards custody",
+      "context": {
+        "fam": "mathematics",
+        "code": "MP.1",
+        "occurrences": 19
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "STANDARD_UNTRACEABLE",
+      "message": "mathematics cites MP.4 in 190 place(s); it is not evidenced by the lane's own standards custody",
+      "context": {
+        "fam": "mathematics",
+        "code": "MP.4",
+        "occurrences": 190
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "STANDARD_UNTRACEABLE",
+      "message": "mathematics cites MP.5 in 57 place(s); it is not evidenced by the lane's own standards custody",
+      "context": {
+        "fam": "mathematics",
+        "code": "MP.5",
+        "occurrences": 57
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-social-studies delivers 108 lessons against a recommended 180 sessions",
+      "context": {
+        "id": "ma-g9-social-studies",
+        "delivered": 108,
+        "recommended": 180
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g10-social-studies delivers 108 lessons against a recommended 180 sessions",
+      "context": {
+        "id": "ma-g10-social-studies",
+        "delivered": 108,
+        "recommended": 180
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g11-social-studies delivers 108 lessons against a recommended 180 sessions",
+      "context": {
+        "id": "ma-g11-social-studies",
+        "delivered": 108,
+        "recommended": 180
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g12-social-studies delivers 108 lessons against a recommended 180 sessions",
+      "context": {
+        "id": "ma-g12-social-studies",
+        "delivered": 108,
+        "recommended": 180
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-health delivers 36 lessons against a recommended 90 sessions",
+      "context": {
+        "id": "ma-g9-health",
+        "delivered": 36,
+        "recommended": 90
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-physical-education delivers 108 lessons against a recommended 90 sessions",
+      "context": {
+        "id": "ma-g9-physical-education",
+        "delivered": 108,
+        "recommended": 90
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-technology delivers 36 lessons against a recommended 90 sessions",
+      "context": {
+        "id": "ma-g9-technology",
+        "delivered": 36,
+        "recommended": 90
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g10-technology delivers 36 lessons against a recommended 90 sessions",
+      "context": {
+        "id": "ma-g10-technology",
+        "delivered": 36,
+        "recommended": 90
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g11-technology delivers 36 lessons against a recommended 90 sessions",
+      "context": {
+        "id": "ma-g11-technology",
+        "delivered": 36,
+        "recommended": 90
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g12-technology delivers 48 lessons against a recommended 90 sessions",
+      "context": {
+        "id": "ma-g12-technology",
+        "delivered": 48,
+        "recommended": 90
+      }
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-financial-literacy delivers 72 lessons against a recommended 90 sessions",
+      "context": {
+        "id": "ma-g9-financial-literacy",
+        "delivered": 72,
+        "recommended": 90
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "SCIENCE_ID_SCHEME_CONFLICT",
+      "message": "ma-hs9-biology does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json",
+      "context": {
+        "id": "ma-hs9-biology",
+        "expected": "ma-g9-science"
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "SCIENCE_ID_SCHEME_CONFLICT",
+      "message": "ma-hs10-chemistry does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json",
+      "context": {
+        "id": "ma-hs10-chemistry",
+        "expected": "ma-g10-science"
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "SCIENCE_ID_SCHEME_CONFLICT",
+      "message": "ma-hs11-physics does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json",
+      "context": {
+        "id": "ma-hs11-physics",
+        "expected": "ma-g11-science"
+      }
+    },
+    {
+      "severity": "BLOCKING",
+      "code": "SCIENCE_ID_SCHEME_CONFLICT",
+      "message": "ma-hs12-earth-space-environmental does not match the release contract identifier grammar ma-g<grade>-science required by course-matrix.json",
+      "context": {
+        "id": "ma-hs12-earth-space-environmental",
+        "expected": "ma-g12-science"
+      }
+    },
+    {
+      "severity": "NOTE",
+      "code": "SCIENCE_PENDING_H2_REVIEW",
+      "message": "science is imported verbatim from mac/hs912-science-h2 and carries status PENDING_H2_REVIEW until the parallel read-only review passes",
+      "context": {
+        "courses": 4,
+        "units": 36,
+        "lessons": 432
+      }
+    },
+    {
+      "severity": "NOTE",
+      "code": "NOTE_VALIDATOR_POLARITY",
+      "message": "release/validate-high-school.mjs matches the Health/PE body-assessment denylist without polarity and reports every lesson whose safety_and_privacy text forbids those practices. checkBodyAssessment here is polarity aware. The release validator is not edited by this session.",
+      "context": {}
+    }
+  ]
+}

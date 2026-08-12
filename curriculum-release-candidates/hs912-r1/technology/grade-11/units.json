@@ -1,0 +1,197 @@
+[
+  {
+    "unit_id": "ma-g11-technology-u01",
+    "course_id": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "unit_number": 1,
+    "title": "Software Engineering Practice and Collaborative Version Control",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "essential_question": "What separates code that works from software that a team can keep working on?",
+    "topics": [
+      "requirements and user stories",
+      "branching merging and conflict resolution",
+      "code review and shared standards",
+      "refactoring and technical debt",
+      "continuous testing habits",
+      "solo and collaborative workflow"
+    ],
+    "performance_task": "Run a full engineering workflow on a small feature with tracked issues, branches, a resolved merge conflict, review notes, and test evidence.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g11-technology-u01-l01",
+      "ma-g11-technology-u01-l02",
+      "ma-g11-technology-u01-l03",
+      "ma-g11-technology-u01-l04",
+      "ma-g11-technology-u01-l05",
+      "ma-g11-technology-u01-l06"
+    ],
+    "assessment_id": "ma-g11-technology-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g11-technology-u02",
+    "course_id": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "unit_number": 2,
+    "title": "Object-Oriented and Modular Design",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "essential_question": "How does structuring code around objects and modules change what we can safely change later?",
+    "topics": [
+      "objects classes and state",
+      "encapsulation and interfaces",
+      "composition and inheritance tradeoffs",
+      "modules and dependencies",
+      "design patterns in context",
+      "testability and design seams"
+    ],
+    "performance_task": "Refactor a procedural program into a modular design and demonstrate preserved behavior with tests.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g11-technology-u02-l01",
+      "ma-g11-technology-u02-l02",
+      "ma-g11-technology-u02-l03",
+      "ma-g11-technology-u02-l04",
+      "ma-g11-technology-u02-l05",
+      "ma-g11-technology-u02-l06"
+    ],
+    "assessment_id": "ma-g11-technology-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g11-technology-u03",
+    "course_id": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "unit_number": 3,
+    "title": "Web and Application Architecture",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Networks and the Internet"
+    ],
+    "essential_question": "How do the pieces of a web application fit together, and where does accessibility live in that structure?",
+    "topics": [
+      "semantic structure and templating",
+      "state and data flow",
+      "interfaces and structured data exchange",
+      "storage and caching",
+      "authentication concepts without real credentials",
+      "performance and accessibility budgets"
+    ],
+    "performance_task": "Build a multi-view accessible web application against a mock interface with documented architecture decisions.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g11-technology-u03-l01",
+      "ma-g11-technology-u03-l02",
+      "ma-g11-technology-u03-l03",
+      "ma-g11-technology-u03-l04",
+      "ma-g11-technology-u03-l05",
+      "ma-g11-technology-u03-l06"
+    ],
+    "assessment_id": "ma-g11-technology-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g11-technology-u04",
+    "course_id": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "unit_number": 4,
+    "title": "Applied Data Science and Modeling",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Data and Analysis"
+    ],
+    "essential_question": "What can this data honestly support, and what would make the conclusion wrong?",
+    "topics": [
+      "question framing and study design",
+      "acquisition cleaning and provenance",
+      "exploratory analysis",
+      "visualization integrity",
+      "correlation causation and uncertainty",
+      "reproducible reporting"
+    ],
+    "performance_task": "Produce a reproducible data analysis with provenance, uncertainty, stated limitations, and an honest visualization set.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g11-technology-u04-l01",
+      "ma-g11-technology-u04-l02",
+      "ma-g11-technology-u04-l03",
+      "ma-g11-technology-u04-l04",
+      "ma-g11-technology-u04-l05",
+      "ma-g11-technology-u04-l06"
+    ],
+    "assessment_id": "ma-g11-technology-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g11-technology-u05",
+    "course_id": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "unit_number": 5,
+    "title": "AI, Machine Learning Literacy, and Evaluation",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Data and Analysis",
+      "Impacts of Computing"
+    ],
+    "essential_question": "How do we tell whether a model is good, and good for whom?",
+    "topics": [
+      "supervised learning concepts",
+      "training data and representativeness",
+      "evaluation metrics and baselines",
+      "bias fairness and harm analysis",
+      "interpretability and limitations",
+      "responsible and disclosed AI use"
+    ],
+    "performance_task": "Evaluate a supplied model or AI output against metrics, baselines, bias analysis, and disclosure requirements.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g11-technology-u05-l01",
+      "ma-g11-technology-u05-l02",
+      "ma-g11-technology-u05-l03",
+      "ma-g11-technology-u05-l04",
+      "ma-g11-technology-u05-l05",
+      "ma-g11-technology-u05-l06"
+    ],
+    "assessment_id": "ma-g11-technology-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g11-technology-u06",
+    "course_id": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "unit_number": 6,
+    "title": "Engineering Project with Test and Accessibility Evidence",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Impacts of Computing"
+    ],
+    "essential_question": "What does it take to hand an application to someone else with confidence?",
+    "topics": [
+      "scope and architecture decisions",
+      "implementation increments",
+      "automated test coverage",
+      "accessibility conformance evidence",
+      "security and privacy review",
+      "release notes and maintenance"
+    ],
+    "performance_task": "Deliver an engineered application with an architecture record, test coverage, accessibility conformance, and a maintenance plan.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g11-technology-u06-l01",
+      "ma-g11-technology-u06-l02",
+      "ma-g11-technology-u06-l03",
+      "ma-g11-technology-u06-l04",
+      "ma-g11-technology-u06-l05",
+      "ma-g11-technology-u06-l06"
+    ],
+    "assessment_id": "ma-g11-technology-u06-assessment"
+  }
+]

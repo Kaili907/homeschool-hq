@@ -1,0 +1,17 @@
+Release-lane validator (release/validate-high-school.mjs), --mode assembly, run verbatim.
+This file is captured output. The validator itself is NOT modified by the assembly session.
+
+overall: BLOCKED
+blocking: 1171   advisory: 0
+
+derived counts:
+  courses_delivered: 36
+  units_delivered: 276
+  lessons_delivered: 3324
+  assessments_delivered: 276
+  schedules_delivered: 4
+
+finding codes:
+  STANDARD_UNTRACEABLE           738
+  BODY_ASSESSMENT_PROHIBITED     432
+  ASSEMBLY_INCOMPLETE            1

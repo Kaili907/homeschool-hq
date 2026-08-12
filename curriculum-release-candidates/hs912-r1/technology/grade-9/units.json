@@ -1,0 +1,196 @@
+[
+  {
+    "unit_id": "ma-g9-technology-u01",
+    "course_id": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "unit_number": 1,
+    "title": "Computational Thinking and Problem Decomposition",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "essential_question": "What makes a problem solvable by a computer, and how do we know our plan works before we build it?",
+    "topics": [
+      "problem framing and requirements",
+      "decomposition into subproblems",
+      "abstraction and pattern recognition",
+      "algorithm design and pseudocode",
+      "trace tables and hand execution",
+      "comparing candidate algorithms"
+    ],
+    "performance_task": "Design and hand-trace an algorithm for a defined user need, documenting decomposition and abstraction choices.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g9-technology-u01-l01",
+      "ma-g9-technology-u01-l02",
+      "ma-g9-technology-u01-l03",
+      "ma-g9-technology-u01-l04",
+      "ma-g9-technology-u01-l05",
+      "ma-g9-technology-u01-l06"
+    ],
+    "assessment_id": "ma-g9-technology-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g9-technology-u02",
+    "course_id": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "unit_number": 2,
+    "title": "Programming Foundations: Data, Control, and Functions",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "essential_question": "How do a few control structures and well-chosen data combine into a program that solves a real problem?",
+    "topics": [
+      "data types and type conversion",
+      "expressions operators and precedence",
+      "selection and compound boolean logic",
+      "iteration nested loops and loop conditions",
+      "functions parameters return values and composition",
+      "scope program structure and modularity"
+    ],
+    "performance_task": "Build a modular program that uses compound conditions, nested iteration, and composed functions to solve a stated problem for a real user.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g9-technology-u02-l01",
+      "ma-g9-technology-u02-l02",
+      "ma-g9-technology-u02-l03",
+      "ma-g9-technology-u02-l04",
+      "ma-g9-technology-u02-l05",
+      "ma-g9-technology-u02-l06"
+    ],
+    "assessment_id": "ma-g9-technology-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g9-technology-u03",
+    "course_id": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "unit_number": 3,
+    "title": "Debugging, Testing, and Version Control",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "essential_question": "Why does correct-looking code fail, and what evidence proves it is actually fixed?",
+    "topics": [
+      "defect classes and error messages",
+      "reading traces and diagnostic output",
+      "systematic debugging strategy",
+      "version control commits and history",
+      "test case design and edge cases",
+      "assertions and defensive input handling"
+    ],
+    "performance_task": "Repair a supplied defective program and deliver a commit history, a defect log, a failing test that reproduces the bug, and a verified fix.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g9-technology-u03-l01",
+      "ma-g9-technology-u03-l02",
+      "ma-g9-technology-u03-l03",
+      "ma-g9-technology-u03-l04",
+      "ma-g9-technology-u03-l05",
+      "ma-g9-technology-u03-l06"
+    ],
+    "assessment_id": "ma-g9-technology-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g9-technology-u04",
+    "course_id": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "unit_number": 4,
+    "title": "Computing Systems, Hardware, and Abstraction",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Computing Systems"
+    ],
+    "essential_question": "What is actually happening beneath the interface, and why does the abstraction matter?",
+    "topics": [
+      "layers of abstraction",
+      "binary and data representation",
+      "processor memory and storage",
+      "operating systems and processes",
+      "hardware and software troubleshooting",
+      "device lifecycle and sustainability"
+    ],
+    "performance_task": "Diagram a computing system across its abstraction layers and document a reproducible troubleshooting protocol.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g9-technology-u04-l01",
+      "ma-g9-technology-u04-l02",
+      "ma-g9-technology-u04-l03",
+      "ma-g9-technology-u04-l04",
+      "ma-g9-technology-u04-l05",
+      "ma-g9-technology-u04-l06"
+    ],
+    "assessment_id": "ma-g9-technology-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g9-technology-u05",
+    "course_id": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "unit_number": 5,
+    "title": "Human-Centered and Accessible Interface Design",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Impacts of Computing",
+      "Algorithms and Programming"
+    ],
+    "essential_question": "Who is excluded by a design, and how do we find out before we ship it?",
+    "topics": [
+      "user research without private data",
+      "personas scenarios and requirements",
+      "semantic structure and responsive layout",
+      "forms validation and error handling without private data",
+      "accessibility guidelines and assistive-technology testing",
+      "usability testing consent and inclusive tradeoffs"
+    ],
+    "performance_task": "Build a responsive, accessible multi-view interface with validated forms, then document an accessibility audit and a user-test revision log.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g9-technology-u05-l01",
+      "ma-g9-technology-u05-l02",
+      "ma-g9-technology-u05-l03",
+      "ma-g9-technology-u05-l04",
+      "ma-g9-technology-u05-l05",
+      "ma-g9-technology-u05-l06"
+    ],
+    "assessment_id": "ma-g9-technology-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g9-technology-u06",
+    "course_id": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "unit_number": 6,
+    "title": "Foundations Project and Impact Review",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Impacts of Computing"
+    ],
+    "essential_question": "What evidence should accompany software before anyone else relies on it?",
+    "topics": [
+      "project scoping and success criteria",
+      "version control and iterative build history",
+      "test evidence and defect closure",
+      "accessibility verification",
+      "privacy security and data minimization review",
+      "documentation and handoff"
+    ],
+    "performance_task": "Deliver a foundations software project with version history, test evidence, an accessibility audit, and a privacy and security review.",
+    "capstone_unit": false,
+    "lesson_ids": [
+      "ma-g9-technology-u06-l01",
+      "ma-g9-technology-u06-l02",
+      "ma-g9-technology-u06-l03",
+      "ma-g9-technology-u06-l04",
+      "ma-g9-technology-u06-l05",
+      "ma-g9-technology-u06-l06"
+    ],
+    "assessment_id": "ma-g9-technology-u06-assessment"
+  }
+]

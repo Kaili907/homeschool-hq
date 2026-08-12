@@ -1,0 +1,69 @@
+{
+ "schema_set_version": "2.0.0",
+ "policy_set_id": "manuel-academy-hs-science-policy",
+ "title": "Manuel Academy High School Science 9-12 policy set",
+ "mastery_floor": {
+  "policy_ref": "manuel-academy-hs-science-policy",
+  "minimum_occasions": 2,
+  "minimum_distinct_dates": 2,
+  "independent_evidence_required": true,
+  "evidence_types": [
+   "explanation",
+   "application"
+  ],
+  "transfer_requirement": "novel-context"
+ },
+ "tutor_authority": {
+  "reveals_answers": false,
+  "gives_final_graded_answer": false,
+  "controls_graded_work_policy": false
+ },
+ "safety_privacy": {
+  "non_disableable_prohibitions": [
+   "Never mix household cleaning products; bleach combined with ammonia or acid releases toxic gas.",
+   "Never connect any investigation to mains electricity; low-voltage cells only.",
+   "Never fully seal a reacting, fermenting, oxidising, or warm mixture in any container.",
+   "Never have a flammable liquid open in the same room as a flame, hob, pilot light, heater, lamp, charger, or battery.",
+   "Never use alcohol, or any other fuel, for a flame demonstration; no open-flame demonstration is used anywhere in this package.",
+   "Never cut, tear, puncture, or open a sealed commercial product - cold pack, hand warmer, glow stick, or smoke detector.",
+   "Never look at the sun directly or through any lens, filter, grating, or camera.",
+   "Never require a photograph, video, or voice recording as evidence of completion.",
+   "Never request or record a learner body measurement, health measurement, or medical history.",
+   "Never present invented measurements as real experimental results."
+  ],
+  "required_privacy_declarations": [
+   "Records the learning target, completion state, evidence type, and next step only.",
+   "Stores no raw reflection text, no free-text answers, no photograph, no video, and no voice recording.",
+   "Requires no camera or video proof of any activity.",
+   "Collects no learner body measurement, health measurement, or medical information.",
+   "Requires no account creation, purchase, or disclosure of the family's location."
+  ]
+ },
+ "extension_namespaces": [
+  {
+   "namespace": "manuel.academy/lab-alternative",
+   "value_schema_ref": "lab-alternative-v1",
+   "allowed_projection": "student-safe"
+  },
+  {
+   "namespace": "manuel.academy/data-provenance",
+   "value_schema_ref": "data-provenance-v1",
+   "allowed_projection": "student-safe"
+  },
+  {
+   "namespace": "manuel.academy/standards-role",
+   "value_schema_ref": "standards-role-v1",
+   "allowed_projection": "student-safe"
+  },
+  {
+   "namespace": "manuel.academy/sequence-note",
+   "value_schema_ref": "sequence-note-v1",
+   "allowed_projection": "student-safe"
+  },
+  {
+   "namespace": "manuel.academy/lab-safety",
+   "value_schema_ref": "lab-safety-v1",
+   "allowed_projection": "student-safe"
+  }
+ ]
+}

@@ -1,0 +1,358 @@
+[
+  {
+    "assessment_id": "ma-g9-technology-u01-assessment",
+    "unit_number": 1,
+    "unit_title": "Computational Thinking and Problem Decomposition",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain problem framing and requirements in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of decomposition into subproblems.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply abstraction and pattern recognition in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving algorithm design and pseudocode; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how trace tables and hand execution and comparing candidate algorithms relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Design and hand-trace an algorithm for a defined user need, documenting decomposition and abstraction choices.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-technology-u02-assessment",
+    "unit_number": 2,
+    "unit_title": "Programming Foundations: Data, Control, and Functions",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain data types and type conversion in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of expressions operators and precedence.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply selection and compound boolean logic in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving iteration nested loops and loop conditions; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how functions parameters return values and composition and scope program structure and modularity relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Build a modular program that uses compound conditions, nested iteration, and composed functions to solve a stated problem for a real user.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-technology-u03-assessment",
+    "unit_number": 3,
+    "unit_title": "Debugging, Testing, and Version Control",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain defect classes and error messages in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of reading traces and diagnostic output.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply systematic debugging strategy in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving version control commits and history; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how test case design and edge cases and assertions and defensive input handling relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Repair a supplied defective program and deliver a commit history, a defect log, a failing test that reproduces the bug, and a verified fix.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-technology-u04-assessment",
+    "unit_number": 4,
+    "unit_title": "Computing Systems, Hardware, and Abstraction",
+    "standards": [
+      "Michigan Computer Science: Computing Systems"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain layers of abstraction in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of binary and data representation.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply processor memory and storage in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving operating systems and processes; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how hardware and software troubleshooting and device lifecycle and sustainability relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Diagram a computing system across its abstraction layers and document a reproducible troubleshooting protocol.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-technology-u05-assessment",
+    "unit_number": 5,
+    "unit_title": "Human-Centered and Accessible Interface Design",
+    "standards": [
+      "Michigan Computer Science: Impacts of Computing",
+      "Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain user research without private data in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of personas scenarios and requirements.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply semantic structure and responsive layout in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving forms validation and error handling without private data; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how accessibility guidelines and assistive-technology testing and usability testing consent and inclusive tradeoffs relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Build a responsive, accessible multi-view interface with validated forms, then document an accessibility audit and a user-test revision log.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-technology-u06-assessment",
+    "unit_number": 6,
+    "unit_title": "Foundations Project and Impact Review",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Impacts of Computing"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain project scoping and success criteria in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of version control and iterative build history.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply test evidence and defect closure in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving accessibility verification; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how privacy security and data minimization review and documentation and handoff relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Deliver a foundations software project with version history, test evidence, an accessibility audit, and a privacy and security review.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  }
+]

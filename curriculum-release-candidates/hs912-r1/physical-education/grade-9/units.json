@@ -1,0 +1,726 @@
+[
+  {
+    "unit_id": "ma-g9-physical-education-u01",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 1,
+    "title": "Safe Start: Personal Movement Readiness and Self-Management",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 3 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 4 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 5 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "How do I get my own body ready to work, and how do I know when to stop?",
+    "topics": [
+      "self-directed warm-up and cool-down design",
+      "effort scales described by feel, breath, and speech rather than by device",
+      "the stop rule: pain, dizziness, breathing difficulty, head impact, unsafe conditions",
+      "space, surface, footwear, weather, and equipment checks",
+      "hydration and recovery around activity",
+      "setting a personal starting point without comparison"
+    ],
+    "performance_task": "Design and run a personal warm-up, effort-management, and stop-rule routine, then revise it after using it across several sessions. Evidence is the written or described routine and its revision, not a measured result.",
+    "materials": [
+      "open safe space (indoor or outdoor)",
+      "supportive footwear if available",
+      "course notebook or digital equivalent"
+    ],
+    "inclusive_adaptation": "Every element has a seated, supported, low-impact, and reduced-range version. A learner using a mobility aid, working from a chair, or managing a condition designs the same routine around the movements available to them, and that routine is assessed as fully equivalent.",
+    "inclusion_guard": "The learner sets their own starting point; no baseline is compared to any other learner, to a norm table, or to a prior year.",
+    "guardian_safety": {
+      "equipment": "No specialized equipment. Optional supportive footwear.",
+      "environment": "Clear indoor or outdoor space free of obstacles.",
+      "movement_hazards": "General activity risk. Guardian confirms the space and surface are safe and agrees the stop rule with the learner before the unit.",
+      "supervision_note": "Guardian sets whether activity is supervised or independent for this learner and this space.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u01-l01",
+      "ma-g9-physical-education-u01-l02",
+      "ma-g9-physical-education-u01-l03",
+      "ma-g9-physical-education-u01-l04",
+      "ma-g9-physical-education-u01-l05",
+      "ma-g9-physical-education-u01-l06",
+      "ma-g9-physical-education-u01-l07",
+      "ma-g9-physical-education-u01-l08",
+      "ma-g9-physical-education-u01-l09",
+      "ma-g9-physical-education-u01-l10",
+      "ma-g9-physical-education-u01-l11",
+      "ma-g9-physical-education-u01-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u02",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 2,
+    "title": "Movement Competence: Invasion Activity Category",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 1 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 2 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 4 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "What do all invasion activities have in common once you stop naming the sport?",
+    "topics": [
+      "sending, receiving, and carrying an object under light pressure",
+      "creating and denying space",
+      "support angles and off-object movement",
+      "transition between attacking and defending",
+      "shared rules, fair play, and safe contact limits",
+      "adapting an activity so everyone present can play it"
+    ],
+    "performance_task": "Demonstrate the core invasion skills and explain one tactical principle using a diagram or description, then modify the activity so a person with a different mobility profile can play the same game.",
+    "materials": [
+      "one ball or substitute object",
+      "markers or household objects for boundaries",
+      "open safe space"
+    ],
+    "inclusive_adaptation": "Activities run in seated, walking, reduced-space, reduced-pace, or no-contact versions. Solo learners use wall, target, and self-pass variants; the tactical understanding, not the game size, is what is assessed.",
+    "inclusion_guard": "The learner may complete the entire unit without another participant, and modifying an activity for access is itself a graded skill rather than a concession.",
+    "guardian_safety": {
+      "equipment": "One ball or soft substitute; improvised boundary markers.",
+      "environment": "Open space clear of hazards and breakables.",
+      "movement_hazards": "Running, changes of direction, and object contact. No person-to-person contact is required at any point.",
+      "supervision_note": "Guardian confirms space size and whether any second participant is involved.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u02-l01",
+      "ma-g9-physical-education-u02-l02",
+      "ma-g9-physical-education-u02-l03",
+      "ma-g9-physical-education-u02-l04",
+      "ma-g9-physical-education-u02-l05",
+      "ma-g9-physical-education-u02-l06",
+      "ma-g9-physical-education-u02-l07",
+      "ma-g9-physical-education-u02-l08",
+      "ma-g9-physical-education-u02-l09",
+      "ma-g9-physical-education-u02-l10",
+      "ma-g9-physical-education-u02-l11",
+      "ma-g9-physical-education-u02-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u03",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 3,
+    "title": "Movement Competence: Net/Wall, Target, and Striking Categories",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 1 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 2 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 5 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "How does the goal of an activity change the movement it asks for?",
+    "topics": [
+      "net/wall rallying: contact, control, and recovery position",
+      "target activities: aim, consistency, and routine",
+      "striking and fielding: contact mechanics and reading the object",
+      "accuracy under a small amount of pressure",
+      "reading an opponent or a target situation",
+      "choosing an activity in this family worth continuing"
+    ],
+    "performance_task": "Show competence in one activity from each of the three categories and explain what each demanded that the others did not.",
+    "materials": [
+      "wall or net substitute",
+      "ball, racket, or striking implement or substitute",
+      "safe targets"
+    ],
+    "inclusive_adaptation": "Distances, implement size, object speed, and target size are all learner-set. Seated and one-handed versions of every activity are provided, and a learner may substitute a self-designed activity that meets the same category description.",
+    "inclusion_guard": "Equipment substitutions from household items are expected and never treated as a lesser version of the task.",
+    "guardian_safety": {
+      "equipment": "Improvised implements and soft objects are acceptable; no purchase is required.",
+      "environment": "Space with a usable wall or open area, clear of windows and breakables.",
+      "movement_hazards": "Struck or thrown objects. Guardian confirms target direction and clear background before the unit.",
+      "supervision_note": "Guardian approves any implement used for striking.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u03-l01",
+      "ma-g9-physical-education-u03-l02",
+      "ma-g9-physical-education-u03-l03",
+      "ma-g9-physical-education-u03-l04",
+      "ma-g9-physical-education-u03-l05",
+      "ma-g9-physical-education-u03-l06",
+      "ma-g9-physical-education-u03-l07",
+      "ma-g9-physical-education-u03-l08",
+      "ma-g9-physical-education-u03-l09",
+      "ma-g9-physical-education-u03-l10",
+      "ma-g9-physical-education-u03-l11",
+      "ma-g9-physical-education-u03-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u04",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 4,
+    "title": "Fitness Literacy I: Training Principles Without Body Metrics",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 3 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 2 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "What actually makes a body more capable, and how would I notice it?",
+    "topics": [
+      "the health-related fitness components and what each one does",
+      "overload, progression, specificity, reversibility, and recovery",
+      "frequency, intensity, time, and type as design levers",
+      "monitoring effort by feel, breath, and speech",
+      "noticing capability change through what the learner can now do",
+      "evaluating fitness claims and products critically"
+    ],
+    "performance_task": "Design a four-week progression for one self-chosen capability and state how progress will be recognized through tasks the learner can perform — never through weight, size, body composition, or appearance.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "open safe space"
+    ],
+    "inclusive_adaptation": "The chosen capability may be endurance, strength, mobility, coordination, balance, or a functional task; a learner with a medical restriction designs the progression inside that restriction with guardian input.",
+    "inclusion_guard": "No fitness test battery, norm table, percentile, or peer comparison is used. Progress is defined by the learner’s own stated task.",
+    "guardian_safety": {
+      "equipment": "Bodyweight only unless the guardian supplies equipment.",
+      "environment": "Clear indoor or outdoor space.",
+      "movement_hazards": "Progressive loading. Guardian reviews the progression before it starts and confirms it fits any medical restriction.",
+      "supervision_note": "Guardian confirms any medical restriction is respected; the course does not ask for the restriction’s diagnosis or details, only for what movement is allowed.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u04-l01",
+      "ma-g9-physical-education-u04-l02",
+      "ma-g9-physical-education-u04-l03",
+      "ma-g9-physical-education-u04-l04",
+      "ma-g9-physical-education-u04-l05",
+      "ma-g9-physical-education-u04-l06",
+      "ma-g9-physical-education-u04-l07",
+      "ma-g9-physical-education-u04-l08",
+      "ma-g9-physical-education-u04-l09",
+      "ma-g9-physical-education-u04-l10",
+      "ma-g9-physical-education-u04-l11",
+      "ma-g9-physical-education-u04-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u05",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 5,
+    "title": "Rhythm, Dance, and Expressive Movement",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 1 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 5 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 2 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "What can movement say that words cannot?",
+    "topics": [
+      "beat, tempo, and phrasing",
+      "locomotor and non-locomotor sequencing",
+      "dance forms across cultures, treated with accuracy and respect",
+      "composing an original short sequence",
+      "refining a sequence through self-review",
+      "movement as expression and as stress relief"
+    ],
+    "performance_task": "Compose, refine, and perform a short original movement sequence for an audience of one trusted adult, or describe and notate it in full if the learner prefers not to perform.",
+    "materials": [
+      "music or rhythm source",
+      "open safe space",
+      "course notebook or digital equivalent"
+    ],
+    "inclusive_adaptation": "Sequences may be seated, small-range, hand-and-arm only, or built at any tempo. Notation, description, or storyboarding is an accepted alternative to performing.",
+    "inclusion_guard": "No performance is recorded, filmed, photographed, or shown to any audience beyond one trusted adult, and the learner may decline to perform entirely without losing any credit.",
+    "guardian_safety": {
+      "equipment": "Music source only.",
+      "environment": "Clear space with safe flooring.",
+      "movement_hazards": "Turning, level changes, and travel. Learner sets range and tempo.",
+      "supervision_note": "Guardian confirms who, if anyone, watches; the default is no audience.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u05-l01",
+      "ma-g9-physical-education-u05-l02",
+      "ma-g9-physical-education-u05-l03",
+      "ma-g9-physical-education-u05-l04",
+      "ma-g9-physical-education-u05-l05",
+      "ma-g9-physical-education-u05-l06",
+      "ma-g9-physical-education-u05-l07",
+      "ma-g9-physical-education-u05-l08",
+      "ma-g9-physical-education-u05-l09",
+      "ma-g9-physical-education-u05-l10",
+      "ma-g9-physical-education-u05-l11",
+      "ma-g9-physical-education-u05-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u06",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 6,
+    "title": "Individual and Dual Lifetime Activities",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 1 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 5 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 3 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "Which activities would I still be doing at thirty?",
+    "topics": [
+      "walking, hiking, cycling, and self-paced endurance activity",
+      "strength, mobility, and bodyweight practice",
+      "yoga, stretching, and mindful movement",
+      "racket, throwing, and precision activities for two",
+      "access: cost, equipment, location, and time as real constraints",
+      "trialing an activity honestly before judging it"
+    ],
+    "performance_task": "Trial three individual or dual activities, evaluate each against enjoyment, access, cost, and sustainability, and justify which one is worth continuing.",
+    "materials": [
+      "whatever the trialed activities require; free and household options are always offered",
+      "course notebook or digital equivalent"
+    ],
+    "inclusive_adaptation": "Every activity family includes a seated, low-impact, indoor, and zero-cost option, and a learner may design a substitute activity that meets the same description.",
+    "inclusion_guard": "Activity choice is the learner’s. No activity is required that the household cannot access or afford.",
+    "guardian_safety": {
+      "equipment": "Varies by chosen activity; free options are always available.",
+      "environment": "Guardian approves any location outside the home.",
+      "movement_hazards": "Varies by activity. Guardian approves each trialed activity and its location before it begins.",
+      "supervision_note": "Guardian decides supervision level for any activity away from home.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u06-l01",
+      "ma-g9-physical-education-u06-l02",
+      "ma-g9-physical-education-u06-l03",
+      "ma-g9-physical-education-u06-l04",
+      "ma-g9-physical-education-u06-l05",
+      "ma-g9-physical-education-u06-l06",
+      "ma-g9-physical-education-u06-l07",
+      "ma-g9-physical-education-u06-l08",
+      "ma-g9-physical-education-u06-l09",
+      "ma-g9-physical-education-u06-l10",
+      "ma-g9-physical-education-u06-l11",
+      "ma-g9-physical-education-u06-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u06-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u07",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 7,
+    "title": "Outdoor and Community Activity Foundations",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 3 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 5 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 4 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "What does it take to be active outside safely and repeatedly?",
+    "topics": [
+      "weather, terrain, daylight, and clothing decisions",
+      "route planning and telling someone where you are going",
+      "hydration, fuel, and pacing for longer outdoor activity",
+      "trail, road, and shared-space etiquette",
+      "environmental care and leave-no-trace practice",
+      "finding free public activity spaces in a community"
+    ],
+    "performance_task": "Plan and complete one guardian-approved outdoor activity, including the safety plan, and produce a map of free activity spaces reachable from home.",
+    "materials": [
+      "weather-appropriate clothing",
+      "water",
+      "course notebook or digital equivalent"
+    ],
+    "inclusive_adaptation": "Distance, duration, terrain, and pace are learner-set. An indoor or home-yard equivalent is available in full for any learner for whom outdoor activity is unsafe, inaccessible, or not approved.",
+    "inclusion_guard": "The community-space map is built from public information; the learner never records their own route, precise location, or a photograph of themselves.",
+    "guardian_safety": {
+      "equipment": "Weather-appropriate clothing and water.",
+      "environment": "Outdoor location approved by the guardian, or the indoor equivalent.",
+      "movement_hazards": "Traffic, terrain, weather, heat, cold, and sun exposure. Guardian approves the location, route, duration, and supervision before the activity.",
+      "supervision_note": "Guardian decides whether the learner is accompanied. No precise location is stored by the course.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u07-l01",
+      "ma-g9-physical-education-u07-l02",
+      "ma-g9-physical-education-u07-l03",
+      "ma-g9-physical-education-u07-l04",
+      "ma-g9-physical-education-u07-l05",
+      "ma-g9-physical-education-u07-l06",
+      "ma-g9-physical-education-u07-l07",
+      "ma-g9-physical-education-u07-l08",
+      "ma-g9-physical-education-u07-l09",
+      "ma-g9-physical-education-u07-l10",
+      "ma-g9-physical-education-u07-l11",
+      "ma-g9-physical-education-u07-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u07-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u08",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 8,
+    "title": "Responsible Participation, Inclusion, and Etiquette",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 4 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 2 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 5 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "What makes an activity one that people actually want to come back to?",
+    "topics": [
+      "safety responsibility toward yourself and others",
+      "rules, officiating basics, and honest self-calling",
+      "winning and losing without changing how you treat people",
+      "designing for inclusion rather than adding it afterward",
+      "giving and receiving feedback about performance, never about bodies",
+      "conflict during activity and how to resolve it"
+    ],
+    "performance_task": "Redesign a standard activity so that three people with different mobility, experience, and confidence profiles can all participate meaningfully in the same game, and defend each design choice.",
+    "materials": [
+      "course notebook or digital equivalent",
+      "equipment from any earlier unit"
+    ],
+    "inclusive_adaptation": "The redesign may be written, diagrammed, described aloud, or trialed practically. Practical trial is optional.",
+    "inclusion_guard": "This unit makes inclusive design an assessed competency in its own right rather than an accommodation applied to someone else.",
+    "guardian_safety": {
+      "equipment": "Reuses equipment from earlier units.",
+      "environment": "Indoor study space; practical trial optional.",
+      "movement_hazards": "None required.",
+      "supervision_note": "No additional supervision needed for the written redesign.",
+      "guardian_confirmation_required": false
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u08-l01",
+      "ma-g9-physical-education-u08-l02",
+      "ma-g9-physical-education-u08-l03",
+      "ma-g9-physical-education-u08-l04",
+      "ma-g9-physical-education-u08-l05",
+      "ma-g9-physical-education-u08-l06",
+      "ma-g9-physical-education-u08-l07",
+      "ma-g9-physical-education-u08-l08",
+      "ma-g9-physical-education-u08-l09",
+      "ma-g9-physical-education-u08-l10",
+      "ma-g9-physical-education-u08-l11",
+      "ma-g9-physical-education-u08-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u08-assessment"
+  },
+  {
+    "unit_id": "ma-g9-physical-education-u09",
+    "course_id": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "unit_number": 9,
+    "title": "Grade 9 Capstone: Personal Movement Portfolio",
+    "days": 12,
+    "pe_level": 1,
+    "standards": [
+      "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]",
+      "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]"
+    ],
+    "standards_mapping": [
+      {
+        "code": "Standard 1 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 2 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 3 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical fitness.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 4 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      },
+      {
+        "code": "Standard 5 / LEVEL 1",
+        "framework": "Michigan K-12 Physical Education Standards (State Board approved 2017)",
+        "standard": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "level": "Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)",
+        "mapping_status": "unverified",
+        "note": "Standard statement and the grades 9-12 LEVEL 1 / LEVEL 2 structure confirmed against the official MDE source; per-outcome codes were not legible from that source and none is claimed."
+      }
+    ],
+    "essential_question": "What can I now do, and what am I choosing to carry forward?",
+    "topics": [
+      "assembling evidence across all activity categories",
+      "self-assessment against stated criteria rather than against others",
+      "explaining a tactical or training principle in the learner’s own words",
+      "documenting progress by capability, never by body",
+      "choosing Grade 10 activity directions and justifying the choice",
+      "reviewing the safety and stop-rule plan against a year of use"
+    ],
+    "performance_task": "Assemble and present the portfolio to one trusted adult: category evidence, a training principle explained, the revised safety plan, and a justified plan for Grade 10.",
+    "materials": [
+      "the year’s course notebook or digital equivalent"
+    ],
+    "inclusive_adaptation": "Presentation may be spoken one-to-one, written, or submitted as an annotated document. No recording, video, photograph, or audience beyond one adult is required.",
+    "inclusion_guard": "Portfolio evidence is described in words; no photographic or video proof of any performance is requested or accepted as a requirement.",
+    "guardian_safety": {
+      "equipment": "None.",
+      "environment": "Indoor space for a one-to-one review.",
+      "movement_hazards": "None expected.",
+      "supervision_note": "Guardian acts as reviewer. The review is a conversation, not a recorded artifact.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g9-physical-education-u09-l01",
+      "ma-g9-physical-education-u09-l02",
+      "ma-g9-physical-education-u09-l03",
+      "ma-g9-physical-education-u09-l04",
+      "ma-g9-physical-education-u09-l05",
+      "ma-g9-physical-education-u09-l06",
+      "ma-g9-physical-education-u09-l07",
+      "ma-g9-physical-education-u09-l08",
+      "ma-g9-physical-education-u09-l09",
+      "ma-g9-physical-education-u09-l10",
+      "ma-g9-physical-education-u09-l11",
+      "ma-g9-physical-education-u09-l12"
+    ],
+    "assessment_id": "ma-g9-physical-education-u09-assessment"
+  }
+]

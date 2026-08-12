@@ -1,0 +1,3518 @@
+[
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u01-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u01",
+  "title": "Scientific Practice, Measurement, and the Molecules of Life - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u01-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain biological scale and measurement in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u01-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of uncertainty and repeated trials.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u01-assessment-p03",
+    "type": "application",
+    "prompt": "Apply carbon and macromolecule structure in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u01-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving structure-function relationships; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u01-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect biological scale and measurement with argument from evidence in biology. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u01-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Plan and run a controlled investigation of one factor affecting an enzyme or browning reaction, then defend the conclusion with your own data, stated uncertainty, and named limitations. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u01-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u01-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: practice foundation; this assessment claims no performance expectation.. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u02-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u02",
+  "title": "DNA, Proteins, and the Information Flow of the Cell - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u02-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain DNA structure and base pairing in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u02-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of replication as information copying.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u02-assessment-p03",
+    "type": "application",
+    "prompt": "Apply transcription in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u02-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving translation and the genetic code; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u02-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect DNA structure and base pairing with mutation and its consequences. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u02-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Build a physical or drawn model tracing one gene from DNA sequence to folded protein to observable function, and state precisely what your model cannot show. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u02-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u02-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS1-1. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u03-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u03",
+  "title": "Cells, Hierarchical Organization, and Cellular Division - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u03-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain cell theory and cell types in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u03-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of organelles as interacting subsystems.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u03-assessment-p03",
+    "type": "application",
+    "prompt": "Apply tissues, organs, and organ systems in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u03-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving the cell cycle and mitosis; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u03-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect cell theory and cell types with scale and surface-area-to-volume. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u03-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Model the hierarchical organization of one organ system from organelle to organism, showing where cellular division and differentiation act and what each level contributes. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u03-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u03-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS1-2, HS-LS1-4. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u04-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u04",
+  "title": "Homeostasis and Feedback Mechanisms - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u04-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain setpoints and tolerance ranges in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u04-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of negative feedback loops.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u04-assessment-p03",
+    "type": "application",
+    "prompt": "Apply positive feedback loops in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u04-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving feedback failure and disease; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u04-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect setpoints and tolerance ranges with modelling feedback quantitatively. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u04-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Plan and conduct an investigation using a non-human system that provides evidence a feedback mechanism is maintaining a stable internal condition, then model the loop and identify what would break it. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u04-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u04-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS1-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u05-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u05",
+  "title": "Photosynthesis, Cellular Respiration, and Energy in Living Systems - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u05-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain light energy capture in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u05-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of photosynthesis as matter and energy transformation.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u05-assessment-p03",
+    "type": "application",
+    "prompt": "Apply cellular respiration in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u05-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving aerobic and anaerobic pathways; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u05-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect light energy capture with energy accounting in organisms. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u05-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Construct and revise an evidence-based explanation of how matter and energy move through photosynthesis and respiration, using your own data plus a published dataset. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u05-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u05-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS1-5, HS-LS1-6, HS-LS1-7, HS-LS2-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u06-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u06",
+  "title": "Ecosystems: Matter Cycling and Energy Flow - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u06-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain trophic levels and energy transfer in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u06-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of food webs and matter flow.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u06-assessment-p03",
+    "type": "application",
+    "prompt": "Apply the carbon cycle in ecosystems in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u06-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving nitrogen and nutrient cycling; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u06-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect trophic levels and energy transfer with quantitative ecosystem models. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u06-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use mathematical representations of a real ecosystem's energy budget and carbon flows to support a claim about what limits its structure. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u06-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u06-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS2-4, HS-LS2-5. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u07-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u07",
+  "title": "Population Dynamics, Carrying Capacity, and Biodiversity - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-8",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u07-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain exponential and logistic growth in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u07-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of carrying capacity and limiting factors.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u07-assessment-p03",
+    "type": "application",
+    "prompt": "Apply interspecific interactions in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u07-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving biodiversity measurement; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u07-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect exponential and logistic growth with group behaviour and survival. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u07-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use mathematical and computational representations of real population data to explain and revise a claim about carrying capacity, biodiversity, or the survival value of group behaviour. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u07-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u07-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS2-1, HS-LS2-2, HS-LS2-6, HS-LS2-8. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u08-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u08",
+  "title": "Inheritance and Variation of Traits - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u08-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain chromosomes and gene loci in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u08-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of meiosis and recombination.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u08-assessment-p03",
+    "type": "application",
+    "prompt": "Apply sources of genetic variation in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u08-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving probability and Punnett models; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u08-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect chromosomes and gene loci with distribution of expressed traits. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u08-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Make and defend an evidence-based claim about the source of a heritable variation, using statistics and probability, and state where a simple inheritance model stops working. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u08-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u08-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS3-1, HS-LS3-2, HS-LS3-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs9-biology-u09-assessment",
+  "course_ref": "ma-hs9-biology",
+  "unit_ref": "ma-hs9-biology-u09",
+  "title": "Natural Selection, Evolution, and Biodiversity Engineering - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs9-biology-u09-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain multiple lines of evidence for common ancestry in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u09-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of the four factors driving natural selection.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u09-assessment-p03",
+    "type": "application",
+    "prompt": "Apply statistics of advantageous traits in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u09-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving adaptation of populations; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u09-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect multiple lines of evidence for common ancestry with engineering solutions for biodiversity. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u09-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Complete a biodiversity engineering capstone: define criteria and constraints for a real conservation problem, model a solution, test it by simulation, evaluate trade-offs, and defend the revision history. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs9-biology-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs9-biology-u09-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs9-biology-u09-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-LS4-1, HS-LS4-2, HS-LS4-3, HS-LS4-4, HS-LS4-5, HS-LS4-6, HS-LS2-7, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u01-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u01",
+  "title": "Matter, Measurement, and Laboratory Practice - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u01-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain physical and chemical properties in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u01-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of measurement, precision, and significant figures.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u01-assessment-p03",
+    "type": "application",
+    "prompt": "Apply uncertainty and repeated trials in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u01-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving density and derived quantities; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u01-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect physical and chemical properties with chemical safety and hazard reading. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u01-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Determine the density of an unknown solid or solution from your own repeated measurements, report it with an honest uncertainty, and justify every digit you kept. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u01-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u01-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: practice foundation; this assessment claims no performance expectation.. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u02-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u02",
+  "title": "Atomic Structure and the Periodic Table as a Model - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u02-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain subatomic structure and isotopes in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u02-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of electron arrangement and energy levels.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u02-assessment-p03",
+    "type": "application",
+    "prompt": "Apply valence electrons in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u02-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving periodic trends in atomic radius and ionization; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u02-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect subatomic structure and isotopes with the periodic table as a predictive model. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u02-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use the periodic table as a model to predict relative properties of unfamiliar elements from outer-electron patterns, then check your predictions against published data and account for every miss. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u02-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u02-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-1. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u03-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u03",
+  "title": "Bonding, Structure, and the Properties of Designed Materials - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-6",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u03-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain ionic, covalent, and metallic bonding in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u03-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of intermolecular forces.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u03-assessment-p03",
+    "type": "application",
+    "prompt": "Apply bulk properties as evidence of particle forces in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u03-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving conductivity, melting point, and solubility; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u03-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect ionic, covalent, and metallic bonding with communicating technical information. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u03-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Plan and conduct an investigation comparing bulk properties of several substances to infer the relative strength of forces between their particles, then communicate why molecular-level structure matters for one designed material. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u03-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u03-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-3, HS-PS2-6. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u04-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u04",
+  "title": "Chemical Reactions and Electron Rearrangement - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-2",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u04-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain evidence of chemical change in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u04-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of reaction types and patterns.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u04-assessment-p03",
+    "type": "application",
+    "prompt": "Apply outermost electron states in reactions in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u04-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving oxidation and reduction basics; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u04-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect evidence of chemical change with writing and revising explanations. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u04-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Construct and revise an explanation for the outcome of a reaction you ran, grounded in outer-electron states and periodic trends rather than memorised rules. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u04-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u04-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-2. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u05-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u05",
+  "title": "Conservation of Mass and Quantitative Reasoning in Reactions - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-7",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u05-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain conservation of atoms and mass in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u05-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of balancing equations as bookkeeping.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u05-assessment-p03",
+    "type": "application",
+    "prompt": "Apply the mole as a counting unit in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u05-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving molar mass and formula mass; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u05-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect conservation of atoms and mass with mathematical representations of reactions. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u05-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use your own mass measurements from open and closed systems to support the claim that atoms and mass are conserved, and explain the open-system loss quantitatively. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u05-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u05-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-7. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u06-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u06",
+  "title": "Energy in Chemical Systems - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u06-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain bond breaking and bond making in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u06-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of exothermic and endothermic processes.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u06-assessment-p03",
+    "type": "application",
+    "prompt": "Apply total bond energy changes in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u06-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving thermal energy transfer and equilibration; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u06-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect bond breaking and bond making with the second law in everyday systems. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u06-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Develop a model showing that energy release or absorption depends on total bond energy change, and build a computational energy account for a system you measured. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u06-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u06-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-4. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u07-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u07",
+  "title": "Reaction Rates and the Conditions That Change Them - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u07-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain collision model of reactions in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u07-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of temperature and reaction rate.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u07-assessment-p03",
+    "type": "application",
+    "prompt": "Apply concentration and reaction rate in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u07-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving surface area and mixing; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u07-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect collision model of reactions with explaining rate with scientific principles. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u07-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Apply the collision model and your own rate data to explain how temperature and concentration change reaction rate, and identify the variable your design failed to control. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u07-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u07-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-5. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u08-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u08",
+  "title": "Equilibrium and the Design of Chemical Systems - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-6",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u08-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain reversible reactions in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u08-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of dynamic equilibrium.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u08-assessment-p03",
+    "type": "application",
+    "prompt": "Apply stress and system response in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u08-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving shifting equilibrium by changing conditions; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u08-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect reversible reactions with refining a chemical system design. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u08-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Refine the design of a chemical system by specifying a condition change that would increase product at equilibrium, and defend the change with evidence and stated trade-offs. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u08-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u08-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-6. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs10-chemistry-u09-assessment",
+  "course_ref": "ma-hs10-chemistry",
+  "unit_ref": "ma-hs10-chemistry-u09",
+  "title": "The Nucleus, Nuclear Energy, and a Chemistry Engineering Capstone - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-8",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs10-chemistry-u09-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain nuclear composition and isotopes in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u09-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of radioactive decay and half-life.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u09-assessment-p03",
+    "type": "application",
+    "prompt": "Apply fission in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u09-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving fusion; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u09-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect nuclear composition and isotopes with criteria, constraints, and trade-offs in chemical engineering. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u09-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Complete a chemistry engineering capstone: analyse a real materials or energy challenge, model a chemical solution including nuclear or energy trade-offs, evaluate it against prioritised criteria, and defend the revisions. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs10-chemistry-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs10-chemistry-u09-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs10-chemistry-u09-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS1-8, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u01-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u01",
+  "title": "Motion, Measurement, and Quantitative Reasoning - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u01-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain position, displacement, and reference frames in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u01-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of velocity and acceleration.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u01-assessment-p03",
+    "type": "application",
+    "prompt": "Apply motion graphs and their slopes in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u01-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving uniform acceleration relationships; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u01-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect position, displacement, and reference frames with vectors and components. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u01-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Measure a real accelerating motion, produce position, velocity, and acceleration representations from your own data, and report the acceleration with an honest uncertainty. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u01-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u01-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: practice foundation; this assessment claims no performance expectation.. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u02-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u02",
+  "title": "Forces and Newton's Second Law - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u02-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain free-body diagrams in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u02-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of net force.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u02-assessment-p03",
+    "type": "application",
+    "prompt": "Apply Newton's second law as a mathematical relationship in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u02-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving mass versus weight; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u02-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect free-body diagrams with analysing force data. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u02-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Analyse your own data to support or challenge the claim that net force, mass, and acceleration follow Newton's second law, and account for the friction your model ignored. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u02-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u02-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS2-1. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u03-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u03",
+  "title": "Momentum, Collisions, and Protective Design - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u03-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain momentum as mass times velocity in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u03-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of conservation of momentum.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u03-assessment-p03",
+    "type": "application",
+    "prompt": "Apply impulse and contact time in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u03-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving elastic and inelastic collisions; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u03-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect momentum as mass times velocity with engineering a protective device. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u03-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Design, test, and refine a device that minimises the force on an object during a collision, and use momentum and impulse reasoning plus your own trial data to justify each revision. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u03-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u03-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS2-2, HS-PS2-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u04-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u04",
+  "title": "Gravitation and Electrostatic Forces - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u04-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain Newton's law of gravitation in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u04-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of Coulomb's law.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u04-assessment-p03",
+    "type": "application",
+    "prompt": "Apply inverse-square relationships in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u04-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving comparing gravitational and electrostatic strength; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u04-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect Newton's law of gravitation with predicting forces mathematically. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u04-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use mathematical representations of Newton's law of gravitation and Coulomb's law to predict and compare forces in real situations, and explain why one dominates at each scale. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u04-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u04-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS2-4. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u05-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u05",
+  "title": "Energy: Modelling, Accounting, and Conservation - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-2",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u05-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain kinetic and potential energy in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u05-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of energy as a system-level account.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u05-assessment-p03",
+    "type": "application",
+    "prompt": "Apply computational energy models in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u05-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving energy at macroscopic and particle scales; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u05-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect kinetic and potential energy with building and checking an energy budget. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u05-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Create a computational model that calculates the energy change of one component of a system from the changes in the others, and test it against a system you measured. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u05-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u05-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS3-1, HS-PS3-2. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u06-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u06",
+  "title": "Thermal Energy and the Second Law - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u06-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain temperature versus thermal energy in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u06-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of conduction, convection, and radiation.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u06-assessment-p03",
+    "type": "application",
+    "prompt": "Apply thermal equilibrium in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u06-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving specific heat capacity; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u06-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect temperature versus thermal energy with investigating energy distribution. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u06-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Plan and conduct an investigation providing evidence that combining components at different temperatures in a closed system produces a more uniform energy distribution. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u06-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u06-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS3-4. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u07-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u07",
+  "title": "Fields, Electromagnetism, and Induction - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u07-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain electric and magnetic fields in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u07-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of current and magnetic field production.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u07-assessment-p03",
+    "type": "application",
+    "prompt": "Apply electromagnetic induction in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u07-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving field models of interaction at a distance; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u07-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect electric and magnetic fields with investigating induction. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u07-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Plan and conduct an investigation providing evidence that a current produces a magnetic field and that a changing magnetic field produces a current, and model the energy change involved. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u07-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u07-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS2-5, HS-PS3-5. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u08-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u08",
+  "title": "Waves and Their Mathematics - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u08-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain wave properties and terminology in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u08-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of the frequency-wavelength-speed relationship.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u08-assessment-p03",
+    "type": "application",
+    "prompt": "Apply waves in different media in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u08-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving reflection, refraction, and diffraction; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u08-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect wave properties and terminology with evaluating competing models. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u08-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use mathematical representations to support a claim about frequency, wavelength, and speed in different media, and evaluate when a wave model or a particle model of light serves better. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u08-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u08-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS4-1, HS-PS4-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs11-physics-u09-assessment",
+  "course_ref": "ma-hs11-physics",
+  "unit_ref": "ma-hs11-physics-u09",
+  "title": "Electromagnetic Radiation, Information, and a Physics Engineering Capstone - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs11-physics-u09-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain the electromagnetic spectrum in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u09-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of absorption of radiation by matter.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u09-assessment-p03",
+    "type": "application",
+    "prompt": "Apply digital versus analog information in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u09-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving evaluating published claims about radiation; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u09-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect the electromagnetic spectrum with energy conversion device design. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u09-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Complete a physics engineering capstone: design, build, and refine a device that converts one form of energy into another or transmits information, and communicate how wave principles and evidence justify the design. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs11-physics-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs11-physics-u09-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs11-physics-u09-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-PS4-2, HS-PS4-4, HS-PS4-5, HS-PS3-3, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u01-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u01",
+  "title": "Earth and Space Systems, Scale, and Data Practice - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u01-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain systems and system models in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u01-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of spatial and temporal scale.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u01-assessment-p03",
+    "type": "application",
+    "prompt": "Apply proxy data and indirect evidence in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u01-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving uncertainty in geoscience data; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u01-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect systems and system models with distinguishing correlation and causation. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u01-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Take one published geoscience or astronomical dataset, build an honest representation of it, and document every choice that could mislead a reader. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u01-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u01-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: practice foundation; this assessment claims no performance expectation.. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u02-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u02",
+  "title": "The Sun, Stars, and the Origin of the Elements - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u02-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain nuclear fusion in stellar cores in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u02-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of the sun's energy budget and lifespan.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u02-assessment-p03",
+    "type": "application",
+    "prompt": "Apply stellar life cycles in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u02-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving nucleosynthesis and element formation; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u02-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect nuclear fusion in stellar cores with communicating stellar science. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u02-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Develop an evidence-based model of the sun's life span and energy source, and communicate how stars across their life cycle produce the elements in ordinary matter. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u02-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u02-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS1-1, HS-ESS1-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u03-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u03",
+  "title": "Cosmology and the Evidence for the Big Bang - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-2",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u03-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain light spectra and redshift in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u03-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of motion of distant galaxies.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u03-assessment-p03",
+    "type": "application",
+    "prompt": "Apply Hubble's relationship in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u03-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving cosmic microwave background; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u03-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect light spectra and redshift with constructing an explanation from multiple evidence lines. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u03-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Construct an explanation of the Big Bang theory from astronomical evidence, weighing how each independent line of evidence constrains the model. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u03-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u03-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS1-2. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u04-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u04",
+  "title": "Orbital Motion and the Solar System - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u04-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain gravitational orbits in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u04-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of Kepler's relationships.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u04-assessment-p03",
+    "type": "application",
+    "prompt": "Apply orbital period and radius in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u04-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving elliptical orbits and orbital energy; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u04-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect gravitational orbits with solar system architecture. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u04-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use mathematical or computational representations to predict the motion of orbiting bodies, and test your predictions against published orbital data. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u04-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u04-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS1-4. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u05-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u05",
+  "title": "Plate Tectonics and the History of Earth - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u05-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain evidence for plate motion in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u05-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of seafloor age and magnetic striping.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u05-assessment-p03",
+    "type": "application",
+    "prompt": "Apply convection in Earth's interior in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u05-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving continental and oceanic crust formation; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u05-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect evidence for plate motion with reconstructing geologic history. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u05-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Evaluate multiple lines of evidence for past and current crustal movement, and construct an account of Earth's formation and early history from ancient materials and planetary surfaces. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u05-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u05-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS1-5, HS-ESS1-6, HS-ESS2-1, HS-ESS2-3. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u06-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u06",
+  "title": "Surface Processes, Water, and Earth System Feedbacks - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u06-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain weathering and erosion in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u06-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of the special properties of water.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u06-assessment-p03",
+    "type": "application",
+    "prompt": "Apply surface water and groundwater systems in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u06-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving feedbacks between Earth systems; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u06-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect weathering and erosion with investigating water and Earth materials. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u06-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Plan and conduct an investigation of water's properties and their effects on Earth materials, then analyse geoscience data to claim that one surface change creates feedbacks in other systems. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u06-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u06-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS2-2, HS-ESS2-5. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u07-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u07",
+  "title": "Climate, Energy Flow, and the Carbon Cycle - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u07-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain energy flow into and out of Earth systems in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u07-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of the greenhouse effect.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u07-assessment-p03",
+    "type": "application",
+    "prompt": "Apply the global carbon cycle in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u07-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving climate versus weather; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u07-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect energy flow into and out of Earth systems with evidence-based forecasting. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u07-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Use a model of Earth's energy flows and a quantitative carbon-cycle model to make an evidence-based forecast of climate change, with the forecast's uncertainty stated explicitly. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u07-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u07-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS2-4, HS-ESS2-6, HS-ESS3-5. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u08-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u08",
+  "title": "Coevolution of Earth and Life, Resources, and Natural Hazards - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u08-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain the Great Oxidation Event and atmospheric change in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u08-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of coevolution of the geosphere and biosphere.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u08-assessment-p03",
+    "type": "application",
+    "prompt": "Apply distribution of natural resources in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u08-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving natural hazards and their causes; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u08-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect the Great Oxidation Event and atmospheric change with constructing arguments from geologic and biological evidence. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u08-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Construct an evidence-based argument about the coevolution of Earth's systems and life, and explain how resource distribution, hazards, and climate change have driven human activity. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u08-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u08-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS2-7, HS-ESS3-1. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "assessment_id": "ma-hs12-earth-space-environmental-u09-assessment",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "unit_ref": "ma-hs12-earth-space-environmental-u09",
+  "title": "Sustainability Engineering and the Grade 12 Capstone - unit assessment",
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "total_points": 38,
+  "prompts": [
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u09-assessment-p01",
+    "type": "concept-vocabulary",
+    "prompt": "Explain criteria, constraints, and prioritisation in your own words and give or identify a valid example.",
+    "points": 4,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u09-assessment-p02",
+    "type": "representation-source",
+    "prompt": "Use a diagram, model, graph, data display, or worked process to show your understanding of cost-benefit analysis of energy and mineral resources.",
+    "points": 5,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u09-assessment-p03",
+    "type": "application",
+    "prompt": "Apply computational simulation of coupled systems in a situation you have not seen before. Show the process or cite the evidence you used.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u09-assessment-p04",
+    "type": "error-claim-analysis",
+    "prompt": "Analyse a plausible error, weak claim, unsafe choice, or design flaw involving refining technological solutions; correct it and explain why the correction holds.",
+    "points": 6,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u09-assessment-p05",
+    "type": "connection",
+    "prompt": "Connect criteria, constraints, and prioritisation with defending a design under uncertainty. Explain how the two ideas support, constrain, contrast with, or build on one another.",
+    "points": 5,
+    "resource_refs": []
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u09-assessment-p06",
+    "type": "performance-evidence",
+    "prompt": "Present your strongest evidence from the unit performance task: Complete the Grade 12 capstone: analyse a global challenge, build a computational simulation of coupled Earth and human systems, evaluate competing solutions on prioritised criteria and trade-offs, refine your solution, and defend it with stated limitations. State one limitation of that evidence.",
+    "points": 8,
+    "resource_refs": [
+     "res-ma-hs12-earth-space-environmental-data-sources"
+    ]
+   },
+   {
+    "prompt_id": "ma-hs12-earth-space-environmental-u09-assessment-p07",
+    "type": "reflection-transfer",
+    "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.",
+    "points": 4,
+    "resource_refs": []
+   }
+  ],
+  "rubric_dimensions": [
+   "accuracy or fidelity",
+   "evidence and reasoning",
+   "application or transfer",
+   "checking and revision",
+   "safety and honest reporting"
+  ],
+  "accommodation_note": "Any response mode the standard permits is acceptable: typed, handwritten, spoken, drawn, built, or demonstrated. Extended time and a hidden timer are available by default. Reading the prompts aloud is allowed. No photograph, video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target.",
+  "protected_interpretation_ref": "ma-hs12-earth-space-environmental-u09-assessment-interpretation",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Assessed here: HS-ESS3-2, HS-ESS3-3, HS-ESS3-4, HS-ESS3-6, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3, HS-ETS1-4. No standard is assessed before the unit that teaches it."
+    }
+   }
+  ]
+ }
+]

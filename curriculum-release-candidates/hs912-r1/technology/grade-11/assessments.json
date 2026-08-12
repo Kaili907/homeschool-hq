@@ -1,0 +1,359 @@
+[
+  {
+    "assessment_id": "ma-g11-technology-u01-assessment",
+    "unit_number": 1,
+    "unit_title": "Software Engineering Practice and Collaborative Version Control",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain requirements and user stories in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of branching merging and conflict resolution.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply code review and shared standards in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving refactoring and technical debt; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how continuous testing habits and solo and collaborative workflow relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Run a full engineering workflow on a small feature with tracked issues, branches, a resolved merge conflict, review notes, and test evidence.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g11-technology-u02-assessment",
+    "unit_number": 2,
+    "unit_title": "Object-Oriented and Modular Design",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain objects classes and state in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of encapsulation and interfaces.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply composition and inheritance tradeoffs in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving modules and dependencies; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how design patterns in context and testability and design seams relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Refactor a procedural program into a modular design and demonstrate preserved behavior with tests.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g11-technology-u03-assessment",
+    "unit_number": 3,
+    "unit_title": "Web and Application Architecture",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Networks and the Internet"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain semantic structure and templating in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of state and data flow.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply interfaces and structured data exchange in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving storage and caching; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how authentication concepts without real credentials and performance and accessibility budgets relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Build a multi-view accessible web application against a mock interface with documented architecture decisions.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g11-technology-u04-assessment",
+    "unit_number": 4,
+    "unit_title": "Applied Data Science and Modeling",
+    "standards": [
+      "Michigan Computer Science: Data and Analysis"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain question framing and study design in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of acquisition cleaning and provenance.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply exploratory analysis in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving visualization integrity; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how correlation causation and uncertainty and reproducible reporting relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Produce a reproducible data analysis with provenance, uncertainty, stated limitations, and an honest visualization set.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g11-technology-u05-assessment",
+    "unit_number": 5,
+    "unit_title": "AI, Machine Learning Literacy, and Evaluation",
+    "standards": [
+      "Michigan Computer Science: Data and Analysis",
+      "Impacts of Computing"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain supervised learning concepts in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of training data and representativeness.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply evaluation metrics and baselines in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving bias fairness and harm analysis; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how interpretability and limitations and responsible and disclosed AI use relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Evaluate a supplied model or AI output against metrics, baselines, bias analysis, and disclosure requirements.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g11-technology-u06-assessment",
+    "unit_number": 6,
+    "unit_title": "Engineering Project with Test and Accessibility Evidence",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Impacts of Computing"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain scope and architecture decisions in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of implementation increments.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply automated test coverage in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving accessibility conformance evidence; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how security and privacy review and release notes and maintenance relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Deliver an engineered application with an architecture record, test coverage, accessibility conformance, and a maintenance plan.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  }
+]
