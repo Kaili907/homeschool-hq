@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "corpus_id": "manuel-academy-rfl-9-12-competencies",
+  "framework": "Manuel Academy Ready for Life — High School Competency Progression, Grades 9-12",
+  "jurisdiction": null,
+  "authority": "LOCAL_COMPOSITION",
+  "authority_statement": "This is NOT a state, national, or third-party standards framework, and no claim of alignment to one is made. Ready for Life is a Manuel Academy subject with no external standards body. Every competency below was written for this repository. It extends the existing published progression, whose Grade 5, 7, and 8 courses in curriculum-content/manuel-academy/1.0.0 carry the literal standards string 'Manuel Academy RFL Grade <n> progression' — an equally local declaration. No external standard was cited, implied, inferred, or invented to lend this framework borrowed authority.",
+  "relationship_to_published_release": {
+    "predecessor_course": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/ready-for-life",
+    "predecessor_shape": "6 units x 6 lessons = 36 lessons, matching grades 5 and 7; 18 units and 108 lessons across the three published grades.",
+    "predecessor_units": [
+      "Independent Planning and Executive Routines",
+      "Home Operations and Basic Maintenance",
+      "Meal Planning, Cooking, and Food Management",
+      "Transportation, Appointments, and Community Navigation",
+      "Work, Communication, and Career Readiness",
+      "Independent-Living Capstone"
+    ],
+    "modification": "NONE. The published Grade 5/7/8 Ready for Life courses are read for continuity and are not edited, moved, re-numbered, re-tagged, or reproduced by this lane. This lane adds four new high-school courses alongside them."
+  },
+  "domains": [
+    { "code": "RFL.PLAN",   "title": "Planning and Time Management",        "grade_8_root": "Independent Planning and Executive Routines" },
+    { "code": "RFL.HOME",   "title": "Household Independence",             "grade_8_root": "Home Operations and Basic Maintenance" },
+    { "code": "RFL.FOOD",   "title": "Food Systems and Nutrition",         "grade_8_root": "Meal Planning, Cooking, and Food Management" },
+    { "code": "RFL.MOVE",   "title": "Transportation and Travel Planning", "grade_8_root": "Transportation, Appointments, and Community Navigation" },
+    { "code": "RFL.COMM",   "title": "Communication and Self-Advocacy",    "grade_8_root": "Work, Communication, and Career Readiness" },
+    { "code": "RFL.WORK",   "title": "Career Exploration and Job Readiness", "grade_8_root": "Work, Communication, and Career Readiness" },
+    { "code": "RFL.CIVIC",  "title": "Civic and Consumer Tasks",           "grade_8_root": "Transportation, Appointments, and Community Navigation" },
+    { "code": "RFL.SOLVE",  "title": "Problem Solving and Decision Making", "grade_8_root": "Independent Planning and Executive Routines" },
+    { "code": "RFL.HEALTH", "title": "Health and Wellness Self-Management", "grade_8_root": "Home Operations and Basic Maintenance" },
+    { "code": "RFL.POST",   "title": "Postsecondary Planning",             "grade_8_root": "Work, Communication, and Career Readiness" },
+    { "code": "RFL.ADULT",  "title": "Adult-Life Systems",                 "grade_8_root": "Independent-Living Capstone" },
+    { "code": "RFL.TRANS",  "title": "Transition to Adulthood",            "grade_8_root": "Independent-Living Capstone" }
+  ],
+  "safety_charter": [
+    "No shame. Difficulty with a life skill is never framed as a character flaw, and no lesson compares learners.",
+    "No unsafe unsupervised real-world task. Any task involving heat, sharp tools, chemicals, medication, electricity, heights, ladders, power tools, driving, water, money movement, or contact with unfamiliar adults is guardian-supervised or is simulated.",
+    "Guardian sign-off is required wherever a real-world task is claimed as evidence, and a click alone can never certify one.",
+    "No credential collection. No password, account number, government identifier, card number, or real balance is ever requested, displayed, stored, or entered anywhere in this lane.",
+    "No forced private disclosure. Autobiographical or household disclosure is never required; a fictional or analytical alternative is always offered and is never scored lower.",
+    "Accessibility is not an accommodation afterthought. No task requires a photo of the learner, a voice recording, a public performance, or a specific response modality."
+  ],
+  "certification_rule": {
+    "statement": "A click cannot certify a real-world adult-supervised task.",
+    "implementation": "Every lesson whose evidence depends on a real-world action carries requires_guardian_signoff = true and an adult_attestation object naming the observing adult role, what the adult actually observed, and the date. A learner-side completion toggle records only that the learner reports finishing; it never satisfies the attestation, and the Study Engine treats an unattested real-world task as incomplete evidence rather than as mastery."
+  },
+  "evidence_rule": "Practice generation never directly awards mastery. Mastery requires accurate independent evidence plus explanation on at least two separate occasions, at least one of them transferred to a situation the learner has not rehearsed. Guardian-confirmed real-world performance counts as one occasion only when attested.",
+  "privacy_rule": "Parent-visible evidence remains minimized: lesson target, completion state, evidence type, guardian attestation where required, and the next instructional step. Raw reflections, raw responses, recordings, photographs, household detail, and any diagnosis-like language are not surfaced.",
+  "limits": [
+    "This framework confers no credential, credit, licence, certification of competence, or statement that a learner is safe to perform any task unsupervised.",
+    "Nothing here is medical, legal, financial, employment, or immigration advice. Where a topic touches those domains the lesson teaches how to find and evaluate a qualified human source, and explicitly declines to individualize.",
+    "Local law varies. Driving, working papers, curfew, age of majority, tenancy, and identification rules differ by jurisdiction; lessons direct the learner to verify locally rather than asserting a rule."
+  ]
+}

@@ -1,0 +1,109 @@
+# Financial Literacy, Grade 11 — Lesson Sequence
+
+## Unit 1 — PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs
+
+| Day | Lesson | Phase | Focus |
+| --- | --- | --- | --- |
+| 1 | `ma-g11-financial-literacy-u01-l01` | Launch and diagnostic | return on a pathway: cost, time, debt, and earnings |
+| 2 | `ma-g11-financial-literacy-u01-l02` | Concept model A | opportunity cost of years not earning |
+| 3 | `ma-g11-financial-literacy-u01-l03` | Concept model B | earnings variation within a field, not just the median |
+| 4 | `ma-g11-financial-literacy-u01-l04` | Guided practice | stating and testing assumptions in a projection |
+| 5 | `ma-g11-financial-literacy-u01-l05` | Applied simulation | risk of non-completion and how to model it |
+| 6 | `ma-g11-financial-literacy-u01-l06` | Comparison and analysis | negotiation, advancement, and long-run wage growth |
+| 7 | `ma-g11-financial-literacy-u01-l07` | Error and misconception analysis | return on a pathway: cost, time, debt, and earnings |
+| 8 | `ma-g11-financial-literacy-u01-l08` | Transfer to a new case | opportunity cost of years not earning |
+| 9 | `ma-g11-financial-literacy-u01-l09` | Synthesis and review | earnings variation within a field, not just the median |
+| 10 | `ma-g11-financial-literacy-u01-l10` | Unit performance task | stating and testing assumptions in a projection |
+
+## Unit 2 — PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint
+
+| Day | Lesson | Phase | Focus |
+| --- | --- | --- | --- |
+| 11 | `ma-g11-financial-literacy-u02-l01` | Launch and diagnostic | total cost of ownership over a holding period |
+| 12 | `ma-g11-financial-literacy-u02-l02` | Concept model A | buy, finance, lease, or delay compared |
+| 13 | `ma-g11-financial-literacy-u02-l03` | Concept model B | depreciation and resale value |
+| 14 | `ma-g11-financial-literacy-u02-l04` | Guided practice | how a large purchase constrains other goals |
+| 15 | `ma-g11-financial-literacy-u02-l05` | Applied simulation | negotiating position and information asymmetry |
+| 16 | `ma-g11-financial-literacy-u02-l06` | Comparison and analysis | government consumer-information roles in large purchases |
+| 17 | `ma-g11-financial-literacy-u02-l07` | Error and misconception analysis | total cost of ownership over a holding period |
+| 18 | `ma-g11-financial-literacy-u02-l08` | Transfer to a new case | buy, finance, lease, or delay compared |
+| 19 | `ma-g11-financial-literacy-u02-l09` | Synthesis and review | depreciation and resale value |
+| 20 | `ma-g11-financial-literacy-u02-l10` | Unit performance task | how a large purchase constrains other goals |
+
+## Unit 3 — PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict
+
+| Day | Lesson | Phase | Focus |
+| --- | --- | --- | --- |
+| 21 | `ma-g11-financial-literacy-u03-l01` | Launch and diagnostic | sequencing competing multi-year goals |
+| 22 | `ma-g11-financial-literacy-u03-l02` | Concept model A | inflation compounding across a decade |
+| 23 | `ma-g11-financial-literacy-u03-l03` | Concept model B | income shocks and recovery planning |
+| 24 | `ma-g11-financial-literacy-u03-l04` | Guided practice | time value of money applied to real choices |
+| 25 | `ma-g11-financial-literacy-u03-l05` | Applied simulation | behavioural pressures on a savings plan |
+| 26 | `ma-g11-financial-literacy-u03-l06` | Comparison and analysis | revising a plan without abandoning it |
+| 27 | `ma-g11-financial-literacy-u03-l07` | Error and misconception analysis | sequencing competing multi-year goals |
+| 28 | `ma-g11-financial-literacy-u03-l08` | Transfer to a new case | inflation compounding across a decade |
+| 29 | `ma-g11-financial-literacy-u03-l09` | Synthesis and review | income shocks and recovery planning |
+| 30 | `ma-g11-financial-literacy-u03-l10` | Unit performance task | time value of money applied to real choices |
+
+## Unit 4 — PF4 — Using Credit: Debt Strategy and Repayment Analysis
+
+| Day | Lesson | Phase | Focus |
+| --- | --- | --- | --- |
+| 31 | `ma-g11-financial-literacy-u04-l01` | Launch and diagnostic | amortisation schedules and total interest |
+| 32 | `ma-g11-financial-literacy-u04-l02` | Concept model A | repayment ordering strategies compared |
+| 33 | `ma-g11-financial-literacy-u04-l03` | Concept model B | refinancing, consolidation, and their tradeoffs |
+| 34 | `ma-g11-financial-literacy-u04-l04` | Guided practice | student loan repayment plan structures in outline |
+| 35 | `ma-g11-financial-literacy-u04-l05` | Applied simulation | debt-to-income and borrowing capacity |
+| 36 | `ma-g11-financial-literacy-u04-l06` | Comparison and analysis | delinquency, default, and available remedies |
+| 37 | `ma-g11-financial-literacy-u04-l07` | Error and misconception analysis | amortisation schedules and total interest |
+| 38 | `ma-g11-financial-literacy-u04-l08` | Transfer to a new case | repayment ordering strategies compared |
+| 39 | `ma-g11-financial-literacy-u04-l09` | Synthesis and review | refinancing, consolidation, and their tradeoffs |
+| 40 | `ma-g11-financial-literacy-u04-l10` | Unit performance task | student loan repayment plan structures in outline |
+| 41 | `ma-g11-financial-literacy-u04-l11` | Defense and extension | debt-to-income and borrowing capacity |
+
+## Unit 5 — PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects
+
+| Day | Lesson | Phase | Focus |
+| --- | --- | --- | --- |
+| 42 | `ma-g11-financial-literacy-u05-l01` | Launch and diagnostic | expected return, volatility, and horizon interacting |
+| 43 | `ma-g11-financial-literacy-u05-l02` | Concept model A | after-fee and after-tax return |
+| 44 | `ma-g11-financial-literacy-u05-l03` | Concept model B | real return net of inflation |
+| 45 | `ma-g11-financial-literacy-u05-l04` | Guided practice | rebalancing rules and why they are written in advance |
+| 46 | `ma-g11-financial-literacy-u05-l05` | Applied simulation | retirement account structures in outline |
+| 47 | `ma-g11-financial-literacy-u05-l06` | Comparison and analysis | distinguishing evidence from prediction in claims |
+| 48 | `ma-g11-financial-literacy-u05-l07` | Error and misconception analysis | expected return, volatility, and horizon interacting |
+| 49 | `ma-g11-financial-literacy-u05-l08` | Transfer to a new case | after-fee and after-tax return |
+| 50 | `ma-g11-financial-literacy-u05-l09` | Synthesis and review | real return net of inflation |
+| 51 | `ma-g11-financial-literacy-u05-l10` | Unit performance task | rebalancing rules and why they are written in advance |
+
+## Unit 6 — PF6 — Protecting and Insuring: Risk Management Across a Household
+
+| Day | Lesson | Phase | Focus |
+| --- | --- | --- | --- |
+| 52 | `ma-g11-financial-literacy-u06-l01` | Launch and diagnostic | quantifying exposure: likelihood times severity |
+| 53 | `ma-g11-financial-literacy-u06-l02` | Concept model A | allocating a limited protection budget |
+| 54 | `ma-g11-financial-literacy-u06-l03` | Concept model B | self-insuring through reserves versus buying coverage |
+| 55 | `ma-g11-financial-literacy-u06-l04` | Guided practice | coverage gaps and overlapping policies |
+| 56 | `ma-g11-financial-literacy-u06-l05` | Applied simulation | disability and income-loss protection |
+| 57 | `ma-g11-financial-literacy-u06-l06` | Comparison and analysis | fraud, scam escalation, and recovery procedures |
+| 58 | `ma-g11-financial-literacy-u06-l07` | Error and misconception analysis | quantifying exposure: likelihood times severity |
+| 59 | `ma-g11-financial-literacy-u06-l08` | Transfer to a new case | allocating a limited protection budget |
+| 60 | `ma-g11-financial-literacy-u06-l09` | Synthesis and review | self-insuring through reserves versus buying coverage |
+| 61 | `ma-g11-financial-literacy-u06-l10` | Unit performance task | coverage gaps and overlapping policies |
+
+## Unit 7 — PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else
+
+| Day | Lesson | Phase | Focus |
+| --- | --- | --- | --- |
+| 62 | `ma-g11-financial-literacy-u07-l01` | Launch and diagnostic | marginal rate effects on a decision |
+| 63 | `ma-g11-financial-literacy-u07-l02` | Concept model A | tax-advantaged accounts as a planning tool |
+| 64 | `ma-g11-financial-literacy-u07-l03` | Concept model B | credits versus deductions in outline |
+| 65 | `ma-g11-financial-literacy-u07-l04` | Guided practice | self-employment and multiple-income tax obligations |
+| 66 | `ma-g11-financial-literacy-u07-l05` | Applied simulation | tax consequences of investing decisions |
+| 67 | `ma-g11-financial-literacy-u07-l06` | Comparison and analysis | integrating tax reasoning into a whole plan |
+| 68 | `ma-g11-financial-literacy-u07-l07` | Error and misconception analysis | marginal rate effects on a decision |
+| 69 | `ma-g11-financial-literacy-u07-l08` | Transfer to a new case | tax-advantaged accounts as a planning tool |
+| 70 | `ma-g11-financial-literacy-u07-l09` | Synthesis and review | credits versus deductions in outline |
+| 71 | `ma-g11-financial-literacy-u07-l10` | Unit performance task | self-employment and multiple-income tax obligations |
+| 72 | `ma-g11-financial-literacy-u07-l11` | Defense and extension | tax consequences of investing decisions |
+

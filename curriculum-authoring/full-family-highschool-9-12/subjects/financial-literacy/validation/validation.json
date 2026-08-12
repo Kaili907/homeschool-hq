@@ -1,0 +1,802 @@
+{
+  "total": 159,
+  "passed": 159,
+  "failed": 0,
+  "checks": [
+    {
+      "check": "standards corpus exists",
+      "result": "PASS",
+      "details": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-hs912-rfl-finlit-r1/curriculum-authoring/full-family-highschool-9-12/subjects/financial-literacy/standards/michigan-personal-finance-9-12-expectations.json"
+    },
+    {
+      "check": "corpus contains exactly PF1-PF7 plus PF4.1",
+      "result": "PASS",
+      "details": "PF1, PF2, PF3, PF4, PF4.1, PF5, PF6, PF7"
+    },
+    {
+      "check": "every expectation carries verbatim text",
+      "result": "PASS",
+      "details": "8 expectations"
+    },
+    {
+      "check": "corpus records a sha256 of the retrieved source document",
+      "result": "PASS",
+      "details": "ff97640535d7864de8d3333669a5f8d8ab8134ebfa0af5f9f938cf2e91ab2735"
+    },
+    {
+      "check": "corpus records byte length and page count",
+      "result": "PASS",
+      "details": "537595 bytes / 2 pages"
+    },
+    {
+      "check": "corpus asserts retrieval-not-memory provenance",
+      "result": "PASS",
+      "details": "verification.method"
+    },
+    {
+      "check": "PF7 Paying Taxes is present (the expectation a 6-standard summary would drop)",
+      "result": "PASS",
+      "details": "Paying Taxes"
+    },
+    {
+      "check": "PF4.1 is recorded as a child of PF4",
+      "result": "PASS",
+      "details": "parent=PF4"
+    },
+    {
+      "check": "standards custody document exists",
+      "result": "PASS",
+      "details": "standards-custody.md"
+    },
+    {
+      "check": "corpus states that alignment is not approval",
+      "result": "PASS",
+      "details": "limits"
+    },
+    {
+      "check": "g9: units.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-9/units.json"
+    },
+    {
+      "check": "g9: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "financial-literacy-9/lessons.jsonl"
+    },
+    {
+      "check": "g9: assessments.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-9/assessments.json"
+    },
+    {
+      "check": "g9: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "financial-literacy-9/daily-schedule.csv"
+    },
+    {
+      "check": "g9: course-guide.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-9/course-guide.md"
+    },
+    {
+      "check": "g9: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-9/lesson-sequence.md"
+    },
+    {
+      "check": "g9: 7 units (one per expectation)",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g9: 72 lessons",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g9: 7 unit assessments",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g9: unit day counts match the published Grade 8 shape",
+      "result": "PASS",
+      "details": "10,10,10,11,10,10,11"
+    },
+    {
+      "check": "g9: expectation PF1 is covered",
+      "result": "PASS",
+      "details": "PF1"
+    },
+    {
+      "check": "g9: expectation PF2 is covered",
+      "result": "PASS",
+      "details": "PF2"
+    },
+    {
+      "check": "g9: expectation PF3 is covered",
+      "result": "PASS",
+      "details": "PF3"
+    },
+    {
+      "check": "g9: expectation PF4 is covered",
+      "result": "PASS",
+      "details": "PF4"
+    },
+    {
+      "check": "g9: expectation PF4.1 is covered",
+      "result": "PASS",
+      "details": "PF4.1"
+    },
+    {
+      "check": "g9: expectation PF5 is covered",
+      "result": "PASS",
+      "details": "PF5"
+    },
+    {
+      "check": "g9: expectation PF6 is covered",
+      "result": "PASS",
+      "details": "PF6"
+    },
+    {
+      "check": "g9: expectation PF7 is covered",
+      "result": "PASS",
+      "details": "PF7"
+    },
+    {
+      "check": "g9: lesson ids unique",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g9: every unit lesson_id resolves to a lesson",
+      "result": "PASS",
+      "details": "72 refs"
+    },
+    {
+      "check": "g9: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g9-financial-literacy"
+    },
+    {
+      "check": "g9: course_day is contiguous 1..72",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g9: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g9: lesson unit_title matches its unit",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g9: schedule header",
+      "result": "PASS",
+      "details": "course_day,week,weekday,unit_number,unit_title,lesson_id,phase,focus"
+    },
+    {
+      "check": "g9: one schedule row per lesson",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g9: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g9: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g9: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g9: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "g9: assessments carry mastery_interpretation",
+      "result": "PASS",
+      "details": "present"
+    },
+    {
+      "check": "g10: units.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-10/units.json"
+    },
+    {
+      "check": "g10: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "financial-literacy-10/lessons.jsonl"
+    },
+    {
+      "check": "g10: assessments.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-10/assessments.json"
+    },
+    {
+      "check": "g10: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "financial-literacy-10/daily-schedule.csv"
+    },
+    {
+      "check": "g10: course-guide.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-10/course-guide.md"
+    },
+    {
+      "check": "g10: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-10/lesson-sequence.md"
+    },
+    {
+      "check": "g10: 7 units (one per expectation)",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g10: 72 lessons",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g10: 7 unit assessments",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g10: unit day counts match the published Grade 8 shape",
+      "result": "PASS",
+      "details": "10,10,10,11,10,10,11"
+    },
+    {
+      "check": "g10: expectation PF1 is covered",
+      "result": "PASS",
+      "details": "PF1"
+    },
+    {
+      "check": "g10: expectation PF2 is covered",
+      "result": "PASS",
+      "details": "PF2"
+    },
+    {
+      "check": "g10: expectation PF3 is covered",
+      "result": "PASS",
+      "details": "PF3"
+    },
+    {
+      "check": "g10: expectation PF4 is covered",
+      "result": "PASS",
+      "details": "PF4"
+    },
+    {
+      "check": "g10: expectation PF4.1 is covered",
+      "result": "PASS",
+      "details": "PF4.1"
+    },
+    {
+      "check": "g10: expectation PF5 is covered",
+      "result": "PASS",
+      "details": "PF5"
+    },
+    {
+      "check": "g10: expectation PF6 is covered",
+      "result": "PASS",
+      "details": "PF6"
+    },
+    {
+      "check": "g10: expectation PF7 is covered",
+      "result": "PASS",
+      "details": "PF7"
+    },
+    {
+      "check": "g10: lesson ids unique",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g10: every unit lesson_id resolves to a lesson",
+      "result": "PASS",
+      "details": "72 refs"
+    },
+    {
+      "check": "g10: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g10-financial-literacy"
+    },
+    {
+      "check": "g10: course_day is contiguous 1..72",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g10: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g10: lesson unit_title matches its unit",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g10: schedule header",
+      "result": "PASS",
+      "details": "course_day,week,weekday,unit_number,unit_title,lesson_id,phase,focus"
+    },
+    {
+      "check": "g10: one schedule row per lesson",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g10: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g10: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g10: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g10: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "g10: assessments carry mastery_interpretation",
+      "result": "PASS",
+      "details": "present"
+    },
+    {
+      "check": "g11: units.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-11/units.json"
+    },
+    {
+      "check": "g11: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "financial-literacy-11/lessons.jsonl"
+    },
+    {
+      "check": "g11: assessments.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-11/assessments.json"
+    },
+    {
+      "check": "g11: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "financial-literacy-11/daily-schedule.csv"
+    },
+    {
+      "check": "g11: course-guide.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-11/course-guide.md"
+    },
+    {
+      "check": "g11: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-11/lesson-sequence.md"
+    },
+    {
+      "check": "g11: 7 units (one per expectation)",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g11: 72 lessons",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g11: 7 unit assessments",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g11: unit day counts match the published Grade 8 shape",
+      "result": "PASS",
+      "details": "10,10,10,11,10,10,11"
+    },
+    {
+      "check": "g11: expectation PF1 is covered",
+      "result": "PASS",
+      "details": "PF1"
+    },
+    {
+      "check": "g11: expectation PF2 is covered",
+      "result": "PASS",
+      "details": "PF2"
+    },
+    {
+      "check": "g11: expectation PF3 is covered",
+      "result": "PASS",
+      "details": "PF3"
+    },
+    {
+      "check": "g11: expectation PF4 is covered",
+      "result": "PASS",
+      "details": "PF4"
+    },
+    {
+      "check": "g11: expectation PF4.1 is covered",
+      "result": "PASS",
+      "details": "PF4.1"
+    },
+    {
+      "check": "g11: expectation PF5 is covered",
+      "result": "PASS",
+      "details": "PF5"
+    },
+    {
+      "check": "g11: expectation PF6 is covered",
+      "result": "PASS",
+      "details": "PF6"
+    },
+    {
+      "check": "g11: expectation PF7 is covered",
+      "result": "PASS",
+      "details": "PF7"
+    },
+    {
+      "check": "g11: lesson ids unique",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g11: every unit lesson_id resolves to a lesson",
+      "result": "PASS",
+      "details": "72 refs"
+    },
+    {
+      "check": "g11: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g11-financial-literacy"
+    },
+    {
+      "check": "g11: course_day is contiguous 1..72",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g11: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g11: lesson unit_title matches its unit",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g11: schedule header",
+      "result": "PASS",
+      "details": "course_day,week,weekday,unit_number,unit_title,lesson_id,phase,focus"
+    },
+    {
+      "check": "g11: one schedule row per lesson",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g11: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g11: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g11: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g11: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "g11: assessments carry mastery_interpretation",
+      "result": "PASS",
+      "details": "present"
+    },
+    {
+      "check": "g12: units.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-12/units.json"
+    },
+    {
+      "check": "g12: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "financial-literacy-12/lessons.jsonl"
+    },
+    {
+      "check": "g12: assessments.json exists",
+      "result": "PASS",
+      "details": "financial-literacy-12/assessments.json"
+    },
+    {
+      "check": "g12: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "financial-literacy-12/daily-schedule.csv"
+    },
+    {
+      "check": "g12: course-guide.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-12/course-guide.md"
+    },
+    {
+      "check": "g12: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "financial-literacy-12/lesson-sequence.md"
+    },
+    {
+      "check": "g12: 7 units (one per expectation)",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g12: 72 lessons",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g12: 7 unit assessments",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g12: unit day counts match the published Grade 8 shape",
+      "result": "PASS",
+      "details": "10,10,10,11,10,10,11"
+    },
+    {
+      "check": "g12: expectation PF1 is covered",
+      "result": "PASS",
+      "details": "PF1"
+    },
+    {
+      "check": "g12: expectation PF2 is covered",
+      "result": "PASS",
+      "details": "PF2"
+    },
+    {
+      "check": "g12: expectation PF3 is covered",
+      "result": "PASS",
+      "details": "PF3"
+    },
+    {
+      "check": "g12: expectation PF4 is covered",
+      "result": "PASS",
+      "details": "PF4"
+    },
+    {
+      "check": "g12: expectation PF4.1 is covered",
+      "result": "PASS",
+      "details": "PF4.1"
+    },
+    {
+      "check": "g12: expectation PF5 is covered",
+      "result": "PASS",
+      "details": "PF5"
+    },
+    {
+      "check": "g12: expectation PF6 is covered",
+      "result": "PASS",
+      "details": "PF6"
+    },
+    {
+      "check": "g12: expectation PF7 is covered",
+      "result": "PASS",
+      "details": "PF7"
+    },
+    {
+      "check": "g12: lesson ids unique",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g12: every unit lesson_id resolves to a lesson",
+      "result": "PASS",
+      "details": "72 refs"
+    },
+    {
+      "check": "g12: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g12-financial-literacy"
+    },
+    {
+      "check": "g12: course_day is contiguous 1..72",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g12: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "g12: lesson unit_title matches its unit",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g12: schedule header",
+      "result": "PASS",
+      "details": "course_day,week,weekday,unit_number,unit_title,lesson_id,phase,focus"
+    },
+    {
+      "check": "g12: one schedule row per lesson",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "g12: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g12: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g12: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g12: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "g12: assessments carry mastery_interpretation",
+      "result": "PASS",
+      "details": "present"
+    },
+    {
+      "check": "complete 9-12 progression covers every Michigan Personal Finance expectation",
+      "result": "PASS",
+      "details": "PF1, PF2, PF3, PF4, PF4.1, PF5, PF6, PF7"
+    },
+    {
+      "check": "practice generation never directly awards mastery",
+      "result": "PASS",
+      "details": "288 lessons"
+    },
+    {
+      "check": "mastery requires evidence on at least two separate occasions",
+      "result": "PASS",
+      "details": "two-occasion rule"
+    },
+    {
+      "check": "every lesson carries a mastery-evidence tutor route",
+      "result": "PASS",
+      "details": "present"
+    },
+    {
+      "check": "no learner-facing field ever requests real financial or identifying data",
+      "result": "PASS",
+      "details": "288 lessons scanned, 0 violations"
+    },
+    {
+      "check": "no SSN-shaped literal anywhere in the lane",
+      "result": "PASS",
+      "details": "none"
+    },
+    {
+      "check": "no card-number-shaped literal anywhere in the lane",
+      "result": "PASS",
+      "details": "none"
+    },
+    {
+      "check": "every lesson is flagged simulation-only and requires no real financial data",
+      "result": "PASS",
+      "details": "288 lessons"
+    },
+    {
+      "check": "every lesson states that no real transaction is required",
+      "result": "PASS",
+      "details": "no-transaction rule"
+    },
+    {
+      "check": "every lesson carries a tutor route refusing real financial data",
+      "result": "PASS",
+      "details": "refusal route"
+    },
+    {
+      "check": "every lesson carries a tutor route declining individualized financial advice",
+      "result": "PASS",
+      "details": "decline route"
+    },
+    {
+      "check": "every lesson states the no-individualized-advice boundary",
+      "result": "PASS",
+      "details": "boundary stated"
+    },
+    {
+      "check": "every lesson carries the non-shaming requirement",
+      "result": "PASS",
+      "details": "no shame"
+    },
+    {
+      "check": "every lesson routes household-hardship disclosure without recording it",
+      "result": "PASS",
+      "details": "hardship route"
+    },
+    {
+      "check": "parent-visible evidence is minimized on every lesson",
+      "result": "PASS",
+      "details": "minimized"
+    },
+    {
+      "check": "no lesson requires media",
+      "result": "PASS",
+      "details": "media optional everywhere"
+    },
+    {
+      "check": "grade 12 declares a capstone unit",
+      "result": "PASS",
+      "details": "PF7 \u2014 Paying Taxes: Taxes and the Simulated Adult Finance Capstone"
+    },
+    {
+      "check": "grade 12 capstone is a practical simulated adult-finance capstone",
+      "result": "PASS",
+      "details": "declared"
+    },
+    {
+      "check": "grade 12 capstone requires no real transaction",
+      "result": "PASS",
+      "details": "simulated"
+    },
+    {
+      "check": "grade 12 has exactly one capstone lesson",
+      "result": "PASS",
+      "details": "one"
+    },
+    {
+      "check": "grade 8 uses the same PF code vocabulary this lane extends",
+      "result": "PASS",
+      "details": "PF1, PF1\u2013PF7 synthesis, PF2, PF3, PF4, PF4.1, PF5, PF6, PF7"
+    },
+    {
+      "check": "grade 8 predecessor has 7 units, matching this lane",
+      "result": "PASS",
+      "details": "7"
+    },
+    {
+      "check": "grade 9 keeps the grade 8 unit-length shape",
+      "result": "PASS",
+      "details": "10,10,10,11,10,10,11"
+    },
+    {
+      "check": "grade 8 -> 9 handoff document exists",
+      "result": "PASS",
+      "details": "handoff"
+    },
+    {
+      "check": "rigor progression document exists",
+      "result": "PASS",
+      "details": "rigor"
+    }
+  ]
+}

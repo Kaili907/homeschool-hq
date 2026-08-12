@@ -1,0 +1,717 @@
+{
+  "total": 142,
+  "passed": 142,
+  "failed": 0,
+  "checks": [
+    {
+      "check": "competency framework exists",
+      "result": "PASS",
+      "details": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-hs912-rfl-finlit-r1/curriculum-authoring/full-family-highschool-9-12/subjects/ready-for-life/standards/manuel-academy-rfl-9-12-competencies.json"
+    },
+    {
+      "check": "framework is declared LOCAL_COMPOSITION",
+      "result": "PASS",
+      "details": "LOCAL_COMPOSITION"
+    },
+    {
+      "check": "framework claims no jurisdiction",
+      "result": "PASS",
+      "details": "jurisdiction=null"
+    },
+    {
+      "check": "framework explicitly disclaims external standards authority",
+      "result": "PASS",
+      "details": "disclaimed"
+    },
+    {
+      "check": "framework states the published grades 5/7/8 course is unmodified",
+      "result": "PASS",
+      "details": "NONE"
+    },
+    {
+      "check": "safety charter present",
+      "result": "PASS",
+      "details": "6 clauses"
+    },
+    {
+      "check": "framework states that a click cannot certify a real-world task",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "framework states the multi-occasion evidence rule",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "g9: units.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-9/units.json"
+    },
+    {
+      "check": "g9: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "ready-for-life-9/lessons.jsonl"
+    },
+    {
+      "check": "g9: assessments.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-9/assessments.json"
+    },
+    {
+      "check": "g9: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "ready-for-life-9/daily-schedule.csv"
+    },
+    {
+      "check": "g9: course-guide.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-9/course-guide.md"
+    },
+    {
+      "check": "g9: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-9/lesson-sequence.md"
+    },
+    {
+      "check": "g9: 6 units",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g9: 36 lessons",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g9: 6 unit assessments",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g9: every unit is 6 lessons",
+      "result": "PASS",
+      "details": "uniform"
+    },
+    {
+      "check": "g9: lesson ids unique",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g9: every unit lesson_id resolves",
+      "result": "PASS",
+      "details": "36 refs"
+    },
+    {
+      "check": "g9: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g9-ready-for-life"
+    },
+    {
+      "check": "g9: course_day contiguous 1..36",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g9: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g9: lessons carry the local grade progression string",
+      "result": "PASS",
+      "details": "Manuel Academy RFL Grade 9 progression"
+    },
+    {
+      "check": "g9: every competency domain resolves to the framework",
+      "result": "PASS",
+      "details": "resolved"
+    },
+    {
+      "check": "g9: one schedule row per lesson",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g9: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g9: schedule sign-off column matches lessons",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g9: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g9: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g9: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "g10: units.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-10/units.json"
+    },
+    {
+      "check": "g10: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "ready-for-life-10/lessons.jsonl"
+    },
+    {
+      "check": "g10: assessments.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-10/assessments.json"
+    },
+    {
+      "check": "g10: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "ready-for-life-10/daily-schedule.csv"
+    },
+    {
+      "check": "g10: course-guide.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-10/course-guide.md"
+    },
+    {
+      "check": "g10: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-10/lesson-sequence.md"
+    },
+    {
+      "check": "g10: 6 units",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g10: 36 lessons",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g10: 6 unit assessments",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g10: every unit is 6 lessons",
+      "result": "PASS",
+      "details": "uniform"
+    },
+    {
+      "check": "g10: lesson ids unique",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g10: every unit lesson_id resolves",
+      "result": "PASS",
+      "details": "36 refs"
+    },
+    {
+      "check": "g10: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g10-ready-for-life"
+    },
+    {
+      "check": "g10: course_day contiguous 1..36",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g10: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g10: lessons carry the local grade progression string",
+      "result": "PASS",
+      "details": "Manuel Academy RFL Grade 10 progression"
+    },
+    {
+      "check": "g10: every competency domain resolves to the framework",
+      "result": "PASS",
+      "details": "resolved"
+    },
+    {
+      "check": "g10: one schedule row per lesson",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g10: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g10: schedule sign-off column matches lessons",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g10: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g10: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g10: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "g11: units.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-11/units.json"
+    },
+    {
+      "check": "g11: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "ready-for-life-11/lessons.jsonl"
+    },
+    {
+      "check": "g11: assessments.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-11/assessments.json"
+    },
+    {
+      "check": "g11: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "ready-for-life-11/daily-schedule.csv"
+    },
+    {
+      "check": "g11: course-guide.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-11/course-guide.md"
+    },
+    {
+      "check": "g11: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-11/lesson-sequence.md"
+    },
+    {
+      "check": "g11: 6 units",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g11: 36 lessons",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g11: 6 unit assessments",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g11: every unit is 6 lessons",
+      "result": "PASS",
+      "details": "uniform"
+    },
+    {
+      "check": "g11: lesson ids unique",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g11: every unit lesson_id resolves",
+      "result": "PASS",
+      "details": "36 refs"
+    },
+    {
+      "check": "g11: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g11-ready-for-life"
+    },
+    {
+      "check": "g11: course_day contiguous 1..36",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g11: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g11: lessons carry the local grade progression string",
+      "result": "PASS",
+      "details": "Manuel Academy RFL Grade 11 progression"
+    },
+    {
+      "check": "g11: every competency domain resolves to the framework",
+      "result": "PASS",
+      "details": "resolved"
+    },
+    {
+      "check": "g11: one schedule row per lesson",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g11: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g11: schedule sign-off column matches lessons",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g11: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g11: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g11: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "g12: units.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-12/units.json"
+    },
+    {
+      "check": "g12: lessons.jsonl exists",
+      "result": "PASS",
+      "details": "ready-for-life-12/lessons.jsonl"
+    },
+    {
+      "check": "g12: assessments.json exists",
+      "result": "PASS",
+      "details": "ready-for-life-12/assessments.json"
+    },
+    {
+      "check": "g12: daily-schedule.csv exists",
+      "result": "PASS",
+      "details": "ready-for-life-12/daily-schedule.csv"
+    },
+    {
+      "check": "g12: course-guide.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-12/course-guide.md"
+    },
+    {
+      "check": "g12: lesson-sequence.md exists",
+      "result": "PASS",
+      "details": "ready-for-life-12/lesson-sequence.md"
+    },
+    {
+      "check": "g12: 6 units",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g12: 36 lessons",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g12: 6 unit assessments",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g12: every unit is 6 lessons",
+      "result": "PASS",
+      "details": "uniform"
+    },
+    {
+      "check": "g12: lesson ids unique",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g12: every unit lesson_id resolves",
+      "result": "PASS",
+      "details": "36 refs"
+    },
+    {
+      "check": "g12: course_id consistent",
+      "result": "PASS",
+      "details": "ma-g12-ready-for-life"
+    },
+    {
+      "check": "g12: course_day contiguous 1..36",
+      "result": "PASS",
+      "details": "contiguous"
+    },
+    {
+      "check": "g12: every unit assessment_id resolves",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "g12: lessons carry the local grade progression string",
+      "result": "PASS",
+      "details": "Manuel Academy RFL Grade 12 progression"
+    },
+    {
+      "check": "g12: every competency domain resolves to the framework",
+      "result": "PASS",
+      "details": "resolved"
+    },
+    {
+      "check": "g12: one schedule row per lesson",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g12: schedule lesson refs align",
+      "result": "PASS",
+      "details": "aligned"
+    },
+    {
+      "check": "g12: schedule sign-off column matches lessons",
+      "result": "PASS",
+      "details": "consistent"
+    },
+    {
+      "check": "g12: schedule spans 36 weeks",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "g12: every lesson has >= 5 lesson_flow segments",
+      "result": "PASS",
+      "details": "segment resume safe"
+    },
+    {
+      "check": "g12: adult-only fields present on every lesson",
+      "result": "PASS",
+      "details": "3 protected fields"
+    },
+    {
+      "check": "expected number of guardian sign-off lessons",
+      "result": "PASS",
+      "details": "48 of 144"
+    },
+    {
+      "check": "sign-off lessons are exactly the real-world application and performance-task days",
+      "result": "PASS",
+      "details": "days 4,6"
+    },
+    {
+      "check": "every sign-off lesson requires an adult attestation",
+      "result": "PASS",
+      "details": "48 lessons"
+    },
+    {
+      "check": "attestation names the observing adult role, what was observed, and the date",
+      "result": "PASS",
+      "details": "3 fields"
+    },
+    {
+      "check": "every lesson records that a click alone is insufficient",
+      "result": "PASS",
+      "details": "144 lessons"
+    },
+    {
+      "check": "every sign-off lesson states the click-cannot-certify rule verbatim",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "every sign-off lesson routes an unattested completion claim",
+      "result": "PASS",
+      "details": "routed"
+    },
+    {
+      "check": "every lesson states that no unsafe unsupervised task is assigned",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "every lesson enumerates the supervision-required hazards",
+      "result": "PASS",
+      "details": "enumerated"
+    },
+    {
+      "check": "every lesson offers a simulated alternative at equal credit",
+      "result": "PASS",
+      "details": "144 lessons"
+    },
+    {
+      "check": "every lesson carries a tutor route refusing unsafe or unsupervised action",
+      "result": "PASS",
+      "details": "routed"
+    },
+    {
+      "check": "no learner-facing field ever requests a credential or identifier",
+      "result": "PASS",
+      "details": "144 lessons scanned, 0 violations"
+    },
+    {
+      "check": "every lesson states the no-credential rule",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "every lesson routes an offered credential to refusal",
+      "result": "PASS",
+      "details": "routed"
+    },
+    {
+      "check": "every lesson carries the no-shame requirement",
+      "result": "PASS",
+      "details": "no shame"
+    },
+    {
+      "check": "every lesson routes learner shame without recording it",
+      "result": "PASS",
+      "details": "routed"
+    },
+    {
+      "check": "every lesson states the no-forced-disclosure rule",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "every lesson routes private disclosure without storing it",
+      "result": "PASS",
+      "details": "routed"
+    },
+    {
+      "check": "no lesson requires an identifiable photo, recording, or performance",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "no lesson requires media",
+      "result": "PASS",
+      "details": "optional"
+    },
+    {
+      "check": "every lesson states the not-advice boundary",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "every lesson routes an advice request to a qualified human",
+      "result": "PASS",
+      "details": "routed"
+    },
+    {
+      "check": "every lesson tells the learner to verify local rules rather than assume",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "practice generation never directly awards mastery",
+      "result": "PASS",
+      "details": "144 lessons"
+    },
+    {
+      "check": "mastery requires evidence on at least two separate occasions",
+      "result": "PASS",
+      "details": "two-occasion rule"
+    },
+    {
+      "check": "an attested real-world performance counts only when the attestation exists",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "parent-visible evidence is minimized on every lesson",
+      "result": "PASS",
+      "details": "minimized"
+    },
+    {
+      "check": "grade 12 declares a senior capstone unit",
+      "result": "PASS",
+      "details": "Transition-to-Adulthood Capstone"
+    },
+    {
+      "check": "the senior capstone is the final unit of grade 12",
+      "result": "PASS",
+      "details": "unit 6"
+    },
+    {
+      "check": "the senior capstone is a transition-to-adulthood capstone",
+      "result": "PASS",
+      "details": "declared"
+    },
+    {
+      "check": "the senior capstone requires guardian attestation of real-world components",
+      "result": "PASS",
+      "details": "required"
+    },
+    {
+      "check": "the senior capstone names remaining support needs without shame",
+      "result": "PASS",
+      "details": "stated"
+    },
+    {
+      "check": "g9: declares a capstone unit",
+      "result": "PASS",
+      "details": "Grade 9 Independence Capstone"
+    },
+    {
+      "check": "g10: declares a capstone unit",
+      "result": "PASS",
+      "details": "Grade 10 Work-Readiness Capstone"
+    },
+    {
+      "check": "g11: declares a capstone unit",
+      "result": "PASS",
+      "details": "Grade 11 Transition-Planning Capstone"
+    },
+    {
+      "check": "g12: declares a capstone unit",
+      "result": "PASS",
+      "details": "Transition-to-Adulthood Capstone"
+    },
+    {
+      "check": "grade 8 predecessor has 6 units, matching this lane",
+      "result": "PASS",
+      "details": "6"
+    },
+    {
+      "check": "grade 8 predecessor uses 6-lesson units, matching this lane",
+      "result": "PASS",
+      "details": "uniform"
+    },
+    {
+      "check": "grade 8 uses the same local progression-string convention this lane extends",
+      "result": "PASS",
+      "details": "Manuel Academy RFL Grade 8 progression"
+    },
+    {
+      "check": "framework predecessor unit list matches the actual grade 8 course",
+      "result": "PASS",
+      "details": "6 units"
+    },
+    {
+      "check": "grade 8 -> 9 handoff exists",
+      "result": "PASS",
+      "details": "handoff"
+    },
+    {
+      "check": "progression document exists",
+      "result": "PASS",
+      "details": "progression"
+    }
+  ]
+}

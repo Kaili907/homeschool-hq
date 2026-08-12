@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "corpus_id": "michigan-personal-finance-9-12-expectations",
+  "jurisdiction": "Michigan",
+  "framework": "Michigan Merit Curriculum: Personal Finance 9-12 Content Expectations",
+  "framework_version": "Personal Finance v5/2023",
+  "framework_adoption": "Required by Section 380.1278a of the Revised School Code as revised in 2022, for all students starting with those entering 8th grade in 2023. The expectations themselves originate in the K-12 Social Studies Standards approved by the Michigan State Board of Education in 2019, under the Personal Finance standards category within the economics content area, and were republished separately as the Personal Finance Content Expectations after public comment.",
+  "band": "9-12",
+  "code_format": {
+    "pattern": "PF<n> and PF<n>.<m> for sub-expectations",
+    "authority": "SOURCE_VERBATIM",
+    "note": "Unlike the ELA corpus in the sibling lane, the source document prints these codes literally ('PF1', 'PF2', ... 'PF7', and '4.1' nested under PF4). The code strings are therefore verbatim, not a local composition. The one local element is rendering the nested sub-expectation as 'PF4.1' rather than the source's bare '4.1', so that every code in this corpus is globally unique and self-identifying. The published Manuel Academy Grade 8 financial-literacy course in curriculum-content/manuel-academy/1.0.0 already uses exactly these 'PF1'..'PF7' and 'PF4.1' strings, so this corpus matches the existing repository convention rather than introducing one."
+  },
+  "source": {
+    "title": "Michigan Merit Curriculum: Personal Finance 9-12 Content Expectations",
+    "pdf_title_metadata": "Michigan Merit Curriculum: Personal Finance 9-12 Content Expectations",
+    "pdf_author_metadata": "Michigan Department of Education",
+    "pdf_creator_metadata": "Adobe InDesign 18.5 (Windows)",
+    "pdf_creation_date": "2023-09-21",
+    "publisher": "Michigan Department of Education",
+    "official_landing_page": "https://www.michigan.gov/mde/services/academic-standards/personal-finance",
+    "document_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Personal-Finance/Personal_Finance_Content_Expectations.pdf",
+    "sha256": "ff97640535d7864de8d3333669a5f8d8ab8134ebfa0af5f9f938cf2e91ab2735",
+    "bytes": 537595,
+    "pages": 2,
+    "retrieved_on": "2026-08-12",
+    "extraction_method": "pypdf 6.6.2 text extraction; both pages extracted in full and transcribed. The complete expectation list occupies page 2.",
+    "attribution": "Content expectations are reproduced from the Michigan Department of Education publication cited above for curriculum-alignment purposes."
+  },
+  "verification": {
+    "verified": true,
+    "method": "Document retrieved directly from the michigan.gov media host with a standard desktop User-Agent, hashed before any processing, and text-extracted in this environment. Every code and every text string below was transcribed from that extraction. No expectation was reconstructed from model memory.",
+    "pages_read": { "introduction": 2, "expectations": 2 },
+    "count_cross_check": "A web summary of the requirement encountered during retrieval stated that credit is awarded on 'the 6 recognized personal finance standards'. The retrieved v5/2023 document prints SEVEN expectations, PF1 through PF7, the seventh being 'Paying Taxes'. This corpus follows the retrieved document, not the summary. The repository's own published Grade 8 financial-literacy course independently organizes its units as PF1..PF7 including 'PF7 - Paying Taxes', which corroborates the seven-expectation reading."
+  },
+  "transcription_notes": {
+    "whitespace_artifacts": "The source PDF is InDesign-set with letter-spacing applied to headings, and pypdf emits stray intra-word spaces in some heading strings. These were closed up. Every instance is enumerated here so a reviewer can confirm that only whitespace changed and no wording was altered: 'Earning Inco me' -> 'Earning Income'; 'Buying Go ods and Services' -> 'Buying Goods and Services'; 'Pro tecting and Insuring' -> 'Protecting and Insuring'; 'Free A pplication' -> 'Free Application'.",
+    "body_text": "Expectation body paragraphs extracted cleanly and are transcribed with no character changes other than the collapsing of line-wrap whitespace into single spaces."
+  },
+  "count": 8,
+  "applicable_count": 8,
+  "expectations": [
+    {
+      "code": "PF1",
+      "title": "Earning Income",
+      "text": "Conduct research regarding potential income and employee benefit packages, non-income factors that may influence career choice, benefits, and costs of obtaining the necessary education or technical skills, taxes a person is likely to pay, and other possible sources of income.",
+      "parent": null
+    },
+    {
+      "code": "PF2",
+      "title": "Buying Goods and Services",
+      "text": "Describe the factors that consumers may consider when purchasing a good or service, including the costs, benefits, and the role of government in obtaining the information.",
+      "parent": null
+    },
+    {
+      "code": "PF3",
+      "title": "Budgeting and Saving",
+      "text": "Identify the incentives people have to set aside income for future consumption and evaluate the impact of time, interest rates, and inflation upon the value of savings.",
+      "parent": null
+    },
+    {
+      "code": "PF4",
+      "title": "Using Credit",
+      "text": "Evaluate the benefits, costs, and potential impacts of using credit to purchase goods and services.",
+      "parent": null
+    },
+    {
+      "code": "PF4.1",
+      "title": "Free Application for Federal Student Aid (FAFSA), Student Loans, Scholarships, Work Study and Grants",
+      "text": "Free Application for Federal Student Aid (FAFSA), Student Loans, Scholarships, Work Study and Grants",
+      "parent": "PF4",
+      "source_code_as_printed": "4.1",
+      "note": "The source prints this as a nested sub-heading '4.1' beneath PF4 with no separate body paragraph; the heading text is itself the expectation. It is represented here with the disambiguated code 'PF4.1' and its heading reproduced as the text."
+    },
+    {
+      "code": "PF5",
+      "title": "Financial Investing",
+      "text": "Analyze the risks, expected rate of return, tax benefits, the impact of inflation, the role of government agencies, and the importance of diversification when investing in financial assets.",
+      "parent": null
+    },
+    {
+      "code": "PF6",
+      "title": "Protecting and Insuring",
+      "text": "Assess the financial risk of lost income, assets, health, or identity, and determine if a person should accept the risk exposure, reduce risk, or transfer the risk to others by paying a fee now to avoid the possibility of a larger loss later.",
+      "parent": null
+    },
+    {
+      "code": "PF7",
+      "title": "Paying Taxes",
+      "text": "Identify and evaluate taxes a person is likely to pay, including federal, state, and local taxes, tax benefits and drawbacks, impacts on take-home pay, types of IRS tax forms, and how these can affect their taxes.",
+      "parent": null
+    }
+  ],
+  "scope_of_expectations": "These content expectations address important decisions people must make in their lifetimes around earning, spending, saving, credit, investing, and insuring. These standards set the foundation on which a high-quality curriculum can be built that engages students in understanding the social and economic forces that impact individual and household financial decisions.",
+  "limits": [
+    "Alignment is not approval. This package is locally authored curriculum aligned to published expectations. It is not a claim of state approval, accreditation, licensure, credit award, or satisfaction of the Section 380.1278a requirement by any particular school or district.",
+    "Michigan publishes these as a single 9-12 band, not as four grade-level sets. The distribution and depth of PF1-PF7 across grades 9, 10, 11, and 12 is a Manuel Academy curricular decision, documented in ../progression/rigor-progression-9-12.md rather than implied.",
+    "The half-credit determination, and which of mathematics, arts, or world-language credit it offsets, is a district or public school academy decision under the Michigan Merit Curriculum and is not made here."
+  ]
+}
