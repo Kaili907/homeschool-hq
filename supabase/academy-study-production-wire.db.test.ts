@@ -33,6 +33,7 @@ const files = [
 const GUARDIAN_A = '00000000-0000-0000-0000-0000000000a1'
 const GUARDIAN_B = '00000000-0000-0000-0000-0000000000b1'
 const STUDENT_A = '00000000-0000-0000-0000-000000000101'
+const STUDENT_A2 = '00000000-0000-0000-0000-000000000103'
 const STUDENT_B = '00000000-0000-0000-0000-000000000201'
 const HOUSEHOLD_A = '00000000-0000-0000-0000-000000000011'
 const HOUSEHOLD_B = '00000000-0000-0000-0000-000000000022'
@@ -1053,6 +1054,156 @@ describe('authority, isolation and readiness', () => {
       checkpoint: checkpointRequest(two, 1),
     })
     expect(crossSession.body).toEqual({ status: 'quarantined' })
+  })
+
+  it('issues a different reference to each learner of one household under one mutation reference', async () => {
+    // The cross-learner case above varies household and learner together, so it
+    // would still hold if the derivation ignored the learner entirely. This one
+    // holds the household and the mutation reference fixed and varies only the
+    // learner, which is the only arrangement that can observe the student_id
+    // component of academy_private.study_production_session_ref.
+    //
+    // The second learner is seeded here rather than in study_engine_fixtures.sql:
+    // that fixture is shared by every study suite and carries one learner per
+    // household, and a second one belongs to this proof rather than to all of them.
+    await database.query(
+      `insert into public.academy_students (
+         id, household_id, display_name, lifecycle_status, created_by
+       ) values ($1::uuid, $2::uuid, 'Study Student A2', 'active', $3::uuid)`,
+      [STUDENT_A2, HOUSEHOLD_A, GUARDIAN_A],
+    )
+    // Same guardian, same membership. The launch issuer resolves a learner only
+    // through an active identity_manager grant on that membership, which is the
+    // level beforeAll upgrades the fixture's own grants to.
+    await database.query(
+      `insert into public.academy_guardian_student_access (
+         id, household_id, student_id, membership_id, permission_level,
+         status, granted_by
+       ) values (
+         '00000000-0000-0000-0000-0000000001a4'::uuid, $1::uuid, $2::uuid,
+         '00000000-0000-0000-0000-0000000000a2'::uuid, 'identity_manager',
+         'active', $3::uuid
+       )`,
+      [HOUSEHOLD_A, STUDENT_A2, GUARDIAN_A],
+    )
+    // The issuer also requires an active pin credential. The verifier is the
+    // fixture's own synthetic shape, which is all the format check inspects.
+    await database.query(
+      `insert into academy_private.student_access_credentials (
+         id, household_id, student_id, credential_kind, credential_version,
+         verifier_scheme, verifier_digest, status, created_actor_kind, created_by,
+         creation_reason, correlation_id
+       ) values (
+         '00000000-0000-0000-0000-000000009103'::uuid, $1::uuid, $2::uuid, 'pin', 1,
+         'argon2id', $4::text, 'active', 'guardian', $3::uuid,
+         'Synthetic Study credential for the second household A learner',
+         '00000000-0000-0000-0000-00000000d103'::uuid
+       )`,
+      [
+        HOUSEHOLD_A,
+        STUDENT_A2,
+        GUARDIAN_A,
+        '$argon2id$v=19$m=65536,t=3,p=1$dGVzdHRlc3R0ZXN0dGVzdA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI',
+      ],
+    )
+    const digestA2 = await issueDigest(GUARDIAN_A, STUDENT_A2)
+
+    const mutationRef = 'mutation.begin.same-household-two-learners'
+    const firstRef = await beginRef(digestA, mutationRef)
+    const second = await begin(digestA2, mutationRef)
+    // A begin by the second learner under a mutation reference the first learner
+    // has already spent is a begin, not a replay: the replay identity is the
+    // learner plus the mutation reference, so this one finds no receipt of its
+    // own and lands on no session of anyone else's.
+    expect(second.body).toEqual({
+      status: 'saved',
+      sessionRef: expect.any(String),
+      revision: 1,
+    })
+    const secondRef = (second.body as { sessionRef: string }).sessionRef
+    // The decisive comparison: two references the server actually issued, out of
+    // one household and one mutation reference. Only the learner differs, so they
+    // can only differ because the learner is inside the derivation.
+    expect(secondRef).not.toBe(firstRef)
+    // The same statement made against the issuing authority directly, so the
+    // proof does not depend on the shape of the begin operation around it.
+    expect(await issuedSessionRef(database, HOUSEHOLD_A, STUDENT_A2, mutationRef))
+      .not.toBe(await issuedSessionRef(database, HOUSEHOLD_A, STUDENT_A, mutationRef))
+
+    // Each session belongs to the learner who began it, in the core row and in
+    // the private projection alike.
+    const owners = await database.query<{
+      core_first: string
+      projection_first: string
+      core_second: string
+      projection_second: string
+    }>(`
+      select
+        (select student_id::text from public.academy_study_sessions
+          where id = $1) as core_first,
+        (select student_id::text from academy_private.study_production_sessions
+          where session_id = $1) as projection_first,
+        (select student_id::text from public.academy_study_sessions
+          where id = $2) as core_second,
+        (select student_id::text from academy_private.study_production_sessions
+          where session_id = $2) as projection_second
+    `, [firstRef, secondRef])
+    expect(owners.rows[0]).toEqual({
+      core_first: STUDENT_A,
+      projection_first: STUDENT_A,
+      core_second: STUDENT_A2,
+      projection_second: STUDENT_A2,
+    })
+
+    // Neither learner can act under the other's reference, in either direction,
+    // even though one household holds both and one guardian issued both.
+    await expect(execute(digestA2, PROGRESS, 'session:read', {
+      sessionRef: firstRef,
+    })).rejects.toThrow(/STUDY_OPERATION_NOT_AVAILABLE/)
+    await expect(execute(digestA, PROGRESS, 'session:read', {
+      sessionRef: secondRef,
+    })).rejects.toThrow(/STUDY_OPERATION_NOT_AVAILABLE/)
+    await expect(execute(digestA2, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef: firstRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.checkpoint.same-household-cross',
+      checkpoint: checkpointRequest(firstRef, 1),
+    })).rejects.toThrow(/STUDY_OPERATION_NOT_AVAILABLE/)
+    // That last refusal is only about the learner if the same call by the owner
+    // goes through. Compare-and-swap resolves authority through the projection's
+    // learner and answers STUDY_OPERATION_NOT_AVAILABLE for a reference that does
+    // not exist at all, so the refusal above is attributable only next to this.
+    expect((await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef: firstRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.checkpoint.same-household-owner',
+      checkpoint: checkpointRequest(firstRef, 1),
+    })).body).toEqual({ status: 'saved', revision: 1 })
+
+    // One mutation reference, two receipts, each under its own learner token and
+    // each carrying back that learner's own reference.
+    const firstScope = await learnerScope(database, STUDENT_A)
+    const secondScope = await learnerScope(database, STUDENT_A2)
+    expect(firstScope).not.toBe(secondScope)
+    const receipts = await database.query<{
+      actor_scope: string
+      status: string
+      session_ref: string
+    }>(`
+      select actor_scope, result ->> 'status' as status,
+        result ->> 'sessionRef' as session_ref
+      from academy_private.study_mutation_receipts
+      where operation_kind = 'production_session_begin_v1'
+        and idempotency_key = $1
+    `, [mutationRef])
+    expect(receipts.rows).toHaveLength(2)
+    const byScope = new Map(receipts.rows.map((row) => [row.actor_scope, row]))
+    expect(byScope.get(firstScope)).toEqual({
+      actor_scope: firstScope, status: 'saved', session_ref: firstRef,
+    })
+    expect(byScope.get(secondScope)).toEqual({
+      actor_scope: secondScope, status: 'saved', session_ref: secondRef,
+    })
   })
 
   it('adds no idempotency contract over an identifier a caller can already name', async () => {

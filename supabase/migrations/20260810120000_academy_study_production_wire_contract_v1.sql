@@ -569,12 +569,9 @@ $$;
 -- So this authority does not accept a session reference at all.  It issues one,
 -- from academy_private.study_production_session_ref, out of the two identifiers
 -- the server recovered from the grant and the mutation reference the caller
--- owns.  The caller supplies nothing that could name a row, which makes four
+-- owns.  The caller supplies nothing that could name a row, which makes three
 -- things true at once:
 --
---   * the reference cannot collide with a row this authority did not create,
---     because no caller can propose one and nothing else writes in this
---     namespace;
 --   * the reference cannot address another learner's session -- a guessed one
 --     is not a thing that exists rather than a thing that gets refused;
 --   * the replay identity of a begin is the verified learner plus that mutation
@@ -584,6 +581,26 @@ $$;
 --     already name;
 --   * the reference, the advisory lock and the receipt are one identity, so
 --     there is nothing for them to disagree about.
+--
+-- What owning the reference does not buy is a reference nothing else can write,
+-- and the collision handling below is not decoration.  The derivation is a
+-- sha256 over the household, the student and the mutation reference, so an adult
+-- who already manages that learner holds both identifiers and chooses the third:
+-- the value is precomputable, without ever seeing a result.  And
+-- public.academy_study_create_session is still granted to authenticated, still
+-- takes its identifier from its caller, validates that identifier's shape only,
+-- reserves nothing about this prefix, and takes none of the locks below -- so a
+-- row this authority did not create can arrive at the derived reference.  The
+-- exposure is narrow and bounded: same household only, never cross-tenant, and
+-- it costs that learner a closed status rather than anyone else's data.  Narrow
+-- is not closed, so the closed answer is given twice.  The post-lock probe below
+-- covers the row that is already committed when this operation looks, which is
+-- the case the suite can stage and does.  The unique_violation handler on the
+-- insert covers the rest of the check-then-insert window, where the other lane
+-- commits after that probe's snapshot: real under read committed, and the reason
+-- the handler stays, but not a window anything here can schedule on demand.  It
+-- is a backstop no behavioural test pins, so read it as load-bearing on the
+-- strength of that argument rather than on the strength of a test watching it.
 --
 -- The caller's stability handle moves with the ownership: what used to be "reuse
 -- the same session reference for this block" is now "reuse the same mutation
