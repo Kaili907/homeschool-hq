@@ -1,0 +1,103 @@
+{
+  "gate": "src/curriculum/production-quality",
+  "subject": "science",
+  "totalLessons": 972,
+  "status": "PASS",
+  "summary": {
+    "ready": 972,
+    "needsHumanReview": 0,
+    "notReady": 0
+  },
+  "codeCounts": {
+    "READY": 972,
+    "MISSING_INSTRUCTION": 0,
+    "MISSING_STUDENT_WORK": 0,
+    "MISSING_GUIDED_PRACTICE": 0,
+    "MISSING_INDEPENDENT_WORK": 0,
+    "MISSING_SCORING_AUTHORITY": 0,
+    "MISSING_ANSWER_KEY": 0,
+    "MISSING_RUBRIC": 0,
+    "MISSING_REMEDIATION": 0,
+    "MISSING_EXTENSION": 0,
+    "ASSESSMENT_NOT_ALIGNED": 0,
+    "SOURCE_INTEGRITY_GAP": 0,
+    "SAFETY_OR_PRIVACY_GAP": 0,
+    "NEEDS_HUMAN_REVIEW": 0
+  },
+  "courses": [
+    {
+      "courseId": "ma-g3-science",
+      "title": "Grade 3 Science",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-g4-science",
+      "title": "Grade 4 Science",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-g5-science",
+      "title": "Grade 5 Science",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-g7-science",
+      "title": "Grade 7 Science",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-g8-science",
+      "title": "Grade 8 Science",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-hs10-chemistry",
+      "title": "High School Chemistry (Grade 10)",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-hs11-physics",
+      "title": "High School Physics (Grade 11)",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-hs12-earth-space-environmental",
+      "title": "High School Earth, Space, and Environmental Science (Grade 12)",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    },
+    {
+      "courseId": "ma-hs9-biology",
+      "title": "High School Biology (Grade 9)",
+      "status": "READY",
+      "ready": 108,
+      "needsHumanReview": 0,
+      "notReady": 0
+    }
+  ],
+  "notReadyLessons": [],
+  "needsHumanReviewLessons": []
+}
