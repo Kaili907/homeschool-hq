@@ -18,6 +18,7 @@ export type SecurityLifecycleSink = (
 export class SerializedLifecycleDelivery {
   readonly #sink?: SecurityLifecycleSink
   #tail: Promise<void> = Promise.resolve()
+  #queued = 0
   #failed = false
 
   constructor(sink?: SecurityLifecycleSink) {
@@ -41,6 +42,7 @@ export class SerializedLifecycleDelivery {
         // Rejection handling must itself remain contained.
       }
     }
+    this.#queued += 1
     const run = this.#tail.then(async () => {
       if (stopAfterFailure && this.#failed) {
         delivered = false
@@ -53,8 +55,12 @@ export class SerializedLifecycleDelivery {
         await rejectSafely()
       }
     })
+    // The decrement is part of the tail itself, so whenIdle() resolving always
+    // implies pending === false for a caller that observes it afterwards.
     this.#tail = run.catch(async () => {
       await rejectSafely()
+    }).then(() => {
+      this.#queued -= 1
     })
     return this.#tail.then(() => delivered)
   }
@@ -71,6 +77,15 @@ export class SerializedLifecycleDelivery {
       if (this.#failed) throw new Error('Security lifecycle delivery failed closed.')
       if (observedTail === this.#tail) return
     }
+  }
+
+  /**
+   * Synchronously true while authority-removing cleanup is still queued. A
+   * caller that cannot await — a synchronous authority factory — must refuse on
+   * this rather than await the queue, which would reopen the window it closes.
+   */
+  get pending(): boolean {
+    return this.#queued > 0
   }
 
   get failed(): boolean {

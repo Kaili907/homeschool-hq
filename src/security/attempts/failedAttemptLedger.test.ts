@@ -17,6 +17,11 @@ const P1 = parseProfileId('p1')!
 const P2 = parseProfileId('p2')!
 const HOUSEHOLD_A = '11111111-1111-4111-8111-111111111111'
 const HOUSEHOLD_B = '22222222-2222-4222-8222-222222222222'
+// Letter-bearing on purpose: lowercasing a digit-only UUID is a no-op, so the
+// existing fixtures cannot witness canonicalization at all.
+const HOUSEHOLD_HEX_LOWER = 'abcdefab-cdef-4abc-8def-abcdefabcdef'
+const HOUSEHOLD_HEX_UPPER = 'ABCDEFAB-CDEF-4ABC-8DEF-ABCDEFABCDEF'
+const HOUSEHOLD_HEX_MIXED = 'AbCdEfAb-cDeF-4AbC-8dEf-AbCdEfAbCdEf'
 
 class MemoryStorage implements SecurityStorage {
   readonly values = new Map<string, string>()
@@ -194,6 +199,13 @@ describe('failed PIN attempt ledger', () => {
     ['parent missing household', { kind: 'parent' }],
     ['parent numeric household', { kind: 'parent', householdId: 1 }],
     ['parent extra representation', { kind: 'parent', householdId: HOUSEHOLD_A, profileId: 'p1' }],
+    ['parent uppercase leading space', { kind: 'parent', householdId: ` ${HOUSEHOLD_HEX_UPPER}` }],
+    ['parent uppercase trailing space', { kind: 'parent', householdId: `${HOUSEHOLD_HEX_UPPER} ` }],
+    ['parent uppercase non-v4 version', { kind: 'parent', householdId: 'ABCDEFAB-CDEF-5ABC-8DEF-ABCDEFABCDEF' }],
+    ['parent uppercase bad variant', { kind: 'parent', householdId: 'ABCDEFAB-CDEF-4ABC-CDEF-ABCDEFABCDEF' }],
+    ['parent braced uppercase household', { kind: 'parent', householdId: `{${HOUSEHOLD_HEX_UPPER}}` }],
+    ['parent urn uppercase household', { kind: 'parent', householdId: `urn:uuid:${HOUSEHOLD_HEX_UPPER}` }],
+    ['parent uppercase extra representation', { kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER, profileId: 'p1' }],
   ] as const)(
     'rejects malformed attempt subject before every side effect: %s',
     async (_label, input) => {
@@ -228,6 +240,94 @@ describe('failed PIN attempt ledger', () => {
     const parentResults = await failureCycle(runtime.ledger, parent, runtime.advance)
     expect(parentResults[9]).toMatchObject({
       status: 'temporarily-locked',
+      remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.parent,
+    })
+  })
+
+  it('treats equivalent household UUID text as exactly one attempt identity', async () => {
+    const runtime = setup()
+    const spellings = [HOUSEHOLD_HEX_LOWER, HOUSEHOLD_HEX_UPPER, HOUSEHOLD_HEX_MIXED]
+    const results: FailedAttemptStatus[] = []
+    for (let attempt = 1; attempt <= 10; attempt += 1) {
+      const subject = {
+        kind: 'parent' as const,
+        householdId: spellings[attempt % spellings.length],
+      }
+      const result = await runtime.ledger.recordFailure(subject)
+      results.push(result)
+      if (result.status === 'cooldown') runtime.advance(result.remainingMs)
+    }
+
+    // Alternating case must not halve the effective threshold.
+    expect(results[9]).toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 10,
+      remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.parent,
+    })
+    await expect(runtime.ledger.status({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER }))
+      .resolves.toMatchObject({ status: 'temporarily-locked', failedAttempts: 10 })
+
+    // One durable counter and one coordination lock, both spelled lowercase.
+    expect([...runtime.storage.values.keys()]).toEqual([
+      `${FAILED_ATTEMPT_STORAGE_PREFIX}parent:${HOUSEHOLD_HEX_LOWER}`,
+    ])
+    expect(new Set(runtime.locks.names).size).toBe(1)
+    expect(runtime.locks.names[0]).toBe(
+      failedAttemptLockName({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER }),
+    )
+    expect(failedAttemptLockName({ kind: 'parent', householdId: HOUSEHOLD_HEX_MIXED }))
+      .toContain(`pin:parent:household:36:${HOUSEHOLD_HEX_LOWER}`)
+  })
+
+  it('clears the shared household counter through any equivalent spelling', async () => {
+    const runtime = setup()
+    await runtime.ledger.recordFailure({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER })
+    await runtime.ledger.recordFailure({ kind: 'parent', householdId: HOUSEHOLD_HEX_LOWER })
+    await expect(runtime.ledger.status({ kind: 'parent', householdId: HOUSEHOLD_HEX_MIXED }))
+      .resolves.toEqual({ status: 'ready', failedAttempts: 2 })
+
+    await runtime.ledger.recordSuccess({ kind: 'parent', householdId: HOUSEHOLD_HEX_MIXED })
+    await expect(runtime.ledger.status({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER }))
+      .resolves.toEqual({ status: 'ready', failedAttempts: 0 })
+    expect(runtime.storage.values.size).toBe(0)
+  })
+
+  it('leaves the approved Parent friction schedule unchanged', async () => {
+    expect(FAILED_ATTEMPT_POLICY).toEqual({
+      genericFailureThroughAttempt: 2,
+      cooldownMsByAttempt: {
+        3: 5_000, 4: 15_000, 5: 30_000, 6: 60_000, 7: 60_000, 8: 60_000, 9: 60_000,
+      },
+      temporaryLockAtAttempt: 10,
+      temporaryLockMs: { learner: 900_000, parent: 1_800_000 },
+    })
+    expect(Object.isFrozen(FAILED_ATTEMPT_POLICY)).toBe(true)
+    expect(Object.isFrozen(FAILED_ATTEMPT_POLICY.temporaryLockMs)).toBe(true)
+
+    const runtime = setup()
+    const results = await failureCycle(
+      runtime.ledger,
+      { kind: 'parent', householdId: HOUSEHOLD_HEX_LOWER },
+      runtime.advance,
+    )
+    expect(results.map((result) => result.status)).toEqual([
+      'ready',
+      'ready',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'temporarily-locked',
+    ])
+    expect(results.map((result) => result.status === 'cooldown' ? result.remainingMs : 0)).toEqual([
+      0, 0, 5_000, 15_000, 30_000, 60_000, 60_000, 60_000, 60_000, 0,
+    ])
+    expect(results[9]).toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 10,
       remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.parent,
     })
   })

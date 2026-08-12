@@ -898,6 +898,14 @@ describe('causeful global revocation transport', () => {
     expect(notices).toEqual(['learner-switch-start'])
     expect(runtime.lifecycleEvents).toEqual(['learner-switch-start'])
 
+    // The denied create() clears end-state bookkeeping; a later restore() must
+    // not re-deliver the terminal event the controller has already delivered.
+    await expect(runtime.session.restore())
+      .resolves.toEqual({ status: 'ended', reason: 'global-revocation' })
+    await runtime.session.whenLifecycleIdle()
+    expect(runtime.lifecycleEvents).toEqual(['learner-switch-start'])
+    expect(runtime.studyCancellations).toEqual(['learner-switch'])
+
     await runtime.session.close()
     runtime.coordinator.close()
   })
@@ -924,6 +932,13 @@ describe('causeful global revocation transport', () => {
     expect(runtime.lifecycleEvents).toEqual(['global-revocation'])
     expect(runtime.studyCancellations).toEqual(['authorization-loss'])
 
+    await expect(runtime.session.create(P1)).rejects.toThrow('exhausted')
+    await expect(runtime.session.restore())
+      .resolves.toEqual({ status: 'ended', reason: 'global-revocation' })
+    await runtime.session.whenLifecycleIdle()
+    expect(runtime.lifecycleEvents).toEqual(['global-revocation'])
+    expect(runtime.studyCancellations).toEqual(['authorization-loss'])
+
     await runtime.session.close()
     runtime.coordinator.close()
   })
@@ -942,6 +957,15 @@ describe('causeful global revocation transport', () => {
     await vi.waitFor(() => expect(notices.length).toBeGreaterThanOrEqual(1))
     await new Promise((resolve) => setTimeout(resolve, 0))
     expect(notices).toEqual(['global-revocation'])
+    expect(runtime.lifecycleEvents).toEqual(['global-revocation'])
+    expect(runtime.studyCancellations).toEqual(['authorization-loss'])
+
+    // A legacy numeric MAX carries no envelope, so notice identity can never
+    // dedupe it. Only the controller-lifetime latch can.
+    await expect(runtime.session.create(P1)).rejects.toThrow('exhausted')
+    await expect(runtime.session.restore())
+      .resolves.toEqual({ status: 'ended', reason: 'global-revocation' })
+    await runtime.session.whenLifecycleIdle()
     expect(runtime.lifecycleEvents).toEqual(['global-revocation'])
     expect(runtime.studyCancellations).toEqual(['authorization-loss'])
 
@@ -986,6 +1010,13 @@ describe('causeful global revocation transport', () => {
     expect(restored.session).toBeNull()
     expect(sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBeNull()
     expect(lifecycleEvents).toEqual(['learner-credential-reset'])
+
+    await expect(restored.create(P1)).rejects.toThrow('exhausted')
+    await expect(restored.restore())
+      .resolves.toEqual({ status: 'ended', reason: 'global-revocation' })
+    await restored.whenLifecycleIdle()
+    expect(lifecycleEvents).toEqual(['learner-credential-reset'])
+    expect(ownership.requests).toBe(0)
 
     await restored.close()
     coordinator.close()

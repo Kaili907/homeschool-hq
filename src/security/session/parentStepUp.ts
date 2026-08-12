@@ -21,6 +21,7 @@ export class ParentStepUpController {
   readonly #randomUUID?: () => string
   readonly #unsubscribeParentEnd: () => void
   #grant: ParentStepUpGrant | null = null
+  #grantAuthorityGeneration: number | null = null
   #lastObservedAt: number | null = null
 
   constructor(options: ParentStepUpControllerOptions) {
@@ -32,6 +33,7 @@ export class ParentStepUpController {
 
   issue(operationId: string): ParentStepUpGrant {
     if (!operationId || operationId.trim() !== operationId) throw new Error('Step-up operation ID is required.')
+    this.#requireSettledParentLifecycle()
     const parent = this.#parentSession.recheck()
     if (parent.status !== 'active') throw new Error('An active Parent session is required for step-up.')
     const now = requireSafeTimestamp(this.#clock)
@@ -45,14 +47,26 @@ export class ParentStepUpController {
       issuedAt: new Date(now).toISOString(),
       expiresAt: new Date(now + SECURITY_SESSION_POLICY.parentStepUp.maximumLifetimeMs).toISOString(),
     })
+    this.#grantAuthorityGeneration = this.#parentSession.authorityGeneration
     this.#lastObservedAt = now
     return this.#grant
   }
 
   consume(operationId: string): boolean {
     if (!this.#grant || !operationId) return false
+    if (
+      this.#parentSession.lifecycleDeliveryFailed ||
+      this.#parentSession.lifecycleCleanupPending
+    ) {
+      this.revoke()
+      return false
+    }
     const parent = this.#parentSession.recheck()
-    if (parent.status !== 'active' || parent.session.sessionId !== this.#grant.parentSessionId) {
+    if (
+      parent.status !== 'active' ||
+      parent.session.sessionId !== this.#grant.parentSessionId ||
+      this.#parentSession.authorityGeneration !== this.#grantAuthorityGeneration
+    ) {
       this.revoke()
       return false
     }
@@ -82,7 +96,24 @@ export class ParentStepUpController {
 
   revoke(): void {
     this.#grant = null
+    this.#grantAuthorityGeneration = null
     this.#lastObservedAt = null
+  }
+
+  /**
+   * Step-up is Parent authority, so it inherits the Parent lifecycle barrier:
+   * no grant may be minted or spent while authority-removing cleanup is in
+   * flight, and none at all once that cleanup has terminally failed.
+   */
+  #requireSettledParentLifecycle(): void {
+    if (this.#parentSession.lifecycleDeliveryFailed) {
+      this.revoke()
+      throw new Error('Parent lifecycle delivery failed closed.')
+    }
+    if (this.#parentSession.lifecycleCleanupPending) {
+      this.revoke()
+      throw new Error('Parent lifecycle cleanup is pending.')
+    }
   }
 
   close(): void {

@@ -89,12 +89,15 @@ function requireFailedAttemptSubject(value: unknown): FailedAttemptSubject {
     const profileId = parseProfileId(value.profileId)
     if (profileId) return Object.freeze({ kind: 'learner', profileId })
   }
-  if (
-    value.kind === 'parent' &&
-    hasExactKeys(value, PARENT_SUBJECT_KEYS) &&
-    isUuidV4(value.householdId)
-  ) {
-    return Object.freeze({ kind: 'parent', householdId: value.householdId })
+  if (value.kind === 'parent' && hasExactKeys(value, PARENT_SUBJECT_KEYS)) {
+    // Read once so a hostile accessor cannot pass validation and then supply
+    // different text, then canonicalize only what the unchanged UUIDv4
+    // contract already accepted. Equivalent household text must resolve to one
+    // lock, one storage key, and one counter; no version or variant rule moves.
+    const householdId = value.householdId
+    if (isUuidV4(householdId)) {
+      return Object.freeze({ kind: 'parent', householdId: householdId.toLowerCase() })
+    }
   }
   throw new Error('Attempt subject ID is invalid.')
 }

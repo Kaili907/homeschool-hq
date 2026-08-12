@@ -27,6 +27,7 @@ export type ParentSessionEndReason =
   | 'absolute-expired'
   | 'clock-anomaly'
   | 'global-revocation'
+  | 'lifecycle-failed'
 
 export type ParentSessionCheck =
   | Readonly<{ status: 'active'; session: ParentSessionRecord }>
@@ -39,7 +40,19 @@ export interface ParentSessionControllerOptions {
   readonly onLifecycleEvent?: SecurityLifecycleSink
 }
 
-/** Parent authority intentionally has no storage dependency and cannot survive refresh. */
+/**
+ * Parent authority intentionally has no storage dependency and cannot survive refresh.
+ *
+ * Every authority-ending event — parent-lock, idle/absolute expiry, clock
+ * anomaly, and the revocation causes that carry household-switch,
+ * household-sign-out, credential reset, provenance loss and global revocation —
+ * funnels through `#end`, so `#lifecycle` is the single serialized Parent
+ * lifecycle authority domain. `create` refuses while that domain is unsettled.
+ *
+ * Lock order: this controller acquires no lock of any kind. It holds no
+ * storage, no learner-session ownership lock, and no revocation lock, so its
+ * lifecycle queue is a leaf and can never participate in a cycle.
+ */
 export class ParentSessionController {
   readonly #revocation: GlobalRevocationSource
   readonly #clock: SecurityClock
@@ -50,6 +63,7 @@ export class ParentSessionController {
   #session: ParentSessionRecord | null = null
   #lastObservedAt: number | null = null
   #lastEndReason: ParentSessionEndReason = 'none'
+  #authorityGeneration = 0
 
   constructor(options: ParentSessionControllerOptions) {
     this.#revocation = options.revocation
@@ -60,6 +74,7 @@ export class ParentSessionController {
   }
 
   create(verifiedParentActorId: string, householdId: string): ParentSessionRecord {
+    this.#requireSettledLifecycle()
     if (!verifiedParentActorId || verifiedParentActorId.trim() !== verifiedParentActorId) {
       throw new Error('Verified Parent actor ID is required.')
     }
@@ -95,6 +110,7 @@ export class ParentSessionController {
     })
     this.#lastObservedAt = now
     this.#lastEndReason = 'none'
+    this.#authorityGeneration += 1
     return this.#session
   }
 
@@ -180,6 +196,32 @@ export class ParentSessionController {
     return this.#lifecycle.failed
   }
 
+  /** True while authority-removing Parent cleanup is still in flight. */
+  get lifecycleCleanupPending(): boolean {
+    return this.#lifecycle.pending
+  }
+
+  /**
+   * Monotonic per-authority counter. A step-up proves it is still current by
+   * matching this, so a replacement session cannot inherit an earlier grant
+   * even when the injected identifier source repeats a session ID.
+   */
+  get authorityGeneration(): number {
+    return this.#authorityGeneration
+  }
+
+  /**
+   * Parent authority may only be created while this controller's lifecycle
+   * domain is settled. `#end` extends the queue synchronously before its caller
+   * can yield, so an unsettled queue means prior Parent authority has not
+   * finished being withdrawn. The check is deliberately synchronous: awaiting
+   * the queue here would reopen the very window it closes.
+   */
+  #requireSettledLifecycle(): void {
+    if (this.#lifecycle.failed) throw new Error('Parent lifecycle delivery failed closed.')
+    if (this.#lifecycle.pending) throw new Error('Parent lifecycle cleanup is pending.')
+  }
+
   #end(
     reason: ParentSessionEndReason,
     emit = true,
@@ -217,11 +259,23 @@ export class ParentSessionController {
       type,
       occurredAt: new Date(timestamp).toISOString(),
     })
-    return this.#lifecycle.enqueue(event, () => {
-      this.#session = null
-      this.#lastObservedAt = null
-      this.#lastEndReason = 'global-revocation'
-    })
+    return this.#lifecycle.enqueue(
+      event,
+      () => this.#failClosedForLifecycle(),
+      undefined,
+      true,
+    )
+  }
+
+  /**
+   * Terminal fail-closed action for this controller's lifetime. The queue's own
+   * failure latch is what permanently denies replacement authority; this only
+   * clears the in-memory authority and records the accurate end reason.
+   */
+  #failClosedForLifecycle(): void {
+    this.#session = null
+    this.#lastObservedAt = null
+    this.#lastEndReason = 'lifecycle-failed'
   }
 
   async #handleRevocation(notice: GlobalRevocationNotice): Promise<void> {

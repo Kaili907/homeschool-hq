@@ -190,6 +190,8 @@ export class LearnerSessionController {
   #lastEndReason: LearnerSessionEndReason = 'none'
   #terminalRevocation: GlobalRevocationNotice | null = null
   #coveredTerminalRevocation: GlobalRevocationNotice | null = null
+  #terminalLifecycleDelivered = false
+  #pendingRelease: Promise<void> = Promise.resolve()
   #pendingAuthorityOperations = 0
   #authorityIdle: Promise<void> = Promise.resolve()
   #resolveAuthorityIdle: (() => void) | null = null
@@ -229,7 +231,7 @@ export class LearnerSessionController {
           true,
           notice ? parseCanonicalTimestamp(notice.occurredAt) ?? undefined : undefined,
           notice?.cause ?? 'global-revocation',
-          !this.#isTerminalLifecycleCovered(notice),
+          this.#claimTerminalLifecycleDelivery(notice),
         )
         await this.#lifecycle.whenIdle()
       } else {
@@ -276,7 +278,7 @@ export class LearnerSessionController {
           const notice = publishedEpoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
             ? publishedRevocation?.notice ?? null
             : null
-          if (!this.#isTerminalLifecycleCovered(notice)) {
+          if (this.#claimTerminalLifecycleDelivery(notice)) {
             await this.#emit(
               notice?.cause ?? 'global-revocation',
               notice ? parseCanonicalTimestamp(notice.occurredAt) ?? now : now,
@@ -323,7 +325,7 @@ export class LearnerSessionController {
         true,
         notice ? parseCanonicalTimestamp(notice.occurredAt) ?? undefined : undefined,
         notice?.cause ?? 'global-revocation',
-        !this.#isTerminalLifecycleCovered(notice),
+        this.#claimTerminalLifecycleDelivery(notice),
       )
       await this.#lifecycle.whenIdle()
       return this.#lifecycle.failed
@@ -365,7 +367,7 @@ export class LearnerSessionController {
           true,
           parseCanonicalTimestamp(terminal.occurredAt) ?? undefined,
           terminal.cause,
-          !this.#isTerminalLifecycleCovered(terminal),
+          this.#claimTerminalLifecycleDelivery(terminal),
         )
         await this.#lifecycle.whenIdle()
         return this.#lifecycle.failed
@@ -424,7 +426,9 @@ export class LearnerSessionController {
         true,
         occurredAt,
         exactNotice?.cause ?? 'global-revocation',
-        !this.#isTerminalLifecycleCovered(exactNotice),
+        exhausted
+          ? this.#claimTerminalLifecycleDelivery(exactNotice)
+          : !this.#isTerminalLifecycleCovered(exactNotice),
       )
     }
     if (now >= parsed.absoluteExpiresAt) return this.#end('absolute-expired', true, now)
@@ -490,6 +494,7 @@ export class LearnerSessionController {
             terminal.notice?.cause === event.type
           ) {
             this.#coveredTerminalRevocation = terminal.notice
+            this.#terminalLifecycleDelivered = true
           }
         }
       : undefined
@@ -626,6 +631,29 @@ export class LearnerSessionController {
       notice.occurredAt === covered.occurredAt
   }
 
+  /**
+   * Controller-lifetime latch: the terminal (exhausted-epoch) lifecycle event
+   * is delivered exactly once. Notice identity alone is not enough — a legacy
+   * numeric MAX carries no envelope to compare — and `#lastEndReason` is reset
+   * by `clearLocal()`, so a denied create() followed by restore() used to
+   * re-emit the same terminal event. `clearLocal()` must never clear this.
+   */
+  #claimTerminalLifecycleDelivery(notice: GlobalRevocationNotice | null | undefined): boolean {
+    const alreadyDelivered = this.#terminalLifecycleDelivered ||
+      this.#isTerminalLifecycleCovered(notice)
+    this.#terminalLifecycleDelivered = true
+    return !alreadyDelivered
+  }
+
+  /** Resolves once every scheduled ownership release has actually completed. */
+  async #whenOwnershipReleased(): Promise<void> {
+    for (;;) {
+      const pending = this.#pendingRelease
+      await pending
+      if (pending === this.#pendingRelease) return
+    }
+  }
+
   async #handleRevocation(notice: GlobalRevocationNotice): Promise<void> {
     const terminal = notice.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
     if (terminal) this.#terminalRevocation = notice
@@ -637,6 +665,7 @@ export class LearnerSessionController {
         this.#lastStorageWriteAt = null
         await this.#releaseOwnership()
         await this.#whenAuthorityIdle()
+        await this.#whenOwnershipReleased()
         await this.#lifecycle.whenIdle()
       }
       return
@@ -654,9 +683,12 @@ export class LearnerSessionController {
       true,
       occurredAt,
       notice.cause,
-      !this.#isTerminalLifecycleCovered(notice),
+      terminal
+        ? this.#claimTerminalLifecycleDelivery(notice)
+        : !this.#isTerminalLifecycleCovered(notice),
     )
     if (terminal) await this.#whenAuthorityIdle()
+    await this.#whenOwnershipReleased()
     await this.#lifecycle.whenIdle()
   }
 
@@ -682,10 +714,17 @@ export class LearnerSessionController {
     return true
   }
 
+  /**
+   * Records every release so a settlement-reporting API can wait for the Web
+   * Lock to be genuinely gone. `#end` releases without awaiting, so retaining
+   * the promise here is what keeps revocation settlement honest.
+   */
   #releaseOwnership(): Promise<void> {
     const ownership = this.#ownership
     this.#ownership = null
-    return ownership?.release().catch(() => undefined) ?? Promise.resolve()
+    const released = ownership?.release().catch(() => undefined) ?? Promise.resolve()
+    this.#pendingRelease = this.#pendingRelease.then(() => released)
+    return released
   }
 
   async #failClosedForLifecycle(): Promise<void> {
