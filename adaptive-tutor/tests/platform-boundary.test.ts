@@ -33,6 +33,7 @@ test("flags oauth, auth2, authn, and authz integration paths", () => {
     "src/OAuth2Client.ts",
     "src/oAuth2Client.ts",
     "auth2/client.ts",
+    "gapi.auth2.js",
     "hooks/useOAuth.ts",
     "src/authz.ts",
     "authn/verify.ts",
@@ -99,13 +100,16 @@ test("does not flag authorship, authoring, or authenticity words that share an a
   }
 });
 
-test("does not flag the unauthorized subject-package vocabulary this package uses", () => {
+test("does not flag prefixed authorization words this package uses in a non-authentication sense", () => {
   for (const file of [
+    "unauthorized.ts",
+    "unauthenticated.ts",
+    "reauthorization-model.md",
+    "deauthorize.ts",
     "docs/unauthorized-subject-packages.md",
     "unauthorized-subject-package-guard.ts",
     "actor-unauthorized-policy.ts",
     "unauthorized-private-read.ts",
-    "reauthorization-model.md",
   ]) {
     assert.equal(isAuthenticationIntegrationPath(file), false, file);
   }
