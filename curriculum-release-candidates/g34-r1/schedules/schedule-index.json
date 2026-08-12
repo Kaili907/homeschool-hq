@@ -1,0 +1,207 @@
+{
+  "candidate_id": "manuel-academy-grades-3-4-r1",
+  "weeks": 36,
+  "note": "One normalized schedule per course. 'provenance' records whether the lane authored a schedule or the assembly derived one from course_day order.",
+  "courses": [
+    {
+      "course_id": "ma-g3-mathematics",
+      "grade": 3,
+      "subject": "mathematics",
+      "sessions": 180,
+      "sessions_per_week": 5,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule-36-week.csv)",
+      "file": "schedules/ma-g3-mathematics.csv"
+    },
+    {
+      "course_id": "ma-g3-english-language-arts",
+      "grade": 3,
+      "subject": "english-language-arts",
+      "sessions": 180,
+      "sessions_per_week": 5,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.csv)",
+      "file": "schedules/ma-g3-english-language-arts.csv"
+    },
+    {
+      "course_id": "ma-g3-science",
+      "grade": 3,
+      "subject": "science",
+      "sessions": 108,
+      "sessions_per_week": 3,
+      "weeks_spanned": 36,
+      "provenance": "derived",
+      "file": "schedules/ma-g3-science.csv"
+    },
+    {
+      "course_id": "ma-g3-social-studies",
+      "grade": 3,
+      "subject": "social-studies",
+      "sessions": 108,
+      "sessions_per_week": 3,
+      "weeks_spanned": 36,
+      "provenance": "derived",
+      "file": "schedules/ma-g3-social-studies.csv"
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.csv)",
+      "file": "schedules/ma-g3-health.csv"
+    },
+    {
+      "course_id": "ma-g3-physical-education",
+      "grade": 3,
+      "subject": "physical-education",
+      "sessions": 108,
+      "sessions_per_week": 3,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.csv)",
+      "file": "schedules/ma-g3-physical-education.csv"
+    },
+    {
+      "course_id": "ma-g3-ready-for-life",
+      "grade": 3,
+      "subject": "ready-for-life",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (course-schedule.csv)",
+      "file": "schedules/ma-g3-ready-for-life.csv"
+    },
+    {
+      "course_id": "ma-g3-tech-cs",
+      "grade": 3,
+      "subject": "technology",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.json)",
+      "file": "schedules/ma-g3-tech-cs.csv"
+    },
+    {
+      "course_id": "ma-g3-arts-music",
+      "grade": 3,
+      "subject": "arts-and-music",
+      "sessions": 72,
+      "sessions_per_week": 2,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.json)",
+      "file": "schedules/ma-g3-arts-music.csv"
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (course-schedule.csv)",
+      "file": "schedules/ma-g3-financial-literacy.csv"
+    },
+    {
+      "course_id": "ma-g4-mathematics",
+      "grade": 4,
+      "subject": "mathematics",
+      "sessions": 180,
+      "sessions_per_week": 5,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule-36-week.csv)",
+      "file": "schedules/ma-g4-mathematics.csv"
+    },
+    {
+      "course_id": "ma-g4-english-language-arts",
+      "grade": 4,
+      "subject": "english-language-arts",
+      "sessions": 180,
+      "sessions_per_week": 5,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.csv)",
+      "file": "schedules/ma-g4-english-language-arts.csv"
+    },
+    {
+      "course_id": "ma-g4-science",
+      "grade": 4,
+      "subject": "science",
+      "sessions": 108,
+      "sessions_per_week": 3,
+      "weeks_spanned": 36,
+      "provenance": "derived",
+      "file": "schedules/ma-g4-science.csv"
+    },
+    {
+      "course_id": "ma-g4-social-studies",
+      "grade": 4,
+      "subject": "social-studies",
+      "sessions": 108,
+      "sessions_per_week": 3,
+      "weeks_spanned": 36,
+      "provenance": "derived",
+      "file": "schedules/ma-g4-social-studies.csv"
+    },
+    {
+      "course_id": "ma-g4-health",
+      "grade": 4,
+      "subject": "health",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.csv)",
+      "file": "schedules/ma-g4-health.csv"
+    },
+    {
+      "course_id": "ma-g4-physical-education",
+      "grade": 4,
+      "subject": "physical-education",
+      "sessions": 108,
+      "sessions_per_week": 3,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.csv)",
+      "file": "schedules/ma-g4-physical-education.csv"
+    },
+    {
+      "course_id": "ma-g4-ready-for-life",
+      "grade": 4,
+      "subject": "ready-for-life",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (course-schedule.csv)",
+      "file": "schedules/ma-g4-ready-for-life.csv"
+    },
+    {
+      "course_id": "ma-g4-tech-cs",
+      "grade": 4,
+      "subject": "technology",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.json)",
+      "file": "schedules/ma-g4-tech-cs.csv"
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "sessions": 72,
+      "sessions_per_week": 2,
+      "weeks_spanned": 36,
+      "provenance": "authored (schedule.json)",
+      "file": "schedules/ma-g4-arts-music.csv"
+    },
+    {
+      "course_id": "ma-g4-financial-literacy",
+      "grade": 4,
+      "subject": "financial-literacy",
+      "sessions": 36,
+      "sessions_per_week": 1,
+      "weeks_spanned": 36,
+      "provenance": "authored (course-schedule.csv)",
+      "file": "schedules/ma-g4-financial-literacy.csv"
+    }
+  ]
+}

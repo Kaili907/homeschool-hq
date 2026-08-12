@@ -1,0 +1,450 @@
+{
+  "course_id": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "practice_sets": [
+    {
+      "practice_id": "ma-g4-mathematics-u01-practice",
+      "unit_id": "ma-g4-mathematics-u01",
+      "unit_number": 1,
+      "unit_title": "Mathematical Habits and Place Value to One Million",
+      "fluency_practice": {
+        "target": "Read, write, compare, and round multi-digit whole numbers through the hundred thousands.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "place value to 1,000",
+          "rounding to the nearest ten and hundred",
+          "reading three-digit numbers"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u02-practice",
+      "unit_id": "ma-g4-mathematics-u02",
+      "unit_number": 2,
+      "unit_title": "Multi-Digit Addition and Subtraction",
+      "fluency_practice": {
+        "target": "Fluently add and subtract multi-digit whole numbers using the standard algorithm.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          1
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "addition and subtraction within 1,000",
+          "place value to one million",
+          "rounding to any place"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u03-practice",
+      "unit_id": "ma-g4-mathematics-u03",
+      "unit_number": 3,
+      "unit_title": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+      "fluency_practice": {
+        "target": "Find all factor pairs for whole numbers 1 to 100 and determine whether a number is prime or composite.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          1,
+          2
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "multiplication and division within 100",
+          "arrays",
+          "meanings of the operations"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u04-practice",
+      "unit_id": "ma-g4-mathematics-u04",
+      "unit_number": 4,
+      "unit_title": "Multi-Digit Multiplication with Area Models and Partial Products",
+      "fluency_practice": {
+        "target": "Multiply a whole number of up to four digits by a one-digit number, and multiply two two-digit numbers, using place-value strategies.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          1,
+          2,
+          3
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "multiplication facts within 100",
+          "place value to one million",
+          "the distributive property"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u05-practice",
+      "unit_id": "ma-g4-mathematics-u05",
+      "unit_number": 5,
+      "unit_title": "Division with Remainders",
+      "fluency_practice": {
+        "target": "Find whole-number quotients and remainders with up to four-digit dividends and one-digit divisors.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          2,
+          3,
+          4
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "multiplication facts and multi-digit multiplication",
+          "place value",
+          "meanings of division"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u06-practice",
+      "unit_id": "ma-g4-mathematics-u06",
+      "unit_number": 6,
+      "unit_title": "Fraction Equivalence and Comparison",
+      "fluency_practice": {
+        "target": "Generate equivalent fractions and compare two fractions with different numerators and denominators (denominators 2, 3, 4, 5, 6, 8, 10, 12, and 100).",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          3,
+          4,
+          5
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "fractions as numbers",
+          "unit fractions",
+          "comparing fractions with like denominators or like numerators"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u07-practice",
+      "unit_id": "ma-g4-mathematics-u07",
+      "unit_number": 7,
+      "unit_title": "Adding, Subtracting, and Multiplying Fractions",
+      "fluency_practice": {
+        "target": "Add and subtract fractions and mixed numbers with like denominators, and multiply a fraction by a whole number.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          4,
+          5,
+          6
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "fraction equivalence",
+          "unit fractions",
+          "multiplication facts"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u08-practice",
+      "unit_id": "ma-g4-mathematics-u08",
+      "unit_number": 8,
+      "unit_title": "Decimal Notation and Fraction-Decimal Connections",
+      "fluency_practice": {
+        "target": "Write fractions with denominators 10 and 100 in decimal notation and compare two decimals to hundredths.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          5,
+          6,
+          7
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "fraction equivalence",
+          "place value",
+          "comparing fractions"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u09-practice",
+      "unit_id": "ma-g4-mathematics-u09",
+      "unit_number": 9,
+      "unit_title": "Measurement, Conversion, and Data",
+      "fluency_practice": {
+        "target": "Convert measurements from a larger unit to a smaller unit within one system, and apply area and perimeter formulas for rectangles.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          6,
+          7,
+          8
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "multiplication and division",
+          "fraction operations",
+          "area and perimeter of rectangles from Grade 3"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    },
+    {
+      "practice_id": "ma-g4-mathematics-u10-practice",
+      "unit_id": "ma-g4-mathematics-u10",
+      "unit_number": 10,
+      "unit_title": "Angles, Geometry, and Integrated Capstone",
+      "fluency_practice": {
+        "target": "Measure and sketch angles in whole-number degrees, classify two-dimensional figures, and identify lines of symmetry.",
+        "scheduled_day_in_unit": 9,
+        "format": "Short mixed set, 8 to 12 items.",
+        "timing_policy": "Untimed by default. Timers stay hidden or off. Speed is never scored and is never reported to a parent or guardian as a result.",
+        "stop_rule": "Stop the set early if accuracy drops below roughly half; that is a signal to reteach, not to continue practicing an error."
+      },
+      "retrieval_practice": {
+        "scheduled_days_in_unit": [
+          9,
+          15
+        ],
+        "spaced_review_units": [
+          7,
+          8,
+          9
+        ],
+        "format": "Two or three items from each listed earlier unit, mixed with current-unit items.",
+        "purpose": "Spacing and interleaving build durable retrieval; this is not a graded quiz."
+      },
+      "application_practice": {
+        "scheduled_days_in_unit": [
+          11,
+          18
+        ],
+        "format": "One or two multi-step problems set in a realistic situation.",
+        "requirement": "The learner records the model or process, not only the answer."
+      },
+      "prerequisite_practice": {
+        "available": true,
+        "targets": [
+          "quadrilateral categories from Grade 3",
+          "measurement",
+          "addition and subtraction"
+        ],
+        "note": "Assign only when a gap is observed. Do not pre-assign as a default workload."
+      },
+      "accessibility": "Quantity may be reduced without changing the target. Any item may be answered orally, in writing, by drawing, or by building with objects.",
+      "no_media_path": "All practice is text and object based. No image, audio, or video is required."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "package_id": "manuel-academy-grades-3-4-curriculum-v1",
+  "status": "planned",
+  "generated_on": "2026-08-12",
+  "note": "Authoritative 20-course matrix for the Grades 3/4 release. Subject lanes create subjects/<subject>/** independently; this file is not updated by subject lanes — the release convergence session reconciles matrix vs. actual authored content and updates unit_count/lesson_count from what lanes report.",
+  "grades": [3, 4],
+  "school_year": {
+    "weeks": 36,
+    "instructional_days": 180
+  },
+  "subjects": [
+    "mathematics",
+    "english-language-arts",
+    "science",
+    "social-studies",
+    "health",
+    "physical-education",
+    "ready-for-life",
+    "technology-computer-science",
+    "arts-music",
+    "financial-literacy"
+  ],
+  "counts": {
+    "grades": 2,
+    "courses_per_grade": 10,
+    "courses_total": 20,
+    "units_total": null,
+    "lessons_total": null,
+    "note": "unit/lesson totals are null until subject lanes report them; see release-contract.md"
+  },
+  "courses": [
+    { "course_id": "ma-g3-mathematics", "grade": 3, "subject": "mathematics", "title": "Grade 3 Mathematics", "days": 180, "standards_ref": "standards-reference.md#mathematics", "path": "subjects/mathematics/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-english-language-arts", "grade": 3, "subject": "english-language-arts", "title": "Grade 3 English Language Arts", "days": 180, "standards_ref": "standards-reference.md#english-language-arts", "path": "subjects/english-language-arts/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-science", "grade": 3, "subject": "science", "title": "Grade 3 Science", "days": 180, "standards_ref": "standards-reference.md#science", "path": "subjects/science/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-social-studies", "grade": 3, "subject": "social-studies", "title": "Grade 3 Social Studies", "days": 180, "standards_ref": "standards-reference.md#social-studies", "path": "subjects/social-studies/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-health", "grade": 3, "subject": "health", "title": "Grade 3 Health", "days": 180, "standards_ref": "standards-reference.md#health-education", "path": "subjects/health/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-physical-education", "grade": 3, "subject": "physical-education", "title": "Grade 3 Physical Education", "days": 180, "standards_ref": "standards-reference.md#physical-education", "path": "subjects/physical-education/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-ready-for-life", "grade": 3, "subject": "ready-for-life", "title": "Grade 3 Ready for Life", "days": 180, "standards_ref": "standards-reference.md#ready-for-life", "path": "subjects/ready-for-life/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-technology-computer-science", "grade": 3, "subject": "technology-computer-science", "title": "Grade 3 Technology & Computer Science", "days": 180, "standards_ref": "standards-reference.md#technology--computer-science", "path": "subjects/technology-computer-science/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-arts-music", "grade": 3, "subject": "arts-music", "title": "Grade 3 Arts & Music", "days": 180, "standards_ref": "standards-reference.md#arts--music", "path": "subjects/arts-music/grade-3/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g3-financial-literacy", "grade": 3, "subject": "financial-literacy", "title": "Grade 3 Financial Literacy", "days": 180, "standards_ref": "standards-reference.md#financial-literacy", "path": "subjects/financial-literacy/grade-3/", "unit_count": null, "lesson_count": null, "note": "No dedicated Michigan standard for this grade band — see standards-reference.md Gap 1" },
+
+    { "course_id": "ma-g4-mathematics", "grade": 4, "subject": "mathematics", "title": "Grade 4 Mathematics", "days": 180, "standards_ref": "standards-reference.md#mathematics", "path": "subjects/mathematics/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-english-language-arts", "grade": 4, "subject": "english-language-arts", "title": "Grade 4 English Language Arts", "days": 180, "standards_ref": "standards-reference.md#english-language-arts", "path": "subjects/english-language-arts/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-science", "grade": 4, "subject": "science", "title": "Grade 4 Science", "days": 180, "standards_ref": "standards-reference.md#science", "path": "subjects/science/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-social-studies", "grade": 4, "subject": "social-studies", "title": "Grade 4 Social Studies", "days": 180, "standards_ref": "standards-reference.md#social-studies", "path": "subjects/social-studies/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-health", "grade": 4, "subject": "health", "title": "Grade 4 Health", "days": 180, "standards_ref": "standards-reference.md#health-education", "path": "subjects/health/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-physical-education", "grade": 4, "subject": "physical-education", "title": "Grade 4 Physical Education", "days": 180, "standards_ref": "standards-reference.md#physical-education", "path": "subjects/physical-education/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-ready-for-life", "grade": 4, "subject": "ready-for-life", "title": "Grade 4 Ready for Life", "days": 180, "standards_ref": "standards-reference.md#ready-for-life", "path": "subjects/ready-for-life/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-technology-computer-science", "grade": 4, "subject": "technology-computer-science", "title": "Grade 4 Technology & Computer Science", "days": 180, "standards_ref": "standards-reference.md#technology--computer-science", "path": "subjects/technology-computer-science/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-arts-music", "grade": 4, "subject": "arts-music", "title": "Grade 4 Arts & Music", "days": 180, "standards_ref": "standards-reference.md#arts--music", "path": "subjects/arts-music/grade-4/", "unit_count": null, "lesson_count": null },
+    { "course_id": "ma-g4-financial-literacy", "grade": 4, "subject": "financial-literacy", "title": "Grade 4 Financial Literacy", "days": 180, "standards_ref": "standards-reference.md#financial-literacy", "path": "subjects/financial-literacy/grade-4/", "unit_count": null, "lesson_count": null, "note": "No dedicated Michigan standard for this grade band — see standards-reference.md Gap 1" }
+  ]
+}

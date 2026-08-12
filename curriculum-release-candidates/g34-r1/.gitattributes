@@ -1,0 +1,3 @@
+# Preserve the release candidate byte-for-byte across platforms, so SHA256SUMS.txt
+# stays valid on checkout. Mirrors the guard the sealed curriculum-content/ release uses.
+** -text

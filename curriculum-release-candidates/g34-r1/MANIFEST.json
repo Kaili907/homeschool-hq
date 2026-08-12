@@ -1,0 +1,210 @@
+{
+  "candidate_id": "manuel-academy-grades-3-4-r1",
+  "status": "GRADE34_ASSEMBLY_READY",
+  "assembled_on": "2026-08-12",
+  "supersedes": null,
+  "preserves": {
+    "package": "curriculum-content/manuel-academy/1.0.0",
+    "note": "The sealed Grades 5/7/8 release keeps its own identity, version, counts, and checksums. This candidate is a separate tree and modifies nothing under curriculum-content/."
+  },
+  "grades": [
+    3,
+    4
+  ],
+  "school_year": {
+    "weeks": 36,
+    "instructional_days": 180
+  },
+  "subjects": [
+    "mathematics",
+    "english-language-arts",
+    "science",
+    "social-studies",
+    "health",
+    "physical-education",
+    "ready-for-life",
+    "technology",
+    "arts-and-music",
+    "financial-literacy"
+  ],
+  "counts": {
+    "grades": 2,
+    "courses": 20,
+    "units": 154,
+    "lessons": 1800,
+    "assessments": 154,
+    "scheduled_sessions": 1800,
+    "per_grade": {
+      "3": {
+        "courses": 10,
+        "units": 77,
+        "lessons": 900
+      },
+      "4": {
+        "courses": 10,
+        "units": 77,
+        "lessons": 900
+      }
+    },
+    "per_course": {
+      "ma-g3-mathematics": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g3-english-language-arts": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g3-science": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g3-social-studies": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g3-health": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g3-physical-education": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g3-ready-for-life": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g3-tech-cs": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g3-arts-music": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "ma-g3-financial-literacy": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-mathematics": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g4-english-language-arts": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "ma-g4-science": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g4-social-studies": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g4-health": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-physical-education": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "ma-g4-ready-for-life": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-tech-cs": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "ma-g4-arts-music": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "ma-g4-financial-literacy": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      }
+    }
+  },
+  "entry_points": {
+    "course_index": "course-index.json",
+    "unit_index": "unit-index.json",
+    "lesson_index": "lesson-index.csv",
+    "schedule_index": "schedules/schedule-index.json",
+    "lesson_schema_candidate": "schemas/lesson.schema.candidate.json",
+    "validation": "validation/validation.json",
+    "standards_custody": "standards/standards-custody-report.md",
+    "source_ledger": "ledger/source-branches.json",
+    "checksums": "SHA256SUMS.txt"
+  },
+  "course_status": {
+    "ma-g3-mathematics": "CANDIDATE_READY",
+    "ma-g3-english-language-arts": "CANDIDATE_READY",
+    "ma-g3-science": "CANDIDATE_READY",
+    "ma-g3-social-studies": "CANDIDATE_READY",
+    "ma-g3-health": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g3-physical-education": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g3-ready-for-life": "CANDIDATE_READY",
+    "ma-g3-tech-cs": "CANDIDATE_READY",
+    "ma-g3-arts-music": "CANDIDATE_READY",
+    "ma-g3-financial-literacy": "CANDIDATE_READY",
+    "ma-g4-mathematics": "CANDIDATE_READY",
+    "ma-g4-english-language-arts": "CANDIDATE_READY",
+    "ma-g4-science": "CANDIDATE_READY",
+    "ma-g4-social-studies": "CANDIDATE_READY",
+    "ma-g4-health": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g4-physical-education": "PENDING_FINAL_HEALTH_REVIEW",
+    "ma-g4-ready-for-life": "CANDIDATE_READY",
+    "ma-g4-tech-cs": "CANDIDATE_READY",
+    "ma-g4-arts-music": "CANDIDATE_READY",
+    "ma-g4-financial-literacy": "CANDIDATE_READY"
+  },
+  "boundaries": {
+    "owns": "curriculum-release-candidates/g34-r1/**",
+    "does_not_modify": [
+      "curriculum-content/manuel-academy/1.0.0/**",
+      "curriculum-authoring/full-family-grade34/**",
+      "src/**",
+      "scripts/**"
+    ],
+    "not_yet_wired": [
+      "AcademyGrade in src/types.ts",
+      "PILOT_GRADES in src/curriculum/family-pilot/source.node.ts",
+      "EXPECTED counts in scripts/build-curriculum.mjs",
+      "a published release version for grades 3/4"
+    ]
+  },
+  "validation": {
+    "assembly_integrity": "PASS",
+    "release_contract_conformance": "FAIL",
+    "failed_contract_checks": [
+      "lesson-schema-compatibility",
+      "required-standards-and-objectives"
+    ],
+    "failed_assembly_checks": [],
+    "note": "Assembly integrity is this session's deliverable and passes. The release-contract failures are a property of the authored content (standards emitted as strings, and a release schema whose subject enum and schema_version const do not match what the lanes authored), not of the assembly. They must be resolved before promotion - see standards/standards-custody-report.md."
+  }
+}

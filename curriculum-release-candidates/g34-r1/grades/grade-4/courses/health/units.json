@@ -1,0 +1,641 @@
+[
+  {
+    "unit_id": "ma-g4-health-u01",
+    "course_id": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "unit_number": 1,
+    "title": "How My Body Works and Stays Well",
+    "days": 6,
+    "standards": [
+      "Michigan Health Practice 3: Information and Resource Seeking",
+      "Michigan Health Practice 5: Self-Management and Goal Setting",
+      "Michigan Health Topic (Grades 3-5): Personal Health and Wellness"
+    ],
+    "essential_question": "How do my body systems and my daily habits work together to keep me well?",
+    "topics": [
+      "body systems working together",
+      "germs and how illness spreads",
+      "handwashing and respiratory etiquette",
+      "dental and skin care",
+      "sleep quality and routines",
+      "checkups and staying well"
+    ],
+    "topic_content": [
+      {
+        "name": "body systems working together",
+        "key_points": [
+          "Systems cooperate: the respiratory system takes in oxygen, the circulatory system carries it, and muscles use it.",
+          "The digestive system breaks food into fuel the blood can deliver.",
+          "The skeleton supports and protects; the skin is the first barrier against germs.",
+          "Because systems are connected, a habit like sleep or hydration affects several at once."
+        ],
+        "scenario": "Running upstairs leaves you breathing hard with a fast heartbeat. Which systems are responding, and why do both change together?"
+      },
+      {
+        "name": "germs and how illness spreads",
+        "key_points": [
+          "Bacteria and viruses are different: antibiotics work on bacteria and do nothing to viruses.",
+          "Germs spread by droplets from coughs and sneezes, by direct contact, by contaminated surfaces, and through food and water.",
+          "Someone can pass on an illness before they feel ill themselves.",
+          "Breaking one link in the chain — washing, covering, staying home, cleaning surfaces — stops the spread."
+        ],
+        "scenario": "One person in a class has a stomach bug on Monday and six do by Friday. Trace the likely routes and name the two changes that would help most."
+      },
+      {
+        "name": "handwashing and respiratory etiquette",
+        "key_points": [
+          "Soap works by breaking up the outer layer of many germs, which is why scrubbing beats a quick rinse.",
+          "Twenty seconds, covering palms, backs, between fingers, thumbs, and nails.",
+          "Sanitiser is a stand-in when soap is unavailable, and does not work well on visibly dirty hands.",
+          "Cough or sneeze into your elbow or a tissue, bin the tissue, then wash."
+        ],
+        "scenario": "Someone rinses their hands with water for three seconds and says they washed. Explain, using how soap works, why that is not enough."
+      },
+      {
+        "name": "dental and skin care",
+        "key_points": [
+          "Brush twice daily for two minutes with fluoride toothpaste, and clean between teeth.",
+          "Plaque is a bacterial film; left alone it causes decay and gum disease.",
+          "Skin needs washing, sun protection, and clean cuts covered to keep germs out.",
+          "Adult teeth are permanent, so damage now lasts."
+        ],
+        "scenario": "A friend brushes once a day and never cleans between their teeth, and their gums bleed. Explain what is likely happening and what to change."
+      },
+      {
+        "name": "sleep quality and routines",
+        "key_points": [
+          "Around 9 to 12 hours a night is typical at this age.",
+          "Sleep consolidates memory and learning, and supports mood, growth, and immunity.",
+          "Blue light and stimulating content near bedtime delay falling asleep.",
+          "A consistent schedule works better than catching up at weekends."
+        ],
+        "scenario": "Someone sleeps five hours on school nights and twelve on Saturday, and still feels tired. Explain why the weekend does not fix it."
+      },
+      {
+        "name": "checkups and staying well",
+        "key_points": [
+          "Routine checkups find problems early, before they are felt.",
+          "Vaccines teach the immune system to recognise a germ safely in advance, which protects the person and people who cannot be vaccinated.",
+          "Bring questions to appointments; you are allowed to ask about your own body.",
+          "Medical decisions are made by guardians and health professionals, not by children or by the internet."
+        ],
+        "scenario": "A friend says checkups are pointless when you feel fine. Give two reasons that is not right."
+      }
+    ],
+    "home_connection": "With a guardian, find out where the household keeps its first-aid supplies and the doctor or clinic contact details.",
+    "performance_task": "Design a prevention routine that explains what each step protects, why it works, and when adult or professional help is needed.",
+    "adapted_alternative": "Diagrams may be replaced with text descriptions, tactile models, or spoken explanation. Any routine step a learner cannot perform independently is planned as an adult-supported step, which counts fully.",
+    "guardian_safety_review": {
+      "equipment": "Household hygiene items only. No medical device, thermometer reading, or body measurement is used.",
+      "environment": "Indoor home or classroom setting.",
+      "movement_hazards": "None expected.",
+      "food_or_allergy_note": "Check soap, sanitizer, and dental products against any known allergy before use.",
+      "guardian_confirmation_required": false
+    },
+    "lesson_ids": [
+      "ma-g4-health-u01-l01",
+      "ma-g4-health-u01-l02",
+      "ma-g4-health-u01-l03",
+      "ma-g4-health-u01-l04",
+      "ma-g4-health-u01-l05",
+      "ma-g4-health-u01-l06"
+    ],
+    "assessment_id": "ma-g4-health-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g4-health-u02",
+    "course_id": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "unit_number": 2,
+    "title": "Balanced Eating, Hydration, and Active Living",
+    "days": 6,
+    "standards": [
+      "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+      "Michigan Health Practice 5: Self-Management and Goal Setting",
+      "Michigan Health Topic (Grades 3-5): Balanced Eating and Physical Activity"
+    ],
+    "essential_question": "How can I plan food, water, and movement in a way that fits my body, my day, and my family?",
+    "topics": [
+      "what different foods do for the body",
+      "food allergies and cross-contact safety",
+      "media messages about food and bodies",
+      "building balanced meals and snacks",
+      "hydration through the day",
+      "reading a simple food label"
+    ],
+    "topic_content": [
+      {
+        "name": "what different foods do for the body",
+        "key_points": [
+          "Carbohydrates are the body's main everyday fuel, including for the brain.",
+          "Protein builds and repairs muscle, skin, and blood.",
+          "Fats support the brain and help absorb some vitamins; the body needs them.",
+          "Fruit and vegetables supply vitamins, minerals, and fibre that keep digestion working.",
+          "No single food does everything, which is why range matters more than any one item."
+        ],
+        "scenario": "A lunch is bread, butter, cheese, and an apple. Which jobs are covered? What could be added without calling the lunch bad?"
+      },
+      {
+        "name": "food allergies and cross-contact safety",
+        "key_points": [
+          "An allergy is an immune reaction; an intolerance is a digestive one, and allergies can be life-threatening.",
+          "Cross-contact is when a trace transfers by a shared knife, board, toaster, or unwashed hand — a trace is enough.",
+          "Labels must flag major allergens; \"may contain\" means a real risk.",
+          "Signs needing an adult immediately: swelling of lips, face or throat, widespread rash, wheezing, or difficulty breathing.",
+          "Never talk someone into eating something they have said they cannot eat."
+        ],
+        "scenario": "A peanut-butter knife was rinsed and used for jam on a friend's sandwich. The friend is allergic to peanuts. Is that safe? Explain what should have happened."
+      },
+      {
+        "name": "media messages about food and bodies",
+        "key_points": [
+          "Adverts, influencers, and filters present altered images, not real bodies.",
+          "Bodies genuinely differ in size and shape, and healthy comes in many of them.",
+          "Claims that a food is \"clean\", \"guilt-free\", or \"bad\" are marketing, not nutrition.",
+          "Content that makes you feel worse about your body is worth unfollowing; talk to a trusted adult if it keeps happening."
+        ],
+        "scenario": "A post promises a snack that will \"fix your body in two weeks\" and shows a before-and-after photo. Name three reasons to distrust it."
+      },
+      {
+        "name": "building balanced meals and snacks",
+        "key_points": [
+          "A workable pattern: half the plate fruit and vegetables, a quarter grains, a quarter protein, plus dairy or an alternative.",
+          "Pairing carbohydrate with protein tends to keep energy steadier than carbohydrate alone.",
+          "Snacks are a normal part of the day at this age.",
+          "Plans have to survive real life: budget, time, and what is actually in the house."
+        ],
+        "scenario": "Redesign a snack of crackers alone so it lasts longer through an afternoon, using only cupboard staples."
+      },
+      {
+        "name": "hydration through the day",
+        "key_points": [
+          "Water carries nutrients, controls temperature, and cushions joints.",
+          "Pale straw-coloured urine suggests you are drinking enough; dark yellow suggests not.",
+          "Needs rise with heat, illness, and activity.",
+          "Sugary and caffeinated drinks are not everyday hydration."
+        ],
+        "scenario": "Someone drinks only at meals, plays sport at midday in summer, and gets afternoon headaches. Suggest a plan."
+      },
+      {
+        "name": "reading a simple food label",
+        "key_points": [
+          "Ingredients are listed by weight, so the first few make up most of the product.",
+          "The allergen information is usually emphasised in bold or a separate statement.",
+          "Serving size matters: the numbers on the label describe one serving, not the whole pack.",
+          "A label describes what is in a food; it does not tell you whether the food is allowed or forbidden."
+        ],
+        "scenario": "On one label sugar is the second ingredient and the pack holds four servings. What does that tell you, and what does it not tell you?"
+      }
+    ],
+    "home_connection": "With a guardian, look at one food label from the cupboard and find the ingredients list and any allergen warning.",
+    "performance_task": "Build a week of flexible meal, snack, hydration, and movement options with substitutions for allergies, preferences, culture, and budget. No calorie counting, dieting, weight goal, or body measurement is used.",
+    "adapted_alternative": "Planning may use pictures, dictation, sorting cards, or a spoken walkthrough. Learners with allergies, medical diets, religious or cultural food practices, or limited food access plan with the foods actually available to them, and any example may be substituted.",
+    "guardian_safety_review": {
+      "equipment": "Clean, empty food packaging or printed labels. No cooking with heat is required.",
+      "environment": "Kitchen or table setting with an adult present for any food handling.",
+      "movement_hazards": "Active-living examples only; the learner chooses intensity and may rest at any point.",
+      "food_or_allergy_note": "Guardian confirms every food example, label, and any handling against household allergies, intolerances, medical diets, and dietary practices. No tasting is required to complete any lesson.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g4-health-u02-l01",
+      "ma-g4-health-u02-l02",
+      "ma-g4-health-u02-l03",
+      "ma-g4-health-u02-l04",
+      "ma-g4-health-u02-l05",
+      "ma-g4-health-u02-l06"
+    ],
+    "assessment_id": "ma-g4-health-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g4-health-u03",
+    "course_id": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "unit_number": 3,
+    "title": "Emotional Health and Managing Stress",
+    "days": 6,
+    "standards": [
+      "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+      "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+      "Michigan Health Topic (Grades 3-5): Mental and Emotional Health"
+    ],
+    "essential_question": "How can I manage strong feelings and know when to reach for support?",
+    "topics": [
+      "emotion vocabulary and intensity",
+      "help-seeking and trusted supports",
+      "stress signals and triggers",
+      "change, loss, and difficult feelings",
+      "coping and regulation strategies",
+      "self-talk and mindset"
+    ],
+    "topic_content": [
+      {
+        "name": "emotion vocabulary and intensity",
+        "key_points": [
+          "Precise words give better options: disappointed, overwhelmed, resentful, anxious, relieved, content.",
+          "Intensity matters — irritated, angry, and furious call for different responses.",
+          "Two feelings can be present at once, such as excited and nervous.",
+          "Naming a feeling accurately tends to reduce its intensity."
+        ],
+        "scenario": "Someone says only \"I am fine\" while slamming doors. Offer three more accurate words and say what each would suggest doing."
+      },
+      {
+        "name": "help-seeking and trusted supports",
+        "key_points": [
+          "Reaching out is a skill, not a weakness or a failure.",
+          "Build a support list: guardians, a relative, a teacher, a coach, a school counsellor or nurse.",
+          "Get help promptly when a feeling stops you eating, sleeping, or going out, when it lasts for weeks, or when anyone talks about harming themselves.",
+          "If someone mentions hurting themselves, tell a trusted adult immediately — that is never a secret to keep.",
+          "If the first adult does not respond, keep telling until someone acts."
+        ],
+        "scenario": "A friend says they feel hopeless and asks you to promise not to tell. What do you do, and what do you say to your friend?"
+      },
+      {
+        "name": "stress signals and triggers",
+        "key_points": [
+          "Stress shows up in the body — headaches, stomach aches, tight muscles, disturbed sleep.",
+          "It shows up in behaviour too — snapping, avoiding, rushing, or going quiet.",
+          "A trigger is the situation that sets it off; noticing patterns lets you plan ahead.",
+          "Some stress before a challenge is normal and can help you focus."
+        ],
+        "scenario": "Every Sunday evening one learner gets a stomach ache that clears by Monday afternoon. What might the trigger be, and how could you check?"
+      },
+      {
+        "name": "change, loss, and difficult feelings",
+        "key_points": [
+          "Moving, a family change, or the death of a person or pet all bring grief, and grief is not an illness.",
+          "Grief arrives in waves rather than in tidy stages, and there is no correct timetable.",
+          "Routines, talking, and remembering all help; so does being allowed to feel bad for a while.",
+          "A trusted adult should know when a hard feeling is not easing."
+        ],
+        "scenario": "A classmate's dog died two weeks ago and they were laughing yesterday but tearful today. Is that normal? What could a friend say?"
+      },
+      {
+        "name": "coping and regulation strategies",
+        "key_points": [
+          "Slow breathing with a longer out-breath lowers the body's alarm response.",
+          "Grounding by naming what you can see, hear, and touch brings attention back to the present.",
+          "Movement, water, daylight, and sleep are underrated regulators.",
+          "Match the strategy to the setting — some work in a classroom, some only at home.",
+          "Strategies work better when practised before you need them."
+        ],
+        "scenario": "Build a toolkit for someone who gets overwhelmed in noisy places and cannot leave the room. What actually fits that constraint?"
+      },
+      {
+        "name": "self-talk and mindset",
+        "key_points": [
+          "Self-talk is the running commentary in your head, and it can be checked for accuracy.",
+          "\"I cannot do this\" becomes \"I cannot do this yet\", which describes the situation more truthfully.",
+          "Mistakes are information about the method, not verdicts about the person.",
+          "Speak to yourself the way you would speak to a friend in the same position."
+        ],
+        "scenario": "After a hard test someone thinks \"I am useless at maths.\" Rewrite that thought so it is both kinder and more accurate."
+      }
+    ],
+    "home_connection": "With a guardian, agree one signal you can use at home that means \"I need a few minutes\".",
+    "performance_task": "Build a coping-strategy toolkit matched to different fictional stress scenarios, plus a help-seeking plan. Private reflection is never required to be shared or stored.",
+    "adapted_alternative": "Coping strategies may be movement-based, still, sensory, verbal, or silent, and each learner selects strategies their body and setting allow. Scenario responses may be pointed to, chosen from options, drawn, spoken, or written.",
+    "guardian_safety_review": {
+      "equipment": "None.",
+      "environment": "Quiet indoor space with a break space available.",
+      "movement_hazards": "None expected.",
+      "food_or_allergy_note": null,
+      "guardian_confirmation_required": false
+    },
+    "lesson_ids": [
+      "ma-g4-health-u03-l01",
+      "ma-g4-health-u03-l02",
+      "ma-g4-health-u03-l03",
+      "ma-g4-health-u03-l04",
+      "ma-g4-health-u03-l05",
+      "ma-g4-health-u03-l06"
+    ],
+    "assessment_id": "ma-g4-health-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g4-health-u04",
+    "course_id": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "unit_number": 4,
+    "title": "Relationships, Boundaries, and Conflict Repair",
+    "days": 6,
+    "standards": [
+      "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+      "Michigan Health Practice 6: Advocacy and Health Promotion",
+      "Michigan Health Topic (Grades 3-5): Healthy Relationships"
+    ],
+    "essential_question": "How do I speak up for myself, respect others, and repair a relationship after conflict?",
+    "topics": [
+      "assertive, respectful communication",
+      "body autonomy, consent, and unsafe requests",
+      "listening and perspective-taking",
+      "conflict resolution and repair",
+      "bullying and cyberbullying response",
+      "inclusion and respect for differences"
+    ],
+    "topic_content": [
+      {
+        "name": "assertive, respectful communication",
+        "key_points": [
+          "Passive gives in, aggressive attacks, assertive states your need and respects theirs.",
+          "A clear frame: \"When ___ happens, I feel ___, and I would like ___.\"",
+          "Tone, volume, and body language carry as much as the words.",
+          "Being assertive does not guarantee you get what you want; it makes being understood far more likely."
+        ],
+        "scenario": "A friend keeps borrowing things without asking. Write a passive, an aggressive, and an assertive version, and say why the third is better."
+      },
+      {
+        "name": "body autonomy, consent, and unsafe requests",
+        "key_points": [
+          "Your body belongs to you; you decide about hugs, tickling, and touch, including with family.",
+          "The parts covered by a swimsuit are private. Use correct anatomical names — they make you easier to understand and to believe.",
+          "No one should touch, look at, photograph, or ask to see your private parts, except a doctor or nurse checking your health with your guardian present, or a carer helping you when you need help.",
+          "Unsafe requests most often come from someone already known and trusted, not from a stranger — so the rule applies to everyone.",
+          "Bribes, threats, and \"this is our secret\" are warning signs.",
+          "If it happens it is never your fault, whatever you did, accepted, or agreed to earlier. Tell a trusted adult and keep telling until someone helps."
+        ],
+        "scenario": "An adult a family knows well asks Sam to sit on their lap and keep it \"just between us.\" Name every warning sign, and say exactly what Sam should do."
+      },
+      {
+        "name": "listening and perspective-taking",
+        "key_points": [
+          "Active listening: face the person, let them finish, then summarise before replying.",
+          "Two people can experience the same event differently and both be reporting honestly.",
+          "Asking a genuine question beats assuming a motive.",
+          "Understanding someone is not the same as agreeing with them."
+        ],
+        "scenario": "Two friends give opposite accounts of an argument. How would you find out more without deciding who is lying?"
+      },
+      {
+        "name": "conflict resolution and repair",
+        "key_points": [
+          "Cool down first — nothing useful gets settled mid-anger.",
+          "State the problem as a behaviour, not as a character flaw.",
+          "Look for a solution both can live with, not for a winner.",
+          "A real repair names the specific action, apologises for it, and changes something afterwards."
+        ],
+        "scenario": "Two friends both think the other started it and neither will speak. Write the first three steps towards repair."
+      },
+      {
+        "name": "bullying and cyberbullying response",
+        "key_points": [
+          "Bullying is deliberate, repeated, and directed at someone struggling to stop it.",
+          "Cyberbullying follows people home, spreads fast, and leaves a record.",
+          "Keep the evidence, do not retaliate, block and report, and tell a trusted adult.",
+          "Bystanders shift outcomes by refusing to join in, supporting the person afterwards, and reporting."
+        ],
+        "scenario": "A group chat is sharing an unkind edited photo of a classmate. List what you do, in order, and what you do not do."
+      },
+      {
+        "name": "inclusion and respect for differences",
+        "key_points": [
+          "People differ in ability, culture, language, faith, family shape, and interests.",
+          "Exclusion can be quiet — never being picked, never being asked — and still does harm.",
+          "Inclusion often means changing the activity rather than asking the person to cope.",
+          "Asking someone what would help beats guessing on their behalf."
+        ],
+        "scenario": "A game needs fast running and one classmate uses a wheelchair. Redesign the game so they are genuinely playing, not just present."
+      }
+    ],
+    "home_connection": "With a guardian, review who is on your list of adults you could tell if something felt wrong.",
+    "performance_task": "Write and rehearse assertive communication and conflict-repair scripts for fictional situations, including a bystander response plan.",
+    "adapted_alternative": "Scripts may be spoken, signed, typed, drawn as a comic, or acted with figures. Role-play is optional and may always be replaced by describing what a character should say and why.",
+    "guardian_safety_review": {
+      "equipment": "None.",
+      "environment": "Indoor setting.",
+      "movement_hazards": "None expected.",
+      "food_or_allergy_note": "None. This unit covers personal-safety and consent rules; guardians may wish to preview it.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g4-health-u04-l01",
+      "ma-g4-health-u04-l02",
+      "ma-g4-health-u04-l03",
+      "ma-g4-health-u04-l04",
+      "ma-g4-health-u04-l05",
+      "ma-g4-health-u04-l06"
+    ],
+    "assessment_id": "ma-g4-health-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g4-health-u05",
+    "course_id": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "unit_number": 5,
+    "title": "Safety, Injury Prevention, and Digital Life",
+    "days": 6,
+    "standards": [
+      "Michigan Health Practice 4: Decision Making and Problem Solving",
+      "Michigan Health Practice 3: Information and Resource Seeking",
+      "Michigan Health Topic (Grades 3-5): Safety and Injury Prevention",
+      "Michigan Health Topic (Grades 3-5): Substance Use and Misuse"
+    ],
+    "essential_question": "How do I prevent harm and respond well when something goes wrong?",
+    "topics": [
+      "injury prevention and protective gear",
+      "emergency response and calling for help",
+      "medicines, household chemicals, and substance safety",
+      "basic first aid and when to get an adult",
+      "online privacy and personal information",
+      "recognising unsafe requests and refusing"
+    ],
+    "topic_content": [
+      {
+        "name": "injury prevention and protective gear",
+        "key_points": [
+          "Most injuries at this age are predictable and preventable: falls, collisions, and road incidents.",
+          "A helmet sits level, two fingers above the eyebrows, snug strap, and is replaced after a hard impact.",
+          "Gear only works when it fits and is actually worn.",
+          "Checking the surface, the equipment, and the space first prevents more injuries than reacting well afterwards."
+        ],
+        "scenario": "Before skating at a new park, list the checks you would do on gear, surface, and surroundings."
+      },
+      {
+        "name": "emergency response and calling for help",
+        "key_points": [
+          "Call 911 in the United States for fire, serious injury, someone not breathing, or a crime in progress.",
+          "Give what happened, the full address, and your name; stay on the line until told otherwise.",
+          "Check the scene is safe before approaching — do not become a second casualty.",
+          "Know your address and a guardian's number by heart; a locked phone can still call emergency services.",
+          "Prank calls take help away from someone who genuinely needs it."
+        ],
+        "scenario": "You find an adult collapsed and unresponsive at home and you are alone. Give the exact sequence, including what you say on the call."
+      },
+      {
+        "name": "medicines, household chemicals, and substance safety",
+        "key_points": [
+          "Medicine is given by a trusted adult only, at the right dose, and is never shared.",
+          "Prescription medicine belongs to one named person; taking someone else's is dangerous.",
+          "Alcohol, nicotine, vapes, and other drugs affect a developing brain more than an adult one.",
+          "Vapes are not harmless water vapour; most contain nicotine, which is addictive.",
+          "Never taste or sniff an unlabelled substance. If someone has swallowed something, tell an adult at once — speed matters."
+        ],
+        "scenario": "An older student says vaping is \"just flavoured air\" and offers one. Give two accurate facts in reply and say what you do next."
+      },
+      {
+        "name": "basic first aid and when to get an adult",
+        "key_points": [
+          "Small cut: wash with clean water, apply gentle pressure, cover.",
+          "Burn: cool under running water for around 20 minutes, then get an adult. Never use ice, butter, or cream.",
+          "Nosebleed: sit up, lean forward, pinch the soft part of the nose.",
+          "Always get an adult for head injuries, bleeding that will not stop, breathing trouble, a suspected broken bone, or any loss of consciousness.",
+          "Your job is to recognise and fetch help, not to treat someone yourself."
+        ],
+        "scenario": "A friend falls, hits their head, and seems dazed and confused. What do you do, and what do you not do?"
+      },
+      {
+        "name": "online privacy and personal information",
+        "key_points": [
+          "Personal data — full name, address, school, birthday, phone, location, passwords — stays private.",
+          "Photos can carry location data and can be copied and re-shared beyond your control.",
+          "Privacy settings help but never make something truly private.",
+          "A digital footprint lasts; assume anything posted could be seen by a guardian or a future school."
+        ],
+        "scenario": "A quiz app asks for your birthday, school, and first pet's name to \"find your spirit animal.\" What is actually being collected, and why does it matter?"
+      },
+      {
+        "name": "recognising unsafe requests and refusing",
+        "key_points": [
+          "Warning signs: secrecy, flattery, gifts, urgency, isolating you, or asking you to break a family rule.",
+          "Online grooming often begins friendly and moves slowly towards secrets and images.",
+          "A refusal is short and repeated; you do not owe an explanation, and you may simply leave or log off.",
+          "Requests for photos of your body always get a no and always get reported to a trusted adult.",
+          "You will not be in trouble for telling, even if you already replied or already agreed."
+        ],
+        "scenario": "Someone met in a game says they are 11, sends a gift code, asks for a photo, and says not to tell. Identify every warning sign and give the full response."
+      }
+    ],
+    "home_connection": "With a guardian, check that everyone in the household knows the home address and one emergency contact number by heart.",
+    "performance_task": "Create a safety and refusal plan covering an activity, an online situation, and an emergency, reviewed and confirmed by a guardian.",
+    "adapted_alternative": "First-aid content is taught as recognition and when-to-get-help, not as independent treatment. Any hands-on step may be observed, described, or demonstrated by the adult instead of performed by the learner.",
+    "guardian_safety_review": {
+      "equipment": "First-aid kit inspected with an adult; helmet or protective gear if the learner uses wheels or sport equipment.",
+      "environment": "Indoor setting, plus a guardian-supervised outdoor area if chosen. Water and fire content is planning and discussion only.",
+      "movement_hazards": "No learner performs first aid on another person, tests a hazard, or enters water as part of this unit. Gear fitting is adult-supervised.",
+      "food_or_allergy_note": "If the first-aid kit is reviewed, check adhesive, latex, and antiseptic contents against known allergies.",
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g4-health-u05-l01",
+      "ma-g4-health-u05-l02",
+      "ma-g4-health-u05-l03",
+      "ma-g4-health-u05-l04",
+      "ma-g4-health-u05-l05",
+      "ma-g4-health-u05-l06"
+    ],
+    "assessment_id": "ma-g4-health-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g4-health-u06",
+    "course_id": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "unit_number": 6,
+    "title": "Decisions, Goals, and Health Advocacy",
+    "days": 6,
+    "standards": [
+      "Michigan Health Practice 4: Decision Making and Problem Solving",
+      "Michigan Health Practice 5: Self-Management and Goal Setting",
+      "Michigan Health Practice 6: Advocacy and Health Promotion",
+      "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+      "Michigan Health Topic (Grades 3-5): Community and Environmental Health"
+    ],
+    "essential_question": "How do I make a sound decision, set a goal I can reach, and advocate for health beyond myself?",
+    "topics": [
+      "a step-by-step decision process",
+      "checking sources and spotting misinformation",
+      "influences from peers, family, and media",
+      "setting and tracking a personal health goal",
+      "community health helpers and access",
+      "advocating for a healthier community"
+    ],
+    "topic_content": [
+      {
+        "name": "a step-by-step decision process",
+        "key_points": [
+          "Name the decision precisely, because a vague question gets a vague answer.",
+          "List options, including ones nobody has suggested.",
+          "Weigh likely consequences for you and for others, short term and longer term.",
+          "Decide, act, then review whether it worked — reviewing is what improves the next decision.",
+          "Safety decisions always include a trusted adult."
+        ],
+        "scenario": "Friends want to cycle a busy road with no bike lane to reach a park faster. Work the process and justify your decision."
+      },
+      {
+        "name": "checking sources and spotting misinformation",
+        "key_points": [
+          "Ask who wrote it, when, and what they gain if you believe it.",
+          "Prefer health organisations, hospitals, and qualified professionals over anonymous posts.",
+          "Cross-check a claim in at least two independent places.",
+          "Warning signs: miracle cures, \"what doctors will not tell you\", urgency, and a product attached to the claim.",
+          "Sponsored content is an advert even when it looks like advice."
+        ],
+        "scenario": "Two pages disagree about whether a supplement helps children concentrate. One sells it. Describe how you decide what to believe."
+      },
+      {
+        "name": "influences from peers, family, and media",
+        "key_points": [
+          "Influence is often invisible: placement, repetition, and who is shown using a product.",
+          "Peer influence can push either way, towards risk or towards good habits.",
+          "Family habits shape defaults such as meals, bedtime, and activity.",
+          "Noticing an influence is what gives you the option to choose differently."
+        ],
+        "scenario": "A learner suddenly wants a drink they have never tried. Trace three possible influences and say how you would test which was strongest."
+      },
+      {
+        "name": "setting and tracking a personal health goal",
+        "key_points": [
+          "A workable goal is specific, realistic, and has a visible first step.",
+          "\"Drink water with each meal\" beats \"be healthier\", because you can tell whether you did it.",
+          "Track the action, not your body — never weight, size, or appearance.",
+          "Expect to miss some days; a plan that survives a missed day is a better plan."
+        ],
+        "scenario": "Turn \"get fitter\" into a goal a nine-year-old could actually start tomorrow and check on Friday."
+      },
+      {
+        "name": "community health helpers and access",
+        "key_points": [
+          "Community health includes clinics, school nurses, pharmacists, dentists, libraries, and food programmes.",
+          "Access is not equal: cost, transport, language, and disability all get in the way.",
+          "Knowing what exists locally is itself a health skill.",
+          "Helping someone reach a service is a genuine form of advocacy."
+        ],
+        "scenario": "A family new to the area does not know where to get a child's vaccination. Who could help, and how would you find out?"
+      },
+      {
+        "name": "advocating for a healthier community",
+        "key_points": [
+          "Advocacy is speaking up for a change with a reason and an audience in mind.",
+          "A strong message states the problem, gives evidence, and makes one clear ask.",
+          "Direct it at someone who can actually act — a school, a council, a shop.",
+          "Children's advocacy works, especially when it is specific and polite."
+        ],
+        "scenario": "Your park has no shade and no water fountain. Draft the one clear ask, name who receives it, and give the evidence you would include."
+      }
+    ],
+    "home_connection": "With a guardian, pick one household health habit worth improving and talk about what would make it stick.",
+    "performance_task": "Set a private-safe personal health goal with a plan and a progress check, and produce an advocacy piece supported by a reliable source. Goals may not target body weight, body size, or appearance.",
+    "adapted_alternative": "Goal tracking may be a checklist, a spoken check-in, a drawing, or an adult-recorded note. The advocacy piece may be a poster, letter, slide, spoken message, or described plan. No public posting, publication, or performance is required.",
+    "guardian_safety_review": {
+      "equipment": "None beyond writing or digital tools.",
+      "environment": "Indoor setting; supervised internet use when sources are compared online.",
+      "movement_hazards": "None expected.",
+      "food_or_allergy_note": null,
+      "guardian_confirmation_required": true
+    },
+    "lesson_ids": [
+      "ma-g4-health-u06-l01",
+      "ma-g4-health-u06-l02",
+      "ma-g4-health-u06-l03",
+      "ma-g4-health-u06-l04",
+      "ma-g4-health-u06-l05",
+      "ma-g4-health-u06-l06"
+    ],
+    "assessment_id": "ma-g4-health-u06-assessment"
+  }
+]
