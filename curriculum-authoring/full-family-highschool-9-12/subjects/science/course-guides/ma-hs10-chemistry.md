@@ -37,7 +37,7 @@ Every unit opens on an observable phenomenon rather than a definition.
 | 1 | Two people measure the same spoon of salt and get masses that differ by more than the salt they think they added. |
 | 2 | Published footage shows sodium and potassium, neighbours in one column, reacting with water in strikingly similar ways while argon beside them does nothing at all. Neither metal is handled in this course. |
 | 3 | Candle wax, table salt, and copper wire all look solid, but only one conducts, only one shatters, and only one melts in a warm room. |
-| 4 | Steel wool left damp in air grows warm and gains mass, while the same wool kept dry does not change. |
+| 4 | Recorded mass and temperature data show steel wool left damp in air gaining mass and warming, while identical wool kept dry does not change. |
 | 5 | Baking soda and vinegar in an open cup lose mass as they fizz; the same reaction in a sealed bag does not. |
 | 6 | One instant cold pack and one hand warmer are both sealed pouches you squeeze, and they do opposite things. |
 | 7 | A glow stick snapped in ice water stays bright far longer than an identical one in warm water. |
@@ -233,7 +233,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** baking soda, vinegar, Epsom salt, pure calcium chloride ice-melt or food-grade calcium chloride in its original labelled container (optional), water, thermometer, insulated cup, kitchen scale, timer, one commercial cold pack and one hand warmer, OBSERVED SEALED and never opened
+- **Materials:** baking soda, vinegar, Epsom salt, pure calcium chloride ice-melt or food-grade calcium chloride in its original labelled container (optional), water, a thermometer kept for these investigations and never used with food or drink, disposable cups for the calcium chloride route - one standing inside a second for insulation - binned after a single use; no mug, tumbler, flask, bottle, or drinking cup ever holds calcium chloride, a disposable stirring stick for the calcium chloride route, binned after a single use, an insulated drinking cup for the Epsom-salt, baking-soda, and vinegar trials only; it never holds calcium chloride, kitchen scale used only with a disposable tray under the sample, so no sample touches the scale surface and it stays in food use, gloves, timer, one commercial cold pack and one hand warmer, OBSERVED SEALED and never opened
 
 **Hazards**
 
@@ -241,16 +241,18 @@ alternative that meets the same learning target: a first-class path, not a conso
 | --- | --- | --- |
 | chemical | A cold pack holds a salt that irritates skin and eyes and is harmful if swallowed; a torn hand warmer releases self-heating iron powder reaching about 65 degrees Celsius, an inhalation and ignition hazard. | OBSERVED FROM THE OUTSIDE ONLY: never cut, torn, punctured, or opened, and the contents never touched or tasted. If one leaks, an adult bags and bins it and contact is rinsed 15 minutes. Not disableable. |
 | chemical | Calcium chloride releases substantial heat when dissolving and can burn skin and eyes, and pouring water onto the solid spatters hot solution. | OPTIONAL. An adult handles the solid from its original labelled container - never bulk road salt. Eye protection and gloves; under one teaspoon; SOLID IS ALWAYS ADDED TO THE WATER, never the reverse; never touched warm. |
+| chemical | Ice-melt calcium chloride is not a food grade and leaves residue on whatever holds, stirs, or measures it. | The calcium chloride route runs in disposable cups with a disposable stirrer, binned after one use. No mug, tumbler, flask, bottle, or drinking cup holds it, and nothing that touches it returns to food or drinking use. |
 | physical | Solutions can become hot enough to burn. | Use an insulated cup on a tray, stir with the thermometer rather than a finger, judge temperature only from the thermometer, and stop if the solution exceeds 50 degrees Celsius. |
 
 **Safe order**
 
 1. Read the phenomenon with the commercial cold pack and hand warmer SEALED. They are squeezed and felt through the pouch only, and are never cut, torn, punctured, or opened.
 2. Put on eye protection; if the calcium chloride route runs, put on gloves too and let the adult handle the solid from its original labelled container.
-3. Set the insulated cup on a tray and record the starting temperature before anything is added.
-4. ALWAYS ADD THE SOLID TO THE WATER, a little at a time, never water to the solid. Keep every quantity under one teaspoon.
-5. Stir with the thermometer, not a finger, and read temperature only from the thermometer.
-6. Stop at 50 degrees Celsius and let the solution stand untouched until it is cool.
+3. If the calcium chloride route runs, set out its DISPOSABLE cups and stirrer now. Calcium chloride is never put in a mug, tumbler, flask, bottle, or drinking cup, and nothing that touches it returns to food or drinking use.
+4. Set the insulated cup on a tray and record the starting temperature before anything is added.
+5. ALWAYS ADD THE SOLID TO THE WATER, a little at a time, never water to the solid. Keep every quantity under one teaspoon.
+6. Stir with the thermometer, not a finger, and read temperature only from the thermometer.
+7. Stop at 50 degrees Celsius and let the solution stand untouched until it is cool.
 
 **Stop conditions**
 
@@ -259,7 +261,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 - Stop if calcium chloride contacts skin and rinse thoroughly for 15 minutes.
 - Skip the calcium chloride route entirely if eye protection and gloves are not available.
 
-**Disposal.** Let every solution cool to room temperature in its OPEN cup before it is moved; never cap or store a warm solution. Pour cooled Epsom-salt, baking-soda, and vinegar solutions down the drain with the tap running. Dilute a cooled calcium chloride solution with plenty of cold water as it goes down the drain, then rinse the cup. The cold pack and the hand warmer go into the household bin STILL SEALED - never opened, drained, or cut.
+**Disposal.** Let every solution cool to room temperature in its OPEN cup before it is moved; never cap or store a warm solution. Pour cooled Epsom-salt, baking-soda, and vinegar solutions down the drain with the tap running. Dilute a cooled calcium chloride solution with plenty of cold water as it goes down the drain, then bin the disposable cups and stirrer that held it; they never return to food or drinking use. The cold pack and the hand warmer go into the household bin STILL SEALED - never opened, drained, or cut.
 
 **No-special-equipment alternative.** Use Epsom salt and baking soda with vinegar only - both mild - to observe cooling and mild warming, or work entirely from a published table of dissolution enthalpies and bond energies. Kitchen materials or paper.
 
@@ -269,7 +271,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** effervescent tablets or baking soda, vinegar at several dilutions, cold, room-temperature, and warm water, clear cups, timer, thermometer, notebook
+- **Materials:** effervescent tablets or baking soda, vinegar at several dilutions, cold, room-temperature, and warm water, two identical glow sticks for the temperature strand, bent to activate and never cut, bitten, or opened, clear cups, timer, thermometer, notebook
 
 **Hazards**
 

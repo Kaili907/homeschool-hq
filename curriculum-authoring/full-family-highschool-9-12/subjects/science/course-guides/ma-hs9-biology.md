@@ -287,7 +287,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `nearby-adult`
 - **Guardian visibility:** `summary`
-- **Materials:** dried beans, seeds, or leaves from one plant species (30+ specimens), ruler, graph paper, coins or dice for probability modelling, notebook
+- **Materials:** dried beans, seeds, or leaves from one plant species (30+ specimens), ruler, graph paper, coins or dice for probability modelling, gloves, notebook
 
 **Hazards**
 

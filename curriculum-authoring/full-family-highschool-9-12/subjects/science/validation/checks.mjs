@@ -77,14 +77,25 @@ export function runChecks(set, frameworkDoc) {
   const whole = JSON.stringify(set).toLowerCase()
   // A negated mention ("never require a photograph") is the safeguard, not a violation,
   // so a hit only counts when no negation appears in the preceding clause.
-  const NEGATION = /(never|no|not|without|n't)\b[^.]{0,60}$/
-  const affirmativeHits = (re) => {
+  const NEGATION = /(never|neither|no|not|without|n't)\b/i
+  // Clause scope, not sentence scope: a negation only cancels the clause it governs. `. ; : ,and
+  // ,then` and a bare newline all open a new clause, so an earlier negated clause can no longer
+  // hide an affirmative hazard instruction that follows it.
+  const CLAUSE_BREAK = /[.;:\n]|,\s*(and|then|but|or)\s|\s(and|then)\s+(?=(connect|plug|light|pour|add|use|hold|place)\b)/gi
+  const clauseBefore = (text, index) => {
+    const head = text.slice(Math.max(0, index - 200), index)
+    let start = 0
+    for (const b of head.matchAll(CLAUSE_BREAK)) start = b.index + b[0].length
+    return head.slice(start)
+  }
+  const affirmativeHitsIn = (text, re) => {
     const hits = []
-    for (const m of whole.matchAll(new RegExp(re, 'g'))) {
-      if (!NEGATION.test(whole.slice(Math.max(0, m.index - 80), m.index))) hits.push(m[0])
+    for (const m of text.matchAll(new RegExp(re, 'gi'))) {
+      if (!NEGATION.test(clauseBefore(text, m.index))) hits.push(m[0])
     }
     return hits
   }
+  const affirmativeHits = (re) => affirmativeHitsIn(whole, re)
   const banned = [
     ['required-photo-or-video-proof', /require[sd]?\s+(a\s+)?(photo|photograph|video|voice recording)/],
     ['mains-electricity-use', /(plug|connect)[^.]{0,40}\b(wall|outlet|mains)\b/],
@@ -397,6 +408,247 @@ export function runChecks(set, frameworkDoc) {
     docMismatch.length
       ? docMismatch.map(([label, d, a]) => `${label}: doc says ${d ?? 'nothing'}, package has ${a}`).join('; ')
       : docFacts.map(([label, , a]) => `${label}=${a}`).join(' '))
+
+
+  // ================================================================ H3 learner-use checks
+  // The H2 review found two defects the H2 checks could not see: a hazard-bearing phenomenon
+  // repeated on the ten days that carry no safety brief, and a non-food-grade chemical sharing
+  // drinking equipment. Both are defect CLASSES, so the checks below detect the class.
+
+  // Plain student-visible text, so windows and clause boundaries work on real prose rather than
+  // on JSON escapes.
+  const flatText = (value) => {
+    const out = []
+    const walk = (v) => {
+      if (typeof v === 'string') out.push(v)
+      else if (Array.isArray(v)) v.forEach(walk)
+      else if (v && typeof v === 'object') Object.values(v).forEach(walk)
+    }
+    walk(value)
+    return out.join('\n')
+  }
+  const studentPlain = new Map(lessons.map((l) => [l.lesson_id, flatText(projectStudentLesson(l, policy))]))
+  const studentStrings = (l) => { const out = []; const walk = (v) => { if (typeof v === 'string') out.push(v); else if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v === 'object') Object.values(v).forEach(walk) }; walk(projectStudentLesson(l, policy)); return out }
+  const briefOf = (l) => l.lesson_flow.find((s) => s.segment_id === 'safety-review')?.teacher_or_tutor_action ?? ''
+  const hasBrief = (l) => briefOf(l).length > 0
+
+  // --- A. Hazard-bearing text on days that carry no safety brief -----------------------------------
+  // Only the hands-on days carry a safety review, but the unit phenomenon is repeated on all twelve
+  // and unit extensions carry it with no day at all. Any student-visible naming of a material whose
+  // hazard a learner could reproduce at a kitchen sink must carry a prohibition AND the context that
+  // defers it to supervision or to data, in the same passage.
+  const REPRODUCIBLE_HAZARD = /\b(steel wool|iron powder|iron filings|sodium|potassium|caesium|cesium|bleach|ammonia|drain cleaner|calcium chloride|ice-melt|hydrogen peroxide|cold pack|hand warmer|glow stick|smoke detector|smoke alarm|sealed (bag|jar|box|container|bottle))\b/gi
+  const RULE_PROHIBITION = /\b(never|neither|not|no|do not|does not)\b/i
+  const RULE_CONTEXT = /\b(adult|safety review|investigation|day 7|sealed|outside only|recorded data|published (data|footage|table)|data only|is handled|are handled)\b/i
+  const unruled = []
+  // The rule has to live in the SAME string the learner reads the material in. A window over the
+  // whole projection let an unrelated neighbouring field supply the words and mask the gap.
+  const scanUnbriefed = (label, strings) => {
+    for (const text of strings) {
+      for (const m of text.matchAll(REPRODUCIBLE_HAZARD)) {
+        const near = text.slice(Math.max(0, m.index - 150), m.index + 600)
+        if (!(RULE_PROHIBITION.test(near) && RULE_CONTEXT.test(text))) unruled.push(`${label}:${m[0]}`)
+      }
+    }
+  }
+  for (const l of lessons.filter((l) => !hasBrief(l))) scanUnbriefed(l.lesson_id, studentStrings(l))
+  for (const u of set.units) scanUnbriefed(u.unit_id, (u.extensions ?? []).filter((e) => e.projection === 'student-safe').map((e) => e.value?.value ?? ''))
+  check('unbriefed-hazard-text-carries-a-student-visible-rule', unruled.length === 0,
+    fail(unruled, 'a hazard-bearing material is named in student-visible text on a day with no safety brief, with no prohibition and no deferral to supervision or data')
+      ?? 'every hazard-bearing material named outside a safety brief carries its own prohibition and deferral')
+
+  // --- B. Non-food-grade chemicals and food or drinking equipment ----------------------------------
+  // A non-food grade may not touch anything that returns to eating or drinking. Disposable or
+  // permanently designated non-food equipment is the only acceptable answer.
+  const NON_FOOD_GRADE = /\b(ice-melt|ice melt|road salt|de-?icer|pool salt|non-food-grade|not food grade|technical grade|fertilis|fertiliz|garden lime)\b/i
+  const FOOD_OR_DRINK_VESSEL = /\b(mug|tumbler|drinking (glass|cup)|water bottle|flask|straw|dinner plate|bowl|kitchen scale|baking (pan|tray)|food container|measuring (spoon|jug|cup)|cutlery|fork|teaspoon|saucepan|kettle|insulated (cup|mug)|clear cups?)\b/i
+  const PERMANENTLY_NON_FOOD = /\b(disposable|single[- ]use|binned after|lab use only|non-food|never (used )?(for|with) (food|drink)|never (returns?|return) to (the kitchen|food|drinking)|stays in food use|never holds calcium chloride|only;? it never holds)\b/i
+  const nonFoodGradeLessons = hazardLessons.filter((l) => NON_FOOD_GRADE.test(l.materials.join(' | ')))
+  const sharedKit = []
+  for (const l of nonFoodGradeLessons) {
+    for (const m of l.materials) if (FOOD_OR_DRINK_VESSEL.test(m) && !PERMANENTLY_NON_FOOD.test(m)) sharedKit.push(`${l.lesson_id}: ${m.slice(0, 60)}`)
+    if (!/returns? to food or drinking use|never returns? to (the kitchen|food)/i.test(studentPlain.get(l.lesson_id))) sharedKit.push(`${l.lesson_id}: no never-return-to-food rule reaches the learner`)
+  }
+  check('non-food-grade-chemicals-never-share-food-or-drinking-equipment', sharedKit.length === 0,
+    fail(sharedKit, 'a non-food-grade chemical is run in food or drinking equipment with no permanent non-food designation')
+      ?? `${nonFoodGradeLessons.length} lesson(s) carry a non-food grade; all run it in disposable or permanently non-food equipment`)
+
+  // --- C. Water-temperature caps are a safe RANGE, not merely a number present ----------------------
+  // The H2 check accepted any two-digit number next to "degrees Celsius", so "below 80 degrees
+  // Celsius" would have passed. Every stated limit is now read and bounded.
+  const SAFE_MAX_C = 50
+  const CAP_VALUES = /\b(?:below|under|no more than|at most|not above|does not exceed)\s+(\d{1,3})\s*(?:degrees celsius|°\s*c)\b/gi
+  const STOP_VALUES = /\bstop\w*\b[^.\n]{0,90}?\b(?:above|over|exceeds?|at)\s+(\d{1,3})\s*(?:degrees celsius|°\s*c)\b/gi
+  const overCap = []
+  for (const l of warmLessons) {
+    const text = studentPlain.get(l.lesson_id)
+    const caps = [...text.matchAll(CAP_VALUES)].map((m) => Number(m[1]))
+    const stops = [...text.matchAll(STOP_VALUES)].map((m) => Number(m[1]))
+    if (caps.length === 0) overCap.push(`${l.lesson_id}: no bounded cap, only a bare number`)
+    for (const v of [...caps, ...stops]) if (v > SAFE_MAX_C) overCap.push(`${l.lesson_id}: permits ${v} C`)
+  }
+  check('water-temperature-limits-state-a-safe-numeric-range', overCap.length === 0,
+    fail(overCap, `a learner-handling temperature limit is missing or exceeds ${SAFE_MAX_C} degrees Celsius`)
+      ?? `${warmLessons.length} warm-water lessons bound every learner-handling limit at or below ${SAFE_MAX_C} degrees Celsius`)
+
+  // --- D. Generic open-flame prohibition -----------------------------------------------------------
+  // H2 banned only a fuel-fed flame. No lesson may direct the learner to light or operate ANY flame,
+  // and the prohibition must be declared non-disableable rather than left implicit.
+  const OPEN_FLAME_USE = /\b(light|lights|lighting|lit|ignite|ignites|igniting|strike|strikes)\s+(a|the)\s+(candle|match|flame|burner|lighter|hob|stove|gas)\b|\b(hold|holds|place|places|put|pass)\b[^.\n]{0,40}\b(in|into|over|above)\s+(a|the)\s+(flame|candle|burner|hob)\b|\bflame test\b|\bbunsen\b|\bspirit (burner|lamp)\b/
+  const flameHits = affirmativeHits(OPEN_FLAME_USE.source)
+  const flamePolicy = policy.safety_privacy.non_disableable_prohibitions.some((r) => /\bopen flame\b/i.test(r) && /\b(light|strike|operate)\b/i.test(r))
+  check('no-open-flame-is-lit-or-operated-anywhere', flameHits.length === 0 && flamePolicy,
+    flameHits.length ? `MATCHED: ${flameHits.slice(0, 3).join(' | ')}`
+      : flamePolicy ? 'no lesson lights or operates a flame, and a generic open-flame prohibition is non-disableable'
+        : 'no generic open-flame prohibition is declared non-disableable')
+
+  // --- E. PPE actually reaches the learner and the materials list ----------------------------------
+  // The eye-protection trigger is transcribed here independently of the builder, so a builder that
+  // stops resolving PPE cannot validate itself.
+  const EYE_TRIGGER = /\b(splash|spatter|sting\w* (the )?eyes?|eye protection|snap back|under tension|shatter|burst|spray)\b/i
+  const eyeLessons = hazardLessons.filter((l) => l.safety_privacy.hazards.some((h) => h.kind === 'chemical' || EYE_TRIGGER.test(`${h.description} ${h.mitigation}`)))
+  const gloveLessons = hazardLessons.filter((l) => l.safety_privacy.hazards.some((h) => /\bgloves?\b/i.test(h.mitigation)))
+  const ppeGaps = []
+  for (const l of eyeLessons) {
+    if (!/EYE PROTECTION IS REQUIRED/i.test(studentPlain.get(l.lesson_id))) ppeGaps.push(`${l.lesson_id}: eye protection never required in student text`)
+    if (!l.materials.some((m) => /eye protection/i.test(m) && !/^no eye protection/i.test(m))) ppeGaps.push(`${l.lesson_id}: eye protection absent from materials`)
+  }
+  for (const l of gloveLessons) {
+    if (!l.materials.some((m) => /\bgloves?\b/i.test(m))) ppeGaps.push(`${l.lesson_id}: a mitigation requires gloves but they are not a material`)
+    if (!/\bgloves?\b/i.test(studentPlain.get(l.lesson_id))) ppeGaps.push(`${l.lesson_id}: gloves required but never stated to the learner`)
+  }
+  check('required-ppe-reaches-the-learner-and-the-materials-list', ppeGaps.length === 0,
+    fail(ppeGaps, 'PPE named in a mitigation never reaches the learner or the materials list')
+      ?? `${eyeLessons.length} eye-protection lessons and ${gloveLessons.length} glove lessons carry their PPE in both places`)
+
+  // --- F. The equal-credit alternative is real ------------------------------------------------------
+  const altOf = (l) => (l.extensions ?? []).find((e) => e.namespace === 'manuel.academy/lab-alternative')?.value?.value ?? ''
+  const altFaults = []
+  for (const l of hazardLessons) {
+    const alt = altOf(l)
+    const text = studentPlain.get(l.lesson_id)
+    if (alt.trim().length < 80) altFaults.push(`${l.lesson_id}: alternative is ${alt.trim().length} chars`)
+    if (!text.includes(alt.trim())) altFaults.push(`${l.lesson_id}: alternative never reaches the learner`)
+    const at = text.indexOf(alt.trim())
+    if (at >= 0 && !/equal credit/i.test(text.slice(Math.max(0, at - 120), at))) altFaults.push(`${l.lesson_id}: alternative is not stated to carry equal credit`)
+    // Clause-scoped, so "no battery, no alcohol" reads as the absence of equipment it plainly is.
+    if (affirmativeHitsIn(alt, /\b(eye protection|goggles|gloves|thermometer|battery|flame|burner)\b/.source).length) altFaults.push(`${l.lesson_id}: alternative still requires special equipment`)
+  }
+  check('equal-credit-alternative-is-stated-and-needs-no-special-equipment', altFaults.length === 0,
+    fail(altFaults, 'the no-special-equipment alternative is missing, hidden from the learner, unequal, or still needs equipment')
+      ?? `${hazardLessons.length} hazard-bearing lessons state a full equal-credit alternative that needs no special equipment`)
+
+  // --- G. Student brief and guardian record agree in BOTH directions --------------------------------
+  // H2 checked only that the guardian record reached the learner. A brief that tells the learner
+  // something the guardian record does not hold is the same defect facing the other way.
+  const SUPERVISION_SENTENCE = {
+    none: 'SUPERVISION: you may work on this independently. Tell an adult before you start anyway.',
+    'nearby-adult': 'SUPERVISION: an adult must be within earshot and able to reach you. Do not start until they are.',
+    'direct-adult': 'SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start any step until they are there.',
+  }
+  const drift = []
+  for (const l of hazardLessons) {
+    const lines = briefOf(l).split('\n')
+    const sp = l.safety_privacy
+    const hz = lines.filter((x) => x.startsWith('HAZARD (')).map((x) => x.match(/^HAZARD \(([^)]+)\): ([\s\S]*)$/)?.slice(1) ?? [])
+    const mit = lines.filter((x) => x.startsWith('MITIGATION: ')).map((x) => x.slice('MITIGATION: '.length))
+    const stops = lines.filter((x) => x.startsWith('  STOP: ')).map((x) => x.slice('  STOP: '.length))
+    if (hz.length !== sp.hazards.length) drift.push(`${l.lesson_id}: brief states ${hz.length} hazards, record holds ${sp.hazards.length}`)
+    else if (!hz.every(([kind, desc], i) => kind === sp.hazards[i].kind && desc === sp.hazards[i].description)) drift.push(`${l.lesson_id}: a hazard in the brief is not the hazard in the record`)
+    if (mit.length !== sp.hazards.length || !mit.every((m, i) => m === sp.hazards[i]?.mitigation)) drift.push(`${l.lesson_id}: a mitigation in the brief is not the mitigation in the record`)
+    if (stops.length !== sp.stop_conditions.length || !stops.every((c, i) => c === sp.stop_conditions[i])) drift.push(`${l.lesson_id}: brief states ${stops.length} stop conditions, record holds ${sp.stop_conditions.length}`)
+    if (!lines.includes(SUPERVISION_SENTENCE[sp.supervision])) drift.push(`${l.lesson_id}: the brief does not state the supervision level the record declares`)
+    if (/an adult must be beside you/.test(briefOf(l)) && sp.guardian_visibility !== 'confirmation-required') drift.push(`${l.lesson_id}: direct supervision is promised to the learner but not confirmed with the guardian`)
+  }
+  check('student-brief-and-guardian-record-agree-both-ways', drift.length === 0,
+    fail(drift, 'the learner brief and the guardian safety record state different hazards, mitigations, stop conditions, or supervision')
+      ?? `${hazardLessons.length} hazard-bearing lessons state identical hazards, mitigations, stop conditions, and supervision to learner and guardian`)
+
+  // --- H. Preview vs reinforcement at LESSON level ---------------------------------------------------
+  // H2 checked units only. The same extension is projected to the learner on every lesson, so a
+  // lesson that mislabels a forward-looking standard mis-teaches 12 times per unit.
+  const lessonSemantic = []
+  const unitById = new Map(set.units.map((u) => [u.unit_id, u]))
+  for (const l of lessons) {
+    const idx = unitIndex.get(l.unit_ref)
+    const text = roleOf(l)
+    if (!text) { lessonSemantic.push(`${l.lesson_id}: no standards-role text`); continue }
+    if (text !== roleOf(unitById.get(l.unit_ref) ?? {})) lessonSemantic.push(`${l.lesson_id}: standards role differs from its unit`)
+    for (const c of codesIn(text, 'Reinforced')) if (!(firstTaught.get(c) <= idx)) lessonSemantic.push(`${l.lesson_id}: ${c} called reinforcement but first taught at unit ${firstTaught.get(c) ?? '?'} of ${idx}`)
+    for (const c of codesIn(text, 'Previewed')) {
+      if (firstTaught.get(c) <= idx) lessonSemantic.push(`${l.lesson_id}: ${c} called a preview but already taught at unit ${firstTaught.get(c)}`)
+      if (l.standards.some((s) => s.standard_id === c)) lessonSemantic.push(`${l.lesson_id}: ${c} is previewed and assessed in the same lesson`)
+    }
+  }
+  check('lesson-preview-and-reinforcement-semantics-hold', lessonSemantic.length === 0,
+    fail(lessonSemantic, 'a lesson labels forward-looking coverage as reinforcement, or drifts from its unit')
+      ?? `all ${lessons.length} lessons carry their unit's standards role with preview and reinforcement the right way round`)
+
+  // --- I. A negated clause cannot hide a hazard combination -----------------------------------------
+  // Hazard pairs are read from the STRUCTURED materials and typed hazards, entry by entry, so a
+  // negation in one entry ("stored away from steel wool") can never cancel a different entry, and
+  // a negated sentence elsewhere in the prose can never suppress the pairing.
+  const entriesNaming = (l, re) => [...l.materials, ...l.safety_privacy.hazards.map((h) => h.description)]
+    .filter((entry) => affirmativeHitsIn(entry, re.source).length > 0)
+  const SEPARATION_INSTRUCTION = /\b(away from|never (let it )?touch|kept? apart|different surface|out of the room|never [^.\n]{0,40}together|not [^.\n]{0,30}(in the same room|near)|before any|removed from the room)\b/i
+  const PAIRS = [
+    ['flammable liquid and an ignition source', FLAMMABLE, IGNITION],
+    ['a self-heating metal and an ignition source', /\b(steel wool|iron powder|iron filings)\b/i, IGNITION],
+  ]
+  const hiddenPairs = []
+  let pairsFound = 0
+  for (const l of hazardLessons) {
+    const sentences = studentPlain.get(l.lesson_id).split(/(?<=[.\n])\s*/)
+    for (const [label, a, b] of PAIRS) {
+      if (!entriesNaming(l, a).length || !entriesNaming(l, b).length) continue
+      pairsFound += 1
+      if (l.safety_privacy.supervision !== 'direct-adult') { hiddenPairs.push(`${l.lesson_id}: ${label} without direct adult supervision`); continue }
+      if (!sentences.some((sn) => SEPARATION_INSTRUCTION.test(sn) && a.test(sn) && b.test(sn))) hiddenPairs.push(`${l.lesson_id}: ${label}`)
+    }
+  }
+  check('hazard-combinations-are-read-structurally-not-from-negatable-prose', hiddenPairs.length === 0,
+    fail(hiddenPairs, 'a hazard pair present in the materials or typed hazards carries no separation rule in student-visible text')
+      ?? `${pairsFound} hazard pair(s) found in the structured fields; each carries a separation instruction naming both materials in one sentence`)
+
+
+  // --- J. The non-disableable prohibitions must reach the learner ------------------------------------
+  // They were declared in the policy set and in safety_privacy, both of which the 2.0.0 contract
+  // strips from the student projection, so not one of them reached a learner.
+  const prohibitions = policy.safety_privacy.non_disableable_prohibitions
+  const prohibitionGaps = hazardLessons.filter((l) => {
+    const text = studentPlain.get(l.lesson_id)
+    return !prohibitions.every((rule) => text.includes(rule))
+  })
+  check('non-disableable-prohibitions-reach-the-learner', prohibitionGaps.length === 0,
+    fail(prohibitionGaps.map((l) => l.lesson_id), 'a non-disableable prohibition never reaches the learner in student-visible text')
+      ?? `all ${prohibitions.length} non-disableable prohibitions reach the learner in each of ${hazardLessons.length} hazard-bearing lessons`)
+
+  // --- K. A hazardous item the brief tells the learner to handle must be on the materials list -------
+  // Prep happens from the materials list. An item the safe order activates but the list omits is
+  // a hazard the family never had notice to obtain, refuse, or supervise.
+  const HANDLE_VERB = /\b(bend|bends|activate|activates|squeeze|squeezes|snap|snaps|hold|holds|use|uses|feel|feels|shake|shakes)\b/
+  const unlistedHandled = []
+  for (const l of hazardLessons) {
+    const brief = briefOf(l)
+    const listed = l.materials.join(' | ').toLowerCase()
+    for (const term of ['cold pack', 'hand warmer', 'glow stick', 'smoke detector', 'smoke alarm']) {
+      if (!brief.toLowerCase().includes(term) || listed.includes(term)) continue
+      const handled = brief.split(/(?<=[.\n])\s*/).some((sn) => sn.toLowerCase().includes(term) && affirmativeHitsIn(sn, HANDLE_VERB.source).length > 0)
+      if (handled) unlistedHandled.push(`${l.lesson_id}: ${term}`)
+    }
+  }
+  check('hazardous-items-the-learner-handles-are-on-the-materials-list', unlistedHandled.length === 0,
+    fail(unlistedHandled, 'the safe order tells the learner to handle a sealed commercial product the materials list never names')
+      ?? 'every sealed commercial product the learner is told to handle is on the materials list')
+
+  // --- L. The guardian note covers the fields safety_privacy has no room for -------------------------
+  // safety_privacy carries hazards, supervision and stop conditions but no safe order and no
+  // disposal, so the note that governs guardian sharing has to name them explicitly.
+  const noteGaps = hazardLessons.filter((l) => !/safe order/i.test(l.guardian_visibility_note) || !/disposal/i.test(l.guardian_visibility_note)
+    || !/\b(ppe|eye protection|protective)\b/i.test(l.guardian_visibility_note))
+  check('guardian-note-covers-safe-order-disposal-and-ppe', noteGaps.length === 0,
+    fail(noteGaps.map((l) => l.lesson_id), 'the guardian note omits the safe order, the disposal, or the PPE that safety_privacy cannot hold')
+      ?? `${hazardLessons.length} hazard-bearing lessons direct the guardian to the safe order, the PPE, and the disposal before the session`)
 
   return { report, checks }
 }

@@ -80,6 +80,7 @@ NON_DISABLEABLE = [
     "Never fully seal a reacting, fermenting, oxidising, or warm mixture in any container.",
     "Never have a flammable liquid open in the same room as a flame, hob, pilot light, heater, lamp, charger, or battery.",
     "Never use alcohol, or any other fuel, for a flame demonstration; no open-flame demonstration is used anywhere in this package.",
+    "Never light, strike, or operate an open flame or a hob, burner, or pilot light for any investigation in this package; no lesson requires one.",
     "Never cut, tear, puncture, or open a sealed commercial product - cold pack, hand warmer, glow stick, or smoke detector.",
     "Never look at the sun directly or through any lens, filter, grating, or camera.",
     "Never require a photograph, video, or voice recording as evidence of completion.",
@@ -124,6 +125,20 @@ def supervision_sentence(level):
     }[level]
 
 
+# Anything a mitigation tells the learner to wear has to appear on the materials list, or the
+# family has no notice to obtain it before the session.
+PPE_FROM_MITIGATION = (
+    (re.compile(r"\bgloves?\b", re.I), "gloves - REQUIRED for this investigation"),
+    (re.compile(r"waterproof dressing", re.I), "waterproof dressing for any cut or graze - REQUIRED for this investigation"),
+)
+
+
+def mitigation_ppe(inv):
+    listed = " | ".join(inv["materials"])
+    return [label for pattern, label in PPE_FROM_MITIGATION
+            if pattern.search(" ".join(m for _, _, m in inv["hazards"])) and not pattern.search(listed)]
+
+
 def requires_eye_protection(inv):
     """Resolve the PPE line at build time; the learner cannot read the hazard list to decide."""
     text = " ".join(d + " " + m for _, d, m in inv["hazards"]).lower()
@@ -163,6 +178,9 @@ def safety_brief(inv):
         lines.append(f"  STOP: {cond}")
     lines.append(f"DISPOSAL: {inv['disposal']}")
     lines.append(f"ALTERNATIVE (equal credit, no special equipment): {inv['alternative']}")
+    lines.append("ALWAYS - these rules hold in every lesson and nobody can switch them off:")
+    for rule in NON_DISABLEABLE:
+        lines.append(f"  ALWAYS: {rule}")
     return "\n".join(lines)
 
 
@@ -288,17 +306,48 @@ def criteria(unit, focus, day):
 
 SEALED_PRODUCT = ("cold pack", "hand warmer", "glow stick", "smoke detector", "smoke alarm")
 
+# The anchoring phenomenon is repeated in the retrieval segment of all twelve days, but only the
+# hands-on days carry a safety brief. A phenomenon that names a material a learner could reproduce
+# at a kitchen sink is therefore an unbriefed invitation on the ten days it is not investigated, so
+# every hazard-bearing phenomenon carries its own student-visible rule on every day, briefed or not.
+PHENOMENON_RIDERS = (
+    (re.compile(r"\b(steel wool|iron powder|iron filings)\b", re.I),
+     "damp or warm finely divided iron self-heats as it oxidises and can start a fire, so it is never dampened, "
+     "warmed, sealed, bagged, boxed, or binned outside the Day 7 investigation, which an adult runs beside you in a "
+     "wide open dish under that lesson's safety review; on every other day this phenomenon is studied from recorded "
+     "data only and no steel wool is handled"),
+    (re.compile(r"\b(sodium|potassium|caesium|cesium)\b", re.I),
+     "these metals react violently with water, are never handled or substituted for anywhere in this course, and the "
+     "phenomenon is studied from published footage and recorded data only"),
+    (re.compile(r"\bsealed (bag|jar|box|container)\b", re.I),
+     "a reacting, fermenting, oxidising, or warm mixture is never sealed in any container in any other lesson; the one "
+     "sealed trial in this course is the Day 7 investigation, at the quantity that lesson fixes, flat on a tray, never "
+     "held, with an adult beside you under its safety review"),
+    (re.compile(r"\b(fizzy|carbonated|sparkling) (water|drink)\b|\bsealed bottle\b", re.I),
+     "a closed carbonated bottle is a pressure vessel: it is never warmed above 40 degrees Celsius, never shaken while "
+     "closed, and is opened slowly by an adult with the cap pointed away from every face"),
+    (re.compile(r"\b(bleach|ammonia|drain cleaner)\b", re.I),
+     "household cleaning products are never mixed, decanted, or brought to the work surface in any lesson, and no "
+     "investigation uses one"),
+)
+
 
 def phenomenon_line(unit):
-    """A sealed commercial product named in the phenomenon carries its do-not-open rule every day."""
+    """A hazard-bearing material named in the phenomenon carries its rule every day, briefed or not."""
     text = unit["phenomenon"]
+    riders = []
     named = [p for p in SEALED_PRODUCT if p in text.lower()]
-    if not named:
+    if named:
+        riders.append("the " + " and ".join(named) + " in this unit "
+                      + ("is" if len(named) == 1 else "are")
+                      + " observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, "
+                        "or opened, and the contents are never touched or tasted")
+    for pattern, rider in PHENOMENON_RIDERS:
+        if pattern.search(text):
+            riders.append(rider)
+    if not riders:
         return text
-    return (text + " SAFETY: the " + " and ".join(named) + " in this unit "
-            + ("is" if len(named) == 1 else "are")
-            + " observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, "
-              "and the contents are never touched or tasted.")
+    return text + " SAFETY: " + "; ".join(riders) + "."
 
 
 def hands_on(inv, day):
@@ -412,7 +461,7 @@ def build_lesson(course, unit, unit_no, day, course_day, unit_index):
     materials = ["course notebook or digital equivalent", "pencil, keyboard, or other accessible response tool"]
     if hands_on(inv, day):
         ppe = (["eye protection - REQUIRED for this investigation"] if requires_eye_protection(inv)
-               else ["no eye protection is required for this investigation"])
+               else ["no eye protection is required for this investigation"]) + mitigation_ppe(inv)
         materials = list(inv["materials"]) + ppe + materials
     else:
         materials.append("printed or on-screen text, data table, or model for this lesson")
@@ -492,8 +541,9 @@ def build_lesson(course, unit, unit_no, day, course_day, unit_index):
         "safety_privacy": safety_for(unit, day, inv),
         "resource_refs": resource_refs,
         "guardian_visibility_note": (
-            "Share the lesson target, completion state, evidence type, and next instructional step. For the Day 7 investigation, share the hazard "
-            "list, the supervision level, and the stop conditions BEFORE the session so the guardian can review them in advance. Do not expose raw "
+            "Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard "
+            "list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step "
+            "that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw "
             "reflections, raw answers, or diagnosis language."),
         "home_connection": (f"Notice one safe, optional example of {focus} in ordinary life and describe it in a sentence. No purchase, account, "
                             "photograph, travel, or private disclosure is required, and this is never graded."),

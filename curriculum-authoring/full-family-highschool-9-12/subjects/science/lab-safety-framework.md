@@ -10,8 +10,19 @@ invariants below are broken.
 holding the materials. Every hazard-bearing lesson therefore opens with a student-visible
 `safety-review` segment carrying the hazards, their mitigations, the supervision level, the required
 PPE, the safe order, every stop condition, the disposal steps, and the equal-credit alternative in full.
-`safety_privacy` remains the guardian record. `validate.mjs` compares the two and fails if any hazard,
-mitigation, or stop condition in the guardian record is missing from what the learner sees.
+The eleven non-disableable prohibitions are repeated in the same brief, because the policy set that
+declares them is stripped from the student projection too.
+`safety_privacy` remains the guardian record. `validate.mjs` compares the two **in both directions** and
+fails if any hazard, mitigation, stop condition, or supervision level differs between the guardian record
+and what the learner sees. `safety_privacy` has no field for the safe order or the disposal, so the
+guardian visibility note names them explicitly, including any step that runs unattended or overnight.
+
+**A hazard-bearing phenomenon carries its rule on every day, not only on lab days.** The anchoring
+phenomenon is repeated in the retrieval segment of all twelve days of a unit, but only the hands-on days
+carry a safety brief. Any phenomenon naming a material a learner could reproduce at a kitchen sink —
+finely divided iron, a reactive metal, a cleaning product, a sealed gas-producing reaction, a pressurised
+bottle, or a sealed commercial product — therefore carries its own student-visible prohibition and its
+deferral to supervision or to recorded data, on all twelve days and on the unit record.
 
 ## 1. Non-disableable prohibitions
 
@@ -23,11 +34,12 @@ tutor route, or extension can weaken them.
 3. Never fully seal a reacting, fermenting, oxidising, or warm mixture in any container.
 4. Never have a flammable liquid open in the same room as a flame, hob, pilot light, heater, lamp, charger, or battery.
 5. Never use alcohol, or any other fuel, for a flame demonstration; no open-flame demonstration is used anywhere in this package.
-6. Never cut, tear, puncture, or open a sealed commercial product — cold pack, hand warmer, glow stick, or smoke detector.
-7. Never look at the sun directly or through any lens, filter, grating, or camera.
-8. Never require a photograph, video, or voice recording as evidence of completion.
-9. Never request or record a learner body measurement, health measurement, or medical history.
-10. Never present invented measurements as real experimental results.
+6. Never light, strike, or operate an open flame or a hob, burner, or pilot light for any investigation in this package; no lesson requires one.
+7. Never cut, tear, puncture, or open a sealed commercial product — cold pack, hand warmer, glow stick, or smoke detector.
+8. Never look at the sun directly or through any lens, filter, grating, or camera.
+9. Never require a photograph, video, or voice recording as evidence of completion.
+10. Never request or record a learner body measurement, health measurement, or medical history.
+11. Never present invented measurements as real experimental results.
 
 ## 2. What is excluded from the whole package
 

@@ -12,8 +12,8 @@ A four-course science progression for Grades 9–12, authored to **Curriculum Au
 | Schedules | 4 (36 weeks × 3 sessions) |
 | Standards coverage | all 71 Michigan high school performance expectations |
 | Contract validation | `validateAuthoringSet` — 0 issues |
-| Mission validation | 48/48 checks pass |
-| Mutation tests | 22/22 mutants killed |
+| Mission validation | 60/60 checks pass |
+| Mutation tests | 36/36 mutants killed |
 
 ## The sequence
 

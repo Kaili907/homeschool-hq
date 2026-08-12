@@ -118,7 +118,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `nearby-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** raw eggs or a small fragile object, padding materials from the household, measuring tape, tray or tarp for the landing zone, toy cars for the collision strand, notebook
+- **Materials:** raw eggs or a small fragile object, padding materials from the household, measuring tape, tray or tarp for the landing zone, toy cars for the collision strand, gloves, notebook
 
 **Hazards**
 

@@ -4,8 +4,8 @@
   "overall": "PASS",
   "contract_issues": [],
   "counts": {
-    "checks": 48,
-    "passed": 48,
+    "checks": 60,
+    "passed": 60,
     "failed": 0
   },
   "checks": [
@@ -192,7 +192,7 @@
     {
       "check": "sealed-commercial-products-are-never-opened",
       "result": "PASS",
-      "detail": "36 lessons mention a sealed commercial product; all forbid opening it"
+      "detail": "100 lessons mention a sealed commercial product; all forbid opening it"
     },
     {
       "check": "strong-magnets-declare-the-ingestion-hazard",
@@ -247,7 +247,67 @@
     {
       "check": "safety-documentation-agrees-with-the-authored-hazards",
       "result": "PASS",
-      "detail": "chemical-hazard lessons=20 emotional-hazard units=8 investigations with an alternative=36 hazard-bearing lessons=70 non-disableable prohibitions=10"
+      "detail": "chemical-hazard lessons=20 emotional-hazard units=8 investigations with an alternative=36 hazard-bearing lessons=70 non-disableable prohibitions=11"
+    },
+    {
+      "check": "unbriefed-hazard-text-carries-a-student-visible-rule",
+      "result": "PASS",
+      "detail": "every hazard-bearing material named outside a safety brief carries its own prohibition and deferral"
+    },
+    {
+      "check": "non-food-grade-chemicals-never-share-food-or-drinking-equipment",
+      "result": "PASS",
+      "detail": "2 lesson(s) carry a non-food grade; all run it in disposable or permanently non-food equipment"
+    },
+    {
+      "check": "water-temperature-limits-state-a-safe-numeric-range",
+      "result": "PASS",
+      "detail": "16 warm-water lessons bound every learner-handling limit at or below 50 degrees Celsius"
+    },
+    {
+      "check": "no-open-flame-is-lit-or-operated-anywhere",
+      "result": "PASS",
+      "detail": "no lesson lights or operates a flame, and a generic open-flame prohibition is non-disableable"
+    },
+    {
+      "check": "required-ppe-reaches-the-learner-and-the-materials-list",
+      "result": "PASS",
+      "detail": "24 eye-protection lessons and 12 glove lessons carry their PPE in both places"
+    },
+    {
+      "check": "equal-credit-alternative-is-stated-and-needs-no-special-equipment",
+      "result": "PASS",
+      "detail": "70 hazard-bearing lessons state a full equal-credit alternative that needs no special equipment"
+    },
+    {
+      "check": "student-brief-and-guardian-record-agree-both-ways",
+      "result": "PASS",
+      "detail": "70 hazard-bearing lessons state identical hazards, mitigations, stop conditions, and supervision to learner and guardian"
+    },
+    {
+      "check": "lesson-preview-and-reinforcement-semantics-hold",
+      "result": "PASS",
+      "detail": "all 432 lessons carry their unit's standards role with preview and reinforcement the right way round"
+    },
+    {
+      "check": "hazard-combinations-are-read-structurally-not-from-negatable-prose",
+      "result": "PASS",
+      "detail": "2 hazard pair(s) found in the structured fields; each carries a separation instruction naming both materials in one sentence"
+    },
+    {
+      "check": "non-disableable-prohibitions-reach-the-learner",
+      "result": "PASS",
+      "detail": "all 11 non-disableable prohibitions reach the learner in each of 70 hazard-bearing lessons"
+    },
+    {
+      "check": "hazardous-items-the-learner-handles-are-on-the-materials-list",
+      "result": "PASS",
+      "detail": "every sealed commercial product the learner is told to handle is on the materials list"
+    },
+    {
+      "check": "guardian-note-covers-safe-order-disposal-and-ppe",
+      "result": "PASS",
+      "detail": "70 hazard-bearing lessons direct the guardian to the safe order, the PPE, and the disposal before the session"
     }
   ]
 }

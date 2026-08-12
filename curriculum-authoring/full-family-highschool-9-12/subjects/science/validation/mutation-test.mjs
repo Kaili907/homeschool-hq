@@ -247,6 +247,140 @@ const MUTANTS = [
     doc: (text) => text.replace('holds for all 20 lessons that carry a chemical hazard', 'holds for all 11 lessons that carry a chemical hazard'),
     apply() {},
   },
+  // ---------------------------------------------------------------- H3 learner-use mutants
+  {
+    name: 'phenomenon-safety-rider-stripped-from-the-unbriefed-days',
+    kills: 'unbriefed-hazard-text-carries-a-student-visible-rule',
+    why: 'the shipped defect: a hazard-bearing phenomenon repeated on the ten days that carry no safety brief',
+    apply(set) {
+      for (const l of set.lessons) {
+        for (const seg of l.lesson_flow) seg.teacher_or_tutor_action = seg.teacher_or_tutor_action.replace(/ SAFETY: [\s\S]*?(?= - or a short retrieval prompt)/g, '')
+      }
+      for (const u of set.units) for (const e of u.extensions ?? []) {
+        if (typeof e.value?.value === 'string') e.value.value = e.value.value.replace(/ SAFETY: [\s\S]*$/, '')
+      }
+    },
+  },
+  {
+    name: 'non-food-grade-chemical-returned-to-drinking-equipment',
+    kills: 'non-food-grade-chemicals-never-share-food-or-drinking-equipment',
+    why: 'the shipped defect: ice-melt calcium chloride dissolved in an insulated drinking cup weighed on the kitchen scale',
+    apply(set) {
+      for (const l of withSafety(set)) {
+        if (!l.materials.some((m) => /ice-melt/i.test(m))) continue
+        l.materials = l.materials.map((m) => (/disposable cups for the calcium chloride/i.test(m) ? 'insulated cup' : m))
+      }
+    },
+  },
+  {
+    name: 'water-temperature-cap-raised-out-of-the-safe-range',
+    kills: 'water-temperature-limits-state-a-safe-numeric-range',
+    why: 'the H2 check accepted any number beside "degrees Celsius", so a scalding cap would have passed',
+    apply(set) {
+      for (const lesson of withSafety(set)) editSafety(lesson, (t) => t.replace(/below 50 degrees Celsius/g, 'below 80 degrees Celsius'))
+    },
+  },
+  {
+    name: 'a-lesson-lights-an-open-flame',
+    kills: 'no-open-flame-is-lit-or-operated-anywhere',
+    why: 'H2 banned only a fuel-fed flame, so any other open-flame step was unguarded',
+    apply(set) {
+      editSafety(find(set, 'ma-hs10-chemistry-u04-l07'), (t) => `${t}\n  SAFE ORDER 7. Light the candle and hold the sample over the flame.`)
+    },
+  },
+  {
+    name: 'generic-open-flame-prohibition-removed-from-the-policy-set',
+    kills: 'no-open-flame-is-lit-or-operated-anywhere',
+    why: 'a prohibition that is not declared non-disableable can be switched off by a host',
+    apply(set) {
+      const sp = set.policy_sets[0].safety_privacy
+      sp.non_disableable_prohibitions = sp.non_disableable_prohibitions.filter((r) => !/\bopen flame\b/i.test(r) || !/\b(light|strike|operate)\b/i.test(r))
+    },
+  },
+  {
+    name: 'ppe-named-in-a-mitigation-dropped-from-the-materials-list',
+    kills: 'required-ppe-reaches-the-learner-and-the-materials-list',
+    why: 'the shipped defect: mitigations told the learner to wear gloves the family was never told to obtain',
+    apply(set) {
+      for (const l of set.lessons) l.materials = l.materials.filter((m) => !/\bgloves?\b/i.test(m))
+    },
+  },
+  {
+    name: 'alternative-demoted-below-equal-credit',
+    kills: 'equal-credit-alternative-is-stated-and-needs-no-special-equipment',
+    why: 'an alternative that is not equal credit is a penalty for the household that cannot run the lab',
+    apply(set) {
+      for (const lesson of withSafety(set)) editSafety(lesson, (t) => t.replace('ALTERNATIVE (equal credit, no special equipment):', 'ALTERNATIVE (partial credit, if the investigation cannot be run):'))
+    },
+  },
+  {
+    name: 'guardian-record-supervision-diverges-from-the-student-brief',
+    kills: 'student-brief-and-guardian-record-agree-both-ways',
+    why: 'H2 checked only that the guardian record reached the learner, never that the learner brief matched the record',
+    apply(set) {
+      const lesson = find(set, 'ma-hs10-chemistry-u03-l07')
+      lesson.safety_privacy.supervision = 'nearby-adult'
+      lesson.safety_privacy.guardian_visibility = 'summary'
+    },
+  },
+  {
+    name: 'a-lesson-calls-a-forward-looking-standard-reinforcement',
+    kills: 'lesson-preview-and-reinforcement-semantics-hold',
+    why: 'H2 checked unit-level roles only, and the same text is projected to the learner on all twelve lessons',
+    apply(set) {
+      for (const l of set.lessons) {
+        const e = (l.extensions ?? []).find((x) => x.namespace === 'manuel.academy/standards-role')
+        if (e?.value?.value?.includes('Previewed')) e.value.value = e.value.value.replace('Previewed (taught later in the sequence; touched here to build readiness, never assessed here)', 'Reinforced (already taught in or before this unit, and assessed only where it is primary)')
+      }
+    },
+  },
+  {
+    name: 'a-negated-clause-hides-an-affirmative-hazard-instruction',
+    kills: 'no-mains-electricity-use',
+    why: 'the H2 negation window was the whole sentence, so an unrelated earlier negation masked the instruction that followed it',
+    apply(set) {
+      editSafety(find(set, 'ma-hs10-chemistry-u04-l07'), (t) => `${t}\n  SAFE ORDER 7. No battery is anywhere in the room, and connect the leads into the wall outlet.`)
+    },
+  },
+  {
+    name: 'hazard-pair-separation-replaced-by-a-bare-negation',
+    kills: 'hazard-combinations-are-read-structurally-not-from-negatable-prose',
+    why: 'a sentence asserting that an ignition source is absent is not an instruction to keep the pair apart',
+    apply(set) {
+      for (const lesson of withSafety(set)) {
+        editSafety(lesson, (t) => t
+          .replace(/Keep steel wool away from every battery and heat source, and never let it touch a 9V battery from an earlier unit\./g, 'No battery is present.')
+          .replace(/Alcohol and a battery are never left out together at any point\./g, 'No battery is present.')
+          .replace(/and takes the bottle out of the room/g, 'and caps the bottle')
+          .replace(/, before any battery appears;/g, ';')
+          .replace(/store it away from steel wool and loose metal/g, 'store it'))
+      }
+    },
+  },
+  {
+    name: 'non-disableable-prohibitions-stripped-from-the-learner-brief',
+    kills: 'non-disableable-prohibitions-reach-the-learner',
+    why: 'the shipped defect: all eleven prohibitions lived only in fields the contract strips from the student projection',
+    apply(set) {
+      for (const lesson of withSafety(set)) editSafety(lesson, (t) => t.split('\n').filter((line) => !line.startsWith('  ALWAYS: ') && !line.startsWith('ALWAYS - ')).join('\n'))
+    },
+  },
+  {
+    name: 'a-handled-glow-stick-dropped-from-the-materials-list',
+    kills: 'hazardous-items-the-learner-handles-are-on-the-materials-list',
+    why: 'the shipped defect: the safe order told the learner to bend and activate a glow stick the materials list never named',
+    apply(set) {
+      for (const l of set.lessons) l.materials = l.materials.filter((m) => !/glow stick/i.test(m))
+    },
+  },
+  {
+    name: 'guardian-note-reverts-to-hazards-and-stop-conditions-only',
+    kills: 'guardian-note-covers-safe-order-disposal-and-ppe',
+    why: 'safety_privacy has no safe-order or disposal field, so a narrowed note leaves the overnight cool-down learner-only',
+    apply(set) {
+      for (const l of set.lessons) l.guardian_visibility_note = 'Share the lesson target, completion state, evidence type, and next instructional step. For the Day 7 investigation, share the hazard list, the supervision level, and the stop conditions BEFORE the session.'
+    },
+  },
 ]
 
 const { checks: cleanChecks } = runChecks(clone(baseline), baselineDoc)

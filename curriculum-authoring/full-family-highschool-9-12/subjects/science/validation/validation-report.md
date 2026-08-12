@@ -3,7 +3,7 @@
 **Schema set:** 2.0.0  
 **Overall:** **PASS**  
 **Contract issues from `validateAuthoringSet`:** 0  
-**Mission checks:** 48/48 passed
+**Mission checks:** 60/60 passed
 
 The contract check runs the repository's own validator,
 `src/curriculum-authoring/v2/validation.ts`, against this authoring set. The mission checks below
@@ -48,7 +48,7 @@ alternative paths, media independence, and data provenance.
 | every-hazard-bearing-lesson-declares-disposal | PASS | 70 lessons declare disposal |
 | hazardous-disposal-is-open-cooled-and-never-sealed | PASS | no disposal instruction seals a reactive or warm material |
 | hydrogen-generation-is-named-where-it-occurs | PASS | 2 lesson(s) run an acid-and-metal reaction; all name hydrogen and its flammability |
-| sealed-commercial-products-are-never-opened | PASS | 36 lessons mention a sealed commercial product; all forbid opening it |
+| sealed-commercial-products-are-never-opened | PASS | 100 lessons mention a sealed commercial product; all forbid opening it |
 | strong-magnets-declare-the-ingestion-hazard | PASS | 2 magnet lessons state the ingestion hazard |
 | soil-and-mould-work-never-shares-food-equipment | PASS | 6 contaminating-material lessons keep equipment out of food use |
 | no-food-equipment-used-for-soil-or-mould-work | PASS | 6 contaminating-material lessons list no food equipment |
@@ -59,7 +59,19 @@ alternative paths, media independence, and data provenance.
 | assessment-standards-are-taught-in-or-before-their-unit | PASS | 36 assessments carry only standards already taught |
 | foundation-units-claim-no-performance-expectation | PASS | 4 foundation unit(s) declare no performance expectation instead of borrowing one |
 | preview-and-reinforcement-semantics-hold | PASS | every reinforced standard was taught earlier and every previewed standard is taught later |
-| safety-documentation-agrees-with-the-authored-hazards | PASS | chemical-hazard lessons=20 emotional-hazard units=8 investigations with an alternative=36 hazard-bearing lessons=70 non-disableable prohibitions=10 |
+| safety-documentation-agrees-with-the-authored-hazards | PASS | chemical-hazard lessons=20 emotional-hazard units=8 investigations with an alternative=36 hazard-bearing lessons=70 non-disableable prohibitions=11 |
+| unbriefed-hazard-text-carries-a-student-visible-rule | PASS | every hazard-bearing material named outside a safety brief carries its own prohibition and deferral |
+| non-food-grade-chemicals-never-share-food-or-drinking-equipment | PASS | 2 lesson(s) carry a non-food grade; all run it in disposable or permanently non-food equipment |
+| water-temperature-limits-state-a-safe-numeric-range | PASS | 16 warm-water lessons bound every learner-handling limit at or below 50 degrees Celsius |
+| no-open-flame-is-lit-or-operated-anywhere | PASS | no lesson lights or operates a flame, and a generic open-flame prohibition is non-disableable |
+| required-ppe-reaches-the-learner-and-the-materials-list | PASS | 24 eye-protection lessons and 12 glove lessons carry their PPE in both places |
+| equal-credit-alternative-is-stated-and-needs-no-special-equipment | PASS | 70 hazard-bearing lessons state a full equal-credit alternative that needs no special equipment |
+| student-brief-and-guardian-record-agree-both-ways | PASS | 70 hazard-bearing lessons state identical hazards, mitigations, stop conditions, and supervision to learner and guardian |
+| lesson-preview-and-reinforcement-semantics-hold | PASS | all 432 lessons carry their unit's standards role with preview and reinforcement the right way round |
+| hazard-combinations-are-read-structurally-not-from-negatable-prose | PASS | 2 hazard pair(s) found in the structured fields; each carries a separation instruction naming both materials in one sentence |
+| non-disableable-prohibitions-reach-the-learner | PASS | all 11 non-disableable prohibitions reach the learner in each of 70 hazard-bearing lessons |
+| hazardous-items-the-learner-handles-are-on-the-materials-list | PASS | every sealed commercial product the learner is told to handle is on the materials list |
+| guardian-note-covers-safe-order-disposal-and-ppe | PASS | 70 hazard-bearing lessons direct the guardian to the safe order, the PPE, and the disposal before the session |
 
 ## What a PASS does and does not mean
 
