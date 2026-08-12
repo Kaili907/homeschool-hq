@@ -1,0 +1,275 @@
+{
+  "schema_version": "1.0",
+  "course_id": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "note": "Integration metadata for the existing Study Engine contracts. This file adds no new engine capability; it records how this course's lessons map onto contracts that already exist.",
+  "study_contract_refs": {
+    "lesson_plan": "src/study/types.ts :: StudyLessonPlan",
+    "mastery_authority": "src/study/types.ts :: StudyLessonPlan.masteryAuthority",
+    "calendar_entry": "src/study/types.ts :: StudyCalendarEntry",
+    "host_mapping": "src/study/curriculumAdapter.ts :: HOST_STUDY_MAPPING",
+    "learner_projection": "src/study/contracts/production/content.ts :: StudyLearnerLesson",
+    "guardian_authorized_action": "src/study/family-pilot/parent/actions.ts :: acknowledgeReview"
+  },
+  "default_mastery_authority": "completion-only",
+  "mastery_advancing_phases": [
+    "Mastery check"
+  ],
+  "policy": "Financial Literacy practice, simulated budgets, and marketplace play record completion only and do not by themselves advance official mastery. Only the unit mastery check and unit assessment carry tutor-core mastery authority. All amounts are fictional and simulated.",
+  "real_world_sign_off_rule": "This course contains no real-world financial actions. Every task is fictional and simulated, and no guardian financial sign-off is requested because no real money, account, or purchase is involved.",
+  "lessons": [
+    {
+      "lesson_id": "ma-g3-financial-literacy-u01-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u01-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u01-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u01-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u01-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u01-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u02-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u02-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u02-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u02-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u02-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u02-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u03-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u03-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u03-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u03-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u03-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u03-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u04-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u04-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u04-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u04-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u04-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u04-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u05-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u05-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u05-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u05-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u05-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u05-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u06-l01",
+      "phase": "Launch and diagnostic",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u06-l02",
+      "phase": "Explicit model",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u06-l03",
+      "phase": "Guided practice",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u06-l04",
+      "phase": "Application or project",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u06-l05",
+      "phase": "Mastery check",
+      "mastery_authority": "tutor-core",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    },
+    {
+      "lesson_id": "ma-g3-financial-literacy-u06-l06",
+      "phase": "Correction and reflection",
+      "mastery_authority": "completion-only",
+      "real_world_action": false,
+      "completion_authority": "learner"
+    }
+  ]
+}
