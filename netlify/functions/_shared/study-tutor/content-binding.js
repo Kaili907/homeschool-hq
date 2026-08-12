@@ -79,11 +79,14 @@ const TRUSTED_TEST_STATIC_ACADEMY_PERMITS = new WeakSet()
 const PRIVATE_TUTOR_BINDING_STATE = new WeakMap()
 const PRIVATE_STATIC_PERMIT_STATE = new WeakMap()
 
-const CLOSED_RESULTS = Object.freeze(Object.fromEntries(
+const CLOSED_RESULTS = Object.freeze(
   SERVER_TUTOR_CONTENT_BINDING_STATUSES
     .filter((status) => status !== 'eligible' && status !== 'ordinary-content-ineligible')
-    .map((status) => [status, Object.freeze({ schemaVersion: 1, status })]),
-))
+    .reduce((results, status) => {
+      results[status] = Object.freeze({ schemaVersion: 1, status })
+      return results
+    }, Object.create(null)),
+)
 
 function closed(status) {
   return CLOSED_RESULTS[status] ?? CLOSED_RESULTS['server-unavailable']
@@ -362,6 +365,19 @@ function isExactEligibleDecision(value) {
   )
 }
 
+/**
+ * The only two contractual shapes for `resolveApprovedMapping`'s result are
+ * exact `null` (no approved row) and a frozen plain object (an opaque
+ * selection token). `undefined`, `0`, `''`, `false`, a Promise, or any other
+ * non-plain value is a broken custody contract, not "no selection" and not
+ * "selected" — it must fail closed rather than silently pass `!== null`.
+ */
+function isExactApprovedSelection(value) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false
+  const prototype = Object.getPrototypeOf(value)
+  return (prototype === Object.prototype || prototype === null) && Object.isFrozen(value)
+}
+
 function createBindingService({
   sessionVerifier,
   operationResolver,
@@ -463,7 +479,12 @@ function createBindingService({
     if (!frozenPinsCurrent) return closed('mapping-stale')
 
     // Stage 8: exact lesson + segment + task lookup. A null lookup is the
-    // production truth today and must not touch any Tutor selector.
+    // production truth today and must not touch any Tutor selector. The
+    // embedded static capability's lookup is a synchronous, side-effect-free
+    // data read (proven by the census equivalence check in
+    // artifact-custody.js's verifyEmbeddedArtifacts); it is deliberately not
+    // awaited, so any Promise it might return is left un-awaited and is
+    // rejected below by isExactApprovedSelection rather than resolved.
     let selection
     try {
       selection = artifact.resolveApprovedMapping({
@@ -472,6 +493,9 @@ function createBindingService({
         taskType: content.taskType,
       })
     } catch {
+      return closed('mapping-integrity-failed')
+    }
+    if (selection !== null && !isExactApprovedSelection(selection)) {
       return closed('mapping-integrity-failed')
     }
 
@@ -570,7 +594,10 @@ function createBindingService({
  */
 export function createServerTutorContentBindingService(options = {}) {
   return createBindingService({
-    sessionVerifier: createTrustedStudySessionVerifier(options),
+    sessionVerifier: createTrustedStudySessionVerifier({
+      env: options.env,
+      fetchImpl: options.fetchImpl,
+    }),
     operationResolver: options.operationResolver,
     hostContentResolver: options.hostContentResolver,
     artifactCustody: createProductionServerTutorArtifactCustody(),

@@ -8,6 +8,7 @@ import { createTestServerTutorArtifactCustody } from './artifact-custody.js'
 import {
   SERVER_TUTOR_CONTENT_BINDING_STATUSES,
   SERVER_TUTOR_FORBIDDEN_BROWSER_FIELDS,
+  createServerTutorContentBindingService,
   createTestServerTutorContentBindingService,
   isTestServerTutorBinding,
   isTestStaticAcademyPermit,
@@ -15,6 +16,15 @@ import {
   isTrustedStaticAcademyPermit,
   parseServerTutorOperationRequest,
 } from './content-binding.js'
+
+vi.mock('../study-identity/supabase.js', async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    createTrustedStudySessionVerifier: vi.fn(actual.createTrustedStudySessionVerifier),
+  }
+})
+const { createTrustedStudySessionVerifier } = await import('../study-identity/supabase.js')
 
 const SESSION_REFERENCE = `aca_stu_v1_${'A'.repeat(43)}`
 const IDS = Object.freeze({
@@ -574,5 +584,118 @@ describe('closed result vocabulary', () => {
       'server-unavailable',
       'safety-failure',
     ])
+  })
+})
+
+describe('production composition', () => {
+  it('passes the session verifier only its two contractual transport dependencies, forwarding nothing else', async () => {
+    createTrustedStudySessionVerifier.mockClear()
+    const env = Object.freeze({})
+    const fetchImpl = vi.fn()
+    createServerTutorContentBindingService({
+      env,
+      fetchImpl,
+      operationResolver: { isReady: () => true, resolve: vi.fn() },
+      hostContentResolver: { isReady: () => true, resolve: vi.fn() },
+      hostAuthority: { isReady: () => true, check: vi.fn() },
+      verifier: { isReady: () => true, verify: vi.fn() },
+      timeoutMs: 1,
+      extraneous: 'must-not-reach-the-trust-boundary',
+    })
+    expect(createTrustedStudySessionVerifier).toHaveBeenCalledTimes(1)
+    const [forwarded] = createTrustedStudySessionVerifier.mock.calls[0]
+    expect(forwarded).toEqual({ env, fetchImpl })
+    expect(Object.keys(forwarded)).toEqual(['env', 'fetchImpl'])
+  })
+
+  it('runs the real production session verifier end to end through a mocked transport, still closing on denial', async () => {
+    createTrustedStudySessionVerifier.mockClear()
+    const env = Object.freeze({
+      SUPABASE_URL: 'https://example.supabase.co',
+      SUPABASE_SERVICE_ROLE_KEY: 'service-role-key',
+    })
+    const fetchImpl = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify({ status: 'denied', schemaVersion: 1 }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      }),
+    )
+    const operationResolver = { isReady: () => true, resolve: vi.fn() }
+    const hostContentResolver = { isReady: () => true, resolve: vi.fn() }
+    const hostAuthority = { isReady: () => true, check: vi.fn() }
+    const service = createServerTutorContentBindingService({
+      env,
+      fetchImpl,
+      operationResolver,
+      hostContentResolver,
+      hostAuthority,
+    })
+    const result = await service.resolve(request())
+    expectBare(result, 'auth-refused')
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+    expect(operationResolver.resolve).not.toHaveBeenCalled()
+    expect(hostContentResolver.resolve).not.toHaveBeenCalled()
+    expect(hostAuthority.check).not.toHaveBeenCalled()
+  })
+})
+
+describe('forged or unbranded artifact capability refusal', () => {
+  it('refuses a capability object with the exact right method shape that was never minted by artifact custody', async () => {
+    const forgedMethods = Object.freeze({
+      verifyAcademySourcePins: vi.fn(() => true),
+      verifyFrozenTutorPins: vi.fn(() => true),
+      resolveApprovedMapping: vi.fn(() => null),
+      evaluateApprovedMapping: vi.fn(),
+      deriveLearnerPseudonym: vi.fn(),
+      createRuntime: vi.fn(),
+    })
+    const forgedCapability = Object.freeze({ ...forgedMethods })
+    const artifactCustody = {
+      verify: vi.fn().mockResolvedValue({ status: 'verified', capability: forgedCapability }),
+    }
+    const { service } = harness({ artifactCustody })
+    expectBare(await service.resolve(request()), 'mapping-integrity-failed')
+    for (const method of Object.values(forgedMethods)) expect(method).not.toHaveBeenCalled()
+  })
+
+  it('refuses an unbranded plain object masquerading as the capability envelope itself', async () => {
+    const artifactCustody = {
+      verify: vi.fn().mockResolvedValue({
+        status: 'verified',
+        capability: Object.freeze({ notACapability: true }),
+      }),
+    }
+    const { service, calls } = harness({ artifactCustody })
+    expectBare(await service.resolve(request()), 'mapping-integrity-failed')
+    expect(calls.verifyAcademyPins).not.toHaveBeenCalled()
+    expect(calls.lookup).not.toHaveBeenCalled()
+  })
+})
+
+describe('exact approved-selection shape (broken custody contracts fail closed)', () => {
+  it.each([
+    ['undefined', undefined],
+    ['zero', 0],
+    ['empty string', ''],
+    ['false', false],
+    ['NaN', Number.NaN],
+    ['an unfrozen plain object', {}],
+    ['a frozen array', Object.freeze([])],
+    ['a Promise (resolveApprovedMapping is a synchronous contract, never awaited)', Promise.resolve(Object.freeze({}))],
+  ])('treats a %s lookup result as a broken custody contract, not a selection', async (_label, badSelection) => {
+    const { service, calls } = harness({ lookup: vi.fn(() => badSelection) })
+    expectBare(await service.resolve(request()), 'mapping-integrity-failed')
+    expect(calls.eligibility).not.toHaveBeenCalled()
+    expect(calls.pseudonym).not.toHaveBeenCalled()
+    expect(calls.liveAuthority).not.toHaveBeenCalled()
+  })
+
+  it('still accepts exact null as "no selection" and a frozen plain object as a selection', async () => {
+    const nullLookup = harness({ lookup: vi.fn(() => null) })
+    expect((await nullLookup.service.resolve(request())).status).toBe('ordinary-content-ineligible')
+
+    const selection = Object.freeze({ fixture: 'valid-selection' })
+    const objectLookup = harness({ lookup: vi.fn(() => selection) })
+    expect((await objectLookup.service.resolve(request())).status).toBe('eligible')
   })
 })
