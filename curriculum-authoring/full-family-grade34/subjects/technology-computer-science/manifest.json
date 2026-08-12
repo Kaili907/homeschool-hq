@@ -1,0 +1,47 @@
+{
+  "package_id": "manuel-academy-g34-technology-computer-science-authoring",
+  "version": "0.1.0",
+  "status": "draft",
+  "school_year": {
+    "weeks": 36,
+    "cadence": "weekly"
+  },
+  "jurisdictional_alignment": "Michigan-aligned; locally authored; not a claim of state approval or automatic credit",
+  "subject": "technology-computer-science",
+  "grades": [3, 4],
+  "counts": {
+    "courses": 2,
+    "units": 12,
+    "lessons": 72,
+    "assessments": 12,
+    "schedules": 2
+  },
+  "courses": [
+    {
+      "course_id": "ma-g3-tech-cs",
+      "grade": 3,
+      "title": "Grade 3 Technology and Computer Science",
+      "path": "grade-3",
+      "units": 6,
+      "lessons": 36
+    },
+    {
+      "course_id": "ma-g4-tech-cs",
+      "grade": 4,
+      "title": "Grade 4 Technology and Computer Science",
+      "path": "grade-4",
+      "units": 6,
+      "lessons": 36
+    }
+  ],
+  "entry_points": {
+    "human": "README.md",
+    "standards": "standards-map.md",
+    "policy": "accessibility-and-safety-policy.md",
+    "projects": "projects-and-portfolio.md"
+  },
+  "id_pattern": "^ma-g[34]-tech-cs-u[0-9]{2}-l[0-9]{2}$",
+  "no_new_study_engine": true,
+  "no_credential_collection": true,
+  "no_live_security_attack_tasks": true
+}
