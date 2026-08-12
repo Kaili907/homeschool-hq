@@ -185,9 +185,22 @@ This is a stated, deliberate gap in the *prerequisite*, not a gap in *coverage*.
 ## 5. Standards coverage — all 71 performance expectations
 
 Every one of the 71 Michigan high school performance expectations has exactly one **primary** course
-that owns it, teaches it to mastery, and assesses it. Some are additionally **reinforced** in a later
-course; reinforcement is deliberate spiral practice supporting the multi-occasion mastery rule, never
-a substitute for primary coverage.
+that owns it, teaches it to mastery, and assesses it — with the single documented exception of
+HS-ETS1-1, HS-ETS1-2, and HS-ETS1-3, which are deliberately distributed across all four engineering
+capstones.
+
+A unit that touches an expectation it does not own is doing one of two different things, and the
+package does not conflate them. **Reinforcement** looks backwards: the expectation was taught in or
+before this unit, and revisiting it is deliberate spiral practice supporting the multi-occasion mastery
+rule. **Preview** looks forwards: the expectation is taught later in the sequence, and the unit is
+building readiness for it. Neither substitutes for primary coverage, and neither is assessed — a unit
+assessment carries its own unit's primary standards only, so nothing is ever assessed before the unit
+that teaches it. `validation/checks.mjs` enforces all three rules.
+
+Four units — Biology, Chemistry, Physics, and Earth/Space Unit 1 — teach measurement, uncertainty, and
+data practice and claim no performance expectation at all. They say so explicitly rather than borrowing
+one from their spiral list, which is what previously put HS-PS2-1 and HS-ESS3-5 on a Unit 1 assessment
+before either was taught.
 
 `standards-alignment.md` carries the full machine-checked table, including the exact statement text of
 each performance expectation as published by MDE. Summary:
@@ -253,11 +266,20 @@ validation check, not just by convention.
 Full detail is in `lab-safety-framework.md`. The design commitments:
 
 - **Home-school-safe by construction.** No investigation requires a fume hood, a compressed gas
-  cylinder, concentrated strong acid or base, an open-flame glassware setup, or any chemical
-  requiring institutional disposal.
-- **Guardian-visible hazards.** Every lesson carries a structured `safety_privacy` block with typed
-  hazards (kind, description, mitigation), a supervision level, and a guardian visibility level. A
-  guardian can see the hazard set before the session, not after.
+  cylinder, concentrated strong acid or base, an open flame of any kind, or any chemical requiring
+  institutional disposal. There is no flame test and no flame demonstration anywhere in the four
+  courses; Chemistry Unit 2 meets HS-PS1-1 from published emission spectra and a card-tube spectroscope.
+- **Learner-visible hazards, not only guardian-visible ones.** Every lesson carries a structured
+  `safety_privacy` block with typed hazards (kind, description, mitigation), a supervision level, and a
+  guardian visibility level, so a guardian sees the hazard set before the session rather than after.
+  Because the 2.0.0 contract strips `safety_privacy` from the student projection, every hazard-bearing
+  lesson *also* opens with a student-visible `safety-review` segment carrying the same hazards and
+  mitigations plus the supervision level, required PPE, safe order, stop conditions, disposal steps, and
+  the equal-credit alternative. Safety never lives only where the person handling the materials cannot
+  read it.
+- **Day 9 inherits Day 7's safety.** The performance-task build handles the same materials, so it carries
+  the same hazard set, supervision level, and safety brief wherever the investigation declares a physical
+  or chemical hazard.
 - **Supervision is explicit.** Every lesson declares `none`, `nearby-adult`, or `direct-adult`. Any
   lesson with a chemical or thermal hazard declares `direct-adult` and
   `guardian_visibility: confirmation-required`.

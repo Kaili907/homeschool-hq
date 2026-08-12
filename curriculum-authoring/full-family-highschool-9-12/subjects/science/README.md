@@ -12,7 +12,8 @@ A four-course science progression for Grades 9–12, authored to **Curriculum Au
 | Schedules | 4 (36 weeks × 3 sessions) |
 | Standards coverage | all 71 Michigan high school performance expectations |
 | Contract validation | `validateAuthoringSet` — 0 issues |
-| Mission validation | 27/27 checks pass |
+| Mission validation | 48/48 checks pass |
+| Mutation tests | 22/22 mutants killed |
 
 ## The sequence
 
@@ -36,6 +37,8 @@ from what is merely conventional, and marks every Manuel Academy decision as a l
 | [`study-integration.md`](study-integration.md) | How these courses meet the Study Engine seam, and what integration work remains |
 | [`course-guides/`](course-guides/) | Per-course unit tables, phenomena, investigations, hazards, alternatives (generated) |
 | [`validation/validation-report.md`](validation/validation-report.md) | Validation evidence (generated) |
+| [`validation/checks.mjs`](validation/checks.mjs) | The contract and mission checks, importable so they can be mutation-tested |
+| [`validation/mutation-test.mjs`](validation/mutation-test.mjs) | One deliberate defect per check; a survivor means the check is decoration |
 
 ## Authoring set
 
@@ -48,14 +51,30 @@ blueprints per course under `lessons/`.
 
 ```bash
 python3 curriculum-authoring/full-family-highschool-9-12/subjects/science/tools/build_authoring_set.py
-python3 curriculum-authoring/full-family-highschool-9-12/subjects/science/tools/build_docs.py
 node --experimental-strip-types --disable-warning=ExperimentalWarning \
   curriculum-authoring/full-family-highschool-9-12/subjects/science/validation/validate.mjs
+python3 curriculum-authoring/full-family-highschool-9-12/subjects/science/tools/build_docs.py
+```
+
+Run the order above: `build_docs.py` renders `validation/validation-report.md` from the JSON report
+that `validate.mjs` writes, so it comes last. The mutation tests prove the safety and standards checks
+actually fire; they damage an in-memory copy of the package and require the named check to fail.
+
+```bash
+node --experimental-strip-types --disable-warning=ExperimentalWarning \
+  curriculum-authoring/full-family-highschool-9-12/subjects/science/validation/mutation-test.mjs
 ```
 
 The hand-authored source is `tools/course_spec.py`; everything else in `authoring-set/`,
 `course-guides/`, `standards-alignment.md`, and the validation report is generated from it.
-`tools/standards_data.py` is transcribed standards data and is not edited by hand.
+`tools/standards_data.py` is transcribed standards data and is not edited by hand. Its topic groupings are
+verified independently by `validation/checks.mjs`, which carries its own transcription of the Michigan
+high school topic arrangement so the data cannot validate itself.
+
+Safety reaches the learner, not only the guardian. The 2.0.0 contract strips `safety_privacy` from the
+student projection, so every hazard-bearing lesson also opens with a student-visible `safety-review`
+segment carrying the hazards, mitigations, supervision level, required PPE, safe order, stop conditions,
+disposal, and the equal-credit alternative in full. See [`lab-safety-framework.md`](lab-safety-framework.md).
 
 ## Scope and status
 

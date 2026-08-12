@@ -5,13 +5,31 @@ import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import course_spec as spec, standards_data
+sys.path.insert(0, HERE)
+from build_authoring_set import taught_order
 
 PE = {p["code"]: p for p in standards_data.PERFORMANCE_EXPECTATIONS}
 COURSE_OF = {}
-for c in spec.COURSES:
+ORDERED = sorted(spec.COURSES, key=lambda c: c["order"])
+UNIT_INDEX = {}
+_i = 0
+for c in ORDERED:
     for u in c["units"]:
+        _i += 1
+        UNIT_INDEX[id(u)] = _i
         for s in u["standards"]:
             COURSE_OF.setdefault(s.upper(), []).append((c["title"], u))
+TAUGHT_FIRST = taught_order()
+
+
+def split_spiral(u):
+    """Reinforcement looks backwards; a preview looks forwards. Never conflate them."""
+    n = UNIT_INDEX[id(u)]
+    back, fwd = [], []
+    for pe in u["spiral"]:
+        first = TAUGHT_FIRST.get(pe)
+        (back if first is not None and first <= n else fwd).append(pe)
+    return back, fwd
 
 def w(path, text):
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -49,14 +67,22 @@ for grp in ["Physical", "Life", "Earth and Space", "Engineering"]:
         stmt = p["statement"].replace("|", "\\|")
         L += [f"| `{p['code']}`{note} | {p['group']} | {courses} | {units} | {stmt} |"]
     L += [""]
-L += ["## Reinforcement (secondary occasions)", "",
-      "Reinforcement is deliberate spiral practice supporting the multi-occasion mastery rule. It never",
-      "substitutes for the primary coverage above.", "",
-      "| Course | Unit | Reinforces |", "| --- | --- | --- |"]
-for c in spec.COURSES:
+L += ["## Reinforcement and preview (secondary occasions)", "",
+      "A unit that touches a performance expectation it does not own is doing one of two different things,",
+      "and the package does not conflate them:", "",
+      "- **Reinforcement** — the expectation was already taught in or before this unit. This is deliberate",
+      "  spiral practice supporting the multi-occasion mastery rule.",
+      "- **Preview** — the expectation is taught later in the sequence. The unit builds readiness for it.",
+      "  A preview is never called reinforcement, and it is never assessed here.", "",
+      "Neither substitutes for the primary coverage above, and neither appears on a unit assessment: an",
+      "assessment carries its own unit's primary standards only.", "",
+      "| Course | Unit | Reinforces (already taught) | Previews (taught later) |", "| --- | --- | --- | --- |"]
+for c in ORDERED:
     for u in c["units"]:
-        if u["reinforces"]:
-            L += [f"| {c['title']} | U{u['_n']:02d} {u['title']} | {', '.join(s.upper() for s in u['reinforces'])} |"]
+        back, fwd = split_spiral(u)
+        if back or fwd:
+            L += [f"| {c['title']} | U{u['_n']:02d} {u['title']} | {', '.join(s.upper() for s in back) or '—'} "
+                  f"| {', '.join(s.upper() for s in fwd) or '—'} |"]
 w(os.path.join(ROOT, "standards-alignment.md"), "\n".join(L) + "\n")
 
 # ---------------------------------------------------------- per-course guides
@@ -69,7 +95,7 @@ for c in spec.COURSES:
          "## Units", "",
          "| # | Unit | Days | Primary PEs | Performance task |", "| --- | --- | --- | --- | --- |"]
     for u in c["units"]:
-        pes = ", ".join(s.upper() for s in u["standards"]) or "practice foundation"
+        pes = ", ".join(s.upper() for s in u["standards"]) or "practice foundation (no PE claimed or assessed)"
         G += [f"| {u['_n']} | {u['title']} | 12 | {pes} | {u['performance_task']} |"]
     G += ["", "## Anchoring phenomena", "",
           "Every unit opens on an observable phenomenon rather than a definition.", "",
@@ -77,8 +103,11 @@ for c in spec.COURSES:
     for u in c["units"]:
         G += [f"| {u['_n']} | {u['phenomenon']} |"]
     G += ["", "## Investigations, hazards, and alternative paths", "",
-          "Each unit's Day 7 is an investigation. Every one has a no-special-equipment alternative that meets",
-          "the same learning target — the alternative is a first-class path, not a consolation.", ""]
+          "Each unit's Day 7 is an investigation, and Day 9 rebuilds the performance task with the same",
+          "materials and the same safety set. Every hazard, mitigation, supervision level, safe-order step,",
+          "stop condition, and disposal step below is rendered into the learner-visible lesson flow on those",
+          "days — none of it lives only in the guardian record. Every investigation has a no-special-equipment",
+          "alternative that meets the same learning target: a first-class path, not a consolation.", ""]
     for u in c["units"]:
         i = u["investigation"]
         G += [f"### Unit {u['_n']} — {i['title']}", "",
@@ -88,10 +117,14 @@ for c in spec.COURSES:
               "**Hazards**", "", "| Kind | Hazard | Mitigation |", "| --- | --- | --- |"]
         for k, d, m in i["hazards"]:
             G += [f"| {k} | {d} | {m} |"]
+        G += ["", "**Safe order**", ""]
+        for n, step in enumerate(i["sequence"], start=1):
+            G += [f"{n}. {step}"]
         G += ["", "**Stop conditions**", ""]
         for s in i["stop"]:
             G += [f"- {s}"]
-        G += ["", f"**No-special-equipment alternative.** {i['alternative']}", "",
+        G += ["", f"**Disposal.** {i['disposal']}", "",
+              f"**No-special-equipment alternative.** {i['alternative']}", "",
               f"**Data provenance.** {i['data_source']}", ""]
     w(os.path.join(ROOT, "course-guides", f"{c['course_id']}.md"), "\n".join(G) + "\n")
 

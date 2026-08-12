@@ -22,6 +22,10 @@
   "non_disableable_prohibitions": [
    "Never mix household cleaning products; bleach combined with ammonia or acid releases toxic gas.",
    "Never connect any investigation to mains electricity; low-voltage cells only.",
+   "Never fully seal a reacting, fermenting, oxidising, or warm mixture in any container.",
+   "Never have a flammable liquid open in the same room as a flame, hob, pilot light, heater, lamp, charger, or battery.",
+   "Never use alcohol, or any other fuel, for a flame demonstration; no open-flame demonstration is used anywhere in this package.",
+   "Never cut, tear, puncture, or open a sealed commercial product - cold pack, hand warmer, glow stick, or smoke detector.",
    "Never look at the sun directly or through any lens, filter, grating, or camera.",
    "Never require a photograph, video, or voice recording as evidence of completion.",
    "Never request or record a learner body measurement, health measurement, or medical history.",
@@ -54,6 +58,11 @@
   {
    "namespace": "manuel.academy/sequence-note",
    "value_schema_ref": "sequence-note-v1",
+   "allowed_projection": "student-safe"
+  },
+  {
+   "namespace": "manuel.academy/lab-safety",
+   "value_schema_ref": "lab-safety-v1",
    "allowed_projection": "student-safe"
   }
  ]

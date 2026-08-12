@@ -27,7 +27,12 @@ PHASES = [
     "Performance task build", "Synthesis and review", "Unit assessment", "Correction and reflection",
 ]
 INVESTIGATION_DAY = 7
+PERFORMANCE_DAY = 9
 ASSESSMENT_DAY = 11
+# Day 9 builds the performance task, which for any unit with a physical or chemical
+# investigation means handling the same materials again. It therefore inherits the
+# investigation's full safety set instead of the desk-work baseline.
+HANDS_ON_DAYS = (INVESTIGATION_DAY, PERFORMANCE_DAY)
 
 SEGMENTS = [
     ("retrieval", "Retrieval and phenomenon check", 5, 7),
@@ -53,6 +58,13 @@ TUTOR_ROUTES = [
 GLOBAL_STOP = [
     "Stop for any injury, burn, spill, fume, or allergic reaction and tell the supervising adult.",
     "Stop if a material, tool, or step is not the one this lesson specifies.",
+    "Burn: cool it under running cool water for 20 minutes. Do not use ice, butter, or ointment.",
+    "Splash in an eye: rinse with running water for 15 minutes, holding the eyelid open, before anything else.",
+    "Fumes or a strong smell: leave the room, open a window from outside the room, and do not go back in to tidy up.",
+    "Fire: do not use water. Get everyone out, close the door, and call the emergency number. Smother a very small "
+    "contained flame with a metal pan lid or a fire blanket only if that is safe to do without reaching over it.",
+    "If anyone may have swallowed a magnet, a battery, or any material from a lesson, treat it as an emergency and "
+    "seek medical help at once. Do not wait for symptoms.",
     "A pause, break, or switch to the alternative activity is never treated as failure.",
 ]
 GLOBAL_PRIVACY = [
@@ -65,6 +77,10 @@ GLOBAL_PRIVACY = [
 NON_DISABLEABLE = [
     "Never mix household cleaning products; bleach combined with ammonia or acid releases toxic gas.",
     "Never connect any investigation to mains electricity; low-voltage cells only.",
+    "Never fully seal a reacting, fermenting, oxidising, or warm mixture in any container.",
+    "Never have a flammable liquid open in the same room as a flame, hob, pilot light, heater, lamp, charger, or battery.",
+    "Never use alcohol, or any other fuel, for a flame demonstration; no open-flame demonstration is used anywhere in this package.",
+    "Never cut, tear, puncture, or open a sealed commercial product - cold pack, hand warmer, glow stick, or smoke detector.",
     "Never look at the sun directly or through any lens, filter, grating, or camera.",
     "Never require a photograph, video, or voice recording as evidence of completion.",
     "Never request or record a learner body measurement, health measurement, or medical history.",
@@ -80,16 +96,129 @@ EXT_NAMESPACES = [
      "allowed_projection": "student-safe"},
     {"namespace": "manuel.academy/sequence-note", "value_schema_ref": "sequence-note-v1",
      "allowed_projection": "student-safe"},
+    {"namespace": "manuel.academy/lab-safety", "value_schema_ref": "lab-safety-v1",
+     "allowed_projection": "student-safe"},
 ]
+
+# The 2.0.0 contract strips safety_privacy from the student projection, so safety that
+# lives only there never reaches the learner. Everything actionable is therefore also
+# rendered into the learner-visible lesson flow, the student activity, and a student-safe
+# lab-safety extension. safety_privacy stays as the guardian record.
+SAFETY_LABELS = ("HAZARD", "MITIGATION", "SUPERVISION", "SAFE ORDER", "STOP", "DISPOSAL", "ALTERNATIVE")
 
 
 def ext(namespace, schema_ref, key, text):
+    if len(text) > 2000:
+        raise SystemExit(f"extension {namespace}/{key} is {len(text)} chars; the contract caps string "
+                         "extension values at 2000 and silent truncation would drop safety text")
     return {"namespace": namespace, "key": key, "schema_ref": schema_ref,
-            "projection": "student-safe", "value": {"type": "string", "value": text[:2000]}}
+            "projection": "student-safe", "value": {"type": "string", "value": text}}
+
+
+def supervision_sentence(level):
+    return {
+        "none": "SUPERVISION: you may work on this independently. Tell an adult before you start anyway.",
+        "nearby-adult": "SUPERVISION: an adult must be within earshot and able to reach you. Do not start until they are.",
+        "direct-adult": "SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start "
+                        "any step until they are there.",
+    }[level]
+
+
+def requires_eye_protection(inv):
+    """Resolve the PPE line at build time; the learner cannot read the hazard list to decide."""
+    text = " ".join(d + " " + m for _, d, m in inv["hazards"]).lower()
+    kinds = {k for k, _, _ in inv["hazards"]}
+    return "chemical" in kinds or any(w in text for w in ("eye protection", "splash", "spatter", "snap back", "tension"))
+
+
+def safety_capsule(inv):
+    """Compact machine-readable safety block for a host that renders safety separately.
+    The full brief is carried in lesson_flow, which has room for all of it."""
+    kinds = sorted({k for k, _, _ in inv["hazards"]})
+    return (f"SUPERVISION: {inv['supervision']} | "
+            f"EYE PROTECTION: {'required' if requires_eye_protection(inv) else 'not required'} | "
+            f"HAZARD KINDS: {', '.join(kinds)} | "
+            f"HAZARD COUNT: {len(inv['hazards'])} | "
+            f"SAFE-ORDER STEPS: {len(inv['sequence'])} | "
+            f"STOP CONDITIONS: {len(inv['stop']) + len(GLOBAL_STOP)} | "
+            "The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this "
+            "lesson's Safety review segment, which you must read before you touch any material.")
+
+
+def safety_brief(inv):
+    """The learner-facing safety brief. Every field a learner needs before touching a
+    material appears here in plain text, because safety_privacy does not reach them."""
+    lines = ["READ THIS BEFORE YOU TOUCH ANY MATERIAL."]
+    for kind, description, mitigation in inv["hazards"]:
+        lines.append(f"HAZARD ({kind}): {description}")
+        lines.append(f"MITIGATION: {mitigation}")
+    lines.append(supervision_sentence(inv["supervision"]))
+    if requires_eye_protection(inv):
+        lines.append("EYE PROTECTION IS REQUIRED for this investigation. Put it on before the first step.")
+    lines.append("SAFE ORDER - do these steps in this order and do not reorder them:")
+    for n, step in enumerate(inv["sequence"], start=1):
+        lines.append(f"  SAFE ORDER {n}. {step}")
+    lines.append("STOP CONDITIONS - stop at once if any of these happens:")
+    for cond in list(inv["stop"]) + GLOBAL_STOP:
+        lines.append(f"  STOP: {cond}")
+    lines.append(f"DISPOSAL: {inv['disposal']}")
+    lines.append(f"ALTERNATIVE (equal credit, no special equipment): {inv['alternative']}")
+    return "\n".join(lines)
 
 
 def std_ref(pe):
     return {"framework_ref": FRAMEWORK_ID, "standard_id": pe, "mapping_status": "canonical"}
+
+
+# A unit that owns no performance expectation says so, rather than borrowing a standard it
+# has not taught. Borrowing put HS-ETS1-3, HS-PS2-1, and HS-ESS3-5 on Unit 1 assessments in
+# three courses, in every case before the standard was taught.
+FOUNDATION_REF = {
+    "framework_ref": FRAMEWORK_ID,
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review",
+}
+
+
+def taught_order():
+    """Global teaching order: {performance expectation -> index of the unit that first teaches it}."""
+    first, idx = {}, 0
+    for course in sorted(spec.COURSES, key=lambda c: c["order"]):
+        for unit in course["units"]:
+            idx += 1
+            for pe in unit["standards"]:
+                first.setdefault(pe, idx)
+    return first
+
+
+TAUGHT_FIRST = None  # populated by build()
+
+
+def split_spiral(unit, unit_index):
+    """Reinforcement looks backwards; a preview looks forwards. They are never the same thing."""
+    reinforces, previews = [], []
+    for pe in unit["spiral"]:
+        first = TAUGHT_FIRST.get(pe)
+        (reinforces if first is not None and first <= unit_index else previews).append(pe)
+    return reinforces, previews
+
+
+def standards_role_text(unit, unit_index):
+    reinforces, previews = split_spiral(unit, unit_index)
+    parts = ["Primary coverage: " + (", ".join(pe.upper() for pe in unit["standards"])
+                                     or "practice foundation; no performance expectation is claimed for this unit.")]
+    if reinforces:
+        parts.append("Reinforced (already taught in or before this unit, and assessed only where it is primary): "
+                     + ", ".join(pe.upper() for pe in reinforces))
+    if previews:
+        parts.append("Previewed (taught later in the sequence; touched here to build readiness, never assessed here): "
+                     + ", ".join(pe.upper() for pe in previews))
+    return ". ".join(parts) + "."
+
+
+def unit_standard_refs(unit):
+    """Assessed standards are the unit's own primary coverage - never a spiral entry."""
+    return [std_ref(pe) for pe in unit["standards"]] or [dict(FOUNDATION_REF)]
 
 
 def uid(course_id, unit_no, lesson_no=None):
@@ -157,31 +286,65 @@ def criteria(unit, focus, day):
     return base
 
 
+SEALED_PRODUCT = ("cold pack", "hand warmer", "glow stick", "smoke detector", "smoke alarm")
+
+
+def phenomenon_line(unit):
+    """A sealed commercial product named in the phenomenon carries its do-not-open rule every day."""
+    text = unit["phenomenon"]
+    named = [p for p in SEALED_PRODUCT if p in text.lower()]
+    if not named:
+        return text
+    return (text + " SAFETY: the " + " and ".join(named) + " in this unit "
+            + ("is" if len(named) == 1 else "are")
+            + " observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, "
+              "and the contents are never touched or tasted.")
+
+
+def hands_on(inv, day):
+    """True when this day physically handles the investigation's materials."""
+    if day == INVESTIGATION_DAY:
+        return True
+    if day != PERFORMANCE_DAY:
+        return False
+    return any(k in ("physical", "chemical") for k, _, _ in inv["hazards"])
+
+
 def flow(unit, focus, phase, day, inv):
     a = []
+    if hands_on(inv, day):
+        # First segment of any hands-on day, and it is student-visible: the learner reads the
+        # actual hazards, mitigations, supervision, safe order, stop conditions, disposal, and
+        # alternative here, not a pointer to a guardian-only record.
+        a.append({"segment_id": "safety-review", "title": "Safety review before any material is handled",
+                  "duration": {"minimum_minutes": 6, "maximum_minutes": 9},
+                  "teacher_or_tutor_action": safety_brief(inv)})
     for seg_id, seg_title, lo, hi in SEGMENTS:
         if seg_id == "retrieval":
-            act = (f"Open with the unit phenomenon - {unit['phenomenon']} - or a short retrieval prompt on {focus}. "
+            act = (f"Open with the unit phenomenon - {phenomenon_line(unit)} - or a short retrieval prompt on {focus}. "
                    "Ask the learner to notice, predict, estimate, or question before any instruction. Record the prediction; it is not graded.")
         elif seg_id == "instruction":
             act = (f"Develop {focus} from the phenomenon: pose the testable question, build or use a model, and show how evidence "
                    f"constrains the explanation. Name the success criteria and demonstrate how to check the work. Phase focus: {phase}.")
-            if day == INVESTIGATION_DAY:
-                act = (f"Before any materials are handled, review the investigation's hazards, the required supervision level, and every stop "
-                       f"condition with the guardian present. Then model the procedure for: {inv['title']}. Confirm which path the family is "
-                       "running - the investigation or its no-special-equipment alternative. Both meet the same target.")
+            if hands_on(inv, day):
+                act = (f"The safety review in the first segment has already been read aloud with the guardian present; do not begin until it "
+                       f"has. Then model the procedure for: {inv['title']}, following the safe order exactly as written. Confirm which path the "
+                       "family is running - the investigation or its no-special-equipment alternative. Both meet the same target.")
         elif seg_id == "guided":
             act = (f"Work two supported examples on {focus}, asking after each move: what evidence or reasoning supports that step? "
                    "Fade the prompting on the second example and have the learner narrate the check.")
-            if day == INVESTIGATION_DAY:
-                act = (f"Set up and run the first trial together, or the first step of the alternative. Establish how each measurement is taken, "
-                       "how uncertainty is recorded, and how a trial that goes wrong is written down rather than discarded.")
+            if hands_on(inv, day):
+                act = (f"Set up and run the first trial together, or the first step of the alternative, keeping to the safe order in the safety "
+                       "review. Establish how each measurement is taken, how uncertainty is recorded, and how a trial that goes wrong is "
+                       "written down rather than discarded.")
         elif seg_id == "independent":
             act = (f"The learner completes a new application of {focus} independently and records both the result and the reasoning, evidence, "
                    "process, or design choice that produced it.")
-            if day == INVESTIGATION_DAY:
-                act = (f"The learner runs the remaining trials and records their own data. No expected value is supplied beforehand and no result "
-                       "is ever filled in for the learner. If the data is messy, the learner writes down what happened and why it may have happened.")
+            if hands_on(inv, day):
+                act = ("Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition "
+                       "happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result "
+                       "is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the "
+                       "disposal steps in the safety review before anything is packed away.")
             if day == ASSESSMENT_DAY:
                 act = ("The learner completes the unit assessment independently. The tutor may clarify what a prompt is asking but supplies no "
                        "answer, no worked solution, and no evaluation of correctness during the assessment.")
@@ -191,16 +354,28 @@ def flow(unit, focus, phase, day, inv):
         else:
             act = (f"In one concise response, the learner shows or explains the most important idea about {focus}, then names one check that "
                    "would catch an error or a weak claim in their own work.")
+            if hands_on(inv, day):
+                act = (f"Confirm out loud that every disposal step in the safety review has been done and nothing has been left sealed, warm, "
+                       f"connected, or unaccounted for. Then in one concise response show or explain the most important idea about {focus}, and "
+                       "name one check that would catch an error or a weak claim in your own work.")
         a.append({"segment_id": f"{seg_id}", "title": seg_title,
                   "duration": {"minimum_minutes": lo, "maximum_minutes": hi},
                   "teacher_or_tutor_action": act})
     return a
 
 
+def clamp(text, field):
+    if len(text) > 240:
+        raise SystemExit(f"safety {field} is {len(text)} chars; the contract caps it at 240 and silent "
+                         f"truncation would drop safety text: {text[:80]}...")
+    return text
+
+
 def safety_for(unit, day, inv):
-    """Investigation day carries the unit's full hazard set; other days carry the baseline."""
-    if day == INVESTIGATION_DAY:
-        hazards = [{"kind": k, "description": d[:240], "mitigation": m[:240]} for k, d, m in inv["hazards"]]
+    """Hands-on days carry the unit's full hazard set; desk days carry the baseline."""
+    if hands_on(inv, day):
+        hazards = [{"kind": k, "description": clamp(d, "hazard description"), "mitigation": clamp(m, "hazard mitigation")}
+                   for k, d, m in inv["hazards"]]
         supervision, visibility = inv["supervision"], inv["visibility"]
         stops = list(inv["stop"]) + GLOBAL_STOP
     else:
@@ -221,7 +396,7 @@ def safety_for(unit, day, inv):
     }
 
 
-def build_lesson(course, unit, unit_no, day, course_day):
+def build_lesson(course, unit, unit_no, day, course_day, unit_index):
     focus = unit["topics"][(day - 1) % 6]
     phase = PHASES[day - 1]
     inv = unit["investigation"]
@@ -235,8 +410,10 @@ def build_lesson(course, unit, unit_no, day, course_day):
         evidence = evidence + ["retrieval"]
 
     materials = ["course notebook or digital equivalent", "pencil, keyboard, or other accessible response tool"]
-    if day == INVESTIGATION_DAY:
-        materials = list(inv["materials"]) + ["eye protection where the hazard list requires it"] + materials
+    if hands_on(inv, day):
+        ppe = (["eye protection - REQUIRED for this investigation"] if requires_eye_protection(inv)
+               else ["no eye protection is required for this investigation"])
+        materials = list(inv["materials"]) + ppe + materials
     else:
         materials.append("printed or on-screen text, data table, or model for this lesson")
 
@@ -246,14 +423,22 @@ def build_lesson(course, unit, unit_no, day, course_day):
     if day in (ASSESSMENT_DAY, 12):
         resource_refs.append("res-hs-science-mastery-evidence-guide")
 
+    lesson_flow = flow(unit, focus, phase, day, inv)
+    independent = next(seg for seg in lesson_flow if seg["segment_id"] == "independent")["teacher_or_tutor_action"]
+    if hands_on(inv, day):
+        student_activity = (f"SAFETY FIRST - {supervision_sentence(inv['supervision'])} Read the safety review segment in full "
+                            "before you touch any material, follow the safe order in the order written, stop at once if any stop "
+                            f"condition happens, and finish with the disposal steps. {independent}")
+    else:
+        student_activity = independent
+
     exts = [
-        ext("manuel.academy/standards-role", "standards-role-v1", "role",
-            "Primary coverage: " + (", ".join(s.upper() for s in unit["standards"]) or "practice foundation; no performance expectation is claimed for this unit.")
-            + (". Reinforced: " + ", ".join(s.upper() for s in unit["reinforces"]) if unit["reinforces"] else "")),
+        ext("manuel.academy/standards-role", "standards-role-v1", "role", standards_role_text(unit, unit_index)),
         ext("manuel.academy/data-provenance", "data-provenance-v1", "provenance", inv["data_source"]),
     ]
-    if day == INVESTIGATION_DAY:
+    if hands_on(inv, day):
         exts.append(ext("manuel.academy/lab-alternative", "lab-alternative-v1", "alternative", inv["alternative"]))
+        exts.append(ext("manuel.academy/lab-safety", "lab-safety-v1", "safety", safety_capsule(inv)))
     else:
         exts.append(ext("manuel.academy/lab-alternative", "lab-alternative-v1", "alternative",
                         "No special equipment is needed for this lesson; it is notebook and text based. The unit investigation on Day 7 carries the full alternative path."))
@@ -277,14 +462,15 @@ def build_lesson(course, unit, unit_no, day, course_day):
         "title": f"{phase}: {focus}",
         "phase": phase,
         "focus": focus,
-        "estimated_duration": {"minimum_minutes": 55, "maximum_minutes": 75},
-        "standards": [std_ref(s) for s in (unit["standards"] or unit["reinforces"])],
+        "estimated_duration": ({"minimum_minutes": 61, "maximum_minutes": 84} if hands_on(inv, day)
+                               else {"minimum_minutes": 55, "maximum_minutes": 75}),
+        "standards": unit_standard_refs(unit),
         "essential_question": unit["essential_question"],
         "learning_objectives": objectives(unit, focus, phase, day),
         "success_criteria": criteria(unit, focus, day),
         "materials": materials[:100],
-        "lesson_flow": flow(unit, focus, phase, day, inv),
-        "student_activity": flow(unit, focus, phase, day, inv)[3]["teacher_or_tutor_action"],
+        "lesson_flow": lesson_flow,
+        "student_activity": student_activity,
         "formative_check": (f"In one concise response, show or explain the most important idea about {focus}, then name one check that would "
                             "catch an error or a weak claim."),
         "scoring_guidance": scoring,
@@ -340,7 +526,7 @@ def build_assessment(course, unit, unit_no):
     assessment = {
         "schema_set_version": SSV, "assessment_id": aid, "course_ref": cid, "unit_ref": uid(cid, unit_no),
         "title": f"{unit['title']} - unit assessment",
-        "standards": [std_ref(s) for s in (unit["standards"] or unit["reinforces"])],
+        "standards": unit_standard_refs(unit),
         "total_points": total, "prompts": prompts,
         "rubric_dimensions": ["accuracy or fidelity", "evidence and reasoning", "application or transfer",
                               "checking and revision", "safety and honest reporting"],
@@ -349,7 +535,9 @@ def build_assessment(course, unit, unit_no):
                                "video, or voice recording is required. Adjust quantity, pacing, or representation while preserving the target."),
         "protected_interpretation_ref": f"{aid}-interpretation",
         "extensions": [ext("manuel.academy/standards-role", "standards-role-v1", "role",
-                           "Primary coverage: " + (", ".join(s.upper() for s in unit["standards"]) or "practice foundation."))],
+                           "Assessed here: " + (", ".join(s.upper() for s in unit["standards"])
+                                                or "practice foundation; this assessment claims no performance expectation.")
+                           + ". No standard is assessed before the unit that teaches it.")],
     }
     interpretation = {
         "schema_set_version": SSV, "interpretation_id": f"{aid}-interpretation", "assessment_ref": aid,
@@ -379,21 +567,25 @@ def _scoring_for(ptype, unit):
 
 # ---------------------------------------------------------------- assembly
 def build():
+    global TAUGHT_FIRST
+    TAUGHT_FIRST = taught_order()
     courses, units, lessons, assessments, interpretations, schedules = [], [], [], [], [], []
-    for course in spec.COURSES:
+    unit_index = 0
+    for course in sorted(spec.COURSES, key=lambda c: c["order"]):
         cid, unit_refs = course["course_id"], []
         course_day = 0
         course_pes = []
         for unit_no, unit in enumerate(course["units"], start=1):
+            unit_index += 1
             u_id = uid(cid, unit_no)
             unit_refs.append(u_id)
             lesson_refs = []
             for day in range(1, 13):
                 course_day += 1
-                lesson = build_lesson(course, unit, unit_no, day, course_day)
+                lesson = build_lesson(course, unit, unit_no, day, course_day, unit_index)
                 lessons.append(lesson)
                 lesson_refs.append(lesson["lesson_id"])
-            a, i = build_assessment(course, unit, unit_no)
+            a, i = build_assessment(course, unit, unit_no)  # assessed standards are primary only
             assessments.append(a); interpretations.append(i)
             for s in unit["standards"]:
                 if s not in course_pes:
@@ -401,19 +593,18 @@ def build():
             units.append({
                 "schema_set_version": SSV, "unit_id": u_id, "course_ref": cid, "grade": course["grade"],
                 "subject": "science", "order": unit_no, "title": unit["title"], "days": 12,
-                "standards": [std_ref(s) for s in (unit["standards"] or unit["reinforces"])],
+                "standards": unit_standard_refs(unit),
                 "essential_question": unit["essential_question"], "topics": unit["topics"],
                 "performance_task": unit["performance_task"], "lesson_refs": lesson_refs,
                 "assessment_ref": a["assessment_id"],
                 "extensions": [
                     ext("manuel.academy/sequence-note", "sequence-note-v1", "phenomenon",
-                        "Anchoring phenomenon: " + unit["phenomenon"]),
+                        "Anchoring phenomenon: " + phenomenon_line(unit)),
                     ext("manuel.academy/lab-alternative", "lab-alternative-v1", "alternative",
                         "Day 7 investigation: " + unit["investigation"]["title"] + " | No-special-equipment alternative: "
                         + unit["investigation"]["alternative"]),
-                    ext("manuel.academy/standards-role", "standards-role-v1", "role",
-                        "Primary: " + (", ".join(s.upper() for s in unit["standards"]) or "practice foundation; no performance expectation claimed.")
-                        + (" | Reinforced: " + ", ".join(s.upper() for s in unit["reinforces"]) if unit["reinforces"] else "")),
+                    ext("manuel.academy/standards-role", "standards-role-v1", "role", standards_role_text(unit, unit_index)),
+                    ext("manuel.academy/lab-safety", "lab-safety-v1", "safety", safety_capsule(unit["investigation"])),
                 ],
             })
         courses.append({

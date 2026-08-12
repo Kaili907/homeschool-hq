@@ -11,8 +11,8 @@
   "standards": [
    {
     "framework_ref": "michigan-science-standards-2015",
-    "standard_id": "hs-ls1-6",
-    "mapping_status": "canonical"
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
    }
   ],
   "essential_question": "What counts as biological evidence, and how do the molecules of life make structure and function inseparable?",
@@ -68,7 +68,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS1-6 | Reinforced: HS-ETS1-3"
+     "value": "Primary coverage: practice foundation; no performance expectation is claimed for this unit.. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-LS1-6, HS-ETS1-3."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 4 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -142,7 +152,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS1-1 | Reinforced: HS-LS3-2"
+     "value": "Primary coverage: HS-LS1-1. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-LS3-2."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -221,7 +241,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS1-2, HS-LS1-4"
+     "value": "Primary coverage: HS-LS1-2, HS-LS1-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 3 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -295,7 +325,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS1-3 | Reinforced: HS-ETS1-1"
+     "value": "Primary coverage: HS-LS1-3. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-ETS1-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: emotional, physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -313,6 +353,11 @@
    {
     "framework_ref": "michigan-science-standards-2015",
     "standard_id": "hs-ls1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-6",
     "mapping_status": "canonical"
    },
    {
@@ -379,7 +424,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS1-5, HS-LS1-7, HS-LS2-3 | Reinforced: HS-PS1-7"
+     "value": "Primary coverage: HS-LS1-5, HS-LS1-6, HS-LS1-7, HS-LS2-3. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-PS1-7."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 4 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -458,7 +513,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS2-4, HS-LS2-5 | Reinforced: HS-ESS2-6, HS-LS1-5"
+     "value": "Primary coverage: HS-LS2-4, HS-LS2-5. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-LS1-5. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-ESS2-6."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: physical, privacy | HAZARD COUNT: 3 | SAFE-ORDER STEPS: 6 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -547,7 +612,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS2-1, HS-LS2-2, HS-LS2-6, HS-LS2-8 | Reinforced: HS-ETS1-4"
+     "value": "Primary coverage: HS-LS2-1, HS-LS2-2, HS-LS2-6, HS-LS2-8. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-ETS1-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: physical, privacy | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 9 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -631,7 +706,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS3-1, HS-LS3-2, HS-LS3-3 | Reinforced: HS-LS1-1"
+     "value": "Primary coverage: HS-LS3-1, HS-LS3-2, HS-LS3-3. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-LS1-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: emotional, physical, privacy | HAZARD COUNT: 4 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -750,7 +835,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-LS4-1, HS-LS4-2, HS-LS4-3, HS-LS4-4, HS-LS4-5, HS-LS4-6, HS-LS2-7, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3 | Reinforced: HS-LS3-3"
+     "value": "Primary coverage: HS-LS4-1, HS-LS4-2, HS-LS4-3, HS-LS4-4, HS-LS4-5, HS-LS4-6, HS-LS2-7, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-LS3-3."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: none | EYE PROTECTION: not required | HAZARD KINDS: emotional, physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 9 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -767,8 +862,8 @@
   "standards": [
    {
     "framework_ref": "michigan-science-standards-2015",
-    "standard_id": "hs-ets1-3",
-    "mapping_status": "canonical"
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
    }
   ],
   "essential_question": "How do chemists decide what a measurement actually tells them, and how do we work safely with matter at home?",
@@ -824,7 +919,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: practice foundation; no performance expectation claimed. | Reinforced: HS-ETS1-3"
+     "value": "Primary coverage: practice foundation; no performance expectation is claimed for this unit.. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-ETS1-3."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 3 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -878,7 +983,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Anchoring phenomenon: Sodium and potassium sit in the same column and react with water in strikingly similar ways, while argon beside them does nothing at all."
+     "value": "Anchoring phenomenon: Published footage shows sodium and potassium, neighbours in one column, reacting with water in strikingly similar ways while argon beside them does nothing at all. Neither metal is handled in this course."
     }
    },
    {
@@ -888,7 +993,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Day 7 investigation: Flame-colour patterns and periodic trend analysis from published data | No-special-equipment alternative: Do the entire unit from published data: graph atomic radius, ionization energy, and electronegativity across periods and down groups, and use published emission-spectrum images to identify elements. No flame, no chemicals, paper only. This is the DEFAULT path."
+     "value": "Day 7 investigation: Emission-spectrum identification and periodic trend analysis | No-special-equipment alternative: Skip the spectroscope build entirely: identify elements from published emission-spectrum images alone, and graph atomic radius, ionization energy, and electronegativity across periods and down groups from published data. Paper and calculator only. Both paths meet the same target."
     }
    },
    {
@@ -898,7 +1003,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-1"
+     "value": "Primary coverage: HS-PS1-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -967,7 +1082,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Day 7 investigation: Inferring particle forces from solubility, conductivity, and melting behaviour | No-special-equipment alternative: Compare only salt, sugar, and oil in water at room temperature - solubility and mixing behaviour alone - and use published melting-point and conductivity tables for the rest. No battery, no alcohol, no heat, and therefore no ignition risk at all. Choose this path if the two hazardous steps cannot be reliably separated in time and space."
+     "value": "Day 7 investigation: Inferring particle forces from solubility, conductivity, and melting behaviour | No-special-equipment alternative: Compare only salt, sugar, and oil in water at room temperature - solubility and mixing behaviour alone - and take every melting-point and conductivity figure from the published tables. No battery, no alcohol, no heat, and therefore no ignition risk at all. This is the path to choose if the two stages cannot be separated in time and space exactly as written."
     }
    },
    {
@@ -977,7 +1092,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-3, HS-PS2-6 | Reinforced: HS-ETS1-2"
+     "value": "Primary coverage: HS-PS1-3, HS-PS2-6. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-ETS1-2."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 5 | SAFE-ORDER STEPS: 7 | STOP CONDITIONS: 13 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1041,7 +1166,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Day 7 investigation: Oxidation of steel wool and acid-base reactions with a natural indicator | No-special-equipment alternative: Run the cabbage-indicator colour scale with vinegar and baking soda only - no steel wool - and analyse published mass-change data for the rusting reaction. Kitchen materials only."
+     "value": "Day 7 investigation: Oxidation of steel wool and acid-base reactions with a natural indicator | No-special-equipment alternative: Run the cabbage-indicator colour scale with vinegar and baking soda only - no steel wool, no hydrogen, no cool-down - and analyse published mass-change data for the rusting reaction. Kitchen materials only. This is the path to choose if the household cannot leave an open dish ventilated and undisturbed overnight."
     }
    },
    {
@@ -1051,7 +1176,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-2 | Reinforced: HS-PS1-1"
+     "value": "Primary coverage: HS-PS1-2. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS1-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 5 | SAFE-ORDER STEPS: 6 | STOP CONDITIONS: 12 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1125,7 +1260,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-7 | Reinforced: HS-PS1-2"
+     "value": "Primary coverage: HS-PS1-7. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS1-2."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 6 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1179,7 +1324,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Anchoring phenomenon: One instant cold pack and one hand warmer are both sealed pouches you squeeze, and they do opposite things."
+     "value": "Anchoring phenomenon: One instant cold pack and one hand warmer are both sealed pouches you squeeze, and they do opposite things. SAFETY: the cold pack and hand warmer in this unit are observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, and the contents are never touched or tasted."
     }
    },
    {
@@ -1199,7 +1344,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-4 | Reinforced: HS-PS3-1, HS-PS3-2, HS-PS3-4"
+     "value": "Primary coverage: HS-PS1-4. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-PS3-1, HS-PS3-2, HS-PS3-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 3 | SAFE-ORDER STEPS: 6 | STOP CONDITIONS: 12 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1253,7 +1408,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Anchoring phenomenon: A glow stick snapped in ice water stays bright far longer than an identical one in warm water."
+     "value": "Anchoring phenomenon: A glow stick snapped in ice water stays bright far longer than an identical one in warm water. SAFETY: the glow stick in this unit is observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, and the contents are never touched or tasted."
     }
    },
    {
@@ -1273,7 +1428,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-5 | Reinforced: HS-LS1-6"
+     "value": "Primary coverage: HS-PS1-5. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-LS1-6."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 3 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1347,7 +1512,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-6 | Reinforced: HS-ETS1-3"
+     "value": "Primary coverage: HS-PS1-6. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-ETS1-3."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: required | HAZARD KINDS: chemical, physical | HAZARD COUNT: 4 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1416,7 +1591,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Anchoring phenomenon: A smoke detector contains a radioactive source, runs for a decade, and is safe to hold - while a comparable mass of the same isotope in another form would not be."
+     "value": "Anchoring phenomenon: A smoke detector contains a radioactive source, runs for a decade, and is safe to hold - while a comparable mass of the same isotope in another form would not be. SAFETY: the smoke detector in this unit is observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, and the contents are never touched or tasted."
     }
    },
    {
@@ -1436,7 +1611,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS1-8, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3 | Reinforced: HS-PS1-4"
+     "value": "Primary coverage: HS-PS1-8, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS1-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: none | EYE PROTECTION: not required | HAZARD KINDS: emotional, physical | HAZARD COUNT: 3 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1453,8 +1638,8 @@
   "standards": [
    {
     "framework_ref": "michigan-science-standards-2015",
-    "standard_id": "hs-ps2-1",
-    "mapping_status": "canonical"
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
    }
   ],
   "essential_question": "How do we describe motion precisely enough that someone else can check us?",
@@ -1510,7 +1695,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: practice foundation; no performance expectation claimed. | Reinforced: HS-PS2-1"
+     "value": "Primary coverage: practice foundation; no performance expectation is claimed for this unit.. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-PS2-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 1 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1584,7 +1779,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS2-1"
+     "value": "Primary coverage: HS-PS2-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: required | HAZARD KINDS: physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1653,7 +1858,7 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Day 7 investigation: Impact-protection design and collision trials | No-special-equipment alternative: Use a sealed water balloon, a small beanbag, or a marshmallow instead of an egg - no biological hazard, no cleanup - or run the collision strand with toy cars only and analyse published crash-test data for the protective design. "
+     "value": "Day 7 investigation: Impact-protection design and collision trials | No-special-equipment alternative: Use a sealed water balloon, a small beanbag, or a marshmallow instead of an egg - no biological hazard, no cleanup - or run the collision strand with toy cars only and analyse published crash-test data for the protective design. Both paths meet the same momentum and impulse target."
     }
    },
    {
@@ -1663,7 +1868,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS2-2, HS-PS2-3 | Reinforced: HS-ETS1-2, HS-ETS1-3"
+     "value": "Primary coverage: HS-PS2-2, HS-PS2-3. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-ETS1-2, HS-ETS1-3."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1737,7 +1952,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS2-4 | Reinforced: HS-ESS1-4"
+     "value": "Primary coverage: HS-PS2-4. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-ESS1-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: none | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1816,7 +2041,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS3-1, HS-PS3-2 | Reinforced: HS-PS1-4"
+     "value": "Primary coverage: HS-PS3-1, HS-PS3-2. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS1-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: none | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 1 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1890,7 +2125,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS3-4 | Reinforced: HS-PS1-4, HS-ESS2-4"
+     "value": "Primary coverage: HS-PS3-4. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS1-4. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-ESS2-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -1969,7 +2214,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS2-5, HS-PS3-5 | Reinforced: HS-PS2-4"
+     "value": "Primary coverage: HS-PS2-5, HS-PS3-5. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS2-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 4 | SAFE-ORDER STEPS: 6 | STOP CONDITIONS: 12 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2048,7 +2303,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS4-1, HS-PS4-3 | Reinforced: HS-PS4-4"
+     "value": "Primary coverage: HS-PS4-1, HS-PS4-3. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-PS4-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: required | HAZARD KINDS: physical | HAZARD COUNT: 3 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2152,7 +2417,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-PS4-2, HS-PS4-4, HS-PS4-5, HS-PS3-3, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3 | Reinforced: HS-PS4-1"
+     "value": "Primary coverage: HS-PS4-2, HS-PS4-4, HS-PS4-5, HS-PS3-3, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS4-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: not required | HAZARD KINDS: online, physical | HAZARD COUNT: 4 | SAFE-ORDER STEPS: 6 | STOP CONDITIONS: 11 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2169,8 +2444,8 @@
   "standards": [
    {
     "framework_ref": "michigan-science-standards-2015",
-    "standard_id": "hs-ess3-5",
-    "mapping_status": "canonical"
+    "legacy_label": "Science and engineering practice foundation - this unit claims no Michigan performance expectation.",
+    "mapping_status": "human-review"
    }
   ],
   "essential_question": "How do we reason honestly about systems too large, too slow, or too far away to experiment on?",
@@ -2226,7 +2501,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: practice foundation; no performance expectation claimed. | Reinforced: HS-ESS3-5"
+     "value": "Primary coverage: practice foundation; no performance expectation is claimed for this unit.. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-ESS3-5."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: online, physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2305,7 +2590,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS1-1, HS-ESS1-3 | Reinforced: HS-PS1-8, HS-PS3-1"
+     "value": "Primary coverage: HS-ESS1-1, HS-ESS1-3. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS1-8, HS-PS3-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: direct-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2379,7 +2674,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS1-2 | Reinforced: HS-ESS1-3"
+     "value": "Primary coverage: HS-ESS1-2. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-ESS1-3."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: none | EYE PROTECTION: not required | HAZARD KINDS: emotional, physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2453,7 +2758,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS1-4 | Reinforced: HS-PS2-4, HS-ETS1-4"
+     "value": "Primary coverage: HS-ESS1-4. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS2-4. Previewed (taught later in the sequence; touched here to build readiness, never assessed here): HS-ETS1-4."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: none | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 1 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 9 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2542,7 +2857,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS1-5, HS-ESS1-6, HS-ESS2-1, HS-ESS2-3 | Reinforced: HS-PS1-8"
+     "value": "Primary coverage: HS-ESS1-5, HS-ESS1-6, HS-ESS2-1, HS-ESS2-3. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS1-8."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2621,7 +2946,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS2-2, HS-ESS2-5 | Reinforced: HS-ESS2-1"
+     "value": "Primary coverage: HS-ESS2-2, HS-ESS2-5. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-ESS2-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: physical, privacy | HAZARD COUNT: 4 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2705,7 +3040,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS2-4, HS-ESS2-6, HS-ESS3-5 | Reinforced: HS-PS3-4, HS-LS2-5"
+     "value": "Primary coverage: HS-ESS2-4, HS-ESS2-6, HS-ESS3-5. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-PS3-4, HS-LS2-5."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: emotional, physical | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 5 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2784,7 +3129,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS2-7, HS-ESS3-1 | Reinforced: HS-LS4-5, HS-LS2-6"
+     "value": "Primary coverage: HS-ESS2-7, HS-ESS3-1. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-LS4-5, HS-LS2-6."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: none | EYE PROTECTION: not required | HAZARD KINDS: emotional, privacy | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]
@@ -2893,7 +3248,17 @@
     "projection": "student-safe",
     "value": {
      "type": "string",
-     "value": "Primary: HS-ESS3-2, HS-ESS3-3, HS-ESS3-4, HS-ESS3-6, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3, HS-ETS1-4 | Reinforced: HS-LS2-7, HS-ESS3-1"
+     "value": "Primary coverage: HS-ESS3-2, HS-ESS3-3, HS-ESS3-4, HS-ESS3-6, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3, HS-ETS1-4. Reinforced (already taught in or before this unit, and assessed only where it is primary): HS-LS2-7, HS-ESS3-1."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-safety",
+    "key": "safety",
+    "schema_ref": "lab-safety-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "SUPERVISION: nearby-adult | EYE PROTECTION: not required | HAZARD KINDS: emotional, online | HAZARD COUNT: 2 | SAFE-ORDER STEPS: 4 | STOP CONDITIONS: 10 | The full hazard, mitigation, safe-order, stop-condition, disposal, and alternative text is in this lesson's Safety review segment, which you must read before you touch any material."
     }
    }
   ]

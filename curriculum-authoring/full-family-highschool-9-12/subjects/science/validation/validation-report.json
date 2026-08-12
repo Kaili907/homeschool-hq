@@ -4,8 +4,8 @@
   "overall": "PASS",
   "contract_issues": [],
   "counts": {
-    "checks": 27,
-    "passed": 27,
+    "checks": 48,
+    "passed": 48,
     "failed": 0
   },
   "checks": [
@@ -52,7 +52,7 @@
     {
       "check": "chemical-hazards-require-direct-adult-supervision",
       "result": "PASS",
-      "detail": "11 lessons carry a chemical hazard; 11 require direct adult supervision"
+      "detail": "10 lessons carry a chemical hazard; 10 require direct adult supervision"
     },
     {
       "check": "every-lesson-states-an-alternative-path",
@@ -143,6 +143,111 @@
       "check": "assessment-bands-ordered",
       "result": "PASS",
       "detail": "not-yet < developing < secure for all interpretations"
+    },
+    {
+      "check": "investigations-expose-student-visible-safety",
+      "result": "PASS",
+      "detail": "70 hazard-bearing lessons carry the full safety brief in student-visible text"
+    },
+    {
+      "check": "desk-baseline-lessons-really-are-desk-based",
+      "result": "PASS",
+      "detail": "no lesson understates its hazards"
+    },
+    {
+      "check": "incompatible-hazards-require-operational-separation",
+      "result": "PASS",
+      "detail": "2 lesson(s) co-list a flammable liquid and an ignition source; all state operational separation in time and space"
+    },
+    {
+      "check": "flammable-separation-covers-poured-samples-not-just-the-bottle",
+      "result": "PASS",
+      "detail": "sample-level separation stated wherever the combination occurs"
+    },
+    {
+      "check": "no-alcohol-or-fuel-fed-flame-demonstration",
+      "result": "PASS",
+      "detail": "no fuel-fed flame demonstration anywhere in the package"
+    },
+    {
+      "check": "no-water-as-the-fire-response",
+      "result": "PASS",
+      "detail": "fire response never instructs water"
+    },
+    {
+      "check": "every-hazard-bearing-lesson-declares-disposal",
+      "result": "PASS",
+      "detail": "70 lessons declare disposal"
+    },
+    {
+      "check": "hazardous-disposal-is-open-cooled-and-never-sealed",
+      "result": "PASS",
+      "detail": "no disposal instruction seals a reactive or warm material"
+    },
+    {
+      "check": "hydrogen-generation-is-named-where-it-occurs",
+      "result": "PASS",
+      "detail": "2 lesson(s) run an acid-and-metal reaction; all name hydrogen and its flammability"
+    },
+    {
+      "check": "sealed-commercial-products-are-never-opened",
+      "result": "PASS",
+      "detail": "36 lessons mention a sealed commercial product; all forbid opening it"
+    },
+    {
+      "check": "strong-magnets-declare-the-ingestion-hazard",
+      "result": "PASS",
+      "detail": "2 magnet lessons state the ingestion hazard"
+    },
+    {
+      "check": "soil-and-mould-work-never-shares-food-equipment",
+      "result": "PASS",
+      "detail": "6 contaminating-material lessons keep equipment out of food use"
+    },
+    {
+      "check": "no-food-equipment-used-for-soil-or-mould-work",
+      "result": "PASS",
+      "detail": "6 contaminating-material lessons list no food equipment"
+    },
+    {
+      "check": "warm-water-steps-carry-a-numeric-temperature-cap",
+      "result": "PASS",
+      "detail": "16 warm-water lessons state a numeric cap"
+    },
+    {
+      "check": "temperature-is-never-judged-by-hand",
+      "result": "PASS",
+      "detail": "temperature is judged with a thermometer everywhere"
+    },
+    {
+      "check": "standards-group-labels-match-the-canonical-framework",
+      "result": "PASS",
+      "detail": "all 71 topic labels match the canonical arrangement"
+    },
+    {
+      "check": "every-science-performance-expectation-has-exactly-one-primary-owner",
+      "result": "PASS",
+      "detail": "all 67 science performance expectations have exactly one owning unit; HS-ETS1-* is distributed across the four capstones by design"
+    },
+    {
+      "check": "assessment-standards-are-taught-in-or-before-their-unit",
+      "result": "PASS",
+      "detail": "36 assessments carry only standards already taught"
+    },
+    {
+      "check": "foundation-units-claim-no-performance-expectation",
+      "result": "PASS",
+      "detail": "4 foundation unit(s) declare no performance expectation instead of borrowing one"
+    },
+    {
+      "check": "preview-and-reinforcement-semantics-hold",
+      "result": "PASS",
+      "detail": "every reinforced standard was taught earlier and every previewed standard is taught later"
+    },
+    {
+      "check": "safety-documentation-agrees-with-the-authored-hazards",
+      "result": "PASS",
+      "detail": "chemical-hazard lessons=20 emotional-hazard units=8 investigations with an alternative=36 hazard-bearing lessons=70 non-disableable prohibitions=10"
     }
   ]
 }

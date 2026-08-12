@@ -65,7 +65,11 @@ into student-visible output.
 2. **An `investigation` / laboratory task type** in `CanonicalStudyTaskType`, with `completion-only`
    mastery authority and a guardian safety-confirmation step before the block can start.
 3. **A guardian pre-session safety surface** that renders the lesson's hazard list, supervision level,
-   and stop conditions before the block opens, and lets the guardian select the alternative path.
+   and stop conditions before the block opens, and lets the guardian select the alternative path. This
+   remains a follow-up, but it is no longer the only thing standing between a learner and the hazard
+   information: the learner-visible `safety-review` segment is part of the student projection already,
+   so a host that renders `lesson_flow` at all renders the full safety brief. Nothing in this package
+   requires a new engine — the existing Study Engine seam carries it as ordinary lesson flow.
 4. **Evidence-type and transfer-mode recording** in learner evidence, which the schema-set v2 README
    already names as the precondition for enforcing structured mastery rules at runtime. Until that
    exists, the multi-occasion mastery floor in this package is authored and auditable but not
