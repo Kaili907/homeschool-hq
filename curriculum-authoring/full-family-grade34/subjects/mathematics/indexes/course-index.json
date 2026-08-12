@@ -1,0 +1,30 @@
+[
+  {
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "title": "Grade 3 Mathematics",
+    "days": 180,
+    "units": 10,
+    "weeks": 36,
+    "days_per_week": 5,
+    "session_minutes": "30-45",
+    "capstone": "Capstone: design a small garden, room, or play space using perimeter, area, shape categories, and fractional partitioning, with a written justification of every decision.",
+    "requires_adaptive_package": false,
+    "path": "courses/grade-3/mathematics"
+  },
+  {
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "title": "Grade 4 Mathematics",
+    "days": 180,
+    "units": 10,
+    "weeks": 36,
+    "days_per_week": 5,
+    "session_minutes": "40-55",
+    "capstone": "Capstone: design a symmetric plan for a garden, room, banner, or game board using measured angles, classified shapes, and a generated pattern, with a full written justification.",
+    "requires_adaptive_package": false,
+    "path": "courses/grade-4/mathematics"
+  }
+]

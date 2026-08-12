@@ -1,0 +1,1151 @@
+[
+  {
+    "assessment_id": "ma-g3-mathematics-u01-assessment",
+    "unit_id": "ma-g3-mathematics-u01",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 1,
+    "unit_title": "Mathematical Habits, Place Value, and Rounding",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.NBT.1",
+      "3.NBT.2",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6",
+      "MP.7"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3"
+        ],
+        "prompt": "Explain problem-solving routines in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.NBT.1",
+          "MP.7"
+        ],
+        "prompt": "Use one of the unit representations (base-ten blocks or paper place-value strips; open number line) to show place-value structure to 1,000. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.NBT.1"
+        ],
+        "prompt": "Carry out rounding to the nearest ten and hundred accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.NBT.2"
+        ],
+        "prompt": "Apply addition within 1,000 in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.NBT.1",
+          "MP.6",
+          "MP.7"
+        ],
+        "prompt": "A learner rounded 476 to the nearest ten and wrote 400. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.NBT.1",
+          "MP.1",
+          "MP.3"
+        ],
+        "prompt": "Explain how rounding helps you decide whether an addition or subtraction answer within 1,000 is reasonable."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.NBT.1",
+          "3.NBT.2"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Build a Number Sense Toolkit poster: for each strategy, show a worked example, a model, and a check for reasonableness."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4",
+          "MP.6",
+          "MP.7"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u02-assessment",
+    "unit_id": "ma-g3-mathematics-u02",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 2,
+    "unit_title": "Meanings of Multiplication and Division",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.OA.1",
+      "3.OA.2",
+      "3.OA.3",
+      "3.OA.4",
+      "3.OA.5",
+      "3.OA.6",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.OA.1"
+        ],
+        "prompt": "Explain multiplication as equal groups in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.OA.1"
+        ],
+        "prompt": "Use one of the unit representations (counters in equal groups; arrays on grid paper) to show arrays and area. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.OA.2"
+        ],
+        "prompt": "Carry out division as equal sharing accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.OA.2"
+        ],
+        "prompt": "Apply division as equal measuring in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.OA.1",
+          "MP.1"
+        ],
+        "prompt": "The problem says four bags hold six marbles each. A learner wrote 4 x 6 = 24 and said there are six bags of four marbles. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.OA.1",
+          "3.OA.5",
+          "3.OA.6"
+        ],
+        "prompt": "Explain how multiplication and division describe the same equal-groups situation from two directions."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.OA.1",
+          "3.OA.2",
+          "3.OA.3",
+          "3.OA.4",
+          "3.OA.5",
+          "3.OA.6"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Curate an Equal Groups Museum: each exhibit pairs a model, a story problem, and the matching multiplication and division equations."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4",
+          "MP.6"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u03-assessment",
+    "unit_id": "ma-g3-mathematics-u03",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 3,
+    "unit_title": "Multiplication and Division Fluency Within 100",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.OA.4",
+      "3.OA.5",
+      "3.OA.6",
+      "3.OA.7",
+      "3.NBT.3",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6",
+      "MP.7"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.OA.7",
+          "3.OA.5"
+        ],
+        "prompt": "Explain doubling strategies in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.OA.5",
+          "3.OA.7"
+        ],
+        "prompt": "Use one of the unit representations (arrays split into two parts; number line with equal jumps) to show fives and tens from place value. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.OA.5"
+        ],
+        "prompt": "Carry out the commutative property accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.OA.5",
+          "MP.7"
+        ],
+        "prompt": "Apply the distributive property in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.OA.7",
+          "MP.1"
+        ],
+        "prompt": "A learner skip-counted by sevens to find 6 x 7 and wrote 48. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.OA.5",
+          "3.OA.7",
+          "3.NBT.3"
+        ],
+        "prompt": "Explain how knowing one multiplication fact helps you find both a related multiplication fact and a related division fact."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.OA.4",
+          "3.OA.5",
+          "3.OA.6",
+          "3.OA.7",
+          "3.NBT.3"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Design a fact-strategy deck: each card shows a fact, the strategy that unlocks it, a model, and a way to check."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4",
+          "MP.6",
+          "MP.7"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u04-assessment",
+    "unit_id": "ma-g3-mathematics-u04",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 4,
+    "unit_title": "Properties, Patterns, and Two-Step Problems",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.OA.5",
+      "3.OA.7",
+      "3.OA.8",
+      "3.OA.9",
+      "3.NBT.3",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.OA.8"
+        ],
+        "prompt": "Explain two-step word problems in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.OA.8"
+        ],
+        "prompt": "Use one of the unit representations (bar models with two stages; equations with a letter) to show equations with a letter for the unknown. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.OA.8",
+          "MP.6"
+        ],
+        "prompt": "Carry out order of operations in context accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.OA.8",
+          "MP.3"
+        ],
+        "prompt": "Apply estimation to check reasonableness in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.OA.8",
+          "MP.1"
+        ],
+        "prompt": "A problem asks how much money is left after buying 3 notebooks that cost $4 each, starting from $20. A learner wrote 3 x 4 = 12 and answered $12. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.OA.5",
+          "3.OA.8",
+          "3.OA.9"
+        ],
+        "prompt": "Explain how a pattern in the multiplication table can help you check the answer to a two-step problem."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.OA.5",
+          "3.OA.7",
+          "3.OA.8",
+          "3.OA.9",
+          "3.NBT.3"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Write and publish a two-step event problem set; each problem needs a model, an equation with a letter for the unknown, and a reasonableness check."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4",
+          "MP.6"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u05-assessment",
+    "unit_id": "ma-g3-mathematics-u05",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 5,
+    "unit_title": "Understanding Fractions as Numbers",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.NF.1",
+      "3.NF.2",
+      "3.G.2",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.G.2",
+          "3.NF.1"
+        ],
+        "prompt": "Explain equal partitioning in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.NF.1"
+        ],
+        "prompt": "Use one of the unit representations (folded paper strips; area models partitioned equally) to show unit fractions. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.NF.1"
+        ],
+        "prompt": "Carry out building fractions from unit fractions accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.NF.2"
+        ],
+        "prompt": "Apply the number line as a length model in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.NF.1",
+          "MP.1"
+        ],
+        "prompt": "A learner cut a rectangle into 4 parts of clearly different sizes, then labeled the largest part 1/4. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.NF.1",
+          "3.G.2",
+          "MP.6"
+        ],
+        "prompt": "Explain how partitioning a shape into equal parts and marking a fraction on a number line show the same idea."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.NF.1",
+          "3.NF.2",
+          "3.G.2"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Build a fraction number-line gallery showing unit fractions and non-unit fractions, each with visible evidence that the parts are equal."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4",
+          "MP.6"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u06-assessment",
+    "unit_id": "ma-g3-mathematics-u06",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 6,
+    "unit_title": "Equivalent Fractions and Comparison",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.NF.1",
+      "3.NF.2",
+      "3.NF.3",
+      "3.G.2",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.NF.2",
+          "3.NF.3"
+        ],
+        "prompt": "Explain equivalence on the number line in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.NF.3",
+          "3.G.2"
+        ],
+        "prompt": "Use one of the unit representations (stacked fraction bars; parallel number lines) to show equivalence with area models. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.NF.3"
+        ],
+        "prompt": "Carry out generating equivalent fractions accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.NF.3"
+        ],
+        "prompt": "Apply whole numbers as fractions in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.NF.3",
+          "3.G.2"
+        ],
+        "prompt": "A learner wrote 1/2 = 2/3, explaining that they added one to the top and one to the bottom. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.NF.2",
+          "3.NF.3"
+        ],
+        "prompt": "Explain how two fractions can name the same amount even though their numerators and denominators are different numbers."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.NF.1",
+          "3.NF.2",
+          "3.NF.3",
+          "3.G.2"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Create a Same Size, Different Name proof set: each claim is backed by a model and a written justification."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u07-assessment",
+    "unit_id": "ma-g3-mathematics-u07",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 7,
+    "unit_title": "Measurement: Time, Liquid Volume, and Mass",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.OA.3",
+      "3.MD.1",
+      "3.MD.2",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.MD.1"
+        ],
+        "prompt": "Explain telling time to the minute in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.MD.1"
+        ],
+        "prompt": "Use one of the unit representations (analog and digital clock faces; elapsed-time number line) to show elapsed time on a number line. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.MD.1"
+        ],
+        "prompt": "Carry out time interval problems accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.MD.2",
+          "MP.5"
+        ],
+        "prompt": "Apply liquid volume in liters in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.MD.1"
+        ],
+        "prompt": "A learner found the time from 2:45 to 3:20 by writing 3:20 - 2:45 = 0:75 and answered 75 minutes. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.MD.1",
+          "3.MD.2",
+          "MP.6"
+        ],
+        "prompt": "Explain how choosing a different unit changes the number you write down without changing the amount you measured."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.OA.3",
+          "3.MD.1",
+          "3.MD.2"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Design a day plan and a Measure It station guide with estimates, chosen units, and elapsed-time reasoning."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.3",
+          "MP.4",
+          "MP.5",
+          "MP.6"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u08-assessment",
+    "unit_id": "ma-g3-mathematics-u08",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 8,
+    "unit_title": "Data: Scaled Graphs and Measurement Line Plots",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.OA.8",
+      "3.MD.3",
+      "3.MD.4",
+      "MP.3",
+      "MP.4",
+      "MP.5"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.MD.3"
+        ],
+        "prompt": "Explain scaled picture graphs in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.MD.3"
+        ],
+        "prompt": "Use one of the unit representations (picture graph with a key; scaled bar graph) to show scaled bar graphs. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.MD.3",
+          "3.OA.8"
+        ],
+        "prompt": "Carry out one- and two-step graph questions accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.MD.4",
+          "MP.5"
+        ],
+        "prompt": "Apply measuring to the half and quarter inch in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.MD.3"
+        ],
+        "prompt": "On a bar graph where each square stands for 5 books, a learner read a bar that is 4 squares tall and answered 4 books. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.MD.3",
+          "3.MD.4",
+          "MP.4"
+        ],
+        "prompt": "Explain how the scale on a bar graph and the marks on a line plot each change what the display can tell you."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.OA.8",
+          "3.MD.3",
+          "3.MD.4"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Run a small de-identified survey or measurement study and publish a scaled bar graph, a line plot, and a written interpretation."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.3",
+          "MP.4",
+          "MP.5"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u09-assessment",
+    "unit_id": "ma-g3-mathematics-u09",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 9,
+    "unit_title": "Area and the Distributive Property",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.OA.5",
+      "3.OA.7",
+      "3.MD.5",
+      "3.MD.6",
+      "3.MD.7",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.7"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.MD.5"
+        ],
+        "prompt": "Explain area as covering in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.MD.5"
+        ],
+        "prompt": "Use one of the unit representations (square tiles; grid paper) to show unit squares. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.MD.6"
+        ],
+        "prompt": "Carry out measuring area by tiling accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.MD.7"
+        ],
+        "prompt": "Apply area as multiplication of side lengths in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.MD.7"
+        ],
+        "prompt": "A learner found the area of a rectangle with sides 6 cm and 4 cm by writing 6 + 4 + 6 + 4 = 20 and answered 20 square centimeters. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.MD.5",
+          "3.MD.7"
+        ],
+        "prompt": "Explain how breaking a rectangle into two smaller rectangles shows why you can multiply one side by a sum of two numbers."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.OA.5",
+          "3.OA.7",
+          "3.MD.5",
+          "3.MD.6",
+          "3.MD.7"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Design a floor plan for a small space and justify every area calculation two different ways."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4",
+          "MP.7"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  },
+  {
+    "assessment_id": "ma-g3-mathematics-u10-assessment",
+    "unit_id": "ma-g3-mathematics-u10",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "unit_number": 10,
+    "unit_title": "Perimeter, Geometry, and Integrated Capstone",
+    "administered_on_day_in_unit": 16,
+    "standards": [
+      "3.NF.1",
+      "3.MD.7",
+      "3.MD.8",
+      "3.G.1",
+      "3.G.2",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "total_points": 46,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "points": 4,
+        "standards": [
+          "3.MD.8"
+        ],
+        "prompt": "Explain perimeter of polygons in your own words and give a correct example."
+      },
+      {
+        "type": "representation",
+        "points": 6,
+        "standards": [
+          "3.MD.8"
+        ],
+        "prompt": "Use one of the unit representations (grid paper outlines; labeled polygons) to show unknown side lengths. Label the parts."
+      },
+      {
+        "type": "procedure and accuracy",
+        "points": 6,
+        "standards": [
+          "3.MD.8"
+        ],
+        "prompt": "Carry out same perimeter with different area accurately and show every step."
+      },
+      {
+        "type": "application",
+        "points": 8,
+        "standards": [
+          "3.G.1"
+        ],
+        "prompt": "Apply quadrilateral categories in a situation you have not worked before. Show the process that produced your answer."
+      },
+      {
+        "type": "error analysis",
+        "points": 6,
+        "standards": [
+          "3.MD.8",
+          "MP.1"
+        ],
+        "prompt": "A learner found the perimeter of a rectangle labeled 8 cm and 3 cm by writing 8 + 3 = 11 cm. Find the error, correct it, and explain why the correction works."
+      },
+      {
+        "type": "connection",
+        "points": 4,
+        "standards": [
+          "3.NF.1",
+          "3.MD.8",
+          "3.G.2"
+        ],
+        "prompt": "Explain how two shapes can have the same perimeter but cover different amounts of space."
+      },
+      {
+        "type": "performance evidence",
+        "points": 8,
+        "standards": [
+          "3.NF.1",
+          "3.MD.7",
+          "3.MD.8",
+          "3.G.1",
+          "3.G.2"
+        ],
+        "prompt": "Present the strongest evidence from the unit task: Capstone: design a small garden, room, or play space using perimeter, area, shape categories, and fractional partitioning, with a written justification of every decision."
+      },
+      {
+        "type": "reflection and transfer",
+        "points": 4,
+        "standards": [
+          "MP.1",
+          "MP.3",
+          "MP.4"
+        ],
+        "prompt": "Name one skill you can now transfer, one check that improves your accuracy, and one question you still have."
+      }
+    ],
+    "rubric_dimensions": [
+      "accuracy",
+      "representation and reasoning",
+      "application",
+      "checking and revision"
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85 percent with accurate independent application and adequate reasoning.",
+      "developing": "70 to 84 percent, or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70 percent or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "This score is ONE evidence source. It cannot by itself establish or deny mastery."
+    },
+    "reassessment": {
+      "occurs_on_day_in_unit": 17,
+      "requires_fresh_items": true,
+      "note": "Reassessment must use items not seen on this assessment; a reused item cannot establish new evidence."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+    "no_media_path": "Every prompt is answerable in writing, by speech, by drawing, or by building with objects. No image, audio, video, or camera is required."
+  }
+]

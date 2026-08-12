@@ -1,0 +1,1105 @@
+[
+  {
+    "unit_id": "ma-g3-mathematics-u01",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 1,
+    "title": "Mathematical Habits, Place Value, and Rounding",
+    "days": 18,
+    "standards": [
+      "3.NBT.1",
+      "3.NBT.2",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6",
+      "MP.7"
+    ],
+    "essential_question": "How do we make sense of an unfamiliar problem, and how does place value help us round, add, and subtract within 1,000?",
+    "topics": [
+      "problem-solving routines",
+      "place-value structure to 1,000",
+      "rounding to the nearest ten and hundred",
+      "addition within 1,000",
+      "subtraction within 1,000",
+      "estimation and reasonableness"
+    ],
+    "academic_vocabulary": [
+      "digit",
+      "place value",
+      "expanded form",
+      "round",
+      "estimate",
+      "regroup",
+      "sum",
+      "difference",
+      "number line",
+      "reasonable"
+    ],
+    "representations": [
+      "base-ten blocks or paper place-value strips",
+      "open number line",
+      "place-value chart",
+      "expanded form",
+      "written algorithm"
+    ],
+    "prerequisites": [
+      "reading and writing three-digit numbers",
+      "addition and subtraction within 100"
+    ],
+    "fluency_target": "Add and subtract within 1,000 using place-value strategies and algorithms.",
+    "known_misconceptions": [
+      {
+        "pattern": "Rounds using the wrong digit (looks at the leftmost digit instead of the digit to the right of the target place).",
+        "probe": "Round 476 to the nearest ten. Which digit decides, and why?",
+        "repair": "Locate the number between two consecutive tens on an open number line and name the closer end before applying any rule."
+      },
+      {
+        "pattern": "Rounds correctly but drops place value, writing 350 rounded to the nearest hundred as 4 rather than 400.",
+        "probe": "You rounded 350 and wrote 4. What does the 4 stand for?",
+        "repair": "Say the rounded value aloud in place-value words, then write it in expanded form."
+      },
+      {
+        "pattern": "Subtracts the smaller digit from the larger in each column regardless of position.",
+        "probe": "For 502 - 138, what happens in the ones place, and is that allowed?",
+        "repair": "Model the minuend with base-ten materials and physically trade before recording the written step."
+      },
+      {
+        "pattern": "Regroups across a zero incorrectly, treating the zero as nothing to trade.",
+        "probe": "In 400 - 176, there are no tens to trade. What can you trade first?",
+        "repair": "Trade one hundred for ten tens first, record it, then trade one ten for ten ones."
+      },
+      {
+        "pattern": "Treats an estimate as a wrong answer because it does not match the exact sum.",
+        "probe": "Your estimate was 700 and the exact answer is 683. Is the estimate wrong?",
+        "repair": "Name the purpose of the estimate (checking reasonableness) separately from the purpose of the exact calculation."
+      }
+    ],
+    "performance_task": "Build a Number Sense Toolkit poster: for each strategy, show a worked example, a model, and a check for reasonableness.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u01-l01",
+      "ma-g3-mathematics-u01-l02",
+      "ma-g3-mathematics-u01-l03",
+      "ma-g3-mathematics-u01-l04",
+      "ma-g3-mathematics-u01-l05",
+      "ma-g3-mathematics-u01-l06",
+      "ma-g3-mathematics-u01-l07",
+      "ma-g3-mathematics-u01-l08",
+      "ma-g3-mathematics-u01-l09",
+      "ma-g3-mathematics-u01-l10",
+      "ma-g3-mathematics-u01-l11",
+      "ma-g3-mathematics-u01-l12",
+      "ma-g3-mathematics-u01-l13",
+      "ma-g3-mathematics-u01-l14",
+      "ma-g3-mathematics-u01-l15",
+      "ma-g3-mathematics-u01-l16",
+      "ma-g3-mathematics-u01-l17",
+      "ma-g3-mathematics-u01-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u01-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u02",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 2,
+    "title": "Meanings of Multiplication and Division",
+    "days": 18,
+    "standards": [
+      "3.OA.1",
+      "3.OA.2",
+      "3.OA.3",
+      "3.OA.4",
+      "3.OA.5",
+      "3.OA.6",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "essential_question": "What do multiplication and division actually mean, and how does each one undo the other?",
+    "topics": [
+      "multiplication as equal groups",
+      "arrays and area",
+      "division as equal sharing",
+      "division as equal measuring",
+      "word problems within 100",
+      "multiplication and division as inverses"
+    ],
+    "academic_vocabulary": [
+      "factor",
+      "product",
+      "quotient",
+      "divisor",
+      "dividend",
+      "equal groups",
+      "array",
+      "row",
+      "column",
+      "unknown factor"
+    ],
+    "representations": [
+      "counters in equal groups",
+      "arrays on grid paper",
+      "equal-jumps number line",
+      "bar model",
+      "equation with a symbol for the unknown"
+    ],
+    "prerequisites": [
+      "skip counting by 2s, 5s, and 10s",
+      "repeated addition",
+      "equal sharing with concrete objects"
+    ],
+    "fluency_target": "Interpret products and quotients within 100 and match them to models and contexts.",
+    "known_misconceptions": [
+      {
+        "pattern": "Swaps the number of groups with the size of each group when writing an equation from a context.",
+        "probe": "Four bags hold six marbles each. In 4 x 6, which number is the group size?",
+        "repair": "Label the model out loud - 'groups' and 'in each group' - before writing the equation."
+      },
+      {
+        "pattern": "Treats division as always meaning 'how many in each group', missing measurement division.",
+        "probe": "You have 24 markers and put 6 in each cup. What is unknown here - the group size or the number of groups?",
+        "repair": "Sort story problems into 'sharing' and 'measuring' piles and model each with counters."
+      },
+      {
+        "pattern": "Reads an array by counting every square individually rather than using rows and columns.",
+        "probe": "Can you find the total without counting each square?",
+        "repair": "Cover all but one row, name the row size, then count rows."
+      },
+      {
+        "pattern": "Believes multiplication always makes a number bigger and division always makes it smaller, then applies the wrong operation.",
+        "probe": "Does 1 x 7 make 7 bigger? Does 7 divided by 1 make it smaller?",
+        "repair": "Test the claim against models involving 1 and 0 before generalizing."
+      },
+      {
+        "pattern": "Solves an unknown-factor problem by guessing rather than using a related known fact.",
+        "probe": "For 8 x ? = 32, which multiplication fact family helps?",
+        "repair": "Write the fact family for the two known numbers and read off the missing factor."
+      }
+    ],
+    "performance_task": "Curate an Equal Groups Museum: each exhibit pairs a model, a story problem, and the matching multiplication and division equations.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u02-l01",
+      "ma-g3-mathematics-u02-l02",
+      "ma-g3-mathematics-u02-l03",
+      "ma-g3-mathematics-u02-l04",
+      "ma-g3-mathematics-u02-l05",
+      "ma-g3-mathematics-u02-l06",
+      "ma-g3-mathematics-u02-l07",
+      "ma-g3-mathematics-u02-l08",
+      "ma-g3-mathematics-u02-l09",
+      "ma-g3-mathematics-u02-l10",
+      "ma-g3-mathematics-u02-l11",
+      "ma-g3-mathematics-u02-l12",
+      "ma-g3-mathematics-u02-l13",
+      "ma-g3-mathematics-u02-l14",
+      "ma-g3-mathematics-u02-l15",
+      "ma-g3-mathematics-u02-l16",
+      "ma-g3-mathematics-u02-l17",
+      "ma-g3-mathematics-u02-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u02-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u03",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 3,
+    "title": "Multiplication and Division Fluency Within 100",
+    "days": 18,
+    "standards": [
+      "3.OA.4",
+      "3.OA.5",
+      "3.OA.6",
+      "3.OA.7",
+      "3.NBT.3",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6",
+      "MP.7"
+    ],
+    "essential_question": "How do properties and facts we already know help us multiply and divide within 100 accurately and efficiently?",
+    "topics": [
+      "doubling strategies",
+      "fives and tens from place value",
+      "the commutative property",
+      "the distributive property",
+      "division from related multiplication",
+      "multiplying by multiples of ten"
+    ],
+    "academic_vocabulary": [
+      "strategy",
+      "commutative property",
+      "associative property",
+      "distributive property",
+      "double",
+      "half",
+      "multiple of ten",
+      "fact family",
+      "known fact",
+      "derived fact"
+    ],
+    "representations": [
+      "arrays split into two parts",
+      "number line with equal jumps",
+      "fact-family triangles",
+      "area models on grid paper",
+      "strategy cards"
+    ],
+    "prerequisites": [
+      "meanings of multiplication and division",
+      "skip counting",
+      "arrays"
+    ],
+    "fluency_target": "Multiply and divide within 100, knowing from memory all products of two one-digit numbers by the end of the unit sequence.",
+    "known_misconceptions": [
+      {
+        "pattern": "Skip-counts to a near miss and lands one group off (for example 6 x 7 = 48).",
+        "probe": "How many sevens did you count? Show them.",
+        "repair": "Track each group physically or with tally marks, then verify with a derived fact such as 5 x 7 plus 7."
+      },
+      {
+        "pattern": "Does not use commutativity, so treats 3 x 8 and 8 x 3 as two unrelated facts to memorize.",
+        "probe": "Turn the array a quarter turn. What changed, and what stayed the same?",
+        "repair": "Rotate a physical array and record both equations for the same picture."
+      },
+      {
+        "pattern": "Breaks a factor apart but forgets to add the second partial product.",
+        "probe": "You split 7 into 5 and 2. Where did the 2 groups go?",
+        "repair": "Shade both regions of the split array in different colors and label each partial product before adding."
+      },
+      {
+        "pattern": "Writes a division fact with the dividend and divisor reversed.",
+        "probe": "In 42 divided by 6, which number is the whole amount you started with?",
+        "repair": "State the total first in words, then place it in the equation."
+      },
+      {
+        "pattern": "Multiplies by a multiple of ten by appending a zero without understanding the place-value shift.",
+        "probe": "Why does 4 x 30 give 120? Where did the ten come from?",
+        "repair": "Model 4 x 3 tens with base-ten materials and name the result in tens before writing it."
+      }
+    ],
+    "performance_task": "Design a fact-strategy deck: each card shows a fact, the strategy that unlocks it, a model, and a way to check.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u03-l01",
+      "ma-g3-mathematics-u03-l02",
+      "ma-g3-mathematics-u03-l03",
+      "ma-g3-mathematics-u03-l04",
+      "ma-g3-mathematics-u03-l05",
+      "ma-g3-mathematics-u03-l06",
+      "ma-g3-mathematics-u03-l07",
+      "ma-g3-mathematics-u03-l08",
+      "ma-g3-mathematics-u03-l09",
+      "ma-g3-mathematics-u03-l10",
+      "ma-g3-mathematics-u03-l11",
+      "ma-g3-mathematics-u03-l12",
+      "ma-g3-mathematics-u03-l13",
+      "ma-g3-mathematics-u03-l14",
+      "ma-g3-mathematics-u03-l15",
+      "ma-g3-mathematics-u03-l16",
+      "ma-g3-mathematics-u03-l17",
+      "ma-g3-mathematics-u03-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u03-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u04",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 4,
+    "title": "Properties, Patterns, and Two-Step Problems",
+    "days": 18,
+    "standards": [
+      "3.OA.5",
+      "3.OA.7",
+      "3.OA.8",
+      "3.OA.9",
+      "3.NBT.3",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "essential_question": "How do we solve problems that hide a second step, and how can patterns help us predict and check?",
+    "topics": [
+      "two-step word problems",
+      "equations with a letter for the unknown",
+      "order of operations in context",
+      "estimation to check reasonableness",
+      "patterns in the addition and multiplication tables",
+      "explaining patterns with properties"
+    ],
+    "academic_vocabulary": [
+      "two-step problem",
+      "unknown",
+      "variable letter",
+      "expression",
+      "equation",
+      "pattern",
+      "row",
+      "column",
+      "even",
+      "odd",
+      "reasonable"
+    ],
+    "representations": [
+      "bar models with two stages",
+      "equations with a letter",
+      "estimation number line",
+      "addition table",
+      "multiplication table"
+    ],
+    "prerequisites": [
+      "fact fluency within 100",
+      "one-step word problems",
+      "rounding to the nearest ten"
+    ],
+    "fluency_target": "Solve two-step word problems using the four operations and assess reasonableness with mental math and estimation.",
+    "known_misconceptions": [
+      {
+        "pattern": "Answers only the first step and stops before the question is actually answered.",
+        "probe": "Read the question again. Does your number answer that question?",
+        "repair": "Underline the question, then check each recorded step against it before finishing."
+      },
+      {
+        "pattern": "Adds every number that appears in the problem regardless of what the situation describes.",
+        "probe": "What is happening in this story - joining, separating, grouping, or sharing?",
+        "repair": "Draw the situation as a bar model before choosing any operation."
+      },
+      {
+        "pattern": "Ignores grouping and computes strictly left to right in a two-operation expression.",
+        "probe": "In 3 + 4 x 2, which part describes the groups?",
+        "repair": "Bracket the multiplication in the model first, then record the expression to match."
+      },
+      {
+        "pattern": "Treats a letter for the unknown as a label for an object rather than a number.",
+        "probe": "In 5 x b = 45, does b stand for a bag or for a number?",
+        "repair": "Say the sentence in words with 'some number' in place of the letter."
+      },
+      {
+        "pattern": "Describes a table pattern by appearance only ('it goes up') without an arithmetic explanation.",
+        "probe": "Why does every product in this column end in 0 or 5?",
+        "repair": "Connect the pattern to the property or place-value fact that causes it."
+      }
+    ],
+    "performance_task": "Write and publish a two-step event problem set; each problem needs a model, an equation with a letter for the unknown, and a reasonableness check.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u04-l01",
+      "ma-g3-mathematics-u04-l02",
+      "ma-g3-mathematics-u04-l03",
+      "ma-g3-mathematics-u04-l04",
+      "ma-g3-mathematics-u04-l05",
+      "ma-g3-mathematics-u04-l06",
+      "ma-g3-mathematics-u04-l07",
+      "ma-g3-mathematics-u04-l08",
+      "ma-g3-mathematics-u04-l09",
+      "ma-g3-mathematics-u04-l10",
+      "ma-g3-mathematics-u04-l11",
+      "ma-g3-mathematics-u04-l12",
+      "ma-g3-mathematics-u04-l13",
+      "ma-g3-mathematics-u04-l14",
+      "ma-g3-mathematics-u04-l15",
+      "ma-g3-mathematics-u04-l16",
+      "ma-g3-mathematics-u04-l17",
+      "ma-g3-mathematics-u04-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u04-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u05",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 5,
+    "title": "Understanding Fractions as Numbers",
+    "days": 18,
+    "standards": [
+      "3.NF.1",
+      "3.NF.2",
+      "3.G.2",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.6"
+    ],
+    "essential_question": "What is a fraction, and how do we place one on the number line?",
+    "topics": [
+      "equal partitioning",
+      "unit fractions",
+      "building fractions from unit fractions",
+      "the number line as a length model",
+      "locating fractions on the number line",
+      "identifying the whole"
+    ],
+    "academic_vocabulary": [
+      "fraction",
+      "numerator",
+      "denominator",
+      "unit fraction",
+      "equal parts",
+      "whole",
+      "partition",
+      "interval",
+      "number line",
+      "point"
+    ],
+    "representations": [
+      "folded paper strips",
+      "area models partitioned equally",
+      "fraction bars",
+      "number line with marked intervals",
+      "fraction notation"
+    ],
+    "prerequisites": [
+      "partitioning shapes into halves, thirds, and fourths",
+      "equal sharing",
+      "reading a number line with whole numbers"
+    ],
+    "fluency_target": "Name, draw, and locate unit fractions and non-unit fractions with denominators 2, 3, 4, 6, and 8.",
+    "known_misconceptions": [
+      {
+        "pattern": "Partitions a shape into the right number of parts without making the parts equal.",
+        "probe": "Are these four parts the same size? How could you prove it?",
+        "repair": "Cut out and overlay the parts, or fold the strip, before naming the fraction."
+      },
+      {
+        "pattern": "Reads a larger denominator as a larger fraction because the number is bigger.",
+        "probe": "Which is more of the same pizza - one of eight slices, or one of three slices?",
+        "repair": "Compare the physical size of one part as the number of parts increases."
+      },
+      {
+        "pattern": "Counts tick marks instead of intervals when locating a fraction on a number line.",
+        "probe": "How many equal jumps from 0 to this point?",
+        "repair": "Trace and count the jumps between marks, not the marks themselves."
+      },
+      {
+        "pattern": "Names a fraction without identifying the whole it refers to.",
+        "probe": "One half of what? Show me the whole.",
+        "repair": "Outline the whole first and label it before naming any part."
+      },
+      {
+        "pattern": "Treats a fraction as two separate whole numbers rather than one number.",
+        "probe": "Where does three fourths sit on this number line - is it one place or two?",
+        "repair": "Locate the single point on the number line and say its one name."
+      }
+    ],
+    "performance_task": "Build a fraction number-line gallery showing unit fractions and non-unit fractions, each with visible evidence that the parts are equal.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u05-l01",
+      "ma-g3-mathematics-u05-l02",
+      "ma-g3-mathematics-u05-l03",
+      "ma-g3-mathematics-u05-l04",
+      "ma-g3-mathematics-u05-l05",
+      "ma-g3-mathematics-u05-l06",
+      "ma-g3-mathematics-u05-l07",
+      "ma-g3-mathematics-u05-l08",
+      "ma-g3-mathematics-u05-l09",
+      "ma-g3-mathematics-u05-l10",
+      "ma-g3-mathematics-u05-l11",
+      "ma-g3-mathematics-u05-l12",
+      "ma-g3-mathematics-u05-l13",
+      "ma-g3-mathematics-u05-l14",
+      "ma-g3-mathematics-u05-l15",
+      "ma-g3-mathematics-u05-l16",
+      "ma-g3-mathematics-u05-l17",
+      "ma-g3-mathematics-u05-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u05-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u06",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 6,
+    "title": "Equivalent Fractions and Comparison",
+    "days": 18,
+    "standards": [
+      "3.NF.1",
+      "3.NF.2",
+      "3.NF.3",
+      "3.G.2",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "essential_question": "When are two fractions the same number, and how can we compare fractions we cannot simply count?",
+    "topics": [
+      "equivalence on the number line",
+      "equivalence with area models",
+      "generating equivalent fractions",
+      "whole numbers as fractions",
+      "comparing with the same numerator",
+      "comparing with the same denominator"
+    ],
+    "academic_vocabulary": [
+      "equivalent",
+      "equal",
+      "compare",
+      "greater than",
+      "less than",
+      "same whole",
+      "justify",
+      "numerator",
+      "denominator",
+      "whole number as a fraction"
+    ],
+    "representations": [
+      "stacked fraction bars",
+      "parallel number lines",
+      "area models with the same whole",
+      "fraction notation",
+      "comparison statements with symbols"
+    ],
+    "prerequisites": [
+      "unit fractions",
+      "locating fractions on a number line",
+      "equal partitioning"
+    ],
+    "fluency_target": "Recognize and generate simple equivalent fractions and compare fractions with the same numerator or the same denominator (denominators 2, 3, 4, 6, and 8).",
+    "known_misconceptions": [
+      {
+        "pattern": "Compares fractions drawn on wholes of different sizes and concludes the larger picture is the larger fraction.",
+        "probe": "Are these two wholes the same size? Can we compare fairly if they are not?",
+        "repair": "Redraw both fractions on identical wholes before comparing."
+      },
+      {
+        "pattern": "Assumes a bigger denominator always means a bigger fraction.",
+        "probe": "Compare one third and one sixth on the same bar. Which part is larger?",
+        "repair": "Hold the numerator fixed and watch the part shrink as the denominator grows."
+      },
+      {
+        "pattern": "Generates 'equivalent' fractions by adding the same number to numerator and denominator.",
+        "probe": "You changed one half to two thirds by adding one to each. Are those the same amount on the bar?",
+        "repair": "Test the claim on a model; then re-partition each part to see what equivalence actually does."
+      },
+      {
+        "pattern": "Does not recognize that a whole number can be written as a fraction.",
+        "probe": "How many fourths make one whole? How would you write that?",
+        "repair": "Partition several wholes into four equal parts each and count all the fourths."
+      },
+      {
+        "pattern": "Compares two fractions by looking only at numerators or only at denominators.",
+        "probe": "Which is greater, three eighths or five eighths? What did you compare?",
+        "repair": "Model both fractions on the same whole and compare the shaded amounts directly. In Grade 3, compare only fractions that share a numerator or share a denominator."
+      }
+    ],
+    "performance_task": "Create a Same Size, Different Name proof set: each claim is backed by a model and a written justification.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u06-l01",
+      "ma-g3-mathematics-u06-l02",
+      "ma-g3-mathematics-u06-l03",
+      "ma-g3-mathematics-u06-l04",
+      "ma-g3-mathematics-u06-l05",
+      "ma-g3-mathematics-u06-l06",
+      "ma-g3-mathematics-u06-l07",
+      "ma-g3-mathematics-u06-l08",
+      "ma-g3-mathematics-u06-l09",
+      "ma-g3-mathematics-u06-l10",
+      "ma-g3-mathematics-u06-l11",
+      "ma-g3-mathematics-u06-l12",
+      "ma-g3-mathematics-u06-l13",
+      "ma-g3-mathematics-u06-l14",
+      "ma-g3-mathematics-u06-l15",
+      "ma-g3-mathematics-u06-l16",
+      "ma-g3-mathematics-u06-l17",
+      "ma-g3-mathematics-u06-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u06-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u07",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 7,
+    "title": "Measurement: Time, Liquid Volume, and Mass",
+    "days": 18,
+    "standards": [
+      "3.OA.3",
+      "3.MD.1",
+      "3.MD.2",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6"
+    ],
+    "essential_question": "How do we measure time, liquid volume, and mass, and how do we know a measurement is reasonable?",
+    "topics": [
+      "telling time to the minute",
+      "elapsed time on a number line",
+      "time interval problems",
+      "liquid volume in liters",
+      "mass in grams and kilograms",
+      "estimating with benchmarks"
+    ],
+    "academic_vocabulary": [
+      "minute",
+      "hour",
+      "elapsed time",
+      "interval",
+      "liquid volume",
+      "liter",
+      "mass",
+      "gram",
+      "kilogram",
+      "estimate",
+      "benchmark"
+    ],
+    "representations": [
+      "analog and digital clock faces",
+      "elapsed-time number line",
+      "labeled containers",
+      "balance scale",
+      "benchmark reference objects"
+    ],
+    "prerequisites": [
+      "telling time to the nearest five minutes",
+      "addition and subtraction within 100",
+      "one-step word problems"
+    ],
+    "fluency_target": "Tell and write time to the nearest minute and solve one-step problems involving time intervals, liquid volume, and mass.",
+    "known_misconceptions": [
+      {
+        "pattern": "Computes elapsed time by subtracting clock digits as if they were base-ten numbers.",
+        "probe": "From 2:45 to 3:20, does 3:20 minus 2:45 equal 0:75?",
+        "repair": "Jump forward on an elapsed-time number line in friendly chunks to the next hour, then onward."
+      },
+      {
+        "pattern": "Confuses mass units with volume units and reports a drink in grams or a rock in liters.",
+        "probe": "Does this measure how heavy it is, or how much space the liquid fills?",
+        "repair": "Sort objects into 'we weigh this' and 'we pour this' before selecting a unit."
+      },
+      {
+        "pattern": "Gives an estimate with no benchmark, producing an unreasonable value.",
+        "probe": "Is a full water bottle closer to 1 liter or 20 liters? What do you know that is about 1 liter?",
+        "repair": "Anchor every estimate to a known benchmark object before answering."
+      },
+      {
+        "pattern": "Reads only the hour hand position and misnames the hour when the minute hand is past the half hour.",
+        "probe": "The hour hand is between 4 and 5. Which hour has already started?",
+        "repair": "Name the hour that has begun, then read minutes separately."
+      },
+      {
+        "pattern": "Adds the numbers in a measurement problem without attending to the unit.",
+        "probe": "You added 3 and 250. What unit is each one in?",
+        "repair": "Write the unit next to every number before computing."
+      }
+    ],
+    "performance_task": "Design a day plan and a Measure It station guide with estimates, chosen units, and elapsed-time reasoning.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u07-l01",
+      "ma-g3-mathematics-u07-l02",
+      "ma-g3-mathematics-u07-l03",
+      "ma-g3-mathematics-u07-l04",
+      "ma-g3-mathematics-u07-l05",
+      "ma-g3-mathematics-u07-l06",
+      "ma-g3-mathematics-u07-l07",
+      "ma-g3-mathematics-u07-l08",
+      "ma-g3-mathematics-u07-l09",
+      "ma-g3-mathematics-u07-l10",
+      "ma-g3-mathematics-u07-l11",
+      "ma-g3-mathematics-u07-l12",
+      "ma-g3-mathematics-u07-l13",
+      "ma-g3-mathematics-u07-l14",
+      "ma-g3-mathematics-u07-l15",
+      "ma-g3-mathematics-u07-l16",
+      "ma-g3-mathematics-u07-l17",
+      "ma-g3-mathematics-u07-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u07-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u08",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 8,
+    "title": "Data: Scaled Graphs and Measurement Line Plots",
+    "days": 18,
+    "standards": [
+      "3.OA.8",
+      "3.MD.3",
+      "3.MD.4",
+      "MP.3",
+      "MP.4",
+      "MP.5"
+    ],
+    "essential_question": "How do we represent data honestly, and what questions can a graph actually answer?",
+    "topics": [
+      "scaled picture graphs",
+      "scaled bar graphs",
+      "one- and two-step graph questions",
+      "measuring to the half and quarter inch",
+      "line plots",
+      "choosing a representation"
+    ],
+    "academic_vocabulary": [
+      "data",
+      "category",
+      "scale",
+      "key",
+      "axis",
+      "bar graph",
+      "picture graph",
+      "line plot",
+      "half inch",
+      "quarter inch",
+      "interpret"
+    ],
+    "representations": [
+      "picture graph with a key",
+      "scaled bar graph",
+      "ruler marked in halves and fourths",
+      "line plot",
+      "written interpretation"
+    ],
+    "prerequisites": [
+      "counting by 2s, 5s, and 10s",
+      "measuring to the nearest inch",
+      "two-step word problems"
+    ],
+    "fluency_target": "Draw and read scaled bar and picture graphs and build line plots from measurement data in halves and fourths of an inch.",
+    "known_misconceptions": [
+      {
+        "pattern": "Reads a scaled graph as if each unit on the axis were one item.",
+        "probe": "What does one square on this axis stand for?",
+        "repair": "Read the scale aloud and label a few gridlines with their values before answering."
+      },
+      {
+        "pattern": "Answers a 'how many more' question by reading only the taller bar.",
+        "probe": "How many more - is that one bar, or the difference between two?",
+        "repair": "Mark both values, then subtract, showing the difference on the graph."
+      },
+      {
+        "pattern": "Places a measurement at the nearest whole number on a line plot when it falls at a half or quarter mark.",
+        "probe": "Your object measured between 3 and 4 inches. Which mark is closest?",
+        "repair": "Count the quarter-inch marks between whole numbers before placing the point."
+      },
+      {
+        "pattern": "Draws bars of unequal width or with inconsistent spacing, distorting the comparison.",
+        "probe": "Do these bars start from the same line and use the same width?",
+        "repair": "Use grid paper and a shared baseline for every bar."
+      },
+      {
+        "pattern": "Claims a graph proves something it does not show, such as a cause.",
+        "probe": "Does this graph tell us why, or only how many?",
+        "repair": "Restate the claim so it only says what the data actually shows."
+      }
+    ],
+    "performance_task": "Run a small de-identified survey or measurement study and publish a scaled bar graph, a line plot, and a written interpretation.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u08-l01",
+      "ma-g3-mathematics-u08-l02",
+      "ma-g3-mathematics-u08-l03",
+      "ma-g3-mathematics-u08-l04",
+      "ma-g3-mathematics-u08-l05",
+      "ma-g3-mathematics-u08-l06",
+      "ma-g3-mathematics-u08-l07",
+      "ma-g3-mathematics-u08-l08",
+      "ma-g3-mathematics-u08-l09",
+      "ma-g3-mathematics-u08-l10",
+      "ma-g3-mathematics-u08-l11",
+      "ma-g3-mathematics-u08-l12",
+      "ma-g3-mathematics-u08-l13",
+      "ma-g3-mathematics-u08-l14",
+      "ma-g3-mathematics-u08-l15",
+      "ma-g3-mathematics-u08-l16",
+      "ma-g3-mathematics-u08-l17",
+      "ma-g3-mathematics-u08-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u08-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u09",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 9,
+    "title": "Area and the Distributive Property",
+    "days": 18,
+    "standards": [
+      "3.OA.5",
+      "3.OA.7",
+      "3.MD.5",
+      "3.MD.6",
+      "3.MD.7",
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.7"
+    ],
+    "essential_question": "What is area, and why can a rectangle be broken apart without changing how much it covers?",
+    "topics": [
+      "area as covering",
+      "unit squares",
+      "measuring area by tiling",
+      "area as multiplication of side lengths",
+      "breaking rectangles apart",
+      "rectilinear figures"
+    ],
+    "academic_vocabulary": [
+      "area",
+      "unit square",
+      "square unit",
+      "tile",
+      "gap",
+      "overlap",
+      "side length",
+      "decompose",
+      "distributive property",
+      "rectilinear"
+    ],
+    "representations": [
+      "square tiles",
+      "grid paper",
+      "labeled rectangles",
+      "split arrays with two partial products",
+      "decomposed rectilinear figures"
+    ],
+    "prerequisites": [
+      "arrays",
+      "multiplication within 100",
+      "measuring side lengths"
+    ],
+    "fluency_target": "Find the area of rectangles by tiling and by multiplying side lengths, and decompose rectilinear figures into rectangles.",
+    "known_misconceptions": [
+      {
+        "pattern": "Confuses area with perimeter and adds side lengths when asked for area.",
+        "probe": "Are you measuring the space inside or the distance around?",
+        "repair": "Trace the boundary in one color and shade the interior in another before choosing an operation."
+      },
+      {
+        "pattern": "Tiles with gaps or overlaps and still reports the tile count as the area.",
+        "probe": "Do your tiles cover every part exactly once?",
+        "repair": "Rebuild the covering with physical tiles and check for gaps and overlaps."
+      },
+      {
+        "pattern": "Reports area in linear units rather than square units.",
+        "probe": "You wrote 12 centimeters. Are we counting lengths or squares?",
+        "repair": "Name one unit square aloud, then label the result in square units."
+      },
+      {
+        "pattern": "Splits a rectangle for the distributive property but multiplies the split parts together instead of adding the partial areas.",
+        "probe": "You found two areas. Should they be joined or combined by multiplying?",
+        "repair": "Shade both regions and physically push them together to see that areas add."
+      },
+      {
+        "pattern": "Decomposes a rectilinear figure into overlapping rectangles and double-counts a region.",
+        "probe": "Is any part of this figure inside two of your rectangles?",
+        "repair": "Outline each rectangle in a different color to check that none overlap."
+      }
+    ],
+    "performance_task": "Design a floor plan for a small space and justify every area calculation two different ways.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u09-l01",
+      "ma-g3-mathematics-u09-l02",
+      "ma-g3-mathematics-u09-l03",
+      "ma-g3-mathematics-u09-l04",
+      "ma-g3-mathematics-u09-l05",
+      "ma-g3-mathematics-u09-l06",
+      "ma-g3-mathematics-u09-l07",
+      "ma-g3-mathematics-u09-l08",
+      "ma-g3-mathematics-u09-l09",
+      "ma-g3-mathematics-u09-l10",
+      "ma-g3-mathematics-u09-l11",
+      "ma-g3-mathematics-u09-l12",
+      "ma-g3-mathematics-u09-l13",
+      "ma-g3-mathematics-u09-l14",
+      "ma-g3-mathematics-u09-l15",
+      "ma-g3-mathematics-u09-l16",
+      "ma-g3-mathematics-u09-l17",
+      "ma-g3-mathematics-u09-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u09-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  },
+  {
+    "unit_id": "ma-g3-mathematics-u10",
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unit_number": 10,
+    "title": "Perimeter, Geometry, and Integrated Capstone",
+    "days": 18,
+    "standards": [
+      "3.NF.1",
+      "3.MD.7",
+      "3.MD.8",
+      "3.G.1",
+      "3.G.2",
+      "MP.1",
+      "MP.3",
+      "MP.4"
+    ],
+    "essential_question": "How do shape, perimeter, and area work together when we design something real?",
+    "topics": [
+      "perimeter of polygons",
+      "unknown side lengths",
+      "same perimeter with different area",
+      "quadrilateral categories",
+      "shared attributes",
+      "partitioning shapes into equal areas"
+    ],
+    "academic_vocabulary": [
+      "perimeter",
+      "polygon",
+      "quadrilateral",
+      "rhombus",
+      "rectangle",
+      "square",
+      "attribute",
+      "category",
+      "equal area",
+      "unit fraction"
+    ],
+    "representations": [
+      "grid paper outlines",
+      "labeled polygons",
+      "shape sorting by attribute",
+      "partitioned shapes",
+      "scaled design plan"
+    ],
+    "prerequisites": [
+      "area of rectangles",
+      "addition within 1,000",
+      "unit fractions",
+      "shape names"
+    ],
+    "fluency_target": "Solve perimeter problems for polygons, including finding an unknown side length, and classify quadrilaterals by attribute.",
+    "known_misconceptions": [
+      {
+        "pattern": "Adds only the two labeled side lengths of a rectangle and reports that as the perimeter.",
+        "probe": "How many sides does this rectangle have? Did every side get counted?",
+        "repair": "Trace the full boundary with a finger, labeling each side before adding."
+      },
+      {
+        "pattern": "Assumes shapes with the same perimeter must have the same area.",
+        "probe": "Build two different rectangles with perimeter 12. Do they cover the same amount?",
+        "repair": "Construct several rectangles with a fixed perimeter and tabulate their areas."
+      },
+      {
+        "pattern": "Classifies a square as not a rectangle because it 'looks different'.",
+        "probe": "Does a square have four sides and four square corners, the way a rectangle does?",
+        "repair": "Check each defining attribute against the category definition rather than the overall look."
+      },
+      {
+        "pattern": "Rotates a shape and treats it as a different shape.",
+        "probe": "Did turning it change any side length or angle?",
+        "repair": "Physically rotate a cut-out and re-check the attributes."
+      },
+      {
+        "pattern": "Partitions a shape into the right number of parts without equal areas and names them unit fractions.",
+        "probe": "Do these four parts cover the same amount of space?",
+        "repair": "Verify equal area by tiling or by overlaying the parts before naming the fraction."
+      }
+    ],
+    "performance_task": "Capstone: design a small garden, room, or play space using perimeter, area, shape categories, and fractional partitioning, with a written justification of every decision.",
+    "lesson_ids": [
+      "ma-g3-mathematics-u10-l01",
+      "ma-g3-mathematics-u10-l02",
+      "ma-g3-mathematics-u10-l03",
+      "ma-g3-mathematics-u10-l04",
+      "ma-g3-mathematics-u10-l05",
+      "ma-g3-mathematics-u10-l06",
+      "ma-g3-mathematics-u10-l07",
+      "ma-g3-mathematics-u10-l08",
+      "ma-g3-mathematics-u10-l09",
+      "ma-g3-mathematics-u10-l10",
+      "ma-g3-mathematics-u10-l11",
+      "ma-g3-mathematics-u10-l12",
+      "ma-g3-mathematics-u10-l13",
+      "ma-g3-mathematics-u10-l14",
+      "ma-g3-mathematics-u10-l15",
+      "ma-g3-mathematics-u10-l16",
+      "ma-g3-mathematics-u10-l17",
+      "ma-g3-mathematics-u10-l18"
+    ],
+    "assessment_id": "ma-g3-mathematics-u10-assessment",
+    "independent_evidence_days": [
+      5,
+      10,
+      11,
+      18
+    ],
+    "adaptive_math_aligned_sequences": [],
+    "static_fallback_complete": true
+  }
+]

@@ -1,0 +1,765 @@
+{
+  "course_id": "ma-g3-mathematics",
+  "grade": 3,
+  "subject": "mathematics",
+  "canonical_rule": "One correct response cannot establish mastery.",
+  "evidence_model": {
+    "instruction": "The idea is being taught. No mastery claim is possible from an instruction day.",
+    "guided-practice": "Success is supported by prompts or feedback. Recorded as supported; not weighted as independent evidence.",
+    "independent-evidence": "Unsupported, unprompted work with recorded reasoning. Usable toward a mastery claim.",
+    "retrieval": "Spaced recall without speed pressure. Informs teaching; a slow response is not a mastery failure.",
+    "project": "Extended application with revision. Contributes performance evidence.",
+    "assessment": "One evidence source among several.",
+    "reassessment": "Fresh evidence after targeted correction, separated in time from the first attempt."
+  },
+  "mastery_decision_rule": "Record a standard as secure only when the learner has produced accurate independent evidence WITH an explanation on at least two separate occasions, separated by time or by representation, and has not shown the target misconception on the later occasion. A single assessment score, a single correct answer, or guided success alone is never sufficient.",
+  "reporting_bands": [
+    "Secure",
+    "Developing",
+    "Not Yet"
+  ],
+  "pacing_note": "A pacing concern is not a mastery failure. Extended time, reduced quantity, and breaks do not change the standard being evidenced.",
+  "privacy_note": "Mastery records store the target, evidence type, completion state, adult-observed result, and next step. Raw learner responses are not required to be stored.",
+  "units": [
+    {
+      "unit_id": "ma-g3-mathematics-u01",
+      "unit_number": 1,
+      "unit_title": "Mathematical Habits, Place Value, and Rounding",
+      "standards": [
+        "3.NBT.1",
+        "3.NBT.2",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6",
+        "MP.7"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u01-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "rounding to the nearest hundred",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u01-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "subtraction within 1,000 by decomposing place values",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u01-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "subtraction with regrouping across zeros",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u01-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "estimating and checking in everyday situations",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u01-l16",
+          "evidence_type": "assessment",
+          "focus": "rounding and computation within 1,000",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u01-l17",
+          "evidence_type": "reassessment",
+          "focus": "rounding and regrouping",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u02",
+      "unit_number": 2,
+      "unit_title": "Meanings of Multiplication and Division",
+      "standards": [
+        "3.OA.1",
+        "3.OA.2",
+        "3.OA.3",
+        "3.OA.4",
+        "3.OA.5",
+        "3.OA.6",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u02-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "interpreting products in context",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u02-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "solving multiplication and division word problems within 100",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u02-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "unknown-factor problems and fact families",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u02-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "choosing an operation for a new situation",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u02-l16",
+          "evidence_type": "assessment",
+          "focus": "meanings of multiplication and division",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u02-l17",
+          "evidence_type": "reassessment",
+          "focus": "operation meaning",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u03",
+      "unit_number": 3,
+      "unit_title": "Multiplication and Division Fluency Within 100",
+      "standards": [
+        "3.OA.4",
+        "3.OA.5",
+        "3.OA.6",
+        "3.OA.7",
+        "3.NBT.3",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6",
+        "MP.7"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u03-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "deriving threes and sixes from known facts",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u03-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "solving unknown-factor equations",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u03-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "multiplying one-digit numbers by multiples of ten",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u03-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "accuracy and flexibility without speed pressure",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u03-l16",
+          "evidence_type": "assessment",
+          "focus": "fluency, strategy, and explanation",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u03-l17",
+          "evidence_type": "reassessment",
+          "focus": "unsecured facts",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u04",
+      "unit_number": 4,
+      "unit_title": "Properties, Patterns, and Two-Step Problems",
+      "standards": [
+        "3.OA.5",
+        "3.OA.7",
+        "3.OA.8",
+        "3.OA.9",
+        "3.NBT.3",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u04-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "two-step problems combining addition and multiplication",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u04-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "two-step problems across all four operations",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u04-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "patterns in the addition and multiplication tables",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u04-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "two-step reasoning in daily planning",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u04-l16",
+          "evidence_type": "assessment",
+          "focus": "two-step problems and pattern reasoning",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u04-l17",
+          "evidence_type": "reassessment",
+          "focus": "multi-step reasoning",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u05",
+      "unit_number": 5,
+      "unit_title": "Understanding Fractions as Numbers",
+      "standards": [
+        "3.NF.1",
+        "3.NF.2",
+        "3.G.2",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.6"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u05-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "naming fractions from area models",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u05-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "locating non-unit fractions on the number line",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u05-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "fractions of a whole in measurement and sharing contexts",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u05-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "fractions in measurement and sharing",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u05-l16",
+          "evidence_type": "assessment",
+          "focus": "fractions as numbers",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u05-l17",
+          "evidence_type": "reassessment",
+          "focus": "partitioning and placement",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u06",
+      "unit_number": 6,
+      "unit_title": "Equivalent Fractions and Comparison",
+      "standards": [
+        "3.NF.1",
+        "3.NF.2",
+        "3.NF.3",
+        "3.G.2",
+        "MP.1",
+        "MP.3",
+        "MP.4"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u06-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "recognizing equivalent fractions in models and notation",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u06-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "comparing fractions with the same numerator",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u06-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "comparing fractions with the same denominator",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u06-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "recognizing the same amount written different ways",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u06-l16",
+          "evidence_type": "assessment",
+          "focus": "equivalence and comparison",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u06-l17",
+          "evidence_type": "reassessment",
+          "focus": "comparison reasoning",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u07",
+      "unit_number": 7,
+      "unit_title": "Measurement: Time, Liquid Volume, and Mass",
+      "standards": [
+        "3.OA.3",
+        "3.MD.1",
+        "3.MD.2",
+        "MP.3",
+        "MP.4",
+        "MP.5",
+        "MP.6"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u07-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "elapsed-time problems in real contexts",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u07-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "one-step problems involving liquid volume and mass",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u07-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "choosing a unit and estimating before measuring",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u07-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "measuring safely with an adult at home",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u07-l16",
+          "evidence_type": "assessment",
+          "focus": "time, liquid volume, and mass",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u07-l17",
+          "evidence_type": "reassessment",
+          "focus": "elapsed time and units",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u08",
+      "unit_number": 8,
+      "unit_title": "Data: Scaled Graphs and Measurement Line Plots",
+      "standards": [
+        "3.OA.8",
+        "3.MD.3",
+        "3.MD.4",
+        "MP.3",
+        "MP.4",
+        "MP.5"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u08-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "a scaled bar graph from a data set",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u08-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "interpreting a line plot",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u08-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "comparing categories with two-step questions",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u08-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "judging whether a real graph is honest",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u08-l16",
+          "evidence_type": "assessment",
+          "focus": "scaled graphs and line plots",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u08-l17",
+          "evidence_type": "reassessment",
+          "focus": "scale and interpretation",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u09",
+      "unit_number": 9,
+      "unit_title": "Area and the Distributive Property",
+      "standards": [
+        "3.OA.5",
+        "3.OA.7",
+        "3.MD.5",
+        "3.MD.6",
+        "3.MD.7",
+        "MP.1",
+        "MP.3",
+        "MP.4",
+        "MP.7"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u09-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "finding area from a tiled figure",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u09-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "area of rectangles in real contexts",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u09-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "breaking a rectangle apart to show the distributive property",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u09-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "area in the spaces around us",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u09-l16",
+          "evidence_type": "assessment",
+          "focus": "area and the distributive property",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u09-l17",
+          "evidence_type": "reassessment",
+          "focus": "area reasoning",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    },
+    {
+      "unit_id": "ma-g3-mathematics-u10",
+      "unit_number": 10,
+      "unit_title": "Perimeter, Geometry, and Integrated Capstone",
+      "standards": [
+        "3.NF.1",
+        "3.MD.7",
+        "3.MD.8",
+        "3.G.1",
+        "3.G.2",
+        "MP.1",
+        "MP.3",
+        "MP.4"
+      ],
+      "independent_evidence_occasions": 4,
+      "guided_practice_days": [
+        4,
+        7,
+        8
+      ],
+      "instruction_days": [
+        1,
+        2,
+        3,
+        6,
+        12
+      ],
+      "evidence_occasions": [
+        {
+          "day_in_unit": 5,
+          "lesson_id": "ma-g3-mathematics-u10-l05",
+          "evidence_type": "independent-evidence",
+          "focus": "same area, different perimeter",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 10,
+          "lesson_id": "ma-g3-mathematics-u10-l10",
+          "evidence_type": "independent-evidence",
+          "focus": "partitioning shapes into parts with equal areas",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 11,
+          "lesson_id": "ma-g3-mathematics-u10-l11",
+          "evidence_type": "independent-evidence",
+          "focus": "design constraints that involve both perimeter and area",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 18,
+          "lesson_id": "ma-g3-mathematics-u10-l18",
+          "evidence_type": "independent-evidence",
+          "focus": "perimeter, area, and shape classification in the completed design",
+          "counts_toward_mastery": true
+        },
+        {
+          "day_in_unit": 16,
+          "lesson_id": "ma-g3-mathematics-u10-l16",
+          "evidence_type": "assessment",
+          "focus": "perimeter, geometry, and partitioning",
+          "counts_toward_mastery": true,
+          "note": "One evidence source among several; never the sole basis."
+        },
+        {
+          "day_in_unit": 17,
+          "lesson_id": "ma-g3-mathematics-u10-l17",
+          "evidence_type": "reassessment",
+          "focus": "perimeter and classification",
+          "counts_toward_mastery": true,
+          "requires_fresh_items": true
+        }
+      ]
+    }
+  ]
+}

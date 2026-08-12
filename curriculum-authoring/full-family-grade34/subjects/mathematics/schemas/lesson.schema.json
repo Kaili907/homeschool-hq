@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/curriculum-lesson-g34-v1.json",
+  "title": "Manuel Academy Curriculum Lesson v1 - Grade 3/4 profile",
+  "description": "Grade 3/4 profile of the Manuel Academy curriculum lesson contract. It keeps every required field of curriculum-lesson-v1 and adds the fields the Grade 3/4 courses rely on: evidence typing, the target misconception, the evidence record, and the Study adapter block. The v1.0.0 package schema is unchanged by this profile.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "lesson_id",
+    "course_id",
+    "grade",
+    "subject",
+    "course_day",
+    "unit_number",
+    "title",
+    "phase",
+    "focus",
+    "standards",
+    "learning_objectives",
+    "lesson_flow",
+    "formative_check",
+    "mastery_rule",
+    "accessibility_and_accommodations",
+    "safety_and_privacy",
+    "evidence_type",
+    "target_misconception",
+    "adaptive_tutor_routes",
+    "media",
+    "evidence_record",
+    "study_adapter"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "lesson_id": {
+      "type": "string",
+      "pattern": "^ma-g(3|4)-mathematics-u[0-9]{2}-l[0-9]{2}$"
+    },
+    "course_id": {
+      "type": "string",
+      "pattern": "^ma-g(3|4)-mathematics$"
+    },
+    "grade": {
+      "enum": [
+        3,
+        4
+      ]
+    },
+    "subject": {
+      "const": "mathematics"
+    },
+    "course_day": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 180
+    },
+    "unit_number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "day_in_unit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 18
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "phase": {
+      "type": "string"
+    },
+    "focus": {
+      "type": "string"
+    },
+    "evidence_type": {
+      "enum": [
+        "instruction",
+        "guided-practice",
+        "independent-evidence",
+        "retrieval",
+        "project",
+        "assessment",
+        "reassessment"
+      ]
+    },
+    "counts_toward_independent_mastery_evidence": {
+      "type": "boolean"
+    },
+    "standards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "learning_objectives": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string"
+      }
+    },
+    "success_criteria": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "string"
+      }
+    },
+    "lesson_flow": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "segment_id",
+          "segment",
+          "minutes",
+          "teacher_or_tutor_action"
+        ],
+        "properties": {
+          "segment_id": {
+            "type": "string"
+          },
+          "segment": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "string"
+          },
+          "teacher_or_tutor_action": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "formative_check": {
+      "type": "string"
+    },
+    "mastery_rule": {
+      "type": "string"
+    },
+    "target_misconception": {
+      "type": "object",
+      "required": [
+        "pattern",
+        "diagnostic_probe",
+        "repair_move"
+      ],
+      "properties": {
+        "pattern": {
+          "type": "string"
+        },
+        "diagnostic_probe": {
+          "type": "string"
+        },
+        "repair_move": {
+          "type": "string"
+        }
+      }
+    },
+    "adaptive_tutor_routes": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "signal",
+          "action",
+          "handler"
+        ],
+        "properties": {
+          "signal": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "handler": {
+            "enum": [
+              "static-lesson-fallback",
+              "adaptive-math-capability-marker"
+            ]
+          },
+          "capability": {
+            "type": "string"
+          },
+          "aligned_sequence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "accessibility_and_accommodations": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string"
+      }
+    },
+    "safety_and_privacy": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string"
+      }
+    },
+    "media": {
+      "type": "object",
+      "required": [
+        "required",
+        "fallback",
+        "reduced_motion_safe"
+      ],
+      "properties": {
+        "suggestion": {
+          "type": "string"
+        },
+        "required": {
+          "const": false
+        },
+        "fallback": {
+          "type": "string"
+        },
+        "reduced_motion_safe": {
+          "const": true
+        }
+      }
+    },
+    "evidence_record": {
+      "type": "object",
+      "required": [
+        "persist",
+        "do_not_persist",
+        "raw_learner_response_persistence"
+      ],
+      "properties": {
+        "persist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "do_not_persist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "raw_learner_response_persistence": {
+          "const": "not-required"
+        }
+      }
+    },
+    "study_adapter": {
+      "type": "object",
+      "required": [
+        "resumable_by_segment",
+        "segment_ids",
+        "static_fallback_available",
+        "requires_adaptive_package"
+      ],
+      "properties": {
+        "resumable_by_segment": {
+          "const": true
+        },
+        "segment_ids": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "string"
+          }
+        },
+        "session_target_minutes": {
+          "type": "string"
+        },
+        "break_points_after": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "static_fallback_available": {
+          "const": true
+        },
+        "requires_network": {
+          "const": false
+        },
+        "requires_adaptive_package": {
+          "const": false
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,241 @@
+{
+  "capability": "adaptive-math.v1",
+  "package_id": "manuel-academy-grade34-mathematics",
+  "version": "1.0.0",
+  "integration_mode": "capability-marker-and-adapter",
+  "frozen_package": {
+    "path": "adaptive-tutor/subjects/math",
+    "subject_id": "math",
+    "declared_version": "1.0.0",
+    "declared_grade_band": {
+      "minimum": 4,
+      "maximum": 6,
+      "prerequisite_support": [
+        3
+      ]
+    },
+    "sequences": [
+      {
+        "sequence_id": "math-seq-pv-regroup-v1",
+        "title": "Place Value and Regrouping"
+      },
+      {
+        "sequence_id": "math-seq-mult-div-rel-v1",
+        "title": "Multiplication and Division Relationships"
+      },
+      {
+        "sequence_id": "math-seq-equivalent-fractions-v1",
+        "title": "Equivalent Fractions and Common Denominators"
+      },
+      {
+        "sequence_id": "math-seq-multistep-word-problems-v1",
+        "title": "Multistep Word-Problem Reasoning"
+      }
+    ],
+    "modification_status": "referenced only - not copied, not rewritten, not modified"
+  },
+  "contract": [
+    "This map is the ONLY coupling between the Grade 3/4 mathematics courses and the frozen Adaptive Math package.",
+    "The frozen package is never imported, vendored, edited, or re-published by this course.",
+    "A capability marker is advisory. When the capability is absent, every route falls back to the static lesson and help path and the course remains complete.",
+    "Alignment is asserted only where the unit's skills genuinely match a frozen sequence. Units with no genuine match are marked 'none' rather than force-fitted.",
+    "Grade 3 asserts no alignment at all. The frozen package lists grade 3 only as prerequisite support, which is not a Grade 3 curriculum claim."
+  ],
+  "resolution_order": [
+    "1. Static in-lesson support: the lesson's own support text and target misconception repair.",
+    "2. Static unit fallback: the unit's prerequisite list and known-misconception table.",
+    "3. Optional: if capability 'adaptive-math.v1' is present AND the unit declares an aligned sequence, an adult may route the learner to that frozen sequence.",
+    "4. If the capability is absent or no sequence is aligned, stop at step 2. This is a supported terminal state, not a degraded one."
+  ],
+  "grade_3": {
+    "alignment": "none",
+    "requires_adaptive_package": false,
+    "static_fallback_mandatory": true,
+    "units": [
+      {
+        "unit_id": "ma-g3-mathematics-u01",
+        "unit_number": 1,
+        "unit_title": "Mathematical Habits, Place Value, and Rounding",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u02",
+        "unit_number": 2,
+        "unit_title": "Meanings of Multiplication and Division",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u03",
+        "unit_number": 3,
+        "unit_title": "Multiplication and Division Fluency Within 100",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u04",
+        "unit_number": 4,
+        "unit_title": "Properties, Patterns, and Two-Step Problems",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u05",
+        "unit_number": 5,
+        "unit_title": "Understanding Fractions as Numbers",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u06",
+        "unit_number": 6,
+        "unit_title": "Equivalent Fractions and Comparison",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u07",
+        "unit_number": 7,
+        "unit_title": "Measurement: Time, Liquid Volume, and Mass",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u08",
+        "unit_number": 8,
+        "unit_title": "Data: Scaled Graphs and Measurement Line Plots",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u09",
+        "unit_number": 9,
+        "unit_title": "Area and the Distributive Property",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g3-mathematics-u10",
+        "unit_number": 10,
+        "unit_title": "Perimeter, Geometry, and Integrated Capstone",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      }
+    ]
+  },
+  "grade_4": {
+    "alignment": "partial",
+    "requires_adaptive_package": false,
+    "static_fallback_mandatory": true,
+    "units": [
+      {
+        "unit_id": "ma-g4-mathematics-u01",
+        "unit_number": 1,
+        "unit_title": "Mathematical Habits and Place Value to One Million",
+        "aligned_sequence_ids": [
+          "math-seq-pv-regroup-v1"
+        ],
+        "alignment": "aligned",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u02",
+        "unit_number": 2,
+        "unit_title": "Multi-Digit Addition and Subtraction",
+        "aligned_sequence_ids": [
+          "math-seq-pv-regroup-v1",
+          "math-seq-multistep-word-problems-v1"
+        ],
+        "alignment": "aligned",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u03",
+        "unit_number": 3,
+        "unit_title": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+        "aligned_sequence_ids": [
+          "math-seq-mult-div-rel-v1"
+        ],
+        "alignment": "aligned",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u04",
+        "unit_number": 4,
+        "unit_title": "Multi-Digit Multiplication with Area Models and Partial Products",
+        "aligned_sequence_ids": [
+          "math-seq-mult-div-rel-v1",
+          "math-seq-multistep-word-problems-v1"
+        ],
+        "alignment": "aligned",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u05",
+        "unit_number": 5,
+        "unit_title": "Division with Remainders",
+        "aligned_sequence_ids": [
+          "math-seq-mult-div-rel-v1",
+          "math-seq-multistep-word-problems-v1"
+        ],
+        "alignment": "aligned",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u06",
+        "unit_number": 6,
+        "unit_title": "Fraction Equivalence and Comparison",
+        "aligned_sequence_ids": [
+          "math-seq-equivalent-fractions-v1"
+        ],
+        "alignment": "aligned",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u07",
+        "unit_number": 7,
+        "unit_title": "Adding, Subtracting, and Multiplying Fractions",
+        "aligned_sequence_ids": [
+          "math-seq-equivalent-fractions-v1"
+        ],
+        "alignment": "aligned",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u08",
+        "unit_number": 8,
+        "unit_title": "Decimal Notation and Fraction-Decimal Connections",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u09",
+        "unit_number": 9,
+        "unit_title": "Measurement, Conversion, and Data",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      },
+      {
+        "unit_id": "ma-g4-mathematics-u10",
+        "unit_number": 10,
+        "unit_title": "Angles, Geometry, and Integrated Capstone",
+        "aligned_sequence_ids": [],
+        "alignment": "none",
+        "static_fallback_complete": true
+      }
+    ]
+  }
+}

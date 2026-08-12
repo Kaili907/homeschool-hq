@@ -1,0 +1,233 @@
+{
+  "package_id": "manuel-academy-grade34-mathematics",
+  "version": "1.0.0",
+  "validated_on": "2026-08-12",
+  "overall": "PASS",
+  "counts": {
+    "checks": 44,
+    "passed": 44,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "check": "two-courses",
+      "result": "PASS",
+      "details": "grades [3, 4]"
+    },
+    {
+      "check": "lessons-per-course-180",
+      "result": "PASS",
+      "details": "g3=180, g4=180"
+    },
+    {
+      "check": "ten-units-of-18-days",
+      "result": "PASS",
+      "details": "g3=10 units, g4=10 units"
+    },
+    {
+      "check": "full-36-week-schedule",
+      "result": "PASS",
+      "details": "g3: weeks=36 rows=180 all-5-day=True; g4: weeks=36 rows=180 all-5-day=True"
+    },
+    {
+      "check": "unique-lesson-ids",
+      "result": "PASS",
+      "details": "360 ids, 360 unique"
+    },
+    {
+      "check": "unique-unit-and-course-ids",
+      "result": "PASS",
+      "details": "20 units, 2 courses"
+    },
+    {
+      "check": "unique-segment-ids",
+      "result": "PASS",
+      "details": "1800 segments, 1800 unique"
+    },
+    {
+      "check": "schedule-covers-every-lesson-exactly-once",
+      "result": "PASS",
+      "details": "g3: scheduled=180 lessons=180 resolve-once=True; g4: scheduled=180 lessons=180 resolve-once=True"
+    },
+    {
+      "check": "course-days-contiguous-1-180",
+      "result": "PASS",
+      "details": "both grades"
+    },
+    {
+      "check": "schedule-course-day-agreement",
+      "result": "PASS",
+      "details": "360 rows checked"
+    },
+    {
+      "check": "lesson-schema-conformance",
+      "result": "PASS",
+      "details": "360 lessons validated"
+    },
+    {
+      "check": "no-invented-standards-codes",
+      "result": "PASS",
+      "details": "all codes verified against the Michigan catalog"
+    },
+    {
+      "check": "domain-ceilings-respected",
+      "result": "PASS",
+      "details": "no code exceeds its verified domain ceiling"
+    },
+    {
+      "check": "standards-coverage-complete",
+      "result": "PASS",
+      "details": "g3: 25/25; g4: 28/28"
+    },
+    {
+      "check": "every-standard-reaches-independent-evidence",
+      "result": "PASS",
+      "details": "g3: 25/25; g4: 28/28"
+    },
+    {
+      "check": "unit-progression-contiguous-and-ordered",
+      "result": "PASS",
+      "details": "10 ordered 18-day blocks per grade"
+    },
+    {
+      "check": "unit-manifest-lesson-refs-resolve",
+      "result": "PASS",
+      "details": "20 unit manifests checked"
+    },
+    {
+      "check": "assessment-alignment",
+      "result": "PASS",
+      "details": "20 assessments; standards subset of their unit; prompts aligned"
+    },
+    {
+      "check": "multi-occasion-mastery",
+      "result": "PASS",
+      "details": "every unit: 4 independent-evidence days on separate days + assessment + reassessment"
+    },
+    {
+      "check": "single-response-cannot-establish-mastery",
+      "result": "PASS",
+      "details": "all 360 lessons carry the rule; guided success is never flagged as independent evidence"
+    },
+    {
+      "check": "reassessment-requires-fresh-items",
+      "result": "PASS",
+      "details": "20 assessments"
+    },
+    {
+      "check": "no-duplicate-grade5-content",
+      "result": "PASS",
+      "details": "zero overlap with Grade 5 across focus, lesson title, objective, activity, unit title, and performance task"
+    },
+    {
+      "check": "grade5-source-present-and-read-only",
+      "result": "PASS",
+      "details": "Grade 5 mathematics read as reference only; this package writes nothing outside its own path"
+    },
+    {
+      "check": "no-raw-learner-response-persistence-requirement",
+      "result": "PASS",
+      "details": "all 360 lessons declare raw responses not-required and list them as do-not-persist"
+    },
+    {
+      "check": "study-adaptable-lesson-structure",
+      "result": "PASS",
+      "details": "all 360 lessons resumable by segment with 5+ addressable segments and no runtime dependency"
+    },
+    {
+      "check": "accessibility-and-safety-depth",
+      "result": "PASS",
+      "details": "5+ accommodations and 2+ safety notes on all lessons"
+    },
+    {
+      "check": "media-optional-with-text-fallback",
+      "result": "PASS",
+      "details": "all 360 lessons"
+    },
+    {
+      "check": "no-camera-photo-or-voice-requirement",
+      "result": "PASS",
+      "details": "every lesson states no camera and no voice input is required; no requiring phrase found"
+    },
+    {
+      "check": "grade3-functional-without-adaptive-match",
+      "result": "PASS",
+      "details": "180 Grade 3 lessons: every route resolves to static-lesson-fallback; zero adaptive dependency"
+    },
+    {
+      "check": "grade4-adaptive-markers-only-where-aligned",
+      "result": "PASS",
+      "details": "aligned units [1, 2, 3, 4, 5, 6, 7]; units [8, 9, 10] carry no marker; all sequence ids exist in the frozen manifest"
+    },
+    {
+      "check": "frozen-adaptive-package-referenced-not-modified",
+      "result": "PASS",
+      "details": "adaptive-tutor/subjects/math present and declared reference-only"
+    },
+    {
+      "check": "projects-and-practice-complete",
+      "result": "PASS",
+      "details": "10 projects (last is the capstone) and 10 practice sets per grade"
+    },
+    {
+      "check": "mastery-evidence-refs-resolve",
+      "result": "PASS",
+      "details": "120 evidence occasions resolve to real lessons"
+    },
+    {
+      "check": "manifest-counts-agree",
+      "result": "PASS",
+      "details": "{\"3\": 25, \"4\": 28}"
+    },
+    {
+      "check": "standards-map-agrees",
+      "result": "PASS",
+      "details": "G3 25/25, G4 28/28"
+    },
+    {
+      "check": "ownership-boundary",
+      "result": "PASS",
+      "details": "curriculum-authoring/full-family-grade34/subjects/mathematics"
+    },
+    {
+      "check": "no-scripted-help-on-unsupported-days",
+      "result": "PASS",
+      "details": "100 independent-evidence and assessment lessons carry observe-and-defer routes only"
+    },
+    {
+      "check": "access-supports-guaranteed-on-unsupported-days",
+      "result": "PASS",
+      "details": "every unsupported lesson carries an explicit access-support route"
+    },
+    {
+      "check": "misconceptions-authored-per-day-not-rotated",
+      "result": "PASS",
+      "details": "20 units: every day carries an authored misconception, every misconception is used, and no unit uses a modulo rotation"
+    },
+    {
+      "check": "topic-standards-valid-and-in-unit",
+      "result": "PASS",
+      "details": "121 authored topic-to-standard mappings"
+    },
+    {
+      "check": "assessment-prompt-standards-match-their-topic",
+      "result": "PASS",
+      "details": "80 topic-bound prompts tagged from the authored topic mapping, not a slice of the unit list"
+    },
+    {
+      "check": "assessment-error-prompt-shows-work-not-the-answer",
+      "result": "PASS",
+      "details": "20 error-analysis prompts present concrete erroneous work and never name the error"
+    },
+    {
+      "check": "connection-prompts-authored",
+      "result": "PASS",
+      "details": "20 authored connection prompts"
+    },
+    {
+      "check": "lesson-titles-do-not-stutter",
+      "result": "PASS",
+      "details": "360 titles read as phase plus a distinct mathematical target"
+    }
+  ]
+}

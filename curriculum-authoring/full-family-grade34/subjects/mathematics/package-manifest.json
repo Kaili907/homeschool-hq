@@ -1,0 +1,61 @@
+{
+  "package_id": "manuel-academy-grade34-mathematics",
+  "version": "1.0.0",
+  "authored_on": "2026-08-12",
+  "status": "grade34-mathematics-authoring-complete",
+  "subject": "mathematics",
+  "grades": [
+    3,
+    4
+  ],
+  "jurisdictional_alignment": "Michigan-aligned; locally authored; not a claim of state approval, accreditation, licensure, or automatic credit",
+  "school_year": {
+    "weeks": 36,
+    "days_per_week": 5,
+    "instructional_days": 180
+  },
+  "cadence_note": "180 daily lesson opportunities across 36 weeks at 5 instructional days per week, matching the Manuel Academy v1.0.0 mathematics convention. No deviation was required.",
+  "counts": {
+    "courses": 2,
+    "units": 20,
+    "lessons": 360,
+    "lessons_by_grade": {
+      "3": 180,
+      "4": 180
+    },
+    "assessments": 20,
+    "content_standards_covered": {
+      "3": 25,
+      "4": 28
+    }
+  },
+  "contract_reference": {
+    "schema_and_policy_reference": "curriculum-content/manuel-academy/1.0.0",
+    "note": "The v1.0.0 package is the schema, policy, and convention reference. It is read, not modified. No Grade 5 content is copied, adapted, or reused."
+  },
+  "frozen_baselines": [
+    {
+      "artifact": "adaptive-tutor/subjects/math",
+      "declared_version": "1.0.0",
+      "role": "Adaptive mathematics intervention overlay for grades 4-6; referenced through a capability marker only. Not copied, rewritten, or modified."
+    }
+  ],
+  "entry_points": {
+    "human": "README.md",
+    "courses": "indexes/course-index.json",
+    "units": "indexes/unit-index.json",
+    "lessons": "indexes/lesson-index.csv",
+    "schema": "schemas/lesson.schema.json",
+    "standards": "standards/standards-map.json",
+    "adaptive": "adaptive/adaptive-math-capability-map.json",
+    "validation": "validation/validation-report.md",
+    "blockers": "PILOT_BLOCKERS.md"
+  },
+  "boundaries": [
+    "Owns only curriculum-authoring/full-family-grade34/subjects/mathematics/**.",
+    "No release path, no other subject, and no Study Engine source is modified.",
+    "The frozen adaptive-math package is referenced but never embedded or altered.",
+    "Grade 5 mathematics is neither rewritten nor duplicated.",
+    "No repository, database, hosted service, identity system, or deployment is modified."
+  ]
+}
