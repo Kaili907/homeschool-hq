@@ -11,8 +11,8 @@ import {
   digestStudySessionReference,
   isVerifiedGrant,
   STUDY_IDENTITY_SCHEMA_VERSION,
+  validUuid,
 } from '../study-identity/contracts.js'
-import { validUuid } from './contracts.js'
 
 /**
  * Classifying learner or tutor text belongs to an in-progress attempt, so the
@@ -52,6 +52,10 @@ export function createVerifiedStudySessionAuthorizationPort(options = {}) {
     isDurable: true,
     async resolve({ actorUserId, sessionReference, studentRef }) {
       const tokenDigest = digestStudySessionReference(sessionReference)
+      // The actor arrives already authenticated, so its shape is checked only
+      // against the canonical Study identity contract. The stricter RFC-shaped
+      // predicate this module's request contract applies to caller-supplied ids
+      // would refuse valid PostgreSQL uuids before the verification RPC below.
       if (!validUuid(actorUserId) || !tokenDigest) return DENIED
 
       let result
