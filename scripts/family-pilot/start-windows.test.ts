@@ -111,4 +111,57 @@ describeOnWindows('start-windows.ps1', () => {
     expect(result.status).toBe(0)
     expect(result.stdout).toMatch(/never reads, sets, or clears it/)
   })
+
+  it('emits exactly one JSON document with status PASS in -Format json -Check mode', async () => {
+    const root = await makeFixtureRoot({ nodeModules: true })
+    fixtureRoots.push(root)
+
+    const result = runLauncher(root, ['-Check', '-Format', 'json'])
+
+    expect(result.status).toBe(0)
+    const parsed = JSON.parse(result.stdout)
+    expect(parsed.status).toBe('PASS')
+    expect(parsed.launcher).toBe('start-windows.ps1')
+    expect(Array.isArray(parsed.checks)).toBe(true)
+    expect(parsed.checks.length).toBeGreaterThan(0)
+  })
+
+  it('emits exactly one JSON document with status FAIL and blockers when blocked', async () => {
+    const root = await makeFixtureRoot({ nodeModules: false })
+    fixtureRoots.push(root)
+
+    const result = runLauncher(root, ['-Check', '-Format', 'json'])
+
+    expect(result.status).toBe(2)
+    const parsed = JSON.parse(result.stdout)
+    expect(parsed.status).toBe('FAIL')
+    expect(parsed.blockers.some((b: string) => b.includes('dependencies are not installed'))).toBe(true)
+  })
+
+  it('never includes secret .env.local values in JSON mode', async () => {
+    const secretValue = 'sk-ant-super-secret-pilot-value-should-never-appear'
+    const root = await makeFixtureRoot({
+      nodeModules: true,
+      envLocal: `ANTHROPIC_API_KEY=${secretValue}\n`,
+    })
+    fixtureRoots.push(root)
+
+    const result = runLauncher(root, ['-Check', '-Format', 'json'])
+
+    expect(result.status).toBe(0)
+    expect(result.stdout).not.toContain(secretValue)
+    const parsed = JSON.parse(result.stdout)
+    expect(parsed.environment.envLocalKeys).toContain('ANTHROPIC_API_KEY')
+  })
+
+  it('leaves default text output unchanged when -Format is omitted', async () => {
+    const root = await makeFixtureRoot({ nodeModules: true })
+    fixtureRoots.push(root)
+
+    const result = runLauncher(root, ['-Check'])
+
+    expect(result.status).toBe(0)
+    expect(() => JSON.parse(result.stdout)).toThrow()
+    expect(result.stdout).toMatch(/checks PASSED/)
+  })
 })

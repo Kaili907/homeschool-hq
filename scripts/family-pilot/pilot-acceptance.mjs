@@ -88,7 +88,7 @@ export const DEFAULT_CHECKS = [
     discoveryPaths: ['scripts/family-pilot/start-windows.ps1'],
     buildCommand: (root, resolvedPath) => ({
       command: 'powershell.exe',
-      args: ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', resolvedPath, '-Check', '-RepoRoot', root],
+      args: ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', resolvedPath, '-Check', '-Format', 'json', '-RepoRoot', root],
     }),
   },
 ]

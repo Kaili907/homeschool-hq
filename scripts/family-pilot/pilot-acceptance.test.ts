@@ -209,4 +209,10 @@ describe('DEFAULT_CHECKS', () => {
     expect(report.overall).toBe(WAITING_ON_INTEGRATION)
     expect(report.checks.every((check) => check.status === WAITING_ON_INTEGRATION)).toBe(true)
   })
+
+  it('requests structured JSON output from the Windows launcher check', () => {
+    const windowsCheck = DEFAULT_CHECKS.find((check) => check.id === 'windows-launcher-check')
+    const { args } = windowsCheck.buildCommand('C:\\some\\root', 'C:\\some\\root\\scripts\\family-pilot\\start-windows.ps1')
+    expect(args).toEqual(expect.arrayContaining(['-Format', 'json']))
+  })
 })

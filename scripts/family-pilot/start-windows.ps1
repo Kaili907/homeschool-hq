@@ -21,23 +21,37 @@
   Override the repo root the launcher checks and runs in. Defaults to the
   repo containing this script (two levels above scripts/family-pilot).
   Intended for tests; not needed for normal use.
+
+.PARAMETER Format
+  Output format for -Check. Defaults to 'text' (existing human-readable
+  output, unchanged). 'json' emits exactly one JSON document to stdout
+  describing the check result instead, for tooling that consumes this
+  launcher's output programmatically (see pilot-acceptance.mjs). Never
+  includes secret values, only key names and pass/fail status.
 #>
 [CmdletBinding()]
 param(
     [switch]$Check,
     [switch]$Preview,
-    [string]$RepoRoot
+    [string]$RepoRoot,
+    [ValidateSet('text', 'json')]
+    [string]$Format = 'text'
 )
 
 $ErrorActionPreference = 'Stop'
+$jsonMode = $Format -eq 'json'
 
 if (-not $RepoRoot) {
     $RepoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $RepoRoot = (Resolve-Path -LiteralPath $RepoRoot).ProviderPath
 
+$checkResults = New-Object System.Collections.Generic.List[object]
+
 function Write-Check {
     param([bool]$Ok, [string]$Label, [string]$Detail)
+    $checkResults.Add([ordered]@{ name = $Label; ok = $Ok; detail = $Detail }) | Out-Null
+    if ($jsonMode) { return }
     $mark = if ($Ok) { '[OK]' } else { '[BLOCKED]' }
     $color = if ($Ok) { 'Green' } else { 'Red' }
     Write-Host "$mark $Label" -ForegroundColor $color
@@ -121,25 +135,66 @@ if (Test-Path -LiteralPath $envLocalPath) {
         Where-Object { $_ -match '^\s*[A-Za-z_][A-Za-z0-9_]*\s*=' } |
         ForEach-Object { ($_ -split '=', 2)[0].Trim() }
     Write-Check $true '.env.local found' "Keys present (values hidden): $($configuredKeys -join ', ')"
-    if ($configuredKeys -contains 'ACADEMY_STUDY_ENABLED') {
+    if ($configuredKeys -contains 'ACADEMY_STUDY_ENABLED' -and -not $jsonMode) {
         Write-Host '      NOTE: ACADEMY_STUDY_ENABLED is set locally. This launcher never reads, sets, or clears it - production Study flags are out of scope.' -ForegroundColor Yellow
     }
 } else {
     Write-Check $true '.env.local not present' 'Optional - the app runs local-only without it; cloud sync and the Study engine stay inactive.'
 }
 
-Write-Host ''
+function Write-JsonResult {
+    param([string]$Status, [string]$Detail)
+    $envLocalPresentNow = Test-Path -LiteralPath $envLocalPath
+    $envLocalKeysNow = New-Object System.Collections.Generic.List[string]
+    if ($envLocalPresentNow -and $configuredKeys) {
+        foreach ($key in $configuredKeys) { $envLocalKeysNow.Add($key) }
+    }
+    $nodeVersionForJson = $null
+    if ($nodeOk) { $nodeVersionForJson = $nodeVersionRaw }
+    $npmVersionForJson = $null
+    if ($npmOk) { $npmVersionForJson = "v$npmVersionRaw" }
+    $environment = [ordered]@{
+        nodeVersion       = $nodeVersionForJson
+        npmVersion        = $npmVersionForJson
+        expectedNodeMajor = $expectedNodeMajor
+        envLocalPresent   = $envLocalPresentNow
+        envLocalKeys      = $envLocalKeysNow
+    }
+    $result = [ordered]@{
+        schemaVersion = 1
+        launcher      = 'start-windows.ps1'
+        status        = $Status
+        detail        = $Detail
+        repoRoot      = $RepoRoot
+        checks        = $checkResults
+        blockers      = $blockers
+        environment   = $environment
+    }
+    $result | ConvertTo-Json -Depth 6
+}
+
 if ($blockers.Count -gt 0) {
+    if ($jsonMode) {
+        Write-JsonResult -Status 'FAIL' -Detail 'Pilot launch BLOCKED.'
+        exit 2
+    }
+    Write-Host ''
     Write-Host 'Pilot launch BLOCKED:' -ForegroundColor Red
     foreach ($blocker in $blockers) { Write-Host "  - $blocker" -ForegroundColor Red }
     exit 2
 }
 
 if ($Check) {
+    if ($jsonMode) {
+        Write-JsonResult -Status 'PASS' -Detail 'Pilot launch checks PASSED. (-Check: no service was started)'
+        exit 0
+    }
+    Write-Host ''
     Write-Host 'Pilot launch checks PASSED. (-Check: no service was started)' -ForegroundColor Green
     exit 0
 }
 
+Write-Host ''
 Write-Host 'Pilot launch checks PASSED. Starting local service...' -ForegroundColor Green
 Push-Location $RepoRoot
 try {
