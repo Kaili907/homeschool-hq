@@ -26,6 +26,7 @@ import { readParentCredentialRecord } from './parentVault.internal'
 import {
   MemoryCredentialStorage,
   MemoryParentCredentialGenerationAuthority,
+  MemoryParentInstallationGrantIssuer,
 } from './testStorage'
 import {
   enrollLearnerPin,
@@ -454,9 +455,14 @@ describe('exact root Parent credential migration', () => {
       status: 'verified',
     })
 
+    const resetIssuer = new MemoryParentInstallationGrantIssuer(binding)
+    resetIssuer.issueRecovery(
+      generationAuthorityFor(storage)
+        .snapshot(parentCredentialBindingReference(binding)).generation,
+    )
     await markParentCredentialResetRequiredAuthorized(
       binding,
-      { consumeParentCredentialResetAuthorization: () => true },
+      resetIssuer.recovery,
       parentOptions(storage),
     )
     const afterReset = await migrateLegacyParentCredential(
@@ -1311,26 +1317,125 @@ describe('transaction completion remains the Parent authority boundary', () => {
     })
   })
 
-  it('rejects a completed-journal commitment altered and locally resealed against the external anchor', async () => {
+  // Each completion fact below is proved on its own. The four fixtures perturb
+  // exactly one field each and pin a distinct typed reason, so none of them can
+  // pass by tripping an earlier guard.
+  const OTHER_COMMITMENT_BASE64 = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA='
+
+  async function completedMigration() {
     const binding = installationBinding()
     const storage = new MemoryCredentialStorage()
-    const source = legacyState('2468')
-    const persistence = new DurableHarness(source)
+    const persistence = new DurableHarness(legacyState('2468'))
     await migrateLegacyParentCredential(binding, fixedOptions(storage, persistence))
+    return { binding, storage, persistence }
+  }
 
-    const entry = storage.entries().find(([key]) =>
-      key.startsWith(`${LEGACY_PARENT_CREDENTIAL_MIGRATION_NAMESPACE}:`),
-    )
-    expect(entry).toBeDefined()
-    const tampered = JSON.parse(entry![1]) as Record<string, unknown>
-    tampered.educationalDataCommitmentBase64 =
-      'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA='
-    tampered.completionSealBase64 = await completionSealForTest(tampered)
-    storage.setItem(entry![0], JSON.stringify(tampered))
+  it('rejects a durable preparation commitment that no longer matches the journal', async () => {
+    const { binding, storage, persistence } = await completedMigration()
+    const before = persistence.atomicSnapshot()
+    persistence.replaceAtomicSnapshotForTest({
+      ...before,
+      migrationPreparationCommitmentBase64: OTHER_COMMITMENT_BASE64,
+    })
 
     await expect(
       migrateLegacyParentCredential(binding, fixedOptions(storage, persistence)),
-    ).rejects.toThrow(/durable completion anchor|external credential authority/i)
+    ).rejects.toMatchObject({ reason: 'preparation-commitment-mismatch' })
+    // The completion anchor is untouched, so only the preparation guard can fire.
+    expect(persistence.atomicSnapshot().migrationCompletionCommitmentBase64).toBe(
+      before.migrationCompletionCommitmentBase64,
+    )
+  })
+
+  it('rejects a durable completion anchor that no longer matches the sealed journal', async () => {
+    const { binding, storage, persistence } = await completedMigration()
+    const before = persistence.atomicSnapshot()
+    persistence.replaceAtomicSnapshotForTest({
+      ...before,
+      migrationCompletionCommitmentBase64: OTHER_COMMITMENT_BASE64,
+    })
+
+    await expect(
+      migrateLegacyParentCredential(binding, fixedOptions(storage, persistence)),
+    ).rejects.toMatchObject({ reason: 'durable-completion-anchor-mismatch' })
+    // The preparation commitment is untouched, so the earlier guard cannot fire.
+    expect(persistence.atomicSnapshot().migrationPreparationCommitmentBase64).toBe(
+      before.migrationPreparationCommitmentBase64,
+    )
+  })
+
+  it('rejects an external generation anchor that disagrees with the sealed journal', async () => {
+    const { binding, storage, persistence } = await completedMigration()
+    const reference = parentCredentialBindingReference(binding)
+    const authority = generationAuthorityFor(storage)
+    const before = authority.snapshot(reference)
+    authority.setForTest(reference, {
+      ...before,
+      migrationCommitmentBase64: OTHER_COMMITMENT_BASE64,
+    })
+
+    await expect(
+      migrateLegacyParentCredential(binding, fixedOptions(storage, persistence)),
+    ).rejects.toMatchObject({ reason: 'external-generation-anchor-mismatch' })
+    // Durable state is untouched, so no durable guard can have fired first.
+    expect(persistence.atomicSnapshot().migrationCompletionCommitmentBase64).toEqual(
+      expect.any(String),
+    )
+  })
+
+  it('rejects a final authoritative read whose receipt no longer matches', async () => {
+    const { binding, storage, persistence } = await completedMigration()
+    const exactRead = persistence.read.bind(persistence)
+    let reads = 0
+    persistence.read = () => {
+      const snapshot = exactRead()
+      reads += 1
+      // Only the final post-completion read diverges; entry checks see pristine state.
+      return reads === 2
+        ? { ...snapshot, migrationReceiptBase64: OTHER_COMMITMENT_BASE64 }
+        : snapshot
+    }
+
+    await expect(
+      migrateLegacyParentCredential(binding, fixedOptions(storage, persistence)),
+    ).rejects.toMatchObject({ reason: 'revision-receipt-mismatch' })
+    expect(reads).toBe(2)
+  })
+
+  it('refuses to activate Parent authority when commitCompletion lies about the anchor', async () => {
+    const binding = installationBinding()
+    const storage = new MemoryCredentialStorage()
+    const persistence = new DurableHarness(legacyState('2468'))
+    const exactCommitLock = persistence.withMigrationCommitLock.bind(persistence)
+    persistence.withMigrationCommitLock = (
+      expected,
+      completionCommitmentBase64,
+      operation,
+    ) => exactCommitLock(
+      expected,
+      completionCommitmentBase64,
+      (locked, commitCompletion) => operation(locked, () => {
+        const anchored = commitCompletion() as DurableParentMigrationSnapshot
+        // The adapter keeps testifying to an anchor it did not durably retain.
+        persistence.replaceAtomicSnapshotForTest({
+          ...persistence.atomicSnapshot(),
+          migrationCompletionCommitmentBase64: null,
+        })
+        return anchored
+      }),
+    )
+
+    await expect(
+      migrateLegacyParentCredential(binding, fixedOptions(storage, persistence)),
+    ).rejects.toMatchObject({ reason: 'completion-anchor-not-durably-installed' })
+
+    expect(persistence.atomicSnapshot().migrationCompletionCommitmentBase64).toBeNull()
+    expect(
+      generationAuthorityFor(storage).snapshot(parentCredentialBindingReference(binding)),
+    ).toMatchObject({ activeGeneration: null, migrationCommitmentBase64: null })
+    await expect(verifyParentPin(binding, '2468', parentOptions(storage))).resolves.toMatchObject({
+      status: 'not-verified',
+    })
   })
 })
 

@@ -15,7 +15,9 @@ export {
   type LegacyPinClassification,
 } from './migration'
 export {
+  ParentMigrationCompletionError,
   migrateLegacyParentCredential,
+  type ParentMigrationCompletionReason,
   type DurableParentMigrationPersistence,
   type DurableParentMigrationSnapshot,
   type LegacyParentCredentialMigrationOptions,
@@ -26,6 +28,7 @@ export { PARENT_PIN_VERIFIER_DOMAIN } from './parentPinVerifier'
 export {
   PARENT_CREDENTIAL_STORAGE_NAMESPACE,
   ParentCredentialVaultError,
+  claimParentPinAuthorized,
   markParentCredentialResetRequiredAuthorized,
   parentCredentialBindingReference,
   parentCredentialStorageKey,
@@ -39,14 +42,14 @@ export {
   type ParentCredentialGenerationSnapshot,
   type ParentCredentialMutationResult,
   type ParentCredentialOperationOptions,
-  type ParentCredentialRecoveryAuthorization,
-  type ParentCredentialRecoveryAuthorizationContext,
-  type ParentCredentialResetAuthorization,
-  type ParentCredentialResetAuthorizationContext,
   type ParentCredentialRotationAuthorization,
   type ParentCredentialRotationAuthorizationContext,
   type ParentCredentialVaultErrorCode,
   type ParentFailedAttemptSubject,
+  type ParentInstallationClaimAuthorization,
+  type ParentInstallationClaimAuthorizationContext,
+  type ParentInstallationRecoveryAuthorization,
+  type ParentInstallationRecoveryAuthorizationContext,
   type ParentPinVerificationResult,
 } from './parentVault'
 export {

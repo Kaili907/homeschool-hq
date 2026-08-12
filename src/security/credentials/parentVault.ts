@@ -1,12 +1,17 @@
 import {
   INSTALLATION_BINDING_SCHEMA_VERSION,
+  INSTALLATION_GRANT_SCHEMA_VERSION,
+  isInstallationGrantCapabilityConsistent,
   isInstallationId,
   PARENT_CREDENTIAL_BINDING_SCHEMA_VERSION,
   PARENT_CREDENTIAL_SCHEMA_VERSION,
   PARENT_PIN_VERIFIER_SCHEME_VERSION,
   type InstallationBinding,
+  type InstallationGrantPurpose,
+  type InstallationManagerCapability,
   type ParentCredentialBindingReference,
   type ParentCredentialRecord,
+  type ParentInstallationGrant,
 } from '../contracts'
 import {
   base64ToBytes,
@@ -127,31 +132,61 @@ export interface ParentCredentialRotationAuthorization {
   ): boolean | Promise<boolean>
 }
 
-export interface ParentCredentialResetAuthorizationContext {
-  readonly operationId: 'parent-pin:reset-required'
+/**
+ * Establishing the first Parent credential and replacing a later generation are
+ * different operations with different server authority. They therefore have
+ * separate ports, separate capabilities, and separate accepted grant purposes;
+ * neither port can satisfy the other's operation.
+ *
+ * Every authorizer is a server-backed adapter supplied by final integration and
+ * must be one-use, exact-purpose, actor aware, household/installation bound,
+ * generation bound, and replay rejecting. This subsystem cannot manufacture that
+ * authority locally: it only refuses a grant that fails the checks it can make.
+ */
+export interface ParentInstallationClaimAuthorizationContext {
+  readonly operationId: 'parent-installation:claim'
+  readonly requiredCapability: 'parent_installation:claim'
   readonly binding: ParentCredentialBindingReference
-  readonly priorState: 'prepared' | 'enrolled' | 'reset-required' | 'missing' | 'unavailable'
+  /** A first claim is only ever offered against pristine generation-zero state. */
+  readonly priorState: 'missing'
+  readonly priorGeneration: 0
+}
+
+export interface ParentInstallationClaimAuthorization {
+  consumeParentInstallationClaimAuthorization(
+    context: ParentInstallationClaimAuthorizationContext,
+  ): ParentInstallationGrant | null | Promise<ParentInstallationGrant | null>
+}
+
+export interface ParentInstallationRecoveryAuthorizationContext {
+  readonly operationId: 'parent-pin:reset-required' | 'parent-pin:recover'
+  readonly requiredCapability: 'parent_installation:recover'
+  readonly binding: ParentCredentialBindingReference
+  /** Recovery never runs from `missing`: that state requires a first claim. */
+  readonly priorState: 'prepared' | 'enrolled' | 'reset-required' | 'unavailable'
   readonly priorGeneration: number
 }
 
-/** Integration must consume installation claim/recovery authority here. */
-export interface ParentCredentialResetAuthorization {
-  consumeParentCredentialResetAuthorization(
-    context: ParentCredentialResetAuthorizationContext,
-  ): boolean | Promise<boolean>
+export interface ParentInstallationRecoveryAuthorization {
+  consumeParentInstallationRecoveryAuthorization(
+    context: ParentInstallationRecoveryAuthorizationContext,
+  ): ParentInstallationGrant | null | Promise<ParentInstallationGrant | null>
 }
 
-export interface ParentCredentialRecoveryAuthorizationContext {
-  readonly operationId: 'parent-pin:recover'
-  readonly binding: ParentCredentialBindingReference
-  readonly priorGeneration: number
-}
+const CLAIM_CAPABILITY: InstallationManagerCapability = 'parent_installation:claim'
+const RECOVERY_CAPABILITY: InstallationManagerCapability = 'parent_installation:recover'
 
-export interface ParentCredentialRecoveryAuthorization {
-  consumeParentCredentialRecoveryAuthorization(
-    context: ParentCredentialRecoveryAuthorizationContext,
-  ): boolean | Promise<boolean>
-}
+/**
+ * `legacy_upgrade` also carries the claim capability, so purpose is checked
+ * separately: a legacy-upgrade grant must not establish a first claim.
+ */
+const CLAIM_GRANT_PURPOSES: readonly InstallationGrantPurpose[] = Object.freeze(['first_claim'])
+const RECOVERY_GRANT_PURPOSES: readonly InstallationGrantPurpose[] = Object.freeze(['recovery'])
+
+const GRANT_KEYS = Object.freeze([
+  'schemaVersion', 'grantId', 'householdId', 'verifiedActorId', 'installationId',
+  'datasetEpoch', 'purpose', 'capability', 'issuedAt', 'expiresAt', 'nonce', 'status',
+] as const)
 
 const REQUIRED_RECORD_KEYS = Object.freeze([
   'schemaVersion',
@@ -313,6 +348,90 @@ function activeInstallationBindingSnapshot(
     status: 'active',
     boundAt: fields.get('boundAt') as string,
   })
+}
+
+function authorizationFailure(message: string): never {
+  throw new ParentCredentialVaultError('authorization-required', message)
+}
+
+/**
+ * Checks the grant evidence this subsystem can verify itself: exact shape,
+ * required capability, accepted purpose, and exact live installation binding.
+ * One-use redemption, actor verification, and generation binding stay server
+ * obligations — `redeemed` is the adapter's assertion that it already consumed
+ * the grant, and a replayed grant must be refused by the issuing server.
+ *
+ */
+function parentInstallationGrantEvidence(
+  value: unknown,
+  activeBinding: InstallationBinding,
+  requiredCapability: InstallationManagerCapability,
+  acceptedPurposes: readonly InstallationGrantPurpose[],
+  now: Date,
+): ParentInstallationGrant {
+  const fields = ownDataFields(value, GRANT_KEYS, [], (message) =>
+    authorizationFailure(`Parent installation grant is invalid: ${message}`))
+  const grant = Object.fromEntries(fields) as unknown as ParentInstallationGrant
+  if (
+    grant.schemaVersion !== INSTALLATION_GRANT_SCHEMA_VERSION ||
+    !isExactBoundedIdentifier(grant.grantId) ||
+    !isExactBoundedIdentifier(grant.nonce) ||
+    !isExactBoundedIdentifier(grant.verifiedActorId) ||
+    !validIsoTimestamp(grant.issuedAt) ||
+    !validIsoTimestamp(grant.expiresAt) ||
+    Date.parse(grant.issuedAt) >= Date.parse(grant.expiresAt)
+  ) {
+    authorizationFailure('Parent installation grant is malformed.')
+  }
+  if (grant.capability !== requiredCapability) {
+    authorizationFailure(
+      `Parent installation grant does not carry the required ${requiredCapability} capability.`,
+    )
+  }
+  if (
+    !acceptedPurposes.includes(grant.purpose) ||
+    !isInstallationGrantCapabilityConsistent(grant)
+  ) {
+    authorizationFailure('Parent installation grant is not bound to this operation purpose.')
+  }
+  if (
+    grant.installationId !== activeBinding.installationId ||
+    grant.householdId !== activeBinding.householdId ||
+    grant.datasetEpoch !== activeBinding.datasetEpoch
+  ) {
+    authorizationFailure(
+      'Parent installation grant is not bound to the active installation, household, and dataset.',
+    )
+  }
+  if (grant.status !== 'redeemed') {
+    authorizationFailure('Parent installation grant was not redeemed one-use by its issuer.')
+  }
+  if (now.getTime() >= Date.parse(grant.expiresAt)) {
+    authorizationFailure('Parent installation grant has expired.')
+  }
+  return Object.freeze({ ...grant })
+}
+
+/** @internal Shared with the vault implementation module. */
+export function parentInstallationClaimGrantEvidence(
+  value: unknown,
+  activeBinding: InstallationBinding,
+  now: Date,
+): ParentInstallationGrant {
+  return parentInstallationGrantEvidence(
+    value, activeBinding, CLAIM_CAPABILITY, CLAIM_GRANT_PURPOSES, now,
+  )
+}
+
+/** @internal Shared with the vault implementation module. */
+export function parentInstallationRecoveryGrantEvidence(
+  value: unknown,
+  activeBinding: InstallationBinding,
+  now: Date,
+): ParentInstallationGrant {
+  return parentInstallationGrantEvidence(
+    value, activeBinding, RECOVERY_CAPABILITY, RECOVERY_GRANT_PURPOSES, now,
+  )
 }
 
 function parseStoredBindingReference(value: unknown): ParentCredentialBindingReference {
@@ -506,9 +625,24 @@ export async function rotateParentPinAuthorized(
   )
 }
 
+/**
+ * The only fresh-install enrollment path. It requires pristine generation-zero
+ * state and a redeemed `parent_installation:claim` grant; an ordinary first
+ * browser visitor holds no such grant and cannot self-enroll.
+ */
+export async function claimParentPinAuthorized(
+  binding: InstallationBinding,
+  pin: string,
+  authorization: ParentInstallationClaimAuthorization,
+  options: ParentCredentialOperationOptions,
+): Promise<ParentCredentialMutationResult> {
+  const internal = await import('./parentVault.internal')
+  return internal.claimParentPinAuthorized(binding, pin, authorization, options)
+}
+
 export async function markParentCredentialResetRequiredAuthorized(
   binding: InstallationBinding,
-  authorization: ParentCredentialResetAuthorization,
+  authorization: ParentInstallationRecoveryAuthorization,
   options: ParentCredentialOperationOptions,
 ): Promise<ParentCredentialMutationResult> {
   const internal = await import('./parentVault.internal')
@@ -522,7 +656,7 @@ export async function markParentCredentialResetRequiredAuthorized(
 export async function recoverParentPinAuthorized(
   binding: InstallationBinding,
   replacementPin: string,
-  authorization: ParentCredentialRecoveryAuthorization,
+  authorization: ParentInstallationRecoveryAuthorization,
   options: ParentCredentialOperationOptions,
 ): Promise<ParentCredentialMutationResult> {
   const internal = await import('./parentVault.internal')

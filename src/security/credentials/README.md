@@ -86,8 +86,9 @@ mutually exclusive.
 Every Parent operation requires a caller-supplied active `InstallationBinding`.
 The credential stores only its stable installation/household reference and
 never creates or guesses installation identity. Missing credentials produce
-`parent-setup-required`; there is intentionally no general Parent enrollment
-or first-visitor setup API. Parent verification returns the structural
+`parent-setup-required`. An ordinary first browser visitor cannot self-enroll:
+`InstallationBinding` alone is binding context, not authorization. Parent
+verification returns the structural
 `{ kind: 'parent', householdId }` seam used by the shared failed-attempt ledger,
 but this vault stores no attempt counters or lockout state.
 
@@ -102,11 +103,44 @@ records never authenticate.
 Rotation is exposed only through `rotateParentPinAuthorized`, whose integration
 port must consume live Parent credential/session step-up authority and verify
 that its actor/session household matches the exact binding in the supplied
-context. Recovery
-can only replace verifier material with an unusable `reset-required` tombstone
-after its installation claim/recovery authorization port approves. Neither API
-creates a recovery PIN or elevates Parent authority into installation-manager,
-Study, Admin, learner, or hosted authentication authority.
+context.
+
+### Installation claim and recovery authority
+
+Establishing a first Parent credential and replacing a later one are different
+operations with different server authority, so they have separate ports,
+separate capabilities, and separate accepted grant purposes:
+
+- `claimParentPinAuthorized` is the only fresh-install enrollment path. It runs
+  only from pristine generation-zero state and consumes a
+  `parent_installation:claim` grant whose purpose is `first_claim`.
+- `markParentCredentialResetRequiredAuthorized` and
+  `recoverParentPinAuthorized` consume a `parent_installation:recover` grant
+  whose purpose is `recovery`. Reset refuses generation zero outright, so a
+  recovery grant can never reach an initial credential through the reset path.
+
+Both authorized claim and authorized recovery do install replacement verifier
+material, and recovery does establish a caller-supplied PIN at a new
+generation. What is ruled out is unauthenticated enrollment and any local
+forgot-PIN bypass: there is no path to a usable Parent PIN without external
+server authority. The PIN itself stays a device-local convenience lock and
+never becomes installation-manager, Study, Admin, learner, Supabase, or hosted
+authentication authority.
+
+The vault independently rechecks each returned grant against the live active
+binding: exact shape, required capability, accepted purpose, exact
+installation/household/dataset epoch, redeemed status, and expiry. The
+remaining obligations cannot be verified device-side and belong to the
+server-backed adapter, which must issue grants that are one-use, exact-purpose,
+actor aware, household/installation bound, generation bound, and replay
+rejecting. This subsystem never manufactures that authority locally; a grant
+that fails any check it can make is refused.
+
+Current Parent authority is available only through `verifyParentPin`, which
+reads the external generation authority either side of PBKDF2. There is
+deliberately no exported raw boolean over serialized record material: such a
+helper cannot see the generation authority and would answer `true` for a stale
+or revoked record.
 
 ## Legacy migration state machine
 

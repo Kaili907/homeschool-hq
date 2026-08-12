@@ -58,6 +58,36 @@ export const LEGACY_PARENT_CREDENTIAL_MIGRATION_NAMESPACE =
 const NULL_PARENT_RECORD_COMMITMENT_BASE64 =
   'dCNOmK/nSY+12vHzasLXiswzlGT5UHA7jAGYkvmCuQs=' as const
 
+/**
+ * Completion is guarded by several independent facts. Each carries its own
+ * reason so a test cannot pass by tripping a different guard than the one it
+ * claims to prove.
+ */
+export type ParentMigrationCompletionReason =
+  | 'durable-receipt-mismatch'
+  | 'preparation-commitment-mismatch'
+  | 'durable-completion-anchor-mismatch'
+  | 'external-generation-anchor-mismatch'
+  | 'completion-anchor-not-durably-installed'
+  | 'revision-receipt-mismatch'
+
+export class ParentMigrationCompletionError extends Error {
+  constructor(
+    readonly reason: ParentMigrationCompletionReason,
+    message: string,
+  ) {
+    super(message)
+    this.name = 'ParentMigrationCompletionError'
+  }
+}
+
+function completionFailure(
+  reason: ParentMigrationCompletionReason,
+  message: string,
+): never {
+  throw new ParentMigrationCompletionError(reason, message)
+}
+
 export type LegacyParentPinClassification =
   | 'migratable'
   | 'parent-setup-required'
@@ -990,14 +1020,29 @@ async function finishCompletedMigration(
     throw new Error('Completed Parent migration is missing its completion anchor.')
   }
   const preparedTransactionCommitment = await journalPreparedCommitment(journal)
+  if (durableSnapshot.migrationReceiptBase64 !== journal.migrationReceiptBase64) {
+    completionFailure(
+      'durable-receipt-mismatch',
+      'Completed Parent migration does not match its durable transaction receipt.',
+    )
+  }
   if (
-    durableSnapshot.migrationReceiptBase64 !== journal.migrationReceiptBase64 ||
     durableSnapshot.migrationPreparationCommitmentBase64 !==
-      preparedTransactionCommitment ||
+    preparedTransactionCommitment
+  ) {
+    completionFailure(
+      'preparation-commitment-mismatch',
+      'Completed Parent migration does not match its durable preparation commitment.',
+    )
+  }
+  if (
     durableSnapshot.migrationCompletionCommitmentBase64 !== null &&
     durableSnapshot.migrationCompletionCommitmentBase64 !== completionCommitment
   ) {
-    throw new Error('Completed Parent migration conflicts with its durable completion anchor.')
+    completionFailure(
+      'durable-completion-anchor-mismatch',
+      'Completed Parent migration conflicts with its durable completion anchor.',
+    )
   }
 
   const educationalData = sanitizeCredentialFreeEducationalData(
@@ -1039,7 +1084,10 @@ async function finishCompletedMigration(
     authority.migrationCommitmentBase64 !== null &&
     authority.migrationCommitmentBase64 !== completionCommitment
   ) {
-    throw new Error('Completed Parent migration conflicts with external credential authority.')
+    completionFailure(
+      'external-generation-anchor-mismatch',
+      'Completed Parent migration conflicts with external credential authority.',
+    )
   }
 
   const exactGeneration = journal.promotedGeneration !== null &&
@@ -1129,6 +1177,47 @@ async function finishCompletedMigration(
             'Learner credentials changed while Parent completion was being anchored.',
           )
         }
+        // `anchored` is only the adapter's own assertion that it installed the
+        // anchor. Parent authority must never be activated on that testimony, so
+        // re-read authoritative durable state inside the still-held lock and let
+        // only that independent read authorize activation.
+        const durable = await readAuthoritativeSnapshot(
+          options.educationalDataPersistence,
+        )
+        if (durable.migrationCompletionCommitmentBase64 !== completionCommitment) {
+          completionFailure(
+            'completion-anchor-not-durably-installed',
+            'Parent completion anchor is absent from authoritative durable state after commit.',
+          )
+        }
+        if (durable.migrationReceiptBase64 !== journal.migrationReceiptBase64) {
+          completionFailure(
+            'durable-receipt-mismatch',
+            'Authoritative durable state lost this Parent migration receipt during commit.',
+          )
+        }
+        if (
+          durable.migrationPreparationCommitmentBase64 !==
+          preparedTransactionCommitment
+        ) {
+          completionFailure(
+            'preparation-commitment-mismatch',
+            'Authoritative durable state lost this Parent preparation commitment during commit.',
+          )
+        }
+        if (
+          !isExactCredentialFreeSnapshot(durable.educationalData, educationalData) ||
+          durable.revision !== anchored.revision
+        ) {
+          completionFailure(
+            'revision-receipt-mismatch',
+            'Authoritative durable state does not match the anchored Parent completion revision.',
+          )
+        }
+        assertEducationalProfileSet(
+          durable.educationalData,
+          journal.educationalProfileIds,
+        )
         await commitParentMigrationAuthority(
           binding,
           journal.classification === 'parent-setup-required'
@@ -1160,7 +1249,10 @@ async function finishCompletedMigration(
       exactGeneration &&
       snapshot?.authority.activeGeneration !== journal.promotedGeneration)
   ) {
-    throw new Error('Completed Parent migration failed exact anchored post-completion verification.')
+    completionFailure(
+      'revision-receipt-mismatch',
+      'Completed Parent migration failed exact anchored post-completion verification.',
+    )
   }
   const credentialState: LegacyParentCredentialMigrationOutcome['credentialState'] =
     snapshot?.record.state === 'enrolled' || snapshot?.record.state === 'reset-required'

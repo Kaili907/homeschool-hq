@@ -21,11 +21,14 @@ import {
   parentCredentialBindingReference,
   parentFailedAttemptSubject,
   parentCredentialStorageKey,
+  parentInstallationClaimGrantEvidence,
+  parentInstallationRecoveryGrantEvidence,
   parseParentCredentialRecord,
   withParentCredentialMutationLock,
   type ParentCredentialMutationResult,
-  type ParentCredentialRecoveryAuthorization,
-  type ParentCredentialResetAuthorization,
+  type ParentInstallationClaimAuthorization,
+  type ParentInstallationRecoveryAuthorization,
+  type ParentInstallationRecoveryAuthorizationContext,
   type ParentCredentialRotationAuthorization,
   type ParentCredentialGenerationSnapshot,
   type ParentCredentialOperationOptions,
@@ -281,11 +284,12 @@ async function recordMatchesAuthority(
   authority: ParentCredentialGenerationSnapshot,
   options: ParentCredentialOperationOptions,
 ): Promise<boolean> {
+  // An active generation already forces `enrolled` in the clause above, so no
+  // further state guard can change this result.
   return record.generation === authority.generation &&
     await recordCommitment(record, options) === authority.recordCommitmentBase64 &&
     (authority.activeGeneration === null ||
-      (record.state === 'enrolled' && authority.activeGeneration === record.generation)) &&
-    (record.state === 'enrolled' || authority.activeGeneration === null)
+      (record.state === 'enrolled' && authority.activeGeneration === record.generation))
 }
 
 function persistPendingParentCredentialRecord(
@@ -639,22 +643,14 @@ export async function createPreparedParentCredentialRecordForTest(
   )
 }
 
-export async function verifyParentCredentialRecord(
-  record: unknown,
-  binding: InstallationBinding,
-  pin: unknown,
-  options?: Pick<ParentCredentialOperationOptions, 'crypto'>,
-): Promise<boolean> {
-  let validated: StoredParentCredentialRecord
-  try {
-    validated = parseParentCredentialRecord(record, binding)
-  } catch {
-    return false
-  }
-  return validated.state === 'enrolled' &&
-    verifyParentPinVerifier(validated.binding, pin, validated, options?.crypto)
-}
-
+/**
+ * Verifies only that a serialized record's own material matches a PIN, and only
+ * for the non-authenticating `prepared` migration state. There is deliberately
+ * no equivalent for `enrolled`: a raw boolean over serialized material cannot
+ * see the generation authority, so it would answer `true` for a stale or
+ * revoked record. Current Parent authority is available exclusively through
+ * `verifyParentPin`, which reads that authority either side of PBKDF2.
+ */
 export async function verifyPreparedParentCredentialForMigration(
   record: unknown,
   binding: InstallationBinding,
@@ -1176,13 +1172,120 @@ export async function rotateParentPinAuthorized(
   })
 }
 
-export async function markParentCredentialResetRequiredAuthorized(
+function currentDate(options: Pick<ParentCredentialOperationOptions, 'now'>): Date {
+  return (options.now ?? (() => new Date()))()
+}
+
+/**
+ * Consumes a recovery authorization and then independently checks the grant it
+ * returns. A denial and a grant that fails the checks are both fail-closed.
+ */
+async function consumeRecoveryGrant(
+  authorization: ParentInstallationRecoveryAuthorization,
+  lockedBinding: InstallationBinding,
+  context: ParentInstallationRecoveryAuthorizationContext,
+  options: ParentCredentialOperationOptions,
+): Promise<void> {
+  const granted = await authorization.consumeParentInstallationRecoveryAuthorization(context)
+  if (granted === null || granted === undefined) {
+    throw new ParentCredentialVaultError(
+      'authorization-required',
+      `Parent installation recovery authorization was denied for ${context.operationId}.`,
+    )
+  }
+  parentInstallationRecoveryGrantEvidence(granted, lockedBinding, currentDate(options))
+}
+
+/**
+ * Establishes the first Parent credential from pristine generation-zero state.
+ * This is the only enrollment path, and it exists solely to consume explicit
+ * `parent_installation:claim` authority.
+ */
+export async function claimParentPinAuthorized(
   binding: InstallationBinding,
-  authorization: ParentCredentialResetAuthorization,
+  pin: string,
+  authorization: ParentInstallationClaimAuthorization,
   options: ParentCredentialOperationOptions,
 ): Promise<ParentCredentialMutationResult> {
-  if (!authorization || typeof authorization.consumeParentCredentialResetAuthorization !== 'function') {
-    throw new ParentCredentialVaultError('authorization-required', 'Parent recovery authorization is required.')
+  if (!isFourDigitPin(pin)) {
+    throw new Error('A Parent PIN must contain exactly four decimal digits.')
+  }
+  if (
+    !authorization ||
+    typeof authorization.consumeParentInstallationClaimAuthorization !== 'function'
+  ) {
+    throw new ParentCredentialVaultError(
+      'authorization-required',
+      'Parent installation claim authorization is required.',
+    )
+  }
+  return withParentCredentialMutationLock(binding, options, async (lockedBinding) => {
+    const reference = parentCredentialBindingReference(lockedBinding)
+    const authorityBefore = await readGeneration(reference, options)
+    const previous = await readParentCredentialSnapshot(lockedBinding, options)
+    if (previous !== null || authorityBefore.generation !== 0) {
+      throw new ParentCredentialVaultError(
+        'credential-conflict',
+        'A first Parent claim requires pristine generation-zero installation state.',
+      )
+    }
+    const granted = await authorization.consumeParentInstallationClaimAuthorization({
+      operationId: 'parent-installation:claim',
+      requiredCapability: 'parent_installation:claim',
+      binding: reference,
+      priorState: 'missing',
+      priorGeneration: 0,
+    })
+    if (granted === null || granted === undefined) {
+      throw new ParentCredentialVaultError(
+        'authorization-required',
+        'Parent installation claim authorization was denied.',
+      )
+    }
+    parentInstallationClaimGrantEvidence(granted, lockedBinding, currentDate(options))
+    await requireStableSnapshot(
+      lockedBinding,
+      null,
+      options,
+      'Parent credential changed while claim authorization was being consumed.',
+    )
+    const authority = await readGeneration(reference, options)
+    if (!parentGenerationSnapshotsEqual(authorityBefore, authority)) {
+      throw new ParentCredentialVaultError(
+        'generation-conflict',
+        'Parent credential authority changed while claim authorization was being consumed.',
+      )
+    }
+    const now = timestamp(options)
+    const claimed = await createCredentialRecord(
+      lockedBinding,
+      nextGeneration(authority),
+      'enrolled',
+      pin,
+      now,
+      undefined,
+      options,
+    )
+    await verifyReplacementBeforeCommit(pin, claimed, options)
+    return mutationResult(
+      await reserveAndPersistActiveRecord(lockedBinding, authority, claimed, options),
+    )
+  })
+}
+
+export async function markParentCredentialResetRequiredAuthorized(
+  binding: InstallationBinding,
+  authorization: ParentInstallationRecoveryAuthorization,
+  options: ParentCredentialOperationOptions,
+): Promise<ParentCredentialMutationResult> {
+  if (
+    !authorization ||
+    typeof authorization.consumeParentInstallationRecoveryAuthorization !== 'function'
+  ) {
+    throw new ParentCredentialVaultError(
+      'authorization-required',
+      'Parent installation recovery authorization is required.',
+    )
   }
   return withParentCredentialMutationLock(binding, options, async (lockedBinding) => {
     const reference = parentCredentialBindingReference(lockedBinding)
@@ -1195,15 +1298,21 @@ export async function markParentCredentialResetRequiredAuthorized(
       if (!recordRejection(cause)) throw cause
       unavailable = true
     }
-    const accepted = await authorization.consumeParentCredentialResetAuthorization({
-      operationId: 'parent-pin:reset-required',
-      binding: reference,
-      priorState: unavailable ? 'unavailable' : previous?.record.state ?? 'missing',
-      priorGeneration: authorityBefore.generation,
-    })
-    if (accepted !== true) {
-      throw new ParentCredentialVaultError('authorization-required', 'Parent recovery authorization was denied.')
+    // Generation zero is not a recovery: it is a first claim, and a recovery
+    // grant must never establish an initial Parent credential.
+    if (!unavailable && previous === null && authorityBefore.generation === 0) {
+      throw new ParentCredentialVaultError(
+        'credential-missing',
+        'A pristine installation requires a first Parent claim, not a recovery reset.',
+      )
     }
+    await consumeRecoveryGrant(authorization, lockedBinding, {
+      operationId: 'parent-pin:reset-required',
+      requiredCapability: 'parent_installation:recover',
+      binding: reference,
+      priorState: unavailable ? 'unavailable' : previous!.record.state,
+      priorGeneration: authorityBefore.generation,
+    }, options)
     if (previous) {
       await requireStableSnapshot(
         lockedBinding,
@@ -1238,14 +1347,20 @@ export async function markParentCredentialResetRequiredAuthorized(
 export async function recoverParentPinAuthorized(
   binding: InstallationBinding,
   replacementPin: string,
-  authorization: ParentCredentialRecoveryAuthorization,
+  authorization: ParentInstallationRecoveryAuthorization,
   options: ParentCredentialOperationOptions,
 ): Promise<ParentCredentialMutationResult> {
   if (!isFourDigitPin(replacementPin)) {
     throw new Error('A Parent PIN must contain exactly four decimal digits.')
   }
-  if (!authorization || typeof authorization.consumeParentCredentialRecoveryAuthorization !== 'function') {
-    throw new ParentCredentialVaultError('authorization-required', 'Parent recovery authorization is required.')
+  if (
+    !authorization ||
+    typeof authorization.consumeParentInstallationRecoveryAuthorization !== 'function'
+  ) {
+    throw new ParentCredentialVaultError(
+      'authorization-required',
+      'Parent installation recovery authorization is required.',
+    )
   }
   return withParentCredentialMutationLock(binding, options, async (lockedBinding) => {
     const previous = await readParentCredentialSnapshot(lockedBinding, options)
@@ -1255,14 +1370,13 @@ export async function recoverParentPinAuthorized(
         'A reset-required Parent tombstone is required for recovery.',
       )
     }
-    const accepted = await authorization.consumeParentCredentialRecoveryAuthorization({
+    await consumeRecoveryGrant(authorization, lockedBinding, {
       operationId: 'parent-pin:recover',
+      requiredCapability: 'parent_installation:recover',
       binding: parentCredentialBindingReference(lockedBinding),
+      priorState: 'reset-required',
       priorGeneration: previous.record.generation,
-    })
-    if (accepted !== true) {
-      throw new ParentCredentialVaultError('authorization-required', 'Parent recovery authorization was denied.')
-    }
+    }, options)
     await requireStableSnapshot(
       lockedBinding,
       previous,

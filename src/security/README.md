@@ -20,8 +20,14 @@ server request, changes an RPC, or wires session lifecycle into `App`.
   It removes only exact legacy `Profile.pin` and root `AppState.parentPin`
   locations before enforcing the shared policy across the complete clone.
 - `sanitizeCredentialFreeEducationalProfile` is the profile-projection seam. It
-  validates the canonical profile ID, removes only exact root `Profile.pin`,
-  and enforces that same shared recursive policy on a detached clone.
+  validates the canonical profile ID, removes exact root `Profile.pin`, admits
+  only the explicit `Profile` educational schema, and enforces that same shared
+  recursive policy on a detached clone. The schema allow-list replaced a
+  hand-listed set of forbidden credential field names: a deny-list of names is
+  bypassable by spelling variants such as `parentPinValue` or
+  `parentSaltBase64`, whereas a name outside the educational schema is simply
+  not projectable. Its `Record<Exclude<keyof Profile, 'pin'>, true>` type makes
+  schema drift a compile error rather than silent data loss.
 - `sessionPolicy.ts`, `sessions.ts`, and `lifecycle.ts` define the single policy
   source, future learner/Parent records, one-operation Parent step-up grant,
   and stable lifecycle vocabulary.
@@ -34,8 +40,11 @@ server request, changes an RPC, or wires session lifecycle into `App`.
   installation-manager claim/recovery capabilities. Guardian or household
   membership alone is not installation-management authority.
 - `credentials/parentVault.ts` requires an externally supplied active
-  installation binding, binds the Parent verifier to its exact installation
-  and household, and exposes no fresh-install enrollment. Its schema-v2 vault
+  installation binding and binds the Parent verifier to its exact installation
+  and household. Fresh-install enrollment exists only behind an explicit
+  `parent_installation:claim` grant, and reset/recovery only behind
+  `parent_installation:recover`; an unauthorized first visitor gets
+  `parent-setup-required`. Its schema-v2 vault
   also requires an external monotonic generation/completion authority; the
   supported migration derives credentials only from authoritative persistence
   and activates only under the adapter's durable completion lock. Its

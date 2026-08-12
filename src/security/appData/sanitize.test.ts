@@ -82,7 +82,7 @@ function legacyProfile(
     name: 'Learner One',
     grade: 5,
     pin: '1234',
-    lessonText: 'Ordinary educational content.',
+    missions: { '2026-08-11': { lessonText: 'Ordinary educational content.' } },
     ...additionalData,
   } as unknown as Profile
 }
@@ -287,10 +287,10 @@ describe('credential-free single-profile sanitizer', () => {
     (key) => {
       const placements = [
         { [key]: 'blocked' },
-        { nested: { [key]: 'blocked' } },
-        { one: { two: { three: { [key]: 'blocked' } } } },
-        { items: [{ [key]: 'blocked' }] },
-        { records: { lessonOne: { [key]: 'blocked' } } },
+        { missions: { [key]: 'blocked' } },
+        { missions: { '2026-08-11': { steps: { [key]: 'blocked' } } } },
+        { tutorChats: [{ [key]: 'blocked' }] },
+        { hsStats: { unitOne: { [key]: 'blocked' } } },
       ]
 
       for (const placement of placements) {
@@ -309,18 +309,18 @@ describe('credential-free single-profile sanitizer', () => {
 
   it('preserves security vocabulary in values and returns a detached profile', () => {
     const source = legacyProfile('p1', {
-      lesson: { lessonText: 'Never share your password or secret.' },
+      missions: { '2026-08-11': { lessonText: 'Never share your password or secret.' } },
     })
     const sanitized = sanitizeCredentialFreeEducationalProfile(source)
 
     expect(sanitized).toMatchObject({
       id: 'p1',
-      lesson: { lessonText: 'Never share your password or secret.' },
+      missions: { '2026-08-11': { lessonText: 'Never share your password or secret.' } },
     })
     expect(sanitized).not.toHaveProperty('pin')
     expect(sanitized).not.toBe(source)
-    expect((sanitized as unknown as Record<string, unknown>).lesson).not.toBe(
-      (source as unknown as Record<string, unknown>).lesson,
+    expect((sanitized as unknown as Record<string, unknown>).missions).not.toBe(
+      (source as unknown as Record<string, unknown>).missions,
     )
   })
 

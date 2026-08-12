@@ -16,6 +16,7 @@ import {
 import {
   MemoryCredentialStorage,
   MemoryParentCredentialGenerationAuthority,
+  MemoryParentInstallationGrantIssuer,
 } from './testStorage'
 import {
   createPreparedParentCredentialRecordForTest,
@@ -27,10 +28,10 @@ import {
   readParentCredentialGeneration,
   stagePreparedParentCredentialForMigration,
   stagePreparedParentResetForMigration,
-  verifyParentCredentialRecord,
 } from './parentVault.internal'
 import {
   PARENT_CREDENTIAL_STORAGE_NAMESPACE,
+  claimParentPinAuthorized,
   markParentCredentialResetRequiredAuthorized,
   parentCredentialBindingReference,
   parentCredentialStorageKey,
@@ -43,9 +44,8 @@ import {
   type ParentCredentialGenerationAuthority,
   type ParentCredentialLockManager,
   type ParentCredentialOperationOptions,
-  type ParentCredentialRecoveryAuthorization,
-  type ParentCredentialResetAuthorization,
   type ParentCredentialRotationAuthorization,
+  type ParentInstallationRecoveryAuthorization,
 } from './parentVault'
 
 const INSTALLATION_A = 'd9428888-122b-4f9b-9424-1f35c63d5750'
@@ -160,6 +160,18 @@ function operationOptions(
     lockManager,
     ...overrides,
   }
+}
+
+function recoveryGrantFor(
+  binding: InstallationBinding,
+  authority: MemoryParentCredentialGenerationAuthority,
+  now?: () => Date,
+): ParentInstallationRecoveryAuthorization {
+  const issuer = new MemoryParentInstallationGrantIssuer(binding, now)
+  issuer.issueRecovery(
+    authority.snapshot(parentCredentialBindingReference(binding)).generation,
+  )
+  return issuer.recovery
 }
 
 async function enrollForTest(
@@ -612,14 +624,14 @@ describe('device-local Parent credential vault', () => {
 
     const reset = await markParentCredentialResetRequiredAuthorized(
       binding,
-      { consumeParentCredentialResetAuthorization: () => true },
+      recoveryGrantFor(binding, authority),
       options,
     )
     storage.failNextPrimaryWrite = true
     await expect(recoverParentPinAuthorized(
       binding,
       '3333',
-      { consumeParentCredentialRecoveryAuthorization: () => true },
+      recoveryGrantFor(binding, authority),
       options,
     )).rejects.toMatchObject({ code: 'storage-unavailable' })
     expect(authority.snapshot(parentCredentialBindingReference(binding))).toMatchObject({
@@ -642,17 +654,17 @@ describe('device-local Parent credential vault', () => {
     const resetOptions = operationOptions(storage, authority, {
       now: () => new Date(ROTATED_AT),
     })
-    const deniedReset: ParentCredentialResetAuthorization = {
-      consumeParentCredentialResetAuthorization: vi.fn(() => false),
+    const deniedReset: ParentInstallationRecoveryAuthorization = {
+      consumeParentInstallationRecoveryAuthorization: vi.fn(() => null),
     }
     await expect(
       markParentCredentialResetRequiredAuthorized(binding, deniedReset, resetOptions),
     ).rejects.toMatchObject({ code: 'authorization-required' })
 
-    const allowReset = vi.fn(async () => true)
+    const allowReset = recoveryGrantFor(binding, authority, () => new Date(ROTATED_AT))
     const reset = await markParentCredentialResetRequiredAuthorized(
       binding,
-      { consumeParentCredentialResetAuthorization: allowReset },
+      allowReset,
       resetOptions,
     )
     expect(reset).toMatchObject({
@@ -669,12 +681,9 @@ describe('device-local Parent credential vault', () => {
     await expect(verifyParentPin(binding, '4444', resetOptions)).resolves.toMatchObject({
       status: 'reset-required',
     })
-    await expect(
-      verifyParentCredentialRecord(tombstone, binding, '4444'),
-    ).resolves.toBe(false)
 
-    const deniedRecovery: ParentCredentialRecoveryAuthorization = {
-      consumeParentCredentialRecoveryAuthorization: vi.fn(() => false),
+    const deniedRecovery: ParentInstallationRecoveryAuthorization = {
+      consumeParentInstallationRecoveryAuthorization: vi.fn(() => null),
     }
     await expect(
       recoverParentPinAuthorized(binding, '5555', deniedRecovery, resetOptions),
@@ -683,20 +692,23 @@ describe('device-local Parent credential vault', () => {
       status: 'reset-required',
     })
 
-    const recovery = vi.fn(async () => true)
+    const recovery = recoveryGrantFor(binding, authority, () => new Date(ROTATED_AT))
+    const consumeRecovery = vi.spyOn(recovery, 'consumeParentInstallationRecoveryAuthorization')
     const recovered = await recoverParentPinAuthorized(
       binding,
       '5555',
-      { consumeParentCredentialRecoveryAuthorization: recovery },
+      recovery,
       resetOptions,
     )
     expect(recovered).toMatchObject({
       status: 'enrolled',
       generation: reset.generation + 1,
     })
-    expect(recovery).toHaveBeenCalledWith({
+    expect(consumeRecovery).toHaveBeenCalledWith({
       operationId: 'parent-pin:recover',
+      requiredCapability: 'parent_installation:recover',
       binding: parentCredentialBindingReference(binding),
+      priorState: 'reset-required',
       priorGeneration: reset.generation,
     })
     await expect(verifyParentPin(binding, '4444', resetOptions)).resolves.toMatchObject({
@@ -729,16 +741,18 @@ describe('device-local Parent credential vault', () => {
           schemaVersion: 1,
         }))
       }
-      const authorize = vi.fn(async () => true)
+      const authorize = recoveryGrantFor(binding, authority)
+      const consumeAuthorize = vi.spyOn(authorize, 'consumeParentInstallationRecoveryAuthorization')
 
       const reset = await markParentCredentialResetRequiredAuthorized(
         binding,
-        { consumeParentCredentialResetAuthorization: authorize },
+        authorize,
         options,
       )
 
-      expect(authorize).toHaveBeenCalledWith({
+      expect(consumeAuthorize).toHaveBeenCalledWith({
         operationId: 'parent-pin:reset-required',
+        requiredCapability: 'parent_installation:recover',
         binding: parentCredentialBindingReference(binding),
         priorState: 'unavailable',
         priorGeneration: enrolled.generation,
@@ -773,11 +787,12 @@ describe('device-local Parent credential vault', () => {
     const resetAuthorizationGate = new Promise<void>((resolve) => {
       releaseResetAuthorization = resolve
     })
-    const resetAuthorization: ParentCredentialResetAuthorization = {
-      consumeParentCredentialResetAuthorization: vi.fn(async () => {
+    const grantedReset = recoveryGrantFor(binding, authority, () => new Date(ROTATED_AT))
+    const resetAuthorization: ParentInstallationRecoveryAuthorization = {
+      consumeParentInstallationRecoveryAuthorization: vi.fn(async (context) => {
         announceResetAuthorization()
         await resetAuthorizationGate
-        return true
+        return grantedReset.consumeParentInstallationRecoveryAuthorization(context)
       }),
     }
     const rotationAuthorization = vi.fn(async () => true)
@@ -827,7 +842,7 @@ describe('device-local Parent credential vault', () => {
     await deferred.entered
     await markParentCredentialResetRequiredAuthorized(
       binding,
-      { consumeParentCredentialResetAuthorization: () => true },
+      recoveryGrantFor(binding, authority),
       options,
     )
     deferred.release()
@@ -873,7 +888,7 @@ describe('device-local Parent credential vault', () => {
 
     const reset = await markParentCredentialResetRequiredAuthorized(
       binding,
-      { consumeParentCredentialResetAuthorization: () => true },
+      recoveryGrantFor(binding, authority),
       options,
     )
     expect(reset.generation).toBe(enrolled.generation + 1)
@@ -886,14 +901,16 @@ describe('device-local Parent credential vault', () => {
       code: 'generation-mismatch',
     })
 
-    const authorizeRepair = vi.fn(async () => true)
+    const authorizeRepair = recoveryGrantFor(binding, authority)
+    const consumeRepair = vi.spyOn(authorizeRepair, 'consumeParentInstallationRecoveryAuthorization')
     const repaired = await markParentCredentialResetRequiredAuthorized(
       binding,
-      { consumeParentCredentialResetAuthorization: authorizeRepair },
+      authorizeRepair,
       options,
     )
-    expect(authorizeRepair).toHaveBeenCalledWith({
+    expect(consumeRepair).toHaveBeenCalledWith({
       operationId: 'parent-pin:reset-required',
+      requiredCapability: 'parent_installation:recover',
       binding: parentCredentialBindingReference(binding),
       priorState: 'unavailable',
       priorGeneration: reset.generation,
@@ -961,5 +978,205 @@ describe('device-local Parent credential vault', () => {
     const symbolRecord = { ...record, [Symbol('secret')]: '2468' }
     expect(() => parseParentCredentialRecord(symbolRecord, binding)).toThrow(/symbol/i)
     expect(getterCalls).toBe(0)
+  })
+})
+
+describe('Parent installation claim and recovery authority', () => {
+  function pristine() {
+    const binding = activeBinding()
+    const storage = new MemoryCredentialStorage()
+    const authority = new MemoryParentCredentialGenerationAuthority()
+    const options = operationOptions(storage, authority, { now: () => new Date(CREATED_AT) })
+    const issuer = new MemoryParentInstallationGrantIssuer(binding, () => new Date(CREATED_AT))
+    return { binding, storage, authority, options, issuer }
+  }
+
+  async function tombstoned() {
+    const context = pristine()
+    await enrollForTest(context.binding, '2468', context.storage, context.authority, {
+      now: () => new Date(CREATED_AT),
+    })
+    const reset = await markParentCredentialResetRequiredAuthorized(
+      context.binding,
+      recoveryGrantFor(context.binding, context.authority, () => new Date(CREATED_AT)),
+      context.options,
+    )
+    return { ...context, reset }
+  }
+
+  it('reports setup-required and refuses to enroll a first visitor holding no claim grant', async () => {
+    const { binding, options, issuer } = pristine()
+
+    await expect(readParentCredentialState(binding, options)).resolves.toMatchObject({
+      status: 'parent-setup-required',
+    })
+    await expect(
+      claimParentPinAuthorized(binding, '2468', issuer.claim, options),
+    ).rejects.toMatchObject({ code: 'authorization-required' })
+    await expect(verifyParentPin(binding, '2468', options)).resolves.toMatchObject({
+      status: 'parent-setup-required',
+    })
+  })
+
+  it('refuses a first claim and a reset when only a recovery grant exists', async () => {
+    const { binding, options, issuer } = pristine()
+    issuer.issueRecovery(0)
+
+    await expect(
+      claimParentPinAuthorized(binding, '2468', issuer.claim, options),
+    ).rejects.toMatchObject({ code: 'authorization-required' })
+    // A recovery grant must not reach a first credential through the reset path.
+    await expect(
+      markParentCredentialResetRequiredAuthorized(binding, issuer.recovery, options),
+    ).rejects.toMatchObject({ code: 'credential-missing' })
+    await expect(readParentCredentialState(binding, options)).resolves.toMatchObject({
+      status: 'parent-setup-required',
+    })
+  })
+
+  it('enrolls the first Parent credential against a valid claim grant', async () => {
+    const { binding, authority, options, issuer } = pristine()
+    issuer.issueClaim()
+
+    const claimed = await claimParentPinAuthorized(binding, '2468', issuer.claim, options)
+    expect(claimed).toMatchObject({ status: 'enrolled', generation: 1 })
+    expect(issuer.consumedContexts[0]).toEqual({
+      operationId: 'parent-installation:claim',
+      requiredCapability: 'parent_installation:claim',
+      binding: parentCredentialBindingReference(binding),
+      priorState: 'missing',
+      priorGeneration: 0,
+    })
+    expect(authority.snapshot(parentCredentialBindingReference(binding))).toMatchObject({
+      generation: 1,
+      activeGeneration: 1,
+    })
+    await expect(verifyParentPin(binding, '2468', options)).resolves.toMatchObject({
+      status: 'verified',
+    })
+  })
+
+  it('refuses a replayed claim grant', async () => {
+    const { binding, options, issuer } = pristine()
+    issuer.issueClaim()
+    await claimParentPinAuthorized(binding, '2468', issuer.claim, options)
+
+    // The issuer redeems once, so a second consume of the same grant is null.
+    await expect(
+      claimParentPinAuthorized(binding, '1357', issuer.claim, options),
+    ).rejects.toMatchObject({ code: 'credential-conflict' })
+    await expect(verifyParentPin(binding, '1357', options)).resolves.toMatchObject({
+      status: 'not-verified',
+    })
+  })
+
+  it('refuses recovery of a tombstone when only a claim grant exists', async () => {
+    const { binding, options, issuer } = await tombstoned()
+    issuer.issueClaim()
+
+    await expect(
+      recoverParentPinAuthorized(binding, '5555', issuer.recovery, options),
+    ).rejects.toMatchObject({ code: 'authorization-required' })
+    await expect(verifyParentPin(binding, '5555', options)).resolves.toMatchObject({
+      status: 'reset-required',
+    })
+  })
+
+  it('recovers a tombstone against a valid recovery grant', async () => {
+    const { binding, options, issuer, reset } = await tombstoned()
+    issuer.issueRecovery(reset.generation)
+
+    const recovered = await recoverParentPinAuthorized(binding, '5555', issuer.recovery, options)
+    expect(recovered).toMatchObject({ status: 'enrolled', generation: reset.generation + 1 })
+    await expect(verifyParentPin(binding, '5555', options)).resolves.toMatchObject({
+      status: 'verified',
+    })
+  })
+
+  it.each([
+    ['a different installation', { installationId: createInstallationId(() => INSTALLATION_B) }],
+    ['a different household', { householdId: 'household-b' }],
+    ['a different dataset epoch', { datasetEpoch: 'dataset-epoch-2' }],
+    ['a grant its issuer never redeemed', { status: 'issued' as const }],
+  ])('refuses a claim grant bound to %s', async (_label, overrides) => {
+    const { binding, options, issuer } = pristine()
+    issuer.issueClaim(overrides)
+
+    await expect(
+      claimParentPinAuthorized(binding, '2468', issuer.claim, options),
+    ).rejects.toMatchObject({ code: 'authorization-required' })
+    await expect(readParentCredentialState(binding, options)).resolves.toMatchObject({
+      status: 'parent-setup-required',
+    })
+  })
+
+  it('refuses a claim grant that expired before the operation', async () => {
+    const { binding, options } = pristine()
+    // Issued well before the operation clock and expired in between, so the
+    // issuedAt < expiresAt shape check passes and only expiry can reject.
+    const issuer = new MemoryParentInstallationGrantIssuer(
+      binding,
+      () => new Date('2026-08-11T11:00:00.000Z'),
+    )
+    issuer.issueClaim({ expiresAt: '2026-08-11T11:30:00.000Z' })
+
+    await expect(
+      claimParentPinAuthorized(binding, '2468', issuer.claim, options),
+    ).rejects.toMatchObject({ code: 'authorization-required' })
+    await expect(readParentCredentialState(binding, options)).resolves.toMatchObject({
+      status: 'parent-setup-required',
+    })
+  })
+
+  it('refuses a claim grant issued for a different purpose', async () => {
+    const { binding, options, issuer } = pristine()
+    // legacy_upgrade carries the claim capability, so only the purpose check
+    // can reject this grant.
+    issuer.issueClaim({ purpose: 'legacy_upgrade' })
+
+    await expect(
+      claimParentPinAuthorized(binding, '2468', issuer.claim, options),
+    ).rejects.toMatchObject({ code: 'authorization-required' })
+    await expect(readParentCredentialState(binding, options)).resolves.toMatchObject({
+      status: 'parent-setup-required',
+    })
+  })
+
+  it('refuses a recovery grant bound to a stale generation', async () => {
+    const { binding, options, issuer, reset } = await tombstoned()
+    issuer.issueRecovery(reset.generation - 1)
+
+    await expect(
+      recoverParentPinAuthorized(binding, '5555', issuer.recovery, options),
+    ).rejects.toMatchObject({ code: 'authorization-required' })
+    await expect(verifyParentPin(binding, '5555', options)).resolves.toMatchObject({
+      status: 'reset-required',
+    })
+  })
+
+  it('cannot restore a superseded enrolled record as current authority through any public API', async () => {
+    const { binding, storage, authority, options } = pristine()
+    const enrolled = await enrollForTest(binding, '2468', storage, authority, {
+      now: () => new Date(CREATED_AT),
+    })
+    const supersededRaw = storage.getItem(parentCredentialStorageKey(binding))!
+    await markParentCredentialResetRequiredAuthorized(
+      binding,
+      recoveryGrantFor(binding, authority, () => new Date(CREATED_AT)),
+      options,
+    )
+
+    // Replay the still well-formed, still PIN-matching earlier enrolled record.
+    storage.setItem(parentCredentialStorageKey(binding), supersededRaw)
+    expect(JSON.parse(supersededRaw)).toMatchObject({
+      state: 'enrolled',
+      generation: enrolled.generation,
+    })
+    await expect(verifyParentPin(binding, '2468', options)).resolves.toMatchObject({
+      status: 'not-verified',
+    })
+    await expect(readParentCredentialState(binding, options)).rejects.toMatchObject({
+      code: 'generation-mismatch',
+    })
   })
 })

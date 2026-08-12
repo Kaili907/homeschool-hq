@@ -56,19 +56,19 @@ describe('credential and educational Profile boundaries', () => {
       name: 'Synthetic Learner',
       grade: 5,
       pin: '1234',
-      nestedEducationalData: { completed: true },
+      missions: { '2026-08-11': { completed: true } },
     } as unknown as Profile
 
     expect(toCredentialFreeEducationalProfile(legacy)).toEqual({
       id: 'p1',
       name: 'Synthetic Learner',
       grade: 5,
-      nestedEducationalData: { completed: true },
+      missions: { '2026-08-11': { completed: true } },
     })
     expect(() =>
       toCredentialFreeEducationalProfile({
         ...legacy,
-        nestedEducationalData: { recoverySecret: 'not-for-sync' },
+        missions: { '2026-08-11': { recoverySecret: 'not-for-sync' } },
       } as unknown as Profile),
     ).toThrow(/recoverySecret/)
     expect(() =>
