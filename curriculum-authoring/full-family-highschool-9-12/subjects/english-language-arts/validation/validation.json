@@ -1,0 +1,1084 @@
+{
+  "package_id": "manuel-academy-highschool-9-12-ela",
+  "validated_on": "2026-08-12",
+  "overall": "PASS",
+  "counts": {
+    "checks": 213,
+    "passed": 213,
+    "failed": 0
+  },
+  "totals": {
+    "courses": 4,
+    "units": 40,
+    "lessons": 720,
+    "assessments": 40,
+    "standards_in_corpus": 84
+  },
+  "checks": [
+    {
+      "check": "standards-corpus-size",
+      "result": "PASS",
+      "details": "84 entries (expect 84 = 2 bands x (10+10+10+6+6))"
+    },
+    {
+      "check": "standards-source-hashed",
+      "result": "PASS",
+      "details": "5d340bbe90c70f95b937a4b95f099b55543b423e55ac0708ea43fee6a15a4863"
+    },
+    {
+      "check": "standards-code-format-disclosed",
+      "result": "PASS",
+      "details": "LOCAL_COMPOSITION"
+    },
+    {
+      "check": "standards-verified-flag",
+      "result": "PASS",
+      "details": "true"
+    },
+    {
+      "check": "standards-text-nonempty",
+      "result": "PASS",
+      "details": "all entries carry text"
+    },
+    {
+      "check": "course-exists:english-9",
+      "result": "PASS",
+      "details": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-hs912-ela-r1/curriculum-authoring/full-family-highschool-9-12/subjects/english-language-arts/courses/english-9"
+    },
+    {
+      "check": "course-exists:english-10",
+      "result": "PASS",
+      "details": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-hs912-ela-r1/curriculum-authoring/full-family-highschool-9-12/subjects/english-language-arts/courses/english-10"
+    },
+    {
+      "check": "course-exists:english-11",
+      "result": "PASS",
+      "details": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-hs912-ela-r1/curriculum-authoring/full-family-highschool-9-12/subjects/english-language-arts/courses/english-11"
+    },
+    {
+      "check": "course-exists:english-12",
+      "result": "PASS",
+      "details": "/Users/stephenmanuel/manuel-academy-dev/mac-worktrees/mac-hs912-ela-r1/curriculum-authoring/full-family-highschool-9-12/subjects/english-language-arts/courses/english-12"
+    },
+    {
+      "check": "four-courses",
+      "result": "PASS",
+      "details": "english-9, english-10, english-11, english-12"
+    },
+    {
+      "check": "units-count:english-9",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "lessons-count:english-9",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "assessments-count:english-9",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "unit-days-18:english-9",
+      "result": "PASS",
+      "details": "10 units x 18 days"
+    },
+    {
+      "check": "course-id-consistent:english-9",
+      "result": "PASS",
+      "details": "ma-g9-english-language-arts"
+    },
+    {
+      "check": "grade-consistent:english-9",
+      "result": "PASS",
+      "details": "9"
+    },
+    {
+      "check": "lesson-id-format:english-9",
+      "result": "PASS",
+      "details": "^ma-g9-english-language-arts-u[0-9]{2}-l[0-9]{2}$"
+    },
+    {
+      "check": "course-days-1-180:english-9",
+      "result": "PASS",
+      "details": "1..180, unique=180"
+    },
+    {
+      "check": "units-count:english-10",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "lessons-count:english-10",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "assessments-count:english-10",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "unit-days-18:english-10",
+      "result": "PASS",
+      "details": "10 units x 18 days"
+    },
+    {
+      "check": "course-id-consistent:english-10",
+      "result": "PASS",
+      "details": "ma-g10-english-language-arts"
+    },
+    {
+      "check": "grade-consistent:english-10",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "lesson-id-format:english-10",
+      "result": "PASS",
+      "details": "^ma-g10-english-language-arts-u[0-9]{2}-l[0-9]{2}$"
+    },
+    {
+      "check": "course-days-1-180:english-10",
+      "result": "PASS",
+      "details": "1..180, unique=180"
+    },
+    {
+      "check": "units-count:english-11",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "lessons-count:english-11",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "assessments-count:english-11",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "unit-days-18:english-11",
+      "result": "PASS",
+      "details": "10 units x 18 days"
+    },
+    {
+      "check": "course-id-consistent:english-11",
+      "result": "PASS",
+      "details": "ma-g11-english-language-arts"
+    },
+    {
+      "check": "grade-consistent:english-11",
+      "result": "PASS",
+      "details": "11"
+    },
+    {
+      "check": "lesson-id-format:english-11",
+      "result": "PASS",
+      "details": "^ma-g11-english-language-arts-u[0-9]{2}-l[0-9]{2}$"
+    },
+    {
+      "check": "course-days-1-180:english-11",
+      "result": "PASS",
+      "details": "1..180, unique=180"
+    },
+    {
+      "check": "units-count:english-12",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "lessons-count:english-12",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "assessments-count:english-12",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "unit-days-18:english-12",
+      "result": "PASS",
+      "details": "10 units x 18 days"
+    },
+    {
+      "check": "course-id-consistent:english-12",
+      "result": "PASS",
+      "details": "ma-g12-english-language-arts"
+    },
+    {
+      "check": "grade-consistent:english-12",
+      "result": "PASS",
+      "details": "12"
+    },
+    {
+      "check": "lesson-id-format:english-12",
+      "result": "PASS",
+      "details": "^ma-g12-english-language-arts-u[0-9]{2}-l[0-9]{2}$"
+    },
+    {
+      "check": "course-days-1-180:english-12",
+      "result": "PASS",
+      "details": "1..180, unique=180"
+    },
+    {
+      "check": "unique-lesson-ids",
+      "result": "PASS",
+      "details": "720 unique, 0 dupes"
+    },
+    {
+      "check": "unique-unit-ids",
+      "result": "PASS",
+      "details": "40 unique"
+    },
+    {
+      "check": "unique-assessment-ids",
+      "result": "PASS",
+      "details": "40 unique"
+    },
+    {
+      "check": "unit-refs-resolve:english-9",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "unit-refs-exactly-once:english-9",
+      "result": "PASS",
+      "details": "0 referenced != once"
+    },
+    {
+      "check": "no-orphan-lessons:english-9",
+      "result": "PASS",
+      "details": "0 orphans"
+    },
+    {
+      "check": "assessment-refs-resolve:english-9",
+      "result": "PASS",
+      "details": "10/10"
+    },
+    {
+      "check": "unit-refs-resolve:english-10",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "unit-refs-exactly-once:english-10",
+      "result": "PASS",
+      "details": "0 referenced != once"
+    },
+    {
+      "check": "no-orphan-lessons:english-10",
+      "result": "PASS",
+      "details": "0 orphans"
+    },
+    {
+      "check": "assessment-refs-resolve:english-10",
+      "result": "PASS",
+      "details": "10/10"
+    },
+    {
+      "check": "unit-refs-resolve:english-11",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "unit-refs-exactly-once:english-11",
+      "result": "PASS",
+      "details": "0 referenced != once"
+    },
+    {
+      "check": "no-orphan-lessons:english-11",
+      "result": "PASS",
+      "details": "0 orphans"
+    },
+    {
+      "check": "assessment-refs-resolve:english-11",
+      "result": "PASS",
+      "details": "10/10"
+    },
+    {
+      "check": "unit-refs-resolve:english-12",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "unit-refs-exactly-once:english-12",
+      "result": "PASS",
+      "details": "0 referenced != once"
+    },
+    {
+      "check": "no-orphan-lessons:english-12",
+      "result": "PASS",
+      "details": "0 orphans"
+    },
+    {
+      "check": "assessment-refs-resolve:english-12",
+      "result": "PASS",
+      "details": "10/10"
+    },
+    {
+      "check": "schedule-rows:english-9",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "schedule-refs-known:english-9",
+      "result": "PASS",
+      "details": "0 unknown"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once:english-9",
+      "result": "PASS",
+      "details": "scheduled=180, lessons=180"
+    },
+    {
+      "check": "schedule-36-weeks:english-9",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "schedule-weekdays-1-5:english-9",
+      "result": "PASS",
+      "details": "1,2,3,4,5"
+    },
+    {
+      "check": "schedule-rows:english-10",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "schedule-refs-known:english-10",
+      "result": "PASS",
+      "details": "0 unknown"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once:english-10",
+      "result": "PASS",
+      "details": "scheduled=180, lessons=180"
+    },
+    {
+      "check": "schedule-36-weeks:english-10",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "schedule-weekdays-1-5:english-10",
+      "result": "PASS",
+      "details": "1,2,3,4,5"
+    },
+    {
+      "check": "schedule-rows:english-11",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "schedule-refs-known:english-11",
+      "result": "PASS",
+      "details": "0 unknown"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once:english-11",
+      "result": "PASS",
+      "details": "scheduled=180, lessons=180"
+    },
+    {
+      "check": "schedule-36-weeks:english-11",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "schedule-weekdays-1-5:english-11",
+      "result": "PASS",
+      "details": "1,2,3,4,5"
+    },
+    {
+      "check": "schedule-rows:english-12",
+      "result": "PASS",
+      "details": "180"
+    },
+    {
+      "check": "schedule-refs-known:english-12",
+      "result": "PASS",
+      "details": "0 unknown"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once:english-12",
+      "result": "PASS",
+      "details": "scheduled=180, lessons=180"
+    },
+    {
+      "check": "schedule-36-weeks:english-12",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "check": "schedule-weekdays-1-5:english-12",
+      "result": "PASS",
+      "details": "1,2,3,4,5"
+    },
+    {
+      "check": "standards-resolve:english-9",
+      "result": "PASS",
+      "details": "0 unknown: "
+    },
+    {
+      "check": "standards-band-correct:english-9",
+      "result": "PASS",
+      "details": "band 9-10, 0 out-of-band"
+    },
+    {
+      "check": "standards-applicable-only:english-9",
+      "result": "PASS",
+      "details": "0 not-applicable used"
+    },
+    {
+      "check": "no-k8-standard-codes:english-9",
+      "result": "PASS",
+      "details": "0 grade-prefixed (e.g. 8.RL.1) codes"
+    },
+    {
+      "check": "standards-resolve:english-10",
+      "result": "PASS",
+      "details": "0 unknown: "
+    },
+    {
+      "check": "standards-band-correct:english-10",
+      "result": "PASS",
+      "details": "band 9-10, 0 out-of-band"
+    },
+    {
+      "check": "standards-applicable-only:english-10",
+      "result": "PASS",
+      "details": "0 not-applicable used"
+    },
+    {
+      "check": "no-k8-standard-codes:english-10",
+      "result": "PASS",
+      "details": "0 grade-prefixed (e.g. 8.RL.1) codes"
+    },
+    {
+      "check": "standards-resolve:english-11",
+      "result": "PASS",
+      "details": "0 unknown: "
+    },
+    {
+      "check": "standards-band-correct:english-11",
+      "result": "PASS",
+      "details": "band 11-12, 0 out-of-band"
+    },
+    {
+      "check": "standards-applicable-only:english-11",
+      "result": "PASS",
+      "details": "0 not-applicable used"
+    },
+    {
+      "check": "no-k8-standard-codes:english-11",
+      "result": "PASS",
+      "details": "0 grade-prefixed (e.g. 8.RL.1) codes"
+    },
+    {
+      "check": "standards-resolve:english-12",
+      "result": "PASS",
+      "details": "0 unknown: "
+    },
+    {
+      "check": "standards-band-correct:english-12",
+      "result": "PASS",
+      "details": "band 11-12, 0 out-of-band"
+    },
+    {
+      "check": "standards-applicable-only:english-12",
+      "result": "PASS",
+      "details": "0 not-applicable used"
+    },
+    {
+      "check": "no-k8-standard-codes:english-12",
+      "result": "PASS",
+      "details": "0 grade-prefixed (e.g. 8.RL.1) codes"
+    },
+    {
+      "check": "band-coverage:9-10",
+      "result": "PASS",
+      "details": "41/41 covered"
+    },
+    {
+      "check": "band-coverage:11-12",
+      "result": "PASS",
+      "details": "41/41 covered"
+    },
+    {
+      "check": "lesson-required-fields:english-9",
+      "result": "PASS",
+      "details": "0 lessons missing a required field"
+    },
+    {
+      "check": "lesson-3-objectives:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-5-segments:english-9",
+      "result": "PASS",
+      "details": "all (Study-resumable segmentation)"
+    },
+    {
+      "check": "lesson-has-standards:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-accessibility-5:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-safety-2:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "media-optional-with-fallback:english-9",
+      "result": "PASS",
+      "details": "all lessons: media never required, fallback present"
+    },
+    {
+      "check": "accessible-reading-representation:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "private-presentation-path:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "multi-occasion-mastery:english-9",
+      "result": "PASS",
+      "details": "every lesson requires >= 2 occasions"
+    },
+    {
+      "check": "student-authorship-present:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-may-not-write-response:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-declines-answer-route:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "no-raw-essay-in-guardian-metadata:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-required-fields:english-10",
+      "result": "PASS",
+      "details": "0 lessons missing a required field"
+    },
+    {
+      "check": "lesson-3-objectives:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-5-segments:english-10",
+      "result": "PASS",
+      "details": "all (Study-resumable segmentation)"
+    },
+    {
+      "check": "lesson-has-standards:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-accessibility-5:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-safety-2:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "media-optional-with-fallback:english-10",
+      "result": "PASS",
+      "details": "all lessons: media never required, fallback present"
+    },
+    {
+      "check": "accessible-reading-representation:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "private-presentation-path:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "multi-occasion-mastery:english-10",
+      "result": "PASS",
+      "details": "every lesson requires >= 2 occasions"
+    },
+    {
+      "check": "student-authorship-present:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-may-not-write-response:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-declines-answer-route:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "no-raw-essay-in-guardian-metadata:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-required-fields:english-11",
+      "result": "PASS",
+      "details": "0 lessons missing a required field"
+    },
+    {
+      "check": "lesson-3-objectives:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-5-segments:english-11",
+      "result": "PASS",
+      "details": "all (Study-resumable segmentation)"
+    },
+    {
+      "check": "lesson-has-standards:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-accessibility-5:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-safety-2:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "media-optional-with-fallback:english-11",
+      "result": "PASS",
+      "details": "all lessons: media never required, fallback present"
+    },
+    {
+      "check": "accessible-reading-representation:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "private-presentation-path:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "multi-occasion-mastery:english-11",
+      "result": "PASS",
+      "details": "every lesson requires >= 2 occasions"
+    },
+    {
+      "check": "student-authorship-present:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-may-not-write-response:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-declines-answer-route:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "no-raw-essay-in-guardian-metadata:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-required-fields:english-12",
+      "result": "PASS",
+      "details": "0 lessons missing a required field"
+    },
+    {
+      "check": "lesson-3-objectives:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-5-segments:english-12",
+      "result": "PASS",
+      "details": "all (Study-resumable segmentation)"
+    },
+    {
+      "check": "lesson-has-standards:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-accessibility-5:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-safety-2:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "media-optional-with-fallback:english-12",
+      "result": "PASS",
+      "details": "all lessons: media never required, fallback present"
+    },
+    {
+      "check": "accessible-reading-representation:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "private-presentation-path:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "multi-occasion-mastery:english-12",
+      "result": "PASS",
+      "details": "every lesson requires >= 2 occasions"
+    },
+    {
+      "check": "student-authorship-present:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-may-not-write-response:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "tutor-declines-answer-route:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "no-raw-essay-in-guardian-metadata:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-points-sum:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-rubric:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-reassessment:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-authorship-rule:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-weight-non-decreasing:english-9",
+      "result": "PASS",
+      "details": "0 -> 38"
+    },
+    {
+      "check": "assessment-points-sum:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-rubric:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-reassessment:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-authorship-rule:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-weight-non-decreasing:english-10",
+      "result": "PASS",
+      "details": "38 -> 38"
+    },
+    {
+      "check": "assessment-points-sum:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-rubric:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-reassessment:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-authorship-rule:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-weight-non-decreasing:english-11",
+      "result": "PASS",
+      "details": "38 -> 44"
+    },
+    {
+      "check": "assessment-points-sum:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-rubric:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-reassessment:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-authorship-rule:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "assessment-weight-non-decreasing:english-12",
+      "result": "PASS",
+      "details": "44 -> 52"
+    },
+    {
+      "check": "rigor-distinct:model",
+      "result": "PASS",
+      "details": "4/4 distinct across the four courses"
+    },
+    {
+      "check": "rigor-distinct:guided",
+      "result": "PASS",
+      "details": "4/4 distinct across the four courses"
+    },
+    {
+      "check": "rigor-distinct:independent",
+      "result": "PASS",
+      "details": "4/4 distinct across the four courses"
+    },
+    {
+      "check": "rigor-distinct:mastery",
+      "result": "PASS",
+      "details": "4/4 distinct across the four courses"
+    },
+    {
+      "check": "g12-no-supplied-method",
+      "result": "PASS",
+      "details": "English 12 withholds the worked exemplar"
+    },
+    {
+      "check": "g9-scaffold-present",
+      "result": "PASS",
+      "details": "English 9 keeps the criteria checklist"
+    },
+    {
+      "check": "g12-source-trail-audit",
+      "result": "PASS",
+      "details": "English 12 scores an auditable source trail"
+    },
+    {
+      "check": "g11-uncertainty-scored",
+      "result": "PASS",
+      "details": "English 11 scores uncertainty and limits"
+    },
+    {
+      "check": "g10-lacks-g12-dimension",
+      "result": "PASS",
+      "details": "English 10 does not carry the senior dimension"
+    },
+    {
+      "check": "text-rights-valid:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "text-ids-unique:english-9",
+      "result": "PASS",
+      "details": "12"
+    },
+    {
+      "check": "public-domain-year:english-9",
+      "result": "PASS",
+      "details": "0 entries dated after 1929"
+    },
+    {
+      "check": "rights-required-substituted:english-9",
+      "result": "PASS",
+      "details": "1 gated entries, each with a PD substitute"
+    },
+    {
+      "check": "rights-required-no-text:english-9",
+      "result": "PASS",
+      "details": "no passage stored for gated works"
+    },
+    {
+      "check": "text-citation-metadata:english-9",
+      "result": "PASS",
+      "details": "all entries carry source + author"
+    },
+    {
+      "check": "original-texts-present:english-9",
+      "result": "PASS",
+      "details": "4 original"
+    },
+    {
+      "check": "text-rights-valid:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "text-ids-unique:english-10",
+      "result": "PASS",
+      "details": "12"
+    },
+    {
+      "check": "public-domain-year:english-10",
+      "result": "PASS",
+      "details": "0 entries dated after 1929"
+    },
+    {
+      "check": "rights-required-substituted:english-10",
+      "result": "PASS",
+      "details": "1 gated entries, each with a PD substitute"
+    },
+    {
+      "check": "rights-required-no-text:english-10",
+      "result": "PASS",
+      "details": "no passage stored for gated works"
+    },
+    {
+      "check": "text-citation-metadata:english-10",
+      "result": "PASS",
+      "details": "all entries carry source + author"
+    },
+    {
+      "check": "original-texts-present:english-10",
+      "result": "PASS",
+      "details": "4 original"
+    },
+    {
+      "check": "text-rights-valid:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "text-ids-unique:english-11",
+      "result": "PASS",
+      "details": "13"
+    },
+    {
+      "check": "public-domain-year:english-11",
+      "result": "PASS",
+      "details": "0 entries dated after 1929"
+    },
+    {
+      "check": "rights-required-substituted:english-11",
+      "result": "PASS",
+      "details": "0 gated entries, each with a PD substitute"
+    },
+    {
+      "check": "rights-required-no-text:english-11",
+      "result": "PASS",
+      "details": "no passage stored for gated works"
+    },
+    {
+      "check": "text-citation-metadata:english-11",
+      "result": "PASS",
+      "details": "all entries carry source + author"
+    },
+    {
+      "check": "original-texts-present:english-11",
+      "result": "PASS",
+      "details": "3 original"
+    },
+    {
+      "check": "text-rights-valid:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "text-ids-unique:english-12",
+      "result": "PASS",
+      "details": "12"
+    },
+    {
+      "check": "public-domain-year:english-12",
+      "result": "PASS",
+      "details": "0 entries dated after 1929"
+    },
+    {
+      "check": "rights-required-substituted:english-12",
+      "result": "PASS",
+      "details": "0 gated entries, each with a PD substitute"
+    },
+    {
+      "check": "rights-required-no-text:english-12",
+      "result": "PASS",
+      "details": "no passage stored for gated works"
+    },
+    {
+      "check": "text-citation-metadata:english-12",
+      "result": "PASS",
+      "details": "all entries carry source + author"
+    },
+    {
+      "check": "original-texts-present:english-12",
+      "result": "PASS",
+      "details": "4 original"
+    },
+    {
+      "check": "lane-self-contained",
+      "result": "PASS",
+      "details": "all authored artifacts live under the ELA lane"
+    }
+  ]
+}
