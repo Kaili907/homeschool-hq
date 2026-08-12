@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l09",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l09",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 9,
+    "courseDay": 135,
+    "phase": "Retrieval and fluency",
+    "focus": "reading scaled graphs",
+    "title": "Retrieval and fluency: reading scaled graphs"
+  },
+  "standards": [
+    "3.MD.3"
+  ],
+  "blueprint": {
+    "phase": "Retrieval and fluency",
+    "profile": "retrieval-and-fluency",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Oranges\" is worth 4 symbols. How many does \"Oranges\" represent?",
+          "choices": [
+            "4",
+            "6",
+            "10",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "On a scaled bar graph with 1 per symbol, \"Apples\" has 6 symbols and \"Bananas\" has 4 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "3",
+            "2",
+            "10",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Cats\" is worth 3 symbols. How many does \"Cats\" represent?",
+          "choices": [
+            "3",
+            "4",
+            "8",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 5 per symbol, \"Red\" has 9 symbols and \"Blue\" has 7 symbols. How many more does \"Red\" have than \"Blue\"?",
+          "choices": [
+            "80",
+            "45",
+            "2",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 2 per symbol. The bar for \"Yellow\" is worth 4 symbols. How many does \"Yellow\" represent?",
+          "choices": [
+            "10",
+            "8",
+            "4",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l09#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 10 per symbol, \"Apples\" has 7 symbols and \"Bananas\" has 1 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "60",
+            "6",
+            "80",
+            "70"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l09#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Yellow\" is worth 8 symbols. How many does \"Yellow\" represent?",
+          "choices": [
+            "80",
+            "90",
+            "8",
+            "70"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Dogs\" has 4 symbols and \"Cats\" has 3 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "1",
+            "8",
+            "2",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Cats\" is worth 2 symbols. How many does \"Cats\" represent?",
+          "choices": [
+            "2",
+            "30",
+            "20",
+            "10"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l09"
+  }
+}

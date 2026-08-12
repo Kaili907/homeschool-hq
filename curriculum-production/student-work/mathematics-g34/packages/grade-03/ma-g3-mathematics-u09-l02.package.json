@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u09-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u09-l02",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Area and the Distributive Property",
+    "dayInUnit": 2,
+    "courseDay": 146,
+    "phase": "Concept build A",
+    "focus": "unit squares and area as a count of squares",
+    "title": "Concept build A: unit squares and area as a count of squares"
+  },
+  "standards": [
+    "3.MD.5"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 1,
+          "prompt": "Which statement correctly describes the perimeter of a shape?",
+          "workedSolution": {
+            "steps": [
+              "Perimeter is the distance around the outside boundary of a shape, measured in linear units, not the space it covers."
+            ],
+            "answer": "Perimeter is the distance around the outside edge of a shape, measured in linear units."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 1,
+          "prompt": "Which statement correctly describes the area of a shape?",
+          "choices": [
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area is the amount of flat space a shape covers, measured in square units."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": []
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": []
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u09-l02"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l13",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l13",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 13,
+    "courseDay": 175,
+    "phase": "Performance task: plan",
+    "focus": "the capstone design",
+    "title": "Performance task: plan: the capstone design"
+  },
+  "standards": [
+    "3.MD.7",
+    "3.MD.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangular patio is 7 m long and 4 m wide. What is its area?",
+          "workedSolution": {
+            "steps": [
+              "7 × 4 = 28.",
+              "The area is 28 square meters."
+            ],
+            "answer": "28 sq m"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 2,
+          "prompt": "A rectangular field is 4 cm long and 4 cm wide. What is its perimeter?",
+          "choices": [
+            "17 cm",
+            "8 cm",
+            "15 cm",
+            "16 cm"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular patio is 11 m long and 6 m wide. What is its area?",
+          "choices": [
+            "17 sq m",
+            "34 sq m",
+            "66 sq m",
+            "67 sq m"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "perimeter-of-rectangle",
+          "standard": "3.MD.8",
+          "difficulty": 3,
+          "prompt": "A rectangular field is 12 m long and 5 m wide. What is its perimeter?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "area-formula-capstone",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular patio is 12 in long and 9 in wide. What is its area?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l13"
+  }
+}

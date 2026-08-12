@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l02",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 2,
+    "courseDay": 128,
+    "phase": "Concept build A",
+    "focus": "picture graphs with a scaled key",
+    "title": "Concept build A: picture graphs with a scaled key"
+  },
+  "standards": [
+    "3.MD.3"
+  ],
+  "blueprint": {
+    "phase": "Concept build A",
+    "profile": "concept-build-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph uses a scale of 5 per symbol. A bar shows 3 symbols. What does that bar represent?",
+          "workedSolution": {
+            "steps": [
+              "3 symbols × 5 per symbol = 15."
+            ],
+            "answer": "15"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "With a scale of 2 per symbol, \"Dogs\" has 6 symbols and \"Cats\" has 4 symbols. How many more dogs than cats?",
+          "workedSolution": {
+            "steps": [
+              "Dogs: 6 × 2 = 12.",
+              "Cats: 4 × 2 = 8.",
+              "12 − 8 = 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 1 per symbol. The bar for \"Blue\" is worth 4 symbols. How many does \"Blue\" represent?",
+          "choices": [
+            "3",
+            "5",
+            "7",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "On a scaled bar graph with 1 per symbol, \"Dogs\" has 6 symbols and \"Cats\" has 3 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "9",
+            "4",
+            "3",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Birds\" is worth 2 symbols. How many does \"Birds\" represent?",
+          "choices": [
+            "10",
+            "2",
+            "15",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "On a scaled bar graph with 1 per symbol, \"Dogs\" has 9 symbols and \"Cats\" has 1 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "8",
+            "9",
+            "10",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Bananas\" is worth 5 symbols. How many does \"Bananas\" represent?",
+          "choices": [
+            "20",
+            "25",
+            "30",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Apples\" has 6 symbols and \"Bananas\" has 1 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "10",
+            "12",
+            "5",
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 1,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 1 per symbol. The bar for \"Apples\" is worth 1 symbols. How many does \"Apples\" represent?",
+          "choices": [
+            "0",
+            "4",
+            "2",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "On a scaled bar graph with 2 per symbol, \"Dogs\" has 9 symbols and \"Cats\" has 6 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "3",
+            "18",
+            "6",
+            "30"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l02"
+  }
+}

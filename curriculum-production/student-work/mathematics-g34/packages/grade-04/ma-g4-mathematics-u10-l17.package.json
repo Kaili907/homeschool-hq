@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l17",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l17",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 17,
+    "courseDay": 179,
+    "phase": "Targeted correction and reassessment",
+    "focus": "angle and classification work",
+    "title": "Targeted correction and reassessment: angle and classification work"
+  },
+  "standards": [
+    "4.MD.6",
+    "4.MD.7",
+    "4.G.2"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 1,
+          "prompt": "Two adjacent angles together measure 90°. One measures 35°. What does the other measure?",
+          "workedSolution": {
+            "steps": [
+              "90 − 35 = 55."
+            ],
+            "answer": "55°"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 2,
+          "prompt": "A triangle where one angle measures more than 90° is called what kind of triangle?",
+          "workedSolution": {
+            "steps": [
+              "One angle over 90° makes it an obtuse triangle."
+            ],
+            "answer": "obtuse triangle"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 1,
+          "prompt": "A protractor reads 90° for an angle. Classify the angle.",
+          "choices": [
+            "straight",
+            "right",
+            "acute",
+            "obtuse"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles share a ray and together measure 169°. One of the angles measures 80°. What does the other angle measure?",
+          "choices": [
+            "80°",
+            "169°",
+            "89°",
+            "249°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 2,
+          "prompt": "A triangle where all three angles measure less than 90° is called what kind of triangle?",
+          "choices": [
+            "right triangle",
+            "obtuse triangle",
+            "acute triangle",
+            "equilateral triangle"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 110° for an angle. Classify the angle.",
+          "choices": [
+            "obtuse",
+            "straight",
+            "right",
+            "acute"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles share a ray and together measure 160°. One of the angles measures 133°. What does the other angle measure?",
+          "choices": [
+            "160°",
+            "27°",
+            "293°",
+            "133°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where one angle measures exactly 90° is called what kind of triangle?",
+          "choices": [
+            "acute triangle",
+            "right triangle",
+            "obtuse triangle",
+            "equilateral triangle"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l17"
+  }
+}

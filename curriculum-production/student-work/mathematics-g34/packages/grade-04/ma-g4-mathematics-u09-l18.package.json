@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u09-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u09-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Measurement, Conversion, and Data",
+    "dayInUnit": 18,
+    "courseDay": 162,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "measuring and converting for a real task",
+    "title": "Transfer, reflection, and publication: measuring and converting for a real task"
+  },
+  "standards": [
+    "4.MD.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 1,
+          "prompt": "A runner covers 200 meters, then runs 4 more laps of 50 meters each. How many meters total?",
+          "workedSolution": {
+            "steps": [
+              "4 × 50 = 200.",
+              "200 + 200 = 400."
+            ],
+            "answer": "400"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 2,
+          "prompt": "A hiker walks 22 meters, then walks 5 more trips of 37 meters each. How many meters total?",
+          "choices": [
+            "185",
+            "22",
+            "208",
+            "207"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 1477 liters of water. 9 containers of 91 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "1477",
+            "819",
+            "2296",
+            "658"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 719 liters of water. 5 containers of 56 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "439",
+            "280",
+            "999",
+            "719"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A tank has 1267 liters of water. 6 containers of 174 liters each are drained from it. How many liters remain?",
+          "choices": [
+            "1044",
+            "223",
+            "1267",
+            "2311"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u09-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 639 meters, then walks 9 more trips of 148 meters each. How many meters total?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u09-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "measurement-word-problem",
+          "standard": "4.MD.2",
+          "difficulty": 3,
+          "prompt": "A hiker walks 721 meters, then walks 8 more trips of 273 meters each. How many meters total?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u09-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u09-l18"
+  }
+}

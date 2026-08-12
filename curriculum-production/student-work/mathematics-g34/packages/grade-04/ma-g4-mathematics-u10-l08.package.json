@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l08",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l08",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 8,
+    "courseDay": 170,
+    "phase": "Error analysis and repair",
+    "focus": "protractor scale-reading errors",
+    "title": "Error analysis and repair: protractor scale-reading errors"
+  },
+  "standards": [
+    "4.MD.6",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 1,
+          "prompt": "A protractor reads 120° for an angle. Classify the angle.",
+          "workedSolution": {
+            "steps": [
+              "120° is greater than 90° and less than 180°, so it is obtuse."
+            ],
+            "answer": "obtuse"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 1,
+          "prompt": "A protractor reads 150° for an angle. Classify the angle.",
+          "choices": [
+            "right",
+            "straight",
+            "obtuse",
+            "acute"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 1,
+          "prompt": "A protractor reads 30° for an angle. Classify the angle.",
+          "choices": [
+            "right",
+            "obtuse",
+            "straight",
+            "acute"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 110° for an angle. Classify the angle.",
+          "choices": [
+            "obtuse",
+            "right",
+            "acute",
+            "straight"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 75° for an angle. Classify the angle.",
+          "choices": [
+            "right",
+            "straight",
+            "obtuse",
+            "acute"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 20° for an angle. Classify the angle.",
+          "choices": [
+            "straight",
+            "right",
+            "acute",
+            "obtuse"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 2,
+          "prompt": "A protractor reads 170° for an angle. Classify the angle.",
+          "choices": [
+            "straight",
+            "obtuse",
+            "right",
+            "acute"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-angle-by-measure",
+          "standard": "4.MD.6",
+          "difficulty": 3,
+          "prompt": "A protractor reads 91° for an angle. Classify the angle.",
+          "choices": [
+            "acute",
+            "right",
+            "obtuse",
+            "straight"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l08"
+  }
+}

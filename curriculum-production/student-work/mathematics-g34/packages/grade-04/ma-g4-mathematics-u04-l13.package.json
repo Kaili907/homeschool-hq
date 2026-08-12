@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l13",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l13",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 13,
+    "courseDay": 67,
+    "phase": "Performance task: plan",
+    "focus": "the supply order",
+    "title": "Performance task: plan: the supply order"
+  },
+  "standards": [
+    "4.NBT.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task: plan",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to plan before computing anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l13#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 6 × 47. Split 47 into 40 and 7.",
+          "workedSolution": {
+            "steps": [
+              "6 × 40 = 240.",
+              "6 × 7 = 42.",
+              "240 + 42 = 282."
+            ],
+            "answer": "282"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l13#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 4 × 885 using partial products.",
+          "choices": [
+            "3200",
+            "3536",
+            "3520",
+            "3540"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l13#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use an area model to find 3 × 45. Split 45 into 40 and 5.",
+          "choices": [
+            "135",
+            "15",
+            "120",
+            "125"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will figure out, how, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l13#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 5 × 394 using partial products.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l13#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 5 × 29. Split 29 into 20 and 9.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l13"
+  }
+}

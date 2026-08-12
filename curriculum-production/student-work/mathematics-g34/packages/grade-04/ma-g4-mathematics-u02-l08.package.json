@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u02-l08",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u02-l08",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "dayInUnit": 8,
+    "courseDay": 26,
+    "phase": "Error analysis and repair",
+    "focus": "alignment and regrouping errors",
+    "title": "Error analysis and repair: alignment and regrouping errors"
+  },
+  "standards": [
+    "4.NBT.4",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "A theater sold 24,861 tickets in week one and 18,957 in week two. How many total?",
+          "workedSolution": {
+            "steps": [
+              "24,861 + 18,957.",
+              "Add each place, regrouping as needed.",
+              "Total: 43,818."
+            ],
+            "answer": "43818"
+          }
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "A stadium holds 62,000 seats. 47,318 seats were filled. How many were empty?",
+          "workedSolution": {
+            "steps": [
+              "62,000 − 47,318.",
+              "Regroup across the zeros as needed.",
+              "Difference: 14,682."
+            ],
+            "answer": "14682"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a fundraiser raised 9861 dollars on Saturday and 7563 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "2298",
+            "17424",
+            "16424",
+            "18424"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 1,
+          "prompt": "a stadium had 3129 visitors expected, but only 3000 attended. How many fewer people attended than expected?",
+          "choices": [
+            "1129",
+            "-871",
+            "129",
+            "6129"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a food drive raised 34368 dollars on Saturday and 31091 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "3277",
+            "64459",
+            "66459",
+            "65459"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a stadium had 44162 visitors expected, but only 25491 attended. How many fewer people attended than expected?",
+          "choices": [
+            "69653",
+            "19671",
+            "18671",
+            "17671"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u02-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a fundraiser raised 53237 dollars on Saturday and 96332 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "43095",
+            "150569",
+            "148569",
+            "149569"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-subtraction",
+          "standard": "4.NBT.4",
+          "difficulty": 2,
+          "prompt": "a school had 72009 visitors expected, but only 56369 attended. How many fewer people attended than expected?",
+          "choices": [
+            "14640",
+            "15640",
+            "128378",
+            "16640"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u02-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-addition",
+          "standard": "4.NBT.4",
+          "difficulty": 3,
+          "prompt": "a stadium raised 147908 dollars on Saturday and 186886 dollars on Sunday. What was the total number of dollars raised?",
+          "choices": [
+            "334794",
+            "335794",
+            "38978",
+            "333794"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u02-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u02-l08"
+  }
+}

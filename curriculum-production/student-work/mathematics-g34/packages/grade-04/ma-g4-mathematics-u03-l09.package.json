@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u03-l09",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u03-l09",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplicative Comparison, Factors, Multiples, and Patterns",
+    "dayInUnit": 9,
+    "courseDay": 45,
+    "phase": "Retrieval and fluency",
+    "focus": "facts and factor pairs",
+    "title": "Retrieval and fluency: facts and factor pairs"
+  },
+  "standards": [
+    "4.OA.4"
+  ],
+  "blueprint": {
+    "phase": "Retrieval and fluency",
+    "profile": "retrieval-and-fluency",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "How many whole-number factors does 24 have?",
+          "choices": [
+            "4",
+            "8",
+            "7",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 1,
+          "prompt": "What is the 3rd multiple of 3?",
+          "choices": [
+            "12",
+            "9",
+            "6",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 40 have?",
+          "choices": [
+            "9",
+            "7",
+            "4",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 5th multiple of 4?",
+          "choices": [
+            "9",
+            "24",
+            "16",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "How many whole-number factors does 28 have?",
+          "choices": [
+            "6",
+            "5",
+            "3",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l09#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "What is the 9th multiple of 3?",
+          "choices": [
+            "24",
+            "12",
+            "30",
+            "27"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l09#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "How many whole-number factors does 48 have?",
+          "choices": [
+            "10",
+            "9",
+            "11",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u03-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiples-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 2,
+          "prompt": "What is the 7th multiple of 5?",
+          "choices": [
+            "12",
+            "40",
+            "35",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u03-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "factors-of-a-number",
+          "standard": "4.OA.4",
+          "difficulty": 3,
+          "prompt": "How many whole-number factors does 63 have?",
+          "choices": [
+            "5",
+            "7",
+            "3",
+            "6"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u03-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u03-l09"
+  }
+}

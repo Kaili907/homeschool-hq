@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u08-l11",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u08-l11",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Data: Scaled Graphs and Measurement Line Plots",
+    "dayInUnit": 11,
+    "courseDay": 137,
+    "phase": "Concept extension",
+    "focus": "comparing categories with two-step questions",
+    "title": "Concept extension: comparing categories with two-step questions"
+  },
+  "standards": [
+    "3.OA.8",
+    "3.MD.3"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-step-word-problem-review",
+          "standard": "3.OA.8",
+          "difficulty": 1,
+          "prompt": "A class collects 4 groups of 7 cans, then 5 more cans arrive. How many cans in all?",
+          "workedSolution": {
+            "steps": [
+              "4 × 7 = 28.",
+              "28 + 5 = 33."
+            ],
+            "answer": "33"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Oranges\" is worth 3 symbols. How many does \"Oranges\" represent?",
+          "choices": [
+            "3",
+            "10",
+            "20",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 10 per symbol, \"Dogs\" has 6 symbols and \"Cats\" has 4 symbols. How many more does \"Dogs\" have than \"Cats\"?",
+          "choices": [
+            "60",
+            "20",
+            "100",
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem-review",
+          "standard": "3.OA.8",
+          "difficulty": 2,
+          "prompt": "A survey collects 6 groups of 4 responses, then 10 more responses come in. How many responses in all?",
+          "choices": [
+            "24",
+            "20",
+            "34",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 2,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 5 per symbol. The bar for \"Birds\" is worth 5 symbols. How many does \"Birds\" represent?",
+          "choices": [
+            "25",
+            "5",
+            "20",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 10 per symbol, \"Apples\" has 8 symbols and \"Bananas\" has 3 symbols. How many more does \"Apples\" have than \"Bananas\"?",
+          "choices": [
+            "110",
+            "5",
+            "50",
+            "80"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "two-step-word-problem-review",
+          "standard": "3.OA.8",
+          "difficulty": 3,
+          "prompt": "A survey collects 8 groups of 9 responses, then 15 more responses come in. How many responses in all?",
+          "choices": [
+            "32",
+            "72",
+            "87",
+            "57"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u08-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "scaled-bar-graph-reading",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "A scaled bar graph shows a survey where each bar length equals a count of 10 per symbol. The bar for \"Bananas\" is worth 2 symbols. How many does \"Bananas\" represent?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u08-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "scaled-bar-graph-comparison",
+          "standard": "3.MD.3",
+          "difficulty": 3,
+          "prompt": "On a scaled bar graph with 5 per symbol, \"Red\" has 9 symbols and \"Blue\" has 5 symbols. How many more does \"Red\" have than \"Blue\"?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u08-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u08-l11"
+  }
+}

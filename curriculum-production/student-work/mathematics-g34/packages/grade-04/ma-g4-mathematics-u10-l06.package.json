@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l06",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 6,
+    "courseDay": 168,
+    "phase": "Concept build C",
+    "focus": "angle measure as additive and unknown-angle problems",
+    "title": "Concept build C: angle measure as additive and unknown-angle problems"
+  },
+  "standards": [
+    "4.MD.7"
+  ],
+  "blueprint": {
+    "phase": "Concept build C",
+    "profile": "concept-build-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 1,
+          "prompt": "Two adjacent angles together measure 90°. One measures 35°. What does the other measure?",
+          "workedSolution": {
+            "steps": [
+              "90 − 35 = 55."
+            ],
+            "answer": "55°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles share a ray and together measure 94°. One of the angles measures 60°. What does the other angle measure?",
+          "choices": [
+            "34°",
+            "154°",
+            "60°",
+            "94°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles share a ray and together measure 157°. One of the angles measures 55°. What does the other angle measure?",
+          "choices": [
+            "212°",
+            "157°",
+            "55°",
+            "102°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 3,
+          "prompt": "Two adjacent angles share a ray and together measure 278°. One of the angles measures 257°. What does the other angle measure?",
+          "choices": [
+            "278°",
+            "535°",
+            "257°",
+            "21°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles share a ray and together measure 91°. One of the angles measures 16°. What does the other angle measure?",
+          "choices": [
+            "75°",
+            "107°",
+            "16°",
+            "91°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 3,
+          "prompt": "Two adjacent angles share a ray and together measure 308°. One of the angles measures 276°. What does the other angle measure?",
+          "choices": [
+            "276°",
+            "308°",
+            "32°",
+            "584°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 3,
+          "prompt": "Two adjacent angles share a ray and together measure 303°. One of the angles measures 99°. What does the other angle measure?",
+          "choices": [
+            "99°",
+            "303°",
+            "204°",
+            "402°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 3,
+          "prompt": "Two adjacent angles share a ray and together measure 254°. One of the angles measures 93°. What does the other angle measure?",
+          "choices": [
+            "254°",
+            "93°",
+            "161°",
+            "347°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 2,
+          "prompt": "Two adjacent angles share a ray and together measure 97°. One of the angles measures 19°. What does the other angle measure?",
+          "choices": [
+            "97°",
+            "19°",
+            "78°",
+            "116°"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "find-unknown-angle-additive",
+          "standard": "4.MD.7",
+          "difficulty": 3,
+          "prompt": "Two adjacent angles share a ray and together measure 279°. One of the angles measures 236°. What does the other angle measure?",
+          "choices": [
+            "43°",
+            "515°",
+            "279°",
+            "236°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l06"
+  }
+}

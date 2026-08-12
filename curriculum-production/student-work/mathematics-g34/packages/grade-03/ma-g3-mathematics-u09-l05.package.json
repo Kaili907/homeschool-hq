@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u09-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u09-l05",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Area and the Distributive Property",
+    "dayInUnit": 5,
+    "courseDay": 149,
+    "phase": "Independent evidence A",
+    "focus": "finding area from a tiled figure",
+    "title": "Independent evidence A: finding area from a tiled figure"
+  },
+  "standards": [
+    "3.MD.5",
+    "3.MD.6"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 1,
+          "prompt": "Which statement correctly describes the perimeter of a shape?",
+          "workedSolution": {
+            "steps": [
+              "Perimeter is the distance around the outside boundary of a shape, measured in linear units, not the space it covers."
+            ],
+            "answer": "Perimeter is the distance around the outside edge of a shape, measured in linear units."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 2 rows of 4 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "6",
+            "8",
+            "12",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 2,
+          "prompt": "Which statement correctly describes the area of a shape?",
+          "choices": [
+            "Area is always the same number as the perimeter for any rectangle.",
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is the amount of flat space a shape covers, measured in square units."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 3 rows of 3 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "9",
+            "12",
+            "6",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 6 rows of 6 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "36",
+            "12",
+            "30",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 5 rows of 9 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "45",
+            "40",
+            "28",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 9 rows of 7 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "16",
+            "32",
+            "54",
+            "63"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 9 rows of 5 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "36",
+            "45",
+            "28",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 4 rows of 4 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "8",
+            "16",
+            "17",
+            "12"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u09-l05"
+  }
+}

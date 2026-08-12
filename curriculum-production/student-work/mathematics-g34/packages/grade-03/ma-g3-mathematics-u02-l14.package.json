@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l14",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l14",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 14,
+    "courseDay": 32,
+    "phase": "Performance task: build",
+    "focus": "exhibits with matched models and equations",
+    "title": "Performance task: build: exhibits with matched models and equations"
+  },
+  "standards": [
+    "3.OA.1",
+    "3.OA.2",
+    "3.OA.3"
+  ],
+  "blueprint": {
+    "phase": "Performance task: build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l14#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 2,
+          "prompt": "A teacher has 6 pencils and gives the same number to each of 2 students. How many pencils does each student get?",
+          "choices": [
+            "3",
+            "6",
+            "4",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l14#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 2,
+          "prompt": "There are 9 bags with 4 marbles in each bag. How many marbles are there in all?",
+          "choices": [
+            "27",
+            "13",
+            "36",
+            "45"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 2,
+          "prompt": "35 stickers are shared equally among 7 bags. How many stickers go in each bag?",
+          "choices": [
+            "28",
+            "5",
+            "7",
+            "35"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 2,
+          "prompt": "A classroom has 5 rows of desks with 3 desks in each row. How many desks are there?",
+          "choices": [
+            "5",
+            "10",
+            "15",
+            "8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 7 bags with 7 seashells in each bag. How many seashells are there in all?",
+          "choices": [
+            "49",
+            "56",
+            "42",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "10 marbles are shared equally among 2 bags. How many marbles go in each bag?",
+          "choices": [
+            "10",
+            "8",
+            "2",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-or-division-word-problem",
+          "standard": "3.OA.3",
+          "difficulty": 3,
+          "prompt": "A classroom has 3 rows of desks with 8 desks in each row. How many desks are there?",
+          "choices": [
+            "21",
+            "24",
+            "3",
+            "11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and say how you would check it is right.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplication-as-equal-groups",
+          "standard": "3.OA.1",
+          "difficulty": 3,
+          "prompt": "There are 9 bags with 5 crayons in each bag. How many crayons are there in all?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "30 cookies are shared equally among 5 bags. How many cookies go in each bag?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l14"
+  }
+}

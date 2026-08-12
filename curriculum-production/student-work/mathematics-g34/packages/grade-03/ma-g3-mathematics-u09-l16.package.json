@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u09-l16",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u09-l16",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Area and the Distributive Property",
+    "dayInUnit": 16,
+    "courseDay": 160,
+    "phase": "Unit assessment",
+    "focus": "area and the distributive property",
+    "title": "Unit assessment: area and the distributive property"
+  },
+  "standards": [
+    "3.MD.5",
+    "3.MD.6",
+    "3.MD.7"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangular rug is 3 m long and 8 m wide. What is its area?",
+          "choices": [
+            "25 sq m",
+            "11 sq m",
+            "24 sq m",
+            "22 sq m"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 1,
+          "prompt": "A rectangle 4 units long is split into two parts: one 4 units wide and one 4 units wide. Use 4 × (4 + 4) to find the total area.",
+          "choices": [
+            "32",
+            "33",
+            "16",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "recognize-area-attribute",
+          "standard": "3.MD.5",
+          "difficulty": 2,
+          "prompt": "Which statement correctly describes the area of a shape?",
+          "choices": [
+            "Area can be found by counting only the unit squares along one edge of a shape.",
+            "Area is the distance around the outside edge of a shape, measured in linear units.",
+            "Area is the amount of flat space a shape covers, measured in square units.",
+            "Area is always the same number as the perimeter for any rectangle."
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 2,
+          "prompt": "A rectangle is covered by unit squares in 4 rows of 6 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "20",
+            "25",
+            "24",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangular rug is 7 ft long and 5 ft wide. What is its area?",
+          "choices": [
+            "35 sq ft",
+            "36 sq ft",
+            "24 sq ft",
+            "12 sq ft"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 2,
+          "prompt": "A rectangle 5 units long is split into two parts: one 3 units wide and one 4 units wide. Use 5 × (3 + 4) to find the total area.",
+          "choices": [
+            "35",
+            "20",
+            "15",
+            "12"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangle 7 units long is split into two parts: one 8 units wide and one 4 units wide. Use 7 × (8 + 4) to find the total area.",
+          "choices": [
+            "19",
+            "84",
+            "56",
+            "28"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "area-by-counting-unit-squares",
+          "standard": "3.MD.6",
+          "difficulty": 3,
+          "prompt": "A rectangle is covered by unit squares in 9 rows of 6 squares each, with no gaps or overlaps. How many unit squares cover the rectangle?",
+          "choices": [
+            "45",
+            "54",
+            "15",
+            "30"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "area-formula-multiplication",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangular rug is 9 in long and 7 in wide. What is its area?",
+          "choices": [
+            "63 sq in",
+            "16 sq in",
+            "64 sq in",
+            "32 sq in"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u09-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "area-distributive-property",
+          "standard": "3.MD.7",
+          "difficulty": 3,
+          "prompt": "A rectangle 6 units long is split into two parts: one 6 units wide and one 7 units wide. Use 6 × (6 + 7) to find the total area.",
+          "choices": [
+            "78",
+            "36",
+            "19",
+            "42"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u09-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u09-l16"
+  }
+}

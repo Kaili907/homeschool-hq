@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l11",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 11,
+    "courseDay": 65,
+    "phase": "Concept extension",
+    "focus": "multiplicative comparison with larger numbers",
+    "title": "Concept extension: multiplicative comparison with larger numbers"
+  },
+  "standards": [
+    "4.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 1,
+          "prompt": "Sam read 4 books. Priya read 5 times as many as Sam. How many did Priya read?",
+          "workedSolution": {
+            "steps": [
+              "5 × 4 = 20."
+            ],
+            "answer": "20"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Carlos read 11 books this year. Emma read 3 times as many books as Carlos. How many books did Emma read?",
+          "choices": [
+            "14",
+            "44",
+            "22",
+            "33"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Carlos read 10 books this year. Emma read 4 times as many books as Carlos. How many books did Emma read?",
+          "choices": [
+            "30",
+            "40",
+            "50",
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Ben read 8 books this year. Priya read 2 times as many books as Ben. How many books did Priya read?",
+          "choices": [
+            "8",
+            "10",
+            "24",
+            "16"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 2,
+          "prompt": "Ben read 7 books this year. Priya read 2 times as many books as Ben. How many books did Priya read?",
+          "choices": [
+            "7",
+            "21",
+            "9",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Ben read 11 books this year. Priya read 3 times as many books as Ben. How many books did Priya read?",
+          "choices": [
+            "22",
+            "33",
+            "44",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Ben read 12 books this year. Priya read 6 times as many books as Ben. How many books did Priya read?",
+          "choices": [
+            "72",
+            "60",
+            "84",
+            "18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Ben read 9 books this year. Priya read 3 times as many books as Ben. How many books did Priya read?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiplicative-comparison-word-problem-review",
+          "standard": "4.OA.2",
+          "difficulty": 3,
+          "prompt": "Ben read 2 books this year. Priya read 4 times as many books as Ben. How many books did Priya read?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l11"
+  }
+}

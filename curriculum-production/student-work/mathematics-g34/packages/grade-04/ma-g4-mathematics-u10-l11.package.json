@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u10-l11",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u10-l11",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Angles, Geometry, and Integrated Capstone",
+    "dayInUnit": 11,
+    "courseDay": 173,
+    "phase": "Concept extension",
+    "focus": "points, lines, rays, classifying two-dimensional figures, and lines of symmetry",
+    "title": "Concept extension: points, lines, rays, classifying two-dimensional figures, and lines of symmetry"
+  },
+  "standards": [
+    "4.G.1",
+    "4.G.2",
+    "4.G.3"
+  ],
+  "blueprint": {
+    "phase": "Concept extension",
+    "profile": "concept-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example applies the idea in a new setting. Notice what stayed the same.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 1,
+          "prompt": "How many lines of symmetry does a square have?",
+          "workedSolution": {
+            "steps": [
+              "A square matches itself when folded along 2 diagonals and 2 midlines.",
+              "That is 4 lines of symmetry."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what is different about this case before you start.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-lines-and-angles",
+          "standard": "4.G.1",
+          "difficulty": 2,
+          "prompt": "Which term describes a part of a line that has one endpoint and extends forever in one direction?",
+          "choices": [
+            "perpendicular lines",
+            "a ray",
+            "parallel lines",
+            "a line segment"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where all three sides are the same length is called what kind of triangle?",
+          "choices": [
+            "equilateral triangle",
+            "right triangle",
+            "acute triangle",
+            "obtuse triangle"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l11#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 2,
+          "prompt": "How many lines of symmetry does a equilateral triangle have?",
+          "choices": [
+            "2",
+            "4",
+            "3",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l11#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-lines-and-angles",
+          "standard": "4.G.1",
+          "difficulty": 2,
+          "prompt": "Which term describes two lines in the same plane that never meet and stay the same distance apart?",
+          "choices": [
+            "a line segment",
+            "a ray",
+            "parallel lines",
+            "perpendicular lines"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l11#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where one angle measures more than 90° is called what kind of triangle?",
+          "choices": [
+            "right triangle",
+            "acute triangle",
+            "equilateral triangle",
+            "obtuse triangle"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l11#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-line-of-symmetry",
+          "standard": "4.G.3",
+          "difficulty": 3,
+          "prompt": "How many lines of symmetry does a regular pentagon have?",
+          "choices": [
+            "4",
+            "10",
+            "5",
+            "6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain, in writing, what made this case different from the original one.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u10-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "classify-lines-and-angles",
+          "standard": "4.G.1",
+          "difficulty": 3,
+          "prompt": "Which term describes two lines that cross to form a right angle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u10-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "classify-triangles",
+          "standard": "4.G.2",
+          "difficulty": 3,
+          "prompt": "A triangle where all three angles measure less than 90° is called what kind of triangle?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u10-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u10-l11"
+  }
+}

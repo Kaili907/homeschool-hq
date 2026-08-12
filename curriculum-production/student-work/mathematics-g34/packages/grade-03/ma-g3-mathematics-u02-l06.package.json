@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u02-l06",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Meanings of Multiplication and Division",
+    "dayInUnit": 6,
+    "courseDay": 24,
+    "phase": "Concept build C",
+    "focus": "division as sharing a total into equal groups",
+    "title": "Concept build C: division as sharing a total into equal groups"
+  },
+  "standards": [
+    "3.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Concept build C",
+    "profile": "concept-build-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 1,
+          "prompt": "18 marbles are shared equally among 3 bags. How many marbles in each bag?",
+          "workedSolution": {
+            "steps": [
+              "18 ÷ 3 asks how many are in each of 3 equal groups.",
+              "3 × 6 = 18, so 18 ÷ 3 = 6."
+            ],
+            "answer": "6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 2,
+          "prompt": "14 seashells are shared equally among 7 bags. How many seashells go in each bag?",
+          "choices": [
+            "2",
+            "14",
+            "7",
+            "9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 2,
+          "prompt": "40 cookies are shared equally among 8 bags. How many cookies go in each bag?",
+          "choices": [
+            "40",
+            "32",
+            "8",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "6 seashells are shared equally among 2 bags. How many seashells go in each bag?",
+          "choices": [
+            "4",
+            "3",
+            "2",
+            "6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 2,
+          "prompt": "20 seashells are shared equally among 5 bags. How many seashells go in each bag?",
+          "choices": [
+            "5",
+            "4",
+            "15",
+            "20"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "21 marbles are shared equally among 7 bags. How many marbles go in each bag?",
+          "choices": [
+            "3",
+            "7",
+            "14",
+            "21"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "30 marbles are shared equally among 6 bags. How many marbles go in each bag?",
+          "choices": [
+            "30",
+            "6",
+            "5",
+            "24"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "9 cookies are shared equally among 3 bags. How many cookies go in each bag?",
+          "choices": [
+            "6",
+            "3",
+            "9",
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u02-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 2,
+          "prompt": "25 seashells are shared equally among 5 bags. How many seashells go in each bag?",
+          "choices": [
+            "20",
+            "10",
+            "5",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u02-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-as-equal-groups",
+          "standard": "3.OA.2",
+          "difficulty": 3,
+          "prompt": "12 cookies are shared equally among 2 bags. How many cookies go in each bag?",
+          "choices": [
+            "6",
+            "10",
+            "12",
+            "2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u02-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u02-l06"
+  }
+}

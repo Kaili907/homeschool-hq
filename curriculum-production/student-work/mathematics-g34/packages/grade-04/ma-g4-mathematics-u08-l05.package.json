@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u08-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u08-l05",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "dayInUnit": 5,
+    "courseDay": 131,
+    "phase": "Independent evidence A",
+    "focus": "locating decimals on a number line",
+    "title": "Independent evidence A: locating decimals on a number line"
+  },
+  "standards": [
+    "4.NF.6"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence A",
+    "profile": "independent-evidence",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 1,
+          "prompt": "Write 7/100 using decimal notation.",
+          "workedSolution": {
+            "steps": [
+              "A denominator of 100 means two decimal places.",
+              "7/100 = 0.07."
+            ],
+            "answer": "0.07"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 46/100 using decimal notation.",
+          "choices": [
+            "0.47",
+            "0.49",
+            "0.46",
+            "0.45"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 37/100 using decimal notation.",
+          "choices": [
+            "0.37",
+            "0.36",
+            "0.38",
+            "0.40"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 90/100 using decimal notation.",
+          "choices": [
+            "0.90",
+            "0.89",
+            "0.93",
+            "0.91"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 22/100 using decimal notation.",
+          "choices": [
+            "0.22",
+            "0.21",
+            "0.25",
+            "0.23"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l05#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 69/100 using decimal notation.",
+          "choices": [
+            "0.68",
+            "0.70",
+            "0.72",
+            "0.69"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l05#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 95/100 using decimal notation.",
+          "choices": [
+            "0.98",
+            "0.95",
+            "0.96",
+            "0.94"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u08-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 2,
+          "prompt": "Write 44/100 using decimal notation.",
+          "choices": [
+            "0.47",
+            "0.44",
+            "0.45",
+            "0.43"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u08-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-notation-for-fraction",
+          "standard": "4.NF.6",
+          "difficulty": 3,
+          "prompt": "Write 70/100 using decimal notation.",
+          "choices": [
+            "0.69",
+            "0.73",
+            "0.70",
+            "0.71"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u08-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u08-l05"
+  }
+}

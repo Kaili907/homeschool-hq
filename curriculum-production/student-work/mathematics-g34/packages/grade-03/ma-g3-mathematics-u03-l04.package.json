@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l04",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 4,
+    "courseDay": 40,
+    "phase": "Guided practice A",
+    "focus": "using the commutative property to halve the fact load",
+    "title": "Guided practice A: using the commutative property to halve the fact load"
+  },
+  "standards": [
+    "3.OA.5"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l04#ex-01",
+          "kind": "worked-example",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression is equal to 3 × 7 by the commutative property?",
+          "workedSolution": {
+            "steps": [
+              "Changing the order of the factors keeps the same product.",
+              "3 × 7 = 7 × 3."
+            ],
+            "answer": "7 × 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching adult. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l04#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression is equal to 9 × 2 by the commutative property?",
+          "choices": [
+            "2 × 9",
+            "9 + 2",
+            "9 × 3",
+            "10 × 2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l04#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression shows 6 × (8 + 3) rewritten using the distributive property?",
+          "choices": [
+            "(6 × 8) + (6 × 3)",
+            "(6 + 8) × (6 + 3)",
+            "6 + 8 + 3",
+            "6 × 8 × 3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l04#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression is equal to 4 × 2 by the commutative property?",
+          "choices": [
+            "4 + 2",
+            "4 × 3",
+            "2 × 4",
+            "5 × 2"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l04#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 3 × (7 × 6) rewritten using the associative property?",
+          "choices": [
+            "3 × 7 + 6",
+            "3 × 6 × 7 × 7",
+            "(3 × 7) × 6",
+            "(3 + 7) × 6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l04#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 7 × (2 + 2) rewritten using the distributive property?",
+          "choices": [
+            "7 + 2 + 2",
+            "(7 + 2) × (7 + 2)",
+            "(7 × 2) + (7 × 2)",
+            "7 × 2 × 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l04#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 8 × (9 + 3) rewritten using the distributive property?",
+          "choices": [
+            "(8 + 9) × (8 + 3)",
+            "8 × 9 × 3",
+            "(8 × 9) + (8 × 3)",
+            "8 + 9 + 3"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l04#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 9 × (6 × 6) rewritten using the associative property?",
+          "choices": [
+            "9 × 6 × 6 × 6",
+            "9 × 6 + 6",
+            "(9 + 6) × 6",
+            "(9 × 6) × 6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l04#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 1,
+          "prompt": "Which expression is equal to 9 × 8 by the commutative property?",
+          "choices": [
+            "9 × 9",
+            "10 × 8",
+            "9 + 8",
+            "8 × 9"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l04#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "property-of-operations",
+          "standard": "3.OA.5",
+          "difficulty": 2,
+          "prompt": "Which expression shows 2 × (5 + 5) rewritten using the distributive property?",
+          "choices": [
+            "2 × 5 × 5",
+            "(2 × 5) + (2 × 5)",
+            "(2 + 5) × (2 + 5)",
+            "2 + 5 + 5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l04.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l04"
+  }
+}

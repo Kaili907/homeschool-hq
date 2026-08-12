@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u06-l10",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u06-l10",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Equivalent Fractions and Comparison",
+    "dayInUnit": 10,
+    "courseDay": 100,
+    "phase": "Independent evidence B",
+    "focus": "comparing fractions with the same numerator",
+    "title": "Independent evidence B: comparing fractions with the same numerator"
+  },
+  "standards": [
+    "3.NF.3"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "equivalent-fractions",
+          "standard": "3.NF.3",
+          "difficulty": 1,
+          "prompt": "Which fraction is equivalent to 1/3?",
+          "workedSolution": {
+            "steps": [
+              "Multiply numerator and denominator by 2.",
+              "1 × 2 = 2, 3 × 2 = 6.",
+              "1/3 = 2/6."
+            ],
+            "answer": "2/6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-same-whole",
+          "standard": "3.NF.3",
+          "difficulty": 2,
+          "prompt": "Which fraction is greater: 1/4 or 1/2?",
+          "choices": [
+            "1/2",
+            "1/4",
+            "They are equal.",
+            "1/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions",
+          "standard": "3.NF.3",
+          "difficulty": 2,
+          "prompt": "Which fraction is equivalent to 2/6?",
+          "choices": [
+            "2/18",
+            "6/6",
+            "6/18",
+            "7/18"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-same-whole",
+          "standard": "3.NF.3",
+          "difficulty": 3,
+          "prompt": "Which fraction is greater: 4/6 or 2/6?",
+          "choices": [
+            "4/6",
+            "They are equal.",
+            "2/6",
+            "6/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions",
+          "standard": "3.NF.3",
+          "difficulty": 3,
+          "prompt": "Which fraction is equivalent to 3/6?",
+          "choices": [
+            "6/6",
+            "7/12",
+            "6/12",
+            "3/12"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-same-whole",
+          "standard": "3.NF.3",
+          "difficulty": 3,
+          "prompt": "Which fraction is greater: 5/6 or 2/6?",
+          "choices": [
+            "2/6",
+            "They are equal.",
+            "5/6",
+            "6/6"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions",
+          "standard": "3.NF.3",
+          "difficulty": 3,
+          "prompt": "Which fraction is equivalent to 3/8?",
+          "choices": [
+            "9/24",
+            "3/24",
+            "10/24",
+            "9/8"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u06-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-same-whole",
+          "standard": "3.NF.3",
+          "difficulty": 3,
+          "prompt": "Which fraction is greater: 1/8 or 7/8?",
+          "choices": [
+            "1/8",
+            "8/8",
+            "They are equal.",
+            "7/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u06-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "equivalent-fractions",
+          "standard": "3.NF.3",
+          "difficulty": 3,
+          "prompt": "Which fraction is equivalent to 3/4?",
+          "choices": [
+            "10/12",
+            "9/12",
+            "3/12",
+            "9/4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u06-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-fractions-same-whole",
+          "standard": "3.NF.3",
+          "difficulty": 3,
+          "prompt": "Which fraction is greater: 1/2 or 1/3?",
+          "choices": [
+            "They are equal.",
+            "1/2",
+            "1/3",
+            "1/5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u06-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u06-l10"
+  }
+}

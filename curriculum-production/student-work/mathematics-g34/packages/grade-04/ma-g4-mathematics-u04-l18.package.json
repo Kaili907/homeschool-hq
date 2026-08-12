@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u04-l18",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u04-l18",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Multi-Digit Multiplication with Area Models and Partial Products",
+    "dayInUnit": 18,
+    "courseDay": 72,
+    "phase": "Transfer, reflection, and publication",
+    "focus": "scaling a plan up with multiplication",
+    "title": "Transfer, reflection, and publication: scaling a plan up with multiplication"
+  },
+  "standards": [
+    "4.NBT.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Transfer, reflection, and publication",
+    "profile": "transfer-reflection-publication",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different setting than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 1,
+          "prompt": "Use an area model to find 6 × 47. Split 47 into 40 and 7.",
+          "workedSolution": {
+            "steps": [
+              "6 × 40 = 240.",
+              "6 × 7 = 42.",
+              "240 + 42 = 282."
+            ],
+            "answer": "282"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 2,
+          "prompt": "Find 5 × 588 using partial products.",
+          "choices": [
+            "2900",
+            "2935",
+            "2500",
+            "2940"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 2 × 13. Split 13 into 10 and 3.",
+          "choices": [
+            "23",
+            "20",
+            "26",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 8 × 377 using partial products.",
+          "choices": [
+            "2400",
+            "2960",
+            "3016",
+            "3008"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 5 × 42. Split 42 into 40 and 2.",
+          "choices": [
+            "200",
+            "10",
+            "202",
+            "210"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u04-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-multiplication-partial-products",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Find 3 × 479 using partial products.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u04-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multi-digit-multiplication-area-model",
+          "standard": "4.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use an area model to find 3 × 51. Split 51 into 50 and 1.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u04-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u04-l18"
+  }
+}

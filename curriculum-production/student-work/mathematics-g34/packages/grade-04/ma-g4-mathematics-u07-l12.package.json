@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u07-l12",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u07-l12",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Adding, Subtracting, and Multiplying Fractions",
+    "dayInUnit": 12,
+    "courseDay": 120,
+    "phase": "Applied problem solving",
+    "focus": "connecting repeated addition to n times a over b",
+    "title": "Applied problem solving: connecting repeated addition to n times a over b"
+  },
+  "standards": [
+    "4.NF.4",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Applied problem solving",
+    "profile": "applied-problem-solving",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the problem below asks for.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l12#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 1,
+          "prompt": "Find 3 × 2/5.",
+          "workedSolution": {
+            "steps": [
+              "3 groups of 2/5.",
+              "2 × 3 = 6.",
+              "The product is 6/5."
+            ],
+            "answer": "6/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what the problem is asking before you compute.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 5 × 1/6.",
+          "choices": [
+            "6/6",
+            "1/30",
+            "5/6",
+            "5/30"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 4 × 1/4.",
+          "choices": [
+            "4/16",
+            "4/4",
+            "5/4",
+            "1/16"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 2,
+          "prompt": "Find 4 × 2/6.",
+          "choices": [
+            "2/24",
+            "8/24",
+            "4/6",
+            "8/6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 7 × 5/6.",
+          "choices": [
+            "5/42",
+            "35/42",
+            "7/6",
+            "35/6"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 4 × 4/6.",
+          "choices": [
+            "4/6",
+            "16/6",
+            "4/24",
+            "16/24"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u07-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 4 × 7/8.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g4-mathematics-u07-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiply-fraction-by-whole-number",
+          "standard": "4.NF.4",
+          "difficulty": 3,
+          "prompt": "Find 6 × 1/8.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u07-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u07-l12"
+  }
+}

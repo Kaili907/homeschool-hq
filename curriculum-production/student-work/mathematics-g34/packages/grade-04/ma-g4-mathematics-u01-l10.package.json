@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g4-mathematics-u01-l10",
+  "lessonRef": {
+    "lessonId": "ma-g4-mathematics-u01-l10",
+    "courseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Place Value to One Million",
+    "dayInUnit": 10,
+    "courseDay": 10,
+    "phase": "Independent evidence B",
+    "focus": "comparing and ordering multi-digit numbers in context",
+    "title": "Independent evidence B: comparing and ordering multi-digit numbers in context"
+  },
+  "standards": [
+    "4.NBT.2"
+  ],
+  "blueprint": {
+    "phase": "Independent evidence B",
+    "profile": "independent-evidence-varied",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One reference example. Use it only if you get stuck.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 1,
+          "prompt": "Compare using <, >, or =: 48,213 ___ 48,129",
+          "workedSolution": {
+            "steps": [
+              "Both have 4 in the ten thousands place.",
+              "Compare the thousands: 8 vs 8, tie.",
+              "Compare the hundreds: 2 vs 1.",
+              "48,213 > 48,129."
+            ],
+            "answer": ">"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 79952 ___ 20007",
+          "choices": [
+            "Cannot be compared without more information",
+            "=",
+            ">",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 2,
+          "prompt": "Compare using <, >, or =: 41239 ___ 68605",
+          "choices": [
+            "Cannot be compared without more information",
+            ">",
+            "<",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 851369 ___ 582578",
+          "choices": [
+            "Cannot be compared without more information",
+            ">",
+            "=",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 270061 ___ 398445",
+          "choices": [
+            ">",
+            "<",
+            "Cannot be compared without more information",
+            "="
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 537779 ___ 466338",
+          "choices": [
+            ">",
+            "<",
+            "=",
+            "Cannot be compared without more information"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 876560 ___ 708527",
+          "choices": [
+            "Cannot be compared without more information",
+            "=",
+            "<",
+            ">"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l10#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 114833 ___ 855813",
+          "choices": [
+            "Cannot be compared without more information",
+            ">",
+            "<",
+            "="
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g4-mathematics-u01-l10#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 192092 ___ 232403",
+          "choices": [
+            "Cannot be compared without more information",
+            "=",
+            ">",
+            "<"
+          ]
+        },
+        {
+          "ref": "ma-g4-mathematics-u01-l10#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-multi-digit-numbers",
+          "standard": "4.NBT.2",
+          "difficulty": 3,
+          "prompt": "Compare using <, >, or =: 170633 ___ 932168",
+          "choices": [
+            "=",
+            "<",
+            ">",
+            "Cannot be compared without more information"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-04/ma-g4-mathematics-u01-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g4-mathematics-u01-l10"
+  }
+}

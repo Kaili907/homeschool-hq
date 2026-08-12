@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u03-l17",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u03-l17",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multiplication and Division Fluency Within 100",
+    "dayInUnit": 17,
+    "courseDay": 53,
+    "phase": "Targeted correction and reassessment",
+    "focus": "unsecured facts",
+    "title": "Targeted correction and reassessment: unsecured facts"
+  },
+  "standards": [
+    "3.OA.6",
+    "3.OA.7"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction and reassessment",
+    "profile": "targeted-correction-and-reassessment",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 1,
+          "prompt": "A teacher has 42 pencils to put into cups of 6 pencils each. How many cups are needed?",
+          "workedSolution": {
+            "steps": [
+              "6 × 7 = 42.",
+              "So 42 ÷ 6 = 7 cups."
+            ],
+            "answer": "7"
+          }
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 7 × 8.",
+          "workedSolution": {
+            "steps": [
+              "7 groups of 8: 8, 16, 24, 32, 40, 48, 56.",
+              "7 × 8 = 56."
+            ],
+            "answer": "56"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 1,
+          "prompt": "Find 42 ÷ 6.",
+          "choices": [
+            "8",
+            "36",
+            "6",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "A teacher has 36 crayons to put into cups of 6 crayons each. How many cups are needed?",
+          "choices": [
+            "7",
+            "30",
+            "6",
+            "36"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 9 × 4.",
+          "choices": [
+            "45",
+            "27",
+            "36",
+            "13"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Reassessment. Work alone; this checks whether the repair held.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u03-l17#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "fluency-division-fact",
+          "standard": "3.OA.7",
+          "difficulty": 2,
+          "prompt": "Find 24 ÷ 8.",
+          "choices": [
+            "3",
+            "16",
+            "8",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l17#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "division-unknown-factor-strategy",
+          "standard": "3.OA.6",
+          "difficulty": 2,
+          "prompt": "A teacher has 28 crayons to put into cups of 4 crayons each. How many cups are needed?",
+          "choices": [
+            "24",
+            "7",
+            "28",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u03-l17#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "fluency-multiplication-fact",
+          "standard": "3.OA.7",
+          "difficulty": 3,
+          "prompt": "Find 7 × 4.",
+          "choices": [
+            "21",
+            "28",
+            "11",
+            "35"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u03-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u03-l17"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g3-mathematics-u10-l08",
+  "lessonRef": {
+    "lessonId": "ma-g3-mathematics-u10-l08",
+    "courseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "dayInUnit": 8,
+    "courseDay": 170,
+    "phase": "Error analysis and repair",
+    "focus": "classification-by-appearance errors",
+    "title": "Error analysis and repair: classification-by-appearance errors"
+  },
+  "standards": [
+    "3.G.1",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Error analysis and repair",
+    "profile": "error-analysis-and-repair",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example shows a common mistake, then the correction. Read both parts.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 1,
+          "prompt": "Which quadrilateral has four equal sides and four right angles?",
+          "workedSolution": {
+            "steps": [
+              "Four equal sides and four right angles describes a square."
+            ],
+            "answer": "square"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say out loud which mistake the problem could trigger.",
+      "items": [
+        {
+          "ref": "ma-g3-mathematics-u10-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 1,
+          "prompt": "Which quadrilateral is defined by having exactly one pair of parallel sides?",
+          "choices": [
+            "rhombus",
+            "rectangle",
+            "trapezoid",
+            "square"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 1,
+          "prompt": "Which quadrilateral is defined by having four equal sides, but not necessarily right angles?",
+          "choices": [
+            "square",
+            "trapezoid",
+            "rhombus",
+            "rectangle"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four right angles, with opposite sides equal?",
+          "choices": [
+            "trapezoid",
+            "square",
+            "rectangle",
+            "rhombus"
+          ]
+        },
+        {
+          "ref": "ma-g3-mathematics-u10-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-quadrilaterals",
+          "standard": "3.G.1",
+          "difficulty": 2,
+          "prompt": "Which quadrilateral is defined by having four equal sides and four right angles?",
+          "choices": [
+            "square",
+            "trapezoid",
+            "rectangle",
+            "rhombus"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": []
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-03/ma-g3-mathematics-u10-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "g34-student-work-generators@curriculum-production/student-work/mathematics-g34/src/g34",
+    "seed": "1.0.0|ma-g3-mathematics-u10-l08"
+  }
+}
