@@ -2,7 +2,7 @@
 
 **Package:** `manuel-academy-highschool-9-12-ela`  
 **Validated:** 2026-08-12  
-**Result:** **PASS** — 213/213 checks passed, 0 failed
+**Result:** **PASS** — 303/303 checks passed, 0 failed
 
 | Total | Count |
 | --- | --- |
@@ -177,22 +177,22 @@ Run with `node validation/validate.mjs` (add `--json` for the machine-readable f
 | `assessment-rubric:english-9` | PASS | all |
 | `assessment-reassessment:english-9` | PASS | all |
 | `assessment-authorship-rule:english-9` | PASS | all |
-| `assessment-weight-non-decreasing:english-9` | PASS | 0 -> 38 |
+| `assessment-weight-non-decreasing:english-9` | PASS | 0 -> 43 |
 | `assessment-points-sum:english-10` | PASS | all |
 | `assessment-rubric:english-10` | PASS | all |
 | `assessment-reassessment:english-10` | PASS | all |
 | `assessment-authorship-rule:english-10` | PASS | all |
-| `assessment-weight-non-decreasing:english-10` | PASS | 38 -> 38 |
+| `assessment-weight-non-decreasing:english-10` | PASS | 43 -> 48 |
 | `assessment-points-sum:english-11` | PASS | all |
 | `assessment-rubric:english-11` | PASS | all |
 | `assessment-reassessment:english-11` | PASS | all |
 | `assessment-authorship-rule:english-11` | PASS | all |
-| `assessment-weight-non-decreasing:english-11` | PASS | 38 -> 44 |
+| `assessment-weight-non-decreasing:english-11` | PASS | 48 -> 54 |
 | `assessment-points-sum:english-12` | PASS | all |
 | `assessment-rubric:english-12` | PASS | all |
 | `assessment-reassessment:english-12` | PASS | all |
 | `assessment-authorship-rule:english-12` | PASS | all |
-| `assessment-weight-non-decreasing:english-12` | PASS | 44 -> 52 |
+| `assessment-weight-non-decreasing:english-12` | PASS | 54 -> 62 |
 | `rigor-distinct:model` | PASS | 4/4 distinct across the four courses |
 | `rigor-distinct:guided` | PASS | 4/4 distinct across the four courses |
 | `rigor-distinct:independent` | PASS | 4/4 distinct across the four courses |
@@ -230,4 +230,94 @@ Run with `node validation/validate.mjs` (add `--json` for the machine-readable f
 | `rights-required-no-text:english-12` | PASS | no passage stored for gated works |
 | `text-citation-metadata:english-12` | PASS | all entries carry source + author |
 | `original-texts-present:english-12` | PASS | 4 original |
+| `phase-arc-implemented:english-9` | PASS | 13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative) |
+| `phase-shape-stable:english-9` | PASS | each phase yields one consistent shape |
+| `assessment-days-present:english-9` | PASS | 10 |
+| `assessment-day-no-instruction:english-9` | PASS | 0 assessment days still run modelling or guided practice |
+| `seminar-day-is-seminar:english-9` | PASS | 10 days |
+| `seminar-private-option:english-9` | PASS | all |
+| `correction-day-has-reassessment:english-9` | PASS | 10 days |
+| `formative-check-varies:english-9` | PASS | 89 distinct formative checks |
+| `phase-arc-implemented:english-10` | PASS | 13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative) |
+| `phase-shape-stable:english-10` | PASS | each phase yields one consistent shape |
+| `assessment-days-present:english-10` | PASS | 10 |
+| `assessment-day-no-instruction:english-10` | PASS | 0 assessment days still run modelling or guided practice |
+| `seminar-day-is-seminar:english-10` | PASS | 10 days |
+| `seminar-private-option:english-10` | PASS | all |
+| `correction-day-has-reassessment:english-10` | PASS | 10 days |
+| `formative-check-varies:english-10` | PASS | 89 distinct formative checks |
+| `phase-arc-implemented:english-11` | PASS | 13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative) |
+| `phase-shape-stable:english-11` | PASS | each phase yields one consistent shape |
+| `assessment-days-present:english-11` | PASS | 10 |
+| `assessment-day-no-instruction:english-11` | PASS | 0 assessment days still run modelling or guided practice |
+| `seminar-day-is-seminar:english-11` | PASS | 10 days |
+| `seminar-private-option:english-11` | PASS | all |
+| `correction-day-has-reassessment:english-11` | PASS | 10 days |
+| `formative-check-varies:english-11` | PASS | 89 distinct formative checks |
+| `phase-arc-implemented:english-12` | PASS | 13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative) |
+| `phase-shape-stable:english-12` | PASS | each phase yields one consistent shape |
+| `assessment-days-present:english-12` | PASS | 10 |
+| `assessment-day-no-instruction:english-12` | PASS | 0 assessment days still run modelling or guided practice |
+| `seminar-day-is-seminar:english-12` | PASS | 10 days |
+| `seminar-private-option:english-12` | PASS | all |
+| `correction-day-has-reassessment:english-12` | PASS | 10 days |
+| `formative-check-varies:english-12` | PASS | 88 distinct formative checks |
+| `success-criteria-distinct-per-course` | PASS | 4/4 distinct |
+| `learning-objectives-distinct-per-course` | PASS | 4/4 distinct |
+| `g12-criteria-are-senior-level` | PASS | English 12 is judged on method choice and bounded claims |
+| `g9-criteria-are-scaffolded` | PASS | English 9 is judged against a supplied checklist |
+| `assessment-above-grade-8` | PASS | 43 < 48 < 54 < 62 vs grade 8 = 38 |
+| `assessment-strictly-increasing` | PASS | 43 -> 48 -> 54 -> 62 |
+| `assessment-weight-consistent-in-course` | PASS | all 10 units per course carry the same weight |
+| `primary-standard-resolves:english-9` | PASS | all |
+| `primary-standard-in-unit:english-9` | PASS | all |
+| `every-unit-standard-is-primary-somewhere:english-9` | PASS | 0 unit standards never primary |
+| `primary-standards-varied:english-9` | PASS | 40 distinct primaries |
+| `primary-standard-resolves:english-10` | PASS | all |
+| `primary-standard-in-unit:english-10` | PASS | all |
+| `every-unit-standard-is-primary-somewhere:english-10` | PASS | 0 unit standards never primary |
+| `primary-standards-varied:english-10` | PASS | 38 distinct primaries |
+| `primary-standard-resolves:english-11` | PASS | all |
+| `primary-standard-in-unit:english-11` | PASS | all |
+| `every-unit-standard-is-primary-somewhere:english-11` | PASS | 0 unit standards never primary |
+| `primary-standards-varied:english-11` | PASS | 41 distinct primaries |
+| `primary-standard-resolves:english-12` | PASS | all |
+| `primary-standard-in-unit:english-12` | PASS | all |
+| `every-unit-standard-is-primary-somewhere:english-12` | PASS | 0 unit standards never primary |
+| `primary-standards-varied:english-12` | PASS | 39 distinct primaries |
+| `units-assign-texts:english-9` | PASS | every unit assigns >= 2 texts |
+| `assigned-texts-resolve:english-9` | PASS | 0 unresolved |
+| `gated-text-never-assigned:english-9` | PASS | 0 gated works assigned |
+| `every-text-is-taught:english-9` | PASS | 11/11 assignable texts assigned |
+| `lessons-name-their-texts:english-9` | PASS | all 180 |
+| `lesson-texts-carry-citation:english-9` | PASS | all |
+| `lesson-texts-accessible:english-9` | PASS | all |
+| `units-assign-texts:english-10` | PASS | every unit assigns >= 2 texts |
+| `assigned-texts-resolve:english-10` | PASS | 0 unresolved |
+| `gated-text-never-assigned:english-10` | PASS | 0 gated works assigned |
+| `every-text-is-taught:english-10` | PASS | 11/11 assignable texts assigned |
+| `lessons-name-their-texts:english-10` | PASS | all 180 |
+| `lesson-texts-carry-citation:english-10` | PASS | all |
+| `lesson-texts-accessible:english-10` | PASS | all |
+| `units-assign-texts:english-11` | PASS | every unit assigns >= 2 texts |
+| `assigned-texts-resolve:english-11` | PASS | 0 unresolved |
+| `gated-text-never-assigned:english-11` | PASS | 0 gated works assigned |
+| `every-text-is-taught:english-11` | PASS | 13/13 assignable texts assigned |
+| `lessons-name-their-texts:english-11` | PASS | all 180 |
+| `lesson-texts-carry-citation:english-11` | PASS | all |
+| `lesson-texts-accessible:english-11` | PASS | all |
+| `units-assign-texts:english-12` | PASS | every unit assigns >= 2 texts |
+| `assigned-texts-resolve:english-12` | PASS | 0 unresolved |
+| `gated-text-never-assigned:english-12` | PASS | 0 gated works assigned |
+| `every-text-is-taught:english-12` | PASS | 12/12 assignable texts assigned |
+| `lessons-name-their-texts:english-12` | PASS | all 180 |
+| `lesson-texts-carry-citation:english-12` | PASS | all |
+| `lesson-texts-accessible:english-12` | PASS | all |
+| `text-anchor:english-10-u3-9-10.RI.9` | PASS | 9-10.RI.9 instantiated by ma-hs-ela-t-1005 + ma-hs-ela-t-1007 |
+| `text-anchor:english-9-u9-9-10.RL.6` | PASS | 9-10.RL.6 instantiated by ma-hs-ela-t-909 |
+| `text-anchor:english-10-u7-9-10.RL.7` | PASS | 9-10.RL.7 instantiated by ma-hs-ela-t-1010 + ma-hs-ela-t-1012 |
+| `text-anchor:english-11-u2-11-12.RI.9` | PASS | 11-12.RI.9 instantiated by ma-hs-ela-t-1113 + ma-hs-ela-t-1106 |
+| `text-anchor:english-11-u9-11-12.RL.7` | PASS | 11-12.RL.7 instantiated by ma-hs-ela-t-1110 + ma-hs-ela-t-1112 |
+| `text-anchor:english-12-u7-11-12.RL.7` | PASS | 11-12.RL.7 instantiated by ma-hs-ela-t-1208 + ma-hs-ela-t-1209 |
+| `text-anchor:english-11-u5-11-12.RL.9` | PASS | 11-12.RL.9 instantiated by ma-hs-ela-t-1107 + ma-hs-ela-t-1108 |
 | `lane-self-contained` | PASS | all authored artifacts live under the ELA lane |

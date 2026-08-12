@@ -87,7 +87,11 @@ BANKS = {
      "Pairs with Seneca Falls and Douglass for related-themes analysis (9-10.RI.9)."),
   pd("ma-hs-ela-t-1008", "The Yellow Wallpaper", "Charlotte Perkins Gilman", 1892, "short story", GUT,
      "Unreliable narration; structure and sanity are the same analytic object."),
-  pd("ma-hs-ela-t-1010", "Landscape with the Fall of Icarus (painting)", "Pieter Bruegel the Elder", 1560, "visual art", "Royal Museums of Fine Arts of Belgium; work in the public domain",
+  # ma-hs-ela-t-1009 was withdrawn during authoring: it duplicated the gated Auden
+  # entry (ma-hs-ela-t-1013) as a pseudo-catalogue row. IDs are stable and are not
+  # renumbered after withdrawal, so 1009 is intentionally absent.
+  pd("ma-hs-ela-t-1010", "Landscape with the Fall of Icarus (painting)", "after Pieter Bruegel the Elder", 1560, "visual art",
+     "Royal Museums of Fine Arts of Belgium, Brussels; public domain. NOTE: scholarly consensus now treats the Brussels panel as a later copy rather than an autograph Bruegel. Public domain either way; the attribution question is worth naming to students.",
      "The visual half of the two-mediums comparison in 9-10.RL.7."),
   pd("ma-hs-ela-t-1011", "To a Friend Whose Work Has Come to Nothing", "W. B. Yeats", 1916, "poem", GUT,
      "Public-domain poem for medium-comparison work."),
@@ -154,7 +158,8 @@ BANKS = {
      "Extended argument that models the limits paragraph in practice."),
   pd("ma-hs-ela-t-1211", "The Waste Land", "T. S. Eliot", 1922, "poem", GUT,
      "Allusive density appropriate to independent 11-CCR reading."),
-  pd("ma-hs-ela-t-1212", "Address to the Second Annual Convention of the People's Party", "Mary Elizabeth Lease", 1892, "speech", GUT,
-     "Public advocacy for rhetorical-power analysis (11-12.RI.6)."),
+  pd("ma-hs-ela-t-1212", "Address to the Second Annual Convention of the People's Party", "Mary Elizabeth Lease", 1892, "speech",
+     "Contemporary newspaper transcription, 1892; public domain. NOTE: the transmitted text of Lease's speeches is historically contested and no single authoritative text exists. Facilitators should treat textual variance as part of the analysis, and should cite the specific transcription used.",
+     "Public advocacy for rhetorical-power analysis (11-12.RI.6). Textual instability is itself instructive for source evaluation."),
  ],
 }

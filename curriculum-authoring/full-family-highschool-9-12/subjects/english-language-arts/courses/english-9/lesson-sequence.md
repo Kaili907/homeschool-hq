@@ -159,13 +159,13 @@
 | 18 | 90 | Publication, presentation, or reflection | formal style and objective tone |
 
 
-## Unit 6: Research Foundations and Ethical Source Use
+## Unit 6: Sustained Inquiry and Source Usefulness
 
 *Days 91–108 · Standards: 9-10.W.7, 9-10.W.8, 9-10.RI.7, 9-10.SL.2, 9-10.L.3*
 
 **Essential question:** How does disciplined attention to self-generated research questions and narrowing or broadening an inquiry change what a reader or writer is entitled to claim?
 
-**Performance task:** Complete a short sustained research brief with an auditable source trail and style-manual citations.
+**Performance task:** Produce a source-usefulness report: for one research question, rank every source by how well it actually answers that question, with formal style-manual citations.
 
 
 | Day | Course day | Phase | Focus |
@@ -190,44 +190,44 @@
 | 18 | 108 | Publication, presentation, or reflection | standard citation format and plagiarism avoidance |
 
 
-## Unit 7: Rhetoric, Purpose, and Accounts Across Media
+## Unit 7: Rhetoric, Fallacy, and the Audited Argument
 
 *Days 109–126 · Standards: 9-10.RI.6, 9-10.RI.7, 9-10.SL.2, 9-10.SL.3, 9-10.RL.7*
 
 **Essential question:** How does disciplined attention to author point of view and purpose and rhetoric used to advance a purpose change what a reader or writer is entitled to claim?
 
-**Performance task:** Analyze one subject across two mediums and produce a redesign that corrects emphasis and improves transparency.
+**Performance task:** Audit a public argument for false statements and named fallacies, then produce a corrected version that survives the same audit.
 
 
 | Day | Course day | Phase | Focus |
 | --- | --- | --- | --- |
 | 1 | 109 | Launch and diagnostic | author point of view and purpose |
 | 2 | 110 | Concept model A | rhetoric used to advance a purpose |
-| 3 | 111 | Guided practice A | which details each medium emphasizes |
-| 4 | 112 | Independent application A | credibility and accuracy across sources |
-| 5 | 113 | Concept model B | exaggerated or distorted evidence |
-| 6 | 114 | Guided practice B | a subject represented in two artistic mediums |
+| 3 | 111 | Guided practice A | valid reasoning versus relevant and sufficient evidence |
+| 4 | 112 | Independent application A | false statements in a public argument |
+| 5 | 113 | Concept model B | named fallacies and how to test for them |
+| 6 | 114 | Guided practice B | which details a second medium emphasizes or omits |
 | 7 | 115 | Investigation or close reading | author point of view and purpose |
 | 8 | 116 | Reteach and varied practice | rhetoric used to advance a purpose |
-| 9 | 117 | Concept model C | which details each medium emphasizes |
-| 10 | 118 | Discussion or problem seminar | credibility and accuracy across sources |
-| 11 | 119 | Performance task planning | exaggerated or distorted evidence |
-| 12 | 120 | Performance task build | a subject represented in two artistic mediums |
+| 9 | 117 | Concept model C | valid reasoning versus relevant and sufficient evidence |
+| 10 | 118 | Discussion or problem seminar | false statements in a public argument |
+| 11 | 119 | Performance task planning | named fallacies and how to test for them |
+| 12 | 120 | Performance task build | which details a second medium emphasizes or omits |
 | 13 | 121 | Skill consolidation | author point of view and purpose |
 | 14 | 122 | Transfer challenge | rhetoric used to advance a purpose |
-| 15 | 123 | Assessment preparation | which details each medium emphasizes |
-| 16 | 124 | Unit assessment | credibility and accuracy across sources |
-| 17 | 125 | Targeted correction | exaggerated or distorted evidence |
-| 18 | 126 | Publication, presentation, or reflection | a subject represented in two artistic mediums |
+| 15 | 123 | Assessment preparation | valid reasoning versus relevant and sufficient evidence |
+| 16 | 124 | Unit assessment | false statements in a public argument |
+| 17 | 125 | Targeted correction | named fallacies and how to test for them |
+| 18 | 126 | Publication, presentation, or reflection | which details a second medium emphasizes or omits |
 
 
-## Unit 8: Grammar of Complex Sentences and Style
+## Unit 8: Named Grammatical Structures and Style-Manual Conformance
 
 *Days 127–144 · Standards: 9-10.L.1, 9-10.L.2, 9-10.L.3, 9-10.W.5, 9-10.L.6*
 
 **Essential question:** How does disciplined attention to parallel structure and participial, absolute, and other phrase types change what a reader or writer is entitled to claim?
 
-**Performance task:** Assemble an editor's portfolio showing sentence-level revision decisions and what each one changes about meaning.
+**Performance task:** Bring a full draft into conformance with a named style manual, documenting every phrase- and clause-level change by its grammatical category.
 
 
 | Day | Course day | Phase | Focus |
@@ -289,7 +289,7 @@
 
 **Essential question:** How does disciplined attention to writing routinely over extended and short time frames and technology for producing and updating writing change what a reader or writer is entitled to claim?
 
-**Performance task:** Publish a curated portfolio and present one piece with a documented revision history.
+**Performance task:** Publish a curated portfolio and formally defend one piece against questions about its evidence, revision history, and source use.
 
 
 | Day | Course day | Phase | Focus |

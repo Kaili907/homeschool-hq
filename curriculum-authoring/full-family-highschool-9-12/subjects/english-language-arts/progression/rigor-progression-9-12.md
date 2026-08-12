@@ -73,10 +73,30 @@ These are the mechanisms encoded in `authoring/rigor.py` and rendered into every
 
 | | Prompts | Points | Added dimension |
 | --- | --- | --- | --- |
-| English 9 | 7 | 38 | — |
-| English 10 | 7 | 38 | — |
-| English 11 | 8 | 44 | **Uncertainty and limits**: where the sources leave the question unsettled, and what would settle it |
-| English 12 | 9 | 52 | Uncertainty and limits **plus a source-trail audit**: every claim traced to a source, every source assessed for strengths and limitations relative to *this* task |
+| *Grade 8 (published)* | *7* | *38* | *baseline* |
+| English 9 | 8 | 43 | **Sufficiency and counter-evidence**: show the evidence is sufficient, not merely consistent, and name what cuts against you |
+| English 10 | 9 | 48 | **+ unaided transfer**: apply the move to a text supplied at assessment time, with no exemplar and no checklist |
+| English 11 | 10 | 54 | **+ uncertainty and limits**: where the sources leave the question unsettled, and what would settle it |
+| English 12 | 11 | 62 | **+ source-trail audit**: every claim traced to a source, every source assessed for strengths and limitations relative to *this* task |
+
+The assessed weight rises at every boundary including grade 8 → 9, so the sequence is
+never flat. This is asserted mechanically (`assessment-strictly-increasing`,
+`assessment-above-grade-8`).
+
+### What the 18 days themselves demand
+
+The unit arc is implemented, not decorative: each of the 18 phase names produces its own
+`lesson_flow`, `student_activity`, and `formative_check`. A launch day runs an ungraded
+cold diagnostic; a close-reading day runs a 25-35 minute uninterrupted reading block with
+no instruction inside it; a seminar day runs the course's seminar demand plus an always-
+available private one-to-one route; a correction day has the learner categorise their own
+errors as not-known, misapplied, or careless and then agree a reassessment path.
+
+Most importantly, a **unit assessment day contains no modelling and no guided practice** —
+`Conditions and access`, `Assessment part one`, `Break`, `Assessment part two`,
+`Submission`. Without this, a course whose administration note says "closed method supply"
+would still have been prescribing facilitator critique on the one day it must not. The
+validator asserts it (`assessment-day-no-instruction`, `phase-arc-implemented`).
 
 ### What discussion demands
 

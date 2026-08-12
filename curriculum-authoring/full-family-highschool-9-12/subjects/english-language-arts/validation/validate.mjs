@@ -248,6 +248,110 @@ for (const slug of SLUGS) {
   assert(ts.some((t) => t.rights === 'original'), `original-texts-present:${slug}`, `${ts.filter((t) => t.rights === 'original').length} original`)
 }
 
+// ---------- the 18-day arc must actually differentiate days ----------
+for (const slug of SLUGS) {
+  const c = courses[slug]
+  const shapeOf = (l) => l.lesson_flow.map((s) => s.segment).join(' | ')
+  const shapes = new Set(c.lessons.map(shapeOf))
+  assert(shapes.size >= 10, `phase-arc-implemented:${slug}`,
+    `${shapes.size} distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative)`)
+  const byPhase = new Map()
+  for (const l of c.lessons) {
+    if (!byPhase.has(l.phase)) byPhase.set(l.phase, new Set())
+    byPhase.get(l.phase).add(shapeOf(l))
+  }
+  assert([...byPhase.values()].every((set) => set.size === 1), `phase-shape-stable:${slug}`,
+    'each phase yields one consistent shape')
+  // the day that matters most: assessment day must not run instruction
+  const assessDays = c.lessons.filter((l) => l.phase === 'Unit assessment')
+  assert(assessDays.length === 10, `assessment-days-present:${slug}`, `${assessDays.length}`)
+  const instructing = assessDays.filter((l) => l.lesson_flow.some((s) => /Model or mini-lesson|Guided practice/i.test(s.segment)))
+  assert(instructing.length === 0, `assessment-day-no-instruction:${slug}`,
+    `${instructing.length} assessment days still run modelling or guided practice`)
+  const seminarDays = c.lessons.filter((l) => l.phase === 'Discussion or problem seminar')
+  assert(seminarDays.every((l) => l.lesson_flow.some((s) => /Seminar/i.test(s.segment))), `seminar-day-is-seminar:${slug}`, `${seminarDays.length} days`)
+  assert(seminarDays.every((l) => l.lesson_flow.some((s) => /private/i.test(s.teacher_or_tutor_action))), `seminar-private-option:${slug}`, 'all')
+  const correction = c.lessons.filter((l) => l.phase === 'Targeted correction')
+  assert(correction.every((l) => /reassessment/i.test(JSON.stringify(l.lesson_flow))), `correction-day-has-reassessment:${slug}`, `${correction.length} days`)
+  // activity and check must vary by phase, not just by focus
+  const acts = new Set(c.lessons.map((l) => l.student_activity.replace(/[a-z' -]+$/i, '')))
+  assert(new Set(c.lessons.map((l) => l.formative_check)).size >= 10, `formative-check-varies:${slug}`,
+    `${new Set(c.lessons.map((l) => l.formative_check)).size} distinct formative checks`)
+}
+
+// ---------- the assessed bar must rise between courses ----------
+{
+  const crit = SLUGS.map((s) => JSON.stringify(courses[s].lessons[3].success_criteria))
+  const objs = SLUGS.map((s) => JSON.stringify(courses[s].lessons[3].learning_objectives.map((o) => o.replace(/grades [0-9-]+[^.]*/g, ''))))
+  assert(new Set(crit).size === 4, 'success-criteria-distinct-per-course', `${new Set(crit).size}/4 distinct`)
+  assert(new Set(objs).size === 4, 'learning-objectives-distinct-per-course', `${new Set(objs).size}/4 distinct`)
+  const g12 = courses['english-12'].lessons[3].success_criteria.join(' ')
+  assert(/known weakness of that method/i.test(g12) && /does not establish/i.test(g12),
+    'g12-criteria-are-senior-level', 'English 12 is judged on method choice and bounded claims')
+  const g9 = courses['english-9'].lessons[3].success_criteria.join(' ')
+  assert(/criteria checklist/i.test(g9), 'g9-criteria-are-scaffolded', 'English 9 is judged against a supplied checklist')
+}
+
+// ---------- assessment weight ladder (Grade 8 assesses at 38) ----------
+{
+  const pts = SLUGS.map((s) => courses[s].assessments[0].total_points)
+  assert(pts.every((p) => p > 38), 'assessment-above-grade-8', `${pts.join(' < ')} vs grade 8 = 38`)
+  assert(pts.every((p, i) => i === 0 || p > pts[i - 1]), 'assessment-strictly-increasing', pts.join(' -> '))
+  assert(SLUGS.every((s) => courses[s].assessments.every((a) => a.total_points === courses[s].assessments[0].total_points)),
+    'assessment-weight-consistent-in-course', 'all 10 units per course carry the same weight')
+}
+
+// ---------- lesson-level standards must be informative ----------
+for (const slug of SLUGS) {
+  const c = courses[slug]
+  assert(c.lessons.every((l) => l.primary_standard && byCode.has(l.primary_standard)), `primary-standard-resolves:${slug}`, 'all')
+  assert(c.lessons.every((l) => l.standards.includes(l.primary_standard)), `primary-standard-in-unit:${slug}`, 'all')
+  const uncovered = []
+  for (const u of c.units) {
+    const primaries = new Set(c.lessons.filter((l) => l.unit_number === u.unit_number).map((l) => l.primary_standard))
+    for (const st of u.standards) if (!primaries.has(st)) uncovered.push(`u${u.unit_number}:${st}`)
+  }
+  assert(uncovered.length === 0, `every-unit-standard-is-primary-somewhere:${slug}`,
+    `${uncovered.length} unit standards never primary${uncovered.length ? ': ' + uncovered.slice(0, 4).join(',') : ''}`)
+  assert(new Set(c.lessons.map((l) => l.primary_standard)).size >= 5, `primary-standards-varied:${slug}`,
+    `${new Set(c.lessons.map((l) => l.primary_standard)).size} distinct primaries`)
+}
+
+// ---------- texts must actually be assigned, not merely catalogued ----------
+const TEXT_ANCHORS = [
+  ['english-10', 3, '9-10.RI.9', ['ma-hs-ela-t-1005', 'ma-hs-ela-t-1007']],
+  ['english-9', 9, '9-10.RL.6', ['ma-hs-ela-t-909']],
+  ['english-10', 7, '9-10.RL.7', ['ma-hs-ela-t-1010', 'ma-hs-ela-t-1012']],
+  ['english-11', 2, '11-12.RI.9', ['ma-hs-ela-t-1113', 'ma-hs-ela-t-1106']],
+  ['english-11', 9, '11-12.RL.7', ['ma-hs-ela-t-1110', 'ma-hs-ela-t-1112']],
+  ['english-12', 7, '11-12.RL.7', ['ma-hs-ela-t-1208', 'ma-hs-ela-t-1209']],
+  ['english-11', 5, '11-12.RL.9', ['ma-hs-ela-t-1107', 'ma-hs-ela-t-1108']],
+]
+for (const slug of SLUGS) {
+  const c = courses[slug]
+  const bank = new Map(c.texts.texts.map((t) => [t.text_id, t]))
+  const gated = new Set(c.texts.texts.filter((t) => t.rights === 'rights_required').map((t) => t.text_id))
+  const assignable = c.texts.texts.filter((t) => t.rights !== 'rights_required').map((t) => t.text_id)
+  const assigned = new Set()
+  for (const u of c.units) for (const id of u.assigned_text_ids || []) assigned.add(id)
+  assert(c.units.every((u) => (u.assigned_text_ids || []).length >= 2), `units-assign-texts:${slug}`, 'every unit assigns >= 2 texts')
+  assert([...assigned].every((id) => bank.has(id)), `assigned-texts-resolve:${slug}`, `${[...assigned].filter((id) => !bank.has(id)).length} unresolved`)
+  assert([...assigned].every((id) => !gated.has(id)), `gated-text-never-assigned:${slug}`, `${[...assigned].filter((id) => gated.has(id)).length} gated works assigned`)
+  const unreferenced = assignable.filter((id) => !assigned.has(id))
+  assert(unreferenced.length === 0, `every-text-is-taught:${slug}`,
+    `${assignable.length - unreferenced.length}/${assignable.length} assignable texts assigned${unreferenced.length ? '; orphaned: ' + unreferenced.join(',') : ''}`)
+  assert(c.lessons.every((l) => Array.isArray(l.assigned_texts) && l.assigned_texts.length >= 2), `lessons-name-their-texts:${slug}`, 'all 180')
+  assert(c.lessons.every((l) => l.assigned_texts.every((t) => t.title && t.author !== undefined && t.rights && t.source)),
+    `lesson-texts-carry-citation:${slug}`, 'all')
+  assert(c.lessons.every((l) => l.assigned_texts.every((t) => t.accessible_representation)), `lesson-texts-accessible:${slug}`, 'all')
+}
+for (const [slug, un, code, required] of TEXT_ANCHORS) {
+  const u = courses[slug].units.find((x) => x.unit_number === un)
+  const has = required.every((id) => (u.assigned_text_ids || []).includes(id))
+  assert(u.standards.includes(code) && has, `text-anchor:${slug}-u${un}-${code}`,
+    `${code} instantiated by ${required.join(' + ')}`)
+}
+
 // ---------- ownership boundary ----------
 const laneOnly = existsSync(join(LANE, 'courses')) && existsSync(join(LANE, 'standards'))
 assert(laneOnly, 'lane-self-contained', 'all authored artifacts live under the ELA lane')

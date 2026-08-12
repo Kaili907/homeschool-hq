@@ -11,7 +11,7 @@ COURSES = [
     "title": "English 9: Foundations of Analysis, Argument, and Academic Writing",
     "description": "A first high-school English course that converts Grade 8 literacy habits into high-school analytical practice: strong and thorough evidence, complex character and structural analysis, formal argument with fairly developed counterclaims, explanatory synthesis, and the first sustained research writing with formal citation.",
     "band_expectation": "Grade 9 works inside the grades 9-10 text complexity band with scaffolding as needed at the high end of the range (9-10.RL.10, 9-10.RI.10, first sentence).",
-    "capstone": "A curated analytical portfolio and presentation with a documented revision history and private presentation option.",
+    "capstone": "A curated analytical portfolio and a formally defended selection, with a documented revision history and a private defense option.",
     "units": [
       ("Close Reading and Strong, Thorough Evidence",
        ["9-10.RL.1","9-10.RI.1","9-10.SL.1","9-10.W.9","9-10.L.6"],
@@ -33,18 +33,18 @@ COURSES = [
        ["9-10.W.1","9-10.RI.8","9-10.SL.3","9-10.L.1","9-10.W.5"],
        ["precise claims distinguished from opposing claims","counterclaim strengths and limitations","valid reasoning versus sufficient evidence","false statements and fallacious reasoning","cohesion across major sections","formal style and objective tone"],
        "Write a formal argument that develops a counterclaim fairly, then defend it in a structured evidence exchange."),
-      ("Research Foundations and Ethical Source Use",
+      ("Sustained Inquiry and Source Usefulness",
        ["9-10.W.7","9-10.W.8","9-10.RI.7","9-10.SL.2","9-10.L.3"],
        ["self-generated research questions","narrowing or broadening an inquiry","advanced search strategies","assessing a source's usefulness to the question","selective integration that maintains flow","standard citation format and plagiarism avoidance"],
-       "Complete a short sustained research brief with an auditable source trail and style-manual citations."),
-      ("Rhetoric, Purpose, and Accounts Across Media",
+       "Produce a source-usefulness report: for one research question, rank every source by how well it actually answers that question, with formal style-manual citations."),
+      ("Rhetoric, Fallacy, and the Audited Argument",
        ["9-10.RI.6","9-10.RI.7","9-10.SL.2","9-10.SL.3","9-10.RL.7"],
-       ["author point of view and purpose","rhetoric used to advance a purpose","which details each medium emphasizes","credibility and accuracy across sources","exaggerated or distorted evidence","a subject represented in two artistic mediums"],
-       "Analyze one subject across two mediums and produce a redesign that corrects emphasis and improves transparency."),
-      ("Grammar of Complex Sentences and Style",
+       ["author point of view and purpose","rhetoric used to advance a purpose","valid reasoning versus relevant and sufficient evidence","false statements in a public argument","named fallacies and how to test for them","which details a second medium emphasizes or omits"],
+       "Audit a public argument for false statements and named fallacies, then produce a corrected version that survives the same audit."),
+      ("Named Grammatical Structures and Style-Manual Conformance",
        ["9-10.L.1","9-10.L.2","9-10.L.3","9-10.W.5","9-10.L.6"],
        ["parallel structure","participial, absolute, and other phrase types","independent, relative, and adverbial clauses","semicolons and conjunctive adverbs","colons introducing lists and quotations","editing to a style manual"],
-       "Assemble an editor's portfolio showing sentence-level revision decisions and what each one changes about meaning."),
+       "Bring a full draft into conformance with a named style manual, documenting every phrase- and clause-level change by its grammatical category."),
       ("World Literature and Cultural Perspective",
        ["9-10.RL.6","9-10.RL.9","9-10.RL.2","9-10.W.9","9-10.SL.1"],
        ["point of view from outside the United States","wide reading of world literature","how an author transforms source material","theme across cultural contexts","comparative thesis construction","evidence-based collegial seminar"],
@@ -52,7 +52,7 @@ COURSES = [
       ("Sustained Writing, Portfolio, and Presentation",
        ["9-10.W.10","9-10.W.6","9-10.RL.10","9-10.RI.10","9-10.SL.4","9-10.SL.5"],
        ["writing routinely over extended and short time frames","technology for producing and updating writing","independent reading in the 9-10 band","portfolio curation and selection rationale","clear, concise, logical presentation","strategic and accessible digital media"],
-       "Publish a curated portfolio and present one piece with a documented revision history."),
+       "Publish a curated portfolio and formally defend one piece against questions about its evidence, revision history, and source use."),
     ],
   },
   {
@@ -202,4 +202,82 @@ COURSES = [
        "Complete and defend an independent senior research project supported by a full auditable source trail."),
     ],
   },
+]
+
+
+# ---------------------------------------------------------------------------
+# Unit -> assigned texts. Without this the courses cannot be taught: a family
+# opening day 1 must be told what to read. Gated (rights_required) works are
+# deliberately never assigned; their public-domain substitutes are.
+# ---------------------------------------------------------------------------
+
+UNIT_TEXTS = {
+  "english-9": {
+    1: ["ma-hs-ela-t-901", "ma-hs-ela-t-905"],
+    2: ["ma-hs-ela-t-902", "ma-hs-ela-t-907"],
+    3: ["ma-hs-ela-t-908", "ma-hs-ela-t-911"],
+    4: ["ma-hs-ela-t-904", "ma-hs-ela-t-910"],
+    5: ["ma-hs-ela-t-903", "ma-hs-ela-t-910"],
+    6: ["ma-hs-ela-t-903", "ma-hs-ela-t-904"],
+    7: ["ma-hs-ela-t-906", "ma-hs-ela-t-911"],
+    8: ["ma-hs-ela-t-901", "ma-hs-ela-t-904"],
+    9: ["ma-hs-ela-t-909", "ma-hs-ela-t-906"],
+    10: ["ma-hs-ela-t-905", "ma-hs-ela-t-910"],
+  },
+  "english-10": {
+    1: ["ma-hs-ela-t-1001", "ma-hs-ela-t-1008"],
+    2: ["ma-hs-ela-t-1001", "ma-hs-ela-t-1008"],
+    3: ["ma-hs-ela-t-1005", "ma-hs-ela-t-1006", "ma-hs-ela-t-1007"],
+    4: ["ma-hs-ela-t-1004", "ma-hs-ela-t-1002"],
+    5: ["ma-hs-ela-t-1003", "ma-hs-ela-t-1006"],
+    6: ["ma-hs-ela-t-1002", "ma-hs-ela-t-1004"],
+    7: ["ma-hs-ela-t-1010", "ma-hs-ela-t-1012", "ma-hs-ela-t-1011"],
+    8: ["ma-hs-ela-t-1003", "ma-hs-ela-t-1004"],
+    9: ["ma-hs-ela-t-1012", "ma-hs-ela-t-1007"],
+    10: ["ma-hs-ela-t-1008", "ma-hs-ela-t-1005"],
+  },
+  "english-11": {
+    1: ["ma-hs-ela-t-1101", "ma-hs-ela-t-1108"],
+    2: ["ma-hs-ela-t-1113", "ma-hs-ela-t-1106", "ma-hs-ela-t-1104"],
+    3: ["ma-hs-ela-t-1102", "ma-hs-ela-t-1104"],
+    4: ["ma-hs-ela-t-1110", "ma-hs-ela-t-1109"],
+    5: ["ma-hs-ela-t-1105", "ma-hs-ela-t-1107", "ma-hs-ela-t-1108"],
+    6: ["ma-hs-ela-t-1103", "ma-hs-ela-t-1104"],
+    7: ["ma-hs-ela-t-1105", "ma-hs-ela-t-1110"],
+    8: ["ma-hs-ela-t-1109", "ma-hs-ela-t-1102"],
+    9: ["ma-hs-ela-t-1111", "ma-hs-ela-t-1112", "ma-hs-ela-t-1110"],
+    10: ["ma-hs-ela-t-1103", "ma-hs-ela-t-1111"],
+  },
+  "english-12": {
+    1: ["ma-hs-ela-t-1211", "ma-hs-ela-t-1210"],
+    2: ["ma-hs-ela-t-1201", "ma-hs-ela-t-1202"],
+    3: ["ma-hs-ela-t-1202", "ma-hs-ela-t-1205"],
+    4: ["ma-hs-ela-t-1204", "ma-hs-ela-t-1210"],
+    5: ["ma-hs-ela-t-1203", "ma-hs-ela-t-1207"],
+    6: ["ma-hs-ela-t-1212", "ma-hs-ela-t-1206", "ma-hs-ela-t-1205"],
+    7: ["ma-hs-ela-t-1208", "ma-hs-ela-t-1209"],
+    8: ["ma-hs-ela-t-1202", "ma-hs-ela-t-1203"],
+    9: ["ma-hs-ela-t-1201", "ma-hs-ela-t-1204"],
+    10: ["ma-hs-ela-t-1201", "ma-hs-ela-t-1203"],
+  },
+}
+
+# Standards that name a required *kind* of text. The validator asserts that the
+# unit carrying the code actually assigns a text meeting it, so the alignment is
+# instantiated rather than merely claimed.
+TEXT_ANCHORS = [
+  ("english-10", 3, "9-10.RI.9", ["ma-hs-ela-t-1005", "ma-hs-ela-t-1007"],
+   "seminal U.S. documents of historical and literary significance"),
+  ("english-9", 9, "9-10.RL.6", ["ma-hs-ela-t-909"],
+   "a work of literature from outside the United States"),
+  ("english-10", 7, "9-10.RL.7", ["ma-hs-ela-t-1010", "ma-hs-ela-t-1012"],
+   "one subject represented in two different artistic mediums"),
+  ("english-11", 2, "11-12.RI.9", ["ma-hs-ela-t-1113", "ma-hs-ela-t-1106"],
+   "foundational U.S. documents of historical and literary significance"),
+  ("english-11", 9, "11-12.RL.7", ["ma-hs-ela-t-1110", "ma-hs-ela-t-1112"],
+   "at least one play by Shakespeare and one play by an American dramatist"),
+  ("english-12", 7, "11-12.RL.7", ["ma-hs-ela-t-1208", "ma-hs-ela-t-1209"],
+   "at least one play by Shakespeare and one play by an American dramatist"),
+  ("english-11", 5, "11-12.RL.9", ["ma-hs-ela-t-1107", "ma-hs-ela-t-1108"],
+   "nineteenth-century foundational works of American literature"),
 ]

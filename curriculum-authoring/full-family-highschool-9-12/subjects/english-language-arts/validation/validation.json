@@ -3,8 +3,8 @@
   "validated_on": "2026-08-12",
   "overall": "PASS",
   "counts": {
-    "checks": 213,
-    "passed": 213,
+    "checks": 303,
+    "passed": 303,
     "failed": 0
   },
   "totals": {
@@ -813,7 +813,7 @@
     {
       "check": "assessment-weight-non-decreasing:english-9",
       "result": "PASS",
-      "details": "0 -> 38"
+      "details": "0 -> 43"
     },
     {
       "check": "assessment-points-sum:english-10",
@@ -838,7 +838,7 @@
     {
       "check": "assessment-weight-non-decreasing:english-10",
       "result": "PASS",
-      "details": "38 -> 38"
+      "details": "43 -> 48"
     },
     {
       "check": "assessment-points-sum:english-11",
@@ -863,7 +863,7 @@
     {
       "check": "assessment-weight-non-decreasing:english-11",
       "result": "PASS",
-      "details": "38 -> 44"
+      "details": "48 -> 54"
     },
     {
       "check": "assessment-points-sum:english-12",
@@ -888,7 +888,7 @@
     {
       "check": "assessment-weight-non-decreasing:english-12",
       "result": "PASS",
-      "details": "44 -> 52"
+      "details": "54 -> 62"
     },
     {
       "check": "rigor-distinct:model",
@@ -1074,6 +1074,456 @@
       "check": "original-texts-present:english-12",
       "result": "PASS",
       "details": "4 original"
+    },
+    {
+      "check": "phase-arc-implemented:english-9",
+      "result": "PASS",
+      "details": "13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative)"
+    },
+    {
+      "check": "phase-shape-stable:english-9",
+      "result": "PASS",
+      "details": "each phase yields one consistent shape"
+    },
+    {
+      "check": "assessment-days-present:english-9",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "assessment-day-no-instruction:english-9",
+      "result": "PASS",
+      "details": "0 assessment days still run modelling or guided practice"
+    },
+    {
+      "check": "seminar-day-is-seminar:english-9",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "seminar-private-option:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "correction-day-has-reassessment:english-9",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "formative-check-varies:english-9",
+      "result": "PASS",
+      "details": "89 distinct formative checks"
+    },
+    {
+      "check": "phase-arc-implemented:english-10",
+      "result": "PASS",
+      "details": "13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative)"
+    },
+    {
+      "check": "phase-shape-stable:english-10",
+      "result": "PASS",
+      "details": "each phase yields one consistent shape"
+    },
+    {
+      "check": "assessment-days-present:english-10",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "assessment-day-no-instruction:english-10",
+      "result": "PASS",
+      "details": "0 assessment days still run modelling or guided practice"
+    },
+    {
+      "check": "seminar-day-is-seminar:english-10",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "seminar-private-option:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "correction-day-has-reassessment:english-10",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "formative-check-varies:english-10",
+      "result": "PASS",
+      "details": "89 distinct formative checks"
+    },
+    {
+      "check": "phase-arc-implemented:english-11",
+      "result": "PASS",
+      "details": "13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative)"
+    },
+    {
+      "check": "phase-shape-stable:english-11",
+      "result": "PASS",
+      "details": "each phase yields one consistent shape"
+    },
+    {
+      "check": "assessment-days-present:english-11",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "assessment-day-no-instruction:english-11",
+      "result": "PASS",
+      "details": "0 assessment days still run modelling or guided practice"
+    },
+    {
+      "check": "seminar-day-is-seminar:english-11",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "seminar-private-option:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "correction-day-has-reassessment:english-11",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "formative-check-varies:english-11",
+      "result": "PASS",
+      "details": "89 distinct formative checks"
+    },
+    {
+      "check": "phase-arc-implemented:english-12",
+      "result": "PASS",
+      "details": "13 distinct lesson_flow shapes across 18 phases (a single shape means the arc is decorative)"
+    },
+    {
+      "check": "phase-shape-stable:english-12",
+      "result": "PASS",
+      "details": "each phase yields one consistent shape"
+    },
+    {
+      "check": "assessment-days-present:english-12",
+      "result": "PASS",
+      "details": "10"
+    },
+    {
+      "check": "assessment-day-no-instruction:english-12",
+      "result": "PASS",
+      "details": "0 assessment days still run modelling or guided practice"
+    },
+    {
+      "check": "seminar-day-is-seminar:english-12",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "seminar-private-option:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "correction-day-has-reassessment:english-12",
+      "result": "PASS",
+      "details": "10 days"
+    },
+    {
+      "check": "formative-check-varies:english-12",
+      "result": "PASS",
+      "details": "88 distinct formative checks"
+    },
+    {
+      "check": "success-criteria-distinct-per-course",
+      "result": "PASS",
+      "details": "4/4 distinct"
+    },
+    {
+      "check": "learning-objectives-distinct-per-course",
+      "result": "PASS",
+      "details": "4/4 distinct"
+    },
+    {
+      "check": "g12-criteria-are-senior-level",
+      "result": "PASS",
+      "details": "English 12 is judged on method choice and bounded claims"
+    },
+    {
+      "check": "g9-criteria-are-scaffolded",
+      "result": "PASS",
+      "details": "English 9 is judged against a supplied checklist"
+    },
+    {
+      "check": "assessment-above-grade-8",
+      "result": "PASS",
+      "details": "43 < 48 < 54 < 62 vs grade 8 = 38"
+    },
+    {
+      "check": "assessment-strictly-increasing",
+      "result": "PASS",
+      "details": "43 -> 48 -> 54 -> 62"
+    },
+    {
+      "check": "assessment-weight-consistent-in-course",
+      "result": "PASS",
+      "details": "all 10 units per course carry the same weight"
+    },
+    {
+      "check": "primary-standard-resolves:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "primary-standard-in-unit:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "every-unit-standard-is-primary-somewhere:english-9",
+      "result": "PASS",
+      "details": "0 unit standards never primary"
+    },
+    {
+      "check": "primary-standards-varied:english-9",
+      "result": "PASS",
+      "details": "40 distinct primaries"
+    },
+    {
+      "check": "primary-standard-resolves:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "primary-standard-in-unit:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "every-unit-standard-is-primary-somewhere:english-10",
+      "result": "PASS",
+      "details": "0 unit standards never primary"
+    },
+    {
+      "check": "primary-standards-varied:english-10",
+      "result": "PASS",
+      "details": "38 distinct primaries"
+    },
+    {
+      "check": "primary-standard-resolves:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "primary-standard-in-unit:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "every-unit-standard-is-primary-somewhere:english-11",
+      "result": "PASS",
+      "details": "0 unit standards never primary"
+    },
+    {
+      "check": "primary-standards-varied:english-11",
+      "result": "PASS",
+      "details": "41 distinct primaries"
+    },
+    {
+      "check": "primary-standard-resolves:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "primary-standard-in-unit:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "every-unit-standard-is-primary-somewhere:english-12",
+      "result": "PASS",
+      "details": "0 unit standards never primary"
+    },
+    {
+      "check": "primary-standards-varied:english-12",
+      "result": "PASS",
+      "details": "39 distinct primaries"
+    },
+    {
+      "check": "units-assign-texts:english-9",
+      "result": "PASS",
+      "details": "every unit assigns >= 2 texts"
+    },
+    {
+      "check": "assigned-texts-resolve:english-9",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "gated-text-never-assigned:english-9",
+      "result": "PASS",
+      "details": "0 gated works assigned"
+    },
+    {
+      "check": "every-text-is-taught:english-9",
+      "result": "PASS",
+      "details": "11/11 assignable texts assigned"
+    },
+    {
+      "check": "lessons-name-their-texts:english-9",
+      "result": "PASS",
+      "details": "all 180"
+    },
+    {
+      "check": "lesson-texts-carry-citation:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-texts-accessible:english-9",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "units-assign-texts:english-10",
+      "result": "PASS",
+      "details": "every unit assigns >= 2 texts"
+    },
+    {
+      "check": "assigned-texts-resolve:english-10",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "gated-text-never-assigned:english-10",
+      "result": "PASS",
+      "details": "0 gated works assigned"
+    },
+    {
+      "check": "every-text-is-taught:english-10",
+      "result": "PASS",
+      "details": "11/11 assignable texts assigned"
+    },
+    {
+      "check": "lessons-name-their-texts:english-10",
+      "result": "PASS",
+      "details": "all 180"
+    },
+    {
+      "check": "lesson-texts-carry-citation:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-texts-accessible:english-10",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "units-assign-texts:english-11",
+      "result": "PASS",
+      "details": "every unit assigns >= 2 texts"
+    },
+    {
+      "check": "assigned-texts-resolve:english-11",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "gated-text-never-assigned:english-11",
+      "result": "PASS",
+      "details": "0 gated works assigned"
+    },
+    {
+      "check": "every-text-is-taught:english-11",
+      "result": "PASS",
+      "details": "13/13 assignable texts assigned"
+    },
+    {
+      "check": "lessons-name-their-texts:english-11",
+      "result": "PASS",
+      "details": "all 180"
+    },
+    {
+      "check": "lesson-texts-carry-citation:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-texts-accessible:english-11",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "units-assign-texts:english-12",
+      "result": "PASS",
+      "details": "every unit assigns >= 2 texts"
+    },
+    {
+      "check": "assigned-texts-resolve:english-12",
+      "result": "PASS",
+      "details": "0 unresolved"
+    },
+    {
+      "check": "gated-text-never-assigned:english-12",
+      "result": "PASS",
+      "details": "0 gated works assigned"
+    },
+    {
+      "check": "every-text-is-taught:english-12",
+      "result": "PASS",
+      "details": "12/12 assignable texts assigned"
+    },
+    {
+      "check": "lessons-name-their-texts:english-12",
+      "result": "PASS",
+      "details": "all 180"
+    },
+    {
+      "check": "lesson-texts-carry-citation:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "lesson-texts-accessible:english-12",
+      "result": "PASS",
+      "details": "all"
+    },
+    {
+      "check": "text-anchor:english-10-u3-9-10.RI.9",
+      "result": "PASS",
+      "details": "9-10.RI.9 instantiated by ma-hs-ela-t-1005 + ma-hs-ela-t-1007"
+    },
+    {
+      "check": "text-anchor:english-9-u9-9-10.RL.6",
+      "result": "PASS",
+      "details": "9-10.RL.6 instantiated by ma-hs-ela-t-909"
+    },
+    {
+      "check": "text-anchor:english-10-u7-9-10.RL.7",
+      "result": "PASS",
+      "details": "9-10.RL.7 instantiated by ma-hs-ela-t-1010 + ma-hs-ela-t-1012"
+    },
+    {
+      "check": "text-anchor:english-11-u2-11-12.RI.9",
+      "result": "PASS",
+      "details": "11-12.RI.9 instantiated by ma-hs-ela-t-1113 + ma-hs-ela-t-1106"
+    },
+    {
+      "check": "text-anchor:english-11-u9-11-12.RL.7",
+      "result": "PASS",
+      "details": "11-12.RL.7 instantiated by ma-hs-ela-t-1110 + ma-hs-ela-t-1112"
+    },
+    {
+      "check": "text-anchor:english-12-u7-11-12.RL.7",
+      "result": "PASS",
+      "details": "11-12.RL.7 instantiated by ma-hs-ela-t-1208 + ma-hs-ela-t-1209"
+    },
+    {
+      "check": "text-anchor:english-11-u5-11-12.RL.9",
+      "result": "PASS",
+      "details": "11-12.RL.9 instantiated by ma-hs-ela-t-1107 + ma-hs-ela-t-1108"
     },
     {
       "check": "lane-self-contained",

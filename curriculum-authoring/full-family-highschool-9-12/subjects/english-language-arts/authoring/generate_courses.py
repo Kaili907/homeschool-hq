@@ -13,8 +13,8 @@ import json, os, sys, csv
 HERE = os.path.dirname(os.path.abspath(__file__))
 LANE = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-from blueprints import COURSES
-from rigor import RIGOR, PHASES
+from blueprints import COURSES, UNIT_TEXTS, TEXT_ANCHORS
+from rigor import RIGOR, PHASES, PHASE_SPECS, OBJECTIVES, CRITERIA
 from texts import BANKS
 
 CORPUS = json.load(open(os.path.join(LANE, "standards", "michigan-ela-9-12-standards.json"), encoding="utf-8"))
@@ -60,12 +60,42 @@ def tutor_routes(focus, g):
        "action": r["mastery"]},
     ]
 
-def build_lesson(course, unit_idx, day, unit_title, standards, topics, ptask):
+def resolve_texts(slug, unit_number):
+    bank = {t["text_id"]: t for t in BANKS[slug]}
+    out = []
+    for tid in UNIT_TEXTS[slug][unit_number]:
+        t = bank[tid]
+        out.append({
+            "text_id": tid, "title": t["title"], "author": t["author"],
+            "year": t["year"], "form": t["form"], "rights": t["rights"],
+            "source": t["source"],
+            "accessible_representation": "Digital reflowable text, enlarged print, or audio, learner's choice.",
+        })
+    return out
+
+def build_lesson(course, unit_idx, day, unit_title, standards, topics, ptask, slug):
     g = course["grade"]; r = RIGOR[g]
     un = unit_idx + 1
     focus = topics[(day - 1) % 6]
     phase = PHASES[day - 1]
+    spec = PHASE_SPECS[phase]
     cid = f"ma-g{g}-english-language-arts"
+    primary = standards[(day - 1) % len(standards)]
+
+    fmt = dict(focus=focus, ptask=ptask, unit=unit_title, band=r["band_clause"],
+               model=r["model"], guided=r["guided"], independent=r["independent"],
+               seminar=r["seminar"], transfer=r["transfer"], mastery=r["mastery"])
+
+    flow = [{"segment": name, "minutes": mins,
+             "teacher_or_tutor_action": action.format(**fmt)}
+            for (name, mins, action) in spec["segments"]]
+
+    default_activity = r["independent"] + f" Focus: {focus}."
+    default_check = (f"State the most important claim about {focus} and identify one check "
+                     "that would expose a weak or unsupported reading.")
+    activity = spec.get("activity", default_activity).format(**fmt)
+    check = spec.get("check", default_check).format(**fmt)
+
     return {
       "schema_version": "1.0",
       "lesson_id": f"{cid}-u{un:02d}-l{day:02d}",
@@ -79,43 +109,26 @@ def build_lesson(course, unit_idx, day, unit_title, standards, topics, ptask):
       "title": f"{phase}: {focus}",
       "phase": phase,
       "focus": focus,
-      "estimated_minutes": "55–75",
+      "estimated_minutes": "55\u201375",
       "standards": list(standards),
+      "primary_standard": primary,
       "standards_band": course["band"],
+      "assigned_texts": resolve_texts(slug, un),
       "essential_question": f"How does close, evidence-governed attention to {focus} change what a reader or writer is entitled to claim?",
-      "learning_objectives": [
-        f"Explain what {focus} means in this unit and why it changes an interpretation or a draft.",
-        f"Apply {focus} to text at the level described for this course: {r['band_clause']}.",
-        f"Judge the sufficiency of the learner's own evidence about {focus} and revise using stated criteria.",
-      ],
-      "success_criteria": [
-        f"The learner completes the central task about {focus}.",
-        "The learner gives cited textual evidence and reasoning rather than an unsupported assertion.",
-        "The learner checks or revises the work and can name the next step.",
-      ],
+      "learning_objectives": [o.format(**fmt) for o in OBJECTIVES[g]],
+      "success_criteria": [c.format(**fmt) for c in CRITERIA[g]],
       "materials": [
         "course notebook or digital equivalent",
-        "assigned text from the course text bank, in an accessible reading representation",
+        "the unit's assigned texts, in an accessible reading representation",
         "citation reference or style manual appropriate to the course",
       ],
-      "lesson_flow": [
-        {"segment": "Welcome and retrieval", "minutes": "5–8",
-         "teacher_or_tutor_action": f"Open with a short retrieval prompt on {focus}. Ask the learner to predict, recall, or pose a question before any instruction."},
-        {"segment": "Model or mini-lesson", "minutes": "8–15",
-         "teacher_or_tutor_action": f"{r['model']} Keep the explanation centered on {focus}."},
-        {"segment": "Guided practice", "minutes": "10–18",
-         "teacher_or_tutor_action": f"{r['guided']} The object of practice is {focus}."},
-        {"segment": "Independent application", "minutes": "15–28",
-         "teacher_or_tutor_action": f"{r['independent']} The learner writes this response; the tutor may question or critique but may not draft it."},
-        {"segment": "Exit ticket and next step", "minutes": "3–7",
-         "teacher_or_tutor_action": f"In one concise response, state the most important claim about {focus} and one check that would expose a weak or unsupported reading."},
-      ],
-      "student_activity": f"{r['independent']} Focus: {focus}.",
-      "formative_check": f"State the most important claim about {focus} and identify one check that would expose a weak or unsupported reading.",
+      "lesson_flow": flow,
+      "student_activity": activity,
+      "formative_check": check,
       "answer_or_scoring_guidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid readings when the evidence supports them. Do not infer effort, motivation, diagnosis, or character from an error.",
       "adaptive_tutor_routes": tutor_routes(focus, g),
       "mastery_rule": r["mastery"],
-      "extension": f"{r['transfer']}",
+      "extension": r["transfer"],
       "student_authorship": AUTHORSHIP,
       "accessibility_and_accommodations": ACCESS,
       "safety_and_privacy": SAFETY,
@@ -149,6 +162,14 @@ def build_assessment(course, unit_idx, unit_title, standards, topics, ptask):
       {"type": "reflection and transfer",
        "prompt": "Identify one skill you can now transfer, one check that improves the quality of your reading or writing, and one open question.", "points": 4},
     ]
+    # The ladder. Grade 8 assesses at 38 points / 7 prompts; every high-school
+    # course must ask for strictly more, and each step adds a dimension tied to
+    # that course's rigor profile rather than more of the same.
+    prompts.append({"type": "sufficiency and counter-evidence",
+      "prompt": f"Show that your evidence for {topics[1]} is sufficient, not merely consistent with your claim. Identify the strongest piece of evidence that cuts against you.", "points": 5})
+    if g >= 10:
+        prompts.append({"type": "unaided transfer",
+          "prompt": f"Apply {topics[0]} to a text supplied at assessment time, with no exemplar and no checklist. Explain the choice you made and why.", "points": 5})
     if g >= 11:
         prompts.append({"type": "uncertainty and limits",
           "prompt": "State precisely where the text or the sources leave the question unsettled, and what additional evidence would settle it.", "points": 6})
@@ -272,7 +293,7 @@ representation. Access supports never change the standard being assessed.
 ## Text bank and source boundaries
 
 This course draws on {len(bank)} catalogued texts: {n_orig} original Manuel Academy texts,
-{n_pd} public-domain works, and {n_gated} reference-only entries.
+{n_pd} public-domain works, and {"1 reference-only entry" if n_gated == 1 else str(n_gated) + " reference-only entries"}.
 
 No copyrighted novel, play, poem, article, or lyric is reproduced in this package.
 Where the Michigan standards name a still-copyrighted work as an example, this course
@@ -336,11 +357,12 @@ def main():
               "essential_question": f"How does disciplined attention to {topics[0]} and {topics[1]} change what a reader or writer is entitled to claim?",
               "topics": list(topics),
               "performance_task": ptask,
+              "assigned_text_ids": list(UNIT_TEXTS[slug][un]),
               "lesson_ids": lesson_ids,
               "assessment_id": f"{cid}-u{un:02d}-assessment",
             })
             for d in range(1, 19):
-                lessons.append(build_lesson(course, i, d, title, stds, topics, ptask))
+                lessons.append(build_lesson(course, i, d, title, stds, topics, ptask, slug))
             assessments.append(build_assessment(course, i, title, stds, topics, ptask))
 
         def w(name, obj):

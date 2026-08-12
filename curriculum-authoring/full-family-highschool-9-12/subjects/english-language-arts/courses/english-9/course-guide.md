@@ -30,7 +30,7 @@ By the end of the course, learners will:
 2. Ground every interpretive or argumentative claim in cited textual evidence, and say what the evidence does not establish.
 3. Transfer analytical and research moves to unfamiliar texts, tasks, and audiences.
 4. Use feedback and error evidence to revise without shame or character judgments.
-5. Complete the course capstone: **A curated analytical portfolio and presentation with a documented revision history and private presentation option.**
+5. Complete the course capstone: **A curated analytical portfolio and a formally defended selection, with a documented revision history and a private defense option.**
 
 ## Instructional model
 
@@ -85,16 +85,16 @@ representation. Access supports never change the standard being assessed.
 | 3 | Word Choice, Tone, and Cumulative Meaning | 18 | 9-10.RL.4, 9-10.RI.4, 9-10.L.4, 9-10.L.5, 9-10.SL.6 | Produce a diction-and-tone study comparing two passages, then rewrite one passage for a deliberately changed tone. |
 | 4 | Central Ideas and Explanatory Synthesis | 18 | 9-10.RI.2, 9-10.RI.3, 9-10.RI.5, 9-10.W.2, 9-10.W.4 | Write a formal explanatory article with headings and one graphic that genuinely clarifies a complex idea. |
 | 5 | Argument, Counterclaim, and Valid Reasoning | 18 | 9-10.W.1, 9-10.RI.8, 9-10.SL.3, 9-10.L.1, 9-10.W.5 | Write a formal argument that develops a counterclaim fairly, then defend it in a structured evidence exchange. |
-| 6 | Research Foundations and Ethical Source Use | 18 | 9-10.W.7, 9-10.W.8, 9-10.RI.7, 9-10.SL.2, 9-10.L.3 | Complete a short sustained research brief with an auditable source trail and style-manual citations. |
-| 7 | Rhetoric, Purpose, and Accounts Across Media | 18 | 9-10.RI.6, 9-10.RI.7, 9-10.SL.2, 9-10.SL.3, 9-10.RL.7 | Analyze one subject across two mediums and produce a redesign that corrects emphasis and improves transparency. |
-| 8 | Grammar of Complex Sentences and Style | 18 | 9-10.L.1, 9-10.L.2, 9-10.L.3, 9-10.W.5, 9-10.L.6 | Assemble an editor's portfolio showing sentence-level revision decisions and what each one changes about meaning. |
+| 6 | Sustained Inquiry and Source Usefulness | 18 | 9-10.W.7, 9-10.W.8, 9-10.RI.7, 9-10.SL.2, 9-10.L.3 | Produce a source-usefulness report: for one research question, rank every source by how well it actually answers that question, with formal style-manual citations. |
+| 7 | Rhetoric, Fallacy, and the Audited Argument | 18 | 9-10.RI.6, 9-10.RI.7, 9-10.SL.2, 9-10.SL.3, 9-10.RL.7 | Audit a public argument for false statements and named fallacies, then produce a corrected version that survives the same audit. |
+| 8 | Named Grammatical Structures and Style-Manual Conformance | 18 | 9-10.L.1, 9-10.L.2, 9-10.L.3, 9-10.W.5, 9-10.L.6 | Bring a full draft into conformance with a named style manual, documenting every phrase- and clause-level change by its grammatical category. |
 | 9 | World Literature and Cultural Perspective | 18 | 9-10.RL.6, 9-10.RL.9, 9-10.RL.2, 9-10.W.9, 9-10.SL.1 | Write and present a comparative analysis of a world-literature text and a later work that transforms it. |
-| 10 | Sustained Writing, Portfolio, and Presentation | 18 | 9-10.W.10, 9-10.W.6, 9-10.RL.10, 9-10.RI.10, 9-10.SL.4, 9-10.SL.5 | Publish a curated portfolio and present one piece with a documented revision history. |
+| 10 | Sustained Writing, Portfolio, and Presentation | 18 | 9-10.W.10, 9-10.W.6, 9-10.RL.10, 9-10.RI.10, 9-10.SL.4, 9-10.SL.5 | Publish a curated portfolio and formally defend one piece against questions about its evidence, revision history, and source use. |
 
 ## Text bank and source boundaries
 
 This course draws on 12 catalogued texts: 4 original Manuel Academy texts,
-7 public-domain works, and 1 reference-only entries.
+7 public-domain works, and 1 reference-only entry.
 
 No copyrighted novel, play, poem, article, or lyric is reproduced in this package.
 Where the Michigan standards name a still-copyrighted work as an example, this course
@@ -114,7 +114,7 @@ they hold or obtain access. Full citation and rights metadata for every entry is
 
 ## Capstone
 
-A curated analytical portfolio and presentation with a documented revision history and private presentation option.
+A curated analytical portfolio and a formally defended selection, with a documented revision history and a private defense option.
 
 The capstone may be presented publicly, privately, in writing, orally, or in another
 accessible format that preserves the learning targets.

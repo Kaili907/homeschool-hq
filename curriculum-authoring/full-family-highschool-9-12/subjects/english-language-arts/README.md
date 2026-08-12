@@ -42,7 +42,7 @@ courses/<slug>/
   lesson-sequence.md                 human-readable sequence
 authoring/                           deterministic generators for the above
 validation/
-  validate.mjs                       213 mechanical checks
+  validate.mjs                       303 mechanical checks
   validation-report.md               latest run
 ```
 
@@ -56,6 +56,8 @@ validation/
 | Unit assessments | 40 |
 | Catalogued texts | 49 |
 | Standards in corpus | 84 (82 applicable; RL.8 is "not applicable to literature" in both bands) |
+| Unit assessment weight | 43 / 48 / 54 / 62 points (Grade 8 baseline: 38) |
+| Distinct lesson shapes | 18 per course, one per phase of the unit arc |
 
 ## Standards
 
@@ -82,6 +84,15 @@ Three rights categories, enforced by the validator:
   supplied, and families may substitute the named work if they hold access.
 
 No copyrighted novel, play, article, poem, or lyric is reproduced anywhere in this lane.
+
+Texts are **assigned, not merely catalogued**. Every unit names the 2-3 texts it teaches,
+every lesson carries those texts with full citation and an accessible-representation note,
+and the validator asserts that every assignable text is taught by at least one unit and
+that no `rights_required` work is ever assigned. Standards that name a required *kind* of
+text are checked for instantiation rather than trusted — for example `11-12.RL.7`'s
+"at least one play by Shakespeare and one play by an American dramatist" is asserted
+against English 11 Unit 9 (*Macbeth* + Glaspell's *Trifles*) and English 12 Unit 7
+(*Hamlet* + O'Neill's *The Emperor Jones*).
 
 ## Student authorship
 

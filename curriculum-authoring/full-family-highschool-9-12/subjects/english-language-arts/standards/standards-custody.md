@@ -70,6 +70,17 @@ against the PDF will find the text and numbering but will not find the concatena
   `src/admin/curriculum-standards-review/knownEvidence.ts`, which states: *"Repository
   evidence only. No canonical ID, wording, version, or URL is inferred."*
 
+## Scope decision: what this corpus deliberately excludes
+
+The source document also contains the **Standards for Literacy in History/Social Studies,
+Science, and Technical Subjects 6-12** (RH, RST, WHST strands, pages 59-65). These are
+**not** included in this corpus.
+
+That is deliberate: those standards govern literacy instruction inside history, science,
+and technical courses, not the ELA course itself. They belong to those subject lanes, which
+this work does not own. A reader comparing this corpus against the PDF will find those
+pages unrepresented, and this paragraph is the reason.
+
 ## Known limits
 
 1. **Band, not grade.** Michigan does not publish grade-9, grade-10, grade-11, and grade-12

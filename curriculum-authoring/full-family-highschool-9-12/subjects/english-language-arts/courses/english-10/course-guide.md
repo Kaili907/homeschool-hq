@@ -94,7 +94,7 @@ representation. Access supports never change the standard being assessed.
 ## Text bank and source boundaries
 
 This course draws on 12 catalogued texts: 4 original Manuel Academy texts,
-7 public-domain works, and 1 reference-only entries.
+7 public-domain works, and 1 reference-only entry.
 
 No copyrighted novel, play, poem, article, or lyric is reproduced in this package.
 Where the Michigan standards name a still-copyrighted work as an example, this course
