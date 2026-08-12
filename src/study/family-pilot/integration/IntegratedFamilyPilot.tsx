@@ -28,8 +28,17 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
   const [study, setStudy] = useState<FamilyPilotStudySnapshot | null>(null)
   const [openAssignmentRef, setOpenAssignmentRef] = useState<string | null>(null)
   const [help, setHelp] = useState<{ readonly session: FamilyPilotHelpSession; readonly text: string } | null>(null)
+  const [helpMessage, setHelpMessage] = useState('')
+  const [helpBusy, setHelpBusy] = useState(false)
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
+  // Bumped whenever a start/resume is refused (clearOnReject below), and used
+  // as StudentExperience's key. StudentExperience owns its own "which
+  // assignment is open" state and flips to it optimistically on click,
+  // independent of whether the call this component makes actually succeeds —
+  // remounting it is what undoes that optimism, so a safety refusal can't
+  // leave its Pause/Finish shell looking like a normal, still-open assignment.
+  const [shellEpoch, setShellEpoch] = useState(0)
 
   // NOTE: there is deliberately no "clear on student change" effect here.
   // IntegratedPilotSurface keys this component on the active learner, so a
@@ -62,7 +71,14 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
   )
 
   const run = useCallback(
-    async (action: () => Promise<{ status: string; message?: string; study?: FamilyPilotStudySnapshot | null }>) => {
+    async (
+      action: () => Promise<{ status: string; message?: string; study?: FamilyPilotStudySnapshot | null }>,
+      // clearOnReject: for start/resume only. Those set openAssignmentRef
+      // optimistically before the async call settles, so a rejection — most
+      // notably a safety hold — must not leave the study section rendering a
+      // stale or mismatched "open" shell that looks usable but isn't.
+      options?: { readonly clearOnReject?: boolean },
+    ) => {
       setBusy(true)
       try {
         const result = await action()
@@ -71,6 +87,12 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
           setMessage('')
         } else {
           setMessage(result.message ?? 'That step could not be completed.')
+          if (options?.clearOnReject) {
+            setOpenAssignmentRef(null)
+            setStudy(null)
+            setHelp(null)
+            setShellEpoch((epoch) => epoch + 1)
+          }
         }
       } finally {
         setBusy(false)
@@ -101,18 +123,44 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
 
   const open = assignments.find((item) => item.assignmentRef === openAssignmentRef) ?? null
 
+  /**
+   * Advances the open help session by one learner message. A flagged turn
+   * (Tutor bridge's own isConcerning() check, via controller.helpTurn) has
+   * already recorded a Family Pilot safety hold by the time this returns, so
+   * re-running the SAME entry gate resume() uses is what surfaces the exact
+   * "get an adult" refusal and clears the study shell — no new hold logic or
+   * classifier is added here.
+   */
+  const sendHelpMessage = async (): Promise<void> => {
+    if (!help || !open) return
+    setHelpBusy(true)
+    try {
+      const step = await controller.helpTurn(help.session, helpMessage)
+      setHelpMessage('')
+      if (step.session.flaggedForAdult) {
+        setHelp(null)
+        await run(() => controller.resume(activeStudentRef, open.assignmentRef), { clearOnReject: true })
+      } else {
+        setHelp({ session: step.session, text: step.presentation.visibleText })
+      }
+    } finally {
+      setHelpBusy(false)
+    }
+  }
+
   return (
     <section className="mt-6" data-testid="family-pilot-student-work" data-student-ref={activeStudentRef}>
       <StudentExperience
+        key={shellEpoch}
         student={{ displayName: controller.parentProgress(activeStudentRef)?.displayName ?? 'Learner' }}
         assignments={assignments}
         onStart={(assignmentRef) => {
           setOpenAssignmentRef(assignmentRef)
-          void run(() => controller.start(activeStudentRef, assignmentRef))
+          void run(() => controller.start(activeStudentRef, assignmentRef), { clearOnReject: true })
         }}
         onResume={(assignmentRef) => {
           setOpenAssignmentRef(assignmentRef)
-          void run(() => controller.resume(activeStudentRef, assignmentRef))
+          void run(() => controller.resume(activeStudentRef, assignmentRef), { clearOnReject: true })
         }}
         onPause={(assignmentRef) => void run(() => controller.pause(activeStudentRef, assignmentRef))}
         onComplete={(assignmentRef) => void run(() => controller.complete(activeStudentRef, assignmentRef))}
@@ -176,6 +224,7 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
                 // unavailable Tutor Core costs the student a hint, not the lesson.
                 const step = controller.help(activeStudentRef, open.assignmentRef)
                 if (step) setHelp({ session: step.session, text: step.presentation.visibleText })
+                setHelpMessage('')
               }}
             >
               I need help
@@ -186,16 +235,43 @@ export function IntegratedFamilyPilot({ context, controller }: IntegratedFamilyP
             <section className="mt-3 rounded-lg border border-cyan-200 bg-cyan-50 p-3" data-testid="family-pilot-tutor">
               <p className="font-semibold" data-tutor="path">{help.session.path}</p>
               <p className="mt-1 font-semibold" data-tutor="text">{help.text}</p>
-              <button
-                type="button"
-                className="mt-2 min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold"
-                onClick={() => {
-                  controller.closeHelp(help.session)
-                  setHelp(null)
-                }}
-              >
-                Back to my lesson
-              </button>
+              <label className="mt-3 block text-sm font-semibold text-slate-700" htmlFor="family-pilot-help-message">
+                What&rsquo;s tricky?
+              </label>
+              {/* No raw learner text is ever persisted: helpMessage lives only in
+                  this component's state and is cleared the moment each turn is
+                  sent, matching submitTurn's own in-memory-only transcript. */}
+              <textarea
+                id="family-pilot-help-message"
+                data-testid="family-pilot-help-input"
+                className="mt-1 w-full rounded-lg border border-slate-300 p-2"
+                rows={2}
+                value={helpMessage}
+                disabled={helpBusy}
+                onChange={(event) => setHelpMessage(event.target.value)}
+              />
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  data-testid="family-pilot-help-send"
+                  className="min-h-11 rounded-lg border border-cyan-800 bg-cyan-700 px-4 py-2 font-bold text-white"
+                  disabled={helpBusy || !helpMessage.trim()}
+                  onClick={() => void sendHelpMessage()}
+                >
+                  Ask
+                </button>
+                <button
+                  type="button"
+                  className="min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold"
+                  onClick={() => {
+                    controller.closeHelp(help.session)
+                    setHelp(null)
+                    setHelpMessage('')
+                  }}
+                >
+                  Back to my lesson
+                </button>
+              </div>
             </section>
           )}
         </section>
