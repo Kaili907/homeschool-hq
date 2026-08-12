@@ -1,0 +1,263 @@
+{
+  "package_id": "manuel-academy-grades-3-4-ela-authoring-v1",
+  "version": "1.0.0",
+  "validated_on": "2026-08-12",
+  "overall": "PASS",
+  "counts": {
+    "checks": 50,
+    "passed": 50,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "check": "two-courses",
+      "result": "PASS",
+      "details": "['ma-g3-english-language-arts', 'ma-g4-english-language-arts']"
+    },
+    {
+      "check": "grade-3-full-year",
+      "result": "PASS",
+      "details": "lessons=180, units=10, days/unit=18"
+    },
+    {
+      "check": "grade-4-full-year",
+      "result": "PASS",
+      "details": "lessons=180, units=10, days/unit=18"
+    },
+    {
+      "check": "thirty-six-week-model",
+      "result": "PASS",
+      "details": "[(3, 36, 180), (4, 36, 180)]"
+    },
+    {
+      "check": "stable-unique-lesson-refs",
+      "result": "PASS",
+      "details": "360 refs, 360 unique"
+    },
+    {
+      "check": "lesson-ref-pattern",
+      "result": "PASS",
+      "details": "all 360 match ^ma-g[34]-english-language-arts-uNN-lNN$"
+    },
+    {
+      "check": "lesson-ref-matches-fields",
+      "result": "PASS",
+      "details": "grade, unit, and day encoded in every ref match the record"
+    },
+    {
+      "check": "grade-3-course-days-contiguous",
+      "result": "PASS",
+      "details": "1..180 with no gap or repeat"
+    },
+    {
+      "check": "grade-4-course-days-contiguous",
+      "result": "PASS",
+      "details": "1..180 with no gap or repeat"
+    },
+    {
+      "check": "grade-3-schedule-exact-coverage",
+      "result": "PASS",
+      "details": "scheduled=180, unique=180, lessons=180, weeks=1..36, unscheduled=0, scheduled-but-missing=0"
+    },
+    {
+      "check": "grade-4-schedule-exact-coverage",
+      "result": "PASS",
+      "details": "scheduled=180, unique=180, lessons=180, weeks=1..36, unscheduled=0, scheduled-but-missing=0"
+    },
+    {
+      "check": "unit-lesson-and-assessment-integrity",
+      "result": "PASS",
+      "details": "all 20 units list exactly their 18 lessons and a resolvable assessment"
+    },
+    {
+      "check": "index-consistency",
+      "result": "PASS",
+      "details": "unit-index=20, lesson-index=360"
+    },
+    {
+      "check": "grade-3-no-invented-standards",
+      "result": "PASS",
+      "details": "42 codes used, all in the verified catalog"
+    },
+    {
+      "check": "grade-3-standards-coverage-complete",
+      "result": "PASS",
+      "details": "all 42 catalog codes reach at least one lesson or unit"
+    },
+    {
+      "check": "grade-3-excluded-codes-absent",
+      "result": "PASS",
+      "details": "none of ['3.RF.1', '3.RF.2', '3.RL.8', '3.W.9'] appear anywhere"
+    },
+    {
+      "check": "grade-3-standards-map-nonempty",
+      "result": "PASS",
+      "details": "standards-map resolves 42 codes to lessons"
+    },
+    {
+      "check": "grade-4-no-invented-standards",
+      "result": "PASS",
+      "details": "44 codes used, all in the verified catalog"
+    },
+    {
+      "check": "grade-4-standards-coverage-complete",
+      "result": "PASS",
+      "details": "all 44 catalog codes reach at least one lesson or unit"
+    },
+    {
+      "check": "grade-4-excluded-codes-absent",
+      "result": "PASS",
+      "details": "none of ['4.RF.1', '4.RF.2', '4.RF.3b', '4.RL.8'] appear anywhere"
+    },
+    {
+      "check": "grade-4-standards-map-nonempty",
+      "result": "PASS",
+      "details": "standards-map resolves 44 codes to lessons"
+    },
+    {
+      "check": "unit-declares-every-code-its-days-cite",
+      "result": "PASS",
+      "details": "every day-level code is declared on its unit"
+    },
+    {
+      "check": "text-bank-units-match-anchor-usage",
+      "result": "PASS",
+      "details": "every anchor text declares the unit it anchors"
+    },
+    {
+      "check": "standards-code-format",
+      "result": "PASS",
+      "details": "every code matches <grade>.<strand>.<number>[letter]"
+    },
+    {
+      "check": "lesson-required-fields",
+      "result": "PASS",
+      "details": "all 360 lessons carry every v1.1 required field"
+    },
+    {
+      "check": "lesson-depth",
+      "result": "PASS",
+      "details": "all lessons carry 3+ objectives, 5+ flow segments, 1+ standards, 5+ tutor routes"
+    },
+    {
+      "check": "lesson-flow-segments-distinct",
+      "result": "PASS",
+      "details": "no lesson repeats the same instructional move in two segments"
+    },
+    {
+      "check": "accessibility-depth",
+      "result": "PASS",
+      "details": "every lesson carries 5+ accessibility provisions"
+    },
+    {
+      "check": "accessibility-required-paths",
+      "result": "PASS",
+      "details": "every lesson states a text-only path, read-aloud capability, a no-audio path, and a private presentation alternative"
+    },
+    {
+      "check": "no-required-learner-voice-or-video",
+      "result": "PASS",
+      "details": "no lesson requires learner voice or video; captions and transcripts required when media exists"
+    },
+    {
+      "check": "media-optional-with-fallback",
+      "result": "PASS",
+      "details": "media optional with a readable fallback on all 360 lessons"
+    },
+    {
+      "check": "text-provenance-resolves",
+      "result": "PASS",
+      "details": "every lesson names a text with a resolvable id, matching source type, and a rights statement"
+    },
+    {
+      "check": "public-domain-referenced-not-reproduced",
+      "result": "PASS",
+      "details": "17 public-domain works are references with creator, year, and rationale; none is reproduced"
+    },
+    {
+      "check": "original-text-bank-integrity",
+      "result": "PASS",
+      "details": "17 Grade 3 and 18 Grade 4 original texts, each with a rights statement and substantive length"
+    },
+    {
+      "check": "public-domain-metadata-complete",
+      "result": "PASS",
+      "details": "every public-domain reference carries title, creator, first-publication year, and rationale"
+    },
+    {
+      "check": "student-authorship-on-every-lesson",
+      "result": "PASS",
+      "details": "all 360 lessons carry the authorship rule stating what the tutor must not do"
+    },
+    {
+      "check": "fixed-answer-protection-on-every-lesson",
+      "result": "PASS",
+      "details": "all 360 lessons restrict fixed-answer keys to scorer-visible only"
+    },
+    {
+      "check": "tutor-does-not-touch-assessed-draft",
+      "result": "PASS",
+      "details": "every revision lesson instructs the tutor to model on a sample, never on the learner's assessed draft"
+    },
+    {
+      "check": "assessed-days-are-independent",
+      "result": "PASS",
+      "details": "20 assessed lessons (one per unit), all marked independent"
+    },
+    {
+      "check": "multi-occasion-mastery",
+      "result": "PASS",
+      "details": "all 360 lessons require 2+ occasions, independent evidence, and 3+ evidence types, and record that guided success is not mastery"
+    },
+    {
+      "check": "guided-and-independent-evidence-per-unit",
+      "result": "PASS",
+      "details": "every unit produces both guided and independent evidence"
+    },
+    {
+      "check": "no-raw-essay-persistence-requirement",
+      "result": "PASS",
+      "details": "no lesson requires retaining a learner's raw essay or extended response text"
+    },
+    {
+      "check": "assessment-integrity",
+      "result": "PASS",
+      "details": "all 20 assessments split guided from independent evidence, require 2+ occasions, protect fixed answers, require student authorship, bound persistence, and balance points"
+    },
+    {
+      "check": "writing-progression",
+      "result": "PASS",
+      "details": "Grade 3 covers opinion, informative, narrative and revision with no W.9 (which begins at Grade 4); Grade 4 adds W.9a and W.9b, the evidence-from-texts standard new at this grade"
+    },
+    {
+      "check": "reading-progression",
+      "result": "PASS",
+      "details": "foundational decoding present at both grades and heavier at Grade 3 as the standards require (3.RF.3 on 21 lessons vs 4.RF.3 on 4); fluency retained at both (3.RF.4 on 13, 4.RF.4 on 10); Grade 4 adds structure, firsthand/secondhand, and author's reasoning"
+    },
+    {
+      "check": "grades-independently-authored",
+      "result": "PASS",
+      "details": "different 18-day arcs; 180 and 180 distinct daily foci with zero overlap; no shared unit title; no shared text"
+    },
+    {
+      "check": "not-derived-from-grade-5",
+      "result": "PASS",
+      "details": "no unit title, no standards code, and neither 18-day arc is shared with the frozen Grade 5 ELA course"
+    },
+    {
+      "check": "adaptive-english-boundary",
+      "result": "PASS",
+      "details": "Grade 3 records no band match and runs on static help; Grade 4 records band match for a future adapter; no lesson modifies the frozen package"
+    },
+    {
+      "check": "package-self-contained",
+      "result": "PASS",
+      "details": "50 files, all under curriculum-authoring/full-family-grade34/subjects/english-language-arts/"
+    },
+    {
+      "check": "lessons-conform-to-schema-v1_1",
+      "result": "PASS",
+      "details": "all 360 lessons validate against schemas/lesson.schema.json"
+    }
+  ]
+}

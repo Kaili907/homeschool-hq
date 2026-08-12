@@ -1,0 +1,82 @@
+{
+  "package_id": "manuel-academy-grades-3-4-ela-authoring-v1",
+  "version": "1.0.0",
+  "authored_on": "2026-08-12",
+  "status": "curriculum-authoring-release-complete",
+  "subject": "english-language-arts",
+  "grades": [
+    3,
+    4
+  ],
+  "jurisdictional_alignment": "Michigan-aligned; locally authored; not a claim of state approval, accreditation, licensure, or automatic credit",
+  "standards_verified_on": "2026-08-12",
+  "school_year": {
+    "weeks": 36,
+    "instructional_days_per_grade": 180
+  },
+  "counts": {
+    "courses": 2,
+    "units": 20,
+    "lessons": 360,
+    "lessons_by_grade": {
+      "3": 180,
+      "4": 180
+    },
+    "assessments": 20,
+    "standards_by_grade": {
+      "3": 42,
+      "4": 44
+    },
+    "original_texts": {
+      "3": 16,
+      "4": 18
+    },
+    "public_domain_references": {
+      "3": 8,
+      "4": 9
+    }
+  },
+  "code_format": {
+    "in_this_package": "<grade>.<strand>.<number>",
+    "as_published_by_mde": "<strand>.<grade>.<number>",
+    "note": "3.RL.1 and RL.3.1 denote the same standard. See standards/standards-reference.md."
+  },
+  "schema": {
+    "lesson": "schemas/lesson.schema.json",
+    "version": "1.1",
+    "extends": "curriculum-content/manuel-academy/1.0.0/schemas/lesson.schema.json"
+  },
+  "bound_policies": [
+    "curriculum-content/manuel-academy/1.0.0/policies/instruction-mastery-accessibility-safety.md",
+    "curriculum-content/manuel-academy/1.0.0/shared/rubrics.md",
+    "curriculum-content/manuel-academy/1.0.0/shared/student-learning-tools.md",
+    "curriculum-content/manuel-academy/1.0.0/shared/teacher-and-tutor-tools.md",
+    "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+  ],
+  "frozen_baselines": [
+    {
+      "artifact": "a5-adaptive-english-mvp-v0.2.0-20260216.zip",
+      "sha256": "474645929e9be3194601c0535d641dab55e8e79b7e10bbf00b3e667908874035",
+      "role": "Adaptive English intervention overlay for the Grade 4-6 band; referenced, not copied, embedded, duplicated, or modified."
+    }
+  ],
+  "entry_points": {
+    "human": "README.md",
+    "courses": "indices/course-index.json",
+    "units": "indices/unit-index.json",
+    "lessons": "indices/lesson-index.csv",
+    "standards_map": "standards/standards-map.json",
+    "schema": "schemas/lesson.schema.json",
+    "validation": "validation/validation-report.md",
+    "build": "authoring/build.py",
+    "validate": "tools/validate.py"
+  },
+  "boundaries": [
+    "No repository code, database, hosted service, identity system, route, or deployment outside this directory is modified.",
+    "The Study Engine is not rebuilt, extended, or altered.",
+    "The existing Grade 5 English Language Arts course is not rewritten, edited, or re-derived.",
+    "The frozen Adaptive English package is referenced only; it is not rewritten or duplicated.",
+    "No full or partial copyrighted trade text is reproduced; public-domain works are referenced, not embedded.",
+    "Third-party text licensing and custom media production are outside this authoring release."
+  ]
+}

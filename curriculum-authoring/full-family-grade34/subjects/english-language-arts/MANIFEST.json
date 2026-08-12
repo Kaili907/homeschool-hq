@@ -1,0 +1,253 @@
+{
+  "package_id": "manuel-academy-grades-3-4-ela-authoring-v1",
+  "version": "1.0.0",
+  "hash_algorithm": "sha256",
+  "exclusions": [
+    "MANIFEST.json",
+    "SHA256SUMS.txt"
+  ],
+  "file_count": 48,
+  "total_bytes": 5446633,
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 19,
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7146,
+      "sha256": "30a3ff47e75adce24113e0064464b2cdb4563666065b47689aa748b7328a26c4"
+    },
+    {
+      "path": "package-manifest.json",
+      "bytes": 3035,
+      "sha256": "90a49cb199a833cae12e4be75a7aadaf389f3bcef4a772c7516c206aa1689feb"
+    },
+    {
+      "path": "authoring/build.py",
+      "bytes": 37072,
+      "sha256": "03aff67e19e6603f48fcc90bafb70c15c469133867bacb63901ece3c1ac93506"
+    },
+    {
+      "path": "authoring/phases.py",
+      "bytes": 18275,
+      "sha256": "9c0eb1f0a3b494a2d8b61a13662beac1acb7f9e9440c6bc27d1f47abcc4ef864"
+    },
+    {
+      "path": "authoring/public_domain.py",
+      "bytes": 6846,
+      "sha256": "d8618468dbc88589a85bb1b40bf784eab5aa4cdea71351acb095d5fecf6bb6f6"
+    },
+    {
+      "path": "authoring/spec_grade3.py",
+      "bytes": 28546,
+      "sha256": "3f2505c346203cc72d7983713acc912b9f25f3f4dcc144f029c6ffa3c967c325"
+    },
+    {
+      "path": "authoring/spec_grade4.py",
+      "bytes": 30468,
+      "sha256": "21f942b8514807896ac41758f26d38f968b8f2786e2fce74c93457e429ca49e4"
+    },
+    {
+      "path": "authoring/standards_source.py",
+      "bytes": 17803,
+      "sha256": "47c5c97396fd285424eeefd215f1e279b527a6285b93a9c3092a166878f97b07"
+    },
+    {
+      "path": "authoring/texts_grade3.py",
+      "bytes": 26263,
+      "sha256": "2d72e21e4944000cbb25514fa851868656b624e33bee36457461a60a9e3387b5"
+    },
+    {
+      "path": "authoring/texts_grade4.py",
+      "bytes": 35982,
+      "sha256": "4e35d5ee7e0dfe80e92342ab69e45fcddd19382f38ea4be4182d4f0e11666b6d"
+    },
+    {
+      "path": "grades/grade-3/assessments.json",
+      "bytes": 64054,
+      "sha256": "cb0391ccd9ed4a2d7319073470f8bf153fba430b8eb0a2e3bf4bacac2134df4f"
+    },
+    {
+      "path": "grades/grade-3/course-guide.md",
+      "bytes": 8990,
+      "sha256": "ca63d91677ed4e882b270b16b6df14978d76be6f81296e1fe5985fe0132d1655"
+    },
+    {
+      "path": "grades/grade-3/course-overview.md",
+      "bytes": 3954,
+      "sha256": "786809df5f861a1f6c73fa17ec9b2902cc743cf5c3d4a71fb894997196280827"
+    },
+    {
+      "path": "grades/grade-3/lesson-sequence.md",
+      "bytes": 116733,
+      "sha256": "9cf74ed8ab475b4ddc4bb724ad7a890ab64cfde0098bf0175a459d6db4e4cd5e"
+    },
+    {
+      "path": "grades/grade-3/lessons.jsonl",
+      "bytes": 2133595,
+      "sha256": "7b5f814195876381a0adb59c2b7b6d79249e075a59cb92f4a600eb7ec8991762"
+    },
+    {
+      "path": "grades/grade-3/original-text-bank.json",
+      "bytes": 26791,
+      "sha256": "534db5aecc25345191a53da4ccf35a1ad6753c2396a5816cdbe4f860a716ded2"
+    },
+    {
+      "path": "grades/grade-3/original-text-bank.md",
+      "bytes": 24753,
+      "sha256": "327957b1f2a646e65527cfa267d412485f4525e60b36f573a37ac5c1e2c10ecc"
+    },
+    {
+      "path": "grades/grade-3/public-domain-register.json",
+      "bytes": 5185,
+      "sha256": "5220922910212060128136940d782346fa4595d231658234e7a153729e311d15"
+    },
+    {
+      "path": "grades/grade-3/schedule.csv",
+      "bytes": 10134,
+      "sha256": "d6e71ccb43cf9244e96e31322e070dbeab1048adfad25a2db84b69020151373d"
+    },
+    {
+      "path": "grades/grade-3/units.json",
+      "bytes": 22450,
+      "sha256": "4a7c5fad4aedc8d30ffa107cc5df31501fd300894ddc40cce285fdd825fba3a0"
+    },
+    {
+      "path": "grades/grade-4/assessments.json",
+      "bytes": 65144,
+      "sha256": "fa061fc413901e93a93f1bd0dea69bd80fbd5ca2d559322aa76067b59bd310e8"
+    },
+    {
+      "path": "grades/grade-4/course-guide.md",
+      "bytes": 9609,
+      "sha256": "4e1e4106c240afd74c063c270565b3405f5fe2bb7b99b2a95d0b4dbb85597301"
+    },
+    {
+      "path": "grades/grade-4/course-overview.md",
+      "bytes": 4418,
+      "sha256": "c87e924cc2e8451d7a95ec034959171cbd61a6f683baf12fc4c2d42474212a20"
+    },
+    {
+      "path": "grades/grade-4/lesson-sequence.md",
+      "bytes": 118681,
+      "sha256": "c03e997166414d0493a0b43166d1aa06aa42f9edb8bd98af9ddd02c7e9f7dd10"
+    },
+    {
+      "path": "grades/grade-4/lessons.jsonl",
+      "bytes": 2157807,
+      "sha256": "102f5b4f09e4bb401b255f971925ca68f1fbd03ecd2ff7f2165f4edf2b074a86"
+    },
+    {
+      "path": "grades/grade-4/original-text-bank.json",
+      "bytes": 36405,
+      "sha256": "e9605013de0dca114e6e192b42061c2b56010fd29a61f794c678c0f367f93596"
+    },
+    {
+      "path": "grades/grade-4/original-text-bank.md",
+      "bytes": 33873,
+      "sha256": "301a15b28fc2c52fe7945c16f4280a7b1f0fef26cefb3d0eefdb92e84b2bab99"
+    },
+    {
+      "path": "grades/grade-4/public-domain-register.json",
+      "bytes": 6237,
+      "sha256": "e5efc39fc560024165fe0c9e8241dd7f98d023e9a86c94aadad65246bff7893e"
+    },
+    {
+      "path": "grades/grade-4/schedule.csv",
+      "bytes": 10134,
+      "sha256": "d89b274ffea96253147cf7c63cd0d1ccd9f579e50909e53f5e4f6984a09df982"
+    },
+    {
+      "path": "grades/grade-4/units.json",
+      "bytes": 23589,
+      "sha256": "c894a4472009656ee7797420be13102ed55652a00c4b894ad137fb89bc427c7e"
+    },
+    {
+      "path": "indices/course-index.json",
+      "bytes": 2161,
+      "sha256": "9371985194d111c954e0623e1b9d444d3a8ddd6b9e7745b487c29ab85cf770e9"
+    },
+    {
+      "path": "indices/lesson-index.csv",
+      "bytes": 130383,
+      "sha256": "e1dab8ceee6c4416284025aa78cfce2a1244af92e22721cea83edacab066e053"
+    },
+    {
+      "path": "indices/unit-index.json",
+      "bytes": 46036,
+      "sha256": "3165e278d91acb6798a0becbf780478a146bea699df1e7fcaef9b294f813ccce"
+    },
+    {
+      "path": "policies/academic-integrity.md",
+      "bytes": 3614,
+      "sha256": "7effcf4de4995628e9c562bf8dfa8f60ef6ceb5916178b8cdccabbd6f644dea6"
+    },
+    {
+      "path": "policies/accessibility.md",
+      "bytes": 4349,
+      "sha256": "97fc4629745fa097bb63f409d2dac399f52bb196c27344e8c02e293587bc972d"
+    },
+    {
+      "path": "policies/adaptive-english-boundary.md",
+      "bytes": 2641,
+      "sha256": "0571c6615dd4835f2c467be1ef74b64b57d250b19e07350379d39d5cc85475fa"
+    },
+    {
+      "path": "policies/policy-binding.md",
+      "bytes": 2715,
+      "sha256": "fa3a658b7fbf3cd045ffd9627711306804d8bad06ecf35cb7a9cc9a2d8783a0a"
+    },
+    {
+      "path": "policies/source-integrity.md",
+      "bytes": 4102,
+      "sha256": "5be7e0fea03a265da030e4d13d5ba426d0677f013ace9e413e548a880682f9a3"
+    },
+    {
+      "path": "schemas/lesson.schema.json",
+      "bytes": 7016,
+      "sha256": "c86525628650e6ca23a224ea2969a2878ada9eff7360bcce5dd875cbd4b5b25f"
+    },
+    {
+      "path": "standards/michigan-ela-g3.json",
+      "bytes": 8821,
+      "sha256": "d9f279f4dc8bc47813a129a7a7133a61862bb5c42addf650b706677b48661652"
+    },
+    {
+      "path": "standards/michigan-ela-g4.json",
+      "bytes": 10005,
+      "sha256": "d57c6b473d87ffea452a47d6d43d137809ce180204dc74b389ff2c2a4ad9d980"
+    },
+    {
+      "path": "standards/standards-map.json",
+      "bytes": 78428,
+      "sha256": "b44e4d97d17a9e34e635feb127bd79592bd225c40abb8f94c4a7b42be86178e5"
+    },
+    {
+      "path": "standards/standards-reference.md",
+      "bytes": 7257,
+      "sha256": "35c18ed6f1b97bedd321e23c3fa8173750a184384a9acad98ce4f6d8678b3960"
+    },
+    {
+      "path": "tools/manifest.py",
+      "bytes": 1681,
+      "sha256": "81e1a2497980b2c66fda3b96d68cf245c4a6b8ac9d2276f76a441d2e8567b765"
+    },
+    {
+      "path": "tools/validate.py",
+      "bytes": 27459,
+      "sha256": "225366e47438f39d6a05f2a448670bff4a1679982409cd4121b67c166a589d56"
+    },
+    {
+      "path": "validation/validation-report.md",
+      "bytes": 6868,
+      "sha256": "1fd87090a721eca57b751cda3f8250660e02ea67ed402f39cec5b4e10b2b0bbe"
+    },
+    {
+      "path": "validation/validation.json",
+      "bytes": 9106,
+      "sha256": "76cd91231dbc752a4a3e96107793025527eefbe40d1a8cae85c037b784666d28"
+    }
+  ]
+}

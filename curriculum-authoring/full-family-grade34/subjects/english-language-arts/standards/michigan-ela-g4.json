@@ -1,0 +1,81 @@
+{
+  "grade": 4,
+  "jurisdiction": "Michigan",
+  "alignment_date": "2026-08-12",
+  "code_format_in_this_package": "<grade>.<strand>.<number>",
+  "code_format_as_published_by_mde": "<strand>.<grade>.<number>",
+  "sources": [
+    {
+      "label": "Michigan K-12 Standards: English Language Arts (MDE-published document)",
+      "url": "https://www.michigan.gov/mde/services/academic-standards/mmc/curriculum/ela",
+      "note": "Canonical MDE landing page for the Michigan ELA standards."
+    },
+    {
+      "label": "Michigan K-12 ELA Standards, full document (district-hosted mirror of the MDE publication)",
+      "url": "https://www.redfordu.k12.mi.us/downloads/curriculum/k-12_mi_ela_standardsrev.pdf",
+      "note": "Full 69-page Michigan-branded ELA standards document; every Grade 3 and Grade 4 code and sub-code below was read from this text. Michigan.gov blocks automated retrieval of its own copy."
+    },
+    {
+      "label": "Michigan grades 3-5 ELA standards extract (district-hosted)",
+      "url": "https://elps.us/downloads/educational_services_-_common_core_standards/3-5_ela.pdf",
+      "note": "Independent corroboration of the RF, L, and W enumerations for Grades 3 and 4."
+    },
+    {
+      "label": "Michigan Academic Standards (program index)",
+      "url": "https://www.michigan.gov/mde/services/academic-standards",
+      "note": "Jurisdictional context for the alignment claim."
+    }
+  ],
+  "standards": {
+    "4.RL.1": "Refer to details and examples when explaining what the text says explicitly and when drawing inferences.",
+    "4.RL.2": "Determine a theme of a story, drama, or poem from details in the text; summarize the text.",
+    "4.RL.3": "Describe in depth a character, setting, or event, drawing on specific details in the text.",
+    "4.RL.4": "Determine the meaning of words and phrases, including those that allude to significant characters found in mythology.",
+    "4.RL.5": "Explain major differences between poems, drama, and prose, referring to the structural elements of each.",
+    "4.RL.6": "Compare and contrast the point of view from which different stories are narrated, including first- and third-person narrations.",
+    "4.RL.7": "Make connections between the text of a story or drama and a visual or oral presentation of that text.",
+    "4.RL.9": "Compare and contrast the treatment of similar themes and topics and of patterns of events across cultures.",
+    "4.RL.10": "Read and comprehend literature in the grades 4-5 complexity band proficiently, with scaffolding as needed at the high end.",
+    "4.RI.1": "Refer to details and examples when explaining what the text says explicitly and when drawing inferences.",
+    "4.RI.2": "Determine the main idea and explain how it is supported by key details; summarize the text.",
+    "4.RI.3": "Explain events, procedures, ideas, or concepts in a historical, scientific, or technical text, including what happened and why.",
+    "4.RI.4": "Determine the meaning of general academic and domain-specific words or phrases in a grade 4 topic or subject area.",
+    "4.RI.5": "Describe the overall structure of a text or part of a text: chronology, comparison, cause and effect, or problem and solution.",
+    "4.RI.6": "Compare and contrast a firsthand and a secondhand account of the same event or topic, describing the differences in focus and information provided.",
+    "4.RI.7": "Interpret information presented visually, orally, or quantitatively and explain how it contributes to understanding.",
+    "4.RI.8": "Explain how an author uses reasons and evidence to support particular points in a text.",
+    "4.RI.9": "Integrate information from two texts on the same topic in order to write or speak about the subject knowledgeably.",
+    "4.RI.10": "Read and comprehend informational text in the grades 4-5 complexity band proficiently, with scaffolding as needed at the high end.",
+    "4.RF.3": "Know and apply grade-level phonics and word analysis skills in decoding words. Sub-point (a) only: use combined knowledge of letter-sound correspondences, syllabication patterns, and morphology to read unfamiliar multisyllabic words in context and out of context.",
+    "4.RF.4": "Read with sufficient accuracy and fluency to support comprehension. Sub-points: (a) purpose and understanding; (b) oral prose and poetry with accuracy, rate, and expression on successive readings; (c) context to confirm or self-correct, rereading as necessary.",
+    "4.W.1": "Write opinion pieces supporting a point of view with reasons and information. Sub-points: (a) introduce the topic clearly, state an opinion, and group related ideas to support the purpose; (b) provide reasons supported by facts and details; (c) link opinion and reasons; (d) provide a concluding statement or section related to the opinion presented.",
+    "4.W.2": "Write informative or explanatory texts to examine a topic and convey ideas clearly. Sub-points: (a) introduce the topic and group related information in paragraphs and sections, including formatting and multimedia when useful; (b) develop with facts, definitions, concrete details, quotations, and examples; (c) link ideas within categories; (d) use precise language and domain-specific vocabulary; (e) provide a concluding statement or section.",
+    "4.W.3": "Write narratives with effective technique, descriptive details, and clear event sequences. Sub-points: (a) orient the reader by establishing a situation and introducing a narrator or characters; (b) use dialogue and description to develop experiences and responses; (c) use a variety of transitional words and phrases to manage sequence; (d) use concrete words, phrases, and sensory details; (e) provide a conclusion that follows from the narrated experiences or events.",
+    "4.W.4": "Produce clear and coherent writing in which development and organization are appropriate to task, purpose, and audience.",
+    "4.W.5": "With guidance and support from peers and adults, plan, revise, and edit, addressing the grade 4 language standards.",
+    "4.W.6": "With some guidance and support, use technology, including the Internet, to produce and publish writing; type a minimum of one page in a single sitting.",
+    "4.W.7": "Conduct short research projects that build knowledge through investigation of different aspects of a topic.",
+    "4.W.8": "Recall relevant experience and gather relevant information from print and digital sources; take notes, categorize information, and provide a list of sources.",
+    "4.W.9a": "Draw evidence from literary texts to support analysis and reflection, applying the grade 4 reading standards for literature.",
+    "4.W.9b": "Draw evidence from informational texts to support analysis and reflection, applying the grade 4 reading standards for informational text.",
+    "4.W.10": "Write routinely over extended and shorter time frames for a range of tasks, purposes, and audiences.",
+    "4.SL.1": "Engage effectively in collaborative discussions on grade 4 topics and texts. Sub-points: (a) come prepared and draw on that preparation; (b) follow agreed-upon rules and carry out assigned roles; (c) pose and respond to specific questions to clarify or follow up; (d) review the key ideas expressed and explain one's own understanding.",
+    "4.SL.2": "Paraphrase portions of a text read aloud or information presented in diverse media and formats.",
+    "4.SL.3": "Identify the reasons and evidence a speaker provides to support particular points.",
+    "4.SL.4": "Report on a topic or text, tell a story, or recount an experience in an organized manner, with facts and details supporting main ideas.",
+    "4.SL.5": "Add audio recordings and visual displays to presentations when appropriate to enhance main ideas or themes.",
+    "4.SL.6": "Differentiate between contexts calling for formal English and situations where informal discourse is appropriate; use formal English when appropriate.",
+    "4.L.1": "Demonstrate command of standard English grammar and usage. Sub-points (a)-(g): relative pronouns and relative adverbs; progressive verb tenses; modal auxiliaries; ordering adjectives conventionally; prepositional phrases; complete sentences, correcting fragments and run-ons; frequently confused words.",
+    "4.L.2": "Demonstrate command of capitalization, punctuation, and spelling. Sub-points (a)-(d): correct capitalization; commas and quotation marks marking direct speech and quotations from a text; a comma before a coordinating conjunction in a compound sentence; grade-appropriate spelling, consulting references as needed.",
+    "4.L.3": "Use knowledge of language and its conventions. Sub-points: (a) choose words and phrases to convey ideas precisely; (b) choose punctuation for effect; (c) differentiate contexts calling for formal English from informal discourse.",
+    "4.L.4": "Determine or clarify the meaning of unknown and multiple-meaning words. Sub-points: (a) context including definitions, examples, and restatements; (b) common Greek and Latin affixes and roots; (c) dictionaries, glossaries, and thesauruses, print and digital, for pronunciation and precise meaning.",
+    "4.L.5": "Demonstrate understanding of figurative language, word relationships, and nuances. Sub-points: (a) explain simple similes and metaphors in context; (b) recognize and explain idioms, adages, and proverbs; (c) demonstrate understanding of antonyms and synonyms.",
+    "4.L.6": "Acquire and use grade-appropriate general academic and domain-specific words and phrases, including those that signal precise actions, emotions, or states of being and those basic to a particular topic."
+  },
+  "excluded_codes": {
+    "4.RL.8": "The official text reads '(Not applicable to literature).' No such standard exists.",
+    "4.RF.1": "Print Concepts ends after Grade 1. Not defined at Grade 4.",
+    "4.RF.2": "Phonological Awareness ends after Grade 1. Not defined at Grade 4.",
+    "4.RF.3b": "RF.4.3 has a single sub-point, 'a'. There is no sub-point 'b'."
+  }
+}

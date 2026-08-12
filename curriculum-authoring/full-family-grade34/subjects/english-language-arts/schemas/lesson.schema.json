@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/curriculum-lesson-g34-ela-v1_1.json",
+  "title": "Manuel Academy Curriculum Lesson v1.1 — Grades 3 and 4 English Language Arts",
+  "description": "Extends the Manuel Academy curriculum lesson v1 schema (curriculum-content/manuel-academy/1.0.0/schemas/lesson.schema.json). Every v1 required field is still required and keeps its meaning. This profile narrows grade, subject, and lesson_id, and adds the fields Grades 3-4 ELA needs to be checkable rather than merely asserted: text provenance, guided versus independent evidence, student authorship, fixed-answer protection, structured mastery, speaking and listening alternatives, persistence boundary, and the adaptive-support band declaration.",
+  "type": "object",
+  "required": [
+    "schema_version", "lesson_id", "course_id", "grade", "subject", "course_day",
+    "unit_number", "day_in_unit", "title", "phase", "focus", "standards",
+    "learning_objectives", "lesson_flow", "formative_check", "mastery_rule",
+    "accessibility_and_accommodations", "safety_and_privacy",
+    "text_reference", "evidence_mode", "assessed", "student_authorship",
+    "fixed_answer_protection", "mastery", "speaking_and_listening_alternatives",
+    "persistence", "adaptive_support", "media", "adaptive_tutor_routes"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.1" },
+    "lesson_id": {
+      "type": "string",
+      "pattern": "^ma-g(3|4)-english-language-arts-u[0-9]{2}-l[0-9]{2}$"
+    },
+    "course_id": { "enum": ["ma-g3-english-language-arts", "ma-g4-english-language-arts"] },
+    "grade": { "enum": [3, 4] },
+    "subject": { "const": "english-language-arts" },
+    "course_day": { "type": "integer", "minimum": 1, "maximum": 180 },
+    "unit_number": { "type": "integer", "minimum": 1, "maximum": 10 },
+    "day_in_unit": { "type": "integer", "minimum": 1, "maximum": 18 },
+    "title": { "type": "string", "minLength": 5 },
+    "phase": { "type": "string", "minLength": 3 },
+    "focus": { "type": "string", "minLength": 3 },
+    "estimated_minutes": { "type": "string" },
+    "standards": {
+      "type": "array", "minItems": 1,
+      "items": { "type": "string", "pattern": "^[34]\\.(RL|RI|RF|W|SL|L)\\.[0-9]{1,2}[a-z]?$" }
+    },
+    "learning_objectives": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+    "success_criteria": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+    "lesson_flow": {
+      "type": "array", "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["segment", "minutes", "teacher_or_tutor_action"],
+        "properties": {
+          "segment": { "type": "string" },
+          "minutes": { "type": "string" },
+          "teacher_or_tutor_action": { "type": "string", "minLength": 20 }
+        }
+      }
+    },
+    "text_reference": {
+      "type": "object",
+      "required": ["mode", "source_type", "learner_or_family_selected_texts_permitted"],
+      "properties": {
+        "mode": { "enum": ["package-supplied", "learner-produced"] },
+        "source_type": { "enum": ["original", "public-domain", "short-excerpt", "learner-authored"] },
+        "text_id": { "type": "string" },
+        "title": { "type": "string" },
+        "genre": { "type": "string" },
+        "rights": { "type": "string" },
+        "location": { "type": "string" },
+        "public_domain_alternatives": { "type": "array", "items": { "type": "string" } },
+        "learner_or_family_selected_texts_permitted": { "type": "string" }
+      },
+      "allOf": [{
+        "if": { "properties": { "mode": { "const": "package-supplied" } } },
+        "then": { "required": ["text_id", "title", "rights", "location"] }
+      }]
+    },
+    "evidence_mode": { "enum": ["guided", "independent"] },
+    "assessed": { "type": "boolean" },
+    "student_authorship": { "type": "string", "minLength": 40 },
+    "fixed_answer_protection": { "type": "string", "minLength": 40 },
+    "mastery": {
+      "type": "object",
+      "required": ["occasions_required", "independent_evidence_required",
+                   "guided_success_is_not_mastery", "evidence_types", "rule"],
+      "properties": {
+        "occasions_required": { "type": "integer", "minimum": 2 },
+        "separation": { "type": "string" },
+        "independent_evidence_required": { "const": true },
+        "guided_success_is_not_mastery": { "const": true },
+        "evidence_types": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+        "rule": { "type": "string" }
+      }
+    },
+    "accessibility_and_accommodations": { "type": "array", "minItems": 5, "items": { "type": "string" } },
+    "speaking_and_listening_alternatives": {
+      "type": "object",
+      "required": ["private_presentation_alternative", "no_audio_path",
+                   "no_learner_voice_or_video_required",
+                   "captions_and_transcript_required_when_media_exists"],
+      "properties": {
+        "private_presentation_alternative": { "type": "string" },
+        "no_audio_path": { "type": "string" },
+        "no_learner_voice_or_video_required": { "const": true },
+        "captions_and_transcript_required_when_media_exists": { "const": true },
+        "recording_is_opt_in": { "type": "string" }
+      }
+    },
+    "safety_and_privacy": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+    "media": {
+      "type": "object",
+      "required": ["required", "fallback"],
+      "properties": {
+        "suggestion": { "type": "string" },
+        "required": { "const": false },
+        "fallback": { "type": "string", "minLength": 20 },
+        "captions_required_if_used": { "const": true },
+        "transcript_required_if_used": { "const": true }
+      }
+    },
+    "persistence": {
+      "type": "object",
+      "required": ["raw_response_retention_required", "stored", "not_required_to_store"],
+      "properties": {
+        "raw_response_retention_required": { "const": false },
+        "stored": { "type": "array", "minItems": 3, "items": { "type": "string" } },
+        "not_required_to_store": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "note": { "type": "string" }
+      }
+    },
+    "adaptive_support": {
+      "type": "object",
+      "required": ["adaptive_english_band_match", "route", "static_help_sufficient", "package_modified"],
+      "properties": {
+        "adaptive_english_band_match": { "type": "boolean" },
+        "route": { "type": "string" },
+        "static_help_sufficient": { "const": true },
+        "package_modified": { "const": false }
+      }
+    },
+    "adaptive_tutor_routes": {
+      "type": "array", "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["signal", "action"],
+        "properties": { "signal": { "type": "string" }, "action": { "type": "string" } }
+      }
+    },
+    "formative_check": { "type": "string" },
+    "mastery_rule": { "type": "string" }
+  },
+  "additionalProperties": true
+}
