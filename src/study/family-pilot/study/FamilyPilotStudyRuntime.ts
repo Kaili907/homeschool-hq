@@ -517,8 +517,18 @@ export class FamilyPilotStudyRuntime {
     )
   }
 
+  /**
+   * CalendarRuntime requires every active-work interval to resolve to an
+   * exact whole number of seconds, but the host clock is millisecond-precise.
+   * Rounding every instant this runtime hands to the calendar port UP to the
+   * next whole second (never down, so an instant never lands before the
+   * block's own creation timestamp) keeps the delta between any two rounded
+   * instants an exact integer, and equal instants are accepted by the
+   * calendar's chronological check.
+   */
   #at(): string {
-    return this.#now().toISOString()
+    const ms = this.#now().getTime()
+    return new Date(Math.ceil(ms / 1000) * 1000).toISOString()
   }
 
   /**

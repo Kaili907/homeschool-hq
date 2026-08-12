@@ -51,6 +51,34 @@ function pilotDevice(options: { readonly safety?: 'clear' | 'urgent' } = {}) {
   }
 }
 
+/**
+ * A real host clock never lands on second boundaries: `Date.now()` carries
+ * arbitrary millisecond jitter. This reproduces that instead of the fixed
+ * 1000ms-per-call cadence `pilotDevice` uses, which happens to always land
+ * on whole seconds and so can never exercise this defect.
+ */
+function pilotDeviceWithRealisticClock(options: { readonly safety?: 'clear' | 'urgent' } = {}) {
+  const jitterMs = [647, 289, 913, 152, 734, 68, 401]
+  let elapsedMs = 0
+  let call = 0
+  const now = () => {
+    elapsedMs += jitterMs[call % jitterMs.length]!
+    call += 1
+    return new Date(SYNTHETIC_NOW.getTime() + elapsedMs)
+  }
+  const { ports: localPorts, services } = createLocalDevelopmentStudyPorts({ now })
+  const ports: StudyPortBundle = { ...localPorts, safety: safetyPort(options.safety ?? 'clear') }
+  const lifecycle = new StudyLifecycleBoundary()
+  const safetyStopStorage = memoryStorage()
+  return {
+    ports,
+    services,
+    lifecycle,
+    safetyStopStorage,
+    reload: () => new FamilyPilotStudyRuntime({ ports, now, lifecycle, safetyStopStorage }),
+  }
+}
+
 function studentContext(id: string): HostStudyLaunchContext {
   return { ...syntheticGrade5StudyContext('math'), learnerRef: `learner:pilot-${id}`, hostProfileRef: `pilot-${id}` }
 }
@@ -171,6 +199,26 @@ describe('Family Pilot Study runtime', () => {
       status: 'rejected',
       reason: 'assignment-not-active',
     })
+  })
+
+  it('completes a segment on a real host clock that never lands on a whole second', async () => {
+    const device = pilotDeviceWithRealisticClock()
+    const context = studentContext('one')
+    const { runtime, session, snapshot } = await startMath(device, context, 'clock-jitter')
+    const completed = await runtime.completeSegment({ context, session })
+    if (completed.status !== 'ok') throw new Error(`completeSegment failed: ${completed.reason}`)
+    expect(completed.snapshot.completedSegmentRefs).toEqual([snapshot.segmentRef])
+    expect(completed.snapshot.segmentOrdinal).toBe(2)
+
+    // A second completion, a pause, and a resume must all still resolve —
+    // every one of them reaches the same whole-active-seconds check.
+    const paused = await runtime.pause({ context, session })
+    if (paused.status !== 'ok') throw new Error(`pause failed: ${paused.reason}`)
+    const resumed = await runtime.resume({ context, session })
+    if (resumed.status !== 'ok') throw new Error(`resume failed: ${resumed.reason}`)
+    const completedAgain = await runtime.completeSegment({ context, session })
+    if (completedAgain.status !== 'ok') throw new Error(`completeSegment failed: ${completedAgain.reason}`)
+    expect(completedAgain.snapshot.segmentOrdinal).toBe(3)
   })
 
   it('completes the whole assignment only against accepted Tutor receipts', async () => {
