@@ -12,16 +12,18 @@ is invented here.** A code appears in backticks — and is therefore accepted by
 | Class | Meaning | Count |
 | --- | --- | --- |
 | VERBATIM | the string occurs verbatim in the lane custody documents | 0 |
-| COMPOSITE_VERIFIED | a lane-composed label whose every component the lane evidences | 10 |
-| DECLARED_UNVERIFIED | the lane marked the citation UNVERIFIED itself | 0 |
+| COMPOSITE_VERIFIED | a lane-composed label whose every component the lane evidences | 0 |
+| DECLARED_UNVERIFIED | the lane itself declares the citation unverified | 10 |
 | UNTRACEABLE | not evidenced by the lane custody documents | 0 |
 
-## Composite, components verified
+## Declared UNVERIFIED by the lane
 
-Each label below is composed by the lane from parts its own custody documents evidence:
-verbatim text, a restatement built from at least two published vocabulary words, or a code
-token whose alphabetic suffix and whose construction template the lane publishes. The
-composite string itself is a lane label, not a state code.
+The authoring lane attached `mapping_status: unverified` to every occasion on which
+delivered content cites these strings, or marked the citation UNVERIFIED in the string
+itself. That declaration outranks any text match this assembly could make: the lane is
+saying it did not read the code off the official document. These strings remain quoted
+because an honest UNVERIFIED is an accepted value under `authoring-boundaries.md` §7 —
+but they are **not** evidence of state-standard alignment.
 
 - `Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns. [Michigan PE Grades 9-12 LEVEL 1 (foundational high-school physical education)]`
 - `Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns. [Michigan PE Grades 9-12 LEVEL 2 (advanced/elective high-school physical education)]`

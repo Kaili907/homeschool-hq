@@ -85,7 +85,27 @@ def evidenced(component, corpus):
     words = re.findall(r'[A-Za-z0-9][A-Za-z0-9\-]{3,}', component)
     return len(words) >= 2 and all(w in corpus for w in words)
 
-def classify(code, corpus):
+# A lane may declare its own citation unverified in the delivered content, via a
+# `standards_mapping` entry carrying mapping_status: unverified. That declaration
+# outranks any text-matching this assembly could do: if the lane says it did not
+# read the code off the official document, the registry must say so too.
+def collect_mapping_status(records):
+    """cited standards string -> set of mapping_status values the lane attached."""
+    out = {}
+    for rec in records:
+        cited = rec.get('standards') or []
+        for m in rec.get('standards_mapping') or []:
+            st = m.get('mapping_status')
+            if not st: continue
+            code, statement = m.get('code'), m.get('standard')
+            for s in cited:
+                if (code and (f'[{code}]' in s or code in s)) or (statement and statement in s):
+                    out.setdefault(s, set()).add(st)
+    return out
+
+def classify(code, corpus, declared=None):
+    lane = (declared or {}).get(code)
+    if lane and lane == {'unverified'}: return 'DECLARED_UNVERIFIED', []
     if 'UNVERIFIED' in code.upper(): return 'DECLARED_UNVERIFIED', []
     if code in corpus: return 'VERBATIM', []
     comps = composite_components(code)
@@ -119,6 +139,7 @@ def main():
             (shutil.copytree if os.path.isdir(src) else shutil.copy2)(src, os.path.join(dst, 'source-docs', entry))
 
         cited = set()
+        records = []
         fam_courses = []
         for g in GRADES:
             srcdir = os.path.join(fam_root.rsplit('/' + root, 1)[0], root, '') if False else os.path.join(sub(lane), tmpl.format(g=g, gg=f'{g:02d}'))
@@ -133,21 +154,23 @@ def main():
             assess = assess if isinstance(assess, list) else assess.get('assessments', [])
             for u in units: cited |= set(u.get('standards', []))
             for l in lessons: cited |= set(l.get('standards', []))
+            records.extend(units); records.extend(lessons)
             fam_courses.append({'course_id': f'ma-g{g}-{fam}', 'grade': g,
                                 'units': len(units), 'lessons': len(lessons), 'assessments': len(assess)})
         report['families'][fam] = {'owner_lane': lane, 'courses': fam_courses, 'source_root': f'{WAVE}/subjects/{root}'}
 
         # derived standards registry
         corpus = family_source_corpus(fam_root)
+        declared = collect_mapping_status(records)
         buckets = {'VERBATIM': [], 'COMPOSITE_VERIFIED': [], 'DECLARED_UNVERIFIED': [], 'UNTRACEABLE': []}
         detail = {}
         for code in sorted(cited):
-            kind, comps = classify(code, corpus)
+            kind, comps = classify(code, corpus, declared)
             buckets[kind].append(code)
             detail[code] = {'class': kind, 'missing_components': comps if kind == 'UNTRACEABLE' else []}
         report['standards'][fam] = {k: len(v) for k, v in buckets.items()}
         report['standards'][fam]['untraceable_codes'] = buckets['UNTRACEABLE']
-        write_coverage(os.path.join(dst, 'standards-coverage.md'), fam, root, buckets, detail)
+        write_coverage(os.path.join(dst, 'standards-coverage.md'), fam, root, buckets, detail, declared)
 
     # ---- schedules ----------------------------------------------------------
     os.makedirs(os.path.join(RC, 'schedules'))
@@ -172,7 +195,7 @@ def main():
     json.dump(report, open(os.path.join(HERE, 'assembly-derived.json'), 'w'), indent=2, sort_keys=True)
     print(json.dumps({k: (v if k != 'families' else list(v)) for k, v in report.items()}, indent=2)[:2000])
 
-def write_coverage(path, fam, root, buckets, detail):
+def write_coverage(path, fam, root, buckets, detail, declared=None):
     L = []
     L.append(f'# Standards Coverage Registry — {fam}')
     L.append('')
@@ -189,7 +212,7 @@ def write_coverage(path, fam, root, buckets, detail):
     L.append('| --- | --- | --- |')
     L.append(f'| VERBATIM | the string occurs verbatim in the lane custody documents | {len(buckets["VERBATIM"])} |')
     L.append(f'| COMPOSITE_VERIFIED | a lane-composed label whose every component the lane evidences | {len(buckets["COMPOSITE_VERIFIED"])} |')
-    L.append(f'| DECLARED_UNVERIFIED | the lane marked the citation UNVERIFIED itself | {len(buckets["DECLARED_UNVERIFIED"])} |')
+    L.append(f'| DECLARED_UNVERIFIED | the lane itself declares the citation unverified | {len(buckets["DECLARED_UNVERIFIED"])} |')
     L.append(f'| UNTRACEABLE | not evidenced by the lane custody documents | {len(buckets["UNTRACEABLE"])} |')
     L.append('')
     if buckets['VERBATIM']:
@@ -209,6 +232,13 @@ def write_coverage(path, fam, root, buckets, detail):
         L.append('')
     if buckets['DECLARED_UNVERIFIED']:
         L.append('## Declared UNVERIFIED by the lane')
+        L.append('')
+        L.append('The authoring lane attached `mapping_status: unverified` to every occasion on which')
+        L.append('delivered content cites these strings, or marked the citation UNVERIFIED in the string')
+        L.append('itself. That declaration outranks any text match this assembly could make: the lane is')
+        L.append('saying it did not read the code off the official document. These strings remain quoted')
+        L.append('because an honest UNVERIFIED is an accepted value under `authoring-boundaries.md` §7 —')
+        L.append('but they are **not** evidence of state-standard alignment.')
         L.append('')
         for c in buckets['DECLARED_UNVERIFIED']: L.append(f'- `{c}`')
         L.append('')

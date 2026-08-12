@@ -13,7 +13,7 @@ is invented here.** A code appears in backticks — and is therefore accepted by
 | --- | --- | --- |
 | VERBATIM | the string occurs verbatim in the lane custody documents | 8 |
 | COMPOSITE_VERIFIED | a lane-composed label whose every component the lane evidences | 0 |
-| DECLARED_UNVERIFIED | the lane marked the citation UNVERIFIED itself | 0 |
+| DECLARED_UNVERIFIED | the lane itself declares the citation unverified | 0 |
 | UNTRACEABLE | not evidenced by the lane custody documents | 0 |
 
 ## Verbatim

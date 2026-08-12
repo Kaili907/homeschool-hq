@@ -57,7 +57,7 @@ Every lane already emitted contract-conformant identifiers (`ma-g<grade>-<family
 | 4 | Every lesson is claimed by exactly one unit; no orphans, no double claims | **PASS** |
 | 5 | Schedules are complete in both directions | **PASS** — 3,324 references, each resolving to exactly one delivered lesson, each lesson scheduled exactly once |
 | 6 | Mastery is evidenced on more than one occasion in every unit | **PASS** — every unit has ≥2 lessons and a distinct unit assessment |
-| 7 | Standards are traceable to the owning lane's own custody documents | **FAIL for mathematics only** — see §6 |
+| 7 | Standards are traceable to the owning lane's own custody documents, or the lane declares them unverified | **FAIL for mathematics only** — 7 codes; physical education and part of health are lane-declared `UNVERIFIED`, which is accepted but is not verification. See §5 and §6 |
 | 8 | Every delivered course has a credit recommendation and a matrix row | **PASS** |
 | 9 | Grade 12 is substantive | **PASS** — no family's Grade 12 is smaller than its Grade 11; every Grade 12 carries ≥6 units; `ma-g12-mathematics` carries the final-year mathematics requirement |
 | 10 | Personal Finance stays separate from economics | **PASS** — `ma-g9-financial-literacy` carries `MMC_PERSONAL_FINANCE`; `ma-g11-social-studies` carries `MMC_SOCIAL_STUDIES_ECONOMICS`; no course claims both |
@@ -81,21 +81,48 @@ documents, which sit verbatim beside it in `source-docs/`:
 | --- | --- | --- |
 | `VERBATIM` | the whole string occurs in the lane's custody documents | yes |
 | `COMPOSITE_VERIFIED` | a lane-composed label every component of which is evidenced — either verbatim, or restated from at least two published vocabulary words, or a code token whose alphabetic suffix and whose construction template the lane publishes | yes |
-| `DECLARED_UNVERIFIED` | the lane marked the citation `UNVERIFIED` itself | yes |
+| `DECLARED_UNVERIFIED` | the lane itself declares the citation unverified — either the string says so, or every `standards_mapping` entry the lane attached to it carries `mapping_status: unverified` | yes |
 | `UNTRACEABLE` | none of the above | **no** — deliberately left unquoted so the validator rejects it |
 
-Counts: mathematics 156 verbatim / 7 untraceable; english-language-arts 82 / 0; social-studies
-162 / 0; arts-and-music 20 / 0; technology 11 / 0; financial-literacy 8 / 0; ready-for-life 4 / 0;
-health 0 verbatim / 26 composite-verified / 0 untraceable; physical-education 0 / 10 / 0.
+| Family | verbatim | composite-verified | lane-declared unverified | untraceable |
+| --- | ---: | ---: | ---: | ---: |
+| social-studies | 162 | 0 | 0 | 0 |
+| mathematics | 156 | 0 | 0 | **7** |
+| english-language-arts | 82 | 0 | 0 | 0 |
+| arts-and-music | 20 | 0 | 0 | 0 |
+| technology | 11 | 0 | 0 | 0 |
+| financial-literacy | 8 | 0 | 0 | 0 |
+| ready-for-life | 4 | 0 | 0 | 0 |
+| health | 0 | 25 | 1 | 0 |
+| physical-education | 0 | 0 | **10** | 0 |
 
-Health and physical education cite lane-composed labels rather than bare state codes —
-`Michigan HESG 2025 Grades 9-12 [12.1.BEPA] Balanced Eating and Physical Activity — Self-Awareness
-and Analyzing Influences`. Every semantic part of that label is published by the health lane:
-the topic abbreviation `BEPA`, the topic name, the practice name, and the code template
-`12.<practice>.<TOPIC>` with its confirmed official examples. The wrapper is a lane label, not a
-state code, and the coverage file says so. Readers who want the stricter reading should note
-that the health lane's own standards reference already records part of the HESG as `unverified`
-because `www.michigan.gov` returns HTTP 403 to direct fetch.
+**Two families ship no verbatim-verified state standard, and one of them is entirely
+self-declared unverified. That is not equivalent to social studies' 162 verbatim codes and
+should not be read as if it were.**
+
+- **Physical education: 10 of 10 citations are lane-declared unverified.** The PE lane attaches
+  `mapping_status: unverified` to all 1,417 `standards_mapping` entries across its units and
+  lessons, and its own `standards-reference.md` records `canonical` as *"(none) — deliberately.
+  Nothing here was read verbatim off the primary PDF, so nothing claims to be."* `www.michigan.gov`
+  returns HTTP 403 to direct fetch, so the lane confirmed the five standard statements and the
+  LEVEL 1 / LEVEL 2 structure through search-engine indexing instead. The registry now records
+  every one of those citations as `DECLARED_UNVERIFIED`.
+- **Health: 25 composite-verified, 1 lane-declared unverified.** Health attaches
+  `mapping_status: canonical` to 371 of its 413 mappings and `unverified` to 42, all of them the
+  HESG Section 1 citation. Its composite labels — `Michigan HESG 2025 Grades 9-12 [12.1.BEPA]
+  Balanced Eating and Physical Activity — Self-Awareness and Analyzing Influences` — are built
+  from parts the lane does publish: the topic abbreviation `BEPA`, the topic name, the practice
+  name, and the code template `12.<practice>.<TOPIC>` derived from confirmed grade-5 and grade-8
+  examples. The bracketed 9–12 band codes themselves appear nowhere in the lane's custody
+  documents; they are extrapolated from that template, which the lane states openly and which
+  the coverage file repeats.
+
+A lane's own declaration outranks any text match this assembly could make. Where a lane says it
+did not read a code off the official document, the registry says so too, whatever the string
+looks like. `UNVERIFIED` remains an accepted, non-blocking value under
+`release/authoring-boundaries.md` §7 — an honest `UNVERIFIED` is acceptable, a plausible
+invented code is not — but it is not evidence of state-standard alignment, and no reader of
+these registries should mistake it for one.
 
 ### A validator defect, reported rather than worked around
 
@@ -162,3 +189,33 @@ pins the numbers.
   work belongs to the integration owner.
 - It does not claim graduation completeness, and it does not decide whether the Michigan Merit
   Curriculum binds this family at all.
+
+## 9. Independent review
+
+One read-only HS release/standards reviewer went over this candidate adversarially, with the
+standards registries and the completeness claims as its named targets. It confirmed grade
+continuity, identifier integrity, schedule completeness in both directions, scope containment,
+the absence of any completeness overstatement, and senior-year substance — the last by checking
+that Grade 12 reuses no unit title from Grade 11 in any family and that per-lesson payload size
+holds within about 1% of Grade 11.
+
+It disputed the standards registries, and it was right. The first cut of
+`health/standards-coverage.md` and `physical-education/standards-coverage.md` reported
+`DECLARED_UNVERIFIED: 0` and *"Every cited string is evidenced above"* while both lanes were
+declaring those very citations unverified in the delivered content. The classifier read only the
+standards string, never the `standards_mapping` metadata beside it. §5 above and both registry
+files are the corrected version; `validation/standards-classification.json` records the counts.
+No gate outcome changes — `DECLARED_UNVERIFIED` is an accepted class — but a reader could
+previously have taken physical education's alignment for verified, and now cannot.
+
+It also found that the registry was read from every backticked token in the coverage file,
+including prose, so a stray backtick could silently widen traceability. `checkStandards` now
+accepts only enumerated list entries. The release lane's validator still uses the looser rule;
+that file is not edited here.
+
+Two observations were checked and left as they are. The identifier grammar in
+`validation/validate-assembly.mjs` admits grades `5|7|8` as well as `9|1[0-2]`, deliberately
+mirroring the release contract's own grammar; no delivered identifier exploits the difference.
+And the `'no '` token in the body-assessment negation list is loose — but of the 144 health and
+PE sentences containing a denylist phrase, all 144 are negated by a strong token and none
+depends on it, so the PASS does not rest on it.

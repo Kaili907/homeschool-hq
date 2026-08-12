@@ -217,7 +217,12 @@ export async function checkStandards(model) {
   for (const fam of NORMALISED) {
     const coverage = await readText(join(RC_ROOT, fam, 'standards-coverage.md'))
     if (!coverage) { out.push(fail('STANDARDS_COVERAGE_MISSING', `${fam} ships no standards-coverage.md`, { fam })); continue }
-    const registry = new Set([...coverage.matchAll(/`([^`\n]+)`/g)].map((m) => m[1].trim()))
+    // Only enumerated registry entries count — a backticked token in prose must
+    // not silently widen traceability. release/validate-high-school.mjs reads
+    // every backtick in the file; this is the stricter reading of the same file.
+    const registry = new Set(coverage.split('\n')
+      .filter((line) => /^- `/.test(line))
+      .flatMap((line) => [...line.matchAll(/`([^`\n]+)`/g)].map((m) => m[1].trim())))
     const untraceable = new Map()
     for (const c of model.courses.filter((c) => c.subject === fam)) {
       for (const src of [...c.units, ...c.lessons]) {
