@@ -11,8 +11,8 @@ import {
   digestStudySessionReference,
   isVerifiedGrant,
   STUDY_IDENTITY_SCHEMA_VERSION,
+  validUuid,
 } from '../study-identity/contracts.js'
-import { validUuid } from './contracts.js'
 
 /**
  * Classifying learner or tutor text belongs to an in-progress attempt, so the
@@ -52,6 +52,9 @@ export function createVerifiedStudySessionAuthorizationPort(options = {}) {
     isDurable: true,
     async resolve({ actorUserId, sessionReference, studentRef }) {
       const tokenDigest = digestStudySessionReference(sessionReference)
+      // The canonical identity rule, not a stricter RFC-style one: this actor id
+      // is already server-verified, and re-narrowing it here would refuse
+      // Postgres-valid identities the verifier accepted.
       if (!validUuid(actorUserId) || !tokenDigest) return DENIED
 
       let result

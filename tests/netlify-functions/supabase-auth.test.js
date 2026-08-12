@@ -410,6 +410,96 @@ describe('verifySupabaseBearer timeout bounds', () => {
   )
 })
 
+describe('verifySupabaseBearer authorization representation ambiguity', () => {
+  it('refuses an empty single authorization header paired with a multi-value bearer', async () => {
+    const fetchImpl = vi.fn()
+    const result = await verifySupabaseBearer(
+      event({
+        headers: { authorization: '' },
+        multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] },
+      }),
+      { fetchImpl, env: ENV },
+    )
+
+    expectFailure(result, 'unauthenticated', 401, 'unauthenticated')
+    expect(fetchImpl).not.toHaveBeenCalled()
+    expect(JSON.stringify(result)).not.toContain(ACCESS_TOKEN)
+  })
+
+  it.each([
+    [
+      'a conflicting single and multi-value bearer',
+      event({
+        headers: { authorization: 'Bearer other.token.value' },
+        multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] },
+      }),
+    ],
+    [
+      'a whitespace single header against a multi-value bearer',
+      event({
+        headers: { authorization: '   ' },
+        multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] },
+      }),
+    ],
+    [
+      'a non-string single header against a multi-value bearer',
+      event({
+        headers: { authorization: 42 },
+        multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] },
+      }),
+    ],
+    [
+      'an empty multi-value list',
+      event({ headers: {}, multiValueHeaders: { authorization: [] } }),
+    ],
+  ])('refuses %s without an upstream request', async (_name, request) => {
+    const fetchImpl = vi.fn()
+    const result = await verifySupabaseBearer(request, { fetchImpl, env: ENV })
+
+    expectFailure(result, 'unauthenticated', 401, 'unauthenticated')
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+
+  it.each([
+    ['a single authorization header only', event()],
+    [
+      'agreeing single and multi-value headers',
+      event({
+        headers: { authorization: `Bearer ${ACCESS_TOKEN}` },
+        multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] },
+      }),
+    ],
+    [
+      'a multi-value header with no single authorization header',
+      event({ headers: {}, multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] } }),
+    ],
+  ])('accepts an unambiguous bearer from %s', async (_name, request) => {
+    const fetchImpl = vi.fn(async () => providerResponse({ id: USER_ID }))
+    const result = await verifySupabaseBearer(request, { fetchImpl, env: ENV })
+
+    expect(result).toEqual({ ok: true, user: { id: USER_ID }, accessToken: ACCESS_TOKEN })
+    expect(fetchImpl).toHaveBeenCalledOnce()
+  })
+})
+
+describe('verifySupabaseBearer successful non-200 responses', () => {
+  it.each([202, 203, 204, 206])(
+    'maps successful non-200 status %s to auth-unavailable without reading an identity body',
+    async (status) => {
+      const json = vi.fn(async () => ({ id: USER_ID }))
+      const result = await verifySupabaseBearer(event(), {
+        fetchImpl: vi.fn(async () => ({ status, json })),
+        env: ENV,
+      })
+
+      expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
+      expect(json).not.toHaveBeenCalled()
+      expect(isTransientBearerAuthFailure(result)).toBe(true)
+      expect(JSON.stringify(result)).not.toContain(ACCESS_TOKEN)
+    },
+  )
+})
+
 describe('canonical failure predicate', () => {
   it('names only retryable bearer-auth failures as transient', () => {
     expect(isTransientBearerAuthFailure({ failure: 'auth-unavailable' })).toBe(true)

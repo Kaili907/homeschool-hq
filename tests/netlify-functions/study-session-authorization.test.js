@@ -308,6 +308,51 @@ describe('A6-3 durable Study-session authorization in the default composition', 
     expect(copied.proposals.size).toBe(0)
   })
 
+  it.each([
+    ['a canonical UUID with non-RFC version and variant nibbles', '123e4567-e89b-f2d3-7456-426614174000'],
+    ['an all-zero canonical UUID', '00000000-0000-0000-0000-000000000000'],
+  ])('forwards %s from the trusted verifier to the session verification RPC', async (_label, actorUserId) => {
+    const { handler, proposals, rpcCalls } = harness({ actorUserId })
+    const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))
+
+    expect(result.statusCode).toBe(200)
+    expect(proposals.size).toBe(1)
+    const verifyCall = rpcCalls.find(({ url }) => url.endsWith('/rpc/academy_study_verify_session_v1'))
+    expect(verifyCall).toBeDefined()
+    expect(JSON.parse(verifyCall.init.body).p_actor_user_id).toBe(actorUserId)
+  })
+
+  it.each([
+    ['a missing actor id', undefined],
+    ['a null actor id', null],
+    ['a non-string actor id', 42],
+    ['an empty actor id', ''],
+    ['a hyphenless actor id', '123e4567e89b42d3a456426614174000'],
+    ['a non-hexadecimal actor id', 'g23e4567-e89b-42d3-a456-426614174000'],
+    ['a whitespace-padded actor id', ' 11111111-1111-4111-8111-111111111111 '],
+    ['a braced actor id', '{11111111-1111-4111-8111-111111111111}'],
+    ['a truncated actor id', '123e4567-e89b-42d3-a456-42661417400'],
+  ])('refuses %s before the session verification RPC', async (_label, actorUserId) => {
+    const rpcCalls = []
+    const port = createVerifiedStudySessionAuthorizationPort({
+      env: ENV,
+      fetchImpl: async (url, init) => {
+        rpcCalls.push({ url, init })
+        return new Response(JSON.stringify(verifiedGrant()), {
+          headers: { 'content-type': 'application/json' },
+        })
+      },
+    })
+
+    const refused = await port.resolve({
+      actorUserId,
+      sessionReference: SESSION_REFERENCE,
+      studentRef: { kind: 'academy-student-id', value: IDS.student },
+    })
+    expect(refused).toEqual({ status: 'denied', code: 'student-session-invalid' })
+    expect(rpcCalls).toHaveLength(0)
+  })
+
   it('authorizes a valid bearer presented by the grant owner', async () => {
     const { handler, proposals } = harness()
     const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))

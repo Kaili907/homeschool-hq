@@ -37,7 +37,8 @@ function bearerToken(event) {
     return null
   }
 
-  let authorization = headerEntries.length === 1 ? headerEntries[0][1] : ''
+  const hasSingleHeader = headerEntries.length === 1
+  let authorization = hasSingleHeader ? headerEntries[0][1] : ''
   const multiEntries =
     event?.multiValueHeaders && typeof event.multiValueHeaders === 'object'
       ? Object.entries(event.multiValueHeaders).filter(([key]) => key.toLowerCase() === 'authorization')
@@ -48,7 +49,10 @@ function bearerToken(event) {
     if (!Array.isArray(values) || values.length !== 1 || typeof values[0] !== 'string') {
       return null
     }
-    if (authorization && authorization !== values[0]) return null
+    // A present single representation must agree exactly with the multi-value
+    // one. An empty single representation contradicts a credential rather than
+    // deferring to it, so that ambiguity fails closed too.
+    if (hasSingleHeader && authorization !== values[0]) return null
     authorization = values[0]
   }
   const match = /^Bearer ([^\s,]+)$/i.exec(authorization)
