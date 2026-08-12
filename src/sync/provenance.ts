@@ -1,5 +1,6 @@
 import { SCHEMA_VERSION } from '../migration'
-import type { AppState, Profile } from '../types'
+import { ACADEMY_GRADES as ACADEMY_GRADE_VALUES, type AppState, type Profile } from '../types'
+import { ACADEMY_COURSE_ID_PATTERN } from '../curriculum/grade-authority'
 import type { HouseholdSyncMeta, RemoteProfileRow } from './types'
 
 export const APP_STATE_STORAGE_KEY = 'homeschool-hq:app:v2'
@@ -19,8 +20,13 @@ const MAX_SYNC_PAYLOAD_BYTES = 10_000_000
 const MAX_SYNC_PROFILES = 5
 const PROFILE_ID = /^p[1-5]$/
 const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
-const GRADES = new Set(['3', '4', '5', '6', '7', '8', '10', '12'])
-const ACADEMY_GRADES = new Set(['5', '7', '8'])
+// NOMINAL grades a profile may carry — deliberately a different vocabulary from
+// ACADEMY_GRADES below: grade 6 is a perfectly valid nominal grade with no
+// curriculum authored for it.
+const GRADES = new Set<string>(['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'])
+// CURRICULUM-SUPPORTED grades, from the canonical authority rather than a
+// second hand-maintained copy of the same list.
+const ACADEMY_GRADES = new Set<string>(ACADEMY_GRADE_VALUES)
 // mirrors ACADEMY_SUBJECTS (src/types.ts), the working-level record's key domain
 const ACADEMY_SUBJECTS = new Set([
   'mathematics',
@@ -646,9 +652,9 @@ function academyAuthorization(
 
 /**
  * ACADEMY-LEVEL-DECOUPLE: subject → academy level. Levels are restricted to the
- * ones the release publishes content for (5/7/8) — the same set the parent UI
- * offers. A nominal-only grade such as '10' is rejected rather than stored as an
- * inert value nothing can serve.
+ * grades curriculum is authored for — the same set the parent UI offers. A
+ * nominal-only grade such as '6' is rejected rather than stored as an inert
+ * value nothing can serve.
  */
 function validateWorkingLevels(value: unknown): boolean {
   return boundedRecord(
@@ -657,9 +663,10 @@ function validateWorkingLevels(value: unknown): boolean {
   )
 }
 
-/** Course ids encode their level and subject (`ma-g5-mathematics`); mirrors
- * COURSE_ID in academy/academyRoute.ts. Every id in the shipped release parses. */
-const ACADEMY_COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
+/** Course ids encode their level and subject (`ma-g5-mathematics`). Shares one
+ * definition with academy/academyRoute.ts and academy/workingLevel.ts via the
+ * grade authority. Every id in the shipped release parses. */
+const ACADEMY_COURSE_ID = ACADEMY_COURSE_ID_PATTERN
 
 /**
  * A course record is admissible only if the profile is authorized for that

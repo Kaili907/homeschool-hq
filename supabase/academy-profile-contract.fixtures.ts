@@ -123,7 +123,9 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
     }),
     invalid('missing grade', (candidate) => delete candidate.grade),
     invalid('invalid grade', (candidate) => {
-      candidate.grade = 9
+      // 13 is outside every grade vocabulary. (9 used to serve here, but the
+      // nominal Grade type now represents grades 9 and 11 — see src/types.ts.)
+      candidate.grade = 13
     }),
     invalid('missing pin', (candidate) => delete candidate.pin),
     invalid('invalid pin type', (candidate) => {

@@ -542,6 +542,10 @@ export function verifyPublishedRelease(release, observedSource) {
 
   if (record(release.gradeCounts)) {
     for (const key of ['courses', 'units', 'lessons', 'assessments', 'texts', 'schedules']) {
+      // RELEASE-SCOPED: reconciles the grades THIS published release reports
+      // against its own totals. Widening it to the canonical supported-grade
+      // list would sum `undefined ?? NaN` for grades the release never shipped
+      // and report a mismatch on every healthy package.
       const gradeTotal = ['5', '7', '8'].reduce((sum, grade) => sum + (release.gradeCounts[grade]?.[key] ?? Number.NaN), 0)
       if (!Number.isSafeInteger(gradeTotal) || gradeTotal !== release.counts[key]) {
         manifestMismatch = true

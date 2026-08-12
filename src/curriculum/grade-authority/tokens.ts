@@ -1,5 +1,6 @@
-import { parseSupportedAcademyGrade } from './validation'
-import type { AcademySupportedGrade } from './constants'
+import { parseSupportedAcademyGrade } from './validation.ts'
+import { SUPPORTED_ACADEMY_GRADES } from './constants.ts'
+import type { AcademySupportedGrade } from './constants.ts'
 
 /**
  * Grade tokens are always 1-2 digits captured as a full number, never a
@@ -43,3 +44,31 @@ export function parseGradeFromRouteToken(token: string): AcademySupportedGrade |
   const match = ROUTE_GRADE_PATTERN.exec(token)
   return match ? parseSupportedAcademyGrade(match[1]) : null
 }
+
+/**
+ * Regex source matching exactly one curriculum-supported grade token, e.g.
+ * "10". Alternatives are emitted LONGEST-FIRST so a two-digit grade can never
+ * be shortened to a one-digit prefix: with "3|...|1" ordering a "1" branch
+ * would match the "1" of "g12" and leave "2" to the next pattern element,
+ * misreading Grade 12 content as Grade 1. Grade 1 is not supported today, but
+ * ordering the alternation defensively means adding it later cannot silently
+ * break Grades 10-12.
+ */
+export const SUPPORTED_GRADE_ALTERNATION = [...SUPPORTED_ACADEMY_GRADES]
+  .sort((a, b) => String(b).length - String(a).length || a - b)
+  .join('|')
+
+/**
+ * Canonical course-id shape `ma-g<grade>-<subject>`. Capture 1 is the grade,
+ * capture 2 the subject. Single source for what academyRoute.ts,
+ * workingLevel.ts and sync/provenance.ts each used to spell out by hand.
+ * Stateless (no /g), so sharing one RegExp across call sites is safe.
+ */
+export const ACADEMY_COURSE_ID_PATTERN = new RegExp(
+  `^ma-g(${SUPPORTED_GRADE_ALTERNATION})-([a-z-]+)$`,
+)
+
+/** Canonical lesson-id shape `ma-g<grade>-<subject>-u##-l##`. */
+export const ACADEMY_LESSON_ID_PATTERN = new RegExp(
+  `^ma-g(${SUPPORTED_GRADE_ALTERNATION})-[a-z-]+-u\\d{2}-l\\d{2}$`,
+)

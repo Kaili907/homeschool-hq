@@ -5,6 +5,9 @@ import {
   gradeRouteToken,
   parseGradeFromLessonId,
   parseGradeFromRouteToken,
+  SUPPORTED_GRADE_ALTERNATION,
+  ACADEMY_COURSE_ID_PATTERN,
+  ACADEMY_LESSON_ID_PATTERN,
 } from './tokens'
 
 describe('gradeLessonIdToken / gradeRouteToken', () => {
@@ -74,5 +77,45 @@ describe('lesson-id and route-token grade extraction edge cases', () => {
   it('does not match a grade digit embedded in an unrelated word', () => {
     expect(parseGradeFromLessonId('ma-stage10-math')).toBeNull()
     expect(parseGradeFromRouteToken('upgrade-10')).toBeNull()
+  })
+})
+
+describe('shared course/lesson id patterns', () => {
+  it('exposes a longest-first alternation so two-digit grades cannot truncate', () => {
+    expect(SUPPORTED_GRADE_ALTERNATION).toBe('10|11|12|3|4|5|7|8|9')
+  })
+
+  it('parses every supported grade out of a course id', () => {
+    for (const grade of SUPPORTED_ACADEMY_GRADES) {
+      expect(ACADEMY_COURSE_ID_PATTERN.exec(`ma-g${grade}-mathematics`)?.slice(1)).toEqual([
+        String(grade),
+        'mathematics',
+      ])
+    }
+  })
+
+  it('never reads grade 10, 11 or 12 as grade 1', () => {
+    for (const grade of [10, 11, 12] as const) {
+      const parsed = ACADEMY_COURSE_ID_PATTERN.exec(`ma-g${grade}-mathematics`)
+      expect(parsed?.[1]).toBe(String(grade))
+      expect(parsed?.[2]).toBe('mathematics')
+      expect(ACADEMY_LESSON_ID_PATTERN.test(`ma-g${grade}-mathematics-u02-l01`)).toBe(true)
+      expect(parseGradeFromLessonId(`ma-g${grade}-mathematics-u02-l01`)).toBe(grade)
+      expect(parseGradeFromRouteToken(`grade-${grade}`)).toBe(grade)
+    }
+  })
+
+  it('rejects grades with no authored curriculum', () => {
+    for (const grade of [0, 1, 2, 6, 13, 100]) {
+      expect(ACADEMY_COURSE_ID_PATTERN.test(`ma-g${grade}-mathematics`)).toBe(false)
+      expect(ACADEMY_LESSON_ID_PATTERN.test(`ma-g${grade}-mathematics-u02-l01`)).toBe(false)
+      expect(parseGradeFromLessonId(`ma-g${grade}-mathematics-u02-l01`)).toBeNull()
+    }
+  })
+
+  it('anchors both ends, so a grade token cannot ride in on a longer id', () => {
+    expect(ACADEMY_COURSE_ID_PATTERN.test('xma-g5-mathematics')).toBe(false)
+    expect(ACADEMY_COURSE_ID_PATTERN.test('ma-g5-mathematics-u01')).toBe(false)
+    expect(ACADEMY_LESSON_ID_PATTERN.test('ma-g5-mathematics-u02-l01-extra')).toBe(false)
   })
 })

@@ -1,7 +1,14 @@
+import type { AcademySupportedGrade } from '../../curriculum/grade-authority'
+
 export const CURRICULUM_READ_CAPABILITY = 'curriculum:read' as const
 export const CURRICULUM_SEARCH_LIMIT = 100 as const
 
-export type CurriculumGrade = 5 | 7 | 8
+/**
+ * Grades the admin curriculum read model can surface. Aliased to the canonical
+ * authority rather than re-listed, so admin can never disagree with the rest of
+ * the app about which grades curriculum exists for.
+ */
+export type CurriculumGrade = AcademySupportedGrade
 
 export type CurriculumReadAuthorization =
   | { readonly status: 'checking' }

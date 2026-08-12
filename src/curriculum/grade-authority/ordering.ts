@@ -1,4 +1,4 @@
-import { SUPPORTED_ACADEMY_GRADES, type AcademySupportedGrade } from './constants'
+import { SUPPORTED_ACADEMY_GRADES, type AcademySupportedGrade } from './constants.ts'
 
 /**
  * Zero-based rank of a grade among supported grades, e.g. gradeOrdering(3) is

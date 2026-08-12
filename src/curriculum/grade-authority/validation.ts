@@ -1,4 +1,4 @@
-import { SUPPORTED_ACADEMY_GRADES, type AcademySupportedGrade } from './constants'
+import { SUPPORTED_ACADEMY_GRADES, type AcademySupportedGrade } from './constants.ts'
 
 const SUPPORTED_SET = new Set<number>(SUPPORTED_ACADEMY_GRADES)
 

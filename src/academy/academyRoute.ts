@@ -6,6 +6,11 @@
  * profile exists and reaches an enabled academy level).
  */
 
+import {
+  ACADEMY_COURSE_ID_PATTERN,
+  ACADEMY_LESSON_ID_PATTERN,
+} from '../curriculum/grade-authority'
+
 export const ACADEMY_PATH = '/academy'
 
 export type AcademyRoute =
@@ -16,8 +21,11 @@ export type AcademyRoute =
   | { kind: 'lesson'; courseId: string; unitNumber: number; lessonId: string }
   | { kind: 'assessment'; courseId: string; unitNumber: number }
 
-const COURSE_ID = /^ma-g(5|7|8)-[a-z-]+$/
-const LESSON_ID = /^ma-g(5|7|8)-[a-z-]+-u\d{2}-l\d{2}$/
+// Course/lesson ids carry the grade inside the id segment, so route parsing is
+// the same grade-token problem as everywhere else — both patterns come from the
+// grade authority rather than being spelled out again here.
+const COURSE_ID = ACADEMY_COURSE_ID_PATTERN
+const LESSON_ID = ACADEMY_LESSON_ID_PATTERN
 
 export function isAcademyPath(pathname: string): boolean {
   return pathname === ACADEMY_PATH || pathname.startsWith(`${ACADEMY_PATH}/`)

@@ -22,6 +22,14 @@ export class FamilyPilotContentError extends Error {
   }
 }
 
+/**
+ * RELEASE-SCOPED, deliberately NOT the canonical supported-grade list. These are
+ * the grade directories that exist under curriculum-content/manuel-academy/
+ * <version>/grades/, and loadCourse reads each one off disk. Widening this to
+ * SUPPORTED_ACADEMY_GRADES would make the loader throw FamilyPilotContentError
+ * for grade-3/4/9/10/11/12 directories the release does not ship. It grows when
+ * a release ships more grades, not when the authority does.
+ */
 const PILOT_GRADES: readonly AcademyGrade[] = ['5', '7', '8']
 
 const CONTENT_ROOT = fileURLToPath(

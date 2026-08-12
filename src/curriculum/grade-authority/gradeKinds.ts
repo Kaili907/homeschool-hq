@@ -1,5 +1,5 @@
-import type { AcademySupportedGrade } from './constants'
-import { isSupportedAcademyGrade } from './validation'
+import type { AcademySupportedGrade } from './constants.ts'
+import { isSupportedAcademyGrade } from './validation.ts'
 
 /**
  * Three different questions get asked about "what grade is this", and this

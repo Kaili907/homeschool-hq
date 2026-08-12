@@ -1,4 +1,8 @@
 import {
+  SUPPORTED_ACADEMY_GRADES,
+  isSupportedAcademyGrade,
+} from '../../curriculum/grade-authority'
+import {
   CurriculumSourceError,
   type CurriculumAssessmentEvidence,
   type CurriculumBrowserSource,
@@ -85,8 +89,6 @@ export function createAdminCurriculumHttpSource(
   }
 }
 
-const GRADES = new Set([5, 7, 8])
-
 function record(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
@@ -127,7 +129,7 @@ function adaptSource(value: unknown): CurriculumSourceIdentity | null {
 function adaptCourse(value: unknown): CurriculumCourseSummary | null {
   if (!record(value) || !exact(value,
     ['courseId', 'grade', 'subject', 'title', 'days'], ['description', 'capstone'])
-    || !text(value.courseId, 160) || !GRADES.has(value.grade as number) || !text(value.subject, 160)
+    || !text(value.courseId, 160) || !isSupportedAcademyGrade(value.grade) || !text(value.subject, 160)
     || !text(value.title, 500) || !integer(value.days, 1)
     || (value.description !== undefined && !text(value.description))
     || (value.capstone !== undefined && !text(value.capstone))) return null
@@ -139,7 +141,7 @@ function adaptUnit(value: unknown): CurriculumUnitSummary | null {
     'unitId', 'courseId', 'grade', 'subject', 'unitNumber', 'title', 'days',
     'standards', 'topics', 'lessonIds',
   ], ['essentialQuestion', 'performanceTask', 'assessmentId'])
-    || !text(value.unitId, 160) || !text(value.courseId, 160) || !GRADES.has(value.grade as number)
+    || !text(value.unitId, 160) || !text(value.courseId, 160) || !isSupportedAcademyGrade(value.grade)
     || !text(value.subject, 160) || !integer(value.unitNumber, 1) || !text(value.title, 500)
     || !integer(value.days, 1) || (value.essentialQuestion !== undefined && !text(value.essentialQuestion))
     || (value.performanceTask !== undefined && !text(value.performanceTask))
@@ -156,7 +158,7 @@ function adaptLessonSummary(value: unknown): CurriculumLessonSummary | null {
     'lessonId', 'courseId', 'grade', 'subject', 'courseDay', 'unitNumber', 'unitTitle',
     'dayInUnit', 'title', 'standards',
   ], ['phase', 'focus']) || !text(value.lessonId, 160) || !text(value.courseId, 160)
-    || !GRADES.has(value.grade as number) || !text(value.subject, 160) || !integer(value.courseDay, 1)
+    || !isSupportedAcademyGrade(value.grade) || !text(value.subject, 160) || !integer(value.courseDay, 1)
     || !integer(value.unitNumber, 1) || !text(value.unitTitle, 500) || !integer(value.dayInUnit, 1)
     || !text(value.title, 500) || (value.phase !== undefined && !text(value.phase, 200))
     || (value.focus !== undefined && !text(value.focus))) return null
@@ -175,8 +177,8 @@ function adaptAssessment(value: unknown): CurriculumAssessmentEvidence | null {
 
 function adaptCatalog(value: unknown): CurriculumCatalog | null {
   if (!record(value) || !exact(value, ['source', 'grades', 'courses', 'units', 'lessons', 'assessments'])
-    || !Array.isArray(value.grades) || value.grades.length > GRADES.size
-    || value.grades.some((grade) => !GRADES.has(grade as number)) || new Set(value.grades).size !== value.grades.length
+    || !Array.isArray(value.grades) || value.grades.length > SUPPORTED_ACADEMY_GRADES.length
+    || value.grades.some((grade) => !isSupportedAcademyGrade(grade)) || new Set(value.grades).size !== value.grades.length
     || !Array.isArray(value.courses) || value.courses.length > 1_000
     || !Array.isArray(value.units) || value.units.length > 10_000
     || !Array.isArray(value.lessons) || value.lessons.length > 20_000

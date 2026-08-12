@@ -47,6 +47,9 @@ function decision(value) {
     || !['published_release', 'draft'].includes(value.contextKind)
     || typeof value.contextRef !== 'string' || value.contextRef.length > 128
     || typeof value.sourceLabel !== 'string' || value.sourceLabel.length > 240
+    // Deliberately a RANGE bound, not curriculum-supported membership: standards
+    // review covers findings across the whole 0-12 span (including grade 6 and
+    // the 0 sentinel), so isSupportedAcademyGrade would reject valid findings.
     || !Number.isSafeInteger(value.grade) || value.grade < 0 || value.grade > 12
     || typeof value.courseRef !== 'string' || value.findingRule !== 'standards.human_review_required'
     || !Number.isSafeInteger(value.affectedCount) || value.affectedCount < 1 || value.affectedCount > 1000

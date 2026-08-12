@@ -459,6 +459,9 @@ export function importImmutableV1(sourceRoot = DEFAULT_V1_ROOT): V1ImportResult 
     })
   })
 
+  // RELEASE-SCOPED: the grade directories the v1 source tree actually contains.
+  // These read files off disk, so this list tracks the v1 release, not the
+  // canonical supported-grade authority.
   const schedules: Schedule[] = [5, 7, 8].map((grade) => {
     const relativePath = join('grades', `grade-${grade}`, 'daily-schedule.csv')
     const lines = readFileSync(join(sourceRoot, relativePath), 'utf8').trim().split(/\r?\n/)
@@ -490,6 +493,7 @@ export function importImmutableV1(sourceRoot = DEFAULT_V1_ROOT): V1ImportResult 
   })
 
   const resources: MediaResource[] = []
+  // RELEASE-SCOPED, as above: v1 source directories on disk.
   for (const grade of [5, 7, 8]) {
     const relativePath = join('grades', `grade-${grade}`, 'original-text-bank.json')
     asArray(readJson(join(sourceRoot, relativePath)), `grade ${grade} text bank`).forEach((value) => {
@@ -598,6 +602,7 @@ export function importImmutableV1(sourceRoot = DEFAULT_V1_ROOT): V1ImportResult 
 }
 
 export function listV1CourseDirectories(sourceRoot = DEFAULT_V1_ROOT): readonly string[] {
+  // RELEASE-SCOPED, as above: v1 source directories on disk.
   return [5, 7, 8].flatMap((grade) =>
     readdirSync(join(sourceRoot, 'grades', `grade-${grade}`, 'courses'))
       .sort()
