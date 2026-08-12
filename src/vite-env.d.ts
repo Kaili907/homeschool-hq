@@ -19,6 +19,10 @@ interface ImportMetaEnv {
   readonly VITE_ACADEMY_GRADE_8_ENABLED?: string
   /** MOUNT-G5-MATH: Grade 5 curriculum math practice gate. Exact 'true' only; absent is disabled. */
   readonly VITE_GRADE5_MATH_PRACTICE_ENABLED?: string
+  /** FAMILY-PILOT: local-first family pilot gate. Exact 'true' only; absent is disabled. */
+  readonly VITE_FAMILY_PILOT_ENABLED?: string
+  /** FAMILY-PILOT: development-only diagnostics panel; the pilot gate alone never selects it. */
+  readonly VITE_FAMILY_PILOT_DIAGNOSTICS?: string
 }
 
 interface ImportMeta {

@@ -73,6 +73,8 @@ import {
   type AcademyRoute,
 } from './academy/academyRoute'
 import { isAdminConsolePath } from './admin/adminRoute'
+import { isFamilyPilotEnabledFromHost } from './study/familyPilotFlag'
+import { isFamilyPilotPath, leaveFamilyPilotPath } from './study/family-pilot/core/route'
 import {
   buildHostStudyContext,
   deriveStudyHouseholdRef,
@@ -120,6 +122,15 @@ const AdminConsoleRoute = lazy(() =>
   import('./components/admin/AdminConsoleRoute').then((module) => ({ default: module.AdminConsoleRoute })),
 )
 
+// FAMILY-PILOT: the local-first family pilot shell. Lazy for the same reason as
+// the academy chunk — the pilot's state layer loads only when an enabled
+// household opens it, never on initial application load.
+const FamilyPilotShell = lazy(() =>
+  import('./study/family-pilot/FamilyPilotShell').then((module) => ({
+    default: module.FamilyPilotShell,
+  })),
+)
+
 // MOUNT-G5-MATH: the Grade 5 math practice surface. Lazy for the same reason as
 // the academy chunk — the ten unit generators load only when an enabled grade-5
 // profile opens the surface, never on initial application load.
@@ -152,12 +163,14 @@ type Screen =
   | { kind: 'studySession'; blockRef: string; learnerRef: string }
   | { kind: 'academy'; route: AcademyRoute }
   | { kind: 'g5MathPractice' }
+  | { kind: 'familyPilot' }
   | { kind: 'admin' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
   const studyEnabled = useMemo(isStudyEngineEnabledFromHost, [])
   const studyPreviewEnabled = useMemo(isStudyEnginePreviewEnabledFromHost, [])
+  const familyPilotEnabled = useMemo(isFamilyPilotEnabledFromHost, [])
   const [studyRuntime, setStudyRuntime] = useState<{ readonly ports: StudyPortBundle } | null>(null)
   const [studyProductionStatus, setStudyProductionStatus] = useState<
     'disabled' | 'unauthenticated' | 'checking' | 'not-ready' | 'degraded' | 'ready'
@@ -208,6 +221,13 @@ export default function App() {
       isGrade5MathPracticePath(window.location.pathname)
     ) {
       return { kind: 'g5MathPractice' }
+    }
+    // FAMILY-PILOT (MOUNT-2 pattern): a /family-pilot deep link is honoured only
+    // with the flag on and a persisted profile; flag off or no profile falls
+    // through to the picker. The pilot's own state is device-local and is loaded
+    // by the shell, not here.
+    if (familyPilotEnabled && bootProfile && isFamilyPilotPath(window.location.pathname)) {
+      return { kind: 'familyPilot' }
     }
     if (bootProfile && hasEnabledAcademyProgram(bootProfile)) {
       const academyRoute = parseAcademyPath(window.location.pathname)
@@ -425,6 +445,7 @@ export default function App() {
     leaveStudyEnginePath()
     leaveAcademyPath()
     leaveGrade5MathPracticePath()
+    leaveFamilyPilotPath()
     void purgeVoiceCache()
     studyProductionLifecycleRef.current?.cancel('logout')
     void studyVerifiedRuntimeRef.current?.cancel('logout')
@@ -444,6 +465,22 @@ export default function App() {
 
   if (screen.kind === 'admin') {
     return <Suspense fallback={<main aria-busy="true">Verifying administrator access.</main>}><AdminConsoleRoute /></Suspense>
+  }
+
+  // FAMILY-PILOT: full-bleed and self-styled. Gated again at render time, so the
+  // flag alone decides whether this surface can appear; with the flag off the
+  // screen falls through to the normal app rather than mounting the pilot.
+  if (screen.kind === 'familyPilot' && familyPilotEnabled) {
+    return (
+      <Suspense fallback={<main aria-busy="true">Loading the Family Pilot.</main>}>
+        <FamilyPilotShell
+          onExit={() => {
+            leaveFamilyPilotPath()
+            setScreen({ kind: 'home' })
+          }}
+        />
+      </Suspense>
+    )
   }
 
   if (screen.kind === 'picker') {
