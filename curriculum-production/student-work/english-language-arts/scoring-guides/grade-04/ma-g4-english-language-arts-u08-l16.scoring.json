@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0",
+  "guideId": "sg-ma-g4-english-language-arts-u08-l16",
+  "lessonRef": {
+    "lessonId": "ma-g4-english-language-arts-u08-l16",
+    "courseId": "ma-g4-english-language-arts",
+    "grade": 4,
+    "unitNumber": 8,
+    "unitTitle": "Poetry, Drama, and Prose: Structure, Craft, and Figurative Language",
+    "phase": "Retrieval and assessment preparation",
+    "title": "Retrieval and assessment preparation: retrieving form, structure, allusion, and figurative language"
+  },
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "rubric": [
+      {
+        "dimension": "criterion-1",
+        "description": "The learner completes the central task about retrieving form, structure, allusion, and figurative language."
+      },
+      {
+        "dimension": "criterion-2",
+        "description": "The learner supplies evidence, reasoning, or a documented process rather than a bare answer."
+      },
+      {
+        "dimension": "criterion-3",
+        "description": "The learner checks the work against the criteria and identifies a next step."
+      }
+    ],
+    "scoringGuidance": "Score the stated target, the accuracy of the reading or writing move, the quality of the evidence or reasoning, and the revision. Accept any approach that meets the criteria. Do not infer effort, motivation, character, or diagnosis from an error.",
+    "acceptableAnswerCriteria": {
+      "present": true,
+      "text": "The learner completes the central task about retrieving form, structure, allusion, and figurative language. The learner supplies evidence, reasoning, or a documented process rather than a bare answer. The learner checks the work against the criteria and identifies a next step. Evidence should be traceable to the assigned/selected text (a quote, a paraphrase with location, or a specific detail) rather than a general impression. Do not record mastery from one answer. Require accurate independent evidence plus an explanation, transfer, or retrieval on at least two occasions separated by time, text, or representation. Guided success is recorded as guided evidence only."
+    }
+  },
+  "masteryCriteria": {
+    "occasions_required": 2,
+    "separation": "The two occasions must be separated by time, by text, or by representation.",
+    "independent_evidence_required": true,
+    "guided_success_is_not_mastery": true,
+    "evidence_types": [
+      "text-marked or annotated reading response",
+      "written response with cited evidence",
+      "oral or written explanation of reasoning",
+      "a revision that shows the learner acted on criteria",
+      "transfer to an unfamiliar text or task"
+    ],
+    "rule": "A single correct answer never establishes mastery. Guided success is recorded as guided evidence and is weighted below independent evidence. A pacing concern is not a mastery failure."
+  },
+  "authorshipPolicy": "The learner writes every assessed response. The tutor may question, model on a separate example, name a criterion, restate directions, or point to where an idea is unclear. The tutor must not draft, dictate, outline, complete, reword, or supply sentences for the learner's assessed essay or extended response.",
+  "fixedAnswerProtection": "Fixed-answer items and their keys are scorer-visible only. The tutor surface, the learner surface, and any hint path must not expose, restate, or narrow toward a fixed answer before the learner responds. Feedback after a response addresses reasoning, not the key.",
+  "doNotUse": [
+    "Do not write, dictate, outline, or complete the learner's response.",
+    "This rubric describes what to look for, not a single required answer — accept any response that meets the criteria."
+  ]
+}
