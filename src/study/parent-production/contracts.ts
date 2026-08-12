@@ -9,7 +9,7 @@ export const PARENT_HUB_REQUEST_LIMITS = Object.freeze({
   continuationDurationMinutes: 480,
 })
 
-export const ADULT_PRODUCTION_FAILURE_CODES = [
+export const ADULT_PRODUCTION_FAILURE_CODES = Object.freeze([
   'adult-unauthorized',
   'student-out-of-guardian-scope',
   'stale-revision',
@@ -19,24 +19,24 @@ export const ADULT_PRODUCTION_FAILURE_CODES = [
   'not-found',
   'already-decided',
   'safety-state-changed',
-] as const
+] as const)
 
 export type AdultProductionFailureCode = typeof ADULT_PRODUCTION_FAILURE_CODES[number]
 
-export const ADULT_READ_FAILURE_CODES = [
+export const ADULT_READ_FAILURE_CODES = Object.freeze([
   'adult-unauthorized',
   'student-out-of-guardian-scope',
   'authorization-infrastructure-unavailable',
   'rate-limited',
   'not-found',
-] as const satisfies readonly AdultProductionFailureCode[]
+] as const satisfies readonly AdultProductionFailureCode[])
 
 export type AdultReadFailureCode = typeof ADULT_READ_FAILURE_CODES[number]
 
-export const ADULT_MUTATION_FAILURE_CODES = [
+export const ADULT_MUTATION_FAILURE_CODES = Object.freeze([
   ...ADULT_READ_FAILURE_CODES,
   'idempotency-collision',
-] as const satisfies readonly AdultProductionFailureCode[]
+] as const satisfies readonly AdultProductionFailureCode[])
 
 export type AdultMutationFailureCode = typeof ADULT_MUTATION_FAILURE_CODES[number]
 
