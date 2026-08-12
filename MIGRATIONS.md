@@ -10,6 +10,53 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
 app: `npm test`.
 
+## Supabase: Nominal grade contract correction (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810210000_academy_nominal_grade_contract_correction.sql`.
+
+The additive migration closes a grade-authority mismatch. The 20260726 CAS
+validator hardcoded the grade set `('3', '4', '6', '10', '12')` twice inside
+`public.academy_sync_profile_is_valid` — once for `Profile.grade` and once for
+`tutorChats[].grade`. That set is the five `PROFILE_SEEDS` grades
+(`src/migration.ts`), not the canonical NOMINAL grade contract, which is grades
+3–12 (`Grade` in `src/types.ts`, mirrored by `GRADES` in
+`src/sync/provenance.ts`). A household that moved a learner to grade 5, 7, 8, 9,
+or 11 therefore passed client validation and was then rejected by
+`academy_apply_profile_mutation` as an invalid row.
+
+NOMINAL grade (what a learner IS, for transcripts, report cards and placement)
+stays a vocabulary distinct from CURRICULUM-SUPPORTED grade (what content exists
+for — `SUPPORTED_ACADEMY_GRADES` in `src/curriculum/grade-authority/constants.ts`).
+Grade 6 is a valid nominal grade with no authored curriculum; this contract
+accepts it as nominal and asserts nothing about content support.
+
+The historical 20260726 migration is a hosted-equivalent baseline whose bytes are
+pinned by `supabase/study-engine-migrations.db.test.ts`, so it is not rewritten.
+This migration supersedes the function definition forward with
+`create or replace`. The two duplicated set literals collapse into one authority,
+`public.academy_sync_is_nominal_grade(jsonb)`; every other predicate, bound, and
+the CAS/authorization surface are re-emitted byte-identical.
+
+One deliberate narrowing rides along at the `tutorChats[]` site. The historical
+predicate evaluated to SQL NULL for a jsonb `null` grade, and a PL/pgSQL `if`
+over a NULL OR-chain is not taken, so `{"grade": null}` inside `tutorChats[]`
+was accepted. The helper coalesces to false, closing that fail-open gap in the
+direction the TS validator already enforced. `Profile.grade` never had the gap —
+its retained `jsonb_typeof` guard rejects jsonb null before the set test — so
+that site is a pure widening. Both functions keep
+the historical posture — `security definer`, `set search_path = pg_catalog,
+pg_temp`, owned by `postgres`, revoked from `public`, `anon`, and
+`authenticated` — and no execute grant is added, because they are only reached
+through the security-definer `academy_apply_profile_mutation`. Re-running the
+migration is safe.
+
+The `20260810210000` prefix was selected after scanning migration filenames in
+all active Academy worktrees; the latest observed prefix was `20260810200000`.
+Canonical LF SHA-256:
+`2528c26470137061185f475a57f4c4a1de51f6ffa18df8e9bf427e5a8ac70c55`.
+This migration has not been applied to a hosted Supabase project.
+
 ## Supabase: Curriculum activation and rollback (2026-08-10)
 
 Tracked migration:

@@ -17,6 +17,10 @@ const logicalVoiceMigrationPath = new URL(
   './migrations/20260809150000_academy_logical_voice_profile_contract.sql',
   import.meta.url,
 )
+const nominalGradeMigrationPath = new URL(
+  './migrations/20260810210000_academy_nominal_grade_contract_correction.sql',
+  import.meta.url,
+)
 
 function profileRow(
   id: string,
@@ -109,6 +113,9 @@ describe('Academy household server revision CAS migration in PGlite', () => {
     const logicalVoiceMigration = await readFile(logicalVoiceMigrationPath, 'utf8')
     await database.exec(logicalVoiceMigration)
     await database.exec(logicalVoiceMigration)
+    const nominalGradeMigration = await readFile(nominalGradeMigrationPath, 'utf8')
+    await database.exec(nominalGradeMigration)
+    await database.exec(nominalGradeMigration)
     await configureSession(HOUSEHOLD_A)
   }, 60_000)
 

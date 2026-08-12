@@ -24,6 +24,25 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
     mutate(candidate)
     return { name, profileId: 'p1', data: candidate, valid: false }
   }
+  const acceptable = (
+    name: string,
+    mutate: (candidate: Record<string, unknown>) => void,
+  ): AcademyProfileContractFixture => {
+    const candidate = clone(profile)
+    mutate(candidate)
+    return { name, profileId: 'p1', data: candidate, valid: true }
+  }
+  const tutorChatAtGrade = (grade: unknown) => ({
+    id: 'chat',
+    skillId: 'skill',
+    grade,
+    day: '2026-07-26',
+    startedTs: 1,
+    problem: 'Problem',
+    correctAnswer: 'Answer',
+    herAnswer: 'Answer',
+    messages: [{ role: 'kid', text: 'Help?', ts: 1 }],
+  })
   const allOptionals = clone(profile)
   Object.assign(allOptionals, {
     template: { weekday: [], friday: [] },
@@ -126,6 +145,48 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
       // 13 is outside every grade vocabulary. (9 used to serve here, but the
       // nominal Grade type now represents grades 9 and 11 — see src/types.ts.)
       candidate.grade = 13
+    }),
+    // NOMINAL-GRADE CONTRACT: Profile.grade is the NOMINAL grade (src/types.ts
+    // `Grade`), never a curriculum-supported grade. All ten must be accepted by
+    // both the TS validator and academy_sync_profile_is_valid — including 6,
+    // which has no authored curriculum and is still an ordinary nominal grade,
+    // and 5/7/8/9/11, which the 20260726 CAS validator rejected until the
+    // 20260810210000 correction.
+    ...(['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] as const).map(
+      (grade) =>
+        acceptable(`nominal grade ${grade}`, (candidate) => {
+          candidate.grade = grade
+        }),
+    ),
+    invalid('grade below the nominal floor', (candidate) => {
+      candidate.grade = '2'
+    }),
+    invalid('zero-padded grade', (candidate) => {
+      candidate.grade = '05'
+    }),
+    invalid('fractional grade', (candidate) => {
+      candidate.grade = 5.5
+    }),
+    invalid('empty grade', (candidate) => {
+      candidate.grade = ''
+    }),
+    invalid('null grade', (candidate) => {
+      candidate.grade = null
+    }),
+    // The same nominal vocabulary governs the second grade site, TutorChat.grade.
+    acceptable('tutor chat at an unsupported nominal grade', (candidate) => {
+      candidate.tutorChats = [tutorChatAtGrade('6')]
+    }),
+    acceptable('tutor chat at a newly representable nominal grade', (candidate) => {
+      candidate.tutorChats = [tutorChatAtGrade('9')]
+    }),
+    invalid('tutor chat below the nominal floor', (candidate) => {
+      candidate.tutorChats = [tutorChatAtGrade('2')]
+    }),
+    // Pins the fail-open gap closed by 20260810210000: the historical SQL
+    // predicate went to SQL NULL here and accepted the row. TS always rejected it.
+    invalid('tutor chat with a null grade', (candidate) => {
+      candidate.tutorChats = [tutorChatAtGrade(null)]
     }),
     invalid('missing pin', (candidate) => delete candidate.pin),
     invalid('invalid pin type', (candidate) => {

@@ -503,6 +503,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-curriculum-performance-bounds-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810210000",
+      "filename": "20260810210000_academy_nominal_grade_contract_correction.sql",
+      "sha256": "2528c26470137061185f475a57f4c4a1de51f6ffa18df8e9bf427e5a8ac70c55",
+      "dependency": "20260810200000_academy_admin_curriculum_performance_bounds.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-nominal-grade-contract-correction-v1",
+      "supersessionStatus": "current"
     }
   ]
 }
