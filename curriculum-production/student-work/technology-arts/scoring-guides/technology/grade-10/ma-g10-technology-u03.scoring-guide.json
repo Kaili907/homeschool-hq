@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "unit_id": "ma-g10-technology-u03",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 10,
+  "grade_dir": "grade-10",
+  "unit_title": "Databases and Data Modeling",
+  "scoring_authority_kind": "RUBRIC",
+  "rubric": [
+    {
+      "dimension": "accuracy or fidelity",
+      "exceeds": "Every claim, calculation, artifact, or performance choice is accurate and faithful to the stated criteria, with no notable errors.",
+      "meets": "The work is accurate and faithful to the stated criteria, with at most one minor, self-correctable error.",
+      "developing": "The work is mostly accurate but has one or more errors that affect the result or the intended effect.",
+      "beginning": "The work has multiple accuracy or fidelity errors that prevent it from meeting the stated criteria."
+    },
+    {
+      "dimension": "evidence and reasoning",
+      "exceeds": "Every choice is backed by specific, cited evidence or clearly explained reasoning that a reader/viewer/listener can follow without help.",
+      "meets": "Most choices are backed by evidence or reasoning, with only small gaps.",
+      "developing": "Some choices are backed by evidence or reasoning, but several are asserted without support.",
+      "beginning": "Choices are asserted with little or no supporting evidence or reasoning."
+    },
+    {
+      "dimension": "application or performance",
+      "exceeds": "The finished task, program, or piece fully meets the performance task as written and demonstrates independent transfer to a new example.",
+      "meets": "The finished task, program, or piece meets the performance task as written.",
+      "developing": "The finished task, program, or piece partially meets the performance task, with a named gap.",
+      "beginning": "The finished task, program, or piece does not yet meet the performance task as written."
+    },
+    {
+      "dimension": "checking and revision",
+      "exceeds": "There is clear evidence of testing, critique, or self-checking that produced a real, documented revision improving the work.",
+      "meets": "There is evidence of at least one checking or revision step.",
+      "developing": "There is little evidence of checking or revision beyond a first attempt.",
+      "beginning": "There is no evidence the work was checked or revised at all."
+    }
+  ],
+  "points_reference": {
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain entities attributes and relationships in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of schema design and normalization.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply query logic and filtering in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving aggregation and grouping; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how data quality and validation and retention and data minimization relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Model and query a synthetic dataset, documenting schema decisions, data-quality checks, and retention limits.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ]
+  },
+  "mastery_interpretation": {
+    "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+    "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+  },
+  "scoring_judgment_guidance": "Score with the rubric below, not a single fixed answer key — a technical project legitimately has more than one valid solution. Compare the submission against each rubric dimension using the \"performance evidence\" prompt in the linked assessment record for Databases and Data Modeling, and record which level the student reached for each dimension along with one specific reason drawn from the actual submission.",
+  "remediation_plan": "If the project stalls, step back to the smallest version of the task: rebuild just the part covering entities attributes and relationships in isolation, using a worked example from this unit as a model, then re-attach it to the full project once that smaller piece works and you can explain why.",
+  "extension_plan": "Once the core project is working, extend it to handle a new constraint or edge case related to schema design and normalization, or compare two different approaches to the same problem and explain the real tradeoff between them in your own words.",
+  "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "source_integrity": {
+    "requires_review": false,
+    "status": "NOT_APPLICABLE"
+  },
+  "safety_and_privacy": {
+    "requires_review": true,
+    "status": "VERIFIED",
+    "note": "No real credentials, live external systems, or real personal data are used anywhere in this unit's materials."
+  },
+  "standards": [
+    "Michigan Computer Science: Data and Analysis"
+  ]
+}

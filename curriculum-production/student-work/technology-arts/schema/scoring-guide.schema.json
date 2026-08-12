@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "technology-arts/scoring-guide.schema.json",
+  "title": "Parent/tutor scoring guide",
+  "description": "One unit's rubric and scoring judgment guidance, kept separate from the student-facing task package.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "unit_id",
+    "subject",
+    "band",
+    "grade",
+    "grade_dir",
+    "unit_title",
+    "scoring_authority_kind",
+    "rubric",
+    "points_reference",
+    "mastery_interpretation",
+    "scoring_judgment_guidance",
+    "remediation_plan",
+    "extension_plan",
+    "accommodation_note",
+    "source_integrity",
+    "safety_and_privacy",
+    "standards"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "unit_id": { "type": "string" },
+    "subject": { "enum": ["technology", "arts-music"] },
+    "band": { "enum": ["g3-4", "canonical-5-7-8", "hs-9-12"] },
+    "grade": { "type": "integer", "minimum": 3, "maximum": 12 },
+    "grade_dir": { "type": "string", "pattern": "^grade-\\d{2}$" },
+    "unit_title": { "type": "string", "minLength": 1 },
+    "scoring_authority_kind": { "const": "RUBRIC" },
+    "rubric": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["dimension", "exceeds", "meets", "developing", "beginning"],
+        "properties": {
+          "dimension": { "type": "string" },
+          "exceeds": { "type": "string" },
+          "meets": { "type": "string" },
+          "developing": { "type": "string" },
+          "beginning": { "type": "string" }
+        }
+      }
+    },
+    "points_reference": {
+      "type": "object",
+      "required": ["total_points", "prompts"],
+      "properties": {
+        "total_points": { "type": "integer" },
+        "prompts": { "type": "array" }
+      }
+    },
+    "mastery_interpretation": { "type": "object" },
+    "scoring_judgment_guidance": { "type": "string", "minLength": 1 },
+    "remediation_plan": { "type": "string", "minLength": 1 },
+    "extension_plan": { "type": "string", "minLength": 1 },
+    "accommodation_note": { "type": "string", "minLength": 1 },
+    "source_integrity": {
+      "type": "object",
+      "required": ["requires_review", "status"],
+      "properties": {
+        "requires_review": { "type": "boolean" },
+        "status": { "enum": ["VERIFIED", "GAP", "UNKNOWN", "NOT_APPLICABLE"] },
+        "note": { "type": "string" }
+      }
+    },
+    "safety_and_privacy": {
+      "type": "object",
+      "required": ["requires_review", "status", "note"],
+      "properties": {
+        "requires_review": { "type": "boolean" },
+        "status": { "enum": ["VERIFIED", "GAP", "UNKNOWN", "NOT_APPLICABLE"] },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    },
+    "standards": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  }
+}
