@@ -1,0 +1,43 @@
+{
+ "schema_set_version": "2.0.0",
+ "curriculum_id": "manuel-academy-highschool-9-12-science",
+ "draft_version": "0.1.0",
+ "status": "draft",
+ "title": "Manuel Academy High School Science, Grades 9-12",
+ "policy_set_ref": "manuel-academy-hs-science-policy",
+ "framework_refs": [
+  "michigan-science-standards-2015"
+ ],
+ "course_refs": [
+  "ma-hs9-biology",
+  "ma-hs10-chemistry",
+  "ma-hs11-physics",
+  "ma-hs12-earth-space-environmental"
+ ],
+ "schedule_refs": [
+  "ma-hs9-biology-schedule",
+  "ma-hs10-chemistry-schedule",
+  "ma-hs11-physics-schedule",
+  "ma-hs12-earth-space-environmental-schedule"
+ ],
+ "resource_refs": [
+  "res-hs-science-lab-safety-card",
+  "res-hs-science-mastery-evidence-guide",
+  "res-ma-hs9-biology-investigation-guide",
+  "res-ma-hs9-biology-data-sources",
+  "res-ma-hs10-chemistry-investigation-guide",
+  "res-ma-hs10-chemistry-data-sources",
+  "res-ma-hs11-physics-investigation-guide",
+  "res-ma-hs11-physics-data-sources",
+  "res-ma-hs12-earth-space-environmental-investigation-guide",
+  "res-ma-hs12-earth-space-environmental-data-sources"
+ ],
+ "counts": {
+  "courses": 4,
+  "units": 36,
+  "lessons": 432,
+  "assessments": 36,
+  "schedules": 4,
+  "resources": 10
+ }
+}

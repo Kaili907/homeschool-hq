@@ -1,0 +1,3062 @@
+[
+ {
+  "schema_set_version": "2.0.0",
+  "schedule_id": "ma-hs9-biology-schedule",
+  "grade": 9,
+  "weeks": 36,
+  "instructional_days": 108,
+  "entries": [
+   {
+    "week": 1,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l01"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l02"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l03"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l04"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l05"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l06"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l07"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l08"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l09"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l10"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l11"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u01-l12"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l01"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l02"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l03"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l04"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l05"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l06"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l07"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l08"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l09"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l10"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l11"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u02-l12"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l01"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l02"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l03"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l04"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l05"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l06"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l07"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l08"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l09"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l10"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l11"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u03-l12"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l01"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l02"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l03"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l04"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l05"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l06"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l07"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l08"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l09"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l10"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l11"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u04-l12"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l01"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l02"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l03"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l04"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l05"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l06"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l07"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l08"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l09"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l10"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l11"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u05-l12"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l01"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l02"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l03"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l04"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l05"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l06"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l07"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l08"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l09"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l10"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l11"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u06-l12"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l01"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l02"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l03"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l04"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l05"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l06"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l07"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l08"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l09"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l10"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l11"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u07-l12"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l01"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l02"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l03"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l04"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l05"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l06"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l07"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l08"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l09"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l10"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l11"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u08-l12"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l01"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l02"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l03"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l04"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l05"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l06"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l07"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l08"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l09"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l10"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l11"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs9-biology-u09-l12"
+    ]
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "schedule_id": "ma-hs10-chemistry-schedule",
+  "grade": 10,
+  "weeks": 36,
+  "instructional_days": 108,
+  "entries": [
+   {
+    "week": 1,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l01"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l02"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l03"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l04"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l05"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l06"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l07"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l08"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l09"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l10"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l11"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u01-l12"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l01"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l02"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l03"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l04"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l05"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l06"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l07"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l08"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l09"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l10"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l11"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u02-l12"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l01"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l02"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l03"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l04"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l05"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l06"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l07"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l08"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l09"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l10"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l11"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u03-l12"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l01"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l02"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l03"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l04"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l05"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l06"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l07"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l08"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l09"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l10"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l11"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u04-l12"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l01"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l02"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l03"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l04"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l05"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l06"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l07"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l08"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l09"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l10"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l11"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u05-l12"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l01"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l02"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l03"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l04"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l05"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l06"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l07"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l08"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l09"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l10"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l11"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u06-l12"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l01"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l02"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l03"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l04"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l05"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l06"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l07"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l08"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l09"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l10"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l11"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u07-l12"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l01"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l02"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l03"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l04"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l05"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l06"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l07"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l08"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l09"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l10"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l11"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u08-l12"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l01"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l02"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l03"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l04"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l05"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l06"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l07"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l08"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l09"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l10"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l11"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs10-chemistry-u09-l12"
+    ]
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "schedule_id": "ma-hs11-physics-schedule",
+  "grade": 11,
+  "weeks": 36,
+  "instructional_days": 108,
+  "entries": [
+   {
+    "week": 1,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l01"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l02"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l03"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l04"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l05"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l06"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l07"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l08"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l09"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l10"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l11"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u01-l12"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l01"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l02"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l03"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l04"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l05"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l06"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l07"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l08"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l09"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l10"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l11"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u02-l12"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l01"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l02"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l03"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l04"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l05"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l06"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l07"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l08"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l09"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l10"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l11"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u03-l12"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l01"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l02"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l03"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l04"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l05"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l06"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l07"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l08"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l09"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l10"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l11"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u04-l12"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l01"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l02"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l03"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l04"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l05"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l06"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l07"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l08"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l09"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l10"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l11"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u05-l12"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l01"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l02"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l03"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l04"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l05"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l06"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l07"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l08"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l09"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l10"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l11"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u06-l12"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l01"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l02"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l03"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l04"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l05"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l06"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l07"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l08"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l09"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l10"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l11"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u07-l12"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l01"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l02"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l03"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l04"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l05"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l06"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l07"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l08"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l09"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l10"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l11"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u08-l12"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l01"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l02"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l03"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l04"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l05"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l06"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l07"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l08"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l09"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l10"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l11"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs11-physics-u09-l12"
+    ]
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "schedule_id": "ma-hs12-earth-space-environmental-schedule",
+  "grade": 12,
+  "weeks": 36,
+  "instructional_days": 108,
+  "entries": [
+   {
+    "week": 1,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l01"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l02"
+    ]
+   },
+   {
+    "week": 1,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l03"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l04"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l05"
+    ]
+   },
+   {
+    "week": 2,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l06"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l07"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l08"
+    ]
+   },
+   {
+    "week": 3,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l09"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l10"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l11"
+    ]
+   },
+   {
+    "week": 4,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u01-l12"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l01"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l02"
+    ]
+   },
+   {
+    "week": 5,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l03"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l04"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l05"
+    ]
+   },
+   {
+    "week": 6,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l06"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l07"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l08"
+    ]
+   },
+   {
+    "week": 7,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l09"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l10"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l11"
+    ]
+   },
+   {
+    "week": 8,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u02-l12"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l01"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l02"
+    ]
+   },
+   {
+    "week": 9,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l03"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l04"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l05"
+    ]
+   },
+   {
+    "week": 10,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l06"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l07"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l08"
+    ]
+   },
+   {
+    "week": 11,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l09"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l10"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l11"
+    ]
+   },
+   {
+    "week": 12,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u03-l12"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l01"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l02"
+    ]
+   },
+   {
+    "week": 13,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l03"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l04"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l05"
+    ]
+   },
+   {
+    "week": 14,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l06"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l07"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l08"
+    ]
+   },
+   {
+    "week": 15,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l09"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l10"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l11"
+    ]
+   },
+   {
+    "week": 16,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u04-l12"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l01"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l02"
+    ]
+   },
+   {
+    "week": 17,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l03"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l04"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l05"
+    ]
+   },
+   {
+    "week": 18,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l06"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l07"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l08"
+    ]
+   },
+   {
+    "week": 19,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l09"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l10"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l11"
+    ]
+   },
+   {
+    "week": 20,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u05-l12"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l01"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l02"
+    ]
+   },
+   {
+    "week": 21,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l03"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l04"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l05"
+    ]
+   },
+   {
+    "week": 22,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l06"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l07"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l08"
+    ]
+   },
+   {
+    "week": 23,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l09"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l10"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l11"
+    ]
+   },
+   {
+    "week": 24,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u06-l12"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l01"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l02"
+    ]
+   },
+   {
+    "week": 25,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l03"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l04"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l05"
+    ]
+   },
+   {
+    "week": 26,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l06"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l07"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l08"
+    ]
+   },
+   {
+    "week": 27,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l09"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l10"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l11"
+    ]
+   },
+   {
+    "week": 28,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u07-l12"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l01"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l02"
+    ]
+   },
+   {
+    "week": 29,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l03"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l04"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l05"
+    ]
+   },
+   {
+    "week": 30,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l06"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l07"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l08"
+    ]
+   },
+   {
+    "week": 31,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l09"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l10"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l11"
+    ]
+   },
+   {
+    "week": 32,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u08-l12"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l01"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l02"
+    ]
+   },
+   {
+    "week": 33,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l03"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l04"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l05"
+    ]
+   },
+   {
+    "week": 34,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l06"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l07"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l08"
+    ]
+   },
+   {
+    "week": 35,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l09"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 1,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l10"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 3,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l11"
+    ]
+   },
+   {
+    "week": 36,
+    "day": 5,
+    "lesson_refs": [
+     "ma-hs12-earth-space-environmental-u09-l12"
+    ]
+   }
+  ]
+ }
+]

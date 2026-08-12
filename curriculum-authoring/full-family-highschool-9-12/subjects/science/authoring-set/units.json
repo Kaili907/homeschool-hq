@@ -1,0 +1,2901 @@
+[
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u01",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 1,
+  "title": "Scientific Practice, Measurement, and the Molecules of Life",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-6",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What counts as biological evidence, and how do the molecules of life make structure and function inseparable?",
+  "topics": [
+   "biological scale and measurement",
+   "uncertainty and repeated trials",
+   "carbon and macromolecule structure",
+   "structure-function relationships",
+   "enzymes and reaction conditions",
+   "argument from evidence in biology"
+  ],
+  "performance_task": "Plan and run a controlled investigation of one factor affecting an enzyme or browning reaction, then defend the conclusion with your own data, stated uncertainty, and named limitations.",
+  "lesson_refs": [
+   "ma-hs9-biology-u01-l01",
+   "ma-hs9-biology-u01-l02",
+   "ma-hs9-biology-u01-l03",
+   "ma-hs9-biology-u01-l04",
+   "ma-hs9-biology-u01-l05",
+   "ma-hs9-biology-u01-l06",
+   "ma-hs9-biology-u01-l07",
+   "ma-hs9-biology-u01-l08",
+   "ma-hs9-biology-u01-l09",
+   "ma-hs9-biology-u01-l10",
+   "ma-hs9-biology-u01-l11",
+   "ma-hs9-biology-u01-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u01-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Two apple slices, one left plain and one coated in lemon juice, brown at very different rates on the same counter."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Controlled test of enzymatic browning or catalase activity | No-special-equipment alternative: Run the browning comparison with no chemicals at all: compare apple slices in air, under water, and wrapped, timing colour change against a printed colour scale. This needs only produce, water, and a timer and meets the same target."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS1-6 | Reinforced: HS-ETS1-3"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u02",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 2,
+  "title": "DNA, Proteins, and the Information Flow of the Cell",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How does a sequence of four bases end up determining what a cell can actually do?",
+  "topics": [
+   "DNA structure and base pairing",
+   "replication as information copying",
+   "transcription",
+   "translation and the genetic code",
+   "protein folding and function",
+   "mutation and its consequences"
+  ],
+  "performance_task": "Build a physical or drawn model tracing one gene from DNA sequence to folded protein to observable function, and state precisely what your model cannot show.",
+  "lesson_refs": [
+   "ma-hs9-biology-u02-l01",
+   "ma-hs9-biology-u02-l02",
+   "ma-hs9-biology-u02-l03",
+   "ma-hs9-biology-u02-l04",
+   "ma-hs9-biology-u02-l05",
+   "ma-hs9-biology-u02-l06",
+   "ma-hs9-biology-u02-l07",
+   "ma-hs9-biology-u02-l08",
+   "ma-hs9-biology-u02-l09",
+   "ma-hs9-biology-u02-l10",
+   "ma-hs9-biology-u02-l11",
+   "ma-hs9-biology-u02-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u02-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Two people with the same rare condition carry changes in the same gene, but one has mild symptoms and the other severe ones."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: DNA extraction from fruit, and modelling sequence to protein | No-special-equipment alternative: Skip extraction entirely: use a printed codon table and a supplied DNA sequence to transcribe and translate by hand, then build the protein from paper or beads. This needs only paper and meets the sequence-to-function target."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS1-1 | Reinforced: HS-LS3-2"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u03",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 3,
+  "title": "Cells, Hierarchical Organization, and Cellular Division",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How do interacting systems at every scale from organelle to organism produce a functioning body?",
+  "topics": [
+   "cell theory and cell types",
+   "organelles as interacting subsystems",
+   "tissues, organs, and organ systems",
+   "the cell cycle and mitosis",
+   "differentiation and stem cells",
+   "scale and surface-area-to-volume"
+  ],
+  "performance_task": "Model the hierarchical organization of one organ system from organelle to organism, showing where cellular division and differentiation act and what each level contributes.",
+  "lesson_refs": [
+   "ma-hs9-biology-u03-l01",
+   "ma-hs9-biology-u03-l02",
+   "ma-hs9-biology-u03-l03",
+   "ma-hs9-biology-u03-l04",
+   "ma-hs9-biology-u03-l05",
+   "ma-hs9-biology-u03-l06",
+   "ma-hs9-biology-u03-l07",
+   "ma-hs9-biology-u03-l08",
+   "ma-hs9-biology-u03-l09",
+   "ma-hs9-biology-u03-l10",
+   "ma-hs9-biology-u03-l11",
+   "ma-hs9-biology-u03-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u03-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A cut on a finger closes over about a week, but a cut on the cornea can close in a day."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Surface-area-to-volume modelling and observation of dividing cells | No-special-equipment alternative: Do the whole unit with no microscope and no cutting: use published, openly licensed onion-root-tip micrographs to count cells in each mitotic phase, and model surface-area-to-volume with hand-rolled clay cubes measured with a ruler."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS1-2, HS-LS1-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u04",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 4,
+  "title": "Homeostasis and Feedback Mechanisms",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How do living systems hold conditions steady while the world around them keeps changing?",
+  "topics": [
+   "setpoints and tolerance ranges",
+   "negative feedback loops",
+   "positive feedback loops",
+   "feedback failure and disease",
+   "regulation across organ systems",
+   "modelling feedback quantitatively"
+  ],
+  "performance_task": "Plan and conduct an investigation using a non-human system that provides evidence a feedback mechanism is maintaining a stable internal condition, then model the loop and identify what would break it.",
+  "lesson_refs": [
+   "ma-hs9-biology-u04-l01",
+   "ma-hs9-biology-u04-l02",
+   "ma-hs9-biology-u04-l03",
+   "ma-hs9-biology-u04-l04",
+   "ma-hs9-biology-u04-l05",
+   "ma-hs9-biology-u04-l06",
+   "ma-hs9-biology-u04-l07",
+   "ma-hs9-biology-u04-l08",
+   "ma-hs9-biology-u04-l09",
+   "ma-hs9-biology-u04-l10",
+   "ma-hs9-biology-u04-l11",
+   "ma-hs9-biology-u04-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u04-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A house thermostat and a lizard on a rock both keep temperature within a range, but only one of them can be reprogrammed."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Feedback regulation in a plant or a thermal model system | No-special-equipment alternative: Use a published, openly licensed physiological dataset - for example thermoregulation in a non-human animal - and model the feedback loop from that data. Needs only the dataset and paper."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS1-3 | Reinforced: HS-ETS1-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u05",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 5,
+  "title": "Photosynthesis, Cellular Respiration, and Energy in Living Systems",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls1-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Where does the matter in a tree come from, and where does the energy in your food actually go?",
+  "topics": [
+   "light energy capture",
+   "photosynthesis as matter and energy transformation",
+   "cellular respiration",
+   "aerobic and anaerobic pathways",
+   "conservation of matter in metabolism",
+   "energy accounting in organisms"
+  ],
+  "performance_task": "Construct and revise an evidence-based explanation of how matter and energy move through photosynthesis and respiration, using your own data plus a published dataset.",
+  "lesson_refs": [
+   "ma-hs9-biology-u05-l01",
+   "ma-hs9-biology-u05-l02",
+   "ma-hs9-biology-u05-l03",
+   "ma-hs9-biology-u05-l04",
+   "ma-hs9-biology-u05-l05",
+   "ma-hs9-biology-u05-l06",
+   "ma-hs9-biology-u05-l07",
+   "ma-hs9-biology-u05-l08",
+   "ma-hs9-biology-u05-l09",
+   "ma-hs9-biology-u05-l10",
+   "ma-hs9-biology-u05-l11",
+   "ma-hs9-biology-u05-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u05-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A large tree grows tonnes of wood while the soil beneath it barely loses mass."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Evidence of photosynthesis and respiration rates | No-special-equipment alternative: Run the yeast-and-sugar respiration comparison with a loosely fitted balloon and no lamp at all, or analyse a published photosynthesis-rate dataset against light intensity. Both meet the matter-and-energy target with kitchen materials or paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS1-5, HS-LS1-7, HS-LS2-3 | Reinforced: HS-PS1-7"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u06",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 6,
+  "title": "Ecosystems: Matter Cycling and Energy Flow",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Why does so little of the energy entering an ecosystem reach its top consumers?",
+  "topics": [
+   "trophic levels and energy transfer",
+   "food webs and matter flow",
+   "the carbon cycle in ecosystems",
+   "nitrogen and nutrient cycling",
+   "decomposition",
+   "quantitative ecosystem models"
+  ],
+  "performance_task": "Use mathematical representations of a real ecosystem's energy budget and carbon flows to support a claim about what limits its structure.",
+  "lesson_refs": [
+   "ma-hs9-biology-u06-l01",
+   "ma-hs9-biology-u06-l02",
+   "ma-hs9-biology-u06-l03",
+   "ma-hs9-biology-u06-l04",
+   "ma-hs9-biology-u06-l05",
+   "ma-hs9-biology-u06-l06",
+   "ma-hs9-biology-u06-l07",
+   "ma-hs9-biology-u06-l08",
+   "ma-hs9-biology-u06-l09",
+   "ma-hs9-biology-u06-l10",
+   "ma-hs9-biology-u06-l11",
+   "ma-hs9-biology-u06-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u06-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A hectare of grassland supports thousands of insects, hundreds of mice, and perhaps one hawk."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Decomposition rates and a quantified local food web | No-special-equipment alternative: Skip the decomposition setup: build the energy budget and carbon flow entirely from a published, openly licensed ecosystem dataset and a species list, using arithmetic and a drawn web. Paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS2-4, HS-LS2-5 | Reinforced: HS-ESS2-6, HS-LS1-5"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u07",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 7,
+  "title": "Population Dynamics, Carrying Capacity, and Biodiversity",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-8",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What actually sets the ceiling on a population, and what makes an ecosystem resilient when conditions change?",
+  "topics": [
+   "exponential and logistic growth",
+   "carrying capacity and limiting factors",
+   "interspecific interactions",
+   "biodiversity measurement",
+   "ecosystem resilience and disturbance",
+   "group behaviour and survival"
+  ],
+  "performance_task": "Use mathematical and computational representations of real population data to explain and revise a claim about carrying capacity, biodiversity, or the survival value of group behaviour.",
+  "lesson_refs": [
+   "ma-hs9-biology-u07-l01",
+   "ma-hs9-biology-u07-l02",
+   "ma-hs9-biology-u07-l03",
+   "ma-hs9-biology-u07-l04",
+   "ma-hs9-biology-u07-l05",
+   "ma-hs9-biology-u07-l06",
+   "ma-hs9-biology-u07-l07",
+   "ma-hs9-biology-u07-l08",
+   "ma-hs9-biology-u07-l09",
+   "ma-hs9-biology-u07-l10",
+   "ma-hs9-biology-u07-l11",
+   "ma-hs9-biology-u07-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u07-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: An introduced species explodes for a decade, crashes, and then settles at a level nobody predicted."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Modelling population growth from a published long-term dataset | No-special-equipment alternative: Run a mark-and-recapture sampling model with two colours of dried beans in a bag to estimate an unknown population, then compare the estimate to the true count. Kitchen materials and arithmetic only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS2-1, HS-LS2-2, HS-LS2-6, HS-LS2-8 | Reinforced: HS-ETS1-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u08",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 8,
+  "title": "Inheritance and Variation of Traits",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls3-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Where does heritable variation come from, and what can probability actually predict about it?",
+  "topics": [
+   "chromosomes and gene loci",
+   "meiosis and recombination",
+   "sources of genetic variation",
+   "probability and Punnett models",
+   "polygenic and environmental effects",
+   "distribution of expressed traits"
+  ],
+  "performance_task": "Make and defend an evidence-based claim about the source of a heritable variation, using statistics and probability, and state where a simple inheritance model stops working.",
+  "lesson_refs": [
+   "ma-hs9-biology-u08-l01",
+   "ma-hs9-biology-u08-l02",
+   "ma-hs9-biology-u08-l03",
+   "ma-hs9-biology-u08-l04",
+   "ma-hs9-biology-u08-l05",
+   "ma-hs9-biology-u08-l06",
+   "ma-hs9-biology-u08-l07",
+   "ma-hs9-biology-u08-l08",
+   "ma-hs9-biology-u08-l09",
+   "ma-hs9-biology-u08-l10",
+   "ma-hs9-biology-u08-l11",
+   "ma-hs9-biology-u08-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u08-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Two siblings share both parents and about half their DNA, yet differ in almost every visible trait."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Statistical distribution of a trait in a non-human population | No-special-equipment alternative: Use a supplied fictional pedigree and a coin-flip meiosis model on paper to generate the trait distribution. No specimens needed."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS3-1, HS-LS3-2, HS-LS3-3 | Reinforced: HS-LS1-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs9-biology-u09",
+  "course_ref": "ma-hs9-biology",
+  "grade": 9,
+  "subject": "science",
+  "order": 9,
+  "title": "Natural Selection, Evolution, and Biodiversity Engineering",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls4-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ls2-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What lines of evidence support common ancestry, and how should we design a response when human activity threatens biodiversity?",
+  "topics": [
+   "multiple lines of evidence for common ancestry",
+   "the four factors driving natural selection",
+   "statistics of advantageous traits",
+   "adaptation of populations",
+   "environmental change and extinction",
+   "engineering solutions for biodiversity"
+  ],
+  "performance_task": "Complete a biodiversity engineering capstone: define criteria and constraints for a real conservation problem, model a solution, test it by simulation, evaluate trade-offs, and defend the revision history.",
+  "lesson_refs": [
+   "ma-hs9-biology-u09-l01",
+   "ma-hs9-biology-u09-l02",
+   "ma-hs9-biology-u09-l03",
+   "ma-hs9-biology-u09-l04",
+   "ma-hs9-biology-u09-l05",
+   "ma-hs9-biology-u09-l06",
+   "ma-hs9-biology-u09-l07",
+   "ma-hs9-biology-u09-l08",
+   "ma-hs9-biology-u09-l09",
+   "ma-hs9-biology-u09-l10",
+   "ma-hs9-biology-u09-l11",
+   "ma-hs9-biology-u09-l12"
+  ],
+  "assessment_ref": "ma-hs9-biology-u09-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Antibiotic-resistant bacteria appear in hospitals within a few years of a new drug's release."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Selection simulation and a conservation design test | No-special-equipment alternative: Run the selection simulation entirely on paper with dice determining survival probability by trait, then analyse a published conservation case study. No materials beyond paper and one die."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-LS4-1, HS-LS4-2, HS-LS4-3, HS-LS4-4, HS-LS4-5, HS-LS4-6, HS-LS2-7, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3 | Reinforced: HS-LS3-3"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u01",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 1,
+  "title": "Matter, Measurement, and Laboratory Practice",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How do chemists decide what a measurement actually tells them, and how do we work safely with matter at home?",
+  "topics": [
+   "physical and chemical properties",
+   "measurement, precision, and significant figures",
+   "uncertainty and repeated trials",
+   "density and derived quantities",
+   "separation of mixtures",
+   "chemical safety and hazard reading"
+  ],
+  "performance_task": "Determine the density of an unknown solid or solution from your own repeated measurements, report it with an honest uncertainty, and justify every digit you kept.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u01-l01",
+   "ma-hs10-chemistry-u01-l02",
+   "ma-hs10-chemistry-u01-l03",
+   "ma-hs10-chemistry-u01-l04",
+   "ma-hs10-chemistry-u01-l05",
+   "ma-hs10-chemistry-u01-l06",
+   "ma-hs10-chemistry-u01-l07",
+   "ma-hs10-chemistry-u01-l08",
+   "ma-hs10-chemistry-u01-l09",
+   "ma-hs10-chemistry-u01-l10",
+   "ma-hs10-chemistry-u01-l11",
+   "ma-hs10-chemistry-u01-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u01-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Two people measure the same spoon of salt and get masses that differ by more than the salt they think they added."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Density determination with repeated trials and stated uncertainty | No-special-equipment alternative: Determine density from a supplied set of published mass and volume measurements, computing uncertainty by hand. Paper and calculator only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: practice foundation; no performance expectation claimed. | Reinforced: HS-ETS1-3"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u02",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 2,
+  "title": "Atomic Structure and the Periodic Table as a Model",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Why does the periodic table predict how an element will behave before anyone tests it?",
+  "topics": [
+   "subatomic structure and isotopes",
+   "electron arrangement and energy levels",
+   "valence electrons",
+   "periodic trends in atomic radius and ionization",
+   "reactivity patterns by group",
+   "the periodic table as a predictive model"
+  ],
+  "performance_task": "Use the periodic table as a model to predict relative properties of unfamiliar elements from outer-electron patterns, then check your predictions against published data and account for every miss.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u02-l01",
+   "ma-hs10-chemistry-u02-l02",
+   "ma-hs10-chemistry-u02-l03",
+   "ma-hs10-chemistry-u02-l04",
+   "ma-hs10-chemistry-u02-l05",
+   "ma-hs10-chemistry-u02-l06",
+   "ma-hs10-chemistry-u02-l07",
+   "ma-hs10-chemistry-u02-l08",
+   "ma-hs10-chemistry-u02-l09",
+   "ma-hs10-chemistry-u02-l10",
+   "ma-hs10-chemistry-u02-l11",
+   "ma-hs10-chemistry-u02-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u02-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Sodium and potassium sit in the same column and react with water in strikingly similar ways, while argon beside them does nothing at all."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Flame-colour patterns and periodic trend analysis from published data | No-special-equipment alternative: Do the entire unit from published data: graph atomic radius, ionization energy, and electronegativity across periods and down groups, and use published emission-spectrum images to identify elements. No flame, no chemicals, paper only. This is the DEFAULT path."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u03",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 3,
+  "title": "Bonding, Structure, and the Properties of Designed Materials",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-6",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How does what happens between particles explain what a material does in your hand?",
+  "topics": [
+   "ionic, covalent, and metallic bonding",
+   "intermolecular forces",
+   "bulk properties as evidence of particle forces",
+   "conductivity, melting point, and solubility",
+   "polymers and designed materials",
+   "communicating technical information"
+  ],
+  "performance_task": "Plan and conduct an investigation comparing bulk properties of several substances to infer the relative strength of forces between their particles, then communicate why molecular-level structure matters for one designed material.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u03-l01",
+   "ma-hs10-chemistry-u03-l02",
+   "ma-hs10-chemistry-u03-l03",
+   "ma-hs10-chemistry-u03-l04",
+   "ma-hs10-chemistry-u03-l05",
+   "ma-hs10-chemistry-u03-l06",
+   "ma-hs10-chemistry-u03-l07",
+   "ma-hs10-chemistry-u03-l08",
+   "ma-hs10-chemistry-u03-l09",
+   "ma-hs10-chemistry-u03-l10",
+   "ma-hs10-chemistry-u03-l11",
+   "ma-hs10-chemistry-u03-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u03-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Candle wax, table salt, and copper wire all look solid, but only one conducts, only one shatters, and only one melts in a warm room."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Inferring particle forces from solubility, conductivity, and melting behaviour | No-special-equipment alternative: Compare only salt, sugar, and oil in water at room temperature - solubility and mixing behaviour alone - and use published melting-point and conductivity tables for the rest. No battery, no alcohol, no heat, and therefore no ignition risk at all. Choose this path if the two hazardous steps cannot be reliably separated in time and space."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-3, HS-PS2-6 | Reinforced: HS-ETS1-2"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u04",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 4,
+  "title": "Chemical Reactions and Electron Rearrangement",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-2",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What is actually happening to electrons when one substance turns into another?",
+  "topics": [
+   "evidence of chemical change",
+   "reaction types and patterns",
+   "outermost electron states in reactions",
+   "oxidation and reduction basics",
+   "predicting products from periodic trends",
+   "writing and revising explanations"
+  ],
+  "performance_task": "Construct and revise an explanation for the outcome of a reaction you ran, grounded in outer-electron states and periodic trends rather than memorised rules.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u04-l01",
+   "ma-hs10-chemistry-u04-l02",
+   "ma-hs10-chemistry-u04-l03",
+   "ma-hs10-chemistry-u04-l04",
+   "ma-hs10-chemistry-u04-l05",
+   "ma-hs10-chemistry-u04-l06",
+   "ma-hs10-chemistry-u04-l07",
+   "ma-hs10-chemistry-u04-l08",
+   "ma-hs10-chemistry-u04-l09",
+   "ma-hs10-chemistry-u04-l10",
+   "ma-hs10-chemistry-u04-l11",
+   "ma-hs10-chemistry-u04-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u04-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Steel wool left damp in air grows warm and gains mass, while the same wool kept dry does not change."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Oxidation of steel wool and acid-base reactions with a natural indicator | No-special-equipment alternative: Run the cabbage-indicator colour scale with vinegar and baking soda only - no steel wool - and analyse published mass-change data for the rusting reaction. Kitchen materials only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-2 | Reinforced: HS-PS1-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u05",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 5,
+  "title": "Conservation of Mass and Quantitative Reasoning in Reactions",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-7",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "If atoms are never created or destroyed, why does a reaction so often look like mass disappeared?",
+  "topics": [
+   "conservation of atoms and mass",
+   "balancing equations as bookkeeping",
+   "the mole as a counting unit",
+   "molar mass and formula mass",
+   "limiting reactants",
+   "mathematical representations of reactions"
+  ],
+  "performance_task": "Use your own mass measurements from open and closed systems to support the claim that atoms and mass are conserved, and explain the open-system loss quantitatively.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u05-l01",
+   "ma-hs10-chemistry-u05-l02",
+   "ma-hs10-chemistry-u05-l03",
+   "ma-hs10-chemistry-u05-l04",
+   "ma-hs10-chemistry-u05-l05",
+   "ma-hs10-chemistry-u05-l06",
+   "ma-hs10-chemistry-u05-l07",
+   "ma-hs10-chemistry-u05-l08",
+   "ma-hs10-chemistry-u05-l09",
+   "ma-hs10-chemistry-u05-l10",
+   "ma-hs10-chemistry-u05-l11",
+   "ma-hs10-chemistry-u05-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u05-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Baking soda and vinegar in an open cup lose mass as they fizz; the same reaction in a sealed bag does not."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Open versus closed system mass accounting | No-special-equipment alternative: Do the mass accounting from a supplied table of published open- and closed-system masses, balancing the equation and computing expected gas mass by hand. Paper and calculator only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-7 | Reinforced: HS-PS1-2"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u06",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 6,
+  "title": "Energy in Chemical Systems",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Why do some reactions warm their surroundings and others chill them, when both are just rearranging bonds?",
+  "topics": [
+   "bond breaking and bond making",
+   "exothermic and endothermic processes",
+   "total bond energy changes",
+   "thermal energy transfer and equilibration",
+   "computational energy models",
+   "the second law in everyday systems"
+  ],
+  "performance_task": "Develop a model showing that energy release or absorption depends on total bond energy change, and build a computational energy account for a system you measured.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u06-l01",
+   "ma-hs10-chemistry-u06-l02",
+   "ma-hs10-chemistry-u06-l03",
+   "ma-hs10-chemistry-u06-l04",
+   "ma-hs10-chemistry-u06-l05",
+   "ma-hs10-chemistry-u06-l06",
+   "ma-hs10-chemistry-u06-l07",
+   "ma-hs10-chemistry-u06-l08",
+   "ma-hs10-chemistry-u06-l09",
+   "ma-hs10-chemistry-u06-l10",
+   "ma-hs10-chemistry-u06-l11",
+   "ma-hs10-chemistry-u06-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u06-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: One instant cold pack and one hand warmer are both sealed pouches you squeeze, and they do opposite things."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Measuring temperature change in dissolution and reaction | No-special-equipment alternative: Use Epsom salt and baking soda with vinegar only - both mild - to observe cooling and mild warming, or work entirely from a published table of dissolution enthalpies and bond energies. Kitchen materials or paper."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-4 | Reinforced: HS-PS3-1, HS-PS3-2, HS-PS3-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u07",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 7,
+  "title": "Reaction Rates and the Conditions That Change Them",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What has to be true at the particle level for a reaction to go faster?",
+  "topics": [
+   "collision model of reactions",
+   "temperature and reaction rate",
+   "concentration and reaction rate",
+   "surface area and mixing",
+   "catalysts",
+   "explaining rate with scientific principles"
+  ],
+  "performance_task": "Apply the collision model and your own rate data to explain how temperature and concentration change reaction rate, and identify the variable your design failed to control.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u07-l01",
+   "ma-hs10-chemistry-u07-l02",
+   "ma-hs10-chemistry-u07-l03",
+   "ma-hs10-chemistry-u07-l04",
+   "ma-hs10-chemistry-u07-l05",
+   "ma-hs10-chemistry-u07-l06",
+   "ma-hs10-chemistry-u07-l07",
+   "ma-hs10-chemistry-u07-l08",
+   "ma-hs10-chemistry-u07-l09",
+   "ma-hs10-chemistry-u07-l10",
+   "ma-hs10-chemistry-u07-l11",
+   "ma-hs10-chemistry-u07-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u07-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A glow stick snapped in ice water stays bright far longer than an identical one in warm water."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Rate of an effervescent or enzymatic reaction under varied conditions | No-special-equipment alternative: Vary only surface area and concentration at room temperature - whole versus crushed tablet, full-strength versus diluted vinegar - eliminating all heating. Or analyse a published rate-versus-temperature dataset. Kitchen materials or paper."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-5 | Reinforced: HS-LS1-6"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u08",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 8,
+  "title": "Equilibrium and the Design of Chemical Systems",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-6",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How can a reaction be running hard in both directions and still look like nothing is happening?",
+  "topics": [
+   "reversible reactions",
+   "dynamic equilibrium",
+   "stress and system response",
+   "shifting equilibrium by changing conditions",
+   "yield and industrial trade-offs",
+   "refining a chemical system design"
+  ],
+  "performance_task": "Refine the design of a chemical system by specifying a condition change that would increase product at equilibrium, and defend the change with evidence and stated trade-offs.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u08-l01",
+   "ma-hs10-chemistry-u08-l02",
+   "ma-hs10-chemistry-u08-l03",
+   "ma-hs10-chemistry-u08-l04",
+   "ma-hs10-chemistry-u08-l05",
+   "ma-hs10-chemistry-u08-l06",
+   "ma-hs10-chemistry-u08-l07",
+   "ma-hs10-chemistry-u08-l08",
+   "ma-hs10-chemistry-u08-l09",
+   "ma-hs10-chemistry-u08-l10",
+   "ma-hs10-chemistry-u08-l11",
+   "ma-hs10-chemistry-u08-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u08-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A sealed bottle of fizzy water looks perfectly still until the cap comes off."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Shifting a visible equilibrium with a natural indicator | No-special-equipment alternative: Observe the carbon-dioxide equilibrium in carbonated water alone - sealed versus open, cool versus warm - with no indicator chemistry, or reason from a published equilibrium dataset. Kitchen materials or paper."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-6 | Reinforced: HS-ETS1-3"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs10-chemistry-u09",
+  "course_ref": "ma-hs10-chemistry",
+  "grade": 10,
+  "subject": "science",
+  "order": 9,
+  "title": "The Nucleus, Nuclear Energy, and a Chemistry Engineering Capstone",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps1-8",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What changes when the nucleus itself is rearranged, and how should a society weigh the trade-offs?",
+  "topics": [
+   "nuclear composition and isotopes",
+   "radioactive decay and half-life",
+   "fission",
+   "fusion",
+   "mass-energy and nuclear energy scale",
+   "criteria, constraints, and trade-offs in chemical engineering"
+  ],
+  "performance_task": "Complete a chemistry engineering capstone: analyse a real materials or energy challenge, model a chemical solution including nuclear or energy trade-offs, evaluate it against prioritised criteria, and defend the revisions.",
+  "lesson_refs": [
+   "ma-hs10-chemistry-u09-l01",
+   "ma-hs10-chemistry-u09-l02",
+   "ma-hs10-chemistry-u09-l03",
+   "ma-hs10-chemistry-u09-l04",
+   "ma-hs10-chemistry-u09-l05",
+   "ma-hs10-chemistry-u09-l06",
+   "ma-hs10-chemistry-u09-l07",
+   "ma-hs10-chemistry-u09-l08",
+   "ma-hs10-chemistry-u09-l09",
+   "ma-hs10-chemistry-u09-l10",
+   "ma-hs10-chemistry-u09-l11",
+   "ma-hs10-chemistry-u09-l12"
+  ],
+  "assessment_ref": "ma-hs10-chemistry-u09-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A smoke detector contains a radioactive source, runs for a decade, and is safe to hold - while a comparable mass of the same isotope in another form would not be."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Half-life modelling and a materials trade-off analysis | No-special-equipment alternative: Model half-life with a single die and tally marks on paper instead of 100 coins, then complete the trade-off analysis from published materials data. Paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS1-8, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3 | Reinforced: HS-PS1-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u01",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 1,
+  "title": "Motion, Measurement, and Quantitative Reasoning",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How do we describe motion precisely enough that someone else can check us?",
+  "topics": [
+   "position, displacement, and reference frames",
+   "velocity and acceleration",
+   "motion graphs and their slopes",
+   "uniform acceleration relationships",
+   "measurement uncertainty in motion",
+   "vectors and components"
+  ],
+  "performance_task": "Measure a real accelerating motion, produce position, velocity, and acceleration representations from your own data, and report the acceleration with an honest uncertainty.",
+  "lesson_refs": [
+   "ma-hs11-physics-u01-l01",
+   "ma-hs11-physics-u01-l02",
+   "ma-hs11-physics-u01-l03",
+   "ma-hs11-physics-u01-l04",
+   "ma-hs11-physics-u01-l05",
+   "ma-hs11-physics-u01-l06",
+   "ma-hs11-physics-u01-l07",
+   "ma-hs11-physics-u01-l08",
+   "ma-hs11-physics-u01-l09",
+   "ma-hs11-physics-u01-l10",
+   "ma-hs11-physics-u01-l11",
+   "ma-hs11-physics-u01-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u01-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A ball rolled down a ramp covers far more distance in its third second than its first, even though nothing pushes it."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Timing accelerated motion on a ramp | No-special-equipment alternative: Analyse a published motion dataset or a frame-numbered motion diagram supplied on paper, extracting velocity and acceleration by hand. No ramp, no timing, paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: practice foundation; no performance expectation claimed. | Reinforced: HS-PS2-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u02",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 2,
+  "title": "Forces and Newton's Second Law",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What exactly is the relationship among net force, mass, and acceleration - and how would you know?",
+  "topics": [
+   "free-body diagrams",
+   "net force",
+   "Newton's second law as a mathematical relationship",
+   "mass versus weight",
+   "friction and normal forces",
+   "analysing force data"
+  ],
+  "performance_task": "Analyse your own data to support or challenge the claim that net force, mass, and acceleration follow Newton's second law, and account for the friction your model ignored.",
+  "lesson_refs": [
+   "ma-hs11-physics-u02-l01",
+   "ma-hs11-physics-u02-l02",
+   "ma-hs11-physics-u02-l03",
+   "ma-hs11-physics-u02-l04",
+   "ma-hs11-physics-u02-l05",
+   "ma-hs11-physics-u02-l06",
+   "ma-hs11-physics-u02-l07",
+   "ma-hs11-physics-u02-l08",
+   "ma-hs11-physics-u02-l09",
+   "ma-hs11-physics-u02-l10",
+   "ma-hs11-physics-u02-l11",
+   "ma-hs11-physics-u02-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u02-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A loaded wagon and an empty one, pulled with what feels like the same effort, reach very different speeds."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Varying mass and force on a rolling cart | No-special-equipment alternative: Use a published force-mass-acceleration dataset and a supplied set of free-body diagrams; derive the relationship graphically. Paper and calculator only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS2-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u03",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 3,
+  "title": "Momentum, Collisions, and Protective Design",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What is conserved in a collision, and how do we use that to keep people safe?",
+  "topics": [
+   "momentum as mass times velocity",
+   "conservation of momentum",
+   "impulse and contact time",
+   "elastic and inelastic collisions",
+   "collision analysis from data",
+   "engineering a protective device"
+  ],
+  "performance_task": "Design, test, and refine a device that minimises the force on an object during a collision, and use momentum and impulse reasoning plus your own trial data to justify each revision.",
+  "lesson_refs": [
+   "ma-hs11-physics-u03-l01",
+   "ma-hs11-physics-u03-l02",
+   "ma-hs11-physics-u03-l03",
+   "ma-hs11-physics-u03-l04",
+   "ma-hs11-physics-u03-l05",
+   "ma-hs11-physics-u03-l06",
+   "ma-hs11-physics-u03-l07",
+   "ma-hs11-physics-u03-l08",
+   "ma-hs11-physics-u03-l09",
+   "ma-hs11-physics-u03-l10",
+   "ma-hs11-physics-u03-l11",
+   "ma-hs11-physics-u03-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u03-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: An egg dropped onto a folded towel survives a fall that shatters it on bare tile."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Impact-protection design and collision trials | No-special-equipment alternative: Use a sealed water balloon, a small beanbag, or a marshmallow instead of an egg - no biological hazard, no cleanup - or run the collision strand with toy cars only and analyse published crash-test data for the protective design. "
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS2-2, HS-PS2-3 | Reinforced: HS-ETS1-2, HS-ETS1-3"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u04",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 4,
+  "title": "Gravitation and Electrostatic Forces",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Why do gravity and the electric force follow the same mathematical shape while behaving so differently?",
+  "topics": [
+   "Newton's law of gravitation",
+   "Coulomb's law",
+   "inverse-square relationships",
+   "comparing gravitational and electrostatic strength",
+   "field lines as representations",
+   "predicting forces mathematically"
+  ],
+  "performance_task": "Use mathematical representations of Newton's law of gravitation and Coulomb's law to predict and compare forces in real situations, and explain why one dominates at each scale.",
+  "lesson_refs": [
+   "ma-hs11-physics-u04-l01",
+   "ma-hs11-physics-u04-l02",
+   "ma-hs11-physics-u04-l03",
+   "ma-hs11-physics-u04-l04",
+   "ma-hs11-physics-u04-l05",
+   "ma-hs11-physics-u04-l06",
+   "ma-hs11-physics-u04-l07",
+   "ma-hs11-physics-u04-l08",
+   "ma-hs11-physics-u04-l09",
+   "ma-hs11-physics-u04-l10",
+   "ma-hs11-physics-u04-l11",
+   "ma-hs11-physics-u04-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u04-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A charged balloon lifts hair against the pull of the entire Earth."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Electrostatic force behaviour and inverse-square modelling | No-special-equipment alternative: Demonstrate the inverse-square relationship with a flashlight and a ruler, measuring illuminated area against distance, then apply the same mathematics to gravitation and Coulomb's law using published masses and charges. Household items and paper."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS2-4 | Reinforced: HS-ESS1-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u05",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 5,
+  "title": "Energy: Modelling, Accounting, and Conservation",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-2",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "If energy is always conserved, why does everything eventually stop?",
+  "topics": [
+   "kinetic and potential energy",
+   "energy as a system-level account",
+   "computational energy models",
+   "energy at macroscopic and particle scales",
+   "energy transfer and dissipation",
+   "building and checking an energy budget"
+  ],
+  "performance_task": "Create a computational model that calculates the energy change of one component of a system from the changes in the others, and test it against a system you measured.",
+  "lesson_refs": [
+   "ma-hs11-physics-u05-l01",
+   "ma-hs11-physics-u05-l02",
+   "ma-hs11-physics-u05-l03",
+   "ma-hs11-physics-u05-l04",
+   "ma-hs11-physics-u05-l05",
+   "ma-hs11-physics-u05-l06",
+   "ma-hs11-physics-u05-l07",
+   "ma-hs11-physics-u05-l08",
+   "ma-hs11-physics-u05-l09",
+   "ma-hs11-physics-u05-l10",
+   "ma-hs11-physics-u05-l11",
+   "ma-hs11-physics-u05-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u05-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A bouncing ball returns to a lower height every bounce, yet nothing about it looks like it is losing anything."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Energy accounting for a bouncing ball or a pendulum | No-special-equipment alternative: Build the energy budget from a supplied table of published bounce heights or pendulum periods, computing the model by hand. Paper and calculator only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS3-1, HS-PS3-2 | Reinforced: HS-PS1-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u06",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 6,
+  "title": "Thermal Energy and the Second Law",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Why does energy spread out on its own, and never gather itself back up?",
+  "topics": [
+   "temperature versus thermal energy",
+   "conduction, convection, and radiation",
+   "thermal equilibrium",
+   "specific heat capacity",
+   "the second law of thermodynamics",
+   "investigating energy distribution"
+  ],
+  "performance_task": "Plan and conduct an investigation providing evidence that combining components at different temperatures in a closed system produces a more uniform energy distribution.",
+  "lesson_refs": [
+   "ma-hs11-physics-u06-l01",
+   "ma-hs11-physics-u06-l02",
+   "ma-hs11-physics-u06-l03",
+   "ma-hs11-physics-u06-l04",
+   "ma-hs11-physics-u06-l05",
+   "ma-hs11-physics-u06-l06",
+   "ma-hs11-physics-u06-l07",
+   "ma-hs11-physics-u06-l08",
+   "ma-hs11-physics-u06-l09",
+   "ma-hs11-physics-u06-l10",
+   "ma-hs11-physics-u06-l11",
+   "ma-hs11-physics-u06-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u06-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A metal spoon and a wooden spoon left in the same room feel like different temperatures to the hand."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Thermal equilibration in an insulated system | No-special-equipment alternative: Use a published cooling-curve dataset, or run the whole investigation at room temperature versus refrigerator temperature - no heating at all. Both meet the equilibration target."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS3-4 | Reinforced: HS-PS1-4, HS-ESS2-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u07",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 7,
+  "title": "Fields, Electromagnetism, and Induction",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps2-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How can a moving magnet create a current in a wire it never touches?",
+  "topics": [
+   "electric and magnetic fields",
+   "current and magnetic field production",
+   "electromagnetic induction",
+   "field models of interaction at a distance",
+   "energy changes in field interactions",
+   "investigating induction"
+  ],
+  "performance_task": "Plan and conduct an investigation providing evidence that a current produces a magnetic field and that a changing magnetic field produces a current, and model the energy change involved.",
+  "lesson_refs": [
+   "ma-hs11-physics-u07-l01",
+   "ma-hs11-physics-u07-l02",
+   "ma-hs11-physics-u07-l03",
+   "ma-hs11-physics-u07-l04",
+   "ma-hs11-physics-u07-l05",
+   "ma-hs11-physics-u07-l06",
+   "ma-hs11-physics-u07-l07",
+   "ma-hs11-physics-u07-l08",
+   "ma-hs11-physics-u07-l09",
+   "ma-hs11-physics-u07-l10",
+   "ma-hs11-physics-u07-l11",
+   "ma-hs11-physics-u07-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u07-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A bicycle light with no battery glows brighter the faster the wheel turns."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Electromagnet construction and induction with a coil and magnet | No-special-equipment alternative: Map a magnetic field with a compass and a permanent magnet only - no battery, no circuit - and study induction from published data or a supplied diagram sequence. Compass and paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS2-5, HS-PS3-5 | Reinforced: HS-PS2-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u08",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 8,
+  "title": "Waves and Their Mathematics",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What stays the same and what changes when a wave crosses into a new material?",
+  "topics": [
+   "wave properties and terminology",
+   "the frequency-wavelength-speed relationship",
+   "waves in different media",
+   "reflection, refraction, and diffraction",
+   "wave and particle models of light",
+   "evaluating competing models"
+  ],
+  "performance_task": "Use mathematical representations to support a claim about frequency, wavelength, and speed in different media, and evaluate when a wave model or a particle model of light serves better.",
+  "lesson_refs": [
+   "ma-hs11-physics-u08-l01",
+   "ma-hs11-physics-u08-l02",
+   "ma-hs11-physics-u08-l03",
+   "ma-hs11-physics-u08-l04",
+   "ma-hs11-physics-u08-l05",
+   "ma-hs11-physics-u08-l06",
+   "ma-hs11-physics-u08-l07",
+   "ma-hs11-physics-u08-l08",
+   "ma-hs11-physics-u08-l09",
+   "ma-hs11-physics-u08-l10",
+   "ma-hs11-physics-u08-l11",
+   "ma-hs11-physics-u08-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u08-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A straw in a glass of water looks broken at the surface, and the break shifts as you move your head."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Wave speed in a spring and light behaviour at boundaries | No-special-equipment alternative: Measure wave speed on a rope on the floor - no tension, no recoil - and observe diffraction with a CD held under a household lamp. Or work from published wave-speed tables and a supplied refraction diagram. No spring, no bright source."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS4-1, HS-PS4-3 | Reinforced: HS-PS4-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs11-physics-u09",
+  "course_ref": "ma-hs11-physics",
+  "grade": 11,
+  "subject": "science",
+  "order": 9,
+  "title": "Electromagnetic Radiation, Information, and a Physics Engineering Capstone",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps4-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ps3-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How do we send information reliably using something we cannot see?",
+  "topics": [
+   "the electromagnetic spectrum",
+   "absorption of radiation by matter",
+   "digital versus analog information",
+   "evaluating published claims about radiation",
+   "wave-based technologies",
+   "energy conversion device design"
+  ],
+  "performance_task": "Complete a physics engineering capstone: design, build, and refine a device that converts one form of energy into another or transmits information, and communicate how wave principles and evidence justify the design.",
+  "lesson_refs": [
+   "ma-hs11-physics-u09-l01",
+   "ma-hs11-physics-u09-l02",
+   "ma-hs11-physics-u09-l03",
+   "ma-hs11-physics-u09-l04",
+   "ma-hs11-physics-u09-l05",
+   "ma-hs11-physics-u09-l06",
+   "ma-hs11-physics-u09-l07",
+   "ma-hs11-physics-u09-l08",
+   "ma-hs11-physics-u09-l09",
+   "ma-hs11-physics-u09-l10",
+   "ma-hs11-physics-u09-l11",
+   "ma-hs11-physics-u09-l12"
+  ],
+  "assessment_ref": "ma-hs11-physics-u09-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A phone in a metal box loses signal completely, while the same phone behind a wooden door does not."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Signal transmission, shielding, and an energy-conversion device build | No-special-equipment alternative: Run the shielding test with a radio and household materials only - no build - and complete the capstone as a documented paper design with a modelled energy budget rather than a physical device."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-PS4-2, HS-PS4-4, HS-PS4-5, HS-PS3-3, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3 | Reinforced: HS-PS4-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u01",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 1,
+  "title": "Earth and Space Systems, Scale, and Data Practice",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How do we reason honestly about systems too large, too slow, or too far away to experiment on?",
+  "topics": [
+   "systems and system models",
+   "spatial and temporal scale",
+   "proxy data and indirect evidence",
+   "uncertainty in geoscience data",
+   "reading and building graphs honestly",
+   "distinguishing correlation and causation"
+  ],
+  "performance_task": "Take one published geoscience or astronomical dataset, build an honest representation of it, and document every choice that could mislead a reader.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u01-l01",
+   "ma-hs12-earth-space-environmental-u01-l02",
+   "ma-hs12-earth-space-environmental-u01-l03",
+   "ma-hs12-earth-space-environmental-u01-l04",
+   "ma-hs12-earth-space-environmental-u01-l05",
+   "ma-hs12-earth-space-environmental-u01-l06",
+   "ma-hs12-earth-space-environmental-u01-l07",
+   "ma-hs12-earth-space-environmental-u01-l08",
+   "ma-hs12-earth-space-environmental-u01-l09",
+   "ma-hs12-earth-space-environmental-u01-l10",
+   "ma-hs12-earth-space-environmental-u01-l11",
+   "ma-hs12-earth-space-environmental-u01-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u01-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Two published graphs of the same climate record look like they tell opposite stories, purely because of their axes."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Scale modelling and critical analysis of published representations | No-special-equipment alternative: Do the scale model on paper at desk scale rather than walking it outdoors, and analyse a printed dataset supplied by the adult. Paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: practice foundation; no performance expectation claimed. | Reinforced: HS-ESS3-5"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u02",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 2,
+  "title": "The Sun, Stars, and the Origin of the Elements",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Where did the atoms in your body actually come from?",
+  "topics": [
+   "nuclear fusion in stellar cores",
+   "the sun's energy budget and lifespan",
+   "stellar life cycles",
+   "nucleosynthesis and element formation",
+   "spectra as compositional evidence",
+   "communicating stellar science"
+  ],
+  "performance_task": "Develop an evidence-based model of the sun's life span and energy source, and communicate how stars across their life cycle produce the elements in ordinary matter.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u02-l01",
+   "ma-hs12-earth-space-environmental-u02-l02",
+   "ma-hs12-earth-space-environmental-u02-l03",
+   "ma-hs12-earth-space-environmental-u02-l04",
+   "ma-hs12-earth-space-environmental-u02-l05",
+   "ma-hs12-earth-space-environmental-u02-l06",
+   "ma-hs12-earth-space-environmental-u02-l07",
+   "ma-hs12-earth-space-environmental-u02-l08",
+   "ma-hs12-earth-space-environmental-u02-l09",
+   "ma-hs12-earth-space-environmental-u02-l10",
+   "ma-hs12-earth-space-environmental-u02-l11",
+   "ma-hs12-earth-space-environmental-u02-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u02-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: The sun has been radiating enormous power for billions of years without burning out or collapsing."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Solar energy measurement and spectral element identification | No-special-equipment alternative: Skip all outdoor solar work: compute the sun's power output and lifetime from published solar-constant and mass data, and identify elements from published stellar spectra images. Paper and calculator only. This is the DEFAULT path."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS1-1, HS-ESS1-3 | Reinforced: HS-PS1-8, HS-PS3-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u03",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 3,
+  "title": "Cosmology and the Evidence for the Big Bang",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-2",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What observations force the conclusion that the universe has a history?",
+  "topics": [
+   "light spectra and redshift",
+   "motion of distant galaxies",
+   "Hubble's relationship",
+   "cosmic microwave background",
+   "composition of matter in the universe",
+   "constructing an explanation from multiple evidence lines"
+  ],
+  "performance_task": "Construct an explanation of the Big Bang theory from astronomical evidence, weighing how each independent line of evidence constrains the model.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u03-l01",
+   "ma-hs12-earth-space-environmental-u03-l02",
+   "ma-hs12-earth-space-environmental-u03-l03",
+   "ma-hs12-earth-space-environmental-u03-l04",
+   "ma-hs12-earth-space-environmental-u03-l05",
+   "ma-hs12-earth-space-environmental-u03-l06",
+   "ma-hs12-earth-space-environmental-u03-l07",
+   "ma-hs12-earth-space-environmental-u03-l08",
+   "ma-hs12-earth-space-environmental-u03-l09",
+   "ma-hs12-earth-space-environmental-u03-l10",
+   "ma-hs12-earth-space-environmental-u03-l11",
+   "ma-hs12-earth-space-environmental-u03-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u03-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Nearly every distant galaxy's light is shifted toward red, and the farther away it is, the more shifted it is."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Expansion modelling and analysis of published redshift data | No-special-equipment alternative: Model expansion with dots drawn on an elastic band stretched along a ruler, then fit published redshift-distance data by hand. No balloon, paper and ruler only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS1-2 | Reinforced: HS-ESS1-3"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u04",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 4,
+  "title": "Orbital Motion and the Solar System",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Why do orbits keep their shape, and what would it take to change one?",
+  "topics": [
+   "gravitational orbits",
+   "Kepler's relationships",
+   "orbital period and radius",
+   "elliptical orbits and orbital energy",
+   "computational prediction of orbits",
+   "solar system architecture"
+  ],
+  "performance_task": "Use mathematical or computational representations to predict the motion of orbiting bodies, and test your predictions against published orbital data.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u04-l01",
+   "ma-hs12-earth-space-environmental-u04-l02",
+   "ma-hs12-earth-space-environmental-u04-l03",
+   "ma-hs12-earth-space-environmental-u04-l04",
+   "ma-hs12-earth-space-environmental-u04-l05",
+   "ma-hs12-earth-space-environmental-u04-l06",
+   "ma-hs12-earth-space-environmental-u04-l07",
+   "ma-hs12-earth-space-environmental-u04-l08",
+   "ma-hs12-earth-space-environmental-u04-l09",
+   "ma-hs12-earth-space-environmental-u04-l10",
+   "ma-hs12-earth-space-environmental-u04-l11",
+   "ma-hs12-earth-space-environmental-u04-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u04-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: A comet spends decades far from the sun and then whips through the inner solar system in weeks."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Orbital prediction from published solar system data | No-special-equipment alternative: Construct ellipses with a compass and ruler rather than pins and string, and complete all orbital prediction arithmetically from the published dataset. Paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS1-4 | Reinforced: HS-PS2-4, HS-ETS1-4"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u05",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 5,
+  "title": "Plate Tectonics and the History of Earth",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-5",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess1-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-3",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How can rock that formed at the bottom of an ocean end up on a mountaintop?",
+  "topics": [
+   "evidence for plate motion",
+   "seafloor age and magnetic striping",
+   "convection in Earth's interior",
+   "continental and oceanic crust formation",
+   "radiometric dating and Earth's age",
+   "reconstructing geologic history"
+  ],
+  "performance_task": "Evaluate multiple lines of evidence for past and current crustal movement, and construct an account of Earth's formation and early history from ancient materials and planetary surfaces.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u05-l01",
+   "ma-hs12-earth-space-environmental-u05-l02",
+   "ma-hs12-earth-space-environmental-u05-l03",
+   "ma-hs12-earth-space-environmental-u05-l04",
+   "ma-hs12-earth-space-environmental-u05-l05",
+   "ma-hs12-earth-space-environmental-u05-l06",
+   "ma-hs12-earth-space-environmental-u05-l07",
+   "ma-hs12-earth-space-environmental-u05-l08",
+   "ma-hs12-earth-space-environmental-u05-l09",
+   "ma-hs12-earth-space-environmental-u05-l10",
+   "ma-hs12-earth-space-environmental-u05-l11",
+   "ma-hs12-earth-space-environmental-u05-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u05-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Identical fossil species appear on coastlines now separated by an entire ocean."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Seafloor age mapping and a convection model | No-special-equipment alternative: Do the convection strand from a published thermal-convection diagram sequence and complete the seafloor age mapping with coloured pencils on a printed map. No water, paper only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS1-5, HS-ESS1-6, HS-ESS2-1, HS-ESS2-3 | Reinforced: HS-PS1-8"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u06",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 6,
+  "title": "Surface Processes, Water, and Earth System Feedbacks",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How does one change to Earth's surface end up changing systems far away from it?",
+  "topics": [
+   "weathering and erosion",
+   "the special properties of water",
+   "surface water and groundwater systems",
+   "feedbacks between Earth systems",
+   "human alteration of surface processes",
+   "investigating water and Earth materials"
+  ],
+  "performance_task": "Plan and conduct an investigation of water's properties and their effects on Earth materials, then analyse geoscience data to claim that one surface change creates feedbacks in other systems.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u06-l01",
+   "ma-hs12-earth-space-environmental-u06-l02",
+   "ma-hs12-earth-space-environmental-u06-l03",
+   "ma-hs12-earth-space-environmental-u06-l04",
+   "ma-hs12-earth-space-environmental-u06-l05",
+   "ma-hs12-earth-space-environmental-u06-l06",
+   "ma-hs12-earth-space-environmental-u06-l07",
+   "ma-hs12-earth-space-environmental-u06-l08",
+   "ma-hs12-earth-space-environmental-u06-l09",
+   "ma-hs12-earth-space-environmental-u06-l10",
+   "ma-hs12-earth-space-environmental-u06-l11",
+   "ma-hs12-earth-space-environmental-u06-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u06-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Removing vegetation from a hillside changes the temperature, the water table, and the air quality of a valley kilometres downstream."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Erosion, infiltration, and water property testing | No-special-equipment alternative: Compare infiltration through sand, gravel, and packed soil in three cups on a tray indoors, or work entirely from a published watershed dataset. Kitchen materials or paper."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS2-2, HS-ESS2-5 | Reinforced: HS-ESS2-1"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u07",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 7,
+  "title": "Climate, Energy Flow, and the Carbon Cycle",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-5",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "What determines Earth's temperature, and how confident can a forecast honestly be?",
+  "topics": [
+   "energy flow into and out of Earth systems",
+   "the greenhouse effect",
+   "the global carbon cycle",
+   "climate versus weather",
+   "climate models and their uncertainty",
+   "evidence-based forecasting"
+  ],
+  "performance_task": "Use a model of Earth's energy flows and a quantitative carbon-cycle model to make an evidence-based forecast of climate change, with the forecast's uncertainty stated explicitly.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u07-l01",
+   "ma-hs12-earth-space-environmental-u07-l02",
+   "ma-hs12-earth-space-environmental-u07-l03",
+   "ma-hs12-earth-space-environmental-u07-l04",
+   "ma-hs12-earth-space-environmental-u07-l05",
+   "ma-hs12-earth-space-environmental-u07-l06",
+   "ma-hs12-earth-space-environmental-u07-l07",
+   "ma-hs12-earth-space-environmental-u07-l08",
+   "ma-hs12-earth-space-environmental-u07-l09",
+   "ma-hs12-earth-space-environmental-u07-l10",
+   "ma-hs12-earth-space-environmental-u07-l11",
+   "ma-hs12-earth-space-environmental-u07-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u07-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Two cities at the same latitude have average winter temperatures nearly twenty degrees apart."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Energy balance modelling and carbon cycle quantification | No-special-equipment alternative: Run the energy-balance comparison in sunlight rather than under a lamp, or skip the physical model entirely and build the energy budget and carbon-cycle quantification from published flux data. Paper and calculator only."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS2-4, HS-ESS2-6, HS-ESS3-5 | Reinforced: HS-PS3-4, HS-LS2-5"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u08",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 8,
+  "title": "Coevolution of Earth and Life, Resources, and Natural Hazards",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess2-7",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-1",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "How have Earth and life reshaped each other, and how does that history set where people can live?",
+  "topics": [
+   "the Great Oxidation Event and atmospheric change",
+   "coevolution of the geosphere and biosphere",
+   "distribution of natural resources",
+   "natural hazards and their causes",
+   "resource availability and human settlement",
+   "constructing arguments from geologic and biological evidence"
+  ],
+  "performance_task": "Construct an evidence-based argument about the coevolution of Earth's systems and life, and explain how resource distribution, hazards, and climate change have driven human activity.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u08-l01",
+   "ma-hs12-earth-space-environmental-u08-l02",
+   "ma-hs12-earth-space-environmental-u08-l03",
+   "ma-hs12-earth-space-environmental-u08-l04",
+   "ma-hs12-earth-space-environmental-u08-l05",
+   "ma-hs12-earth-space-environmental-u08-l06",
+   "ma-hs12-earth-space-environmental-u08-l07",
+   "ma-hs12-earth-space-environmental-u08-l08",
+   "ma-hs12-earth-space-environmental-u08-l09",
+   "ma-hs12-earth-space-environmental-u08-l10",
+   "ma-hs12-earth-space-environmental-u08-l11",
+   "ma-hs12-earth-space-environmental-u08-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u08-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Earth's atmosphere contains abundant oxygen, which is chemically reactive and should not persist without something continuously producing it."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Atmospheric change evidence and a regional resource and hazard analysis | No-special-equipment alternative: Use a supplied printed regional case study rather than searching sources, and complete the argument on paper. No online work required."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS2-7, HS-ESS3-1 | Reinforced: HS-LS4-5, HS-LS2-6"
+    }
+   }
+  ]
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "unit_id": "ma-hs12-earth-space-environmental-u09",
+  "course_ref": "ma-hs12-earth-space-environmental",
+  "grade": 12,
+  "subject": "science",
+  "order": 9,
+  "title": "Sustainability Engineering and the Grade 12 Capstone",
+  "days": 12,
+  "standards": [
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-4",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ess3-6",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-1",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-2",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-3",
+    "mapping_status": "canonical"
+   },
+   {
+    "framework_ref": "michigan-science-standards-2015",
+    "standard_id": "hs-ets1-4",
+    "mapping_status": "canonical"
+   }
+  ],
+  "essential_question": "Given real constraints and real trade-offs, what should actually be done?",
+  "topics": [
+   "criteria, constraints, and prioritisation",
+   "cost-benefit analysis of energy and mineral resources",
+   "computational simulation of coupled systems",
+   "refining technological solutions",
+   "sustainability and human population",
+   "defending a design under uncertainty"
+  ],
+  "performance_task": "Complete the Grade 12 capstone: analyse a global challenge, build a computational simulation of coupled Earth and human systems, evaluate competing solutions on prioritised criteria and trade-offs, refine your solution, and defend it with stated limitations.",
+  "lesson_refs": [
+   "ma-hs12-earth-space-environmental-u09-l01",
+   "ma-hs12-earth-space-environmental-u09-l02",
+   "ma-hs12-earth-space-environmental-u09-l03",
+   "ma-hs12-earth-space-environmental-u09-l04",
+   "ma-hs12-earth-space-environmental-u09-l05",
+   "ma-hs12-earth-space-environmental-u09-l06",
+   "ma-hs12-earth-space-environmental-u09-l07",
+   "ma-hs12-earth-space-environmental-u09-l08",
+   "ma-hs12-earth-space-environmental-u09-l09",
+   "ma-hs12-earth-space-environmental-u09-l10",
+   "ma-hs12-earth-space-environmental-u09-l11",
+   "ma-hs12-earth-space-environmental-u09-l12"
+  ],
+  "assessment_ref": "ma-hs12-earth-space-environmental-u09-assessment",
+  "extensions": [
+   {
+    "namespace": "manuel.academy/sequence-note",
+    "key": "phenomenon",
+    "schema_ref": "sequence-note-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Anchoring phenomenon: Two counties facing the same water shortage adopt opposite policies, and both can cite evidence."
+    }
+   },
+   {
+    "namespace": "manuel.academy/lab-alternative",
+    "key": "alternative",
+    "schema_ref": "lab-alternative-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Day 7 investigation: Computational simulation of a coupled resource and sustainability system | No-special-equipment alternative: Build the simulation as an iterated spreadsheet or as a hand-computed table over time steps on paper. No programming environment and no downloads required."
+    }
+   },
+   {
+    "namespace": "manuel.academy/standards-role",
+    "key": "role",
+    "schema_ref": "standards-role-v1",
+    "projection": "student-safe",
+    "value": {
+     "type": "string",
+     "value": "Primary: HS-ESS3-2, HS-ESS3-3, HS-ESS3-4, HS-ESS3-6, HS-ETS1-1, HS-ETS1-2, HS-ETS1-3, HS-ETS1-4 | Reinforced: HS-LS2-7, HS-ESS3-1"
+    }
+   }
+  ]
+ }
+]

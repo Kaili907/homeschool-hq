@@ -1,0 +1,148 @@
+{
+  "package_id": "manuel-academy-highschool-9-12-science",
+  "schema_set_version": "2.0.0",
+  "overall": "PASS",
+  "contract_issues": [],
+  "counts": {
+    "checks": 27,
+    "passed": 27,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "check": "schema-contract-valid",
+      "result": "PASS",
+      "detail": "0 issues from validateAuthoringSet"
+    },
+    {
+      "check": "framework-has-71-performance-expectations",
+      "result": "PASS",
+      "detail": "71 standards"
+    },
+    {
+      "check": "every-performance-expectation-covered",
+      "result": "PASS",
+      "detail": "all 71 covered by a unit"
+    },
+    {
+      "check": "four-courses-grades-9-12",
+      "result": "PASS",
+      "detail": "9:ma-hs9-biology 10:ma-hs10-chemistry 11:ma-hs11-physics 12:ma-hs12-earth-space-environmental"
+    },
+    {
+      "check": "each-course-108-sessions",
+      "result": "PASS",
+      "detail": "ma-hs9-biology=108 ma-hs10-chemistry=108 ma-hs11-physics=108 ma-hs12-earth-space-environmental=108"
+    },
+    {
+      "check": "every-unit-has-an-investigation",
+      "result": "PASS",
+      "detail": "36 investigation lessons / 36 units"
+    },
+    {
+      "check": "investigations-declare-hazards",
+      "result": "PASS",
+      "detail": "all investigation lessons declare at least one typed hazard"
+    },
+    {
+      "check": "investigations-declare-supervision",
+      "result": "PASS",
+      "detail": "all investigation lessons declare a supervision level"
+    },
+    {
+      "check": "chemical-hazards-require-direct-adult-supervision",
+      "result": "PASS",
+      "detail": "11 lessons carry a chemical hazard; 11 require direct adult supervision"
+    },
+    {
+      "check": "every-lesson-states-an-alternative-path",
+      "result": "PASS",
+      "detail": "lab-alternative extension present on every lesson"
+    },
+    {
+      "check": "every-unit-states-an-alternative-path",
+      "result": "PASS",
+      "detail": "lab-alternative extension present on every unit"
+    },
+    {
+      "check": "multi-occasion-mastery-everywhere",
+      "result": "PASS",
+      "detail": "every lesson requires >=2 occasions on >=2 dates with independent evidence and novel-context transfer"
+    },
+    {
+      "check": "text-fallback-required-everywhere",
+      "result": "PASS",
+      "detail": "all lessons"
+    },
+    {
+      "check": "no-required-media-resources",
+      "result": "PASS",
+      "detail": "every resource is optional and has a text fallback"
+    },
+    {
+      "check": "all-resources-have-text-fallback",
+      "result": "PASS",
+      "detail": "10 resources"
+    },
+    {
+      "check": "no-required-photo-or-video-proof",
+      "result": "PASS",
+      "detail": "no affirmative match"
+    },
+    {
+      "check": "no-mains-electricity-use",
+      "result": "PASS",
+      "detail": "no affirmative match"
+    },
+    {
+      "check": "no-laser-instruction",
+      "result": "PASS",
+      "detail": "no affirmative match"
+    },
+    {
+      "check": "no-learner-body-or-health-measurement",
+      "result": "PASS",
+      "detail": "no match"
+    },
+    {
+      "check": "tutor-authority-pinned",
+      "result": "PASS",
+      "detail": "policy set pins all three tutor authority invariants to false"
+    },
+    {
+      "check": "tutor-routes-use-controlled-signals-only",
+      "result": "PASS",
+      "detail": "all routes"
+    },
+    {
+      "check": "student-projection-carries-no-protected-fields",
+      "result": "PASS",
+      "detail": "all 432 lessons project cleanly"
+    },
+    {
+      "check": "all-refs-are-study-seam-safe",
+      "result": "PASS",
+      "detail": "472 identifiers"
+    },
+    {
+      "check": "all-refs-unique",
+      "result": "PASS",
+      "detail": "472 unique of 472"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once",
+      "result": "PASS",
+      "detail": "scheduled=432 lessons=432"
+    },
+    {
+      "check": "assessments-aligned-to-unit-standards",
+      "result": "PASS",
+      "detail": "36 assessments"
+    },
+    {
+      "check": "assessment-bands-ordered",
+      "result": "PASS",
+      "detail": "not-yet < developing < secure for all interpretations"
+    }
+  ]
+}

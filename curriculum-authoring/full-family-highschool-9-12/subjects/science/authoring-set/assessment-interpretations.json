@@ -1,0 +1,1442 @@
+[
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u01-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u01-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u01-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u01-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u01-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u01-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u01-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u01-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u01-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u02-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u02-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u02-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u02-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u02-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u02-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u02-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u02-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u02-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u03-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u03-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u03-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u03-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u03-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u03-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u03-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u03-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u03-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u04-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u04-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u04-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u04-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u04-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u04-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u04-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u04-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u04-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u05-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u05-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u05-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u05-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u05-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u05-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u05-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u05-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u05-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u06-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u06-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u06-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u06-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u06-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u06-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u06-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u06-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u06-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u07-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u07-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u07-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u07-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u07-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u07-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u07-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u07-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u07-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u08-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u08-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u08-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u08-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u08-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u08-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u08-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u08-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u08-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs9-biology-u09-assessment-interpretation",
+  "assessment_ref": "ma-hs9-biology-u09-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs9-biology-u09-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u09-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u09-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u09-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u09-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u09-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs9-biology-u09-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u01-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u01-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u01-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u01-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u01-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u01-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u01-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u01-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u01-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u02-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u02-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u02-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u02-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u02-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u02-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u02-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u02-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u02-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u03-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u03-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u03-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u03-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u03-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u03-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u03-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u03-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u03-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u04-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u04-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u04-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u04-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u04-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u04-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u04-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u04-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u04-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u05-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u05-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u05-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u05-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u05-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u05-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u05-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u05-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u05-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u06-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u06-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u06-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u06-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u06-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u06-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u06-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u06-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u06-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u07-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u07-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u07-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u07-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u07-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u07-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u07-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u07-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u07-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u08-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u08-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u08-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u08-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u08-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u08-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u08-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u08-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u08-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs10-chemistry-u09-assessment-interpretation",
+  "assessment_ref": "ma-hs10-chemistry-u09-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs10-chemistry-u09-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u09-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u09-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u09-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u09-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u09-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs10-chemistry-u09-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u01-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u01-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u01-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u01-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u01-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u01-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u01-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u01-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u01-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u02-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u02-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u02-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u02-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u02-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u02-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u02-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u02-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u02-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u03-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u03-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u03-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u03-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u03-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u03-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u03-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u03-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u03-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u04-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u04-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u04-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u04-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u04-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u04-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u04-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u04-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u04-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u05-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u05-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u05-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u05-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u05-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u05-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u05-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u05-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u05-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u06-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u06-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u06-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u06-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u06-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u06-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u06-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u06-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u06-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u07-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u07-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u07-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u07-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u07-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u07-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u07-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u07-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u07-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u08-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u08-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u08-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u08-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u08-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u08-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u08-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u08-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u08-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs11-physics-u09-assessment-interpretation",
+  "assessment_ref": "ma-hs11-physics-u09-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs11-physics-u09-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u09-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u09-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u09-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u09-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u09-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs11-physics-u09-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u01-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u01-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u01-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u01-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u01-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u01-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u01-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u01-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u01-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u02-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u02-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u02-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u02-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u02-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u02-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u02-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u02-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u02-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u03-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u03-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u03-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u03-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u03-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u03-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u03-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u03-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u03-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u04-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u04-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u04-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u04-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u04-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u04-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u04-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u04-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u04-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u05-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u05-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u05-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u05-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u05-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u05-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u05-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u05-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u05-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u06-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u06-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u06-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u06-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u06-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u06-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u06-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u06-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u06-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u07-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u07-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u07-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u07-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u07-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u07-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u07-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u07-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u07-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u08-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u08-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u08-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u08-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u08-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u08-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u08-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u08-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u08-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ },
+ {
+  "schema_set_version": "2.0.0",
+  "interpretation_id": "ma-hs12-earth-space-environmental-u09-assessment-interpretation",
+  "assessment_ref": "ma-hs12-earth-space-environmental-u09-assessment",
+  "secure_minimum_percent": 85,
+  "developing_minimum_percent": 70,
+  "not_yet_maximum_percent": 69,
+  "mastery_rule": "A unit score is one evidence source and never establishes mastery on its own. The policy floor still requires accurate independent evidence on at least two occasions across at least two distinct dates, including transfer to a novel context. Reassessment uses fresh items or a new application after targeted instruction, and replaces the earlier score.",
+  "prompt_scoring": [
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u09-assessment-p01",
+    "scoring_guidance": "Full credit for an accurate explanation in the learner's own words plus a valid example. Half credit for a correct definition with no example or an example that does not fit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u09-assessment-p02",
+    "scoring_guidance": "Full credit when the representation is accurate, labelled, and actually carries the reasoning. Deduct when the representation is decorative or when axes, units, or scales are missing."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u09-assessment-p03",
+    "scoring_guidance": "Full credit for a correct result in a genuinely new situation WITH the process or evidence shown. A correct answer with no visible reasoning earns partial credit only."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u09-assessment-p04",
+    "scoring_guidance": "Full credit for identifying the specific error, correcting it, and explaining why the correction holds. Naming the error without the reasoning earns partial credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u09-assessment-p05",
+    "scoring_guidance": "Full credit for a specific, defensible relationship between the two ideas. Generic statements that the ideas are 'related' earn no credit."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u09-assessment-p06",
+    "scoring_guidance": "Full credit for evidence the learner actually produced, presented so a reader could check it, with one honest limitation stated. Award NO credit for any quantity the learner did not measure, compute, or cite to a named published source."
+   },
+   {
+    "prompt_ref": "ma-hs12-earth-space-environmental-u09-assessment-p07",
+    "scoring_guidance": "Credit for specificity, not for sentiment. A named skill, a named check, and a real question. Never score reflection on attitude, effort, or character."
+   }
+  ],
+  "extensions": []
+ }
+]
