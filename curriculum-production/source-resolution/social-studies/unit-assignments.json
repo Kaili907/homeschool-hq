@@ -1,0 +1,394 @@
+{
+  "note": "Selection map: which verified sources anchor which unit. Source keys resolve against verified-sources.json; only VERIFIED keys are usable downstream.",
+  "assignments": {
+    "ma-g3-social-studies-u01": {
+      "sourceKeys": [
+        "loc-78690134",
+        "loc-88707288"
+      ],
+      "rationale": "One dated Michigan territorial map and one dated Great Lakes photograph give Grade 3 two contrasting source types to interrogate."
+    },
+    "ma-g3-social-studies-u02": {
+      "sourceKeys": [
+        "loc-2012593319",
+        "loc-78690135",
+        "loc-2012593159",
+        "loc-73693121"
+      ],
+      "rationale": "State-, county-, and city-scale maps of Michigan for location and region work."
+    },
+    "ma-g3-social-studies-u03": {
+      "sourceKeys": [
+        "loc-2005686429",
+        "loc-2004678148",
+        "loc-88707288"
+      ],
+      "rationale": "Photographic evidence of Michigan resource use (timber, copper) and Great Lakes movement."
+    },
+    "ma-g3-social-studies-u04": {
+      "sourceKeys": [
+        "loc-2025887093",
+        "met-319113",
+        "met-319871",
+        "loc-2020637509",
+        "loc-gm71002152"
+      ],
+      "rationale": "Treaty text is the primary record of Anishinaabe nations' negotiated relationship with the United States, and two Great Lakes objects put Anishinaabe-made things in front of the learner before any outsider's depiction of Anishinaabe people."
+    },
+    "ma-g3-social-studies-u05": {
+      "sourceKeys": [
+        "loc-gm71002152",
+        "loc-2021668650",
+        "loc-78690134"
+      ],
+      "rationale": "French-era mapping of the Great Lakes and Detroit, then territorial-era mapping, in date order."
+    },
+    "ma-g3-social-studies-u06": {
+      "sourceKeys": [
+        "nara-northwest-ordinance",
+        "loc-2022697426",
+        "loc-2012593319"
+      ],
+      "rationale": "The statehood chain: the ordinance that set the path, the 1835 state constitution transmitted to Congress, and the 1836 map."
+    },
+    "ma-g3-social-studies-u07": {
+      "sourceKeys": [
+        "loc-2005686429",
+        "loc-2017812992",
+        "loc-98508108"
+      ],
+      "rationale": "Three dated photographs of Michigan's timber, copper, and automobile economies."
+    },
+    "ma-g3-social-studies-u08": {
+      "sourceKeys": [
+        "loc-2022688639",
+        "loc-2022697426",
+        "nara-constitution"
+      ],
+      "rationale": "Michigan's own constitutional documents alongside the federal constitution."
+    },
+    "ma-g3-social-studies-u09": {
+      "sourceKeys": [],
+      "unresolved": true,
+      "rationale": null,
+      "reason": "The capstone turns on a public issue the learner chooses now. Historical Michigan maps and messages can be background, but none of them is evidence about the learner's issue, and marking the unit VERIFIED on them would claim a source check that was never performed. The teacher attaches the issue's own real sources (agency records, local government minutes, current data) when the issue is chosen."
+    },
+    "ma-g4-social-studies-u01": {
+      "sourceKeys": [
+        "loc-2003626426",
+        "loc-2012593319",
+        "loc-98688826"
+      ],
+      "rationale": "Maps at world, national, and state scale to practise geographic tools and questions."
+    },
+    "ma-g4-social-studies-u02": {
+      "sourceKeys": [
+        "loc-98687178",
+        "loc-2012593319",
+        "nara-louisiana-purchase-treaty",
+        "avalon-louis1"
+      ],
+      "rationale": "Mapping and the treaty text behind the United States' continental extent."
+    },
+    "ma-g4-social-studies-u03": {
+      "sourceKeys": [
+        "loc-98688826",
+        "loc-2004678148",
+        "loc-2005686429"
+      ],
+      "rationale": "Railways, mining towns, and lumber camps as evidence of movement, migration, and environmental change."
+    },
+    "ma-g4-social-studies-u04": {
+      "sourceKeys": [
+        "loc-98688826",
+        "loc-73693121",
+        "loc-2012593150"
+      ],
+      "rationale": "Post-statehood Michigan growth read through railway, city, and county-plat records."
+    },
+    "ma-g4-social-studies-u05": {
+      "sourceKeys": [
+        "loc-2005686429",
+        "loc-98508108",
+        "loc-2017812992"
+      ],
+      "rationale": "Dated photographs of Michigan work in timber, automobiles, and copper."
+    },
+    "ma-g4-social-studies-u06": {
+      "sourceKeys": [
+        "nara-declaration-of-independence",
+        "avalon-declare",
+        "nara-articles-of-confederation",
+        "avalon-nworder",
+        "nara-great-seal"
+      ],
+      "rationale": "Founding statements of governmental purpose, with a second transcription host for cross-checking."
+    },
+    "ma-g4-social-studies-u07": {
+      "sourceKeys": [
+        "nara-constitution",
+        "nara-bill-of-rights",
+        "avalon-usconst",
+        "avalon-rights1"
+      ],
+      "rationale": "The structural text itself, from two independent public transcriptions."
+    },
+    "ma-g4-social-studies-u08": {
+      "sourceKeys": [
+        "loc-98508108",
+        "nara-patent-for-cotton-gin",
+        "nara-interstate-commerce-act"
+      ],
+      "rationale": "Production, invention, and regulation as concrete evidence of how a market economy is organized."
+    },
+    "ma-g4-social-studies-u09": {
+      "sourceKeys": [
+        "nara-bill-of-rights",
+        "loc-rbcmiller001106",
+        "nara-15th-amendment"
+      ],
+      "rationale": "Documents in which citizens claimed and extended rights -- a real precedent set for a citizenship capstone."
+    },
+    "ma-g5-social-studies-u01": {
+      "sourceKeys": [
+        "loc-2003626426",
+        "loc-2021668690",
+        "loc-46031077"
+      ],
+      "rationale": "Early maps and a dated first-contact letter to open geographic and historical inquiry."
+    },
+    "ma-g5-social-studies-u02": {
+      "sourceKeys": [
+        "met-310542",
+        "met-318345",
+        "met-717563",
+        "met-310502",
+        "loc-2008678196"
+      ],
+      "rationale": "Maya and Ancestral Pueblo objects are direct material evidence of two Indigenous societies before European contact, in two regions; the Mesa Verde photograph shows a pre-contact built site as it survived."
+    },
+    "ma-g5-social-studies-u03": {
+      "sourceKeys": [
+        "loc-2003626426",
+        "loc-46031077",
+        "loc-2021668690"
+      ],
+      "rationale": "The 1507 world map, Columbus's 1493 printed letter, and a 1596 coastal description show exploration's motives and claims."
+    },
+    "ma-g5-social-studies-u04": {
+      "sourceKeys": [
+        "met-316442",
+        "met-318622",
+        "met-310752",
+        "loc-2005625331",
+        "loc-96687096"
+      ],
+      "rationale": "Three West African-made objects come first -- an ivory saltcellar carved for Portuguese buyers and two Edo court works -- so the unit is not read only through the European maps that follow them."
+    },
+    "ma-g5-social-studies-u05": {
+      "sourceKeys": [
+        "loc-46031077",
+        "met-316442",
+        "met-310542"
+      ],
+      "rationale": "Columbus's 1493 printed letter, an ivory carved in West Africa around 1490-1530 for European buyers, and a Maya vessel -- one contact-era source per 'world', all within the period the unit covers."
+    },
+    "ma-g5-social-studies-u06": {
+      "sourceKeys": [
+        "avalon-mayflower",
+        "loc-gm71002152",
+        "loc-2021668650"
+      ],
+      "rationale": "A colonial governing compact and two colonial-era maps of North America."
+    },
+    "ma-g5-social-studies-u07": {
+      "sourceKeys": [
+        "loc-98504459",
+        "loc-44015764",
+        "loc-2005625331"
+      ],
+      "rationale": "The stowage plan and Equiano's narrative are the standard paired sources: the system, and a person who survived it. Preview both before use with a Grade 5 learner."
+    },
+    "ma-g5-social-studies-u08": {
+      "sourceKeys": [
+        "avalon-stamp_act",
+        "loc-2008661777",
+        "nara-declaration-of-independence",
+        "nara-treaty-of-paris",
+        "nara-lee-resolution"
+      ],
+      "rationale": "Grievance, propaganda image, declaration, and settlement -- the documentary arc of the Revolution."
+    },
+    "ma-g5-social-studies-u09": {
+      "sourceKeys": [
+        "nara-constitution",
+        "nara-bill-of-rights",
+        "avalon-fed10",
+        "nara-northwest-ordinance"
+      ],
+      "rationale": "Founding framework plus one argument made at the time about how it should work."
+    },
+    "ma-g7-social-studies-u01": {
+      "sourceKeys": [
+        "loc-2003626426",
+        "met-329081",
+        "loc-2021668690"
+      ],
+      "rationale": "A world map, the earliest writing in the set, and a coastal description model how world-historical claims are built from artefacts and maps."
+    },
+    "ma-g7-social-studies-u02": {
+      "sourceKeys": [],
+      "unresolved": true,
+      "rationale": null,
+      "reason": "No source in these repositories sits reliably inside Era 1. The Met's Greek Neolithic axe is arguably in period, but the second candidate (a Majiayao jar, ca. 2650-2350 BCE) is later than the proto-cuneiform tablet this same registry assigns to Era 2, so it cannot evidence 'before writing'. Rather than pad the unit to the two-source minimum, it stays unresolved for a curator with access to a Paleolithic/early-Neolithic collection."
+    },
+    "ma-g7-social-studies-u03": {
+      "sourceKeys": [
+        "avalon-hamcode",
+        "met-329081",
+        "met-328901",
+        "met-551786"
+      ],
+      "rationale": "A law code, administrative tablets from two Mesopotamian periods, and an Egyptian funerary papyrus."
+    },
+    "ma-g7-social-studies-u04": {
+      "sourceKeys": [
+        "avalon-twelve_tables",
+        "met-254896",
+        "met-248851",
+        "met-252884"
+      ],
+      "rationale": "Roman law text with Greek and Roman objects, including two dated imperial portraits."
+    },
+    "ma-g7-social-studies-u05": {
+      "sourceKeys": [
+        "met-42178",
+        "met-646117",
+        "met-573599"
+      ],
+      "rationale": "Han Chinese, Gandharan, and Nubian objects to compare classical Asian and African societies."
+    },
+    "ma-g7-social-studies-u06": {
+      "sourceKeys": [
+        "met-453372",
+        "met-38474",
+        "met-548344",
+        "met-317877"
+      ],
+      "rationale": "Qur'an folio, Buddhist sculpture, Egyptian funerary text, and an Ethiopian Christian cross -- four traditions, four object types."
+    },
+    "ma-g7-social-studies-u07": {
+      "sourceKeys": [
+        "avalon-magna",
+        "met-327518",
+        "met-448369"
+      ],
+      "rationale": "A charter that changed governance, a Silk Road garment, and an early Qur'an folio as evidence of hemispheric contact."
+    },
+    "ma-g7-social-studies-u08": {
+      "sourceKeys": [
+        "met-327518",
+        "met-453371",
+        "met-450418",
+        "met-448369"
+      ],
+      "rationale": "Four traded objects that all predate 1500: a Silk Road kaftan, a textile fragment, a Syrian stonepaste bowl, and an early Qur'an folio. The European coastal maps that once anchored this unit were dropped -- they postdate the unit's own 1500 bound by two centuries."
+    },
+    "ma-g7-social-studies-u09": {
+      "sourceKeys": [
+        "avalon-hamcode",
+        "avalon-twelve_tables",
+        "avalon-magna"
+      ],
+      "rationale": "Three legal texts from three civilizations support a genuine comparative-civilization argument."
+    },
+    "ma-g8-social-studies-u01": {
+      "sourceKeys": [
+        "nara-constitution",
+        "nara-bill-of-rights",
+        "nara-virginia-plan",
+        "avalon-fed10"
+      ],
+      "rationale": "The framework, its first amendments, a rejected draft plan, and a contemporaneous argument."
+    },
+    "ma-g8-social-studies-u02": {
+      "sourceKeys": [
+        "nara-washington-first-inaugural",
+        "avalon-washing",
+        "nara-alien-and-sedition-acts",
+        "nara-marbury-v-madison",
+        "nara-federal-judiciary-act",
+        "nara-treaty-of-ghent"
+      ],
+      "rationale": "Early-republic precedent-setting: executive practice, civil-liberties conflict, judicial review, and the courts' and nation's footing."
+    },
+    "ma-g8-social-studies-u03": {
+      "sourceKeys": [
+        "nara-louisiana-purchase-treaty",
+        "nara-jacksons-message-indian-removal",
+        "loc-2025887093",
+        "loc-98687178",
+        "nara-treaty-of-guadalupe-hidalgo",
+        "nara-fort-laramie-treaty",
+        "avalon-monroe"
+      ],
+      "rationale": "Expansion documents paired with the treaty record, so Indigenous sovereignty is read from negotiated text rather than summary."
+    },
+    "ma-g8-social-studies-u04": {
+      "sourceKeys": [
+        "nara-patent-for-cotton-gin",
+        "nara-gibbons-v-ogden",
+        "nara-mcculloch-v-maryland",
+        "loc-09023558"
+      ],
+      "rationale": "Technology, commerce law, and a period reform periodical as evidence of economic and social change."
+    },
+    "ma-g8-social-studies-u05": {
+      "sourceKeys": [
+        "loc-rbcmiller001106",
+        "loc-44015764",
+        "loc-09023558"
+      ],
+      "rationale": "The 1848 convention report and antislavery writing anchor reform-movement analysis in what reformers actually published."
+    },
+    "ma-g8-social-studies-u06": {
+      "sourceKeys": [
+        "nara-missouri-compromise",
+        "nara-compromise-of-1850",
+        "nara-kansas-nebraska-act",
+        "avalon-kanneb",
+        "nara-dred-scott",
+        "loc-98504459"
+      ],
+      "rationale": "The legislative and judicial sequence of sectional conflict, plus the abolitionist image that framed the moral argument."
+    },
+    "ma-g8-social-studies-u07": {
+      "sourceKeys": [
+        "nara-emancipation-proclamation",
+        "nara-general-order-143",
+        "nara-homestead-act",
+        "nara-pacific-railway-act",
+        "nara-morrill-act"
+      ],
+      "rationale": "Wartime emancipation and Black enlistment alongside the 1862 laws that reshaped the country during the war."
+    },
+    "ma-g8-social-studies-u08": {
+      "sourceKeys": [
+        "nara-13th-amendment",
+        "nara-14th-amendment",
+        "nara-15th-amendment",
+        "nara-wade-davis-bill"
+      ],
+      "rationale": "The Reconstruction amendments plus a contested congressional plan, so 'contested legacy' rests on documents."
+    },
+    "ma-g8-social-studies-u09": {
+      "sourceKeys": [
+        "nara-interstate-commerce-act",
+        "nara-dawes-act",
+        "nara-chinese-exclusion-act",
+        "nara-plessy-v-ferguson"
+      ],
+      "rationale": "Four 1870-1898 federal actions that carry Reconstruction's questions forward into the bridge period."
+    }
+  }
+}
