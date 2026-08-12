@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
+import { loadFamilyPilotCatalog } from '../../../curriculum/family-pilot/source.browser'
 import { createLocalDevelopmentStudyPorts } from '../../localDevelopmentPorts'
 import type { StudyPortBundle } from '../../ports'
 import { FamilyPilotParentHub } from '../parent'
 import type { FamilyPilotStoreOptions } from '../core'
 import type { FamilyPilotShellContext } from '../FamilyPilotShell'
 import { FamilyPilotController } from './controller'
-import { hostLessonCurriculumPort, type FamilyPilotCurriculumPort } from './curriculum'
+import { catalogCurriculumPort, type FamilyPilotCurriculumPort } from './curriculum'
 import { FAMILY_PILOT_HOUSEHOLD_REF, learnerOptionFor } from './identity'
 import { IntegratedFamilyPilot } from './IntegratedFamilyPilot'
 import type { FamilyPilotSafetyPort } from './safety'
@@ -65,7 +66,7 @@ export function IntegratedPilotSurface({
   const controller = useMemo(
     () => new FamilyPilotController({
       ports: resolvedPorts,
-      curriculum: curriculum ?? hostLessonCurriculumPort(),
+      curriculum: curriculum ?? catalogCurriculumPort(loadFamilyPilotCatalog()),
       store,
       safety: effectiveSafety,
       safetySignals: safetyHoldBridge,

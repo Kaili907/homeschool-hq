@@ -1,4 +1,5 @@
 import { getPilotAssignments } from '../../../curriculum/family-pilot/catalog'
+import { FAMILY_PILOT_STATIC_CONFIG, resolveFamilyPilotUnit } from '../../../curriculum/family-pilot/pilot-config'
 import type { FamilyPilotCatalog } from '../../../curriculum/family-pilot/types'
 import type { AcademyGrade } from '../../../types'
 import { adaptHostLessonToStudyPlan, type HostLessonDescriptor } from '../../curriculumAdapter'
@@ -23,20 +24,29 @@ function sanitizeRef(value: string): string {
 }
 
 /**
- * The real catalog. Every pilot course is mathematics (FAMILY_PILOT_SUBJECT),
- * which maps onto the host 'math' lesson kind and so inherits the reviewed
- * five-segment math shape from HOST_STUDY_MAPPING rather than a pilot-invented
- * one.
+ * The real catalog, scoped to the one supervised Family Pilot configuration
+ * (FAMILY_PILOT_STATIC_CONFIG: grade 5, ma-g5-mathematics, Unit 1's 18
+ * lessons) rather than the full multi-unit course. Every pilot course is
+ * mathematics (FAMILY_PILOT_SUBJECT), which maps onto the host 'math' lesson
+ * kind and so inherits the reviewed five-segment math shape from
+ * HOST_STUDY_MAPPING rather than a pilot-invented one. Any grade other than
+ * the configured one returns no lessons — grade 7/8 catalog content must
+ * never substitute for the pilot's single reviewed unit.
  */
 export function catalogCurriculumPort(catalog: FamilyPilotCatalog): FamilyPilotCurriculumPort {
   return {
-    listLessons: (grade) =>
-      getPilotAssignments(catalog, { studentRef: 'catalog-query', grade }).map((lesson) => ({
-        lessonRef: sanitizeRef(lesson.lessonId),
-        title: lesson.title,
-        kind: 'math' as const,
-        skillRefs: [sanitizeRef(`${lesson.courseId}:unit:${lesson.unitNumber}`)],
-      })),
+    listLessons: (grade) => {
+      if (grade !== FAMILY_PILOT_STATIC_CONFIG.grade) return []
+      const unit = resolveFamilyPilotUnit(catalog)
+      return getPilotAssignments(catalog, { studentRef: 'catalog-query', grade })
+        .filter((lesson) => lesson.unitId === unit.unitId)
+        .map((lesson) => ({
+          lessonRef: sanitizeRef(lesson.lessonId),
+          title: lesson.title,
+          kind: 'math' as const,
+          skillRefs: [sanitizeRef(`${lesson.courseId}:unit:${lesson.unitNumber}`)],
+        }))
+    },
   }
 }
 
