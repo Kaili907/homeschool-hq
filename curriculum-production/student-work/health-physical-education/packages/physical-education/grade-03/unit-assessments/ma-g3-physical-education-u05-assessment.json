@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g3-physical-education-u05-assessment",
+  "courseId": "ma-g3-physical-education",
+  "grade": 3,
+  "subject": "physical-education",
+  "unitNumber": 5,
+  "unitTitle": "Kicking, Trapping, and Dribbling with the Feet",
+  "essentialQuestion": "How do I control an object with my feet?",
+  "prompts": [
+    {
+      "type": "cue and vocabulary",
+      "prompt": "Name the movement cues for stationary kick for accuracy and explain what each one does.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "demonstration or representation",
+      "prompt": "Show, describe, or diagram trapping and controlling a rolling ball. A demonstration, a spoken description, and a drawing are equally valid.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply approach kick and follow-through in a new movement task at a challenge level you select. Control and cue use are assessed, not speed, distance, or count.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or decision analysis",
+      "prompt": "A made-up learner is struggling with dribbling with the inside of the foot. Identify the likely cue or decision at fault, correct it, and explain why the correction helps.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect stationary kick for accuracy with cooperative foot-skill tasks. Explain how one supports the other.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Design and complete a foot-skill course with a partner or an adult, naming the cue that helped most at each station.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "adaptation and choice",
+      "prompt": "Describe one way you adapted a task so it worked for you, and one activity from this unit you would choose to do again. There is no wrong answer here.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Access supports may change equipment, distance, speed, force, duration, setting, or response mode without changing the standard being assessed. Using the adapted alternative is a full-credit path, never a reduced one.",
+  "accommodationNote": "Access supports may change equipment, distance, speed, force, duration, setting, or response mode without changing the standard being assessed. Using the adapted alternative is a full-credit path, never a reduced one.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa0",
+    "sourceAssessmentId": "ma-g3-physical-education-u05-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

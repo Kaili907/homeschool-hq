@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g4-physical-education-u06-assessment",
+  "courseId": "ma-g4-physical-education",
+  "grade": 4,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "cue use and control",
+    "movement concepts and decisions",
+    "application or performance",
+    "responsibility, safety, and inclusion"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with controlled independent application, accurate cue use, and adequate explanation.",
+    "developing": "70-84% or inconsistent cue use; assign targeted varied practice and a fresh transfer check.",
+    "not_yet": "Below 70% or a missing prerequisite movement; reteach the simplest version and reassess with new evidence.",
+    "rule": "A unit score is one evidence source, not the sole basis for long-term mastery. No part of this score may derive from speed, distance, repetition count, body measurement, or comparison with another learner."
+  },
+  "accommodationNote": "Access supports may change equipment, distance, speed, force, duration, setting, or response mode without changing the standard being assessed. Using the adapted alternative is a full-credit path, never a reduced one.",
+  "guardianSafetyReview": {
+    "equipment": "Short-handled paddle, lightweight racquet, foam bat, or a hand as the striking surface; balloon or soft ball only.",
+    "environment": "Indoor open space with high clearance, or a supervised outdoor area away from windows and bystanders.",
+    "movement_hazards": "Swinging an implement can strike a nearby person. Guardian establishes a swing-radius safety space and confirms it is clear before each turn.",
+    "food_or_allergy_note": "Latex balloons are a known allergen and a choking hazard for younger siblings; substitute a soft foam ball where needed.",
+    "guardian_confirmation_required": true
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

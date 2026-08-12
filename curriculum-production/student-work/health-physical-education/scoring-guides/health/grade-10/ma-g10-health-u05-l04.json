@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g10-health-u05-l04",
+  "courseId": "ma-g10-health",
+  "grade": 10,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "The learner completes the central task about refusal under sustained rather than one-time pressure without being asked for any private disclosure.",
+    "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
+    "The learner checks or revises the work and can identify a next step."
+  ],
+  "scoringGuidance": "Score the stated learning target, accuracy, evidence and reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never score body size, appearance, personal circumstances, or willingness to disclose. Do not infer effort, motivation, diagnosis, or character from an error.",
+  "masteryRule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety plan, and private or minimally disclosive reflection; require accurate independent evidence and successful transfer or retrieval on at least two occasions separated by time or representation.",
+  "remediation": "Return to the smallest prerequisite needed for refusal under sustained rather than one-time pressure, model it with a concrete or text-only representation, then retry one fresh scenario.",
+  "adaptiveRoutes": [
+    {
+      "signal": "prerequisite gap",
+      "action": "Return to the smallest prerequisite needed for refusal under sustained rather than one-time pressure, model it with a concrete or text-only representation, then retry one fresh scenario."
+    },
+    {
+      "signal": "procedure without understanding",
+      "action": "Ask the learner to explain why the approach to refusal under sustained rather than one-time pressure works before continuing."
+    },
+    {
+      "signal": "correct but low confidence",
+      "action": "Confirm the reasoning specifically, offer one varied scenario about refusal under sustained rather than one-time pressure, and avoid unnecessary remediation."
+    },
+    {
+      "signal": "repeated error pattern",
+      "action": "Name the observable pattern neutrally, contrast it with a worked example, and schedule a short later review."
+    },
+    {
+      "signal": "learner discloses something private",
+      "action": "Do not record it, do not treat it as assessment evidence, and route the learner to a trusted adult or qualified professional. Continue the lesson with the fictional scenario."
+    },
+    {
+      "signal": "mastery evidence",
+      "action": "Require accurate independent application plus explanation on a later or different occasion before marking refusal under sustained rather than one-time pressure mastered."
+    }
+  ],
+  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw reflections, raw answers, recordings, body data, or diagnosis language. For safety-critical or sensitive-content units, record only the guardian confirmation that was required.",
+  "guardianSafetyReview": {
+    "equipment": "None. No substance or product is handled.",
+    "environment": "Indoor study space.",
+    "movement_hazards": "None expected.",
+    "sensitive_content_note": "Unit names overdose risk and naloxone. Guardian reviews and approves the resource list and decides which local services are appropriate.",
+    "guardian_confirmation_required": true
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Do not require disclosure of private health, trauma, diagnosis, body, or family information.",
+    "Use body-respect language; do not use dieting, calorie targets, weight cutting, weigh-ins, or body-size scoring.",
+    "Do not require weight, BMI, body-fat, body measurement, calorie counts, diet goals, medical history, mental-health diagnosis, or sexual history at any point.",
+    "Do not require a photograph, video, or voice recording of the learner as evidence; every task has a text, spoken-to-an-adult, or demonstrated alternative.",
+    "This course teaches health information and does not diagnose; direct urgent safety or health concerns to a trusted adult or qualified professional.",
+    "No learner or family substance-use, treatment, or recovery history is requested at any point. All situations are fictional."
+  ],
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

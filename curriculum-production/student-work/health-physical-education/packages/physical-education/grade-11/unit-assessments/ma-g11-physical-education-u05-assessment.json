@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g11-physical-education-u05-assessment",
+  "courseId": "ma-g11-physical-education",
+  "grade": 11,
+  "subject": "physical-education",
+  "unitNumber": 5,
+  "unitTitle": "Strength, Mobility, and Movement Quality",
+  "essentialQuestion": "How do I make a movement better before I make it heavier or faster?",
+  "prompts": [
+    {
+      "type": "concept and cues",
+      "prompt": "Explain the critical features or key principle of technique before load: sequencing a progression in your own words.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "demonstration or description",
+      "prompt": "Demonstrate or fully describe joint range, control, and mobility work using a version your body and setting allow. A described or adapted version earns full credit.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply core and postural control in real movement in a new situation and explain the decision or adjustment you made.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving progressive loading with bodyweight or available equipment; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect recognizing technique breakdown and stopping the set with programming strength and mobility into a wider plan and explain how one affects the other.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Build a technique-first strength and mobility progression, document the criteria for advancing each movement, and show a completed progression with the criteria met.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Every movement has a seated, supported, reduced-range, and unloaded version. Advancement criteria are set by control and range, never by load lifted relative to any other person.",
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g11-physical-education-u05-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

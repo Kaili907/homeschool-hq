@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g4-physical-education-u04-assessment",
+  "courseId": "ma-g4-physical-education",
+  "grade": 4,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "cue use and control",
+    "movement concepts and decisions",
+    "application or performance",
+    "responsibility, safety, and inclusion"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with controlled independent application, accurate cue use, and adequate explanation.",
+    "developing": "70-84% or inconsistent cue use; assign targeted varied practice and a fresh transfer check.",
+    "not_yet": "Below 70% or a missing prerequisite movement; reteach the simplest version and reassess with new evidence.",
+    "rule": "A unit score is one evidence source, not the sole basis for long-term mastery. No part of this score may derive from speed, distance, repetition count, body measurement, or comparison with another learner."
+  },
+  "accommodationNote": "Access supports may change equipment, distance, speed, force, duration, setting, or response mode without changing the standard being assessed. Using the adapted alternative is a full-credit path, never a reduced one.",
+  "guardianSafetyReview": {
+    "equipment": "Soft, lightweight balls, beanbags, or rolled socks. No hard, heavy, or fast-moving balls indoors.",
+    "environment": "Indoor open space or a supervised outdoor area with a clear throwing lane away from windows, roads, and bystanders.",
+    "movement_hazards": "Thrown and struck objects can strike a person or property. Guardian sets the target direction and a no-go zone, and confirms nobody stands in the path.",
+    "food_or_allergy_note": null,
+    "guardian_confirmation_required": true
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

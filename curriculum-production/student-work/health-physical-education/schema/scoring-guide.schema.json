@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://manuel-academy/curriculum-production/student-work/health-physical-education/scoring-guide.schema.json",
+  "title": "Health/PE parent/teacher scoring guide",
+  "description": "Parent/teacher-facing rubric and scoring-judgment authority for one lesson or unit assessment. Health and PE use a rubric or scoring-judgment authority rather than a fixed answer key, per the production readiness gate's ARTS_RFL_PE_PROJECT subject family.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "grade", "subject", "scoringAuthority", "productionReadiness"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "enum": ["lesson-scoring-guide", "unit-assessment-scoring-guide"] },
+    "lessonId": { "type": "string" },
+    "assessmentId": { "type": "string" },
+    "courseId": { "type": "string" },
+    "grade": { "type": "integer", "enum": [3, 4, 5, 7, 8, 9, 10, 11, 12] },
+    "subject": { "enum": ["health", "physical-education"] },
+    "scoringAuthority": { "const": "RUBRIC" },
+    "successCriteria": { "type": "array", "items": { "type": "string" } },
+    "scoringGuidance": { "type": ["string", "null"] },
+    "masteryRule": { "type": ["string", "null"] },
+    "remediation": { "type": ["string", "null"] },
+    "adaptiveRoutes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signal": { "type": "string" },
+          "action": { "type": "string" }
+        }
+      }
+    },
+    "guardianOrParentVisibility": { "type": ["string", "null"] },
+    "guardianSafetyReview": { "type": ["object", "null"] },
+    "safetyAndPrivacyNotes": { "type": "array", "items": { "type": "string" } },
+    "rubricDimensions": { "type": "array", "items": { "type": "string" } },
+    "masteryInterpretation": {
+      "type": ["object", "null"],
+      "properties": {
+        "secure": { "type": "string" },
+        "developing": { "type": "string" },
+        "not_yet": { "type": "string" },
+        "rule": { "type": "string" }
+      }
+    },
+    "accommodationNote": { "type": ["string", "null"] },
+    "productionReadiness": {
+      "type": "object",
+      "required": ["status", "codes"],
+      "properties": {
+        "status": { "enum": ["READY", "NEEDS_HUMAN_REVIEW", "NOT_READY"] },
+        "codes": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

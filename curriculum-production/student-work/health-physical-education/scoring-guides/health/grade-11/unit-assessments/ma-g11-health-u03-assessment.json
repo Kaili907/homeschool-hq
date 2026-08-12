@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g11-health-u03-assessment",
+  "courseId": "ma-g11-health",
+  "grade": 11,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "accuracy of health information",
+    "evidence and reasoning",
+    "skill application",
+    "checking and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check on a later occasion.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+    "rule": "A unit score is one evidence source on one occasion, not the sole basis for long-term mastery."
+  },
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "guardianSafetyReview": {
+    "equipment": "None.",
+    "environment": "Indoor study space.",
+    "movement_hazards": "None expected.",
+    "sensitive_content_note": "Unit discusses inequality in health outcomes factually and without assigning fault to individuals or communities.",
+    "guardian_confirmation_required": false
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}

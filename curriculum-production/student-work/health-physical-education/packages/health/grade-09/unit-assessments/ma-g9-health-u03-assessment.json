@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g9-health-u03-assessment",
+  "courseId": "ma-g9-health",
+  "grade": 9,
+  "subject": "health",
+  "unitNumber": 3,
+  "unitTitle": "Safety, Injury Prevention, and Emergency Response",
+  "essentialQuestion": "If something goes wrong in front of me, what do I actually do in the first two minutes?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain recognizing an emergency and activating help in your own words and give a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of CPR and AED awareness: what they are, when they are used, and how to get trained.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply bleeding control, choking response, and basic first aid concepts in a new fictional situation. Show the decision process or cite the evidence used.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving concussion and head-injury recognition and the stop rule; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect vehicle, water, fire, and home-hazard prevention with bystander responsibility and safe intervention limits. Explain how the two support, constrain, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Produce an emergency-readiness brief for one fictional setting: hazards present, prevention steps, the first three actions in an incident, and who is called. Skills are described and rehearsed verbally or on a manikin if the family has one; no certification is claimed by this course.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Every response step may be described, sequenced, or narrated rather than physically performed. A learner who cannot perform compressions plans and rehearses the call, scene-safety, AED-retrieval, and hand-off roles instead, which are full contributions and are scored as such.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g9-health-u03-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

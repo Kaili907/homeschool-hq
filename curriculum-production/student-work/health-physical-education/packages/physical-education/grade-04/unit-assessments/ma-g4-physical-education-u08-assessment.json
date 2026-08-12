@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g4-physical-education-u08-assessment",
+  "courseId": "ma-g4-physical-education",
+  "grade": 4,
+  "subject": "physical-education",
+  "unitNumber": 8,
+  "unitTitle": "Health-Related Fitness and Personal Activity Planning",
+  "essentialQuestion": "How do I build an activity plan that fits my body and my life?",
+  "prompts": [
+    {
+      "type": "cue and vocabulary",
+      "prompt": "Name the movement cues for components of health-related fitness and explain what each one does.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "demonstration or representation",
+      "prompt": "Show, describe, or diagram judging effort without measurement. A demonstration, a spoken description, and a drawing are equally valid.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply building cardiorespiratory endurance enjoyably in a new movement task at a challenge level you select. Control and cue use are assessed, not speed, distance, or count.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or decision analysis",
+      "prompt": "A made-up learner is struggling with muscular strength, endurance, and flexibility. Identify the likely cue or decision at fault, correct it, and explain why the correction helps.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect components of health-related fitness with planning activity I will actually keep doing. Explain how one supports the other.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Build a two-week personal activity plan based on enjoyment, access, safety, and recovery. No weight, body measurement, calorie, timing, or fitness-test target may appear in it.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "adaptation and choice",
+      "prompt": "Describe one way you adapted a task so it worked for you, and one activity from this unit you would choose to do again. There is no wrong answer here.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Access supports may change equipment, distance, speed, force, duration, setting, or response mode without changing the standard being assessed. Using the adapted alternative is a full-credit path, never a reduced one.",
+  "accommodationNote": "Access supports may change equipment, distance, speed, force, duration, setting, or response mode without changing the standard being assessed. Using the adapted alternative is a full-credit path, never a reduced one.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa0",
+    "sourceAssessmentId": "ma-g4-physical-education-u08-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

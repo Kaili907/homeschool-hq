@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g11-physical-education-u01-assessment",
+  "courseId": "ma-g11-physical-education",
+  "grade": 11,
+  "subject": "physical-education",
+  "unitNumber": 1,
+  "unitTitle": "Self-Directed Program Design and Periodization",
+  "essentialQuestion": "How do I plan a season rather than a week?",
+  "prompts": [
+    {
+      "type": "concept and cues",
+      "prompt": "Explain the critical features or key principle of planning across a longer horizon with phases in your own words.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "demonstration or description",
+      "prompt": "Demonstrate or fully describe balancing development, maintenance, and recovery blocks using a version your body and setting allow. A described or adapted version earns full credit.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply managing competing demands: school, work, and activity in a new situation and explain the decision or adjustment you made.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving deload and taper concepts in plain terms; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect building in review points and objective decision rules with adapting a plan when circumstances change and explain how one affects the other.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Design a full periodized cycle for a self-chosen capability or activity goal, including phase structure, review points, and pre-committed rules for when to progress, hold, or deload.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Goals may be endurance, strength, mobility, skill, coordination, or a functional task; any medical restriction is planned around with guardian input.",
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g11-physical-education-u01-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

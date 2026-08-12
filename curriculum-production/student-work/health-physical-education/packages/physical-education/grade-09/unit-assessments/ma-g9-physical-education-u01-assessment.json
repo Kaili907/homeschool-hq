@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g9-physical-education-u01-assessment",
+  "courseId": "ma-g9-physical-education",
+  "grade": 9,
+  "subject": "physical-education",
+  "unitNumber": 1,
+  "unitTitle": "Safe Start: Personal Movement Readiness and Self-Management",
+  "essentialQuestion": "How do I get my own body ready to work, and how do I know when to stop?",
+  "prompts": [
+    {
+      "type": "concept and cues",
+      "prompt": "Explain the critical features or key principle of self-directed warm-up and cool-down design in your own words.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "demonstration or description",
+      "prompt": "Demonstrate or fully describe effort scales described by feel, breath, and speech rather than by device using a version your body and setting allow. A described or adapted version earns full credit.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply the stop rule: pain, dizziness, breathing difficulty, head impact, unsafe conditions in a new situation and explain the decision or adjustment you made.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving space, surface, footwear, weather, and equipment checks; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect hydration and recovery around activity with setting a personal starting point without comparison and explain how one affects the other.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Design and run a personal warm-up, effort-management, and stop-rule routine, then revise it after using it across several sessions. Evidence is the written or described routine and its revision, not a measured result.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Every element has a seated, supported, low-impact, and reduced-range version. A learner using a mobility aid, working from a chair, or managing a condition designs the same routine around the movements available to them, and that routine is assessed as fully equivalent.",
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g9-physical-education-u01-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

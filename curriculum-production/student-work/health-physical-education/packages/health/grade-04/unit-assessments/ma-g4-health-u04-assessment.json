@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g4-health-u04-assessment",
+  "courseId": "ma-g4-health",
+  "grade": 4,
+  "subject": "health",
+  "unitNumber": 4,
+  "unitTitle": "Relationships, Boundaries, and Conflict Repair",
+  "essentialQuestion": "How do I speak up for myself, respect others, and repair a relationship after conflict?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain assertive, respectful communication in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "representation or source",
+      "prompt": "Use a diagram of a general figure or character rather than your own body, a picture sequence, a model, a described demonstration, or a checked source, to show what you learned about body autonomy, consent, and unsafe requests.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply what you learned about listening and perspective-taking to a new fictional situation. Show the steps or name the source you relied on.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "A made-up character makes an unsafe or unreliable choice involving conflict resolution and repair. Explain what is wrong, correct it, and say why the correction is safer.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect assertive, respectful communication with inclusion and respect for differences. Explain how the two ideas support or depend on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Write and rehearse assertive communication and conflict-repair scripts for fictional situations, including a bystander response plan.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "transfer and next step",
+      "prompt": "Name one skill you can now use somewhere else, one way to check your own work, and one question you still have. This is about the skill, not about your private life; nothing private has to be shared.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. Choosing an adapted or opt-out path is never scored as a deficit.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. Choosing an adapted or opt-out path is never scored as a deficit.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa0",
+    "sourceAssessmentId": "ma-g4-health-u04-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

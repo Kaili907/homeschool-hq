@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g12-health-u01-assessment",
+  "courseId": "ma-g12-health",
+  "grade": 12,
+  "subject": "health",
+  "unitNumber": 1,
+  "unitTitle": "Independent Health Self-Management for Adulthood",
+  "essentialQuestion": "What has to keep happening when no one reminds me?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain building routines that survive a schedule change in your own words and give a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of sleep, movement, fueling, and recovery as maintained systems rather than goals.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply tracking what matters without measuring the body in a new fictional situation. Show the decision process or cite the evidence used.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving managing a routine through illness, stress, or a heavy period; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect restarting after a routine collapses, without self-punishment with deciding what to keep, drop, and add each season. Explain how the two support, constrain, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Build an independent maintenance system with a normal-week version, a hard-week fallback version, and a written restart procedure. Progress is described in terms of behaviors kept, never body measurements.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "The system may be written, tabled, built as a checklist, entered in a calendar, or described aloud to an adult. Any component the learner cannot perform is planned as a supported or adapted component and scored equally.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g12-health-u01-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

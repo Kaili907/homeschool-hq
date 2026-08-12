@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g10-physical-education-u01-assessment",
+  "courseId": "ma-g10-physical-education",
+  "grade": 10,
+  "subject": "physical-education",
+  "unitNumber": 1,
+  "unitTitle": "Movement Analysis and Skill Refinement",
+  "essentialQuestion": "How do I find the flaw in my own movement without anyone filming me?",
+  "prompts": [
+    {
+      "type": "concept and cues",
+      "prompt": "Explain the critical features or key principle of critical features of a movement and what each contributes in your own words.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "demonstration or description",
+      "prompt": "Demonstrate or fully describe self-observation by feel, mirror, shadow, and outcome pattern using a version your body and setting allow. A described or adapted version earns full credit.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply diagnosing from the result rather than from an image in a new situation and explain the decision or adjustment you made.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving targeted correction and the practice design that fixes it; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect transfer of a corrected pattern into an activity with plateaus and what to change when progress stops and explain how one affects the other.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Choose one skill, identify its critical features, diagnose the learner’s own limiting feature from outcome evidence, design and run the corrective practice, and document the change.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Any skill the learner can perform, in any range or position, is a valid choice, including a mobility-aid skill or a seated skill. Analysis may be described, drawn, or tabled.",
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g10-physical-education-u01-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

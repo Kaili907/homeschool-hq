@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g10-physical-education-u02-assessment",
+  "courseId": "ma-g10-physical-education",
+  "grade": 10,
+  "subject": "physical-education",
+  "unitNumber": 2,
+  "unitTitle": "Tactics and Strategy in Invasion Activities",
+  "essentialQuestion": "How do you win space before you win the ball?",
+  "prompts": [
+    {
+      "type": "concept and cues",
+      "prompt": "Explain the critical features or key principle of principles of attack: penetration, support, width, mobility in your own words.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "demonstration or description",
+      "prompt": "Demonstrate or fully describe principles of defense: delay, depth, balance, concentration using a version your body and setting allow. A described or adapted version earns full credit.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply reading a situation and choosing between options in a new situation and explain the decision or adjustment you made.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "analysis or correction",
+      "prompt": "Analyze a plausible technique fault, tactical error, or unsafe choice involving set situations and rehearsed starts; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect communicating intent quickly and clearly with adjusting tactics when the plan is not working and explain how one affects the other.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Analyze a described game situation, propose two tactical solutions with their tradeoffs, then apply one in play or in a solo simulation and evaluate the result.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one thing you can now do or direct yourself, one adjustment that improved it, and one next goal you set for yourself.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "Tactical understanding may be demonstrated through play, walk-through pace, a tabletop or diagram simulation, or written analysis; each route reaches the same standard.",
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g10-physical-education-u02-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

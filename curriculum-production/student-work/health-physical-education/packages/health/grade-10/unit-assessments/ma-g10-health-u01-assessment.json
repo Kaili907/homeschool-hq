@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-task-card",
+  "assessmentId": "ma-g10-health-u01-assessment",
+  "courseId": "ma-g10-health",
+  "grade": 10,
+  "subject": "health",
+  "unitNumber": 1,
+  "unitTitle": "Self-Awareness, Identity, and Analyzing Influences",
+  "essentialQuestion": "Which influences are actually steering my health behavior, and which ones did I choose?",
+  "prompts": [
+    {
+      "type": "concept and vocabulary",
+      "prompt": "Explain values, needs, and beliefs as internal influences on behavior in your own words and give a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "type": "source or representation",
+      "prompt": "Use a cited source, diagram, model, or documented process to show understanding of family, peer, cultural, and community influences.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "application",
+      "prompt": "Apply economic and environmental influences on available choices in a new fictional situation. Show the decision process or cite the evidence used.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, or unsafe choice involving identity, belonging, and health behavior; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "type": "connection",
+      "prompt": "Connect separating an influence from a decision with naming an influence without judging the person carrying it. Explain how the two support, constrain, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "type": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Map the influence field around a fictional learner facing a health choice, rank which influences carry the most weight, and propose one change that shifts the field rather than blaming the person.",
+      "possiblePoints": 8
+    },
+    {
+      "type": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "totalPossiblePoints": 38,
+  "adaptationChoices": "The influence map may be drawn, built with movable labels, dictated, typed, or completed on a supplied template with a reduced number of nodes.",
+  "accommodationNote": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed. No assessment requires disclosure, a recording, or any body measurement.",
+  "optionalReflection": null,
+  "neverRequires": [
+    "This task never requires body weight, height, BMI, or body-fat percentage.",
+    "This task never requires calorie counting or a diet or weight-loss goal.",
+    "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
+    "This task never requires a photograph, video, or voice recording of the learner as proof.",
+    "This task never requires a public performance or an audience."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/hs912-health-pe-r1@e39e2b3",
+    "sourceAssessmentId": "ma-g10-health-u01-assessment"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ]
+  }
+}

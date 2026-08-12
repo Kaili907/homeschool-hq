@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "unit-assessment-scoring-guide",
+  "assessmentId": "ma-g11-physical-education-u09-assessment",
+  "courseId": "ma-g11-physical-education",
+  "grade": 11,
+  "subject": "physical-education",
+  "scoringAuthority": "RUBRIC",
+  "rubricDimensions": [
+    "safe participation and self-management",
+    "skill cues or movement quality",
+    "tactical or training reasoning",
+    "self-assessment and revision"
+  ],
+  "masteryInterpretation": {
+    "secure": "At least 85% with safe, independent application and adequate explanation of cues, tactics, or training reasoning.",
+    "developing": "70–84% or inconsistent explanation; assign varied practice and a fresh transfer check on a later occasion.",
+    "not_yet": "Below 70% or a missing prerequisite; reteach the simplest version and reassess with new evidence.",
+    "rule": "A unit score is one evidence source on one occasion, not the sole basis for long-term mastery. Never adjust a score for body size, weight, or appearance."
+  },
+  "accommodationNote": "Access supports may change format, pacing, intensity, range, equipment, setting, or response mode without changing the standard being assessed. An adapted or described performance is full credit, not partial credit.",
+  "guardianSafetyReview": {
+    "equipment": "None.",
+    "environment": "Indoor space for a one-to-one review.",
+    "movement_hazards": "None expected.",
+    "supervision_note": "Guardian acts as reviewer. The review is a conversation, not a recorded artifact.",
+    "guardian_confirmation_required": true
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}
