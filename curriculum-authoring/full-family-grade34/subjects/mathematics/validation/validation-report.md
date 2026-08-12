@@ -51,6 +51,9 @@
 | assessment-error-prompt-shows-work-not-the-answer | PASS | 20 error-analysis prompts present concrete erroneous work and never name the error |
 | connection-prompts-authored | PASS | 20 authored connection prompts |
 | lesson-titles-do-not-stutter | PASS | 360 titles read as phase plus a distinct mathematical target |
+| no-worked-example-offered-on-unsupported-days | PASS | 100 unsupported lessons offer a blank recording template only |
+| connection-standards-authored-and-in-unit | PASS | 20 authored connection-standard sets, all valid and inside their unit |
+| instruction-precedes-independent-evidence | PASS | every content standard in both grades is instructed on an earlier course day than the first day it is independently evidenced |
 
 ## Interpretation
 

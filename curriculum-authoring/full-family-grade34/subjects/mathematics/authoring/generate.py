@@ -96,7 +96,7 @@ def build_lessons(g, mod):
         aligned = ADAPTIVE_ALIGNMENT.get((g, unit["n"]), [])
         for idx, (day_in_unit, phase, ev) in enumerate(arc.ARC):
             focus, std_s = unit["days"][idx]
-            stds = std_s.split()
+            stds = sorted(std_s.split(), key=std_key)
             course_day += 1
             mis = unit["misconceptions"][unit["day_misconceptions"][idx]]
             seg_ids = []
@@ -171,7 +171,13 @@ def build_lessons(g, mod):
                 "accessibility_and_accommodations": ACCESSIBILITY,
                 "safety_and_privacy": SAFETY,
                 "media": {
-                    "suggestion": "Optional diagram or worked example illustrating %s." % focus,
+                    "suggestion": (
+                        "Optional blank recording template only -- grid paper, a blank number line, or a "
+                        "blank table. No worked example, no diagram of %s, and no model of the method is "
+                        "provided during this task." % focus
+                        if ev in UNSUPPORTED else
+                        "Optional diagram or worked example illustrating %s." % focus
+                    ),
                     "required": False,
                     "fallback": (
                         "Every representation in this lesson is fully described in words and can be built "
@@ -366,7 +372,7 @@ def build_assessments(g, mod):
              "prompt": "%s Find the error, correct it, and explain why the correction works."
                        % unit["assessment_error_stem"]},
             {"type": "connection", "points": 4,
-             "standards": sorted(set(ts[t[0]]) | set(ts[t[-1]]), key=std_key),
+             "standards": sorted(unit["connection_standards"], key=std_key),
              "prompt": unit["connection_prompt"]},
             {"type": "performance evidence", "points": 8,
              "standards": [c for c in u_std if not c.startswith("MP.")],

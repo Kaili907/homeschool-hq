@@ -67,7 +67,7 @@
         "points": 4,
         "standards": [
           "3.NBT.1",
-          "MP.1",
+          "3.NBT.2",
           "MP.3"
         ],
         "prompt": "Explain how rounding helps you decide whether an addition or subtraction answer within 1,000 is reasonable."
@@ -127,7 +127,6 @@
       "3.OA.2",
       "3.OA.3",
       "3.OA.4",
-      "3.OA.5",
       "3.OA.6",
       "MP.1",
       "MP.3",
@@ -150,7 +149,7 @@
         "standards": [
           "3.OA.1"
         ],
-        "prompt": "Use one of the unit representations (counters in equal groups; arrays on grid paper) to show arrays and area. Label the parts."
+        "prompt": "Use one of the unit representations (counters in equal groups; arrays on grid paper) to show arrays, rows, and columns. Label the parts."
       },
       {
         "type": "procedure and accuracy",
@@ -182,7 +181,7 @@
         "points": 4,
         "standards": [
           "3.OA.1",
-          "3.OA.5",
+          "3.OA.2",
           "3.OA.6"
         ],
         "prompt": "Explain how multiplication and division describe the same equal-groups situation from two directions."
@@ -195,7 +194,6 @@
           "3.OA.2",
           "3.OA.3",
           "3.OA.4",
-          "3.OA.5",
           "3.OA.6"
         ],
         "prompt": "Present the strongest evidence from the unit task: Curate an Equal Groups Museum: each exhibit pairs a model, a story problem, and the matching multiplication and division equations."
@@ -296,15 +294,15 @@
           "3.OA.7",
           "MP.1"
         ],
-        "prompt": "A learner skip-counted by sevens to find 6 x 7 and wrote 48. Find the error, correct it, and explain why the correction works."
+        "prompt": "A learner skip-counted by sixes to find 6 x 7, counted 6, 12, 18, 24, 30, 36, 42, 48, and wrote 48. Find the error, correct it, and explain why the correction works."
       },
       {
         "type": "connection",
         "points": 4,
         "standards": [
           "3.OA.5",
-          "3.OA.7",
-          "3.NBT.3"
+          "3.OA.6",
+          "3.OA.7"
         ],
         "prompt": "Explain how knowing one multiplication fact helps you find both a related multiplication fact and a related division fact."
       },
@@ -421,7 +419,6 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "3.OA.5",
           "3.OA.8",
           "3.OA.9"
         ],
@@ -537,8 +534,8 @@
         "points": 4,
         "standards": [
           "3.NF.1",
-          "3.G.2",
-          "MP.6"
+          "3.NF.2",
+          "3.G.2"
         ],
         "prompt": "Explain how partitioning a shape into equal parts and marking a fraction on a number line show the same idea."
       },
@@ -644,13 +641,12 @@
           "3.NF.3",
           "3.G.2"
         ],
-        "prompt": "A learner wrote 1/2 = 2/3, explaining that they added one to the top and one to the bottom. Find the error, correct it, and explain why the correction works."
+        "prompt": "A learner shaded 1/2 of a small square and 1/4 of a much larger square, then wrote 1/4 > 1/2 because the shaded piece looked bigger. Find the error, correct it, and explain why the correction works."
       },
       {
         "type": "connection",
         "points": 4,
         "standards": [
-          "3.NF.2",
           "3.NF.3"
         ],
         "prompt": "Explain how two fractions can name the same amount even though their numerators and denominators are different numbers."
@@ -761,7 +757,6 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "3.MD.1",
           "3.MD.2",
           "MP.6"
         ],
@@ -874,8 +869,7 @@
         "points": 4,
         "standards": [
           "3.MD.3",
-          "3.MD.4",
-          "MP.4"
+          "3.MD.4"
         ],
         "prompt": "Explain how the scale on a bar graph and the marks on a line plot each change what the display can tell you."
       },
@@ -985,7 +979,7 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "3.MD.5",
+          "3.OA.5",
           "3.MD.7"
         ],
         "prompt": "Explain how breaking a rectangle into two smaller rectangles shows why you can multiply one side by a sum of two numbers."
@@ -1099,9 +1093,8 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "3.NF.1",
-          "3.MD.8",
-          "3.G.2"
+          "3.MD.7",
+          "3.MD.8"
         ],
         "prompt": "Explain how two shapes can have the same perimeter but cover different amounts of space."
       },

@@ -571,6 +571,56 @@ def main():
           "360 titles read as phase plus a distinct mathematical target"
           if not stut else "%d stuttering: %s" % (len(stut), stut[:3]))
 
+    # 45 no worked example is offered during a task that must stay unsupported
+    med = [l["lesson_id"] for g in GRADES for l in L[g]
+           if l["evidence_type"] in UNSUPPORTED
+           and ("worked example" not in l["media"]["suggestion"]
+                or "No worked example" not in l["media"]["suggestion"])]
+    check("no-worked-example-offered-on-unsupported-days", not med,
+          "%d unsupported lessons offer a blank recording template only" % n_unsup
+          if not med else "%d lessons still offer a worked example: %s" % (len(med), med[:3]))
+
+    # 46 connection prompts carry authored standards, not a mechanical topic union
+    cs_ok, det = True, []
+    for g in GRADES:
+        for a, u in zip(A[g], MODS[g].UNITS):
+            us, cs = set(unit_std(u)), u["connection_standards"]
+            if not cs:
+                cs_ok = False; det.append("g%d u%d empty" % (g, u["n"]))
+            for c in cs:
+                if not SC.validate_code(c) or c not in us:
+                    cs_ok = False; det.append("g%d u%d %s" % (g, u["n"], c))
+            if a["prompts"][5]["standards"] != sorted(cs, key=lambda x: sorted(cs).index(x)) \
+               and set(a["prompts"][5]["standards"]) != set(cs):
+                cs_ok = False; det.append("g%d u%d prompt mismatch" % (g, u["n"]))
+            mech = set(u["topic_standards"][u["topics"][0]]) | set(u["topic_standards"][u["topics"][-1]])
+            if set(cs) == mech and len(u["topics"]) > 2 and set(cs) != us:
+                det.append("g%d u%d equals the old mechanical union" % (g, u["n"]))
+    check("connection-standards-authored-and-in-unit", cs_ok,
+          "20 authored connection-standard sets, all valid and inside their unit"
+          if cs_ok else "; ".join(det[:4]))
+
+    # 47 every standard is instructed before it is independently evidenced
+    ord_ok, det = True, []
+    for g in GRADES:
+        first_teach, first_ev = {}, {}
+        for l in sorted(L[g], key=lambda x: x["course_day"]):
+            for c in l["standards"]:
+                if c.startswith("MP."):
+                    continue
+                if l["evidence_type"] in UNSUPPORTED:
+                    first_ev.setdefault(c, l["course_day"])
+                else:
+                    first_teach.setdefault(c, l["course_day"])
+        for c, d in first_ev.items():
+            if c not in first_teach or first_teach[c] > d:
+                ord_ok = False
+                det.append("g%d %s evidenced day %d, instructed %s"
+                           % (g, c, d, first_teach.get(c, "never")))
+    check("instruction-precedes-independent-evidence", ord_ok,
+          "every content standard in both grades is instructed on an earlier course day than the "
+          "first day it is independently evidenced" if ord_ok else "; ".join(det[:4]))
+
     passed = sum(1 for c in checks if c["result"] == "PASS")
     overall = "PASS" if passed == len(checks) else "FAIL"
     report = {

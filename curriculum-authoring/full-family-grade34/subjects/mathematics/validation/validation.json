@@ -4,8 +4,8 @@
   "validated_on": "2026-08-12",
   "overall": "PASS",
   "counts": {
-    "checks": 44,
-    "passed": 44,
+    "checks": 47,
+    "passed": 47,
     "failed": 0
   },
   "checks": [
@@ -228,6 +228,21 @@
       "check": "lesson-titles-do-not-stutter",
       "result": "PASS",
       "details": "360 titles read as phase plus a distinct mathematical target"
+    },
+    {
+      "check": "no-worked-example-offered-on-unsupported-days",
+      "result": "PASS",
+      "details": "100 unsupported lessons offer a blank recording template only"
+    },
+    {
+      "check": "connection-standards-authored-and-in-unit",
+      "result": "PASS",
+      "details": "20 authored connection-standard sets, all valid and inside their unit"
+    },
+    {
+      "check": "instruction-precedes-independent-evidence",
+      "result": "PASS",
+      "details": "every content standard in both grades is instructed on an earlier course day than the first day it is independently evidenced"
     }
   ]
 }

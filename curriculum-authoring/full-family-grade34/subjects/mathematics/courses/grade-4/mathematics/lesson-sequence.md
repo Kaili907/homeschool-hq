@@ -119,39 +119,39 @@
 
 **Watch for:** Writes expanded form using digits rather than place values, such as 3 + 4 + 7 for 347.
 
-### Day 10 (course day 10) - Independent evidence B: rounding multi-digit whole numbers to any place
+### Day 10 (course day 10) - Independent evidence B: comparing and ordering multi-digit numbers in context
 **Lesson ID:** `ma-g4-mathematics-u01-l10`  
-**Standards:** 4.NBT.3  
+**Standards:** 4.NBT.2  
 **Evidence type:** independent-evidence  
-**Objective:** Apply rounding multi-digit whole numbers to any place accurately without prompting, on a task not yet worked together.
+**Objective:** Apply comparing and ordering multi-digit numbers in context accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner independently completes a task on rounding multi-digit whole numbers to any place that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner independently completes a task on comparing and ordering multi-digit numbers in context that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Complete one item on rounding multi-digit whole numbers to any place without help and record the reasoning that produced it.
+**Exit check:** Complete one item on comparing and ordering multi-digit numbers in context without help and record the reasoning that produced it.
 
-**Watch for:** Rounds to the wrong place because the target place was not identified first.
+**Watch for:** Compares multi-digit numbers by counting digits or by the largest single digit anywhere in the number.
 
-### Day 11 (course day 11) - Applied problem solving: choosing a rounding place to fit a purpose
+### Day 11 (course day 11) - Concept extension: rounding multi-digit whole numbers to any place
 **Lesson ID:** `ma-g4-mathematics-u01-l11`  
-**Standards:** 4.NBT.3, MP.3  
-**Evidence type:** independent-evidence  
-**Objective:** Apply choosing a rounding place to fit a purpose accurately without prompting, on a task not yet worked together.
+**Standards:** 4.NBT.3  
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of rounding multi-digit whole numbers to any place using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on choosing a rounding place to fit a purpose that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of rounding multi-digit whole numbers to any place, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on choosing a rounding place to fit a purpose without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of rounding multi-digit whole numbers to any place in one response, and name the part that still feels unsteady.
 
 **Watch for:** Rounds to the wrong place because the target place was not identified first.
 
-### Day 12 (course day 12) - Concept extension: estimation as a tool for judging reasonableness
+### Day 12 (course day 12) - Applied problem solving: choosing a rounding place and estimating to judge reasonableness
 **Lesson ID:** `ma-g4-mathematics-u01-l12`  
-**Standards:** 4.NBT.3, MP.1  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of estimation as a tool for judging reasonableness using a concrete or visual representation before any symbol work.
+**Standards:** 4.NBT.3, MP.1, MP.3  
+**Evidence type:** independent-evidence  
+**Objective:** Apply choosing a rounding place and estimating to judge reasonableness accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of estimation as a tool for judging reasonableness, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on choosing a rounding place and estimating to judge reasonableness that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of estimation as a tool for judging reasonableness in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on choosing a rounding place and estimating to judge reasonableness without help and record the reasoning that produced it.
 
 **Watch for:** Rounds to the wrong place because the target place was not identified first.
 
@@ -284,7 +284,7 @@
 
 ### Day 5 (course day 23) - Independent evidence A: addition inside multistep contexts
 **Lesson ID:** `ma-g4-mathematics-u02-l05`  
-**Standards:** 4.NBT.4, 4.OA.3  
+**Standards:** 4.NBT.4  
 **Evidence type:** independent-evidence  
 **Objective:** Apply addition inside multistep contexts accurately without prompting, on a task not yet worked together.
 
@@ -342,41 +342,41 @@
 
 **Watch for:** Subtracts the smaller digit from the larger in each column regardless of position.
 
-### Day 10 (course day 28) - Independent evidence B: multistep problems using a letter for the unknown quantity
+### Day 10 (course day 28) - Independent evidence B: comparison and difference situations in context
 **Lesson ID:** `ma-g4-mathematics-u02-l10`  
-**Standards:** 4.OA.3  
+**Standards:** 4.NBT.4  
 **Evidence type:** independent-evidence  
-**Objective:** Apply multistep problems using a letter for the unknown quantity accurately without prompting, on a task not yet worked together.
+**Objective:** Apply comparison and difference situations in context accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner independently completes a task on multistep problems using a letter for the unknown quantity that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner independently completes a task on comparison and difference situations in context that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Complete one item on multistep problems using a letter for the unknown quantity without help and record the reasoning that produced it.
-
-**Watch for:** Accepts an answer without checking, missing an error an estimate would have caught.
-
-### Day 11 (course day 29) - Applied problem solving: assessing reasonableness with rounding and estimation
-**Lesson ID:** `ma-g4-mathematics-u02-l11`  
-**Standards:** 4.OA.3, 4.NBT.3  
-**Evidence type:** independent-evidence  
-**Objective:** Apply assessing reasonableness with rounding and estimation accurately without prompting, on a task not yet worked together.
-
-**Student activity:** The learner independently completes a task on assessing reasonableness with rounding and estimation that was not worked together, and records the reasoning, model, or process that produced the result.
-
-**Exit check:** Complete one item on assessing reasonableness with rounding and estimation without help and record the reasoning that produced it.
-
-**Watch for:** Accepts an answer without checking, missing an error an estimate would have caught.
-
-### Day 12 (course day 30) - Concept extension: comparison and difference situations in context
-**Lesson ID:** `ma-g4-mathematics-u02-l12`  
-**Standards:** 4.OA.3, 4.NBT.4  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of comparison and difference situations in context using a concrete or visual representation before any symbol work.
-
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of comparison and difference situations in context, then writes the matching notation and explains how the two match.
-
-**Exit check:** Show or explain the main idea of comparison and difference situations in context in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on comparison and difference situations in context without help and record the reasoning that produced it.
 
 **Watch for:** Subtracts the smaller digit from the larger in each column regardless of position.
+
+### Day 11 (course day 29) - Concept extension: multistep problems using a letter for the unknown quantity
+**Lesson ID:** `ma-g4-mathematics-u02-l11`  
+**Standards:** 4.OA.3  
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of multistep problems using a letter for the unknown quantity using a concrete or visual representation before any symbol work.
+
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of multistep problems using a letter for the unknown quantity, then writes the matching notation and explains how the two match.
+
+**Exit check:** Show or explain the main idea of multistep problems using a letter for the unknown quantity in one response, and name the part that still feels unsteady.
+
+**Watch for:** Accepts an answer without checking, missing an error an estimate would have caught.
+
+### Day 12 (course day 30) - Applied problem solving: multistep problems checked against a rounded estimate
+**Lesson ID:** `ma-g4-mathematics-u02-l12`  
+**Standards:** 4.OA.3, 4.NBT.3  
+**Evidence type:** independent-evidence  
+**Objective:** Apply multistep problems checked against a rounded estimate accurately without prompting, on a task not yet worked together.
+
+**Student activity:** The learner independently completes a task on multistep problems checked against a rounded estimate that was not worked together, and records the reasoning, model, or process that produced the result.
+
+**Exit check:** Complete one item on multistep problems checked against a rounded estimate without help and record the reasoning that produced it.
+
+**Watch for:** Accepts an answer without checking, missing an error an estimate would have caught.
 
 ### Day 13 (course day 31) - Performance task: plan: the error-audit correction guide
 **Lesson ID:** `ma-g4-mathematics-u02-l13`  
@@ -392,7 +392,7 @@
 
 ### Day 14 (course day 32) - Performance task: build: corrections with place-value explanations
 **Lesson ID:** `ma-g4-mathematics-u02-l14`  
-**Standards:** 4.NBT.4, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.4  
 **Evidence type:** project  
 **Objective:** Apply corrections with place-value explanations inside an extended task with a real purpose and stated success criteria.
 
@@ -404,7 +404,7 @@
 
 ### Day 15 (course day 33) - Synthesis and review: algorithm, reasoning, and reasonableness
 **Lesson ID:** `ma-g4-mathematics-u02-l15`  
-**Standards:** 4.NBT.4, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.4  
 **Evidence type:** retrieval  
 **Objective:** Retrieve algorithm, reasoning, and reasonableness from memory after a delay, without speed pressure or public comparison.
 
@@ -416,7 +416,7 @@
 
 ### Day 16 (course day 34) - Unit assessment: multi-digit addition and subtraction
 **Lesson ID:** `ma-g4-mathematics-u02-l16`  
-**Standards:** 4.NBT.3, 4.NBT.4, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.3, 4.NBT.4  
 **Evidence type:** assessment  
 **Objective:** Demonstrate independent understanding of multi-digit addition and subtraction across concept, representation, and application.
 
@@ -428,7 +428,7 @@
 
 ### Day 17 (course day 35) - Targeted correction and reassessment: regrouping
 **Lesson ID:** `ma-g4-mathematics-u02-l17`  
-**Standards:** 4.NBT.4, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.4  
 **Evidence type:** reassessment  
 **Objective:** Rebuild the smallest missing prerequisite for regrouping with explicit reteaching.
 
@@ -577,27 +577,27 @@
 
 **Watch for:** Confuses factors with multiples, listing 12, 24, 36 as factors of 12.
 
-### Day 11 (course day 47) - Applied problem solving: generating a number pattern from a rule and describing a feature the rule does not state
+### Day 11 (course day 47) - Concept extension: generating a number pattern from a rule and describing a feature the rule does not state
 **Lesson ID:** `ma-g4-mathematics-u03-l11`  
 **Standards:** 4.OA.5  
-**Evidence type:** independent-evidence  
-**Objective:** Apply generating a number pattern from a rule and describing a feature the rule does not state accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of generating a number pattern from a rule and describing a feature the rule does not state using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on generating a number pattern from a rule and describing a feature the rule does not state that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of generating a number pattern from a rule and describing a feature the rule does not state, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on generating a number pattern from a rule and describing a feature the rule does not state without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of generating a number pattern from a rule and describing a feature the rule does not state in one response, and name the part that still feels unsteady.
 
 **Watch for:** Continues a rule-based pattern correctly but cannot name a feature of the pattern that the rule never stated.
 
-### Day 12 (course day 48) - Concept extension: prime and composite numbers
+### Day 12 (course day 48) - Applied problem solving: prime and composite numbers, and extending a rule-based pattern
 **Lesson ID:** `ma-g4-mathematics-u03-l12`  
-**Standards:** 4.OA.4  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of prime and composite numbers using a concrete or visual representation before any symbol work.
+**Standards:** 4.OA.4, 4.OA.5  
+**Evidence type:** independent-evidence  
+**Objective:** Apply prime and composite numbers, and extending a rule-based pattern accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of prime and composite numbers, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on prime and composite numbers, and extending a rule-based pattern that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of prime and composite numbers in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on prime and composite numbers, and extending a rule-based pattern without help and record the reasoning that produced it.
 
 **Watch for:** Calls every odd number prime.
 
@@ -800,27 +800,27 @@
 
 **Watch for:** Forgets to add the partial products after computing them.
 
-### Day 11 (course day 65) - Applied problem solving: multiplicative comparison with larger numbers
+### Day 11 (course day 65) - Concept extension: multiplicative comparison with larger numbers
 **Lesson ID:** `ma-g4-mathematics-u04-l11`  
 **Standards:** 4.OA.2  
-**Evidence type:** independent-evidence  
-**Objective:** Apply multiplicative comparison with larger numbers accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of multiplicative comparison with larger numbers using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on multiplicative comparison with larger numbers that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of multiplicative comparison with larger numbers, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on multiplicative comparison with larger numbers without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of multiplicative comparison with larger numbers in one response, and name the part that still feels unsteady.
 
 **Watch for:** Accepts an unreasonable product because no estimate was made first.
 
-### Day 12 (course day 66) - Concept extension: estimating products to check reasonableness
+### Day 12 (course day 66) - Applied problem solving: estimating products to check reasonableness
 **Lesson ID:** `ma-g4-mathematics-u04-l12`  
-**Standards:** 4.NBT.5, 4.OA.3, MP.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of estimating products to check reasonableness using a concrete or visual representation before any symbol work.
+**Standards:** 4.OA.3, 4.NBT.5, MP.3  
+**Evidence type:** independent-evidence  
+**Objective:** Apply estimating products to check reasonableness accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of estimating products to check reasonableness, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on estimating products to check reasonableness that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of estimating products to check reasonableness in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on estimating products to check reasonableness without help and record the reasoning that produced it.
 
 **Watch for:** Accepts an unreasonable product because no estimate was made first.
 
@@ -838,7 +838,7 @@
 
 ### Day 14 (course day 68) - Performance task: build: the order with models and estimates
 **Lesson ID:** `ma-g4-mathematics-u04-l14`  
-**Standards:** 4.NBT.5, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.5  
 **Evidence type:** project  
 **Objective:** Apply the order with models and estimates inside an extended task with a real purpose and stated success criteria.
 
@@ -850,7 +850,7 @@
 
 ### Day 15 (course day 69) - Synthesis and review: models, partial products, and estimation
 **Lesson ID:** `ma-g4-mathematics-u04-l15`  
-**Standards:** 4.NBT.5, 4.OA.2, 4.OA.3  
+**Standards:** 4.OA.2, 4.OA.3, 4.NBT.5  
 **Evidence type:** retrieval  
 **Objective:** Retrieve models, partial products, and estimation from memory after a delay, without speed pressure or public comparison.
 
@@ -862,7 +862,7 @@
 
 ### Day 16 (course day 70) - Unit assessment: multi-digit multiplication
 **Lesson ID:** `ma-g4-mathematics-u04-l16`  
-**Standards:** 4.NBT.5, 4.OA.2, 4.OA.3  
+**Standards:** 4.OA.2, 4.OA.3, 4.NBT.5  
 **Evidence type:** assessment  
 **Objective:** Demonstrate independent understanding of multi-digit multiplication across concept, representation, and application.
 
@@ -874,7 +874,7 @@
 
 ### Day 17 (course day 71) - Targeted correction and reassessment: partial products and place-value alignment
 **Lesson ID:** `ma-g4-mathematics-u04-l17`  
-**Standards:** 4.NBT.5, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.5  
 **Evidence type:** reassessment  
 **Objective:** Rebuild the smallest missing prerequisite for partial products and place-value alignment with explicit reteaching.
 
@@ -1023,27 +1023,27 @@
 
 **Watch for:** Always rounds the quotient up, or always drops the remainder, without reading the context.
 
-### Day 11 (course day 83) - Applied problem solving: checking a quotient by multiplying
+### Day 11 (course day 83) - Concept extension: checking a quotient by multiplying
 **Lesson ID:** `ma-g4-mathematics-u05-l11`  
 **Standards:** 4.NBT.6, MP.3  
-**Evidence type:** independent-evidence  
-**Objective:** Apply checking a quotient by multiplying accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of checking a quotient by multiplying using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on checking a quotient by multiplying that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of checking a quotient by multiplying, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on checking a quotient by multiplying without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of checking a quotient by multiplying in one response, and name the part that still feels unsteady.
 
 **Watch for:** Does not verify the quotient, missing an error multiplication would have caught.
 
-### Day 12 (course day 84) - Concept extension: estimating to predict the size of a quotient
+### Day 12 (course day 84) - Applied problem solving: estimating to predict the size of a quotient
 **Lesson ID:** `ma-g4-mathematics-u05-l12`  
-**Standards:** 4.NBT.6, 4.OA.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of estimating to predict the size of a quotient using a concrete or visual representation before any symbol work.
+**Standards:** 4.OA.3, 4.NBT.6  
+**Evidence type:** independent-evidence  
+**Objective:** Apply estimating to predict the size of a quotient accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of estimating to predict the size of a quotient, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on estimating to predict the size of a quotient that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of estimating to predict the size of a quotient in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on estimating to predict the size of a quotient without help and record the reasoning that produced it.
 
 **Watch for:** Does not verify the quotient, missing an error multiplication would have caught.
 
@@ -1061,7 +1061,7 @@
 
 ### Day 14 (course day 86) - Performance task: build: the plan with a written remainder justification
 **Lesson ID:** `ma-g4-mathematics-u05-l14`  
-**Standards:** 4.NBT.6, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.6  
 **Evidence type:** project  
 **Objective:** Apply the plan with a written remainder justification inside an extended task with a real purpose and stated success criteria.
 
@@ -1073,7 +1073,7 @@
 
 ### Day 15 (course day 87) - Synthesis and review: division strategy and remainder interpretation
 **Lesson ID:** `ma-g4-mathematics-u05-l15`  
-**Standards:** 4.NBT.6, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.6  
 **Evidence type:** retrieval  
 **Objective:** Retrieve division strategy and remainder interpretation from memory after a delay, without speed pressure or public comparison.
 
@@ -1085,7 +1085,7 @@
 
 ### Day 16 (course day 88) - Unit assessment: division and remainders
 **Lesson ID:** `ma-g4-mathematics-u05-l16`  
-**Standards:** 4.NBT.6, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.6  
 **Evidence type:** assessment  
 **Objective:** Demonstrate independent understanding of division and remainders across concept, representation, and application.
 
@@ -1097,7 +1097,7 @@
 
 ### Day 17 (course day 89) - Targeted correction and reassessment: quotients and remainders
 **Lesson ID:** `ma-g4-mathematics-u05-l17`  
-**Standards:** 4.NBT.6, 4.OA.3  
+**Standards:** 4.OA.3, 4.NBT.6  
 **Evidence type:** reassessment  
 **Objective:** Rebuild the smallest missing prerequisite for quotients and remainders with explicit reteaching.
 
@@ -1246,27 +1246,27 @@
 
 **Watch for:** Believes a fraction with a larger denominator is always smaller, even when numerators differ.
 
-### Day 11 (course day 101) - Applied problem solving: comparing only when fractions refer to the same whole
+### Day 11 (course day 101) - Concept extension: comparing only when fractions refer to the same whole
 **Lesson ID:** `ma-g4-mathematics-u06-l11`  
 **Standards:** 4.NF.2, MP.6  
-**Evidence type:** independent-evidence  
-**Objective:** Apply comparing only when fractions refer to the same whole accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of comparing only when fractions refer to the same whole using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on comparing only when fractions refer to the same whole that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of comparing only when fractions refer to the same whole, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on comparing only when fractions refer to the same whole without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of comparing only when fractions refer to the same whole in one response, and name the part that still feels unsteady.
 
 **Watch for:** Compares fractions that refer to different wholes and reports a result anyway.
 
-### Day 12 (course day 102) - Concept extension: justifying comparisons visually and symbolically
+### Day 12 (course day 102) - Applied problem solving: justifying comparisons visually and symbolically
 **Lesson ID:** `ma-g4-mathematics-u06-l12`  
 **Standards:** 4.NF.1, 4.NF.2, MP.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of justifying comparisons visually and symbolically using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply justifying comparisons visually and symbolically accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of justifying comparisons visually and symbolically, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on justifying comparisons visually and symbolically that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of justifying comparisons visually and symbolically in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on justifying comparisons visually and symbolically without help and record the reasoning that produced it.
 
 **Watch for:** Compares fractions by comparing numerators alone or denominators alone.
 
@@ -1469,27 +1469,27 @@
 
 **Watch for:** Multiplies a fraction by a whole number by multiplying both the numerator and the denominator.
 
-### Day 11 (course day 119) - Applied problem solving: fraction operations inside measurement contexts
+### Day 11 (course day 119) - Concept extension: fraction operations inside measurement contexts
 **Lesson ID:** `ma-g4-mathematics-u07-l11`  
 **Standards:** 4.NF.4, 4.MD.2  
-**Evidence type:** independent-evidence  
-**Objective:** Apply fraction operations inside measurement contexts accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of fraction operations inside measurement contexts using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on fraction operations inside measurement contexts that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of fraction operations inside measurement contexts, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on fraction operations inside measurement contexts without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of fraction operations inside measurement contexts in one response, and name the part that still feels unsteady.
 
 **Watch for:** Subtracts mixed numbers without regrouping when the fractional part is too small.
 
-### Day 12 (course day 120) - Concept extension: connecting repeated addition to n times a over b
+### Day 12 (course day 120) - Applied problem solving: connecting repeated addition to n times a over b
 **Lesson ID:** `ma-g4-mathematics-u07-l12`  
 **Standards:** 4.NF.4, MP.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of connecting repeated addition to n times a over b using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply connecting repeated addition to n times a over b accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of connecting repeated addition to n times a over b, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on connecting repeated addition to n times a over b that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of connecting repeated addition to n times a over b in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on connecting repeated addition to n times a over b without help and record the reasoning that produced it.
 
 **Watch for:** Multiplies a fraction by a whole number by multiplying both the numerator and the denominator.
 
@@ -1692,20 +1692,8 @@
 
 **Watch for:** Compares decimals by digit count, concluding 0.25 is greater than 0.5.
 
-### Day 11 (course day 137) - Applied problem solving: money problems involving decimals
+### Day 11 (course day 137) - Concept extension: why a comparison requires the same whole
 **Lesson ID:** `ma-g4-mathematics-u08-l11`  
-**Standards:** 4.MD.2, 4.NF.5, 4.NF.6  
-**Evidence type:** independent-evidence  
-**Objective:** Apply money problems involving decimals accurately without prompting, on a task not yet worked together.
-
-**Student activity:** The learner independently completes a task on money problems involving decimals that was not worked together, and records the reasoning, model, or process that produced the result.
-
-**Exit check:** Complete one item on money problems involving decimals without help and record the reasoning that produced it.
-
-**Watch for:** Adds tenths to hundredths without rewriting to a common denominator.
-
-### Day 12 (course day 138) - Concept extension: why a comparison requires the same whole
-**Lesson ID:** `ma-g4-mathematics-u08-l12`  
 **Standards:** 4.NF.7, MP.6  
 **Evidence type:** instruction  
 **Objective:** Build an accurate mental model of why a comparison requires the same whole using a concrete or visual representation before any symbol work.
@@ -1715,6 +1703,18 @@
 **Exit check:** Show or explain the main idea of why a comparison requires the same whole in one response, and name the part that still feels unsteady.
 
 **Watch for:** Compares decimals attached to different wholes and reports a result anyway.
+
+### Day 12 (course day 138) - Applied problem solving: money problems involving decimals
+**Lesson ID:** `ma-g4-mathematics-u08-l12`  
+**Standards:** 4.NF.5, 4.NF.6, 4.MD.2  
+**Evidence type:** independent-evidence  
+**Objective:** Apply money problems involving decimals accurately without prompting, on a task not yet worked together.
+
+**Student activity:** The learner independently completes a task on money problems involving decimals that was not worked together, and records the reasoning, model, or process that produced the result.
+
+**Exit check:** Complete one item on money problems involving decimals without help and record the reasoning that produced it.
+
+**Watch for:** Adds tenths to hundredths without rewriting to a common denominator.
 
 ### Day 13 (course day 139) - Performance task: plan: the conversion board
 **Lesson ID:** `ma-g4-mathematics-u08-l13`  
@@ -1867,17 +1867,17 @@
 
 **Watch for:** Mixes units within a single calculation without converting first.
 
-### Day 7 (course day 151) - Guided practice B: measurement problems involving fractions and decimals
+### Day 7 (course day 151) - Guided practice B: applying area and perimeter formulas for rectangles
 **Lesson ID:** `ma-g4-mathematics-u09-l07`  
-**Standards:** 4.MD.2  
+**Standards:** 4.MD.3  
 **Evidence type:** guided-practice  
-**Objective:** Practice measurement problems involving fractions and decimals with worked support, immediate feedback, and prompts that fade across the set.
+**Objective:** Practice applying area and perimeter formulas for rectangles with worked support, immediate feedback, and prompts that fade across the set.
 
-**Student activity:** The learner completes a short set on measurement problems involving fractions and decimals with prompts that fade item by item, stating the reason for each step.
+**Student activity:** The learner completes a short set on applying area and perimeter formulas for rectangles with prompts that fade item by item, stating the reason for each step.
 
-**Exit check:** Show one step of measurement problems involving fractions and decimals and explain why that step is correct. Name the item that was hardest.
+**Exit check:** Show one step of applying area and perimeter formulas for rectangles and explain why that step is correct. Name the item that was hardest.
 
-**Watch for:** Mixes units within a single calculation without converting first.
+**Watch for:** Substitutes into the area formula when the problem asks for perimeter, or the reverse.
 
 ### Day 8 (course day 152) - Error analysis and repair: wrong-direction conversion errors
 **Lesson ID:** `ma-g4-mathematics-u09-l08`  
@@ -1891,51 +1891,51 @@
 
 **Watch for:** Converts in the wrong direction, dividing when the new unit is smaller.
 
-### Day 9 (course day 153) - Retrieval and fluency: unit benchmarks and conversions
+### Day 9 (course day 153) - Retrieval and fluency: unit benchmarks, conversions, and formulas
 **Lesson ID:** `ma-g4-mathematics-u09-l09`  
-**Standards:** 4.MD.1  
+**Standards:** 4.MD.1, 4.MD.3  
 **Evidence type:** retrieval  
-**Objective:** Retrieve unit benchmarks and conversions from memory after a delay, without speed pressure or public comparison.
+**Objective:** Retrieve unit benchmarks, conversions, and formulas from memory after a delay, without speed pressure or public comparison.
 
-**Student activity:** The learner completes a mixed, untimed retrieval set covering unit benchmarks and conversions and two earlier units, naming the strategy used for each item.
+**Student activity:** The learner completes a mixed, untimed retrieval set covering unit benchmarks, conversions, and formulas and two earlier units, naming the strategy used for each item.
 
-**Exit check:** Sort today's unit benchmarks and conversions items into secure and not-yet-secure, and name the strategy that helped most.
+**Exit check:** Sort today's unit benchmarks, conversions, and formulas items into secure and not-yet-secure, and name the strategy that helped most.
 
 **Watch for:** Mixes units within a single calculation without converting first.
 
-### Day 10 (course day 154) - Independent evidence B: applying area and perimeter formulas for rectangles
+### Day 10 (course day 154) - Independent evidence B: measurement problems involving fractions and decimals
 **Lesson ID:** `ma-g4-mathematics-u09-l10`  
-**Standards:** 4.MD.3  
+**Standards:** 4.MD.2  
 **Evidence type:** independent-evidence  
-**Objective:** Apply applying area and perimeter formulas for rectangles accurately without prompting, on a task not yet worked together.
+**Objective:** Apply measurement problems involving fractions and decimals accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner independently completes a task on applying area and perimeter formulas for rectangles that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner independently completes a task on measurement problems involving fractions and decimals that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Complete one item on applying area and perimeter formulas for rectangles without help and record the reasoning that produced it.
+**Exit check:** Complete one item on measurement problems involving fractions and decimals without help and record the reasoning that produced it.
 
-**Watch for:** Substitutes into the area formula when the problem asks for perimeter, or the reverse.
+**Watch for:** Mixes units within a single calculation without converting first.
 
-### Day 11 (course day 155) - Applied problem solving: line plots with halves, quarters, and eighths of an inch
+### Day 11 (course day 155) - Concept extension: line plots with halves, quarters, and eighths of an inch
 **Lesson ID:** `ma-g4-mathematics-u09-l11`  
 **Standards:** 4.MD.4  
-**Evidence type:** independent-evidence  
-**Objective:** Apply line plots with halves, quarters, and eighths of an inch accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of line plots with halves, quarters, and eighths of an inch using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on line plots with halves, quarters, and eighths of an inch that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of line plots with halves, quarters, and eighths of an inch, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on line plots with halves, quarters, and eighths of an inch without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of line plots with halves, quarters, and eighths of an inch in one response, and name the part that still feels unsteady.
 
 **Watch for:** Places fractional measurements at whole-number marks on a line plot.
 
-### Day 12 (course day 156) - Concept extension: finding an unknown side length from area or perimeter
+### Day 12 (course day 156) - Applied problem solving: finding an unknown side length from area or perimeter, and interpreting a line plot
 **Lesson ID:** `ma-g4-mathematics-u09-l12`  
-**Standards:** 4.MD.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of finding an unknown side length from area or perimeter using a concrete or visual representation before any symbol work.
+**Standards:** 4.MD.3, 4.MD.4  
+**Evidence type:** independent-evidence  
+**Objective:** Apply finding an unknown side length from area or perimeter, and interpreting a line plot accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of finding an unknown side length from area or perimeter, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on finding an unknown side length from area or perimeter, and interpreting a line plot that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of finding an unknown side length from area or perimeter in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on finding an unknown side length from area or perimeter, and interpreting a line plot without help and record the reasoning that produced it.
 
 **Watch for:** Cannot find an unknown side length from a given area or perimeter.
 
@@ -2126,39 +2126,39 @@
 
 **Watch for:** Judges angle size by the drawn length of the rays rather than the opening.
 
-### Day 10 (course day 172) - Independent evidence B: points, lines, segments, rays, and angle types in figures
+### Day 10 (course day 172) - Independent evidence B: unknown-angle problems in diagrams
 **Lesson ID:** `ma-g4-mathematics-u10-l10`  
-**Standards:** 4.G.1  
+**Standards:** 4.MD.7  
 **Evidence type:** independent-evidence  
-**Objective:** Apply points, lines, segments, rays, and angle types in figures accurately without prompting, on a task not yet worked together.
+**Objective:** Apply unknown-angle problems in diagrams accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner independently completes a task on points, lines, segments, rays, and angle types in figures that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner independently completes a task on unknown-angle problems in diagrams that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Complete one item on points, lines, segments, rays, and angle types in figures without help and record the reasoning that produced it.
+**Exit check:** Complete one item on unknown-angle problems in diagrams without help and record the reasoning that produced it.
 
 **Watch for:** Judges angle size by the drawn length of the rays rather than the opening.
 
-### Day 11 (course day 173) - Applied problem solving: solving unknown-angle problems inside classified figures
+### Day 11 (course day 173) - Concept extension: points, lines, rays, classifying two-dimensional figures, and lines of symmetry
 **Lesson ID:** `ma-g4-mathematics-u10-l11`  
-**Standards:** 4.MD.7, 4.G.2  
-**Evidence type:** independent-evidence  
-**Objective:** Apply solving unknown-angle problems inside classified figures accurately without prompting, on a task not yet worked together.
-
-**Student activity:** The learner independently completes a task on solving unknown-angle problems inside classified figures that was not worked together, and records the reasoning, model, or process that produced the result.
-
-**Exit check:** Complete one item on solving unknown-angle problems inside classified figures without help and record the reasoning that produced it.
-
-**Watch for:** Does not align the protractor vertex and baseline with the angle.
-
-### Day 12 (course day 174) - Concept extension: lines of symmetry and patterns generated from a rule
-**Lesson ID:** `ma-g4-mathematics-u10-l12`  
-**Standards:** 4.G.3, 4.OA.5  
+**Standards:** 4.G.1, 4.G.2, 4.G.3  
 **Evidence type:** instruction  
-**Objective:** Build an accurate mental model of lines of symmetry and patterns generated from a rule using a concrete or visual representation before any symbol work.
+**Objective:** Build an accurate mental model of points, lines, rays, classifying two-dimensional figures, and lines of symmetry using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of lines of symmetry and patterns generated from a rule, then writes the matching notation and explains how the two match.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of points, lines, rays, classifying two-dimensional figures, and lines of symmetry, then writes the matching notation and explains how the two match.
 
-**Exit check:** Show or explain the main idea of lines of symmetry and patterns generated from a rule in one response, and name the part that still feels unsteady.
+**Exit check:** Show or explain the main idea of points, lines, rays, classifying two-dimensional figures, and lines of symmetry in one response, and name the part that still feels unsteady.
+
+**Watch for:** Assumes any fold that halves the area is a line of symmetry.
+
+### Day 12 (course day 174) - Applied problem solving: classifying two-dimensional figures and identifying lines of symmetry
+**Lesson ID:** `ma-g4-mathematics-u10-l12`  
+**Standards:** 4.G.1, 4.G.2, 4.G.3  
+**Evidence type:** independent-evidence  
+**Objective:** Apply classifying two-dimensional figures and identifying lines of symmetry accurately without prompting, on a task not yet worked together.
+
+**Student activity:** The learner independently completes a task on classifying two-dimensional figures and identifying lines of symmetry that was not worked together, and records the reasoning, model, or process that produced the result.
+
+**Exit check:** Complete one item on classifying two-dimensional figures and identifying lines of symmetry without help and record the reasoning that produced it.
 
 **Watch for:** Assumes any fold that halves the area is a line of symmetry.
 

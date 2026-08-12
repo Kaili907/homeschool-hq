@@ -42,8 +42,8 @@ Every unit runs the same 18-day arc, so learners and adults always know what kin
 | 8 | Error analysis and repair | Supported practice. Recorded as supported, not independent. |
 | 9 | Retrieval and fluency | Spaced recall without speed pressure. |
 | 10 | Independent evidence B | Unprompted evidence. Counts toward a mastery claim. |
-| 11 | Applied problem solving | Unprompted evidence. Counts toward a mastery claim. |
-| 12 | Concept extension | Teaching. No mastery claim is possible. |
+| 11 | Concept extension | Teaching. No mastery claim is possible. |
+| 12 | Applied problem solving | Unprompted evidence. Counts toward a mastery claim. |
 | 13 | Performance task: plan | Extended application with revision. |
 | 14 | Performance task: build | Extended application with revision. |
 | 15 | Synthesis and review | Spaced recall without speed pressure. |

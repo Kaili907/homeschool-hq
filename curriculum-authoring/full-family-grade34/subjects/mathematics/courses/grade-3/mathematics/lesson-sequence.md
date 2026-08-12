@@ -131,27 +131,27 @@
 
 **Watch for:** Subtracts the smaller digit from the larger in each column regardless of position.
 
-### Day 11 (course day 11) - Applied problem solving: subtraction with regrouping across zeros
+### Day 11 (course day 11) - Concept extension: subtraction with regrouping across zeros
 **Lesson ID:** `ma-g3-mathematics-u01-l11`  
 **Standards:** 3.NBT.2, MP.1  
-**Evidence type:** independent-evidence  
-**Objective:** Apply subtraction with regrouping across zeros accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of subtraction with regrouping across zeros using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on subtraction with regrouping across zeros that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of subtraction with regrouping across zeros, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on subtraction with regrouping across zeros without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of subtraction with regrouping across zeros in one response, and name the part that still feels unsteady.
 
 **Watch for:** Regroups across a zero incorrectly, treating the zero as nothing to trade.
 
-### Day 12 (course day 12) - Concept extension: choosing between an exact answer and an estimate
+### Day 12 (course day 12) - Applied problem solving: choosing between an exact answer and an estimate
 **Lesson ID:** `ma-g3-mathematics-u01-l12`  
 **Standards:** 3.NBT.1, 3.NBT.2, MP.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of choosing between an exact answer and an estimate using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply choosing between an exact answer and an estimate accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of choosing between an exact answer and an estimate, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on choosing between an exact answer and an estimate that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of choosing between an exact answer and an estimate in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on choosing between an exact answer and an estimate without help and record the reasoning that produced it.
 
 **Watch for:** Treats an estimate as a wrong answer because it does not match the exact sum.
 
@@ -230,7 +230,7 @@
 ## Unit 2: Meanings of Multiplication and Division
 
 **Essential question:** What do multiplication and division actually mean, and how does each one undo the other?  
-**Standards:** 3.OA.1, 3.OA.2, 3.OA.3, 3.OA.4, 3.OA.5, 3.OA.6, MP.1, MP.3, MP.4, MP.6  
+**Standards:** 3.OA.1, 3.OA.2, 3.OA.3, 3.OA.4, 3.OA.6, MP.1, MP.3, MP.4, MP.6  
 **Fluency target:** Interpret products and quotients within 100 and match them to models and contexts.  
 **Performance task:** Curate an Equal Groups Museum: each exhibit pairs a model, a story problem, and the matching multiplication and division equations.
 
@@ -284,7 +284,7 @@
 
 ### Day 5 (course day 23) - Independent evidence A: interpreting products in context
 **Lesson ID:** `ma-g3-mathematics-u02-l05`  
-**Standards:** 3.OA.1, 3.OA.3  
+**Standards:** 3.OA.1  
 **Evidence type:** independent-evidence  
 **Objective:** Apply interpreting products in context accurately without prompting, on a task not yet worked together.
 
@@ -320,7 +320,7 @@
 
 ### Day 8 (course day 26) - Error analysis and repair: group-size versus group-count errors
 **Lesson ID:** `ma-g3-mathematics-u02-l08`  
-**Standards:** 3.OA.1, 3.OA.2, MP.3  
+**Standards:** 3.OA.1, 3.OA.2, 3.OA.3, MP.3  
 **Evidence type:** guided-practice  
 **Objective:** Practice group-size versus group-count errors with worked support, immediate feedback, and prompts that fade across the set.
 
@@ -354,27 +354,27 @@
 
 **Watch for:** Believes multiplication always makes a number bigger and division always makes it smaller, then applies the wrong operation.
 
-### Day 11 (course day 29) - Applied problem solving: unknown-factor problems and fact families
+### Day 11 (course day 29) - Concept extension: unknown-factor problems and fact families
 **Lesson ID:** `ma-g3-mathematics-u02-l11`  
 **Standards:** 3.OA.4, 3.OA.6  
-**Evidence type:** independent-evidence  
-**Objective:** Apply unknown-factor problems and fact families accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of unknown-factor problems and fact families using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on unknown-factor problems and fact families that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of unknown-factor problems and fact families, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on unknown-factor problems and fact families without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of unknown-factor problems and fact families in one response, and name the part that still feels unsteady.
 
 **Watch for:** Solves an unknown-factor problem by guessing rather than using a related known fact.
 
-### Day 12 (course day 30) - Concept extension: multiplication and division as inverse operations
+### Day 12 (course day 30) - Applied problem solving: multiplication and division as inverse operations
 **Lesson ID:** `ma-g3-mathematics-u02-l12`  
-**Standards:** 3.OA.5, 3.OA.6  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of multiplication and division as inverse operations using a concrete or visual representation before any symbol work.
+**Standards:** 3.OA.6  
+**Evidence type:** independent-evidence  
+**Objective:** Apply multiplication and division as inverse operations accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of multiplication and division as inverse operations, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on multiplication and division as inverse operations that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of multiplication and division as inverse operations in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on multiplication and division as inverse operations without help and record the reasoning that produced it.
 
 **Watch for:** Solves an unknown-factor problem by guessing rather than using a related known fact.
 
@@ -577,27 +577,27 @@
 
 **Watch for:** Writes a division fact with the dividend and divisor reversed.
 
-### Day 11 (course day 47) - Applied problem solving: multiplying one-digit numbers by multiples of ten
+### Day 11 (course day 47) - Concept extension: multiplying one-digit numbers by multiples of ten
 **Lesson ID:** `ma-g3-mathematics-u03-l11`  
-**Standards:** 3.NBT.3, 3.OA.5  
-**Evidence type:** independent-evidence  
-**Objective:** Apply multiplying one-digit numbers by multiples of ten accurately without prompting, on a task not yet worked together.
+**Standards:** 3.OA.5, 3.NBT.3  
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of multiplying one-digit numbers by multiples of ten using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on multiplying one-digit numbers by multiples of ten that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of multiplying one-digit numbers by multiples of ten, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on multiplying one-digit numbers by multiples of ten without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of multiplying one-digit numbers by multiples of ten in one response, and name the part that still feels unsteady.
 
 **Watch for:** Multiplies by a multiple of ten by appending a zero without understanding the place-value shift.
 
-### Day 12 (course day 48) - Concept extension: division facts derived from related multiplication
+### Day 12 (course day 48) - Applied problem solving: division facts derived from related multiplication
 **Lesson ID:** `ma-g3-mathematics-u03-l12`  
 **Standards:** 3.OA.6, 3.OA.7  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of division facts derived from related multiplication using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply division facts derived from related multiplication accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of division facts derived from related multiplication, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on division facts derived from related multiplication that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of division facts derived from related multiplication in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on division facts derived from related multiplication without help and record the reasoning that produced it.
 
 **Watch for:** Writes a division fact with the dividend and divisor reversed.
 
@@ -800,27 +800,27 @@
 
 **Watch for:** Adds every number that appears in the problem regardless of what the situation describes.
 
-### Day 11 (course day 65) - Applied problem solving: patterns in the addition and multiplication tables
+### Day 11 (course day 65) - Concept extension: patterns in the addition and multiplication tables
 **Lesson ID:** `ma-g3-mathematics-u04-l11`  
 **Standards:** 3.OA.9  
-**Evidence type:** independent-evidence  
-**Objective:** Apply patterns in the addition and multiplication tables accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of patterns in the addition and multiplication tables using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on patterns in the addition and multiplication tables that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of patterns in the addition and multiplication tables, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on patterns in the addition and multiplication tables without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of patterns in the addition and multiplication tables in one response, and name the part that still feels unsteady.
 
 **Watch for:** Describes a table pattern by appearance only ('it goes up') without an arithmetic explanation.
 
-### Day 12 (course day 66) - Concept extension: explaining patterns using properties and multiples of ten
+### Day 12 (course day 66) - Applied problem solving: explaining patterns using properties and multiples of ten
 **Lesson ID:** `ma-g3-mathematics-u04-l12`  
 **Standards:** 3.OA.5, 3.OA.9, 3.NBT.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of explaining patterns using properties and multiples of ten using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply explaining patterns using properties and multiples of ten accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of explaining patterns using properties and multiples of ten, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on explaining patterns using properties and multiples of ten that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of explaining patterns using properties and multiples of ten in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on explaining patterns using properties and multiples of ten without help and record the reasoning that produced it.
 
 **Watch for:** Describes a table pattern by appearance only ('it goes up') without an arithmetic explanation.
 
@@ -917,7 +917,7 @@
 
 ### Day 2 (course day 74) - Concept build A: partitioning shapes into equal parts
 **Lesson ID:** `ma-g3-mathematics-u05-l02`  
-**Standards:** 3.G.2, 3.NF.1  
+**Standards:** 3.NF.1, 3.G.2  
 **Evidence type:** instruction  
 **Objective:** Build an accurate mental model of partitioning shapes into equal parts using a concrete or visual representation before any symbol work.
 
@@ -1023,27 +1023,27 @@
 
 **Watch for:** Counts tick marks instead of intervals when locating a fraction on a number line.
 
-### Day 11 (course day 83) - Applied problem solving: fractions of a whole in measurement and sharing contexts
+### Day 11 (course day 83) - Concept extension: fractions of a whole in measurement and sharing contexts
 **Lesson ID:** `ma-g3-mathematics-u05-l11`  
 **Standards:** 3.NF.1, 3.G.2  
-**Evidence type:** independent-evidence  
-**Objective:** Apply fractions of a whole in measurement and sharing contexts accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of fractions of a whole in measurement and sharing contexts using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on fractions of a whole in measurement and sharing contexts that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of fractions of a whole in measurement and sharing contexts, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on fractions of a whole in measurement and sharing contexts without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of fractions of a whole in measurement and sharing contexts in one response, and name the part that still feels unsteady.
 
 **Watch for:** Names a fraction without identifying the whole it refers to.
 
-### Day 12 (course day 84) - Concept extension: why the whole must always be identified
+### Day 12 (course day 84) - Applied problem solving: why the whole must always be identified
 **Lesson ID:** `ma-g3-mathematics-u05-l12`  
 **Standards:** 3.NF.1, MP.6  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of why the whole must always be identified using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply why the whole must always be identified accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of why the whole must always be identified, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on why the whole must always be identified that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of why the whole must always be identified in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on why the whole must always be identified without help and record the reasoning that produced it.
 
 **Watch for:** Names a fraction without identifying the whole it refers to.
 
@@ -1246,27 +1246,27 @@
 
 **Watch for:** Assumes a bigger denominator always means a bigger fraction.
 
-### Day 11 (course day 101) - Applied problem solving: comparing fractions with the same denominator
+### Day 11 (course day 101) - Concept extension: comparing fractions with the same denominator
 **Lesson ID:** `ma-g3-mathematics-u06-l11`  
 **Standards:** 3.NF.3  
-**Evidence type:** independent-evidence  
-**Objective:** Apply comparing fractions with the same denominator accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of comparing fractions with the same denominator using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on comparing fractions with the same denominator that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of comparing fractions with the same denominator, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on comparing fractions with the same denominator without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of comparing fractions with the same denominator in one response, and name the part that still feels unsteady.
 
 **Watch for:** Compares two fractions by looking only at numerators or only at denominators.
 
-### Day 12 (course day 102) - Concept extension: justifying a comparison with a model and a symbol
+### Day 12 (course day 102) - Applied problem solving: justifying a comparison with a model and a symbol
 **Lesson ID:** `ma-g3-mathematics-u06-l12`  
 **Standards:** 3.NF.3, MP.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of justifying a comparison with a model and a symbol using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply justifying a comparison with a model and a symbol accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of justifying a comparison with a model and a symbol, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on justifying a comparison with a model and a symbol that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of justifying a comparison with a model and a symbol in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on justifying a comparison with a model and a symbol without help and record the reasoning that produced it.
 
 **Watch for:** Compares two fractions by looking only at numerators or only at denominators.
 
@@ -1469,27 +1469,27 @@
 
 **Watch for:** Adds the numbers in a measurement problem without attending to the unit.
 
-### Day 11 (course day 119) - Applied problem solving: choosing a unit and estimating before measuring
+### Day 11 (course day 119) - Concept extension: choosing a unit and estimating before measuring
 **Lesson ID:** `ma-g3-mathematics-u07-l11`  
 **Standards:** 3.MD.2, MP.6  
-**Evidence type:** independent-evidence  
-**Objective:** Apply choosing a unit and estimating before measuring accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of choosing a unit and estimating before measuring using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on choosing a unit and estimating before measuring that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of choosing a unit and estimating before measuring, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on choosing a unit and estimating before measuring without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of choosing a unit and estimating before measuring in one response, and name the part that still feels unsteady.
 
 **Watch for:** Gives an estimate with no benchmark, producing an unreasonable value.
 
-### Day 12 (course day 120) - Concept extension: measurement problems solved by multiplication and division
+### Day 12 (course day 120) - Applied problem solving: measurement problems solved by multiplication and division
 **Lesson ID:** `ma-g3-mathematics-u07-l12`  
-**Standards:** 3.MD.2, 3.OA.3  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of measurement problems solved by multiplication and division using a concrete or visual representation before any symbol work.
+**Standards:** 3.OA.3, 3.MD.2  
+**Evidence type:** independent-evidence  
+**Objective:** Apply measurement problems solved by multiplication and division accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of measurement problems solved by multiplication and division, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on measurement problems solved by multiplication and division that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of measurement problems solved by multiplication and division in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on measurement problems solved by multiplication and division without help and record the reasoning that produced it.
 
 **Watch for:** Adds the numbers in a measurement problem without attending to the unit.
 
@@ -1610,7 +1610,7 @@
 
 ### Day 4 (course day 130) - Guided practice A: one- and two-step questions from a graph
 **Lesson ID:** `ma-g3-mathematics-u08-l04`  
-**Standards:** 3.MD.3, 3.OA.8  
+**Standards:** 3.OA.8, 3.MD.3  
 **Evidence type:** guided-practice  
 **Objective:** Practice one- and two-step questions from a graph with worked support, immediate feedback, and prompts that fade across the set.
 
@@ -1692,27 +1692,27 @@
 
 **Watch for:** Places a measurement at the nearest whole number on a line plot when it falls at a half or quarter mark.
 
-### Day 11 (course day 137) - Applied problem solving: comparing categories with two-step questions
+### Day 11 (course day 137) - Concept extension: comparing categories with two-step questions
 **Lesson ID:** `ma-g3-mathematics-u08-l11`  
-**Standards:** 3.MD.3, 3.OA.8  
-**Evidence type:** independent-evidence  
-**Objective:** Apply comparing categories with two-step questions accurately without prompting, on a task not yet worked together.
+**Standards:** 3.OA.8, 3.MD.3  
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of comparing categories with two-step questions using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on comparing categories with two-step questions that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of comparing categories with two-step questions, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on comparing categories with two-step questions without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of comparing categories with two-step questions in one response, and name the part that still feels unsteady.
 
 **Watch for:** Answers a 'how many more' question by reading only the taller bar.
 
-### Day 12 (course day 138) - Concept extension: choosing a representation that fits the question
+### Day 12 (course day 138) - Applied problem solving: choosing a representation that fits the question
 **Lesson ID:** `ma-g3-mathematics-u08-l12`  
 **Standards:** 3.MD.3, 3.MD.4, MP.4  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of choosing a representation that fits the question using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply choosing a representation that fits the question accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of choosing a representation that fits the question, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on choosing a representation that fits the question that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of choosing a representation that fits the question in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on choosing a representation that fits the question without help and record the reasoning that produced it.
 
 **Watch for:** Claims a graph proves something it does not show, such as a cause.
 
@@ -1893,7 +1893,7 @@
 
 ### Day 9 (course day 153) - Retrieval and fluency: products read as areas
 **Lesson ID:** `ma-g3-mathematics-u09-l09`  
-**Standards:** 3.MD.7, 3.OA.7  
+**Standards:** 3.OA.7, 3.MD.7  
 **Evidence type:** retrieval  
 **Objective:** Retrieve products read as areas from memory after a delay, without speed pressure or public comparison.
 
@@ -1915,27 +1915,27 @@
 
 **Watch for:** Confuses area with perimeter and adds side lengths when asked for area.
 
-### Day 11 (course day 155) - Applied problem solving: breaking a rectangle apart to show the distributive property
+### Day 11 (course day 155) - Concept extension: breaking a rectangle apart to show the distributive property
 **Lesson ID:** `ma-g3-mathematics-u09-l11`  
-**Standards:** 3.MD.7, 3.OA.5, MP.7  
-**Evidence type:** independent-evidence  
-**Objective:** Apply breaking a rectangle apart to show the distributive property accurately without prompting, on a task not yet worked together.
+**Standards:** 3.OA.5, 3.MD.7, MP.7  
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of breaking a rectangle apart to show the distributive property using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on breaking a rectangle apart to show the distributive property that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of breaking a rectangle apart to show the distributive property, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on breaking a rectangle apart to show the distributive property without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of breaking a rectangle apart to show the distributive property in one response, and name the part that still feels unsteady.
 
 **Watch for:** Splits a rectangle for the distributive property but multiplies the split parts together instead of adding the partial areas.
 
-### Day 12 (course day 156) - Concept extension: area of combined rectilinear figures
+### Day 12 (course day 156) - Applied problem solving: area of combined rectilinear figures
 **Lesson ID:** `ma-g3-mathematics-u09-l12`  
 **Standards:** 3.MD.7  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of area of combined rectilinear figures using a concrete or visual representation before any symbol work.
+**Evidence type:** independent-evidence  
+**Objective:** Apply area of combined rectilinear figures accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of area of combined rectilinear figures, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on area of combined rectilinear figures that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of area of combined rectilinear figures in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on area of combined rectilinear figures without help and record the reasoning that produced it.
 
 **Watch for:** Decomposes a rectilinear figure into overlapping rectangles and double-counts a region.
 
@@ -2128,7 +2128,7 @@
 
 ### Day 10 (course day 172) - Independent evidence B: partitioning shapes into parts with equal areas
 **Lesson ID:** `ma-g3-mathematics-u10-l10`  
-**Standards:** 3.G.2, 3.NF.1  
+**Standards:** 3.NF.1, 3.G.2  
 **Evidence type:** independent-evidence  
 **Objective:** Apply partitioning shapes into parts with equal areas accurately without prompting, on a task not yet worked together.
 
@@ -2138,27 +2138,27 @@
 
 **Watch for:** Partitions a shape into the right number of parts without equal areas and names them unit fractions.
 
-### Day 11 (course day 173) - Applied problem solving: design constraints that involve both perimeter and area
+### Day 11 (course day 173) - Concept extension: design constraints that involve both perimeter and area
 **Lesson ID:** `ma-g3-mathematics-u10-l11`  
 **Standards:** 3.MD.7, 3.MD.8  
-**Evidence type:** independent-evidence  
-**Objective:** Apply design constraints that involve both perimeter and area accurately without prompting, on a task not yet worked together.
+**Evidence type:** instruction  
+**Objective:** Build an accurate mental model of design constraints that involve both perimeter and area using a concrete or visual representation before any symbol work.
 
-**Student activity:** The learner independently completes a task on design constraints that involve both perimeter and area that was not worked together, and records the reasoning, model, or process that produced the result.
+**Student activity:** The learner works alongside the adult or tutor to build and label a model of design constraints that involve both perimeter and area, then writes the matching notation and explains how the two match.
 
-**Exit check:** Complete one item on design constraints that involve both perimeter and area without help and record the reasoning that produced it.
+**Exit check:** Show or explain the main idea of design constraints that involve both perimeter and area in one response, and name the part that still feels unsteady.
 
 **Watch for:** Assumes shapes with the same perimeter must have the same area.
 
-### Day 12 (course day 174) - Concept extension: connecting geometry, fractions, and measurement
+### Day 12 (course day 174) - Applied problem solving: connecting geometry, fractions, and measurement
 **Lesson ID:** `ma-g3-mathematics-u10-l12`  
-**Standards:** 3.G.2, 3.NF.1, 3.MD.7  
-**Evidence type:** instruction  
-**Objective:** Build an accurate mental model of connecting geometry, fractions, and measurement using a concrete or visual representation before any symbol work.
+**Standards:** 3.NF.1, 3.MD.7, 3.G.2  
+**Evidence type:** independent-evidence  
+**Objective:** Apply connecting geometry, fractions, and measurement accurately without prompting, on a task not yet worked together.
 
-**Student activity:** The learner works alongside the adult or tutor to build and label a model of connecting geometry, fractions, and measurement, then writes the matching notation and explains how the two match.
+**Student activity:** The learner independently completes a task on connecting geometry, fractions, and measurement that was not worked together, and records the reasoning, model, or process that produced the result.
 
-**Exit check:** Show or explain the main idea of connecting geometry, fractions, and measurement in one response, and name the part that still feels unsteady.
+**Exit check:** Complete one item on connecting geometry, fractions, and measurement without help and record the reasoning that produced it.
 
 **Watch for:** Partitions a shape into the right number of parts without equal areas and names them unit fractions.
 
@@ -2176,7 +2176,7 @@
 
 ### Day 14 (course day 176) - Performance task: build: the capstone design
 **Lesson ID:** `ma-g3-mathematics-u10-l14`  
-**Standards:** 3.MD.8, 3.MD.7, 3.G.1  
+**Standards:** 3.MD.7, 3.MD.8, 3.G.1  
 **Evidence type:** project  
 **Objective:** Apply the capstone design inside an extended task with a real purpose and stated success criteria.
 
@@ -2224,7 +2224,7 @@
 
 ### Day 18 (course day 180) - Transfer, reflection, and publication: perimeter, area, and shape classification in the completed design
 **Lesson ID:** `ma-g3-mathematics-u10-l18`  
-**Standards:** 3.G.1, 3.MD.8, MP.4  
+**Standards:** 3.MD.8, 3.G.1, MP.4  
 **Evidence type:** independent-evidence  
 **Objective:** Apply perimeter, area, and shape classification in the completed design accurately without prompting, on a task not yet worked together.
 

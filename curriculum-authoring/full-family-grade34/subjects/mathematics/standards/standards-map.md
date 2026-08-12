@@ -19,25 +19,25 @@ Verified domain ceilings: 3.G ends at 2, 3.MD ends at 8, 3.NBT ends at 3, 3.NF e
 | `3.MD.1` | Tell and write time to the nearest minute and solve word problems involving time intervals in minutes. | 7 | 11 | 1 |
 | `3.MD.2` | Measure and estimate liquid volumes and masses of objects using grams, kilograms, and liters, and solve one-step problems. | 7 | 14 | 3 |
 | `3.MD.3` | Draw scaled picture graphs and scaled bar graphs and solve one- and two-step problems using the information. | 8 | 15 | 3 |
-| `3.MD.4` | Generate measurement data by measuring lengths using rulers marked with halves and fourths of an inch and show the data on a line plot. | 8 | 9 | 1 |
+| `3.MD.4` | Generate measurement data by measuring lengths using rulers marked with halves and fourths of an inch and show the data on a line plot. | 8 | 9 | 2 |
 | `3.MD.5` | Recognize area as an attribute of plane figures and understand concepts of area measurement. | 9 | 5 | 1 |
 | `3.MD.6` | Measure areas by counting unit squares in square centimeters, square meters, square inches, square feet, and improvised units. | 9 | 5 | 1 |
 | `3.MD.7` | Relate area to the operations of multiplication and addition. | 9, 10 | 17 | 4 |
-| `3.MD.8` | Solve real-world and mathematical problems involving perimeters of polygons, including the relationship between perimeter and area. | 10 | 13 | 3 |
-| `3.NBT.1` | Use place-value understanding to round whole numbers to the nearest 10 or 100. | 1 | 11 | 2 |
+| `3.MD.8` | Solve real-world and mathematical problems involving perimeters of polygons, including the relationship between perimeter and area. | 10 | 13 | 2 |
+| `3.NBT.1` | Use place-value understanding to round whole numbers to the nearest 10 or 100. | 1 | 11 | 3 |
 | `3.NBT.2` | Fluently add and subtract within 1000 using strategies and algorithms based on place value and the relationship between addition and subtraction. | 1 | 12 | 2 |
 | `3.NBT.3` | Multiply one-digit whole numbers by multiples of 10 in the range 10 to 90. | 3, 4 | 5 | 1 |
-| `3.NF.1` | Understand 1/b as one part of a whole partitioned into b equal parts, and a/b as a parts of size 1/b. | 5, 6, 10 | 18 | 3 |
+| `3.NF.1` | Understand 1/b as one part of a whole partitioned into b equal parts, and a/b as a parts of size 1/b. | 5, 6, 10 | 18 | 4 |
 | `3.NF.2` | Understand a fraction as a number on the number line and represent fractions on a number-line diagram. | 5, 6 | 12 | 2 |
 | `3.NF.3` | Explain equivalence of fractions in special cases and compare fractions by reasoning about their size. | 6 | 18 | 4 |
 | `3.OA.1` | Interpret products of whole numbers, such as 5 x 7 as five groups of seven objects. | 2 | 12 | 1 |
 | `3.OA.2` | Interpret whole-number quotients as equal sharing or as equal grouping. | 2 | 10 | 1 |
 | `3.OA.3` | Use multiplication and division within 100 to solve word problems involving equal groups, arrays, and measurement quantities. | 2, 7 | 7 | 3 |
-| `3.OA.4` | Determine the unknown whole number in a multiplication or division equation. | 2, 3 | 3 | 2 |
-| `3.OA.5` | Apply properties of operations as strategies to multiply and divide; formal property names are not required. | 2, 3, 4, 9 | 15 | 3 |
-| `3.OA.6` | Understand division as an unknown-factor problem. | 2, 3 | 8 | 2 |
-| `3.OA.7` | Fluently multiply and divide within 100; know from memory all products of two one-digit numbers by the end of Grade 3. | 3, 4, 9 | 16 | 2 |
-| `3.OA.8` | Solve two-step word problems using the four operations and assess the reasonableness of answers. | 4, 8 | 18 | 4 |
+| `3.OA.4` | Determine the unknown whole number in a multiplication or division equation. | 2, 3 | 3 | 1 |
+| `3.OA.5` | Apply properties of operations as strategies to multiply and divide; formal property names are not required. | 3, 4, 9 | 14 | 2 |
+| `3.OA.6` | Understand division as an unknown-factor problem. | 2, 3 | 8 | 3 |
+| `3.OA.7` | Fluently multiply and divide within 100; know from memory all products of two one-digit numbers by the end of Grade 3. | 3, 4, 9 | 16 | 3 |
+| `3.OA.8` | Solve two-step word problems using the four operations and assess the reasonableness of answers. | 4, 8 | 18 | 3 |
 | `3.OA.9` | Identify and explain arithmetic patterns using properties of operations. | 4 | 6 | 1 |
 
 ### Verified sub-parts under Grade 3 parent codes
@@ -79,23 +79,23 @@ Verified domain ceilings: 4.G ends at 3, 4.MD ends at 7, 4.NBT ends at 6, 4.NF e
 
 | Code | Requirement | Units | Lessons | Independent-evidence lessons |
 | --- | --- | --- | --- | --- |
-| `4.G.1` | Draw points, lines, line segments, rays, angles, and perpendicular and parallel lines, and identify these in two-dimensional figures. | 10 | 3 | 1 |
-| `4.G.2` | Classify two-dimensional figures based on the presence of parallel or perpendicular lines or angles of a specified size. | 10 | 6 | 1 |
-| `4.G.3` | Recognize a line of symmetry for a two-dimensional figure, identify line-symmetric figures, and draw lines of symmetry. | 10 | 5 | 1 |
+| `4.G.1` | Draw points, lines, line segments, rays, angles, and perpendicular and parallel lines, and identify these in two-dimensional figures. | 10 | 4 | 1 |
+| `4.G.2` | Classify two-dimensional figures based on the presence of parallel or perpendicular lines or angles of a specified size. | 10 | 7 | 1 |
+| `4.G.3` | Recognize a line of symmetry for a two-dimensional figure, identify line-symmetric figures, and draw lines of symmetry. | 10 | 6 | 2 |
 | `4.MD.1` | Know relative sizes of measurement units within one system and express measurements in a larger unit in terms of a smaller unit. | 9 | 12 | 1 |
 | `4.MD.2` | Use the four operations to solve word problems involving distance, time, liquid volume, mass, and money, including simple fractions and decimals. | 7, 8, 9 | 8 | 3 |
-| `4.MD.3` | Apply the area and perimeter formulas for rectangles in real-world and mathematical problems. | 9 | 6 | 1 |
-| `4.MD.4` | Make a line plot to display a data set of measurements in fractions of a unit and solve problems using the line plot. | 9 | 5 | 1 |
+| `4.MD.3` | Apply the area and perimeter formulas for rectangles in real-world and mathematical problems. | 9 | 7 | 1 |
+| `4.MD.4` | Make a line plot to display a data set of measurements in fractions of a unit and solve problems using the line plot. | 9 | 6 | 1 |
 | `4.MD.5` | Recognize angles as geometric shapes formed wherever two rays share a common endpoint and understand concepts of angle measurement. | 10 | 5 | 1 |
 | `4.MD.6` | Measure angles in whole-number degrees using a protractor and sketch angles of a specified measure. | 10 | 8 | 1 |
 | `4.MD.7` | Recognize angle measure as additive and solve addition and subtraction problems to find unknown angles. | 10 | 6 | 1 |
 | `4.NBT.1` | Recognize that a digit in one place represents ten times what it represents in the place to its right. | 1, 2, 4 | 10 | 1 |
-| `4.NBT.2` | Read and write multi-digit whole numbers in numerals, number names, and expanded form, and compare them using >, =, and <. | 1 | 12 | 1 |
-| `4.NBT.3` | Use place-value understanding to round multi-digit whole numbers to any place. | 1, 2 | 10 | 4 |
-| `4.NBT.4` | Fluently add and subtract multi-digit whole numbers using the standard algorithm. | 2 | 15 | 1 |
-| `4.NBT.5` | Multiply a whole number of up to four digits by a one-digit number, and multiply two two-digit numbers, using place-value strategies. | 4 | 16 | 2 |
+| `4.NBT.2` | Read and write multi-digit whole numbers in numerals, number names, and expanded form, and compare them using >, =, and <. | 1 | 13 | 2 |
+| `4.NBT.3` | Use place-value understanding to round multi-digit whole numbers to any place. | 1, 2 | 9 | 3 |
+| `4.NBT.4` | Fluently add and subtract multi-digit whole numbers using the standard algorithm. | 2 | 15 | 2 |
+| `4.NBT.5` | Multiply a whole number of up to four digits by a one-digit number, and multiply two two-digit numbers, using place-value strategies. | 4 | 16 | 3 |
 | `4.NBT.6` | Find whole-number quotients and remainders with up to four-digit dividends and one-digit divisors using place-value strategies. | 5 | 13 | 2 |
-| `4.NF.1` | Explain why a/b equals (n x a)/(n x b) using visual fraction models and use the principle to generate equivalent fractions. | 6 | 13 | 1 |
+| `4.NF.1` | Explain why a/b equals (n x a)/(n x b) using visual fraction models and use the principle to generate equivalent fractions. | 6 | 13 | 2 |
 | `4.NF.2` | Compare two fractions with different numerators and different denominators using common denominators, common numerators, or benchmarks. | 6 | 11 | 3 |
 | `4.NF.3` | Understand a fraction a/b with a greater than 1 as a sum of fractions 1/b. | 7 | 13 | 1 |
 | `4.NF.4` | Apply and extend previous understandings of multiplication to multiply a fraction by a whole number. | 7 | 10 | 3 |
@@ -103,9 +103,9 @@ Verified domain ceilings: 4.G ends at 3, 4.MD ends at 7, 4.NBT ends at 6, 4.NF e
 | `4.NF.6` | Use decimal notation for fractions with denominators 10 or 100. | 8 | 12 | 3 |
 | `4.NF.7` | Compare two decimals to hundredths by reasoning about their size and record the result with >, =, or <. | 8 | 8 | 1 |
 | `4.OA.1` | Interpret a multiplication equation as a comparison, such as 35 = 5 x 7 meaning 35 is five times as many as seven. | 3 | 7 | 1 |
-| `4.OA.2` | Multiply or divide to solve word problems involving multiplicative comparison, distinguishing it from additive comparison. | 3, 4 | 9 | 2 |
-| `4.OA.3` | Solve multistep word problems with the four operations, including problems in which remainders must be interpreted, and assess reasonableness. | 2, 4, 5 | 25 | 7 |
-| `4.OA.4` | Find all factor pairs for a whole number from 1 to 100, recognize multiples, and determine whether a number is prime or composite. | 3 | 11 | 1 |
+| `4.OA.2` | Multiply or divide to solve word problems involving multiplicative comparison, distinguishing it from additive comparison. | 3, 4 | 9 | 1 |
+| `4.OA.3` | Solve multistep word problems with the four operations, including problems in which remainders must be interpreted, and assess reasonableness. | 2, 4, 5 | 23 | 7 |
+| `4.OA.4` | Find all factor pairs for a whole number from 1 to 100, recognize multiples, and determine whether a number is prime or composite. | 3 | 11 | 2 |
 | `4.OA.5` | Generate a number or shape pattern from a given rule and identify features of the pattern not explicit in the rule. | 3, 10 | 3 | 2 |
 
 ### Verified sub-parts under Grade 4 parent codes

@@ -42,8 +42,8 @@ Every unit runs the same 18-day arc, so learners and adults always know what kin
 | 8 | Error analysis and repair | Supported practice. Recorded as supported, not independent. |
 | 9 | Retrieval and fluency | Spaced recall without speed pressure. |
 | 10 | Independent evidence B | Unprompted evidence. Counts toward a mastery claim. |
-| 11 | Applied problem solving | Unprompted evidence. Counts toward a mastery claim. |
-| 12 | Concept extension | Teaching. No mastery claim is possible. |
+| 11 | Concept extension | Teaching. No mastery claim is possible. |
+| 12 | Applied problem solving | Unprompted evidence. Counts toward a mastery claim. |
 | 13 | Performance task: plan | Extended application with revision. |
 | 14 | Performance task: build | Extended application with revision. |
 | 15 | Synthesis and review | Spaced recall without speed pressure. |
@@ -66,7 +66,7 @@ Every unit runs the same 18-day arc, so learners and adults always know what kin
 | Unit | Title | Days | Standards | Performance task |
 | --- | --- | --- | --- | --- |
 | 1 | Mathematical Habits, Place Value, and Rounding | 18 | 3.NBT.1, 3.NBT.2, MP.1, MP.3, MP.4, MP.6, MP.7 | Build a Number Sense Toolkit poster: for each strategy, show a worked example, a model, and a check for reasonableness. |
-| 2 | Meanings of Multiplication and Division | 18 | 3.OA.1, 3.OA.2, 3.OA.3, 3.OA.4, 3.OA.5, 3.OA.6, MP.1, MP.3, MP.4, MP.6 | Curate an Equal Groups Museum: each exhibit pairs a model, a story problem, and the matching multiplication and division equations. |
+| 2 | Meanings of Multiplication and Division | 18 | 3.OA.1, 3.OA.2, 3.OA.3, 3.OA.4, 3.OA.6, MP.1, MP.3, MP.4, MP.6 | Curate an Equal Groups Museum: each exhibit pairs a model, a story problem, and the matching multiplication and division equations. |
 | 3 | Multiplication and Division Fluency Within 100 | 18 | 3.OA.4, 3.OA.5, 3.OA.6, 3.OA.7, 3.NBT.3, MP.1, MP.3, MP.4, MP.6, MP.7 | Design a fact-strategy deck: each card shows a fact, the strategy that unlocks it, a model, and a way to check. |
 | 4 | Properties, Patterns, and Two-Step Problems | 18 | 3.OA.5, 3.OA.7, 3.OA.8, 3.OA.9, 3.NBT.3, MP.1, MP.3, MP.4, MP.6 | Write and publish a two-step event problem set; each problem needs a model, an equation with a letter for the unknown, and a reasonableness check. |
 | 5 | Understanding Fractions as Numbers | 18 | 3.NF.1, 3.NF.2, 3.G.2, MP.1, MP.3, MP.4, MP.6 | Build a fraction number-line gallery showing unit fractions and non-unit fractions, each with visible evidence that the parts are equal. |

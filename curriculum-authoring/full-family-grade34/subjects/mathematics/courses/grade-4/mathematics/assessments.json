@@ -66,9 +66,9 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "4.NBT.3",
-          "MP.1",
-          "MP.3"
+          "4.NBT.1",
+          "4.NBT.2",
+          "4.NBT.3"
         ],
         "prompt": "Explain how the ten-times relationship between neighboring places makes both comparing and rounding multi-digit numbers possible."
       },
@@ -292,7 +292,7 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "4.OA.1",
+          "4.OA.4",
           "4.OA.5"
         ],
         "prompt": "Explain how the factor pairs of a number decide whether it is prime or composite, and how a rule-generated pattern can show a feature the rule never mentioned."
@@ -400,16 +400,13 @@
           "4.NBT.5",
           "MP.1"
         ],
-        "prompt": "A learner multiplied 38 x 52 by writing 3 x 5 = 15 and 8 x 2 = 16, and answered 1,516. Find the error, correct it, and explain why the correction works."
+        "prompt": "A learner multiplied 30 x 40 by writing 3 x 4 = 12 and then adding one zero, and answered 120. Find the error, correct it, and explain why the correction works."
       },
       {
         "type": "connection",
         "points": 4,
         "standards": [
-          "4.OA.3",
-          "4.NBT.1",
-          "4.NBT.5",
-          "MP.3"
+          "4.NBT.5"
         ],
         "prompt": "Explain how an area model and a written set of partial products record the same multiplication in two different ways."
       },
@@ -518,8 +515,8 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "4.NBT.6",
-          "MP.3"
+          "4.OA.3",
+          "4.NBT.6"
         ],
         "prompt": "Explain how multiplying the quotient by the divisor checks a division, and why the remainder has to be added back in."
       },
@@ -628,8 +625,7 @@
         "points": 4,
         "standards": [
           "4.NF.1",
-          "4.NF.2",
-          "MP.3"
+          "4.NF.2"
         ],
         "prompt": "Explain how generating an equivalent fraction is what makes it possible to compare two fractions with unlike denominators."
       },
@@ -738,8 +734,7 @@
         "points": 4,
         "standards": [
           "4.NF.3",
-          "4.NF.4",
-          "4.MD.2"
+          "4.NF.4"
         ],
         "prompt": "Explain how adding fractions with like denominators and multiplying a fraction by a whole number are both just counting unit fractions."
       },
@@ -849,7 +844,7 @@
         "points": 4,
         "standards": [
           "4.NF.5",
-          "4.NF.7"
+          "4.NF.6"
         ],
         "prompt": "Explain how a fraction with denominator 100 and a decimal written to hundredths describe the same amount."
       },
@@ -963,8 +958,8 @@
         "points": 4,
         "standards": [
           "4.MD.1",
-          "4.MD.4",
-          "MP.5"
+          "4.MD.2",
+          "4.MD.3"
         ],
         "prompt": "Explain why measurements have to be converted to a common unit before an area or perimeter formula can be applied to them."
       },
@@ -1080,8 +1075,8 @@
         "type": "connection",
         "points": 4,
         "standards": [
-          "4.OA.5",
           "4.MD.5",
+          "4.MD.6",
           "4.G.3"
         ],
         "prompt": "Explain how angle measure and line symmetry each describe something about a shape that side lengths alone cannot."
