@@ -64,6 +64,7 @@ export class ParentSessionController {
   #lastObservedAt: number | null = null
   #lastEndReason: ParentSessionEndReason = 'none'
   #authorityGeneration = 0
+  #endingAuthority = false
 
   constructor(options: ParentSessionControllerOptions) {
     this.#revocation = options.revocation
@@ -219,7 +220,9 @@ export class ParentSessionController {
    */
   #requireSettledLifecycle(): void {
     if (this.#lifecycle.failed) throw new Error('Parent lifecycle delivery failed closed.')
-    if (this.#lifecycle.pending) throw new Error('Parent lifecycle cleanup is pending.')
+    if (this.#endingAuthority || this.#lifecycle.pending) {
+      throw new Error('Parent lifecycle cleanup is pending.')
+    }
   }
 
   #end(
@@ -233,17 +236,42 @@ export class ParentSessionController {
     this.#lastObservedAt = null
     this.#lastEndReason = reason
     if (hadSession) {
-      for (const listener of [...this.#endListeners]) listener(reason)
-      if (emit && reason !== 'replaced') {
-        const type: SecurityLifecycleEventType = lifecycleType ?? (reason === 'global-revocation'
-          ? 'global-revocation'
-          : reason === 'parent-lock'
-            ? 'parent-lock'
-            : 'parent-session-expired')
-        void this.#emit(type, occurredAt)
+      // The whole transition is closed to replacement authority before any
+      // public subscriber runs. `replaced` carries no cleanup of its own, so it
+      // must not arm the queue — the flag is what denies reentrancy there.
+      this.#endingAuthority = true
+      try {
+        if (emit && reason !== 'replaced') {
+          const type: SecurityLifecycleEventType = lifecycleType ?? (reason === 'global-revocation'
+            ? 'global-revocation'
+            : reason === 'parent-lock'
+              ? 'parent-lock'
+              : 'parent-session-expired')
+          void this.#emit(type, occurredAt)
+        }
+        this.#notifyEnded(reason)
+      } finally {
+        this.#endingAuthority = false
       }
     }
     return Object.freeze({ status: 'ended', reason })
+  }
+
+  /**
+   * Each subscriber is isolated. A throwing listener must not stop the ones
+   * after it, abandon the already-armed cleanup, or escape into `recheck()` and
+   * `close()`, whose callers rely on them not throwing. Containment matches the
+   * revocation coordinator's fan-out: a failed observer is not a failed
+   * cleanup, so it does not latch the terminal delivery failure.
+   */
+  #notifyEnded(reason: ParentSessionEndReason): void {
+    for (const listener of [...this.#endListeners]) {
+      try {
+        listener(reason)
+      } catch {
+        // Subscribers own their own recovery; the security transition continues.
+      }
+    }
   }
 
   #emit(type: SecurityLifecycleEventType, occurredAt?: number): Promise<boolean> {

@@ -89,10 +89,22 @@ interface LearnerSessionOwnershipLease {
   release(): Promise<void>
 }
 
+/**
+ * One textual form for text the case-insensitive UUIDv4 contract already
+ * accepted. Equivalent session text must resolve to one ownership lock name,
+ * one owner, and one persisted identity; no version or variant rule moves.
+ */
+function canonicalLearnerSessionId(sessionId: string): LocalSessionId {
+  return sessionId.toLowerCase() as LocalSessionId
+}
+
 function parseLearnerSessionRecord(value: unknown): ParsedLearnerSession | null {
   if (!isPlainRecord(value) || !hasExactKeys(value, LEARNER_SESSION_KEYS)) return null
   if (value.schemaVersion !== LOCAL_SESSION_SCHEMA_VERSION) return null
-  if (!isUuidV4(value.sessionId)) return null
+  // Read once so a hostile accessor cannot pass validation and then supply
+  // different text for the lock name.
+  const sessionId = value.sessionId
+  if (!isUuidV4(sessionId)) return null
   const profileId = parseProfileId(value.profileId)
   if (!profileId) return null
   if (!Number.isSafeInteger(value.globalRevocationEpoch) || Number(value.globalRevocationEpoch) < 0) return null
@@ -103,7 +115,11 @@ function parseLearnerSessionRecord(value: unknown): ParsedLearnerSession | null 
   if (lastMeaningfulActivityAt < authenticatedAt || lastMeaningfulActivityAt > absoluteExpiresAt) return null
   if (absoluteExpiresAt !== authenticatedAt + SECURITY_SESSION_POLICY.learner.absoluteTimeoutMs) return null
   return {
-    record: Object.freeze({ ...value, profileId }) as unknown as LearnerSessionRecord,
+    record: Object.freeze({
+      ...value,
+      sessionId: canonicalLearnerSessionId(sessionId),
+      profileId,
+    }) as unknown as LearnerSessionRecord,
     authenticatedAt,
     lastMeaningfulActivityAt,
     absoluteExpiresAt,
@@ -120,7 +136,7 @@ export function deserializeLearnerSessionRecord(serialized: string): LearnerSess
 
 export function learnerSessionOwnershipLockName(sessionId: LocalSessionId): string {
   if (!isUuidV4(sessionId)) throw new Error('Learner session ID is invalid.')
-  return `${LEARNER_SESSION_OWNER_LOCK_PREFIX}${sessionId}`
+  return `${LEARNER_SESSION_OWNER_LOCK_PREFIX}${canonicalLearnerSessionId(sessionId)}`
 }
 
 async function acquireLearnerSessionOwnership(
@@ -231,7 +247,7 @@ export class LearnerSessionController {
           true,
           notice ? parseCanonicalTimestamp(notice.occurredAt) ?? undefined : undefined,
           notice?.cause ?? 'global-revocation',
-          this.#claimTerminalLifecycleDelivery(notice),
+          { exhausted: true, notice },
         )
         await this.#lifecycle.whenIdle()
       } else {
@@ -239,9 +255,15 @@ export class LearnerSessionController {
       }
       throw new Error('Global revocation authority is exhausted.')
     }
+    if (this.#session) {
+      // Replacing a live learner is a reviewed transition, not a fresh
+      // authentication: `transitionLearnerAccess` must end the previous learner
+      // — with its cancellation and revocation — before create() may run.
+      throw new Error('An active learner session must end before a new one is created.')
+    }
     await this.clearLocal()
     await this.#lifecycle.requireClean()
-    const sessionId = createLocalSessionId(this.#randomUUID)
+    const sessionId = canonicalLearnerSessionId(createLocalSessionId(this.#randomUUID))
     if (!await this.#claimOwnership(sessionId)) {
       if (this.#lifecycle.failed) await this.#lifecycle.requireClean()
       if (this.#terminalRevocation?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
@@ -325,7 +347,7 @@ export class LearnerSessionController {
         true,
         notice ? parseCanonicalTimestamp(notice.occurredAt) ?? undefined : undefined,
         notice?.cause ?? 'global-revocation',
-        this.#claimTerminalLifecycleDelivery(notice),
+        { exhausted: true, notice },
       )
       await this.#lifecycle.whenIdle()
       return this.#lifecycle.failed
@@ -367,7 +389,7 @@ export class LearnerSessionController {
           true,
           parseCanonicalTimestamp(terminal.occurredAt) ?? undefined,
           terminal.cause,
-          this.#claimTerminalLifecycleDelivery(terminal),
+          { exhausted: true, notice: terminal },
         )
         await this.#lifecycle.whenIdle()
         return this.#lifecycle.failed
@@ -426,9 +448,7 @@ export class LearnerSessionController {
         true,
         occurredAt,
         exactNotice?.cause ?? 'global-revocation',
-        exhausted
-          ? this.#claimTerminalLifecycleDelivery(exactNotice)
-          : !this.#isTerminalLifecycleCovered(exactNotice),
+        { exhausted, notice: exactNotice },
       )
     }
     if (now >= parsed.absoluteExpiresAt) return this.#end('absolute-expired', true, now)
@@ -556,18 +576,19 @@ export class LearnerSessionController {
     remove = true,
     occurredAt?: number,
     lifecycleType?: SecurityLifecycleEventType,
-    emit = true,
+    revocation?: Readonly<{
+      exhausted: boolean
+      notice: GlobalRevocationNotice | null | undefined
+    }>,
   ): LearnerSessionCheck {
     if (remove) safeRemove(this.#storage, LEARNER_SESSION_STORAGE_KEY)
-    const shouldEmit = emit && reason !== 'none' && (
-      this.#session !== null || this.#lastEndReason !== reason
-    )
+    const repeatsLastEnd = this.#session === null && this.#lastEndReason === reason
     this.#session = null
     this.#lastObservedAt = null
     this.#lastStorageWriteAt = null
     this.#lastEndReason = reason
     void this.#releaseOwnership()
-    if (shouldEmit) {
+    if (reason !== 'none') {
       const type = lifecycleType ?? (
         reason === 'idle-expired' || reason === 'absolute-expired'
           ? 'learner-session-expired'
@@ -575,7 +596,17 @@ export class LearnerSessionController {
             ? 'global-revocation'
             : 'provenance-loss'
       )
-      void this.#emit(type, occurredAt)
+      if (revocation?.exhausted) {
+        // Terminal delivery is governed only by the controller-lifetime latch,
+        // and the latch is claimed on the same branch that emits. Claiming it
+        // as an argument — before the checks below — could consume the single
+        // terminal notification on a path that then delivered nothing at all.
+        if (this.#claimTerminalLifecycleDelivery(revocation.notice)) {
+          void this.#emit(type, occurredAt)
+        }
+      } else if (!repeatsLastEnd && !this.#isTerminalLifecycleCovered(revocation?.notice)) {
+        void this.#emit(type, occurredAt)
+      }
     }
     return Object.freeze({ status: 'ended', reason })
   }
@@ -683,9 +714,7 @@ export class LearnerSessionController {
       true,
       occurredAt,
       notice.cause,
-      terminal
-        ? this.#claimTerminalLifecycleDelivery(notice)
-        : !this.#isTerminalLifecycleCovered(notice),
+      { exhausted: terminal, notice },
     )
     if (terminal) await this.#whenAuthorityIdle()
     await this.#whenOwnershipReleased()

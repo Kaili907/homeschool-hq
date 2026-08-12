@@ -1,6 +1,14 @@
 import { describe, expect, it, vi } from 'vitest'
+import {
+  SECURITY_LIFECYCLE_EVENT_TYPES,
+  type SecurityLifecycleEventType,
+} from '../contracts/lifecycle'
 import { parseProfileId } from '../contracts/profileId'
 import { createLocalSessionId } from '../contracts/sessions'
+import {
+  STUDY_BRIDGE_EVENT_MAP,
+  studyCancellationReasonFor,
+} from '../contracts/studyBridge'
 import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecycle'
 import { SerializedLifecycleDelivery, type SecurityLifecycleSink } from './lifecycleDelivery'
 import {
@@ -107,6 +115,48 @@ describe('safe Study Bridge compatibility', () => {
       'cancel-start:learner-switch',
       'cancel-done:learner-switch',
     ])
+  })
+
+  it('fails closed on prototype key names instead of reaching Study with a Function', async () => {
+    for (const inherited of [
+      'toString',
+      'constructor',
+      'valueOf',
+      'hasOwnProperty',
+      'isPrototypeOf',
+      '__proto__',
+    ]) {
+      const received: unknown[] = []
+      await expect(cancelStudyForSecurityLifecycleEvent(
+        {
+          type: inherited as SecurityLifecycleEventType,
+          occurredAt: '2026-08-09T12:01:00.000Z',
+        },
+        { cancel: (reason) => { received.push(reason) } },
+      )).resolves.toBe('authorization-loss')
+
+      expect(received).toEqual(['authorization-loss'])
+      expect(typeof received[0]).toBe('string')
+    }
+  })
+
+  it('resolves prototype key names to undefined on the contract map itself', () => {
+    for (const inherited of [
+      'toString',
+      'constructor',
+      'valueOf',
+      'hasOwnProperty',
+      'isPrototypeOf',
+      '__proto__',
+    ]) {
+      expect(STUDY_BRIDGE_EVENT_MAP[inherited as SecurityLifecycleEventType]).toBeUndefined()
+      expect(studyCancellationReasonFor(inherited as SecurityLifecycleEventType)).toBeUndefined()
+    }
+    // Every legitimate mapping survives.
+    for (const type of SECURITY_LIFECYCLE_EVENT_TYPES) {
+      expect(studyCancellationReasonFor(type)).toBe(STUDY_BRIDGE_EVENT_MAP[type])
+    }
+    expect(Object.keys(STUDY_BRIDGE_EVENT_MAP)).toEqual([...SECURITY_LIFECYCLE_EVENT_TYPES])
   })
 
   it('preserves learner Study across Parent lock per the safe bridge contract', async () => {

@@ -190,6 +190,27 @@ describe('composed initiating lifecycle barrier', () => {
     await closeRuntime(runtime)
   })
 
+  it('refuses a direct create() over the live learner and admits it after the reviewed switch', async () => {
+    const runtime = await setupRuntime()
+    expect(runtime.session.session).toMatchObject({ profileId: 'p1' })
+    const serialized = runtime.sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)
+
+    // create() is not a switch: it may not quietly retire live learner authority.
+    await expect(runtime.session.create(P2)).rejects.toThrow('An active learner session must end')
+    expect(runtime.session.session).toMatchObject({ profileId: 'p1' })
+    expect(runtime.sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBe(serialized)
+    expect(runtime.lifecycleEvents).toEqual([])
+    expect(runtime.trace).toEqual([])
+
+    // The reviewed path ends the previous learner, with cancellation and revocation.
+    const { execution } = await beginSwitch(runtime)
+    runtime.cleanup.resolve()
+    await execution
+    await expect(runtime.session.create(P2)).resolves.toMatchObject({ profileId: 'p2' })
+    expect(runtime.lifecycleEvents).toEqual(['learner-switch-start', 'learner-authenticated'])
+    await closeRuntime(runtime)
+  })
+
   it('blocks restore while the real switch cleanup is pending', async () => {
     const runtime = await setupRuntime()
     const { execution } = await beginSwitch(runtime)

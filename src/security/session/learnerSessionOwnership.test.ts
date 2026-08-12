@@ -6,6 +6,7 @@ import type {
 } from './revocation'
 import {
   LearnerSessionController,
+  LEARNER_SESSION_OWNER_LOCK_PREFIX,
   LEARNER_SESSION_STORAGE_KEY,
   learnerSessionOwnershipLockName,
   type LearnerSessionOwnershipLock,
@@ -70,6 +71,7 @@ function controller(options: {
   storage?: MemoryStorage
   locks?: ExclusiveOwnershipLocks
   now?: () => number
+  randomUUID?: () => string
   lifecycle?: (event: { readonly type: string; readonly occurredAt: string }) => void | Promise<unknown>
 } = {}) {
   return new LearnerSessionController({
@@ -77,7 +79,7 @@ function controller(options: {
     revocation: new StableRevocation(),
     ownershipLockManager: options.locks,
     clock: options.now ?? (() => START),
-    randomUUID: () => UUID_A,
+    randomUUID: options.randomUUID ?? (() => UUID_A),
     onLifecycleEvent: options.lifecycle,
   })
 }
@@ -164,6 +166,81 @@ describe('exclusive learner-session tab ownership', () => {
     expect(locks.isHeld(closingLock)).toBe(false)
     await session.close()
     await expiring.close()
+  })
+
+  it('gives a case-modified copy of the same session ID the same ownership identity', async () => {
+    const locks = new ExclusiveOwnershipLocks()
+    const storage = new MemoryStorage()
+    const holder = controller({ storage, locks })
+    const record = await holder.create(P1)
+    const canonicalLock = learnerSessionOwnershipLockName(record.sessionId)
+    expect(locks.isHeld(canonicalLock)).toBe(true)
+
+    const copied = JSON.parse(storage.getItem(LEARNER_SESSION_STORAGE_KEY)!)
+    copied.sessionId = String(copied.sessionId).toUpperCase()
+    expect(copied.sessionId).not.toBe(record.sessionId)
+    expect(learnerSessionOwnershipLockName(copied.sessionId)).toBe(canonicalLock)
+
+    const copiedStorage = new MemoryStorage()
+    copiedStorage.setItem(LEARNER_SESSION_STORAGE_KEY, JSON.stringify(copied))
+    const contender = controller({ storage: copiedStorage, locks })
+
+    // Upper-case hex is the same UUID, so it must not mint a second owner.
+    await expect(contender.restore()).resolves.toEqual({
+      status: 'ended',
+      reason: 'ownership-conflict',
+    })
+    expect(holder.recheck()).toEqual({ status: 'active', session: record })
+
+    await holder.close()
+    await contender.close()
+  })
+
+  it('canonicalizes an ingested session ID so the restored identity is canonical', async () => {
+    const locks = new ExclusiveOwnershipLocks()
+    const seedStorage = new MemoryStorage()
+    const seed = controller({ storage: seedStorage, locks })
+    const record = await seed.create(P1)
+    await seed.close()
+
+    const upperCased = JSON.parse(seedStorage.getItem(LEARNER_SESSION_STORAGE_KEY)!)
+    upperCased.sessionId = String(upperCased.sessionId).toUpperCase()
+    const storage = new MemoryStorage()
+    storage.setItem(LEARNER_SESSION_STORAGE_KEY, JSON.stringify(upperCased))
+
+    const restored = controller({ storage, locks })
+    await expect(restored.restore()).resolves.toEqual({ status: 'active', session: record })
+    expect(restored.session?.sessionId).toBe(record.sessionId)
+    await restored.close()
+  })
+
+  it('canonicalizes a noncanonical generated session ID before it owns anything', async () => {
+    const locks = new ExclusiveOwnershipLocks()
+    const upperCasing = controller({ locks, randomUUID: () => UUID_A.toUpperCase() })
+    const record = await upperCasing.create(P1)
+
+    expect(record.sessionId).toBe(UUID_A)
+    expect(locks.isHeld(`${LEARNER_SESSION_OWNER_LOCK_PREFIX}${UUID_A}`)).toBe(true)
+    await upperCasing.close()
+  })
+
+  it('refuses create() while a learner session is already active', async () => {
+    const locks = new ExclusiveOwnershipLocks()
+    const storage = new MemoryStorage()
+    const session = controller({ storage, locks })
+    const first = await session.create(P1)
+    const serialized = storage.getItem(LEARNER_SESSION_STORAGE_KEY)
+
+    await expect(session.create(parseProfileId('p2')!))
+      .rejects.toThrow('An active learner session must end')
+
+    // No silent replacement: record, storage and ownership are all untouched.
+    expect(session.session).toEqual(first)
+    expect(session.recheck()).toEqual({ status: 'active', session: first })
+    expect(storage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBe(serialized)
+    expect(locks.isHeld(learnerSessionOwnershipLockName(first.sessionId))).toBe(true)
+
+    await session.close()
   })
 
   it('fails closed when Web Locks are unavailable and rejects noncanonical IDs', async () => {

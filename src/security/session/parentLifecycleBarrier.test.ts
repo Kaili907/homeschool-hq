@@ -238,6 +238,105 @@ describe('Parent authority lifecycle barrier', () => {
     runtime.close()
   })
 
+  it('arms the cleanup barrier before any end subscriber runs', () => {
+    const runtime = setupParentRuntime()
+    runtime.parent.create('parent-a', 'household-a')
+
+    let pendingInsideCallback: boolean | null = null
+    let reentrantCreate = 'not-attempted'
+    runtime.parent.subscribeEnded(() => {
+      pendingInsideCallback = runtime.parent.lifecycleCleanupPending
+      try {
+        runtime.parent.create('parent-b', 'household-b')
+        reentrantCreate = 'allowed'
+      } catch (error) {
+        reentrantCreate = (error as Error).message
+      }
+    })
+
+    runtime.parent.lock()
+
+    expect(pendingInsideCallback).toBe(true)
+    expect(reentrantCreate).toBe('Parent lifecycle cleanup is pending.')
+    expect(runtime.parent.session).toBeNull()
+    runtime.cleanup.resolve()
+    runtime.close()
+  })
+
+  it('denies a reentrant create() from a subscriber on the replacement transition too', () => {
+    const runtime = setupParentRuntime()
+    runtime.parent.create('parent-a', 'household-a')
+
+    let reentrantCreate = 'not-attempted'
+    runtime.parent.subscribeEnded(() => {
+      try {
+        runtime.parent.create('parent-c', 'household-c')
+        reentrantCreate = 'allowed'
+      } catch (error) {
+        reentrantCreate = (error as Error).message
+      }
+    })
+
+    // The replacement transition emits no lifecycle event, so the queue alone
+    // cannot deny reentrancy here.
+    const replacement = runtime.parent.create('parent-b', 'household-b')
+
+    expect(reentrantCreate).toBe('Parent lifecycle cleanup is pending.')
+    expect(runtime.parent.session).toBe(replacement)
+    expect(replacement.verifiedParentActorId).toBe('parent-b')
+    runtime.close()
+  })
+
+  it('contains a throwing end subscriber without abandoning cleanup', async () => {
+    const runtime = setupParentRuntime()
+    const observed: string[] = []
+    runtime.parent.subscribeEnded(() => {
+      observed.push('A')
+      throw new Error('subscriber exploded')
+    })
+    runtime.parent.subscribeEnded(() => { observed.push('B') })
+    runtime.parent.create('parent-a', 'household-a')
+    runtime.stepUp.issue('replace-dataset:operation-1')
+
+    expect(() => runtime.parent.lock()).not.toThrow()
+
+    // A throwing listener stops neither the later listeners nor the barrier.
+    expect(observed).toEqual(['A', 'B'])
+    expect(runtime.parent.session).toBeNull()
+    expect(runtime.parent.lifecycleCleanupPending).toBe(true)
+    expect(runtime.stepUp.grant).toBeNull()
+    expect(() => runtime.parent.create('parent-b', 'household-b'))
+      .toThrow('Parent lifecycle cleanup is pending')
+
+    await vi.waitFor(() => expect(runtime.lifecycleEvents).toEqual(['parent-lock']))
+    runtime.cleanup.resolve()
+    await runtime.parent.whenLifecycleIdle()
+
+    // Legitimate re-authentication is available only once cleanup succeeded.
+    expect(runtime.parent.create('parent-b', 'household-b')).toMatchObject({
+      verifiedParentActorId: 'parent-b',
+    })
+    runtime.close()
+  })
+
+  it('keeps cleanup failure terminal even when an end subscriber threw', async () => {
+    const runtime = setupParentRuntime()
+    runtime.parent.subscribeEnded(() => { throw new Error('subscriber exploded') })
+    runtime.parent.create('parent-a', 'household-a')
+
+    expect(() => runtime.parent.lock()).not.toThrow()
+    await vi.waitFor(() => expect(runtime.lifecycleEvents).toEqual(['parent-lock']))
+
+    runtime.cleanup.reject(new Error('Study cancellation failed'))
+    await runtime.parent.whenLifecycleIdle()
+
+    expect(runtime.parent.lifecycleDeliveryFailed).toBe(true)
+    expect(() => runtime.parent.create('parent-b', 'household-b'))
+      .toThrow('Parent lifecycle delivery failed closed')
+    expect(runtime.parent.recheck()).toEqual({ status: 'ended', reason: 'lifecycle-failed' })
+    runtime.close()
+  })
+
   it('never lets a replacement Parent session inherit a prior grant', async () => {
     const runtime = setupParentRuntime()
     const first = runtime.parent.create('parent-a', 'household-a')
