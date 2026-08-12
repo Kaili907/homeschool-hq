@@ -4,29 +4,28 @@ import type {
   LessonContentBlock,
   LessonProductionInput,
 } from '../../../../src/curriculum/production-quality/index.ts'
-import { AUTHORED_COURSES, loadCourseLessons } from '../src/inventory.ts'
+import { RELEASED_COURSES, loadCourseLessons } from '../src/inventory.ts'
 
 const block = (text: string): LessonContentBlock => ({ present: true, text })
 
 /**
- * The single scoring string the source repeats verbatim for every lesson in
- * every RFL/FinLit course. It is read from source rather than pasted, so this
- * test keeps describing reality if the source text ever changes.
+ * The single scoring string the released source repeats verbatim for every
+ * lesson. Read from source rather than pasted, so this keeps describing
+ * reality if the source text ever changes.
  */
 function genericScoringGuidance(): string {
-  const course = AUTHORED_COURSES.find(
+  const course = RELEASED_COURSES.find(
     (c) => c.grade === 5 && c.subject === 'financial-literacy',
   )!
-  const lessons = loadCourseLessons(course)!
-  return lessons[0].answer_or_scoring_guidance as string
+  return loadCourseLessons(course)![0].answer_or_scoring_guidance as string
 }
 
 /**
- * Prose blocks are all comfortably above the 25-word specificity floor, so
- * the word-count heuristic is held constant and the only variable under test
- * is the scoring authority itself.
+ * Every prose block sits comfortably above the 25-word specificity floor, so
+ * the word-count heuristic is held constant and the scoring authority is the
+ * only variable under test.
  */
-function finLitLessonWith(scoringContent: string): LessonProductionInput {
+function finLitLessonWith(scoringAuthority: LessonProductionInput['scoringAuthority']): LessonProductionInput {
   return {
     lessonId: 'blind-spot-probe',
     title: 'Budget basics',
@@ -45,7 +44,7 @@ function finLitLessonWith(scoringContent: string): LessonProductionInput {
     independentWork: block(
       'The learner builds an entirely new fictional monthly budget from a given income figure and records the explicit reasoning behind every single category allocation decision, then checks the totals once before submitting it.',
     ),
-    scoringAuthority: { kind: 'ANSWER_KEY', content: block(scoringContent) },
+    scoringAuthority,
     remediation: block(
       'Reteach by reducing the problem to only two spending categories and rebuilding the subtraction sequence one step at a time until the running balance is correct, then gradually restore the other categories.',
     ),
@@ -56,56 +55,68 @@ function finLitLessonWith(scoringContent: string): LessonProductionInput {
   } as LessonProductionInput
 }
 
-describe('the source carries no per-lesson answer content', () => {
-  it('repeats one identical scoring string for every lesson, with no numbers in it', () => {
+describe('the released source carries no per-lesson answer content', () => {
+  it('repeats one identical scoring string per course, with no numbers in it', () => {
     const guidance = genericScoringGuidance()
     expect(guidance).not.toMatch(/\d/)
 
-    for (const course of AUTHORED_COURSES.filter((c) => c.ref === null)) {
+    for (const course of RELEASED_COURSES.filter((c) => c.ref === null)) {
       const lessons = loadCourseLessons(course)!
       const distinct = new Set(lessons.map((l) => l.answer_or_scoring_guidance))
-      expect(
-        distinct.size,
-        `grade-${course.grade}/${course.subject} should carry exactly one scoring string`,
-      ).toBe(1)
+      expect(distinct.size, `grade-${course.grade}/${course.subject}`).toBe(1)
       expect(distinct.has(guidance)).toBe(true)
     }
   })
 })
 
 /**
- * KNOWN GAP — this is a characterization test, not an endorsement.
+ * KNOWN GAP — characterization tests, not an endorsement.
  *
- * evaluateLessonProductionReadiness requires MATH_STRUCTURED_FINLIT lessons to
- * carry a fixed ANSWER_KEY, but it only checks that the block is present and
- * clears the specificity heuristic. It never checks that an answer exists. So
- * the generic scoring boilerplate above — which contains no answer to anything
- * and is byte-identical across all 396 authored lessons — satisfies the gate.
+ * For MATH_STRUCTURED_FINLIT the gate requires a fixed ANSWER_KEY, but the
+ * only checks it performs are `authority.kind === 'ANSWER_KEY'` and
+ * `isSubstantive(authority.content)` — and isSubstantive tests `present === true`
+ * WITHOUT looking at `text`. The specificity heuristic in specificity.ts is
+ * applied to instruction, workedExample, guidedPractice and independentWork,
+ * and to nothing else, so it never runs on the answer key at all.
  *
- * Consequence: a mechanically mass-generated corpus can report
- * QUALITY_GATE: READY while shipping no real answer keys at all. Passing this
- * gate is therefore necessary but NOT sufficient evidence of FinLit production
- * readiness, and this test exists so that stops being an invisible assumption.
+ * Net effect: the gate's answer-key requirement reduces to "a boolean is true
+ * and a label reads ANSWER_KEY". A mass-generated corpus can report
+ * QUALITY_GATE: READY while containing no answer to any question. Passing this
+ * gate is necessary but NOT sufficient evidence of FinLit readiness.
  *
- * If the gate is later hardened to require genuine answer content, this test
- * should be updated to expect the rejection — the change would be a fix.
+ * When the gate is hardened, these expectations should flip to rejection.
  */
-describe('KNOWN GAP: the gate accepts generic boilerplate as a fixed answer key', () => {
-  it('returns READY for a FinLit lesson whose answer key contains no answers', () => {
-    const result = evaluateLessonProductionReadiness(finLitLessonWith(genericScoringGuidance()))
-
+describe('KNOWN GAP: the gate never inspects answer-key content', () => {
+  it.each([
+    ['the generic source boilerplate', () => block(genericScoringGuidance())],
+    ['a placeholder string', () => block('TODO')],
+    ['arithmetic that is simply wrong', () => block('The answer is 2 + 2 = 5')],
+    ['an empty string', () => block('')],
+    ['a block with no text at all', () => ({ present: true }) as LessonContentBlock],
+  ])('returns READY when the answer key is %s', (_label, makeContent) => {
+    const result = evaluateLessonProductionReadiness(
+      finLitLessonWith({ kind: 'ANSWER_KEY', content: makeContent() }),
+    )
     expect(result.status).toBe('READY')
     expect(result.notes).toEqual([])
-    expect(result.codes).toContain('READY')
   })
 
-  it('still rejects a FinLit lesson that declares a rubric instead of an answer key', () => {
+  it('proves the specificity heuristic is live elsewhere, so its absence here is a real gap', () => {
     const lesson = {
-      ...finLitLessonWith(genericScoringGuidance()),
-      scoringAuthority: { kind: 'RUBRIC', content: block(genericScoringGuidance()) },
+      ...finLitLessonWith({ kind: 'ANSWER_KEY', content: block(genericScoringGuidance()) }),
+      // Same boilerplate, moved into a field the heuristic DOES cover.
+      independentWork: block('Review the key concepts from this unit.'),
     } as LessonProductionInput
 
     const result = evaluateLessonProductionReadiness(lesson)
+    expect(result.status).toBe('NEEDS_HUMAN_REVIEW')
+    expect(result.notes.join(' ')).toContain('independent work')
+  })
+
+  it('still rejects a FinLit lesson that declares a rubric instead of an answer key', () => {
+    const result = evaluateLessonProductionReadiness(
+      finLitLessonWith({ kind: 'RUBRIC', content: block(genericScoringGuidance()) }),
+    )
     expect(result.status).toBe('NOT_READY')
     expect(result.codes).toContain('MISSING_ANSWER_KEY')
   })
