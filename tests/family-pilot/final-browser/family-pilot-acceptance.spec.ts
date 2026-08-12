@@ -1,42 +1,33 @@
 import { expect, test, type Locator, type Page } from '@playwright/test'
 import { defaultAppState } from '../../../src/migration'
 import { APP_STATE_STORAGE_KEY } from '../../../src/sync/provenance'
-import {
-  createInitialSafetyState,
-  createSafetyHold,
-  serializeSafetyState,
-} from '../../../src/study/family-pilot/safety'
 
-// FAMILY-PILOT-FINAL-BROWSER-ACCEPTANCE-R1: the real first pilot flow, driven
+// FAMILY-PILOT-FINAL-BROWSER-ACCEPTANCE-R2: the real first pilot flow, driven
 // through the actual rendered app (no component mocking), against the Vite
 // dev server with VITE_FAMILY_PILOT_ENABLED=true — see playwright.family-pilot.config.ts
 // for why this must be dev, not a production build.
 //
-// Two storage keys are seeded directly rather than clicked through:
+// One storage key is seeded directly rather than clicked through:
 //
-//   1. homeschool-hq:app:v2 — the outer app's persisted profile. App.tsx only
-//      honours the /family-pilot deep link when a profile already exists
-//      (src/App.tsx: `familyPilotEnabled && bootProfile && isFamilyPilotPath(...)`).
-//      This is infrastructure, not a Family Pilot feature; every existing
-//      route-lifecycle test (src/App.familyPilotRouteLifecycle.test.tsx) seeds
-//      it the same way, via the same exported `defaultAppState`.
+//   homeschool-hq:app:v2 — the outer app's persisted profile. App.tsx only
+//   honours the /family-pilot deep link when a profile already exists
+//   (src/App.tsx: `familyPilotEnabled && bootProfile && isFamilyPilotPath(...)`).
+//   This is outer-app infrastructure, not a Family Pilot feature; every
+//   existing route-lifecycle test (src/App.familyPilotRouteLifecycle.test.tsx)
+//   seeds it the same way, via the same exported `defaultAppState`.
 //
-//   2. manuel-academy.study.family-pilot-safety-holds.v1 — the Family Pilot
-//      safety-hold store (src/study/family-pilot/integration/safetyHolds.ts).
-//      There is no live Study-safety classifier wired into this local pilot
-//      build to organically produce an 'urgent' classification from student
-//      input, so the supported way to place a hold in a test is the one the
-//      bridge itself is built on: construct it with the real, exported
-//      createSafetyHold/serializeSafetyState functions
-//      (src/study/family-pilot/safety/holdStore.ts + persistence.ts) and write
-//      the result under the bridge's own storage key. This is the same
-//      construction integration/safetyHolds.test.ts uses.
-//
-// Every other step — learner creation, student login, opening a lesson,
-// checkpoint/resume, the Tutor static fallback, and the parent hold/resolve
-// cycle — is driven purely through accessible roles/names on the live UI.
-
-const SAFETY_HOLDS_STORAGE_KEY = 'manuel-academy.study.family-pilot-safety-holds.v1'
+// Everything else — learner creation, student login, the real Grade 5 Unit 1
+// catalog, opening a lesson, finishing a step, checkpoint/resume, the Tutor
+// static fallback, the AUTOMATIC safety hold raised by typing a concerning
+// message through the real "I need help" textarea and clicking Ask, the
+// parent hold/resolve cycle, and second-learner isolation — is driven purely
+// through accessible roles/names on the live UI. No hold is ever seeded into
+// storage, and "Finish this step" is exercised for real: App.tsx wires
+// <FamilyPilotHost> with no `curriculum` prop, so IntegratedPilotSurface's
+// default (catalogCurriculumPort(loadFamilyPilotCatalog())) is what's live in
+// the browser, and FamilyPilotStudyRuntime now hands the calendar port a
+// whole-second-rounded clock, so completeSegment no longer throws
+// CalendarRuntimeError: invalid_timestamp.
 
 function seededBootState() {
   const state = defaultAppState()
@@ -52,45 +43,60 @@ async function seedBootProfile(page: Page) {
   )
 }
 
-/** Mirrors familyPilotSessionRef() in src/study/family-pilot/study/FamilyPilotStudyRuntime.ts. */
-function sessionRefForBlock(blockRef: string): string {
-  return `${blockRef}:session`
-}
-
-/** Builds a real, schema-valid urgent hold via the bridge's own exported constructors. */
-function serializedUrgentHold(input: { readonly studentRef: string; readonly blockRef: string }): string {
-  const { state } = createSafetyHold(createInitialSafetyState(), {
-    studentRef: input.studentRef,
-    sessionRef: sessionRefForBlock(input.blockRef),
-    createdAt: new Date().toISOString(),
-    reasonCode: 'study-safety-urgent',
-    source: 'study-safety',
-  })
-  return serializeSafetyState(state)
-}
-
-async function seedUrgentSafetyHold(page: Page, input: { readonly studentRef: string; readonly blockRef: string }) {
-  await page.evaluate(
-    ({ key, value }) => localStorage.setItem(key, value),
-    { key: SAFETY_HOLDS_STORAGE_KEY, value: serializedUrgentHold(input) },
-  )
-}
-
 function diagnostic(page: Page, key: string): Locator {
   return page.locator(`[data-diagnostic="${key}"]`)
+}
+
+function studyField(page: Page, key: string): Locator {
+  return page.locator(`[data-study="${key}"]`)
 }
 
 function assignmentsRegion(page: Page): Locator {
   return page.getByRole('region', { name: 'Your assignments' })
 }
 
-async function firstAssignmentTitle(page: Page): Promise<string> {
-  const title = await assignmentsRegion(page).getByRole('listitem').first().locator('p').first().innerText()
-  return title.trim()
-}
-
 function assignmentCard(page: Page, title: string): Locator {
   return assignmentsRegion(page).getByRole('listitem').filter({ hasText: title })
+}
+
+function holdsSection(page: Page): Locator {
+  return page.getByTestId('family-pilot-safety-holds')
+}
+
+/**
+ * Asserts the lesson's Study position is exactly "1 step finished, now on
+ * segment 2 (the 'teach' segment)" via the authoritative live Study fields
+ * (family-pilot-study's dl, driven straight off the Study runtime's own
+ * snapshot) plus the progress fraction StudentExperience derives from the
+ * same completedSegmentRefs set.
+ *
+ * Deliberately NOT asserted: ActiveAssignmentView's "Current step" title.
+ * KNOWN FINDING (not fixed here — out of scope for this test-harness card):
+ * toStudentAssignment (src/study/family-pilot/integration/assignments.ts)
+ * derives currentSegmentRef from record.progress.lastSegmentRef when not
+ * paused, but recordFamilyPilotProgress (core/operations.ts) sets
+ * lastSegmentRef to the segment that was just COMPLETED, not the next one —
+ * so after a real "Finish this step" click (no pause involved) the "Current
+ * step" label keeps showing the just-finished segment instead of advancing.
+ * The Study session's actual position is correct throughout, as proven below.
+ */
+async function expectOnSegmentTwo(page: Page, lessonTitle: string): Promise<void> {
+  await expect(studyField(page, 'segmentRef')).toHaveText('ma-g5-mathematics-u01-l01:segment:teach')
+  await expect(studyField(page, 'segmentOrdinal')).toHaveText('2')
+  await expect(studyField(page, 'completedSegments')).toHaveText('1')
+  const working = page.getByRole('region', { name: `Working on ${lessonTitle}` })
+  await expect(working.getByText('1 of 5 steps complete')).toBeVisible()
+}
+
+async function currentHoldRef(page: Page): Promise<string | null> {
+  const items = holdsSection(page).locator('[data-hold-ref]')
+  if ((await items.count()) === 0) return null
+  return items.first().getAttribute('data-hold-ref')
+}
+
+async function sendHelpMessage(page: Page, message: string): Promise<void> {
+  await page.getByTestId('family-pilot-help-input').fill(message)
+  await page.getByTestId('family-pilot-help-send').click()
 }
 
 test.describe('Family Pilot — real first pilot flow (browser acceptance)', () => {
@@ -98,7 +104,7 @@ test.describe('Family Pilot — real first pilot flow (browser acceptance)', () 
     await seedBootProfile(page)
   })
 
-  test('login, lesson, checkpoint/resume, tutor fallback, safety hold, parent resolve, learner isolation', async ({ page }) => {
+  test('login, real curriculum, lesson step, checkpoint/resume, learner safety trigger, parent resolve, learner isolation', async ({ page }) => {
     await test.step('Family Pilot is enabled locally and the deep link reaches the pilot shell', async () => {
       await page.goto('/family-pilot')
       await expect(page.getByRole('heading', { name: 'Family Pilot', exact: true })).toBeVisible()
@@ -131,159 +137,147 @@ test.describe('Family Pilot — real first pilot flow (browser acceptance)', () 
       await expect(page.getByRole('heading', { name: 'Hi, Ada' })).toBeVisible()
     })
 
-    let lessonTitle = ''
-    await test.step('Grade 5 math work is visible for the newly signed-in learner', async () => {
-      // KNOWN APP-WIRING GAP (not fixed here — out of scope for a test-harness
-      // card, would require editing src/App.tsx):
-      //
-      // src/App.tsx renders <FamilyPilotHost onExit={...} /> with no `curriculum`
-      // prop, so src/study/family-pilot/integration/IntegratedPilotSurface.tsx
-      // falls back to hostLessonCurriculumPort() — a synthetic "Grade N math ·
-      // lesson N" stand-in (src/study/family-pilot/integration/curriculum.ts) —
-      // instead of catalogCurriculumPort(loadFamilyPilotCatalog()), which would
-      // serve the real, frozen FAMILY_PILOT_STATIC_CONFIG catalog: grade 5,
-      // mathematics, Unit 1 "Mathematical Habits and Whole-Number Reasoning"
-      // (src/curriculum/family-pilot/pilot-config.ts), now browser-loadable via
-      // source.browser.ts (merged into this branch from 2730770 specifically so
-      // this catalog COULD be reached from a browser test). Nothing in
-      // App.tsx/FamilyPilotHost/IntegratedPilotSurface ever calls
-      // catalogCurriculumPort, so the real Unit 1 lessons are unreachable from
-      // the routed app today — this is the harness's
-      // FINAL_BROWSER_ACCEPTANCE_APP_BLOCKER finding for this one sub-step.
-      //
-      // Everything below this step exercises real product behaviour end to
-      // end; only the specific curriculum CONTENT is the placeholder.
-      lessonTitle = await firstAssignmentTitle(page)
-      expect(lessonTitle).toMatch(/^Grade 5 math/)
-      await expect(assignmentCard(page, lessonTitle).getByRole('button', { name: /^Start / })).toBeVisible()
+    const LESSON_TITLE = 'Launch and diagnostic: problem-solving routines'
+    await test.step('The real Grade 5 Unit 1 catalog is visible — not the synthetic placeholder', async () => {
+      const cards = assignmentsRegion(page).getByRole('listitem')
+      await expect(cards).toHaveCount(18)
+      const titles = await cards.locator('p').first().allInnerTexts()
+      expect(titles[0].trim()).toBe(LESSON_TITLE)
+      expect(titles.some((title) => /^Grade 5 math/.test(title.trim()))).toBe(false)
+      await expect(assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Start / })).toBeVisible()
     })
 
-    await test.step('Open the lesson and Study starts', async () => {
-      await assignmentCard(page, lessonTitle).getByRole('button', { name: /^Start / }).click()
-      const working = page.getByRole('region', { name: `Working on ${lessonTitle}` })
+    await test.step('Start real lesson 1 and Study starts against the real catalog', async () => {
+      await assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Start / }).click()
+      const working = page.getByRole('region', { name: `Working on ${LESSON_TITLE}` })
       await expect(working).toBeVisible()
       await expect(working.getByText('Warm-up recall')).toBeVisible()
+      // ma-g5-mathematics-u01 is the pilot's one supervised unit — this is the
+      // catalog lesson ref, not the host-lesson placeholder's `grade-5:math:day-1`.
+      await expect(studyField(page, 'lessonRef')).toHaveText('ma-g5-mathematics-u01-l01')
       await expect(page.getByRole('button', { name: 'Save my place' })).toBeVisible()
     })
 
-    let studentRefBeforeCheckpoint = ''
-    let blockRefBeforeCheckpoint = ''
+    await test.step('Finish this step: the segment actually advances', async () => {
+      await expect(studyField(page, 'completedSegments')).toHaveText('0')
+      await page.getByRole('button', { name: 'Finish this step' }).click()
+      // Proves completeSegment no longer throws CalendarRuntimeError:
+      // invalid_timestamp — a thrown rejection would render a role="alert".
+      await expect(page.getByRole('alert')).toHaveCount(0)
+      await expectOnSegmentTwo(page, LESSON_TITLE)
+    })
+
+    let studentRefBeforeReload = ''
+    let blockRefBeforeReload = ''
     await test.step('Checkpoint / save place', async () => {
-      // NOTE: this deliberately does not exercise "Finish this step"
-      // (completeSegment). That path is currently broken independent of this
-      // harness: the calendar runtime's completeCurrentSegment requires the
-      // active-work interval between the block's launch and the completion
-      // instant to resolve to an exact whole number of seconds
-      // (adaptive-tutor/study-engine/integration-labs/calendar-parent-runtime/
-      // calendar-runtime.ts assertChronological/addActiveTime — see the
-      // `study-calendar-whole-second-timestamps` project note), but
-      // FamilyPilotController/FamilyPilotStudyRuntime feed it a raw
-      // `new Date()` (src/study/family-pilot/integration/controller.ts /
-      // FamilyPilotStudyRuntime.ts's `#now`/`#at`), never the rounded
-      // `studyInstant()` clock src/components/study/StudySessionContainer.tsx
-      // already uses for the same calendar calls. Confirmed live: clicking
-      // "Finish this step" reliably throws
-      // `CalendarRuntimeError: invalid_timestamp` and surfaces as "Study could
-      // not complete that step safely." This is a real, tiny, out-of-scope
-      // production defect (fixing it means editing FamilyPilotController, not
-      // this test harness) — flagged separately, not fixed or routed around
-      // here. "checkpoint/save place" itself (controller.checkpoint(), used
-      // below) does not call completeCurrentSegment and is unaffected.
-      studentRefBeforeCheckpoint = (await diagnostic(page, 'activeStudentRef').innerText()).trim()
-      blockRefBeforeCheckpoint = (await diagnostic(page, 'activeSessionRef').innerText()).trim()
+      studentRefBeforeReload = (await diagnostic(page, 'activeStudentRef').innerText()).trim()
+      blockRefBeforeReload = (await diagnostic(page, 'activeSessionRef').innerText()).trim()
       await page.getByRole('button', { name: 'Save my place' }).click()
       await expect(page.getByRole('alert')).toHaveCount(0)
     })
 
-    await test.step('Reload — the checkpoint is retained, not lost or reset', async () => {
+    await test.step('Reload — resume the same learner/session, checkpoint and completed step retained', async () => {
       await page.reload()
-      await expect(assignmentCard(page, lessonTitle).getByText('In progress')).toBeVisible()
-      await assignmentCard(page, lessonTitle).getByRole('button', { name: /^Resume / }).click()
-      const working = page.getByRole('region', { name: `Working on ${lessonTitle}` })
-      await expect(working.getByText('Warm-up recall')).toBeVisible()
+      await expect(assignmentCard(page, LESSON_TITLE).getByText('In progress')).toBeVisible()
+      await assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Resume / }).click()
       // Resume rebuilds the Study session from Core's persisted record rather
       // than the in-memory ports (which do not survive a real reload) — the
-      // SAME blockRef/session identity below proves this is a genuine resume,
+      // SAME student/block identity below proves this is a genuine resume,
       // not a silent fresh start that happens to look the same.
-      expect((await diagnostic(page, 'activeStudentRef').innerText()).trim()).toBe(studentRefBeforeCheckpoint)
-      expect((await diagnostic(page, 'activeSessionRef').innerText()).trim()).toBe(blockRefBeforeCheckpoint)
+      expect((await diagnostic(page, 'activeStudentRef').innerText()).trim()).toBe(studentRefBeforeReload)
+      expect((await diagnostic(page, 'activeSessionRef').innerText()).trim()).toBe(blockRefBeforeReload)
+      await expectOnSegmentTwo(page, LESSON_TITLE)
     })
 
-    await test.step('Request Tutor help with the provider offline: static fallback is visible', async () => {
+    await test.step('Open "I need help": the static Tutor fallback is live (provider offline is fine for this pilot)', async () => {
       // FamilyPilotController never receives a tutorDeps/live-provider option
-      // from FamilyPilotHost (src/study/family-pilot/integration/FamilyPilotHost.tsx
-      // has no such prop), so startHelp() always degrades to the static
+      // from FamilyPilotHost, so startHelp() always degrades to the static
       // fallback — there is no live Tutor Core path to go offline FROM in this
-      // build. That is exactly the "provider offline" state the target flow
-      // asks for, so no network interception is needed to reach it.
+      // build. That is exactly the "static Family Pilot Tutor" state the pilot
+      // targets for its first supervised run.
       await page.getByTestId('family-pilot-help').click()
       const tutor = page.getByTestId('family-pilot-tutor')
       await expect(tutor).toBeVisible()
       await expect(tutor.locator('[data-tutor="path"]')).toHaveText('static-fallback')
       await expect(tutor.locator('[data-tutor="text"]')).not.toBeEmpty()
-      await page.getByRole('button', { name: 'Back to my lesson' }).click()
+      await expect(page.getByTestId('family-pilot-help-input')).toBeVisible()
+      await expect(page.getByRole('button', { name: 'Ask' })).toBeVisible()
     })
 
-    let studentRef = ''
-    let blockRef = ''
-    await test.step('Seed an urgent Family Pilot safety hold through the supported test seam', async () => {
-      studentRef = (await diagnostic(page, 'activeStudentRef').innerText()).trim()
-      blockRef = (await diagnostic(page, 'activeSessionRef').innerText()).trim()
-      expect(studentRef).not.toBe('—')
-      expect(blockRef).not.toBe('—')
-      await seedUrgentSafetyHold(page, { studentRef, blockRef })
-      // The gate is only checked on entry (start/resume/help), so a reload +
-      // resume is what actually surfaces the hold to the learner.
-      await page.reload()
-      await assignmentCard(page, lessonTitle).getByRole('button', { name: /^Resume / }).click()
-    })
-
-    await test.step('The learner is visibly blocked', async () => {
+    await test.step('A deterministic concerning message, sent through the real textarea, automatically raises a safety hold', async () => {
+      // No localStorage seeding anywhere in this step: the hold is produced by
+      // the real Tutor bridge's isConcerning() check via controller.helpTurn,
+      // reached only by typing into family-pilot-help-input and clicking Ask.
+      await sendHelpMessage(page, 'I want to hurt myself')
+      // The flagged turn re-runs the same entry gate resume() uses, which is
+      // what surfaces the block below — no separate reload/seed step needed.
       await expect(page.getByRole('alert').filter({ hasText: 'This needs an adult to look at before continuing' }))
         .toBeVisible()
+      // The learner is blocked, not left looking at a stale, still-usable lesson.
+      await expect(page.getByTestId('family-pilot-study')).toHaveCount(0)
     })
 
+    await test.step('The learner cannot silently continue: retrying is refused again', async () => {
+      await assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Resume / }).click()
+      await expect(page.getByTestId('family-pilot-study')).toHaveCount(0)
+      await expect(page.getByRole('alert').filter({ hasText: 'This needs an adult' })).toBeVisible()
+    })
+
+    let firstHoldRef: string | null = null
     await test.step('Parent view shows the exact hold', async () => {
       await page.getByTestId('family-pilot-parent-toggle').click()
-      const holds = page.getByTestId('family-pilot-safety-holds')
-      await expect(holds).toBeVisible()
-      await expect(holds.getByText(/study-safety-urgent/)).toBeVisible()
+      await expect(holdsSection(page)).toBeVisible()
+      await expect(holdsSection(page).getByText(/tutor-concerning-content/)).toBeVisible()
+      firstHoldRef = await currentHoldRef(page)
+      expect(firstHoldRef).toBeTruthy()
     })
 
-    await test.step('Parent chooses "Resolve and let them resume"', async () => {
+    await test.step('Parent chooses "Resolve and let them resume" and the learner resumes with progress intact', async () => {
       await page.getByRole('button', { name: 'Resolve and let them resume' }).click()
-      await expect(page.getByTestId('family-pilot-safety-holds').getByText('Nothing is paused for Ada right now.'))
-        .toBeVisible()
-    })
+      await expect(holdsSection(page).getByText('Nothing is paused for Ada right now.')).toBeVisible()
 
-    await test.step('The learner resumes, checkpoint still intact', async () => {
-      await page.getByRole('button', { name: '← Return to assignments' }).click()
-      await assignmentCard(page, lessonTitle).getByRole('button', { name: /^Resume / }).click()
-      const working = page.getByRole('region', { name: `Working on ${lessonTitle}` })
-      await expect(working.getByText('Warm-up recall')).toBeVisible()
+      await assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Resume / }).click()
       await expect(page.getByRole('alert').filter({ hasText: 'This needs an adult' })).toHaveCount(0)
+      await expectOnSegmentTwo(page, LESSON_TITLE)
     })
 
-    await test.step('A second learner/session remains isolated', async () => {
+    await test.step('A later concerning message opens a NEW hold and blocks again', async () => {
+      await page.getByTestId('family-pilot-help').click()
+      await sendHelpMessage(page, 'I hate myself')
+      await expect(page.getByRole('alert').filter({ hasText: 'This needs an adult to look at before continuing' }))
+        .toBeVisible()
+      await expect(holdsSection(page).getByText(/tutor-concerning-content/)).toBeVisible()
+      const secondHoldRef = await currentHoldRef(page)
+      expect(secondHoldRef).toBeTruthy()
+      expect(secondHoldRef).not.toBe(firstHoldRef)
+
+      // Leave Ada in a clean, resumable state before switching learners below.
+      await page.getByRole('button', { name: 'Resolve and let them resume' }).click()
+      await expect(holdsSection(page).getByText('Nothing is paused for Ada right now.')).toBeVisible()
+    })
+
+    await test.step('A second learner is created and fully isolated from the first', async () => {
       await page.getByTestId('family-pilot-switch-student').click()
       await page.getByRole('listitem', { name: 'Continue as Bo' }).click()
       await page.getByRole('button', { name: 'Continue', exact: true }).click()
       await expect(page.getByRole('heading', { name: 'Hi, Bo' })).toBeVisible()
 
-      // Bo's own copy of the same placeholder lesson list, but every card is
-      // untouched — none of Ada's progress, checkpoint or hold history leaked.
-      await expect(assignmentCard(page, lessonTitle).getByText('Not started')).toBeVisible()
-      await expect(assignmentCard(page, lessonTitle).getByRole('button', { name: /^Start / })).toBeVisible()
+      // Bo's own copy of the same real catalog, but untouched: no adult text,
+      // no hold, no in-progress state leaked from Ada.
+      await expect(page.getByText('This needs an adult', { exact: false })).toHaveCount(0)
+      await expect(assignmentCard(page, LESSON_TITLE).getByText('Not started')).toBeVisible()
+      await expect(assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Start / })).toBeVisible()
+    })
 
-      // Switching back proves the isolation runs both directions: Bo's fresh
-      // session did not reset or bleed into Ada's retained checkpoint either.
+    await test.step('Switching back to the first learner: her progress remains intact', async () => {
       await page.getByTestId('family-pilot-switch-student').click()
       await page.getByRole('listitem', { name: 'Continue as Ada' }).click()
       await page.getByRole('button', { name: 'Continue', exact: true }).click()
-      await assignmentCard(page, lessonTitle).getByText('In progress').waitFor()
-      await assignmentCard(page, lessonTitle).getByRole('button', { name: /^Resume / }).click()
-      const working = page.getByRole('region', { name: `Working on ${lessonTitle}` })
-      await expect(working.getByText('Warm-up recall')).toBeVisible()
+      await expect(assignmentCard(page, LESSON_TITLE).getByText('In progress')).toBeVisible()
+
+      await assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Resume / }).click()
+      await expect(page.getByRole('alert').filter({ hasText: 'This needs an adult' })).toHaveCount(0)
+      await expectOnSegmentTwo(page, LESSON_TITLE)
     })
   })
 })
