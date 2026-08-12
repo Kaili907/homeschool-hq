@@ -1,0 +1,62 @@
+[
+  {
+    "course_id": "ma-g9-social-studies",
+    "grade": 9,
+    "subject": "social-studies",
+    "title": "Grade 9 Social Studies: United States History and Geography",
+    "short_title": "United States History and Geography",
+    "sessions": 108,
+    "units": 9,
+    "cadence": "three times weekly across 36 weeks",
+    "credit": "1.0 credit — United States History and Geography (Michigan Merit Curriculum social studies requirement)",
+    "credit_key": "ushg",
+    "description": "A Michigan-aligned high school United States history and geography course. It begins at USHG Era 6.1, the point at which Grade 8 ends, and continues through Era 9 and current policy debates, using primary and secondary evidence, maps, and argument from evidence.",
+    "capstone": "A researched United States history argument and policy-debate defense built from primary and secondary evidence with full citation.",
+    "path": "grades/grade-9/courses/social-studies"
+  },
+  {
+    "course_id": "ma-g10-social-studies",
+    "grade": 10,
+    "subject": "social-studies",
+    "title": "Grade 10 Social Studies: World History and Geography",
+    "short_title": "World History and Geography",
+    "sessions": 108,
+    "units": 9,
+    "cadence": "three times weekly across 36 weeks",
+    "credit": "1.0 credit — World History and Geography (Michigan Merit Curriculum social studies requirement)",
+    "credit_key": "whg",
+    "description": "A Michigan-aligned high school world history and geography course covering WHG Foundations and Eras 4 through 7, concluding with Contemporary Global Issues. Learners work across scales of time and space using maps, data, and multi-regional sources.",
+    "capstone": "A world-historical and geographic investigation of a contemporary global issue, defended with maps, data, and cited multi-regional evidence.",
+    "path": "grades/grade-10/courses/social-studies"
+  },
+  {
+    "course_id": "ma-g11-social-studies",
+    "grade": 11,
+    "subject": "social-studies",
+    "title": "Grade 11 Social Studies: Civics and Economics",
+    "short_title": "Civics and Economics",
+    "sessions": 108,
+    "units": 9,
+    "cadence": "three times weekly across 36 weeks",
+    "credit": "1.0 credit total — 0.5 credit Civics (units 1-5) and 0.5 credit Economics (units 6-9), meeting both Michigan Merit Curriculum social studies components",
+    "credit_key": "civics_economics",
+    "description": "A Michigan-aligned high school course combining civics and economics in one year. Units 1-5 carry the civics half-credit and cover Civics standards C1 through C6. Units 6-9 carry the economics half-credit and cover Economics standards E1 through E4.",
+    "capstone": "A paired defense: a documented civic action plan for the civics half-credit and an applied economics analysis for the economics half-credit.",
+    "path": "grades/grade-11/courses/social-studies"
+  },
+  {
+    "course_id": "ma-g12-social-studies",
+    "grade": 12,
+    "subject": "social-studies",
+    "title": "Grade 12 Social Studies: Advanced Civic Inquiry, Research, and Policy Analysis",
+    "short_title": "Advanced Civic Inquiry, Research, and Policy Analysis",
+    "sessions": 108,
+    "units": 9,
+    "cadence": "three times weekly across 36 weeks",
+    "credit": "1.0 elective credit — senior capstone building on, and not repeating, the Michigan Merit Curriculum social studies requirements completed in grades 9-11",
+    "credit_key": "capstone",
+    "description": "A senior capstone that raises rigor rather than repeating earlier content. Learners move from studying other people's arguments to producing their own: research design, historiography, advanced source criticism, comparative government, geospatial and quantitative analysis, applied policy and economic analysis, deliberation, and an independently researched, publicly defended civic inquiry.",
+    "capstone": "An independent senior research argument with a documented civic action and a public or private defense answering unrehearsed questions.",
+    "path": "grades/grade-12/courses/social-studies"
+  }
+]
