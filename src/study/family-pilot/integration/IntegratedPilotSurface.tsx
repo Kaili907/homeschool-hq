@@ -9,6 +9,7 @@ import { hostLessonCurriculumPort, type FamilyPilotCurriculumPort } from './curr
 import { FAMILY_PILOT_HOUSEHOLD_REF, learnerOptionFor } from './identity'
 import { IntegratedFamilyPilot } from './IntegratedFamilyPilot'
 import type { FamilyPilotSafetyPort } from './safety'
+import { FamilyPilotSafetyHoldBridge } from './safetyHolds'
 
 // FAMILY-PILOT-INTEGRATION: everything the pilot's Study path needs.
 //
@@ -52,16 +53,26 @@ export function IntegratedPilotSurface({
   const [resolvedPorts] = useState<StudyPortBundle>(
     () => ports ?? createLocalDevelopmentStudyPorts(now ? { now } : {}).ports,
   )
+  // The Family Pilot safety-hold bridge (mac/family-pilot-safety-r1, wired
+  // here). It is a SEPARATE, additive layer from the Study Engine's own
+  // permanent local-stop ledger: it never reads or writes that ledger, and a
+  // caller-supplied `safety` prop still overrides it entirely, exactly as C1
+  // already allowed before this branch merged in the hold store.
+  const [safetyHoldBridge] = useState(
+    () => new FamilyPilotSafetyHoldBridge({ coreStore: store, now: now ? () => now().toISOString() : undefined }),
+  )
+  const effectiveSafety = safety ?? safetyHoldBridge.port
   const controller = useMemo(
     () => new FamilyPilotController({
       ports: resolvedPorts,
       curriculum: curriculum ?? hostLessonCurriculumPort(),
       store,
-      safety,
+      safety: effectiveSafety,
+      safetySignals: safetyHoldBridge,
       now,
       householdTimeZone,
     }),
-    [resolvedPorts, curriculum, store, safety, now, householdTimeZone],
+    [resolvedPorts, curriculum, store, effectiveSafety, safetyHoldBridge, now, householdTimeZone],
   )
   const activeStudentRef = context.activeStudentRef
   const [showParent, setShowParent] = useState(false)
@@ -121,6 +132,10 @@ export function IntegratedPilotSurface({
                 actorRef: 'family-pilot-parent',
                 role: 'parent',
                 adultAuthorized: true,
+              }}
+              safetyHolds={{
+                openHoldsFor: (studentRef) => safetyHoldBridge.openHoldsFor(studentRef),
+                resolveHold: (holdRef, clearedBy) => safetyHoldBridge.resolveHold(holdRef, clearedBy),
               }}
             />
           )}

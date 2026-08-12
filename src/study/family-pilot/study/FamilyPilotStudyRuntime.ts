@@ -102,6 +102,13 @@ function cancellation(error: unknown): boolean {
     (error instanceof Error && error.name === 'AbortError')
 }
 
+export interface FamilyPilotStudySafetyStopSignal {
+  readonly studentRef: string
+  readonly sessionRef: string
+  readonly classification: 'urgent' | 'uncertain' | 'invalid'
+  readonly occurredAt: string
+}
+
 export interface FamilyPilotStudyRuntimeOptions {
   readonly ports: Partial<StudyPortBundle>
   /** Shared with the host when Study must be cancelled by sign-out or learner switch. */
@@ -109,6 +116,14 @@ export interface FamilyPilotStudyRuntimeOptions {
   readonly now?: () => Date
   /** Injectable only so the durable stop lock can be exercised outside a browser. */
   readonly safetyStopStorage?: Pick<Storage, 'getItem' | 'setItem'>
+  /**
+   * Purely observational side channel, fired alongside (never instead of) the
+   * durable permanent stop write below. It exists so an optional, additive
+   * layer (e.g. the Family Pilot safety-hold bridge) can react to the same
+   * classification without this runtime knowing that layer exists. It never
+   * gates or reverses anything this runtime decides.
+   */
+  readonly onSafetyStop?: (signal: FamilyPilotStudySafetyStopSignal) => void
 }
 
 /**
@@ -124,6 +139,7 @@ export class FamilyPilotStudyRuntime {
   readonly #lifecycle: StudyLifecycleBoundary
   readonly #now: () => Date
   readonly #stopStorage: Pick<Storage, 'getItem' | 'setItem'> | undefined
+  readonly #onSafetyStop: ((signal: FamilyPilotStudySafetyStopSignal) => void) | undefined
   #turn = 0
 
   constructor(options: FamilyPilotStudyRuntimeOptions) {
@@ -132,6 +148,7 @@ export class FamilyPilotStudyRuntime {
     this.#lifecycle = options.lifecycle ?? new StudyLifecycleBoundary()
     this.#now = options.now ?? (() => new Date())
     this.#stopStorage = options.safetyStopStorage
+    this.#onSafetyStop = options.onSafetyStop
   }
 
   get lifecycle(): StudyLifecycleBoundary {
@@ -304,6 +321,17 @@ export class FamilyPilotStudyRuntime {
               ? 'server-answered-stop'
               : 'server-acceptance-not-confirmed',
         }, this.#stopStorage).catch(() => null)
+        try {
+          this.#onSafetyStop?.({
+            studentRef: input.session.learnerRef,
+            sessionRef: input.session.sessionRef,
+            classification: result.classification,
+            occurredAt: at,
+          })
+        } catch {
+          // Observational only. A failing subscriber must never affect the
+          // permanent stop above, which has already been written.
+        }
         const stoppedSnapshot = await this.#project(token, input.session, entry)
         try {
           await ports.eventLedger.append(scope, {

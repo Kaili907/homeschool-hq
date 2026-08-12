@@ -13,4 +13,5 @@ export type {
   FamilyPilotWorkCounts,
   FamilyPilotStudentSnapshot,
   FamilyPilotActionOutcome,
+  FamilyPilotSafetyHoldsView,
 } from './types'

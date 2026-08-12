@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { createLocalDevelopmentStudyPorts } from '../../localDevelopmentPorts'
-import type { StudyPortBundle } from '../../ports'
+import type { StudyPortBundle, StudySafetyPort } from '../../ports'
 import { FAMILY_PILOT_STATE_KEY, loadFamilyPilotState } from '../core'
+import { parseSafetyStateJsonWithRecovery } from '../safety'
 import { FamilyPilotController } from './controller'
 import { assignmentRefFor, hostLessonCurriculumPort } from './curriculum'
-import { fromStudentSelector, toStudentSelector } from './identity'
+import { fromStudentSelector, launchContextFor, toStudentSelector } from './identity'
 import type { FamilyPilotSafetyPort } from './safety'
+import { FAMILY_PILOT_SAFETY_HOLDS_KEY, FamilyPilotSafetyHoldBridge } from './safetyHolds'
 
 // FAMILY-PILOT-INTEGRATION: the required pilot user flow, end to end.
 //
@@ -266,6 +268,145 @@ describe('family pilot integrated flow', () => {
     expect(resumed.study.segmentOrdinal).toBe(3)
     expect([...resumed.study.completedSegmentRefs]).toEqual([...finished])
     expect(resumed.study.assignmentState).toBe('active')
+  })
+
+  it('a Family Pilot safety hold survives a browser close/reopen rebuild, blocks both resume and a fresh start until a parent resolves it, and a later hold blocks the newly minted session again', async () => {
+    // Same shape as "rebuilds the lesson position after a device restart loses
+    // the Study ports" above, but with the real FamilyPilotSafetyHoldBridge
+    // wired in (as IntegratedPilotSurface.tsx composes it), and a second
+    // build() a day later — a real browser close overnight, not just a
+    // same-instant remount — so the rebuild genuinely mints a new block
+    // (block refs embed the learner's local date; see calendarAdapter.ts).
+    const storage = memoryStorage()
+
+    function urgentSafetyPort(): StudySafetyPort {
+      return {
+        mode: 'production',
+        classifierVersion: 'family-pilot-h2-rebuild-test-v1',
+        evaluate: async () => ({ outcome: 'urgent', mayContinue: false, adultHelpState: 'proposed-not-delivered' }),
+      }
+    }
+
+    function build(now: () => Date) {
+      const { ports: localPorts } = createLocalDevelopmentStudyPorts({ now })
+      const ports: StudyPortBundle = { ...localPorts, safety: urgentSafetyPort() }
+      const bridge = new FamilyPilotSafetyHoldBridge({
+        coreStore: { storage, now: () => now().toISOString() },
+        storage,
+        now: () => now().toISOString(),
+      })
+      const controller = new FamilyPilotController({
+        ports,
+        curriculum: hostLessonCurriculumPort(2),
+        store: { storage, now: () => now().toISOString() },
+        safety: bridge.port,
+        safetySignals: bridge,
+        now,
+        householdTimeZone: 'UTC',
+        defaultGrade: '5',
+        newStudentRef: () => 'student:h2-rebuild-1',
+      })
+      return { controller, bridge }
+    }
+
+    // 1. Establish Core state with block/session B1.
+    const day1 = () => new Date('2026-03-04T15:00:00.000Z')
+    const first = build(day1)
+    first.controller.createStudent('Ada')
+    const ref = first.controller.snapshot().state.students[0].studentRef
+    first.controller.selectStudent(ref)
+    first.controller.ensureAssignments(ref)
+    const assignmentRef = firstAssignmentRef(first.controller, ref)
+
+    const started = await first.controller.start(ref, assignmentRef)
+    if (started.status !== 'ok' || !started.study) throw new Error('expected a Study snapshot')
+    const sessionB1 = started.study.session.sessionRef
+
+    // 2. Create a Family Pilot safety hold against B1, via the real Study stop
+    // path (the runtime's own onSafetyStop -> bridge.recordStudySignal wire).
+    const stopped = await first.controller.runtime.submitStudyAction({
+      context: launchContextFor({
+        studentRef: ref,
+        grade: 5,
+        subject: 'math',
+        lessonRef: started.study.lessonRef,
+        skillRefs: ['grade-5:math:current'],
+        householdTimeZone: 'UTC',
+        at: day1(),
+      }),
+      session: started.study.session,
+      transientLearnerText: 'a raw student answer',
+    })
+    expect(stopped.status).toBe('stopped')
+    const [holdB1] = first.bridge.openHoldsFor(ref)
+    expect(holdB1).toBeDefined()
+    expect(holdB1!.sessionRef).toBe(sessionB1)
+
+    // 3. Simulate a real runtime/browser reconstruction: fresh in-memory Study
+    // ports, a fresh bridge instance, and a fresh controller — all over the
+    // SAME persisted storage — a day later, exactly what closing the browser
+    // overnight and reopening it leaves behind.
+    const day2 = () => new Date('2026-03-05T09:00:00.000Z')
+    const second = build(day2)
+
+    // 4. Before any replacement session can become authoritative, the safety
+    // check still resolves against the persisted B1 state and refuses entry.
+    const blockedResume = await second.controller.resume(ref, assignmentRef)
+    expect(blockedResume.status).toBe('rejected')
+    if (blockedResume.status === 'rejected') expect(blockedResume.reason).toBe('study-safety-urgent')
+
+    // 5. No fresh session may bypass the unresolved hold either.
+    const blockedStart = await second.controller.start(ref, assignmentRef)
+    expect(blockedStart.status).toBe('rejected')
+    if (blockedStart.status === 'rejected') expect(blockedStart.reason).toBe('study-safety-urgent')
+
+    // 6. A parent clears the exact hold.
+    const outcome = second.bridge.resolveHold(holdB1!.holdRef, 'family-pilot-parent')
+    expect(outcome.ok).toBe(true)
+    expect(second.bridge.openHoldsFor(ref)).toHaveLength(0)
+
+    // 7. Rebuild/resume may now succeed and mints the next session, B2 — the
+    // ports lost the block, so the controller replays through #rebuild.
+    const resumed = await second.controller.resume(ref, assignmentRef)
+    expect(resumed.status).toBe('ok')
+    if (resumed.status !== 'ok' || !resumed.study) throw new Error('expected a Study snapshot')
+    const sessionB2 = resumed.study.session.sessionRef
+    expect(sessionB2).not.toBe(sessionB1)
+    expect(resumed.study.assignmentState).toBe('active')
+    expect(
+      resumed.snapshot.state.students[0].assignments.find((item) => item.assignmentRef === assignmentRef)?.sessionRef,
+    ).toBe(resumed.study.session.blockRef)
+
+    // 8. The old hold remains historical/cleared, not deleted.
+    const rawHoldState = parseSafetyStateJsonWithRecovery(storage.getItem(FAMILY_PILOT_SAFETY_HOLDS_KEY)).state
+    const historicalHold = rawHoldState.holds.find((hold) => hold.holdRef === holdB1!.holdRef)
+    expect(historicalHold?.status).toBe('cleared')
+    expect(historicalHold?.sessionRef).toBe(sessionB1)
+
+    // 9. A later new hold — against the newly minted B2 — blocks again.
+    const stoppedAgain = await second.controller.runtime.submitStudyAction({
+      context: launchContextFor({
+        studentRef: ref,
+        grade: 5,
+        subject: 'math',
+        lessonRef: resumed.study.lessonRef,
+        skillRefs: ['grade-5:math:current'],
+        householdTimeZone: 'UTC',
+        at: day2(),
+      }),
+      session: resumed.study.session,
+      transientLearnerText: 'another raw student answer',
+    })
+    expect(stoppedAgain.status).toBe('stopped')
+
+    const blockedAgain = await second.controller.resume(ref, assignmentRef)
+    expect(blockedAgain.status).toBe('rejected')
+    if (blockedAgain.status === 'rejected') expect(blockedAgain.reason).toBe('study-safety-urgent')
+
+    const openHolds = second.bridge.openHoldsFor(ref)
+    expect(openHolds).toHaveLength(1)
+    expect(openHolds[0]!.sessionRef).toBe(sessionB2)
+    expect(openHolds[0]!.holdRef).not.toBe(holdB1!.holdRef)
   })
 
   it('offers Tutor help and the fallback path does not end the lesson', async () => {
