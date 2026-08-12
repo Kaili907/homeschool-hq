@@ -234,6 +234,8 @@ export function evaluateMigrationPreflight(evidence, manifest) {
 }
 
 export function isDirectExecution(moduleUrl, entrypoint) {
+  // Left uncaught: a canonicalization failure here must fail loud, never silently
+  // resolve to "not the entrypoint."
   return typeof entrypoint === 'string' &&
     realpathSync(fileURLToPath(moduleUrl)) === realpathSync(resolve(entrypoint))
 }

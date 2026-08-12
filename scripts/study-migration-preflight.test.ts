@@ -74,6 +74,7 @@ function expectBlockedCliResult(run: ReturnType<typeof runCli>) {
   expect(run.error).toBeUndefined()
   expect(run.status).toBe(2)
   expect(run.stderr).toBe('')
+  expect(run.stdout.length).toBeGreaterThan(0)
   const lines = run.stdout.trim().split('\n')
   expect(lines).toHaveLength(1)
   const result = JSON.parse(lines[0])
@@ -101,6 +102,31 @@ describe('direct CLI execution', () => {
   it('does not hide entrypoint canonicalization failures', () => {
     const missingPath = join(REPOSITORY_ROOT, 'scripts', 'missing-study-migration-preflight.mjs')
     expect(() => isDirectExecution(pathToFileURL(CLI_ABSOLUTE_PATH).href, missingPath)).toThrow()
+  })
+
+  /**
+   * Every spawn-based test in this file runs the CLI through `node`, whose ESM loader
+   * canonicalizes `import.meta.url` before `isDirectExecution` ever sees it — so a
+   * `moduleUrl`-side realpath call that silently went missing would be invisible to any
+   * of them. Only a direct call with a synthetically non-canonical `moduleUrl` — one
+   * built through a symlink, never seen by the loader — can tell the two apart.
+   */
+  it('canonicalizes the module side of the identity comparison, not only the entrypoint side', async ({ skip }) => {
+    const directory = await mkdtemp(join(await realpath(tmpdir()), 'study-migration-preflight-module-link-'))
+    temporaryDirectories.push(directory)
+    const moduleLinkPath = join(directory, 'study-migration-preflight.mjs')
+    try {
+      await symlink(CLI_ABSOLUTE_PATH, moduleLinkPath, 'file')
+    } catch (error) {
+      if (error && typeof error === 'object' && 'code' in error &&
+          ['EACCES', 'EPERM', 'ENOSYS', 'ENOTSUP'].includes(String(error.code))) {
+        skip()
+        return
+      }
+      throw error
+    }
+    expect(moduleLinkPath).not.toBe(await realpath(moduleLinkPath))
+    expect(isDirectExecution(pathToFileURL(moduleLinkPath).href, CLI_ABSOLUTE_PATH)).toBe(true)
   })
 
   it('executes from a relative POSIX script path', () => {
@@ -162,6 +188,53 @@ describe('direct CLI execution', () => {
     expect(run.stderr).toBe('')
   })
 
+  /**
+   * A real importer, not `--eval`: `node importer.mjs` gives `process.argv[1]` a real,
+   * different, on-disk file (importer.mjs itself), which is what a wrapper CLI or any
+   * consumer that imports this module actually looks like. The importer never touches
+   * `--evidence`/`--manifest` itself, but they are passed on the command line anyway —
+   * `process.argv` is process-global, so if the guard were ever wrong and `main()` ran,
+   * it would find fully valid args and emit a real, unmistakable preflight JSON verdict
+   * (not just silence or a Usage error) rather than leaving the failure ambiguous.
+   *
+   * Two placements, not one, because a dirname-only guard and a basename-only guard need
+   * opposite setups to be caught: the first needs same-directory/different-name, the
+   * second needs same-name/different-directory. Neither alone would catch both mutants.
+   */
+  async function writeImporter(importerPath: string, modulePath: string) {
+    await writeFile(importerPath, `import ${JSON.stringify(pathToFileURL(modulePath).href)}\n`, 'utf8')
+  }
+
+  it('stays inert when imported by a sibling module in the same directory', async () => {
+    const directory = await mkdtemp(join(await realpath(tmpdir()), 'study-migration-preflight-samedir-'))
+    temporaryDirectories.push(directory)
+    const modulePath = join(directory, 'study-migration-preflight.mjs')
+    await copyFile(CLI_ABSOLUTE_PATH, modulePath)
+    const importerPath = join(directory, 'importer.mjs')
+    await writeImporter(importerPath, modulePath)
+    const run = runCli(importerPath)
+    expect(run.error).toBeUndefined()
+    expect(run.status).toBe(0)
+    expect(run.stdout).toBe('')
+    expect(run.stderr).toBe('')
+  })
+
+  it('stays inert when imported by a same-named module in a different directory', async () => {
+    const moduleDirectory = await mkdtemp(join(await realpath(tmpdir()), 'study-migration-preflight-module-'))
+    temporaryDirectories.push(moduleDirectory)
+    const modulePath = join(moduleDirectory, 'study-migration-preflight.mjs')
+    await copyFile(CLI_ABSOLUTE_PATH, modulePath)
+    const entryDirectory = await mkdtemp(join(await realpath(tmpdir()), 'study-migration-preflight-entry-'))
+    temporaryDirectories.push(entryDirectory)
+    const importerPath = join(entryDirectory, 'study-migration-preflight.mjs')
+    await writeImporter(importerPath, modulePath)
+    const run = runCli(importerPath)
+    expect(run.error).toBeUndefined()
+    expect(run.status).toBe(0)
+    expect(run.stdout).toBe('')
+    expect(run.stderr).toBe('')
+  })
+
   it('reports usage and exits 1 when arguments are missing', () => {
     const run = runCli(CLI_RELATIVE_PATH, [])
     expect(run.error).toBeUndefined()
@@ -197,6 +270,7 @@ describe('direct CLI execution', () => {
     expect(run.error).toBeUndefined()
     expect(run.status).toBe(2)
     expect(run.stderr).toBe('')
+    expect(run.stdout.length).toBeGreaterThan(0)
     const lines = run.stdout.trim().split('\n')
     expect(lines).toHaveLength(1)
     const result = JSON.parse(lines[0])
