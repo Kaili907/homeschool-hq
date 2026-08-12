@@ -88,6 +88,45 @@ describe('verifySupabaseBearer credential decisions', () => {
     expect(JSON.stringify(result)).not.toContain(ACCESS_TOKEN)
   })
 
+  it('rejects a present-but-empty Authorization header beside a valid multi-value header', async () => {
+    const fetchImpl = vi.fn()
+    const result = await verifySupabaseBearer(
+      event({
+        headers: { authorization: '' },
+        multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] },
+      }),
+      { fetchImpl, env: ENV },
+    )
+
+    expectFailure(result, 'unauthenticated', 401, 'unauthenticated')
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+
+  it('rejects a valid Authorization header beside an empty multi-value header', async () => {
+    const fetchImpl = vi.fn()
+    const result = await verifySupabaseBearer(
+      event({
+        headers: { authorization: `Bearer ${ACCESS_TOKEN}` },
+        multiValueHeaders: { authorization: [''] },
+      }),
+      { fetchImpl, env: ENV },
+    )
+
+    expectFailure(result, 'unauthenticated', 401, 'unauthenticated')
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+
+  it('accepts a multi-value Authorization header when no single-value header is present', async () => {
+    const fetchImpl = vi.fn(async () => providerResponse({ id: USER_ID }))
+    const result = await verifySupabaseBearer(
+      event({ headers: {}, multiValueHeaders: { authorization: [`Bearer ${ACCESS_TOKEN}`] } }),
+      { fetchImpl, env: ENV },
+    )
+
+    expect(result).toEqual({ ok: true, user: { id: USER_ID }, accessToken: ACCESS_TOKEN })
+    expect(fetchImpl).toHaveBeenCalledOnce()
+  })
+
   it('returns the exact minimal success contract for a valid bearer and UUID', async () => {
     const fetchImpl = vi.fn(async () =>
       providerResponse({
@@ -178,6 +217,79 @@ describe('verifySupabaseBearer upstream availability decisions', () => {
       expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
     },
   )
+
+  it.each([201, 202, 203, 299])(
+    'accepts a canonical UUID identity returned on successful status %s',
+    async (status) => {
+      const fetchImpl = vi.fn(async () => providerResponse({ id: USER_ID }, status))
+      const result = await verifySupabaseBearer(event(), { fetchImpl, env: ENV })
+
+      expect(result).toEqual({ ok: true, user: { id: USER_ID }, accessToken: ACCESS_TOKEN })
+      expect(fetchImpl).toHaveBeenCalledOnce()
+    },
+  )
+
+  it.each([
+    ['204 with no parsable body', 204, () => Promise.reject(new SyntaxError('Unexpected end of JSON input'))],
+    ['204 with a null body', 204, async () => null],
+    ['205 with no parsable body', 205, () => Promise.reject(new SyntaxError('Unexpected end of JSON input'))],
+  ])('maps %s to auth-unavailable, never unauthenticated', async (_name, status, json) => {
+    const result = await verifySupabaseBearer(event(), {
+      fetchImpl: vi.fn(async () => ({ status, json: vi.fn(json) })),
+      env: ENV,
+    })
+
+    expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
+  })
+
+  it('holds a non-200 2xx body read to the same absolute deadline', async () => {
+    installFakeTimers()
+    const fetchImpl = vi.fn(async () => ({ status: 201, json: () => new Promise(() => {}) }))
+    const pending = verifySupabaseBearer(event(), { fetchImpl, env: ENV })
+
+    await vi.advanceTimersByTimeAsync(SUPABASE_AUTH_TIMEOUT_MS)
+
+    expectFailure(await pending, 'upstream-timeout', 504, 'upstream_timeout')
+    expect(vi.getTimerCount()).toBe(0)
+    expect(fetchImpl).toHaveBeenCalledOnce()
+  })
+
+  it.each([199, 300, 301, 302, 399])(
+    'refuses to treat status %s as success even with a canonical UUID body',
+    async (status) => {
+      const result = await verifySupabaseBearer(event(), {
+        fetchImpl: vi.fn(async () => providerResponse({ id: USER_ID }, status)),
+        env: ENV,
+      })
+
+      expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
+    },
+  )
+
+  it.each([400, 401, 403])(
+    'keeps status %s unauthenticated even when the body carries a canonical UUID',
+    async (status) => {
+      const result = await verifySupabaseBearer(event(), {
+        fetchImpl: vi.fn(async () => providerResponse({ id: USER_ID }, status)),
+        env: ENV,
+      })
+
+      expectFailure(result, 'unauthenticated', 401, 'unauthenticated')
+    },
+  )
+
+  it.each([
+    ['absent', {}],
+    ['numeric string', { status: '200' }],
+    ['fractional', { status: 200.5 }],
+  ])('refuses a %s status as success', async (_name, statusPart) => {
+    const result = await verifySupabaseBearer(event(), {
+      fetchImpl: vi.fn(async () => ({ ...statusPart, json: vi.fn(async () => ({ id: USER_ID })) })),
+      env: ENV,
+    })
+
+    expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
+  })
 
   it.each([
     ['network failure', new TypeError('getaddrinfo ENOTFOUND secret.internal')],

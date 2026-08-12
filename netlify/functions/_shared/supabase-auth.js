@@ -48,7 +48,7 @@ function bearerToken(event) {
     if (!Array.isArray(values) || values.length !== 1 || typeof values[0] !== 'string') {
       return null
     }
-    if (authorization && authorization !== values[0]) return null
+    if (headerEntries.length === 1 && authorization !== values[0]) return null
     authorization = values[0]
   }
   const match = /^Bearer ([^\s,]+)$/i.exec(authorization)
@@ -145,7 +145,9 @@ export async function verifySupabaseBearer(event, { fetchImpl, env, timeoutMs })
     if ([400, 401, 403].includes(response?.status)) {
       return { ok: false, failure: 'unauthenticated', response: errorResponse(401, 'unauthenticated') }
     }
-    if (response?.status !== 200) {
+    // Every 2xx is a candidate success; the identity itself is decided by the body below.
+    const status = response?.status
+    if (!Number.isInteger(status) || status < 200 || status > 299) {
       return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
     }
     if (typeof response.json !== 'function') throw new TypeError('Invalid auth response')
