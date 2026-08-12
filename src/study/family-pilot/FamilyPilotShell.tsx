@@ -22,13 +22,27 @@ import {
 // file never has to know what a lesson looks like to keep a household's data
 // correct.
 
+/**
+ * What the shell hands to a render-function child. The integrated pilot needs
+ * the shell's OWN snapshot rather than a second read of storage: two surfaces
+ * holding independent copies of "who is active" is precisely how one learner's
+ * work ends up rendered under another's name.
+ */
+export interface FamilyPilotShellContext {
+  readonly snapshot: FamilyPilotSnapshot
+  readonly activeStudentRef: string | null
+  /** Re-reads pilot state after a child has written to it. */
+  readonly reload: () => void
+}
+
 export interface FamilyPilotShellProps {
   readonly onExit: () => void
   /** Defence in depth: the route gates entry, and the shell gates render. */
   readonly enabled?: boolean
   readonly diagnostics?: boolean
   readonly store?: FamilyPilotStoreOptions
-  readonly children?: ReactNode
+  /** A plain node, or a function given custody of the shell's live snapshot. */
+  readonly children?: ReactNode | ((context: FamilyPilotShellContext) => ReactNode)
 }
 
 function newStudentRef(): string {
@@ -79,6 +93,14 @@ export function FamilyPilotShell({
     () => projectFamilyPilotParentProgress(snapshot.state, snapshot.state.activeStudentRef),
     [snapshot.state],
   )
+
+  const reload = useCallback(() => {
+    setSnapshot(loadFamilyPilotState(storeOptions))
+  }, [storeOptions])
+
+  const body = typeof children === 'function'
+    ? children({ snapshot, activeStudentRef: snapshot.state.activeStudentRef, reload })
+    : children
 
   if (!pilotEnabled) return null
 
@@ -194,7 +216,7 @@ export function FamilyPilotShell({
           </section>
         )}
 
-        {children}
+        {body}
 
         <section className="mt-6" aria-labelledby="family-pilot-data">
           <h2 id="family-pilot-data" className="font-extrabold">Pilot data</h2>

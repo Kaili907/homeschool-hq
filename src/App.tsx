@@ -125,9 +125,11 @@ const AdminConsoleRoute = lazy(() =>
 // FAMILY-PILOT: the local-first family pilot shell. Lazy for the same reason as
 // the academy chunk — the pilot's state layer loads only when an enabled
 // household opens it, never on initial application load.
-const FamilyPilotShell = lazy(() =>
-  import('./study/family-pilot/FamilyPilotShell').then((module) => ({
-    default: module.FamilyPilotShell,
+// The integrated host composes the pilot's login, student, Study, Tutor and
+// parent surfaces over that shell; the shell alone renders state custody only.
+const FamilyPilotHost = lazy(() =>
+  import('./study/family-pilot/integration/FamilyPilotHost').then((module) => ({
+    default: module.FamilyPilotHost,
   })),
 )
 
@@ -473,7 +475,7 @@ export default function App() {
   if (screen.kind === 'familyPilot' && familyPilotEnabled) {
     return (
       <Suspense fallback={<main aria-busy="true">Loading the Family Pilot.</main>}>
-        <FamilyPilotShell
+        <FamilyPilotHost
           onExit={() => {
             leaveFamilyPilotPath()
             setScreen({ kind: 'home' })
