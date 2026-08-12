@@ -1,0 +1,372 @@
+[
+  {
+    "assessment_id": "ma-g12-technology-u01-assessment",
+    "unit_number": 1,
+    "unit_title": "Advanced Algorithms and Computational Limits",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain graph representations and traversal in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of greedy and dynamic programming strategies.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply algorithm design strategies in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving intractability and heuristics; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how correctness and complexity reasoning and algorithm selection under constraints relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Solve a constrained optimization or graph problem and defend the algorithm choice with complexity reasoning.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-technology-u02-assessment",
+    "unit_number": 2,
+    "unit_title": "Systems, Concurrency, and Performance",
+    "standards": [
+      "Michigan Computer Science: Computing Systems",
+      "Algorithms and Programming"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain memory models and resource limits in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of processes threads and concurrency.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply race conditions and safe coordination in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving profiling and bottleneck analysis; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how caching and optimization tradeoffs and reliability and failure modes relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Profile and optimize a supplied program, documenting measurements, tradeoffs, and correctness under concurrency.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-technology-u03-assessment",
+    "unit_number": 3,
+    "unit_title": "Applied Cybersecurity, Privacy Engineering, and Risk",
+    "standards": [
+      "Michigan Computer Science: Networks and the Internet — Cybersecurity",
+      "Impacts of Computing"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain risk assessment and threat modeling at scale in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of secure architecture and defense in depth.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply privacy by design and data minimization in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving incident response and disclosure ethics; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how authorization scope and legal boundaries and sandboxed defensive exercises relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Produce a security and privacy engineering review for a fictional system with a risk register and an incident-response plan; all work stays in a sandbox and no live system is tested.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-technology-u04-assessment",
+    "unit_number": 4,
+    "unit_title": "Computing Ethics, Law, Policy, and Societal Impact",
+    "standards": [
+      "Michigan Computer Science: Impacts of Computing"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain intellectual property licensing and attribution in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of privacy law and data rights.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply accessibility obligations in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving algorithmic accountability and auditing; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how labor economic and environmental effects and professional codes of conduct relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Write an evidence-based policy analysis of a computing practice with stakeholder, legal, and equity findings.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-technology-u05-assessment",
+    "unit_number": 5,
+    "unit_title": "Capstone Design, Build, and Test",
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Impacts of Computing"
+    ],
+    "total_points": 50,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain problem validation and stakeholders in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of requirements and success metrics.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply architecture and build increments in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving verification and test evidence; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how accessibility and privacy verification and iteration from feedback relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      },
+      {
+        "type": "defense and response to critique",
+        "prompt": "Respond to one substantive critique of the capstone work: state the critique fairly, say what you changed or why you did not, and name the limitation that remains.",
+        "points": 12
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "sustained craft or engineering quality",
+      "response to critique",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g12-technology-u06-assessment",
+    "unit_number": 6,
+    "unit_title": "Capstone Review, Defense, and Transition",
+    "standards": [
+      "Michigan Computer Science: Impacts of Computing",
+      "Algorithms and Programming"
+    ],
+    "total_points": 50,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain evidence assembly and documentation in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, score, data display, demonstration, or worked process to show understanding of independent review and critique response.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply limitations and future work in a new realistic situation. Show the process or cite the evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyse a plausible error, weak claim, unsafe choice, rights problem, or design flaw involving maintenance security and sunset planning; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Explain how presentation in a chosen private or public mode and pathways portfolio and transition relate — how one supports, constrains, contrasts with, or builds on the other.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit task: Defend the capstone in a chosen private or public mode with complete documentation, a response to independent review, and a maintenance and transition plan.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      },
+      {
+        "type": "defense and response to critique",
+        "prompt": "Respond to one substantive critique of the capstone work: state the critique fairly, say what you changed or why you did not, and name the limitation that remains.",
+        "points": 12
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence and reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "sustained craft or engineering quality",
+      "response to critique",
+      "checking and revision"
+    ],
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  }
+]
