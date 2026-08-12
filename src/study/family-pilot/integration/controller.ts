@@ -34,6 +34,7 @@ import { toStudentAssignments } from './assignments'
 import { assignmentRefFor, lessonSegments, type FamilyPilotCurriculumPort } from './curriculum'
 import { launchContextFor, learnerScopeFor, toStudentSelector } from './identity'
 import { checkStudyEntry, checkTutorEntry, type FamilyPilotSafetyPort } from './safety'
+import type { FamilyPilotSafetySignalSink } from './safetyHolds'
 
 // FAMILY-PILOT-INTEGRATION: the one object that owns the wiring.
 //
@@ -69,6 +70,8 @@ export interface FamilyPilotControllerOptions {
   readonly store?: FamilyPilotStoreOptions
   /** Absent until the separate Safety branch lands; the pilot runs without it. */
   readonly safety?: FamilyPilotSafetyPort
+  /** Where a Study or Tutor safety signal is recorded as a hold. Absent runs exactly as before: no hold is ever created. */
+  readonly safetySignals?: FamilyPilotSafetySignalSink
   readonly tutorDeps?: FamilyPilotTutorDeps
   readonly now?: () => Date
   readonly householdTimeZone?: string
@@ -87,6 +90,7 @@ export class FamilyPilotController {
   readonly #curriculum: FamilyPilotCurriculumPort
   readonly #store: FamilyPilotStoreOptions
   readonly #safety: FamilyPilotSafetyPort | undefined
+  readonly #safetySignals: FamilyPilotSafetySignalSink | undefined
   readonly #tutorDeps: FamilyPilotTutorDeps
   readonly #now: () => Date
   readonly #timeZone: string
@@ -105,6 +109,7 @@ export class FamilyPilotController {
     this.#curriculum = options.curriculum
     this.#store = options.store ?? {}
     this.#safety = options.safety
+    this.#safetySignals = options.safetySignals
     this.#tutorDeps = options.tutorDeps ?? {}
     this.#now = options.now ?? (() => new Date())
     this.#timeZone = options.householdTimeZone ?? 'UTC'
@@ -113,6 +118,9 @@ export class FamilyPilotController {
     this.#runtime = new FamilyPilotStudyRuntime({
       ports: options.ports,
       now: this.#now,
+      onSafetyStop: this.#safetySignals
+        ? (signal) => this.#safetySignals?.recordStudySignal(signal)
+        : undefined,
     })
   }
 
@@ -441,7 +449,19 @@ export class FamilyPilotController {
   }
 
   async helpTurn(session: FamilyPilotHelpSession, message: string): Promise<FamilyPilotHelpStep> {
-    return submitTurn(session, message, this.#tutorDeps)
+    const step = await submitTurn(session, message, this.#tutorDeps)
+    // createSafetyHold is itself idempotent per (studentRef, sessionRef,
+    // reasonCode), so recording on every flagged turn — not just the one that
+    // flipped it — never duplicates a hold.
+    if (step.session.flaggedForAdult) {
+      this.#safetySignals?.recordTutorSignal({
+        studentRef: step.session.scope.learnerRef,
+        sessionRef: step.session.scope.sessionRef,
+        concerning: true,
+        occurredAt: this.#at(),
+      })
+    }
+    return step
   }
 
   closeHelp(session: FamilyPilotHelpSession) {

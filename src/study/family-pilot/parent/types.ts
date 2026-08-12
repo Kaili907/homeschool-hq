@@ -1,4 +1,5 @@
 import type { StudyReviewRecommendation } from '../../types'
+import type { SafetyHoldV1 } from '../safety'
 
 /**
  * First-party, plain typed contracts for the family-pilot Parent Hub. Every
@@ -68,4 +69,17 @@ export interface FamilyPilotStudentSnapshot {
 export interface FamilyPilotActionOutcome {
   readonly ok: boolean
   readonly message: string
+}
+
+/**
+ * The Family Pilot safety-hold surface (mac/family-pilot-safety-r1), a
+ * separate and resolvable concept from FamilyPilotSafetyStatus above, which
+ * reflects the Study Engine's own PERMANENT local-stop ledger and is never
+ * resolvable from this Hub. Absent when the safety-hold bridge is not wired
+ * (e.g. an existing FamilyPilotParentHub caller/test that predates it), in
+ * which case no hold section renders — identical to today's behavior.
+ */
+export interface FamilyPilotSafetyHoldsView {
+  readonly openHoldsFor: (studentRef: string) => readonly SafetyHoldV1[]
+  readonly resolveHold: (holdRef: string, clearedBy: string) => { readonly ok: boolean; readonly message: string }
 }
