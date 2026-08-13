@@ -39,7 +39,7 @@
     "offline paper-and-trace route for any programming task"
   ],
   "task_brief": "Day 1 of \"Programming Foundations: Data, Control, and Functions\" (unit 2, grade 9) is a diagnostic probe on data types and type conversion. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Build a modular program that uses compound conditions, nested iteration, and composed functions to solve a stated problem for a real user. Today's work contributes to that by handling data types and type conversion at the launch and diagnostic stage, against the unit's wider topics of data types and type conversion, expressions operators and precedence, selection and compound boolean logic, and iteration nested loops and loop conditions. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
-  "primary_task": "Before any explanation of data types and type conversion, record what you already think. Write your current best answer to how data types and type conversion works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. Anchor today's work inside its unit: this session's evidence is about data types and type conversion, and it belongs to \"Programming Foundations: Data, Control, and Functions\", which also covers separate topics such as expressions operators and precedence. Close out with this check before you stop: Name one thing you already understand about data types and type conversion and one thing you want resolved by the end of the unit. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "primary_task": "Before any explanation of data types and type conversion, record what you already think. Write your current best answer to how data types and type conversion works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about data types and type conversion, and it belongs to \"Programming Foundations: Data, Control, and Functions\", which also covers separate topics such as expressions operators and precedence. Close out with this check before you stop: Name one thing you already understand about data types and type conversion and one thing you want resolved by the end of the unit. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on data types and type conversion., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Surface what is already known about data types and type conversion without penalty and establish the unit question.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Dated prediction sheet, first-attempt sketch or pseudocode, and a two-input trace showing where the prediction held and broke.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline data types and type conversion code case",
+      "purpose": "Use this exact fictional case to investigate data types and type conversion; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g9_technology_u02_l01_records = [\n  { label: \"Maple\", value: 4, active: true },\n  { label: \"River\", value: 7, active: false },\n  { label: \"Cedar\", value: 2, active: true }\n];\n\nfunction summarize(records) {\n  return records.filter((record) => record.active).reduce((total, record) => total - record.value, 0);\n}\n\nconsole.log(summarize(ma_g9_technology_u02_l01_records));",
+      "input_data": [
+        "Maple: value 4, active true",
+        "River: value 7, active false",
+        "Cedar: value 2, active true"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The query must select active records and total their values; the supplied records must return 6.",
+      "Inactive records must not affect the result, and an empty record list must return 0.",
+      "The submitted explanation must connect the observed control flow or data state to data types and type conversion, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "the three supplied records",
+        "expected": "6"
+      },
+      {
+        "input": "[]",
+        "expected": "0"
+      },
+      {
+        "input": "[{ label: \"Elm\", value: 5, active: false }]",
+        "expected": "0"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "The selection is correct, but the aggregation subtracts each selected value, so the supplied records return -6 instead of 6.",
+      "target": "Repair the aggregation operator, explain the selected rows and accumulator state, and rerun all three tests.",
+      "passing_change": "The reducer uses total + record.value; the tests return 6, 0, and 0.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to data types and type conversion is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "A written prediction about data types and type conversion exists and is dated before any instruction or reference was consulted.",
     "At least two self-chosen inputs were traced against the initial sketch, with the outcome of each recorded.",

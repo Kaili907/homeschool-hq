@@ -39,7 +39,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "Day 2 of \"Programming and Software Design\" (unit 2, grade 8) is a worked-model trace on data and variables. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Build a small application, simulation, or game that solves a defined user need. Today's work contributes to that by handling data and variables at the explicit model stage, against the unit's wider topics of requirements and decomposition, data and variables, selection and iteration, and functions or procedures. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
-  "primary_task": "Work through the provided worked model of data and variables one step at a time rather than reading it straight through. For each step, write what changed and why that step is legal. Build a trace table with one row per step showing the values or states before and after. Then change exactly one line, value, or condition in the model, predict the new result before running or re-tracing it, and record whether your prediction was right. Explain in your own words the rule that makes data and variables behave the way the model shows. Anchor today's work inside its unit: this session's evidence is about data and variables, and it belongs to \"Programming and Software Design\", which also covers separate topics such as requirements and decomposition. Close out with this check before you stop: In one concise response, show or explain the most important idea about data and variables; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
+  "primary_task": "Work through the complete central input printed in activity_setup for data and variables, one step at a time rather than reading it straight through. For each step, write what changed and why that step is legal. Build a trace table with one row per step showing the values or states before and after. Then change exactly one line, value, or condition in the model, predict the new result before running or re-tracing it, and record whether your prediction was right. Explain in your own words the rule that makes data and variables behave the way the model shows. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about data and variables, and it belongs to \"Programming and Software Design\", which also covers separate topics such as requirements and decomposition. Close out with this check before you stop: In one concise response, show or explain the most important idea about data and variables; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task about data and variables., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
     "Address the lesson objective: Build a clear mental model of data and variables through an explicit worked example, demonstration, text, or phenomenon.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Completed step-by-step trace table with per-step reasons, plus the one-change experiment with prediction and outcome.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline data and variables code case",
+      "purpose": "Use this exact fictional case to investigate data and variables; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g8_technology_u02_l02_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g8_technology_u02_l02_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to data and variables, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to data and variables is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "The trace table has one row per step and shows values or states both before and after that step.",
     "Every step carries a written reason that step is legal, not just a restatement of what happened.",

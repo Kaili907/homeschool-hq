@@ -32,6 +32,7 @@ import {
 } from './lessonPhasesElementary.mjs'
 import { buildAccessibilityProvisions } from './lessonAccessibility.mjs'
 import { buildLessonRubric } from './lessonRubrics.mjs'
+import { buildTechnologyActivitySetup } from './technologyActivitySetup.mjs'
 
 /**
  * The specificity heuristic in src/curriculum/production-quality rejects
@@ -249,6 +250,7 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
   const taskType = classifyLesson(lesson, unit, subjectKey)
 
   const taskFocus = taskFacingFocus(lesson.focus, subjectKey)
+  const activitySetup = isTech ? buildTechnologyActivitySetup({ lesson, taskType, grade }) : undefined
 
   /**
    * Authored strings (objectives, success criteria, formative checks, tutor
@@ -316,7 +318,12 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     : (isTech ? TECH_DELIVERABLE : ARTS_DELIVERABLE)
 
   const taskBody = taskRegistry[mode](ctx)
-  const primaryTask = `${taskBody}${anchor} ${gradeExpectation}`
+  const completeInputNote = isTech
+    ? elementary
+      ? ' Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app.'
+      : ' The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool.'
+    : ''
+  const primaryTask = `${taskBody}${completeInputNote}${anchor} ${gradeExpectation}`
 
   /**
    * Elementary tasks are authored one action per sentence, so splitting the
@@ -423,6 +430,7 @@ export function buildLessonMaterials({ lesson, unit, assessment, subjectKey, ban
     ...(taskSteps ? { task_steps: taskSteps } : {}),
     requirements,
     deliverable,
+    ...(activitySetup ? { activity_setup: activitySetup } : {}),
     ...(scaffoldNote ? { guided_scaffold_note: scaffoldNote } : {}),
     [isTech ? 'test_or_check_criteria' : 'critique_criteria']: checks,
     presentation_and_privacy: isTech

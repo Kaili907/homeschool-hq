@@ -39,7 +39,7 @@
     "approved editor or runtime, with an offline paper-and-trace route available"
   ],
   "task_brief": "Day 6 of \"Computational Thinking and Problem Decomposition\" (unit 1, grade 9) is a correction and reflection on computational thinking and problem decomposition. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Design and hand-trace an algorithm for a defined user need, documenting decomposition and abstraction choices. Today's work contributes to that by handling computational thinking and problem decomposition at the correction and reflection stage, against the unit's wider topics of problem framing and requirements, decomposition into subproblems, abstraction and pattern recognition, and algorithm design and pseudocode. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Correct and reflect on your own earlier work involving computational thinking and problem decomposition. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about computational thinking and problem decomposition — and name one habit that would catch that pattern earlier next time. Anchor today's work inside its unit: this session's evidence is about computational thinking and problem decomposition, and it belongs to \"Computational Thinking and Problem Decomposition\", which also covers separate topics such as problem framing and requirements. Close out with this check before you stop: For one corrected item, state the original error, its cause, and the check that would catch it next time. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "primary_task": "Correct and reflect on your own earlier work involving computational thinking and problem decomposition. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about computational thinking and problem decomposition — and name one habit that would catch that pattern earlier next time. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about computational thinking and problem decomposition, and it belongs to \"Computational Thinking and Problem Decomposition\", which also covers separate topics such as problem framing and requirements. Close out with this check before you stop: For one corrected item, state the original error, its cause, and the check that would catch it next time. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on computational thinking and problem decomposition., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Use error evidence to correct work on computational thinking and problem decomposition and demonstrate corrected understanding on a fresh item.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Defect log with symptom/root cause/fix/passing check per error, one before-and-after failing case, and a named error pattern with a countermeasure habit.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline computational thinking and problem decomposition code case",
+      "purpose": "Use this exact fictional case to investigate computational thinking and problem decomposition; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g9_technology_u01_l06_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g9_technology_u01_l06_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to computational thinking and problem decomposition, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to computational thinking and problem decomposition is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "The defect log has one row per error with symptom, root cause, the specific fix, and the check that now passes.",
     "At least one case demonstrably failed before the fix and passes after it.",

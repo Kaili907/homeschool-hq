@@ -39,7 +39,7 @@
     "supplied defective sample programs; offline trace route available"
   ],
   "task_brief": "Day 1 of \"Debugging, Testing, and Version Control\" (unit 3, grade 9) is a diagnostic probe on defect classes and error messages. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Repair a supplied defective program and deliver a commit history, a defect log, a failing test that reproduces the bug, and a verified fix. Today's work contributes to that by handling defect classes and error messages at the launch and diagnostic stage, against the unit's wider topics of defect classes and error messages, reading traces and diagnostic output, systematic debugging strategy, and version control commits and history. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
-  "primary_task": "Before any explanation of defect classes and error messages, record what you already think. Write your current best answer to how defect classes and error messages works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. Anchor today's work inside its unit: this session's evidence is about defect classes and error messages, and it belongs to \"Debugging, Testing, and Version Control\", which also covers separate topics such as reading traces and diagnostic output. Close out with this check before you stop: Name one thing you already understand about defect classes and error messages and one thing you want resolved by the end of the unit. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "primary_task": "Before any explanation of defect classes and error messages, record what you already think. Write your current best answer to how defect classes and error messages works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about defect classes and error messages, and it belongs to \"Debugging, Testing, and Version Control\", which also covers separate topics such as reading traces and diagnostic output. Close out with this check before you stop: Name one thing you already understand about defect classes and error messages and one thing you want resolved by the end of the unit. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on defect classes and error messages., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Surface what is already known about defect classes and error messages without penalty and establish the unit question.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Dated prediction sheet, first-attempt sketch or pseudocode, and a two-input trace showing where the prediction held and broke.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline defect classes and error messages code case",
+      "purpose": "Use this exact fictional case to investigate defect classes and error messages; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "class ma_g9_technology_u03_l01_Counter {\n  constructor() { this.value = 0; }\n  add(amount) { this.value = amount; }\n}\n\nconst counter = new ma_g9_technology_u03_l01_Counter();\ncounter.add(2);\ncounter.add(3);\nconsole.log(counter.value);",
+      "input_data": [
+        "starting state 0",
+        "add(2)",
+        "add(3)"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The object must preserve its state and add each amount; after add(2) and add(3), the exact value must be 5.",
+      "Each method call must change only the counter instance state, and adding 0 must leave the state unchanged.",
+      "The submitted explanation must connect the observed control flow or data state to defect classes and error messages, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "start 0; add(2); add(3)",
+        "expected": "5"
+      },
+      {
+        "input": "start 0; add(0)",
+        "expected": "0"
+      },
+      {
+        "input": "start 0; add(-1); add(4)",
+        "expected": "3"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "The add method replaces the stored state instead of composing the new amount with the prior state, so the supplied calls end at 3 instead of 5.",
+      "target": "Repair the state update inside add, explain the role of the existing instance value, and rerun all three tests.",
+      "passing_change": "The update combines this.value with amount; the three tests return 5, 0, and 3.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to defect classes and error messages is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "A written prediction about defect classes and error messages exists and is dated before any instruction or reference was consulted.",
     "At least two self-chosen inputs were traced against the initial sketch, with the outcome of each recorded.",

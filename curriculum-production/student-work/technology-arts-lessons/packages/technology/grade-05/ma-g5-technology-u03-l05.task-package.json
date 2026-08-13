@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 5 of \"Typing and Productivity Tools\". That is unit 3 in grade 5. Today is a mastery demonstration about collaboration comments. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Create an accessible one-page guide and short presentation on a curriculum topic. Today helps by working on collaboration comments. Your unit also covers efficient keyboarding, document structure, tables and slides, and accessibility features. Today counts for a grade. Do it on your own.",
-  "primary_task": "Show that you can do this on your own: collaboration comments. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to collaboration comments could follow it. Keep today's work tied to your unit. Today is about collaboration comments. It is part of \"Typing and Productivity Tools\". Later days in this unit cover other things, like efficient keyboarding. Before you stop, do this check: Rate confidence in collaboration comments, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
+  "primary_task": "Show that you can do this on your own: collaboration comments. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to collaboration comments could follow it. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about collaboration comments. It is part of \"Typing and Productivity Tools\". Later days in this unit cover other things, like efficient keyboarding. Before you stop, do this check: Rate confidence in collaboration comments, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
   "task_steps": [
     "Show that you can do this on your own: collaboration comments.",
     "Put away the help sheet and the examples.",
@@ -60,6 +60,61 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your solution done alone, a two-way check with expected and actual, and an explanation someone new could follow.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline design brief for collaboration comments",
+      "purpose": "Design only for the fictional learner described here; no interview, public post, account, camera, or outside tester is needed.",
+      "fictional_user": "Kai uses a keyboard, sometimes enlarges text to 200%, and wants a three-step way to track completed reading sessions without entering a name or location.",
+      "required_features": [
+        "Add one reading session in at most three actions.",
+        "Show completion using both a word and a visual mark, not color alone.",
+        "Remain understandable at 200% text size.",
+        "Store only a fictional book label and a completed/not-completed value."
+      ],
+      "fixed_constraint": "The prototype is a labelled paper sketch or local file; it is never published and collects no real personal data."
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply collaboration comments to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to collaboration comments.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "You solved it with no help sheet and no examples in front of you.",
     "You wrote what you expected first, then tested two ways including a tricky one.",

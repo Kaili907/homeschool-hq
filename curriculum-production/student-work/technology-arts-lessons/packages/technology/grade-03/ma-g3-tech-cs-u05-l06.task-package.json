@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 6 of \"Pictures, Sounds, and Simple Data\". That is unit 5 in grade 3. Today is a correction and reflection about checking if a fact seems true. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Collect a small set of data and create a simple picture graph with a short conclusion. Today helps by working on checking if a fact seems true. Your unit also covers sorting and counting objects, simple picture graphs, choosing a picture that fits, and comparing two data sets. Today adds real evidence toward your unit project.",
-  "primary_task": "Look back at your earlier work on checking if a fact seems true and fix it. Make a fix-it list. For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now. Include one thing that failed before and works now. Then look at all your mistakes together. What do they have in common? Name one habit that would catch it sooner. Keep today's work tied to your unit. Today is about checking if a fact seems true. It is part of \"Pictures, Sounds, and Simple Data\". Later days in this unit cover other things, like sorting and counting objects. Before you stop, do this check: In one concise response, show or explain the most important idea about checking if a fact seems true; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
+  "primary_task": "Look back at your earlier work on checking if a fact seems true and fix it. Make a fix-it list. For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now. Include one thing that failed before and works now. Then look at all your mistakes together. What do they have in common? Name one habit that would catch it sooner. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about checking if a fact seems true. It is part of \"Pictures, Sounds, and Simple Data\". Later days in this unit cover other things, like sorting and counting objects. Before you stop, do this check: In one concise response, show or explain the most important idea about checking if a fact seems true; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
   "task_steps": [
     "Look back at your earlier work on checking if a fact seems true and fix it.",
     "Make a fix-it list.",
@@ -58,6 +58,85 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your fix-it list with what went wrong, why, the change, and the check that passes, plus what your mistakes share.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline fictional evidence table for checking if a fact seems true",
+      "purpose": "Use every row below; the table is the entire dataset for the task and contains no real person or location.",
+      "columns": [
+        "case",
+        "category",
+        "value",
+        "source_note"
+      ],
+      "rows": [
+        [
+          "Maple",
+          "A",
+          4,
+          "direct count recorded twice"
+        ],
+        [
+          "River",
+          "B",
+          7,
+          "estimate with a range of 6 to 8"
+        ],
+        [
+          "Cedar",
+          "A",
+          2,
+          "direct count recorded once"
+        ],
+        [
+          "Harbor",
+          "B",
+          7,
+          "copied claim with no supporting observation"
+        ]
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply checking if a fact seems true to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to checking if a fact seems true.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "Your fix-it list says what went wrong, why, what you changed, and how you know it works.",
     "At least one thing failed before and works now.",

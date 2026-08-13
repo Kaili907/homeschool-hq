@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 1 of \"Data, Media, and Checking Sources\". That is unit 5 in grade 4. Today is a diagnostic probe about collecting simple data. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Create a short data story with a chart, cited or original media, and a source-check note. Today helps by working on collecting simple data. Your unit also covers collecting simple data, making tables and charts, image and media rights basics, and search strategies. Today is for practice. You are scored on finishing and being honest, not on getting it perfect.",
-  "primary_task": "First, write what you already think about collecting simple data. Do this before anyone explains it. Draw or list the steps you think are needed. Then guess one thing that would break your steps. Try your steps on two examples you make up. Mark what worked. Mark what did not. A wrong guess is fine here. It does not lower your score. Keep today's work tied to your unit. Today is about collecting simple data. It is part of \"Data, Media, and Checking Sources\". Later days in this unit cover other things, like making tables and charts. Before you stop, do this check: In one concise response, show or explain the most important idea about collecting simple data; then identify one check that would catch an error or weak claim. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully.",
+  "primary_task": "First, write what you already think about collecting simple data. Do this before anyone explains it. Draw or list the steps you think are needed. Then guess one thing that would break your steps. Try your steps on two examples you make up. Mark what worked. Mark what did not. A wrong guess is fine here. It does not lower your score. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about collecting simple data. It is part of \"Data, Media, and Checking Sources\". Later days in this unit cover other things, like making tables and charts. Before you stop, do this check: In one concise response, show or explain the most important idea about collecting simple data; then identify one check that would catch an error or weak claim. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully.",
   "task_steps": [
     "First, write what you already think about collecting simple data.",
     "Do this before anyone explains it.",
@@ -60,6 +60,85 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your dated guess sheet, your first sketch or steps, and a two-example try showing what worked and what did not.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline fictional evidence table for collecting simple data",
+      "purpose": "Use every row below; the table is the entire dataset for the task and contains no real person or location.",
+      "columns": [
+        "case",
+        "category",
+        "value",
+        "source_note"
+      ],
+      "rows": [
+        [
+          "Maple",
+          "A",
+          4,
+          "direct count recorded twice"
+        ],
+        [
+          "River",
+          "B",
+          7,
+          "estimate with a range of 6 to 8"
+        ],
+        [
+          "Cedar",
+          "A",
+          2,
+          "direct count recorded once"
+        ],
+        [
+          "Harbor",
+          "B",
+          7,
+          "copied claim with no supporting observation"
+        ]
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply collecting simple data to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to collecting simple data.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "You wrote what you thought about collecting simple data before anyone explained it, and you put the date on it.",
     "You tried your own steps on two examples you made up, and wrote what happened each time.",

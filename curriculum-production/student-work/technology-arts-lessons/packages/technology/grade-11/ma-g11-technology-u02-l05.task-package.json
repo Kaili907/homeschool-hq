@@ -39,7 +39,7 @@
     "offline paper-and-trace route for any programming task"
   ],
   "task_brief": "Day 5 of \"Object-Oriented and Modular Design\" (unit 2, grade 11) is a mastery demonstration on object-oriented and modular design. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Refactor a procedural program into a modular design and demonstrate preserved behavior with tests. Today's work contributes to that by handling object-oriented and modular design at the mastery check stage, against the unit's wider topics of objects classes and state, encapsulation and interfaces, composition and inheritance tradeoffs, and modules and dependencies. This session produces graded evidence of record and must be completed independently.",
-  "primary_task": "Demonstrate object-oriented and modular design independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen object-oriented and modular design could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. Anchor today's work inside its unit: this session's evidence is about object-oriented and modular design, and it belongs to \"Object-Oriented and Modular Design\", which also covers separate topics such as objects classes and state. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
+  "primary_task": "Demonstrate object-oriented and modular design independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen object-oriented and modular design could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about object-oriented and modular design, and it belongs to \"Object-Oriented and Modular Design\", which also covers separate topics such as objects classes and state. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on object-oriented and modular design., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Demonstrate current mastery across object-oriented and modular design, showing process or evidence for each response.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline object-oriented and modular design code case",
+      "purpose": "Use this exact fictional case to investigate object-oriented and modular design; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "class ma_g11_technology_u02_l05_Counter {\n  constructor() { this.value = 0; }\n  add(amount) { this.value = amount; }\n}\n\nconst counter = new ma_g11_technology_u02_l05_Counter();\ncounter.add(2);\ncounter.add(3);\nconsole.log(counter.value);",
+      "input_data": [
+        "starting state 0",
+        "add(2)",
+        "add(3)"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The object must preserve its state and add each amount; after add(2) and add(3), the exact value must be 5.",
+      "Each method call must change only the counter instance state, and adding 0 must leave the state unchanged.",
+      "The submitted explanation must connect the observed control flow or data state to object-oriented and modular design, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "start 0; add(2); add(3)",
+        "expected": "5"
+      },
+      {
+        "input": "start 0; add(0)",
+        "expected": "0"
+      },
+      {
+        "input": "start 0; add(-1); add(4)",
+        "expected": "3"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "The add method replaces the stored state instead of composing the new amount with the prior state, so the supplied calls end at 3 instead of 5.",
+      "target": "Repair the state update inside add, explain the role of the existing instance value, and rerun all three tests.",
+      "passing_change": "The update combines this.value with amount; the three tests return 5, 0, and 3.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to object-oriented and modular design is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "The solution is complete and correct with no scaffold, prompt, or worked example in view.",
     "Expected results were stated first, then at least two cases including a boundary case were run with actual against expected shown.",

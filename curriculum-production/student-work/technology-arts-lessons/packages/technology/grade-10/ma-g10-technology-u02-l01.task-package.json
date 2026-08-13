@@ -39,7 +39,7 @@
     "approved editor or runtime, with an offline paper-and-trace route available"
   ],
   "task_brief": "Day 1 of \"Algorithms, Efficiency, and Correctness\" (unit 2, grade 10) is a diagnostic probe on searching algorithms. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Compare searching and sorting approaches using complexity reasoning together with measured runtime evidence. Today's work contributes to that by handling searching algorithms at the launch and diagnostic stage, against the unit's wider topics of searching algorithms, sorting algorithms, recursion and base cases, and complexity and growth rates. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
-  "primary_task": "Before any explanation of searching algorithms, record what you already think. Write your current best answer to how searching algorithms works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. Anchor today's work inside its unit: this session's evidence is about searching algorithms, and it belongs to \"Algorithms, Efficiency, and Correctness\", which also covers separate topics such as sorting algorithms. Close out with this check before you stop: Name one thing you already understand about searching algorithms and one thing you want resolved by the end of the unit. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely.",
+  "primary_task": "Before any explanation of searching algorithms, record what you already think. Write your current best answer to how searching algorithms works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about searching algorithms, and it belongs to \"Algorithms, Efficiency, and Correctness\", which also covers separate topics such as sorting algorithms. Close out with this check before you stop: Name one thing you already understand about searching algorithms and one thing you want resolved by the end of the unit. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on searching algorithms., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Surface what is already known about searching algorithms without penalty and establish the unit question.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Dated prediction sheet, first-attempt sketch or pseudocode, and a two-input trace showing where the prediction held and broke.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline searching algorithms code case",
+      "purpose": "Use this exact fictional case to investigate searching algorithms; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g10_technology_u02_l01_values = [4, 7, 2];\n\nfunction greatest(values) {\n  let best = 0;\n  for (const value of values) {\n    if (value > best) best = value;\n  }\n  return best;\n}\n\nconsole.log(greatest(ma_g10_technology_u02_l01_values));",
+      "input_data": [
+        "[4, 7, 2]",
+        "[-5, -2, -9]",
+        "[6]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The algorithm must return the greatest member of a nonempty list; the supplied list must return 7.",
+      "The invariant is that best equals the greatest value examined so far, including when every value is negative.",
+      "The submitted explanation must connect the observed control flow or data state to searching algorithms, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[4, 7, 2]",
+        "expected": "7"
+      },
+      {
+        "input": "[-5, -2, -9]",
+        "expected": "-2"
+      },
+      {
+        "input": "[6]",
+        "expected": "6"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
+      "target": "Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.",
+      "passing_change": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to searching algorithms is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "A written prediction about searching algorithms exists and is dated before any instruction or reference was consulted.",
     "At least two self-chosen inputs were traced against the initial sketch, with the outcome of each recorded.",

@@ -39,7 +39,7 @@
     "supplied defective sample programs; offline trace route available"
   ],
   "task_brief": "Day 6 of \"Software Engineering Practice and Collaborative Version Control\" (unit 1, grade 11) is a correction and reflection on software engineering practice and collaborative version control. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Run a full engineering workflow on a small feature with tracked issues, branches, a resolved merge conflict, review notes, and test evidence. Today's work contributes to that by handling software engineering practice and collaborative version control at the correction and reflection stage, against the unit's wider topics of requirements and user stories, branching merging and conflict resolution, code review and shared standards, and refactoring and technical debt. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Correct and reflect on your own earlier work involving software engineering practice and collaborative version control. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about software engineering practice and collaborative version control — and name one habit that would catch that pattern earlier next time. Anchor today's work inside its unit: this session's evidence is about software engineering practice and collaborative version control, and it belongs to \"Software Engineering Practice and Collaborative Version Control\", which also covers separate topics such as requirements and user stories. Close out with this check before you stop: For one corrected item, state the original error, its cause, and the check that would catch it next time. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
+  "primary_task": "Correct and reflect on your own earlier work involving software engineering practice and collaborative version control. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about software engineering practice and collaborative version control — and name one habit that would catch that pattern earlier next time. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about software engineering practice and collaborative version control, and it belongs to \"Software Engineering Practice and Collaborative Version Control\", which also covers separate topics such as requirements and user stories. Close out with this check before you stop: For one corrected item, state the original error, its cause, and the check that would catch it next time. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on software engineering practice and collaborative version control., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Use error evidence to correct work on software engineering practice and collaborative version control and demonstrate corrected understanding on a fresh item.",
@@ -48,6 +48,65 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Defect log with symptom/root cause/fix/passing check per error, one before-and-after failing case, and a named error pattern with a countermeasure habit.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline paper system for software engineering practice and collaborative version control",
+      "purpose": "Use the labelled parts and event log below; no device, account, network, or special application is required.",
+      "labelled_parts": [
+        "Input card I1: the user selects Save",
+        "Process card P1: the application checks the file name",
+        "Storage card S1: Folder/Practice receives a copy named draft-02.txt",
+        "Output card O1: the screen reports Saved as draft-02.txt"
+      ],
+      "event_log": [
+        "09:00 — draft-01.txt exists in Folder/Practice",
+        "09:02 — user selects Save As and enters draft-02.txt",
+        "09:03 — storage card records draft-02.txt",
+        "09:04 — output card reports success"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply software engineering practice and collaborative version control to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one limitation or trade-off and explain why the available evidence does not settle it."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to software engineering practice and collaborative version control.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "The defect log has one row per error with symptom, root cause, the specific fix, and the check that now passes.",
     "At least one case demonstrably failed before the fix and passes after it.",

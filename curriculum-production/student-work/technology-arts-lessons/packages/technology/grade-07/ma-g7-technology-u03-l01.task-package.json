@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "Day 1 of \"Web and Interface Design\" (unit 3, grade 7) is a diagnostic probe on HTML or block-based page structure. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Create a small accessible site or prototype for a curriculum or community purpose. Today's work contributes to that by handling HTML or block-based page structure at the launch and diagnostic stage, against the unit's wider topics of HTML or block-based page structure, visual hierarchy, navigation, and forms without personal data. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
-  "primary_task": "Before any explanation of HTML or block-based page structure, record what you already think. Write your current best answer to how HTML or block-based page structure works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. Anchor today's work inside its unit: this session's evidence is about HTML or block-based page structure, and it belongs to \"Web and Interface Design\", which also covers separate topics such as visual hierarchy. Close out with this check before you stop: In one concise response, show or explain the most important idea about HTML or block-based page structure; then identify one check that would catch an error or weak claim. At grade 7 the bar is independent work with reasoning that a reader can follow without you present, plus one stated check you ran on your own result before submitting.",
+  "primary_task": "Before any explanation of HTML or block-based page structure, record what you already think. Write your current best answer to how HTML or block-based page structure works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about HTML or block-based page structure, and it belongs to \"Web and Interface Design\", which also covers separate topics such as visual hierarchy. Close out with this check before you stop: In one concise response, show or explain the most important idea about HTML or block-based page structure; then identify one check that would catch an error or weak claim. At grade 7 the bar is independent work with reasoning that a reader can follow without you present, plus one stated check you ran on your own result before submitting.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task about HTML or block-based page structure., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
     "Address the lesson objective: Activate prior knowledge about HTML or block-based page structure, surface initial thinking without penalty, and establish the unit question.",
@@ -49,6 +49,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Dated prediction sheet, first-attempt sketch or pseudocode, and a two-input trace showing where the prediction held and broke.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline HTML or block-based page structure code case",
+      "purpose": "Use this exact fictional case to investigate HTML or block-based page structure; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g7_technology_u03_l01_controls = [\n  { text: \"Save\", label: \"\" },\n  { text: \"Cancel\", label: \"Cancel\" }\n];\n\nfunction countMissingLabels(controls) {\n  return controls.filter((control) => control.text.trim().length === 0).length;\n}\n\nconsole.log(countMissingLabels(ma_g7_technology_u03_l01_controls));",
+      "input_data": [
+        "{ text: \"Save\", label: \"\" }",
+        "{ text: \"Cancel\", label: \"Cancel\" }",
+        "[]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The function must count controls whose label is empty; the supplied two-control input must return 1.",
+      "The function must inspect the label field, must not alter the controls, and must return 0 for an empty list.",
+      "The submitted explanation must connect the observed control flow or data state to HTML or block-based page structure, not merely state the final number.",
+      "The smallest test case must be tried and its actual result compared with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "the two supplied controls",
+        "expected": "1"
+      },
+      {
+        "input": "[]",
+        "expected": "0"
+      },
+      {
+        "input": "[{ text: \"Go\", label: \"Go\" }]",
+        "expected": "0"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "The code checks visible text instead of the label field, so it reports 0 missing labels when one label is missing.",
+      "target": "Change the field used by the filter, explain why visible text and an accessible label are separate data, and rerun all three tests.",
+      "passing_change": "The filter checks control.label; the three tests return 1, 0, and 0.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to HTML or block-based page structure is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "A written prediction about HTML or block-based page structure exists and is dated before any instruction or reference was consulted.",
     "At least two self-chosen inputs were traced against the initial sketch, with the outcome of each recorded.",

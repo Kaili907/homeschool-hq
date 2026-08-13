@@ -39,7 +39,7 @@
     "approved editor or runtime, with an offline paper-and-trace route available"
   ],
   "task_brief": "Day 6 of \"Algorithms, Efficiency, and Correctness\" (unit 2, grade 10) is a correction and reflection on algorithms, efficiency, and correctness. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Compare searching and sorting approaches using complexity reasoning together with measured runtime evidence. Today's work contributes to that by handling algorithms, efficiency, and correctness at the correction and reflection stage, against the unit's wider topics of searching algorithms, sorting algorithms, recursion and base cases, and complexity and growth rates. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Correct and reflect on your own earlier work involving algorithms, efficiency, and correctness. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about algorithms, efficiency, and correctness — and name one habit that would catch that pattern earlier next time. Anchor today's work inside its unit: this session's evidence is about algorithms, efficiency, and correctness, and it belongs to \"Algorithms, Efficiency, and Correctness\", which also covers separate topics such as searching algorithms. Close out with this check before you stop: For one corrected item, state the original error, its cause, and the check that would catch it next time. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely.",
+  "primary_task": "Correct and reflect on your own earlier work involving algorithms, efficiency, and correctness. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about algorithms, efficiency, and correctness — and name one habit that would catch that pattern earlier next time. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about algorithms, efficiency, and correctness, and it belongs to \"Algorithms, Efficiency, and Correctness\", which also covers separate topics such as searching algorithms. Close out with this check before you stop: For one corrected item, state the original error, its cause, and the check that would catch it next time. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on algorithms, efficiency, and correctness., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Use error evidence to correct work on algorithms, efficiency, and correctness and demonstrate corrected understanding on a fresh item.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Defect log with symptom/root cause/fix/passing check per error, one before-and-after failing case, and a named error pattern with a countermeasure habit.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline algorithms, efficiency, and correctness code case",
+      "purpose": "Use this exact fictional case to investigate algorithms, efficiency, and correctness; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g10_technology_u02_l06_values = [4, 7, 2];\n\nfunction greatest(values) {\n  let best = 0;\n  for (const value of values) {\n    if (value > best) best = value;\n  }\n  return best;\n}\n\nconsole.log(greatest(ma_g10_technology_u02_l06_values));",
+      "input_data": [
+        "[4, 7, 2]",
+        "[-5, -2, -9]",
+        "[6]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The algorithm must return the greatest member of a nonempty list; the supplied list must return 7.",
+      "The invariant is that best equals the greatest value examined so far, including when every value is negative.",
+      "The submitted explanation must connect the observed control flow or data state to algorithms, efficiency, and correctness, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[4, 7, 2]",
+        "expected": "7"
+      },
+      {
+        "input": "[-5, -2, -9]",
+        "expected": "-2"
+      },
+      {
+        "input": "[6]",
+        "expected": "6"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
+      "target": "Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.",
+      "passing_change": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to algorithms, efficiency, and correctness is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "The defect log has one row per error with symptom, root cause, the specific fix, and the check that now passes.",
     "At least one case demonstrably failed before the fix and passes after it.",

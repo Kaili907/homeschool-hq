@@ -39,7 +39,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 1 of \"Patterns, Sequences, and Introductory Algorithms\". That is unit 4 in grade 3. Today is a diagnostic probe about what is an algorithm. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Write and test a step-by-step set of directions for a partner or character to follow. Today helps by working on what is an algorithm. Your unit also covers what is an algorithm, everyday sequences, giving step-by-step directions, and following a partner's directions. Today is for practice. You are scored on finishing and being honest, not on getting it perfect.",
-  "primary_task": "First, write what you already think about what is an algorithm. Do this before anyone explains it. Draw or list the steps you think are needed. Then guess one thing that would break your steps. Try your steps on two examples you make up. Mark what worked. Mark what did not. A wrong guess is fine here. It does not lower your score. Keep today's work tied to your unit. Today is about what is an algorithm. It is part of \"Patterns, Sequences, and Introductory Algorithms\". Later days in this unit cover other things, like everyday sequences. Before you stop, do this check: In one concise response, show or explain the most important idea about what is an algorithm; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
+  "primary_task": "First, write what you already think about what is an algorithm. Do this before anyone explains it. Draw or list the steps you think are needed. Then guess one thing that would break your steps. Try your steps on two examples you make up. Mark what worked. Mark what did not. A wrong guess is fine here. It does not lower your score. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about what is an algorithm. It is part of \"Patterns, Sequences, and Introductory Algorithms\". Later days in this unit cover other things, like everyday sequences. Before you stop, do this check: In one concise response, show or explain the most important idea about what is an algorithm; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
   "task_steps": [
     "First, write what you already think about what is an algorithm.",
     "Do this before anyone explains it.",
@@ -59,6 +59,61 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your dated guess sheet, your first sketch or steps, and a two-example try showing what worked and what did not.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline what is an algorithm code case",
+      "purpose": "Use this exact fictional case to investigate what is an algorithm; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g3_tech_cs_u04_l01_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g3_tech_cs_u04_l01_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to what is an algorithm, not merely state the final number.",
+      "The smallest test case must be tried and its actual result compared with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to what is an algorithm is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "You wrote what you thought about what is an algorithm before anyone explained it, and you put the date on it.",
     "You tried your own steps on two examples you made up, and wrote what happened each time.",

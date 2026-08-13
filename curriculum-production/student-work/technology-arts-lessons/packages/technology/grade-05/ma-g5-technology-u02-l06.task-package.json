@@ -39,7 +39,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 6 of \"Computing Systems, Files, and Troubleshooting\". That is unit 2 in grade 5. Today is a correction and reflection about backup concepts. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Organize a sample project folder and write a step-by-step troubleshooting flowchart. Today helps by working on backup concepts. Your unit also covers hardware and software, input output storage, files and folders, and naming and versions. Today adds real evidence toward your unit project.",
-  "primary_task": "Look back at your earlier work on backup concepts and fix it. Make a fix-it list. For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now. Include one thing that failed before and works now. Then look at all your mistakes together. What do they have in common? Name one habit that would catch it sooner. Keep today's work tied to your unit. Today is about backup concepts. It is part of \"Computing Systems, Files, and Troubleshooting\". Later days in this unit cover other things, like hardware and software. Before you stop, do this check: In one concise response, show or explain the most important idea about backup concepts; then identify one check that would catch an error or weak claim. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
+  "primary_task": "Look back at your earlier work on backup concepts and fix it. Make a fix-it list. For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now. Include one thing that failed before and works now. Then look at all your mistakes together. What do they have in common? Name one habit that would catch it sooner. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about backup concepts. It is part of \"Computing Systems, Files, and Troubleshooting\". Later days in this unit cover other things, like hardware and software. Before you stop, do this check: In one concise response, show or explain the most important idea about backup concepts; then identify one check that would catch an error or weak claim. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
   "task_steps": [
     "Look back at your earlier work on backup concepts and fix it.",
     "Make a fix-it list.",
@@ -57,6 +57,65 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your fix-it list with what went wrong, why, the change, and the check that passes, plus what your mistakes share.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline paper system for backup concepts",
+      "purpose": "Use the labelled parts and event log below; no device, account, network, or special application is required.",
+      "labelled_parts": [
+        "Input card I1: the user selects Save",
+        "Process card P1: the application checks the file name",
+        "Storage card S1: Folder/Practice receives a copy named draft-02.txt",
+        "Output card O1: the screen reports Saved as draft-02.txt"
+      ],
+      "event_log": [
+        "09:00 — draft-01.txt exists in Folder/Practice",
+        "09:02 — user selects Save As and enters draft-02.txt",
+        "09:03 — storage card records draft-02.txt",
+        "09:04 — output card reports success"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply backup concepts to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to backup concepts.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "Your fix-it list says what went wrong, why, what you changed, and how you know it works.",
     "At least one thing failed before and works now.",

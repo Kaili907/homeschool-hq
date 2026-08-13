@@ -39,7 +39,7 @@
     "stakeholder-analysis templates"
   ],
   "task_brief": "Day 3 of \"Computing Ethics, Law, Policy, and Societal Impact\" (unit 4, grade 12) is a guided practice on accessibility obligations and algorithmic accountability and auditing. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Write an evidence-based policy analysis of a computing practice with stakeholder, legal, and equity findings. Today's work contributes to that by handling accessibility obligations and algorithmic accountability and auditing at the guided practice stage, against the unit's wider topics of intellectual property licensing and attribution, privacy law and data rights, accessibility obligations, and algorithmic accountability and auditing. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Complete two supported problems on accessibility obligations and algorithmic accountability and auditing. On the first, work step by step with prompts available, and after each step write the one-line reason that step is correct. On the second, work without prompts and only check the reference after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. Anchor today's work inside its unit: this session's evidence is about accessibility obligations and algorithmic accountability and auditing, and it belongs to \"Computing Ethics, Law, Policy, and Societal Impact\", which also covers separate topics such as intellectual property licensing and attribution. Close out with this check before you stop: Show your reasoning on the faded example of accessibility obligations and algorithmic accountability and auditing and identify the check that confirms it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "primary_task": "Complete the first two test cases printed in activity_setup for accessibility obligations and algorithmic accountability and auditing. On the first, work step by step with the printed method available, and after each step write the one-line reason that step is correct. On the second, work without the method in view and only check it after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about accessibility obligations and algorithmic accountability and auditing, and it belongs to \"Computing Ethics, Law, Policy, and Societal Impact\", which also covers separate topics such as intellectual property licensing and attribution. Close out with this check before you stop: Show your reasoning on the faded example of accessibility obligations and algorithmic accountability and auditing and identify the check that confirms it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on accessibility obligations and algorithmic accountability and auditing., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Practise accessibility obligations and algorithmic accountability and auditing with prompts, feedback, and gradually reduced support.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline accessibility obligations and algorithmic accountability and auditing code case",
+      "purpose": "Use this exact fictional case to investigate accessibility obligations and algorithmic accountability and auditing; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g12_technology_u04_l03_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g12_technology_u04_l03_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to accessibility obligations and algorithmic accountability and auditing, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to accessibility obligations and algorithmic accountability and auditing is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "guided_scaffold_note": "Scaffolding for accessibility obligations and algorithmic accountability and auditing fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
   "test_or_check_criteria": [
     "Both problems show intermediate states — trace table, printed values, or labelled diagram — not only final answers.",
