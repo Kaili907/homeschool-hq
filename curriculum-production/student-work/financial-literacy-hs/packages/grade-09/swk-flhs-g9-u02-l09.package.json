@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l09",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l09",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: reading a disclosure, label, or warranty"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "reading a disclosure, label, or warranty",
+  "objective": "Read a fictional energy disclosure label, convert its rating into an annual running cost, and combine running cost with purchase price to find how long the cheaper-to-run option takes to pay for itself.",
+  "scenario": "Two fictional refrigerators carry simulated energy labels stating estimated yearly electricity use. Both models, both prices, and the electricity rate below are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional label figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional labels: Model A uses 512 kWh a year and sells for $1,049. Model B uses 389 kWh a year and sells for $1,199. Electricity costs $0.174 per kWh.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Model A cost to run for a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Model B cost to run for a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does Model B save in running cost each year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Model B saves money to run and costs more to buy.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Model B cost to buy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many years of running-cost savings does it take to repay that difference? Round to one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Over 12 years of ownership, what is the total cost — purchase plus running — of Model B?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The label gives an estimated yearly kWh figure and nothing about price. Explain why the label stops there, and what a buyer must supply to turn it into a decision."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the payback comes out near half a year or near seventy, check whether the $150 price gap was divided by the annual saving or by the annual running cost. Write the sentence in words first — the extra $150 is repaid at $21.40 a year — and then divide.",
+  "extension": "Recompute the payback at an electricity rate of $0.26 per kWh and say what that shows about how much the label alone can settle.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

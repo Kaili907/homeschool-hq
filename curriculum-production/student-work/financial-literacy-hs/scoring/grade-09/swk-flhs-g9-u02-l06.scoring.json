@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l06",
+  "lessonId": "ma-g9-financial-literacy-u02-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "3.6",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.5 x 4 plus 0.3 x 2 plus 0.2 x 5 gives 2.0 + 0.6 + 1.0."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "3.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.5 x 2 plus 0.3 x 5 plus 0.2 x 3 gives 1.0 + 1.5 + 0.6."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "3.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.5 x 3 plus 0.3 x 4 plus 0.2 x 2 gives 1.5 + 1.2 + 0.4, the same total as Mirren by a different route."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "Larkspur",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Larkspur scores 3.6 against 3.1 for both of the others, so the log selects it outright."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "3.7",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.3 x 2 plus 0.5 x 5 plus 0.2 x 3 gives 0.6 + 2.5 + 0.6."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "3.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.3 x 4 plus 0.5 x 2 plus 0.2 x 5 gives 1.2 + 1.0 + 1.0, so the ranking reverses."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wPrice * lp + wDur * ld + wRep * lr",
+        "substituted": "0.5 * 4 + 0.3 * 2 + 0.2 * 5",
+        "result": "3.6",
+        "why": "0.5 x 4 plus 0.3 x 2 plus 0.2 x 5 gives 2.0 + 0.6 + 1.0."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "wPrice2 * mp + wDur2 * md + wRep2 * mr",
+        "substituted": "0.5 * 2 + 0.3 * 5 + 0.2 * 3",
+        "result": "3.1",
+        "why": "0.5 x 2 plus 0.3 x 5 plus 0.2 x 3 gives 1.0 + 1.5 + 0.6."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "wPrice3 * op + wDur3 * od + wRep3 * or_",
+        "substituted": "0.5 * 3 + 0.3 * 4 + 0.2 * 2",
+        "result": "3.1",
+        "why": "0.5 x 3 plus 0.3 x 4 plus 0.2 x 2 gives 1.5 + 1.2 + 0.4, the same total as Mirren by a different route."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 > #t1-p2",
+        "substituted": "#t1-p1 > #t1-p2",
+        "result": "Larkspur",
+        "why": "Larkspur scores 3.6 against 3.1 for both of the others, so the log selects it outright."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "newPrice * mp2 + newDur * md2 + wRep4 * mr2",
+        "substituted": "0.3 * 2 + 0.5 * 5 + 0.2 * 3",
+        "result": "3.7",
+        "why": "0.3 x 2 plus 0.5 x 5 plus 0.2 x 3 gives 0.6 + 2.5 + 0.6."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "newPrice2 * lp2 + newDur2 * ld2 + wRep5 * lr2",
+        "substituted": "0.3 * 4 + 0.5 * 2 + 0.2 * 5",
+        "result": "3.2",
+        "why": "0.3 x 4 plus 0.5 x 2 plus 0.2 x 5 gives 1.2 + 1.0 + 1.0, so the ranking reverses."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Changing two weights reversed the ranking. Explain what that shows about a weighted decision log, and say what a buyer should record alongside the scores so the decision can be re-checked in a year.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the ranking is driven by the weights as much as by the ratings, since the same ratings gave Larkspur 3.6 then 3.2 and Mirren 3.1 then 3.7.",
+          "Concludes that the weights are a judgement that must be recorded and justified, not a neutral step.",
+          "Names what to record beyond the scores — the weights, why each weight was chosen, the ratings’ source, and the date — so a later reader can tell whether the reasoning still holds."
+        ],
+        "evidenceRequirements": [
+          "Uses both sets of scores for at least two options to show the reversal."
+        ],
+        "lookFors": [
+          "The response treats the reversal as informative rather than as a flaw in the method.",
+          "The recording suggestion is specific enough to act on."
+        ],
+        "commonMisconception": "Reading a weighted score as an objective measurement rather than as a compressed statement of the buyer’s priorities.",
+        "dimensions": [
+          "assumption-identification",
+          "plan-coherence",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

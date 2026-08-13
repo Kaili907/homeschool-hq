@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l09",
+  "lessonId": "ma-g9-financial-literacy-u03-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$270.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$900 x 5% x 6 years, with the base never changing."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,206.09",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$900 x 1.05 to the sixth power is $1,206.0857, which rounds to $1,206.09."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,170.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $900 deposit plus $270.00 of simple interest."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$36.09",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,206.09 against $1,170.00, at the same quoted rate over the same term."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "4.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$36.09 on a $900 deposit is 0.0401, or 4.0% of the deposit accumulated over six years."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "principal * rate * years",
+        "substituted": "900 * 0.05 * 6",
+        "result": "$270.00",
+        "why": "$900 x 5% x 6 years, with the base never changing."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(principal2 * pow(growth, years2), 2)",
+        "substituted": "round(900 * pow(1.05, 6), 2)",
+        "result": "$1,206.09",
+        "why": "$900 x 1.05 to the sixth power is $1,206.0857, which rounds to $1,206.09."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "principal3 + #t1-p1",
+        "substituted": "900 + #t1-p1",
+        "result": "$1,170.00",
+        "why": "The $900 deposit plus $270.00 of simple interest."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 - #t2-p1",
+        "substituted": "#t1-p2 - #t2-p1",
+        "result": "$36.09",
+        "why": "$1,206.09 against $1,170.00, at the same quoted rate over the same term."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / principal4 * 100, 1)",
+        "substituted": "round(#t2-p2 / 900 * 100, 1)",
+        "result": "4.0%",
+        "why": "$36.09 on a $900 deposit is 0.0401, or 4.0% of the deposit accumulated over six years."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Over 3 years at 4.5% the compounding advantage on $1,400 was $8.63; here over 6 years at 5% on $900 it is $36.09. State the three things that drive how large that advantage gets, and say which one this pair of examples shows most clearly.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names the three drivers: the length of the term, the size of the rate, and the size of the balance.",
+          "Identifies term as the driver these two examples show most clearly, since the deposit here is smaller and the rate barely higher, yet the advantage is more than four times larger.",
+          "Avoids attributing the whole difference to the rate, which rose only from 4.5% to 5%."
+        ],
+        "evidenceRequirements": [
+          "Compares the $8.63 figure from the earlier three-year example with the $36.09 figure here, noting the deposits differ."
+        ],
+        "lookFors": [
+          "The response recognises that the smaller deposit makes the term effect stand out more, not less.",
+          "The response does not claim compounding is always dramatic; over three years it was under $9."
+        ],
+        "commonMisconception": "Believing compounding produces large gains at any term, when short terms leave it close to simple interest.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

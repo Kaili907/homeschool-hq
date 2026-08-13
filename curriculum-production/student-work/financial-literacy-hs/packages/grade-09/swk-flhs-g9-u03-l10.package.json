@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u03-l10",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: the effect of time on the value of savings"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "the effect of time on the value of savings",
+  "objective": "Build a 12-month savings plan for a fictional goal, verify it reaches the target with interest, then repair it after a mid-year shock and defend the repair.",
+  "scenario": "A fictional saver wants $1,800 in twelve months for a simulated goal. The account, the rate, and the shock below are all invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan parameters in these directions",
+    "a blank 12-month schedule"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The plan: deposit $150 a month for 12 months. The fictional account credits 3.2% a year on the average balance, which for level monthly deposits is about $975 across this year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the twelve deposits total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the year credit on an average balance of $975?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the plan finish with?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now the shock. In month 7, immediately after that month’s deposit, the saver must withdraw $400.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the deposit balance after 7 months, before the withdrawal and ignoring interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is left immediately after the $400 withdrawal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "To still reach $1,800 in deposits by month 12, what must each of the remaining 5 monthly deposits become?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write up the repaired plan.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Present the repaired plan. State the new monthly deposit, say whether raising the deposit by $80 a month is the right repair or whether moving the goal date is better, and defend the choice."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The plan’s interest figure assumed an average balance of $975. Say why the $400 withdrawal makes that figure wrong, and in which direction."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the repaired deposit is coming out as $360, the $1,800 goal is being divided by the five remaining months without crediting the $650 already saved. Write the sentence first — $1,800 needed, $650 already there, five months left — and then divide what remains.",
+  "extension": "Rebuild the plan assuming the saver can manage only $190 a month after the shock, find the month the goal would then be reached, and say what that costs in delay.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u03-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

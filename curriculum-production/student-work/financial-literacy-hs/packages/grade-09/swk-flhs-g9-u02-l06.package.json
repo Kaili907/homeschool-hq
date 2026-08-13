@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l06",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: recording a decision and its reasons"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "recording a decision and its reasons",
+  "objective": "Score three fictional options against weighted criteria, produce a defensible ranking, and record the reasons in a form that can be re-checked later.",
+  "scenario": "A fictional buyer has written down three criteria, given each a weight, and rated three invented options from 1 to 5 on each. All ratings and weights below are made up for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional decision log in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The weights are: price 0.5, durability 0.3, repairability 0.2. Option Larkspur is rated 4 on price, 2 on durability, 5 on repairability. Option Mirren is rated 2, 5, and 3. Option Otsego is rated 3, 4, and 2.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Larkspur’s weighted score?"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Mirren’s weighted score?"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Otsego’s weighted score?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Interpret the scores.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "Which option does the weighted log select?",
+          "choices": [
+            "Larkspur",
+            "Mirren",
+            "Otsego",
+            "The log does not separate them"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If durability were reweighted to 0.5 and price to 0.3, with repairability unchanged, what would Mirren score?"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under those same new weights, what would Larkspur score?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Changing two weights reversed the ranking. Explain what that shows about a weighted decision log, and say what a buyer should record alongside the scores so the decision can be re-checked in a year."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the weighted scores come out above 5, the weights are being added to the ratings rather than multiplied. Compute one line at a time — weight times rating — and check that the three weights sum to 1 before summing the products.",
+  "extension": "Find a set of three weights, still summing to 1, under which Otsego wins, and say what that set of weights implies about the buyer’s priorities.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

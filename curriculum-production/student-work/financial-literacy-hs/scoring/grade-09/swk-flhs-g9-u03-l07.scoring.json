@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l07",
+  "lessonId": "ma-g9-financial-literacy-u03-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "This reproduces the student’s own arithmetic: 4% of $40 is $1.60, and the arithmetic is correct even though the quantity is the wrong one."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$480.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$40 a month for twelve months, which is the student’s own money and is not interest at all."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$9.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The average balance is about half the $480 year-end total, and 4% of $240 is $9.60."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$489.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$480 deposited plus $9.60 credited."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "The base; the rate was applied to one month’s deposit instead of the balance",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The rate and the arithmetic are both right — 4% of $40 really is $1.60 — but the rate belongs on the accumulated balance, which reaches $480 by year end and averages about $240."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$8.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9.60 actually credited against the $1.60 the student computed."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(deposit * rate, 2)",
+        "substituted": "round(40 * 0.04, 2)",
+        "result": "$1.60",
+        "why": "This reproduces the student’s own arithmetic: 4% of $40 is $1.60, and the arithmetic is correct even though the quantity is the wrong one."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "monthly * months",
+        "substituted": "40 * 12",
+        "result": "$480.00",
+        "why": "$40 a month for twelve months, which is the student’s own money and is not interest at all."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / 2 * rate2, 2)",
+        "substituted": "round(#t2-p1 / 2 * 0.04, 2)",
+        "result": "$9.60",
+        "why": "The average balance is about half the $480 year-end total, and 4% of $240 is $9.60."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 + #t2-p2",
+        "substituted": "#t2-p1 + #t2-p2",
+        "result": "$489.60",
+        "why": "$480 deposited plus $9.60 credited."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t2-p2 - #t1-p1",
+        "substituted": "#t2-p2 - #t1-p1",
+        "result": "$8.00",
+        "why": "$9.60 actually credited against the $1.60 the student computed."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Even at the corrected $9.60, the interest is small. Explain why the student’s conclusion is still wrong, distinguishing what the interest does from what the saving does.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Separates the $480 the student put aside from the $9.60 the account added, and identifies the $480 as the main result of saving.",
+          "States that the student judged the whole activity by the return on it, which is the wrong test when the balance itself is the point.",
+          "Acknowledges honestly that $9.60 is a small return, so the argument does not depend on overstating the interest."
+        ],
+        "evidenceRequirements": [
+          "Uses the $480 deposited and the $9.60 credited as two separate quantities."
+        ],
+        "lookFors": [
+          "The response does not defend saving by inflating the interest figure.",
+          "The response identifies having $489.60 available as the thing that changes what the saver can do."
+        ],
+        "commonMisconception": "Judging whether to save by the size of the interest rather than by the balance accumulated.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l07",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: price, quality, and fitness for purpose"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "price, quality, and fitness for purpose",
+  "objective": "Test the claim that a higher price means better quality against fictional rating data, find the counterexample that breaks it, and quantify what the extra money bought.",
+  "scenario": "A fictional product reviewer wrote: \"With blenders, you get what you pay for — the more it costs, the better it is.\" The four invented models and their made-up durability ratings below are the data the reviewer had.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional rating table in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The four fictional models, with price and durability rating out of 5: Model W $39, rated 3.8. Model X $72, rated 4.4. Model Y $118, rated 3.1. Model Z $155, rated 4.5.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-choice",
+          "text": "Which pair of models directly contradicts the claim that a higher price means a better rating?",
+          "choices": [
+            "Model W and Model X",
+            "Model X and Model Y",
+            "Model Y and Model Z",
+            "No pair contradicts it"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Quantify the counterexample and put every model on one scale.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Model Y cost than Model X?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Model X cost per rating point? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Model Y cost per rating point?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work these without help.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Model W cost per rating point?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Model Z cost per rating point?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "State precisely what is wrong with the reviewer’s claim, using the data, and write a version of the claim that the same four models would actually support."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the counterexample is hard to spot, sort the four models by price and read the ratings down the column: 3.8, 4.4, 3.1, 4.5. A rule that price predicts rating would need that column to rise every time, and it falls once.",
+  "extension": "Add a fictional Model V at $95 rated 4.8 and say whether it changes the reviewer’s claim, the cost-per-point ranking, or both.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

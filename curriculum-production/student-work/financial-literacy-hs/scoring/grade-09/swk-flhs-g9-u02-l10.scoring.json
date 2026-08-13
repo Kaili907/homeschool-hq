@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l10",
+  "lessonId": "ma-g9-financial-literacy-u02-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$588.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$529 for the machine plus the $59 drive it needs to reach the required storage."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$589.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$479 plus the $110 drive, which puts the cheapest machine a dollar above the Cedarline once the requirement is met."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "Pellham Flex",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The Pellham Flex ships with 256 GB, exactly the requirement; the other two ship below it and need a drive."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$324.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$649 over 2 years of coverage; the Pellham needs no drive, so its total cost is its price."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$588.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Its $588 total over a single year of coverage."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,356.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Its $589 total over 0.25 years of coverage, which is what a 90-day warranty amounts to."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "priceCedar + driveCedar",
+        "substituted": "529 + 59",
+        "result": "$588.00",
+        "why": "$529 for the machine plus the $59 drive it needs to reach the required storage."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "priceVantis + driveVantis",
+        "substituted": "479 + 110",
+        "result": "$589.00",
+        "why": "$479 plus the $110 drive, which puts the cheapest machine a dollar above the Cedarline once the requirement is met."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "storagePellham >= required",
+        "substituted": "256 >= 256",
+        "result": "Pellham Flex",
+        "why": "The Pellham Flex ships with 256 GB, exactly the requirement; the other two ship below it and need a drive."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(pricePellham / warrantyPellham, 2)",
+        "substituted": "round(649 / 2, 2)",
+        "result": "$324.50",
+        "why": "$649 over 2 years of coverage; the Pellham needs no drive, so its total cost is its price."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 / warrantyCedar, 2)",
+        "substituted": "round(#t1-p1 / 1, 2)",
+        "result": "$588.00",
+        "why": "Its $588 total over a single year of coverage."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p2 / warrantyVantis, 2)",
+        "substituted": "round(#t1-p2 / 0.25, 2)",
+        "result": "$2,356.00",
+        "why": "Its $589 total over 0.25 years of coverage, which is what a 90-day warranty amounts to."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Recommend one model. Your dossier must state the total cost to meet the requirement, the warranty position, and the one figure that decided it — and must say what you would need to learn to change your mind.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Recommends a model and names the deciding figure explicitly rather than gesturing at overall value.",
+          "Uses the totals that meet the requirement ($588, $649, $589), not the advertised prices, and explains why the advertised ranking is misleading here.",
+          "Handles the warranty comparison honestly: the Pellham costs $60 more than the Cedarline in total but carries twice the coverage at $324.50 a year against $588.00.",
+          "States a specific, checkable thing that would change the recommendation."
+        ],
+        "evidenceRequirements": [
+          "Cites at least one total-cost figure and one cost-per-warranty-year figure computed in this lesson."
+        ],
+        "lookFors": [
+          "The response notices that the Vantis Air, cheapest on the shelf at $479, is the most expensive of the three once the requirement and the warranty are counted.",
+          "The what-would-change-my-mind statement is testable, not a general caveat."
+        ],
+        "commonMisconception": "Ranking options by advertised price when the options do not all meet the requirement as sold.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Warranty length is not the same as reliability. Explain the difference and say what the dossier would need in order to say anything about reliability.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a warranty is a promise about who pays if the product fails, while reliability is how often it fails, and that the two are related but not the same.",
+          "Names what the dossier lacks — failure rates, repair histories, independent testing, or user reports over time — and notes that none of it is in the listings given."
+        ],
+        "evidenceRequirements": [
+          "Refers to the warranty terms given (1 year, 2 years, 90 days) as evidence about coverage rather than about failure rates."
+        ],
+        "lookFors": [
+          "The response resists inferring that the 90-day model is necessarily less reliable, while allowing that a short warranty can be a signal."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

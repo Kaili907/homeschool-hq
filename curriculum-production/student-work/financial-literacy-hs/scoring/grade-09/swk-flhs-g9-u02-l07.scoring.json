@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l07",
+  "lessonId": "ma-g9-financial-literacy-u02-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "Model X and Model Y",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Model Y costs $46 more than Model X and is rated 1.3 points lower, so a single pair is enough to break a claim stated as a rule."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$46.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$118 less $72, paid for a rating that is lower rather than higher."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$16.36",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$72 divided by a rating of 4.4 is $16.3636, which rounds to $16.36."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$38.06",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$118 divided by 3.1 is $38.0645, which rounds to $38.06 — more than double Model X’s cost per point."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$10.26",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$39 divided by 3.8 is $10.2631, which rounds to $10.26, the lowest of the four."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$34.44",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$155 divided by 4.5 is $34.4444, which rounds to $34.44."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "ratingY < ratingX",
+        "substituted": "3.1 < 4.4",
+        "result": "Model X and Model Y",
+        "why": "Model Y costs $46 more than Model X and is rated 1.3 points lower, so a single pair is enough to break a claim stated as a rule."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "priceY - priceX",
+        "substituted": "118 - 72",
+        "result": "$46.00",
+        "why": "$118 less $72, paid for a rating that is lower rather than higher."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(priceX2 / ratingX2, 2)",
+        "substituted": "round(72 / 4.4, 2)",
+        "result": "$16.36",
+        "why": "$72 divided by a rating of 4.4 is $16.3636, which rounds to $16.36."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(priceY2 / ratingY2, 2)",
+        "substituted": "round(118 / 3.1, 2)",
+        "result": "$38.06",
+        "why": "$118 divided by 3.1 is $38.0645, which rounds to $38.06 — more than double Model X’s cost per point."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(priceW / ratingW, 2)",
+        "substituted": "round(39 / 3.8, 2)",
+        "result": "$10.26",
+        "why": "$39 divided by 3.8 is $10.2631, which rounds to $10.26, the lowest of the four."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "round(priceZ / ratingZ, 2)",
+        "substituted": "round(155 / 4.5, 2)",
+        "result": "$34.44",
+        "why": "$155 divided by 4.5 is $34.4444, which rounds to $34.44."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "State precisely what is wrong with the reviewer’s claim, using the data, and write a version of the claim that the same four models would actually support.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies that the claim is stated as a rule and is broken by Model Y, which costs $46 more than Model X and rates 1.3 lower.",
+          "Notes that the highest-rated model (Z, at 4.5) is indeed the most expensive, so the data is not simply the reverse of the claim — the relationship is loose, not absent.",
+          "Offers a supportable restatement, such as that the cheapest model here buys the most rating per dollar while the highest rating costs the most, with no reliable rule in between."
+        ],
+        "evidenceRequirements": [
+          "Cites at least two of the cost-per-rating-point figures ($10.26, $16.36, $38.06, $34.44) in support."
+        ],
+        "lookFors": [
+          "The response does not overcorrect into \"price tells you nothing\", which the Model Z figure does not support.",
+          "The restated claim is testable against the table."
+        ],
+        "commonMisconception": "Treating a loose tendency in a few data points as a rule that holds for every pair.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

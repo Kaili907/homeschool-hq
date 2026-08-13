@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l06",
+  "lessonId": "ma-g9-financial-literacy-u03-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$625.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six planned figures added: $240 + $90 + $60 + $45 + $150 + $40."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$598.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six actual figures added: $287 + $76 + $128 + $45 + $0 + $62."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$27.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$625.00 planned against $598.00 actual, which looks like a month that went well."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$68.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$128 spent against $60 planned, the largest single overspend in the month."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "113.3%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$68 over a $60 plan is 1.1333 times the plan, or 113.3% over."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "-$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Nothing was saved against a $150 plan, so the variance is negative $150 — the single largest variance of the month."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "pg + pf + pe + pp + ps + pm",
+        "substituted": "240 + 90 + 60 + 45 + 150 + 40",
+        "result": "$625.00",
+        "why": "The six planned figures added: $240 + $90 + $60 + $45 + $150 + $40."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "ag + af + ae + ap + as_ + am",
+        "substituted": "287 + 76 + 128 + 45 + 0 + 62",
+        "result": "$598.00",
+        "why": "The six actual figures added: $287 + $76 + $128 + $45 + $0 + $62."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$27.00",
+        "why": "$625.00 planned against $598.00 actual, which looks like a month that went well."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "actualEat - plannedEat",
+        "substituted": "128 - 60",
+        "result": "$68.00",
+        "why": "$128 spent against $60 planned, the largest single overspend in the month."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / plannedEat2 * 100, 1)",
+        "substituted": "round(#t2-p1 / 60 * 100, 1)",
+        "result": "113.3%",
+        "why": "$68 over a $60 plan is 1.1333 times the plan, or 113.3% over."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "actualSave - plannedSave",
+        "substituted": "0 - 150",
+        "result": "-$150.00",
+        "why": "Nothing was saved against a $150 plan, so the variance is negative $150 — the single largest variance of the month."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The month came in $27 under plan overall. Explain why that total is a misleading summary of this month, using at least two line variances.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies that the whole $27 underspend and more is explained by the $150 that was not saved, so the household spent more than planned on everything else.",
+          "Uses at least two line variances, most naturally the $68 overspend on eating out and the -$150 savings variance.",
+          "States that a savings line missed is not the same kind of event as a spending line missed, because it is the goal the plan existed to protect."
+        ],
+        "evidenceRequirements": [
+          "Cites the $27 total underspend alongside at least two specific line variances."
+        ],
+        "lookFors": [
+          "The response notices that spending lines alone totalled $598 against $475 planned once savings is set aside.",
+          "The response does not treat the $14 fuel underspend as offsetting the savings miss."
+        ],
+        "commonMisconception": "Judging a month by whether the bottom line came in under plan.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "error-diagnosis",
+          "plan-coherence"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Suggest one change to how this budget is written that would make the savings line harder to miss, and say what it would cost the household in flexibility.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Proposes a concrete mechanism — moving the $150 out at the start of the month, a separate account, or treating savings as a fixed cost rather than a leftover.",
+          "Names the flexibility cost honestly: the money is harder to reach in a month where spending genuinely has to rise."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $150 savings line and at least one overspent line as the reason the money went elsewhere."
+        ],
+        "lookFors": [
+          "The response does not present the change as costless."
+        ],
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

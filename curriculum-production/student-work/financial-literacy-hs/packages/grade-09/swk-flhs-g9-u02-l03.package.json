@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l03",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: reading a disclosure, label, or warranty"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "reading a disclosure, label, or warranty",
+  "objective": "Read a fictional warranty’s coverage and exclusions, compute what the warranty actually pays on a specific repair, and state what share of the bill the owner still carries.",
+  "scenario": "The warranty text below belongs to a fictional appliance brand and covers a made-up repair. Nothing here describes a real product or a real warranty.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional warranty text in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional warranty reads: \"Covers replacement parts for 24 months from purchase. Labour is not covered. A service fee of $50 applies to each claim. Coverage is void if the unit was opened by anyone other than an authorised technician.\" The repair quote is $138 for parts and 2.5 hours of labour at $95 an hour.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the labour portion of the repair quote?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total repair bill before any warranty is applied?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Apply the warranty exactly as written: parts covered, labour not covered, $50 service fee per claim.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the warranty actually pay toward this repair?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the owner pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of the repair bill does the warranty cover? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read the exclusion clause again before answering.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "The owner had already taken the back panel off themselves to look inside. Under the warranty as written, what does the warranty now pay?",
+          "choices": [
+            "$88.00, as calculated",
+            "$138.00, the full parts cost",
+            "Nothing; coverage is void"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "A seller describes this warranty as \"2-year full coverage\". Identify every part of that description the warranty text contradicts, and write a one-sentence description that is accurate."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the warranty is being credited with the whole parts cost, read the two money clauses in order: parts are covered, then a $50 fee applies to the claim. Compute $138, then subtract the fee, and only then compare with the bill.",
+  "extension": "Work out the repair bill at which this warranty would cover half the cost, and say whether such a repair is likely for an appliance.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

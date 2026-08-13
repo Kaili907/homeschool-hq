@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: price, quality, and fitness for purpose"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "price, quality, and fitness for purpose",
+  "objective": "Convert three fictional headphone prices into cost per month of expected life, then rank the options on fitness for a stated purpose rather than on price alone.",
+  "scenario": "A fictional shopper needs headphones that plug into a wired jack, because the simulated equipment they must work with has no wireless option. The three invented models below are the only ones available.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional model listings in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional listings: Aria 40 costs $89 and is expected to last 18 months, with a wired jack. Kestrel Pro costs $164 and is expected to last 36 months, wireless only. Dunlin costs $52 and is expected to last 8 months, with a wired jack.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the Aria 40 cost per month of expected life? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the Kestrel Pro cost per month of expected life?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the Dunlin cost per month of expected life?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now apply the stated requirement: the headphones must have a wired jack.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "Among only the models that meet the wired-jack requirement, which costs least per month?",
+          "choices": [
+            "Aria 40",
+            "Kestrel Pro",
+            "Dunlin"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Over 36 months, how much more would repeated Dunlin purchases cost than repeated Aria 40 purchases, if each is replaced when it wears out?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "The Kestrel Pro has the lowest cost per month of the three. Explain why it is still the wrong purchase here."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The Dunlin has the lowest sticker price and the highest cost per month. Explain how both can be true."
+        }
+      ]
+    }
+  ],
+  "remediation": "If cost per month is being computed as months divided by price, anchor the units out loud: dollars per month means dollars on top, months underneath. Check the Dunlin first, where $52 over 8 months gives an easy $6.50, before returning to the two that need rounding.",
+  "extension": "Suppose the Aria 40 lasted only 12 months rather than 18. Recompute its cost per month and say whether the wired-model ranking changes.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

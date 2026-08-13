@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l10",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: the role of government in consumer information"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "the role of government in consumer information",
+  "objective": "Assemble a pre-purchase dossier on three fictional laptops — total cost to meet a stated requirement, cost per year of warranty coverage, and a recorded decision — and defend the recommendation.",
+  "scenario": "A fictional student needs a laptop with at least 256 GB of storage for a simulated course. The three invented models below are the options, and no product, price, or warranty named here is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional model listings in these directions",
+    "a blank three-column dossier sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional options. Cedarline 14: $529, 128 GB storage, 1-year warranty. Pellham Flex: $649, 256 GB storage, 2-year warranty. Vantis Air: $479, 64 GB storage, 90-day warranty. An external drive that brings any model up to the required 256 GB costs $59 for the Cedarline and $110 for the Vantis.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the Cedarline 14 cost in total to meet the 256 GB requirement?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the Vantis Air cost in total to meet the requirement?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-choice",
+          "text": "Which model meets the storage requirement with no additional purchase?",
+          "choices": [
+            "Cedarline 14",
+            "Pellham Flex",
+            "Vantis Air"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put warranty coverage on the same scale as cost. Express the 90-day warranty in years as 0.25.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the Pellham Flex cost per year of warranty coverage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the Cedarline 14 cost per year of warranty coverage, counting the drive it needs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the Vantis Air cost per year of warranty coverage, counting its drive?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the dossier’s conclusion.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one model. Your dossier must state the total cost to meet the requirement, the warranty position, and the one figure that decided it — and must say what you would need to learn to change your mind."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Warranty length is not the same as reliability. Explain the difference and say what the dossier would need in order to say anything about reliability."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the Vantis Air is coming out best, check whether the $110 drive was added. The requirement is 256 GB; a 64 GB machine does not meet it as sold, so its shelf price of $479 is not a price for something that does the job.",
+  "extension": "Add the assumption that the student keeps the laptop 4 years and that an out-of-warranty repair costs $215. Rebuild the three totals with one expected repair after coverage ends and say whether the recommendation holds.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

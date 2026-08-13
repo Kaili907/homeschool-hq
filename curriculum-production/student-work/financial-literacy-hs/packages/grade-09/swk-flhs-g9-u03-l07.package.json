@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u03-l07",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: incentives to set aside income for future consumption"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "incentives to set aside income for future consumption",
+  "objective": "Find the error in a fictional argument that dismisses saving, recompute the figure correctly, and separate the return on savings from the savings themselves.",
+  "scenario": "A fictional student wrote the argument below about a simulated savings account. The reasoning contains one specific mistake.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional argument as written in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The fictional argument reads: \"My account pays 4% a year. I can only put in $40 a month. So saving earns me 4% of $40, which is $1.60 a year. That is not worth doing.\" Assume interest is credited on the average balance across the year, which for level monthly deposits is about half the year-end total.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What figure did the fictional student compute, taking 4% of a single $40 deposit?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now compute what the year actually produces.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the student deposit over 12 months at $40 a month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Using the stated rule, how much interest does the account credit for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the account worth at the end of the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Locate the mistake precisely.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "What did the fictional student’s calculation get wrong?",
+          "choices": [
+            "The interest rate; 4% is not the right rate",
+            "The base; the rate was applied to one month’s deposit instead of the balance",
+            "The arithmetic; 4% of $40 is not $1.60",
+            "Nothing; $1.60 is correct"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much did the student’s figure understate the year’s interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Even at the corrected $9.60, the interest is small. Explain why the student’s conclusion is still wrong, distinguishing what the interest does from what the saving does."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the corrected interest still looks like it should be $1.60, ask what the balance is in December under the student’s own plan. The rate is paid on money held, and by December $480 is being held, not $40.",
+  "extension": "Recompute the year with the account paying 0.4% instead of 4%, and say whether the student’s conclusion becomes right at that rate.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u03-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

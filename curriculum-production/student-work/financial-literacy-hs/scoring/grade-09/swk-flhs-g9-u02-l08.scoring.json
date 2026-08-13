@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l08",
+  "lessonId": "ma-g9-financial-literacy-u02-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,560.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$65 a month for 24 months, with nothing paid upfront for the handset."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,411.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$499 for the handset plus $38 a month for 24 months, which is $912 of service."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$149.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,560.00 against $1,411.00, so the free handset is more than paid for through the monthly price."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "18.5",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Offer Q starts $499 behind and closes the gap at $27 a month, so the totals are equal at 18.48 months and Q is cheaper from month 19 onward."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,020.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$780 of service over 12 months plus the $240 fee for leaving the 24-month contract early."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$955.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$499 upfront plus $456 of service over 12 months."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "monthlyP * months",
+        "substituted": "65 * 24",
+        "result": "$1,560.00",
+        "why": "$65 a month for 24 months, with nothing paid upfront for the handset."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "upfrontQ + monthlyQ * months2",
+        "substituted": "499 + 38 * 24",
+        "result": "$1,411.00",
+        "why": "$499 for the handset plus $38 a month for 24 months, which is $912 of service."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$149.00",
+        "why": "$1,560.00 against $1,411.00, so the free handset is more than paid for through the monthly price."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(upfront / (monthlyP2 - monthlyQ2), 1)",
+        "substituted": "round(499 / (65 - 38), 1)",
+        "result": "18.5",
+        "why": "Offer Q starts $499 behind and closes the gap at $27 a month, so the totals are equal at 18.48 months and Q is cheaper from month 19 onward."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "monthlyP3 * monthsUsed + etf",
+        "substituted": "65 * 12 + 240",
+        "result": "$1,020.00",
+        "why": "$780 of service over 12 months plus the $240 fee for leaving the 24-month contract early."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "upfrontQ2 + monthlyQ3 * monthsUsed2",
+        "substituted": "499 + 38 * 12",
+        "result": "$955.00",
+        "why": "$499 upfront plus $456 of service over 12 months."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain what the word \"free\" is doing in Offer P, and say which buyer — if any — Offer P is genuinely better for.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the handset cost is recovered through the $27 monthly premium, so \"free\" describes the timing of the payment rather than its absence.",
+          "Identifies that Offer P is better for a buyer who cannot pay $499 today, or one who will stop before the 18.5-month crossing point without triggering the fee.",
+          "Notes that the $240 termination fee removes most of that early advantage, since leaving at 12 months costs $1,020 against Offer Q’s $955."
+        ],
+        "evidenceRequirements": [
+          "Uses the crossing point of 18.5 months and at least one of the 12-month totals."
+        ],
+        "lookFors": [
+          "The response recognises that having $499 available today is a real constraint and not merely a preference.",
+          "The response applies the total-cost method rather than comparing monthly prices."
+        ],
+        "commonMisconception": "Treating a cost bundled into a monthly price as no cost at all.",
+        "dimensions": [
+          "transfer",
+          "tradeoff-defense",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

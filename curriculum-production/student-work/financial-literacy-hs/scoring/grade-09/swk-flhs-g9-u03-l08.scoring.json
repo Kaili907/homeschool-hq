@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l08",
+  "lessonId": "ma-g9-financial-literacy-u03-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$51.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$612 a year spread over twelve months is exactly $51.00, regardless of it being billed twice."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$13.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$640 over 48 months is $13.3333, which rounds to $13.33."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$10.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$124 a year over twelve months is $10.3333, which rounds to $10.33."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$12.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$148 over twelve months is $12.3333, which rounds to $12.33."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$393.99",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$219 loan + $88 fuel + $51.00 insurance + $13.33 tyres + $10.33 oil + $12.33 registration."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$270.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $219 loan payment and the $51.00 monthly share of insurance do not move with how much the vehicle is driven."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "insurance / 12",
+        "substituted": "612 / 12",
+        "result": "$51.00",
+        "why": "$612 a year spread over twelve months is exactly $51.00, regardless of it being billed twice."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(tyres / (tyreYears * 12), 2)",
+        "substituted": "round(640 / (4 * 12), 2)",
+        "result": "$13.33",
+        "why": "$640 over 48 months is $13.3333, which rounds to $13.33."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(oil * 2 / 12, 2)",
+        "substituted": "round(62 * 2 / 12, 2)",
+        "result": "$10.33",
+        "why": "$124 a year over twelve months is $10.3333, which rounds to $10.33."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(registration / 12, 2)",
+        "substituted": "round(148 / 12, 2)",
+        "result": "$12.33",
+        "why": "$148 over twelve months is $12.3333, which rounds to $12.33."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "loan + fuel + #t1-p1 + #t1-p2 + #t1-p3 + #t2-p1",
+        "substituted": "219 + 88 + #t1-p1 + #t1-p2 + #t1-p3 + #t2-p1",
+        "result": "$393.99",
+        "why": "$219 loan + $88 fuel + $51.00 insurance + $13.33 tyres + $10.33 oil + $12.33 registration."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "loan2 + #t1-p1",
+        "substituted": "219 + #t1-p1",
+        "result": "$270.00",
+        "why": "The $219 loan payment and the $51.00 monthly share of insurance do not move with how much the vehicle is driven."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The owner has a month where money is short by $60. Say which of the six vehicle costs can actually absorb that cut, which cannot, and what happens if the cut is taken from the wrong one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies fuel, at $88 a month, as the only genuinely variable line, and therefore the only one that can absorb a cut by driving less.",
+          "States that the loan and insurance are fixed obligations that cannot be reduced by choice in a single month, and explains the consequence of missing them.",
+          "Explains that cutting the periodic set-asides — tyres, oil, registration, totalling $35.99 a month — does not remove the cost but moves it to the month the bill arrives."
+        ],
+        "evidenceRequirements": [
+          "Uses at least three of the six monthly figures in the argument, including the $88 fuel line."
+        ],
+        "lookFors": [
+          "The response treats skipping an oil change as deferring a cost with a possible larger cost later, not as a saving.",
+          "The response applies the same three-way classification used for the household budget to a single asset."
+        ],
+        "commonMisconception": "Treating a periodic set-aside as spare money because no bill is due this month.",
+        "dimensions": [
+          "transfer",
+          "plan-coherence",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}
