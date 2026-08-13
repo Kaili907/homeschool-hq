@@ -1,0 +1,522 @@
+{
+  "schemaVersion": "pe-learner-audit-r1",
+  "classification": "PE_LEARNER_AUDIT_COMPLETE",
+  "base": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "lessonsAudited": 972,
+  "expectedLessons": 972,
+  "gradesAudited": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "totals": {
+    "ZERO_ACTIONABLE_WORK": 0,
+    "EMPTY_ACTIVITY": 0,
+    "MISSING_MOVEMENT_CUES": 756,
+    "MISSING_SAFETY": 324,
+    "MISSING_ADAPTATION": 0,
+    "EQUIPMENT_ASSUMPTION": 600,
+    "MEDIA_PROOF_REQUIREMENT": 0,
+    "BODY_WEIGHT_DIET_PROBLEM": 0,
+    "UNSAFE_INTENSITY": 0,
+    "PROJECTION_LOSS": 0,
+    "EMPTY_COMPLETION_CRITERIA": 0,
+    "PLACEHOLDER": 0
+  },
+  "criteriaPassCounts": {
+    "clearActivityGoal": 972,
+    "actionableWork": 972,
+    "activityPresent": 972,
+    "movementCuesOrSteps": 216,
+    "usableInstructions": 972,
+    "durationGuidance": 972,
+    "reasonableDurationOrRepetitionGuidance": 972,
+    "safetyGuidance": 648,
+    "adaptationChoice": 972,
+    "lowSpaceNoEquipmentAlternativeWhereRequired": 372,
+    "completionCriteria": 972,
+    "noMediaProofRequirement": 972,
+    "bodyNeutral": 972,
+    "safeIntensity": 972,
+    "feasibleEquipment": 372,
+    "browserProjection": 972,
+    "noPlaceholder": 972
+  },
+  "grades": [
+    {
+      "grade": 3,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 0,
+        "MISSING_SAFETY": 0,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 108,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 108,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 108,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 0,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 0,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 4,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 0,
+        "MISSING_SAFETY": 0,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 108,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 108,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 108,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 0,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 0,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 5,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 108,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 108,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 0,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 0,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 0,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 0,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 7,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 108,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 108,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 0,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 0,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 0,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 0,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 8,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 108,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 108,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 0,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 0,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 0,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 0,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 9,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 0,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 0,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 108,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 108,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 108,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 10,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 0,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 0,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 108,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 108,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 108,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 11,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 0,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 24,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 0,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 108,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 84,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 84,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    },
+    {
+      "grade": 12,
+      "lessonsAudited": 108,
+      "flags": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_ACTIVITY": 0,
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 0,
+        "MISSING_ADAPTATION": 0,
+        "EQUIPMENT_ASSUMPTION": 36,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "BODY_WEIGHT_DIET_PROBLEM": 0,
+        "UNSAFE_INTENSITY": 0,
+        "PROJECTION_LOSS": 0,
+        "EMPTY_COMPLETION_CRITERIA": 0,
+        "PLACEHOLDER": 0
+      },
+      "criteriaPassCounts": {
+        "clearActivityGoal": 108,
+        "actionableWork": 108,
+        "activityPresent": 108,
+        "movementCuesOrSteps": 0,
+        "usableInstructions": 108,
+        "durationGuidance": 108,
+        "reasonableDurationOrRepetitionGuidance": 108,
+        "safetyGuidance": 108,
+        "adaptationChoice": 108,
+        "lowSpaceNoEquipmentAlternativeWhereRequired": 72,
+        "completionCriteria": 108,
+        "noMediaProofRequirement": 108,
+        "bodyNeutral": 108,
+        "safeIntensity": 108,
+        "feasibleEquipment": 72,
+        "browserProjection": 108,
+        "noPlaceholder": 108
+      },
+      "lessonsWithFindings": 108,
+      "safeToBegin": false
+    }
+  ],
+  "safeToBeginMatrix": {
+    "3": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "EQUIPMENT_ASSUMPTION": 108
+      }
+    },
+    "4": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "EQUIPMENT_ASSUMPTION": 108
+      }
+    },
+    "5": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 108,
+        "EQUIPMENT_ASSUMPTION": 108
+      }
+    },
+    "7": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 108,
+        "EQUIPMENT_ASSUMPTION": 108
+      }
+    },
+    "8": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "MISSING_MOVEMENT_CUES": 108,
+        "MISSING_SAFETY": 108,
+        "EQUIPMENT_ASSUMPTION": 108
+      }
+    },
+    "9": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "MISSING_MOVEMENT_CUES": 108
+      }
+    },
+    "10": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "MISSING_MOVEMENT_CUES": 108
+      }
+    },
+    "11": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "MISSING_MOVEMENT_CUES": 108,
+        "EQUIPMENT_ASSUMPTION": 24
+      }
+    },
+    "12": {
+      "result": "BLOCKED",
+      "blockingFindings": {
+        "MISSING_MOVEMENT_CUES": 108,
+        "EQUIPMENT_ASSUMPTION": 36
+      }
+    }
+  },
+  "negativeControls": [
+    {
+      "id": "delete_activity",
+      "expectedFlags": [
+        "ZERO_ACTIONABLE_WORK",
+        "EMPTY_ACTIVITY"
+      ],
+      "detected": true,
+      "actualFlags": [
+        "ZERO_ACTIONABLE_WORK",
+        "EMPTY_ACTIVITY"
+      ]
+    },
+    {
+      "id": "delete_safety",
+      "expectedFlags": [
+        "MISSING_SAFETY"
+      ],
+      "detected": true,
+      "actualFlags": [
+        "MISSING_SAFETY"
+      ]
+    },
+    {
+      "id": "camera_requirement",
+      "expectedFlags": [
+        "MEDIA_PROOF_REQUIREMENT"
+      ],
+      "detected": true,
+      "actualFlags": [
+        "MEDIA_PROOF_REQUIREMENT"
+      ]
+    },
+    {
+      "id": "impossible_equipment",
+      "expectedFlags": [
+        "EQUIPMENT_ASSUMPTION"
+      ],
+      "detected": true,
+      "actualFlags": [
+        "EQUIPMENT_ASSUMPTION"
+      ]
+    },
+    {
+      "id": "no_adaptation",
+      "expectedFlags": [
+        "MISSING_ADAPTATION"
+      ],
+      "detected": true,
+      "actualFlags": [
+        "MISSING_ADAPTATION"
+      ]
+    }
+  ]
+}

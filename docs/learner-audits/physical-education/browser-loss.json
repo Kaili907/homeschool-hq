@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "pe-learner-audit-r1",
+  "lessonsAudited": 972,
+  "result": "PASS",
+  "lossCount": 0,
+  "fields": {
+    "privacySafeScenario": {
+      "sourceValues": 972,
+      "preservedValues": 972,
+      "lossCount": 0
+    },
+    "studentTask": {
+      "sourceValues": 972,
+      "preservedValues": 972,
+      "lossCount": 0
+    },
+    "movementCues": {
+      "sourceValues": 864,
+      "preservedValues": 864,
+      "lossCount": 0
+    },
+    "keyPoints": {
+      "sourceValues": 864,
+      "preservedValues": 864,
+      "lossCount": 0
+    },
+    "task_steps": {
+      "sourceValues": 0,
+      "preservedValues": 0,
+      "lossCount": 0
+    },
+    "adaptationChoices": {
+      "sourceValues": 972,
+      "preservedValues": 972,
+      "lossCount": 0
+    },
+    "completionCriteria": {
+      "sourceValues": 2916,
+      "preservedValues": 2916,
+      "lossCount": 0
+    },
+    "accessibilitySupports": {
+      "sourceValues": 6696,
+      "preservedValues": 6696,
+      "lossCount": 0
+    }
+  },
+  "implementation": {
+    "builderPath": "scripts/build-final-family-pilot-data.mjs",
+    "builderSha256": "2fa1c0bf618ae6fb43a8d8566888673caa781b6910772951fa3e84979c38a817",
+    "rendererPath": "src/study/family-pilot/final-app/FinalFamilyPilotApp.tsx",
+    "rendererSha256": "e19f3abda9de8ee2803aeda0fa007b44988227a873e7568bedc2c62ecf6c0076",
+    "builderKeysPresent": true,
+    "fullMaterialRendererFound": true,
+    "syntheticProjectionControl": true
+  },
+  "losses": [],
+  "note": "The production learner MaterialView renders every projected section body and every prompt. The segment player uses one current prompt, but the full material remains visible beside it."
+}
