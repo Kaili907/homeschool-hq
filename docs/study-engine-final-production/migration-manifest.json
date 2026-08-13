@@ -523,6 +523,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "cross_device_authority_version:0->1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260813172000",
+      "filename": "20260813172000_academy_study_sync_lossless_v2.sql",
+      "sha256": "003bc5adbc7148f32ae15c477fb093f420b69873e85b0d53a8fde147ad42a3e1",
+      "dependency": "20260813171000_academy_study_cross_device_authority.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "lossless_sync_version:0->2",
+      "supersessionStatus": "current"
     }
   ]
 }
