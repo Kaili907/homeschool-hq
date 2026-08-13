@@ -1,0 +1,101 @@
+{
+  "schema_version": "manuel-academy-world-language-external-course-1.0",
+  "record_id": "wl-ext-ja-s01",
+  "subject_family": "world-language",
+  "authorship": {
+    "authored_by": "external-provider",
+    "manuel_academy_role": "records-and-verifies-only",
+    "statement": "Taught and assessed by <PROVIDER_LEGAL_NAME>. Manuel Academy did not author, teach, or assess this course; it records the enrolment and verifies the provider evidence."
+  },
+  "status": "template",
+  "language": {
+    "name": "Japanese",
+    "iso_639_1": "ja",
+    "iso_639_3": "jpn",
+    "notes": null
+  },
+  "provider": {
+    "selection_status": "unselected",
+    "legal_name": "<PROVIDER_LEGAL_NAME>",
+    "kind": "unselected",
+    "accreditation": {
+      "claimed": "<ACCREDITATION_AS_STATED_BY_PROVIDER_OR_NONE>",
+      "verified_by_parent": false,
+      "verified_on": null
+    },
+    "reference": {
+      "url": "<PROVIDER_COURSE_PAGE_URL>",
+      "catalog_id": "<PROVIDER_CATALOG_ID>",
+      "retrieved_on": null,
+      "contact": "<PROVIDER_CONTACT>"
+    }
+  },
+  "course": {
+    "title": "<COURSE_TITLE_AS_THE_PROVIDER_PRINTS_IT>",
+    "provider_course_code": "<PROVIDER_COURSE_CODE>",
+    "level_label": "Japanese I, first semester",
+    "delivery": "unknown",
+    "claimed_contact_hours": null
+  },
+  "term": {
+    "sequence_position": 1,
+    "semester_label": "S1",
+    "school_year": null,
+    "term": "unscheduled",
+    "start_date": null,
+    "end_date": null
+  },
+  "placement": {
+    "grade": "9",
+    "counts_toward": "world-language"
+  },
+  "credit": {
+    "requested": 0.5,
+    "awarded": null,
+    "basis": "provider-awarded",
+    "provider_credit_value": "<CREDIT_VALUE_AS_THE_PROVIDER_STATES_IT>"
+  },
+  "evidence": {
+    "syllabus": [
+      {
+        "kind": "syllabus",
+        "description": "<WHAT_THE_DOCUMENT_IS>",
+        "location": "<WHERE_THE_DOCUMENT_LIVES>",
+        "obtained_on": null,
+        "verified_by_parent": false
+      }
+    ],
+    "transcript": [],
+    "assignments": [],
+    "proficiency_artifact": [],
+    "other": []
+  },
+  "tracking": {
+    "assignments_reported": null,
+    "assignments_completed": null,
+    "completion_source": "none",
+    "last_updated": null
+  },
+  "final_grade": {
+    "reported": null,
+    "scale": null,
+    "source": "none"
+  },
+  "proficiency": {
+    "claimed_level": null,
+    "framework": null,
+    "artifact_ref": null,
+    "assessed_on": null
+  },
+  "parent_verification": {
+    "verified_by": "<PARENT_NAME>",
+    "verified_on": null,
+    "method": "none",
+    "statement": null
+  },
+  "mmc_claim": "none",
+  "graduation_claim": "none",
+  "notes": [
+    "Copy this file, fill every <PLACEHOLDER>, then set status. The validator rejects any record past status=template that still carries an unfilled placeholder (rule R2), so a half-filled record cannot quietly become a transcript line."
+  ]
+}

@@ -1,0 +1,412 @@
+{
+  "schema_version": "manuel-academy-world-language-external-pathway-1.0",
+  "pathway_id": "wl-ext-path-japanese-2yr",
+  "language": {
+    "name": "Japanese",
+    "iso_639_1": "ja",
+    "iso_639_3": "jpn"
+  },
+  "intent": "Two years of the same language, sourced externally, for a college-ready transcript. Japanese is the intended language because it is already the house language; the contract is language-agnostic and this pathway can be re-keyed to another language without schema change.",
+  "target": {
+    "credits": 2,
+    "semesters": 4,
+    "proficiency_target": "ACTFL Novice High",
+    "proficiency_target_basis": "Michigan states its world-language requirement as two credits 'based on students meeting a Novice High proficiency level'. Recorded as the design target for a Manuel Academy pathway, NOT as a requirement binding this homeschool. Claimable only on an external artifact, and only on a pathway that delivered two credits — see validator rules R5, R12 and P4. The ~360-hour figure often quoted alongside it is extrapolated and is not an MDE number."
+  },
+  "provider_selection": {
+    "status": "unselected",
+    "endorsed_provider": null,
+    "criteria": [
+      "Issues a transcript or report card in the provider’s own name, naming the course and the term.",
+      "Publishes a syllabus obtainable BEFORE enrolment, so evidence.syllabus can be filled at status=enrolled.",
+      "Grades on a stated scale, with the scale itself documented.",
+      "Provides an instructor who gives feedback on produced Japanese — the elementary plan explicitly assumed an instructor who does not speak the language, and that is the capacity gap being purchased.",
+      "States its accreditation status plainly, including stating that it has none.",
+      "For dual enrolment: confirms the course carries transferable college credit and appears on a college transcript.",
+      "Does not require Manuel Academy to represent the provider’s coursework as its own.",
+      "Has a stated path to, or compatibility with, an external proficiency artifact."
+    ],
+    "candidates_considered": []
+  },
+  "records": [
+    {
+      "schema_version": "manuel-academy-world-language-external-course-1.0",
+      "record_id": "wl-ext-ja-s01",
+      "subject_family": "world-language",
+      "authorship": {
+        "authored_by": "external-provider",
+        "manuel_academy_role": "records-and-verifies-only",
+        "statement": "Taught and assessed by an external provider. Manuel Academy did not author, teach, or assess this course; it records the enrolment and verifies the provider evidence."
+      },
+      "status": "planned",
+      "language": {
+        "name": "Japanese",
+        "iso_639_1": "ja",
+        "iso_639_3": "jpn",
+        "notes": "FSI Category IV. Hour-to-proficiency estimates are not transferable from Category I languages."
+      },
+      "provider": {
+        "selection_status": "unselected",
+        "legal_name": null,
+        "kind": "unselected",
+        "accreditation": {
+          "claimed": null,
+          "verified_by_parent": false,
+          "verified_on": null
+        },
+        "reference": {
+          "url": null,
+          "catalog_id": null,
+          "retrieved_on": null,
+          "contact": null
+        }
+      },
+      "course": {
+        "title": null,
+        "provider_course_code": null,
+        "level_label": "Japanese I, first semester",
+        "delivery": "unknown",
+        "claimed_contact_hours": null
+      },
+      "term": {
+        "sequence_position": 1,
+        "semester_label": "S1",
+        "school_year": null,
+        "term": "fall",
+        "start_date": null,
+        "end_date": null
+      },
+      "placement": {
+        "grade": "9",
+        "counts_toward": "world-language"
+      },
+      "credit": {
+        "requested": 0.5,
+        "awarded": null,
+        "basis": "provider-awarded",
+        "provider_credit_value": null
+      },
+      "evidence": {
+        "syllabus": [],
+        "transcript": [],
+        "assignments": [],
+        "proficiency_artifact": [],
+        "other": []
+      },
+      "tracking": {
+        "assignments_reported": null,
+        "assignments_completed": null,
+        "completion_source": "none",
+        "last_updated": null
+      },
+      "final_grade": {
+        "reported": null,
+        "scale": null,
+        "source": "none"
+      },
+      "proficiency": {
+        "claimed_level": null,
+        "framework": null,
+        "artifact_ref": null,
+        "assessed_on": null
+      },
+      "parent_verification": {
+        "verified_by": null,
+        "verified_on": null,
+        "method": "none",
+        "statement": null
+      },
+      "mmc_claim": "none",
+      "graduation_claim": "none",
+      "notes": []
+    },
+    {
+      "schema_version": "manuel-academy-world-language-external-course-1.0",
+      "record_id": "wl-ext-ja-s02",
+      "subject_family": "world-language",
+      "authorship": {
+        "authored_by": "external-provider",
+        "manuel_academy_role": "records-and-verifies-only",
+        "statement": "Taught and assessed by an external provider. Manuel Academy did not author, teach, or assess this course; it records the enrolment and verifies the provider evidence."
+      },
+      "status": "planned",
+      "language": {
+        "name": "Japanese",
+        "iso_639_1": "ja",
+        "iso_639_3": "jpn",
+        "notes": "FSI Category IV. Hour-to-proficiency estimates are not transferable from Category I languages."
+      },
+      "provider": {
+        "selection_status": "unselected",
+        "legal_name": null,
+        "kind": "unselected",
+        "accreditation": {
+          "claimed": null,
+          "verified_by_parent": false,
+          "verified_on": null
+        },
+        "reference": {
+          "url": null,
+          "catalog_id": null,
+          "retrieved_on": null,
+          "contact": null
+        }
+      },
+      "course": {
+        "title": null,
+        "provider_course_code": null,
+        "level_label": "Japanese I, second semester",
+        "delivery": "unknown",
+        "claimed_contact_hours": null
+      },
+      "term": {
+        "sequence_position": 2,
+        "semester_label": "S2",
+        "school_year": null,
+        "term": "spring",
+        "start_date": null,
+        "end_date": null
+      },
+      "placement": {
+        "grade": "9",
+        "counts_toward": "world-language"
+      },
+      "credit": {
+        "requested": 0.5,
+        "awarded": null,
+        "basis": "provider-awarded",
+        "provider_credit_value": null
+      },
+      "evidence": {
+        "syllabus": [],
+        "transcript": [],
+        "assignments": [],
+        "proficiency_artifact": [],
+        "other": []
+      },
+      "tracking": {
+        "assignments_reported": null,
+        "assignments_completed": null,
+        "completion_source": "none",
+        "last_updated": null
+      },
+      "final_grade": {
+        "reported": null,
+        "scale": null,
+        "source": "none"
+      },
+      "proficiency": {
+        "claimed_level": null,
+        "framework": null,
+        "artifact_ref": null,
+        "assessed_on": null
+      },
+      "parent_verification": {
+        "verified_by": null,
+        "verified_on": null,
+        "method": "none",
+        "statement": null
+      },
+      "mmc_claim": "none",
+      "graduation_claim": "none",
+      "notes": []
+    },
+    {
+      "schema_version": "manuel-academy-world-language-external-course-1.0",
+      "record_id": "wl-ext-ja-s03",
+      "subject_family": "world-language",
+      "authorship": {
+        "authored_by": "external-provider",
+        "manuel_academy_role": "records-and-verifies-only",
+        "statement": "Taught and assessed by an external provider. Manuel Academy did not author, teach, or assess this course; it records the enrolment and verifies the provider evidence."
+      },
+      "status": "planned",
+      "language": {
+        "name": "Japanese",
+        "iso_639_1": "ja",
+        "iso_639_3": "jpn",
+        "notes": "FSI Category IV. Hour-to-proficiency estimates are not transferable from Category I languages."
+      },
+      "provider": {
+        "selection_status": "unselected",
+        "legal_name": null,
+        "kind": "unselected",
+        "accreditation": {
+          "claimed": null,
+          "verified_by_parent": false,
+          "verified_on": null
+        },
+        "reference": {
+          "url": null,
+          "catalog_id": null,
+          "retrieved_on": null,
+          "contact": null
+        }
+      },
+      "course": {
+        "title": null,
+        "provider_course_code": null,
+        "level_label": "Japanese II, first semester",
+        "delivery": "unknown",
+        "claimed_contact_hours": null
+      },
+      "term": {
+        "sequence_position": 3,
+        "semester_label": "S3",
+        "school_year": null,
+        "term": "fall",
+        "start_date": null,
+        "end_date": null
+      },
+      "placement": {
+        "grade": "10",
+        "counts_toward": "world-language"
+      },
+      "credit": {
+        "requested": 0.5,
+        "awarded": null,
+        "basis": "provider-awarded",
+        "provider_credit_value": null
+      },
+      "evidence": {
+        "syllabus": [],
+        "transcript": [],
+        "assignments": [],
+        "proficiency_artifact": [],
+        "other": []
+      },
+      "tracking": {
+        "assignments_reported": null,
+        "assignments_completed": null,
+        "completion_source": "none",
+        "last_updated": null
+      },
+      "final_grade": {
+        "reported": null,
+        "scale": null,
+        "source": "none"
+      },
+      "proficiency": {
+        "claimed_level": null,
+        "framework": null,
+        "artifact_ref": null,
+        "assessed_on": null
+      },
+      "parent_verification": {
+        "verified_by": null,
+        "verified_on": null,
+        "method": "none",
+        "statement": null
+      },
+      "mmc_claim": "none",
+      "graduation_claim": "none",
+      "notes": []
+    },
+    {
+      "schema_version": "manuel-academy-world-language-external-course-1.0",
+      "record_id": "wl-ext-ja-s04",
+      "subject_family": "world-language",
+      "authorship": {
+        "authored_by": "external-provider",
+        "manuel_academy_role": "records-and-verifies-only",
+        "statement": "Taught and assessed by an external provider. Manuel Academy did not author, teach, or assess this course; it records the enrolment and verifies the provider evidence."
+      },
+      "status": "planned",
+      "language": {
+        "name": "Japanese",
+        "iso_639_1": "ja",
+        "iso_639_3": "jpn",
+        "notes": "FSI Category IV. Hour-to-proficiency estimates are not transferable from Category I languages."
+      },
+      "provider": {
+        "selection_status": "unselected",
+        "legal_name": null,
+        "kind": "unselected",
+        "accreditation": {
+          "claimed": null,
+          "verified_by_parent": false,
+          "verified_on": null
+        },
+        "reference": {
+          "url": null,
+          "catalog_id": null,
+          "retrieved_on": null,
+          "contact": null
+        }
+      },
+      "course": {
+        "title": null,
+        "provider_course_code": null,
+        "level_label": "Japanese II, second semester",
+        "delivery": "unknown",
+        "claimed_contact_hours": null
+      },
+      "term": {
+        "sequence_position": 4,
+        "semester_label": "S4",
+        "school_year": null,
+        "term": "spring",
+        "start_date": null,
+        "end_date": null
+      },
+      "placement": {
+        "grade": "10",
+        "counts_toward": "world-language"
+      },
+      "credit": {
+        "requested": 0.5,
+        "awarded": null,
+        "basis": "provider-awarded",
+        "provider_credit_value": null
+      },
+      "evidence": {
+        "syllabus": [],
+        "transcript": [],
+        "assignments": [],
+        "proficiency_artifact": [],
+        "other": []
+      },
+      "tracking": {
+        "assignments_reported": null,
+        "assignments_completed": null,
+        "completion_source": "none",
+        "last_updated": null
+      },
+      "final_grade": {
+        "reported": null,
+        "scale": null,
+        "source": "none"
+      },
+      "proficiency": {
+        "claimed_level": null,
+        "framework": null,
+        "artifact_ref": null,
+        "assessed_on": null
+      },
+      "parent_verification": {
+        "verified_by": null,
+        "verified_on": null,
+        "method": "none",
+        "statement": null
+      },
+      "mmc_claim": "none",
+      "graduation_claim": "none",
+      "notes": [
+        "An external proficiency artifact (JLPT, ACTFL AAPPL/OPI, STAMP, or AP Japanese) is sat separately from the course and recorded on whichever semester record is open when the score report arrives."
+      ]
+    }
+  ],
+  "transcript": {
+    "rollup_label": "World Language: Japanese (external coursework)",
+    "source_attribution": "Course source: external provider (named per record). Manuel Academy records and verifies; it did not author or teach this coursework.",
+    "proficiency_claim": null,
+    "gpa_treatment": "undecided"
+  },
+  "graduation_completeness": "NOT_GRADUATION_COMPLETE_UNCHANGED",
+  "mmc_note": "No MMC claim is made. mac/world-language-decision-r1 found that MCL 380.1278a(2) binds school boards and that MCL 380.1561(3)(f) omits world language from the nine subjects Michigan requires of a homeschool. This pathway exists for the college transcript, which is the constraint that does apply.",
+  "integration": {
+    "requires_eleventh_subject": true,
+    "performed_in_this_lane": false,
+    "see": "curriculum-authoring/world-language-external/integration-requirements.md"
+  }
+}
