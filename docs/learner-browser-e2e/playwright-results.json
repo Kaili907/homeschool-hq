@@ -1,0 +1,712 @@
+{
+  "config": {
+    "configFile": "/private/tmp/manuel-learner-release-r1.Ph05AZ/playwright.learner-release.config.ts",
+    "rootDir": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/learner-browser-e2e/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.1",
+    "workers": 1,
+    "webServer": {
+      "command": "VITE_FAMILY_PILOT_ENABLED=true npm run build && npm run preview -- --host 127.0.0.1 --port 4187",
+      "url": "http://127.0.0.1:4187/family-pilot",
+      "reuseExistingServer": false,
+      "timeout": 600000
+    }
+  },
+  "suites": [
+    {
+      "title": "assessment-authority.spec.ts",
+      "file": "assessment-authority.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "all 699 canonical assessment packages parse and pair with restricted adult authorities",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 604,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:28.995Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24e691045e89bad8e967-8c31b342ee2231eda4bd",
+          "file": "assessment-authority.spec.ts",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "schedule/assignment adapter launch and static scoring return only a minimized result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:29.603Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24e691045e89bad8e967-51437b67f9deedfcfcee",
+          "file": "assessment-authority.spec.ts",
+          "line": 73,
+          "column": 1
+        },
+        {
+          "title": "negative controls reject answer material and learner guardian self-certification",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:29.605Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "24e691045e89bad8e967-f224057e5a459910e017",
+          "file": "assessment-authority.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "the production browser exposes assessment launch from schedule or assignment",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 15459,
+                  "error": {
+                    "message": "Error: \u001b[31mTimed out 15000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()\u001b[22m\n",
+                    "stack": "Error: \u001b[31mTimed out 15000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()\u001b[22m\n\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/assessment-authority.spec.ts:143:101",
+                    "location": {
+                      "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/assessment-authority.spec.ts",
+                      "column": 101,
+                      "line": 143
+                    },
+                    "snippet": "  141 |   await page.getByRole('button', { name: 'Finish family setup' }).click()\n  142 |   await page.getByLabel('Parent student').selectOption({ label: 'Assessment Browser' })\n> 143 |   await expect(page.getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()).toBeVisible()\n      |                                                                                                     ^\n  144 | })\n  145 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/assessment-authority.spec.ts",
+                        "column": 101,
+                        "line": 143
+                      },
+                      "message": "Error: \u001b[31mTimed out 15000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()\u001b[22m\n\n\n  141 |   await page.getByRole('button', { name: 'Finish family setup' }).click()\n  142 |   await page.getByLabel('Parent student').selectOption({ label: 'Assessment Browser' })\n> 143 |   await expect(page.getByRole('button', { name: /start.*assessment|launch.*assessment/i }).first()).toBeVisible()\n      |                                                                                                     ^\n  144 | })\n  145 |\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/assessment-authority.spec.ts:143:101"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:29.606Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/assessment-authority-the-p-5c9ff-from-schedule-or-assignment/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/assessment-authority-the-p-5c9ff-from-schedule-or-assignment/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/assessment-authority-the-p-5c9ff-from-schedule-or-assignment/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/assessment-authority.spec.ts",
+                    "column": 101,
+                    "line": 143
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "24e691045e89bad8e967-a54a3f5a7248540a5e9f",
+          "file": "assessment-authority.spec.ts",
+          "line": 136,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "corpus.spec.ts",
+      "file": "corpus.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "production browser lazily fetches and parses all 90 course payloads and all 8,292 learner DTOs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1819,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:45.546Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "824601e1143c24ef69d2-6744ff7b1f56f9a5da51",
+          "file": "corpus.spec.ts",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "production network and browser artifacts contain no answer-key material",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 327,
+                  "error": {
+                    "message": "Error: answer material must not ship in browser-readable files\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  2\u001b[39m\n\u001b[31m+ Received  + 28\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"artifactLeaks\": Array [],\u001b[39m\n\u001b[32m-   \"networkLeaks\": Array [],\u001b[39m\n\u001b[31m+   \"artifactLeaks\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"AdminConsoleRoute-6eqtEKla.js\",\u001b[39m\n\u001b[31m+       \"token\": \"correctAnswer\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"FinalFamilyPilotApp-CG9JdRjV.js\",\u001b[39m\n\u001b[31m+       \"token\": \"expectedAnswer\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"Grade5MathPractice-CCd0uOpA.js\",\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"index-CEHZsgi0.js\",\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[31m+   \"networkLeaks\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+       \"url\": \"/assets/index-CEHZsgi0.js\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"token\": \"expectedAnswer\",\u001b[39m\n\u001b[31m+       \"url\": \"/assets/FinalFamilyPilotApp-CG9JdRjV.js\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: answer material must not ship in browser-readable files\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  2\u001b[39m\n\u001b[31m+ Received  + 28\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"artifactLeaks\": Array [],\u001b[39m\n\u001b[32m-   \"networkLeaks\": Array [],\u001b[39m\n\u001b[31m+   \"artifactLeaks\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"AdminConsoleRoute-6eqtEKla.js\",\u001b[39m\n\u001b[31m+       \"token\": \"correctAnswer\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"FinalFamilyPilotApp-CG9JdRjV.js\",\u001b[39m\n\u001b[31m+       \"token\": \"expectedAnswer\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"Grade5MathPractice-CCd0uOpA.js\",\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"index-CEHZsgi0.js\",\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[31m+   \"networkLeaks\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+       \"url\": \"/assets/index-CEHZsgi0.js\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"token\": \"expectedAnswer\",\u001b[39m\n\u001b[31m+       \"url\": \"/assets/FinalFamilyPilotApp-CG9JdRjV.js\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts:108:102",
+                    "location": {
+                      "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts",
+                      "column": 102,
+                      "line": 108
+                    },
+                    "snippet": "  106 |     contentType: 'application/json',\n  107 |   })\n> 108 |   expect({ networkLeaks, artifactLeaks }, 'answer material must not ship in browser-readable files').toEqual({\n      |                                                                                                      ^\n  109 |     networkLeaks: [],\n  110 |     artifactLeaks: [],\n  111 |   })"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts",
+                        "column": 102,
+                        "line": 108
+                      },
+                      "message": "Error: answer material must not ship in browser-readable files\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  2\u001b[39m\n\u001b[31m+ Received  + 28\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"artifactLeaks\": Array [],\u001b[39m\n\u001b[32m-   \"networkLeaks\": Array [],\u001b[39m\n\u001b[31m+   \"artifactLeaks\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"AdminConsoleRoute-6eqtEKla.js\",\u001b[39m\n\u001b[31m+       \"token\": \"correctAnswer\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"FinalFamilyPilotApp-CG9JdRjV.js\",\u001b[39m\n\u001b[31m+       \"token\": \"expectedAnswer\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"Grade5MathPractice-CCd0uOpA.js\",\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"file\": \"index-CEHZsgi0.js\",\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[31m+   \"networkLeaks\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"token\": \"answerIndex\",\u001b[39m\n\u001b[31m+       \"url\": \"/assets/index-CEHZsgi0.js\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"token\": \"expectedAnswer\",\u001b[39m\n\u001b[31m+       \"url\": \"/assets/FinalFamilyPilotApp-CG9JdRjV.js\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  106 |     contentType: 'application/json',\n  107 |   })\n> 108 |   expect({ networkLeaks, artifactLeaks }, 'answer material must not ship in browser-readable files').toEqual({\n      |                                                                                                      ^\n  109 |     networkLeaks: [],\n  110 |     artifactLeaks: [],\n  111 |   })\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts:108:102"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:47.445Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "answer-material-artifact-leaks",
+                      "contentType": "application/json",
+                      "body": "ewogICJuZXR3b3JrTGVha3MiOiBbCiAgICB7CiAgICAgICJ1cmwiOiAiL2Fzc2V0cy9pbmRleC1DRUhac2dpMC5qcyIsCiAgICAgICJ0b2tlbiI6ICJhbnN3ZXJJbmRleCIKICAgIH0sCiAgICB7CiAgICAgICJ1cmwiOiAiL2Fzc2V0cy9GaW5hbEZhbWlseVBpbG90QXBwLUNHOUpkUmpWLmpzIiwKICAgICAgInRva2VuIjogImV4cGVjdGVkQW5zd2VyIgogICAgfQogIF0sCiAgImFydGlmYWN0TGVha3MiOiBbCiAgICB7CiAgICAgICJmaWxlIjogIkFkbWluQ29uc29sZVJvdXRlLTZlcXRFS2xhLmpzIiwKICAgICAgInRva2VuIjogImNvcnJlY3RBbnN3ZXIiCiAgICB9LAogICAgewogICAgICAiZmlsZSI6ICJGaW5hbEZhbWlseVBpbG90QXBwLUNHOUpkUmpWLmpzIiwKICAgICAgInRva2VuIjogImV4cGVjdGVkQW5zd2VyIgogICAgfSwKICAgIHsKICAgICAgImZpbGUiOiAiR3JhZGU1TWF0aFByYWN0aWNlLUNDZDB1T3BBLmpzIiwKICAgICAgInRva2VuIjogImFuc3dlckluZGV4IgogICAgfSwKICAgIHsKICAgICAgImZpbGUiOiAiaW5kZXgtQ0VIWnNnaTAuanMiLAogICAgICAidG9rZW4iOiAiYW5zd2VySW5kZXgiCiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/corpus-production-network--aad9f-tain-no-answer-key-material/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/corpus-production-network--aad9f-tain-no-answer-key-material/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/corpus-production-network--aad9f-tain-no-answer-key-material/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts",
+                    "column": 102,
+                    "line": 108
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "824601e1143c24ef69d2-b56c25ccb371b6df71aa",
+          "file": "corpus.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "all projected DTOs enter the production response mapper with canonical response kinds",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7581,
+                  "error": {
+                    "message": "Error: answer-required items must use the canonical runtime vocabulary\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -   2\u001b[39m\n\u001b[31m+ Received  + 103\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"count\": 0,\u001b[39m\n\u001b[32m-   \"examples\": Array [],\u001b[39m\n\u001b[31m+   \"count\": 3881,\u001b[39m\n\u001b[31m+   \"examples\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l04#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l04\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l04#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l04\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: answer-required items must use the canonical runtime vocabulary\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -   2\u001b[39m\n\u001b[31m+ Received  + 103\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"count\": 0,\u001b[39m\n\u001b[32m-   \"examples\": Array [],\u001b[39m\n\u001b[31m+   \"count\": 3881,\u001b[39m\n\u001b[31m+   \"examples\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l04#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l04\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l04#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l04\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts:145:72",
+                    "location": {
+                      "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts",
+                      "column": 72,
+                      "line": 145
+                    },
+                    "snippet": "  143 |   expect(lessons).toBe(8292)\n  144 |   expect({ count: invalidRequired.length, examples: invalidRequired.slice(0, 20) },\n> 145 |     'answer-required items must use the canonical runtime vocabulary').toEqual({ count: 0, examples: [] })\n      |                                                                        ^\n  146 |   for (const kind of ['CHOICE', 'NUMERIC', 'TEXT', 'CONSTRUCTED_RESPONSE', 'ACTIVITY_EVIDENCE', 'RUBRIC_REVIEW_PENDING', 'GUARDIAN_ATTESTATION']) {\n  147 |     expect(responseCounts.get(kind) ?? 0, `${kind} must be exercised by actual projected material`).toBeGreaterThan(0)\n  148 |   }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts",
+                        "column": 72,
+                        "line": 145
+                      },
+                      "message": "Error: answer-required items must use the canonical runtime vocabulary\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -   2\u001b[39m\n\u001b[31m+ Received  + 103\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"count\": 0,\u001b[39m\n\u001b[32m-   \"examples\": Array [],\u001b[39m\n\u001b[31m+   \"count\": 3881,\u001b[39m\n\u001b[31m+   \"examples\": Array [\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l01#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l01\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l02#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l02\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t1-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l03#t2-p3\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l03\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l04#t1-p1\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l04\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+     Object {\u001b[39m\n\u001b[31m+       \"itemRef\": \"ma-g10-financial-literacy-u01-l04#t1-p2\",\u001b[39m\n\u001b[31m+       \"lessonRef\": \"ma-g10-financial-literacy-u01-l04\",\u001b[39m\n\u001b[31m+       \"responseType\": \"FIXED\",\u001b[39m\n\u001b[31m+     },\u001b[39m\n\u001b[31m+   ],\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  143 |   expect(lessons).toBe(8292)\n  144 |   expect({ count: invalidRequired.length, examples: invalidRequired.slice(0, 20) },\n> 145 |     'answer-required items must use the canonical runtime vocabulary').toEqual({ count: 0, examples: [] })\n      |                                                                        ^\n  146 |   for (const kind of ['CHOICE', 'NUMERIC', 'TEXT', 'CONSTRUCTED_RESPONSE', 'ACTIVITY_EVIDENCE', 'RUBRIC_REVIEW_PENDING', 'GUARDIAN_ATTESTATION']) {\n  147 |     expect(responseCounts.get(kind) ?? 0, `${kind} must be exercised by actual projected material`).toBeGreaterThan(0)\n  148 |   }\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts:145:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:48.106Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "response-type-counts",
+                      "contentType": "application/json",
+                      "body": "ewogICJBQ1RJVklUWV9FVklERU5DRSI6IDg0NDgsCiAgIkNIT0lDRSI6IDEzNTA2LAogICJDT05TVFJVQ1RFRF9SRVNQT05TRSI6IDI5MTYsCiAgIkZJWEVEIjogMjUwNywKICAiT1BFTiI6IDk2LAogICJSRUFEIjogNzM0MDMsCiAgImNoZWNrbGlzdC1pdGVtIjogNzg5LAogICJjb25zdHJ1Y3RlZC1yZXNwb25zZSI6IDksCiAgImV4dGVuZGVkLXJlc3BvbnNlIjogMjIwLAogICJzaG9ydC1yZXNwb25zZSI6IDI2MAp9"
+                    },
+                    {
+                      "name": "invalid-required-response-types",
+                      "contentType": "application/json",
+                      "body": "ewogICJjb3VudCI6IDM4ODEsCiAgImV4YW1wbGVzIjogWwogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSN0Mi1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMSN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiN0Mi1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMiN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyN0Mi1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwMyN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNCN0Mi1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNSN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiN0Mi1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNiN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNyN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNyN0Mi1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNyIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwNyN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOCN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSN0MS1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSN0Mi1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSN0Mi1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwwOSN0Mi1wMyIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwxMCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwxMCN0MS1wMSIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9LAogICAgewogICAgICAibGVzc29uUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwxMCIsCiAgICAgICJpdGVtUmVmIjogIm1hLWcxMC1maW5hbmNpYWwtbGl0ZXJhY3ktdTAxLWwxMCN0MS1wMiIsCiAgICAgICJyZXNwb25zZVR5cGUiOiAiRklYRUQiCiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/corpus-all-projected-DTOs--9e414-th-canonical-response-kinds/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/corpus.spec.ts",
+                    "column": 72,
+                    "line": 145
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "824601e1143c24ef69d2-1b8917abaf7dcc634c24",
+          "file": "corpus.spec.ts",
+          "line": 114,
+          "column": 1
+        },
+        {
+          "title": "negative control: a count-tampered manifest is rejected before setup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 251,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:56.104Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "824601e1143c24ef69d2-17c3929e1e7bc6ff21ae",
+          "file": "corpus.spec.ts",
+          "line": 151,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "learner-flow.spec.ts",
+      "file": "learner-flow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Grade 3 repaired Math renders a real choice, submits it, and preserves pending work across reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1983,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:56.433Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2d8f65172fc67da44551-9ce602af19d6c7cfd18f",
+          "file": "learner-flow.spec.ts",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "actual Grade 3 constructed-response work renders a submittable response control",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16487,
+                  "error": {
+                    "message": "Error: \u001b[31mTimed out 15000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByLabel('Your response')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Your response')\u001b[22m\n",
+                    "stack": "Error: \u001b[31mTimed out 15000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByLabel('Your response')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Your response')\u001b[22m\n\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts:53:50",
+                    "location": {
+                      "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts",
+                      "column": 50,
+                      "line": 53
+                    },
+                    "snippet": "  51 |   await expect(page.getByText('Step 3 of 3', { exact: true })).toBeVisible()\n  52 |   await expect(page.getByText('A farm had 219 apples. They received 308 more apples. How many apples are there now?')).toBeVisible()\n> 53 |   await expect(page.getByLabel('Your response')).toBeVisible()\n     |                                                  ^\n  54 |   await page.getByLabel('Your response').fill('527, because 219 + 308 = 527.')\n  55 |   await page.getByRole('button', { name: 'Submit', exact: true }).click()\n  56 |   await expect(page.getByText('Response saved on this device. Assessment is pending.')).toBeVisible()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts",
+                        "column": 50,
+                        "line": 53
+                      },
+                      "message": "Error: \u001b[31mTimed out 15000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByLabel('Your response')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Your response')\u001b[22m\n\n\n  51 |   await expect(page.getByText('Step 3 of 3', { exact: true })).toBeVisible()\n  52 |   await expect(page.getByText('A farm had 219 apples. They received 308 more apples. How many apples are there now?')).toBeVisible()\n> 53 |   await expect(page.getByLabel('Your response')).toBeVisible()\n     |                                                  ^\n  54 |   await page.getByLabel('Your response').fill('527, because 219 + 308 = 527.')\n  55 |   await page.getByRole('button', { name: 'Submit', exact: true }).click()\n  56 |   await expect(page.getByText('Response saved on this device. Assessment is pending.')).toBeVisible()\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts:53:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:18:58.418Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/learner-flow-actual-Grade--1a975-ubmittable-response-control/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/learner-flow-actual-Grade--1a975-ubmittable-response-control/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/learner-flow-actual-Grade--1a975-ubmittable-response-control/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts",
+                    "column": 50,
+                    "line": 53
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2d8f65172fc67da44551-4b5e8340fc8edbf68fd5",
+          "file": "learner-flow.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "dynamic Social Studies blocks, then unlocks only after adult source metadata",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1886,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:19:15.263Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2d8f65172fc67da44551-510b68a2320e00e4b9f9",
+          "file": "learner-flow.spec.ts",
+          "line": 59,
+          "column": 1
+        },
+        {
+          "title": "Ready for Life learner work reaches guardian-pending without a learner self-certification control",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 989,
+                  "error": {
+                    "message": "Error: RFL progression blocked on loop 1\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7madvanc\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mblock\u001b[27med\"\u001b[39m",
+                    "stack": "Error: RFL progression blocked on loop 1\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7madvanc\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mblock\u001b[27med\"\u001b[39m\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts:91:96",
+                    "location": {
+                      "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts",
+                      "column": 96,
+                      "line": 91
+                    },
+                    "snippet": "  89 |   for (let guard = 0; guard < 40; guard += 1) {\n  90 |     if (await page.getByRole('heading', { name: 'Work finished — parent sign-off pending' }).isVisible().catch(() => false)) break\n> 91 |     expect(await submitEveryVisibleResponse(page), `RFL progression blocked on loop ${guard}`).toBe('advanced')\n     |                                                                                                ^\n  92 |   }\n  93 |   await expect(page.getByRole('heading', { name: 'Work finished — parent sign-off pending' })).toBeVisible()\n  94 |   await expect(page.getByRole('button', { name: /attest/i })).toHaveCount(0)"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts",
+                        "column": 96,
+                        "line": 91
+                      },
+                      "message": "Error: RFL progression blocked on loop 1\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7madvanc\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mblock\u001b[27med\"\u001b[39m\n\n  89 |   for (let guard = 0; guard < 40; guard += 1) {\n  90 |     if (await page.getByRole('heading', { name: 'Work finished — parent sign-off pending' }).isVisible().catch(() => false)) break\n> 91 |     expect(await submitEveryVisibleResponse(page), `RFL progression blocked on loop ${guard}`).toBe('advanced')\n     |                                                                                                ^\n  92 |   }\n  93 |   await expect(page.getByRole('heading', { name: 'Work finished — parent sign-off pending' })).toBeVisible()\n  94 |   await expect(page.getByRole('button', { name: /attest/i })).toHaveCount(0)\n    at /private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts:91:96"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-13T22:19:17.224Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/learner-flow-Ready-for-Lif-f5bd8--self-certification-control/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/learner-flow-Ready-for-Lif-f5bd8--self-certification-control/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/private/tmp/manuel-learner-release-r1.Ph05AZ/test-results/learner-release/learner-flow-Ready-for-Lif-f5bd8--self-certification-control/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/manuel-learner-release-r1.Ph05AZ/tests/browser/learner-release/learner-flow.spec.ts",
+                    "column": 96,
+                    "line": 91
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2d8f65172fc67da44551-060ec7d413b13cf0ce83",
+          "file": "learner-flow.spec.ts",
+          "line": 83,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-13T22:18:22.700Z",
+    "duration": 55586.954,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}
