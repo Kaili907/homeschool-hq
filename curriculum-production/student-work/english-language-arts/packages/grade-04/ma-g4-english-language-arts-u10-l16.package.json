@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g4-english-language-arts-u10-l16",
   "lessonRef": {
     "lessonId": "ma-g4-english-language-arts-u10-l16",
@@ -22,34 +22,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: retrieving the year's reading, writing, research, and language moves. Essential question: How do I write a narrative a reader can follow, and show a year of growth across genres? By the end of this lesson you should be able to: Retrieve the unit's targets from memory and identify the remaining gap. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 4 lesson develops retrieving the year's reading, writing, research, and language moves within the unit “Narrative Craft, Comparison, and the Year-End Portfolio.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's retrieval and assessment preparation work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "In September I thought revising meant fixing spelling.\n\nI would write a paragraph, read it once for red underlines, and call it finished. When my teacher wrote *develop this* in the margin, I genuinely did not know what she was asking for. The sentence was correct. What else was there?\n\nThe answer arrived in November, and it arrived through a piece I did not care about.\n\nWe had to explain a process. I chose how a lock works on a canal, because my uncle had shown me one. I wrote four sentences. My partner read them and asked why the water does not simply run out the bottom. I said because of the gates. She asked how the gates hold back that much water. I said because they are strong. She said that was not an answer, and she was right, and I was annoyed for about a day.\n\nThen I went and found out. The gates form a shallow V pointing upstream, so the water pressure pushes them together instead of apart. The harder the water pushes, the tighter they seal.\n\nWhen I put that in, the paragraph stopped being four correct sentences and started being something a person could learn from.\n\nThat is what *develop this* meant. It took me two months and one annoying question to find out.\n\nIn March I wrote an opinion piece and someone asked me a question I could not answer, and I recognized the feeling immediately. I did not get annoyed. I went and found out.\n\nI still misspell *necessary*. I expect I always will. But I no longer think that is what revising is.",
     "refs": [
       {
         "textId": "g4-text-16",
         "title": "What the Year Taught Me",
+        "author": "Manuel Academy",
         "form": "reflective narrative",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 273,
+        "sha256": "6bba7190dcb66299c5857d0cb79f8bf580948d5faf143f839e957b3e7ff1bc39",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word study and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Name the unit targets without explanation and ask the learner to reconstruct each one.\n- Guided practice: Work a mixed set that requires selecting the right move rather than repeating one.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “What the Year Taught Me”:\n1. Preview the title and paragraph structure; write what retrieving the year's reading, writing, research, and language moves asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner completes a mixed retrieval set and marks which target is least secure. When finished: Which target is least secure, and what would fix it in one session?"
+    "text": "Read “What the Year Taught Me,” then answer: Audit your readiness on retrieving the year's reading, writing, research, and language moves. Which criterion is secure, which needs practice, and what source-based practice will close the gap?\n\nDeliverable: Grade 4: a readiness audit with one completed practice item drawn from the reading; write two connected paragraphs.\n\nEvidence requirement: Use two exact details. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 4: a readiness audit with one completed practice item drawn from the reading; write two connected paragraphs.",
+  "learning_objectives": [
+    "Use the delivered reading to apply retrieving the year's reading, writing, research, and language moves.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about retrieving the year's reading, writing, research, and language moves and complete the named deliverable.",
+    "I use two exact details from “What the Year Taught Me” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about retrieving the year's reading, writing, research, and language moves and complete the named deliverable.",
+    "I use two exact details from “What the Year Taught Me” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “What the Year Taught Me” in full and mark evidence connected to retrieving the year's reading, writing, research, and language moves.",
+    "Answer the lesson question using two exact details; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": true,
+    "prompt": "Audit your readiness on retrieving the year's reading, writing, research, and language moves. Which criterion is secure, which needs practice, and what source-based practice will close the gap?",
+    "deliverable": "Grade 4: a readiness audit with one completed practice item drawn from the reading; write two connected paragraphs."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (retrieving the year's reading, writing, research, and language moves):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If retrieving the year's reading, writing, research, and language moves is not yet secure, return to “What the Year Taught Me” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply retrieving the year's reading, writing, research, and language moves to a different paragraph or a defensible alternative interpretation of “What the Year Taught Me.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g4-english-language-arts-u06-l18",
   "lessonRef": {
     "lessonId": "ma-g4-english-language-arts-u06-l18",
@@ -21,34 +21,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: correcting one section and publishing with a typed page. Essential question: How do I group related information and develop it so a reader learns something new? By the end of this lesson you should be able to: Correct with understanding and publish or file the unit product. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 4 lesson develops correcting one section and publishing with a typed page within the unit “Explanatory Writing: Grouping, Precision, and Development.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's targeted correction, publication, and reflection work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "Lay a flat sheet of paper across a gap between two books and it collapses under the weight of a single coin. Fold the same sheet into a row of narrow accordion pleats, lay it across the same gap, and it will hold a stack of coins. Nothing has been added. Only the shape has changed.\n\nThe explanation involves how a material resists bending. When a flat sheet bends downward, its top surface is squeezed and its bottom surface is stretched. The material closest to the middle of the sheet does almost nothing, because it is neither squeezed nor stretched. A flat sheet is thin, so nearly all of its material sits near that inactive middle.\n\nFolding changes where the material sits. In a pleated sheet, some of the paper is lifted well above the center line and some is pushed well below it. Material located far from the center resists bending far more effectively than material near it. Engineers describe this using a quantity called the second moment of area, which increases sharply as material moves away from the middle.\n\nThis is why structural beams are shaped like the capital letter I. Most of the steel is concentrated in the top and bottom flanges, far from the center, while the thin vertical web in the middle mainly holds those flanges apart. An I-beam uses less steel than a solid rectangular bar of equal strength.\n\nThe same principle explains corrugated cardboard, ridged metal roofing, and the fluted edge of a pie crust. In each case a weak, thin material is made stiff not by adding more of it, but by moving what is already there farther from the center.",
     "refs": [
       {
         "textId": "g4-text-11",
         "title": "Why a Folded Sheet Beats a Flat One",
+        "author": "Manuel Academy",
         "form": "explanatory model",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 279,
+        "sha256": "873c9efea06f439834de7b2aea4cb2dc1761fff0509652d4d8cef6732fbb0fe3",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word study and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Return evidence by target rather than by score. Model a full correction with reasoning.\n- Guided practice: Work the learner's chosen correction together until the reasoning holds.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “Why a Folded Sheet Beats a Flat One”:\n1. Preview the title and paragraph structure; write what correcting one section and publishing with a typed page asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner corrects one item, completes the unit product, and writes a short reflection on what changed. When finished: What did you correct, and what will you carry forward?"
+    "text": "Read “Why a Folded Sheet Beats a Flat One,” then answer: Classify one weakness in your assessment work on correcting one section and publishing with a typed page, correct it with fresh evidence, and explain why the correction works.\n\nDeliverable: Grade 4: an error analysis and a corrected response; write two connected paragraphs.\n\nEvidence requirement: Use two exact details. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 4: an error analysis and a corrected response; write two connected paragraphs.",
+  "learning_objectives": [
+    "Use the delivered reading to apply correcting one section and publishing with a typed page.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about correcting one section and publishing with a typed page and complete the named deliverable.",
+    "I use two exact details from “Why a Folded Sheet Beats a Flat One” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about correcting one section and publishing with a typed page and complete the named deliverable.",
+    "I use two exact details from “Why a Folded Sheet Beats a Flat One” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “Why a Folded Sheet Beats a Flat One” in full and mark evidence connected to correcting one section and publishing with a typed page.",
+    "Answer the lesson question using two exact details; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": true,
+    "prompt": "Classify one weakness in your assessment work on correcting one section and publishing with a typed page, correct it with fresh evidence, and explain why the correction works.",
+    "deliverable": "Grade 4: an error analysis and a corrected response; write two connected paragraphs."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (correcting one section and publishing with a typed page):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If correcting one section and publishing with a typed page is not yet secure, return to “Why a Folded Sheet Beats a Flat One” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply correcting one section and publishing with a typed page to a different paragraph or a defensible alternative interpretation of “Why a Folded Sheet Beats a Flat One.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

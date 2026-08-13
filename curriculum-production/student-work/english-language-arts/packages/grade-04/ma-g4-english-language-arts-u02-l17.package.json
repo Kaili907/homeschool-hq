@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g4-english-language-arts-u02-l17",
   "lessonRef": {
     "lessonId": "ma-g4-english-language-arts-u02-l17",
@@ -22,34 +22,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: unit evidence: objective summary plus supported theme statement. Essential question: How is a summary different from a retelling, and how do I state a theme the text supports? By the end of this lesson you should be able to: Produce independent evidence of the unit's targets. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 4 lesson develops unit evidence: objective summary plus supported theme statement within the unit “Summary and Theme: Saying What a Story Means.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's unit assessment work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "Every low tide, Oona counted the tide pools along the rock shelf, and every low tide she found the same thing: pool number seven was dying.\n\nThe others held anemones that opened like green flowers, small crabs that scuttled under ledges, and snails grazing slowly across the stone. Pool seven held silt, a few empty shells, and water that smelled wrong.\n\nOona decided to fix it. She scooped out the silt with a yogurt container. She carried in clean seawater bucket by bucket. She moved two anemones from pool four and set them carefully on the rock.\n\nWithin three days the anemones had shriveled. The silt was back. The water smelled worse than before.\n\nHer aunt Ines, who had studied the shelf for twenty years, listened to the whole account without interrupting.\n\n\"Where does pool seven sit?\" she asked.\n\n\"On the shelf. Same as the others.\"\n\n\"Show me.\"\n\nThey walked out at the next low tide. Ines did not look at the pool. She looked above it, at the cliff, where a thin seep of fresh water ran down the rock face and dripped steadily into pool seven and nowhere else.\n\n\"Fresh water,\" Ines said. \"Every hour of every day. Those animals need salt.\"\n\nOona stared at the seep. She had walked past it a hundred times.\n\n\"So it cannot be fixed,\" she said.\n\n\"It does not need fixing,\" Ines said. \"Look again.\"\n\nOona looked. In the shallow edge of pool seven, where nothing was supposed to live, a mat of pale green algae grew thick and soft, and among it moved small flat creatures she had never seen in any other pool.\n\n\"They are not in pool four,\" Ines said. \"They cannot live in pool four. Pool seven is not a broken tide pool. You have been counting it wrong.\"\n\nOona knelt on the wet rock for a long time. Then she took out her notebook, crossed out the heading that said POOL 7 — DYING, and wrote a different one.",
     "refs": [
       {
         "textId": "g4-text-03",
         "title": "The Keeper of the Tide Pools",
+        "author": "Manuel Academy",
         "form": "realistic fiction",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 332,
+        "sha256": "966e2cb23f6d491a5cce29e01b4727d319cbe4d4e627c9f0dfeaecfdfc48faf8",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word study and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Read directions aloud on request and confirm access supports. Provide no content coaching once the assessment begins.\n- Guided practice: No guided phase. Access supports remain available; content help does not.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “The Keeper of the Tide Pools”:\n1. Preview the title and paragraph structure; write what unit evidence: objective summary plus supported theme statement asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "Unit assessment for Summary and Theme: Saying What a Story Means. Complete each prompt below in complete sentences, using evidence, reasoning, or a documented process:\n- (4 pts, concept and vocabulary) Explain this idea in your own words and give one valid example: objective summary.\n- (6 pts, text evidence) Answer a question about theme in story, drama, and poem using an unfamiliar passage, and quote or precisely paraphrase the words that support your answer.\n- (6 pts, application) Apply this to new material: evidence drawn from literature. Show the process or cite the evidence.\n- (6 pts, error or claim analysis) A plausible but flawed response about Greek and Latin roots in unfamiliar words is provided. Identify the error, correct it, and explain why the correction is better.\n- (9 pts, constructed writing) Write an independent response connected to reading in the grades 4-5 band with scaffolding and to the unit performance task: Write an objective summary and a theme statement for one story, each supported by two details drawn directly from the text.\n- (4 pts, reflection and transfer) Name one skill you can now transfer, one check that improves your accuracy, and one question you still have.\n\nThis assessment also includes 1 fixed-answer/selected-response item(s) delivered separately by your facilitator."
+    "text": "Read “The Keeper of the Tide Pools,” then answer: Using only the delivered reading, make and defend your strongest independent claim about unit evidence: objective summary plus supported theme statement.\n\nDeliverable: Grade 4: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write two connected paragraphs.\n\nEvidence requirement: Use two exact details. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 4: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write two connected paragraphs.",
+  "learning_objectives": [
+    "Use the delivered reading to apply unit evidence: objective summary plus supported theme statement.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about unit evidence: objective summary plus supported theme statement and complete the named deliverable.",
+    "I use two exact details from “The Keeper of the Tide Pools” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about unit evidence: objective summary plus supported theme statement and complete the named deliverable.",
+    "I use two exact details from “The Keeper of the Tide Pools” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “The Keeper of the Tide Pools” in full and mark evidence connected to unit evidence: objective summary plus supported theme statement.",
+    "Answer the lesson question using two exact details; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": true,
+    "prompt": "Using only the delivered reading, make and defend your strongest independent claim about unit evidence: objective summary plus supported theme statement.",
+    "deliverable": "Grade 4: an independent assessment response with a claim, cited evidence, reasoning, and a final check; write two connected paragraphs."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (unit evidence: objective summary plus supported theme statement):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If unit evidence: objective summary plus supported theme statement is not yet secure, return to “The Keeper of the Tide Pools” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply unit evidence: objective summary plus supported theme statement to a different paragraph or a defensible alternative interpretation of “The Keeper of the Tide Pools.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

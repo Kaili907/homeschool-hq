@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g4-english-language-arts-u09-l16",
   "lessonRef": {
     "lessonId": "ma-g4-english-language-arts-u09-l16",
@@ -22,34 +22,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: retrieving question, aspects, notes, paraphrase, sources, integration. Essential question: How do I investigate a question across sources and record what I found in my own words? By the end of this lesson you should be able to: Retrieve the unit's targets from memory and identify the remaining gap. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 4 lesson develops retrieving question, aspects, notes, paraphrase, sources, integration within the unit “Research, Sources, and Honest Note-Taking.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's retrieval and assessment preparation work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "A river gauge is a device that measures how high a river is at one location. The number it reports is called the gage height — spelled that way by the agencies that record it — and it is measured in feet above a fixed reference point, not above the riverbed.\n\nThe gauge on the Kestrel River at Millbrook reports a reading every fifteen minutes. The following description presents one week of daily peak readings in words, so that the information is available whether or not a chart is displayed.\n\nOn Monday the peak gage height was 3.1 feet. On Tuesday it was 3.0 feet. On Wednesday it rose sharply to 7.4 feet. On Thursday it reached its highest point of the week at 8.7 feet. On Friday it fell to 6.8 feet. On Saturday it fell further to 4.5 feet. On Sunday it measured 3.6 feet.\n\nTwo features of this pattern are worth noticing.\n\nFirst, the rise is much steeper than the fall. The river climbed more than five feet in two days and was still falling three days later. This shape is typical. Rain enters a river quickly through surface runoff, but the water stored in saturated soil drains out slowly for days afterward.\n\nSecond, the river did not return to its starting level. Sunday's 3.6 feet remains half a foot above Monday's 3.1 feet, because the ground is still releasing water it absorbed during the storm.\n\nThe National Weather Service assigns each gauge a flood stage, which for Millbrook is 8.0 feet. Thursday's peak of 8.7 feet therefore exceeded flood stage by 0.7 feet.\n\nA reader should be careful here. Flood stage is not the height at which water enters the river. It is the height at which water begins to affect roads, property, or people at that particular location. A gage height of 8.7 feet would mean something entirely different on a different river.",
     "refs": [
       {
         "textId": "g4-text-10",
         "title": "The River Gauge: Reading the Numbers",
+        "author": "Manuel Academy",
         "form": "informational with quantitative display",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 318,
+        "sha256": "d22c3101baca10c921f183fd5ce0540284c9e386d97217df750ff6b14f91d99a",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word study and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Name the unit targets without explanation and ask the learner to reconstruct each one.\n- Guided practice: Work a mixed set that requires selecting the right move rather than repeating one.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “The River Gauge: Reading the Numbers”:\n1. Preview the title and paragraph structure; write what retrieving question, aspects, notes, paraphrase, sources, integration asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner completes a mixed retrieval set and marks which target is least secure. When finished: Which target is least secure, and what would fix it in one session?"
+    "text": "Read “The River Gauge: Reading the Numbers,” then answer: Audit your readiness on retrieving question, aspects, notes, paraphrase, sources, integration. Which criterion is secure, which needs practice, and what source-based practice will close the gap?\n\nDeliverable: Grade 4: a readiness audit with one completed practice item drawn from the reading; write two connected paragraphs.\n\nEvidence requirement: Use two exact details. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 4: a readiness audit with one completed practice item drawn from the reading; write two connected paragraphs.",
+  "learning_objectives": [
+    "Use the delivered reading to apply retrieving question, aspects, notes, paraphrase, sources, integration.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about retrieving question, aspects, notes, paraphrase, sources, integration and complete the named deliverable.",
+    "I use two exact details from “The River Gauge: Reading the Numbers” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about retrieving question, aspects, notes, paraphrase, sources, integration and complete the named deliverable.",
+    "I use two exact details from “The River Gauge: Reading the Numbers” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “The River Gauge: Reading the Numbers” in full and mark evidence connected to retrieving question, aspects, notes, paraphrase, sources, integration.",
+    "Answer the lesson question using two exact details; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": true,
+    "prompt": "Audit your readiness on retrieving question, aspects, notes, paraphrase, sources, integration. Which criterion is secure, which needs practice, and what source-based practice will close the gap?",
+    "deliverable": "Grade 4: a readiness audit with one completed practice item drawn from the reading; write two connected paragraphs."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (retrieving question, aspects, notes, paraphrase, sources, integration):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If retrieving question, aspects, notes, paraphrase, sources, integration is not yet secure, return to “The River Gauge: Reading the Numbers” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply retrieving question, aspects, notes, paraphrase, sources, integration to a different paragraph or a defensible alternative interpretation of “The River Gauge: Reading the Numbers.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

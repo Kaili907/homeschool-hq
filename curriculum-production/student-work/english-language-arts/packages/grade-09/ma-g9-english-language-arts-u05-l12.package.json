@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g9-english-language-arts-u05-l12",
   "lessonRef": {
     "lessonId": "ma-g9-english-language-arts-u05-l12",
@@ -24,45 +24,70 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: formal style and objective tone. Essential question: How does close, evidence-governed attention to formal style and objective tone change what a reader or writer is entitled to claim? By the end of this lesson you should be able to: Explain what formal style and objective tone means and name the textual signal that tells you it is in play. You'll need: course notebook or digital equivalent; the unit's assigned texts, in an accessible reading representation; citation reference or style manual appropriate to the course."
+    "text": "This English 9 lesson develops formal style and objective tone within the unit “Argument, Counterclaim, and Valid Reasoning.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's performance task build work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "[1] During the “Argument, Counterclaim, and Valid Reasoning” meeting at the riverside walking path, Nia reviewed a proposal with a margin full of questions. The proposal asked the community to reserve one quiet hour each afternoon for reading and study. Supporters said a predictable quiet period would help people who lacked calm work space elsewhere.\n\n[2] The proposal included a one-week survey: 42 of 60 respondents supported the idea, 11 opposed it, and 7 were unsure. Samir pointed out that the survey had been offered only to afternoon visitors. The numbers represented those visitors accurately, but they could not automatically represent everyone who used the building.\n\n[3] An opposing note raised a practical concern. Families with young children often arrived during the proposed hour, and silence might make them feel unwelcome. A revision suggested a quiet room rather than a quiet building. That alternative preserved the goal while changing the cost, though it required staff and available space.\n\n[4] The group evaluated formal style and objective tone by testing the claim against evidence, counterevidence, and consequences. A strong response could favor, oppose, or revise the proposal. It could not ignore the survey's limits or treat a concern as answered merely because the concern was inconvenient.\n\n[5] Before revising, the group tested the source against the workshop goal: formal style and objective tone. They highlighted language that supported the goal, circled a detail that complicated it, and drew an arrow where the relationship between two ideas needed to be made explicit. The marks produced different possible readings, so the group had to defend priorities rather than copy a single approved answer.\n\n[6] A later reader complicated the discussion by asking about audience and purpose. A concise public notice, a literary interpretation, and a research explanation may use evidence differently even when all three are responsible. The group therefore recorded not only what the source said, but also what situation would make each interpretation effective, insufficient, or misleading.",
     "refs": [
       {
-        "textId": "ma-hs-ela-t-903",
-        "title": "The Ordinance Nobody Read",
+        "textId": "ma-original-ma-g9-english-language-arts-u05-l12",
+        "title": "Reading Lab 84: formal style and objective tone",
         "author": "Manuel Academy",
-        "form": "argument",
+        "form": "argument case",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery.",
-        "accessibleRepresentation": "Digital reflowable text, enlarged print, or audio, learner's choice."
-      },
-      {
-        "textId": "ma-hs-ela-t-910",
-        "title": "Narrative of the Life of Frederick Douglass, Chapters I-VII",
-        "author": "Frederick Douglass",
-        "form": "autobiography",
-        "rightsCategory": "public_domain",
-        "obtainNote": "Public-domain work. Obtain the text from a public-domain repository, a library, or a printed edition. It is not reproduced here.",
-        "accessibleRepresentation": "Digital reflowable text, enlarged print, or audio, learner's choice."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 326,
+        "sha256": "d45138fefa7d689f606b9d2fa75357af64218a90ea4a16e5ebd7c59a190713fa",
+        "origin": "academy_original_generated"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Plan check: Re-read the plan of record. Name what changed since planning and why.\n- Sustained production: Uninterrupted work on Write a formal argument that develops a counterclaim fairly, then defend it in a structured evidence exchange.. The learner produces; the tutor is available for questions and critique but writes nothing that will be assessed.\n- Self-critique against criteria: Compare the work in progress against the success criteria and mark the weakest section.\n- Access and source check: Confirm every text the build depends on is still available in an accessible representation and that nothing required sits behind a rights barrier.\n- Next-session commitment: Record exactly where work will resume.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite needed for today's lesson, re-teach it on a short passage, then retry one fresh item. Do not write the learner's response.\n- If repeated error pattern: Describe the observable pattern neutrally, contrast it with a correct case, and schedule a short later review of today's lesson.\n- If procedure without understanding: Ask the learner to explain why the move for today's lesson works on this text before continuing. Accept explanation in any modality."
+    "text": "Use this source-specific routine for “Reading Lab 84: formal style and objective tone”:\n1. Preview the title and paragraph structure; write what formal style and objective tone asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "Sustained independent production on the unit performance task. When finished: Identify the weakest section of what you built today and what it needs. This unit's performance task: Write a formal argument that develops a counterclaim fairly, then defend it in a structured evidence exchange."
+    "text": "Read “Reading Lab 84: formal style and objective tone,” then answer: Draft the planned response about formal style and objective tone. How will each paragraph use the reading rather than merely mention it?\n\nDeliverable: English 9: a complete first draft with source-based development in every body section; write a structured response of 500–700 words.\n\nEvidence requirement: Use two precise quotations or paraphrases with paragraph numbers. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "English 9: a complete first draft with source-based development in every body section; write a structured response of 500–700 words.",
+  "learning_objectives": [
+    "Use the delivered reading to apply formal style and objective tone.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about formal style and objective tone and complete the named deliverable.",
+    "I use two precise quotations or paraphrases with paragraph numbers from “Reading Lab 84: formal style and objective tone” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting.",
+    "I address a meaningful complication, alternative interpretation, counterclaim, or limitation when the evidence calls for one."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about formal style and objective tone and complete the named deliverable.",
+    "I use two precise quotations or paraphrases with paragraph numbers from “Reading Lab 84: formal style and objective tone” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting.",
+    "I address a meaningful complication, alternative interpretation, counterclaim, or limitation when the evidence calls for one."
+  ],
+  "task_steps": [
+    "Read “Reading Lab 84: formal style and objective tone” in full and mark evidence connected to formal style and objective tone.",
+    "Answer the lesson question using two precise quotations or paraphrases with paragraph numbers; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": true,
+    "prompt": "Draft the planned response about formal style and objective tone. How will each paragraph use the reading rather than merely mention it?",
+    "deliverable": "English 9: a complete first draft with source-based development in every body section; write a structured response of 500–700 words."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (formal style and objective tone):\n- prerequisite gap: Return to the smallest prerequisite needed for today's lesson, re-teach it on a short passage, then retry one fresh item. Do not write the learner's response.\n- repeated error pattern: Describe the observable pattern neutrally, contrast it with a correct case, and schedule a short later review of today's lesson.\n- procedure without understanding: Ask the learner to explain why the move for today's lesson works on this text before continuing. Accept explanation in any modality."
+    "text": "If formal style and objective tone is not yet secure, return to “Reading Lab 84: formal style and objective tone” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply the move to an unfamiliar passage of comparable complexity with the checklist available."
+    "text": "Apply formal style and objective tone to a different paragraph or a defensible alternative interpretation of “Reading Lab 84: formal style and objective tone.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

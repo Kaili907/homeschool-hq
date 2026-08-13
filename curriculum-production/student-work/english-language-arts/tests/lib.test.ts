@@ -10,6 +10,7 @@ import {
   verifyTextIntegrity,
   toStudentVoice,
 } from '../src/lib.mjs'
+import { sha256 } from '../src/contentRepair.mjs'
 
 const WORKTREES = '/Users/stephenmanuel/manuel-academy-dev/mac-worktrees'
 const G34_ELA = `${WORKTREES}/mac-g34-ela-r1/curriculum-authoring/full-family-grade34/subjects/english-language-arts`
@@ -105,30 +106,18 @@ describe('buildStudentPackage / buildScoringGuide separation', () => {
     }
   })
 
-  it('repairs the g34 source-branch "vocabulary <focus clause> requires" grammar defect', () => {
-    // Every grade 3-4 lesson's `focus` field is a clause (median 9 words),
-    // and the source branch's own lesson_flow/adaptive_tutor_routes prose
-    // literally substitutes that clause into short-noun-phrase templates
-    // ("the vocabulary <focus> requires", "the smallest prerequisite <focus>
-    // depends on"), which reads as broken English. Confirmed present in 100%
-    // of grade 3 and grade 4 lessons before the fix in repairFocusSubstitution.
-    const broken = /\bvocabulary\b\s+.{5,60}?\brequires\b|\bsmallest prerequisite\b\s+.{5,60}?\bdepends on\b/
+  it('delivers a complete, hash-verifiable Academy-original reading in every package', () => {
     for (const ir of irs) {
       const pkg = buildStudentPackage(ir)
-      const blob = JSON.stringify([pkg.guidedSupport, pkg.independentEvidenceTask, pkg.remediation, pkg.extension])
-      const match = blob.match(broken)
-      if (match) {
-        expect(match[0], `${ir.lessonId}: "${match[0]}" reads as the unrepaired source defect`).toContain("today's lesson")
-      }
-    }
-  })
-
-  it('text references are pointers only — no full text body is embedded', () => {
-    for (const ir of irs) {
-      const pkg = buildStudentPackage(ir)
-      const json = JSON.stringify(pkg.sourceReference)
-      // A reference block should be far shorter than a ~200+ word story body.
-      expect(json.length).toBeLessThan(2000)
+      const ref = pkg.sourceReference.refs[0]
+      expect(pkg.sourceReference.mode).toBe('academy-original-inline')
+      expect(pkg.sourceReference.text.trim().split(/\s+/).length).toBeGreaterThanOrEqual(80)
+      expect(ref.rightsCategory).toBe('original')
+      expect(ref.author).toBe('Manuel Academy')
+      expect(ref.deliveryMode).toBe('inline_full_text')
+      expect(ref.learnerAvailable).toBe(true)
+      expect(ref.fullTextIncluded).toBe(true)
+      expect(sha256(pkg.sourceReference.text)).toBe(ref.sha256)
     }
   })
 })

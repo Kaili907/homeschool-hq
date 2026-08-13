@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g3-english-language-arts-u08-l09",
   "lessonRef": {
     "lessonId": "ma-g3-english-language-arts-u08-l09",
@@ -20,34 +20,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: close reading an original poem for imagery and word choice. Essential question: How do poets and playwrights use sound, shape, and figurative language to make meaning? By the end of this lesson you should be able to: Read one passage closely with an adult or partner, focused on close reading an original poem for imagery and word choice. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 3 lesson develops close reading an original poem for imagery and word choice within the unit “Poems, Plays, and Words That Mean More.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's shared close reading work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "First one drop, a single tap,\nlike someone knocking to come in.\n\nThen four, then twelve, then far too many\nto count them out or catch a penny\nof the sound. The roof turns drum.\nThe gutters gargle. Here they come.\n\nA thousand tiny running feet\nthat never once have learned to meet\nthe ground politely, one by one.\nThey fall the way that things get done\nwhen everybody starts at once.\n\nAnd then, as quickly as they came,\nthe feet run off. The roof goes tame.\nOne drop. One tap. The roof is dry.\nThe gutter clears its throat. Goodbye.",
     "refs": [
       {
         "textId": "g3-text-13",
         "title": "Rain on the Tin Roof",
+        "author": "Manuel Academy",
         "form": "poem",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 101,
+        "sha256": "acba3856a75b26883b72caf1e955e4b40c1a8e7bfe7a3395fc5832ef9802b25c",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word work and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Read the assigned passage aloud or silently together. Stop three times and ask what the text has established so far.\n- Guided practice: Reread the section that matters for today's lesson. Underline or list the exact words that carry it.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “Rain on the Tin Roof”:\n1. Preview the title and paragraph structure; write what close reading an original poem for imagery and word choice asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner writes one text-based statement about today's lesson and copies the words that prove it. When finished: Quote the words from the passage that prove your statement about today's lesson."
+    "text": "Read “Rain on the Tin Roof,” then answer: Read the source without interruption, then decide which detail most changes an interpretation of close reading an original poem for imagery and word choice. Explain the change.\n\nDeliverable: Grade 3: an evidence log and a short interpretation; write 3–5 complete sentences.\n\nEvidence requirement: Use one exact detail. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 3: an evidence log and a short interpretation; write 3–5 complete sentences.",
+  "learning_objectives": [
+    "Use the delivered reading to apply close reading an original poem for imagery and word choice.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about close reading an original poem for imagery and word choice and complete the named deliverable.",
+    "I use one exact detail from “Rain on the Tin Roof” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about close reading an original poem for imagery and word choice and complete the named deliverable.",
+    "I use one exact detail from “Rain on the Tin Roof” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “Rain on the Tin Roof” in full and mark evidence connected to close reading an original poem for imagery and word choice.",
+    "Answer the lesson question using one exact detail; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": false,
+    "prompt": "Read the source without interruption, then decide which detail most changes an interpretation of close reading an original poem for imagery and word choice. Explain the change.",
+    "deliverable": "Grade 3: an evidence log and a short interpretation; write 3–5 complete sentences."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (close reading an original poem for imagery and word choice):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If close reading an original poem for imagery and word choice is not yet secure, return to “Rain on the Tin Roof” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply close reading an original poem for imagery and word choice to a different paragraph or a defensible alternative interpretation of “Rain on the Tin Roof.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

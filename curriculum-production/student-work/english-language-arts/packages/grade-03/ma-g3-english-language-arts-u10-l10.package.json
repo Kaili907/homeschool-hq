@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g3-english-language-arts-u10-l10",
   "lessonRef": {
     "lessonId": "ma-g3-english-language-arts-u10-l10",
@@ -21,34 +21,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: repairing sequences that jump, repeat, or stop without closure. Essential question: How do I tell a story a reader can follow, and show a year of reading and writing growth? By the end of this lesson you should be able to: Repair the most common error in repairing sequences that jump, repeat, or stop without closure using a different representation. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 3 lesson develops repairing sequences that jump, repeat, or stop without closure within the unit “Narrative Craft and the Year-End Portfolio.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's reteach and varied practice work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "In September, Priya read the way a person crosses a stream on wobbling stones: one word, then a pause, then the next word, with all her attention on not falling.\n\nBy November, something had changed in a way she could not name. She noticed it while reading a chapter about a girl and a lost dog. She reached the bottom of a page and realized she had not thought about the words at all. She had been thinking about the dog.\n\nIn January she got stuck. The book she chose used long words about weather, and she slid off them the way she used to slide off everything. She almost quit. Instead she did what she had practiced: she covered the ending, found the part she knew, and read it in pieces. Atmosphere. Temperature. Precipitation. The words held still.\n\nIn April she reread the first book she had finished in the fall. It took her one afternoon instead of three weeks, and she noticed a joke on page nine that she had missed entirely the first time.\n\nIn June her teacher asked what she had learned this year.\n\nPriya thought about wobbling stones, and about the dog, and about the word precipitation.\n\n\"I learned that getting stuck is not the same as being finished,\" she said.",
     "refs": [
       {
         "textId": "g3-text-16",
         "title": "A Reader's Year",
+        "author": "Manuel Academy",
         "form": "reflective narrative",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 216,
+        "sha256": "46f038b39ed704a8dbe1347a8118d94f2a1116bc08cf3bcb90c990ec70984b22",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word work and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Show one plausible wrong answer about today's lesson. Name the error neutrally and show a different way to picture it.\n- Guided practice: Fix two flawed examples together and say what the fix was each time.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “A Reader's Year”:\n1. Preview the title and paragraph structure; write what repairing sequences that jump, repeat, or stop without closure asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner fixes one flawed example alone and explains the correction. When finished: Describe the mistake people make with today's lesson and how to catch it."
+    "text": "Read “A Reader's Year,” then answer: Identify one earlier misunderstanding about repairing sequences that jump, repeat, or stop without closure. Use this reading to correct it and explain why the correction is stronger.\n\nDeliverable: Grade 3: a before-and-after correction supported by the source; write 3–5 complete sentences.\n\nEvidence requirement: Use one exact detail. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 3: a before-and-after correction supported by the source; write 3–5 complete sentences.",
+  "learning_objectives": [
+    "Use the delivered reading to apply repairing sequences that jump, repeat, or stop without closure.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about repairing sequences that jump, repeat, or stop without closure and complete the named deliverable.",
+    "I use one exact detail from “A Reader's Year” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about repairing sequences that jump, repeat, or stop without closure and complete the named deliverable.",
+    "I use one exact detail from “A Reader's Year” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “A Reader's Year” in full and mark evidence connected to repairing sequences that jump, repeat, or stop without closure.",
+    "Answer the lesson question using one exact detail; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": false,
+    "prompt": "Identify one earlier misunderstanding about repairing sequences that jump, repeat, or stop without closure. Use this reading to correct it and explain why the correction is stronger.",
+    "deliverable": "Grade 3: a before-and-after correction supported by the source; write 3–5 complete sentences."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (repairing sequences that jump, repeat, or stop without closure):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If repairing sequences that jump, repeat, or stop without closure is not yet secure, return to “A Reader's Year” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply repairing sequences that jump, repeat, or stop without closure to a different paragraph or a defensible alternative interpretation of “A Reader's Year.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }

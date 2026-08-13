@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "packageId": "swk-ma-g3-english-language-arts-u09-l16",
   "lessonRef": {
     "lessonId": "ma-g3-english-language-arts-u09-l16",
@@ -21,34 +21,68 @@
   ],
   "studentTask": {
     "present": true,
-    "text": "Today's focus: running the whole routine on a new question in one session. Essential question: How do I answer a real question using sources I can name and notes I took myself? By the end of this lesson you should be able to: Use the unit's skills on unfamiliar material. You'll need: course notebook or an accessible digital equivalent; pencil, keyboard, or another accessible response tool; the assigned passage in print, on screen, or read aloud."
+    "text": "This Grade 3 lesson develops running the whole routine on a new question in one session within the unit “Small Research: Questions, Sources, and Notes.” Read the delivered Academy-original source before responding. Strong ELA work separates what the source explicitly says from what a reader infers, selects evidence because it is relevant and sufficient, and explains the connection instead of leaving a quotation to speak for itself. Today's transfer to a new text work asks you to make that reasoning visible and to revise if the evidence does not support the first idea."
   },
   "sourceReference": {
     "present": true,
+    "mode": "academy-original-inline",
+    "text": "The Kestrel River runs for sixty miles, and two different books describe it in two different ways.\n\nA guide for paddlers describes the river as a route. It lists the places to put a boat in the water and take it out. It warns about a stretch of fast water below the old mill, notes where the current slows, and explains that the river drops about four feet per mile in its upper half. Its purpose is to help a person travel the river safely, so it organizes everything from upstream to downstream.\n\nA book about local wildlife describes the same river as a habitat. It explains that cold, fast water near the headwaters holds trout, while the slower, warmer water downstream holds bass and turtles. It describes the herons that hunt the shallow edges and the mussels buried in the gravel. Its purpose is to explain who lives where and why, so it organizes everything by habitat rather than by distance.\n\nBoth books are accurate. Neither is complete. The paddling guide barely mentions the mussels, and the wildlife book says almost nothing about where to launch a canoe.\n\nA reader who wants to understand the Kestrel River needs both. The fast water below the old mill is a hazard in one book and a trout habitat in the other, and it is genuinely both at once. What a text tells you depends a great deal on what it was written to do.",
     "refs": [
       {
         "textId": "g3-text-10",
         "title": "Two Looks at the Same River",
+        "author": "Manuel Academy",
         "form": "informational",
         "rightsCategory": "original",
-        "obtainNote": "Manuel Academy original text — ships with the course package; do not post it outside gated course delivery."
+        "deliveryMode": "inline_full_text",
+        "learnerAvailable": true,
+        "fullTextIncluded": true,
+        "rightsStatement": "Original Manuel Academy instructional text. Included in full for enrolled learner course use.",
+        "wordCount": 243,
+        "sha256": "eff6acc5c89cb670d4269e56d5e6e5fac437afae64454031c704732e0f8d5551",
+        "origin": "academy_original_bank"
       }
     ]
   },
   "guidedSupport": {
     "present": true,
-    "text": "Work through this with a facilitator, tutor, or on your own if you're ready:\n- Welcome and retrieval: Open with a brief accessible retrieval prompt connected to today's lesson. Ask the learner to recall, predict, or pose a question before any instruction.\n- Word work and fluency: Two minutes of word work on the vocabulary today's lesson requires, then one short passage read for accuracy and phrasing. Reading aloud is optional.\n- Model or mini-lesson: Present an unfamiliar text or task connected to today's lesson. Give no content preview beyond genre and purpose.\n- Guided practice: Confirm the learner knows the task. Do not preview the answer.\n\nIf you get stuck:\n- If prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- If decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- If repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "Use this source-specific routine for “Two Looks at the Same River”:\n1. Preview the title and paragraph structure; write what running the whole routine on a new question in one session asks you to notice or do.\n2. Mark one statement the source makes explicitly and one inference a reader could draw. Keep the two kinds of thinking separate.\n3. Test the inference with the evidence requirement in today's task. If the evidence is weak or incomplete, narrow or revise the inference.\n4. Draft your own response. A facilitator may clarify directions or ask questions, but may not supply your claim, evidence choice, sentences, or revision."
   },
   "independentEvidenceTask": {
     "present": true,
-    "text": "The learner applies today's lesson to the unfamiliar material independently and records the evidence used. When finished: What did you do first with the new text, and did it work?"
+    "text": "Read “Two Looks at the Same River,” then answer: Transfer running the whole routine on a new question in one session to a different paragraph or perspective in the reading. What had to change in your approach?\n\nDeliverable: Grade 3: a transfer response and a precise explanation of the adjustment; write 3–5 complete sentences.\n\nEvidence requirement: Use one exact detail. Label source evidence with a paragraph number or another precise location. Your response must explain the connection between the evidence and your conclusion."
+  },
+  "deliverable": "Grade 3: a transfer response and a precise explanation of the adjustment; write 3–5 complete sentences.",
+  "learning_objectives": [
+    "Use the delivered reading to apply running the whole routine on a new question in one session.",
+    "Support a conclusion with located evidence and explain the reasoning."
+  ],
+  "lesson_success_criteria": [
+    "I directly answer the question about running the whole routine on a new question in one session and complete the named deliverable.",
+    "I use one exact detail from “Two Looks at the Same River” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "completionCriteria": [
+    "I directly answer the question about running the whole routine on a new question in one session and complete the named deliverable.",
+    "I use one exact detail from “Two Looks at the Same River” and identify where the evidence appears.",
+    "I explain how the evidence supports my thinking, then check clarity, accuracy, and completion before submitting."
+  ],
+  "task_steps": [
+    "Read “Two Looks at the Same River” in full and mark evidence connected to running the whole routine on a new question in one session.",
+    "Answer the lesson question using one exact detail; distinguish source evidence from your own inference.",
+    "Complete the named deliverable and use every success criterion for a final self-check."
+  ],
+  "writingTask": {
+    "required": false,
+    "prompt": "Transfer running the whole routine on a new question in one session to a different paragraph or perspective in the reading. What had to change in your approach?",
+    "deliverable": "Grade 3: a transfer response and a precise explanation of the adjustment; write 3–5 complete sentences."
   },
   "remediation": {
     "present": true,
-    "text": "Reteach paths for this lesson's target (running the whole routine on a new question in one session):\n- prerequisite gap: Return to the smallest prerequisite today's lesson depends on, model it once with a text-only representation, then retry one fresh item.\n- decoding or fluency barrier: If the barrier is reading the words rather than today's lesson, drop to the word or phrase level, reread the line, then return. Do not reteach today's lesson while decoding is the actual obstacle.\n- repeated error pattern: Name the observable pattern neutrally, contrast it with a worked example, and schedule a short retrieval check in a later session."
+    "text": "If running the whole routine on a new question in one session is not yet secure, return to “Two Looks at the Same River” before starting over:\n- Evidence gap: underline the exact words that support the idea and label their paragraph or location.\n- Reasoning gap: complete the stem “This evidence matters because …” in your own words, then reread the question.\n- Overclaim: name what the source does not establish and narrow the conclusion to what the evidence can support.\n- Completion gap: compare the draft with each learner success criterion and repair one missing part at a time."
   },
   "extension": {
     "present": true,
-    "text": "Apply today's lesson to a longer or unfamiliar text, compare two texts on it, or teach it with an original example. Extension never means completing another learner's assessed work."
+    "text": "Apply running the whole routine on a new question in one session to a different paragraph or a defensible alternative interpretation of “Two Looks at the Same River.” Compare the new result with your first response and explain which evidence changes, which reasoning still holds, and why."
   }
 }
