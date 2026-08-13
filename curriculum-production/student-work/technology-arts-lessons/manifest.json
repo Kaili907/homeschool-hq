@@ -1,5 +1,5 @@
 {
-  "corpusVersion": "1.0.0",
+  "corpusVersion": "1.0.1",
   "granularity": "lesson",
   "subjects": [
     "technology",
@@ -8,7 +8,7 @@
   "scope": "curriculum-production/student-work/technology-arts-lessons/** only",
   "relationshipToUnitCorpus": {
     "unitCorpus": "curriculum-production/student-work/technology-arts (108 unit-level packages)",
-    "note": "This corpus is per-LESSON, not a re-cut of the unit corpus. Each of the 984 authored lessons gets its own task and scoring path, whose shape is selected by that lesson's authored `phase` and whose content comes from its authored `focus`, objectives, and success criteria. Measured overlap between a lesson task and its own unit's task package is 0.0826 maximum (5-gram Jaccard) \u2014 see duplicate-report.json."
+    "note": "This corpus is per-LESSON, not a re-cut of the unit corpus. Each of the 984 authored lessons gets its own task and scoring path, whose shape is selected by that lesson's authored `phase` and whose content comes from its authored `focus`, objectives, and success criteria. Measured overlap between a lesson task and its own unit's task package is 0.0761 maximum (5-gram Jaccard) \u2014 see duplicate-report.json."
   },
   "generatedFrom": {
     "g3-4": {
@@ -106,13 +106,35 @@
       "gate-report.md"
     ]
   },
+  "technologyContentRepair": {
+    "baseline": {
+      "lessons": 336,
+      "blockedByMissingCentralInputsOrTools": 168,
+      "unrunnableCodeOrDebugTasks": 87,
+      "placeholderOrTemplateFindings": 170
+    },
+    "result": {
+      "actionableLessons": 336,
+      "missingCentralInputs": 0,
+      "unrunnableRequiredTasks": 0,
+      "placeholderShells": 0,
+      "codeOrDebugActivitiesWithCompleteStarterCode": 87,
+      "lessonsWithNoInstallOrPaperMethod": 336,
+      "lessonsWithEqualCreditManualAlternative": 336,
+      "lessonsWithPrivacyAndSecurityControls": 336
+    },
+    "activityContract": "Every Technology package supplies a complete inline fictional input, expected behavior/specification, an available browser/local/manual execution method, three input/expected checks, a concrete debugging target, and an explicitly equal-credit paper or hand-trace alternative. CODE_OR_DEBUG packages additionally supply parseable JavaScript starter code and inline input data.",
+    "evidence": "technology-content-repair-evidence.json",
+    "checksums": "TECHNOLOGY_SHA256SUMS.txt",
+    "validator": "tests/technology-actionability-audit.mjs"
+  },
   "duplicateContentCheck": {
     "method": "5-gram word-shingle Jaccard over student-facing task text",
     "exactDuplicateTaskTexts": 0,
-    "maxSiblingSimilarityWithinUnit": 0.4012,
-    "meanSiblingSimilarityWithinUnit": 0.2961,
+    "maxSiblingSimilarityWithinUnit": 0.4232,
+    "meanSiblingSimilarityWithinUnit": 0.3047,
     "siblingCeiling": 0.6,
-    "maxSimilarityToOwnUnitLevelTask": 0.0826,
+    "maxSimilarityToOwnUnitLevelTask": 0.0761,
     "unitEchoCeiling": 0.6,
     "reportFile": "duplicate-report.json"
   },
@@ -128,6 +150,8 @@
     "duplicateContentCheck": "node tests/duplicate-check.mjs",
     "structuralAndPolicyValidator": "node tests/validate-corpus.mjs",
     "schemaConformance": "node tests/schema-check.mjs",
+    "technologyActionability": "node tests/technology-actionability-audit.mjs",
+    "technologyChecksums": "node tests/write-technology-checksums.mjs",
     "regenerate": "node generate.mjs"
   },
   "accessibility": {

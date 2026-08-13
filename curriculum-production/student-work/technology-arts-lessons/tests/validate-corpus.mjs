@@ -212,6 +212,23 @@ for (const course of COURSES) {
     if (isTech) {
       const checks = pkg.test_or_check_criteria
       if (!Array.isArray(checks) || checks.length < 4) fail(id, 'technology lesson has fewer than 4 test/check criteria')
+      const setup = pkg.activity_setup
+      if (!setup?.central_input || Object.keys(setup.central_input).length < 3) fail(id, 'technology lesson lacks a complete inline central input')
+      if (!Array.isArray(setup?.expected_behavior_and_specification) || setup.expected_behavior_and_specification.length < 4) {
+        fail(id, 'technology lesson lacks a complete expected behavior/specification')
+      }
+      if (!Array.isArray(setup?.test_cases) || setup.test_cases.length < 3) fail(id, 'technology lesson has fewer than 3 supplied test cases')
+      if (!setup?.execution_method || !/(paper|hand-trace|notes app|browser)/i.test(JSON.stringify(setup.execution_method))) {
+        fail(id, 'technology lesson lacks a no-install browser/manual execution method')
+      }
+      if (!setup?.debugging_target?.target || !setup?.debugging_target?.passing_change) fail(id, 'technology lesson lacks a concrete debugging target')
+      if (!/(same score|identical credit|exactly the same score)/i.test(JSON.stringify(setup?.equal_credit_alternative ?? {}))) {
+        fail(id, 'technology lesson lacks an explicitly equal-credit manual alternative')
+      }
+      if (setup?.activity_kind === 'CODE_OR_DEBUG') {
+        if (!setup.central_input?.starter_code || !setup.central_input?.starter_code_language) fail(id, 'code/debug activity lacks starter code or language')
+        if (!Array.isArray(setup.central_input?.input_data) || setup.central_input.input_data.length < 3) fail(id, 'code/debug activity lacks supplied input data')
+      }
       const note = pkg.presentation_and_privacy?.sandbox_and_credentials_note ?? ''
       if (!/never use a real password/i.test(note)) fail(id, 'technology lesson lacks the no-real-credentials prohibition')
       if (!/do not sign into, probe, scan/i.test(note)) fail(id, 'technology lesson lacks the no-live-system prohibition')
@@ -226,6 +243,7 @@ for (const course of COURSES) {
       if (!/written alternative is always available/i.test(alt)) fail(id, 'arts lesson lacks the written/no-audio alternative')
       if (!/public domain|openly licensed/i.test(pkg.copyright_and_authorship)) fail(id, 'arts lesson lacks copyright-safe sourcing language')
       if (pkg.test_or_check_criteria) fail(id, 'arts lesson unexpectedly carries technology check criteria')
+      if (pkg.activity_setup) fail(id, 'arts lesson unexpectedly carries technology activity_setup')
     }
 
     if (!/must be your own authorship/i.test(pkg.copyright_and_authorship)) fail(id, 'lesson lacks the student-authorship requirement')
@@ -266,6 +284,7 @@ for (const course of COURSES) {
       extension: pkg.extension,
       presentation: JSON.stringify(pkg.presentation_and_privacy),
       copyright: pkg.copyright_and_authorship,
+      ...(pkg.activity_setup ? { activity_setup: JSON.stringify(pkg.activity_setup) } : {}),
     }
     for (const [label, text] of Object.entries(studentFacing)) scanText(id, label, text)
   }

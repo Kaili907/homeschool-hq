@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "Day 4 of \"Technology Capstone and Impact Review\" (unit 6, grade 8) is a build and test on testing and accessibility. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Deliver a software, data, automation, or design capstone with a full impact, privacy, accessibility, and security review. Today's work contributes to that by handling testing and accessibility at the application or project stage, against the unit's wider topics of problem framing, stakeholders and unintended effects, prototype development, and testing and accessibility. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Build a working artifact for a stated need arising in the unit \"Technology Capstone and Impact Review\", built around what this session covers: testing and accessibility. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. Anchor today's work inside its unit: this session's evidence is about testing and accessibility, and it belongs to \"Technology Capstone and Impact Review\", which also covers separate topics such as problem framing. Close out with this check before you stop: In one concise response, show or explain the most important idea about testing and accessibility; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
+  "primary_task": "Build a working artifact for a stated need arising in the unit \"Technology Capstone and Impact Review\", built around what this session covers: testing and accessibility. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about testing and accessibility, and it belongs to \"Technology Capstone and Impact Review\", which also covers separate topics such as problem framing. Close out with this check before you stop: In one concise response, show or explain the most important idea about testing and accessibility; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task about testing and accessibility., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
     "Address the lesson objective: Create, test, or revise a meaningful product that applies testing and accessibility and the unit standards.",
@@ -49,6 +49,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline design brief for testing and accessibility",
+      "purpose": "Design only for the fictional learner described here; no interview, public post, account, camera, or outside tester is needed.",
+      "fictional_user": "Kai uses a keyboard, sometimes enlarges text to 200%, and wants a three-step way to track completed reading sessions without entering a name or location.",
+      "required_features": [
+        "Add one reading session in at most three actions.",
+        "Show completion using both a word and a visual mark, not color alone.",
+        "Remain understandable at 200% text size.",
+        "Store only a fictional book label and a completed/not-completed value."
+      ],
+      "fixed_constraint": "The prototype is a labelled paper sketch or local file; it is never published and collects no real personal data."
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply testing and accessibility to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one limitation or trade-off and explain why the available evidence does not settle it."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to testing and accessibility.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "Requirements and success conditions were written in testable form before implementation began.",
     "A test log shows at least three cases — normal, boundary, and a deliberate break case — with actual against expected.",

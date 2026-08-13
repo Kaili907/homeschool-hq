@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "Day 2 of \"Networks, Cybersecurity, and Digital Safety\" (unit 5, grade 7) is a worked-model trace on encryption concept. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Complete a fictional security audit and create a response plan without testing real systems. Today's work contributes to that by handling encryption concept at the explicit model stage, against the unit's wider topics of network basics, encryption concept, authentication, and recognising and defending against phishing and social engineering. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
-  "primary_task": "Work through the provided worked model of encryption concept one step at a time rather than reading it straight through. For each step, write what changed and why that step is legal. Build a trace table with one row per step showing the values or states before and after. Then change exactly one line, value, or condition in the model, predict the new result before running or re-tracing it, and record whether your prediction was right. Explain in your own words the rule that makes encryption concept behave the way the model shows. Anchor today's work inside its unit: this session's evidence is about encryption concept, and it belongs to \"Networks, Cybersecurity, and Digital Safety\", which also covers separate topics such as network basics. Close out with this check before you stop: In one concise response, show or explain the most important idea about encryption concept; then identify one check that would catch an error or weak claim. At grade 7 the bar is independent work with reasoning that a reader can follow without you present, plus one stated check you ran on your own result before submitting.",
+  "primary_task": "Work through the complete central input printed in activity_setup for encryption concept, one step at a time rather than reading it straight through. For each step, write what changed and why that step is legal. Build a trace table with one row per step showing the values or states before and after. Then change exactly one line, value, or condition in the model, predict the new result before running or re-tracing it, and record whether your prediction was right. Explain in your own words the rule that makes encryption concept behave the way the model shows. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about encryption concept, and it belongs to \"Networks, Cybersecurity, and Digital Safety\", which also covers separate topics such as network basics. Close out with this check before you stop: In one concise response, show or explain the most important idea about encryption concept; then identify one check that would catch an error or weak claim. At grade 7 the bar is independent work with reasoning that a reader can follow without you present, plus one stated check you ran on your own result before submitting.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task about encryption concept., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
     "Address the lesson objective: Build a clear mental model of encryption concept through an explicit worked example, demonstration, text, or phenomenon.",
@@ -49,6 +49,63 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Completed step-by-step trace table with per-step reasons, plus the one-change experiment with prediction and outcome.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline fictional decision case for encryption concept",
+      "purpose": "Classify and revise this case without opening a site, contacting anyone, signing in, or using real personal information.",
+      "scenario": [
+        "A fictional app called Pebble Planner asks for a display nickname, exact birth date, home address, and contact list before showing a simple homework timer.",
+        "Its notice says the nickname is needed to label the timer, but gives no reason for collecting an address or contacts.",
+        "A fictional message then pressures the learner to reveal a sign-in secret immediately or lose the timer."
+      ],
+      "decision_options": [
+        "A: supply every requested item",
+        "B: stop, share no information, save a description of the message, and ask a trusted adult",
+        "C: invent an address but reveal a sign-in secret"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply encryption concept to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to encryption concept.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "The trace table has one row per step and shows values or states both before and after that step.",
     "Every step carries a written reason that step is legal, not just a restatement of what happened.",

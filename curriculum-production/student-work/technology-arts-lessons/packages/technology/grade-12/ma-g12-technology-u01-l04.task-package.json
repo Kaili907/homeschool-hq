@@ -39,7 +39,7 @@
     "approved editor or runtime, with an offline paper-and-trace route available"
   ],
   "task_brief": "Day 4 of \"Advanced Algorithms and Computational Limits\" (unit 1, grade 12) is a build and test on correctness and complexity reasoning and algorithm selection under constraints. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Solve a constrained optimization or graph problem and defend the algorithm choice with complexity reasoning. Today's work contributes to that by handling correctness and complexity reasoning and algorithm selection under constraints at the application or project stage, against the unit's wider topics of graph representations and traversal, greedy and dynamic programming strategies, algorithm design strategies, and intractability and heuristics. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Build a working artifact for a stated need arising in the unit \"Advanced Algorithms and Computational Limits\", built around what this session covers: correctness and complexity reasoning and algorithm selection under constraints. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. Anchor today's work inside its unit: this session's evidence is about correctness and complexity reasoning and algorithm selection under constraints, and it belongs to \"Advanced Algorithms and Computational Limits\", which also covers separate topics such as graph representations and traversal. Close out with this check before you stop: Show this session’s increment and name what remains before the task is complete. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "primary_task": "Build a working artifact for a stated need arising in the unit \"Advanced Algorithms and Computational Limits\", built around what this session covers: correctness and complexity reasoning and algorithm selection under constraints. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about correctness and complexity reasoning and algorithm selection under constraints, and it belongs to \"Advanced Algorithms and Computational Limits\", which also covers separate topics such as graph representations and traversal. Close out with this check before you stop: Show this session’s increment and name what remains before the task is complete. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on correctness and complexity reasoning and algorithm selection under constraints., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Advance the unit performance task by applying correctness and complexity reasoning and algorithm selection under constraints to a reviewable increment.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline correctness and complexity reasoning and algorithm selection under constraints code case",
+      "purpose": "Use this exact fictional case to investigate correctness and complexity reasoning and algorithm selection under constraints; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g12_technology_u01_l04_values = [4, 7, 2];\n\nfunction greatest(values) {\n  let best = 0;\n  for (const value of values) {\n    if (value > best) best = value;\n  }\n  return best;\n}\n\nconsole.log(greatest(ma_g12_technology_u01_l04_values));",
+      "input_data": [
+        "[4, 7, 2]",
+        "[-5, -2, -9]",
+        "[6]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The algorithm must return the greatest member of a nonempty list; the supplied list must return 7.",
+      "The invariant is that best equals the greatest value examined so far, including when every value is negative.",
+      "The submitted explanation must connect the observed control flow or data state to correctness and complexity reasoning and algorithm selection under constraints, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[4, 7, 2]",
+        "expected": "7"
+      },
+      {
+        "input": "[-5, -2, -9]",
+        "expected": "-2"
+      },
+      {
+        "input": "[6]",
+        "expected": "6"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
+      "target": "Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.",
+      "passing_change": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to correctness and complexity reasoning and algorithm selection under constraints is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "Requirements and success conditions were written in testable form before implementation began.",
     "A test log shows at least three cases — normal, boundary, and a deliberate break case — with actual against expected.",

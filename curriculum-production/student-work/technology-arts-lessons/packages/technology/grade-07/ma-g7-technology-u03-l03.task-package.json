@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "Day 3 of \"Web and Interface Design\" (unit 3, grade 7) is a guided practice on navigation. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Create a small accessible site or prototype for a curriculum or community purpose. Today's work contributes to that by handling navigation at the guided practice stage, against the unit's wider topics of HTML or block-based page structure, visual hierarchy, navigation, and forms without personal data. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Complete two supported problems on navigation. On the first, work step by step with prompts available, and after each step write the one-line reason that step is correct. On the second, work without prompts and only check the reference after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. Anchor today's work inside its unit: this session's evidence is about navigation, and it belongs to \"Web and Interface Design\", which also covers separate topics such as HTML or block-based page structure. Close out with this check before you stop: In one concise response, show or explain the most important idea about navigation; then identify one check that would catch an error or weak claim. At grade 7 the bar is independent work with reasoning that a reader can follow without you present, plus one stated check you ran on your own result before submitting.",
+  "primary_task": "Complete the first two test cases printed in activity_setup for navigation. On the first, work step by step with the printed method available, and after each step write the one-line reason that step is correct. On the second, work without the method in view and only check it after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about navigation, and it belongs to \"Web and Interface Design\", which also covers separate topics such as HTML or block-based page structure. Close out with this check before you stop: In one concise response, show or explain the most important idea about navigation; then identify one check that would catch an error or weak claim. At grade 7 the bar is independent work with reasoning that a reader can follow without you present, plus one stated check you ran on your own result before submitting.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task about navigation., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
     "Address the lesson objective: Practice navigation with prompts, feedback, and gradually reduced support.",
@@ -49,6 +49,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline design brief for navigation",
+      "purpose": "Design only for the fictional learner described here; no interview, public post, account, camera, or outside tester is needed.",
+      "fictional_user": "Kai uses a keyboard, sometimes enlarges text to 200%, and wants a three-step way to track completed reading sessions without entering a name or location.",
+      "required_features": [
+        "Add one reading session in at most three actions.",
+        "Show completion using both a word and a visual mark, not color alone.",
+        "Remain understandable at 200% text size.",
+        "Store only a fictional book label and a completed/not-completed value."
+      ],
+      "fixed_constraint": "The prototype is a labelled paper sketch or local file; it is never published and collects no real personal data."
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply navigation to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to navigation.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "guided_scaffold_note": "Scaffolding for navigation fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
   "test_or_check_criteria": [
     "Both problems show intermediate states — trace table, printed values, or labelled diagram — not only final answers.",

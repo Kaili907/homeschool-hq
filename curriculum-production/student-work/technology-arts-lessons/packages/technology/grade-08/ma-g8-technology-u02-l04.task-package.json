@@ -39,7 +39,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "Day 4 of \"Programming and Software Design\" (unit 2, grade 8) is a build and test on functions or procedures. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Build a small application, simulation, or game that solves a defined user need. Today's work contributes to that by handling functions or procedures at the application or project stage, against the unit's wider topics of requirements and decomposition, data and variables, selection and iteration, and functions or procedures. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Build a working artifact for a stated need arising in the unit \"Programming and Software Design\", built around what this session covers: functions or procedures. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. Anchor today's work inside its unit: this session's evidence is about functions or procedures, and it belongs to \"Programming and Software Design\", which also covers separate topics such as requirements and decomposition. Close out with this check before you stop: In one concise response, show or explain the most important idea about functions or procedures; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
+  "primary_task": "Build a working artifact for a stated need arising in the unit \"Programming and Software Design\", built around what this session covers: functions or procedures. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about functions or procedures, and it belongs to \"Programming and Software Design\", which also covers separate topics such as requirements and decomposition. Close out with this check before you stop: In one concise response, show or explain the most important idea about functions or procedures; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task about functions or procedures., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
     "Address the lesson objective: Create, test, or revise a meaningful product that applies functions or procedures and the unit standards.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline functions or procedures code case",
+      "purpose": "Use this exact fictional case to investigate functions or procedures; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g8_technology_u02_l04_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g8_technology_u02_l04_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to functions or procedures, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to functions or procedures is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "Requirements and success conditions were written in testable form before implementation began.",
     "A test log shows at least three cases — normal, boundary, and a deliberate break case — with actual against expected.",

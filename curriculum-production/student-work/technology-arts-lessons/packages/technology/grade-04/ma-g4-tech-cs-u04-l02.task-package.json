@@ -39,9 +39,10 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 2 of \"Algorithms, Loops, and Debugging\". That is unit 4 in grade 4. Today is a worked-model trace about events. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Build a short story, animation, or simple game using block-based logic and document the algorithm. Today helps by working on events. Your unit also covers sequence review, events, loops and repeats, and conditionals: if-then. Today is for practice. You are scored on finishing and being honest, not on getting it perfect.",
-  "primary_task": "Follow the example about events one step at a time. Do not skip ahead. After each step, write what changed. Make a small table. Show what things looked like before and after each step. Now change one thing in the example. Guess what will happen. Then check. Was your guess right? Last, say the rule for events in your own words. Keep today's work tied to your unit. Today is about events. It is part of \"Algorithms, Loops, and Debugging\". Later days in this unit cover other things, like sequence review. Before you stop, do this check: In one concise response, show or explain the most important idea about events; then identify one check that would catch an error or weak claim. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully.",
+  "primary_task": "Use the whole example printed in activity_setup about events. Follow it one step at a time. Do not skip ahead. After each step, write what changed. Make a small table. Show what things looked like before and after each step. Now change one thing in the example. Guess what will happen. Then check. Was your guess right? Last, say the rule for events in your own words. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about events. It is part of \"Algorithms, Loops, and Debugging\". Later days in this unit cover other things, like sequence review. Before you stop, do this check: In one concise response, show or explain the most important idea about events; then identify one check that would catch an error or weak claim. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully.",
   "task_steps": [
-    "Follow the example about events one step at a time.",
+    "Use the whole example printed in activity_setup about events.",
+    "Follow it one step at a time.",
     "Do not skip ahead.",
     "After each step, write what changed.",
     "Make a small table.",
@@ -60,6 +61,61 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your finished step table with reasons, plus the one change you made with your guess and what really happened.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline events code case",
+      "purpose": "Use this exact fictional case to investigate events; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g4_tech_cs_u04_l02_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g4_tech_cs_u04_l02_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to events, not merely state the final number.",
+      "The smallest test case must be tried and its actual result compared with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to events is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "Your table has one row for each step and shows things before and after.",
     "Each step has a short reason why it is right.",

@@ -40,7 +40,7 @@
     "project milestone plan, test log, and accessibility checklist"
   ],
   "task_brief": "Day 5 of \"Engineering Project with Test and Accessibility Evidence\" (unit 6, grade 11) is a mastery demonstration on engineering project with test and accessibility evidence. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Deliver an engineered application with an architecture record, test coverage, accessibility conformance, and a maintenance plan. Today's work contributes to that by handling engineering project with test and accessibility evidence at the mastery check stage, against the unit's wider topics of scope and architecture decisions, implementation increments, automated test coverage, and accessibility conformance evidence. This session produces graded evidence of record and must be completed independently.",
-  "primary_task": "Demonstrate engineering project with test and accessibility evidence independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen engineering project with test and accessibility evidence could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. Anchor today's work inside its unit: this session's evidence is about engineering project with test and accessibility evidence, and it belongs to \"Engineering Project with Test and Accessibility Evidence\", which also covers separate topics such as scope and architecture decisions. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
+  "primary_task": "Demonstrate engineering project with test and accessibility evidence independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen engineering project with test and accessibility evidence could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about engineering project with test and accessibility evidence, and it belongs to \"Engineering Project with Test and Accessibility Evidence\", which also covers separate topics such as scope and architecture decisions. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on engineering project with test and accessibility evidence., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Demonstrate current mastery across engineering project with test and accessibility evidence, showing process or evidence for each response.",
@@ -49,6 +49,85 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline fictional evidence table for engineering project with test and accessibility evidence",
+      "purpose": "Use every row below; the table is the entire dataset for the task and contains no real person or location.",
+      "columns": [
+        "case",
+        "category",
+        "value",
+        "source_note"
+      ],
+      "rows": [
+        [
+          "Maple",
+          "A",
+          4,
+          "direct count recorded twice"
+        ],
+        [
+          "River",
+          "B",
+          7,
+          "estimate with a range of 6 to 8"
+        ],
+        [
+          "Cedar",
+          "A",
+          2,
+          "direct count recorded once"
+        ],
+        [
+          "Harbor",
+          "B",
+          7,
+          "copied claim with no supporting observation"
+        ]
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply engineering project with test and accessibility evidence to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one limitation or trade-off and explain why the available evidence does not settle it."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to engineering project with test and accessibility evidence.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "The solution is complete and correct with no scaffold, prompt, or worked example in view.",
     "Expected results were stated first, then at least two cases including a boundary case were run with actual against expected shown.",

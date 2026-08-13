@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "scope": "Technology/Computer Science lesson task packages only",
+  "source_audit_baseline": {
+    "lessons": 336,
+    "blocked_by_missing_central_inputs_or_tools": 168,
+    "unrunnable_code_or_debug_tasks": 87,
+    "placeholder_or_template_findings": 170,
+    "credential_public_post_or_media_proof_problems": 0,
+    "safety_rules_present": 336
+  },
+  "result": {
+    "lessons": 336,
+    "actionable_lessons": 336,
+    "missing_central_inputs": 0,
+    "unrunnable_required_tasks": 0,
+    "placeholder_shells": 0,
+    "code_or_debug_activities_by_conservative_focus_scan": 87,
+    "code_or_debug_activities_with_complete_parseable_starter_code": 87,
+    "lessons_with_no_install_browser_or_paper_method": 336,
+    "lessons_with_equal_credit_manual_alternative": 336,
+    "lessons_with_privacy_and_security_controls": 336,
+    "failures": 0
+  },
+  "proof_samples": {
+    "starter_code": [
+      "ma-g3-tech-cs-u03-l06",
+      "ma-g3-tech-cs-u04-l01",
+      "ma-g3-tech-cs-u04-l02"
+    ],
+    "tool_environment": [
+      "ma-g3-tech-cs-u01-l01",
+      "ma-g3-tech-cs-u01-l02",
+      "ma-g3-tech-cs-u01-l03"
+    ],
+    "equal_credit_alternative": [
+      "ma-g12-technology-u06-l10",
+      "ma-g12-technology-u06-l11",
+      "ma-g12-technology-u06-l12"
+    ],
+    "privacy_security": [
+      "ma-g3-tech-cs-u01-l05",
+      "ma-g4-tech-cs-u01-l03",
+      "ma-g4-tech-cs-u01-l06"
+    ]
+  },
+  "audit_method": {
+    "central_inputs": "Requires a non-thin inline central_input object in every generated Technology package.",
+    "starter_code": "CODE_OR_DEBUG activities require JavaScript language, complete parseable starter code, and at least three inline inputs.",
+    "tool_environment": "Requires a browser, paper, hand-trace, or notes-app route and rejects installation/paid-account dependencies.",
+    "alternatives": "Requires an explicitly same-score or identical-credit manual/pseudocode route in every lesson.",
+    "placeholders": "Rejects \\b(todo|tbd|tba|placeholder|lorem ipsum|insert (text|code|data|link)|fill in later|teacher will provide|source to be supplied|download the starter|find (a|an|some) (example|dataset|website) online|prepared artifact|provided worked model)\\b.",
+    "privacy_security": "Requires no-real-password, no-live-system, fictional-data language and scans for credential-shaped literals."
+  },
+  "corpus_sha256": "3bd19c25bce8f5179143dad0280ceb170deeb05fc4d752bfa7cb6df2e54c2092"
+}

@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 5 of \"Typing and Getting Organized\". That is unit 3 in grade 3. Today is a mastery demonstration about organizing a simple folder. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Create and save one clearly named, organized digital or paper folder of practice work. Today helps by working on organizing a simple folder. Your unit also covers home row typing basics, saving a file, naming files clearly, and finding a saved file. Today counts for a grade. Do it on your own.",
-  "primary_task": "Show that you can do this on your own: organizing a simple folder. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to organizing a simple folder could follow it. Keep today's work tied to your unit. Today is about organizing a simple folder. It is part of \"Typing and Getting Organized\". Later days in this unit cover other things, like home row typing basics. Before you stop, do this check: Rate confidence in organizing a simple folder, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
+  "primary_task": "Show that you can do this on your own: organizing a simple folder. Put away the help sheet and the examples. Solve a new problem all the way. First write what answer you expect. Then test it two ways. Include one tricky case. Show what you expected and what you got. Then explain your thinking. Write it so someone new to organizing a simple folder could follow it. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about organizing a simple folder. It is part of \"Typing and Getting Organized\". Later days in this unit cover other things, like home row typing basics. Before you stop, do this check: Rate confidence in organizing a simple folder, cite one piece of evidence from today, and choose: ready to extend, ready to review later, or need a different explanation. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
   "task_steps": [
     "Show that you can do this on your own: organizing a simple folder.",
     "Put away the help sheet and the examples.",
@@ -60,6 +60,65 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your solution done alone, a two-way check with expected and actual, and an explanation someone new could follow.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline paper system for organizing a simple folder",
+      "purpose": "Use the labelled parts and event log below; no device, account, network, or special application is required.",
+      "labelled_parts": [
+        "Input card I1: the user selects Save",
+        "Process card P1: the application checks the file name",
+        "Storage card S1: Folder/Practice receives a copy named draft-02.txt",
+        "Output card O1: the screen reports Saved as draft-02.txt"
+      ],
+      "event_log": [
+        "09:00 — draft-01.txt exists in Folder/Practice",
+        "09:02 — user selects Save As and enters draft-02.txt",
+        "09:03 — storage card records draft-02.txt",
+        "09:04 — output card reports success"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply organizing a simple folder to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to organizing a simple folder.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "You solved it with no help sheet and no examples in front of you.",
     "You wrote what you expected first, then tested two ways including a tricky one.",

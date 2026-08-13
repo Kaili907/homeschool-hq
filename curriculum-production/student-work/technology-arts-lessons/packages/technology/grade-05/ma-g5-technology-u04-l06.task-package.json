@@ -39,7 +39,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 6 of \"Algorithms and Introductory Coding\". That is unit 4 in grade 5. Today is a correction and reflection about testing and debugging. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Build a small story, game, animation, or simulation and document the algorithm. Today helps by working on testing and debugging. Your unit also covers sequence, events, loops, and conditionals. Today adds real evidence toward your unit project.",
-  "primary_task": "Look back at your earlier work on testing and debugging and fix it. Make a fix-it list. For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now. Include one thing that failed before and works now. Then look at all your mistakes together. What do they have in common? Name one habit that would catch it sooner. Keep today's work tied to your unit. Today is about testing and debugging. It is part of \"Algorithms and Introductory Coding\". Later days in this unit cover other things, like sequence. Before you stop, do this check: In one concise response, show or explain the most important idea about testing and debugging; then identify one check that would catch an error or weak claim. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
+  "primary_task": "Look back at your earlier work on testing and debugging and fix it. Make a fix-it list. For each mistake write four things: what went wrong, why it went wrong, what you changed, and how you know it works now. Include one thing that failed before and works now. Then look at all your mistakes together. What do they have in common? Name one habit that would catch it sooner. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about testing and debugging. It is part of \"Algorithms and Introductory Coding\". Later days in this unit cover other things, like sequence. Before you stop, do this check: In one concise response, show or explain the most important idea about testing and debugging; then identify one check that would catch an error or weak claim. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
   "task_steps": [
     "Look back at your earlier work on testing and debugging and fix it.",
     "Make a fix-it list.",
@@ -57,6 +57,61 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your fix-it list with what went wrong, why, the change, and the check that passes, plus what your mistakes share.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline testing and debugging code case",
+      "purpose": "Use this exact fictional case to investigate testing and debugging; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g5_technology_u04_l06_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g5_technology_u04_l06_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to testing and debugging, not merely state the final number.",
+      "The smallest test case must be tried and its actual result compared with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to testing and debugging is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "Your fix-it list says what went wrong, why, what you changed, and how you know it works.",
     "At least one thing failed before and works now.",

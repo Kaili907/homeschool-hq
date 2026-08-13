@@ -40,7 +40,7 @@
     "project milestone plan, test log, and accessibility checklist"
   ],
   "task_brief": "Day 6 of \"Capstone Design, Build, and Test\" (unit 5, grade 12) is a guided practice (second pass) on iteration from feedback. It is one step inside the unit — not the whole unit project — and takes about 60–90 minutes. The unit is working toward: Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence. Today's work contributes to that by handling iteration from feedback at the guided practice b stage, against the unit's wider topics of problem validation and stakeholders, requirements and success metrics, architecture and build increments, and verification and test evidence. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Work the second supported pass on iteration from feedback with the scaffold removed. Solve two fresh cases without prompts, then compare your steps against the first pass you completed earlier in this unit. Where your unscaffolded work diverges from the scaffolded version, decide which one is actually correct and write the reason. Specifically revisit the step you flagged as fragile in the first pass and report whether it held this time and what evidence shows it. Anchor today's work inside its unit: this session's evidence is about iteration from feedback, and it belongs to \"Capstone Design, Build, and Test\", which also covers separate topics such as problem validation and stakeholders. Close out with this check before you stop: State how the changed constraint altered your approach to iteration from feedback. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "primary_task": "Work the second supported pass on iteration from feedback with the scaffold removed. Solve two fresh cases without prompts, then compare your steps against the first pass you completed earlier in this unit. Where your unscaffolded work diverges from the scaffolded version, decide which one is actually correct and write the reason. Specifically revisit the step you flagged as fragile in the first pass and report whether it held this time and what evidence shows it. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about iteration from feedback, and it belongs to \"Capstone Design, Build, and Test\", which also covers separate topics such as problem validation and stakeholders. Close out with this check before you stop: State how the changed constraint altered your approach to iteration from feedback. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on iteration from feedback., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Practise iteration from feedback with prompts, feedback, and gradually reduced support.",
@@ -49,6 +49,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Two unscaffolded solutions, a divergence comparison against the first pass, and a verdict on the previously flagged step.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline iteration from feedback code case",
+      "purpose": "Use this exact fictional case to investigate iteration from feedback; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g12_technology_u05_l06_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g12_technology_u05_l06_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to iteration from feedback, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to iteration from feedback is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "guided_scaffold_note": "Scaffolding for iteration from feedback fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
   "test_or_check_criteria": [
     "Two fresh cases are solved without prompts, with work shown.",

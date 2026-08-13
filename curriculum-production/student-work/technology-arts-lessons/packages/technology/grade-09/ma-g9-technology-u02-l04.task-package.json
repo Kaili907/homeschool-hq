@@ -39,7 +39,7 @@
     "offline paper-and-trace route for any programming task"
   ],
   "task_brief": "Day 4 of \"Programming Foundations: Data, Control, and Functions\" (unit 2, grade 9) is a build and test on functions parameters return values and composition and scope program structure and modularity. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Build a modular program that uses compound conditions, nested iteration, and composed functions to solve a stated problem for a real user. Today's work contributes to that by handling functions parameters return values and composition and scope program structure and modularity at the application or project stage, against the unit's wider topics of data types and type conversion, expressions operators and precedence, selection and compound boolean logic, and iteration nested loops and loop conditions. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Build a working artifact for a stated need arising in the unit \"Programming Foundations: Data, Control, and Functions\", built around what this session covers: functions parameters return values and composition and scope program structure and modularity. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. Anchor today's work inside its unit: this session's evidence is about functions parameters return values and composition and scope program structure and modularity, and it belongs to \"Programming Foundations: Data, Control, and Functions\", which also covers separate topics such as data types and type conversion. Close out with this check before you stop: Show this session’s increment and name what remains before the task is complete. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "primary_task": "Build a working artifact for a stated need arising in the unit \"Programming Foundations: Data, Control, and Functions\", built around what this session covers: functions parameters return values and composition and scope program structure and modularity. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about functions parameters return values and composition and scope program structure and modularity, and it belongs to \"Programming Foundations: Data, Control, and Functions\", which also covers separate topics such as data types and type conversion. Close out with this check before you stop: Show this session’s increment and name what remains before the task is complete. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on functions parameters return values and composition and scope program structure and modularity., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Advance the unit performance task by applying functions parameters return values and composition and scope program structure and modularity to a reviewable increment.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline functions parameters return values and composition and scope program structure and modularity code case",
+      "purpose": "Use this exact fictional case to investigate functions parameters return values and composition and scope program structure and modularity; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g9_technology_u02_l04_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g9_technology_u02_l04_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to functions parameters return values and composition and scope program structure and modularity, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to functions parameters return values and composition and scope program structure and modularity is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "Requirements and success conditions were written in testable form before implementation began.",
     "A test log shows at least three cases — normal, boundary, and a deliberate break case — with actual against expected.",

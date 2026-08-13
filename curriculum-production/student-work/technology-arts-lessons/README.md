@@ -14,8 +14,8 @@ re-cut six or twelve ways — see [Why each lesson differs](#why-each-lesson-dif
 | Units covered | 108 |
 | Courses | 18 (2 subjects × 9 grades) |
 | Production Quality Gate | **984 READY**, 0 needs-review, 0 not-ready |
-| Duplicate content check | **PASS** — 0 exact duplicates, max sibling similarity 0.40 |
-| Overlap with own unit task | 0.083 max (5-gram Jaccard) |
+| Duplicate content check | **PASS** — 0 exact duplicates, max sibling similarity 0.4232 |
+| Overlap with own unit task | 0.0761 max (5-gram Jaccard) |
 
 ## Layout
 
@@ -69,8 +69,15 @@ focus values outright — so the grade band is what separates those lessons.
 
 ## Subject guarantees
 
-**Technology / CS.** Every lesson is a logic, code, debugging, or design task
-with explicit success and check criteria (minimum four per lesson). Every
+**Technology / CS.** Every lesson is a logic, code, debugging, analysis, or
+design task with explicit success and check criteria (minimum four per
+lesson). Every package now includes an `activity_setup` block containing the
+complete central input, expected behavior/specification, available execution
+method, three test cases, a concrete debugging target, and an equal-credit
+paper/manual alternative. None waits for a teacher-supplied model, dataset,
+starter file, account, or external service. All 87 code/debug activities carry
+complete parseable JavaScript starter code and inline inputs; the same task can
+be completed by hand-tracing for identical credit. Every
 lesson prohibits real passwords, passphrases, API keys, credentials, access
 tokens, precise locations, and real personal data, and prohibits signing into,
 probing, scanning, or accessing any live, production, school, or third-party
@@ -118,6 +125,14 @@ node tests/validate-corpus.mjs
 node tests/schema-check.mjs
 ```
 
+```bash
+node tests/technology-actionability-audit.mjs
+```
+
+```bash
+node tests/write-technology-checksums.mjs
+```
+
 `run-gate.ts` runs the shared repo gate at
 `src/curriculum/production-quality` over all 984 lessons under the
 `ARTS_RFL_PE_PROJECT` subject family. Before its READY result was accepted, the
@@ -134,6 +149,13 @@ materials, no materials without an authored lesson), fidelity of phase, focus,
 title, day, objectives, and success criteria against source, and the subject
 policies above — including a credential-literal scan and a risk-term scan that
 allows a term only inside a prohibiting or defensively-framed sentence.
+
+`tests/technology-actionability-audit.mjs` independently audits the 336
+generated Technology packages as delivered to learners. It writes
+`technology-content-repair-evidence.json` and fails for a missing central
+input, unrunnable tool path, incomplete starter code/input/specification/test,
+missing debugging target, unequal fallback, placeholder shell, paid/account
+dependency, credential-shaped literal, or privacy/security gap.
 
 ## Reading register
 
@@ -195,8 +217,9 @@ whose authored focus is a gerund phrase.
   elements** (for example "materials rights and permissions planning"), so a
   make-a-piece archetype reads as a stretch on those days.
 - **The grade 9 technology unit 2 performance task says "for a real user"**
-  (authored upstream). The sandbox note constrains it, but the wording could
-  be read as requiring an outside person.
+  (authored upstream). The generated learner activity does not require an
+  outside person: `activity_setup` supplies the complete fictional case and
+  explicitly forbids waiting for an account, service, or other handout.
 - **`safety_and_privacy.status` is `VERIFIED` on every scoring guide.** That
   records that the stated policy invariants are machine-enforced for that
   lesson — not that a human subject-matter reviewer signed off individually.

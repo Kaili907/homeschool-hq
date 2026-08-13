@@ -39,7 +39,7 @@
     "supplied defective sample programs; offline trace route available"
   ],
   "task_brief": "Day 2 of \"Debugging, Testing, and Version Control\" (unit 3, grade 9) is a worked-model trace on reading traces and diagnostic output. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Repair a supplied defective program and deliver a commit history, a defect log, a failing test that reproduces the bug, and a verified fix. Today's work contributes to that by handling reading traces and diagnostic output at the explicit model stage, against the unit's wider topics of defect classes and error messages, reading traces and diagnostic output, systematic debugging strategy, and version control commits and history. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
-  "primary_task": "Work through the provided worked model of reading traces and diagnostic output one step at a time rather than reading it straight through. For each step, write what changed and why that step is legal. Build a trace table with one row per step showing the values or states before and after. Then change exactly one line, value, or condition in the model, predict the new result before running or re-tracing it, and record whether your prediction was right. Explain in your own words the rule that makes reading traces and diagnostic output behave the way the model shows. Anchor today's work inside its unit: this session's evidence is about reading traces and diagnostic output, and it belongs to \"Debugging, Testing, and Version Control\", which also covers separate topics such as defect classes and error messages. Close out with this check before you stop: Explain the modelled approach to reading traces and diagnostic output in your own words and name the step most likely to go wrong. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "primary_task": "Work through the complete central input printed in activity_setup for reading traces and diagnostic output, one step at a time rather than reading it straight through. For each step, write what changed and why that step is legal. Build a trace table with one row per step showing the values or states before and after. Then change exactly one line, value, or condition in the model, predict the new result before running or re-tracing it, and record whether your prediction was right. Explain in your own words the rule that makes reading traces and diagnostic output behave the way the model shows. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about reading traces and diagnostic output, and it belongs to \"Debugging, Testing, and Version Control\", which also covers separate topics such as defect classes and error messages. Close out with this check before you stop: Explain the modelled approach to reading traces and diagnostic output in your own words and name the step most likely to go wrong. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on reading traces and diagnostic output., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Build a clear mental model of reading traces and diagnostic output from an explicit worked example, demonstration, or source.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Completed step-by-step trace table with per-step reasons, plus the one-change experiment with prediction and outcome.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline reading traces and diagnostic output code case",
+      "purpose": "Use this exact fictional case to investigate reading traces and diagnostic output; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g9_technology_u03_l02_deltas = [3, -1, 2];\n\nfunction applyUpdates(start, deltas) {\n  let current = start;\n  for (const delta of deltas) {\n    current = start + delta;\n  }\n  return current;\n}\n\nconsole.log(applyUpdates(0, ma_g9_technology_u03_l02_deltas));",
+      "input_data": [
+        "start 0 with deltas [3, -1, 2]",
+        "start 5 with deltas []",
+        "start 1 with deltas [2, 2]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "Updates must compose in order from the latest state; start 0 with deltas 3, -1, and 2 must finish at 4.",
+      "An empty update list must preserve the start value, and no update may recompute from stale start state.",
+      "The submitted explanation must connect the observed control flow or data state to reading traces and diagnostic output, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "applyUpdates(0, [3, -1, 2])",
+        "expected": "4"
+      },
+      {
+        "input": "applyUpdates(5, [])",
+        "expected": "5"
+      },
+      {
+        "input": "applyUpdates(1, [2, 2])",
+        "expected": "5"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Each update recomputes from the original start value, discarding earlier updates, so the supplied case returns 2 instead of 4.",
+      "target": "Replace the stale-state dependency with the current state, explain the update order, and rerun all three tests.",
+      "passing_change": "Each assignment uses current + delta; the tests return 4, 5, and 5.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to reading traces and diagnostic output is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "The trace table has one row per step and shows values or states both before and after that step.",
     "Every step carries a written reason that step is legal, not just a restatement of what happened.",

@@ -40,7 +40,7 @@
     "offline paper-and-trace route for any programming task"
   ],
   "task_brief": "Day 3 of \"Data Representation and Structures\" (unit 1, grade 10) is a guided practice on dictionaries and records and stacks and queues. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Implement and measure two data structures for the same task and justify the selection with evidence. Today's work contributes to that by handling dictionaries and records and stacks and queues at the guided practice stage, against the unit's wider topics of numeric text and binary encoding, arrays and lists, dictionaries and records, and stacks and queues. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Complete two supported problems on dictionaries and records and stacks and queues. On the first, work step by step with prompts available, and after each step write the one-line reason that step is correct. On the second, work without prompts and only check the reference after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. Anchor today's work inside its unit: this session's evidence is about dictionaries and records and stacks and queues, and it belongs to \"Data Representation and Structures\", which also covers separate topics such as numeric text and binary encoding. Close out with this check before you stop: Show your reasoning on the faded example of dictionaries and records and stacks and queues and identify the check that confirms it. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely.",
+  "primary_task": "Complete the first two test cases printed in activity_setup for dictionaries and records and stacks and queues. On the first, work step by step with the printed method available, and after each step write the one-line reason that step is correct. On the second, work without the method in view and only check it after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about dictionaries and records and stacks and queues, and it belongs to \"Data Representation and Structures\", which also covers separate topics such as numeric text and binary encoding. Close out with this check before you stop: Show your reasoning on the faded example of dictionaries and records and stacks and queues and identify the check that confirms it. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on dictionaries and records and stacks and queues., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Practise dictionaries and records and stacks and queues with prompts, feedback, and gradually reduced support.",
@@ -49,6 +49,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline dictionaries and records and stacks and queues code case",
+      "purpose": "Use this exact fictional case to investigate dictionaries and records and stacks and queues; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g10_technology_u01_l03_records = [\n  { label: \"Maple\", value: 4, active: true },\n  { label: \"River\", value: 7, active: false },\n  { label: \"Cedar\", value: 2, active: true }\n];\n\nfunction summarize(records) {\n  return records.filter((record) => record.active).reduce((total, record) => total - record.value, 0);\n}\n\nconsole.log(summarize(ma_g10_technology_u01_l03_records));",
+      "input_data": [
+        "Maple: value 4, active true",
+        "River: value 7, active false",
+        "Cedar: value 2, active true"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The query must select active records and total their values; the supplied records must return 6.",
+      "Inactive records must not affect the result, and an empty record list must return 0.",
+      "The submitted explanation must connect the observed control flow or data state to dictionaries and records and stacks and queues, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "the three supplied records",
+        "expected": "6"
+      },
+      {
+        "input": "[]",
+        "expected": "0"
+      },
+      {
+        "input": "[{ label: \"Elm\", value: 5, active: false }]",
+        "expected": "0"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "The selection is correct, but the aggregation subtracts each selected value, so the supplied records return -6 instead of 6.",
+      "target": "Repair the aggregation operator, explain the selected rows and accumulator state, and rerun all three tests.",
+      "passing_change": "The reducer uses total + record.value; the tests return 6, 0, and 0.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to dictionaries and records and stacks and queues is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "guided_scaffold_note": "Scaffolding for dictionaries and records and stacks and queues fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
   "test_or_check_criteria": [
     "Both problems show intermediate states — trace table, printed values, or labelled diagram — not only final answers.",

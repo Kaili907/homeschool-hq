@@ -323,6 +323,54 @@
         "type": "string",
         "minLength": 40
       }
+    },
+    "activity_setup": {
+      "description": "Technology only: all central inputs, specification, execution routes, tests, debugging target, and equal-credit manual alternative needed to perform the task without another handout or service.",
+      "type": "object",
+      "required": [
+        "activity_kind",
+        "central_input",
+        "expected_behavior_and_specification",
+        "execution_method",
+        "test_cases",
+        "debugging_target",
+        "equal_credit_alternative"
+      ],
+      "properties": {
+        "activity_kind": {
+          "enum": [
+            "CODE_OR_DEBUG",
+            "ANALYSIS_OR_DESIGN"
+          ]
+        },
+        "central_input": {
+          "type": "object"
+        },
+        "expected_behavior_and_specification": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 20
+          }
+        },
+        "execution_method": {
+          "type": "object"
+        },
+        "test_cases": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object"
+          }
+        },
+        "debugging_target": {
+          "type": "object"
+        },
+        "equal_credit_alternative": {
+          "type": "object"
+        }
+      }
     }
   },
   "allOf": [
@@ -336,7 +384,8 @@
       },
       "then": {
         "required": [
-          "test_or_check_criteria"
+          "test_or_check_criteria",
+          "activity_setup"
         ],
         "not": {
           "required": [
@@ -357,11 +406,22 @@
         "required": [
           "critique_criteria"
         ],
-        "not": {
-          "required": [
-            "test_or_check_criteria"
-          ]
-        }
+        "allOf": [
+          {
+            "not": {
+              "required": [
+                "test_or_check_criteria"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "activity_setup"
+              ]
+            }
+          }
+        ]
       }
     }
   ]

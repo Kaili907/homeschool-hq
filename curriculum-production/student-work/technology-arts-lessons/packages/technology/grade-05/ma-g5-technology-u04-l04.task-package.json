@@ -39,7 +39,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 4 of \"Algorithms and Introductory Coding\". That is unit 4 in grade 5. Today is a build and test about conditionals. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Build a small story, game, animation, or simulation and document the algorithm. Today helps by working on conditionals. Your unit also covers sequence, events, loops, and conditionals. Today adds real evidence toward your unit project.",
-  "primary_task": "Build something that solves a real need in your unit \"Algorithms and Introductory Coding\". Build it around what today covers: conditionals. First write what it must do. Write it so you can check it later. Then build it. Test it three ways: a normal case, a tricky case, and one you think will break it. Write down what happened each time. Fix anything that failed. Test again. Turn in the thing you built, your test notes, and one idea you tried but did not use. Keep today's work tied to your unit. Today is about conditionals. It is part of \"Algorithms and Introductory Coding\". Later days in this unit cover other things, like sequence. Before you stop, do this check: In one concise response, show or explain the most important idea about conditionals; then identify one check that would catch an error or weak claim. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
+  "primary_task": "Build something that solves a real need in your unit \"Algorithms and Introductory Coding\". Build it around what today covers: conditionals. First write what it must do. Write it so you can check it later. Then build it. Test it three ways: a normal case, a tricky case, and one you think will break it. Write down what happened each time. Fix anything that failed. Test again. Turn in the thing you built, your test notes, and one idea you tried but did not use. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about conditionals. It is part of \"Algorithms and Introductory Coding\". Later days in this unit cover other things, like sequence. Before you stop, do this check: In one concise response, show or explain the most important idea about conditionals; then identify one check that would catch an error or weak claim. In grade 5, finish on your own. Write a reason for each main choice. If there were two ways to do it, say which one you picked and why.",
   "task_steps": [
     "Build something that solves a real need in your unit \"Algorithms and Introductory Coding\".",
     "Build it around what today covers: conditionals.",
@@ -60,6 +60,61 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "The thing you built, what it must do written first, your three-way test notes, and one idea you did not use.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline conditionals code case",
+      "purpose": "Use this exact fictional case to investigate conditionals; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g5_technology_u04_l04_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g5_technology_u04_l04_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to conditionals, not merely state the final number.",
+      "The smallest test case must be tried and its actual result compared with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to conditionals is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "You wrote what it must do before you started building.",
     "Your test notes show three tries: normal, tricky, and one meant to break it.",

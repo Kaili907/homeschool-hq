@@ -40,9 +40,10 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 2 of \"Pictures, Sounds, and Simple Data\". That is unit 5 in grade 3. Today is a worked-model trace about simple picture graphs. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Collect a small set of data and create a simple picture graph with a short conclusion. Today helps by working on simple picture graphs. Your unit also covers sorting and counting objects, simple picture graphs, choosing a picture that fits, and comparing two data sets. Today is for practice. You are scored on finishing and being honest, not on getting it perfect.",
-  "primary_task": "Follow the example about simple picture graphs one step at a time. Do not skip ahead. After each step, write what changed. Make a small table. Show what things looked like before and after each step. Now change one thing in the example. Guess what will happen. Then check. Was your guess right? Last, say the rule for simple picture graphs in your own words. Keep today's work tied to your unit. Today is about simple picture graphs. It is part of \"Pictures, Sounds, and Simple Data\". Later days in this unit cover other things, like sorting and counting objects. Before you stop, do this check: In one concise response, show or explain the most important idea about simple picture graphs; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
+  "primary_task": "Use the whole example printed in activity_setup about simple picture graphs. Follow it one step at a time. Do not skip ahead. After each step, write what changed. Make a small table. Show what things looked like before and after each step. Now change one thing in the example. Guess what will happen. Then check. Was your guess right? Last, say the rule for simple picture graphs in your own words. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about simple picture graphs. It is part of \"Pictures, Sounds, and Simple Data\". Later days in this unit cover other things, like sorting and counting objects. Before you stop, do this check: In one concise response, show or explain the most important idea about simple picture graphs; then identify one check that would catch an error or weak claim. In grade 3 you need one clear try with a grown-up nearby. Say or write your reason in a sentence or two. Drawings, objects, or spoken answers are all fine.",
   "task_steps": [
-    "Follow the example about simple picture graphs one step at a time.",
+    "Use the whole example printed in activity_setup about simple picture graphs.",
+    "Follow it one step at a time.",
     "Do not skip ahead.",
     "After each step, write what changed.",
     "Make a small table.",
@@ -61,6 +62,61 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your finished step table with reasons, plus the one change you made with your guess and what really happened.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline simple picture graphs code case",
+      "purpose": "Use this exact fictional case to investigate simple picture graphs; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g3_tech_cs_u05_l02_values = [4, 7, 2];\n\nfunction greatest(values) {\n  let best = 0;\n  for (const value of values) {\n    if (value > best) best = value;\n  }\n  return best;\n}\n\nconsole.log(greatest(ma_g3_tech_cs_u05_l02_values));",
+      "input_data": [
+        "[4, 7, 2]",
+        "[-5, -2, -9]",
+        "[6]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The algorithm must return the greatest member of a nonempty list; the supplied list must return 7.",
+      "The invariant is that best equals the greatest value examined so far, including when every value is negative.",
+      "The submitted explanation must connect the observed control flow or data state to simple picture graphs, not merely state the final number.",
+      "The smallest test case must be tried and its actual result compared with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[4, 7, 2]",
+        "expected": "7"
+      },
+      {
+        "input": "[-5, -2, -9]",
+        "expected": "-2"
+      },
+      {
+        "input": "[6]",
+        "expected": "6"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Starting best at 0 violates the stated invariant for an all-negative list, so the second test incorrectly returns 0.",
+      "target": "Choose an initialization supported by the nonempty-list specification, state the loop invariant, and rerun all three tests.",
+      "passing_change": "Initializing best from values[0] makes the invariant true before iteration; the tests return 7, -2, and 6.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to simple picture graphs is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "Your table has one row for each step and shows things before and after.",
     "Each step has a short reason why it is right.",

@@ -39,7 +39,7 @@
     "approved editor or runtime, with an offline paper-and-trace route available"
   ],
   "task_brief": "Day 4 of \"Computational Thinking and Problem Decomposition\" (unit 1, grade 9) is a build and test on trace tables and hand execution and comparing candidate algorithms. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Design and hand-trace an algorithm for a defined user need, documenting decomposition and abstraction choices. Today's work contributes to that by handling trace tables and hand execution and comparing candidate algorithms at the application or project stage, against the unit's wider topics of problem framing and requirements, decomposition into subproblems, abstraction and pattern recognition, and algorithm design and pseudocode. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Build a working artifact for a stated need arising in the unit \"Computational Thinking and Problem Decomposition\", built around what this session covers: trace tables and hand execution and comparing candidate algorithms. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. Anchor today's work inside its unit: this session's evidence is about trace tables and hand execution and comparing candidate algorithms, and it belongs to \"Computational Thinking and Problem Decomposition\", which also covers separate topics such as problem framing and requirements. Close out with this check before you stop: Show this session’s increment and name what remains before the task is complete. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "primary_task": "Build a working artifact for a stated need arising in the unit \"Computational Thinking and Problem Decomposition\", built around what this session covers: trace tables and hand execution and comparing candidate algorithms. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about trace tables and hand execution and comparing candidate algorithms, and it belongs to \"Computational Thinking and Problem Decomposition\", which also covers separate topics such as problem framing and requirements. Close out with this check before you stop: Show this session’s increment and name what remains before the task is complete. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on trace tables and hand execution and comparing candidate algorithms., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Advance the unit performance task by applying trace tables and hand execution and comparing candidate algorithms to a reviewable increment.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline trace tables and hand execution and comparing candidate algorithms code case",
+      "purpose": "Use this exact fictional case to investigate trace tables and hand execution and comparing candidate algorithms; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g9_technology_u01_l04_deltas = [3, -1, 2];\n\nfunction applyUpdates(start, deltas) {\n  let current = start;\n  for (const delta of deltas) {\n    current = start + delta;\n  }\n  return current;\n}\n\nconsole.log(applyUpdates(0, ma_g9_technology_u01_l04_deltas));",
+      "input_data": [
+        "start 0 with deltas [3, -1, 2]",
+        "start 5 with deltas []",
+        "start 1 with deltas [2, 2]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "Updates must compose in order from the latest state; start 0 with deltas 3, -1, and 2 must finish at 4.",
+      "An empty update list must preserve the start value, and no update may recompute from stale start state.",
+      "The submitted explanation must connect the observed control flow or data state to trace tables and hand execution and comparing candidate algorithms, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "applyUpdates(0, [3, -1, 2])",
+        "expected": "4"
+      },
+      {
+        "input": "applyUpdates(5, [])",
+        "expected": "5"
+      },
+      {
+        "input": "applyUpdates(1, [2, 2])",
+        "expected": "5"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Each update recomputes from the original start value, discarding earlier updates, so the supplied case returns 2 instead of 4.",
+      "target": "Replace the stale-state dependency with the current state, explain the update order, and rerun all three tests.",
+      "passing_change": "Each assignment uses current + delta; the tests return 4, 5, and 5.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to trace tables and hand execution and comparing candidate algorithms is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "test_or_check_criteria": [
     "Requirements and success conditions were written in testable form before implementation began.",
     "A test log shows at least three cases — normal, boundary, and a deliberate break case — with actual against expected.",

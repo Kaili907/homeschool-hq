@@ -40,9 +40,10 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "This is day 2 of \"Productivity and Collaboration Tools\". That is unit 3 in grade 4. Today is a worked-model trace about formatting a document. It takes about 40–60 minutes. It is one day's work, not the whole unit project. Your unit is working toward this: Create an accessible one-page document or short slide set on a class topic. Today helps by working on formatting a document. Your unit also covers efficient typing practice, formatting a document, building a simple slide, and using accessibility features. Today is for practice. You are scored on finishing and being honest, not on getting it perfect.",
-  "primary_task": "Follow the example about formatting a document one step at a time. Do not skip ahead. After each step, write what changed. Make a small table. Show what things looked like before and after each step. Now change one thing in the example. Guess what will happen. Then check. Was your guess right? Last, say the rule for formatting a document in your own words. Keep today's work tied to your unit. Today is about formatting a document. It is part of \"Productivity and Collaboration Tools\". Later days in this unit cover other things, like efficient typing practice. Before you stop, do this check: In one concise response, show or explain the most important idea about formatting a document; then identify one check that would catch an error or weak claim. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully.",
+  "primary_task": "Use the whole example printed in activity_setup about formatting a document. Follow it one step at a time. Do not skip ahead. After each step, write what changed. Make a small table. Show what things looked like before and after each step. Now change one thing in the example. Guess what will happen. Then check. Was your guess right? Last, say the rule for formatting a document in your own words. Everything you need is printed in activity_setup. It has the exact case, what should happen, how to try it, checks, and a paper choice worth the same score. Do not wait for another handout or app. Keep today's work tied to your unit. Today is about formatting a document. It is part of \"Productivity and Collaboration Tools\". Later days in this unit cover other things, like efficient typing practice. Before you stop, do this check: In one concise response, show or explain the most important idea about formatting a document; then identify one check that would catch an error or weak claim. In grade 4, try the steps yourself before you ask for help. Give a reason in your own words for at least one choice. A labelled drawing or a spoken answer counts fully.",
   "task_steps": [
-    "Follow the example about formatting a document one step at a time.",
+    "Use the whole example printed in activity_setup about formatting a document.",
+    "Follow it one step at a time.",
     "Do not skip ahead.",
     "After each step, write what changed.",
     "Make a small table.",
@@ -61,6 +62,61 @@
     "Go through the check list in this package before you hand it in."
   ],
   "deliverable": "Your finished step table with reasons, plus the one change you made with your guess and what really happened.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline design brief for formatting a document",
+      "purpose": "Design only for the fictional learner described here; no interview, public post, account, camera, or outside tester is needed.",
+      "fictional_user": "Kai uses a keyboard, sometimes enlarges text to 200%, and wants a three-step way to track completed reading sessions without entering a name or location.",
+      "required_features": [
+        "Add one reading session in at most three actions.",
+        "Show completion using both a word and a visual mark, not color alone.",
+        "Remain understandable at 200% text size.",
+        "Store only a fictional book label and a completed/not-completed value."
+      ],
+      "fixed_constraint": "The prototype is a labelled paper sketch or local file; it is never published and collects no real personal data."
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply formatting a document to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one thing the supplied case does not tell you instead of guessing."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to formatting a document.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "Your table has one row for each step and shows things before and after.",
     "Each step has a short reason why it is right.",

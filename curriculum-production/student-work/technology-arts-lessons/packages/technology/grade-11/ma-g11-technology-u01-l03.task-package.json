@@ -39,7 +39,7 @@
     "supplied defective sample programs; offline trace route available"
   ],
   "task_brief": "Day 3 of \"Software Engineering Practice and Collaborative Version Control\" (unit 1, grade 11) is a guided practice on code review and shared standards and refactoring and technical debt. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Run a full engineering workflow on a small feature with tracked issues, branches, a resolved merge conflict, review notes, and test evidence. Today's work contributes to that by handling code review and shared standards and refactoring and technical debt at the guided practice stage, against the unit's wider topics of requirements and user stories, branching merging and conflict resolution, code review and shared standards, and refactoring and technical debt. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Complete two supported problems on code review and shared standards and refactoring and technical debt. On the first, work step by step with prompts available, and after each step write the one-line reason that step is correct. On the second, work without prompts and only check the reference after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. Anchor today's work inside its unit: this session's evidence is about code review and shared standards and refactoring and technical debt, and it belongs to \"Software Engineering Practice and Collaborative Version Control\", which also covers separate topics such as requirements and user stories. Close out with this check before you stop: Show your reasoning on the faded example of code review and shared standards and refactoring and technical debt and identify the check that confirms it. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
+  "primary_task": "Complete the first two test cases printed in activity_setup for code review and shared standards and refactoring and technical debt. On the first, work step by step with the printed method available, and after each step write the one-line reason that step is correct. On the second, work without the method in view and only check it after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about code review and shared standards and refactoring and technical debt, and it belongs to \"Software Engineering Practice and Collaborative Version Control\", which also covers separate topics such as requirements and user stories. Close out with this check before you stop: Show your reasoning on the faded example of code review and shared standards and refactoring and technical debt and identify the check that confirms it. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task on code review and shared standards and refactoring and technical debt., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
     "Address the lesson objective: Practise code review and shared standards and refactoring and technical debt with prompts, feedback, and gradually reduced support.",
@@ -48,6 +48,61 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+  "activity_setup": {
+    "activity_kind": "CODE_OR_DEBUG",
+    "central_input": {
+      "title": "Inline code review and shared standards and refactoring and technical debt code case",
+      "purpose": "Use this exact fictional case to investigate code review and shared standards and refactoring and technical debt; no other file, model, dataset, or account is needed.",
+      "starter_code_language": "JavaScript (ECMAScript 2020-compatible)",
+      "starter_code": "const ma_g11_technology_u01_l03_steps = [\"open\", \"check\", \"save\"];\n\nfunction runSteps(steps) {\n  const completed = [];\n  for (let index = 1; index < steps.length; index += 1) {\n    completed.push(steps[index]);\n  }\n  return completed.join(\" > \");\n}\n\nconsole.log(runSteps(ma_g11_technology_u01_l03_steps));",
+      "input_data": [
+        "[\"open\", \"check\", \"save\"]",
+        "[]",
+        "[\"start\"]"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The procedure must execute every supplied step in order; the main input must return open > check > save.",
+      "An empty step list must return an empty string, and a one-step list must retain that step.",
+      "The submitted explanation must connect the observed control flow or data state to code review and shared standards and refactoring and technical debt, not merely state the final number.",
+      "The boundary test must be completed and its actual result compared explicitly with the expected result."
+    ],
+    "execution_method": {
+      "primary": "No-install browser method: open any browser developer console, paste the complete starter code, press Enter, and record the output or exact error text.",
+      "local_optional": "If Node.js is already installed, save the unchanged snippet as activity.js and run `node activity.js`; installing Node.js is not required.",
+      "no_computer_required": "The hand-trace route below is a complete execution method and earns identical credit."
+    },
+    "test_cases": [
+      {
+        "input": "[\"open\", \"check\", \"save\"]",
+        "expected": "open > check > save"
+      },
+      {
+        "input": "[]",
+        "expected": "empty string"
+      },
+      {
+        "input": "[\"start\"]",
+        "expected": "start"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "Iteration begins at index 1, so the first instruction is silently skipped and the main input returns check > save.",
+      "target": "Repair the initial index, explain the sequence invariant, and rerun all three tests.",
+      "passing_change": "Iteration begins at index 0; all three tests retain every step in order.",
+      "scope_note": "Diagnosing the state, control-flow, or data defect and connecting the repair to code review and shared standards and refactoring and technical debt is the central evidence."
+    },
+    "equal_credit_alternative": {
+      "method": "Paper or notes-app simulation; this earns exactly the same score as running code.",
+      "steps": [
+        "Make one row for each statement or loop check and copy the starting input exactly.",
+        "Record every variable, object field, selected item, and output after that step.",
+        "Circle the first row where the actual state stops matching the specification.",
+        "Apply the one repair named in your explanation and trace all three tests again."
+      ],
+      "evidence_to_submit": "The completed trace, the one-line corrected condition, and an expected-versus-actual table for all three tests."
+    }
+  },
   "guided_scaffold_note": "Scaffolding for code review and shared standards and refactoring and technical debt fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
   "test_or_check_criteria": [
     "Both problems show intermediate states — trace table, printed values, or labelled diagram — not only final answers.",

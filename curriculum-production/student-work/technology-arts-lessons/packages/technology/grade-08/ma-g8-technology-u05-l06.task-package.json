@@ -40,7 +40,7 @@
     "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
   ],
   "task_brief": "Day 6 of \"Networks and Cybersecurity\" (unit 5, grade 8) is a correction and reflection on incident response and ethics. It is one step inside the unit — not the whole unit project — and takes about 40–60 minutes. The unit is working toward: Complete a sandboxed or paper cybersecurity design review; never probe real systems without explicit authorization. Today's work contributes to that by handling incident response and ethics at the correction and reflection stage, against the unit's wider topics of internet routing concepts, encryption and certificates, authentication and authorization, and recognising and defending against common attacks and social engineering. This session produces reviewable evidence toward the unit performance task.",
-  "primary_task": "Correct and reflect on your own earlier work involving incident response and ethics. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about incident response and ethics — and name one habit that would catch that pattern earlier next time. Anchor today's work inside its unit: this session's evidence is about incident response and ethics, and it belongs to \"Networks and Cybersecurity\", which also covers separate topics such as internet routing concepts. Close out with this check before you stop: In one concise response, show or explain the most important idea about incident response and ethics; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
+  "primary_task": "Correct and reflect on your own earlier work involving incident response and ethics. Build a defect log: one row per error, giving the symptom you or the check observed, the root cause you diagnosed, the specific change that fixed it, and the check that now passes. Include at least one case that failed before the fix and passes after it. Then write what pattern connects your errors — a misread condition, a skipped verification, an assumption about incident response and ethics — and name one habit that would catch that pattern earlier next time. The activity_setup block below supplies the complete central input, exact specification, execution method, test cases, debugging target, and equal-credit manual simulation; use those exact materials rather than waiting for another handout, account, service, or tool. Anchor today's work inside its unit: this session's evidence is about incident response and ethics, and it belongs to \"Networks and Cybersecurity\", which also covers separate topics such as internet routing concepts. Close out with this check before you stop: In one concise response, show or explain the most important idea about incident response and ethics; then identify one check that would catch an error or weak claim. At grade 8 the bar is independent work that anticipates the obvious objection: name the case most likely to break your result, test it, and report what happened.",
   "requirements": [
     "Meet this lesson's own success criteria: The learner completes the central task about incident response and ethics., The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can identify a next step.",
     "Address the lesson objective: Use error evidence to choose a different representation or strategy for incident response and ethics, then demonstrate corrected understanding.",
@@ -49,6 +49,63 @@
     "Complete the check criteria list in this package before submitting."
   ],
   "deliverable": "Defect log with symptom/root cause/fix/passing check per error, one before-and-after failing case, and a named error pattern with a countermeasure habit.",
+  "activity_setup": {
+    "activity_kind": "ANALYSIS_OR_DESIGN",
+    "central_input": {
+      "title": "Inline fictional decision case for incident response and ethics",
+      "purpose": "Classify and revise this case without opening a site, contacting anyone, signing in, or using real personal information.",
+      "scenario": [
+        "A fictional app called Pebble Planner asks for a display nickname, exact birth date, home address, and contact list before showing a simple homework timer.",
+        "Its notice says the nickname is needed to label the timer, but gives no reason for collecting an address or contacts.",
+        "A fictional message then pressures the learner to reveal a sign-in secret immediately or lose the timer."
+      ],
+      "decision_options": [
+        "A: supply every requested item",
+        "B: stop, share no information, save a description of the message, and ask a trusted adult",
+        "C: invent an address but reveal a sign-in secret"
+      ]
+    },
+    "expected_behavior_and_specification": [
+      "The response must apply incident response and ethics to at least three labelled details from the supplied central input.",
+      "Every conclusion must identify the exact row, card, requirement, or scenario sentence that supports it.",
+      "The response must include one concrete revision or decision and explain the check that would show whether it worked.",
+      "The response must name one limitation or trade-off and explain why the available evidence does not settle it."
+    ],
+    "execution_method": {
+      "primary": "Paper-first method: copy the short labels, annotate them, and complete the response in a notebook or any notes app. No download, installation, account, or internet access is needed.",
+      "local_optional": "A locally available word processor, spreadsheet, drawing tool, or slide editor may be used, but no particular brand or paid feature is required.",
+      "check_path": "Use the numbered specification and the package test/check criteria as a checklist; a parent or tutor can verify the cited labels without needing subject software."
+    },
+    "test_cases": [
+      {
+        "input": "the complete supplied central input",
+        "expected": "three or more evidence-linked observations"
+      },
+      {
+        "input": "the proposed revision or decision",
+        "expected": "one stated check with an observable pass condition"
+      },
+      {
+        "input": "the strongest competing interpretation",
+        "expected": "one limitation, unknown, or trade-off stated without inventing facts"
+      }
+    ],
+    "debugging_target": {
+      "observed_failure": "An unsupported answer names the lesson topic but cites no labelled detail and has no observable way to check the proposed change.",
+      "target": "Replace unsupported claims with evidence-linked claims, then add one pass/fail check for the proposed revision or decision.",
+      "passing_change": "A reader can trace every conclusion to a printed label in the central input and can perform the stated check without outside materials."
+    },
+    "equal_credit_alternative": {
+      "method": "A handwritten, typed, spoken-to-a-scribe, or labelled-diagram response earns identical credit when it addresses the same specification.",
+      "steps": [
+        "Label three facts from the central input.",
+        "Explain how each fact connects to incident response and ethics.",
+        "State one revision or decision and its observable pass condition.",
+        "Name one limitation or missing fact without searching for outside information."
+      ],
+      "evidence_to_submit": "Three labelled evidence links, the revision or decision, the pass condition, and the limitation or missing fact."
+    }
+  },
   "test_or_check_criteria": [
     "The defect log has one row per error with symptom, root cause, the specific fix, and the check that now passes.",
     "At least one case demonstrably failed before the fix and passes after it.",
