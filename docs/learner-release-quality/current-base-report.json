@@ -1,0 +1,3299 @@
+{
+  "schemaVersion": 1,
+  "evidenceBaseSha": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "classification": "LEARNER_RELEASE_BLOCKED",
+  "negativeControls": {
+    "testCommand": "npm run test:learner-release-gate",
+    "coveredBlockingCodes": [
+      "ZERO_ACTIONABLE_NORMAL_LESSON",
+      "EMPTY_REQUIRED_PRACTICE",
+      "EMPTY_REQUIRED_MASTERY",
+      "EMPTY_REQUIRED_ACTIVITY",
+      "MISSING_REQUIRED_READING",
+      "MISSING_REQUIRED_SOURCE",
+      "MISSING_REQUIRED_DATA",
+      "MISSING_REQUIRED_MATERIALS",
+      "PLACEHOLDER_TEMPLATE_SHELL",
+      "FLATTENED_STRUCTURED_CHOICES",
+      "LOST_ITEM_REF",
+      "RESPONSE_KIND_NONE",
+      "UNSUPPORTED_REQUIRED_RESPONSE",
+      "ADULT_ANSWER_SCORING_LEAK",
+      "UNSAFE_SOURCE_STATE",
+      "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+      "ASSESSMENT_WORKFLOW_MISSING",
+      "UNRUNNABLE_TECHNOLOGY_TASK",
+      "MISSING_PE_MOVEMENT_CUES",
+      "MISSING_PE_SAFETY",
+      "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+      "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+      "FINLIT_ANSWER_DISCLOSURE"
+    ],
+    "subjectAwarePositiveControl": "PE, Arts/Music, and Ready for Life pass without Math-style practice/mastery fields"
+  },
+  "releaseReady": false,
+  "counts": {
+    "courses": 90,
+    "lessons": 8292,
+    "assessments": 699
+  },
+  "lessonGate": {
+    "ready": 0,
+    "blocked": 8292,
+    "failureCounts": {
+      "ZERO_ACTIONABLE_NORMAL_LESSON": 1582,
+      "EMPTY_REQUIRED_PRACTICE": 3,
+      "EMPTY_REQUIRED_MASTERY": 8,
+      "EMPTY_REQUIRED_ACTIVITY": 182,
+      "MISSING_REQUIRED_READING": 1620,
+      "MISSING_REQUIRED_SOURCE": 2580,
+      "MISSING_REQUIRED_DATA": 952,
+      "MISSING_REQUIRED_MATERIALS": 1130,
+      "PLACEHOLDER_TEMPLATE_SHELL": 1854,
+      "FLATTENED_STRUCTURED_CHOICES": 1888,
+      "LOST_ITEM_REF": 3420,
+      "RESPONSE_KIND_NONE": 8292,
+      "UNSUPPORTED_REQUIRED_RESPONSE": 8292,
+      "ADULT_ANSWER_SCORING_LEAK": 1800,
+      "UNSAFE_SOURCE_STATE": 12,
+      "MISSING_ASSESSMENT_LEARNER_MATERIAL": 0,
+      "ASSESSMENT_WORKFLOW_MISSING": 0,
+      "UNRUNNABLE_TECHNOLOGY_TASK": 87,
+      "MISSING_PE_MOVEMENT_CUES": 756,
+      "MISSING_PE_SAFETY": 324,
+      "UNSAFE_PE_EQUIPMENT_ASSUMPTION": 600,
+      "MISSING_ARTS_MODEL_OR_SCAFFOLD": 270,
+      "FINLIT_ANSWER_DISCLOSURE": 201
+    }
+  },
+  "assessmentGate": {
+    "ready": 0,
+    "blocked": 699,
+    "failureCounts": {
+      "ZERO_ACTIONABLE_NORMAL_LESSON": 0,
+      "EMPTY_REQUIRED_PRACTICE": 0,
+      "EMPTY_REQUIRED_MASTERY": 0,
+      "EMPTY_REQUIRED_ACTIVITY": 0,
+      "MISSING_REQUIRED_READING": 0,
+      "MISSING_REQUIRED_SOURCE": 0,
+      "MISSING_REQUIRED_DATA": 0,
+      "MISSING_REQUIRED_MATERIALS": 0,
+      "PLACEHOLDER_TEMPLATE_SHELL": 0,
+      "FLATTENED_STRUCTURED_CHOICES": 0,
+      "LOST_ITEM_REF": 0,
+      "RESPONSE_KIND_NONE": 0,
+      "UNSUPPORTED_REQUIRED_RESPONSE": 0,
+      "ADULT_ANSWER_SCORING_LEAK": 0,
+      "UNSAFE_SOURCE_STATE": 0,
+      "MISSING_ASSESSMENT_LEARNER_MATERIAL": 564,
+      "ASSESSMENT_WORKFLOW_MISSING": 699,
+      "UNRUNNABLE_TECHNOLOGY_TASK": 0,
+      "MISSING_PE_MOVEMENT_CUES": 0,
+      "MISSING_PE_SAFETY": 0,
+      "UNSAFE_PE_EQUIPMENT_ASSUMPTION": 0,
+      "MISSING_ARTS_MODEL_OR_SCAFFOLD": 0,
+      "FINLIT_ANSWER_DISCLOSURE": 0
+    }
+  },
+  "subjectRules": {
+    "mathematics": "worked examples plus nonempty promised practice/mastery; structured item refs, choices, and supported response kinds must survive projection",
+    "english-language-arts": "the actual required reading/source and a concrete writing/evidence task must be delivered; facilitator/meta-task shells do not count",
+    "science": "a bound question, model, data set, or runnable investigation is required; investigation materials, safe alternative, and learner response must be usable",
+    "social-studies": "named static source metadata/content must reach the learner; dynamic sources remain blocked until their full attachment contract is satisfied",
+    "health": "meaningful private scenario, instruction, activity, criteria, and equal-credit alternative; no medical/private-disclosure or adult scoring leakage",
+    "physical-education": "actionable movement activity with cues/steps, visible safety, feasible household equipment or no-equipment alternative, adaptation, and completion criteria",
+    "ready-for-life": "actionable life-skill task with the declared learner/guardian authority and equal-credit simulation; fixed/open response structure must survive",
+    "financial-literacy": "visible fictional parameters and both fixed/judgment work where declared; response/scoring mode and choices survive; answers and scoring locators stay adult-only",
+    "technology": "central model/problem/artifact/environment is supplied; code/debug tasks have a runnable starter or complete paper specification and test criteria",
+    "arts-and-music": "create/perform/respond task with critique criteria; model/guided/investigation modes include an actual model, excerpt, locator, or scaffold"
+  },
+  "matrix": [
+    {
+      "grade": 3,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 750,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 193,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 27
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 78,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 749,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 441,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 156,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 810,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 108
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 96
+        },
+        {
+          "code": "UNSAFE_SOURCE_STATE",
+          "count": 12
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 141,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 750,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 169,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 78,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 744,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 441,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 166,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 810,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 108
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 144,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 1110,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 170
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 166,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 114,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 657,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_PE_MOVEMENT_CUES",
+          "count": 108
+        },
+        {
+          "code": "MISSING_PE_SAFETY",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 156,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 810,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 108
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 147,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 1110,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 170
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 163,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 114,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 657,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_PE_MOVEMENT_CUES",
+          "count": 108
+        },
+        {
+          "code": "MISSING_PE_SAFETY",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 164,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 810,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 108
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 147,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 1110,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 170
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 7,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 305,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 72
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 72
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 114,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 11,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 741,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 179
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 11
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 657,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_PE_MOVEMENT_CUES",
+          "count": 108
+        },
+        {
+          "code": "MISSING_PE_SAFETY",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 160,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 810,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 108
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 8,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 150,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 7,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 362,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 72
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 72
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 45
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 114,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 333,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_PE_MOVEMENT_CUES",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 175,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 19
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 732,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 102
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 156,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "UNRUNNABLE_TECHNOLOGY_TASK",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 7,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 391,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 72
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 72
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "FINLIT_ANSWER_DISCLOSURE",
+          "count": 51
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 114,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 333,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_PE_MOVEMENT_CUES",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 157,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 734,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 104
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 150,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 7,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 414,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 72
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 72
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "FINLIT_ANSWER_DISCLOSURE",
+          "count": 56
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 114,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 381,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_PE_MOVEMENT_CUES",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 24
+        },
+        {
+          "code": "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 160,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 730,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 100
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 141,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 18
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 18
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "arts-and-music",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 216,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "MISSING_ARTS_MODEL_OR_SCAFFOLD",
+          "count": 30
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 30
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "english-language-arts",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_READING",
+          "count": 180
+        },
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "financial-literacy",
+      "courses": 1,
+      "lessons": 72,
+      "assessments": 7,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 395,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 72
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 72
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 72
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 72
+        },
+        {
+          "code": "FINLIT_ANSWER_DISCLOSURE",
+          "count": 59
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "health",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 114,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "mathematics",
+      "courses": 1,
+      "lessons": 180,
+      "assessments": 10,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 740,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "FLATTENED_STRUCTURED_CHOICES",
+          "count": 180
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 180
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 180
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 180
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "physical-education",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 405,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_PE_MOVEMENT_CUES",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 36
+        },
+        {
+          "code": "UNSAFE_PE_EQUIPMENT_ASSUMPTION",
+          "count": 36
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "ready-for-life",
+      "courses": 1,
+      "lessons": 36,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 156,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 36
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 36
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 36
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 36
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "science",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 744,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "ADULT_ANSWER_SCORING_LEAK",
+          "count": 108
+        },
+        {
+          "code": "LOST_ITEM_REF",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "MISSING_REQUIRED_DATA",
+          "count": 106
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "social-studies",
+      "courses": 1,
+      "lessons": 108,
+      "assessments": 9,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 342,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "MISSING_REQUIRED_SOURCE",
+          "count": 108
+        },
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 108
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 108
+        },
+        {
+          "code": "ASSESSMENT_WORKFLOW_MISSING",
+          "count": 9
+        },
+        {
+          "code": "MISSING_ASSESSMENT_LEARNER_MATERIAL",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "subject": "technology",
+      "courses": 1,
+      "lessons": 48,
+      "assessments": 6,
+      "readyLessons": 0,
+      "readyAssessments": 0,
+      "blockerCount": 197,
+      "status": "BLOCKED",
+      "topCodes": [
+        {
+          "code": "RESPONSE_KIND_NONE",
+          "count": 48
+        },
+        {
+          "code": "UNSUPPORTED_REQUIRED_RESPONSE",
+          "count": 48
+        },
+        {
+          "code": "PLACEHOLDER_TEMPLATE_SHELL",
+          "count": 26
+        },
+        {
+          "code": "MISSING_REQUIRED_MATERIALS",
+          "count": 24
+        },
+        {
+          "code": "ZERO_ACTIONABLE_NORMAL_LESSON",
+          "count": 24
+        }
+      ]
+    }
+  ],
+  "samplesByCode": {
+    "ZERO_ACTIONABLE_NORMAL_LESSON": [
+      "ma-g3-mathematics-u01-l01",
+      "ma-g3-science-u01-l01",
+      "ma-g3-science-u01-l02",
+      "ma-g3-science-u01-l03",
+      "ma-g3-science-u01-l04",
+      "ma-g3-science-u01-l05",
+      "ma-g3-science-u01-l06",
+      "ma-g3-science-u01-l07",
+      "ma-g3-science-u01-l08",
+      "ma-g3-science-u01-l09"
+    ],
+    "EMPTY_REQUIRED_PRACTICE": [
+      "ma-g3-mathematics-u09-l02",
+      "ma-g3-mathematics-u10-l07",
+      "ma-g3-mathematics-u10-l08"
+    ],
+    "EMPTY_REQUIRED_MASTERY": [
+      "ma-g3-mathematics-u01-l01",
+      "ma-g3-mathematics-u09-l01",
+      "ma-g3-mathematics-u09-l02",
+      "ma-g3-mathematics-u10-l06",
+      "ma-g3-mathematics-u10-l07",
+      "ma-g4-mathematics-u01-l01",
+      "ma-g4-mathematics-u10-l02",
+      "ma-g4-mathematics-u10-l03"
+    ],
+    "EMPTY_REQUIRED_ACTIVITY": [
+      "ma-g3-science-u01-l07",
+      "ma-g3-science-u01-l09",
+      "ma-g3-science-u02-l07",
+      "ma-g3-science-u02-l09",
+      "ma-g3-science-u03-l07",
+      "ma-g3-science-u03-l09",
+      "ma-g3-science-u04-l07",
+      "ma-g3-science-u04-l09",
+      "ma-g3-science-u05-l07",
+      "ma-g3-science-u05-l09"
+    ],
+    "MISSING_REQUIRED_READING": [
+      "ma-g3-english-language-arts-u01-l01",
+      "ma-g3-english-language-arts-u01-l02",
+      "ma-g3-english-language-arts-u01-l03",
+      "ma-g3-english-language-arts-u01-l04",
+      "ma-g3-english-language-arts-u01-l05",
+      "ma-g3-english-language-arts-u01-l06",
+      "ma-g3-english-language-arts-u01-l07",
+      "ma-g3-english-language-arts-u01-l08",
+      "ma-g3-english-language-arts-u01-l09",
+      "ma-g3-english-language-arts-u01-l10"
+    ],
+    "MISSING_REQUIRED_SOURCE": [
+      "ma-g3-english-language-arts-u01-l01",
+      "ma-g3-english-language-arts-u01-l02",
+      "ma-g3-english-language-arts-u01-l03",
+      "ma-g3-english-language-arts-u01-l04",
+      "ma-g3-english-language-arts-u01-l05",
+      "ma-g3-english-language-arts-u01-l06",
+      "ma-g3-english-language-arts-u01-l07",
+      "ma-g3-english-language-arts-u01-l08",
+      "ma-g3-english-language-arts-u01-l09",
+      "ma-g3-english-language-arts-u01-l10"
+    ],
+    "MISSING_REQUIRED_DATA": [
+      "ma-g3-science-u01-l01",
+      "ma-g3-science-u01-l02",
+      "ma-g3-science-u01-l03",
+      "ma-g3-science-u01-l04",
+      "ma-g3-science-u01-l05",
+      "ma-g3-science-u01-l06",
+      "ma-g3-science-u01-l07",
+      "ma-g3-science-u01-l08",
+      "ma-g3-science-u01-l09",
+      "ma-g3-science-u01-l10"
+    ],
+    "MISSING_REQUIRED_MATERIALS": [
+      "ma-g3-arts-music-u01-l02",
+      "ma-g3-arts-music-u01-l03",
+      "ma-g3-arts-music-u01-l05",
+      "ma-g3-arts-music-u01-l06",
+      "ma-g3-arts-music-u01-l07",
+      "ma-g3-arts-music-u02-l02",
+      "ma-g3-arts-music-u02-l03",
+      "ma-g3-arts-music-u02-l05",
+      "ma-g3-arts-music-u02-l06",
+      "ma-g3-arts-music-u02-l07"
+    ],
+    "PLACEHOLDER_TEMPLATE_SHELL": [
+      "ma-g3-english-language-arts-u01-l17",
+      "ma-g3-english-language-arts-u02-l17",
+      "ma-g3-english-language-arts-u03-l17",
+      "ma-g3-english-language-arts-u04-l17",
+      "ma-g3-english-language-arts-u05-l17",
+      "ma-g3-english-language-arts-u06-l17",
+      "ma-g3-english-language-arts-u07-l17",
+      "ma-g3-english-language-arts-u08-l17",
+      "ma-g3-english-language-arts-u09-l17",
+      "ma-g3-english-language-arts-u10-l17"
+    ],
+    "FLATTENED_STRUCTURED_CHOICES": [
+      "ma-g3-financial-literacy-u01-l01",
+      "ma-g3-financial-literacy-u01-l02",
+      "ma-g3-financial-literacy-u01-l03",
+      "ma-g3-financial-literacy-u01-l04",
+      "ma-g3-financial-literacy-u01-l06",
+      "ma-g3-financial-literacy-u02-l01",
+      "ma-g3-financial-literacy-u02-l02",
+      "ma-g3-financial-literacy-u02-l03",
+      "ma-g3-financial-literacy-u02-l04",
+      "ma-g3-financial-literacy-u02-l05"
+    ],
+    "LOST_ITEM_REF": [
+      "ma-g3-financial-literacy-u01-l01",
+      "ma-g3-financial-literacy-u01-l02",
+      "ma-g3-financial-literacy-u01-l03",
+      "ma-g3-financial-literacy-u01-l04",
+      "ma-g3-financial-literacy-u01-l05",
+      "ma-g3-financial-literacy-u01-l06",
+      "ma-g3-financial-literacy-u02-l01",
+      "ma-g3-financial-literacy-u02-l02",
+      "ma-g3-financial-literacy-u02-l03",
+      "ma-g3-financial-literacy-u02-l04"
+    ],
+    "RESPONSE_KIND_NONE": [
+      "ma-g3-arts-music-u01-l01",
+      "ma-g3-arts-music-u01-l02",
+      "ma-g3-arts-music-u01-l03",
+      "ma-g3-arts-music-u01-l04",
+      "ma-g3-arts-music-u01-l05",
+      "ma-g3-arts-music-u01-l06",
+      "ma-g3-arts-music-u01-l07",
+      "ma-g3-arts-music-u01-l08",
+      "ma-g3-arts-music-u01-l09",
+      "ma-g3-arts-music-u01-l10"
+    ],
+    "UNSUPPORTED_REQUIRED_RESPONSE": [
+      "ma-g3-arts-music-u01-l01",
+      "ma-g3-arts-music-u01-l02",
+      "ma-g3-arts-music-u01-l03",
+      "ma-g3-arts-music-u01-l04",
+      "ma-g3-arts-music-u01-l05",
+      "ma-g3-arts-music-u01-l06",
+      "ma-g3-arts-music-u01-l07",
+      "ma-g3-arts-music-u01-l08",
+      "ma-g3-arts-music-u01-l09",
+      "ma-g3-arts-music-u01-l10"
+    ],
+    "ADULT_ANSWER_SCORING_LEAK": [
+      "ma-g3-financial-literacy-u01-l01",
+      "ma-g3-financial-literacy-u01-l02",
+      "ma-g3-financial-literacy-u01-l03",
+      "ma-g3-financial-literacy-u01-l04",
+      "ma-g3-financial-literacy-u01-l05",
+      "ma-g3-financial-literacy-u01-l06",
+      "ma-g3-financial-literacy-u02-l01",
+      "ma-g3-financial-literacy-u02-l02",
+      "ma-g3-financial-literacy-u02-l03",
+      "ma-g3-financial-literacy-u02-l04"
+    ],
+    "UNSAFE_SOURCE_STATE": [
+      "ma-g3-social-studies-u09-l01",
+      "ma-g3-social-studies-u09-l02",
+      "ma-g3-social-studies-u09-l03",
+      "ma-g3-social-studies-u09-l04",
+      "ma-g3-social-studies-u09-l05",
+      "ma-g3-social-studies-u09-l06",
+      "ma-g3-social-studies-u09-l07",
+      "ma-g3-social-studies-u09-l08",
+      "ma-g3-social-studies-u09-l09",
+      "ma-g3-social-studies-u09-l10"
+    ],
+    "MISSING_ASSESSMENT_LEARNER_MATERIAL": [
+      "ma-g3-arts-music-u01-assessment",
+      "ma-g3-arts-music-u02-assessment",
+      "ma-g3-arts-music-u03-assessment",
+      "ma-g3-arts-music-u04-assessment",
+      "ma-g3-arts-music-u05-assessment",
+      "ma-g3-arts-music-u06-assessment",
+      "ma-g3-english-language-arts-u01-assessment",
+      "ma-g3-english-language-arts-u02-assessment",
+      "ma-g3-english-language-arts-u03-assessment",
+      "ma-g3-english-language-arts-u04-assessment"
+    ],
+    "ASSESSMENT_WORKFLOW_MISSING": [
+      "ma-g3-arts-music-u01-assessment",
+      "ma-g3-arts-music-u02-assessment",
+      "ma-g3-arts-music-u03-assessment",
+      "ma-g3-arts-music-u04-assessment",
+      "ma-g3-arts-music-u05-assessment",
+      "ma-g3-arts-music-u06-assessment",
+      "ma-g3-english-language-arts-u01-assessment",
+      "ma-g3-english-language-arts-u02-assessment",
+      "ma-g3-english-language-arts-u03-assessment",
+      "ma-g3-english-language-arts-u04-assessment"
+    ],
+    "UNRUNNABLE_TECHNOLOGY_TASK": [
+      "ma-g3-tech-cs-u04-l02",
+      "ma-g3-tech-cs-u04-l03",
+      "ma-g3-tech-cs-u04-l05",
+      "ma-g4-tech-cs-u02-l02",
+      "ma-g4-tech-cs-u02-l03",
+      "ma-g4-tech-cs-u02-l05",
+      "ma-g4-tech-cs-u04-l02",
+      "ma-g4-tech-cs-u04-l03",
+      "ma-g4-tech-cs-u04-l05",
+      "ma-g5-technology-u02-l02"
+    ],
+    "MISSING_PE_MOVEMENT_CUES": [
+      "ma-g5-physical-education-u01-l01",
+      "ma-g5-physical-education-u01-l02",
+      "ma-g5-physical-education-u01-l03",
+      "ma-g5-physical-education-u01-l04",
+      "ma-g5-physical-education-u01-l05",
+      "ma-g5-physical-education-u01-l06",
+      "ma-g5-physical-education-u01-l07",
+      "ma-g5-physical-education-u01-l08",
+      "ma-g5-physical-education-u01-l09",
+      "ma-g5-physical-education-u01-l10"
+    ],
+    "MISSING_PE_SAFETY": [
+      "ma-g5-physical-education-u01-l01",
+      "ma-g5-physical-education-u01-l02",
+      "ma-g5-physical-education-u01-l03",
+      "ma-g5-physical-education-u01-l04",
+      "ma-g5-physical-education-u01-l05",
+      "ma-g5-physical-education-u01-l06",
+      "ma-g5-physical-education-u01-l07",
+      "ma-g5-physical-education-u01-l08",
+      "ma-g5-physical-education-u01-l09",
+      "ma-g5-physical-education-u01-l10"
+    ],
+    "UNSAFE_PE_EQUIPMENT_ASSUMPTION": [
+      "ma-g3-physical-education-u01-l01",
+      "ma-g3-physical-education-u01-l02",
+      "ma-g3-physical-education-u01-l03",
+      "ma-g3-physical-education-u01-l04",
+      "ma-g3-physical-education-u01-l05",
+      "ma-g3-physical-education-u01-l06",
+      "ma-g3-physical-education-u01-l07",
+      "ma-g3-physical-education-u01-l08",
+      "ma-g3-physical-education-u01-l09",
+      "ma-g3-physical-education-u01-l10"
+    ],
+    "MISSING_ARTS_MODEL_OR_SCAFFOLD": [
+      "ma-g3-arts-music-u01-l02",
+      "ma-g3-arts-music-u01-l03",
+      "ma-g3-arts-music-u01-l05",
+      "ma-g3-arts-music-u01-l06",
+      "ma-g3-arts-music-u01-l07",
+      "ma-g3-arts-music-u02-l02",
+      "ma-g3-arts-music-u02-l03",
+      "ma-g3-arts-music-u02-l05",
+      "ma-g3-arts-music-u02-l06",
+      "ma-g3-arts-music-u02-l07"
+    ],
+    "FINLIT_ANSWER_DISCLOSURE": [
+      "ma-g3-financial-literacy-u01-l02",
+      "ma-g3-financial-literacy-u02-l02",
+      "ma-g3-financial-literacy-u02-l05",
+      "ma-g3-financial-literacy-u03-l01",
+      "ma-g3-financial-literacy-u03-l04",
+      "ma-g3-financial-literacy-u04-l01",
+      "ma-g3-financial-literacy-u04-l02",
+      "ma-g3-financial-literacy-u04-l06",
+      "ma-g3-financial-literacy-u06-l03",
+      "ma-g3-financial-literacy-u06-l06"
+    ]
+  }
+}
