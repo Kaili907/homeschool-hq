@@ -1,6 +1,8 @@
 export * from './importCompatibility'
 export * from './migration'
-export * from './pinVerifier'
+
+// No pinVerifier primitive is application-facing. Internal vault and migration
+// code import the low-level verifier seam directly.
 
 // Only the safe, application-facing learner credential operations are
 // re-exported here. Raw primitives that verify or overwrite credential
