@@ -42,34 +42,34 @@ The practical start ruling is narrower: Mathematics and English Language Arts ar
 
 ## Grade results
 
-| Grade | Courses | Lessons | Actionable | Zero action | Empty mastery | Choice loss | Filler | Source issues |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 3 | 10 | 900 | 890 | 10 | 5 | 207 | 10 | 172 |
-| 4 | 10 | 900 | 890 | 10 | 3 | 200 | 10 | 160 |
-| 5 | 10 | 900 | 740 | 160 | 0 | 187 | 160 | 0 |
-| 7 | 10 | 900 | 740 | 160 | 0 | 192 | 160 | 0 |
-| 8 | 10 | 936 | 776 | 160 | 0 | 185 | 160 | 0 |
-| 9 | 10 | 936 | 926 | 10 | 0 | 244 | 10 | 180 |
-| 10 | 10 | 936 | 926 | 10 | 0 | 219 | 10 | 180 |
-| 11 | 10 | 936 | 926 | 10 | 0 | 240 | 10 | 180 |
-| 12 | 10 | 948 | 938 | 10 | 0 | 214 | 10 | 180 |
+| Grade | Courses | Lessons | Actionable | Zero action | Empty mastery | Empty assessment records | Choice loss | Filler | Source issues |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 3 | 10 | 900 | 890 | 10 | 5 | 62 | 207 | 10 | 172 |
+| 4 | 10 | 900 | 890 | 10 | 3 | 62 | 200 | 10 | 160 |
+| 5 | 10 | 900 | 740 | 160 | 0 | 62 | 187 | 160 | 0 |
+| 7 | 10 | 900 | 740 | 160 | 0 | 62 | 192 | 160 | 0 |
+| 8 | 10 | 936 | 776 | 160 | 0 | 64 | 185 | 160 | 0 |
+| 9 | 10 | 936 | 926 | 10 | 0 | 63 | 244 | 10 | 180 |
+| 10 | 10 | 936 | 926 | 10 | 0 | 63 | 219 | 10 | 180 |
+| 11 | 10 | 936 | 926 | 10 | 0 | 63 | 240 | 10 | 180 |
+| 12 | 10 | 948 | 938 | 10 | 0 | 63 | 214 | 10 | 180 |
 
 Each grade’s first ten worst defects are recorded in `grade-subject-matrix.json`; every grade × subject cell also contains its first ten.
 
 ## Subject results
 
-| Subject | Courses | Lessons | Actionable | Zero action | Empty mastery | Choice loss | Filler | Source issues |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| mathematics | 9 | 1620 | 1620 | 0 | 8 | 1619 | 0 | 0 |
-| english-language-arts | 9 | 1620 | 1080 | 540 | 0 | 0 | 540 | 1040 |
-| science | 9 | 972 | 972 | 0 | 0 | 0 | 0 | 0 |
-| social-studies | 9 | 972 | 972 | 0 | 0 | 0 | 0 | 12 |
-| health | 9 | 324 | 324 | 0 | 0 | 0 | 0 | 0 |
-| physical-education | 9 | 972 | 972 | 0 | 0 | 0 | 0 | 0 |
-| ready-for-life | 9 | 324 | 324 | 0 | 0 | 46 | 0 | 0 |
-| financial-literacy | 9 | 504 | 504 | 0 | 0 | 223 | 0 | 0 |
-| technology | 9 | 336 | 336 | 0 | 0 | 0 | 0 | 0 |
-| arts-and-music | 9 | 648 | 648 | 0 | 0 | 0 | 0 | 0 |
+| Subject | Courses | Lessons | Actionable | Zero action | Empty mastery | Empty assessment records | Choice loss | Filler | Source issues |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| mathematics | 9 | 1620 | 1620 | 0 | 8 | 91 | 1619 | 0 | 0 |
+| english-language-arts | 9 | 1620 | 1080 | 540 | 0 | 90 | 0 | 540 | 1040 |
+| science | 9 | 972 | 972 | 0 | 0 | 81 | 0 | 0 | 0 |
+| social-studies | 9 | 972 | 972 | 0 | 0 | 81 | 0 | 0 | 12 |
+| health | 9 | 324 | 324 | 0 | 0 | 0 | 0 | 0 | 0 |
+| physical-education | 9 | 972 | 972 | 0 | 0 | 0 | 0 | 0 | 0 |
+| ready-for-life | 9 | 324 | 324 | 0 | 0 | 54 | 46 | 0 | 0 |
+| financial-literacy | 9 | 504 | 504 | 0 | 0 | 59 | 223 | 0 | 0 |
+| technology | 9 | 336 | 336 | 0 | 0 | 54 | 0 | 0 | 0 |
+| arts-and-music | 9 | 648 | 648 | 0 | 0 | 54 | 0 | 0 | 0 |
 
 ## Course readiness
 

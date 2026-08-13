@@ -94,6 +94,9 @@ function blankMatrixRow(grade, subject) {
     pendingSourceAttachmentCount: 0,
     attestationIssueCount: 0,
     disconnectedResponsePathCount: 0,
+    assessmentCount: 0,
+    emptyAssessmentCount: 0,
+    usableLearnerAssessmentMaterialCount: 0,
     structuralOnlyAssessmentCount: 0,
     boundAssessmentCount: 0,
     workflowLinkedAssessmentCount: 0,
@@ -305,6 +308,9 @@ for (const finding of lessonFindings) {
 }
 for (const assessment of assessmentRecords) {
   const row = gradeSubjectRows.get(`${assessment.grade}:${assessment.subject}`)
+  addCount(row, 'assessmentCount')
+  if (assessment.emptyAssessmentMaterial) addCount(row, 'emptyAssessmentCount')
+  if (assessment.usableLearnerMaterial) addCount(row, 'usableLearnerAssessmentMaterialCount')
   if (assessment.bindingState === 'STRUCTURAL_ONLY') addCount(row, 'structuralOnlyAssessmentCount')
   if (assessment.bindingState === 'BOUND') addCount(row, 'boundAssessmentCount')
   if (assessment.linkedToFinalFamilyPilotLearnerWorkflow) addCount(row, 'workflowLinkedAssessmentCount')
@@ -509,6 +515,9 @@ const gradeResults = EXPECTED_GRADES.map((grade) => {
     zeroActionableCount: rows.reduce((sum, row) => sum + row.zeroActionableCount, 0),
     emptyMasteryCount: rows.reduce((sum, row) => sum + row.emptyMasteryCount, 0),
     emptyAssessmentSectionCount: rows.reduce((sum, row) => sum + row.emptyAssessmentSectionCount, 0),
+    assessmentCount: rows.reduce((sum, row) => sum + row.assessmentCount, 0),
+    emptyAssessmentCount: rows.reduce((sum, row) => sum + row.emptyAssessmentCount, 0),
+    usableLearnerAssessmentMaterialCount: rows.reduce((sum, row) => sum + row.usableLearnerAssessmentMaterialCount, 0),
     flattenedChoiceLessonCount: rows.reduce((sum, row) => sum + row.flattenedChoiceLessonCount, 0),
     placeholderOrFillerCount: rows.reduce((sum, row) => sum + row.placeholderOrFillerCount, 0),
     adultLeakCount: rows.reduce((sum, row) => sum + row.adultLeakCount, 0),
@@ -531,6 +540,9 @@ const subjectResults = EXPECTED_SUBJECTS.map((subject) => {
     zeroActionableCount: rows.reduce((sum, row) => sum + row.zeroActionableCount, 0),
     emptyMasteryCount: rows.reduce((sum, row) => sum + row.emptyMasteryCount, 0),
     emptyAssessmentSectionCount: rows.reduce((sum, row) => sum + row.emptyAssessmentSectionCount, 0),
+    assessmentCount: rows.reduce((sum, row) => sum + row.assessmentCount, 0),
+    emptyAssessmentCount: rows.reduce((sum, row) => sum + row.emptyAssessmentCount, 0),
+    usableLearnerAssessmentMaterialCount: rows.reduce((sum, row) => sum + row.usableLearnerAssessmentMaterialCount, 0),
     flattenedChoiceLessonCount: rows.reduce((sum, row) => sum + row.flattenedChoiceLessonCount, 0),
     placeholderOrFillerCount: rows.reduce((sum, row) => sum + row.placeholderOrFillerCount, 0),
     sourceReadinessIssueCount: rows.reduce((sum, row) => sum + row.sourceReadinessIssueCount, 0),
@@ -574,6 +586,18 @@ const assessmentReadiness = {
   finalBrowserAssessmentProjectionCount: 0,
   finalFamilyPilotAssessmentWorkflowCount: 0,
   summary: assessmentSummary,
+  byGrade: gradeResults.map((row) => ({
+    grade: row.grade,
+    assessmentCount: row.assessmentCount,
+    emptyAssessmentCount: row.emptyAssessmentCount,
+    usableLearnerAssessmentMaterialCount: row.usableLearnerAssessmentMaterialCount,
+  })),
+  bySubject: subjectResults.map((row) => ({
+    subject: row.subject,
+    assessmentCount: row.assessmentCount,
+    emptyAssessmentCount: row.emptyAssessmentCount,
+    usableLearnerAssessmentMaterialCount: row.usableLearnerAssessmentMaterialCount,
+  })),
   records: assessmentRecords,
 }
 
@@ -610,6 +634,10 @@ check(overall.totalCourses === 90, 'course total drifted during aggregation')
 check(overall.totalLessons === 8292, 'lesson total drifted during aggregation')
 check(overall.totalAssessments === 699, 'assessment total drifted during aggregation')
 check([...gradeSubjectRows.values()].every((row) => row.courseCount === 1), 'grade-subject course matrix is not one course per supported cell')
+check(gradeResults.reduce((sum, row) => sum + row.assessmentCount, 0) === overall.totalAssessments, 'grade assessment total drifted')
+check(gradeResults.reduce((sum, row) => sum + row.emptyAssessmentCount, 0) === overall.emptyAssessments, 'grade empty-assessment total drifted')
+check(subjectResults.reduce((sum, row) => sum + row.assessmentCount, 0) === overall.totalAssessments, 'subject assessment total drifted')
+check(subjectResults.reduce((sum, row) => sum + row.emptyAssessmentCount, 0) === overall.emptyAssessments, 'subject empty-assessment total drifted')
 
 function markdownTable(headers, rows) {
   return [
@@ -621,12 +649,12 @@ function markdownTable(headers, rows) {
 
 function reportMarkdown() {
   const gradeTable = markdownTable(
-    ['Grade', 'Courses', 'Lessons', 'Actionable', 'Zero action', 'Empty mastery', 'Choice loss', 'Filler', 'Source issues'],
-    gradeResults.map((row) => [row.grade, row.courseCount, row.lessonCount, row.actionableWorkCount, row.zeroActionableCount, row.emptyMasteryCount, row.flattenedChoiceLessonCount, row.placeholderOrFillerCount, row.sourceReadinessIssueCount]),
+    ['Grade', 'Courses', 'Lessons', 'Actionable', 'Zero action', 'Empty mastery', 'Empty assessment records', 'Choice loss', 'Filler', 'Source issues'],
+    gradeResults.map((row) => [row.grade, row.courseCount, row.lessonCount, row.actionableWorkCount, row.zeroActionableCount, row.emptyMasteryCount, row.emptyAssessmentCount, row.flattenedChoiceLessonCount, row.placeholderOrFillerCount, row.sourceReadinessIssueCount]),
   )
   const subjectTable = markdownTable(
-    ['Subject', 'Courses', 'Lessons', 'Actionable', 'Zero action', 'Empty mastery', 'Choice loss', 'Filler', 'Source issues'],
-    subjectResults.map((row) => [row.subject, row.courseCount, row.lessonCount, row.actionableWorkCount, row.zeroActionableCount, row.emptyMasteryCount, row.flattenedChoiceLessonCount, row.placeholderOrFillerCount, row.sourceReadinessIssueCount]),
+    ['Subject', 'Courses', 'Lessons', 'Actionable', 'Zero action', 'Empty mastery', 'Empty assessment records', 'Choice loss', 'Filler', 'Source issues'],
+    subjectResults.map((row) => [row.subject, row.courseCount, row.lessonCount, row.actionableWorkCount, row.zeroActionableCount, row.emptyMasteryCount, row.emptyAssessmentCount, row.flattenedChoiceLessonCount, row.placeholderOrFillerCount, row.sourceReadinessIssueCount]),
   )
   const courseTable = markdownTable(
     ['Course', 'Readiness', 'Safe to begin', 'Zero action', 'Empty sections', 'Choice loss', 'Usable assessments'],

@@ -17,6 +17,124 @@
     "normalSchoolUseUsable": 0,
     "exactOrNormalizedDuplicateGroups": []
   },
+  "byGrade": [
+    {
+      "grade": 3,
+      "assessmentCount": 77,
+      "emptyAssessmentCount": 62,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 4,
+      "assessmentCount": 77,
+      "emptyAssessmentCount": 62,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 5,
+      "assessmentCount": 77,
+      "emptyAssessmentCount": 62,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 7,
+      "assessmentCount": 77,
+      "emptyAssessmentCount": 62,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 8,
+      "assessmentCount": 79,
+      "emptyAssessmentCount": 64,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 9,
+      "assessmentCount": 78,
+      "emptyAssessmentCount": 63,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 10,
+      "assessmentCount": 78,
+      "emptyAssessmentCount": 63,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 11,
+      "assessmentCount": 78,
+      "emptyAssessmentCount": 63,
+      "usableLearnerAssessmentMaterialCount": 15
+    },
+    {
+      "grade": 12,
+      "assessmentCount": 78,
+      "emptyAssessmentCount": 63,
+      "usableLearnerAssessmentMaterialCount": 15
+    }
+  ],
+  "bySubject": [
+    {
+      "subject": "mathematics",
+      "assessmentCount": 91,
+      "emptyAssessmentCount": 91,
+      "usableLearnerAssessmentMaterialCount": 0
+    },
+    {
+      "subject": "english-language-arts",
+      "assessmentCount": 90,
+      "emptyAssessmentCount": 90,
+      "usableLearnerAssessmentMaterialCount": 0
+    },
+    {
+      "subject": "science",
+      "assessmentCount": 81,
+      "emptyAssessmentCount": 81,
+      "usableLearnerAssessmentMaterialCount": 0
+    },
+    {
+      "subject": "social-studies",
+      "assessmentCount": 81,
+      "emptyAssessmentCount": 81,
+      "usableLearnerAssessmentMaterialCount": 0
+    },
+    {
+      "subject": "health",
+      "assessmentCount": 54,
+      "emptyAssessmentCount": 0,
+      "usableLearnerAssessmentMaterialCount": 54
+    },
+    {
+      "subject": "physical-education",
+      "assessmentCount": 81,
+      "emptyAssessmentCount": 0,
+      "usableLearnerAssessmentMaterialCount": 81
+    },
+    {
+      "subject": "ready-for-life",
+      "assessmentCount": 54,
+      "emptyAssessmentCount": 54,
+      "usableLearnerAssessmentMaterialCount": 0
+    },
+    {
+      "subject": "financial-literacy",
+      "assessmentCount": 59,
+      "emptyAssessmentCount": 59,
+      "usableLearnerAssessmentMaterialCount": 0
+    },
+    {
+      "subject": "technology",
+      "assessmentCount": 54,
+      "emptyAssessmentCount": 54,
+      "usableLearnerAssessmentMaterialCount": 0
+    },
+    {
+      "subject": "arts-and-music",
+      "assessmentCount": 54,
+      "emptyAssessmentCount": 54,
+      "usableLearnerAssessmentMaterialCount": 0
+    }
+  ],
   "records": [
     {
       "assessmentRef": "ma-g3-arts-music-u01-assessment",
