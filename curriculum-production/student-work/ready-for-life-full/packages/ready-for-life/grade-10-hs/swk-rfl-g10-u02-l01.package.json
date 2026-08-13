@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u02-l01",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Job Readiness: Applications, Resumes, and Interviews",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: building a resume from real experience"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners inventory their real experience (school activities, volunteering, informal work, projects, and extracurriculars) and translate at least four items into resume-ready bullet points using an action verb and a concrete result, without inventing anything that did not happen.",
+  "scenario": "The learner lists every real activity that could belong on a first resume, then rewrites at least four of them as specific bullet points that name what they did and what came of it, entirely from their own genuine experience.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No fabricated experience, title, or outcome is ever acceptable; every bullet point must describe something that genuinely happened."
+  ],
+  "simulationAlternative": null,
+  "materials": ["a notebook or document", "a list of real activities: school clubs, volunteering, informal work, projects, or extracurriculars"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List every real activity you have done that could reasonably appear on a first resume, even if it seems minor.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List at least six real activities, however small they seem, without judging yet whether they belong." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Rewrite at least four activities as bullet points using an action verb plus a specific, honest result.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write four bullet points, each starting with an action verb and naming a specific, true result or outcome." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "Every bullet point describes something that genuinely happened, with nothing invented or exaggerated." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose which activities are the strongest match for the kind of work you're interested in, and put those first.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Explain why you ordered your bullet points the way you did." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what surprised you about this process.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which activity surprised you by turning into a stronger bullet point than you expected, and what specific detail made it stronger?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's bullet points are vague ('helped out at events') with no specific action or result, reteach by modeling the pattern 'action verb + what you actually did + what came of it' on one worked example, then have the learner rewrite two of their weakest bullet points using that pattern.",
+  "extension": "Have the learner rewrite their four bullet points a second time targeted at a specific job title from Unit 1, choosing different details to emphasize depending on what that job actually values.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

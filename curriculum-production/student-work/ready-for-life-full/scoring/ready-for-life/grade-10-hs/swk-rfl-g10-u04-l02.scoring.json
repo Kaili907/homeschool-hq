@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l02",
+  "lessonId": "ma-g10-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Distinguishing the three document types",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Explanations of what each document proves are interchangeable or confused between types." },
+          { "label": "Proficient", "descriptor": "Correctly explains what at least two of the three documents prove." },
+          { "label": "Advanced", "descriptor": "Correctly and distinctly explains what all three documents prove and how long each stays useful." }
+        ]
+      },
+      {
+        "dimension": "Identifying the details that matter",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Named details are generic ('the date') without explaining why they matter for that document." },
+          { "label": "Proficient", "descriptor": "Names specific details and gives a plausible reason for at least two documents." },
+          { "label": "Advanced", "descriptor": "Names specific details for all three documents with a clear reason tied to what could go wrong." }
+        ]
+      },
+      {
+        "dimension": "Reasoning about why documents get lost",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is a single-word or dismissive answer ('people are lazy')." },
+          { "label": "Proficient", "descriptor": "Offers a plausible, non-judgmental reason." },
+          { "label": "Advanced", "descriptor": "Offers a plausible reason that connects to the specific delay between getting the document and needing it." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three explanations of what each document proves are genuinely distinct from one another.",
+      "The details named as most important would plausibly be the details actually needed to resolve a real problem.",
+      "The reflection avoids blaming or shaming language about people who lose documents."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

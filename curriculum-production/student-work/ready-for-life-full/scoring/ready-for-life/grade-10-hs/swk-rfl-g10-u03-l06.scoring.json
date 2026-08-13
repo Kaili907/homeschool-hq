@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l06",
+  "lessonId": "ma-g10-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Response to difficult feedback",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The response is purely apologetic with no named action, or is defensive." },
+          { "label": "Proficient", "descriptor": "The response acknowledges the point and names one specific action." },
+          { "label": "Advanced", "descriptor": "The response acknowledges the point, names a specific action, and neither over-apologizes nor gets defensive." }
+        ]
+      },
+      {
+        "dimension": "Justification quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Justification restates the response without connecting it to earlier unit work." },
+          { "label": "Proficient", "descriptor": "Connects one specific choice to something from an earlier lesson this unit." },
+          { "label": "Advanced", "descriptor": "The connection to earlier work is specific and the reasoning for the choice is clearly explained, not just asserted." }
+        ]
+      },
+      {
+        "dimension": "Distinguishing feedback from character judgment",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection conflates accepting feedback with being a bad person, or dismisses the feedback's validity." },
+          { "label": "Proficient", "descriptor": "States the distinction between accepting feedback and self-judgment." },
+          { "label": "Advanced", "descriptor": "States the distinction and shows it concretely in the learner's own drafted response." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The response to the harder feedback names a specific, plausible action, not a vague promise to 'do better.'",
+      "The justification names an actual earlier lesson or message from this unit, not a generic claim.",
+      "The reflection does not treat the difficult feedback as evidence of the learner's own worth or character."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

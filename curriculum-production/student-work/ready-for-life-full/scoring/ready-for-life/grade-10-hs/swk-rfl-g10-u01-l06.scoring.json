@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l06",
+  "lessonId": "ma-g10-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Completeness and consistency of the findings record",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more careers are missing a field, or the three entries use inconsistent formats." },
+          { "label": "Proficient", "descriptor": "All three careers include pathway, day-to-day reality, and entry requirements in a consistent format." },
+          { "label": "Advanced", "descriptor": "All three entries are complete, consistent, and specific enough that a reader unfamiliar with the unit could compare them directly." }
+        ]
+      },
+      {
+        "dimension": "Grounding in prior research",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Entries appear newly invented rather than drawn from the unit's earlier lessons." },
+          { "label": "Proficient", "descriptor": "Entries are consistent with what was recorded earlier in the unit." },
+          { "label": "Advanced", "descriptor": "Entries are consistent with earlier work and the reflection accurately traces how the learner's thinking changed since day one." }
+        ]
+      },
+      {
+        "dimension": "Concreteness of the revisit plan",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The revisit plan is vague ('sometime later') with no specific trigger." },
+          { "label": "Proficient", "descriptor": "Names a specific future point and a specific trigger for updating the record." },
+          { "label": "Advanced", "descriptor": "The named trigger is genuinely tied to something that would meaningfully change the learner's thinking, not an arbitrary date alone." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each of the three career entries independently makes sense without needing to re-read earlier lessons.",
+      "The interest ordering in the warm-up is revisited honestly in the reflection, including if it changed.",
+      "The revisit plan names something concrete, not a generic 'I'll think about it again someday.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

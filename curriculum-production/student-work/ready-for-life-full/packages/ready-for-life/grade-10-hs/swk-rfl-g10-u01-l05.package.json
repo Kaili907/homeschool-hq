@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u01-l05",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Career Exploration and Pathway Mapping",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: comparing pathways honestly"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research one additional career and write an honest side-by-side comparison between it and the career researched earlier in the unit, weighing real trade-offs in pathway length, day-to-day reality, and fit to their own constraints rather than declaring one simply better.",
+  "scenario": "The learner researches a second career of genuine interest, then writes a comparison against the first career using specific evidence gathered earlier in the unit (day-to-day reality, entry pathway, and how each fits the constraints named on day one), naming genuine trade-offs rather than picking a clear favorite by default.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["research and notes from earlier lessons this unit", "access to a source for the second career, or the provided reference profile", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before comparing, restate the key facts you already have about your first career from earlier this unit.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "In two or three sentences, summarize the day-to-day reality and entry pathway you found for your first career." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Research a second career of genuine interest and record its day-to-day reality and entry pathway.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Summarize the day-to-day reality and entry pathway you found for the second career." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "The second career is a genuine interest, not a random or throwaway choice." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write a side-by-side comparison naming at least two real trade-offs between the two careers.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Name at least two specific trade-offs between the two careers (for example, one has a faster entry pathway but the other has day-to-day work you'd enjoy more), and explain how each trade-off connects to your constraints from day one." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect honestly on the comparison.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "If you had to guess today, which pathway would you lean toward and why, while still naming one real downside of that choice?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's comparison declares one career better across the board with no real trade-off named, reteach by requiring one specific advantage for each career before any conclusion is allowed, using a simple two-column format until the pattern of honest trade-off comparison is established.",
+  "extension": "Have the learner interview or research how someone changed from one career path to a different one, and add a third column to their comparison naming what that transition actually required.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

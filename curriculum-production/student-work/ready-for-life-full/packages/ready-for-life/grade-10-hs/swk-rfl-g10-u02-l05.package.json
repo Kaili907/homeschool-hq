@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u02-l05",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Job Readiness: Applications, Resumes, and Interviews",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: interview preparation and follow-up"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners build a logistics checklist for arriving prepared to a real interview and draft a short, specific thank-you follow-up message referencing something from the practice interview, without sending it, so they understand both sides of the interview process.",
+  "scenario": "Building on the practice interview from the previous lesson, the learner creates a short logistics checklist (what to bring, how to confirm timing, what questions to ask the interviewer) and drafts a thank-you follow-up message that references one specific thing discussed, kept as a draft only.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This draft follow-up message is never sent as part of the lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["notes from the previous lesson's practice interview", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List everything you would need to have ready before a real interview (what to bring, how to confirm the time, how you'd get there).",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List at least four items or steps you'd need ready before a real interview." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Turn your list into a short, usable logistics checklist, and add two genuine questions you would ask the interviewer.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My checklist includes confirming the time and place ahead of the interview." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Write two genuine questions you would ask the interviewer, and explain why each one is useful to you, not just filler." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft a short thank-you follow-up message referencing one specific thing from your practice interview.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Draft a three-to-four sentence thank-you message that references one specific thing discussed in the practice interview, not a generic 'thanks for your time.'" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why the follow-up matters.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Explain in your own words what a specific follow-up message shows an interviewer that a generic one doesn't." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's questions for the interviewer are generic ('what's it like working here') or their follow-up message is a bare 'thanks,' reteach by requiring both to reference one concrete detail from the actual practice interview notes before they count as complete.",
+  "extension": "Have the learner draft a second follow-up message for a scenario where the interview went poorly in one specific way, and explain how the message would need to differ.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

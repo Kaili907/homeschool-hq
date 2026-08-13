@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l03",
+  "lessonId": "ma-g10-ready-for-life-u06-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Timed response quality under pressure",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The timed response omits a key fact or the core request entirely." },
+          { "label": "Proficient", "descriptor": "The timed response states the key facts and request, though wording is rough." },
+          { "label": "Advanced", "descriptor": "The timed response is clear and complete despite the time limit." }
+        ]
+      },
+      {
+        "dimension": "Meaningful comparison to the unhurried version",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The comparison notes only wording polish, with no substantive difference identified." },
+          { "label": "Proficient", "descriptor": "Names a real substantive difference beyond wording (such as an omitted detail or reordered priority)." },
+          { "label": "Advanced", "descriptor": "Names a substantive difference and explains why the pressure caused it." }
+        ]
+      },
+      {
+        "dimension": "Self-awareness about what held up and what slipped",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Claims nothing slipped, or the response is vague." },
+          { "label": "Proficient", "descriptor": "Honestly names one thing that held up and one that slipped." },
+          { "label": "Advanced", "descriptor": "Names specific, believable examples of both, grounded in the actual timed draft." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The timed draft, even if rough, contains the core who/what/by-when facts.",
+      "The comparison identifies a genuine content or structural difference, not just tone.",
+      "The self-awareness response is honest, including admitting something slipped, without self-criticism."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

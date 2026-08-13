@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u04-l03",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Consumer Tasks and Everyday Agreements",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: returning, cancelling, or disputing something"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners use a provided fictional return/cancellation policy to work out the correct steps for a fictional problem scenario (an item that arrived wrong or a service that didn't happen as agreed) and draft a message requesting the specific remedy the policy actually allows.",
+  "scenario": "The learner reads a provided fictional policy document and a fictional problem scenario, determines what remedy the policy actually allows for that specific situation, and drafts a short message requesting exactly that remedy, citing the relevant policy term.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The policy and scenario are entirely fictional and provided with this lesson; no real business or transaction is involved."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional policy document and problem scenario", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the fictional problem scenario and, before checking the policy, guess what remedy you think you're owed.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write your guess at what remedy you'd be owed, before checking the actual policy." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the fictional policy and determine exactly what remedy it allows for this specific scenario.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "State exactly what the policy allows for this scenario, quoting the specific term that applies." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My stated remedy matches what the policy actually says, not what seems fair in general." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft a short message requesting exactly the remedy the policy allows, citing the relevant term.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Draft your message: state the problem plainly, cite the specific policy term, and request the exact remedy it allows." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your warm-up guess to the actual policy.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "How did your initial guess compare to what the policy actually allowed, and what would you check first next time?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner requests a remedy the policy doesn't actually support (for example, asking for a full refund when the policy only allows an exchange), reteach by having them highlight the exact policy sentence that applies before drafting anything, and require the draft's requested remedy to match the highlighted sentence word for word in meaning.",
+  "extension": "Have the learner draft a follow-up message for a scenario where the first request is denied, escalating politely and asking what the next step in the process is.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

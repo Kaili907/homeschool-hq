@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u01-l06",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Career Exploration and Pathway Mapping",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: recording findings and revisiting them"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners compile a findings record mapping three researched careers to their pathway, day-to-day reality, and entry requirements, and set a concrete plan for when and how they will revisit and update the record, completing this unit's performance task.",
+  "scenario": "The learner assembles one findings record covering all three careers researched this unit (the two compared on day five plus the one behind the informational conversation on day four), each mapped consistently across pathway, day-to-day reality, and entry requirements, then sets a specific date and trigger for revisiting the record.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["research and notes from every lesson this unit", "a notebook or document for the final findings record"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before compiling, list the three careers you researched this unit in the order of your current interest.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List the three careers in order of your current interest, and note if that order changed since day one." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "For each of the three careers, record its pathway, day-to-day reality, and entry requirements in a consistent format.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For career one, write its pathway (numbered steps), day-to-day reality (specific tasks), and entry requirements, pulling from your earlier research." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "For career two, write the same three fields." },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "For career three, write the same three fields." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "All three careers are recorded in the same consistent format, so they can be compared at a glance." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Set a concrete plan for revisiting this record.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name a specific future point (a date, grade milestone, or event) when you will revisit this record, and one specific thing that would make you update it before then." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the unit as a whole.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Looking at all three careers side by side, what is the single most useful thing you learned this unit that you did not know before day one?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's three career entries use inconsistent formats or leave a field blank, reteach by providing a fill-in template with the three field labels fixed, and require every field to be filled before the record counts as complete, using the day-four and day-five notes as the source material to fill it.",
+  "extension": "Have the learner add a fourth column ranking all three careers on one dimension of their own choosing (such as flexibility, pay potential, or day-to-day enjoyment) and justify the ranking with evidence from the record.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

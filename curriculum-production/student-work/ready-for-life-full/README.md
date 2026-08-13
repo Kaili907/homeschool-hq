@@ -60,7 +60,7 @@ structurally unverifiable the way a fabricated FinLit answer key would be.
 
 ## What this delivery actually contains
 
-**21 of 324 lessons are genuinely authored** — a real, non-templated sample,
+**54 of 324 lessons are genuinely authored** — a real, non-templated sample,
 not a placeholder for the full corpus:
 
 - **12 lessons** (grades 3, 4, 5, 7, 8, 9 — 2 each) ported from the
@@ -68,14 +68,19 @@ not a placeholder for the full corpus:
   `../ready-for-life-financial-literacy/packages/ready-for-life/`, with the
   `integrity` block rewritten to this schema and to honest provenance (fixing
   one instance of the `1.1.0` citation defect along the way).
-- **9 new lessons** (grades 10, 11, 12 — 3 each), authored from scratch for
-  this delivery. Grades 10-12 previously had **zero** Ready for Life student-work
-  exemplars anywhere in this fleet; this is the first coverage at those grades.
+- **Grade 10: 36 of 36 lessons — complete.** 3 were authored in an earlier
+  round; **this round (R4) authored the remaining 33**, covering all 6 units
+  end to end (Career Exploration, Job Readiness, Professional Communication,
+  Consumer Tasks, Civic Participation, and the Work-Readiness Capstone).
+  Grade 10 is the first fully complete non-released grade in this corpus.
+- **6 lessons** (grades 11, 12 — 3 each) authored from scratch in the
+  earlier round, unchanged by this round.
 
-All 9 grades are represented at least once, demonstrating the full grade
-range end to end, but **303 lessons remain unauthored**. No lesson beyond
-these 21 was mass-generated, templated, or stubbed — there is no fake
-"complete" corpus behind this README.
+All 9 grades are represented, one grade (10) is now fully complete, and
+**270 lessons remain unauthored** across the other 8 grades. No lesson in
+this corpus was mass-generated, templated, or stubbed — there is no fake
+"complete" corpus behind this README. See "Grade 10 completion (R4)" below
+for what this round specifically verified.
 
 ## Infrastructure delivered (reusable for the remaining 303 lessons)
 
@@ -86,16 +91,20 @@ these 21 was mass-generated, templated, or stubbed — there is no fake
 - `tests/` — loadCorpus, gate, validate, attestation, and inventory-integrity
   suites (17 tests, all passing; see Quality below).
 
-## Quality gate results — mandatory H2 re-check required
+## Quality gate results — mandatory Gate H3 re-check required
 
-Two independent checks were run against all 21 authored lessons, per this
-task's instruction to run the real gate plus stronger local checks because
-Production Gate H2 is moving in parallel:
+Two independent checks were run against all 54 authored lessons (all grades,
+including the 36 now-complete grade 10 lessons), per this task's instruction
+to run the real gate plus stronger local checks:
 
 1. **The real production-readiness gate**
    (`src/curriculum/production-quality`, imported read-only, not modified) —
    `tests/gate.test.ts`. Result: **READY**, zero `NOT_READY`, zero
-   `NEEDS_HUMAN_REVIEW`, zero `MISSING_RUBRIC`.
+   `NEEDS_HUMAN_REVIEW`, zero `MISSING_RUBRIC`. (The gate's own confidence
+   check initially flagged 2 of the 33 new grade-10 lessons as
+   under-specified — independent-work text below its 25-word floor — both
+   were rewritten with genuinely more specific directions/prompts, not
+   padded, and the gate now passes clean.)
 2. **Stronger local checks** beyond the gate's scope —
    `tests/validate.test.ts`: no answer-bearing key leaks into any
    student-facing package; every `guardian`-authority package has correctly
@@ -103,46 +112,65 @@ Production Gate H2 is moving in parallel:
    simulation/equal-credit alternative; no package requires an identifiable
    photo; no package matches a photo/video/voice-capture, required-purchase,
    or assumed-household-access pattern.
+3. **Near-duplicate check across all 36 grade-10 packages** (this round,
+   R4) — pairwise text-similarity comparison (objective, scenario, tasks,
+   remediation, extension) across all 630 grade-10 lesson pairs. Highest
+   similarity found: **0.069** (SequenceMatcher ratio, 0-1 scale); no pair
+   approaches template-reuse territory. Every grade-10 lesson is genuinely
+   distinct content, not a find-and-replace of another lesson in the set.
 
-**This result is explicitly marked for mandatory re-check against
-Production Gate H2 during convergence**, per this task's instructions — H2 is
-moving in parallel and has not evaluated this corpus.
+**This result is explicitly marked for mandatory reconciliation against
+Production Gate H3**, per this task's instructions — H3 has not evaluated
+this corpus.
 
 ## Attestation
 
-10 of the 21 lessons are `completionAuthority: "guardian"` (a genuine
-real-world, adult-observed component); all 10 correctly reject a bare learner
+14 of the 54 lessons are `completionAuthority: "guardian"` (a genuine
+real-world, adult-observed component); all 14 correctly reject a bare learner
 click (`computeCompletionStatus` returns
 `RECORDED_PENDING_GUARDIAN_ATTESTATION`, never `CERTIFIED`, without a real
-`AdultAttestation`), tested in `tests/attestation.test.ts`. The other 11 are
+`AdultAttestation`), tested in `tests/attestation.test.ts`. The other 40 are
 `completionAuthority: "learner"` — cognitive, planning, or fictional-scenario
 work with no real-world safety-sensitive component, so no guardian
 attestation is attached (attestation is reserved for lessons that genuinely
-need it, not applied uniformly).
+need it, not applied uniformly). Within grade 10 specifically: 6 of 36 are
+guardian-authority (one per unit's genuinely safety/judgment-sensitive live
+role-play or record-handling task — mock interview delivery, reporting a
+mistake, real household document logging, the full interview rehearsal, and
+the capstone presentation), 30 of 36 are learner-authority.
 
 ## Developmental/safety review
 
-One subagent (the task's cap) reviewed all 21 authored lessons against
-developmental appropriateness, purchase/photo/video/voice prohibitions,
-sensitive-disclosure and shame-language avoidance, household/transportation/
-resource-difference neutrality, and — for every `realWorldAction: true`
-lesson — whether the safety framing and `simulationAlternative` are genuinely
-adequate rather than a token afterthought.
+One subagent (this task's reviewer cap) reviewed all 36 grade-10 lessons
+against developmental appropriateness, purchase/photo/video/voice
+prohibitions, sensitive-disclosure and shame-language avoidance,
+household/transportation/resource-difference neutrality, guardian-authority
+coherence, content specificity (non-templated), and rubric quality — and for
+every `realWorldAction: true` lesson, whether the safety framing and
+`simulationAlternative` are genuinely adequate rather than a token
+afterthought.
 
-**Result: 21/21 PASS, 0 CONCERN.** Full per-file verdicts are in the session
+**Result: 36/36 PASS, 0 CONCERN.** Full per-file verdicts are in the session
 record; not duplicated here to keep this README from rotting as the corpus
-grows. The reviewer's one flag for scaling: this is a hand-picked 21-lesson
-sample, and the two hardest-to-template elements —
-safety-note specificity and `simulationAlternative` equal-credit quality for
-`realWorldAction: true` lessons — are exactly where quality could drift at
-324-lesson scale, since they require genuine per-lesson judgment rather than
-schema-driven scaffolding. Recommend a spot-check pass on those two fields
-specifically (flagging short, generic, or copy-adjusted
-`simulationAlternative` text) before any future production release.
+grows. The reviewer's one flag for scaling: several grade-10 lessons (units
+5-6) ask learners to self-source real civic/legal facts (working-age rules,
+voter eligibility, consumer-help resources) and reward citing *a* current
+source, with no mechanism to catch a learner who confidently cites an
+inaccurate or outdated source — "Advanced" is reachable with a wrong-but-cited
+answer. At 36 lessons this is minor and partly mitigated (re-verification
+against a second source is explicitly taught in two of these lessons), but
+scaled to hundreds of lessons across many jurisdictions and topics, "cite a
+source" without any source-quality bar is the seam most likely to produce
+learners walking away with confidently wrong information the curriculum
+itself validated as top-tier work. Recommend a source-quality rubric
+dimension (or a curated source allowlist) before scaling this pattern
+further.
 
 ## What remains
 
-303 lessons across all 9 grades still need genuine, lesson-specific
-authoring at this same bar. The infrastructure, schema, inventory, and gate
-harness in this directory are built to scale to them; the authoring itself
-is the remaining, substantial work.
+270 lessons across the 8 non-grade-10 grades still need genuine,
+lesson-specific authoring at this same bar. Grade 10 is the proof this scales
+cleanly through a full 36-lesson grade: same infrastructure, schema,
+inventory, and gate harness, extended to 33 new lessons in one round with
+zero near-duplicates and a clean gate/review pass. The authoring itself
+remains the substantial work for the other 8 grades.

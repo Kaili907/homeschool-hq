@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u03-l05",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Professional Communication",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: requesting time off or a schedule change"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft a schedule-change request for a fictional workplace scenario that gives enough advance notice, states the specific dates or shift needed, and offers to help solve any coverage problem it creates, rather than simply announcing the need and leaving the problem to the reader.",
+  "scenario": "The learner reads a provided fictional scenario describing an upcoming conflict with a set work schedule, then drafts a request that names the specific dates or shift affected, gives reasonable advance notice, and proposes a way to help with coverage.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The scenario, employer, and schedule are entirely fictional and provided with this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional schedule-conflict scenario", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the fictional scenario and note the specific dates or shift affected and how much advance notice you have.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the specific dates or shift affected and how many days of advance notice you have." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft your schedule-change request, naming the specific dates, giving advance notice, and offering a way to help with coverage.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My request names the specific dates or shift, not a vague 'sometime soon.'" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My request offers something concrete to help solve the coverage problem it creates." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Reread your draft as if you were the person receiving it, and note anything that would make it harder for them to say yes.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name one thing in your draft that might make it harder for the reader to say yes, and how you'd fix it." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the balance of the request.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Explain, in your own words, why offering to help with coverage changes how a schedule-change request lands, compared to only stating the need." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's draft states the need with no advance notice or offer to help ('I need Friday off'), reteach by requiring three specific elements before the draft is complete: the exact date, how much notice is given, and one concrete coverage offer, checked one at a time against the draft.",
+  "extension": "Have the learner draft a second version for a much shorter-notice, higher-stakes version of the same conflict, and explain what has to change when there's less time to plan.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

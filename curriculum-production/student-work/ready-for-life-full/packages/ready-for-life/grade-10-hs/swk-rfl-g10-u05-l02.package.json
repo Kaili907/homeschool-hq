@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u05-l02",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Civic Participation and Public Systems",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: libraries, transit, health, and community services"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research one public service category genuinely relevant to them (library, transit, health clinic, or community service) and record what it offers, any eligibility or access requirement, and exactly how someone would access it for the first time.",
+  "scenario": "The learner chooses one service category they'd genuinely want to know how to use, researches it using a current local source, and records what it offers, who can use it, and the concrete first step to accessing it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task researches publicly available information about a service category; no account is created and no personal information is submitted anywhere."
+  ],
+  "simulationAlternative": null,
+  "materials": ["access to research one local public service category, or the provided reference example", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Choose one service category (library, transit, health clinic, or community service) that's genuinely useful to know about.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the category you chose and why it's genuinely useful to you right now or soon." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Research what this service offers, who is eligible to use it, and the concrete first step to access it.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Record what the service offers and any eligibility requirement you found." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Record the concrete first step someone would take to access it for the first time." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I recorded where this information came from, so it could be checked again later." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify one thing about the service that would surprise someone who has never used it.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name one specific thing you learned that would surprise someone who has never used this service." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why people might avoid using a service like this.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Name one realistic reason someone eligible for this service might not use it, without judging them for it." }
+      ]
+    }
+  ],
+  "remediation": "If a learner records only a service's general purpose without the concrete first access step (for example, 'the library has books' with no mention of how to actually get a card), reteach by requiring the answer to name the literal first action a first-time user would take, checked against the actual source.",
+  "extension": "Have the learner research a second service category and compare the two access processes, naming which one has more steps and why that might be.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

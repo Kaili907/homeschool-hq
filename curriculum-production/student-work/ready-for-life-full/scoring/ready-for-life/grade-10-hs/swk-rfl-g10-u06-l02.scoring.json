@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l02",
+  "lessonId": "ma-g10-ready-for-life-u06-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Sequence completeness and flow",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The sequence is broken into disconnected pieces with restarts, or a part (introduction or closing) is skipped." },
+          { "label": "Proficient", "descriptor": "The full sequence is completed in one continuous pass." },
+          { "label": "Advanced", "descriptor": "The full sequence is completed continuously and the transitions between parts feel natural." }
+        ]
+      },
+      {
+        "dimension": "Delivery without a script",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner reads most of the sequence directly from notes." },
+          { "label": "Proficient", "descriptor": "Learner delivers most of the sequence from memory, glancing at notes occasionally." },
+          { "label": "Advanced", "descriptor": "Learner delivers the full sequence fluently without notes." }
+        ]
+      },
+      {
+        "dimension": "Whole-sequence reflection",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection addresses only individual answers, not the sequence as a whole." },
+          { "label": "Proficient", "descriptor": "Names a real difference between practicing pieces and running the whole sequence." },
+          { "label": "Advanced", "descriptor": "Names a specific transition point that was harder, and connects it to the feedback received." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The introduction and closing question are both genuinely delivered, not skipped for time.",
+      "The post-interview notes name a specific transition point, not a vague 'it went well.'",
+      "The reflection distinguishes sequence-level flow from individual answer quality."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u06-l04",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 10 Work-Readiness Capstone",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: knowing local rules before applying"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners re-verify the working-age and permit rules researched earlier this year against a second, current source, and add any additional first-job rule (such as required breaks or how soon pay must be provided) relevant to their location, so the capstone portfolio's rule check is current rather than months old.",
+  "scenario": "The learner takes the working-age rules recorded earlier this year, checks them again against a second, current source to confirm nothing has changed, and researches one additional first-job rule for their location, recording both with sources.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Rules are re-checked against a current source rather than assumed to be unchanged from earlier research."
+  ],
+  "simulationAlternative": null,
+  "materials": ["working-age rule notes from earlier this year", "access to a current source for re-verification, or the provided reference summary", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before re-checking, restate the working-age rules you recorded earlier this year.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Restate what you previously found about working-age rules for your location." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Re-verify those rules against a second, current source, and note whether anything changed.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Record what your second source says and whether it matches your earlier finding." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I used a genuinely different source than my original research earlier this year." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Research one additional first-job rule for your location not covered by your earlier research.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Record the additional rule you found, what it means practically, and your source." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on re-verification.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Did re-checking change anything, and either way, what does that tell you about how often information like this should be reverified?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's re-verification uses the same source as the original research rather than a genuinely independent one, reteach by requiring a different type of source (for example, an official page the first time and a different kind of resource the second time) before the re-check counts as complete.",
+  "extension": "Have the learner research how these rules would differ for a job in a genuinely different location (such as a different state or country) and compare the two rule sets.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

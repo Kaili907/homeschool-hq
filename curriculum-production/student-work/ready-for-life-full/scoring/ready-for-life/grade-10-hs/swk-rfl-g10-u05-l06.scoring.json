@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l06",
+  "lessonId": "ma-g10-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Guide completeness and sourcing",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more entries lacks a specific access step or a named source." },
+          { "label": "Proficient", "descriptor": "All three entries include what the system is, how to access it, and a named source." },
+          { "label": "Advanced", "descriptor": "All three entries are complete, specific, and each source is genuinely current and checkable." }
+        ]
+      },
+      {
+        "dimension": "Re-verification discipline",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No genuine second-source re-check is performed." },
+          { "label": "Proficient", "descriptor": "Re-verifies one entry against a real second source." },
+          { "label": "Advanced", "descriptor": "Re-verifies against a second source and honestly reports whether it confirmed or changed the original finding." }
+        ]
+      },
+      {
+        "dimension": "Depth of unit-level reflection",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is generic ('I learned a lot') without a specific before/after comparison." },
+          { "label": "Proficient", "descriptor": "Names one specific thing that changed between assumption and finding." },
+          { "label": "Advanced", "descriptor": "Names a specific change and explains why the original assumption was reasonable but incomplete or wrong." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three guide entries are distinct systems, not near-duplicates of each other.",
+      "Every named source is specific enough that someone else could check it themselves.",
+      "The final reflection cites a concrete fact from the guide, not a vague overall impression."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

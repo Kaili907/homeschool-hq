@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u05-l03",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Civic Participation and Public Systems",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: identification and records: what exists and why"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research three common types of identification or personal records (such as a state identification card, a birth certificate, and a school transcript), explaining in general terms what each proves, who typically issues it, and one situation where an adult would actually need it.",
+  "scenario": "The learner researches three common record or identification types in general terms (not using any of their own personal documents) and records what each proves, the type of authority that issues it, and one real-life situation where it's actually needed.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task researches identification and record types in general terms only; the learner never handles, records, or discloses their own or anyone else's actual identification numbers or personal document details."
+  ],
+  "simulationAlternative": null,
+  "materials": ["access to research three common identification/record types, or the provided reference summary", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, list three types of identification or records you've heard of.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List three types you've heard of, even if you're not sure exactly what they're for." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Research what each of three record types proves, who typically issues it, and one real situation where an adult would need it.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For the first type, explain what it proves, who issues it, and one situation where it's needed." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "For the second type, explain the same three things." },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "For the third type, explain the same three things." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify which of the three would likely be hardest to replace if lost, and why.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name which one would likely be hardest to replace and explain your reasoning." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why these records matter before they're needed.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Explain, in your own words, why it's useful to understand these records before an actual situation requires one urgently." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's explanations are generic ('it's important') rather than naming what the record actually proves and who issues it, reteach with one fully worked example naming all three fields specifically, then have the learner revise their weakest entry using that pattern.",
+  "extension": "Have the learner research one additional record type not covered and add it to their list with the same three fields.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

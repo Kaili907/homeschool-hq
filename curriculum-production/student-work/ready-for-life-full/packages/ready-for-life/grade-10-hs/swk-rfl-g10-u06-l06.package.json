@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u06-l06",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 10 Work-Readiness Capstone",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: presenting readiness and naming remaining gaps"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners present their completed capstone, portfolio, practice interview reflection, professional communication set, local rule check, and weekly plan, to a trusted adult, honestly naming at least two remaining gaps rather than declaring themselves fully ready, and the adult attests to having observed the presentation, completing this year's work-readiness capstone.",
+  "scenario": "The learner walks a trusted adult through their assembled capstone materials from this unit, presents a two-minute honest summary of strengths and at least two specific remaining gaps, and the adult confirms the presentation was observed; the attestation records that the presentation happened and was genuine, not that the learner is certified ready for any specific real job.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This attestation confirms the adult observed a genuine presentation, not that the learner is certified or guaranteed ready for any specific real job or employer.",
+    "No audio or video recording is made; the adult confirms based on direct observation."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available to observe the live presentation right now, the learner instead writes the full two-minute presentation as a script covering strengths and at least two specific gaps, which the guardian reviews and confirms afterward when available, before certification is recorded."
+  },
+  "materials": ["portfolio, practice interview notes, professional communication set, local rule check, and weekly plan from this unit", "a notebook or document for the presentation outline"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Outline your two-minute presentation before delivering it: what you'll cover and in what order.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Outline the order you'll present your materials in, and note at least two specific remaining gaps you'll name honestly." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Present your capstone materials to your trusted adult, including your named strengths and at least two specific remaining gaps.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I presented my portfolio, practice interview reflection, professional communication set, local rule check, and weekly plan." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I honestly named at least two specific remaining gaps, not a vague 'I could always improve.'" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Right after presenting, while it's fresh, write down what your adult said in response to your strengths and to each of your two named gaps.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize what your adult said in response, including anything they agreed with, added, questioned, or saw differently than you did." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the year's work as a whole.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Looking back at this entire year, what is the one specific skill from this course you feel most genuinely confident in now, and what evidence from your own work backs that up?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's named gaps are vague or minimizing ('I guess I could be better at everything'), reteach by requiring each gap to name a specific skill and a specific piece of evidence from the year's work that shows it's still developing, modeled once before the learner revises their two gaps.",
+  "extension": "Have the learner set one specific, dated goal for closing one of the two named gaps before the next grade's course begins, and record it alongside the capstone.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

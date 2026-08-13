@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u03-l06",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Professional Communication",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: receiving and acting on feedback"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners respond to two provided fictional pieces of workplace feedback, one easy to accept and one genuinely difficult, drafting a professional response to each and a short written response accepting and acting on the harder one, then justify the communication choices made across this unit's work, completing the unit's performance task.",
+  "scenario": "The learner reads two provided fictional feedback messages, one straightforward and one that is difficult to hear (specific and somewhat critical but professionally delivered), drafts a brief professional response to each that neither over-apologizes nor gets defensive, and writes a short justification connecting this response to at least one other message drafted earlier in the unit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Both feedback messages are fictional and provided with this lesson; no real supervisor, workplace, or evaluation of the learner personally is involved."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the two provided fictional feedback messages", "earlier drafts from this unit", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read both feedback messages and note your honest first reaction to each, especially the harder one.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe your honest first reaction to the harder feedback message, before drafting a response." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Draft a brief professional response to each feedback message.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Draft your response to the straightforward feedback." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Draft your response to the harder feedback, naming one specific thing you'll do differently, without over-apologizing or getting defensive." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My response to the harder feedback names a specific action, not just an acknowledgment." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Justify your communication choices by connecting this response to at least one other message you drafted earlier in the unit.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Name one specific choice from this response (a wording choice, structural choice, or tone choice) and connect it to something you learned drafting a different message earlier this unit." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on receiving difficult feedback overall.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What is the difference between accepting feedback and agreeing that you're a bad person, and how does your response show that difference?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's response to the harder feedback is either purely apologetic with no named action, or defensive and explaining why the feedback is wrong, reteach using a three-part pattern (acknowledge the specific point, name one concrete action, close without over-apologizing) modeled once on the easier feedback message before revising the harder response.",
+  "extension": "Have the learner draft a short follow-up message to send after acting on the feedback for one week, reporting back on the specific change made.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

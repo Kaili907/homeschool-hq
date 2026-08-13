@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l04",
+  "lessonId": "ma-g10-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Research accuracy and sourcing",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Eligibility rules are based on assumption with no named current source." },
+          { "label": "Proficient", "descriptor": "Records eligibility requirements with a named current source." },
+          { "label": "Advanced", "descriptor": "Records eligibility requirements, the general process outline, and a specific, correctly calculated personal eligibility date." }
+        ]
+      },
+      {
+        "dimension": "Neutral, informational framing",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The response includes advocacy for a candidate, party, or position rather than staying informational." },
+          { "label": "Proficient", "descriptor": "The response stays informational and neutral." },
+          { "label": "Advanced", "descriptor": "The response stays neutral and accurately distinguishes eligibility/process facts from any opinion." }
+        ]
+      },
+      {
+        "dimension": "Understanding of the practice form and broader participation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The form is completed but the surprising-detail response is generic, or no other civic activity is named." },
+          { "label": "Proficient", "descriptor": "Names a specific detail from the form and one other civic activity." },
+          { "label": "Advanced", "descriptor": "Names a specific detail and a genuinely accessible civic activity for the learner's current age." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real personal identifying information is entered anywhere on the fictional practice form.",
+      "The stated personal eligibility date is a genuine calculation from the researched rule, not a guess.",
+      "The response maintains a neutral, informational tone throughout, with no partisan content."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

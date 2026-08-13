@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u06-l02",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 10 Work-Readiness Capstone",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: rehearsing the full application sequence"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners rehearse the full, unbroken application sequence with a trusted adult, from a brief self-introduction through five interview questions to a closing question and thank-you, so they experience the whole sequence together rather than as isolated practiced pieces.",
+  "scenario": "A trusted adult plays interviewer for the capstone's full practice interview: the learner delivers a short self-introduction, answers five interview questions out loud without a script, asks one closing question, and closes with a thank-you, all in one continuous run-through, then the adult gives feedback on the sequence as a whole.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "No audio or video recording is made; the adult gives feedback live and the learner writes notes afterward.",
+    "This is a rehearsal of the sequence, not a real evaluation of the learner's worth; feedback should stay specific to the delivery."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available to play interviewer at this time, the learner instead writes out the full sequence as a script from introduction to closing thank-you, then reads it aloud once to themselves and self-checks it against the same look-fors a live interviewer would use."
+  },
+  "materials": ["five interview questions and notes from earlier this year", "paper or notes app for planning and post-interview notes"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Plan your self-introduction (30-45 seconds) and choose your closing question before beginning.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "extended-response", "text": "Draft your self-introduction and your closing question." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, run the full sequence in one continuous pass: introduction, five questions, closing question, thank-you.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I completed the full sequence in one continuous pass without stopping to restart." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I asked my closing question and thanked the interviewer to close." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My adult gave feedback on the sequence as a whole, not just individual answers." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Right after, write down the feedback on the sequence as a whole.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize the feedback on how the full sequence flowed, not just individual answers, and name one specific transition you'd smooth out next time." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the difference between practicing pieces and running the whole sequence.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What was different about running the whole sequence together compared to practicing individual pieces earlier this year?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's introduction and answers feel disconnected, with awkward stops between each part, reteach by having them practice just the three transition moments (intro-to-first-answer, last-answer-to-closing-question, closing-question-to-thank-you) in isolation, then re-run the full sequence.",
+  "extension": "Have the learner run the full sequence a second time with one question swapped for a harder one, and compare how the transitions held up under a less familiar question.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

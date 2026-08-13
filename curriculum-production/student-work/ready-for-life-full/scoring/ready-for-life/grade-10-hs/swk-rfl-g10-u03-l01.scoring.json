@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l01",
+  "lessonId": "ma-g10-ready-for-life-u03-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Comparison accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Differences listed are limited to 'one is more formal' with no specific structural detail." },
+          { "label": "Proficient", "descriptor": "Names at least two specific structural or wording differences." },
+          { "label": "Advanced", "descriptor": "Names three or more specific differences, including at least one about structure and one about wording choice." }
+        ]
+      },
+      {
+        "dimension": "Structural completeness of the draft",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The draft is missing one or more of the four parts, or blends them with no clear separation." },
+          { "label": "Proficient", "descriptor": "All four parts are present and identifiable." },
+          { "label": "Advanced", "descriptor": "All four parts are present, and the subject line is specific rather than vague." }
+        ]
+      },
+      {
+        "dimension": "Reasoning about audience",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection restates that structure matters without explaining why for this reader." },
+          { "label": "Proficient", "descriptor": "Names one part and a plausible reason tied to a busy, skimming reader." },
+          { "label": "Advanced", "descriptor": "Names a part with a reason that is specific to this scenario, not a generic claim about all workplace email." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner's own draft subject line names the actual topic (start time), not a vague word like 'Question.'",
+      "The four parts of the draft are each recognizable and in the right order.",
+      "The reflection connects a specific structural choice to the reader's situation, not a general 'it's more professional.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}
