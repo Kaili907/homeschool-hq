@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l06",
+  "lessonId": "ma-g4-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Cause identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The named cause is vague or generic ('I forgot,' 'I didn't feel like it') with no specific mechanism behind it."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific, plausible cause is named that genuinely explains why the responsibility was missed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner also names who else, if anyone, was affected by the miss."
+          }
+        ]
+      },
+      {
+        "dimension": "Repair plan and follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The repair plan only redoes the task or apologizes without addressing the named cause, or the repair is not actually carried out."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The repair plan directly addresses the specific cause named, and at least some of it is actually carried out."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection clearly distinguishes fixing the immediate task from changing the cause, with a specific forward-looking change named."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The missed responsibility is a real, specific event from the learner's own week, not a hypothetical example.",
+      "Each repair step traces back to the specific cause named in task two rather than being a generic fix."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

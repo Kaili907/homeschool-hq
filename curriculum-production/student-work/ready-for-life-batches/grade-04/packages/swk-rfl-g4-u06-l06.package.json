@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u06-l06",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: reflecting and setting a next step"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+  ],
+  "objective": "Learners reflect on the full six-day contribution project, naming a specific strength and a specific change for each stage, and set one concrete next step connected to their day-five check results, confirmed by a guardian.",
+  "scenario": "Using your results from checking your contribution in the previous lesson, you now look back across the whole project, choosing, planning, safety-checking, carrying out, and checking, and decide on one specific next step: fixing a partly-met or missed criterion, extending the contribution further, or starting a new one using what you learned.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "If your next step involves a tool, appliance, or cleaning product, note that it will need the same adult check-in as your original plan before you act on it.",
+    "Keep your reflection focused on the task and the process, not on sharing private details about yourself or your household.",
+    "If setting your next step means re-observing your contribution one more time, only do so in spaces you already have permission to be in."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a trusted adult is not available today to confirm the reflection and next step, the learner completes the full written reflection and next-step plan independently and reviews it with that adult at the next available opportunity, earning full credit once the adult confirms it."
+  },
+  "materials": [
+    "notes and results from every earlier lesson in this project",
+    "paper or a notes app for the written reflection"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before writing your reflection, reread your day-five check results.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the one criterion from your check that came out best and the one that came out weakest."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Walk back through each stage of the project, choosing, planning, safety-checking, carrying out, and checking, and note one specific thing that went well and one specific thing you would do differently at each stage.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I covered all five earlier stages, not just the carrying-out day."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Each note is a specific detail from what actually happened, not a general 'it was fine.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I identified at least one thing I would genuinely do differently next time."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Using the weakest criterion from your day-five check and the specific notes you just wrote about each stage, decide on one real next step you will actually take, such as fixing the part of your contribution that fell short, extending it further, or starting a new contribution that uses something you learned this week, and describe exactly what that step involves and roughly when you will do it.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "State your one next step and explain how it connects to something specific your check or your stage-by-stage notes revealed."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Describe roughly when and how you will take this next step."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look back over the whole six-day project one more time.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what you learned about your own planning or follow-through from doing this whole project, separate from how the contribution itself turned out."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's next step is vague, such as 'do better next time,' or disconnected from their actual check results, reteach by pointing back to the specific weakest criterion from the previous lesson and asking what one concrete action would move just that criterion up, turning that answer directly into the next step.",
+  "extension": "Have the learner write a one-paragraph plan for how they would teach the same choose-plan-check-reflect process to someone else taking on a household contribution for the first time.",
+  "scoringRef": "scoring/swk-rfl-g4-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

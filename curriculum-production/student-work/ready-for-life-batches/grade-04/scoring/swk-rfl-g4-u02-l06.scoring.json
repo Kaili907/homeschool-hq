@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l06",
+  "lessonId": "ma-g4-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "System specificity and real trial",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The category or storage spot named is vague ('all my clothes,' 'somewhere better'), or the system was not actually tried on real items."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific category and a specific real spot are named with a real reason, and the system is tried on at least three real items."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the trial notes specific, concrete detail about what happened with each of the three items."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing and revising the problem",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The stated problem is vague ('it didn't work') or is not clearly based on what happened during the trial."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific, real problem from the trial is identified and tied to a specific revision that would fix it."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner reasons about whether the revised system would hold up under a harder condition, such as more items."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The problem identified in the independent task is something that actually happened during the trial, not a hypothetical concern.",
+      "The revised system in the reflection directly addresses the specific problem named, not a general 'I'll try harder' fix."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

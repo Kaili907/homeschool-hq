@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u02-l05",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry Care",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: folding, hanging, and matching"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 2: Clothing and Laundry Care"
+  ],
+  "objective": "Learners take a full load of clean, dry laundry, decide item by item whether it should be folded or hung based on its fabric and garment type, match any paired items, put everything into its real storage spot, and explain why two similar-looking items received different treatment.",
+  "scenario": "A full load of clean, dry laundry from your household is ready to be put away. You decide item by item whether each piece should be folded or hung, match any pairs, and put everything in its real storage spot, while a trusted adult spot-checks a few finished items with you afterward.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "If put-away requires a step stool or reaching a high closet rod, an adult in the household should handle the reaching or supervise directly rather than let the learner climb to reach it.",
+    "Handle hangers carefully, keeping the hook end pointed away from the face and eyes while hanging items.",
+    "If an item's storage spot is unclear or shared with someone else's belongings, check with a trusted adult before deciding where it goes."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a full load of laundry or the actual storage space is not available, the learner instead sorts a small set of picture cards or a written list of garment types (t-shirt, dress shirt, towel, pair of socks) into fold-or-hang decisions, matches any listed pairs, and writes where each item's real storage spot would be, checked by a trusted adult in their household."
+  },
+  "materials": [
+    "a full load of clean, dry laundry",
+    "hangers",
+    "the household's real storage spaces (drawers, closet, shelves)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before folding or hanging anything, sort the clean load into two piles: items that get folded and items that get hung.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one item you are unsure about and explain what is making the fold-or-hang decision hard for that specific piece."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Fold each item in the fold pile using a consistent method for its type, hang each item in the hang pile, and match any paired items like socks before putting anything away.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I folded every item in the fold pile using one consistent method per item type."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I hung every item in the hang pile so it would not slip off or stretch out of shape."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I matched every pair, like socks, before putting them away, with no unmatched singles left out unless truly missing a pair."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Put every folded and hung item into its real storage spot, then compare two items you treated differently to explain your fold-versus-hang reasoning.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name two items from today's load that are similar in size or fabric weight but that you treated differently, one folded and one hung."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Explain the specific reason those two similar items got different treatment: what about each one's fabric, shape, or garment type made folding right for one and hanging right for the other?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back to the grade-3 five-minute tidy routine, where putting items away just meant finding any open spot.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one way today's task is more specific than 'put items back where they belong' from the five-minute tidy: what extra decision did folding, hanging, and matching add that a quick tidy skips?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner folds and hangs items inconsistently, for example folding one shirt in thirds and another in half or hanging some pants and folding others with no clear reason, reteach with three matched pairs of the same garment type set side by side, model one fold or hang method fully, then have the learner repeat that exact method on the matching item before moving to a new type.",
+  "extension": "Have the learner build a short written fold-or-hang rule of thumb covering at least four garment types, then test the rule against one new item type not covered in today's load to see whether the rule still holds up.",
+  "scoringRef": "scoring/swk-rfl-g4-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

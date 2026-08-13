@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u04-l06",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals, Rest, and Fueling Meals",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: asking a trusted adult for help"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 4: Body Signals, Rest, and Fueling Meals"
+  ],
+  "objective": "Learners identify one recent moment when they noticed a body signal (hunger, thirst, stress, or tiredness) but didn't ask a trusted adult for help clearly, write a vague version and a specific two-part version (signal plus need) of what they could have said, and predict how each version would likely be received.",
+  "scenario": "Sometimes a learner notices hunger, thirst, stress, or being overly tired but doesn't say anything to a trusted adult, or asks in a way that's hard to act on, like saying they don't feel good. This lesson has the learner think back to one real moment like that, then practice building a specific request they could use next time.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think back over the last week to one specific moment when you noticed a body signal (hunger, thirst, stress, or tiredness) but didn't ask a trusted adult for help with it, or asked in a way that was hard to understand.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe that moment: what signal did you notice, and what happened instead of asking clearly?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For that same moment, write two versions of what you could have said: a vague version, like saying you don't feel good, and a specific version that names both the signal and what you need, like naming that your stomach feels empty and asking for something to eat soon.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My vague version is realistic, close to something I might actually say without thinking."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My specific version names the actual signal I noticed."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My specific version names one clear thing I need, not just a description of the problem."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare your vague version and your specific version side by side and think through how a trusted adult would likely respond to each one if you actually said them out loud.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Predict how a trusted adult would probably respond to your vague version, and then to your specific version. What's different about the two predicted responses?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one reason the specific version is easier for another person to act on quickly."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about a moment that might come up again this week.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the specific two-part request (signal plus need) you plan to actually use next time you notice hunger, thirst, stress, or tiredness, and explain why you chose that wording."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's 'specific' version still stays vague, like just saying they need help with no named signal or need, reteach with a two-blank sentence frame ('I'm noticing ___, and I need ___') and have the learner fill in the blanks for three different practice signals before returning to their own moment.",
+  "extension": "Have the learner practice saying their specific two-part request out loud to a trusted adult in a calm moment, not during an actual signal, and write down what the adult said back.",
+  "scoringRef": "scoring/swk-rfl-g4-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

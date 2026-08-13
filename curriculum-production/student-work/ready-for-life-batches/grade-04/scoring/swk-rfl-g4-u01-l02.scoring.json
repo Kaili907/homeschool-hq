@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l02",
+  "lessonId": "ma-g4-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Planning specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Task list is vague, or the order was decided during the reset rather than beforehand."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Three or four specific tasks are listed and ordered in writing before the timer starts."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner gives a reason for the chosen order before starting."
+          }
+        ]
+      },
+      {
+        "dimension": "Self-evaluation of the plan",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No comparison is made between the planned order and how the reset actually went."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner accurately reports whether the plan fit in ten minutes and names which task ran long if it didn't."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains a specific change they would make to improve the plan next time."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The chosen room is real and needed a reset before the lesson started.",
+      "The order in the guided task was written down before the timer started, not reconstructed afterward."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

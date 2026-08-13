@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u03-l04",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: steps that require an adult"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+  ],
+  "objective": "Learners look at the real, full list of steps for one simple food their household actually plans to make, sort every step into 'I can do it alone,' 'I can do it right next to an adult,' or 'only the adult does this,' and explain the specific hazard behind each adult-only step before a trusted adult confirms or corrects each call.",
+  "scenario": "A trusted adult picks one simple, real food or drink the household is actually planning to make, such as scrambled eggs, grilled cheese, or a smoothie, and writes out every step from start to finish. Before any step is done, the learner sorts each one and explains their reasoning, and the adult checks the sort against what really happens in the kitchen.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult reviews the full step list with the learner before any step is prepared and personally performs or directly supervises every step involving heat, a stove or oven, a sharp blade, or a small appliance.",
+    "The learner never turns on a stove, oven, or appliance, and never handles a sharp blade, even to test their sort; sorting a step correctly is what earns credit, not performing it.",
+    "If the household's real recipe includes a step the learner is unsure about, the correct move is to mark it 'ask the adult' rather than guess, and asking counts as a correct response."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real recipe or kitchen access is available, the learner instead reads a printed or written step list for a common simple food, such as instructions for making toast with jam or a basic fruit salad, sorts each step into the same three categories, and writes the specific hazard reasoning for every adult-only step without needing an actual kitchen or ingredients."
+  },
+  "materials": [
+    "a real, simple recipe or food-prep plan the household is actually using",
+    "paper or a notes app to write the sorted list",
+    "a trusted adult",
+    "the actual kitchen where the food will be made"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting anything, read through the whole step list with your adult once, start to finish.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one step in the list that you are already sure you can do completely by yourself."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Go through the step list one step at a time with your adult and sort each one into 'alone,' 'next to an adult,' or 'adult only,' saying your reason out loud before writing it down.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I gave every single step in the list one of the three sorting labels."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For every 'adult only' step, I named the specific hazard: heat, a sharp blade, an appliance, or a cleaning chemical."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult confirmed or corrected each of my sorting decisions before we moved to the next step."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "After your adult confirms the full sort, write a short plan for how the two of you will actually divide the work: which steps you will do, which you will do next to your adult, and which your adult will do alone while you watch or wait.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your division-of-labor plan step by step, naming who does each step and why, based on the hazard reasoning from your sort."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one 'next to an adult' step you are looking forward to being ready to do completely alone someday, and what would need to change for that to happen."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back to a specific time when a kitchen step was done without this kind of sorting first.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe a specific time you remember an adult-only kitchen step being done, and explain what could have gone wrong if a kid had tried that step without an adult."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts a step as 'alone' or 'next to an adult' based on how fun or easy it looks rather than the actual hazard present, reteach with a hazard-only drill: cover the step descriptions and show just four hazard words (heat, blade, appliance, chemical) one at a time, having the learner name a real kitchen action that matches each word before returning to sorting the full step list.",
+  "extension": "Have the learner sort the steps for a second, different real food or drink the household plans to make later in the week, then compare in writing which of the two tasks had more adult-only steps and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

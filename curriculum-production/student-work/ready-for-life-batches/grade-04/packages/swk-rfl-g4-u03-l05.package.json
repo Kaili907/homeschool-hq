@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u03-l05",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: a simple no-heat preparation"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+  ],
+  "objective": "Learners assemble one simple, no-heat, no-knife food item, such as a yogurt-and-fruit bowl, a wrap made from an already-cooked filling, or a sandwich built from pre-sliced ingredients, using only ready-to-eat ingredients, while applying the handwashing, surface-cleaning, and cross-contamination practices from earlier in this unit under a trusted adult's supervision.",
+  "scenario": "A trusted adult and the learner choose one real, simple no-heat food to make together, gathering only ingredients that are already washed, cooked, or pre-sliced so no stove, oven, or knife is needed. The learner washes hands, cleans the workspace, and assembles the item start to finish while the adult supervises and checks the result.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult stays in the kitchen for the entire preparation and confirms every ingredient is already washed, cooked, or pre-sliced before the learner touches it.",
+    "No stove, oven, small appliance, or sharp-bladed knife is used at any point; if a step would normally need one of these, an adult has already completed it ahead of time.",
+    "Any ingredient that has been sitting out, such as dairy or a cooked item left unrefrigerated for more than two hours, is checked with the adult before use rather than assumed safe."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no safe kitchen access or pre-prepared ingredients are available, the learner instead plans the same no-heat food item in writing, listing every ingredient, the order of assembly, and one handwashing or surface-cleaning step at each stage, then explains how they would check that each ingredient was ready to eat before using it."
+  },
+  "materials": [
+    "ready-to-eat ingredients that need no cutting or cooking, such as bread, pre-sliced cheese or deli item, yogurt, granola, or washed berries or grapes",
+    "a clean plate or bowl",
+    "a spoon or butter knife for spreading",
+    "soap and water for handwashing",
+    "a clean cloth for the workspace"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before touching any ingredient, wash your hands and clean your workspace.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "checklist-item",
+          "text": "I washed my hands with soap for a full 20 seconds before touching any ingredient."
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "checklist-item",
+          "text": "I wiped down the plate, bowl, or counter space I will use before starting."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult supervising, gather your ready-to-eat ingredients, check each one for freshness with your adult, and lay them out in the order you will use them.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked with my adult that every ingredient was already washed, cooked, or pre-sliced and safe to use."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I laid out my ingredients in the order I planned to use them before starting to assemble."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Assemble your food item yourself, step by step, keeping ready-to-eat ingredients away from any surface or utensil that touched raw or unwashed food earlier in the day, then show your adult the finished result.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Describe the order you assembled your item in, and name one moment where you made sure a surface or utensil was clean before it touched your ready-to-eat ingredients."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Looking back at your assembly, did you keep every ready-to-eat ingredient away from anything that had touched raw or unwashed food?",
+          "choices": [
+            "Yes, everything stayed separated and clean",
+            "Mostly, but one thing could have been cleaner",
+            "No, I noticed a mix-up after the fact"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare making this item carefully to how food might get made without thinking about safety.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific food-safety step you did during this preparation that someone rushing without thinking might skip, and what could go wrong if they skipped it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner assembles ingredients in a random order and sets ready-to-eat items on a surface that was not confirmed clean first, reteach by having the learner point to and name out loud each surface and utensil they are about to use before touching it, checking each one against the adult's confirmation, then restart the assembly slowly one ingredient at a time.",
+  "extension": "Have the learner plan and assemble a second no-heat food item that uses at least one ingredient not used the first time, then write a short comparison of which of the two items required more careful handling to avoid cross-contamination and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

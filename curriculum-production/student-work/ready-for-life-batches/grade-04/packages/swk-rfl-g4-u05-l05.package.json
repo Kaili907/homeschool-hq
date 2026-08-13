@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u05-l05",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Planning, Belongings, and Communication",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: asking for help early"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 5: Planning, Belongings, and Communication"
+  ],
+  "objective": "Learners identify one real problem or stuck point they are currently facing in a task, chore, or plan, tell a trusted adult about it proactively while it is still small, and record what happened when they asked early instead of waiting, producing a written account an adult confirms actually occurred.",
+  "scenario": "The learner has something real going on right now that is not going smoothly, such as a task they cannot finish, a plan that is falling apart, or a mistake they are worried about. Instead of waiting to be asked or letting the problem grow, the learner brings it to a trusted adult while there is still time to fix it easily.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The problem the learner brings forward should be a real, current, task-related stuck point, not a made-up example.",
+    "'Early' means telling the adult while the problem is still small and there is still time to act, not waiting until it can no longer be fixed easily.",
+    "The adult confirms that the learner actually approached them, rather than the adult noticing the problem first or asking about it unprompted."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner cannot identify a real in-progress problem to raise, they instead describe, in specific detail, a real past situation where they waited too long to ask for help, explain exactly what they would say if they caught that same kind of problem early next time, and get a trusted adult to review and discuss that plan with them."
+  },
+  "materials": [
+    "paper or a notes app to record the problem and the conversation",
+    "a trusted adult available to talk with"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before talking to an adult, think honestly about what is currently not going well.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe the real problem or stuck point you are facing right now, and how long you have already been dealing with it on your own."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Go to a trusted adult and tell them about the problem in your own words, while it is still small enough to fix easily.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I brought up the problem myself, before the adult asked or noticed on their own."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I described the specific problem clearly, not just that something was 'wrong.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I asked for or accepted the adult's suggestion instead of only reporting the problem and walking away."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "After talking with the adult, compare how much effort it would take to fix the problem now, right after asking early, against how much effort it likely would have taken if you had waited until it got worse.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What did the adult suggest, and how much effort or time will it take to fix the problem now?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "If you had waited another day or two before saying anything, how much bigger or harder to fix do you think the problem would have gotten? Be specific."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what made it hard or easy to bring the problem up.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what almost stopped you from asking for help, and what you will tell yourself next time a problem starts to feel too small or too embarrassing to mention."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner reports a problem only after an adult already noticed it, or describes it so vaguely that no real fix is possible, reteach with a specific noticing drill: have the learner name one current small snag out loud within the next hour, using a fixed sentence starter ('I'm stuck on ___ because ___'), with the adult confirming the learner initiated the conversation unprompted.",
+  "extension": "Have the learner keep a short log for the rest of the week of every time they notice a small problem starting, marking whether they spoke up early or waited, and compare at the end of the week how the early ones turned out versus the ones they sat on.",
+  "scoringRef": "scoring/swk-rfl-g4-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

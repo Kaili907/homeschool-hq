@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l03",
+  "lessonId": "ma-g4-ready-for-life-u04-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Schedule ownership",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Chosen check-in times are copied from an example or are not clearly tied to the learner's real daily routine."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three check-in times are specific and tied to the learner's own real schedule."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner's evaluation of whether the schedule worked references real events from their day, not a guess."
+          }
+        ]
+      },
+      {
+        "dimension": "Self-evaluation of the plan",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The evaluation of whether the schedule caught real thirst signals is missing or vague."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner accurately judges whether their chosen times caught real thirst signals and names any point their schedule missed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains a specific, workable change to improve tomorrow's schedule."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The three check-in times are spread across the day rather than clustered together.",
+      "No entry frames water intake in terms of a target amount or a restriction."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

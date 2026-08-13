@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u06-l05",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: checking the result"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+  ],
+  "objective": "Learners check their completed contribution against the criteria they set when choosing it on day one, rating each criterion as met, partly met, or missed with specific observed evidence, and a guardian confirms the check.",
+  "scenario": "Using the criteria you set when choosing your contribution and the finished result from carrying it out, you and a trusted adult in your household now check whether your contribution is actually working in real household use, whether that means a chart is being followed, a space is staying organized, a taught skill is being used, or a new checklist system is holding up.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "If checking your result means re-doing or re-testing any step that used a tool, appliance, or cleaning product, ask your adult before repeating it rather than assuming it is fine.",
+    "Only check shared spaces or routines you already have permission to be in on your own.",
+    "If your check turns up something that needs fixing with a tool or product you are not sure about, ask your adult rather than fixing it yourself."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the contribution cannot yet be observed in real daily use, for example not enough time has passed since the carry-out day, the learner instead predicts, for each original criterion, how they expect the contribution to hold up over the next few days based on what they saw right after finishing it, and reviews that prediction with a trusted adult who observed the original work, earning full credit for the same evaluative reasoning."
+  },
+  "materials": [
+    "the criteria recorded on day one and the plan from the earlier lessons",
+    "the completed contribution from the previous lesson",
+    "a trusted adult who can confirm the check"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking, reread the criteria you set on day one and the plan you followed on the carry-out day.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List the criteria you originally set for this contribution, in your own words."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, observe your contribution in actual use, checking whether the chart is being followed, the space is staying organized, the taught skill is being used, or whatever your specific contribution was meant to do, and note what you both see.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked my contribution against every criterion I originally set, not just the easiest one."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I looked for real evidence of how it is working, not just how it looked right when I finished it."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult observed the same result and confirmed what I noted."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each of your original criteria, decide whether your contribution met it, partly met it, or missed it, and back up each rating with one specific piece of evidence you or your adult actually observed rather than a guess about how it is probably going.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Rate your contribution against each criterion (met, partly met, missed) and give the specific observed evidence for each rating."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Which criterion was hardest to judge fairly, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Step back from the specific ratings.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain whether your contribution turned out the way you expected when you chose it on day one, and what that tells you about how you pick projects."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner rates every criterion 'met' without citing specific evidence, reteach by picking one criterion together, asking the adult what they actually observed in the last day, and having the learner rewrite that one rating using only observed evidence before redoing the rest.",
+  "extension": "Have the learner ask a second household member, someone other than the supervising adult, for their independent view on whether the contribution is working, and compare that view to the learner's own ratings.",
+  "scoringRef": "scoring/swk-rfl-g4-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

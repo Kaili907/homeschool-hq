@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u01-l05",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Home Care Routines That Last",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: matching task size to time"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+  ],
+  "objective": "Learners choose two real household tasks of noticeably different sizes, estimate how long each will take before starting, complete both tasks with a trusted adult's permission, and compare their time estimates to the actual time each task took to test how accurately they can match task size to time.",
+  "scenario": "With a trusted adult's permission, the learner selects two real tasks around the household that differ noticeably in size, such as wiping down one counter versus sorting a full shelf of items. Before starting either task, the learner predicts how long each will take, then times both tasks and checks their predictions against reality.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult approves both chosen tasks in advance and confirms neither one involves anything sharp, hot, high up, or otherwise unsafe for the learner to do alone.",
+    "If either task turns out to involve something unexpected and unsafe once started, the learner stops and checks with the adult before continuing.",
+    "The learner uses only a timer or clock during this task and only cleaning materials the adult has already approved for the learner's independent use."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If two real tasks of different sizes aren't available right now, the learner instead reads two written task descriptions of different sizes, one small and one larger, writes a time estimate for each based on what the description involves, and explains what specific details in each description led to a shorter or longer estimate."
+  },
+  "materials": [
+    "a timer or clock",
+    "two real household tasks of noticeably different sizes, approved by a trusted adult",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "With your adult, pick two real tasks that are clearly different sizes.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name your two tasks and explain what makes one clearly smaller or bigger than the other."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Before starting either task, write down how many minutes you think each one will take and why.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote a specific time estimate in minutes for each task before starting either one."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I gave a reason for each estimate based on the size or steps of the task, not a guess."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult reviewed and approved both tasks before I started the timer."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Time yourself completing each task from start to finish, recording the actual minutes each one took.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Record the actual time each task took and the difference between your estimate and the actual time for each one."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "For the task where your estimate was furthest off, explain the specific reason your estimate was too short or too long."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare how close your two estimates were to what actually happened.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what you will do differently next time you estimate how long a task will take, based on which of your two estimates today was more accurate and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's time estimates are copied from each other or given without reasoning, such as both guessed as '10 minutes,' reteach by having them break just one task into its individual physical steps, estimate seconds or minutes for each step separately, and add those up into a total estimate before trying the same approach on the second task.",
+  "extension": "Have the learner estimate and time a third real task of a size between the first two and check whether their estimating accuracy improved compared to the first two tasks.",
+  "scoringRef": "scoring/swk-rfl-g4-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

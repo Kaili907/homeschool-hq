@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l01",
+  "lessonId": "ma-g4-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Shared-space reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Explanation focuses only on how the space looks, such as messy or clean, without naming who is affected."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Explanation names at least one specific person besides the learner and how the space's condition affects that person."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner draws a clear contrast between a personal space and a shared space to explain why the care standard differs."
+          }
+        ]
+      },
+      {
+        "dimension": "Observation specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The recent moment described is vague, such as 'it was messy,' with no specific detail."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific recent moment is described with a concrete detail about what was cluttered, blocked, or missing."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the moment is directly connected to the action named in the reflection."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The shared space named is real and currently exists in the learner's household, not invented.",
+      "The person named as affected is specific, such as a named household member or role, not a vague 'someone.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}
