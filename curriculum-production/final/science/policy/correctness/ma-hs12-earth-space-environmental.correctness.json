@@ -1,0 +1,1035 @@
+{
+  "course_id": "ma-hs12-earth-space-environmental",
+  "source_commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+  "repinned_from": "e7551b959112fcd9e6868d614799028cf22acf5d",
+  "repin_basis": "Repinned from H3 to H4 without re-authoring only after an independent comparison proved that every field these keys are keyed on and authored against - unit_ref, focus, phase, title, essential_question, learning_objectives, success_criteria - is byte-identical across all 108 lessons of this course between e7551b9 and a86780a. Across all four High School courses H4 changed only materials, lesson_flow, safety_privacy, and extensions. The check 'correctness-keys-repinned-on-identical-topic-basis' re-derives the comparison from both pinned commits and fails if it ever stops holding.",
+  "authored_against": "High School Earth, Space, and Environmental Science, Grade 12. Keys state established science at this course level; they are not extracted from the source, which states a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "systems and system models",
+      "fixed_facts": [],
+      "relationships": [
+        "A system is defined by its boundary, its components, and the flows of matter and energy across that boundary.",
+        "System behaviour arises from the interactions between components, so it cannot be predicted from any component alone.",
+        "Where the boundary is drawn determines what counts as internal behaviour and what counts as an input or output."
+      ],
+      "accepted_alternative_framings": [
+        "Box-and-arrow diagrams, stock-and-flow diagrams, and written system descriptions are all acceptable model forms."
+      ],
+      "disqualifying_errors": [
+        "Describing a system with no boundary stated.",
+        "Explaining a whole-system behaviour from one component in isolation.",
+        "Claiming a system model captures the real system completely."
+      ],
+      "out_of_scope": "Formal systems dynamics mathematics is beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "spatial and temporal scale",
+      "fixed_facts": [
+        "Earth and space processes span timescales from seconds to billions of years and spatial scales from grains to galaxies."
+      ],
+      "relationships": [
+        "A process observable at one scale may be invisible at another, so the scale of observation determines what can be concluded.",
+        "Slow processes accumulate large effects over long times, which is why geologic change is substantial despite being imperceptible year to year.",
+        "Extrapolating a rate measured over a short interval to a much longer one requires evidence that the rate is constant."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Extrapolating a short-term rate across geologic time with no evidence that the rate is constant.",
+        "Concluding a process does not occur because it is not observable within a human lifetime.",
+        "Comparing measurements made at different spatial scales as though they were equivalent."
+      ],
+      "out_of_scope": "Formal scaling theory and fractal analysis are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "proxy data and indirect evidence",
+      "fixed_facts": [
+        "A proxy is a measurable quantity that stands in for a quantity that cannot be measured directly, and it requires a calibrated relationship between the two."
+      ],
+      "relationships": [
+        "Ice cores, tree rings, sediment layers, corals, and isotope ratios are proxies for past conditions.",
+        "A proxy carries the uncertainty of the calibration as well as of the measurement itself.",
+        "Independent proxies agreeing is what makes a reconstruction robust; a single proxy carries much weaker support."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating a proxy measurement as a direct measurement of the quantity it stands for.",
+        "Reporting a proxy reconstruction with no reference to its calibration or uncertainty.",
+        "Basing a reconstruction on one proxy and presenting it as settled."
+      ],
+      "out_of_scope": "Specific proxy calibration methodology and age-model construction are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "uncertainty in geoscience data",
+      "fixed_facts": [],
+      "relationships": [
+        "Geoscience data carries uncertainty from measurement, from sampling in space and time, and from the models used to interpret it.",
+        "Uncertainty is a quantified statement about how well something is known; it is not an admission that nothing is known.",
+        "A conclusion is stated with the uncertainty attached, so that a reader can judge what it supports."
+      ],
+      "accepted_alternative_framings": [
+        "Ranges, error bars, and stated confidence language are all acceptable ways to express uncertainty at this level."
+      ],
+      "disqualifying_errors": [
+        "Treating a stated uncertainty as grounds for dismissing a well-supported conclusion.",
+        "Reporting a geoscience result with no indication of uncertainty or sampling limits.",
+        "Claiming two values differ when the difference is within the stated uncertainty."
+      ],
+      "out_of_scope": "Formal statistical inference and Bayesian methods are beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "reading and building graphs honestly",
+      "fixed_facts": [],
+      "relationships": [
+        "Axis range, scale type, and baseline choice change how a graph reads without changing the underlying data.",
+        "A graph states its data source, its date, and its units, or the reader cannot check it.",
+        "Extrapolation beyond the data is labelled as such, because the data does not support it."
+      ],
+      "accepted_alternative_framings": [
+        "Linear and logarithmic scales are both legitimate; the choice is disclosed and justified by what needs to be shown."
+      ],
+      "disqualifying_errors": [
+        "Presenting an extrapolation as though it were measured data.",
+        "Choosing an axis range or baseline that conceals or exaggerates the effect being discussed, without disclosure.",
+        "Drawing a conclusion from a graph with no source, units, or date given."
+      ],
+      "out_of_scope": "Formal data visualisation theory is beyond this course."
+    },
+    {
+      "unit": 1,
+      "focus": "distinguishing correlation and causation",
+      "fixed_facts": [
+        "Correlation between two variables does not establish that one causes the other."
+      ],
+      "relationships": [
+        "Two variables can correlate because one causes the other, because a third factor drives both, or by coincidence in a limited sample.",
+        "Establishing causation requires a mechanism, evidence that cause precedes effect, and where possible a controlled comparison.",
+        "In Earth science, controlled experiments are often impossible, so causal claims rest on mechanism plus multiple independent lines of evidence."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Inferring causation from correlation alone.",
+        "Rejecting a well-supported causal claim on the grounds that the evidence is correlational, when mechanism and multiple lines of evidence are present.",
+        "Asserting a mechanism with no evidence and treating that as having established causation."
+      ],
+      "out_of_scope": "Formal causal inference frameworks are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "nuclear fusion in stellar cores",
+      "fixed_facts": [
+        "Stars release energy by fusing lighter nuclei into heavier ones, principally hydrogen into helium during the main sequence."
+      ],
+      "relationships": [
+        "Fusion requires the extreme temperature and pressure found in stellar cores, because positively charged nuclei repel one another.",
+        "The energy released corresponds to the small mass difference between the reactants and the products.",
+        "The outward pressure from fusion balances the inward pull of gravity, which is what keeps a main-sequence star stable."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the proton-proton chain or the CNO cycle is correct but not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming stars are powered by chemical combustion.",
+        "Claiming stellar energy comes from fission of heavy nuclei.",
+        "Claiming fusion occurs throughout a star rather than in its core region."
+      ],
+      "out_of_scope": "Reaction rate calculations and stellar structure equations are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "the sun's energy budget and lifespan",
+      "fixed_facts": [
+        "The Sun is roughly 4.6 billion years old and is about halfway through its main-sequence lifetime.",
+        "The Sun will end as a white dwarf, not as a supernova."
+      ],
+      "relationships": [
+        "The Sun's energy output is set by the rate of fusion in its core, which is regulated by the balance between gravity and pressure.",
+        "Essentially all the energy driving Earth's surface processes, weather, and life originates from the Sun, with geothermal and tidal energy as small additional contributions.",
+        "A star's lifetime depends on its mass: more massive stars burn far more quickly and live far shorter lives."
+      ],
+      "accepted_alternative_framings": [
+        "Approximate ages and lifetimes such as 'about four and a half billion years' are correct; exact figures are not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming the Sun will explode as a supernova.",
+        "Claiming more massive stars live longer because they have more fuel.",
+        "Claiming the Sun's energy comes from a source other than nuclear fusion."
+      ],
+      "out_of_scope": "Solar interior modelling and helioseismology are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "stellar life cycles",
+      "fixed_facts": [
+        "A star's mass determines its life cycle and its end state: white dwarf for low and intermediate masses, neutron star or black hole for high masses."
+      ],
+      "relationships": [
+        "Stars form from collapsing clouds of gas and dust, spend most of their lives fusing hydrogen on the main sequence, and then evolve as their core fuel is exhausted.",
+        "Low and intermediate mass stars expand to red giants, shed their outer layers, and leave a white dwarf.",
+        "High-mass stars end in supernova explosions, leaving a neutron star or a black hole."
+      ],
+      "accepted_alternative_framings": [
+        "Hertzsprung-Russell diagram reasoning is correct but not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming all stars end their lives as supernovae.",
+        "Claiming a star's life cycle depends principally on its brightness rather than on its mass.",
+        "Claiming stars burn fuel chemically."
+      ],
+      "out_of_scope": "Detailed stellar evolution tracks and mass-loss modelling are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "nucleosynthesis and element formation",
+      "fixed_facts": [
+        "Hydrogen and helium formed in the early universe; elements up to iron are produced by fusion in stars; most elements heavier than iron are produced by neutron capture in evolved stars and in explosive events."
+      ],
+      "relationships": [
+        "Fusion releases energy up to iron, and beyond iron fusion consumes rather than releases energy, which is why stellar fusion does not build the heaviest elements.",
+        "Heavier elements are dispersed into space by stellar winds and supernovae, enriching the material from which later stars and planets form.",
+        "The atoms in Earth and in living things were produced in earlier generations of stars."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the s-process and r-process, or describing neutron capture in general terms, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming all elements were produced in the Big Bang.",
+        "Claiming stellar core fusion produces elements heavier than iron by releasing energy.",
+        "Claiming heavy elements formed on Earth rather than being inherited from earlier stars."
+      ],
+      "out_of_scope": "Nuclear reaction network modelling and isotopic yield calculations are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "spectra as compositional evidence",
+      "fixed_facts": [
+        "Each element produces a characteristic pattern of spectral lines, which is how the composition of distant objects is determined."
+      ],
+      "relationships": [
+        "Emission lines appear where atoms release specific energies; absorption lines appear where atoms remove those same energies from light passing through.",
+        "Because the line pattern is characteristic of the element, a spectrum identifies which elements are present without any sample being collected.",
+        "Line positions also carry information about motion, through Doppler shift, and about conditions such as temperature and pressure."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming spectral line patterns are the same for different elements.",
+        "Claiming composition of distant stars is determined by collecting material from them.",
+        "Confusing an absorption spectrum with an emission spectrum in interpreting which material lies where."
+      ],
+      "out_of_scope": "Quantitative abundance determination and line-profile analysis are beyond this course."
+    },
+    {
+      "unit": 2,
+      "focus": "communicating stellar science",
+      "fixed_facts": [],
+      "relationships": [
+        "Communicating astronomical results means distinguishing what was measured, what was inferred from a model, and how confident the conclusion is.",
+        "Astronomical images are frequently processed and colour-mapped, and a communication says so rather than presenting them as direct views.",
+        "Scale statements need explicit units and comparisons, because astronomical magnitudes are outside everyday experience."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a false-colour or composite astronomical image as a direct visual observation.",
+        "Reporting an inferred property, such as a star's mass, as though it had been measured directly.",
+        "Stating an astronomical distance or age with no units or uncertainty."
+      ],
+      "out_of_scope": "Science communication theory and image processing methods are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "light spectra and redshift",
+      "fixed_facts": [
+        "Redshift is a shift of spectral lines toward longer wavelengths; blueshift is a shift toward shorter wavelengths."
+      ],
+      "relationships": [
+        "Redshift is identified by the whole characteristic line pattern of an element being displaced, which is what distinguishes it from an object simply being red.",
+        "Cosmological redshift arises because space itself has expanded while the light was in transit, stretching its wavelength.",
+        "Measuring the shift of known line patterns is how the recession of distant galaxies is determined."
+      ],
+      "accepted_alternative_framings": [
+        "Describing cosmological redshift as expansion of space, and the Doppler analogy as an approximation for nearby objects, are both acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming a red-looking star is redshifted for that reason.",
+        "Claiming cosmological redshift means galaxies are moving through space away from a central point.",
+        "Claiming redshift shortens wavelengths."
+      ],
+      "out_of_scope": "Relativistic Doppler formulas and scale-factor cosmology are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "motion of distant galaxies",
+      "fixed_facts": [
+        "Almost all distant galaxies show redshift, indicating that the universe is expanding."
+      ],
+      "relationships": [
+        "Observers in any galaxy would see the same pattern of recession, because the expansion has no centre within the universe.",
+        "Nearby galaxies can show blueshift, because local gravitational motion can exceed the expansion at short distances.",
+        "The expansion carries galaxies apart; galaxies are not flying outward through pre-existing space from an explosion site."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the universe has a centre from which galaxies are receding.",
+        "Claiming the Big Bang was an explosion at a point in existing space.",
+        "Claiming every galaxy without exception shows redshift."
+      ],
+      "out_of_scope": "Peculiar velocity corrections and large-scale structure dynamics are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "Hubble's relationship",
+      "fixed_facts": [
+        "More distant galaxies recede faster, with recession speed approximately proportional to distance."
+      ],
+      "relationships": [
+        "The proportionality between recession speed and distance is what is expected if space is expanding uniformly.",
+        "The relationship allows distance to be estimated from redshift, once the constant of proportionality is calibrated.",
+        "Extrapolating the expansion backward gives an estimate of the time since the expansion began."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the constant of proportionality the Hubble constant, or describing the relationship without the name, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming all galaxies recede at the same speed regardless of distance.",
+        "Claiming the relationship shows the Milky Way is at the centre of the expansion.",
+        "Treating the calibration constant as exactly known when its measured value carries real uncertainty."
+      ],
+      "out_of_scope": "Distance ladder methodology and tension between measured values of the constant are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "cosmic microwave background",
+      "fixed_facts": [
+        "The cosmic microwave background is faint radiation reaching Earth from every direction, with a spectrum matching a body at about 2.7 kelvin."
+      ],
+      "relationships": [
+        "The background radiation is light released when the early universe first became transparent, stretched to microwave wavelengths by the expansion since.",
+        "Its near-uniformity across the sky, with small measured variations, is a strong constraint on models of the early universe.",
+        "It was predicted before it was detected, which is why its discovery was decisive evidence."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the background radiation comes from a particular direction or source in the sky.",
+        "Claiming the background is perfectly uniform with no variations; the small variations are themselves key evidence.",
+        "Claiming the background is light currently emitted by distant galaxies."
+      ],
+      "out_of_scope": "Power spectrum analysis and cosmological parameter fitting are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "composition of matter in the universe",
+      "fixed_facts": [
+        "Ordinary matter in the universe is overwhelmingly hydrogen and helium, in a ratio close to three to one by mass."
+      ],
+      "relationships": [
+        "The observed hydrogen and helium proportions match what a hot early universe predicts, which is an independent line of evidence for the model.",
+        "All elements heavier than helium together make up only a small fraction of ordinary matter.",
+        "Ordinary matter itself accounts for a minority of the universe's total mass and energy content, with dark matter and dark energy making up the rest."
+      ],
+      "accepted_alternative_framings": [
+        "Approximate proportions such as 'about three quarters hydrogen' are correct; exact figures are not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming heavy elements make up a large fraction of the universe's ordinary matter.",
+        "Claiming the elemental proportions were produced entirely in stars.",
+        "Claiming ordinary matter accounts for most of the universe's mass and energy."
+      ],
+      "out_of_scope": "Big Bang nucleosynthesis calculations and dark matter detection methods are beyond this course."
+    },
+    {
+      "unit": 3,
+      "focus": "constructing an explanation from multiple evidence lines",
+      "fixed_facts": [],
+      "relationships": [
+        "The strength of the Big Bang model rests on several independent lines agreeing: galaxy redshifts, the microwave background, and the light-element abundances.",
+        "Independent lines of evidence converging carries far more weight than any single line, because they fail in different ways.",
+        "An explanation states which observations it accounts for and which it does not."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting one line of evidence as establishing the model on its own.",
+        "Omitting an observation the explanation does not account for.",
+        "Treating independent confirmations as though they were repetitions of the same measurement."
+      ],
+      "out_of_scope": "Formal model comparison and likelihood analysis are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "gravitational orbits",
+      "fixed_facts": [
+        "Gravity provides the force that keeps a body in orbit, and an orbiting body is continuously accelerating toward the body it orbits."
+      ],
+      "relationships": [
+        "An orbit is the result of a body's sideways motion combined with continuous gravitational acceleration toward the central body.",
+        "An orbiting object has weight; it appears weightless because it and everything with it are in free fall together.",
+        "The two bodies attract each other equally and both orbit their common centre of mass, which lies inside the more massive body when the mass difference is large."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming there is no gravity where satellites orbit.",
+        "Claiming an outward force balances gravity to hold an object in orbit.",
+        "Claiming an orbiting object is not accelerating because its speed is nearly constant."
+      ],
+      "out_of_scope": "Orbital perturbation theory and n-body dynamics are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "Kepler's relationships",
+      "fixed_facts": [
+        "Planetary orbits are ellipses with the Sun at one focus.",
+        "The square of the orbital period is proportional to the cube of the semi-major axis."
+      ],
+      "relationships": [
+        "A planet moves faster when nearer the Sun and slower when farther away, sweeping equal areas in equal times.",
+        "The period-radius relationship holds for any set of bodies orbiting the same central mass, which is why it applies to moons and satellites too.",
+        "Kepler's relationships describe the motion; Newton's law of gravitation explains why it takes that form."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the laws by number, or describing them, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming the Sun sits at the centre of a planet's elliptical orbit rather than at a focus.",
+        "Claiming orbital period is directly proportional to orbital radius.",
+        "Claiming a planet moves at constant speed throughout an elliptical orbit."
+      ],
+      "out_of_scope": "Derivation of Kepler's laws from Newtonian gravitation is acceptable but not required."
+    },
+    {
+      "unit": 4,
+      "focus": "orbital period and radius",
+      "fixed_facts": [
+        "A body in a larger orbit around the same central mass has a longer period and a lower orbital speed."
+      ],
+      "relationships": [
+        "The period-radius relationship means a satellite raised to a higher orbit takes longer to complete each circuit.",
+        "Orbital speed decreases with increasing orbital radius, even though the total orbital energy increases.",
+        "Because the relationship depends on the central mass, measuring a satellite's period and orbital radius determines that mass."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a satellite in a higher orbit moves faster because it has more energy.",
+        "Claiming orbital period depends on the mass of the orbiting body.",
+        "Claiming period is proportional to radius rather than following the square-cube relationship."
+      ],
+      "out_of_scope": "Orbital transfer manoeuvres and delta-v calculation are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "elliptical orbits and orbital energy",
+      "fixed_facts": [
+        "In an elliptical orbit, kinetic and gravitational potential energy exchange while the total remains constant in the absence of other forces."
+      ],
+      "relationships": [
+        "A body speeds up as it approaches the central body, converting potential energy into kinetic, and slows as it recedes.",
+        "Total orbital energy is conserved for an isolated two-body system, so an orbit does not decay without an external influence such as atmospheric drag.",
+        "Most planetary orbits in the solar system are close to circular; textbook diagrams exaggerate their ellipticity."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming Earth's orbit is strongly elliptical, and using that to explain the seasons.",
+        "Claiming an orbiting body loses energy continuously in the absence of drag or another external force.",
+        "Claiming kinetic energy is greatest at the point farthest from the central body."
+      ],
+      "out_of_scope": "Vis-viva equation and orbital element formalism are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "computational prediction of orbits",
+      "fixed_facts": [],
+      "relationships": [
+        "An orbital simulation advances position and velocity in steps using the gravitational force, and its accuracy depends on the step size and method.",
+        "Simulation output is a prediction conditional on the initial conditions and assumptions supplied, and both are stated.",
+        "A simulation that does not conserve energy over long runs is exhibiting numerical error, not physics."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting simulation output as observational data.",
+        "Attributing a simulated orbit's drift to a physical effect without checking the numerical method.",
+        "Reporting simulation results without stating initial conditions or assumptions."
+      ],
+      "out_of_scope": "Numerical integrator theory and error analysis are beyond this course."
+    },
+    {
+      "unit": 4,
+      "focus": "solar system architecture",
+      "fixed_facts": [
+        "The inner planets are small and rocky; the outer planets are large and gas- or ice-rich, and this pattern reflects conditions in the forming solar nebula."
+      ],
+      "relationships": [
+        "The solar system formed from a rotating disc of gas and dust, which is why the planets orbit in nearly the same plane and direction.",
+        "Temperature in the disc decreased with distance from the young Sun, so volatile materials could condense only in the outer regions.",
+        "Asteroids, comets, and Kuiper belt objects are remnants of that formation process and carry evidence about it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the planets formed independently and were later captured by the Sun.",
+        "Claiming the inner-outer composition difference is a coincidence rather than a consequence of formation conditions.",
+        "Claiming the asteroid belt is the remains of a destroyed planet."
+      ],
+      "out_of_scope": "Planetary migration models and exoplanet system comparison are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "evidence for plate motion",
+      "fixed_facts": [
+        "Plate motion is directly measured today by satellite geodesy, at rates of centimetres per year."
+      ],
+      "relationships": [
+        "Evidence includes matching coastlines and rock sequences across oceans, matching fossil distributions, seafloor age patterns, earthquake and volcano distributions, and direct measurement.",
+        "The distribution of earthquakes and volcanoes in narrow bands marks plate boundaries.",
+        "No single line of evidence established plate tectonics; the convergence of many did."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming continents plough through oceanic crust rather than moving as parts of plates.",
+        "Claiming plate motion is too slow to be measured directly.",
+        "Claiming earthquakes and volcanoes are distributed randomly across Earth's surface."
+      ],
+      "out_of_scope": "Quantitative plate kinematics and GPS processing methods are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "seafloor age and magnetic striping",
+      "fixed_facts": [
+        "Oceanic crust is youngest at mid-ocean ridges and progressively older away from them, symmetrically on both sides.",
+        "The oceanic crust is far younger than the continental crust, because it is continually created and destroyed."
+      ],
+      "relationships": [
+        "New oceanic crust forms at ridges and records the direction of Earth's magnetic field as it cools.",
+        "Because Earth's magnetic field has reversed many times, the seafloor carries symmetric bands of alternating magnetisation on either side of a ridge.",
+        "The symmetry of the pattern is direct evidence of seafloor spreading."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the seafloor is oldest at the ridges.",
+        "Claiming the magnetic stripes record variations in rock type rather than reversals of Earth's field.",
+        "Claiming oceanic and continental crust are of comparable age."
+      ],
+      "out_of_scope": "Magnetostratigraphic dating methodology and geodynamo theory are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "convection in Earth's interior",
+      "fixed_facts": [
+        "Earth's mantle is solid rock that deforms and flows very slowly; it is not a liquid layer."
+      ],
+      "relationships": [
+        "Heat from Earth's interior, from residual formation heat and radioactive decay, drives slow convective flow in the mantle.",
+        "Mantle flow, together with the pull of dense subducting slabs and the push at ridges, drives plate motion.",
+        "The mantle behaves as a solid on short timescales and flows on geological ones, which is why seismic shear waves pass through it."
+      ],
+      "accepted_alternative_framings": [
+        "Attributing plate motion to mantle convection, or to a combination including slab pull and ridge push, are both acceptable at this level."
+      ],
+      "disqualifying_errors": [
+        "Claiming the plates float on a layer of liquid magma.",
+        "Claiming Earth's internal heat comes principally from the Sun.",
+        "Claiming the entire outer core and mantle are molten; only the outer core is liquid."
+      ],
+      "out_of_scope": "Mantle rheology and geodynamic modelling are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "continental and oceanic crust formation",
+      "fixed_facts": [
+        "Oceanic crust is denser and thinner than continental crust, which is why oceanic crust subducts beneath continental crust."
+      ],
+      "relationships": [
+        "Oceanic crust forms at spreading ridges from mantle-derived magma and is returned to the mantle at subduction zones.",
+        "Continental crust is less dense, so it resists subduction and can survive for billions of years.",
+        "Subduction generates magma that rises to build volcanic arcs and adds to continental crust over time."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming continental crust subducts beneath oceanic crust.",
+        "Claiming oceanic and continental crust have the same composition and density.",
+        "Claiming continental crust is continuously recycled at the same rate as oceanic crust."
+      ],
+      "out_of_scope": "Igneous petrogenesis and crustal growth modelling are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "radiometric dating and Earth's age",
+      "fixed_facts": [
+        "Earth is about 4.5 billion years old, determined principally from radiometric dating of meteorites and the oldest terrestrial minerals.",
+        "The half-life of a radioactive isotope is unaffected by temperature, pressure, or chemical combination."
+      ],
+      "relationships": [
+        "Radiometric dating measures the ratio of a parent isotope to its decay product and converts it to elapsed time using the known half-life.",
+        "The method requires a closed system since formation, which is why samples are tested for disturbance and why multiple isotope systems are cross-checked.",
+        "Different isotope pairs suit different age ranges, and agreement between independent systems is what makes an age robust."
+      ],
+      "accepted_alternative_framings": [
+        "Approximate statements such as 'about four and a half billion years' are correct; the precise figure is not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming decay rates vary with environmental conditions in a way that undermines dating.",
+        "Claiming radiometric dating gives an age for a rock without any assumption about the system being closed.",
+        "Claiming carbon dating is used to date rocks billions of years old."
+      ],
+      "out_of_scope": "Isochron construction and closure temperature theory are beyond this course."
+    },
+    {
+      "unit": 5,
+      "focus": "reconstructing geologic history",
+      "fixed_facts": [],
+      "relationships": [
+        "A geologic history is reconstructed by combining relative dating of structures with absolute ages and with evidence about depositional environment.",
+        "Cross-cutting relationships, inclusions, and unconformities each constrain the sequence of events.",
+        "A reconstruction states which parts are well constrained and which rest on fewer lines of evidence."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the stratigraphic principles, or applying them without the names, are equally correct."
+      ],
+      "disqualifying_errors": [
+        "Applying superposition to a sequence with evidence of overturning without accounting for it.",
+        "Treating an unconformity as evidence that no time passed rather than that record is missing.",
+        "Presenting a reconstruction as settled where only one line of evidence supports it."
+      ],
+      "out_of_scope": "Basin analysis and quantitative subsidence modelling are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "weathering and erosion",
+      "fixed_facts": [
+        "Weathering breaks rock down in place; erosion transports the products; deposition lays them down elsewhere."
+      ],
+      "relationships": [
+        "Physical weathering fragments rock without changing its composition; chemical weathering alters the minerals themselves.",
+        "Rates depend on climate, rock type, slope, and vegetation cover, so they vary greatly between settings.",
+        "Chemical weathering of silicate rock consumes atmospheric carbon dioxide, linking surface processes to the long-term carbon cycle."
+      ],
+      "accepted_alternative_framings": [
+        "Physical and mechanical weathering are the same category."
+      ],
+      "disqualifying_errors": [
+        "Using weathering and erosion interchangeably.",
+        "Claiming chemical weathering rates are independent of climate.",
+        "Claiming weathering rates are uniform across all rock types and settings."
+      ],
+      "out_of_scope": "Quantitative weathering flux calculation is beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "the special properties of water",
+      "fixed_facts": [
+        "Water expands on freezing, so ice is less dense than liquid water and floats.",
+        "Water has an unusually high specific heat capacity and a high heat of vaporisation."
+      ],
+      "relationships": [
+        "Water's polarity and its hydrogen bonding account for its high specific heat, high heat of vaporisation, high surface tension, and its capacity to dissolve many substances.",
+        "Ice floating means lakes freeze from the top down, insulating the water beneath and allowing aquatic life to survive winter.",
+        "Water's high specific heat moderates the climate near large water bodies and makes the ocean a large thermal reservoir."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming ice is denser than liquid water.",
+        "Claiming water's anomalous properties arise from something other than its polarity and hydrogen bonding.",
+        "Claiming water dissolves all substances equally well."
+      ],
+      "out_of_scope": "Quantitative thermodynamic properties and solvation modelling are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "surface water and groundwater systems",
+      "fixed_facts": [
+        "Groundwater occupies pore spaces and fractures in rock and sediment; it does not generally flow in open underground rivers."
+      ],
+      "relationships": [
+        "Surface water and groundwater are connected: streams gain from or lose to groundwater depending on the water table.",
+        "Groundwater moves far more slowly than surface water, so contamination is slow to appear and slow to clear.",
+        "Extraction faster than recharge lowers the water table and can cause land subsidence and saltwater intrusion."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming groundwater flows in underground rivers throughout the subsurface.",
+        "Claiming surface water and groundwater are independent supplies.",
+        "Claiming an aquifer refills as quickly as it is pumped."
+      ],
+      "out_of_scope": "Darcy's law calculation and aquifer modelling are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "feedbacks between Earth systems",
+      "fixed_facts": [
+        "A positive feedback amplifies an initial change; a negative feedback damps it."
+      ],
+      "relationships": [
+        "Ice-albedo feedback is positive: warming melts reflective ice, exposing darker surfaces that absorb more energy and warm further.",
+        "Silicate weathering is a negative feedback on long timescales: warming speeds weathering, which removes carbon dioxide and cools.",
+        "Feedbacks determine whether a perturbation is amplified or damped, and identifying their sign is central to predicting system behaviour."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Equating positive feedback with a beneficial outcome and negative feedback with a harmful one.",
+        "Describing an amplifying process as a negative feedback.",
+        "Claiming Earth systems contain only stabilising feedbacks."
+      ],
+      "out_of_scope": "Quantitative feedback strength and climate sensitivity calculation are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "human alteration of surface processes",
+      "fixed_facts": [],
+      "relationships": [
+        "Land clearing, agriculture, construction, damming, and channel modification change rates of erosion, deposition, infiltration, and runoff.",
+        "Altering one part of a surface system changes others, often downstream or after a delay.",
+        "Human activity now moves more sediment and earth material annually than many natural processes do."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a local land-use change has only local effects.",
+        "Claiming human effects on surface processes are negligible compared with natural ones.",
+        "Claiming an engineered channel or dam removes flood risk rather than altering it."
+      ],
+      "out_of_scope": "Sediment budget quantification and hydrological modelling are beyond this course."
+    },
+    {
+      "unit": 6,
+      "focus": "investigating water and Earth materials",
+      "fixed_facts": [],
+      "relationships": [
+        "An investigation of water or earth materials states its sampling location, time, method, and the property measured, since all four affect the result.",
+        "Natural variability means a single sample characterises that sample, not the system it came from.",
+        "Measurements are compared against published values only where the method and conditions are comparable."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Characterising a water body or a formation from a single sample.",
+        "Comparing a measurement against a published value obtained by a different method without saying so.",
+        "Reporting a field measurement without location, time, and method."
+      ],
+      "out_of_scope": "Analytical laboratory methods and quality assurance protocols are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "energy flow into and out of Earth systems",
+      "fixed_facts": [
+        "Earth's climate is set by the balance between incoming solar radiation and outgoing infrared radiation."
+      ],
+      "relationships": [
+        "Incoming solar energy is absorbed, reflected, or scattered, and the reflective fraction is the albedo.",
+        "Earth radiates energy back to space as infrared, and long-term temperature is set by the balance between incoming and outgoing.",
+        "Anything that changes absorbed solar energy or outgoing infrared changes the balance and therefore the temperature."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming Earth's surface temperature is set by incoming solar radiation alone with no role for outgoing radiation.",
+        "Claiming Earth's internal heat is a major contributor to surface temperature.",
+        "Claiming a change in albedo has no effect on the energy balance."
+      ],
+      "out_of_scope": "Radiative transfer calculation and quantitative energy budget partitioning are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "the greenhouse effect",
+      "fixed_facts": [
+        "Greenhouse gases are largely transparent to incoming sunlight and absorb outgoing infrared radiation, re-emitting some of it back toward the surface.",
+        "The natural greenhouse effect keeps Earth's surface far warmer than it would otherwise be and is necessary for life as it exists."
+      ],
+      "relationships": [
+        "Water vapour, carbon dioxide, methane, and nitrous oxide absorb infrared radiation because of how their molecules vibrate.",
+        "Adding greenhouse gases reduces outgoing infrared for a given surface temperature, so the surface warms until balance is restored.",
+        "The concern is the enhancement of the natural effect by gases added through human activity, not the existence of the effect."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the mechanism as absorption and re-emission of infrared, or as reduced outgoing longwave radiation, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming greenhouse gases work by trapping heat like the glass of a greenhouse, which warms mainly by suppressing convection.",
+        "Claiming greenhouse gases block incoming sunlight.",
+        "Confusing the natural greenhouse effect with the enhanced effect from added gases, or treating the natural effect as the problem."
+      ],
+      "out_of_scope": "Radiative forcing calculation and line-by-line absorption modelling are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "the global carbon cycle",
+      "fixed_facts": [
+        "Burning fossil fuels transfers carbon from a long-term geological reservoir into the atmosphere far faster than natural processes return it."
+      ],
+      "relationships": [
+        "Carbon moves between atmosphere, ocean, land biosphere, soils, and rock, on timescales ranging from years to millions of years.",
+        "The ocean has absorbed a large fraction of the carbon dioxide added by human activity, which has also made surface waters more acidic.",
+        "A carbon budget accounts for all sources and sinks; the atmospheric increase is the difference between what is added and what is taken up."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming carbon added to the atmosphere is removed on a timescale of a few years.",
+        "Claiming the fast biological cycle and the slow geological cycle operate at comparable rates.",
+        "Claiming ocean uptake of carbon dioxide has no chemical consequences for seawater."
+      ],
+      "out_of_scope": "Quantitative reservoir and flux figures, and carbonate chemistry calculations, are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "climate versus weather",
+      "fixed_facts": [
+        "Weather is the atmospheric state over hours to days; climate is the statistical description of weather over decades."
+      ],
+      "relationships": [
+        "Climate is described by averages, ranges, and the frequency of extremes, over periods conventionally of thirty years or more.",
+        "An individual weather event neither confirms nor refutes a claim about climate, though a change in the frequency of such events is climate evidence.",
+        "Climate predictability and weather predictability are different problems: the long-term statistics can be projected even where individual days cannot."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Using an individual cold or hot event as evidence for or against long-term climate change.",
+        "Claiming that because weather cannot be forecast beyond about two weeks, climate cannot be projected at all.",
+        "Treating climate and weather as the same quantity measured over different periods with no other distinction."
+      ],
+      "out_of_scope": "Attribution science methodology and extreme-value statistics are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "climate models and their uncertainty",
+      "fixed_facts": [],
+      "relationships": [
+        "Climate models are built from physical laws and are tested against past and present observations before being used for projection.",
+        "Projections are given as ranges under stated scenarios, because future emissions are a choice and the physics carries its own uncertainty.",
+        "Model uncertainty is quantified; it is not a statement that the projections carry no information."
+      ],
+      "accepted_alternative_framings": [
+        "Describing projections by scenario, by range, or by ensemble spread are all acceptable."
+      ],
+      "disqualifying_errors": [
+        "Treating a projection range as evidence that models are uninformative.",
+        "Presenting a single model run as a prediction rather than as one member of a range.",
+        "Claiming a scenario-based projection failed because emissions followed a different scenario."
+      ],
+      "out_of_scope": "Model intercomparison methodology and parameterisation schemes are beyond this course."
+    },
+    {
+      "unit": 7,
+      "focus": "evidence-based forecasting",
+      "fixed_facts": [],
+      "relationships": [
+        "A forecast states what is projected, under what assumptions, over what period, and with what uncertainty.",
+        "A forecast is evaluated over many predictions against what actually occurred, not by a single instance.",
+        "Distinguishing a projection conditional on a scenario from an unconditional prediction is essential to evaluating either."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Judging a probabilistic forecast wrong on the basis of one outcome.",
+        "Presenting a scenario-conditional projection as an unconditional prediction.",
+        "Reporting a forecast with no stated period, assumptions, or uncertainty."
+      ],
+      "out_of_scope": "Forecast verification statistics and skill scores are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "the Great Oxidation Event and atmospheric change",
+      "fixed_facts": [
+        "Earth's early atmosphere contained essentially no free oxygen; atmospheric oxygen accumulated from about 2.4 billion years ago, produced by photosynthesising organisms."
+      ],
+      "relationships": [
+        "Oxygen-producing photosynthesis by cyanobacteria released oxygen that was first consumed by dissolved iron and other reduced material before accumulating in the atmosphere.",
+        "Banded iron formations in the rock record are evidence of that early oxygen being taken up by dissolved iron.",
+        "The rise of oxygen transformed surface chemistry and made aerobic metabolism, and eventually complex life, possible."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming Earth's atmosphere has always contained free oxygen at roughly present levels.",
+        "Claiming atmospheric oxygen was produced by geological outgassing rather than by photosynthesis.",
+        "Claiming oxygen accumulated immediately once photosynthesis began."
+      ],
+      "out_of_scope": "Isotopic evidence methodology and detailed Precambrian chronology are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "coevolution of the geosphere and biosphere",
+      "fixed_facts": [],
+      "relationships": [
+        "Life has altered Earth's atmosphere, oceans, soils, and rocks, and those changes have in turn shaped the evolution of life.",
+        "Many rock types, including limestone, coal, and banded iron formations, exist because of biological activity.",
+        "The influence runs in both directions, which is why the systems are described as coevolving rather than one acting on the other."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming life adapted to Earth's conditions without altering them.",
+        "Claiming Earth's physical systems developed independently of the biosphere.",
+        "Claiming biologically produced rocks are chemically indistinguishable in origin from purely inorganic ones."
+      ],
+      "out_of_scope": "Earth system modelling of coevolution is beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "distribution of natural resources",
+      "fixed_facts": [
+        "Mineral, energy, water, and soil resources are distributed unevenly because of the specific geological and biological processes that concentrated them."
+      ],
+      "relationships": [
+        "Ore deposits form where particular processes concentrated an element far above its average crustal abundance.",
+        "Fossil fuels formed where organic material accumulated, was buried, and was heated within a particular range of conditions.",
+        "A resource is economically usable only where concentration, accessibility, and extraction cost permit, so the physical presence of an element is not sufficient."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming resource distribution is random or a matter of chance.",
+        "Claiming an element's presence in the crust makes it available as a resource.",
+        "Claiming resource distribution follows political boundaries."
+      ],
+      "out_of_scope": "Ore genesis models and reserve estimation methodology are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "natural hazards and their causes",
+      "fixed_facts": [
+        "Earthquakes and volcanoes occur predominantly at plate boundaries, and their global distribution follows those boundaries."
+      ],
+      "relationships": [
+        "Each hazard has a physical cause, and understanding the cause is what makes the hazard mappable and, in some cases, forecastable.",
+        "Hazard forecasting is generally probabilistic: the likelihood over a period can be estimated where the timing of a specific event cannot.",
+        "A hazard becomes a disaster through exposure and vulnerability, so risk depends on people and infrastructure as well as on the physical event."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming individual earthquakes can be predicted for a specific day and place with current science.",
+        "Claiming hazards occur at random with no relation to physical processes.",
+        "Treating hazard and risk as the same quantity."
+      ],
+      "out_of_scope": "Probabilistic seismic hazard analysis and eruption forecasting methods are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "resource availability and human settlement",
+      "fixed_facts": [],
+      "relationships": [
+        "Where people settle has been shaped by access to water, arable soil, energy, materials, and transport routes.",
+        "Settlement in hazard-prone locations often reflects the resources that make those locations valuable, such as fertile volcanic soils and river floodplains.",
+        "Resource availability changes over time through depletion, technology, and climate, and settlement patterns respond with a lag."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming settlement patterns are unrelated to the physical distribution of resources.",
+        "Claiming people settle in hazardous places only through ignorance of the hazard.",
+        "Claiming resource availability at a location is fixed over time."
+      ],
+      "out_of_scope": "Human geography theory and economic modelling are beyond this course."
+    },
+    {
+      "unit": 8,
+      "focus": "constructing arguments from geologic and biological evidence",
+      "fixed_facts": [],
+      "relationships": [
+        "An argument about Earth history links a claim to specific geologic and biological evidence through explicit reasoning about process.",
+        "Because controlled experiments on Earth history are impossible, arguments rest on multiple independent lines of evidence converging.",
+        "An argument states which parts of the claim the evidence establishes and which remain open."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a single line of evidence as establishing a claim about Earth history.",
+        "Omitting evidence that does not fit the proposed reconstruction.",
+        "Treating the impossibility of controlled experiment as grounds for treating any reconstruction as equally supported."
+      ],
+      "out_of_scope": "Formal historical-science methodology is beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "criteria, constraints, and prioritisation",
+      "fixed_facts": [],
+      "relationships": [
+        "Criteria state what a sustainability solution must achieve; constraints state its limits, including physical, economic, legal, and ethical ones.",
+        "Prioritising among criteria is a value judgement made explicit, not a measurement, and different stakeholders prioritise differently.",
+        "Physical constraints such as resource availability and energy balance cannot be traded away by preference."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a prioritisation among criteria as though it were determined by the evidence alone.",
+        "Proposing a solution that violates a physical constraint such as conservation of energy or matter.",
+        "Declaring a solution best with no criteria stated."
+      ],
+      "out_of_scope": "Formal multi-criteria decision analysis is beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "cost-benefit analysis of energy and mineral resources",
+      "fixed_facts": [],
+      "relationships": [
+        "A full comparison of resource options accounts for the whole life cycle: extraction, processing, transport, use, and end of life.",
+        "Every energy and mineral option has environmental and social costs; the comparison is between different sets of costs, not between costly and costless options.",
+        "Costs and benefits fall on different groups and over different timescales, and a comparison that omits that is incomplete."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting any energy or mineral option as having no environmental cost.",
+        "Comparing options on operational effects alone while ignoring extraction, manufacture, or disposal.",
+        "Omitting who bears the costs and who receives the benefits."
+      ],
+      "out_of_scope": "Formal life-cycle assessment methodology and discounting are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "computational simulation of coupled systems",
+      "fixed_facts": [],
+      "relationships": [
+        "A coupled-system simulation represents the interactions between components, and the coupling is often what produces the interesting behaviour.",
+        "Output depends on assumptions, parameters, and initial conditions, all of which are stated with the result.",
+        "A simulation is compared against observation where possible, and its limits are reported alongside its output."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting simulation output as observational data.",
+        "Reporting a simulation result without its assumptions or parameter choices.",
+        "Claiming a simulation is validated with no comparison against observation."
+      ],
+      "out_of_scope": "Numerical methods and formal model validation frameworks are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "refining technological solutions",
+      "fixed_facts": [],
+      "relationships": [
+        "Refinement proceeds by testing against criteria, identifying a specific shortfall, and making a change aimed at it.",
+        "Changing one thing at a time keeps the effect of each change identifiable.",
+        "Unintended consequences are looked for deliberately, because a solution that shifts a problem elsewhere has not solved it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Changing several features at once and attributing the improvement to one.",
+        "Declaring a refinement successful without retesting against the criteria.",
+        "Reporting a solution as effective while omitting an effect it displaced elsewhere."
+      ],
+      "out_of_scope": "Formal design-of-experiments methodology is beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "sustainability and human population",
+      "fixed_facts": [],
+      "relationships": [
+        "Total resource demand depends on population size, on consumption per person, and on the technologies used, and all three vary greatly between regions.",
+        "Sustainability requires that renewable resources be used no faster than they are replenished and that waste be produced no faster than it can be absorbed.",
+        "Human population growth rate has been declining globally for decades, while total population continues to rise."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Attributing resource pressure to population size alone, ignoring consumption and technology.",
+        "Claiming a renewable resource cannot be depleted.",
+        "Claiming global population is growing at an accelerating rate."
+      ],
+      "out_of_scope": "Demographic projection methodology and carrying capacity estimation are beyond this course."
+    },
+    {
+      "unit": 9,
+      "focus": "defending a design under uncertainty",
+      "fixed_facts": [],
+      "relationships": [
+        "Defending a design means stating the evidence, the assumptions, the uncertainty, and what result would change the recommendation.",
+        "Uncertainty is a reason to state the range of outcomes and to build in adaptability, not a reason to withhold a recommendation.",
+        "The strongest objection is addressed directly rather than omitted."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a recommendation with no acknowledgement of its uncertainties.",
+        "Treating uncertainty as grounds for taking no position at all.",
+        "Omitting the strongest objection to the proposed design."
+      ],
+      "out_of_scope": "Decision theory under uncertainty and formal risk management frameworks are beyond this course."
+    }
+  ]
+}
