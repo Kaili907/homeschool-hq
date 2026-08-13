@@ -4,6 +4,7 @@ import { FamilyPilotShell } from '../FamilyPilotShell'
 import type { FamilyPilotStoreOptions } from '../core'
 import type { FamilyPilotCurriculumPort } from './curriculum'
 import type { FamilyPilotSafetyPort } from './safety'
+import type { FamilyPilotCompletionPolicyPort } from '../completion/policy'
 
 // FAMILY-PILOT-INTEGRATION: the routed pilot entry point.
 //
@@ -32,6 +33,13 @@ export interface FamilyPilotHostProps {
   readonly store?: FamilyPilotStoreOptions
   /** Not installed in C1. The pilot is required to work without it. */
   readonly safety?: FamilyPilotSafetyPort
+  /**
+   * Which work needs a household adult's sign-off before it counts. Absent
+   * means the curriculum port decides — a student-work package's own authored
+   * `completionAuthority` is the intended source, and this prop is the seam for
+   * a host that resolves it some other way.
+   */
+  readonly completionPolicy?: FamilyPilotCompletionPolicyPort
   readonly now?: () => Date
   readonly householdTimeZone?: string
 }
@@ -43,6 +51,7 @@ export function FamilyPilotHost({
   curriculum,
   store,
   safety,
+  completionPolicy,
   now,
   householdTimeZone,
 }: FamilyPilotHostProps) {
@@ -56,6 +65,7 @@ export function FamilyPilotHost({
             curriculum={curriculum}
             store={store}
             safety={safety}
+            completionPolicy={completionPolicy}
             now={now}
             householdTimeZone={householdTimeZone}
           />

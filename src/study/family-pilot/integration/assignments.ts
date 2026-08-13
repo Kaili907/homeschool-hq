@@ -78,6 +78,8 @@ export function toStudentAssignment(
     segments,
     currentSegmentRef,
     completedSegmentRefs,
+    awaitingAdultAttestation:
+      record.completion.status === 'PENDING_GUARDIAN_ATTESTATION',
   }
 }
 

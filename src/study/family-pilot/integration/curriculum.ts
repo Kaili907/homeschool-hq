@@ -2,6 +2,7 @@ import { getPilotAssignments } from '../../../curriculum/family-pilot/catalog'
 import type { FamilyPilotCatalog } from '../../../curriculum/family-pilot/types'
 import type { AcademyGrade } from '../../../types'
 import { adaptHostLessonToStudyPlan, type HostLessonDescriptor } from '../../curriculumAdapter'
+import type { CurriculumCompletionAuthority } from '../completion'
 
 // FAMILY-PILOT-INTEGRATION: which lessons a student can be assigned.
 //
@@ -15,6 +16,17 @@ import { adaptHostLessonToStudyPlan, type HostLessonDescriptor } from '../../cur
 export interface FamilyPilotCurriculumPort {
   /** Assignable lessons for a grade, in course completion order. */
   readonly listLessons: (grade: AcademyGrade) => readonly HostLessonDescriptor[]
+  /**
+   * The lesson's authored completion authority, when its package declares one.
+   *
+   * This is where a student-work package's own `completionAuthority` field
+   * enters the runtime. An absent hook, or an absent declaration, means
+   * 'learner' — the pilot does not invent an adult-observed requirement for a
+   * lesson whose curriculum never asked for one.
+   */
+  readonly completionAuthorityFor?: (
+    lesson: HostLessonDescriptor,
+  ) => CurriculumCompletionAuthority | undefined
 }
 
 /** Refs are opaque and must satisfy the Study adapter's SAFE_REF. */

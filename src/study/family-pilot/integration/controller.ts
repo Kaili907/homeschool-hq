@@ -1,25 +1,36 @@
 import type { AcademyGrade } from '../../../types'
 import type { HostLessonDescriptor } from '../../curriculumAdapter'
 import type { StudyPortBundle } from '../../ports'
-import type { HostStudyLaunchContext, StudySubject } from '../../types'
+import type { HostStudyLaunchContext, StudyAdultAuthorization, StudySubject } from '../../types'
 import {
   addFamilyPilotAssignment,
-  completeFamilyPilotAssignment,
+  attestFamilyPilotCompletion,
   createFamilyPilotStudent,
   findFamilyPilotStudent,
   loadFamilyPilotState,
   pauseFamilyPilotAssignment,
   projectFamilyPilotParentProgress,
+  recordFamilyPilotLearnerCompletion,
   recordFamilyPilotProgress,
   resumeFamilyPilotAssignment,
   setActiveFamilyPilotStudent,
   startFamilyPilotAssignment,
   updateFamilyPilotState,
   type FamilyPilotAssignmentRecordV1,
+  type FamilyPilotCompletionRecordV1,
   type FamilyPilotSnapshot,
   type FamilyPilotStoreOptions,
   type FamilyPilotStudentRecordV1,
 } from '../core'
+import {
+  familyPilotCompletionAuthority,
+  resolveCompletionAuthority,
+  type FamilyPilotAttestationRejection,
+  type FamilyPilotAttestationRequest,
+  type FamilyPilotAttestationResult,
+  type FamilyPilotCompletionPolicyPort,
+  type FamilyPilotPendingAttestation,
+} from '../completion'
 import {
   FamilyPilotStudyRuntime,
   familyPilotStudySession,
@@ -55,6 +66,12 @@ export type FamilyPilotOperationResult =
       readonly status: 'ok'
       readonly snapshot: FamilyPilotSnapshot
       readonly study: FamilyPilotStudySnapshot | null
+      /**
+       * Set by complete() only. It is how a caller learns that the learner's
+       * click was RECORDED rather than certifying, without having to re-derive
+       * the policy decision the controller already made.
+       */
+      readonly completion?: FamilyPilotCompletionRecordV1 | null
     }
   | {
       readonly status: 'rejected'
@@ -69,6 +86,12 @@ export interface FamilyPilotControllerOptions {
   readonly store?: FamilyPilotStoreOptions
   /** Absent until the separate Safety branch lands; the pilot runs without it. */
   readonly safety?: FamilyPilotSafetyPort
+  /**
+   * Overrides the completion authority for every lesson. Absent means the
+   * curriculum port decides, which is the shipped path — the authority belongs
+   * to the lesson package, not to whoever constructed the controller.
+   */
+  readonly completionPolicy?: FamilyPilotCompletionPolicyPort
   readonly tutorDeps?: FamilyPilotTutorDeps
   readonly now?: () => Date
   readonly householdTimeZone?: string
@@ -93,6 +116,7 @@ export class FamilyPilotController {
   readonly #defaultGrade: AcademyGrade
   readonly #newStudentRef: () => string
   readonly #runtime: FamilyPilotStudyRuntime
+  readonly #completionPolicy: FamilyPilotCompletionPolicyPort
   /**
    * Grade is not part of the Core schema, so it is held per process. Losing it
    * on reload costs a default, never a record: assignments are already seeded
@@ -114,6 +138,16 @@ export class FamilyPilotController {
       ports: options.ports,
       now: this.#now,
     })
+    // The default policy reads the authority off the lesson package itself, so
+    // the curriculum stays the authority on which work needs an adult and this
+    // controller stays the thing that enforces it.
+    this.#completionPolicy = options.completionPolicy ?? {
+      authorityFor: ({ studentRef, lessonRef }) => {
+        const lesson = this.#lessonMap(studentRef).get(lessonRef)
+        const authored = lesson ? this.#curriculum.completionAuthorityFor?.(lesson) : undefined
+        return authored ? familyPilotCompletionAuthority(authored) : 'LEARNER_AUTHORITY'
+      },
+    }
   }
 
   get runtime(): FamilyPilotStudyRuntime {
@@ -370,7 +404,19 @@ export class FamilyPilotController {
   }
 
   /**
-   * Marks the assignment finished for the household.
+   * The learner says they are finished.
+   *
+   * THIS is the completion-policy seam. Every learner-facing "Finish" in the
+   * pilot arrives here, and here is where the authority for this exact lesson
+   * is resolved before anything is written:
+   *
+   *   LEARNER_AUTHORITY               -> the assignment completes, as before.
+   *   GUARDIAN_ATTESTATION_REQUIRED   -> the work is recorded and the
+   *                                      assignment stays
+   *                                      PENDING_GUARDIAN_ATTESTATION. Core
+   *                                      refuses to complete it, so pressing
+   *                                      Finish again cannot certify it and
+   *                                      neither can any other caller.
    *
    * The Study calendar runtime remains the authority on whether the work is
    * actually done: Core records the completion only when the runtime reports
@@ -397,9 +443,182 @@ export class FamilyPilotController {
     if (current.snapshot.assignmentState !== 'completed') {
       return this.#refuse('assignment-incomplete', 'This work still has steps left to finish.')
     }
+    const authority = resolveCompletionAuthority(this.#completionPolicy, {
+      studentRef: ref,
+      assignmentRef,
+      lessonRef: bound.record.lessonRef,
+    })
     const snapshot = updateFamilyPilotState((state) =>
-      completeFamilyPilotAssignment(state, ref, assignmentRef, this.#at()), this.#store)
-    return { status: 'ok', snapshot, study: current.snapshot }
+      recordFamilyPilotLearnerCompletion(state, ref, assignmentRef, authority, this.#at()),
+      this.#store)
+    return {
+      status: 'ok',
+      snapshot,
+      study: current.snapshot,
+      completion: this.#completionOf(snapshot, ref, assignmentRef),
+    }
+  }
+
+  // ------------------------------------------------------- adult attestation
+
+  /**
+   * The work on this student's list that a household adult still has to sign
+   * off. Read straight from persisted state, so it survives a reload and does
+   * not depend on the Study ports still holding the block.
+   */
+  pendingAttestations(ref: string): readonly FamilyPilotPendingAttestation[] {
+    const student = this.#student(ref)
+    if (!student) return []
+    return student.assignments
+      .filter((item) => item.completion.status === 'PENDING_GUARDIAN_ATTESTATION')
+      .map((item) => Object.freeze({
+        studentRef: student.studentRef,
+        assignmentRef: item.assignmentRef,
+        lessonRef: item.lessonRef,
+        subject: item.subject,
+        title: item.title,
+        learnerAssertedAt: item.completion.learnerAssertedAt,
+      }))
+  }
+
+  /**
+   * A household-authorized adult certifies one pending assignment.
+   *
+   * Deliberately synchronous and independent of the Study runtime. The pilot's
+   * Study ports are in-memory and do not survive closing the browser, but a
+   * pending attestation does — so an adult signing off the next morning must
+   * not need a live block, and does not get one.
+   *
+   * Every refusal below names what could not be proved, because "nothing
+   * happened" is the wrong answer for an adult who believes they just signed
+   * their child's work off:
+   *
+   *   • store-read-only        stored state came from a newer build; this one
+   *                            must not write over a schema it cannot read.
+   *   • adult-not-authorized   the caller is not a verified household adult.
+   *   • unknown-student /
+   *     unknown-assignment     the named work is not on this device.
+   *   • lesson-binding-mismatch the attestation names a different lesson than
+   *                            the one this assignment now carries.
+   *   • attestation-not-required this work completes on the learner's own
+   *                            say-so, or is already finished.
+   *   • attestation-not-recorded the learner has not finished it yet.
+   *   • attestation-not-saved  device storage refused the write.
+   *
+   * Attesting twice returns ok with `alreadyAttested`, changing nothing: the
+   * stored `attestedAt` keeps naming the moment the adult really did certify.
+   */
+  attest(
+    request: FamilyPilotAttestationRequest,
+    authorization: StudyAdultAuthorization,
+  ): FamilyPilotAttestationResult {
+    // Checked first, and by name. A read-only store parses as an EMPTY state,
+    // so every lookup below would fail as 'unknown-student' — telling an adult
+    // their child is not set up on this device, which is both false and
+    // alarming. The truth is that this build may not write here at all.
+    const current = this.snapshot()
+    if (current.status === 'read-only') {
+      return this.#refuseAttestation(
+        'store-read-only',
+        'This device has newer saved work than this version can write to. Update, then sign off.',
+        current,
+      )
+    }
+    const scope = learnerScopeFor(request.studentRef)
+    // The same check parent/actions.ts makes before any adult action.
+    if (!authorization.adultAuthorized || authorization.householdRef !== scope.householdRef) {
+      return this.#refuseAttestation(
+        'adult-not-authorized',
+        'Only a verified adult in this household can sign work off.',
+      )
+    }
+    const student = this.#student(request.studentRef)
+    if (!student) {
+      return this.#refuseAttestation('unknown-student', 'That learner is not set up on this device.')
+    }
+    const record = student.assignments.find(
+      (item) => item.assignmentRef === request.assignmentRef,
+    )
+    if (!record) {
+      return this.#refuseAttestation('unknown-assignment', 'That work is not on this learner’s list.')
+    }
+    if (record.lessonRef !== request.lessonRef) {
+      return this.#refuseAttestation(
+        'lesson-binding-mismatch',
+        'That sign-off is for a different lesson. Open the work again and try once more.',
+      )
+    }
+    if (
+      record.completion.status === 'CERTIFIED' &&
+      record.completion.authority === 'GUARDIAN_ATTESTATION_REQUIRED'
+    ) {
+      return {
+        status: 'ok',
+        snapshot: this.snapshot(),
+        completion: record.completion,
+        alreadyAttested: true,
+      }
+    }
+    // Asked of the POLICY, not only of the record: a record carries no
+    // authority until the learner finishes it, so reading the stored value
+    // alone would tell an adult that work they were asked to watch needs no
+    // sign-off. The stored value is still honoured, so a curriculum that stops
+    // requiring an adult cannot strand work already waiting on one.
+    const requiresAdult =
+      resolveCompletionAuthority(this.#completionPolicy, {
+        studentRef: request.studentRef,
+        assignmentRef: request.assignmentRef,
+        lessonRef: record.lessonRef,
+      }) === 'GUARDIAN_ATTESTATION_REQUIRED' ||
+      record.completion.authority === 'GUARDIAN_ATTESTATION_REQUIRED'
+    if (!requiresAdult) {
+      return this.#refuseAttestation(
+        'attestation-not-required',
+        record.completion.status === 'CERTIFIED'
+          ? 'This work is already finished.'
+          : 'This work does not need an adult sign-off.',
+      )
+    }
+    if (record.completion.status !== 'PENDING_GUARDIAN_ATTESTATION') {
+      return this.#refuseAttestation(
+        'attestation-not-recorded',
+        'Your learner has not finished this yet.',
+      )
+    }
+
+    const snapshot = updateFamilyPilotState((state) =>
+      attestFamilyPilotCompletion(state, {
+        studentRef: request.studentRef,
+        assignmentRef: request.assignmentRef,
+        lessonRef: request.lessonRef,
+        attestedByRef: request.attestedByRef,
+        evidenceMode: request.evidenceMode,
+      }, this.#at()), this.#store)
+
+    // The STORE decides whether this happened, not the record.
+    //
+    // updateFamilyPilotState returns the mutated in-memory state even when the
+    // write was refused — a full or denied quota reports 'unavailable' while
+    // still handing back a state that says CERTIFIED. Reading the record back
+    // would therefore show a sign-off that reached no disk, and the adult would
+    // be told the work now counts while it sits in the same pending list
+    // tomorrow. Only 'ready' and 'recovered' mean the bytes actually landed.
+    if (snapshot.status !== 'ready' && snapshot.status !== 'recovered') {
+      return this.#refuseAttestation(
+        'attestation-not-saved',
+        'That sign-off could not be saved on this device. Your learner’s work is unchanged.',
+        snapshot,
+      )
+    }
+    const completion = this.#completionOf(snapshot, request.studentRef, request.assignmentRef)
+    if (!completion || completion.status !== 'CERTIFIED') {
+      return this.#refuseAttestation(
+        'attestation-not-saved',
+        'That sign-off could not be saved. Your learner’s work is unchanged.',
+        snapshot,
+      )
+    }
+    return { status: 'ok', snapshot, completion, alreadyAttested: false }
   }
 
   // ------------------------------------------------------------------- tutor
@@ -504,6 +723,24 @@ export class FamilyPilotController {
   ): FamilyPilotStudySession | null {
     if (record.sessionRef === null) return null
     return familyPilotStudySession(context, record.sessionRef)
+  }
+
+  #completionOf(
+    snapshot: FamilyPilotSnapshot,
+    ref: string,
+    assignmentRef: string,
+  ): FamilyPilotCompletionRecordV1 | null {
+    return findFamilyPilotStudent(snapshot.state, ref)
+      ?.assignments.find((item) => item.assignmentRef === assignmentRef)
+      ?.completion ?? null
+  }
+
+  #refuseAttestation(
+    reason: FamilyPilotAttestationRejection,
+    message: string,
+    snapshot: FamilyPilotSnapshot = this.snapshot(),
+  ): FamilyPilotAttestationResult {
+    return { status: 'rejected', reason, message, snapshot }
   }
 
   #refuse(reason: string, message: string): FamilyPilotOperationResult {

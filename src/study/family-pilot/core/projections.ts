@@ -1,5 +1,11 @@
 import { findFamilyPilotStudent } from './operations'
-import type { FamilyPilotAssignmentState, FamilyPilotStateV1 } from './schema'
+import type {
+  FamilyPilotAssignmentState,
+  FamilyPilotAttestationEvidence,
+  FamilyPilotCompletionAuthority,
+  FamilyPilotCompletionStatus,
+  FamilyPilotStateV1,
+} from './schema'
 import type { FamilyPilotSnapshot } from './store'
 
 // FAMILY-PILOT-CORE: read-only projections.
@@ -26,6 +32,15 @@ export interface FamilyPilotAssignmentProgressView {
   readonly activeSeconds: number
   readonly pausedSeconds: number
   readonly resumeSegmentRef: string | null
+  /** Who may certify this work, and whether anyone has. */
+  readonly completionAuthority: FamilyPilotCompletionAuthority
+  readonly completionStatus: FamilyPilotCompletionStatus
+  /** True when the learner has finished and an adult still has to sign off. */
+  readonly awaitingAdultAttestation: boolean
+  readonly learnerAssertedAt: string | null
+  readonly attestedAt: string | null
+  readonly attestedByRef: string | null
+  readonly evidenceMode: FamilyPilotAttestationEvidence | null
   readonly completedAt: string | null
   readonly updatedAt: string
 }
@@ -36,6 +51,8 @@ export interface FamilyPilotParentProgressView {
   readonly assignments: readonly FamilyPilotAssignmentProgressView[]
   readonly completedCount: number
   readonly inProgressCount: number
+  /** How many pieces of work are waiting on this household's adult. */
+  readonly pendingAttestationCount: number
 }
 
 function percentComplete(completed: number, total: number): number {
@@ -64,6 +81,14 @@ export function projectFamilyPilotParentProgress(
       activeSeconds: assignment.progress.activeSeconds,
       pausedSeconds: assignment.pause.pausedSeconds,
       resumeSegmentRef: assignment.pause.resumeSegmentRef,
+      completionAuthority: assignment.completion.authority,
+      completionStatus: assignment.completion.status,
+      awaitingAdultAttestation:
+        assignment.completion.status === 'PENDING_GUARDIAN_ATTESTATION',
+      learnerAssertedAt: assignment.completion.learnerAssertedAt,
+      attestedAt: assignment.completion.attestedAt,
+      attestedByRef: assignment.completion.attestedByRef,
+      evidenceMode: assignment.completion.evidenceMode,
       completedAt: assignment.completedAt,
       updatedAt: assignment.updatedAt,
     })
@@ -76,6 +101,7 @@ export function projectFamilyPilotParentProgress(
     inProgressCount: assignments.filter(
       (item) => item.state === 'active' || item.state === 'paused',
     ).length,
+    pendingAttestationCount: assignments.filter((item) => item.awaitingAdultAttestation).length,
   })
 }
 
@@ -90,6 +116,7 @@ export interface FamilyPilotDiagnosticsView {
   readonly activeLessonRef: string | null
   readonly activeSessionRef: string | null
   readonly activeAssignmentState: FamilyPilotAssignmentState | null
+  readonly activeCompletionStatus: FamilyPilotCompletionStatus | null
   readonly updatedAt: string
 }
 
@@ -120,6 +147,7 @@ export function projectFamilyPilotDiagnostics(
     activeLessonRef: assignment?.lessonRef ?? null,
     activeSessionRef: assignment?.sessionRef ?? null,
     activeAssignmentState: assignment?.state ?? null,
+    activeCompletionStatus: assignment?.completion.status ?? null,
     updatedAt: state.updatedAt,
   })
 }

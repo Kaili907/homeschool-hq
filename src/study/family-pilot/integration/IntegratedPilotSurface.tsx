@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { createLocalDevelopmentStudyPorts } from '../../localDevelopmentPorts'
 import type { StudyPortBundle } from '../../ports'
+import type { StudyAdultAuthorization } from '../../types'
+import { FamilyPilotAttestationPanel, type FamilyPilotCompletionPolicyPort } from '../completion'
 import { FamilyPilotParentHub } from '../parent'
 import type { FamilyPilotStoreOptions } from '../core'
 import type { FamilyPilotShellContext } from '../FamilyPilotShell'
@@ -30,6 +32,11 @@ export interface IntegratedPilotSurfaceProps {
   readonly curriculum?: FamilyPilotCurriculumPort
   readonly store?: FamilyPilotStoreOptions
   readonly safety?: FamilyPilotSafetyPort
+  /**
+   * Overrides which work needs an adult sign-off. Absent means the curriculum
+   * port decides, through its own `completionAuthorityFor`.
+   */
+  readonly completionPolicy?: FamilyPilotCompletionPolicyPort
   readonly now?: () => Date
   readonly householdTimeZone?: string
 }
@@ -40,6 +47,7 @@ export function IntegratedPilotSurface({
   curriculum,
   store,
   safety,
+  completionPolicy,
   now,
   householdTimeZone,
 }: IntegratedPilotSurfaceProps) {
@@ -58,14 +66,37 @@ export function IntegratedPilotSurface({
       curriculum: curriculum ?? hostLessonCurriculumPort(),
       store,
       safety,
+      completionPolicy,
       now,
       householdTimeZone,
     }),
-    [resolvedPorts, curriculum, store, safety, now, householdTimeZone],
+    [resolvedPorts, curriculum, store, safety, completionPolicy, now, householdTimeZone],
   )
   const activeStudentRef = context.activeStudentRef
   const [showParent, setShowParent] = useState(false)
   const [parentFor, setParentFor] = useState(activeStudentRef)
+
+  /**
+   * The pilot household is one adult on one device, so the authorization is a
+   * constant rather than a server-issued grant — the same shape and the same
+   * constant household the Parent Hub is already given below. `actorRef` is the
+   * opaque adult reference an attestation is recorded against; it is a role
+   * label, never a name or a contact detail.
+   */
+  const authorization: StudyAdultAuthorization = useMemo(() => ({
+    householdRef: FAMILY_PILOT_HOUSEHOLD_REF,
+    actorRef: 'family-pilot-parent',
+    role: 'parent',
+    adultAuthorized: true,
+  }), [])
+
+  // Recomputed from the shell's snapshot, which is the only thing that changes
+  // when work is finished or signed off.
+  const pendingAttestations = useMemo(
+    () => (activeStudentRef ? controller.pendingAttestations(activeStudentRef) : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [activeStudentRef, controller, context.snapshot],
+  )
 
   // Derive-during-render rather than clear-in-effect. An effect would leave the
   // previous learner's parent view mounted for one committed frame under the
@@ -104,25 +135,40 @@ export function IntegratedPilotSurface({
             {showParent ? 'Hide parent view' : 'Show parent view'}
           </button>
           {showParent && (
-            // Scoped to the active learner only: the Parent Hub filters by
-            // learnerRef internally, and handing it a single-learner list means
-            // there is no other student's row for it to render.
-            <FamilyPilotParentHub
-              householdRef={FAMILY_PILOT_HOUSEHOLD_REF}
-              learners={[learnerOptionFor(
-                activeStudentRef,
-                context.snapshot.state.students.find(
-                  (student) => student.studentRef === activeStudentRef,
-                )?.displayName ?? 'Learner',
-              )]}
-              ports={resolvedPorts}
-              authorization={{
-                householdRef: FAMILY_PILOT_HOUSEHOLD_REF,
-                actorRef: 'family-pilot-parent',
-                role: 'parent',
-                adultAuthorized: true,
-              }}
-            />
+            <>
+              {/*
+                The adult-facing half of the completion policy. It is mounted
+                INSIDE the parent view, behind the same toggle as the Parent Hub
+                and scoped to the active learner, so the only route to a
+                certification runs through an adult surface. A sibling cannot
+                reach it, and the controller re-checks the binding anyway.
+              */}
+              <FamilyPilotAttestationPanel
+                pending={pendingAttestations}
+                attestedByRef={authorization.actorRef}
+                onAttest={(request) => {
+                  const result = controller.attest(request, authorization)
+                  context.reload()
+                  return result
+                }}
+              />
+              {/*
+                Scoped to the active learner only: the Parent Hub filters by
+                learnerRef internally, and handing it a single-learner list means
+                there is no other student's row for it to render.
+              */}
+              <FamilyPilotParentHub
+                householdRef={FAMILY_PILOT_HOUSEHOLD_REF}
+                learners={[learnerOptionFor(
+                  activeStudentRef,
+                  context.snapshot.state.students.find(
+                    (student) => student.studentRef === activeStudentRef,
+                  )?.displayName ?? 'Learner',
+                )]}
+                ports={resolvedPorts}
+                authorization={authorization}
+              />
+            </>
           )}
         </section>
       )}

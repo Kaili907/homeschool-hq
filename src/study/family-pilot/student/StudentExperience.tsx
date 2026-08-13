@@ -133,6 +133,14 @@ export function AssignmentList({
                 </span>
               </div>
               {assignment.subject && <p className="text-sm text-slate-600">{assignment.subject}</p>}
+              {assignment.awaitingAdultAttestation && (
+                <p
+                  className="mt-2 rounded-lg bg-amber-50 p-2 text-sm font-semibold text-amber-900"
+                  data-testid="family-pilot-awaiting-adult"
+                >
+                  You finished this. A grown-up needs to check it before it counts.
+                </p>
+              )}
               {resolvePrimaryAction(assignment) === 'start' && (
                 <button
                   type="button"
@@ -222,15 +230,32 @@ export function ActiveAssignmentView({
             Pause
           </button>
         )}
-        <button
-          type="button"
-          className="rounded-lg bg-emerald-600 px-4 py-2 font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-900"
-          aria-label={`Finish ${assignment.title}`}
-          onClick={() => onComplete(assignment.assignmentRef)}
-        >
-          Finish
-        </button>
+        {!assignment.awaitingAdultAttestation && (
+          <button
+            type="button"
+            className="rounded-lg bg-emerald-600 px-4 py-2 font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-900"
+            aria-label={`Finish ${assignment.title}`}
+            onClick={() => onComplete(assignment.assignmentRef)}
+          >
+            Finish
+          </button>
+        )}
       </div>
+
+      {/*
+        Deliberately a message and not a control. There is no button here a
+        learner could press to certify their own adult-observed work — the only
+        surface that can do that lives in the Parent view.
+      */}
+      {assignment.awaitingAdultAttestation && (
+        <p
+          className="mt-4 rounded-xl bg-amber-50 p-4 font-semibold text-amber-900"
+          role="status"
+          data-testid="family-pilot-awaiting-adult"
+        >
+          Nice work — you’re done. A grown-up needs to check this one off before it counts.
+        </p>
+      )}
     </section>
   )
 }

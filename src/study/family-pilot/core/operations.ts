@@ -1,6 +1,10 @@
 import {
   FAMILY_PILOT_SCHEMA_VERSION,
+  emptyFamilyPilotCompletion,
+  isFamilyPilotRef,
   type FamilyPilotAssignmentRecordV1,
+  type FamilyPilotAttestationEvidence,
+  type FamilyPilotCompletionAuthority,
   type FamilyPilotStateV1,
   type FamilyPilotStudentRecordV1,
 } from './schema'
@@ -137,6 +141,11 @@ export function addFamilyPilotAssignment(
         pausedSeconds: 0,
         resumeSegmentRef: null,
       }),
+      // Seeded under learner authority. The real authority for this lesson is
+      // resolved from the completion policy at the moment work is finished, not
+      // at seed time, so a curriculum that starts requiring an adult applies to
+      // work already on the list rather than only to work seeded afterwards.
+      completion: emptyFamilyPilotCompletion(),
       completedAt: null,
       createdAt: now,
       updatedAt: now,
@@ -251,25 +260,164 @@ export function recordFamilyPilotProgress(
   })
 }
 
+/**
+ * Completes an assignment under LEARNER authority.
+ *
+ * The guard is the point: an assignment whose completion authority is
+ * GUARDIAN_ATTESTATION_REQUIRED and which is not already certified is REFUSED
+ * here, not completed. Every learner-driven path in the pilot ends up in this
+ * function, so refusing it here is what makes "a learner click alone cannot
+ * certify" a property of the store rather than a habit of its callers.
+ */
 export function completeFamilyPilotAssignment(
   state: FamilyPilotStateV1,
   studentRef: string,
   assignmentRef: string,
   now: string,
 ): FamilyPilotStateV1 {
-  const completed = withAssignment(state, studentRef, assignmentRef, now, (assignment) =>
-    assignment.state === 'completed'
-      ? assignment
-      : Object.freeze({
-          ...assignment,
-          state: 'completed',
-          sessionRef: null,
-          // First completion wins, mirroring AcademyLessonState.completedAt.
-          completedAt: assignment.completedAt ?? now,
-          pause: Object.freeze({ ...assignment.pause, pausedAt: null }),
-        }))
+  const completed = withAssignment(state, studentRef, assignmentRef, now, (assignment) => {
+    if (assignment.state === 'completed') return assignment
+    if (
+      assignment.completion.authority === 'GUARDIAN_ATTESTATION_REQUIRED' &&
+      assignment.completion.status !== 'CERTIFIED'
+    ) return assignment
+    return Object.freeze({
+      ...assignment,
+      state: 'completed',
+      sessionRef: null,
+      completion: Object.freeze({
+        ...assignment.completion,
+        status: 'CERTIFIED' as const,
+        learnerAssertedAt: assignment.completion.learnerAssertedAt ?? now,
+      }),
+      // First completion wins, mirroring AcademyLessonState.completedAt.
+      completedAt: assignment.completedAt ?? now,
+      pause: Object.freeze({ ...assignment.pause, pausedAt: null }),
+    })
+  })
+  // A refused completion must leave the student exactly as it found them. Only
+  // a completion that actually landed clears the pointer to the open work.
+  if (completed === state) return state
   return withStudent(completed, studentRef, (student) =>
     student.activeAssignmentRef === assignmentRef
+      ? Object.freeze({ ...student, activeAssignmentRef: null })
+      : student)
+}
+
+/**
+ * The learner says they are finished, under the authority the completion policy
+ * resolved for this lesson.
+ *
+ * Under LEARNER_AUTHORITY this is exactly the completion the pilot has always
+ * performed. Under GUARDIAN_ATTESTATION_REQUIRED the work is RECORDED and the
+ * assignment is left in whatever state it was already in — the learner's click
+ * moves the completion status to PENDING_GUARDIAN_ATTESTATION and nothing else.
+ * It does not set `state`, `completedAt`, or clear the session; only an adult
+ * attestation does that.
+ *
+ * Repeat clicks are a no-op: the first assertion's instant stands, so a child
+ * pressing Finish twice cannot make the work look freshly done to a parent.
+ */
+export function recordFamilyPilotLearnerCompletion(
+  state: FamilyPilotStateV1,
+  studentRef: string,
+  assignmentRef: string,
+  authority: FamilyPilotCompletionAuthority,
+  now: string,
+): FamilyPilotStateV1 {
+  if (authority === 'LEARNER_AUTHORITY') {
+    return completeFamilyPilotAssignment(state, studentRef, assignmentRef, now)
+  }
+  return withAssignment(state, studentRef, assignmentRef, now, (assignment) => {
+    if (assignment.completion.status === 'CERTIFIED') return assignment
+    if (
+      assignment.completion.status === 'PENDING_GUARDIAN_ATTESTATION' &&
+      assignment.completion.authority === 'GUARDIAN_ATTESTATION_REQUIRED'
+    ) return assignment
+    return Object.freeze({
+      ...assignment,
+      completion: Object.freeze({
+        ...emptyFamilyPilotCompletion('GUARDIAN_ATTESTATION_REQUIRED'),
+        status: 'PENDING_GUARDIAN_ATTESTATION' as const,
+        learnerAssertedAt: assignment.completion.learnerAssertedAt ?? now,
+      }),
+    })
+  })
+}
+
+/**
+ * A household-authorized adult certifies one pending assignment.
+ *
+ * This is the ONLY transition that can move guardian-required work to
+ * completed, and it refuses everything it cannot prove:
+ *
+ *   • `withAssignment` scopes the write to the named student, so an attestation
+ *     for one child can never land on a sibling — which matters because
+ *     assignment refs are lesson-derived and therefore identical across
+ *     children working the same lesson.
+ *   • `lessonRef` must match the record. A stale attestation, raised against
+ *     the lesson that was open a moment ago, is refused rather than applied to
+ *     whatever now sits under that assignment ref.
+ *   • The record must actually be pending. Attesting work under learner
+ *     authority, or work the learner has not finished, changes nothing.
+ *
+ * Attesting twice is a no-op: the second call sees CERTIFIED and returns the
+ * record untouched, so `attestedAt` keeps naming the moment the adult really
+ * did certify.
+ *
+ * Adult AUTHORIZATION is not checked here — this module has no notion of an
+ * authenticated adult. It is checked at the runtime seam, by the controller,
+ * before this is ever reached.
+ */
+export function attestFamilyPilotCompletion(
+  state: FamilyPilotStateV1,
+  input: {
+    readonly studentRef: string
+    readonly assignmentRef: string
+    readonly lessonRef: string
+    readonly attestedByRef: string
+    readonly evidenceMode: FamilyPilotAttestationEvidence
+  },
+  now: string,
+): FamilyPilotStateV1 {
+  // An adult ref this schema could not read back is refused at write time. The
+  // alternative is worse than a refused sign-off: the parser would drop the
+  // whole assignment on the next load, and the household would lose the work
+  // rather than just the certification.
+  if (!isFamilyPilotRef(input.attestedByRef)) return state
+  const attested = withAssignment(state, input.studentRef, input.assignmentRef, now, (assignment) => {
+    if (assignment.lessonRef !== input.lessonRef) return assignment
+    // Abandoned work is not signed off back into existence.
+    if (assignment.state === 'abandoned') return assignment
+    if (assignment.completion.authority !== 'GUARDIAN_ATTESTATION_REQUIRED') return assignment
+    if (assignment.completion.status !== 'PENDING_GUARDIAN_ATTESTATION') return assignment
+    return Object.freeze({
+      ...assignment,
+      state: 'completed',
+      sessionRef: null,
+      completion: Object.freeze({
+        authority: 'GUARDIAN_ATTESTATION_REQUIRED' as const,
+        status: 'CERTIFIED' as const,
+        learnerAssertedAt: assignment.completion.learnerAssertedAt,
+        attestedAt: now,
+        attestedByRef: input.attestedByRef,
+        evidenceMode: input.evidenceMode,
+        // The binding is written from the record itself, never from the caller,
+        // so a caller cannot bind an attestation to anything but what it
+        // actually certified.
+        attestedStudentRef: input.studentRef,
+        attestedAssignmentRef: assignment.assignmentRef,
+        attestedLessonRef: assignment.lessonRef,
+      }),
+      completedAt: assignment.completedAt ?? now,
+      pause: Object.freeze({ ...assignment.pause, pausedAt: null }),
+    })
+  })
+  // Same rule as completion: a refused attestation changes nothing at all, so a
+  // learner whose adult declined does not silently lose their open work.
+  if (attested === state) return state
+  return withStudent(attested, input.studentRef, (student) =>
+    student.activeAssignmentRef === input.assignmentRef
       ? Object.freeze({ ...student, activeAssignmentRef: null })
       : student)
 }

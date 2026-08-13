@@ -18,6 +18,12 @@ export interface StudentAssignment {
   readonly segments: readonly StudentSegment[]
   readonly currentSegmentRef?: string | null
   readonly completedSegmentRefs?: readonly string[]
+  /**
+   * The learner has finished this, and a household adult still has to sign it
+   * off before it counts. A plain boolean rather than the full completion
+   * vocabulary: this surface renders it, it does not reason about it.
+   */
+  readonly awaitingAdultAttestation?: boolean
 }
 
 export interface StudentProfile {

@@ -23,6 +23,20 @@ export {
   lessonSegments,
   type FamilyPilotCurriculumPort,
 } from './curriculum'
+// Production-safe: the completion policy seam imports Core and nothing else.
+export {
+  computeFamilyPilotCompletionStatus,
+  familyPilotCompletionAuthority,
+  guardianAttestationCompletionPolicy,
+  learnerAuthorityCompletionPolicy,
+  resolveCompletionAuthority,
+  type CurriculumCompletionAuthority,
+  type FamilyPilotAttestationRejection,
+  type FamilyPilotAttestationRequest,
+  type FamilyPilotAttestationResult,
+  type FamilyPilotCompletionPolicyPort,
+  type FamilyPilotPendingAttestation,
+} from '../completion/policy'
 export { toAssignmentStatus, toStudentAssignment, toStudentAssignments } from './assignments'
 export {
   checkStudyEntry,
