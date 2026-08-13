@@ -1,0 +1,418 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l01",
+  "lessonId": "ma-g11-financial-literacy-u03-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "15.4",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,400 divided by the $415 monthly capacity. Because only one goal is funded at a time, this is also the delay every later goal inherits."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "8.7",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,600 at $415 a month — the goal itself is small relative to the 24-month window it has."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "23.6",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,800 at $415 a month, the largest of the three goals and the one with the most time."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "24.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15.4 months of emergency fund followed by 8.7 months of certification. The certification is not slow; it is queued behind something else."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "47.7",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "All three goals funded in sequence: 15.4, then 8.7, then 23.6 months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$19,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three targets added: $6,400, $3,600, and $9,800."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$19,920.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$415 a month for the 48 months to the last deadline."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$120.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$19,920.00 of capacity against $19,800.00 of goals — the plan has enough money in total, with $120.00 to spare."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "No, it is late",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The certification completes in month 24.1 against a month-24 deadline, so the sequence misses it even though the money exists across the whole plan."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "0.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Month 24.1 against a month-24 deadline. The miss is tiny, which is exactly why a plan checked only on totals would never show it."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(emergency / capacity, 1)",
+        "substituted": "round(6400 / 415, 1)",
+        "result": "15.4",
+        "why": "$6,400 divided by the $415 monthly capacity. Because only one goal is funded at a time, this is also the delay every later goal inherits."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(certification / capacity2, 1)",
+        "substituted": "round(3600 / 415, 1)",
+        "result": "8.7",
+        "why": "$3,600 at $415 a month — the goal itself is small relative to the 24-month window it has."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(vehicle / capacity3, 1)",
+        "substituted": "round(9800 / 415, 1)",
+        "result": "23.6",
+        "why": "$9,800 at $415 a month, the largest of the three goals and the one with the most time."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "24.1",
+        "why": "15.4 months of emergency fund followed by 8.7 months of certification. The certification is not slow; it is queued behind something else."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3",
+        "result": "47.7",
+        "why": "All three goals funded in sequence: 15.4, then 8.7, then 23.6 months."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "emergency2 + certification2 + vehicle2",
+        "substituted": "6400 + 3600 + 9800",
+        "result": "$19,800.00",
+        "why": "The three targets added: $6,400, $3,600, and $9,800."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "capacity4 * 48",
+        "substituted": "415 * 48",
+        "result": "$19,920.00",
+        "why": "$415 a month for the 48 months to the last deadline."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 - #t2-p3",
+        "substituted": "#t2-p4 - #t2-p3",
+        "result": "$120.00",
+        "why": "$19,920.00 of capacity against $19,800.00 of goals — the plan has enough money in total, with $120.00 to spare."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t2-p1 <= deadline",
+        "substituted": "#t2-p1 <= 24",
+        "result": "No, it is late",
+        "why": "The certification completes in month 24.1 against a month-24 deadline, so the sequence misses it even though the money exists across the whole plan."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t2-p1 - deadline2",
+        "substituted": "#t2-p1 - 24",
+        "result": "0.1",
+        "why": "Month 24.1 against a month-24 deadline. The miss is tiny, which is exactly why a plan checked only on totals would never show it."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Nkechi has $120.00 more capacity than her goals require and still misses a deadline. Explain how both can be true, and propose one change to the plan that fixes the miss without increasing what she saves.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that total capacity and timing are different constraints: the money exists across 48 months but arrives too late for a goal due at month 24.",
+          "Proposes a change that works within the same $415 a month — most directly funding the certification before the emergency fund, or splitting the monthly amount between the two.",
+          "Checks the proposed change against the deadline rather than asserting it works."
+        ],
+        "evidenceRequirements": [
+          "Cites the month-24.1 completion against the month-24 deadline, and the $120.00 surplus, in the same explanation."
+        ],
+        "lookFors": [
+          "The response separates \"enough money\" from \"money in time\".",
+          "The proposed fix is tested, at least roughly, against the numbers.",
+          "A response that reorders the goals should notice the emergency fund is then delayed, and say whether that is acceptable."
+        ],
+        "commonMisconception": "Checking a multi-goal plan on totals and treating deadlines as automatically satisfied.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "The emergency fund is the goal with no deadline, and it is funded first. Give the strongest argument for keeping it first, and say what the certification miss costs under that choice.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Argues that the emergency fund protects the whole plan, so funding it first is what stops a single unexpected bill from destroying every other goal.",
+          "States the cost of that choice concretely: the certification is 0.1 months late, which may mean paying it late, borrowing a small amount, or deferring the course."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 15.4 months the emergency fund occupies and to the resulting month-24.1 certification date."
+        ],
+        "lookFors": [
+          "The response gives a reason for the priority rather than restating the order.",
+          "The cost named is specific to this plan rather than a general downside."
+        ],
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many months does the $6,400 emergency fund take at $415 a month?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many months does the $3,600 certification course take on its own?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How many months does the $9,800 vehicle replacement take on its own?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "In which month is the certification course fully funded, given that the emergency fund is completed first?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "In which month is the vehicle replacement fully funded?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What do the three goals need in total?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much can Nkechi save across the whole 48 months?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "By how much does the total capacity exceed what the goals need?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "Does the certification course get funded by its month-24 deadline under this sequence?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how many months is the certification deadline missed?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Nkechi has $120.00 more capacity than her goals require and still misses a deadline. Explain how both can be true, and propose one change to the plan that fixes the miss without increasing what she saves."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "The emergency fund is the goal with no deadline, and it is funded first. Give the strongest argument for keeping it first, and say what the certification miss costs under that choice."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How many months does the $6,400 emergency fund take at $415 a month? Answer: 15.4. Verification: $6,400 divided by the $415 monthly capacity. Because only one goal is funded at a time, this is also the delay every later goal inherits. t1-p2: How many months does the $3,600 certification course take on its own? Answer: 8.7. Verification: $3,600 at $415 a month — the goal itself is small relative to the 24-month window it has. t1-p3: How many months does the $9,800 vehicle replacement take on its own? Answer: 23.6. Verification: $9,800 at $415 a month, the largest of the three goals and the one with the most time. t2-p1: In which month is the certification course fully funded, given that the emergency fund is completed first? Answer: 24.1. Verification: 15.4 months of emergency fund followed by 8.7 months of certification. The certification is not slow; it is queued behind something else. t2-p2: In which month is the vehicle replacement fully funded? Answer: 47.7. Verification: All three goals funded in sequence: 15.4, then 8.7, then 23.6 months. t2-p3: What do the three goals need in total? Answer: $19,800.00. Verification: The three targets added: $6,400, $3,600, and $9,800. t2-p4: How much can Nkechi save across the whole 48 months? Answer: $19,920.00. Verification: $415 a month for the 48 months to the last deadline. t2-p5: By how much does the total capacity exceed what the goals need? Answer: $120.00. Verification: $19,920.00 of capacity against $19,800.00 of goals — the plan has enough money in total, with $120.00 to spare. t3-p1: Does the certification course get funded by its month-24 deadline under this sequence? Answer: No, it is late. Verification: The certification completes in month 24.1 against a month-24 deadline, so the sequence misses it even though the money exists across the whole plan. t3-p2: By how many months is the certification deadline missed? Answer: 0.1. Verification: Month 24.1 against a month-24 deadline. The miss is tiny, which is exactly why a plan checked only on totals would never show it."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: Nkechi has $120.00 more capacity than her goals require and still misses a deadline. Explain how both can be true, and propose one change to the plan that fixes the miss without increasing what she saves. Explains that total capacity and timing are different constraints: the money exists across 48 months but arrives too late for a goal due at month 24. Proposes a change that works within the same $415 a month — most directly funding the certification before the emergency fund, or splitting the monthly amount between the two. Checks the proposed change against the deadline rather than asserting it works. Cites the month-24.1 completion against the month-24 deadline, and the $120.00 surplus, in the same explanation. The response separates \"enough money\" from \"money in time\". The proposed fix is tested, at least roughly, against the numbers. A response that reorders the goals should notice the emergency fund is then delayed, and say whether that is acceptable. t4-p2: The emergency fund is the goal with no deadline, and it is funded first. Give the strongest argument for keeping it first, and say what the certification miss costs under that choice. Argues that the emergency fund protects the whole plan, so funding it first is what stops a single unexpected bill from destroying every other goal. States the cost of that choice concretely: the certification is 0.1 months late, which may mean paying it late, borrowing a small amount, or deferring the course. Refers to the 15.4 months the emergency fund occupies and to the resulting month-24.1 certification date. The response gives a reason for the priority rather than restating the order. The cost named is specific to this plan rather than a general downside."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that total capacity and timing are different constraints: the money exists across 48 months but arrives too late for a goal due at month 24. Proposes a change that works within the same $415 a month — most directly funding the certification before the emergency fund, or splitting the monthly amount between the two. Checks the proposed change against the deadline rather than asserting it works. Argues that the emergency fund protects the whole plan, so funding it first is what stops a single unexpected bill from destroying every other goal. States the cost of that choice concretely: the certification is 0.1 months late, which may mean paying it late, borrowing a small amount, or deferring the course."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 10 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 10,
+      "contractFixedItemCount": 10,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u03-l01.scoring.json",
+    "sourceScoringSha256": "b1619d3d8dab2d09f0634f7c8233b988498723b64cab0986d1e72038fa7c12fe",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

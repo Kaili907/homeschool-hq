@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l03",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: common IRS tax forms and what each is for"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "common IRS tax forms and what each is for",
+  "objective": "Read two fictional tax forms, verify the withheld amounts against the stated rates, and identify what the second form does not do that the first does.",
+  "scenario": "The two simulated forms below belong to a fictional filer. Every box figure is invented for this exercise and no real form or filer is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional form summaries in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional W-2 reports wages of $41,250 in box 1 and federal income tax withheld of $3,890 in box 2. Social Security is withheld at 6.2% of wages and Medicare at 1.45%, and both appear on the same form.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What Social Security amount should appear on the fictional W-2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What Medicare amount should appear?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do all three withheld amounts on the W-2 come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The same fictional filer also received a 1099-NEC reporting $2,800 of self-employed work with nothing withheld. Under the simplified fictional rule used here, self-employment tax is 15.3% of that amount.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What self-employment tax does the $2,800 generate under this fictional rule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "What is the main practical difference between the two forms for this filer?",
+          "choices": [
+            "The W-2 reports income and the 1099-NEC does not",
+            "Tax was withheld on the W-2 income and no tax was withheld on the 1099-NEC income",
+            "The 1099-NEC income is not taxable",
+            "The W-2 income is not reported to the tax authority"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the filer’s total income across both forms?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A filer with only W-2 income and a filer with 1099-NEC income face different rules and very different experiences at filing time. Explain both differences, and describe what the second filer should do during the year that the first need not."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the three W-2 amounts are being added to the wages rather than subtracted from them, note what box 1 is: total wages before withholding. The three withheld amounts come out of that figure, they do not add to it.",
+  "extension": "Work out roughly what the fictional filer should set aside from each $100 of 1099-NEC income to cover both self-employment tax and 12% income tax, and say why that estimate should be rounded up.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What Social Security amount should appear on the fictional W-2?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What Medicare amount should appear?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What do all three withheld amounts on the W-2 come to?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What self-employment tax does the $2,800 generate under this fictional rule?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the main practical difference between the two forms for this filer?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the filer’s total income across both forms?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A filer with only W-2 income and a filer with 1099-NEC income face different rules and very different experiences at filing time. Explain both differences, and describe what the second filer should do during the year that the first need not."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u07-l03.package.json",
+    "sourcePackageSha256": "0ee5b13a8d8a729559331783b3b5ce91bf567fc4c8b7e88321595519c7dc5fe6",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u07-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

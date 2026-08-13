@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u02-l04",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Contracts, Disclosures, and Consumer Protection",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: the role of government agencies in consumer protection"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "the role of government agencies in consumer protection",
+  "objective": "Compute defect reporting rates before and after a fictional disclosure requirement, and distinguish a change in what is known from a change in what is happening.",
+  "scenario": "A fictional consumer protection agency requires sellers of a simulated product to publish a defect and complaint disclosure. The reporting figures below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional reporting figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Before the requirement, 3 defects were reported out of 240 units sold in the period. After the requirement, with a published complaint route and a disclosure box on the packaging, 16 defects were reported out of the same 240 units sold in the next comparable period.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What was the reported defect rate before the requirement? Round to two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What was the reported defect rate after? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "By what factor did the reported rate rise? Round to two decimal places."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Interpret the change.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "What does the rise in the reported rate most likely show?",
+          "choices": [
+            "The product became five times more defective",
+            "More of the defects that were already occurring are now being reported",
+            "The disclosure requirement caused defects",
+            "The data cannot support any interpretation"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many additional defects were reported in the second period?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A seller argues that the disclosure requirement made their product look worse without making anything better for buyers. Answer that argument, and say what evidence would be needed to know whether the requirement actually helped."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two rates look like they measure the same thing, write out what each one counts: reports, not defects. The denominator is identical at 240 units; only the willingness and ability to report changed between the periods.",
+  "extension": "Suppose a third period shows 11 reports out of 300 units. Compute that rate and say whether it is evidence that the product improved.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u02-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What was the reported defect rate before the requirement? Round to two decimal places."
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What was the reported defect rate after? Round to one decimal place."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "By what factor did the reported rate rise? Round to two decimal places."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the rise in the reported rate most likely show?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many additional defects were reported in the second period?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A seller argues that the disclosure requirement made their product look worse without making anything better for buyers. Answer that argument, and say what evidence would be needed to know whether the requirement actually helped."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-10/swk-flhs-g10-u02-l04.package.json",
+    "sourcePackageSha256": "f897e0b3a33d66668210d07eccf49e6487a8562204d62231eab407e47ba22ec5",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u02-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

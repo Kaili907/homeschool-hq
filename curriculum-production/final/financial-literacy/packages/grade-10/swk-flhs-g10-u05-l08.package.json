@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l08",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: fees, expense ratios, and their long-run drag"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "fees, expense ratios, and their long-run drag",
+  "objective": "Transfer the expense-ratio method to a fee charged as a flat amount, find the balance at which the two pricing structures cost the same, and state which structure suits which balance.",
+  "scenario": "The two simulated platforms below are invented for this exercise. Each charges only the fee described, and the balances are held constant so the comparison isolates the fee structure.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional fee schedules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional platform A charges 0.45% of the account balance each year. A fictional platform B charges a flat $95 a year regardless of balance. Consider a $12,000 account and a $30,000 account.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does platform A charge on the $12,000 account in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does platform A charge on the $30,000 account in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "At what balance do the two platforms charge the same amount in a year? Round to the nearest cent.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now hold the $30,000 balance for 10 years under each structure and compare, then check the smaller account.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does platform A cost on the $30,000 account over 10 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does platform B cost over the same 10 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the percentage fee cost on that account over the decade?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "On the $12,000 account, how much more does the flat fee cost than the percentage fee in one year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why neither fee structure is cheaper in general, using the crossover balance. Then say what changes about this comparison for an investor who is adding money every year, and what that means for someone starting near the crossover."
+        }
+      ]
+    }
+  ],
+  "remediation": "If one platform looks cheaper in every case, compute both fees at both balances. At $12,000 the percentage fee is $54.00 against $95; at $30,000 it is $135.00 against the same $95. A structure that wins at one balance and loses at another has a crossover, and here it is $21,111.11.",
+  "extension": "Work out which platform is cheaper over 10 years for an account that starts at $12,000 and grows by $3,000 every year, and say roughly when the ranking flips.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does platform A charge on the $12,000 account in a year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does platform A charge on the $30,000 account in a year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "At what balance do the two platforms charge the same amount in a year? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does platform A cost on the $30,000 account over 10 years?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does platform B cost over the same 10 years?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the percentage fee cost on that account over the decade?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "On the $12,000 account, how much more does the flat fee cost than the percentage fee in one year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain why neither fee structure is cheaper in general, using the crossover balance. Then say what changes about this comparison for an investor who is adding money every year, and what that means for someone starting near the crossover."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u05-l08.package.json",
+    "sourcePackageSha256": "06a0f56f92079b30c33334935bb9a1762da31de64c7583ac37b9439930992d5e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u05-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

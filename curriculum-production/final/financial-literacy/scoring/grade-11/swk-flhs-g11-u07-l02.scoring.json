@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l02",
+  "lessonId": "ma-g11-financial-literacy-u07-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$47,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,900 less the $11,400 standard deduction, before the contribution is considered."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6,986.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980.00 in the 10% band, $4,004.00 in the 14% band, and 22% of the $9,100 above $38,400."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$41,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$47,500.00 less the $6,000 contributed — still above $38,400, so the reduction falls entirely in the 22% band."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$5,666.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same two lower bands, and 22% of the $3,100 now above $38,400."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,320.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,986.00 against $5,666.00 — exactly 22% of the $6,000 contributed, because the whole reduction fell in the 22% band."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$4,680.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,000 into the account for $4,680.00 of reduced take-home pay — the tax system supplies the difference now, and taxes the account on the way out later."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "22.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Exactly the marginal rate. A deduction is always worth the rate at which the last dollars of income were taxed."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "11.9%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,986.00 against $58,900. The contribution saved at 22.0% rather than at this 11.9%, which is the whole point of the distinction."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "Because a deduction removes income from the top of the stack, where the highest rate applies",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The saving of 22.0% exceeds the 11.9% effective rate because the $6,000 came off the part of taxable income sitting above $38,400; nothing in the schedule gives the account its own rate, and the $11,400 deduction is applied once."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "income - deduction",
+        "substituted": "58900 - 11400",
+        "result": "$47,500.00",
+        "why": "$58,900 less the $11,400 standard deduction, before the contribution is considered."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(band1 * rate1 + (band2 - band1) * rate2 + (#t1-p1 - band2) * rate3, 2)",
+        "substituted": "round(9800 * 0.1 + (38400 - 9800) * 0.14 + (#t1-p1 - 38400) * 0.22, 2)",
+        "result": "$6,986.00",
+        "why": "$980.00 in the 10% band, $4,004.00 in the 14% band, and 22% of the $9,100 above $38,400."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - contribution",
+        "substituted": "#t1-p1 - 6000",
+        "result": "$41,500.00",
+        "why": "$47,500.00 less the $6,000 contributed — still above $38,400, so the reduction falls entirely in the 22% band."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(band1b * rate1b + (band2b - band1b) * rate2b + (#t1-p3 - band2b) * rate3b, 2)",
+        "substituted": "round(9800 * 0.1 + (38400 - 9800) * 0.14 + (#t1-p3 - 38400) * 0.22, 2)",
+        "result": "$5,666.00",
+        "why": "The same two lower bands, and 22% of the $3,100 now above $38,400."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - #t1-p4",
+        "substituted": "#t1-p2 - #t1-p4",
+        "result": "$1,320.00",
+        "why": "$6,986.00 against $5,666.00 — exactly 22% of the $6,000 contributed, because the whole reduction fell in the 22% band."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "contribution2 - #t2-p1",
+        "substituted": "6000 - #t2-p1",
+        "result": "$4,680.00",
+        "why": "$6,000 into the account for $4,680.00 of reduced take-home pay — the tax system supplies the difference now, and taxes the account on the way out later."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / contribution3 * 100, 1)",
+        "substituted": "round(#t2-p1 / 6000 * 100, 1)",
+        "result": "22.0%",
+        "why": "Exactly the marginal rate. A deduction is always worth the rate at which the last dollars of income were taxed."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t1-p2 / income2 * 100, 1)",
+        "substituted": "round(#t1-p2 / 58900 * 100, 1)",
+        "result": "11.9%",
+        "why": "$6,986.00 against $58,900. The contribution saved at 22.0% rather than at this 11.9%, which is the whole point of the distinction."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 > #t2-p4",
+        "substituted": "#t2-p3 > #t2-p4",
+        "result": "Because a deduction removes income from the top of the stack, where the highest rate applies",
+        "why": "The saving of 22.0% exceeds the 11.9% effective rate because the $6,000 came off the part of taxable income sitting above $38,400; nothing in the schedule gives the account its own rate, and the $11,400 deduction is applied once."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The contribution saves 22.0% while Ignatius’s effective rate is 11.9%. Explain why a deduction is worth the higher figure, and say what would have to be true for the same $6,000 contribution to save less.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a deduction removes income from the top of the stack, so it is valued at the rate the last dollars were taxed at, not at the average across all income.",
+          "Names the condition under which the saving would be smaller: taxable income close enough to $38,400 that part of the contribution drops into the 14% band instead.",
+          "Notes that the saving is a deferral rather than a cancellation, since the account is taxed when the money comes out."
+        ],
+        "evidenceRequirements": [
+          "Cites the 22.0% saving against the 11.9% effective rate and the $1,320.00 in dollars."
+        ],
+        "lookFors": [
+          "The response describes the deduction as coming off the top rather than off the average.",
+          "The condition named is checked against the $38,400 threshold rather than asserted.",
+          "A response noting that the tax is deferred and not avoided is making an important correction."
+        ],
+        "commonMisconception": "Valuing a deduction at the effective rate rather than the marginal rate.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Ignatius has $4,680.00 less take-home pay and $6,000 in the account. Say what he has actually gained and what he has given up, and name one thing he would need to know before deciding this is a good trade.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the gain: $6,000 working in the account for $4,680.00 of forgone take-home pay, with the $1,320.00 difference supplied by the reduced tax bill.",
+          "Names what he would need to know, such as when the money can be withdrawn, what rate will apply on the way out, or whether he needs the $4,680.00 for something sooner."
+        ],
+        "evidenceRequirements": [
+          "Uses the $4,680.00 net cost and the $6,000 contribution in the explanation."
+        ],
+        "lookFors": [
+          "The response identifies access to the money as a real cost, not only the tax position.",
+          "The unknown named is one that would actually change the decision."
+        ],
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Ignatius’s taxable income before any contribution?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is his tax before the contribution?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "A $6,000 contribution reduces taxable income by that amount. What is the new taxable income?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is his tax after the contribution?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much tax does the contribution save?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the net cost of putting $6,000 into the account?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The saving is what percentage of the contribution? Give one decimal place."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is Ignatius’s effective rate before the contribution, against his $58,900 income? Give one decimal place."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "Why is the saving 22.0% of the contribution rather than 11.9%?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The contribution saves 22.0% while Ignatius’s effective rate is 11.9%. Explain why a deduction is worth the higher figure, and say what would have to be true for the same $6,000 contribution to save less."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Ignatius has $4,680.00 less take-home pay and $6,000 in the account. Say what he has actually gained and what he has given up, and name one thing he would need to know before deciding this is a good trade."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is Ignatius’s taxable income before any contribution? Answer: $47,500.00. Verification: $58,900 less the $11,400 standard deduction, before the contribution is considered. t1-p2: What is his tax before the contribution? Answer: $6,986.00. Verification: $980.00 in the 10% band, $4,004.00 in the 14% band, and 22% of the $9,100 above $38,400. t1-p3: A $6,000 contribution reduces taxable income by that amount. What is the new taxable income? Answer: $41,500.00. Verification: $47,500.00 less the $6,000 contributed — still above $38,400, so the reduction falls entirely in the 22% band. t1-p4: What is his tax after the contribution? Answer: $5,666.00. Verification: The same two lower bands, and 22% of the $3,100 now above $38,400. t2-p1: How much tax does the contribution save? Answer: $1,320.00. Verification: $6,986.00 against $5,666.00 — exactly 22% of the $6,000 contributed, because the whole reduction fell in the 22% band. t2-p2: What is the net cost of putting $6,000 into the account? Answer: $4,680.00. Verification: $6,000 into the account for $4,680.00 of reduced take-home pay — the tax system supplies the difference now, and taxes the account on the way out later. t2-p3: The saving is what percentage of the contribution? Give one decimal place. Answer: 22.0%. Verification: Exactly the marginal rate. A deduction is always worth the rate at which the last dollars of income were taxed. t2-p4: What is Ignatius’s effective rate before the contribution, against his $58,900 income? Give one decimal place. Answer: 11.9%. Verification: $6,986.00 against $58,900. The contribution saved at 22.0% rather than at this 11.9%, which is the whole point of the distinction. t2-p5: Why is the saving 22.0% of the contribution rather than 11.9%? Answer: Because a deduction removes income from the top of the stack, where the highest rate applies. Verification: The saving of 22.0% exceeds the 11.9% effective rate because the $6,000 came off the part of taxable income sitting above $38,400; nothing in the schedule gives the account its own rate, and the $11,400 deduction is applied once."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The contribution saves 22.0% while Ignatius’s effective rate is 11.9%. Explain why a deduction is worth the higher figure, and say what would have to be true for the same $6,000 contribution to save less. Explains that a deduction removes income from the top of the stack, so it is valued at the rate the last dollars were taxed at, not at the average across all income. Names the condition under which the saving would be smaller: taxable income close enough to $38,400 that part of the contribution drops into the 14% band instead. Notes that the saving is a deferral rather than a cancellation, since the account is taxed when the money comes out. Cites the 22.0% saving against the 11.9% effective rate and the $1,320.00 in dollars. The response describes the deduction as coming off the top rather than off the average. The condition named is checked against the $38,400 threshold rather than asserted. A response noting that the tax is deferred and not avoided is making an important correction. t3-p2: Ignatius has $4,680.00 less take-home pay and $6,000 in the account. Say what he has actually gained and what he has given up, and name one thing he would need to know before deciding this is a good trade. States the gain: $6,000 working in the account for $4,680.00 of forgone take-home pay, with the $1,320.00 difference supplied by the reduced tax bill. Names what he would need to know, such as when the money can be withdrawn, what rate will apply on the way out, or whether he needs the $4,680.00 for something sooner. Uses the $4,680.00 net cost and the $6,000 contribution in the explanation. The response identifies access to the money as a real cost, not only the tax position. The unknown named is one that would actually change the decision."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that a deduction removes income from the top of the stack, so it is valued at the rate the last dollars were taxed at, not at the average across all income. Names the condition under which the saving would be smaller: taxable income close enough to $38,400 that part of the contribution drops into the 14% band instead. Notes that the saving is a deferral rather than a cancellation, since the account is taxed when the money comes out. States the gain: $6,000 working in the account for $4,680.00 of forgone take-home pay, with the $1,320.00 difference supplied by the reduced tax bill. Names what he would need to know, such as when the money can be withdrawn, what rate will apply on the way out, or whether he needs the $4,680.00 for something sooner."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u07-l02.scoring.json",
+    "sourceScoringSha256": "5fd002954a27e87cba1aa32c3c29e43f30ffccaf2f8dd0eeca7b0aeaebfa2bc5",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

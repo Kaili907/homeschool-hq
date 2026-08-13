@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l05",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: stress-testing the plan against a shock"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "stress-testing the plan against a shock",
+  "objective": "Test the fictional capstone plan against a loss of income and against a large unplanned expense, and establish which of the two it survives.",
+  "scenario": "This lesson stress-tests the capstone plan for Case R, the fictional adult, or for the learner’s own invented fictional profile. The shocks are stated cases used to test the plan; they are not predictions, and no part of this lesson concerns the learner’s own circumstances.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the Case R figures in these directions",
+    "the capstone record"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Case R has living costs of $2,045 a month and a student loan payment of $198.54 that continues whatever happens to income. The reserve holds $1,600 at the start of the year and receives $400 a month. Shock A is 3 months with no income at all. Shock B is a single unplanned expense of $4,200. Note one thing the figures below leave out: the $2,040 health premium was deducted from pay, so with no pay there is no deduction, and keeping that cover through the shock would be a further cost this test does not include.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do living costs come to across the 3 months of shock A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do the loan payments come to across the same 3 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does shock A require in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the reserve against each shock.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the reserve hold after a full year of $400 monthly transfers?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does shock A exceed the reserve?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the reserve hold after shock B instead?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How many months of living costs would the reserve cover after shock B? Give two decimal places."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Add the stress-test findings to the capstone record.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Record what this stress test found. State plainly which shock the plan survives and which it does not, decide what to change in response, and say what your change costs elsewhere in the plan. Explain why leaving the plan as it is could also be defended."
+        }
+      ]
+    }
+  ],
+  "remediation": "If shock A appears to be covered, the loan payment has probably been left out. Income stopping does not stop the $198.54 payment, so the 3 months require $6,135.00 of living costs plus $595.62 of loan payments — $6,730.62 against a reserve of $6,400.00.",
+  "extension": "Work out what monthly reserve transfer would have covered shock A in full by the end of the year, and say what that transfer would have to displace in the $931.04 surplus.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do living costs come to across the 3 months of shock A?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do the loan payments come to across the same 3 months?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does shock A require in total?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the reserve hold after a full year of $400 monthly transfers?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "By how much does shock A exceed the reserve?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would the reserve hold after shock B instead?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How many months of living costs would the reserve cover after shock B? Give two decimal places."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Record what this stress test found. State plainly which shock the plan survives and which it does not, decide what to change in response, and say what your change costs elsewhere in the plan. Explain why leaving the plan as it is could also be defended."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u07-l05.package.json",
+    "sourcePackageSha256": "ec533d7f00c55c3dbabc3cece313af910c77763d7436a2eb2df7488bb7e6cc30",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u07-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

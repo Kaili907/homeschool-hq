@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l08",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: setting a personal borrowing limit before shopping"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "setting a personal borrowing limit before shopping",
+  "objective": "Apply the borrowing-ceiling method to a fictional trade pathway with a shorter repayment term, and quantify the gap between what the ceiling allows and what the pathway costs.",
+  "scenario": "The fictional trade programme, its simulated costs, and the invented payment factor below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional programme costs and payment factor in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional applicant expects to earn $38,400 a year on completing the programme, and adopts a rule that the loan payment must stay within 8% of expected monthly gross pay. Loans for this pathway run over five years, and under the fictional factor table that costs $19.10 a month for every $1,000 borrowed. The programme costs $14,600 across two years and requires $2,800 of tools.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is expected monthly gross pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What monthly payment does the 8% rule allow?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What total borrowing does that payment support over five years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the pathway against the ceiling.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the pathway cost in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the cost exceed the borrowing ceiling?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Does financing the whole pathway by borrowing fit inside the applicant’s own rule?",
+          "choices": [
+            "Yes — the ceiling covers the cost",
+            "No — the cost exceeds the ceiling by $3,996.86"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The pathway costs $3,996.86 more than the ceiling allows. Give two different ways this fictional applicant could close that gap without breaking the rule, price each, and say which you would try first and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the ceiling comes out at $24,150.94, the ten-year factor of $10.60 is being used. This pathway’s loans run five years at $19.10 per $1,000, not $10.60. A shorter term costs more each month for the same balance, so the same $256.00 payment supports far less borrowing.",
+  "extension": "Recompute the ceiling if the applicant could repay over ten years at $10.60 per $1,000, and say whether the longer term closes the gap and what it costs in total repaid.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is expected monthly gross pay?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What monthly payment does the 8% rule allow?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What total borrowing does that payment support over five years?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the pathway cost in total?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the cost exceed the borrowing ceiling?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Does financing the whole pathway by borrowing fit inside the applicant’s own rule?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The pathway costs $3,996.86 more than the ceiling allows. Give two different ways this fictional applicant could close that gap without breaking the rule, price each, and say which you would try first and why."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u04-l08.package.json",
+    "sourcePackageSha256": "aee7a76cbfd6e5dc0a139e4ec710c3c8319da2f61a98d6cd499e98dcbba2240b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u04-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

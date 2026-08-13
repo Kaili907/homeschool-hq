@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l02",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: buy, finance, lease, or delay compared"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "buy, finance, lease, or delay compared",
+  "objective": "Compare buying outright, financing, leasing, and delaying a fictional purchase on total outlay, and identify what each comparison leaves the buyer holding at the end.",
+  "scenario": "Thaddeus Okonkwo-Reyes is a fictional buyer with four simulated routes to the same vehicle. Every price, payment, and lease term below is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the four fictional offers in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Buying outright costs $19,600 today. Financing means $2,900 down and 60 monthly payments of $348. Leasing means $1,850 due at signing and 36 monthly payments of $229, after which the vehicle is returned.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of the 60 finance payments?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the finance route cost in total, counting the deposit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does financing cost than buying outright?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does the 36-month lease cost in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The fourth route is delay. Thaddeus keeps his current vehicle for 2 more years at $2,150 a year in repairs, and then buys the same model, which by then costs $17,200.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the 2 extra years of repairs cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the delay route cost in total, counting the repairs and the later purchase?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does delaying cost than buying outright today?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Among the three routes that end with Thaddeus owning the vehicle, what separates the most expensive from the least?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "The lease has the lowest total on the page at $10,094.00. Why can it not be ranked against the other three on that figure?",
+          "choices": [
+            "Because it covers 36 months and leaves no vehicle, while the others cover 60 months and end in ownership",
+            "Because lease payments are not really payments",
+            "Because the deposit at signing is larger than the finance deposit"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rank the four routes for Thaddeus and defend the ranking. State explicitly what you are holding constant to make the comparison, and what your ranking would change to if he could only find $1,000 today."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The delay route assumes the vehicle will cost $17,200 in two years. Explain what makes that figure different in kind from the other figures in this comparison, and say what would happen to the ranking if it turned out to be $19,900."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the finance route comes out at $20,880.00, the deposit has been left out; if it comes out near $24,000 with no deposit line, the deposit is being double-counted inside the payments. The finance route is exactly two payments of a different kind: $2,900 once, and $348 sixty times. Write those as two lines and total them before comparing anything.",
+  "extension": "Work out what the vehicle would have to cost in two years for the delay route to beat buying outright today, and say whether that price drop is larger or smaller than the one the scenario assumes.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of the 60 finance payments?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the finance route cost in total, counting the deposit?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does financing cost than buying outright?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What does the 36-month lease cost in total?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the 2 extra years of repairs cost?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the delay route cost in total, counting the repairs and the later purchase?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does delaying cost than buying outright today?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Among the three routes that end with Thaddeus owning the vehicle, what separates the most expensive from the least?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "The lease has the lowest total on the page at $10,094.00. Why can it not be ranked against the other three on that figure?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Rank the four routes for Thaddeus and defend the ranking. State explicitly what you are holding constant to make the comparison, and what your ranking would change to if he could only find $1,000 today."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The delay route assumes the vehicle will cost $17,200 in two years. Explain what makes that figure different in kind from the other figures in this comparison, and say what would happen to the ranking if it turned out to be $19,900."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u02-l02.package.json",
+    "sourcePackageSha256": "5d6d38a9802027f2eeae13a259e510246e0d6302a63c122ee597ace0bb7bb4d8",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u02-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

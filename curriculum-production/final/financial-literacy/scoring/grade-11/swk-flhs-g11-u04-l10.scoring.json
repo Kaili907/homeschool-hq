@@ -1,0 +1,481 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l10",
+  "lessonId": "ma-g11-financial-literacy-u04-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$95.38",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.9% a year on $19,400 — the largest balance at the lowest rate."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$61.43",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "23.4% a year on $3,150 — the smallest balance at much the highest rate."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$46.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6.4% a year on $8,700 — a middling balance at a rate close to the study loan’s, so it is neither the dearest nor the cheapest debt in the set."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$203.21",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$95.38, $61.43, and $46.40 together — the amount that must be paid each month before any balance moves."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$574.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The payments Perpetua must make regardless of any strategy."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$246.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$820 of capacity less $574.00 of required payments — the only part of the plan she gets to direct."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,438.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$203.21 a month held constant for a year. Balances do fall, so this overstates a real year slightly and gives the scale of the problem."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "9.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,150 at $341 a month. Ignoring interest understates the time slightly and is a stated simplification."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "11.3%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$574.00 of required payments against $5,100 of gross income — comfortable by lending standards, which is a different question from whether the debt is expensive."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "20.7%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$820 against $3,960 of take-home pay — more than double the debt-to-income figure, because that ratio uses gross income and only the minimums."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$3.59",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$246.00 moved across a gap of 17.5 percentage points for one month."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "The card, at 23.4%",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Minimising interest means directing spare money at the highest rate, and the card at 23.4% charges $61.43 a month on only $3,150 against the vehicle loan’s $46.40 on $8,700; it also happens to be the smallest balance, so both common strategies agree here."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(studyBalance * studyRate / 12, 2)",
+        "substituted": "round(19400 * 0.059 / 12, 2)",
+        "result": "$95.38",
+        "why": "5.9% a year on $19,400 — the largest balance at the lowest rate."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(cardBalance * cardRate / 12, 2)",
+        "substituted": "round(3150 * 0.234 / 12, 2)",
+        "result": "$61.43",
+        "why": "23.4% a year on $3,150 — the smallest balance at much the highest rate."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(vehicleBalance * vehicleRate / 12, 2)",
+        "substituted": "round(8700 * 0.064 / 12, 2)",
+        "result": "$46.40",
+        "why": "6.4% a year on $8,700 — a middling balance at a rate close to the study loan’s, so it is neither the dearest nor the cheapest debt in the set."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "#t1-p1 + #t1-p2 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p2 + #t1-p3",
+        "result": "$203.21",
+        "why": "$95.38, $61.43, and $46.40 together — the amount that must be paid each month before any balance moves."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "studyMin + cardMin + vehicleMin",
+        "substituted": "214 + 95 + 265",
+        "result": "$574.00",
+        "why": "The payments Perpetua must make regardless of any strategy."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "capacity - #t2-p1",
+        "substituted": "820 - #t2-p1",
+        "result": "$246.00",
+        "why": "$820 of capacity less $574.00 of required payments — the only part of the plan she gets to direct."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p4 * 12, 2)",
+        "substituted": "round(#t1-p4 * 12, 2)",
+        "result": "$2,438.52",
+        "why": "$203.21 a month held constant for a year. Balances do fall, so this overstates a real year slightly and gives the scale of the problem."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(cardBalance2 / (cardMin2 + #t2-p2), 1)",
+        "substituted": "round(3150 / (95 + #t2-p2), 1)",
+        "result": "9.2",
+        "why": "$3,150 at $341 a month. Ignoring interest understates the time slightly and is a stated simplification."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p1 / gross * 100, 1)",
+        "substituted": "round(#t2-p1 / 5100 * 100, 1)",
+        "result": "11.3%",
+        "why": "$574.00 of required payments against $5,100 of gross income — comfortable by lending standards, which is a different question from whether the debt is expensive."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "round(capacity2 / takeHome * 100, 1)",
+        "substituted": "round(820 / 3960 * 100, 1)",
+        "result": "20.7%",
+        "why": "$820 against $3,960 of take-home pay — more than double the debt-to-income figure, because that ratio uses gross income and only the minimums."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(#t2-p2 * (cardRate2 - studyRate2) / 12, 2)",
+        "substituted": "round(#t2-p2 * (0.234 - 0.059) / 12, 2)",
+        "result": "$3.59",
+        "why": "$246.00 moved across a gap of 17.5 percentage points for one month."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p2 > #t1-p3",
+        "substituted": "#t1-p2 > #t1-p3",
+        "result": "The card, at 23.4%",
+        "why": "Minimising interest means directing spare money at the highest rate, and the card at 23.4% charges $61.43 a month on only $3,150 against the vehicle loan’s $46.40 on $8,700; it also happens to be the smallest balance, so both common strategies agree here."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Present a repayment plan for Perpetua. State the ordering and the objective it serves, say what happens to the freed-up payment when the card clears, and name the assumption whose failure would most damage the plan.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Sets out an ordering with the card first and justifies it against a stated objective, using the $61.43 monthly charge or the 23.4% rate.",
+          "Says what happens after the card clears at about month 9.2 — the $95 minimum plus the $246.00 extra, or $341 a month, becomes available for the next debt.",
+          "Names the most damaging assumption, most defensibly the $820 monthly capacity holding for the whole plan, and explains what would happen if it fell."
+        ],
+        "evidenceRequirements": [
+          "Cites the $203.21 monthly interest total and the $246.00 of directable capacity.",
+          "Refers to the 9.2-month card clearing time when describing what happens next."
+        ],
+        "lookFors": [
+          "The plan says what happens after the first debt clears, not only where to start.",
+          "The objective is stated rather than assumed, so the ordering can be judged against it.",
+          "A response noting that the card is both the smallest balance and the highest rate, so no strategy conflict arises, is reading the set correctly."
+        ],
+        "commonMisconception": "Building a repayment plan that specifies a starting point but not what happens when a debt is cleared.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "assumption-identification",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "Perpetua’s debt-to-income ratio is 11.3% and her debt capacity is 20.7% of take-home pay. Explain why the two figures differ so much, and say which one describes her situation better.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the ratio uses gross income and counts only the $574.00 of minimums, while the 20.7% uses take-home pay and counts the full $820 she actually commits.",
+          "Argues that the take-home figure describes her situation better, because it measures money she can actually spend against money she has actually committed."
+        ],
+        "evidenceRequirements": [
+          "Uses the $5,100 gross and $3,960 take-home figures, and both the $574.00 and $820 payment figures."
+        ],
+        "lookFors": [
+          "The response identifies both differences — the income base and the payment base.",
+          "The choice is justified rather than asserted."
+        ],
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 11,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does the study loan charge in the first month?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does the card charge in the first month?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does the vehicle loan charge in the first month?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the total interest charged across all three debts in the first month?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the three minimum payments come to?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much does she have above the minimums, from her $820 debt capacity?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "If nothing changed, what would the first month’s interest come to over a year?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Directing the extra $246.00 at the card, how many months does it take to clear? Ignore interest for this step and give one decimal place."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What is Perpetua’s debt-to-income ratio, using the minimums against her $5,100 gross income? Give one decimal place."
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "What share of her $3,960 take-home pay does the $820 debt capacity represent? Give one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "Directing the $246.00 at the card rather than the study loan moves it from 5.9% to 23.4%. How much interest does that save in a month?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "Which debt should receive the extra $246.00 first if the objective is to minimise interest paid?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Present a repayment plan for Perpetua. State the ordering and the objective it serves, say what happens to the freed-up payment when the card clears, and name the assumption whose failure would most damage the plan."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "Perpetua’s debt-to-income ratio is 11.3% and her debt capacity is 20.7% of take-home pay. Explain why the two figures differ so much, and say which one describes her situation better."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much interest does the study loan charge in the first month? Answer: $95.38. Verification: 5.9% a year on $19,400 — the largest balance at the lowest rate. t1-p2: How much interest does the card charge in the first month? Answer: $61.43. Verification: 23.4% a year on $3,150 — the smallest balance at much the highest rate. t1-p3: How much interest does the vehicle loan charge in the first month? Answer: $46.40. Verification: 6.4% a year on $8,700 — a middling balance at a rate close to the study loan’s, so it is neither the dearest nor the cheapest debt in the set. t1-p4: What is the total interest charged across all three debts in the first month? Answer: $203.21. Verification: $95.38, $61.43, and $46.40 together — the amount that must be paid each month before any balance moves. t2-p1: What do the three minimum payments come to? Answer: $574.00. Verification: The payments Perpetua must make regardless of any strategy. t2-p2: How much does she have above the minimums, from her $820 debt capacity? Answer: $246.00. Verification: $820 of capacity less $574.00 of required payments — the only part of the plan she gets to direct. t2-p3: If nothing changed, what would the first month’s interest come to over a year? Answer: $2,438.52. Verification: $203.21 a month held constant for a year. Balances do fall, so this overstates a real year slightly and gives the scale of the problem. t2-p4: Directing the extra $246.00 at the card, how many months does it take to clear? Ignore interest for this step and give one decimal place. Answer: 9.2. Verification: $3,150 at $341 a month. Ignoring interest understates the time slightly and is a stated simplification. t2-p5: What is Perpetua’s debt-to-income ratio, using the minimums against her $5,100 gross income? Give one decimal place. Answer: 11.3%. Verification: $574.00 of required payments against $5,100 of gross income — comfortable by lending standards, which is a different question from whether the debt is expensive. t2-p6: What share of her $3,960 take-home pay does the $820 debt capacity represent? Give one decimal place. Answer: 20.7%. Verification: $820 against $3,960 of take-home pay — more than double the debt-to-income figure, because that ratio uses gross income and only the minimums. t3-p1: Directing the $246.00 at the card rather than the study loan moves it from 5.9% to 23.4%. How much interest does that save in a month? Answer: $3.59. Verification: $246.00 moved across a gap of 17.5 percentage points for one month. t3-p2: Which debt should receive the extra $246.00 first if the objective is to minimise interest paid? Answer: The card, at 23.4%. Verification: Minimising interest means directing spare money at the highest rate, and the card at 23.4% charges $61.43 a month on only $3,150 against the vehicle loan’s $46.40 on $8,700; it also happens to be the smallest balance, so both common strategies agree here."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: Present a repayment plan for Perpetua. State the ordering and the objective it serves, say what happens to the freed-up payment when the card clears, and name the assumption whose failure would most damage the plan. Sets out an ordering with the card first and justifies it against a stated objective, using the $61.43 monthly charge or the 23.4% rate. Says what happens after the card clears at about month 9.2 — the $95 minimum plus the $246.00 extra, or $341 a month, becomes available for the next debt. Names the most damaging assumption, most defensibly the $820 monthly capacity holding for the whole plan, and explains what would happen if it fell. Cites the $203.21 monthly interest total and the $246.00 of directable capacity. Refers to the 9.2-month card clearing time when describing what happens next. The plan says what happens after the first debt clears, not only where to start. The objective is stated rather than assumed, so the ordering can be judged against it. A response noting that the card is both the smallest balance and the highest rate, so no strategy conflict arises, is reading the set correctly. t4-p2: Perpetua’s debt-to-income ratio is 11.3% and her debt capacity is 20.7% of take-home pay. Explain why the two figures differ so much, and say which one describes her situation better. Explains that the ratio uses gross income and counts only the $574.00 of minimums, while the 20.7% uses take-home pay and counts the full $820 she actually commits. Argues that the take-home figure describes her situation better, because it measures money she can actually spend against money she has actually committed. Uses the $5,100 gross and $3,960 take-home figures, and both the $574.00 and $820 payment figures. The response identifies both differences — the income base and the payment base. The choice is justified rather than asserted."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Sets out an ordering with the card first and justifies it against a stated objective, using the $61.43 monthly charge or the 23.4% rate. Says what happens after the card clears at about month 9.2 — the $95 minimum plus the $246.00 extra, or $341 a month, becomes available for the next debt. Names the most damaging assumption, most defensibly the $820 monthly capacity holding for the whole plan, and explains what would happen if it fell. Explains that the ratio uses gross income and counts only the $574.00 of minimums, while the 20.7% uses take-home pay and counts the full $820 she actually commits. Argues that the take-home figure describes her situation better, because it measures money she can actually spend against money she has actually committed."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 12 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 12,
+      "contractFixedItemCount": 12,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u04-l10.scoring.json",
+    "sourceScoringSha256": "1d72dfc2776ed5d2b8d1af5af5a2aadfec3f0d7a1281c616ebc0ce0b8ce2d4cb",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

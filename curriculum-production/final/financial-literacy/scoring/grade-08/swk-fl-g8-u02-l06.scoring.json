@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l06",
+  "lessonId": "ma-g8-financial-literacy-u02-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Analysing a staged scam",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats each stage of Pascale's sequence as unrelated."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The sequence is noticed for Pascale but the purpose of the email is not identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that the email in Pascale's case primes alarm so the call is expected, and identifies the whole sequence as a single designed chain."
+          }
+        ]
+      },
+      {
+        "dimension": "Stopping the chain",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has the household comply or negotiate with the caller."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The call is doubted for Pascale but no independent verification step is given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has the household end the call and verify through an independently obtained number, treating the safe-account request as decisive."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies the email as priming for the call.",
+      "Treats the safe-account request as conclusive on its own.",
+      "Verifies through a channel not supplied by the contact.",
+      "States that accurate details do not authenticate a caller."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What does each stage of Pascale's invented sequence achieve, and why does the call arrive so soon after the email?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should the household do, and why does the safe-account request settle the question regardless of how convincing the caller is?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why does a caller knowing accurate details prove nothing about who they are?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Analysing a staged scam — Not yet: The response treats each stage of Pascale's sequence as unrelated. Approaching: The sequence is noticed for Pascale but the purpose of the email is not identified. Meets: The response explains that the email in Pascale's case primes alarm so the call is expected, and identifies the whole sequence as a single designed chain. Stopping the chain — Not yet: The response has the household comply or negotiate with the caller. Approaching: The call is doubted for Pascale but no independent verification step is given. Meets: The response has the household end the call and verify through an independently obtained number, treating the safe-account request as decisive. Identifies the email as priming for the call. Treats the safe-account request as conclusive on its own. Verifies through a channel not supplied by the contact. States that accurate details do not authenticate a caller."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the email as priming for the call. Treats the safe-account request as conclusive on its own. Verifies through a channel not supplied by the contact. States that accurate details do not authenticate a caller."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u02-l06.scoring.json",
+    "sourceScoringSha256": "a5c4c6ab601d9cb650a6198ee0a2416350d131d9aaf25e13504f27411167547a",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

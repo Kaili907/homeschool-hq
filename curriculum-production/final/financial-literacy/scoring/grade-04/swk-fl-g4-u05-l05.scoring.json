@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u05-l05",
+  "lessonId": "ma-g4-financial-literacy-u05-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Recognising pressure signals",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the deadline in Selin's message as a real constraint to work around."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One signal is named for Selin but the secrecy instruction or the request is missed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names the deadline, the secrecy instruction, and the request for a private code as signals, and explains that urgency is a technique rather than a fact."
+          }
+        ]
+      },
+      {
+        "dimension": "Choosing a non-engaging response",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Selin reply, negotiate, or investigate the sender."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Selin stops but no adult is involved and nothing is reported."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has Selin stop, not reply, and show the message to a guardian or trusted adult, treating the expiry as irrelevant."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies all three pressure signals in the invented message.",
+      "Rejects the deadline as a reason to act quickly.",
+      "Involves a guardian or trusted adult.",
+      "Never sends or types any code, real or invented."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What are the three warning signals in the message Selin received, and why is each one a signal?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should Selin do about the message, and why does the deadline make no difference to the answer?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is being told to keep something secret from a guardian, by itself, a reason to tell one?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Recognising pressure signals — Not yet: The response treats the deadline in Selin's message as a real constraint to work around. Approaching: One signal is named for Selin but the secrecy instruction or the request is missed. Meets: The response names the deadline, the secrecy instruction, and the request for a private code as signals, and explains that urgency is a technique rather than a fact. Choosing a non-engaging response — Not yet: The response has Selin reply, negotiate, or investigate the sender. Approaching: Selin stops but no adult is involved and nothing is reported. Meets: The response has Selin stop, not reply, and show the message to a guardian or trusted adult, treating the expiry as irrelevant. Identifies all three pressure signals in the invented message. Rejects the deadline as a reason to act quickly. Involves a guardian or trusted adult. Never sends or types any code, real or invented."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies all three pressure signals in the invented message. Rejects the deadline as a reason to act quickly. Involves a guardian or trusted adult. Never sends or types any code, real or invented."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-04/swk-fl-g4-u05-l05.scoring.json",
+    "sourceScoringSha256": "09f41768ba4a3619da0de9cdc60c777f7ea4cd63e4d307f5054fc953ae0d6a69",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

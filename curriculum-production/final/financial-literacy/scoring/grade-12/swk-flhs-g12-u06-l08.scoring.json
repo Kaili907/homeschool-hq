@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l08",
+  "lessonId": "ma-g12-financial-literacy-u06-l08",
+  "integratedDomains": [
+    "insurance-risk",
+    "postsecondary-financing",
+    "budgeting",
+    "consumer-protection"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$153.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,842 across 12 months. Converting the annual price to a monthly one is what makes the three routes comparable."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,216.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$268 in each of the 12 months. This route carries no enrolment window, which is part of what it is being paid for."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$7,248.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$604 in each of 12 months — nearly four times the school plan, which is why the enrolment window is worth a diary entry."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$5,406.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,248.00 against $1,842. The gap is the value of acting within the 31 days."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,416.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$604 in each of the 4 bridging months. This is the price of a missed date rather than of any coverage decision."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Yes — bridging for 4 months costs more than the whole school year",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$2,416.00 for 4 months of continuation against $1,842 for a whole year of the school plan. Missing a date costs more than the entire cheaper option would have."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(schoolAnnual / 12, 2)",
+        "substituted": "round(1842 / 12, 2)",
+        "result": "$153.50",
+        "why": "$1,842 across 12 months. Converting the annual price to a monthly one is what makes the three routes comparable."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "marketMonthly * 12",
+        "substituted": "268 * 12",
+        "result": "$3,216.00",
+        "why": "$268 in each of the 12 months. This route carries no enrolment window, which is part of what it is being paid for."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "continuationMonthly * 12",
+        "substituted": "604 * 12",
+        "result": "$7,248.00",
+        "why": "$604 in each of 12 months — nearly four times the school plan, which is why the enrolment window is worth a diary entry."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - schoolAnnual2",
+        "substituted": "#t1-p3 - 1842",
+        "result": "$5,406.00",
+        "why": "$7,248.00 against $1,842. The gap is the value of acting within the 31 days."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "continuationMonthly2 * bridgeMonths",
+        "substituted": "604 * 4",
+        "result": "$2,416.00",
+        "why": "$604 in each of the 4 bridging months. This is the price of a missed date rather than of any coverage decision."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 > #t1-p1 * 12",
+        "substituted": "#t2-p2 > #t1-p1 * 12",
+        "result": "Yes — bridging for 4 months costs more than the whole school year",
+        "why": "$2,416.00 for 4 months of continuation against $1,842 for a whole year of the school plan. Missing a date costs more than the entire cheaper option would have."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain why the 31-day window is the most important figure in this lesson even though it is not a price, and say what a fictional person should have in place before that date arrives so the decision is not made by default.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the role of the window: it is what makes the $1,842 option available at all, so missing it removes the cheapest route and leaves only options costing $3,216.00 or $7,248.00 a year.",
+          "Quantifies the cost of default: bridging for 4 months at $2,416.00 exceeds a whole year of the school plan, so doing nothing is the most expensive choice available.",
+          "Describes concrete preparation: knowing the exact date cover ends, having the enrolment requirements to hand in advance, and setting a reminder several weeks before rather than on the day."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,842 school-plan year and the $2,416.00 cost of bridging 4 months after a missed window."
+        ],
+        "lookFors": [
+          "The response treats the deadline as the decision point rather than as paperwork.",
+          "The response recognises that the default outcome — doing nothing — is both expensive and easy to reach."
+        ],
+        "commonMisconception": "Comparing insurance options on price alone, when eligibility windows determine which of the prices is available at all.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the school plan work out to per month?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the marketplace plan cost across a year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does continuation cost across a year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much cheaper is a year on the school plan than a year of continuation?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the window is missed and continuation is used for 4 months until the next enrolment opportunity, what does that cost?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Is the cost of missing the 31-day window larger than a full year of the school plan?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why the 31-day window is the most important figure in this lesson even though it is not a price, and say what a fictional person should have in place before that date arrives so the decision is not made by default."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the school plan work out to per month? Answer: $153.50. Verification: $1,842 across 12 months. Converting the annual price to a monthly one is what makes the three routes comparable. t1-p2: What does the marketplace plan cost across a year? Answer: $3,216.00. Verification: $268 in each of the 12 months. This route carries no enrolment window, which is part of what it is being paid for. t1-p3: What does continuation cost across a year? Answer: $7,248.00. Verification: $604 in each of 12 months — nearly four times the school plan, which is why the enrolment window is worth a diary entry. t2-p1: How much cheaper is a year on the school plan than a year of continuation? Answer: $5,406.00. Verification: $7,248.00 against $1,842. The gap is the value of acting within the 31 days. t2-p2: If the window is missed and continuation is used for 4 months until the next enrolment opportunity, what does that cost? Answer: $2,416.00. Verification: $604 in each of the 4 bridging months. This is the price of a missed date rather than of any coverage decision. t2-p3: Is the cost of missing the 31-day window larger than a full year of the school plan? Answer: Yes — bridging for 4 months costs more than the whole school year. Verification: $2,416.00 for 4 months of continuation against $1,842 for a whole year of the school plan. Missing a date costs more than the entire cheaper option would have."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Explain why the 31-day window is the most important figure in this lesson even though it is not a price, and say what a fictional person should have in place before that date arrives so the decision is not made by default. Explains the role of the window: it is what makes the $1,842 option available at all, so missing it removes the cheapest route and leaves only options costing $3,216.00 or $7,248.00 a year. Quantifies the cost of default: bridging for 4 months at $2,416.00 exceeds a whole year of the school plan, so doing nothing is the most expensive choice available. Describes concrete preparation: knowing the exact date cover ends, having the enrolment requirements to hand in advance, and setting a reminder several weeks before rather than on the day. Uses the $1,842 school-plan year and the $2,416.00 cost of bridging 4 months after a missed window. The response treats the deadline as the decision point rather than as paperwork. The response recognises that the default outcome — doing nothing — is both expensive and easy to reach."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the role of the window: it is what makes the $1,842 option available at all, so missing it removes the cheapest route and leaves only options costing $3,216.00 or $7,248.00 a year. Quantifies the cost of default: bridging for 4 months at $2,416.00 exceeds a whole year of the school plan, so doing nothing is the most expensive choice available. Describes concrete preparation: knowing the exact date cover ends, having the enrolment requirements to hand in advance, and setting a reminder several weeks before rather than on the day."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u06-l08.scoring.json",
+    "sourceScoringSha256": "508aee0cca5e529e4a8a4262e0bbee37075566e2afced82d07478fbd44f4248d",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

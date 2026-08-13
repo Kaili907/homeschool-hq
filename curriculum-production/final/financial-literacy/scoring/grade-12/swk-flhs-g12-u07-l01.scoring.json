@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l01",
+  "lessonId": "ma-g12-financial-literacy-u07-l01",
+  "integratedDomains": [
+    "taxes",
+    "income",
+    "saving-investing",
+    "banking"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$36,121.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Wages less the pre-tax contribution gives $44,935, the interest income of $186 is added because it is not excluded, and the $9,000 standard deduction comes off last. Interest income is taxable even though nothing was withheld from it."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,126.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,040.00 on the first $10,400 plus 12% of the remaining $25,721.00. Taxable income of $36,121.00 stays below $44,000, so the 22% band is not reached."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$283.48",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,410 withheld against $4,126.52 owed, so $283.48 is returned. A refund is money that was over-collected during the year, not an amount earned by filing."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,618.45",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7.65% of the full $47,300 of wages. The levy gets no standard deduction and is not reduced by the pre-tax contribution, so it is charged on a much larger base than the income tax is."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7,744.97",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,126.52 of income tax plus $3,618.45 of payroll levy. The levy is nearly as large as the income tax, and a filer who thinks only about the return sees only one of them."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "8.72%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,126.52 measured against $47,300 of wages. This is well below the 12% band the last dollars fall in, because the deduction and the 10% band shelter the first part of the income."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The 12% band the last dollars fall in",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "An additional dollar is taxed at the band it falls in, which is 12% here. The 8.72% figure averages the whole income including the untaxed deduction and the 10% band, so it describes the year as a whole rather than the next dollar. This follows from how the stated schedule is built."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wages - pretax + interest - deduction",
+        "substituted": "47300 - 2365 + 186 - 9000",
+        "result": "$36,121.00",
+        "why": "Wages less the pre-tax contribution gives $44,935, the interest income of $186 is added because it is not excluded, and the $9,000 standard deduction comes off last. Interest income is taxable even though nothing was withheld from it."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "band1 * lowRate + (#t1-p1 - band1) * midRate",
+        "substituted": "10400 * 0.1 + (#t1-p1 - 10400) * 0.12",
+        "result": "$4,126.52",
+        "why": "$1,040.00 on the first $10,400 plus 12% of the remaining $25,721.00. Taxable income of $36,121.00 stays below $44,000, so the 22% band is not reached."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "withheld - #t1-p2",
+        "substituted": "4410 - #t1-p2",
+        "result": "$283.48",
+        "why": "$4,410 withheld against $4,126.52 owed, so $283.48 is returned. A refund is money that was over-collected during the year, not an amount earned by filing."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "wages2 * levyRate",
+        "substituted": "47300 * 0.0765",
+        "result": "$3,618.45",
+        "why": "7.65% of the full $47,300 of wages. The levy gets no standard deduction and is not reduced by the pre-tax contribution, so it is charged on a much larger base than the income tax is."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 + #t2-p1",
+        "substituted": "#t1-p2 + #t2-p1",
+        "result": "$7,744.97",
+        "why": "$4,126.52 of income tax plus $3,618.45 of payroll levy. The levy is nearly as large as the income tax, and a filer who thinks only about the return sees only one of them."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p2 / wages3 * 100, 2)",
+        "substituted": "round(#t1-p2 / 47300 * 100, 2)",
+        "result": "8.72%",
+        "why": "$4,126.52 measured against $47,300 of wages. This is well below the 12% band the last dollars fall in, because the deduction and the 10% band shelter the first part of the income."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This fictional filer receives $283.48 back and paid $7,744.97 in federal charges across the year. Explain why the refund is a poor measure of what the year cost, and say which single figure you would put in front of someone who wanted to understand their own tax position — and why.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the refund correctly: it is the difference between what was withheld and what was owed, so it measures the accuracy of withholding rather than the size of the tax bill.",
+          "Uses the scale to make the point: $283.48 returned against $7,744.97 actually charged, so the refund is under 4% of the year’s federal charges and could be zero while nothing about the tax changed.",
+          "Names a better single figure with a reason — most defensibly the total charged, $7,744.97, because it is what the year cost, or the 8.72% share for comparing years with different incomes."
+        ],
+        "evidenceRequirements": [
+          "Uses the $283.48 refund and the $7,744.97 total of federal charges."
+        ],
+        "lookFors": [
+          "The response separates over-withholding from tax owed.",
+          "The response notices the payroll levy, which a focus on the refund hides entirely."
+        ],
+        "commonMisconception": "Treating the refund as the outcome of the tax year, when it only reports whether the right amount was collected in advance.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is taxable income under the fictional schedule?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What federal income tax does the schedule produce?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "The documents show $4,410 withheld. What is the refund or the amount still owed?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the payroll levy on wages at 7.65%?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do the two federal charges come to together?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the federal income tax as a share of wages, to two decimal places?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "The filer’s last dollars are taxed at 12%, and income tax comes to 8.72% of wages. Which figure describes what one more dollar of wages would cost in income tax?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This fictional filer receives $283.48 back and paid $7,744.97 in federal charges across the year. Explain why the refund is a poor measure of what the year cost, and say which single figure you would put in front of someone who wanted to understand their own tax position — and why."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is taxable income under the fictional schedule? Answer: $36,121.00. Verification: Wages less the pre-tax contribution gives $44,935, the interest income of $186 is added because it is not excluded, and the $9,000 standard deduction comes off last. Interest income is taxable even though nothing was withheld from it. t1-p2: What federal income tax does the schedule produce? Answer: $4,126.52. Verification: $1,040.00 on the first $10,400 plus 12% of the remaining $25,721.00. Taxable income of $36,121.00 stays below $44,000, so the 22% band is not reached. t1-p3: The documents show $4,410 withheld. What is the refund or the amount still owed? Answer: $283.48. Verification: $4,410 withheld against $4,126.52 owed, so $283.48 is returned. A refund is money that was over-collected during the year, not an amount earned by filing. t2-p1: What is the payroll levy on wages at 7.65%? Answer: $3,618.45. Verification: 7.65% of the full $47,300 of wages. The levy gets no standard deduction and is not reduced by the pre-tax contribution, so it is charged on a much larger base than the income tax is. t2-p2: What do the two federal charges come to together? Answer: $7,744.97. Verification: $4,126.52 of income tax plus $3,618.45 of payroll levy. The levy is nearly as large as the income tax, and a filer who thinks only about the return sees only one of them. t2-p3: What is the federal income tax as a share of wages, to two decimal places? Answer: 8.72%. Verification: $4,126.52 measured against $47,300 of wages. This is well below the 12% band the last dollars fall in, because the deduction and the 10% band shelter the first part of the income. t2-p4: The filer’s last dollars are taxed at 12%, and income tax comes to 8.72% of wages. Which figure describes what one more dollar of wages would cost in income tax? Answer: The 12% band the last dollars fall in. Verification: An additional dollar is taxed at the band it falls in, which is 12% here. The 8.72% figure averages the whole income including the untaxed deduction and the 10% band, so it describes the year as a whole rather than the next dollar. This follows from how the stated schedule is built."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: This fictional filer receives $283.48 back and paid $7,744.97 in federal charges across the year. Explain why the refund is a poor measure of what the year cost, and say which single figure you would put in front of someone who wanted to understand their own tax position — and why. Explains the refund correctly: it is the difference between what was withheld and what was owed, so it measures the accuracy of withholding rather than the size of the tax bill. Uses the scale to make the point: $283.48 returned against $7,744.97 actually charged, so the refund is under 4% of the year’s federal charges and could be zero while nothing about the tax changed. Names a better single figure with a reason — most defensibly the total charged, $7,744.97, because it is what the year cost, or the 8.72% share for comparing years with different incomes. Uses the $283.48 refund and the $7,744.97 total of federal charges. The response separates over-withholding from tax owed. The response notices the payroll levy, which a focus on the refund hides entirely."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the refund correctly: it is the difference between what was withheld and what was owed, so it measures the accuracy of withholding rather than the size of the tax bill. Uses the scale to make the point: $283.48 returned against $7,744.97 actually charged, so the refund is under 4% of the year’s federal charges and could be zero while nothing about the tax changed. Names a better single figure with a reason — most defensibly the total charged, $7,744.97, because it is what the year cost, or the 8.72% share for comparing years with different incomes."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u07-l01.scoring.json",
+    "sourceScoringSha256": "60890424ae0be394343ebd8c263c8495db91a3afad6c51021b606d92fa8fa936",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

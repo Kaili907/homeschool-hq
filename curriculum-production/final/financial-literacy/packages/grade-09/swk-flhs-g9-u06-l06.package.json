@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u06-l06",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: recognising common scams and pressure tactics"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "recognising common scams and pressure tactics",
+  "objective": "Compare two fictional messages against a checklist of pressure tactics, compute what compliance would cost in each case, and identify the single feature that marks both as fraudulent.",
+  "scenario": "The two simulated messages below arrived to a fictional person. Both are invented for this exercise. No real organisation, number, or account is involved, and no learner should act on any similar message.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the two fictional messages in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Message 1 claims to be from a utility, says service will be cut off within 30 minutes, and demands payment of $500 on each of 3 gift cards. Message 2 says the recipient has won $8,500 and must send a $395 processing fee to release it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much would complying with Message 1 cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Message 2 promises $8,500 for a $395 fee. What is the recipient’s actual net outcome if they pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Check each message against four markers of a fraudulent approach: manufactured urgency, an untraceable payment method, an unsolicited prize, and a demand for payment before anything is received.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "Which marker is present in both messages?",
+          "choices": [
+            "Manufactured urgency",
+            "A demand for payment before anything is received",
+            "An unsolicited prize",
+            "A request for gift cards specifically"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "A real utility with an overdue balance would normally do which of these?",
+          "choices": [
+            "Demand gift cards within 30 minutes",
+            "Send written notice in advance and offer standard payment channels",
+            "Offer a prize for prompt payment",
+            "Call from an unlisted number and refuse to identify the account"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the two costs.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more would complying with Message 1 cost than with Message 2?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the single check you would run on any message of this kind before responding, and explain why it works on both of these messages even though their stories are opposite — one threatens a loss and one promises a gain."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Message 2 seems less serious because $395 is smaller than $1,500, note what is received in each case: nothing. Both are total losses, and the smaller one is often the opening move rather than the whole of it.",
+  "extension": "Write a third fictional message that carries none of the four markers and would still be fraudulent, then say which check would still catch it.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u06-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much would complying with Message 1 cost?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "Message 2 promises $8,500 for a $395 fee. What is the recipient’s actual net outcome if they pay?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "Which marker is present in both messages?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "A real utility with an overdue balance would normally do which of these?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much more would complying with Message 1 cost than with Message 2?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Write the single check you would run on any message of this kind before responding, and explain why it works on both of these messages even though their stories are opposite — one threatens a loss and one promises a gain."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u06-l06.package.json",
+    "sourcePackageSha256": "7b6fd8eb22b199479264e477e198765ccbfd598ed95c58fb3ca0cb52c7220d54",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u06-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

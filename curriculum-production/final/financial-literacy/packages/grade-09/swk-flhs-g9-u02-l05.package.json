@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l05",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: advertising claims versus verifiable claims"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "advertising claims versus verifiable claims",
+  "objective": "Test an advertising claim against the underlying fictional sale data, compute what the claim implies against what the shopper would actually receive, and rewrite the claim so it is verifiable.",
+  "scenario": "A fictional store advertises a made-up sale with the headline \"Save up to 60%!\" The sale data below is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional sale data in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional sale covers 12 items. Exactly 1 of them is discounted 60%. The other 11 are discounted 10%. The item the shopper actually wants has a regular price of $48.00 and is one of the 10% items.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the sale price of the item the shopper wants?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would that same item cost if the headline discount of 60% applied to it?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the gap between what the headline suggests and what the shopper would actually pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now describe the sale as a whole.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the average discount across all 12 sale items? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Is the headline claim \"Save up to 60%\" false as stated?",
+          "choices": [
+            "Yes, no item is discounted 60%",
+            "No, one item is discounted 60%, so the claim is literally true",
+            "The data does not say"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The headline is literally true and still misleads. Explain how, then rewrite it as a claim a shopper could verify before entering the store."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the average discount comes out at 35% — halfway between 10 and 60 — the two rates are being averaged rather than the twelve items. Write out all twelve values, eleven 10s and one 60, and add them before dividing.",
+  "extension": "Find how many of the 12 items would have to be discounted 60% for the average to reach 30%, and say whether the headline would then be a fair summary.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the sale price of the item the shopper wants?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would that same item cost if the headline discount of 60% applied to it?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the gap between what the headline suggests and what the shopper would actually pay?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the average discount across all 12 sale items? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Is the headline claim \"Save up to 60%\" false as stated?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The headline is literally true and still misleads. Explain how, then rewrite it as a claim a shopper could verify before entering the store."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u02-l05.package.json",
+    "sourcePackageSha256": "041612b9afdf681b481683bc593bd081f41566a0a48d845cd04d460a93dfc358",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u02-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

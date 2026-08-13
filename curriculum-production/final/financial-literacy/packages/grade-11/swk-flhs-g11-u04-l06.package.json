@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l06",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: delinquency, default, and available remedies"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "delinquency, default, and available remedies",
+  "objective": "Cost a single missed payment on a fictional account through its fee and its penalty rate, express the cost in comparable terms, and distinguish the remedies available at different stages.",
+  "scenario": "Obadiah Terzian-Delgado has missed one payment on a fictional card account. The balance, rates, fee, and remedy terms below are invented, and this lesson requires no contact with any real lender or account.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The balance is $2,840. The ordinary rate is 17.9% a year. Under the fictional account terms a missed payment triggers a $39 late fee immediately, and if the account is more than 60 days late the rate rises to a penalty rate of 29.9% a year for the following 6 months. Monthly interest is the annual rate divided by 12.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the balance attract in a month at the ordinary 17.9% rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the same balance attract in a month at the 29.9% penalty rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much extra interest does the penalty rate cost each month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now cost the whole episode, assuming the account does go past 60 days and the penalty rate applies for the full 6 months.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the penalty rate cost across the 6 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total cost of the missed payment, counting the $39 fee and the penalty interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The total cost is what percentage of the $2,840 balance? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How many months of ordinary interest does the missed payment cost? Give one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much larger is the penalty interest than the late fee?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The fictional terms also describe what is available at each stage: before the payment is missed, the issuer will move a due date on request; within 60 days, it will reverse one fee a year and keep the ordinary rate; after 60 days, only a repayment arrangement is offered and the penalty rate has already applied.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Under these fictional terms, which action avoids the largest share of the $209.40?",
+          "choices": [
+            "Contacting the issuer before the due date to move it",
+            "Contacting the issuer within 60 days to ask for the fee to be reversed",
+            "Agreeing a repayment arrangement after 90 days"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which figure should Obadiah use when deciding how urgently to act at day 45?",
+          "choices": [
+            "The $39 late fee, because that is the charge already incurred",
+            "The $170.40 of penalty interest, because that is the part still avoidable",
+            "The $2,840 balance, because that is what he owes"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "The visible cost of the missed payment is $39 and the actual cost is $209.40. Explain where the difference sits, why it is harder to notice, and what that implies about when a borrower in difficulty should make contact."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "These terms are a simplified invention. Name one thing a real account’s terms would settle that this scenario does not, and say how it could change the $209.40 figure."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total comes out at $463.56, the whole penalty-rate interest is being counted rather than the extra above the ordinary rate. Obadiah would have paid $42.36 a month in interest regardless; the missed payment costs him the difference of $28.40 a month plus the $39 fee. Compute the two monthly charges side by side and subtract before multiplying by 6.",
+  "extension": "Recompute the cost of the missed payment if the balance were $6,300 instead, and say whether the fee or the penalty interest grows with the balance.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does the balance attract in a month at the ordinary 17.9% rate?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does the same balance attract in a month at the 29.9% penalty rate?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much extra interest does the penalty rate cost each month?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the penalty rate cost across the 6 months?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total cost of the missed payment, counting the $39 fee and the penalty interest?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "The total cost is what percentage of the $2,840 balance? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How many months of ordinary interest does the missed payment cost? Give one decimal place."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "How much larger is the penalty interest than the late fee?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "Under these fictional terms, which action avoids the largest share of the $209.40?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which figure should Obadiah use when deciding how urgently to act at day 45?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "The visible cost of the missed payment is $39 and the actual cost is $209.40. Explain where the difference sits, why it is harder to notice, and what that implies about when a borrower in difficulty should make contact."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "These terms are a simplified invention. Name one thing a real account’s terms would settle that this scenario does not, and say how it could change the $209.40 figure."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u04-l06.package.json",
+    "sourcePackageSha256": "8903a85547c6c279e9c616f7c60f6b8d2e03c1f79e052328949f98655ca47af1",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u04-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

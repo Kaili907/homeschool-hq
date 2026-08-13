@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l09",
+  "lessonId": "ma-g10-financial-literacy-u04-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$368.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The payment that exactly retires $12,000 over 36 months while interest accrues monthly on the falling balance."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$13,259.88",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "36 payments of $368.33, on the stated assumption that every payment equals the rounded figure."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,259.88",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Total paid less the $12,000 borrowed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$235.36",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same loan and the same rate spread over 60 months instead of 36."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$14,121.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60 payments of $235.36, on the same rounding assumption."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,121.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Total paid less the same $12,000 borrowed."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$861.72",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,121.60 against $1,259.88. The rate is identical; the money is simply borrowed for longer."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$132.97",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$368.33 against $235.36 — what the extra $861.72 of interest buys, month by month."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(loan * (apr / 12) * pow(1 + apr / 12, 36) / (pow(1 + apr / 12, 36) - 1), 2)",
+        "substituted": "round(12000 * (0.066 / 12) * pow(1 + 0.066 / 12, 36) / (pow(1 + 0.066 / 12, 36) - 1), 2)",
+        "result": "$368.33",
+        "why": "The payment that exactly retires $12,000 over 36 months while interest accrues monthly on the falling balance."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * 36, 2)",
+        "substituted": "round(#t1-p1 * 36, 2)",
+        "result": "$13,259.88",
+        "why": "36 payments of $368.33, on the stated assumption that every payment equals the rounded figure."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - loan2",
+        "substituted": "#t1-p2 - 12000",
+        "result": "$1,259.88",
+        "why": "Total paid less the $12,000 borrowed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(loan3 * (apr2 / 12) * pow(1 + apr2 / 12, 60) / (pow(1 + apr2 / 12, 60) - 1), 2)",
+        "substituted": "round(12000 * (0.066 / 12) * pow(1 + 0.066 / 12, 60) / (pow(1 + 0.066 / 12, 60) - 1), 2)",
+        "result": "$235.36",
+        "why": "The same loan and the same rate spread over 60 months instead of 36."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 * 60, 2)",
+        "substituted": "round(#t2-p1 * 60, 2)",
+        "result": "$14,121.60",
+        "why": "60 payments of $235.36, on the same rounding assumption."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - loan4",
+        "substituted": "#t2-p2 - 12000",
+        "result": "$2,121.60",
+        "why": "Total paid less the same $12,000 borrowed."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - #t1-p3",
+        "substituted": "#t2-p3 - #t1-p3",
+        "result": "$861.72",
+        "why": "$2,121.60 against $1,259.88. The rate is identical; the money is simply borrowed for longer."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t1-p1 - #t2-p1",
+        "substituted": "#t1-p1 - #t2-p1",
+        "result": "$132.97",
+        "why": "$368.33 against $235.36 — what the extra $861.72 of interest buys, month by month."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The longer term costs $861.72 more and frees $132.97 a month. Argue for one of the two terms for a fictional borrower whose income is steady but whose monthly margin is thin, and name what your choice risks.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Chooses a term and defends it with both figures, treating the $861.72 as the price of the $132.97 of monthly room rather than as a mistake either way.",
+          "Names the risk of the chosen side specifically: the 36-month term risks missed payments if the thin margin disappears, and the 60-month term risks paying $861.72 more and owing on the loan for two additional years.",
+          "Notes that the same rate produced both figures, so the difference is entirely the length of time the money is borrowed, not a worse deal."
+        ],
+        "evidenceRequirements": [
+          "Uses both monthly payments and both total-interest figures."
+        ],
+        "lookFors": [
+          "Either term is defensible; what is scored is whether the cost of the choice is named in figures.",
+          "The response recognises that a payment which cannot be made reliably is worse than a larger total, and does not treat the cheapest total as automatically correct."
+        ],
+        "commonMisconception": "Choosing a loan term by the monthly payment alone, without pricing what the extra months of borrowing cost.",
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the level monthly payment over the 36-month term? Round to the nearest cent."
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is paid in total over the 36-month term?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of that is interest?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the level monthly payment over the 60-month term? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is paid in total over the 60-month term?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of that is interest?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much more interest does the longer term cost?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much smaller is the monthly payment on the longer term?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The longer term costs $861.72 more and frees $132.97 a month. Argue for one of the two terms for a fictional borrower whose income is steady but whose monthly margin is thin, and name what your choice risks."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the level monthly payment over the 36-month term? Round to the nearest cent. Answer: $368.33. Verification: The payment that exactly retires $12,000 over 36 months while interest accrues monthly on the falling balance. t1-p2: What is paid in total over the 36-month term? Answer: $13,259.88. Verification: 36 payments of $368.33, on the stated assumption that every payment equals the rounded figure. t1-p3: How much of that is interest? Answer: $1,259.88. Verification: Total paid less the $12,000 borrowed. t2-p1: What is the level monthly payment over the 60-month term? Round to the nearest cent. Answer: $235.36. Verification: The same loan and the same rate spread over 60 months instead of 36. t2-p2: What is paid in total over the 60-month term? Answer: $14,121.60. Verification: 60 payments of $235.36, on the same rounding assumption. t2-p3: How much of that is interest? Answer: $2,121.60. Verification: Total paid less the same $12,000 borrowed. t2-p4: How much more interest does the longer term cost? Answer: $861.72. Verification: $2,121.60 against $1,259.88. The rate is identical; the money is simply borrowed for longer. t2-p5: How much smaller is the monthly payment on the longer term? Answer: $132.97. Verification: $368.33 against $235.36 — what the extra $861.72 of interest buys, month by month."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The longer term costs $861.72 more and frees $132.97 a month. Argue for one of the two terms for a fictional borrower whose income is steady but whose monthly margin is thin, and name what your choice risks. Chooses a term and defends it with both figures, treating the $861.72 as the price of the $132.97 of monthly room rather than as a mistake either way. Names the risk of the chosen side specifically: the 36-month term risks missed payments if the thin margin disappears, and the 60-month term risks paying $861.72 more and owing on the loan for two additional years. Notes that the same rate produced both figures, so the difference is entirely the length of time the money is borrowed, not a worse deal. Uses both monthly payments and both total-interest figures. Either term is defensible; what is scored is whether the cost of the choice is named in figures. The response recognises that a payment which cannot be made reliably is worse than a larger total, and does not treat the cheapest total as automatically correct."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Chooses a term and defends it with both figures, treating the $861.72 as the price of the $132.97 of monthly room rather than as a mistake either way. Names the risk of the chosen side specifically: the 36-month term risks missed payments if the thin margin disappears, and the 60-month term risks paying $861.72 more and owing on the loan for two additional years. Notes that the same rate produced both figures, so the difference is entirely the length of time the money is borrowed, not a worse deal."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u04-l09.scoring.json",
+    "sourceScoringSha256": "a3d8f6f4b9e57d40979a04577e0133decad942b7b28a67f47b32d0b8a6eea9e9",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

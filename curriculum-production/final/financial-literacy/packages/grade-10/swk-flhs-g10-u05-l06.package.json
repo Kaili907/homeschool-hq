@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l06",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: investment fraud patterns and red flags"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "investment fraud patterns and red flags",
+  "objective": "Annualise a fictional guaranteed monthly return, compute how long a pool of investor money could sustain the promised payouts with no real earnings, and name the structural red flags.",
+  "scenario": "The simulated investment offer below is invented for this exercise. It is a teaching example of a pattern, not a description of any real scheme, product, or person.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional offer in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional offer promises a guaranteed 3% return every month, says the opportunity closes on Friday, and is not registered with the fictional Markets Disclosure Authority. 40 fictional investors put in $5,000 each. Assume the money is never actually invested and earns nothing, so payouts come only from the pool itself.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What annual return does a guaranteed 3% a month work out to, if each month’s return compounds?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much money is in the pool?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does one month of promised payouts cost across all 40 investors?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find how long the arrangement can last, and compare the promise with a stated long-run average.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "With no real earnings, how many months of payouts can the pool fund before it is exhausted? Round to one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "A fictional diversified fund states a long-run average of 7% a year. State that as a percentage for comparison.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how many percentage points does the offer exceed that stated average? Give the number of points, without a percent sign.",
+          "unit": "percentage points"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which feature of the offer is the strongest single warning sign?",
+          "choices": [
+            "That the return is described as guaranteed",
+            "That the offer closes on Friday",
+            "That there are only 40 investors"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why the arithmetic alone shows this arrangement must fail, and name three checks a person could run before putting money into any offer. Say which of your checks would have been quickest here."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the arrangement looks like it could work indefinitely, ask where the $6,000.00 paid out each month comes from. Nothing was invested, so it comes from the same $200,000.00 the investors put in. Dividing one by the other gives 33.3 months, and no skill on the operator’s part changes that division.",
+  "extension": "Work out how much new money would have to arrive each month to keep the payouts going without touching the original pool, and say what happens to that requirement as the number of investors grows.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What annual return does a guaranteed 3% a month work out to, if each month’s return compounds?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much money is in the pool?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does one month of promised payouts cost across all 40 investors?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "With no real earnings, how many months of payouts can the pool fund before it is exhausted? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "A fictional diversified fund states a long-run average of 7% a year. State that as a percentage for comparison."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how many percentage points does the offer exceed that stated average? Give the number of points, without a percent sign."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Which feature of the offer is the strongest single warning sign?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain why the arithmetic alone shows this arrangement must fail, and name three checks a person could run before putting money into any offer. Say which of your checks would have been quickest here."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u05-l06.package.json",
+    "sourcePackageSha256": "fcc4ea70fbfa2902ae84bce64e642e95426ff832402b0ef9ae7ad99a1531eae5",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u05-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

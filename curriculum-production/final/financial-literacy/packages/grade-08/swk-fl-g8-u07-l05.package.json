@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l05",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 5,
+    "phase": "Concept model B",
+    "title": "Concept model B: record keeping and deadlines",
+    "focus": "record keeping and deadlines"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners design a record-keeping system for an invented situation and reason about what deadlines and documentation protect.",
+  "scenario": "Nadege is a made-up eighth grader studying a pretend case: a filing deadline was missed by two weeks, several receipts cannot be found, and one document exists only as a photograph on a phone that has since been replaced. All of it is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Sort the three problems in Nadege's invented case by what each one actually costs: the missed deadline, the lost receipts, and the single-copy document.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What does each of the three problems in Nadege's case actually cost, and which is hardest to fix after the fact?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Design a record-keeping system that would have prevented all three problems, specifying what is kept, where, and for how long.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What system would you design, and how does each part prevent one of the three problems?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Only one problem was about time.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why do deadlines and documentation solve different problems, and why does a system need both?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner proposes only reminders, ask which of Nadege's three problems a reminder would not have prevented, and extend the design from there.",
+  "extension": "Ask the learner what Nadege should do now about the missed deadline, and what makes acting quickly matter.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What does each of the three problems in Nadege's case actually cost, and which is hardest to fix after the fact?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What system would you design, and how does each part prevent one of the three problems?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why do deadlines and documentation solve different problems, and why does a system need both?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u07-l05.package.json",
+    "sourcePackageSha256": "66ac23a0651779d7a0fea6f62815c689f26898573f3121ccf2382b0777e9a12b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u07-l05",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

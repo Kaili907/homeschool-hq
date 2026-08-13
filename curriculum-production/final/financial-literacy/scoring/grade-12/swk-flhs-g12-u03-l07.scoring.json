@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l07",
+  "lessonId": "ma-g12-financial-literacy-u03-l07",
+  "integratedDomains": [
+    "budgeting",
+    "insurance-risk",
+    "banking",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,829.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two insurance charges of $612 plus the three annual items. None appears anywhere in a budget built from a single month, because none of them falls in every month."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$235.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,829.00 spread across the 12 months. This is the amount the budget should have been reserving each month and was not."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "-$55.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The reported $180 surplus less the $235.75 of irregular expenses it omits. The budget does not have a small margin; it runs at a deficit."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,160.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$180 in each of the 12 months. This is what the household believes it will have accumulated by year end."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "-$669.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,160.00 of apparent surplus against $2,829.00 of expenses the budget never counted. The year ends $669.00 down rather than $2,160.00 up."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$55.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $669.00 annual shortfall spread across 12 months, which is exactly the size of the monthly deficit found earlier. Correcting the budget and correcting the year are the same adjustment expressed two ways."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "autoIns * 2 + registration + holidays + medical",
+        "substituted": "612 * 2 + 285 + 900 + 420",
+        "result": "$2,829.00",
+        "why": "Two insurance charges of $612 plus the three annual items. None appears anywhere in a budget built from a single month, because none of them falls in every month."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / 12, 2)",
+        "substituted": "round(#t1-p1 / 12, 2)",
+        "result": "$235.75",
+        "why": "$2,829.00 spread across the 12 months. This is the amount the budget should have been reserving each month and was not."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "statedSurplus - #t1-p2",
+        "substituted": "180 - #t1-p2",
+        "result": "-$55.75",
+        "why": "The reported $180 surplus less the $235.75 of irregular expenses it omits. The budget does not have a small margin; it runs at a deficit."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "statedSurplus2 * 12",
+        "substituted": "180 * 12",
+        "result": "$2,160.00",
+        "why": "$180 in each of the 12 months. This is what the household believes it will have accumulated by year end."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p1",
+        "substituted": "#t2-p1 - #t1-p1",
+        "result": "-$669.00",
+        "why": "$2,160.00 of apparent surplus against $2,829.00 of expenses the budget never counted. The year ends $669.00 down rather than $2,160.00 up."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(abs(#t2-p2) / 12, 2)",
+        "substituted": "round(abs(#t2-p2) / 12, 2)",
+        "result": "$55.75",
+        "why": "The $669.00 annual shortfall spread across 12 months, which is exactly the size of the monthly deficit found earlier. Correcting the budget and correcting the year are the same adjustment expressed two ways."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This budget is arithmetically correct and still wrong. Name the error precisely, explain why it would feel like it was working for most of the year, and describe the change that fixes it rather than merely detecting it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names the error precisely: the budget covers a month rather than a year, so every expense that does not arrive monthly is invisible to it, and the $180 surplus is measured against an incomplete list of costs.",
+          "Explains the experience: in every month with no irregular expense the budget appears to work exactly as written, and it only fails in the months when the $612, $900, $285, or $420 lands.",
+          "Describes the fix rather than the diagnosis: reserve $235.75 each month into a separate holding account so the irregular expenses are already funded when they arrive, and treat the resulting deficit as a spending problem to be solved rather than a rounding issue."
+        ],
+        "evidenceRequirements": [
+          "Uses the $235.75 monthly equivalent and the -$669.00 annual position, and refers to at least one of the individual irregular expenses."
+        ],
+        "lookFors": [
+          "The response identifies the planning horizon as the error, not the arithmetic.",
+          "The fix names where the reserved money is held, so it is not spent before the expense arrives."
+        ],
+        "commonMisconception": "Believing a budget is complete because every line in it is accurate, when the expenses that never appear in a single month are the ones that break the year.",
+        "dimensions": [
+          "error-diagnosis",
+          "plan-coherence",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the four irregular expenses come to across a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of those expenses?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the household’s true monthly position once that is included?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What annual surplus does the budget as written imply?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the actual annual position?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "By how much must monthly spending fall for the year to break even?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This budget is arithmetically correct and still wrong. Name the error precisely, explain why it would feel like it was working for most of the year, and describe the change that fixes it rather than merely detecting it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the four irregular expenses come to across a year? Answer: $2,829.00. Verification: Two insurance charges of $612 plus the three annual items. None appears anywhere in a budget built from a single month, because none of them falls in every month. t1-p2: What is the monthly equivalent of those expenses? Answer: $235.75. Verification: $2,829.00 spread across the 12 months. This is the amount the budget should have been reserving each month and was not. t1-p3: What is the household’s true monthly position once that is included? Answer: -$55.75. Verification: The reported $180 surplus less the $235.75 of irregular expenses it omits. The budget does not have a small margin; it runs at a deficit. t2-p1: What annual surplus does the budget as written imply? Answer: $2,160.00. Verification: $180 in each of the 12 months. This is what the household believes it will have accumulated by year end. t2-p2: What is the actual annual position? Answer: -$669.00. Verification: $2,160.00 of apparent surplus against $2,829.00 of expenses the budget never counted. The year ends $669.00 down rather than $2,160.00 up. t2-p3: By how much must monthly spending fall for the year to break even? Answer: $55.75. Verification: The $669.00 annual shortfall spread across 12 months, which is exactly the size of the monthly deficit found earlier. Correcting the budget and correcting the year are the same adjustment expressed two ways."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: This budget is arithmetically correct and still wrong. Name the error precisely, explain why it would feel like it was working for most of the year, and describe the change that fixes it rather than merely detecting it. Names the error precisely: the budget covers a month rather than a year, so every expense that does not arrive monthly is invisible to it, and the $180 surplus is measured against an incomplete list of costs. Explains the experience: in every month with no irregular expense the budget appears to work exactly as written, and it only fails in the months when the $612, $900, $285, or $420 lands. Describes the fix rather than the diagnosis: reserve $235.75 each month into a separate holding account so the irregular expenses are already funded when they arrive, and treat the resulting deficit as a spending problem to be solved rather than a rounding issue. Uses the $235.75 monthly equivalent and the -$669.00 annual position, and refers to at least one of the individual irregular expenses. The response identifies the planning horizon as the error, not the arithmetic. The fix names where the reserved money is held, so it is not spent before the expense arrives."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names the error precisely: the budget covers a month rather than a year, so every expense that does not arrive monthly is invisible to it, and the $180 surplus is measured against an incomplete list of costs. Explains the experience: in every month with no irregular expense the budget appears to work exactly as written, and it only fails in the months when the $612, $900, $285, or $420 lands. Describes the fix rather than the diagnosis: reserve $235.75 each month into a separate holding account so the irregular expenses are already funded when they arrive, and treat the resulting deficit as a spending problem to be solved rather than a rounding issue."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u03-l07.scoring.json",
+    "sourceScoringSha256": "23a34d82dfce8bbde84a2c98c8889faf66c4e1afdd7878c966fc949f35faf1fa",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

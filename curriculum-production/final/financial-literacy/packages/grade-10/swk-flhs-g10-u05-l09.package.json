@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l09",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: diversification across and within asset classes"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "diversification across and within asset classes",
+  "objective": "Compute the ending value of two fictional three-year return sequences with identical arithmetic averages, and establish that the steadier path ends higher.",
+  "scenario": "The two simulated three-year return sequences below are invented for this exercise. Both are stated outcomes of a simulated period and neither is a forecast.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional return sequences in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Two fictional investors each start with $10,000. Portfolio P returns 20% in the first year, -10% in the second, and 8% in the third. Portfolio Q returns 6% in each of the 3 years. No money is added or withdrawn.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the average of Portfolio P’s three annual returns?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Portfolio P worth after the three years? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Portfolio Q worth after the three years? Round to the nearest cent.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure the gap the swing created.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the steadier portfolio end with?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much did Portfolio P actually gain over the three years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much did Portfolio Q gain?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Why does Portfolio P end lower despite having the same average annual return?",
+          "choices": [
+            "Because its average was computed incorrectly",
+            "Because the -10% year removed money that the later gain had to rebuild before it could add anything",
+            "Because three years is too short a period to compare"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Both portfolios averaged 6.00% a year and ended $246.16 apart. Explain what this shows about reading an advertised average return, and connect it to why an investor might accept a lower expected return in exchange for a steadier one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If both portfolios are expected to end at the same value, notice that returns are applied one after another to a changing balance. Portfolio P’s 8% in year three is applied to what the -10% year left, not to the original $10,000. Multiply the three factors in turn rather than adding the percentages.",
+  "extension": "Construct a three-year sequence that also averages 6.00% but ends lower than $11,664.00, and describe what you had to do to the swing to achieve it.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the average of Portfolio P’s three annual returns?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Portfolio P worth after the three years? Round to the nearest cent."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Portfolio Q worth after the three years? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the steadier portfolio end with?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much did Portfolio P actually gain over the three years?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much did Portfolio Q gain?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Why does Portfolio P end lower despite having the same average annual return?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Both portfolios averaged 6.00% a year and ended $246.16 apart. Explain what this shows about reading an advertised average return, and connect it to why an investor might accept a lower expected return in exchange for a steadier one."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u05-l09.package.json",
+    "sourcePackageSha256": "1134965af4148c7dd079e86298b12ad44f4aa27e509bd275ac932d87df1f9e97",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u05-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

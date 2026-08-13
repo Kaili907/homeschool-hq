@@ -1,0 +1,331 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l09",
+  "lessonId": "ma-g12-financial-literacy-u07-l09",
+  "integratedDomains": [
+    "budgeting",
+    "taxes",
+    "debt",
+    "saving-investing",
+    "insurance-risk",
+    "income",
+    "multi-variable-decision"
+  ],
+  "isCapstone": true,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$24,540.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,045 in each of the 12 months — the largest single use of take-home pay."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,382.48",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$198.54 in each of the 12 months."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,095.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,730 Case R contributes plus the $1,365 the employer adds. Only the first came out of pay; the second is additional and appears nowhere in take-home."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,256.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,040 health premium plus $216.00 of renters insurance. The health premium was taken before tax and so does not appear in take-home, while the renters premium sits inside the monthly living costs."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$4,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$400 in each of the 12 months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$6,372.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,095 less $24,540.00, $2,382.48, and $4,800.00. This is the amount still to be allocated between the card, extra retirement saving, and anything else — and it is the part of the year a plan is actually deciding."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "essentials * 12",
+        "substituted": "2045 * 12",
+        "result": "$24,540.00",
+        "why": "$2,045 in each of the 12 months — the largest single use of take-home pay."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(loanPayment * 12, 2)",
+        "substituted": "round(198.54 * 12, 2)",
+        "result": "$2,382.48",
+        "why": "$198.54 in each of the 12 months."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "ownContribution + employerContribution",
+        "substituted": "2730 + 1365",
+        "result": "$4,095.00",
+        "why": "The $2,730 Case R contributes plus the $1,365 the employer adds. Only the first came out of pay; the second is additional and appears nowhere in take-home."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "healthPrem + rentersIns * 12",
+        "substituted": "2040 + 18 * 12",
+        "result": "$2,256.00",
+        "why": "The $2,040 health premium plus $216.00 of renters insurance. The health premium was taken before tax and so does not appear in take-home, while the renters premium sits inside the monthly living costs."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "reserveMonthly * 12",
+        "substituted": "400 * 12",
+        "result": "$4,800.00",
+        "why": "$400 in each of the 12 months."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "takeHome - #t1-p1 - #t1-p2 - #t2-p2",
+        "substituted": "38095 - #t1-p1 - #t1-p2 - #t2-p2",
+        "result": "$6,372.52",
+        "why": "$38,095 less $24,540.00, $2,382.48, and $4,800.00. This is the amount still to be allocated between the card, extra retirement saving, and anything else — and it is the part of the year a plan is actually deciding."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write the annual summary. Report where the year’s money went across every strand, say which single figure you think best describes whether the year went well, and decide what to do with the $6,372.52 that remains — defending the decision and naming what it forgoes.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Reports the strands accurately with figures: $24,540.00 on living costs, $2,382.48 on the loan, $4,800.00 to the reserve, $4,095.00 into retirement counting both contributions, $2,256.00 on insurance, and $11,735.00 in tax.",
+          "Proposes a summary measure and justifies it — total saved and invested across the year, the reserve expressed in months of living costs, or the change in what is owed — rather than picking a figure without a reason.",
+          "Decides what happens to the $6,372.52 and defends it with a figure, for example clearing the $1,950 card balance and directing the rest to the reserve or to retirement.",
+          "Names what the decision forgoes, so the allocation is presented as a choice rather than as the only option.",
+          "Distinguishes money spent from money that moved between the fictional adult’s own accounts."
+        ],
+        "evidenceRequirements": [
+          "Uses at least four of the annual strand totals, including the $11,735.00 of tax and the $4,095.00 into retirement.",
+          "States the disposal of the $6,372.52 in figures."
+        ],
+        "lookFors": [
+          "The summary keeps the employer contribution separate from the fictional adult’s own contribution.",
+          "The summary does not double-count the renters premium, which sits inside the living costs total.",
+          "The chosen summary measure is defended rather than assumed."
+        ],
+        "commonMisconception": "Judging a financial year by how much was spent, when the strands that decide whether the year went well are what was saved, what was owed, and what protection was in place at the end of it.",
+        "defensibleAlternatives": [
+          "Clear the $1,950 card balance from the $6,372.52 and direct the remainder to the reserve, ending the 21.6% charge first.",
+          "Clear the card and direct the remainder to retirement, accepting a thinner reserve in exchange for more invested in a long-horizon account.",
+          "Split the remainder between the reserve and retirement without clearing the card in full, if the record states why carrying part of the balance is acceptable."
+        ],
+        "dimensions": [
+          "plan-coherence",
+          "evidence-use",
+          "criteria-application",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do living costs come to across the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do the loan payments come to across the year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What goes into retirement across the year, counting both contributions?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the year’s insurance premiums come to, counting the pre-tax health premium and renters insurance?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is added to the reserve across the year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Of the take-home pay, how much is left once living costs, loan payments, and the reserve transfer are taken out?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the annual summary. Report where the year’s money went across every strand, say which single figure you think best describes whether the year went well, and decide what to do with the $6,372.52 that remains — defending the decision and naming what it forgoes."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do living costs come to across the year? Answer: $24,540.00. Verification: $2,045 in each of the 12 months — the largest single use of take-home pay. t1-p2: What do the loan payments come to across the year? Answer: $2,382.48. Verification: $198.54 in each of the 12 months. t1-p3: What goes into retirement across the year, counting both contributions? Answer: $4,095.00. Verification: The $2,730 Case R contributes plus the $1,365 the employer adds. Only the first came out of pay; the second is additional and appears nowhere in take-home. t2-p1: What do the year’s insurance premiums come to, counting the pre-tax health premium and renters insurance? Answer: $2,256.00. Verification: The $2,040 health premium plus $216.00 of renters insurance. The health premium was taken before tax and so does not appear in take-home, while the renters premium sits inside the monthly living costs. t2-p2: What is added to the reserve across the year? Answer: $4,800.00. Verification: $400 in each of the 12 months. t2-p3: Of the take-home pay, how much is left once living costs, loan payments, and the reserve transfer are taken out? Answer: $6,372.52. Verification: $38,095 less $24,540.00, $2,382.48, and $4,800.00. This is the amount still to be allocated between the card, extra retirement saving, and anything else — and it is the part of the year a plan is actually deciding."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Write the annual summary. Report where the year’s money went across every strand, say which single figure you think best describes whether the year went well, and decide what to do with the $6,372.52 that remains — defending the decision and naming what it forgoes. Reports the strands accurately with figures: $24,540.00 on living costs, $2,382.48 on the loan, $4,800.00 to the reserve, $4,095.00 into retirement counting both contributions, $2,256.00 on insurance, and $11,735.00 in tax. Proposes a summary measure and justifies it — total saved and invested across the year, the reserve expressed in months of living costs, or the change in what is owed — rather than picking a figure without a reason. Decides what happens to the $6,372.52 and defends it with a figure, for example clearing the $1,950 card balance and directing the rest to the reserve or to retirement. Names what the decision forgoes, so the allocation is presented as a choice rather than as the only option. Distinguishes money spent from money that moved between the fictional adult’s own accounts. Uses at least four of the annual strand totals, including the $11,735.00 of tax and the $4,095.00 into retirement. States the disposal of the $6,372.52 in figures. The summary keeps the employer contribution separate from the fictional adult’s own contribution. The summary does not double-count the renters premium, which sits inside the living costs total. The chosen summary measure is defended rather than assumed."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Reports the strands accurately with figures: $24,540.00 on living costs, $2,382.48 on the loan, $4,800.00 to the reserve, $4,095.00 into retirement counting both contributions, $2,256.00 on insurance, and $11,735.00 in tax. Proposes a summary measure and justifies it — total saved and invested across the year, the reserve expressed in months of living costs, or the change in what is owed — rather than picking a figure without a reason. Decides what happens to the $6,372.52 and defends it with a figure, for example clearing the $1,950 card balance and directing the rest to the reserve or to retirement. Names what the decision forgoes, so the allocation is presented as a choice rather than as the only option. Distinguishes money spent from money that moved between the fictional adult’s own accounts."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u07-l09.scoring.json",
+    "sourceScoringSha256": "8c29783168739810dd3ffdfadd0666b4746298a2dca1517b6e6bcd9a6a5eb33c",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

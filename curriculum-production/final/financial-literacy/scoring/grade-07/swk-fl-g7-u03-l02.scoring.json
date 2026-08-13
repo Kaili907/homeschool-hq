@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u03-l02",
+  "lessonId": "ma-g7-financial-literacy-u03-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the monthly equivalent of the $720.00 annual bill?",
+        "answer": "$60.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(720.00 / 12) = 60.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 72000
+            },
+            "by": 12,
+            "round": "exact"
+          },
+          "trace": "(720.00 / 12) = 60.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What do the variable costs come to?",
+        "answer": "$405.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(260.00 + 145.00) = 405.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 26000
+              },
+              {
+                "op": "money",
+                "cents": 14500
+              }
+            ]
+          },
+          "trace": "(260.00 + 145.00) = 405.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the full monthly cost including the periodic equivalent?",
+        "answer": "$1,245.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(780.00 + 260.00 + 145.00 + (720.00 / 12)) = 1,245.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 78000
+              },
+              {
+                "op": "money",
+                "cents": 26000
+              },
+              {
+                "op": "money",
+                "cents": 14500
+              },
+              {
+                "op": "divide",
+                "of": {
+                  "op": "money",
+                  "cents": 72000
+                },
+                "by": 12,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(780.00 + 260.00 + 145.00 + (720.00 / 12)) = 1,245.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much is left each month once the periodic equivalent is included?",
+        "answer": "$155.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,400.00 - (780.00 + 260.00 + 145.00 + (720.00 / 12))) = 155.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 140000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 78000
+                },
+                {
+                  "op": "money",
+                  "cents": 26000
+                },
+                {
+                  "op": "money",
+                  "cents": 14500
+                },
+                {
+                  "op": "divide",
+                  "of": {
+                    "op": "money",
+                    "cents": 72000
+                  },
+                  "by": 12,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "(1,400.00 - (780.00 + 260.00 + 145.00 + (720.00 / 12))) = 155.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "In the month the $720.00 bill actually lands, what is the net position if nothing was set aside?",
+        "answer": "-$505.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,400.00 - (780.00 + 260.00 + 145.00 + 720.00)) = -505.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 140000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 78000
+                },
+                {
+                  "op": "money",
+                  "cents": 26000
+                },
+                {
+                  "op": "money",
+                  "cents": 14500
+                },
+                {
+                  "op": "money",
+                  "cents": 72000
+                }
+              ]
+            }
+          },
+          "trace": "(1,400.00 - (780.00 + 260.00 + 145.00 + 720.00)) = -505.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Handling periodic costs",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Adaeze's annual bill as a one-off surprise."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Spreading is mentioned for Adaeze but the two results are not compared."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response contrasts Adaeze's $155.00 monthly surplus with the $505.00 shortfall in the bill month, and explains that spreading converts a shock into a manageable line."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of the $720.00 annual bill?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the variable costs come to?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the full monthly cost including the periodic equivalent?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is left each month once the periodic equivalent is included?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "In the month the $720.00 bill actually lands, what is the net position if nothing was set aside?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why periodic costs are spread across months in a budget, using Adaeze's two results as evidence."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the monthly equivalent of the $720.00 annual bill? Answer: $60.00. Verification: (720.00 / 12) = 60.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What do the variable costs come to? Answer: $405.00. Verification: (260.00 + 145.00) = 405.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What is the full monthly cost including the periodic equivalent? Answer: $1,245.00. Verification: (780.00 + 260.00 + 145.00 + (720.00 / 12)) = 1,245.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much is left each month once the periodic equivalent is included? Answer: $155.00. Verification: (1,400.00 - (780.00 + 260.00 + 145.00 + (720.00 / 12))) = 155.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: In the month the $720.00 bill actually lands, what is the net position if nothing was set aside? Answer: -$505.00. Verification: (1,400.00 - (780.00 + 260.00 + 145.00 + 720.00)) = -505.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Handling periodic costs — Not yet: The response treats Adaeze's annual bill as a one-off surprise. Approaching: Spreading is mentioned for Adaeze but the two results are not compared. Meets: The response contrasts Adaeze's $155.00 monthly surplus with the $505.00 shortfall in the bill month, and explains that spreading converts a shock into a manageable line. The response contrasts Adaeze's $155.00 monthly surplus with the $505.00 shortfall in the bill month, and explains that spreading converts a shock into a manageable line."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response contrasts Adaeze's $155.00 monthly surplus with the $505.00 shortfall in the bill month, and explains that spreading converts a shock into a manageable line."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-07/swk-fl-g7-u03-l02.scoring.json",
+    "sourceScoringSha256": "411a7fc3e786173b5c8b1f724fb48bdfb2bca32f64346687f59a2ae8111203eb",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

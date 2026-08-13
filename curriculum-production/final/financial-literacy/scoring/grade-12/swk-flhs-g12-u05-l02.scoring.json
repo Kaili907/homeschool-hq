@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l02",
+  "lessonId": "ma-g12-financial-literacy-u05-l02",
+  "integratedDomains": [
+    "saving-investing",
+    "taxes",
+    "budgeting",
+    "income"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$49,200 across the 12 months of a year. Every contribution rate below is applied to this figure."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$246.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% of $4,100.00. This is the amount leaving the paycheque, not the amount take-home pay falls by."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$29.52",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of the $246.00 removed from taxable pay. The payroll levy is charged on all pay, so it is unchanged and does not appear here."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$216.48",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$246.00 contributed less $29.52 of income tax no longer paid. The budget has to find $216.48, not $246.00."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$410.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% of the $4,100.00 monthly gross — $164.00 more than the 6% election takes, before any tax effect is considered."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$360.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$410.00 contributed less $49.20 of income tax saved at the 12% band."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$144.32",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$360.80 against $216.48. The contribution rises $164.00 but take-home falls only $144.32, because $19.68 of the increase is met by income tax no longer paid."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(salary / 12, 2)",
+        "substituted": "round(49200 / 12, 2)",
+        "result": "$4,100.00",
+        "why": "$49,200 across the 12 months of a year. Every contribution rate below is applied to this figure."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * rate6, 2)",
+        "substituted": "round(#t1-p1 * 0.06, 2)",
+        "result": "$246.00",
+        "why": "6% of $4,100.00. This is the amount leaving the paycheque, not the amount take-home pay falls by."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p2 * marginal, 2)",
+        "substituted": "round(#t1-p2 * 0.12, 2)",
+        "result": "$29.52",
+        "why": "12% of the $246.00 removed from taxable pay. The payroll levy is charged on all pay, so it is unchanged and does not appear here."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - #t1-p3",
+        "substituted": "#t1-p2 - #t1-p3",
+        "result": "$216.48",
+        "why": "$246.00 contributed less $29.52 of income tax no longer paid. The budget has to find $216.48, not $246.00."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 * rate10, 2)",
+        "substituted": "round(#t1-p1 * 0.1, 2)",
+        "result": "$410.00",
+        "why": "10% of the $4,100.00 monthly gross — $164.00 more than the 6% election takes, before any tax effect is considered."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 - #t2-p2 * marginal2, 2)",
+        "substituted": "round(#t2-p2 - #t2-p2 * 0.12, 2)",
+        "result": "$360.80",
+        "why": "$410.00 contributed less $49.20 of income tax saved at the 12% band."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - #t2-p1",
+        "substituted": "#t2-p3 - #t2-p1",
+        "result": "$144.32",
+        "why": "$360.80 against $216.48. The contribution rises $164.00 but take-home falls only $144.32, because $19.68 of the increase is met by income tax no longer paid."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A fictional colleague says raising the rate from 6% to 10% \"costs $164 a month\". Correct the figure, explain why the correction is not the whole answer, and state what the fictional worker needs to know about their budget before the difference between the two rates can be decided.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Corrects the figure: take-home pay falls by $144.32, not $164.00, because $19.68 of the extra contribution is met by income tax that is no longer paid.",
+          "Explains why the correction is not the whole answer: $144.32 still has to be found every month from a budget that currently spends it, and the contribution is money the worker no longer has available to spend this month even though they still own it.",
+          "Names what must be known: whether $144.32 a month exists in the budget without displacing something the worker cannot defer, such as an obligation or a reserve that is not yet built."
+        ],
+        "evidenceRequirements": [
+          "Uses the $144.32 fall in take-home pay and the $164.00 increase in the contribution itself."
+        ],
+        "lookFors": [
+          "The response separates the contribution from the effect on take-home pay.",
+          "The response does not recommend a rate for any real person; the question is what the fictional worker would need to know."
+        ],
+        "commonMisconception": "Assuming a pre-tax contribution reduces take-home pay by its full amount, which overstates the cost by the tax the contribution saves.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is monthly gross pay?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does a 6% contribution take from each month’s pay?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What income tax does that contribution save each month at the 12% band?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "By how much does take-home pay actually fall at a 6% contribution?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does a 10% contribution take from each month’s pay?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "By how much does take-home pay fall at a 10% contribution?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What does moving from 6% to 10% cost the monthly budget?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "A fictional colleague says raising the rate from 6% to 10% \"costs $164 a month\". Correct the figure, explain why the correction is not the whole answer, and state what the fictional worker needs to know about their budget before the difference between the two rates can be decided."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is monthly gross pay? Answer: $4,100.00. Verification: $49,200 across the 12 months of a year. Every contribution rate below is applied to this figure. t1-p2: What does a 6% contribution take from each month’s pay? Answer: $246.00. Verification: 6% of $4,100.00. This is the amount leaving the paycheque, not the amount take-home pay falls by. t1-p3: What income tax does that contribution save each month at the 12% band? Answer: $29.52. Verification: 12% of the $246.00 removed from taxable pay. The payroll levy is charged on all pay, so it is unchanged and does not appear here. t2-p1: By how much does take-home pay actually fall at a 6% contribution? Answer: $216.48. Verification: $246.00 contributed less $29.52 of income tax no longer paid. The budget has to find $216.48, not $246.00. t2-p2: What does a 10% contribution take from each month’s pay? Answer: $410.00. Verification: 10% of the $4,100.00 monthly gross — $164.00 more than the 6% election takes, before any tax effect is considered. t2-p3: By how much does take-home pay fall at a 10% contribution? Answer: $360.80. Verification: $410.00 contributed less $49.20 of income tax saved at the 12% band. t2-p4: What does moving from 6% to 10% cost the monthly budget? Answer: $144.32. Verification: $360.80 against $216.48. The contribution rises $164.00 but take-home falls only $144.32, because $19.68 of the increase is met by income tax no longer paid."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: A fictional colleague says raising the rate from 6% to 10% \"costs $164 a month\". Correct the figure, explain why the correction is not the whole answer, and state what the fictional worker needs to know about their budget before the difference between the two rates can be decided. Corrects the figure: take-home pay falls by $144.32, not $164.00, because $19.68 of the extra contribution is met by income tax that is no longer paid. Explains why the correction is not the whole answer: $144.32 still has to be found every month from a budget that currently spends it, and the contribution is money the worker no longer has available to spend this month even though they still own it. Names what must be known: whether $144.32 a month exists in the budget without displacing something the worker cannot defer, such as an obligation or a reserve that is not yet built. Uses the $144.32 fall in take-home pay and the $164.00 increase in the contribution itself. The response separates the contribution from the effect on take-home pay. The response does not recommend a rate for any real person; the question is what the fictional worker would need to know."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Corrects the figure: take-home pay falls by $144.32, not $164.00, because $19.68 of the extra contribution is met by income tax that is no longer paid. Explains why the correction is not the whole answer: $144.32 still has to be found every month from a budget that currently spends it, and the contribution is money the worker no longer has available to spend this month even though they still own it. Names what must be known: whether $144.32 a month exists in the budget without displacing something the worker cannot defer, such as an obligation or a reserve that is not yet built."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u05-l02.scoring.json",
+    "sourceScoringSha256": "5723c6c00b67b472f2763d62fcf637f51c3c868e0cb0ed4c3291df58c4c6eed6",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

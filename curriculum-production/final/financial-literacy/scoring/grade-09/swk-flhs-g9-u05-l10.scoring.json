@@ -1,0 +1,359 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l10",
+  "lessonId": "ma-g9-financial-literacy-u05-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$160.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,600 over 10 months, with no growth assumed over so short a horizon."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,000 divided across the 60 months to the vehicle date, with no growth assumed."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$21,459.35",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,000 x 1.06 to the twenty-fifth power."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$310.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$160.00 for Goal A plus $150.00 for Goal B."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$30.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$340 available less the $310 the two dated goals require."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$160.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The Goal A contribution ends when the goal is reached, freeing its full monthly amount."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "goalA / monthsA",
+        "substituted": "1600 / 10",
+        "result": "$160.00",
+        "why": "$1,600 over 10 months, with no growth assumed over so short a horizon."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "goalB / monthsB",
+        "substituted": "9000 / 60",
+        "result": "$150.00",
+        "why": "$9,000 divided across the 60 months to the vehicle date, with no growth assumed."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(placement * pow(1 + rate, years), 2)",
+        "substituted": "round(5000 * pow(1 + 0.06, 25), 2)",
+        "result": "$21,459.35",
+        "why": "$5,000 x 1.06 to the twenty-fifth power."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$310.00",
+        "why": "$160.00 for Goal A plus $150.00 for Goal B."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "available - #t2-p1",
+        "substituted": "340 - #t2-p1",
+        "result": "$30.00",
+        "why": "$340 available less the $310 the two dated goals require."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1",
+        "substituted": "#t1-p1",
+        "result": "$160.00",
+        "why": "The Goal A contribution ends when the goal is reached, freeing its full monthly amount."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Present the allocation: which holding category each goal belongs in, what each requires, and what happens to the freed $160 after month 10. Then answer this objection: \"Goal A is only 10 months away — put it in the stock-type holding and it will get there faster.\"",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Assigns each goal to a category on the basis of its horizon and says why, with Goal A in insured cash and Goal C in a long-horizon growth holding.",
+          "Uses the $160.00, $150.00, and $30.00 figures to show the plan fits within $340 a month.",
+          "Answers the objection directly: a stock-type holding might get there faster and might also be down when the $1,600 is due, and 10 months leaves no time to recover — so the objection trades a fixed requirement for an uncertain one.",
+          "States a plan for the freed $160 after month 10 rather than leaving it unallocated."
+        ],
+        "evidenceRequirements": [
+          "Cites at least three computed figures from this lesson, including at least one monthly requirement and the Goal C projection."
+        ],
+        "lookFors": [
+          "The objection is answered on its merits — the higher expected return is real — rather than dismissed.",
+          "The response does not name specific real investments or products."
+        ],
+        "commonMisconception": "Choosing a holding for a dated goal by expected return rather than by whether the amount must be there on a fixed date.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The Goal C projection assumes 6% a year for 25 years. Say what happens to that projection if the actual average is 4%, and how you would present the figure to avoid overstating certainty.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that a lower average produces a substantially smaller result over 25 years, and that the gap widens with the term.",
+          "Proposes presenting a range or a set of scenarios rather than a single figure, and says why a single figure invites false confidence."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $21,459.35 projection and the 6% assumption behind it."
+        ],
+        "lookFors": [
+          "The response treats the assumed rate as an input to be stated, not a property of the goal."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much a month does Goal A require, assuming no growth?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much a month does Goal B require, assuming no growth?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does Goal C’s $5,000 placement reach in 25 years at 6% a year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do Goals A and B together require each month?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $340 a month is left over?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Once Goal A is funded after 10 months, how much a month becomes free?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Present the allocation: which holding category each goal belongs in, what each requires, and what happens to the freed $160 after month 10. Then answer this objection: \"Goal A is only 10 months away — put it in the stock-type holding and it will get there faster.\""
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "The Goal C projection assumes 6% a year for 25 years. Say what happens to that projection if the actual average is 4%, and how you would present the figure to avoid overstating certainty."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much a month does Goal A require, assuming no growth? Answer: $160.00. Verification: $1,600 over 10 months, with no growth assumed over so short a horizon. t1-p2: How much a month does Goal B require, assuming no growth? Answer: $150.00. Verification: $9,000 divided across the 60 months to the vehicle date, with no growth assumed. t1-p3: What does Goal C’s $5,000 placement reach in 25 years at 6% a year? Answer: $21,459.35. Verification: $5,000 x 1.06 to the twenty-fifth power. t2-p1: What do Goals A and B together require each month? Answer: $310.00. Verification: $160.00 for Goal A plus $150.00 for Goal B. t2-p2: How much of the $340 a month is left over? Answer: $30.00. Verification: $340 available less the $310 the two dated goals require. t2-p3: Once Goal A is funded after 10 months, how much a month becomes free? Answer: $160.00. Verification: The Goal A contribution ends when the goal is reached, freeing its full monthly amount."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Present the allocation: which holding category each goal belongs in, what each requires, and what happens to the freed $160 after month 10. Then answer this objection: \"Goal A is only 10 months away — put it in the stock-type holding and it will get there faster.\" Assigns each goal to a category on the basis of its horizon and says why, with Goal A in insured cash and Goal C in a long-horizon growth holding. Uses the $160.00, $150.00, and $30.00 figures to show the plan fits within $340 a month. Answers the objection directly: a stock-type holding might get there faster and might also be down when the $1,600 is due, and 10 months leaves no time to recover — so the objection trades a fixed requirement for an uncertain one. States a plan for the freed $160 after month 10 rather than leaving it unallocated. Cites at least three computed figures from this lesson, including at least one monthly requirement and the Goal C projection. The objection is answered on its merits — the higher expected return is real — rather than dismissed. The response does not name specific real investments or products. t3-p2: The Goal C projection assumes 6% a year for 25 years. Say what happens to that projection if the actual average is 4%, and how you would present the figure to avoid overstating certainty. States that a lower average produces a substantially smaller result over 25 years, and that the gap widens with the term. Proposes presenting a range or a set of scenarios rather than a single figure, and says why a single figure invites false confidence. Refers to the $21,459.35 projection and the 6% assumption behind it. The response treats the assumed rate as an input to be stated, not a property of the goal."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Assigns each goal to a category on the basis of its horizon and says why, with Goal A in insured cash and Goal C in a long-horizon growth holding. Uses the $160.00, $150.00, and $30.00 figures to show the plan fits within $340 a month. Answers the objection directly: a stock-type holding might get there faster and might also be down when the $1,600 is due, and 10 months leaves no time to recover — so the objection trades a fixed requirement for an uncertain one. States a plan for the freed $160 after month 10 rather than leaving it unallocated. States that a lower average produces a substantially smaller result over 25 years, and that the gap widens with the term. Proposes presenting a range or a set of scenarios rather than a single figure, and says why a single figure invites false confidence."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 6
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u05-l10.scoring.json",
+    "sourceScoringSha256": "d3cbf00ee8e4afb8188fbc17bd80deddc51c54b26be7c6176b2e6f9930a27692",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

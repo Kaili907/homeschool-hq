@@ -1,0 +1,399 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l01",
+  "lessonId": "ma-g11-financial-literacy-u01-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$18,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Tuition is charged once a year for the length of the programme: $9,400 for each of 2 years."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$74,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same rule over a longer programme: $18,600 for each of 4 years, which is where most of the cost difference between the pathways comes from."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$247,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Years 1 and 2 are study years with no wage, so only 6 of the 8 years pay anything: $41,200 x 6."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$227,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Pathway B has the highest salary but the fewest earning years inside this horizon: $56,800 x 4."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$252,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The lowest salary of the three, but paid in every year of the horizon: $31,500 x 8."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$228,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Earnings less tuition for the same pathway: $247,200.00 earned against $18,800.00 of tuition."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$152,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same subtraction for Pathway B: $227,200.00 earned against $74,400.00 of tuition, the largest tuition bill of the three."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "$23,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Pathway C has no tuition to subtract, so its $252,000.00 stands against the stronger of $228,400.00 and $152,800.00, which is Pathway A."
+        }
+      },
+      {
+        "ref": "t3-p4",
+        "answer": "Pathway C, straight to work",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "At this horizon the ranking is decided by earning years, not by salary: C’s $252,000.00 beats A’s $228,400.00 because C was paid in all 8 years while A was paid in 6."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "tuitionA * 2",
+        "substituted": "9400 * 2",
+        "result": "$18,800.00",
+        "why": "Tuition is charged once a year for the length of the programme: $9,400 for each of 2 years."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "tuitionB * 4",
+        "substituted": "18600 * 4",
+        "result": "$74,400.00",
+        "why": "The same rule over a longer programme: $18,600 for each of 4 years, which is where most of the cost difference between the pathways comes from."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "salaryA * yearsA",
+        "substituted": "41200 * 6",
+        "result": "$247,200.00",
+        "why": "Years 1 and 2 are study years with no wage, so only 6 of the 8 years pay anything: $41,200 x 6."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "salaryB * yearsB",
+        "substituted": "56800 * 4",
+        "result": "$227,200.00",
+        "why": "Pathway B has the highest salary but the fewest earning years inside this horizon: $56,800 x 4."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "salaryC * yearsC",
+        "substituted": "31500 * 8",
+        "result": "$252,000.00",
+        "why": "The lowest salary of the three, but paid in every year of the horizon: $31,500 x 8."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t2-p1 - #t1-p1",
+        "substituted": "#t2-p1 - #t1-p1",
+        "result": "$228,400.00",
+        "why": "Earnings less tuition for the same pathway: $247,200.00 earned against $18,800.00 of tuition."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t2-p2 - #t1-p2",
+        "substituted": "#t2-p2 - #t1-p2",
+        "result": "$152,800.00",
+        "why": "The same subtraction for Pathway B: $227,200.00 earned against $74,400.00 of tuition, the largest tuition bill of the three."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "#t2-p3 - max(#t3-p1, #t3-p2)",
+        "substituted": "#t2-p3 - max(#t3-p1, #t3-p2)",
+        "result": "$23,600.00",
+        "why": "Pathway C has no tuition to subtract, so its $252,000.00 stands against the stronger of $228,400.00 and $152,800.00, which is Pathway A."
+      },
+      {
+        "ref": "t3-p4",
+        "expression": "#t2-p3 > #t3-p1",
+        "substituted": "#t2-p3 > #t3-p1",
+        "result": "Pathway C, straight to work",
+        "why": "At this horizon the ranking is decided by earning years, not by salary: C’s $252,000.00 beats A’s $228,400.00 because C was paid in all 8 years while A was paid in 6."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Pathway C finishes first at year 8 and finishes last on salary. Explain what the eight-year horizon is doing to the ranking, and say what you would expect to happen to the ranking at year 20 and why.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the eight-year window rewards years spent earning, and that C wins it by being paid in all 8 years while A is paid in 6 and B in only 4.",
+          "States that beyond the horizon the annual salary gaps keep accruing while the tuition is already spent, so B gains $25,300 a year on C and would eventually overtake it.",
+          "Treats the ranking as a property of the chosen horizon rather than as a fact about the pathways."
+        ],
+        "evidenceRequirements": [
+          "Cites the number of earning years for at least two pathways and the annual salary figures that would drive the later comparison."
+        ],
+        "lookFors": [
+          "The response identifies the horizon itself as the thing doing the work, not the salaries alone.",
+          "The response uses the annual gap between salaries to argue about year 20 rather than asserting a reversal without a mechanism.",
+          "A response that argues C could stay ahead is acceptable if it says what would have to hold, such as C also receiving raises."
+        ],
+        "commonMisconception": "Reading a comparison made at one horizon as the permanent ranking of the options.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "Every salary in this model is held flat for eight years. Name one way that assumption favours a particular pathway, and say which computed figure would move most if it were dropped.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies that flat salaries suppress the advantage of the pathways that start higher, because a percentage raise on $56,800 is worth more than the same raise on $31,500.",
+          "Names a specific computed figure that would move, such as Pathway C’s $252,000.00 total or Pathway B’s $227,200.00, and says in which direction."
+        ],
+        "evidenceRequirements": [
+          "Refers to at least two of the three annual salary figures when explaining who the flat assumption favours."
+        ],
+        "lookFors": [
+          "The response reasons about raises as percentages of different bases rather than as equal dollar amounts.",
+          "The response names a figure and a direction rather than saying only that \"the numbers would change\"."
+        ],
+        "commonMisconception": "Treating a simplifying assumption as neutral between the options it is applied to.",
+        "dimensions": [
+          "assumption-identification",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total tuition for Pathway A across its 2 years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total tuition for Pathway B across its 4 years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Pathway A earn across the horizon, counting only its 6 earning years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much does Pathway B earn across the horizon, counting only its 4 earning years?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much does Pathway C earn across the horizon, earning in all 8 years?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Pathway A’s net position at the end of year 8?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is Pathway B’s net position at the end of year 8?"
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "By how much does Pathway C’s eight-year position exceed the better of the other two?"
+        },
+        {
+          "ref": "t3-p4",
+          "responseMode": "FIXED",
+          "promptText": "Ranked by net position at the end of year 8, which pathway comes first?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Pathway C finishes first at year 8 and finishes last on salary. Explain what the eight-year horizon is doing to the ranking, and say what you would expect to happen to the ranking at year 20 and why."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "Every salary in this model is held flat for eight years. Name one way that assumption favours a particular pathway, and say which computed figure would move most if it were dropped."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total tuition for Pathway A across its 2 years? Answer: $18,800.00. Verification: Tuition is charged once a year for the length of the programme: $9,400 for each of 2 years. t1-p2: What is the total tuition for Pathway B across its 4 years? Answer: $74,400.00. Verification: The same rule over a longer programme: $18,600 for each of 4 years, which is where most of the cost difference between the pathways comes from. t2-p1: How much does Pathway A earn across the horizon, counting only its 6 earning years? Answer: $247,200.00. Verification: Years 1 and 2 are study years with no wage, so only 6 of the 8 years pay anything: $41,200 x 6. t2-p2: How much does Pathway B earn across the horizon, counting only its 4 earning years? Answer: $227,200.00. Verification: Pathway B has the highest salary but the fewest earning years inside this horizon: $56,800 x 4. t2-p3: How much does Pathway C earn across the horizon, earning in all 8 years? Answer: $252,000.00. Verification: The lowest salary of the three, but paid in every year of the horizon: $31,500 x 8. t3-p1: What is Pathway A’s net position at the end of year 8? Answer: $228,400.00. Verification: Earnings less tuition for the same pathway: $247,200.00 earned against $18,800.00 of tuition. t3-p2: What is Pathway B’s net position at the end of year 8? Answer: $152,800.00. Verification: The same subtraction for Pathway B: $227,200.00 earned against $74,400.00 of tuition, the largest tuition bill of the three. t3-p3: By how much does Pathway C’s eight-year position exceed the better of the other two? Answer: $23,600.00. Verification: Pathway C has no tuition to subtract, so its $252,000.00 stands against the stronger of $228,400.00 and $152,800.00, which is Pathway A. t3-p4: Ranked by net position at the end of year 8, which pathway comes first? Answer: Pathway C, straight to work. Verification: At this horizon the ranking is decided by earning years, not by salary: C’s $252,000.00 beats A’s $228,400.00 because C was paid in all 8 years while A was paid in 6."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: Pathway C finishes first at year 8 and finishes last on salary. Explain what the eight-year horizon is doing to the ranking, and say what you would expect to happen to the ranking at year 20 and why. Explains that the eight-year window rewards years spent earning, and that C wins it by being paid in all 8 years while A is paid in 6 and B in only 4. States that beyond the horizon the annual salary gaps keep accruing while the tuition is already spent, so B gains $25,300 a year on C and would eventually overtake it. Treats the ranking as a property of the chosen horizon rather than as a fact about the pathways. Cites the number of earning years for at least two pathways and the annual salary figures that would drive the later comparison. The response identifies the horizon itself as the thing doing the work, not the salaries alone. The response uses the annual gap between salaries to argue about year 20 rather than asserting a reversal without a mechanism. A response that argues C could stay ahead is acceptable if it says what would have to hold, such as C also receiving raises. t4-p2: Every salary in this model is held flat for eight years. Name one way that assumption favours a particular pathway, and say which computed figure would move most if it were dropped. Identifies that flat salaries suppress the advantage of the pathways that start higher, because a percentage raise on $56,800 is worth more than the same raise on $31,500. Names a specific computed figure that would move, such as Pathway C’s $252,000.00 total or Pathway B’s $227,200.00, and says in which direction. Refers to at least two of the three annual salary figures when explaining who the flat assumption favours. The response reasons about raises as percentages of different bases rather than as equal dollar amounts. The response names a figure and a direction rather than saying only that \"the numbers would change\"."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the eight-year window rewards years spent earning, and that C wins it by being paid in all 8 years while A is paid in 6 and B in only 4. States that beyond the horizon the annual salary gaps keep accruing while the tuition is already spent, so B gains $25,300 a year on C and would eventually overtake it. Treats the ranking as a property of the chosen horizon rather than as a fact about the pathways. Identifies that flat salaries suppress the advantage of the pathways that start higher, because a percentage raise on $56,800 is worth more than the same raise on $31,500. Names a specific computed figure that would move, such as Pathway C’s $252,000.00 total or Pathway B’s $227,200.00, and says in which direction."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u01-l01.scoring.json",
+    "sourceScoringSha256": "0f90d9bec77e65f239e4f30a935ca6906c6620022de79d7cdfbc57af6378cbaf",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

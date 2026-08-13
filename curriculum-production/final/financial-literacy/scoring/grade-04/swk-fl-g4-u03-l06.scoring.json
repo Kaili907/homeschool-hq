@@ -1,0 +1,287 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u03-l06",
+  "lessonId": "ma-g4-financial-literacy-u03-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the correct total of Isaac's three amounts?",
+        "answer": "$62.40",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(21.75 + 18.60 + 22.05) = 62.40. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 2175
+              },
+              {
+                "op": "money",
+                "cents": 1860
+              },
+              {
+                "op": "money",
+                "cents": 2205
+              }
+            ]
+          },
+          "trace": "(21.75 + 18.60 + 22.05) = 62.40"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "By how much is Isaac's recorded total wrong?",
+        "answer": "$1.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(63.40 - (21.75 + 18.60 + 22.05)) = 1.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 6340
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2175
+                },
+                {
+                  "op": "money",
+                  "cents": 1860
+                },
+                {
+                  "op": "money",
+                  "cents": 2205
+                }
+              ]
+            }
+          },
+          "trace": "(63.40 - (21.75 + 18.60 + 22.05)) = 1.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "Using the correct total, how much of the $65.00 is left?",
+        "answer": "$2.60",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(65.00 - (21.75 + 18.60 + 22.05)) = 2.60. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 6500
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2175
+                },
+                {
+                  "op": "money",
+                  "cents": 1860
+                },
+                {
+                  "op": "money",
+                  "cents": 2205
+                }
+              ]
+            }
+          },
+          "trace": "(65.00 - (21.75 + 18.60 + 22.05)) = 2.60"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the corrected total with the fourth item?",
+        "answer": "$65.55",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(21.75 + 18.60 + 22.05 + 3.15) = 65.55. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 2175
+              },
+              {
+                "op": "money",
+                "cents": 1860
+              },
+              {
+                "op": "money",
+                "cents": 2205
+              },
+              {
+                "op": "money",
+                "cents": 315
+              }
+            ]
+          },
+          "trace": "(21.75 + 18.60 + 22.05 + 3.15) = 65.55"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How far past his $65.00 does that put him?",
+        "answer": "$0.55",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((21.75 + 18.60 + 22.05 + 3.15) - 65.00) = 0.55. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 2175
+                },
+                {
+                  "op": "money",
+                  "cents": 1860
+                },
+                {
+                  "op": "money",
+                  "cents": 2205
+                },
+                {
+                  "op": "money",
+                  "cents": 315
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 6500
+            }
+          },
+          "trace": "((21.75 + 18.60 + 22.05 + 3.15) - 65.00) = 0.55"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Valuing accuracy in both directions",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response says Isaac's error was harmless because it overstated the cost."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the error should be fixed but gives no consequence."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Isaac's overstatement could make him cut something unnecessarily, and that any wrong total makes later decisions unreliable."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the correct total of Isaac's three amounts?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "By how much is Isaac's recorded total wrong?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Using the correct total, how much of the $65.00 is left?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the corrected total with the fourth item?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How far past his $65.00 does that put him?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Isaac's error made the order look more expensive than it was. Why is an error in that direction still worth fixing?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the correct total of Isaac's three amounts? Answer: $62.40. Verification: (21.75 + 18.60 + 22.05) = 62.40. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: By how much is Isaac's recorded total wrong? Answer: $1.00. Verification: (63.40 - (21.75 + 18.60 + 22.05)) = 1.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: Using the correct total, how much of the $65.00 is left? Answer: $2.60. Verification: (65.00 - (21.75 + 18.60 + 22.05)) = 2.60. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What is the corrected total with the fourth item? Answer: $65.55. Verification: (21.75 + 18.60 + 22.05 + 3.15) = 65.55. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How far past his $65.00 does that put him? Answer: $0.55. Verification: ((21.75 + 18.60 + 22.05 + 3.15) - 65.00) = 0.55. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Valuing accuracy in both directions — Not yet: The response says Isaac's error was harmless because it overstated the cost. Approaching: The response says the error should be fixed but gives no consequence. Meets: The response explains that Isaac's overstatement could make him cut something unnecessarily, and that any wrong total makes later decisions unreliable. The response explains that Isaac's overstatement could make him cut something unnecessarily, and that any wrong total makes later decisions unreliable."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Isaac's overstatement could make him cut something unnecessarily, and that any wrong total makes later decisions unreliable."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-04/swk-fl-g4-u03-l06.scoring.json",
+    "sourceScoringSha256": "e305a8d9ddb47b1a6a91096c8ffdf0b7e52114ba8c2b753909857e433906e73e",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

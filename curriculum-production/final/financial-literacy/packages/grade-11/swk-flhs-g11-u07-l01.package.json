@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l01",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: marginal rate effects on a decision"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "marginal rate effects on a decision",
+  "objective": "Compute a fictional tax liability band by band, distinguish the marginal rate from the effective rate, and find what a raise is actually worth after tax.",
+  "scenario": "Ottoline Varga-Nkemdirim earns a fictional salary in a simulated tax system. The schedule below is an invented one: its deduction, thresholds, and rates were chosen for this course and describe no real tax system, and a real return has many more steps than this.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is gross income less a standard deduction of $11,400. Tax is then 10% on the first $9,800 of taxable income, 14% on taxable income between $9,800 and $38,400, 22% between $38,400 and $85,400, and 30% above that. Ottoline earns $52,600.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Ottoline’s taxable income, after the $11,400 standard deduction?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the first $9,800 of taxable income, at 10%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the band from $9,800 to $38,400, at 14%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the taxable income above $38,400, at 22%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now total the tax and compare the two rates.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Ottoline’s total tax under the fictional schedule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is her effective rate, measured against her $52,600 gross income? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Ottoline is offered a $3,000 raise. How much extra tax does it attract, given that all of it falls in the 22% band?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $3,000 raise does she keep?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which rate answers the question \"what is another dollar of income worth to Ottoline?\"",
+          "choices": [
+            "The 10.6% effective rate",
+            "The 22% marginal rate",
+            "The average of the two"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Ottoline’s marginal rate is 22% and her effective rate is 10.6%. Explain what each measures, say which one a person should use when deciding whether extra work is worth doing, and why the two differ by so much."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "This schedule is invented. Name two ways a real tax calculation would be more complicated, and say which of Ottoline’s figures each would move."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the tax comes out at $11,572.00, the 22% rate is being applied to the whole of the gross income rather than only to the part of taxable income above $38,400. Two things happen first: $11,400 comes off as the standard deduction, and the first $38,400 of what remains is taxed at 10% and 14%. Build the three band pieces as separate rows and check that they add to the total.",
+  "extension": "Recompute Ottoline’s total tax and effective rate at a gross income of $96,000, and say how much of her income then reaches the 30% band.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Ottoline’s taxable income, after the $11,400 standard deduction?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much tax is charged on the first $9,800 of taxable income, at 10%?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much tax is charged on the band from $9,800 to $38,400, at 14%?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much tax is charged on the taxable income above $38,400, at 22%?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Ottoline’s total tax under the fictional schedule?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is her effective rate, measured against her $52,600 gross income? Give one decimal place."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Ottoline is offered a $3,000 raise. How much extra tax does it attract, given that all of it falls in the 22% band?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much of the $3,000 raise does she keep?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Which rate answers the question \"what is another dollar of income worth to Ottoline?\""
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Ottoline’s marginal rate is 22% and her effective rate is 10.6%. Explain what each measures, say which one a person should use when deciding whether extra work is worth doing, and why the two differ by so much."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "This schedule is invented. Name two ways a real tax calculation would be more complicated, and say which of Ottoline’s figures each would move."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u07-l01.package.json",
+    "sourcePackageSha256": "e7a86df392c26d750439eaf89fae134f0d2e74feaba27aaad34170f6b31856c0",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u07-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

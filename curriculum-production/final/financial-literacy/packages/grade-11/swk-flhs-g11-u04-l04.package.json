@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l04",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: student loan repayment plan structures in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "student loan repayment plan structures in outline",
+  "objective": "Compare three fictional student-loan repayment structures on monthly payment and total repaid, and explain what an income-linked structure changes about who carries the risk.",
+  "scenario": "Tarek Lindholm-Okafor is choosing between three simulated repayment structures for a fictional education loan. The plans below are simplified inventions that sketch the shape of real structures without reproducing any real programme’s rules.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional repayment structures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The balance is $28,600. The fictional standard plan charges $308.75 a month for 120 months. The fictional extended plan charges $194.60 a month for 240 months. The fictional income-linked plan charges 10% a year of the amount by which income exceeds $22,600; Tarek earns $38,400.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total repaid under the standard plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total repaid under the extended plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the extended plan repay in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the extended plan’s monthly payment?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now work out the income-linked plan for Tarek’s current income.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much does Tarek’s $38,400 income exceed the $22,600 threshold?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual payment under the income-linked plan, at 10% of that amount?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly payment under the income-linked plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the income-linked payment than the standard plan’s?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What would the income-linked payment be if Tarek’s income fell to $26,900?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The income-linked plan has the lowest payment at Tarek’s current income and the fixed plans do not change if his income falls. Explain what that difference means for who carries the risk, and say what question you would need answered before recommending the income-linked plan."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "These three plans are deliberately simplified inventions. Name two things a real repayment structure would specify that these do not, and say which of your computed figures each would affect."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the income-linked payment comes out at $320.00 a month, the 10% is being charged on the whole $38,400 income rather than on the amount above the threshold. The plan charges on $15,800.00, not on $38,400. Write the subtraction as its own step, and check the result is well below the income before taking a tenth of it.",
+  "extension": "Find the income at which the income-linked payment would equal the standard plan’s $308.75, and say what that figure tells you about who the structure is designed to protect.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total repaid under the standard plan?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total repaid under the extended plan?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the extended plan repay in total?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much lower is the extended plan’s monthly payment?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "By how much does Tarek’s $38,400 income exceed the $22,600 threshold?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the annual payment under the income-linked plan, at 10% of that amount?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the monthly payment under the income-linked plan?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much lower is the income-linked payment than the standard plan’s?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What would the income-linked payment be if Tarek’s income fell to $26,900?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The income-linked plan has the lowest payment at Tarek’s current income and the fixed plans do not change if his income falls. Explain what that difference means for who carries the risk, and say what question you would need answered before recommending the income-linked plan."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "These three plans are deliberately simplified inventions. Name two things a real repayment structure would specify that these do not, and say which of your computed figures each would affect."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u04-l04.package.json",
+    "sourcePackageSha256": "9dee828605e066a626a54efffeb90c160715a749a4cda2dc58f711357b12e0a0",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u04-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

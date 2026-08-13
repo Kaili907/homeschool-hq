@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u02-l06",
+  "lessonId": "ma-g7-financial-literacy-u02-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Marshalling evidence",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response relies on assertion rather than on the evidence in Kiona's case."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The photos are mentioned for Kiona but their timing is not connected to the claim."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies the delivery-day photos as evidence that the damage predates any deadline, and distinguishes documented facts from opinion."
+          }
+        ]
+      },
+      {
+        "dimension": "Escalating in a workable order",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response jumps straight to a complaint body or gives up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Steps are listed for Kiona but out of a sensible order or without content."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response sets out an ordered path for Kiona, starting with a written approach to the seller including the evidence, and names a next step if that fails."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies the delivery-day photos as the key evidence.",
+      "Distinguishes damaged-on-arrival from change-of-mind.",
+      "Puts a written approach to the seller first.",
+      "Names a concrete escalation route if the seller refuses."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What evidence does the customer in Kiona's case actually hold, and why does the timing of the photos matter?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What steps should the customer take, in what order, and what should each communication contain?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why does a damaged-on-arrival item raise a different question from a change-of-mind return?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Marshalling evidence — Not yet: The response relies on assertion rather than on the evidence in Kiona's case. Approaching: The photos are mentioned for Kiona but their timing is not connected to the claim. Meets: The response identifies the delivery-day photos as evidence that the damage predates any deadline, and distinguishes documented facts from opinion. Escalating in a workable order — Not yet: The response jumps straight to a complaint body or gives up. Approaching: Steps are listed for Kiona but out of a sensible order or without content. Meets: The response sets out an ordered path for Kiona, starting with a written approach to the seller including the evidence, and names a next step if that fails. Identifies the delivery-day photos as the key evidence. Distinguishes damaged-on-arrival from change-of-mind. Puts a written approach to the seller first. Names a concrete escalation route if the seller refuses."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the delivery-day photos as the key evidence. Distinguishes damaged-on-arrival from change-of-mind. Puts a written approach to the seller first. Names a concrete escalation route if the seller refuses."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-07/swk-fl-g7-u02-l06.scoring.json",
+    "sourceScoringSha256": "7d682e44eadd1ee4069d5360144579552663bc05b10144a1e7f8e19c869aee37",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

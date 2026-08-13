@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u01-l04",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: cost and time of required education or technical skills"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "cost and time of required education or technical skills",
+  "objective": "Compute what a fictional technical certificate costs in money and time, and how long the resulting pay increase takes to repay that cost.",
+  "scenario": "Lena Pham is a fictional worker considering an invented 18-month HVAC certificate program. The program, the tuition, and the wages below are all made up for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional program and wage figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional certificate costs $6,800 in tuition plus $950 for tools and books, and takes 18 months. Lena currently earns $29,500 per year and expects $46,000 per year once certified.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total out-of-pocket cost of getting qualified?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more would Lena earn per year after certifying?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Payback time is the cost of qualifying divided by the yearly gain, expressed in months.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole months of the higher wage does it take to repay the cost of qualifying? Round to the nearest month.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Counting the 18 months of the program itself, how long from starting the program until the cost is repaid?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work these without help.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "Over 5 years at the higher wage, what is Lena’s net gain after subtracting the cost of qualifying?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "If the program’s tuition rose to $19,000 with everything else unchanged, would the cost still be repaid within the first year of higher pay?",
+          "choices": [
+            "Yes, within the first year",
+            "No, it would take longer than a year"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "The payback calculation above leaves out something that costs Lena real money during the 18 months. Name it, and say how including it would change the answer to the payback question."
+        }
+      ]
+    }
+  ],
+  "remediation": "If payback is being computed as cost divided by the new salary rather than by the gain, put the two salaries side by side and ask which dollars are actually new. Only the $16,500 difference is available to repay the $7,750; the other $29,500 was already being earned.",
+  "extension": "Suppose Lena must cut to half her current hours during the 18 months. Compute the earnings she gives up and redo the payback in months with that cost added.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u01-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total out-of-pocket cost of getting qualified?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more would Lena earn per year after certifying?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many whole months of the higher wage does it take to repay the cost of qualifying? Round to the nearest month."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Counting the 18 months of the program itself, how long from starting the program until the cost is repaid?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "Over 5 years at the higher wage, what is Lena’s net gain after subtracting the cost of qualifying?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "If the program’s tuition rose to $19,000 with everything else unchanged, would the cost still be repaid within the first year of higher pay?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "The payback calculation above leaves out something that costs Lena real money during the 18 months. Name it, and say how including it would change the answer to the payback question."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u01-l04.package.json",
+    "sourcePackageSha256": "96986379e5780c933f7fe78a0d0d025c4be95b34b1861ad1ae28550c51299cf8",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u01-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

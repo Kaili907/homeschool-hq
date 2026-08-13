@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u04-l05",
+  "lessonId": "ma-g3-financial-literacy-u04-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Naming the difficulty honestly",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response tells Sofia that waiting is easy or that wanting the game is childish."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Sofia's frustration is acknowledged but not connected to anything specific about week four."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names something real about Sofia's week four, such as the goal being close enough to see but not yet reachable, and treats the difficulty as normal."
+          }
+        ]
+      },
+      {
+        "dimension": "Offering a usable strategy",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No strategy is offered to Sofia, or the advice is only to try harder."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A strategy is named for Sofia but nothing is said about why it would help her keep going."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A specific, doable strategy is offered to Sofia, such as marking the jar or setting a smaller checkpoint, with a reason tied to how it makes progress visible."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Treats Sofia's impatience as ordinary rather than as a character flaw.",
+      "Offers at least one concrete strategy she could use inside a single week.",
+      "Does not compare Sofia unfavourably with her friend or with any real child.",
+      "Keeps the response about Sofia's own goal rather than about what other families can afford."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why does waiting feel harder for Sofia in week four than it did in week one?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What is one thing Sofia could do this week to make waiting easier, and why would it help?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "What would you say to Sofia about her friend already having the game?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Naming the difficulty honestly — Not yet: The response tells Sofia that waiting is easy or that wanting the game is childish. Approaching: Sofia's frustration is acknowledged but not connected to anything specific about week four. Meets: The response names something real about Sofia's week four, such as the goal being close enough to see but not yet reachable, and treats the difficulty as normal. Offering a usable strategy — Not yet: No strategy is offered to Sofia, or the advice is only to try harder. Approaching: A strategy is named for Sofia but nothing is said about why it would help her keep going. Meets: A specific, doable strategy is offered to Sofia, such as marking the jar or setting a smaller checkpoint, with a reason tied to how it makes progress visible. Treats Sofia's impatience as ordinary rather than as a character flaw. Offers at least one concrete strategy she could use inside a single week. Does not compare Sofia unfavourably with her friend or with any real child. Keeps the response about Sofia's own goal rather than about what other families can afford."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Treats Sofia's impatience as ordinary rather than as a character flaw. Offers at least one concrete strategy she could use inside a single week. Does not compare Sofia unfavourably with her friend or with any real child. Keeps the response about Sofia's own goal rather than about what other families can afford."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u04-l05.scoring.json",
+    "sourceScoringSha256": "7b7cdaaa6aa8776d921ea2f90305243e9b114a8e667d2a771288f48eed152c54",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

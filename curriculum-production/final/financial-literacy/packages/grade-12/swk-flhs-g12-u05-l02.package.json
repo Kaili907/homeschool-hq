@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l02",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: setting a contribution rate inside a real budget"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "setting a contribution rate inside a real budget",
+  "objective": "Convert a fictional contribution rate into the amount take-home pay actually falls by, and compare two rates on that basis rather than on the rate itself.",
+  "scenario": "The fictional salary, the invented marginal tax rate, and the simulated payroll levy below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pay and tax figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker earns $49,200 a year paid monthly. Contributions are taken before income tax, and the worker’s last dollars fall in a fictional 12% income tax band. The payroll levy of 7.65% is charged on all pay and is not reduced by a contribution.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly gross pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a 6% contribution take from each month’s pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What income tax does that contribution save each month at the 12% band?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now express both rates in the only unit a budget can use.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much does take-home pay actually fall at a 6% contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a 10% contribution take from each month’s pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much does take-home pay fall at a 10% contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does moving from 6% to 10% cost the monthly budget?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fictional colleague says raising the rate from 6% to 10% \"costs $164 a month\". Correct the figure, explain why the correction is not the whole answer, and state what the fictional worker needs to know about their budget before the difference between the two rates can be decided."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the cost of moving from 6% to 10% comes out at $164.00, the tax effect has been left out. Compute the take-home reduction at each rate first — $216.48 at 6% and $360.80 at 10% — and take the difference between those, not between the two contributions.",
+  "extension": "Recompute both take-home reductions for a fictional worker whose last dollars fall in a 22% band instead of 12%, and say whether the higher band makes contributing cheaper or dearer in take-home terms.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is monthly gross pay?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does a 6% contribution take from each month’s pay?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What income tax does that contribution save each month at the 12% band?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "By how much does take-home pay actually fall at a 6% contribution?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does a 10% contribution take from each month’s pay?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how much does take-home pay fall at a 10% contribution?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What does moving from 6% to 10% cost the monthly budget?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A fictional colleague says raising the rate from 6% to 10% \"costs $164 a month\". Correct the figure, explain why the correction is not the whole answer, and state what the fictional worker needs to know about their budget before the difference between the two rates can be decided."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u05-l02.package.json",
+    "sourcePackageSha256": "37c5ee29564fde28aea55f267fecc587f48586fe880be786c14841a1262f310c",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u05-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l10",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: subscription and service audits"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "subscription and service audits",
+  "objective": "Run a complete fictional service audit across cancellation, downgrade, and billing-cycle changes, quantify the annual and monthly recovery, and commit the freed money to a stated use.",
+  "scenario": "The ten simulated services, their prices, and the fictional household’s use of them below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional service inventory in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household pays eight services monthly: s1 at $19.99, s2 at $12.50, s3 at $7.99, s4 at $24.00, s5 at $5.99, s6 at $16.49, s7 at $10.00, and s8 at $32.00. Two more are billed annually: s9 at $96.00 and s10 at $149.00. The household has not used s3, s5, or s7 all year. Service s8 has a lower tier at $14.00 a month that covers everything the household actually uses. Service s10 is also offered at $12.00 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the eight monthly services cost in one month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do those eight cost across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the household’s total annual outlay on all ten services?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Price each of the three kinds of change the audit makes available.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would cancelling the three unused services s3, s5, and s7 recover in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would moving s8 to the $14.00 tier save in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would moving s10 from the $149.00 annual price to the $12.00 monthly price save in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does the whole audit recover in a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Express the recovery in the two forms a household actually uses.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What share of the annual outlay does the audit recover, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the audit free up per month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write the audit decision. Give a figure for every line of it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the household’s audit decision: what is cancelled, what is downgraded, what is left alone, and where the freed money goes. Justify each line with a figure, and say which of your three changes is the least certain to deliver what you claimed and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the recovery comes out at $503.76, the s10 billing change has been left out; if it comes out at $676.76, s8 has been counted as cancelled at $32.00 rather than downgraded to $14.00. Price each change for what it actually is: three cancellations recovering the full charge, one downgrade recovering only the $18.00 difference, and one billing change recovering $5.00.",
+  "extension": "Suppose the $14.00 tier of s8 turns out not to cover one feature the household uses monthly. Rework the audit total without that change, and say what share of the original recovery survives.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the eight monthly services cost in one month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do those eight cost across a year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the household’s total annual outlay on all ten services?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would cancelling the three unused services s3, s5, and s7 recover in a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would moving s8 to the $14.00 tier save in a year?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would moving s10 from the $149.00 annual price to the $12.00 monthly price save in a year?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What does the whole audit recover in a year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What share of the annual outlay does the audit recover, to two decimal places?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does the audit free up per month?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Write the household’s audit decision: what is cancelled, what is downgraded, what is left alone, and where the freed money goes. Justify each line with a figure, and say which of your three changes is the least certain to deliver what you claimed and why."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u02-l10.package.json",
+    "sourcePackageSha256": "15ea71fd79b82670f9212e7271463e1f5a83cb1829ee82cf7fdf0912aecf2651",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u02-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

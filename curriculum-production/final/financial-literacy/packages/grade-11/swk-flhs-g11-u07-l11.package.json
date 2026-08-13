@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l11",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l11",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 11,
+    "phase": "Defense and extension",
+    "title": "Defense and extension: tax consequences of investing decisions"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "tax consequences of investing decisions",
+  "objective": "Defend a fictional disposal decision on tax grounds, incorporate an offsetting loss, and state the limits of letting a tax rule drive the timing.",
+  "scenario": "Sylvester Adeyinka-Novotny is defending a fictional disposal decision for a simulated case review. The holding-period rule, the rates, and the loss below were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional gain, loss, and tax rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional rules, a gain on a holding sold within 18 months is taxed at the holder’s marginal rate of 22%, and a gain on a holding sold after 18 months or more is taxed at a flat 15%. A separate holding can be sold at a loss, and the loss reduces the taxable gain dollar for dollar. The gain is $12,600 and the available loss is $3,100.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax on the gain if sold within 18 months, at 22%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax if sold after 18 months, at 12%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does waiting past the 18-month point save?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now bring in the $3,100 loss, which reduces the taxable gain.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the taxable gain after the $3,100 loss is offset against it?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax on the reduced gain under the longer-holding rule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does the loss offset save under the longer-holding rule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What would the same loss offset save under the within-18-months rule instead?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "Combining both moves, how much lower is the tax than selling within 18 months with no offset?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "The combined saving is what percentage of the original gain? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Write your defence. Answer both.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Defend a recommendation about when to sell. State the tax saving you are relying on, the risk the recommendation carries, and the circumstance in which you would reverse it."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The same $3,100 loss is worth $372.00 against a long-held gain and $682.00 against a short-held one. Explain what that implies about which gains a loss should be set against, and why the two tax rules pull in opposite directions here."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the loss offset appears to save $3,100, it is being treated as a credit. A loss reduces the taxable gain from $12,600 to $9,500.00, and the tax then falls by the rate applied to that reduction — $372.00 at 15%. Recompute the tax from the reduced gain rather than subtracting the loss from the tax.",
+  "extension": "Find the loss that would be needed to bring the tax on the long-held gain down to $1,000, and say whether that loss is larger or smaller than the gain itself.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l11",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the tax on the gain if sold within 18 months, at 22%?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the tax if sold after 18 months, at 12%?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much does waiting past the 18-month point save?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the taxable gain after the $3,100 loss is offset against it?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the tax on the reduced gain under the longer-holding rule?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much does the loss offset save under the longer-holding rule?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What would the same loss offset save under the within-18-months rule instead?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Combining both moves, how much lower is the tax than selling within 18 months with no offset?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "The combined saving is what percentage of the original gain? Give one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Defend a recommendation about when to sell. State the tax saving you are relying on, the risk the recommendation carries, and the circumstance in which you would reverse it."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The same $3,100 loss is worth $372.00 against a long-held gain and $682.00 against a short-held one. Explain what that implies about which gains a loss should be set against, and why the two tax rules pull in opposite directions here."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u07-l11.package.json",
+    "sourcePackageSha256": "94bdbdfd3ba97c535e33751eefbe6ea9cf84db4d620559b0254303e67696c203",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u07-l11",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

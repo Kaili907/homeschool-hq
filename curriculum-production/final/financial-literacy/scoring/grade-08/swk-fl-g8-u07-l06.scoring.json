@@ -1,0 +1,319 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l06",
+  "lessonId": "ma-g8-financial-literacy-u07-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much does the saving commitment come to?",
+        "answer": "$630.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(15% of 4,200.00) = 630.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 420000
+            },
+            "bps": 1500,
+            "round": "exact"
+          },
+          "trace": "(15% of 4,200.00) = 630.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What do housing, food, transport, and insurance come to?",
+        "answer": "$2,510.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,300.00 + 600.00 + 350.00 + 260.00) = 2,510.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 130000
+              },
+              {
+                "op": "money",
+                "cents": 60000
+              },
+              {
+                "op": "money",
+                "cents": 35000
+              },
+              {
+                "op": "money",
+                "cents": 26000
+              }
+            ]
+          },
+          "trace": "(1,300.00 + 600.00 + 350.00 + 260.00) = 2,510.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What does the whole plan come to?",
+        "answer": "$3,540.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,300.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00) = 3,540.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 130000
+              },
+              {
+                "op": "money",
+                "cents": 60000
+              },
+              {
+                "op": "money",
+                "cents": 35000
+              },
+              {
+                "op": "money",
+                "cents": 26000
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 420000
+                },
+                "bps": 1500,
+                "round": "exact"
+              },
+              {
+                "op": "money",
+                "cents": 40000
+              }
+            ]
+          },
+          "trace": "(1,300.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00) = 3,540.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much of the $4,200.00 income remains unallocated?",
+        "answer": "$660.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(4,200.00 - (1,300.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00)) = 660.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 420000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 130000
+                },
+                {
+                  "op": "money",
+                  "cents": 60000
+                },
+                {
+                  "op": "money",
+                  "cents": 35000
+                },
+                {
+                  "op": "money",
+                  "cents": 26000
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 420000
+                  },
+                  "bps": 1500,
+                  "round": "exact"
+                },
+                {
+                  "op": "money",
+                  "cents": 40000
+                }
+              ]
+            }
+          },
+          "trace": "(4,200.00 - (1,300.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00)) = 660.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What would remain after a $250.00 rent increase?",
+        "answer": "$410.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(4,200.00 - (1,550.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00)) = 410.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 420000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 155000
+                },
+                {
+                  "op": "money",
+                  "cents": 60000
+                },
+                {
+                  "op": "money",
+                  "cents": 35000
+                },
+                {
+                  "op": "money",
+                  "cents": 26000
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 420000
+                  },
+                  "bps": 1500,
+                  "round": "exact"
+                },
+                {
+                  "op": "money",
+                  "cents": 40000
+                }
+              ]
+            }
+          },
+          "trace": "(4,200.00 - (1,550.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00)) = 410.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Assessing an integrated plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response reports Oisin's totals without assessing resilience."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Resilience is asserted for Oisin but no commitment is prioritised for adjustment."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response evaluates Oisin's remaining margin against a 10% income fall and names which commitment to adjust first, with reasons about necessity and reversibility."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does the saving commitment come to?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do housing, food, transport, and insurance come to?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the whole plan come to?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $4,200.00 income remains unallocated?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would remain after a $250.00 rent increase?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Assess the resilience of Oisin's plan, naming which commitment you would adjust first if income fell by 10% and why."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does the saving commitment come to? Answer: $630.00. Verification: (15% of 4,200.00) = 630.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What do housing, food, transport, and insurance come to? Answer: $2,510.00. Verification: (1,300.00 + 600.00 + 350.00 + 260.00) = 2,510.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What does the whole plan come to? Answer: $3,540.00. Verification: (1,300.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00) = 3,540.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much of the $4,200.00 income remains unallocated? Answer: $660.00. Verification: (4,200.00 - (1,300.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00)) = 660.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What would remain after a $250.00 rent increase? Answer: $410.00. Verification: (4,200.00 - (1,550.00 + 600.00 + 350.00 + 260.00 + (15% of 4,200.00) + 400.00)) = 410.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Assessing an integrated plan — Not yet: The response reports Oisin's totals without assessing resilience. Approaching: Resilience is asserted for Oisin but no commitment is prioritised for adjustment. Meets: The response evaluates Oisin's remaining margin against a 10% income fall and names which commitment to adjust first, with reasons about necessity and reversibility. The response evaluates Oisin's remaining margin against a 10% income fall and names which commitment to adjust first, with reasons about necessity and reversibility."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response evaluates Oisin's remaining margin against a 10% income fall and names which commitment to adjust first, with reasons about necessity and reversibility."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u07-l06.scoring.json",
+    "sourceScoringSha256": "306f33baaeb8cbbb701e6de52ec6558e1bb46a043b19d6f88d2237b2334ad826",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

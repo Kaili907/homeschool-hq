@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l05",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: grants, scholarships, and work study versus loans"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "grants, scholarships, and work study versus loans",
+  "objective": "Price a fictional loan dollar against a grant dollar and a work-study dollar, and rank the four kinds of aid by what each costs the recipient.",
+  "scenario": "The fictional aid lines below are priced out over their full life. The loan terms, the wage, and the amounts are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional aid terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional subsidised loan is $3,500 at 5.5%, repaid over 10 years — 120 monthly payments — at a disclosed $37.99 a month. The fictional work-study award is $2,200 at a wage of $13.75 an hour.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total repaid on the $3,500 loan over the 10 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the loan cost in interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does each borrowed dollar end up costing? Give the answer to two decimal places."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price the work-study award in the currency it actually costs.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many hours must be worked to earn the full $2,200 work-study award at $13.75 an hour?",
+          "unit": "hours"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Ranking a grant dollar, a work-study dollar, and a loan dollar by what each costs the recipient, which costs the most?",
+          "choices": [
+            "A grant dollar",
+            "A work-study dollar",
+            "A loan dollar"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Work study costs 160 hours and the loan costs $1,058.80. Explain why these two costs cannot simply be added or compared as numbers, and describe what an applicant would have to know about themselves to weigh them."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the cost per borrowed dollar comes out near $0.30, the interest has been divided by the amount borrowed rather than the total repaid. The question asks what each dollar costs in the end, so divide the $4,558.80 repaid, not the $1,058.80 of interest.",
+  "extension": "Recompute the cost per borrowed dollar if the same $3,500 were repaid over 20 years at a disclosed $24.08 a month, and say what doubling the term does to that figure.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total repaid on the $3,500 loan over the 10 years?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the loan cost in interest?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does each borrowed dollar end up costing? Give the answer to two decimal places."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many hours must be worked to earn the full $2,200 work-study award at $13.75 an hour?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Ranking a grant dollar, a work-study dollar, and a loan dollar by what each costs the recipient, which costs the most?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Work study costs 160 hours and the loan costs $1,058.80. Explain why these two costs cannot simply be added or compared as numbers, and describe what an applicant would have to know about themselves to weigh them."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u04-l05.package.json",
+    "sourcePackageSha256": "a41fc111779cbda659fc50b3f660fe41f51db5403bcb34462125d211c1a37115",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u04-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

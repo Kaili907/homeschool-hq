@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l09",
+  "lessonId": "ma-g12-financial-literacy-u02-l09",
+  "integratedDomains": [
+    "fraud",
+    "consumer-protection",
+    "credit",
+    "banking"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$415.15",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The two charges the cardholder did not make. These are a different category from the merchant error: the cardholder has no relationship with whoever made them."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$469.15",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$415.15 of unauthorised charges plus the $54.00 duplicate. They are added here to size the problem, but they do not travel to the same place."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$778.68",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,247.83 less the $469.15 in dispute. Establishing this figure early is what lets the cardholder keep the account current while the rest is investigated."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "The $415.15 of unrecognised charges",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The $415.15 was not authorised by the cardholder at all, so there is no merchant relationship to resolve it through and the issuer is the correct first route. The $54.00 duplicate arises from a purchase the cardholder did make, which the merchant can correct directly. This follows from the stated facts about each charge."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7.74",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.65% of $469.15 for one month. It prices the cost of doing nothing, and shows why the disputed amount should not simply be paid and argued about afterwards."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Yes — the owed amount is well above the minimum",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$778.68 against a $35 minimum. Paying the full undisputed $778.68 rather than the $35 minimum keeps the account current without conceding any part of the $469.15."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "unauth1 + unauth2",
+        "substituted": "318.4 + 96.75",
+        "result": "$415.15",
+        "why": "The two charges the cardholder did not make. These are a different category from the merchant error: the cardholder has no relationship with whoever made them."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 + duplicate",
+        "substituted": "#t1-p1 + 54",
+        "result": "$469.15",
+        "why": "$415.15 of unauthorised charges plus the $54.00 duplicate. They are added here to size the problem, but they do not travel to the same place."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "statementTotal - #t1-p2",
+        "substituted": "1247.83 - #t1-p2",
+        "result": "$778.68",
+        "why": "$1,247.83 less the $469.15 in dispute. Establishing this figure early is what lets the cardholder keep the account current while the rest is investigated."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p2 * monthlyRate, 2)",
+        "substituted": "round(#t1-p2 * 0.0165, 2)",
+        "result": "$7.74",
+        "why": "1.65% of $469.15 for one month. It prices the cost of doing nothing, and shows why the disputed amount should not simply be paid and argued about afterwards."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 > minimumPayment",
+        "substituted": "#t1-p3 > 35",
+        "result": "Yes — the owed amount is well above the minimum",
+        "why": "$778.68 against a $35 minimum. Paying the full undisputed $778.68 rather than the $35 minimum keeps the account current without conceding any part of the $469.15."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Two problems on one statement need two different responses. Explain why the $415.15 and the $54.00 are not the same kind of problem, say what each response should be, and name one action the cardholder should take about the $415.15 that has nothing to do with this statement.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Distinguishes the categories: the $54.00 is a billing error by a merchant the cardholder chose to deal with, while the $415.15 was never authorised and indicates the card details are being used by someone else.",
+          "Gives each response: the merchant is asked to reverse the duplicate, and the issuer is notified of the unauthorised charges so the card can be stopped and the charges investigated.",
+          "Names a forward-looking action on the $415.15 — having the card number replaced, and checking later statements for further charges — because the underlying problem is not confined to this statement.",
+          "Notes that the $778.68 should be paid on time regardless, so no late fee or interest attaches while either matter is resolved."
+        ],
+        "evidenceRequirements": [
+          "Uses the $415.15 and $54.00 figures separately, and the $778.68 genuinely owed."
+        ],
+        "lookFors": [
+          "The response treats the unauthorised charges as evidence of an ongoing exposure rather than as a one-off billing question.",
+          "The response never suggests sharing card numbers or account credentials with anyone as part of the remedy."
+        ],
+        "commonMisconception": "Treating every charge a cardholder objects to as one dispute, when an unauthorised charge and a merchant error need different remedies and different urgency.",
+        "dimensions": [
+          "criteria-application",
+          "plan-coherence",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the two unrecognised charges come to?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of everything the cardholder should not have to pay?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is genuinely owed on this statement?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "Which of the disputed amounts should be reported to the card issuer as charges the cardholder did not make, rather than taken up with a merchant first?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the disputed $469.15 were carried on the card for one month at 1.65% rather than being disputed, what would the interest be?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The card issuer’s minimum payment for the month is $35. Does the genuinely owed amount exceed it?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Two problems on one statement need two different responses. Explain why the $415.15 and the $54.00 are not the same kind of problem, say what each response should be, and name one action the cardholder should take about the $415.15 that has nothing to do with this statement."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the two unrecognised charges come to? Answer: $415.15. Verification: The two charges the cardholder did not make. These are a different category from the merchant error: the cardholder has no relationship with whoever made them. t1-p2: What is the total of everything the cardholder should not have to pay? Answer: $469.15. Verification: $415.15 of unauthorised charges plus the $54.00 duplicate. They are added here to size the problem, but they do not travel to the same place. t1-p3: What is genuinely owed on this statement? Answer: $778.68. Verification: $1,247.83 less the $469.15 in dispute. Establishing this figure early is what lets the cardholder keep the account current while the rest is investigated. t2-p1: Which of the disputed amounts should be reported to the card issuer as charges the cardholder did not make, rather than taken up with a merchant first? Answer: The $415.15 of unrecognised charges. Verification: The $415.15 was not authorised by the cardholder at all, so there is no merchant relationship to resolve it through and the issuer is the correct first route. The $54.00 duplicate arises from a purchase the cardholder did make, which the merchant can correct directly. This follows from the stated facts about each charge. t2-p2: If the disputed $469.15 were carried on the card for one month at 1.65% rather than being disputed, what would the interest be? Answer: $7.74. Verification: 1.65% of $469.15 for one month. It prices the cost of doing nothing, and shows why the disputed amount should not simply be paid and argued about afterwards. t2-p3: The card issuer’s minimum payment for the month is $35. Does the genuinely owed amount exceed it? Answer: Yes — the owed amount is well above the minimum. Verification: $778.68 against a $35 minimum. Paying the full undisputed $778.68 rather than the $35 minimum keeps the account current without conceding any part of the $469.15."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: Two problems on one statement need two different responses. Explain why the $415.15 and the $54.00 are not the same kind of problem, say what each response should be, and name one action the cardholder should take about the $415.15 that has nothing to do with this statement. Distinguishes the categories: the $54.00 is a billing error by a merchant the cardholder chose to deal with, while the $415.15 was never authorised and indicates the card details are being used by someone else. Gives each response: the merchant is asked to reverse the duplicate, and the issuer is notified of the unauthorised charges so the card can be stopped and the charges investigated. Names a forward-looking action on the $415.15 — having the card number replaced, and checking later statements for further charges — because the underlying problem is not confined to this statement. Notes that the $778.68 should be paid on time regardless, so no late fee or interest attaches while either matter is resolved. Uses the $415.15 and $54.00 figures separately, and the $778.68 genuinely owed. The response treats the unauthorised charges as evidence of an ongoing exposure rather than as a one-off billing question. The response never suggests sharing card numbers or account credentials with anyone as part of the remedy."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Distinguishes the categories: the $54.00 is a billing error by a merchant the cardholder chose to deal with, while the $415.15 was never authorised and indicates the card details are being used by someone else. Gives each response: the merchant is asked to reverse the duplicate, and the issuer is notified of the unauthorised charges so the card can be stopped and the charges investigated. Names a forward-looking action on the $415.15 — having the card number replaced, and checking later statements for further charges — because the underlying problem is not confined to this statement. Notes that the $778.68 should be paid on time regardless, so no late fee or interest attaches while either matter is resolved."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u02-l09.scoring.json",
+    "sourceScoringSha256": "614ce15008e9d48d328ebaf78b116b21c2b1ceee0c7aa8c8f85c0ec90e167b36",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

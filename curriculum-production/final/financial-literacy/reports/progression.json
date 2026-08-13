@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "checks": {
+    "gradeBandExpansion": true,
+    "elementaryUnits": true,
+    "highSchoolUnits": true,
+    "seniorIntegration": true,
+    "sourceLaneProgressionEvidencePreserved": true
+  },
+  "grades": {
+    "3": {
+      "lessons": 36,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "meanPromptsPerLesson": 5.5,
+      "meanFixedPromptsPerLesson": 4.167,
+      "meanOpenPromptsPerLesson": 1.333,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "4": {
+      "lessons": 36,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "meanPromptsPerLesson": 5.417,
+      "meanFixedPromptsPerLesson": 4.028,
+      "meanOpenPromptsPerLesson": 1.389,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "5": {
+      "lessons": 36,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "meanPromptsPerLesson": 5.5,
+      "meanFixedPromptsPerLesson": 4.167,
+      "meanOpenPromptsPerLesson": 1.333,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "7": {
+      "lessons": 36,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "meanPromptsPerLesson": 5.5,
+      "meanFixedPromptsPerLesson": 4.167,
+      "meanOpenPromptsPerLesson": 1.333,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "8": {
+      "lessons": 72,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "meanPromptsPerLesson": 5.542,
+      "meanFixedPromptsPerLesson": 4.236,
+      "meanOpenPromptsPerLesson": 1.306,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "9": {
+      "lessons": 72,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "meanPromptsPerLesson": 7.208,
+      "meanFixedPromptsPerLesson": 6,
+      "meanOpenPromptsPerLesson": 1.208,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "10": {
+      "lessons": 72,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "meanPromptsPerLesson": 7.875,
+      "meanFixedPromptsPerLesson": 6.833,
+      "meanOpenPromptsPerLesson": 1.042,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "11": {
+      "lessons": 72,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "meanPromptsPerLesson": 11.153,
+      "meanFixedPromptsPerLesson": 9.153,
+      "meanOpenPromptsPerLesson": 2,
+      "integratedDomainDeclarations": 0,
+      "capstones": 0
+    },
+    "12": {
+      "lessons": 72,
+      "units": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "meanPromptsPerLesson": 7.708,
+      "meanFixedPromptsPerLesson": 6.708,
+      "meanOpenPromptsPerLesson": 1,
+      "integratedDomainDeclarations": 327,
+      "capstones": 7
+    }
+  }
+}

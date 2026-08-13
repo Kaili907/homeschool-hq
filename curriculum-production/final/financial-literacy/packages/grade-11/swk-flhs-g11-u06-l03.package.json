@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l03",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: self-insuring through reserves versus buying coverage"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "self-insuring through reserves versus buying coverage",
+  "objective": "Compare the expected cost of carrying a fictional risk against the expected cost of insuring it, and identify the condition under which the cheaper option is still the wrong one.",
+  "scenario": "Wilhelmina Osagie-Trentham is deciding how a fictional household should handle one risk. The chance, the loss, the premium, and the reserve below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional risk and policy figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The risk is a 6% chance of a $4,200 loss in a year. A policy covering it costs $395 a year with a $600 deductible and a limit above the full loss. The household holds a reserve of $1,500.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual loss if the household carries the risk itself?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the loss occurs, how much does the policy pay, after the $600 deductible?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the loss occurs, how much does the household still pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual cost of holding the policy, counting the premium and the expected deductible?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the two, and then look at what happens in the year the loss actually arrives.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much cheaper is carrying the risk than insuring it, in expected terms?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the loss occurs and the household has no policy, how much does its $1,500 reserve fall short by?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "With the policy, how much would the $1,500 reserve have left over after paying the deductible?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How many years of the $179.00 expected saving would it take to build a reserve able to cover the whole $4,200 loss? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which option is cheaper in expected terms, and which is safer for this household?",
+          "choices": [
+            "Carrying the risk is cheaper and also safer",
+            "Carrying the risk is cheaper but the policy is safer",
+            "The policy is cheaper and also safer"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Insuring costs $179.00 a year more in expected terms and is still the right choice here. Explain what the household is buying with that $179.00, and state the general condition under which self-insuring is the better option."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The household is exposed for the 15.1 years it would take to build a sufficient reserve out of the saving. Say what that figure assumes, and name one way the household could shorten it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the expected cost with the policy comes out at $995.00, the whole $600 deductible is being added to the premium. The deductible is only paid in the 6% of years when the loss occurs, so its expected cost is $36.00 and not $600. Write the premium as a certain cost and the deductible as a chance-weighted one before adding them.",
+  "extension": "Find the premium at which insuring and self-insuring would cost the same in expected terms, and say how far below the actual $395 that is.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the expected annual loss if the household carries the risk itself?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "If the loss occurs, how much does the policy pay, after the $600 deductible?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "If the loss occurs, how much does the household still pay?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the expected annual cost of holding the policy, counting the premium and the expected deductible?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much cheaper is carrying the risk than insuring it, in expected terms?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "If the loss occurs and the household has no policy, how much does its $1,500 reserve fall short by?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "With the policy, how much would the $1,500 reserve have left over after paying the deductible?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How many years of the $179.00 expected saving would it take to build a reserve able to cover the whole $4,200 loss? Give one decimal place."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Which option is cheaper in expected terms, and which is safer for this household?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Insuring costs $179.00 a year more in expected terms and is still the right choice here. Explain what the household is buying with that $179.00, and state the general condition under which self-insuring is the better option."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The household is exposed for the 15.1 years it would take to build a sufficient reserve out of the saving. Say what that figure assumes, and name one way the household could shorten it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u06-l03.package.json",
+    "sourcePackageSha256": "3e139af2f4fee7664553160e07f20aa3d781f200c45c86d622361beac8bd71ac",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u06-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

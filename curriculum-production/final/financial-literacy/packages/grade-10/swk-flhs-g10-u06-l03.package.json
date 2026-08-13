@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l03",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: matching coverage level to actual exposure"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "matching coverage level to actual exposure",
+  "objective": "Inventory a fictional renter’s exposure, compute what each of two coverage limits pays in a total loss, and compare the gap in payout with the gap in premium.",
+  "scenario": "The simulated belongings inventory and the two simulated renters policies below are invented for this exercise. Both policies pay the covered loss minus the deductible, up to the coverage limit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional inventory and policy options in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional renter lists their belongings: electronics $2,400, furniture $3,100, clothing $1,800, kitchen items $900, and a bicycle $650. Two simulated policies are available, both with a $500 deductible. Option 1 has a coverage limit of $6,000 and an annual premium of $220. Option 2 has a coverage limit of $10,000 and an annual premium of $290. Consider a fire that destroys everything on the list.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the renter’s total exposure — the value of everything on the list?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "In the total loss, what does Option 1 pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the renter bear under Option 1?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for Option 2 and compare the two.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "In the same total loss, what does Option 2 pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the renter bear under Option 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Option 2 pay in this loss?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Option 2 cost in annual premium?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Option 2 costs $70.00 more a year and pays $2,350.00 more in a total loss. Explain how a renter should decide between them without knowing whether a fire will happen, and say what would have to change about the inventory for Option 1 to become the better fit."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Option 1 leaves the renter paying $500, the limit has not been applied. The deductible comes off first, leaving $8,350, and Option 1 will not pay more than its $6,000 limit. The renter bears the difference, $2,850.00, which is what an under-sized limit actually costs.",
+  "extension": "Find the coverage limit at which Option 1 and Option 2 would pay the same amount in this loss, and say how a renter could keep a limit correctly sized as they acquire more belongings.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the renter’s total exposure — the value of everything on the list?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "In the total loss, what does Option 1 pay?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does the renter bear under Option 1?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "In the same total loss, what does Option 2 pay?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the renter bear under Option 2?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does Option 2 pay in this loss?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much more does Option 2 cost in annual premium?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Option 2 costs $70.00 more a year and pays $2,350.00 more in a total loss. Explain how a renter should decide between them without knowing whether a fire will happen, and say what would have to change about the inventory for Option 1 to become the better fit."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u06-l03.package.json",
+    "sourcePackageSha256": "9a71976c00fe008d1d369494bab6157cc1a764ab177544b19564780bcbdc3090",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u06-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

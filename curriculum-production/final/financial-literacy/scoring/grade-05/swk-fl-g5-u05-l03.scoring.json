@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u05-l03",
+  "lessonId": "ma-g5-financial-literacy-u05-l03",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Raising an unpaid loan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Gus stay silent, or confront the classmate accusingly."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Gus raises it but the wording is likely to embarrass the classmate publicly."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response gives Gus direct, private wording that names the $12.00 and asks about a plan, without accusation."
+          }
+        ]
+      },
+      {
+        "dimension": "Setting a lending boundary",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Gus lend again with no boundary, or refuse all lending without explanation."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A boundary is named for Gus but not explained in a way he could say aloud."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response gives Gus a boundary he can state plainly, such as lending only what he can afford to lose or waiting until the first loan is settled, with a respectful explanation."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Treats the unpaid loan and the new request as separate decisions.",
+      "Supplies wording that is private and non-accusatory.",
+      "States a boundary Gus could actually keep.",
+      "Does not suggest publicly shaming the classmate."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What makes the unpaid loan awkward for Gus, and what makes the new request a separate question?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should Gus say about the unpaid $12.00, and what makes those words workable?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "What boundary could Gus set for lending in future, and how would he explain it without insulting anyone?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Raising an unpaid loan — Not yet: The response has Gus stay silent, or confront the classmate accusingly. Approaching: Gus raises it but the wording is likely to embarrass the classmate publicly. Meets: The response gives Gus direct, private wording that names the $12.00 and asks about a plan, without accusation. Setting a lending boundary — Not yet: The response has Gus lend again with no boundary, or refuse all lending without explanation. Approaching: A boundary is named for Gus but not explained in a way he could say aloud. Meets: The response gives Gus a boundary he can state plainly, such as lending only what he can afford to lose or waiting until the first loan is settled, with a respectful explanation. Treats the unpaid loan and the new request as separate decisions. Supplies wording that is private and non-accusatory. States a boundary Gus could actually keep. Does not suggest publicly shaming the classmate."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Treats the unpaid loan and the new request as separate decisions. Supplies wording that is private and non-accusatory. States a boundary Gus could actually keep. Does not suggest publicly shaming the classmate."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u05-l03.scoring.json",
+    "sourceScoringSha256": "b460438fc34a6563babd6ef4f81deb244e7abcb53373c795864e26a43931bd00",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

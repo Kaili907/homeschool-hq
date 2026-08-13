@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l06",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: fraud, scam escalation, and recovery procedures"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "fraud, scam escalation, and recovery procedures",
+  "objective": "Analyse a written record of a fictional escalating scam, quantify what stopping at each stage would have saved, and evaluate a recovery procedure against what it can actually recover.",
+  "scenario": "Emmerich Grzeskowiak-Toure is reviewing a written transcript of a fictional scam, prepared for training. Everything below is invented and already concluded. This lesson is analysis of a written record only: it involves no contact with anyone, no real message, no account, and no credential of any kind.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional transcript summary in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "In the fictional transcript the escalation ran in four stages. Stage 1 was contact claiming a prize, costing nothing. Stage 2 was a $250 \"verification fee\". Stage 3 was a $1,900 \"release fee\". Stage 4 was a $6,400 transfer described as a \"tax deposit\". Each stage was justified by the one before it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What was lost in total across all four stages?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would stopping after stage 2 have saved?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total loss would stopping after stage 2 have avoided? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How many times larger was the stage-4 payment than the stage-2 payment? Give two decimal places.",
+          "unit": "ratio"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The fictional recovery procedure in the transcript recovered 35% of the stage-4 transfer because it was reported within 48 hours, and nothing from the two earlier payments.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much was recovered under the procedure?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What was the net loss after the recovery?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total loss was recovered? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more would have been kept by stopping after stage 2 than by the recovery procedure?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which stage of the fictional escalation was the most valuable point at which to stop?",
+          "choices": [
+            "After stage 1, before any money moved",
+            "After stage 2, once $250 had been paid",
+            "After stage 3, once $2,150 had been paid"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences. Write only about the fictional transcript.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The escalation put 97.1% of the loss after the first payment. Explain why an escalating structure works that way, and describe the check a person could apply at stage 2 that does not depend on knowing anything about the specific claim being made."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The recovery procedure returned 26.2% of the total and depended on reporting within 48 hours. Say what that tells you about how recovery procedures should be treated in a protection plan."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount saved by stopping after stage 2 comes out at $8,550.00, the $250 already paid is being counted as avoided. Stopping after a payment does not undo it: the $250 is gone, and what is avoided is the $1,900 and $6,400 that would have followed. List the four stages in order and draw the line after stage 2 before adding anything.",
+  "extension": "Work out what recovery rate applied to the whole $8,550.00 would have matched the amount saved by stopping after stage 2, and say whether any recovery procedure could plausibly achieve it.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What was lost in total across all four stages?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much would stopping after stage 2 have saved?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What share of the total loss would stopping after stage 2 have avoided? Give one decimal place."
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How many times larger was the stage-4 payment than the stage-2 payment? Give two decimal places."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much was recovered under the procedure?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What was the net loss after the recovery?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What share of the total loss was recovered? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much more would have been kept by stopping after stage 2 than by the recovery procedure?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Which stage of the fictional escalation was the most valuable point at which to stop?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The escalation put 97.1% of the loss after the first payment. Explain why an escalating structure works that way, and describe the check a person could apply at stage 2 that does not depend on knowing anything about the specific claim being made."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The recovery procedure returned 26.2% of the total and depended on reporting within 48 hours. Say what that tells you about how recovery procedures should be treated in a protection plan."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u06-l06.package.json",
+    "sourcePackageSha256": "63745e0790ab614a0180c67c8681ee1874e737a7d16af31f4342cff2034faabe",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u06-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

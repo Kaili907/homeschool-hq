@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u01-l06",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Money Choices and Tradeoffs",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: family differences and dignity",
+    "focus": "family differences and dignity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 1 — choices, scarcity, and tradeoffs"
+  ],
+  "objective": "Learners explain why invented families with the same pretend amount make different plans, and practise talking about those differences without ranking anyone.",
+  "scenario": "Nour is an invented fourth grader in a pretend class activity. Two made-up families each plan $80.00 of simulated monthly money: one puts most of it toward a bus pass and food, the other toward a repair fund and a shared music lesson. Both plans balance, and neither family is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Discuss only the invented families on this sheet; do not describe any real household's money."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read both invented plans with Nour. Notice what each family put first and what each left out. Neither plan overspends, so the difference is about priorities rather than about arithmetic.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What does each of Nour's two invented families protect first, and what does each leave out?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "A classmate in Nour's activity says one plan is smarter than the other. Write a reply that takes both plans seriously and explains what would need to be known before anyone could judge.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Why can two families with the same $80.00 build very different plans and both be reasonable?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Talk about money can drift into talk about people.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What is one thing to avoid saying when a classmate mentions what their family can or cannot afford?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner ranks the plans, hide the totals and re-read the plans as lists of what each family was protecting, then ask which protection they would drop first and why that is a judgement call rather than a fact.",
+  "extension": "Ask the learner to write a third $80.00 plan for Nour's activity that protects something neither family protected, and to say what it gives up.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u01-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u01-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What does each of Nour's two invented families protect first, and what does each leave out?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why can two families with the same $80.00 build very different plans and both be reasonable?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "What is one thing to avoid saying when a classmate mentions what their family can or cannot afford?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u01-l06.package.json",
+    "sourcePackageSha256": "0b4c0872d0631120f8c737369a82cfaac086fe06a664fecc064a7d939b8ef66e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u01-l06",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

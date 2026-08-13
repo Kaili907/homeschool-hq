@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: paying down debt while saving"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "paying down debt while saving",
+  "objective": "Price the interest consequence of splitting a fictional household’s surplus between a card balance and a reserve, and weigh the measurable cost against the protection it buys.",
+  "scenario": "The fictional household, the simulated card balance, and the rate applied to it below are invented for this exercise. Nothing here recommends a course of action for any real borrower.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional balance and budget figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household has $420 a month available after everything else is paid. It carries a simulated card balance of $3,800 charged at 21.6% a year, applied as one twelfth of that rate each month before the payment is credited. Its reserve currently holds $600. Under the split plan, $210 goes to the card and $210 to the reserve.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What interest is charged on the balance in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the whole $420 goes to the card, what is the balance after one month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under the split plan, what is the balance after one month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find what the split actually costs, which does not appear until the second month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much higher is the balance under the split plan after one month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What interest is charged in the second month if the whole $420 went to the card?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What interest is charged in the second month under the split plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does the split cost in extra interest in the second month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Splitting the surplus costs this fictional household $3.78 in the second month and puts $210 into a reserve that holds only $600. Argue for either the split or the all-to-debt plan on these figures, and state plainly what your argument cannot prove."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the split appears to cost $210.00 in interest, the difference in balances is being read as an interest charge. The $210.00 is money moved to the reserve, not money lost. The interest cost of the split is the difference between the two second-month charges, $65.85 against $62.07, which is $3.78.",
+  "extension": "Carry both plans forward to the third month and say whether the monthly cost of the split is growing, shrinking, or steady, and why.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What interest is charged on the balance in the first month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "If the whole $420 goes to the card, what is the balance after one month?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "Under the split plan, what is the balance after one month?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much higher is the balance under the split plan after one month?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What interest is charged in the second month if the whole $420 went to the card?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What interest is charged in the second month under the split plan?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What does the split cost in extra interest in the second month?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Splitting the surplus costs this fictional household $3.78 in the second month and puts $210 into a reserve that holds only $600. Argue for either the split or the all-to-debt plan on these figures, and state plainly what your argument cannot prove."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u03-l04.package.json",
+    "sourcePackageSha256": "014e178d419ddc4623b3caca12f7e068327fa7c28d5b9da36fc58e154f0d51ee",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u03-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

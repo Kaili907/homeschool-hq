@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u02-l04",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Where Money Comes From",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: unpaid work at home",
+    "focus": "unpaid work at home"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 2 — earning and work"
+  ],
+  "objective": "Learners total the invented minutes spent on unpaid household work, identify the longest job, and scale the routine across several days to see the size of work that carries no pay.",
+  "scenario": "Owen is an invented third grader who helps at home without being paid. In a made-up evening he sweeps for 15 minutes, dries dishes for 10 minutes, and folds laundry for 20 minutes. The minutes are invented for this task.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Add up Owen's three invented evening jobs.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many minutes does Owen spend helping in one pretend evening?",
+          "unit": "minutes"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Look at Owen's three jobs one at a time rather than as a single block, and find which one takes the biggest share of the evening.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How long is Owen's longest single job?",
+          "unit": "minutes"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which takes Owen longer, folding laundry or drying dishes?",
+          "choices": [
+            "Folding laundry takes longer",
+            "Drying dishes takes longer",
+            "They take the same time"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Owen does the same three jobs on three pretend evenings in a row.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many minutes of unpaid help is that across the three evenings?",
+          "unit": "minutes"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many more minutes is that than a single evening?",
+          "unit": "minutes"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "None of Owen's evening jobs comes with pay.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Owen is not paid for any of these minutes. Why does the work still matter to his household?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner multiplies a single job instead of the whole evening, have them total one evening on a strip of paper first and then lay three identical strips end to end, so the tripling is applied to the finished evening rather than to one chore.",
+  "extension": "Ask the learner to add one more unpaid job to Owen's evening with a time under fifteen minutes and recompute the three-evening total.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u02-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u02-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many minutes does Owen spend helping in one pretend evening?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How long is Owen's longest single job?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which takes Owen longer, folding laundry or drying dishes?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many minutes of unpaid help is that across the three evenings?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many more minutes is that than a single evening?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Owen is not paid for any of these minutes. Why does the work still matter to his household?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-03/swk-fl-g3-u02-l04.package.json",
+    "sourcePackageSha256": "50529e40b6d7a640dc017f2650e5c631b7fedc7b9b75825de91f81e218f04bcf",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g3-financial-literacy-u02-l04",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

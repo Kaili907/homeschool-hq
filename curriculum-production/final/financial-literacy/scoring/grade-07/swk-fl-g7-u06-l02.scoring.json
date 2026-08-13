@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u06-l02",
+  "lessonId": "ma-g7-financial-literacy-u06-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much is withheld for simulated payroll tax?",
+        "answer": "$139.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(7.75% of 1,800.00) = 139.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 180000
+            },
+            "bps": 775,
+            "round": "exact"
+          },
+          "trace": "(7.75% of 1,800.00) = 139.50"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much is withheld for simulated income tax?",
+        "answer": "$216.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(12% of 1,800.00) = 216.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 180000
+            },
+            "bps": 1200,
+            "round": "exact"
+          },
+          "trace": "(12% of 1,800.00) = 216.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What is the net pay?",
+        "answer": "$1,444.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(1,800.00 - ((7.75% of 1,800.00) + (12% of 1,800.00))) = 1,444.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 180000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 180000
+                  },
+                  "bps": 775,
+                  "round": "exact"
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 180000
+                  },
+                  "bps": 1200,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "(1,800.00 - ((7.75% of 1,800.00) + (12% of 1,800.00))) = 1,444.50"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the total due on the $250.00 purchase?",
+        "answer": "$266.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(250.00 + (6.5% of 250.00)) = 266.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 25000
+              },
+              {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 25000
+                },
+                "bps": 650,
+                "round": "exact"
+              }
+            ]
+          },
+          "trace": "(250.00 + (6.5% of 250.00)) = 266.25"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What is left of the net pay after that purchase?",
+        "answer": "$1,178.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((1,800.00 - ((7.75% of 1,800.00) + (12% of 1,800.00))) - (250.00 + (6.5% of 250.00))) = 1,178.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "diff",
+              "from": {
+                "op": "money",
+                "cents": 180000
+              },
+              "less": {
+                "op": "sum",
+                "of": [
+                  {
+                    "op": "percent",
+                    "of": {
+                      "op": "money",
+                      "cents": 180000
+                    },
+                    "bps": 775,
+                    "round": "exact"
+                  },
+                  {
+                    "op": "percent",
+                    "of": {
+                      "op": "money",
+                      "cents": 180000
+                    },
+                    "bps": 1200,
+                    "round": "exact"
+                  }
+                ]
+              }
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 25000
+                },
+                {
+                  "op": "percent",
+                  "of": {
+                    "op": "money",
+                    "cents": 25000
+                  },
+                  "bps": 650,
+                  "round": "exact"
+                }
+              ]
+            }
+          },
+          "trace": "((1,800.00 - ((7.75% of 1,800.00) + (12% of 1,800.00))) - (250.00 + (6.5% of 250.00))) = 1,178.25"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Distinguishing kinds of tax",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats all of Constance's taxes as a single deduction."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The two are distinguished for Constance but the base of each is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response states that Constance's payroll and income taxes are charged on earnings while sales tax is charged on a purchase, and locates each at its point in the flow."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld for simulated payroll tax?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is withheld for simulated income tax?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the net pay?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total due on the $250.00 purchase?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is left of the net pay after that purchase?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain the difference between what Constance's payroll taxes and sales tax are charged on, and why the two are calculated at different points."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much is withheld for simulated payroll tax? Answer: $139.50. Verification: (7.75% of 1,800.00) = 139.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much is withheld for simulated income tax? Answer: $216.00. Verification: (12% of 1,800.00) = 216.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What is the net pay? Answer: $1,444.50. Verification: (1,800.00 - ((7.75% of 1,800.00) + (12% of 1,800.00))) = 1,444.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What is the total due on the $250.00 purchase? Answer: $266.25. Verification: (250.00 + (6.5% of 250.00)) = 266.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What is left of the net pay after that purchase? Answer: $1,178.25. Verification: ((1,800.00 - ((7.75% of 1,800.00) + (12% of 1,800.00))) - (250.00 + (6.5% of 250.00))) = 1,178.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Distinguishing kinds of tax — Not yet: The response treats all of Constance's taxes as a single deduction. Approaching: The two are distinguished for Constance but the base of each is not named. Meets: The response states that Constance's payroll and income taxes are charged on earnings while sales tax is charged on a purchase, and locates each at its point in the flow. The response states that Constance's payroll and income taxes are charged on earnings while sales tax is charged on a purchase, and locates each at its point in the flow."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response states that Constance's payroll and income taxes are charged on earnings while sales tax is charged on a purchase, and locates each at its point in the flow."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-07/swk-fl-g7-u06-l02.scoring.json",
+    "sourceScoringSha256": "de3a66f25ae4add3c0f06440eba9925e836083f8749d00760ed858b3d3c22f26",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l05",
+  "lessonId": "ma-g9-financial-literacy-u03-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "2.5",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,700 divided by $1,480 a month is exactly 2.5 months of essential spending."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,340.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,700 less the $620 repair and the $740 of income the household did not receive."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "1.6",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,340 divided by $1,480 is 1.58 months, which rounds to 1.6."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,360.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.5 months of cover is $3,700, and the reserve now stands at $2,340."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,360 at $170 a month takes exactly 8 months."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "Yes, it would stay above one month of essentials",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Taken at the worst moment, before any rebuilding, $2,340 less $620 leaves $1,720, which still exceeds one month of essentials at $1,480."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(reserve / essentials, 1)",
+        "substituted": "round(3700 / 1480, 1)",
+        "result": "2.5",
+        "why": "$3,700 divided by $1,480 a month is exactly 2.5 months of essential spending."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "reserve2 - repair - lostIncome",
+        "substituted": "3700 - 620 - 740",
+        "result": "$2,340.00",
+        "why": "$3,700 less the $620 repair and the $740 of income the household did not receive."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / essentials2, 1)",
+        "substituted": "round(#t2-p1 / 1480, 1)",
+        "result": "1.6",
+        "why": "$2,340 divided by $1,480 is 1.58 months, which rounds to 1.6."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1 * 1480 - #t2-p1",
+        "substituted": "#t1-p1 * 1480 - #t2-p1",
+        "result": "$1,360.00",
+        "why": "2.5 months of cover is $3,700, and the reserve now stands at $2,340."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(#t2-p3 / rebuildRate, 0)",
+        "substituted": "round(#t2-p3 / 170, 0)",
+        "result": "8",
+        "why": "$1,360 at $170 a month takes exactly 8 months."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "lowPoint - secondRepair >= oneMonth",
+        "substituted": "2340 - 620 >= 1480",
+        "result": "Yes, it would stay above one month of essentials",
+        "why": "Taken at the worst moment, before any rebuilding, $2,340 less $620 leaves $1,720, which still exceeds one month of essentials at $1,480."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Measuring a reserve in months rather than in dollars changes what it tells you. Explain the difference, and say what would happen to this household’s months of cover if its essential spending rose to $1,850 with the reserve unchanged at $2,340.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that months of cover measures the reserve against what the household actually needs, so the same dollars mean different things to different households.",
+          "Computes or correctly estimates that $2,340 against $1,850 a month is about 1.3 months, down from 1.6.",
+          "Notes that the reserve did not shrink; the requirement grew, which is a second way to lose cover."
+        ],
+        "evidenceRequirements": [
+          "Uses the $2,340 reserve and both essential-spending figures, $1,480 and $1,850."
+        ],
+        "lookFors": [
+          "The response treats months of cover as a ratio with two moving parts.",
+          "The response does not confuse rising spending with spending more carelessly; the scenario does not say why it rose."
+        ],
+        "commonMisconception": "Judging the adequacy of a reserve by its dollar size alone.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many months of essential spending does the reserve cover? Round to one decimal place."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is left in the reserve after both shocks?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many months of essentials does the reserve now cover? Round to one decimal place."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much would the household have to add to get back to the original 2.5 months of cover?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many months of $170 does it take to rebuild the reserve to $3,700? Round to the nearest month."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "If a second $620 repair happened during those 8 months, would the reserve still cover one full month of essentials at its lowest point?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Measuring a reserve in months rather than in dollars changes what it tells you. Explain the difference, and say what would happen to this household’s months of cover if its essential spending rose to $1,850 with the reserve unchanged at $2,340."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How many months of essential spending does the reserve cover? Round to one decimal place. Answer: 2.5. Verification: $3,700 divided by $1,480 a month is exactly 2.5 months of essential spending. t2-p1: What is left in the reserve after both shocks? Answer: $2,340.00. Verification: $3,700 less the $620 repair and the $740 of income the household did not receive. t2-p2: How many months of essentials does the reserve now cover? Round to one decimal place. Answer: 1.6. Verification: $2,340 divided by $1,480 is 1.58 months, which rounds to 1.6. t2-p3: How much would the household have to add to get back to the original 2.5 months of cover? Answer: $1,360.00. Verification: 2.5 months of cover is $3,700, and the reserve now stands at $2,340. t3-p1: How many months of $170 does it take to rebuild the reserve to $3,700? Round to the nearest month. Answer: 8. Verification: $1,360 at $170 a month takes exactly 8 months. t3-p2: If a second $620 repair happened during those 8 months, would the reserve still cover one full month of essentials at its lowest point? Answer: Yes, it would stay above one month of essentials. Verification: Taken at the worst moment, before any rebuilding, $2,340 less $620 leaves $1,720, which still exceeds one month of essentials at $1,480."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t4-p1: Measuring a reserve in months rather than in dollars changes what it tells you. Explain the difference, and say what would happen to this household’s months of cover if its essential spending rose to $1,850 with the reserve unchanged at $2,340. Explains that months of cover measures the reserve against what the household actually needs, so the same dollars mean different things to different households. Computes or correctly estimates that $2,340 against $1,850 a month is about 1.3 months, down from 1.6. Notes that the reserve did not shrink; the requirement grew, which is a second way to lose cover. Uses the $2,340 reserve and both essential-spending figures, $1,480 and $1,850. The response treats months of cover as a ratio with two moving parts. The response does not confuse rising spending with spending more carelessly; the scenario does not say why it rose."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that months of cover measures the reserve against what the household actually needs, so the same dollars mean different things to different households. Computes or correctly estimates that $2,340 against $1,850 a month is about 1.3 months, down from 1.6. Notes that the reserve did not shrink; the requirement grew, which is a second way to lose cover."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u03-l05.scoring.json",
+    "sourceScoringSha256": "9f80206e6af8b45e7e7ba80001e86cdca50787693524970db1622a0b061625c4",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l07",
+  "lessonId": "ma-g12-financial-literacy-u06-l07",
+  "integratedDomains": [
+    "insurance-risk",
+    "income",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$492.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$41 a month across 12 months. This saving is certain and arrives whether or not anything goes wrong."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$8,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $9,400 loss less the $500 deductible."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$11,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60% of $3,900 a month for 5 months. Disability cover replaces income rather than reimbursing a loss, so its value scales with how long the interruption lasts."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$20,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,900.00 from renters plus $11,700.00 from disability, on the two stated events."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "41.87",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,600.00 measured against the $492.00 saved. The ratio is large, but it compares a certain saving with a payout that only occurs if both events do."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "No — it prices the exposure without saying how likely either event is",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Every figure here is conditional on two stated events occurring. The calculation establishes what the adult would forgo if they happened, which is a necessary input to the decision but not the decision itself; nothing in the scenario states a probability."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "(rentersPrem + disabilityPrem) * 12",
+        "substituted": "(17 + 24) * 12",
+        "result": "$492.00",
+        "why": "$41 a month across 12 months. This saving is certain and arrives whether or not anything goes wrong."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "propertyLoss - deductible",
+        "substituted": "9400 - 500",
+        "result": "$8,900.00",
+        "why": "The $9,400 loss less the $500 deductible."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(monthlyIncome * replaceRate * monthsOut, 2)",
+        "substituted": "round(3900 * 0.6 * 5, 2)",
+        "result": "$11,700.00",
+        "why": "60% of $3,900 a month for 5 months. Disability cover replaces income rather than reimbursing a loss, so its value scales with how long the interruption lasts."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 + #t1-p3",
+        "substituted": "#t1-p2 + #t1-p3",
+        "result": "$20,600.00",
+        "why": "$8,900.00 from renters plus $11,700.00 from disability, on the two stated events."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / #t1-p1, 2)",
+        "substituted": "round(#t2-p1 / #t1-p1, 2)",
+        "result": "41.87",
+        "why": "$20,600.00 measured against the $492.00 saved. The ratio is large, but it compares a certain saving with a payout that only occurs if both events do."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The 41.87 ratio is striking and does not by itself settle anything. Explain what would have to be added to make it a basis for a decision, and describe the situation in which dropping the disability cover is more serious than dropping the renters cover.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names what is missing: some estimate of how likely each event is, and — more importantly — what the household could absorb on its own, since a loss it could meet from reserves does not need to be transferred.",
+          "Explains why the ratio alone misleads: it compares a certain $492.00 against a conditional $20,600.00, so it would look impressive for almost any policy against almost any large enough hypothetical event.",
+          "Distinguishes the two cases: dropping disability cover is more serious for someone whose income is the household’s only one and whose reserves cannot cover several months, because the loss is not a single bill but the disappearance of the money everything else depends on."
+        ],
+        "evidenceRequirements": [
+          "Uses the $492.00 annual saving and the $11,700.00 disability figure, and refers to the 41.87 ratio."
+        ],
+        "lookFors": [
+          "The response resists concluding from the ratio alone.",
+          "The response distinguishes a loss of assets from a loss of income.",
+          "The response makes no recommendation about any real person’s cover."
+        ],
+        "commonMisconception": "Treating a large ratio between a potential payout and a premium as proof that cover should be held, when the same ratio can be produced for any policy by choosing a large enough hypothetical loss.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "error-diagnosis",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the two dropped premiums save across a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would the renters policy have paid on the stated $9,400 loss?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What would the disability policy have paid across the stated 5 months?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What would the two policies have paid across both stated events?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many times the annual saving is that? Give two decimal places."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Does this calculation show that dropping the two policies was the wrong decision?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The 41.87 ratio is striking and does not by itself settle anything. Explain what would have to be added to make it a basis for a decision, and describe the situation in which dropping the disability cover is more serious than dropping the renters cover."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the two dropped premiums save across a year? Answer: $492.00. Verification: $41 a month across 12 months. This saving is certain and arrives whether or not anything goes wrong. t1-p2: What would the renters policy have paid on the stated $9,400 loss? Answer: $8,900.00. Verification: The $9,400 loss less the $500 deductible. t1-p3: What would the disability policy have paid across the stated 5 months? Answer: $11,700.00. Verification: 60% of $3,900 a month for 5 months. Disability cover replaces income rather than reimbursing a loss, so its value scales with how long the interruption lasts. t2-p1: What would the two policies have paid across both stated events? Answer: $20,600.00. Verification: $8,900.00 from renters plus $11,700.00 from disability, on the two stated events. t2-p2: How many times the annual saving is that? Give two decimal places. Answer: 41.87. Verification: $20,600.00 measured against the $492.00 saved. The ratio is large, but it compares a certain saving with a payout that only occurs if both events do. t2-p3: Does this calculation show that dropping the two policies was the wrong decision? Answer: No — it prices the exposure without saying how likely either event is. Verification: Every figure here is conditional on two stated events occurring. The calculation establishes what the adult would forgo if they happened, which is a necessary input to the decision but not the decision itself; nothing in the scenario states a probability."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: The 41.87 ratio is striking and does not by itself settle anything. Explain what additional information is required to make it a basis for a decision, and describe the situation in which dropping the disability cover is more serious than dropping the renters cover. Names what is missing: some estimate of how likely each event is, and — more importantly — what the household could absorb on its own, since a loss it could meet from reserves does not need to be transferred. Explains why the ratio alone misleads: it compares a certain $492.00 against a conditional $20,600.00, so it would look impressive for almost any policy against almost any large enough hypothetical event. Distinguishes the two cases: dropping disability cover is more serious for someone whose income is the household’s only one and whose reserves cannot cover several months, because the loss is not a single bill but the disappearance of the money everything else depends on. Uses the $492.00 annual saving and the $11,700.00 disability figure, and refers to the 41.87 ratio. The response resists concluding from the ratio alone. The response distinguishes a loss of assets from a loss of income. The response makes no recommendation about any real person’s cover."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names what is missing: some estimate of how likely each event is, and — more importantly — what the household could absorb on its own, since a loss it could meet from reserves does not need to be transferred. Explains why the ratio alone misleads: it compares a certain $492.00 against a conditional $20,600.00, so it would look impressive for almost any policy against almost any large enough hypothetical event. Distinguishes the two cases: dropping disability cover is more serious for someone whose income is the household’s only one and whose reserves cannot cover several months, because the loss is not a single bill but the disappearance of the money everything else depends on."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u06-l07.scoring.json",
+    "sourceScoringSha256": "659e41f42bc481b83dd75d6835b8debec01d3dac8ea297e13e697f384e0ca817",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u02-l02",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Consumer Decisions and Contracts",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: unit pricing",
+    "focus": "unit pricing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners normalise invented package prices to a common measure, identify the better value, and quantify the difference on a realistic order.",
+  "scenario": "Hattie is an invented seventh grader comparing two pretend package sizes of the same product: 900 grams for $5.40 and 1,500 grams for $8.25. The store lists no unit price, so she works it out herself.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Convert Hattie's 900-gram package to a price per 100 grams.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per 100 grams in the 900-gram package?",
+          "unit": "USD per 100 g"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Convert the 1,500-gram package the same way, then compare Hattie's two normalised prices.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per 100 grams in the 1,500-gram package?",
+          "unit": "USD per 100 g"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which package is the better value per 100 grams?",
+          "choices": [
+            "The 900-gram package",
+            "The 1,500-gram package",
+            "They are equal per 100 grams"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Hattie needs 4,500 grams, which is 45 hundred-gram units, and both packages can be bought repeatedly.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would 4,500 grams cost at the better rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the better rate save over 4,500 grams?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The larger package is only better under a condition.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name a situation where Hattie should buy the worse-value package anyway, and explain what makes unit price the wrong criterion there."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares package prices directly, require both of Hattie's options to be written as a price per 100 grams before any comparison is stated.",
+  "extension": "Ask the learner what a 600-gram package would need to cost to beat Hattie's best rate, and to prove it.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u02-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u02-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the price per 100 grams in the 900-gram package?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the price per 100 grams in the 1,500-gram package?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which package is the better value per 100 grams?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would 4,500 grams cost at the better rate?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does the better rate save over 4,500 grams?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Name a situation where Hattie should buy the worse-value package anyway, and explain what makes unit price the wrong criterion there."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-07/swk-fl-g7-u02-l02.package.json",
+    "sourcePackageSha256": "aa3de02771d48430fadf24ad63abaa7aff8105d0420a08b8e8d3e994b319aab9",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g7-financial-literacy-u02-l02",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

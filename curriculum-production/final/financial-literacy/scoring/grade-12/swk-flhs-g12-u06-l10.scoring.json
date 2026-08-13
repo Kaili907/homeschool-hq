@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l10",
+  "lessonId": "ma-g12-financial-literacy-u06-l10",
+  "integratedDomains": [
+    "fraud",
+    "consumer-protection",
+    "insurance-risk",
+    "banking",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$273.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$15.60 a year for the box, plus the three annual services. Spreading a durable one-off purchase across its life is what makes it comparable with recurring costs."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "0.53%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$273.60 measured against $52,000. Expressing it this way sets it against the 8.85% a full insurance set can cost, which is a useful sense of scale."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,506.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,860 of charges, $214 of replacements, and $432.00 of time. The time costs more than twice the document replacement and is the component most often left out."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "12.81",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,506.00 measured against $273.60 a year. Unlike an insurance comparison this does not need a probability estimate to be useful, because the protection cost is small relative to a single incident."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,368.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$273.60 a year for 5 years. Even across five years the protection costs less than half of one stated incident."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "The password manager",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A password manager reduces the chance of accounts being compromised by making distinct strong credentials practical. Monitoring detects misuse after it begins, and the document box protects originals from physical loss; both are valuable, but neither prevents an account from being taken over."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(box / 5 + passwordMgr + monitoring + backup, 2)",
+        "substituted": "round(78 / 5 + 36 + 168 + 54, 2)",
+        "result": "$273.60",
+        "why": "$15.60 a year for the box, plus the three annual services. Spreading a durable one-off purchase across its life is what makes it comparable with recurring costs."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / income * 100, 2)",
+        "substituted": "round(#t1-p1 / 52000 * 100, 2)",
+        "result": "0.53%",
+        "why": "$273.60 measured against $52,000. Expressing it this way sets it against the 8.85% a full insurance set can cost, which is a useful sense of scale."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "charges + docReplace + hours * hourly",
+        "substituted": "2860 + 214 + 18 * 24",
+        "result": "$3,506.00",
+        "why": "$2,860 of charges, $214 of replacements, and $432.00 of time. The time costs more than twice the document replacement and is the component most often left out."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / #t1-p1, 2)",
+        "substituted": "round(#t1-p3 / #t1-p1, 2)",
+        "result": "12.81",
+        "why": "$3,506.00 measured against $273.60 a year. Unlike an insurance comparison this does not need a probability estimate to be useful, because the protection cost is small relative to a single incident."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 * 5",
+        "substituted": "#t1-p1 * 5",
+        "result": "$1,368.00",
+        "why": "$273.60 a year for 5 years. Even across five years the protection costs less than half of one stated incident."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write the fictional household’s protection and security plan. Say what is bought and what is done, distinguish the parts that prevent an incident from the parts that limit one, state what the household should never do regardless of who asks, and name the part of your plan you would drop first if the budget required it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Specifies what is bought with figures — for example the full set at $273.60 a year, or a subset with the omission justified — and what is done, such as storing originals and copies separately and keeping credentials only in the manager.",
+          "Separates prevention from limitation: distinct strong credentials and separated storage reduce the chance of an incident, while monitoring and a document inventory reduce what one costs once it starts.",
+          "States a firm rule about disclosure: no account number, password, security answer, or identifying document is given to anyone who makes contact unprompted, whatever the apparent urgency, because that contact is itself a common route into an account.",
+          "Names what would be dropped first and gives a reason — most defensibly the $168 monitoring service, since it is the largest single line and detects rather than prevents, leaving prevention intact."
+        ],
+        "evidenceRequirements": [
+          "Uses the $273.60 annual protection cost and the $3,506.00 incident cost, and refers to the 12.81 years of protection one incident represents.",
+          "Names the specific line that would be dropped first and its cost."
+        ],
+        "lookFors": [
+          "The plan distinguishes prevention from detection rather than treating all four purchases as equivalent.",
+          "The plan states a disclosure rule that holds even under pressure.",
+          "A response that keeps monitoring and drops something else is credited when the reason is given."
+        ],
+        "commonMisconception": "Building a security plan out of purchases alone, when the habits — separated storage, distinct credentials, and never disclosing details to unsolicited contact — carry most of the protection and cost nothing.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "evidence-use",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the whole protection set cost in a year, spreading the box across its 5 years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What share of income is that, to two decimal places?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the stated incident cost in total?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many years of protection does one incident cost? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would the protection set cost across 5 years?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Which of these protections reduces the chance of the incident happening at all, rather than helping the household recover afterwards?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the fictional household’s protection and security plan. Say what is bought and what is done, distinguish the parts that prevent an incident from the parts that limit one, state what the household should never do regardless of who asks, and name the part of your plan you would drop first if the budget required it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the whole protection set cost in a year, spreading the box across its 5 years? Answer: $273.60. Verification: $15.60 a year for the box, plus the three annual services. Spreading a durable one-off purchase across its life is what makes it comparable with recurring costs. t1-p2: What share of income is that, to two decimal places? Answer: 0.53%. Verification: $273.60 measured against $52,000. Expressing it this way sets it against the 8.85% a full insurance set can cost, which is a useful sense of scale. t1-p3: What does the stated incident cost in total? Answer: $3,506.00. Verification: $2,860 of charges, $214 of replacements, and $432.00 of time. The time costs more than twice the document replacement and is the component most often left out. t2-p1: How many years of protection does one incident cost? Give two decimal places. Answer: 12.81. Verification: $3,506.00 measured against $273.60 a year. Unlike an insurance comparison this does not need a probability estimate to be useful, because the protection cost is small relative to a single incident. t2-p2: What would the protection set cost across 5 years? Answer: $1,368.00. Verification: $273.60 a year for 5 years. Even across five years the protection costs less than half of one stated incident. t2-p3: Which of these protections reduces the chance of the incident happening at all, rather than helping the household recover afterwards? Answer: The password manager. Verification: A password manager reduces the chance of accounts being compromised by making distinct strong credentials practical. Monitoring detects misuse after it begins, and the document box protects originals from physical loss; both are valuable, but neither prevents an account from being taken over."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Write the fictional household’s protection and security plan. Say what is bought and what is done, distinguish the parts that prevent an incident from the parts that limit one, state what the household should never do regardless of who asks, and name the part of your plan you would drop first if the budget required it. Specifies what is bought with figures — for example the full set at $273.60 a year, or a subset with the omission justified — and what is done, such as storing originals and copies separately and keeping credentials only in the manager. Separates prevention from limitation: distinct strong credentials and separated storage reduce the chance of an incident, while monitoring and a document inventory reduce what one costs once it starts. States a firm rule about disclosure: no account number, password, security answer, or identifying document is given to anyone who makes contact unprompted, whatever the apparent urgency, because that contact is itself a common route into an account. Names what would be dropped first and gives a reason — most defensibly the $168 monitoring service, since it is the largest single line and detects rather than prevents, leaving prevention intact. Uses the $273.60 annual protection cost and the $3,506.00 incident cost, and refers to the 12.81 years of protection one incident represents. Names the specific line that would be dropped first and its cost. The plan distinguishes prevention from detection rather than treating all four purchases as equivalent. The plan states a disclosure rule that holds even under pressure. A response that keeps monitoring and drops something else is credited when the reason is given."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Specifies what is bought with figures — for example the full set at $273.60 a year, or a subset with the omission justified — and what is done, such as storing originals and copies separately and keeping credentials only in the manager. Separates prevention from limitation: distinct strong credentials and separated storage reduce the chance of an incident, while monitoring and a document inventory reduce what one costs once it starts. States a firm rule about disclosure: no account number, password, security answer, or identifying document is given to anyone who makes contact unprompted, whatever the apparent urgency, because that contact is itself a common route into an account. Names what would be dropped first and gives a reason — most defensibly the $168 monitoring service, since it is the largest single line and detects rather than prevents, leaving prevention intact."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u06-l10.scoring.json",
+    "sourceScoringSha256": "f6db5ed813d77fc0e211033a8c251c1eb3289bf6b41e35a40c1c89fd1e8bfead",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

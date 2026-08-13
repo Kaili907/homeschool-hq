@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l03",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: reserve targets alongside coverage"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "reserve targets alongside coverage",
+  "objective": "Derive two reserve targets from a fictional household’s own policy terms, measure the existing reserve against each, and express the gap as a number of months.",
+  "scenario": "The simulated policy terms and reserve below belong to a fictional household and are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms and reserve figure in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household carries a health deductible of $1,800 with a cap of $5,600 on what the member can pay in a year, an auto deductible of $1,000, and a renters deductible of $500. The reserve currently holds $2,400, and the household can add $185 a month to it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three deductibles come to together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would a worse year cost, taking the health cap rather than the health deductible?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How far short of the deductible floor is the current reserve?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure the reserve against the worse year and express both gaps in months.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How far short of the worse-year figure is the current reserve?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "At $185 a month, how many months would close the smaller gap? Give one decimal place."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many months would close the larger gap? Give one decimal place."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Choose which of the two targets this fictional household should work to first and defend it with the figures. Explain what the household is exposed to under your choice, and say why sizing a reserve from the policies rather than from a general rule is useful here."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the worse-year figure comes out at $8,900.00, the health deductible has been added to the health cap. The cap of $5,600 is the most the member pays toward health in the year, and it already includes the $1,800 deductible. Use the cap in place of the deductible, then add the auto and renters deductibles.",
+  "extension": "Recompute both targets for a fictional household that raises its auto deductible to $2,000 in exchange for a lower premium, and say what that trade does to the reserve requirement.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the three deductibles come to together?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would a worse year cost, taking the health cap rather than the health deductible?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How far short of the deductible floor is the current reserve?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How far short of the worse-year figure is the current reserve?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "At $185 a month, how many months would close the smaller gap? Give one decimal place."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How many months would close the larger gap? Give one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Choose which of the two targets this fictional household should work to first and defend it with the figures. Explain what the household is exposed to under your choice, and say why sizing a reserve from the policies rather than from a general rule is useful here."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u06-l03.package.json",
+    "sourcePackageSha256": "4615a9481a2e0d24e20f477caf1ef41e279ad300856023ccc04f99a39d047f8f",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u06-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

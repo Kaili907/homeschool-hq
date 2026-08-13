@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l02",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: withholding accuracy and adjusting it"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "withholding accuracy and adjusting it",
+  "objective": "Establish a fictional worker’s true liability against what was withheld, convert the over-collection to a monthly figure, and price what that money could not do while it was held.",
+  "scenario": "The fictional worker, the simulated withholding, and the invented card rate below exist only for this exercise. Nothing here advises any real person about their own withholding.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pay and withholding figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker earned $51,600 in wages with a pre-tax retirement contribution of $2,580, and had $5,194.40 of federal income tax withheld across the year. The fictional federal schedule allows a standard deduction of $9,000 and charges 10% on the first $10,400 of taxable income and 12% above it to $44,000. The worker also carries a simulated card balance charged at 21.6% a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What income tax is owed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Given that $5,194.40 was withheld across the year, what refund is due once the amount actually owed is settled?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now express the over-collection as the monthly amount it actually was, and price what it could have been doing.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much extra was withheld each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If $600 had instead sat on the card at 21.6% for the year, what interest would that have cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Is the $600.00 refund money the worker gained by filing?",
+          "choices": [
+            "Yes — it is a payment received after filing",
+            "No — it is the worker’s own pay, over-collected and returned without interest"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Some people deliberately over-withhold. Make the strongest case for and against this fictional worker adjusting their withholding so the refund is close to zero, and say what fact about the worker would decide it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the refund comes out at $2,180.00, the pre-tax contribution has not been subtracted, or the whole taxable income has been taxed at 12%. Taxable income is $40,020.00 after both the $2,580 contribution and the $9,000 deduction, and the first $10,400 of it is charged at 10%, not 12%.",
+  "extension": "Work out what withholding would have produced a refund of exactly zero, and say how much would have had to be withheld each month to achieve it.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is taxable income?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What income tax is owed?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "Given that $5,194.40 was withheld across the year, what refund is due once the amount actually owed is settled?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much extra was withheld each month?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "If $600 had instead sat on the card at 21.6% for the year, what interest would that have cost?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Is the $600.00 refund money the worker gained by filing?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Some people deliberately over-withhold. Make the strongest case for and against this fictional worker adjusting their withholding so the refund is close to zero, and say what fact about the worker would decide it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u07-l02.package.json",
+    "sourcePackageSha256": "d6436bee3260917efb6468e8c580da3c3ef89d44713d794a0f3f48cd7a6047b8",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u07-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

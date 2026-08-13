@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l02",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: inflation compounding across a decade"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "inflation compounding across a decade",
+  "objective": "Compound a fictional inflation rate and a slower wage growth rate across a decade, and express the result as a change in the share of income a fixed basket consumes.",
+  "scenario": "Emeka Thorvaldsen-Ruiz is a fictional household planner. The inflation rate, wage growth, and basket cost below are invented figures chosen to make a decade of compounding visible.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional inflation and wage figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fixed basket of goods Emeka buys costs $4,850 a year today. Prices rise 3.4% a year. Emeka earns $52,000 a year and his wage rises 2.1% a year. Use a 10-year horizon and round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the same basket cost after 10 years of 3.4% inflation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the basket cost after the decade?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Emeka’s income after 10 years of 2.1% growth?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure the basket against the income at each end of the decade.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What share of today’s income does today’s basket take? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of the year-10 income does the year-10 basket take? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how many percentage points has the basket’s share of income risen?",
+          "unit": "percentage points"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What would Emeka’s year-10 income need to be for the basket to take the same 9.3% share it takes today?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the projected year-10 income fall short of that?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Emeka’s wage rises every year for ten years and he is worse off at the end. Explain how, and say what the difference between 3.4% and 2.1% means in plain terms for someone reading a pay rise letter."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "This model applies one inflation rate to everything Emeka buys. Name one way that simplification could understate or overstate his real position, and say which computed figure it would move."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the year-10 basket comes out at $6,499.00, the inflation is being applied as a flat 34% of the original price rather than compounded. Each year’s 3.4% is charged on the previous year’s price, so year 2 costs 3.4% more than year 1 rather than 3.4% more than the start. Build the first three years by hand before using the ten-year form.",
+  "extension": "Find the wage growth rate that would have held the basket at 9.3% of income for the whole decade, and say how close it is to the 3.4% inflation rate.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the same basket cost after 10 years of 3.4% inflation?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the basket cost after the decade?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Emeka’s income after 10 years of 2.1% growth?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What share of today’s income does today’s basket take? Give one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What share of the year-10 income does the year-10 basket take? Give one decimal place."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how many percentage points has the basket’s share of income risen?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What would Emeka’s year-10 income need to be for the basket to take the same 9.3% share it takes today?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the projected year-10 income fall short of that?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Emeka’s wage rises every year for ten years and he is worse off at the end. Explain how, and say what the difference between 3.4% and 2.1% means in plain terms for someone reading a pay rise letter."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "This model applies one inflation rate to everything Emeka buys. Name one way that simplification could understate or overstate his real position, and say which computed figure it would move."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u03-l02.package.json",
+    "sourcePackageSha256": "34bcf27ec4dce3d85ac52509590b1b037ffe8380554e83fa9e758572e9f0048e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u03-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

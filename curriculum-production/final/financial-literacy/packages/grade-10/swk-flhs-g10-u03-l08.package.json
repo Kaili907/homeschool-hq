@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l08",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: compounding frequency and its effect"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "compounding frequency and its effect",
+  "objective": "Apply the compounding method to a five-year horizon and determine whether an extra tenth of a percentage point of rate is worth more than a move from annual to monthly compounding.",
+  "scenario": "The simulated accounts below are invented for this exercise. They are offered to a fictional saver who must pick one and leave the money for the full term.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional saver places $8,000 for 5 years. Account X pays a 3.00% nominal annual rate compounded monthly, adding one twelfth of the rate at each of the 60 month ends. Account Y pays 3.10% compounded once a year. Nothing is added or withdrawn during the term.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Account X hold at the end of the term? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Account Y hold at the end of the term? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Which account ends higher, and by how much?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now separate the two effects, by pricing monthly compounding on its own.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would $8,000 hold after 5 years at 3.00% compounded once a year? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly compounding worth on its own, at the same 3.00% rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the extra tenth of a percentage point worth on its own, comparing the two annually compounded figures?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "An earlier lesson showed that compounding more often always pays more. This one shows an annually compounded account beating a monthly one. Explain how both can be true, and state the rule this case gives you for reading two offers."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Account X is expected to win, notice that two things differ between the offers, not one. Hold the rate at 3.00% and change only the frequency to see that it is worth $18.74; then hold the frequency annual and change only the rate to see that it is worth $45.11. The larger of the two decides the ranking.",
+  "extension": "Find the nominal rate Account X would need, still compounded monthly, to match Account Y over the same term, and say how far that is above 3.00%.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does Account X hold at the end of the term? Round to the nearest cent."
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does Account Y hold at the end of the term? Round to the nearest cent."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which account ends higher, and by how much?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would $8,000 hold after 5 years at 3.00% compounded once a year? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is monthly compounding worth on its own, at the same 3.00% rate?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the extra tenth of a percentage point worth on its own, comparing the two annually compounded figures?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "An earlier lesson showed that compounding more often always pays more. This one shows an annually compounded account beating a monthly one. Explain how both can be true, and state the rule this case gives you for reading two offers."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u03-l08.package.json",
+    "sourcePackageSha256": "e8b6541d5fb03b219db7317324fd39c4ff8a29cc2476e4d9716e076a6d7b6a11",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u03-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

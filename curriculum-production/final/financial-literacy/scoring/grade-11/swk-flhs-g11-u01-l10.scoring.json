@@ -1,0 +1,435 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l10",
+  "lessonId": "ma-g11-financial-literacy-u01-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$42,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two years of $21,300 tuition, all financed."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,538.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Simple interest charges the rate on the principal without compounding: $42,600.00 at 6.5% for each of 2 years. A real loan would usually compound and would not apply the full balance from day one."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$48,138.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Principal plus the accrued interest: $42,600.00 plus $5,538.00."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$60,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two years at $30,200 that never arrive, held flat here so the model has one fewer assumption in it."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$108,538.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $48,138.00 owed plus the $60,400.00 never earned. Both are consequences of the same two years."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$24,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$57,900 against the $33,500 alternative — the advantage is measured against what she would otherwise have earned, not against zero."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "4.4",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$108,538.00 of total cost against $24,400.00 a year."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "5.9",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same $108,538.00 cost against a smaller annual advantage."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "1.5",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.9 years against 4.4 — a quarter cut from the advantage adds about a year and a half to the payback."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "The $24,400 salary advantage, because it is the only input the payback is divided by",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Cutting the advantage by a quarter moved the payback by 1.5 years, while the whole of the accrued interest is $5,538.00, about 5% of the total cost; the divisor is where the model is most exposed."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "tuition * 2",
+        "substituted": "21300 * 2",
+        "result": "$42,600.00",
+        "why": "Two years of $21,300 tuition, all financed."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * rate * 2, 2)",
+        "substituted": "round(#t1-p1 * 0.065 * 2, 2)",
+        "result": "$5,538.00",
+        "why": "Simple interest charges the rate on the principal without compounding: $42,600.00 at 6.5% for each of 2 years. A real loan would usually compound and would not apply the full balance from day one."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$48,138.00",
+        "why": "Principal plus the accrued interest: $42,600.00 plus $5,538.00."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "forgone * 2",
+        "substituted": "30200 * 2",
+        "result": "$60,400.00",
+        "why": "Two years at $30,200 that never arrive, held flat here so the model has one fewer assumption in it."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1",
+        "substituted": "#t1-p3 + #t2-p1",
+        "result": "$108,538.00",
+        "why": "The $48,138.00 owed plus the $60,400.00 never earned. Both are consequences of the same two years."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "withProgramme - without",
+        "substituted": "57900 - 33500",
+        "result": "$24,400.00",
+        "why": "$57,900 against the $33,500 alternative — the advantage is measured against what she would otherwise have earned, not against zero."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p2 / #t2-p3, 1)",
+        "substituted": "round(#t2-p2 / #t2-p3, 1)",
+        "result": "4.4",
+        "why": "$108,538.00 of total cost against $24,400.00 a year."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(#t2-p2 / weaker, 1)",
+        "substituted": "round(#t2-p2 / 18300, 1)",
+        "result": "5.9",
+        "why": "The same $108,538.00 cost against a smaller annual advantage."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t3-p1 - #t2-p4",
+        "substituted": "#t3-p1 - #t2-p4",
+        "result": "1.5",
+        "why": "5.9 years against 4.4 — a quarter cut from the advantage adds about a year and a half to the payback."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Recommend for or against the programme for Anouk. State the payback period you are relying on, the assumptions the recommendation rests on, and the single piece of evidence that would most change your mind.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States a clear recommendation and names the payback figure behind it, either the 4.4 years or the 5.9 years, rather than reporting both without choosing.",
+          "Names at least two load-bearing assumptions from the model, such as the salary advantage holding, the wage during study staying at $30,200, or the simple-interest rule understating a real loan.",
+          "Identifies a specific piece of evidence that would change the recommendation, such as the actual salaries of recent leavers from a comparable programme."
+        ],
+        "evidenceRequirements": [
+          "Cites the total economic cost of $108,538.00 and at least one of the two payback periods.",
+          "Points to the sensitivity result — that a drop to $18,300 adds 1.5 years — when describing the risk."
+        ],
+        "lookFors": [
+          "The recommendation is decided rather than hedged, and the figure supporting it is named.",
+          "The assumptions listed are ones that actually appear in the model, not general cautions.",
+          "Either recommendation is acceptable; what is scored is whether the reasoning carries the cost, the advantage, and the sensitivity together."
+        ],
+        "commonMisconception": "Presenting a model’s output as a recommendation without stating what it assumed.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "The loan in this task uses a simplified simple-interest rule. Explain what a real amortising loan would do differently, and say whether that would make the payback period longer or shorter than the 4.4 years you computed.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a real loan generally compounds and that repayments are split between interest and principal, so the total paid exceeds the $48,138.00 this simplified rule produces.",
+          "Concludes that the payback would be longer than 4.4 years, and ties that to the cost rising while the $24,400.00 advantage stays the same."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $5,538.00 of simple interest as the figure the simplification produced."
+        ],
+        "lookFors": [
+          "The response names compounding or the interest-first application of payments, not merely that real loans are \"more complicated\".",
+          "The direction of the effect on the payback period is stated and justified."
+        ],
+        "commonMisconception": "Treating a simplified classroom interest rule as equivalent to how a real loan accrues.",
+        "dimensions": [
+          "assumption-identification",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total amount borrowed across the 2 years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "Under the stated simple-interest rule, how much interest accrues across the 2 study years?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the balance owed when repayment begins?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What earnings does Anouk give up across the 2 study years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total economic cost of the pathway, counting the balance owed and the earnings given up?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the annual salary advantage the programme is expected to produce?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How long does the pathway take to pay back at that advantage? Give one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the payback period under the weaker advantage? Give one decimal place."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much longer is the payback under the weaker assumption? Give one decimal place."
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "A reviewer asks which single input the recommendation is most exposed to. Which is the defensible answer?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Recommend for or against the programme for Anouk. State the payback period you are relying on, the assumptions the recommendation rests on, and the single piece of evidence that would most change your mind."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "The loan in this task uses a simplified simple-interest rule. Explain what a real amortising loan would do differently, and say whether that would make the payback period longer or shorter than the 4.4 years you computed."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total amount borrowed across the 2 years? Answer: $42,600.00. Verification: Two years of $21,300 tuition, all financed. t1-p2: Under the stated simple-interest rule, how much interest accrues across the 2 study years? Answer: $5,538.00. Verification: Simple interest charges the rate on the principal without compounding: $42,600.00 at 6.5% for each of 2 years. A real loan would usually compound and would not apply the full balance from day one. t1-p3: What is the balance owed when repayment begins? Answer: $48,138.00. Verification: Principal plus the accrued interest: $42,600.00 plus $5,538.00. t2-p1: What earnings does Anouk give up across the 2 study years? Answer: $60,400.00. Verification: Two years at $30,200 that never arrive, held flat here so the model has one fewer assumption in it. t2-p2: What is the total economic cost of the pathway, counting the balance owed and the earnings given up? Answer: $108,538.00. Verification: The $48,138.00 owed plus the $60,400.00 never earned. Both are consequences of the same two years. t2-p3: What is the annual salary advantage the programme is expected to produce? Answer: $24,400.00. Verification: $57,900 against the $33,500 alternative — the advantage is measured against what she would otherwise have earned, not against zero. t2-p4: How long does the pathway take to pay back at that advantage? Give one decimal place. Answer: 4.4. Verification: $108,538.00 of total cost against $24,400.00 a year. t3-p1: What is the payback period under the weaker advantage? Give one decimal place. Answer: 5.9. Verification: The same $108,538.00 cost against a smaller annual advantage. t3-p2: How much longer is the payback under the weaker assumption? Give one decimal place. Answer: 1.5. Verification: 5.9 years against 4.4 — a quarter cut from the advantage adds about a year and a half to the payback. t3-p3: A reviewer asks which single input the recommendation is most exposed to. Which is the defensible answer? Answer: The $24,400 salary advantage, because it is the only input the payback is divided by. Verification: Cutting the advantage by a quarter moved the payback by 1.5 years, while the whole of the accrued interest is $5,538.00, about 5% of the total cost; the divisor is where the model is most exposed."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t4-p1: Recommend for or against the programme for Anouk. State the payback period you are relying on, the assumptions the recommendation rests on, and the single piece of evidence that would most change your mind. States a clear recommendation and names the payback figure behind it, either the 4.4 years or the 5.9 years, rather than reporting both without choosing. Names at least two load-bearing assumptions from the model, such as the salary advantage holding, the wage during study staying at $30,200, or the simple-interest rule understating a real loan. Identifies a specific piece of evidence that would change the recommendation, such as the actual salaries of recent leavers from a comparable programme. Cites the total economic cost of $108,538.00 and at least one of the two payback periods. Points to the sensitivity result — that a drop to $18,300 adds 1.5 years — when describing the risk. The recommendation is decided rather than hedged, and the figure supporting it is named. The assumptions listed are ones that actually appear in the model, not general cautions. Either recommendation is acceptable; what is scored is whether the reasoning carries the cost, the advantage, and the sensitivity together. t4-p2: The loan in this task uses a simplified simple-interest rule. Explain what a real amortising loan would do differently, and say whether that would make the payback period longer or shorter than the 4.4 years you computed. Explains that a real loan generally compounds and that repayments are split between interest and principal, so the total paid exceeds the $48,138.00 this simplified rule produces. Concludes that the payback would be longer than 4.4 years, and ties that to the cost rising while the $24,400.00 advantage stays the same. Refers to the $5,538.00 of simple interest as the figure the simplification produced. The response names compounding or the interest-first application of payments, not merely that real loans are \"more complicated\". The direction of the effect on the payback period is stated and justified."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States a clear recommendation and names the payback figure behind it, either the 4.4 years or the 5.9 years, rather than reporting both without choosing. Names at least two load-bearing assumptions from the model, such as the salary advantage holding, the wage during study staying at $30,200, or the simple-interest rule understating a real loan. Identifies a specific piece of evidence that would change the recommendation, such as the actual salaries of recent leavers from a comparable programme. Explains that a real loan generally compounds and that repayments are split between interest and principal, so the total paid exceeds the $48,138.00 this simplified rule produces. Concludes that the payback would be longer than 4.4 years, and ties that to the cost rising while the $24,400.00 advantage stays the same."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 10,
+      "contractFixedItemCount": 10,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u01-l10.scoring.json",
+    "sourceScoringSha256": "8f9aa162a269f2c57e425bbd4bbeb7d980ab4e66d9e15d9ef6d5e1a55caf412c",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l06",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: integrating PF1-PF7 into one plan"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "integrating PF1-PF7 into one plan",
+  "objective": "Assemble a single fictional annual plan that carries income, taxes, spending, saving, credit, investing, and protection together, and check that it balances.",
+  "scenario": "A fictional worker earning $44,000 builds one simulated annual plan. The tax schedule is the simplified fictional one used in this unit and every figure is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional income and plan figures in these directions",
+    "a blank one-page plan sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Gross income is $44,000. Under the fictional federal schedule, taxable income is gross less a $9,000 standard deduction, then 10% on the first $10,400 of taxable income and 12% above it. Payroll tax is 7.65%, state income tax 4.25%, and city income tax 1%, all charged on gross with no deduction.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the federal income tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do payroll, state, and city taxes come to together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is take-home income for the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The plan allocates take-home pay as follows: essential spending $21,600, debt repayment $2,640, emergency reserve $2,400, long-horizon investing $3,600, and insurance premiums $1,860.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the five allocations total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of take-home pay is unallocated?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of gross income goes to tax? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the plan up as one page.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%."
+        }
+      ]
+    }
+  ],
+  "remediation": "If take-home comes out near $40,000, only the federal tax has been subtracted. Total the four taxes first — $3,992.00, $3,366.00, $1,870.00, and $440.00 — and take the whole $9,668.00 off gross before any allocation. Note that only the federal line gets the $9,000 deduction.",
+  "extension": "Rebuild the plan on $39,600 of gross income, keeping the reserve and insurance lines intact, and state which two lines absorbed the fall.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the federal income tax?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do payroll, state, and city taxes come to together?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is take-home income for the year?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the five allocations total?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of take-home pay is unallocated?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What percentage of gross income goes to tax? Round to one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u07-l06.package.json",
+    "sourcePackageSha256": "3bcaf6cc3d98854ebc384a387af44181a8ac17f2fc2ef772029f293c1bc63cae",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u07-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

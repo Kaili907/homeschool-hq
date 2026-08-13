@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l02",
+  "lessonId": "ma-g12-financial-literacy-u01-l02",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "saving-investing",
+    "insurance-risk"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,916.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% of $48,600. The money leaves the paycheque but stays the worker’s own; it moves into a retirement account rather than being spent."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$34,884.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$48,600 less the $2,916 retirement election, less the $1,800 premium, less the $9,000 standard deduction. All three come off before any rate is applied."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,978.08",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% of the first $10,400 is $1,040.00, and 12% of the remaining $24,484.00 is $2,938.08. Taxable income of $34,884.00 stays inside the second band, which runs to $44,000, so the third rate is not reached."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,717.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7.65% of the full $48,600. The schedule charges this levy on all pay, so neither the retirement election nor the premium nor the standard deduction reduces it."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "No — the levy is charged on the full $48,600 of pay",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The levy on the full $48,600 is $3,717.90; on $45,684 it would be $3,494.83. Because the schedule states the levy applies to all pay with no deduction, the larger figure is the one owed, and the election changes only the income tax."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$349.92",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of the $2,916.00 removed from taxable income. The saving is at the band the last dollars fell in, not at the average rate across the whole schedule."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gross * retireRate",
+        "substituted": "48600 * 0.06",
+        "result": "$2,916.00",
+        "why": "6% of $48,600. The money leaves the paycheque but stays the worker’s own; it moves into a retirement account rather than being spent."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "gross2 - #t1-p1 - healthPremium - deduction",
+        "substituted": "48600 - #t1-p1 - 1800 - 9000",
+        "result": "$34,884.00",
+        "why": "$48,600 less the $2,916 retirement election, less the $1,800 premium, less the $9,000 standard deduction. All three come off before any rate is applied."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "band1 * lowRate + (#t1-p2 - band1) * midRate",
+        "substituted": "10400 * 0.1 + (#t1-p2 - 10400) * 0.12",
+        "result": "$3,978.08",
+        "why": "10% of the first $10,400 is $1,040.00, and 12% of the remaining $24,484.00 is $2,938.08. Taxable income of $34,884.00 stays inside the second band, which runs to $44,000, so the third rate is not reached."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "gross3 * levyRate",
+        "substituted": "48600 * 0.0765",
+        "result": "$3,717.90",
+        "why": "7.65% of the full $48,600. The schedule charges this levy on all pay, so neither the retirement election nor the premium nor the standard deduction reduces it."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "grossFull * levyRate2 > (grossFull - #t1-p1) * levyRate2",
+        "substituted": "48600 * 0.0765 > (48600 - #t1-p1) * 0.0765",
+        "result": "No — the levy is charged on the full $48,600 of pay",
+        "why": "The levy on the full $48,600 is $3,717.90; on $45,684 it would be $3,494.83. Because the schedule states the levy applies to all pay with no deduction, the larger figure is the one owed, and the election changes only the income tax."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1 * midRate2",
+        "substituted": "#t1-p1 * 0.12",
+        "result": "$349.92",
+        "why": "12% of the $2,916.00 removed from taxable income. The saving is at the band the last dollars fell in, not at the average rate across the whole schedule."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A fictional colleague says the 6% election \"costs nothing because the tax saving covers it\". Using the two figures you computed, say what is right and what is wrong in that claim, and explain what the $2,916.00 actually does to this year’s spendable pay.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what is wrong: the election removes $2,916.00 from this year’s spendable pay and returns only $349.92 in income tax saved, so the net reduction in cash available this year is $2,566.08 rather than nothing.",
+          "States what is right: the $2,916.00 is not lost — it moves into the worker’s own retirement account, so the household’s total assets do not fall by the amount the paycheque falls.",
+          "Notes that the payroll levy is unchanged at $3,717.90 either way, so the election reduces only one of the two charges."
+        ],
+        "evidenceRequirements": [
+          "Uses both the $349.92 income tax saved and the $2,916.00 contribution, and states the difference between them."
+        ],
+        "lookFors": [
+          "The response distinguishes a reduction in spendable cash from a reduction in wealth.",
+          "The response does not claim the election is a bad idea or a good one; it is priced, not judged."
+        ],
+        "commonMisconception": "Treating a pre-tax election as free because it lowers a tax bill, without comparing the tax saved to the cash given up.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "error-diagnosis",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the annual retirement contribution the election creates?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is taxable income under the fictional schedule after both elections and the standard deduction?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the fictional federal income tax on that taxable income?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the payroll levy for the year at 7.65%?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Does electing the 6% retirement contribution reduce the payroll levy this fictional worker owes?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The retirement election removes $2,916.00 from taxable income, all of it inside the 12% band. What income tax does the election save this year?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "A fictional colleague says the 6% election \"costs nothing because the tax saving covers it\". Using the two figures you computed, say what is right and what is wrong in that claim, and explain what the $2,916.00 actually does to this year’s spendable pay."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the annual retirement contribution the election creates? Answer: $2,916.00. Verification: 6% of $48,600. The money leaves the paycheque but stays the worker’s own; it moves into a retirement account rather than being spent. t1-p2: What is taxable income under the fictional schedule after both elections and the standard deduction? Answer: $34,884.00. Verification: $48,600 less the $2,916 retirement election, less the $1,800 premium, less the $9,000 standard deduction. All three come off before any rate is applied. t1-p3: What is the fictional federal income tax on that taxable income? Answer: $3,978.08. Verification: 10% of the first $10,400 is $1,040.00, and 12% of the remaining $24,484.00 is $2,938.08. Taxable income of $34,884.00 stays inside the second band, which runs to $44,000, so the third rate is not reached. t2-p1: What is the payroll levy for the year at 7.65%? Answer: $3,717.90. Verification: 7.65% of the full $48,600. The schedule charges this levy on all pay, so neither the retirement election nor the premium nor the standard deduction reduces it. t2-p2: Does electing the 6% retirement contribution reduce the payroll levy this fictional worker owes? Answer: No — the levy is charged on the full $48,600 of pay. Verification: The levy on the full $48,600 is $3,717.90; on $45,684 it would be $3,494.83. Because the schedule states the levy applies to all pay with no deduction, the larger figure is the one owed, and the election changes only the income tax. t2-p3: The retirement election removes $2,916.00 from taxable income, all of it inside the 12% band. What income tax does the election save this year? Answer: $349.92. Verification: 12% of the $2,916.00 removed from taxable income. The saving is at the band the last dollars fell in, not at the average rate across the whole schedule."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: A fictional colleague says the 6% election \"costs nothing because the tax saving covers it\". Using the two figures you computed, say what is right and what is wrong in that claim, and explain what the $2,916.00 actually does to this year’s spendable pay. States what is wrong: the election removes $2,916.00 from this year’s spendable pay and returns only $349.92 in income tax saved, so the net reduction in cash available this year is $2,566.08 rather than nothing. States what is right: the $2,916.00 is not lost — it moves into the worker’s own retirement account, so the household’s total assets do not fall by the amount the paycheque falls. Notes that the payroll levy is unchanged at $3,717.90 either way, so the election reduces only one of the two charges. Uses both the $349.92 income tax saved and the $2,916.00 contribution, and states the difference between them. The response distinguishes a reduction in spendable cash from a reduction in wealth. The response does not claim the election is a bad idea or a good one; it is priced, not judged."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States what is wrong: the election removes $2,916.00 from this year’s spendable pay and returns only $349.92 in income tax saved, so the net reduction in cash available this year is $2,566.08 rather than nothing. States what is right: the $2,916.00 is not lost — it moves into the worker’s own retirement account, so the household’s total assets do not fall by the amount the paycheque falls. Notes that the payroll levy is unchanged at $3,717.90 either way, so the election reduces only one of the two charges."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u01-l02.scoring.json",
+    "sourceScoringSha256": "b4599d7ba674d6e1fe2263c0f28362c005ed8fca40391fd263b81c137beae1d5",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

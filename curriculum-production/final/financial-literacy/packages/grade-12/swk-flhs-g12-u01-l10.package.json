@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l10",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: benefit enrolment decisions and deadlines"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "benefit enrolment decisions and deadlines",
+  "objective": "Build and defend a complete set of first-year benefit elections for a fictional hire, pricing the retirement contribution, both health plans, and the deadline that governs all of them.",
+  "scenario": "The fictional hire, the employer, the two simulated plans, and the fictional year of covered charges below are all invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional enrolment packet in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional hire is paid $58,800 a year over 24 periods. The employer contributes 50% of whatever the worker contributes to retirement, up to the first 6% of salary. Health Plan A costs $118 a period, with a deductible of $1,200, then the member pays 20%. Health Plan B costs $58 a period, with a deductible of $3,000, then the member pays 30%. Elections must be made before the enrolment window closes; a hire who misses it gets no health plan and no retirement contribution until the next window a year later.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is gross pay per period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What must the worker contribute over the year to earn the largest possible employer contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the largest employer retirement contribution available for the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price both health plans against a fictional year with $4,200 of covered charges.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of Plan A premiums cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of Plan B premiums cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under Plan A, what does the member pay toward $4,200 of covered charges?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Under Plan B, what does the member pay toward the same charges?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Put the two plans on the same basis and settle the arithmetic before writing anything.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the full cost of a Plan A year at this level of use?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the full cost of a Plan B year at this level of use?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-choice",
+          "text": "At $4,200 of covered charges, which plan costs less across the whole year?",
+          "choices": [
+            "Plan A",
+            "Plan B"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write the election set. Give the figures behind each choice.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the complete set of first-year elections you would defend for this fictional hire: a retirement contribution rate, a health plan, and what must happen before the enrolment window closes. Justify each with a figure, and name the one election you would change first if the hire told you their expected medical use was much lower."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the plans are ranked on their premiums, Plan B wins by $1,440.00 and the comparison stops too early. Add what the member pays toward the $4,200 of charges under each plan — $1,800.00 under A and $3,360.00 under B — before comparing. Do the same with the retirement election: the $1,764.00 is available only if $3,528.00 is actually contributed.",
+  "extension": "Rebuild the whole election set for a fictional hire on the same $58,800 salary who is also repaying $340 a month on a loan, and say which of the three elections that constraint changes first.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is gross pay per period?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What must the worker contribute over the year to earn the largest possible employer contribution?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the largest employer retirement contribution available for the year?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does a year of Plan A premiums cost?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does a year of Plan B premiums cost?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Under Plan A, what does the member pay toward $4,200 of covered charges?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Under Plan B, what does the member pay toward the same charges?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the full cost of a Plan A year at this level of use?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the full cost of a Plan B year at this level of use?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "At $4,200 of covered charges, which plan costs less across the whole year?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Write the complete set of first-year elections you would defend for this fictional hire: a retirement contribution rate, a health plan, and what must happen before the enrolment window closes. Justify each with a figure, and name the one election you would change first if the hire told you their expected medical use was much lower."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u01-l10.package.json",
+    "sourcePackageSha256": "b13596e5d1e80cf68819b3cf9467d7b1114a30b6ee1c5cff53366ef0a5e4c024",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u01-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

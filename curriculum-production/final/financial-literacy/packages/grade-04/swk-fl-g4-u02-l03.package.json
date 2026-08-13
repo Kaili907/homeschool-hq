@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u02-l03",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Earning, Work, and Value",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: simulated pay and set-asides",
+    "focus": "simulated pay and set-asides"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 2 — earning, work, and enterprise"
+  ],
+  "objective": "Learners take stated percentage set-asides out of invented simulated pay and find the amount actually available to spend.",
+  "scenario": "Hugo is a made-up fourth grader running a pretend pay-day routine. His invented simulated pay is $60.00. His routine sets aside 10% for saving and 5% for giving before anything else is planned. No real paycheck is involved.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Take Hugo's first set-aside: 10% of the invented $60.00 pay for saving.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Hugo set aside for saving?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now take the second set-aside, 5% of the same $60.00 for giving, and add both set-asides together.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Hugo set aside for giving?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do both set-asides come to together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Hugo now sees what is really available to plan with, and then imagines a pay-day of $80.00 with the same two percentages.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $60.00 is left to plan with?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "On an $80.00 pay-day, how much would the two set-asides come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The set-asides grew when the pay grew.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Hugo sets aside a percentage rather than a fixed dollar amount. What does that do when his pay changes?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats 10% as ten dollars, build Hugo's $60.00 as six ten-dollar strips and take one strip as the tenth, so the percentage is seen as a share of the whole rather than a fixed figure.",
+  "extension": "Ask the learner what Hugo's saving percentage would need to be for the saving set-aside alone to reach $9.00 on a $60.00 pay-day.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u02-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u02-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does Hugo set aside for saving?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does Hugo set aside for giving?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do both set-asides come to together?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much of the $60.00 is left to plan with?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "On an $80.00 pay-day, how much would the two set-asides come to?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Hugo sets aside a percentage rather than a fixed dollar amount. What does that do when his pay changes?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u02-l03.package.json",
+    "sourcePackageSha256": "4907dffc4f08b04ee9d5393aab07e39c62bcaaa2dd6c973ad6dea4a009c8a8d5",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u02-l03",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

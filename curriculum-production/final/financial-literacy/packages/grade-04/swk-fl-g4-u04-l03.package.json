@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u04-l03",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Saving, Goals, and Keeping Money Safe",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: what banks and credit unions do",
+    "focus": "what banks and credit unions do"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 4 — saving, goals, and money privacy"
+  ],
+  "objective": "Learners track an invented account through deposits, a withdrawal, and a monthly fee, and compare a fee-charging institution with a fee-free one.",
+  "scenario": "Noor is a made-up fourth grader following a pretend account at an invented bank. Two simulated deposits of $25.00 and $18.50 go in, a $12.25 withdrawal comes out, and the invented bank charges a $2.00 monthly fee. A made-up credit union charges no fee at all. This is a simulation, not a real account.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "This is a simulated account; never write a real account number or balance on this sheet."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Add Noor's two invented deposits.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Noor's two deposits come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Take the $12.25 withdrawal out of the deposits, then apply the invented bank's $2.00 monthly fee to what is left.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is in the simulated account after the withdrawal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is in the simulated account after the $2.00 fee?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Run the same deposits and withdrawal through the invented fee-free credit union, then look at six months of the bank's fee.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the credit-union balance be after the same activity?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would six months of the invented bank's fee come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A two-dollar fee looked small on one statement.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What should Noor ask about any place that holds money, beyond whether it is safe?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner applies the fee before the withdrawal, rewrite Noor's activity as a dated list and process one line at a time, so order of operations follows the order of events.",
+  "extension": "Ask the learner how many months of the invented fee it would take to consume the smaller of Noor's two deposits, and to show the reasoning.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u04-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u04-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do Noor's two deposits come to?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is in the simulated account after the withdrawal?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is in the simulated account after the $2.00 fee?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would the credit-union balance be after the same activity?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would six months of the invented bank's fee come to?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "What should Noor ask about any place that holds money, beyond whether it is safe?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u04-l03.package.json",
+    "sourcePackageSha256": "f71e42f7dc3de3f73c8efa8087584cf09c74842559f5631eef452f8f71e77456",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u04-l03",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l09",
+  "lessonId": "ma-g11-financial-literacy-u04-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$156.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "11.2% a year on $16,800, charged monthly."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$106.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same balance at the lower rate — a saving of $50.40 in the first month alone, which is larger than the monthly payment difference."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$28.54",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$485.35 against $456.81. The payment falls by less than the first month’s interest saving because the term is unchanged, so more of each payment now goes to principal."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "21.9",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$625 divided by the $28.54 monthly saving — the break-even point, after which the refinance is ahead."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$20,384.70",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "42 remaining payments of $485.35."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$19,186.02",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "42 payments of $456.81 over the same term."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$573.68",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,198.68 of gross saving less the $625 of fees. The fees consume more than half the benefit."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "No, the payment saving has not covered the fees by month 18",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Break-even on the payment saving falls at 21.9 months, so by month 18 the $28.54 a month has returned about $514 against $625 of fees. This measures the payment saving alone; the refinanced loan also repays principal faster, which the next task takes up."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balance * currentRate / 12, 2)",
+        "substituted": "round(16800 * 0.112 / 12, 2)",
+        "result": "$156.80",
+        "why": "11.2% a year on $16,800, charged monthly."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(balance2 * newRate / 12, 2)",
+        "substituted": "round(16800 * 0.076 / 12, 2)",
+        "result": "$106.40",
+        "why": "The same balance at the lower rate — a saving of $50.40 in the first month alone, which is larger than the monthly payment difference."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(currentPayment - newPayment, 2)",
+        "substituted": "round(485.35 - 456.81, 2)",
+        "result": "$28.54",
+        "why": "$485.35 against $456.81. The payment falls by less than the first month’s interest saving because the term is unchanged, so more of each payment now goes to principal."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(fees / #t1-p3, 1)",
+        "substituted": "round(625 / #t1-p3, 1)",
+        "result": "21.9",
+        "why": "$625 divided by the $28.54 monthly saving — the break-even point, after which the refinance is ahead."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(currentPayment2 * 42, 2)",
+        "substituted": "round(485.35 * 42, 2)",
+        "result": "$20,384.70",
+        "why": "42 remaining payments of $485.35."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(newPayment2 * 42, 2)",
+        "substituted": "round(456.81 * 42, 2)",
+        "result": "$19,186.02",
+        "why": "42 payments of $456.81 over the same term."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 - #t2-p3 - fees2",
+        "substituted": "#t2-p2 - #t2-p3 - 625",
+        "result": "$573.68",
+        "why": "$1,198.68 of gross saving less the $625 of fees. The fees consume more than half the benefit."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p1 <= plannedMonths",
+        "substituted": "#t2-p1 <= 18",
+        "result": "No, the payment saving has not covered the fees by month 18",
+        "why": "Break-even on the payment saving falls at 21.9 months, so by month 18 the $28.54 a month has returned about $514 against $625 of fees. This measures the payment saving alone; the refinanced loan also repays principal faster, which the next task takes up."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The refinance cuts the rate from 11.2% to 7.6% and can still be the wrong choice. Explain the mechanism, state the condition that decides it, and say what Cornelius should establish about his own plans before accepting.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the benefit accrues monthly at $28.54 while the $625 cost is paid up front, so the offer only pays once enough months have passed.",
+          "States the deciding condition as the holding period against the 21.9-month break-even, not the rate difference, and notes that this break-even counts only the payment saving.",
+          "Identifies what Cornelius must establish: how long he actually expects to keep the loan, including any plan to repay early or to sell the asset behind it."
+        ],
+        "evidenceRequirements": [
+          "Cites the 21.9-month break-even and the $573.68 net saving over the full term."
+        ],
+        "lookFors": [
+          "The response frames the decision as a break-even comparison rather than a rate comparison.",
+          "The response notes that the full-term saving of $573.68 is modest relative to the $625 of fees.",
+          "A response observing that the payment-saving break-even understates the benefit — because the refinanced loan also repays principal faster, leaving a smaller balance at payoff — is reasoning beyond the item and should be credited."
+        ],
+        "commonMisconception": "Treating a lower interest rate as sufficient reason to refinance.",
+        "dimensions": [
+          "tradeoff-defense",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The first month’s interest falls by $50.40 but the payment falls by only $28.54. Explain where the other $21.86 goes, and why that is not a loss to Cornelius.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that because the term is unchanged, the payment is not reduced by the whole interest saving; the remainder goes to repaying principal faster.",
+          "Argues this is not a loss because the money reduces what he owes rather than leaving his hands, so the loan is repaid with less interest overall."
+        ],
+        "evidenceRequirements": [
+          "Uses the $50.40 first-month interest saving and the $28.54 payment reduction in the explanation."
+        ],
+        "lookFors": [
+          "The response tracks the difference into principal rather than treating it as unexplained.",
+          "The response connects faster principal repayment to lower total interest."
+        ],
+        "commonMisconception": "Expecting a fall in the interest rate to show up entirely as a fall in the payment.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does the current loan charge in its first month, at 11.2% a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much interest would the refinanced loan charge in its first month, at 7.6% a year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much lower is the monthly payment under the refinance?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How many months of the monthly saving does it take to recover the $625 in fees? Give one decimal place."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of payments under the current loan?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of payments under the refinance?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the net saving from refinancing across the full 42 months, after the $625 in fees?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "Cornelius expects to repay the loan early, in about 18 months. Do the $625 of fees get recovered out of the monthly payment saving by then?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The refinance cuts the rate from 11.2% to 7.6% and can still be the wrong choice. Explain the mechanism, state the condition that decides it, and say what Cornelius should establish about his own plans before accepting."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "The first month’s interest falls by $50.40 but the payment falls by only $28.54. Explain where the other $21.86 goes, and why that is not a loss to Cornelius."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much interest does the current loan charge in its first month, at 11.2% a year? Answer: $156.80. Verification: 11.2% a year on $16,800, charged monthly. t1-p2: How much interest would the refinanced loan charge in its first month, at 7.6% a year? Answer: $106.40. Verification: The same balance at the lower rate — a saving of $50.40 in the first month alone, which is larger than the monthly payment difference. t1-p3: How much lower is the monthly payment under the refinance? Answer: $28.54. Verification: $485.35 against $456.81. The payment falls by less than the first month’s interest saving because the term is unchanged, so more of each payment now goes to principal. t2-p1: How many months of the monthly saving does it take to recover the $625 in fees? Give one decimal place. Answer: 21.9. Verification: $625 divided by the $28.54 monthly saving — the break-even point, after which the refinance is ahead. t2-p2: What is the total of payments under the current loan? Answer: $20,384.70. Verification: 42 remaining payments of $485.35. t2-p3: What is the total of payments under the refinance? Answer: $19,186.02. Verification: 42 payments of $456.81 over the same term. t2-p4: What is the net saving from refinancing across the full 42 months, after the $625 in fees? Answer: $573.68. Verification: $1,198.68 of gross saving less the $625 of fees. The fees consume more than half the benefit. t2-p5: Cornelius expects to repay the loan early, in about 18 months. Do the $625 of fees get recovered out of the monthly payment saving by then? Answer: No, the payment saving has not covered the fees by month 18. Verification: Break-even on the payment saving falls at 21.9 months, so by month 18 the $28.54 a month has returned about $514 against $625 of fees. This measures the payment saving alone; the refinanced loan also repays principal faster, which the next task takes up."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The refinance cuts the rate from 11.2% to 7.6% and can still be the wrong choice. Explain the mechanism, state the condition that decides it, and say what Cornelius should establish about his own plans before accepting. Explains that the benefit accrues monthly at $28.54 while the $625 cost is paid up front, so the offer only pays once enough months have passed. States the deciding condition as the holding period against the 21.9-month break-even, not the rate difference, and notes that this break-even counts only the payment saving. Identifies what Cornelius must establish: how long he actually expects to keep the loan, including any plan to repay early or to sell the asset behind it. Cites the 21.9-month break-even and the $573.68 net saving over the full term. The response frames the decision as a break-even comparison rather than a rate comparison. The response notes that the full-term saving of $573.68 is modest relative to the $625 of fees. A response observing that the payment-saving break-even understates the benefit — because the refinanced loan also repays principal faster, leaving a smaller balance at payoff — is reasoning beyond the item and should be credited. t3-p2: The first month’s interest falls by $50.40 but the payment falls by only $28.54. Explain where the other $21.86 goes, and why that is not a loss to Cornelius. Explains that because the term is unchanged, the payment is not reduced by the whole interest saving; the remainder goes to repaying principal faster. Argues this is not a loss because the money reduces what he owes rather than leaving his hands, so the loan is repaid with less interest overall. Uses the $50.40 first-month interest saving and the $28.54 payment reduction in the explanation. The response tracks the difference into principal rather than treating it as unexplained. The response connects faster principal repayment to lower total interest."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the benefit accrues monthly at $28.54 while the $625 cost is paid up front, so the offer only pays once enough months have passed. States the deciding condition as the holding period against the 21.9-month break-even, not the rate difference, and notes that this break-even counts only the payment saving. Identifies what Cornelius must establish: how long he actually expects to keep the loan, including any plan to repay early or to sell the asset behind it. Explains that because the term is unchanged, the payment is not reduced by the whole interest saving; the remainder goes to repaying principal faster. Argues this is not a loss because the money reduces what he owes rather than leaving his hands, so the loan is repaid with less interest overall."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u04-l09.scoring.json",
+    "sourceScoringSha256": "5f3b4bef2290f367bba2e234708c47c5daec16564144d4e2feb97c66e93f66e5",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

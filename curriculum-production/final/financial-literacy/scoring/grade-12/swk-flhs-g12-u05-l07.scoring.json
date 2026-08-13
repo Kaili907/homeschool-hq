@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l07",
+  "lessonId": "ma-g12-financial-literacy-u05-l07",
+  "integratedDomains": [
+    "saving-investing",
+    "income",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of the $5,000 monthly gross. The rate is applied per month, which is what causes the annual cap to be reached before the year ends."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,800 divided by $600.00 a month. From month 9 onward the worker may contribute nothing further."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$125.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "50% of 5% of $5,000. Because the plan calculates this monthly with nothing carried forward, a month with no worker contribution produces no employer contribution."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$125.00 in each of the 8 months in which the worker contributed at least 5% of pay."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$125.00 in each of the 4 months with no worker contribution. Nothing was carried forward, so this is not recoverable later in the year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "8.00%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,800 across 12 months is $400.00 a month, which is 8.00% of $5,000. This is above the 5% needed for the full monthly employer contribution, so the cap and the employer terms are compatible at this rate."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$125.00 in each of 12 months. The worker contributes the same $4,800 either way and receives $500.00 more."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(monthlyGross * rate, 2)",
+        "substituted": "round(5000 * 0.12, 2)",
+        "result": "$600.00",
+        "why": "12% of the $5,000 monthly gross. The rate is applied per month, which is what causes the annual cap to be reached before the year ends."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "annualCap / #t1-p1",
+        "substituted": "4800 / #t1-p1",
+        "result": "8",
+        "why": "$4,800 divided by $600.00 a month. From month 9 onward the worker may contribute nothing further."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(monthlyGross2 * matchTier * matchShare, 2)",
+        "substituted": "round(5000 * 0.05 * 0.5, 2)",
+        "result": "$125.00",
+        "why": "50% of 5% of $5,000. Because the plan calculates this monthly with nothing carried forward, a month with no worker contribution produces no employer contribution."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 * 8",
+        "substituted": "#t1-p3 * 8",
+        "result": "$1,000.00",
+        "why": "$125.00 in each of the 8 months in which the worker contributed at least 5% of pay."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 * 4",
+        "substituted": "#t1-p3 * 4",
+        "result": "$500.00",
+        "why": "$125.00 in each of the 4 months with no worker contribution. Nothing was carried forward, so this is not recoverable later in the year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(annualCap2 / 12 / monthlyGross3 * 100, 2)",
+        "substituted": "round(4800 / 12 / 5000 * 100, 2)",
+        "result": "8.00%",
+        "why": "$4,800 across 12 months is $400.00 a month, which is 8.00% of $5,000. This is above the 5% needed for the full monthly employer contribution, so the cap and the employer terms are compatible at this rate."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 * 12",
+        "substituted": "#t1-p3 * 12",
+        "result": "$1,500.00",
+        "why": "$125.00 in each of 12 months. The worker contributes the same $4,800 either way and receives $500.00 more."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The worker saved the same $4,800 and received $500.00 less. Name precisely what caused that, explain why a higher contribution rate produced a worse result, and state which plan rule the worker would have to check to know this could happen.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names the cause precisely: the employer contribution is calculated per month with nothing carried forward, so reaching the annual cap in month 8 left 4 months in which no employer contribution could be earned.",
+          "Explains the paradox: a higher rate did not increase the amount contributed, because the cap fixes that at $4,800, but it did change the timing, and timing is what the monthly calculation rewards.",
+          "Names the rule to check: whether the plan calculates the employer contribution per pay period or across the year — a plan with a year-end true-up would not produce this loss at all."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,000.00 actually earned and the $1,500.00 available, and refers to the 8 contributing months."
+        ],
+        "lookFors": [
+          "The response identifies timing rather than amount as the error.",
+          "The response notes that the worker did nothing wrong in saving more, only in scheduling it."
+        ],
+        "commonMisconception": "Assuming that contributing more, or contributing earlier, can only improve the outcome, when a per-period employer calculation rewards contributing in every period instead.",
+        "dimensions": [
+          "error-diagnosis",
+          "criteria-application",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the worker contribute each month at 12%?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "After how many months is the $4,800 annual cap reached?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the largest employer contribution available in a single month?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What employer contribution was earned across the 8 contributing months?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What employer contribution was lost across the remaining months of the year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What contribution rate would have spread the $4,800 evenly across the whole year, to two decimal places?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What employer contribution would that rate have produced across the year?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The worker saved the same $4,800 and received $500.00 less. Name precisely what caused that, explain why a higher contribution rate produced a worse result, and state which plan rule the worker would have to check to know this could happen."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the worker contribute each month at 12%? Answer: $600.00. Verification: 12% of the $5,000 monthly gross. The rate is applied per month, which is what causes the annual cap to be reached before the year ends. t1-p2: After how many months is the $4,800 annual cap reached? Answer: 8. Verification: $4,800 divided by $600.00 a month. From month 9 onward the worker may contribute nothing further. t1-p3: What is the largest employer contribution available in a single month? Answer: $125.00. Verification: 50% of 5% of $5,000. Because the plan calculates this monthly with nothing carried forward, a month with no worker contribution produces no employer contribution. t2-p1: What employer contribution was earned across the 8 contributing months? Answer: $1,000.00. Verification: $125.00 in each of the 8 months in which the worker contributed at least 5% of pay. t2-p2: What employer contribution was lost across the remaining months of the year? Answer: $500.00. Verification: $125.00 in each of the 4 months with no worker contribution. Nothing was carried forward, so this is not recoverable later in the year. t2-p3: What contribution rate would have spread the $4,800 evenly across the whole year, to two decimal places? Answer: 8.00%. Verification: $4,800 across 12 months is $400.00 a month, which is 8.00% of $5,000. This is above the 5% needed for the full monthly employer contribution, so the cap and the employer terms are compatible at this rate. t2-p4: What employer contribution would that rate have produced across the year? Answer: $1,500.00. Verification: $125.00 in each of 12 months. The worker contributes the same $4,800 either way and receives $500.00 more."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: The worker saved the same $4,800 and received $500.00 less. Name precisely what caused that, explain why a higher contribution rate produced a worse result, and state which plan rule the worker would have to check to know this could happen. Names the cause precisely: the employer contribution is calculated per month with nothing carried forward, so reaching the annual cap in month 8 left 4 months in which no employer contribution could be earned. Explains the paradox: a higher rate did not increase the amount contributed, because the cap fixes that at $4,800, but it did change the timing, and timing is what the monthly calculation rewards. Names the rule to check: whether the plan calculates the employer contribution per pay period or across the year — a plan with a year-end true-up would not produce this loss at all. Uses the $1,000.00 actually earned and the $1,500.00 available, and refers to the 8 contributing months. The response identifies timing rather than amount as the error. The response notes that the worker did nothing wrong in saving more, only in scheduling it."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names the cause precisely: the employer contribution is calculated per month with nothing carried forward, so reaching the annual cap in month 8 left 4 months in which no employer contribution could be earned. Explains the paradox: a higher rate did not increase the amount contributed, because the cap fixes that at $4,800, but it did change the timing, and timing is what the monthly calculation rewards. Names the rule to check: whether the plan calculates the employer contribution per pay period or across the year — a plan with a year-end true-up would not produce this loss at all."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u05-l07.scoring.json",
+    "sourceScoringSha256": "b0f40ff2e78a6c0e1cfc825776ec5bb227d26a5f4923b8f4918cd90e0146a50e",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

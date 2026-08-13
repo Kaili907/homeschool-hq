@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l01",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: sequencing competing multi-year goals"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "sequencing competing multi-year goals",
+  "objective": "Sequence three competing fictional savings goals against one monthly capacity, find when each is funded, and show that a plan can have enough total capacity and still miss a deadline.",
+  "scenario": "Nkechi Halvorsen-Baptiste is a fictional saver in a simulated household. The three goals, their deadlines, and the monthly capacity below are invented figures for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional goal list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Nkechi can save $415 a month and nothing more. The emergency fund needs $6,400 and has no deadline. The certification course needs $3,600 and must be paid by month 24. The vehicle replacement needs $9,800 and must be paid by month 48. Only one goal is funded at a time, in the order given. Give each answer to one decimal place.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months does the $6,400 emergency fund take at $415 a month?",
+          "unit": "months"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many months does the $3,600 certification course take on its own?",
+          "unit": "months"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many months does the $9,800 vehicle replacement take on its own?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now place the goals in the sequence and check them against their deadlines.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "In which month is the certification course fully funded, given that the emergency fund is completed first?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "In which month is the vehicle replacement fully funded?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the three goals need in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much can Nkechi save across the whole 48 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the total capacity exceed what the goals need?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Check the certification deadline specifically.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Does the certification course get funded by its month-24 deadline under this sequence?",
+          "choices": [
+            "Yes, with time to spare",
+            "No, it is late",
+            "It lands exactly on the deadline"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how many months is the certification deadline missed?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Nkechi has $120.00 more capacity than her goals require and still misses a deadline. Explain how both can be true, and propose one change to the plan that fixes the miss without increasing what she saves."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The emergency fund is the goal with no deadline, and it is funded first. Give the strongest argument for keeping it first, and say what the certification miss costs under that choice."
+        }
+      ]
+    }
+  ],
+  "remediation": "If every goal appears to meet its deadline, the goals are being funded in parallel rather than in sequence. The scenario funds one at a time out of a single $415, so the certification cannot start until month 15.4. Draw a 48-month line and mark three consecutive blocks of 15.4, 8.7, and 23.6 months on it before checking any deadline.",
+  "extension": "Work out the smallest monthly capacity that would meet all three deadlines in the given order, and say how much more than $415 that is.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many months does the $6,400 emergency fund take at $415 a month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many months does the $3,600 certification course take on its own?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How many months does the $9,800 vehicle replacement take on its own?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "In which month is the certification course fully funded, given that the emergency fund is completed first?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "In which month is the vehicle replacement fully funded?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What do the three goals need in total?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much can Nkechi save across the whole 48 months?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the total capacity exceed what the goals need?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "Does the certification course get funded by its month-24 deadline under this sequence?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "By how many months is the certification deadline missed?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Nkechi has $120.00 more capacity than her goals require and still misses a deadline. Explain how both can be true, and propose one change to the plan that fixes the miss without increasing what she saves."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "The emergency fund is the goal with no deadline, and it is funded first. Give the strongest argument for keeping it first, and say what the certification miss costs under that choice."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u03-l01.package.json",
+    "sourcePackageSha256": "eaa51b7d4bf55b3fffe5d6b8cac636f026dccc63fcd4083d94d1a10424ac6074",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u03-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

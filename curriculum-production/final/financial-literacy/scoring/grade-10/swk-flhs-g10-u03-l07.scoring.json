@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l07",
+  "lessonId": "ma-g10-financial-literacy-u03-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$54.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3.6% of $1,500. The student’s $54 figure is right as an annual amount and wrong as a monthly one — the word \"annual\" in the rate name is the whole disagreement."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$594.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$648 claimed against $54.00 actually paid, an overstatement of twelve times the true figure less the true figure itself."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$102.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3 overdrafts at $34 each. \"Protection\" describes the bank covering the payment, not the charge being waived."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$30.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6 a day for 5 days beyond the first. This charge accrues from time, not from any further transaction."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$132.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$102.00 of per-item charges plus $30.00 of daily charges — against a year of interest on this account worth $54.00."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$120.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The waiver is written on the daily balance, not the monthly average, so a single day at $25 forfeits it. Twelve failed months at $10 each."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "bal * apy",
+        "substituted": "1500 * 0.036",
+        "result": "$54.00",
+        "why": "3.6% of $1,500. The student’s $54 figure is right as an annual amount and wrong as a monthly one — the word \"annual\" in the rate name is the whole disagreement."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "claimed - #t1-p1",
+        "substituted": "648 - #t1-p1",
+        "result": "$594.00",
+        "why": "$648 claimed against $54.00 actually paid, an overstatement of twelve times the true figure less the true figure itself."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "odFee * odCount",
+        "substituted": "34 * 3",
+        "result": "$102.00",
+        "why": "3 overdrafts at $34 each. \"Protection\" describes the bank covering the payment, not the charge being waived."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "dailyFee * days",
+        "substituted": "6 * 5",
+        "result": "$30.00",
+        "why": "$6 a day for 5 days beyond the first. This charge accrues from time, not from any further transaction."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 + #t2-p2",
+        "substituted": "#t2-p1 + #t2-p2",
+        "result": "$132.00",
+        "why": "$102.00 of per-item charges plus $30.00 of daily charges — against a year of interest on this account worth $54.00."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "monthlyFee2 * 12",
+        "substituted": "10 * 12",
+        "result": "$120.00",
+        "why": "The waiver is written on the daily balance, not the monthly average, so a single day at $25 forfeits it. Twelve failed months at $10 each."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Name the misconception behind each of the student’s three errors, and say which of the three would cost a real account holder the most over a year.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies the three misconceptions: reading an annual rate as a monthly one, reading \"overdraft protection\" as meaning free, and reading a daily-minimum waiver as an average-balance waiver.",
+          "Ranks the overdraft charges highest at $132.00 from a single month, against $120.00 of monthly fees across a whole year and $54.00 of interest earned in a year.",
+          "Notes that the rate error costs nothing directly but produces a wrong expectation, which is how it does its damage."
+        ],
+        "evidenceRequirements": [
+          "Uses the $132.00 overdraft total and the $120.00 annual fee total, and refers to the $54.00 of annual interest."
+        ],
+        "lookFors": [
+          "The response locates each error in a specific misreading of a term rather than calling the work careless.",
+          "A response that ranks the $120.00 annual fee above the $132.00 single month is defensible if it argues that the fee recurs every year while the overdrafts may not."
+        ],
+        "commonMisconception": "Reading the words in an account disclosure as everyday English rather than as terms with a defined trigger.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does a 3.6% annual percentage yield actually pay on $1,500 over a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how much does the student’s $648 claim overstate a year of interest?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the three overdrafts cost in per-item charges?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do the extended overdraft days add?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What did the overdrafts cost altogether?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "The balance fell to $25 on one day, so the waiver condition failed. What does the monthly fee cost over a year if it fails every month?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Name the misconception behind each of the student’s three errors, and say which of the three would cost a real account holder the most over a year."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does a 3.6% annual percentage yield actually pay on $1,500 over a year? Answer: $54.00. Verification: 3.6% of $1,500. The student’s $54 figure is right as an annual amount and wrong as a monthly one — the word \"annual\" in the rate name is the whole disagreement. t1-p2: By how much does the student’s $648 claim overstate a year of interest? Answer: $594.00. Verification: $648 claimed against $54.00 actually paid, an overstatement of twelve times the true figure less the true figure itself. t2-p1: What do the three overdrafts cost in per-item charges? Answer: $102.00. Verification: 3 overdrafts at $34 each. \"Protection\" describes the bank covering the payment, not the charge being waived. t2-p2: What do the extended overdraft days add? Answer: $30.00. Verification: $6 a day for 5 days beyond the first. This charge accrues from time, not from any further transaction. t2-p3: What did the overdrafts cost altogether? Answer: $132.00. Verification: $102.00 of per-item charges plus $30.00 of daily charges — against a year of interest on this account worth $54.00. t2-p4: The balance fell to $25 on one day, so the waiver condition failed. What does the monthly fee cost over a year if it fails every month? Answer: $120.00. Verification: The waiver is written on the daily balance, not the monthly average, so a single day at $25 forfeits it. Twelve failed months at $10 each."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Name the misconception behind each of the student’s three errors, and say which of the three would cost a real account holder the most over a year. Identifies the three misconceptions: reading an annual rate as a monthly one, reading \"overdraft protection\" as meaning free, and reading a daily-minimum waiver as an average-balance waiver. Ranks the overdraft charges highest at $132.00 from a single month, against $120.00 of monthly fees across a whole year and $54.00 of interest earned in a year. Notes that the rate error costs nothing directly but produces a wrong expectation, which is how it does its damage. Uses the $132.00 overdraft total and the $120.00 annual fee total, and refers to the $54.00 of annual interest. The response locates each error in a specific misreading of a term rather than calling the work careless. A response that ranks the $120.00 annual fee above the $132.00 single month is defensible if it argues that the fee recurs every year while the overdrafts may not."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the three misconceptions: reading an annual rate as a monthly one, reading \"overdraft protection\" as meaning free, and reading a daily-minimum waiver as an average-balance waiver. Ranks the overdraft charges highest at $132.00 from a single month, against $120.00 of monthly fees across a whole year and $54.00 of interest earned in a year. Notes that the rate error costs nothing directly but produces a wrong expectation, which is how it does its damage."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u03-l07.scoring.json",
+    "sourceScoringSha256": "4f76cbd20d4101c27f9922836fca6a77b7892ef9bae667c1444987eb12b479d2",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

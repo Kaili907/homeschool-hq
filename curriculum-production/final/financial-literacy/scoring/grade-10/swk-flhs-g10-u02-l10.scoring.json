@@ -1,0 +1,331 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u02-l10",
+  "lessonId": "ma-g10-financial-literacy-u02-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$48.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$78 charged against a $30 cap written into the agreement."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$142.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$94 of charges not in the agreement plus the $48 by which the capped fee was exceeded."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$570.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$712 less the $142 claimed leaves $570, which is $30 above the agreed $540 — exactly the capped fee, correctly charged."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$172.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$712 invoiced against $540 agreed."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$30.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $172 excess less the $142 claimed leaves the $30 fee the agreement expressly permits."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$142, the amount claimed as improperly charged",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Claiming $172 would include the $30 fee the agreement permits, which weakens a complaint by asking for something the contract allows."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "feeCharged - feeCap",
+        "substituted": "78 - 30",
+        "result": "$48.00",
+        "why": "$78 charged against a $30 cap written into the agreement."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "unagreedCharges + #t1-p1",
+        "substituted": "94 + #t1-p1",
+        "result": "$142.00",
+        "why": "$94 of charges not in the agreement plus the $48 by which the capped fee was exceeded."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "invoice - #t1-p2",
+        "substituted": "712 - #t1-p2",
+        "result": "$570.00",
+        "why": "$712 less the $142 claimed leaves $570, which is $30 above the agreed $540 — exactly the capped fee, correctly charged."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "invoice2 - agreed",
+        "substituted": "712 - 540",
+        "result": "$172.00",
+        "why": "$712 invoiced against $540 agreed."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$30.00",
+        "why": "The $172 excess less the $142 claimed leaves the $30 fee the agreement expressly permits."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write the dossier. State the amount claimed and its contractual basis line by line, the evidence you would attach, the escalation path if the seller refuses, and what you would accept as a reasonable settlement.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Leads with the $142 claim and breaks it into the $94 of unagreed charges and the $48 fee excess, each tied to a term of the agreement.",
+          "Names the evidence: the written agreement showing the $540 price and the $30 fee cap, the $712 invoice, proof of payment, and dated copies of any correspondence.",
+          "Sets out an escalation path with an actual sequence — written complaint to the seller with a deadline, then a complaints body or regulator, then a small-claims route — rather than naming one step.",
+          "States a settlement position and its reasoning, recognising that a partial offer may come and the $142 is not guaranteed."
+        ],
+        "evidenceRequirements": [
+          "Uses the $142 claim, the $30 permitted fee, and at least one of the two component amounts."
+        ],
+        "lookFors": [
+          "The dossier concedes the $30 explicitly, which strengthens rather than weakens the claim.",
+          "The escalation path is something the consumer could actually follow, in order."
+        ],
+        "commonMisconception": "Claiming everything above the expected price rather than only what the agreement does not permit.",
+        "dimensions": [
+          "plan-coherence",
+          "evidence-use",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "A consumer protection agency publishes complaint data by seller. Say how that publication helps a consumer who has not yet bought anything, and what it cannot tell them.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that published complaint data lets a buyer compare sellers before purchase, which is information no individual buyer could gather alone.",
+          "States what it cannot tell them: complaint counts depend on how easy complaining is and on how many customers a seller has, so a raw count is not a defect rate."
+        ],
+        "evidenceRequirements": [
+          "Refers to the specific dispute in this lesson as the kind of event such data would record."
+        ],
+        "lookFors": [
+          "The response connects back to the reporting-rate distinction: reports are not incidents."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much of the fee charged exceeds the agreed cap?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total amount the consumer can claim on the contract’s own terms?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the invoice total less the claim come to, and does it match the agreed price?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much above the agreed price of $540 was the consumer invoiced?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of that excess is legitimately chargeable under the agreement?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Which figure should head the complaint?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the dossier. State the amount claimed and its contractual basis line by line, the evidence you would attach, the escalation path if the seller refuses, and what you would accept as a reasonable settlement."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "A consumer protection agency publishes complaint data by seller. Say how that publication helps a consumer who has not yet bought anything, and what it cannot tell them."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much of the fee charged exceeds the agreed cap? Answer: $48.00. Verification: $78 charged against a $30 cap written into the agreement. t1-p2: What is the total amount the consumer can claim on the contract’s own terms? Answer: $142.00. Verification: $94 of charges not in the agreement plus the $48 by which the capped fee was exceeded. t1-p3: What does the invoice total less the claim come to, and does it match the agreed price? Answer: $570.00. Verification: $712 less the $142 claimed leaves $570, which is $30 above the agreed $540 — exactly the capped fee, correctly charged. t2-p1: How much above the agreed price of $540 was the consumer invoiced? Answer: $172.00. Verification: $712 invoiced against $540 agreed. t2-p2: How much of that excess is legitimately chargeable under the agreement? Answer: $30.00. Verification: The $172 excess less the $142 claimed leaves the $30 fee the agreement expressly permits. t2-p3: Which figure should head the complaint? Answer: $142, the amount claimed as improperly charged. Verification: Claiming $172 would include the $30 fee the agreement permits, which weakens a complaint by asking for something the contract allows."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: Write the dossier. State the amount claimed and its contractual basis line by line, the evidence you would attach, the escalation path if the seller refuses, and what you would accept as a reasonable settlement. Leads with the $142 claim and breaks it into the $94 of unagreed charges and the $48 fee excess, each tied to a term of the agreement. Names the evidence: the written agreement showing the $540 price and the $30 fee cap, the $712 invoice, proof of payment, and dated copies of any correspondence. Sets out an escalation path with an actual sequence — written complaint to the seller with a deadline, then a complaints body or regulator, then a small-claims route — rather than naming one step. States a settlement position and its reasoning, recognising that a partial offer may come and the $142 is not guaranteed. Uses the $142 claim, the $30 permitted fee, and at least one of the two component amounts. The dossier concedes the $30 explicitly, which strengthens rather than weakens the claim. The escalation path is something the consumer could actually follow, in order. t3-p2: A consumer protection agency publishes complaint data by seller. Say how that publication helps a consumer who has not yet bought anything, and what it cannot tell them. Explains that published complaint data lets a buyer compare sellers before purchase, which is information no individual buyer could gather alone. States what it cannot tell them: complaint counts depend on how easy complaining is and on how many customers a seller has, so a raw count is not a defect rate. Refers to the specific dispute in this lesson as the kind of event such data would record. The response connects back to the reporting-rate distinction: reports are not incidents."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Leads with the $142 claim and breaks it into the $94 of unagreed charges and the $48 fee excess, each tied to a term of the agreement. Names the evidence: the written agreement showing the $540 price and the $30 fee cap, the $712 invoice, proof of payment, and dated copies of any correspondence. Sets out an escalation path with an actual sequence — written complaint to the seller with a deadline, then a complaints body or regulator, then a small-claims route — rather than naming one step. States a settlement position and its reasoning, recognising that a partial offer may come and the $142 is not guaranteed. Explains that published complaint data lets a buyer compare sellers before purchase, which is information no individual buyer could gather alone. States what it cannot tell them: complaint counts depend on how easy complaining is and on how many customers a seller has, so a raw count is not a defect rate."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 6
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-10/swk-flhs-g10-u02-l10.scoring.json",
+    "sourceScoringSha256": "9286adde32eec2fe3bc600cb303ae759963fc8000e8f5abb9a59afec82d0cf31",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

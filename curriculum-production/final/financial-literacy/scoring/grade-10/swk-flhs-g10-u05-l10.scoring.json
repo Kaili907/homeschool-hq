@@ -1,0 +1,353 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l10",
+  "lessonId": "ma-g10-financial-literacy-u05-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$6,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "40% of the $15,000 allocated. This is the largest single holding and carries most of the allocation’s exposure to shares."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,750.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "25% of the $15,000, spreading share exposure beyond a single country’s market."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "30% of the $15,000, in an asset class that behaves differently from shares."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$750.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5% of the $15,000, held so that a need for money does not force a sale of the other three at whatever price is available that day."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "0.11%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each ratio weighted by its share of the allocation. The international fund carries the highest ratio but only a quarter of the money, so it contributes 0.06 percentage points of the total — more than any other holding, despite not being the largest."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$16.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.11% of the $15,000 allocated, charged inside the funds rather than billed separately."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$172.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.15% of the same $15,000 balance, charged annually on the balance rather than on the amount originally allocated."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$156.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$172.50 against $16.50. Applying the method from earlier in the unit, a gap of this size held over 15 years costs far more than 15 times $156.00."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "total * wBroad",
+        "substituted": "15000 * 0.4",
+        "result": "$6,000.00",
+        "why": "40% of the $15,000 allocated. This is the largest single holding and carries most of the allocation’s exposure to shares."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "total2 * wIntl",
+        "substituted": "15000 * 0.25",
+        "result": "$3,750.00",
+        "why": "25% of the $15,000, spreading share exposure beyond a single country’s market."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "total3 * wBond",
+        "substituted": "15000 * 0.3",
+        "result": "$4,500.00",
+        "why": "30% of the $15,000, in an asset class that behaves differently from shares."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "total4 * wCash",
+        "substituted": "15000 * 0.05",
+        "result": "$750.00",
+        "why": "5% of the $15,000, held so that a need for money does not force a sale of the other three at whatever price is available that day."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "wBroad2*erBroad + wIntl2*erIntl + wBond2*erBond + wCash2*erCash",
+        "substituted": "0.4*0.05 + 0.25*0.24 + 0.3*0.1 + 0.05*0",
+        "result": "0.11%",
+        "why": "Each ratio weighted by its share of the allocation. The international fund carries the highest ratio but only a quarter of the money, so it contributes 0.06 percentage points of the total — more than any other holding, despite not being the largest."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(total5 * (#t2-p1 / 100), 2)",
+        "substituted": "round(15000 * (#t2-p1 / 100), 2)",
+        "result": "$16.50",
+        "why": "0.11% of the $15,000 allocated, charged inside the funds rather than billed separately."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "total6 * advisedEr",
+        "substituted": "15000 * 0.0115",
+        "result": "$172.50",
+        "why": "1.15% of the same $15,000 balance, charged annually on the balance rather than on the amount originally allocated."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - #t2-p2",
+        "substituted": "#t2-p3 - #t2-p2",
+        "result": "$156.00",
+        "why": "$172.50 against $16.50. Applying the method from earlier in the unit, a gap of this size held over 15 years costs far more than 15 times $156.00."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Defend this allocation for a goal 15 years away in four sentences: what each of the four parts is there to do, what risk each one accepts, what the whole thing costs, and what would have to be true for the managed alternative’s extra $156.00 a year to be worth paying.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Assigns a purpose to each of the four holdings and names the risk it accepts — share funds accept market declines, the international fund adds exposure to other countries and currencies, bonds accept rate risk, and cash accepts losing ground to inflation.",
+          "States the total cost accurately at 0.11% and $16.50 in the first year, and contrasts it with the $172.50 alternative.",
+          "States the condition for the managed alternative honestly: it would have to add more than $156.00 a year of value after its own fee, and says how an investor could tell in advance, or that they largely cannot.",
+          "Ties the allocation to the stated 15-year horizon rather than defending it in the abstract."
+        ],
+        "evidenceRequirements": [
+          "Uses at least three of the four dollar allocations, the 0.11% weighted ratio, and the $156.00 annual difference."
+        ],
+        "lookFors": [
+          "The response names a distinct risk for each holding rather than calling the whole allocation \"risky\" or \"safe\".",
+          "The response does not present the allocation as correct for any real person, and does not claim the horizon guarantees an outcome."
+        ],
+        "commonMisconception": "Treating an allocation as complete once the percentages are chosen, without pricing it or naming what each part is exposed to.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much goes into the broad domestic stock index fund?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much goes into the international stock index fund?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much goes into the bond index fund?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much goes into the cash reserve?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the weighted expense ratio of the whole allocation?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does that cost in dollars in the first year? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What would the fictional managed alternative cost on the same balance in a year?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the annual difference between the two?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Defend this allocation for a goal 15 years away in four sentences: what each of the four parts is there to do, what risk each one accepts, what the whole thing costs, and what would have to be true for the managed alternative’s extra $156.00 a year to be worth paying."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much goes into the broad domestic stock index fund? Answer: $6,000.00. Verification: 40% of the $15,000 allocated. This is the largest single holding and carries most of the allocation’s exposure to shares. t1-p2: How much goes into the international stock index fund? Answer: $3,750.00. Verification: 25% of the $15,000, spreading share exposure beyond a single country’s market. t1-p3: How much goes into the bond index fund? Answer: $4,500.00. Verification: 30% of the $15,000, in an asset class that behaves differently from shares. t1-p4: How much goes into the cash reserve? Answer: $750.00. Verification: 5% of the $15,000, held so that a need for money does not force a sale of the other three at whatever price is available that day. t2-p1: What is the weighted expense ratio of the whole allocation? Answer: 0.11%. Verification: Each ratio weighted by its share of the allocation. The international fund carries the highest ratio but only a quarter of the money, so it contributes 0.06 percentage points of the total — more than any other holding, despite not being the largest. t2-p2: What does that cost in dollars in the first year? Round to the nearest cent. Answer: $16.50. Verification: 0.11% of the $15,000 allocated, charged inside the funds rather than billed separately. t2-p3: What would the fictional managed alternative cost on the same balance in a year? Answer: $172.50. Verification: 1.15% of the same $15,000 balance, charged annually on the balance rather than on the amount originally allocated. t2-p4: What is the annual difference between the two? Answer: $156.00. Verification: $172.50 against $16.50. Applying the method from earlier in the unit, a gap of this size held over 15 years costs far more than 15 times $156.00."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Defend this allocation for a goal 15 years away in four sentences: what each of the four parts is there to do, what risk each one accepts, what the whole thing costs, and what would have to be true for the managed alternative’s extra $156.00 a year to be worth paying. Assigns a purpose to each of the four holdings and names the risk it accepts — share funds accept market declines, the international fund adds exposure to other countries and currencies, bonds accept rate risk, and cash accepts losing ground to inflation. States the total cost accurately at 0.11% and $16.50 in the first year, and contrasts it with the $172.50 alternative. States the condition for the managed alternative honestly: it would have to add more than $156.00 a year of value after its own fee, and says how an investor could tell in advance, or that they largely cannot. Ties the allocation to the stated 15-year horizon rather than defending it in the abstract. Uses at least three of the four dollar allocations, the 0.11% weighted ratio, and the $156.00 annual difference. The response names a distinct risk for each holding rather than calling the whole allocation \"risky\" or \"safe\". The response does not present the allocation as correct for any real person, and does not claim the horizon guarantees an outcome."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Assigns a purpose to each of the four holdings and names the risk it accepts — share funds accept market declines, the international fund adds exposure to other countries and currencies, bonds accept rate risk, and cash accepts losing ground to inflation. States the total cost accurately at 0.11% and $16.50 in the first year, and contrasts it with the $172.50 alternative. States the condition for the managed alternative honestly: it would have to add more than $156.00 a year of value after its own fee, and says how an investor could tell in advance, or that they largely cannot. Ties the allocation to the stated 15-year horizon rather than defending it in the abstract."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u05-l10.scoring.json",
+    "sourceScoringSha256": "fe142a946e0ef9cce54f6030f7b65e7eded8e9aefd6d6722600359b2a146826f",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

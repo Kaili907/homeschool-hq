@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l04",
+  "lessonId": "ma-g12-financial-literacy-u07-l04",
+  "integratedDomains": [
+    "budgeting",
+    "debt",
+    "credit",
+    "saving-investing",
+    "insurance-risk",
+    "income"
+  ],
+  "isCapstone": true,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,045.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six recurring costs added. Rent alone is $1,180 of it, which is why the largest line is the one a plan has least room to move."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$198.54",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "18.4 thousands borrowed at $10.79 a month each. The factor already accounts for the rate and the 120-payment term."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$35.10",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 21.6% on $1,950. This is a cost that continues every month the balance is carried, and it is not a committed payment in the way the loan is."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,243.54",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,045.00 of living costs plus the $198.54 loan payment. The card interest is not added here because it is a charge on a balance rather than a required payment."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$931.04",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,174.58 of take-home less $2,243.54 committed. Every later capstone decision is an allocation of this figure."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,365.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "50% of the 5% of $54,600 that Case R contributes."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$273.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The full contribution at 6% is $1,638.00 against $1,365.00 earned at 5%. Claiming it would require Case R to contribute a further $546 across the year."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "rent + utilities + food + transport + phone + rentersIns",
+        "substituted": "1180 + 155 + 430 + 210 + 52 + 18",
+        "result": "$2,045.00",
+        "why": "The six recurring costs added. Rent alone is $1,180 of it, which is why the largest line is the one a plan has least room to move."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(loanBalance / 1000 * factor, 2)",
+        "substituted": "round(18400 / 1000 * 10.79, 2)",
+        "result": "$198.54",
+        "why": "18.4 thousands borrowed at $10.79 a month each. The factor already accounts for the rate and the 120-payment term."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(cardBalance * cardApr / 12, 2)",
+        "substituted": "round(1950 * 0.216 / 12, 2)",
+        "result": "$35.10",
+        "why": "One twelfth of 21.6% on $1,950. This is a cost that continues every month the balance is carried, and it is not a committed payment in the way the loan is."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$2,243.54",
+        "why": "$2,045.00 of living costs plus the $198.54 loan payment. The card interest is not added here because it is a charge on a balance rather than a required payment."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(monthlyTakeHome - #t2-p1, 2)",
+        "substituted": "round(3174.58 - #t2-p1, 2)",
+        "result": "$931.04",
+        "why": "$3,174.58 of take-home less $2,243.54 committed. Every later capstone decision is an allocation of this figure."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "gross * electedRate * matchShare",
+        "substituted": "54600 * 0.05 * 0.5",
+        "result": "$1,365.00",
+        "why": "50% of the 5% of $54,600 that Case R contributes."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "gross2 * fullTier * matchShare2 - #t2-p3",
+        "substituted": "54600 * 0.06 * 0.5 - #t2-p3",
+        "result": "$273.00",
+        "why": "The full contribution at 6% is $1,638.00 against $1,365.00 earned at 5%. Claiming it would require Case R to contribute a further $546 across the year."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write the assumptions page of the capstone record. State the three assumptions this monthly plan most depends on, say for each what would happen to the $931.04 surplus if it turned out to be wrong, and decide whether to raise the retirement election to 6% — defending whichever way you decide.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names at least three genuine assumptions with their effect — for example that the $430 food and $210 transport figures hold rather than drift, that the $1,180 rent does not rise at renewal, that income continues for all 12 months, or that nothing unplanned arrives.",
+          "Quantifies at least one: a rent increase of 5% would take about $59 a month out of the $931.04, and a month without income removes the surplus entirely and $2,243.54 besides.",
+          "Reaches a defended decision on the retirement election, using the $273.00 unclaimed and the $546 it would cost to claim it, rather than asserting a preference.",
+          "Notes that the card interest of $35.10 a month is a cost the plan carries whether or not the surplus is allocated to it."
+        ],
+        "evidenceRequirements": [
+          "Uses the $931.04 monthly surplus and the $273.00 of unclaimed employer contribution.",
+          "Attaches a figure to at least one assumption failing."
+        ],
+        "lookFors": [
+          "The assumptions named are ones the plan actually depends on, not general uncertainties.",
+          "The retirement decision is defended with the $273.00 and the $546 rather than with a rule of thumb."
+        ],
+        "commonMisconception": "Treating an unclaimed employer contribution as free money that must always be taken, without pricing the $546 of surplus it costs to claim it in a year when that surplus has other work to do.",
+        "defensibleAlternatives": [
+          "Raise the election to 6%, claiming the remaining $273.00 and accepting $546 less of surplus across the year.",
+          "Hold at 5% and direct the $546 to the card at 21.6% or to a reserve, on the grounds that the first year needs liquidity and the unclaimed amount is small relative to that need.",
+          "Raise the election to 6% only after the $1,950 card balance is cleared, sequencing the two rather than choosing between them permanently."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "plan-coherence",
+          "tradeoff-defense",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the monthly living costs come to?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly student loan payment?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the card balance cost in interest each month?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is committed each month, counting living costs and the loan payment?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What monthly surplus remains?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What employer retirement contribution does the current 5% election earn across the year?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much employer contribution is left unclaimed by electing 5% rather than 6%?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the assumptions page of the capstone record. State the three assumptions this monthly plan most depends on, say for each what would happen to the $931.04 surplus if it turned out to be wrong, and decide whether to raise the retirement election to 6% — defending whichever way you decide."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the monthly living costs come to? Answer: $2,045.00. Verification: The six recurring costs added. Rent alone is $1,180 of it, which is why the largest line is the one a plan has least room to move. t1-p2: What is the monthly student loan payment? Answer: $198.54. Verification: 18.4 thousands borrowed at $10.79 a month each. The factor already accounts for the rate and the 120-payment term. t1-p3: What does the card balance cost in interest each month? Answer: $35.10. Verification: One twelfth of 21.6% on $1,950. This is a cost that continues every month the balance is carried, and it is not a committed payment in the way the loan is. t2-p1: What is committed each month, counting living costs and the loan payment? Answer: $2,243.54. Verification: $2,045.00 of living costs plus the $198.54 loan payment. The card interest is not added here because it is a charge on a balance rather than a required payment. t2-p2: What monthly surplus remains? Answer: $931.04. Verification: $3,174.58 of take-home less $2,243.54 committed. Every later capstone decision is an allocation of this figure. t2-p3: What employer retirement contribution does the current 5% election earn across the year? Answer: $1,365.00. Verification: 50% of the 5% of $54,600 that Case R contributes. t2-p4: How much employer contribution is left unclaimed by electing 5% rather than 6%? Answer: $273.00. Verification: The full contribution at 6% is $1,638.00 against $1,365.00 earned at 5%. Claiming it would require Case R to contribute a further $546 across the year."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Write the assumptions page of the capstone record. State the three assumptions this monthly plan most depends on, say for each what would happen to the $931.04 surplus if it turned out to be wrong, and decide whether to raise the retirement election to 6% — defending whichever way you decide. Names at least three genuine assumptions with their effect — for example that the $430 food and $210 transport figures hold rather than drift, that the $1,180 rent does not rise at renewal, that income continues for all 12 months, or that nothing unplanned arrives. Quantifies at least one: a rent increase of 5% would take about $59 a month out of the $931.04, and a month without income removes the surplus entirely and $2,243.54 besides. Reaches a defended decision on the retirement election, using the $273.00 unclaimed and the $546 it would cost to claim it, rather than asserting a preference. Notes that the card interest of $35.10 a month is a cost the plan carries whether or not the surplus is allocated to it. Uses the $931.04 monthly surplus and the $273.00 of unclaimed employer contribution. Attaches a figure to at least one assumption failing. The assumptions named are ones the plan actually depends on, not general uncertainties. The retirement decision is defended with the $273.00 and the $546 rather than with a rule of thumb."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names at least three genuine assumptions with their effect — for example that the $430 food and $210 transport figures hold rather than drift, that the $1,180 rent does not rise at renewal, that income continues for all 12 months, or that nothing unplanned arrives. Quantifies at least one: a rent increase of 5% would take about $59 a month out of the $931.04, and a month without income removes the surplus entirely and $2,243.54 besides. Reaches a defended decision on the retirement election, using the $273.00 unclaimed and the $546 it would cost to claim it, rather than asserting a preference. Notes that the card interest of $35.10 a month is a cost the plan carries whether or not the surplus is allocated to it."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u07-l04.scoring.json",
+    "sourceScoringSha256": "71276d1ba04f0920ec2ec72b778d148edaa1ca2cfe62bd41426d282b072b3de4",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

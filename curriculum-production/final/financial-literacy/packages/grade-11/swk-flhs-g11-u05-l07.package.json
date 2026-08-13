@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l07",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: expected return, volatility, and horizon interacting"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "expected return, volatility, and horizon interacting",
+  "objective": "Test a fictional claim that a gain and an equal-sized loss cancel out, compute the actual outcome, and generalise the result to a second case.",
+  "scenario": "Marisol Tanaka-Eberhardt is checking the simulated claim below. The fund, the returns, and the claim are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional claim reproduced in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The claim reads: \"A fictional holding gained 50% in one year and lost 50% the next. The two average to 0%, so it broke even.\" The holding started at $10,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the holding worth after the first year, gaining 50%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is it worth after the second year, losing 50%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much has the holding actually lost across the two years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is that loss as a percentage of the starting amount? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the same idea on a second case where the two returns are not equal: a gain of 30% followed by a loss of 20%.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is $10,000 worth after gaining 30%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is it worth after then losing 20%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the actual two-year gain as a percentage? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "The arithmetic mean of 30% and -20% is 5%. What would two years at 5% have produced?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the average overstate the second case?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-choice",
+          "text": "What do both cases show about averaging returns?",
+          "choices": [
+            "The arithmetic mean of yearly returns overstates what actually happened whenever the returns vary",
+            "The arithmetic mean is only wrong when one of the returns is negative",
+            "The arithmetic mean is wrong because the returns were not calculated correctly"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain in your own words why a 50% gain and a 50% loss do not cancel, and say what percentage gain would be needed to recover from the 50% loss."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The overstatement was $2,500.00 in the first case and $625.00 in the second. Say what explains the difference in size, and what that means for how a fund with volatile returns should be described."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the holding comes back to $10,000 after the second year, the 50% loss is being taken from the original $10,000 rather than from the $15,000.00 the holding had actually reached. Each return applies to whatever the holding is worth at the start of that year. Write the two years as separate rows with the opening balance shown in each.",
+  "extension": "Work out what percentage gain would be needed to recover from a 20% loss, a 40% loss, and a 60% loss, and describe the pattern the three answers make.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the holding worth after the first year, gaining 50%?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is it worth after the second year, losing 50%?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much has the holding actually lost across the two years?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is that loss as a percentage of the starting amount? Give one decimal place."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is $10,000 worth after gaining 30%?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is it worth after then losing 20%?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the actual two-year gain as a percentage? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "The arithmetic mean of 30% and -20% is 5%. What would two years at 5% have produced?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the average overstate the second case?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "What do both cases show about averaging returns?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain in your own words why a 50% gain and a 50% loss do not cancel, and say what percentage gain would be needed to recover from the 50% loss."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The overstatement was $2,500.00 in the first case and $625.00 in the second. Say what explains the difference in size, and what that means for how a fund with volatile returns should be described."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u05-l07.package.json",
+    "sourcePackageSha256": "59927e8351e67a4182ef2a2e7728a586e0d8345ee1f2ea19838b5aacf59c38d3",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u05-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

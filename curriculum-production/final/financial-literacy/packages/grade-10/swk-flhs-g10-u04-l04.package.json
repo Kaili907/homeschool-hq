@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l04",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: the FAFSA process, dependency, and aid packaging"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "the FAFSA process, dependency, and aid packaging",
+  "objective": "Separate a fictional aid package into gift aid, earned aid, and borrowed aid, compute the gap the package leaves, and quantify how much of the offer must be repaid.",
+  "scenario": "The simulated aid offer below is invented for this exercise. No real institution, aid formula, or applicant is described, and no learner is asked for family financial information.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional aid offer in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional aid offer lists a cost of attendance of $21,400 for one year and five lines of aid: a $6,800 grant, a $3,500 scholarship, $2,600 of work study, a $3,500 subsidised loan, and a $2,000 unsubsidised loan. Grants and scholarships are gift aid and are not repaid. Work study is money earned by working an assigned job during the year. Both loans are repaid with interest.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total gift aid in the offer?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the net price — the cost of attendance after gift aid only?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the three self-help lines — work study and the two loans — come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find what the package does not cover, and how much of it is debt.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What gap remains after every line of the offer is used?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of every line the offer calls aid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of that headline total has to be repaid?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which line of the offer requires the applicant to do scheduled work during the year to receive the money?",
+          "choices": [
+            "The grant",
+            "The scholarship",
+            "The work study",
+            "The subsidised loan"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The offer says $18,400.00 of aid. Write two sentences you would use to explain to a fictional applicant what that number actually means, and name the one figure you would want added to the letter."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the gap comes out as zero, the loans and work study are being treated as though they lower the cost. Take only the $10,300.00 of gift aid off the $21,400 cost first. What remains, $11,100.00, is what the applicant has to cover — and the $8,100.00 of self-help aid covers all but $3,000.00 of it.",
+  "extension": "Recompute the gap if the scholarship is renewable for only one year while the cost of attendance stays the same, and say what the applicant should ask the fictional institution before accepting.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total gift aid in the offer?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the net price — the cost of attendance after gift aid only?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What do the three self-help lines — work study and the two loans — come to?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What gap remains after every line of the offer is used?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of every line the offer calls aid?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What percentage of that headline total has to be repaid?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Which line of the offer requires the applicant to do scheduled work during the year to receive the money?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The offer says $18,400.00 of aid. Write two sentences you would use to explain to a fictional applicant what that number actually means, and name the one figure you would want added to the letter."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u04-l04.package.json",
+    "sourcePackageSha256": "c8a06ac1737aeb0abf6403af4ba98735c750fbec4f5cdcb07191fe1426c5461d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u04-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

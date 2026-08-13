@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u06-l04",
+  "lessonId": "ma-g4-financial-literacy-u06-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Telling customers the truth",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Wren's false claims are kept because they help the stall sell."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The problems in Wren's labels are named but the rewrites still overstate."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response rewrites Wren's labels into claims a customer could check, and keeps them appealing without inventing properties or endorsements."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about false endorsement",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats the invented approval as harmless marketing."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The approval claim is called wrong but no reason is given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that an invented approval borrows trust from people who never gave it, which misleads customers more deeply than a boast about quality."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies the fruit claim as the only honest label.",
+      "Rewrites both problem labels into checkable statements.",
+      "Distinguishes exaggeration from a fabricated endorsement.",
+      "Keeps the rewritten labels appealing rather than dull."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "Which of Wren's three claims is honest, and what is wrong with each of the other two?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write honest versions of Wren's two problem labels and explain what you changed in each."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is inventing an approval worse than simply exaggerating how good something is?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Telling customers the truth — Not yet: Wren's false claims are kept because they help the stall sell. Approaching: The problems in Wren's labels are named but the rewrites still overstate. Meets: The response rewrites Wren's labels into claims a customer could check, and keeps them appealing without inventing properties or endorsements. Reasoning about false endorsement — Not yet: The response treats the invented approval as harmless marketing. Approaching: The approval claim is called wrong but no reason is given. Meets: The response explains that an invented approval borrows trust from people who never gave it, which misleads customers more deeply than a boast about quality. Identifies the fruit claim as the only honest label. Rewrites both problem labels into checkable statements. Distinguishes exaggeration from a fabricated endorsement. Keeps the rewritten labels appealing rather than dull."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies the fruit claim as the only honest label. Rewrites both problem labels into checkable statements. Distinguishes exaggeration from a fabricated endorsement. Keeps the rewritten labels appealing rather than dull."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-04/swk-fl-g4-u06-l04.scoring.json",
+    "sourceScoringSha256": "1b152530a7be1da487cf447b2a726443a35789f62a500df6fd001929738b0dff",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

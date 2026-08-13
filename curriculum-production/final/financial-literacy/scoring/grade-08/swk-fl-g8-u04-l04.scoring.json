@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u04-l04",
+  "lessonId": "ma-g8-financial-literacy-u04-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much interest accrues in the first year?",
+        "answer": "$10,800.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6% of 180,000.00) = 10,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 18000000
+            },
+            "bps": 600,
+            "round": "exact"
+          },
+          "trace": "(6% of 180,000.00) = 10,800.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the monthly interest on the mortgage concept?",
+        "answer": "$900.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((6% of 180,000.00) / 12) = 900.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 18000000
+              },
+              "bps": 600,
+              "round": "exact"
+            },
+            "by": 12,
+            "round": "exact"
+          },
+          "trace": "((6% of 180,000.00) / 12) = 900.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much interest does the auto loan accrue in a year?",
+        "answer": "$1,440.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6% of 24,000.00) = 1,440.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 2400000
+            },
+            "bps": 600,
+            "round": "exact"
+          },
+          "trace": "(6% of 24,000.00) = 1,440.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What is the monthly interest on the auto loan?",
+        "answer": "$120.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((6% of 24,000.00) / 12) = 120.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 2400000
+              },
+              "bps": 600,
+              "round": "exact"
+            },
+            "by": 12,
+            "round": "exact"
+          },
+          "trace": "((6% of 24,000.00) / 12) = 120.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much larger is the mortgage concept's monthly interest?",
+        "answer": "$780.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((6% of 180,000.00) / 12) - ((6% of 24,000.00) / 12)) = 780.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "divide",
+              "of": {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 18000000
+                },
+                "bps": 600,
+                "round": "exact"
+              },
+              "by": 12,
+              "round": "exact"
+            },
+            "less": {
+              "op": "divide",
+              "of": {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 2400000
+                },
+                "bps": 600,
+                "round": "exact"
+              },
+              "by": 12,
+              "round": "exact"
+            }
+          },
+          "trace": "(((6% of 180,000.00) / 12) - ((6% of 24,000.00) / 12)) = 780.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Comparing loans beyond the rate",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Hesper's equal rates as meaning equal cost."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The principal difference is noted for Hesper but no further comparison factor is named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that interest scales with principal, so Hesper's rate alone says nothing about burden, and names further factors such as term, fees, or what the loan secures."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much interest accrues in the first year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly interest on the mortgage concept?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much interest does the auto loan accrue in a year?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly interest on the auto loan?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much larger is the mortgage concept's monthly interest?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Explain why the same 6% produces such different burdens in Hesper's two loans, and what else besides rate a borrower should compare."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much interest accrues in the first year? Answer: $10,800.00. Verification: (6% of 180,000.00) = 10,800.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is the monthly interest on the mortgage concept? Answer: $900.00. Verification: ((6% of 180,000.00) / 12) = 900.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much interest does the auto loan accrue in a year? Answer: $1,440.00. Verification: (6% of 24,000.00) = 1,440.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What is the monthly interest on the auto loan? Answer: $120.00. Verification: ((6% of 24,000.00) / 12) = 120.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much larger is the mortgage concept's monthly interest? Answer: $780.00. Verification: (((6% of 180,000.00) / 12) - ((6% of 24,000.00) / 12)) = 780.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Comparing loans beyond the rate — Not yet: The response treats Hesper's equal rates as meaning equal cost. Approaching: The principal difference is noted for Hesper but no further comparison factor is named. Meets: The response explains that interest scales with principal, so Hesper's rate alone says nothing about burden, and names further factors such as term, fees, or what the loan secures. The response explains that interest scales with principal, so Hesper's rate alone says nothing about burden, and names further factors such as term, fees, or what the loan secures."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that interest scales with principal, so Hesper's rate alone says nothing about burden, and names further factors such as term, fees, or what the loan secures."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u04-l04.scoring.json",
+    "sourceScoringSha256": "1d894c3336aa9a8bf7060fb47af88b96cc455407f955d8cac8d35a9c8664f3b8",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

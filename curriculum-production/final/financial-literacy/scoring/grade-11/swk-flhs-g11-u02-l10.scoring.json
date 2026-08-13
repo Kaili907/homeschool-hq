@@ -1,0 +1,434 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l10",
+  "lessonId": "ma-g11-financial-literacy-u02-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$18,250.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $21,750 price less the $3,500 paid at the start."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$20,556.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60 payments of $342.60, which is what the loan actually costs to repay before any running cost is counted."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$2,306.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,556.00 repaid against $18,250.00 borrowed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,870.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Insurance, maintenance, and fuel added — none of which appears in the financing terms."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$19,350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five years at $3,870.00, held flat across the holding period."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$9,650.59",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five years of declining-balance depreciation on $21,750 — the amount Solveig expects to recover at the end."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$33,755.41",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,500 down, $20,556.00 of payments, and $19,350.00 of running costs, less the $9,650.59 recovered on resale."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$562.59",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$33,755.41 across the 60 months of the holding period — the honest monthly figure for this purchase."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$219.99",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$562.59 against $342.60 — the advertised payment covers well under two-thirds of what the vehicle actually costs each month."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "17.7%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$562.59 against $3,180 of take-home pay."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "Keeping the vehicle 8 years instead of 5",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A larger deposit only moves money between the deposit line and the payments, and $500 off the price is a one-off saving spread over 60 months; extending the holding period spreads a cost of over $33,000 across 36 more months, which no adjustment of this size can match."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "price - down",
+        "substituted": "21750 - 3500",
+        "result": "$18,250.00",
+        "why": "The $21,750 price less the $3,500 paid at the start."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(payment * 60, 2)",
+        "substituted": "round(342.6 * 60, 2)",
+        "result": "$20,556.00",
+        "why": "60 payments of $342.60, which is what the loan actually costs to repay before any running cost is counted."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - #t1-p1",
+        "substituted": "#t1-p2 - #t1-p1",
+        "result": "$2,306.00",
+        "why": "$20,556.00 repaid against $18,250.00 borrowed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "insurance + maintenance + fuel",
+        "substituted": "1420 + 760 + 1690",
+        "result": "$3,870.00",
+        "why": "Insurance, maintenance, and fuel added — none of which appears in the financing terms."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 * 5",
+        "substituted": "#t2-p1 * 5",
+        "result": "$19,350.00",
+        "why": "Five years at $3,870.00, held flat across the holding period."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(price2 * pow(1 - depreciation, 5), 2)",
+        "substituted": "round(21750 * pow(1 - 0.15, 5), 2)",
+        "result": "$9,650.59",
+        "why": "Five years of declining-balance depreciation on $21,750 — the amount Solveig expects to recover at the end."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "down2 + #t1-p2 + #t2-p2 - #t2-p3",
+        "substituted": "3500 + #t1-p2 + #t2-p2 - #t2-p3",
+        "result": "$33,755.41",
+        "why": "$3,500 down, $20,556.00 of payments, and $19,350.00 of running costs, less the $9,650.59 recovered on resale."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p4 / 60, 2)",
+        "substituted": "round(#t2-p4 / 60, 2)",
+        "result": "$562.59",
+        "why": "$33,755.41 across the 60 months of the holding period — the honest monthly figure for this purchase."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(#t2-p5 - payment2, 2)",
+        "substituted": "round(#t2-p5 - 342.6, 2)",
+        "result": "$219.99",
+        "why": "$562.59 against $342.60 — the advertised payment covers well under two-thirds of what the vehicle actually costs each month."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "round(#t2-p5 / takeHome * 100, 1)",
+        "substituted": "round(#t2-p5 / 3180 * 100, 1)",
+        "result": "17.7%",
+        "why": "$562.59 against $3,180 of take-home pay."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Recommend for or against this purchase for Solveig. State the monthly figure you are relying on, name the assumptions the analysis rests on, and identify the one figure whose failure would most damage the conclusion.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States a recommendation and relies on the $562.59 true monthly cost rather than the $342.60 payment, or explains why a different figure is the right one for the decision.",
+          "Names at least two load-bearing assumptions, such as the 15% depreciation holding, the running costs staying flat for five years, or the five-year holding period being kept to.",
+          "Identifies the most damaging failure and says why — most defensibly the $9,650.59 resale value, since it is the only figure recovered at the end and it rests entirely on the depreciation assumption."
+        ],
+        "evidenceRequirements": [
+          "Cites the $33,755.41 five-year total and the 17.7% share of take-home pay.",
+          "Refers to the $219.99 gap between the true monthly cost and the advertised payment."
+        ],
+        "lookFors": [
+          "The recommendation is decided and the figure behind it is named.",
+          "The assumptions listed appear in the analysis rather than being general cautions.",
+          "Either recommendation is acceptable; what is scored is whether financing, running costs, and resale are all carried through the reasoning."
+        ],
+        "commonMisconception": "Judging affordability against the payment a lender quotes rather than against the cost of the commitment.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "The resale value is the only figure in this analysis that reduces the cost. Explain what makes it different in kind from the others, and say what the true monthly cost would be if the vehicle turned out to be worth nothing at the end.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that every other figure is a known price or a quoted term, while the resale value is a forecast that will not be tested until year five.",
+          "Computes the alternative correctly, giving a true monthly cost of about $723.43 if the resale value were zero, and notes that this is more than double the advertised payment."
+        ],
+        "evidenceRequirements": [
+          "Uses the $9,650.59 resale figure and the $33,755.41 total when explaining the effect of its failure."
+        ],
+        "lookFors": [
+          "The response distinguishes a quoted figure from a projected one.",
+          "The recomputation is attempted with figures rather than described qualitatively."
+        ],
+        "commonMisconception": "Treating an expected resale value as a certainty because it appears in the same table as the contracted payments.",
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 10,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is financed after the deposit?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total of the 60 payments?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the finance charge on the loan?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the running costs come to in one year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do they come to across the 5 years?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the vehicle worth after 5 years, losing 15% of its value a year?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the total cost of owning the vehicle for 5 years, counting the deposit, all the payments, and the running costs, less the resale value?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What does that come to per month across the 60 months?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much larger is the true monthly cost than the $342.60 payment?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What share of the $3,180 monthly take-home does the true cost take? Give one decimal place."
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "Which single change would reduce the true monthly cost the most?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Recommend for or against this purchase for Solveig. State the monthly figure you are relying on, name the assumptions the analysis rests on, and identify the one figure whose failure would most damage the conclusion."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "The resale value is the only figure in this analysis that reduces the cost. Explain what makes it different in kind from the others, and say what the true monthly cost would be if the vehicle turned out to be worth nothing at the end."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much is financed after the deposit? Answer: $18,250.00. Verification: The $21,750 price less the $3,500 paid at the start. t1-p2: What is the total of the 60 payments? Answer: $20,556.00. Verification: 60 payments of $342.60, which is what the loan actually costs to repay before any running cost is counted. t1-p3: What is the finance charge on the loan? Answer: $2,306.00. Verification: $20,556.00 repaid against $18,250.00 borrowed. t2-p1: What do the running costs come to in one year? Answer: $3,870.00. Verification: Insurance, maintenance, and fuel added — none of which appears in the financing terms. t2-p2: What do they come to across the 5 years? Answer: $19,350.00. Verification: Five years at $3,870.00, held flat across the holding period. t2-p3: What is the vehicle worth after 5 years, losing 15% of its value a year? Answer: $9,650.59. Verification: Five years of declining-balance depreciation on $21,750 — the amount Solveig expects to recover at the end. t2-p4: What is the total cost of owning the vehicle for 5 years, counting the deposit, all the payments, and the running costs, less the resale value? Answer: $33,755.41. Verification: $3,500 down, $20,556.00 of payments, and $19,350.00 of running costs, less the $9,650.59 recovered on resale. t2-p5: What does that come to per month across the 60 months? Answer: $562.59. Verification: $33,755.41 across the 60 months of the holding period — the honest monthly figure for this purchase. t3-p1: How much larger is the true monthly cost than the $342.60 payment? Answer: $219.99. Verification: $562.59 against $342.60 — the advertised payment covers well under two-thirds of what the vehicle actually costs each month. t3-p2: What share of the $3,180 monthly take-home does the true cost take? Give one decimal place. Answer: 17.7%. Verification: $562.59 against $3,180 of take-home pay. t3-p3: Which single change would reduce the true monthly cost the most? Answer: Keeping the vehicle 8 years instead of 5. Verification: A larger deposit only moves money between the deposit line and the payments, and $500 off the price is a one-off saving spread over 60 months; extending the holding period spreads a cost of over $33,000 across 36 more months, which no adjustment of this size can match."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: Recommend for or against this purchase for Solveig. State the monthly figure you are relying on, name the assumptions the analysis rests on, and identify the one figure whose failure would most damage the conclusion. States a recommendation and relies on the $562.59 true monthly cost rather than the $342.60 payment, or explains why a different figure is the right one for the decision. Names at least two load-bearing assumptions, such as the 15% depreciation holding, the running costs staying flat for five years, or the five-year holding period being kept to. Identifies the most damaging failure and says why — most defensibly the $9,650.59 resale value, since it is the only figure recovered at the end and it rests entirely on the depreciation assumption. Cites the $33,755.41 five-year total and the 17.7% share of take-home pay. Refers to the $219.99 gap between the true monthly cost and the advertised payment. The recommendation is decided and the figure behind it is named. The assumptions listed appear in the analysis rather than being general cautions. Either recommendation is acceptable; what is scored is whether financing, running costs, and resale are all carried through the reasoning. t4-p2: The resale value is the only figure in this analysis that reduces the cost. Explain what makes it different in kind from the others, and say what the true monthly cost would be if the vehicle turned out to be worth nothing at the end. Explains that every other figure is a known price or a quoted term, while the resale value is a forecast that will not be tested until year five. Computes the alternative correctly, giving a true monthly cost of about $723.43 if the resale value were zero, and notes that this is more than double the advertised payment. Uses the $9,650.59 resale figure and the $33,755.41 total when explaining the effect of its failure. The response distinguishes a quoted figure from a projected one. The recomputation is attempted with figures rather than described qualitatively."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States a recommendation and relies on the $562.59 true monthly cost rather than the $342.60 payment, or explains why a different figure is the right one for the decision. Names at least two load-bearing assumptions, such as the 15% depreciation holding, the running costs staying flat for five years, or the five-year holding period being kept to. Identifies the most damaging failure and says why — most defensibly the $9,650.59 resale value, since it is the only figure recovered at the end and it rests entirely on the depreciation assumption. Explains that every other figure is a known price or a quoted term, while the resale value is a forecast that will not be tested until year five. Computes the alternative correctly, giving a true monthly cost of about $723.43 if the resale value were zero, and notes that this is more than double the advertised payment."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 10 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 11,
+      "contractFixedItemCount": 11,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u02-l10.scoring.json",
+    "sourceScoringSha256": "7c2facaf6763ca76b5c2ccc0cffe8670cbe6de2b781cadd61c6e29b5add94ede",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

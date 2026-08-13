@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l05",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: state and local tax variation"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "state and local tax variation",
+  "objective": "Total income, sales, and property taxes for the same fictional worker in two simulated states, and show that the state with no income tax is not automatically the cheaper one.",
+  "scenario": "The two simulated states below are invented for this exercise, as are their rates and levies. Federal tax is identical in both and is left out of this comparison, since it does not affect which state is cheaper.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional state tax schedules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional worker with a gross income of $47,000 makes $12,000 of taxable purchases in the simulated year. State P charges a flat 4.6% income tax on gross income, a 7.25% sales tax, and no separate annual levy. State Q charges no income tax, a 9% sales tax, and an annual levy of $1,340 on vehicles and property.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What income tax does the worker pay in State P?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What sales tax does the worker pay in State P?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the worker pay in State P in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now total the same worker’s state and local taxes in State Q, which advertises that it has no income tax.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What sales tax does the worker pay in State Q?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the worker pay in State Q in total, including the annual levy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much less does this worker pay in State Q?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "What does State Q recover through, in place of an income tax?",
+          "choices": [
+            "Nothing — its total tax is simply lower",
+            "A higher sales tax and a separate annual levy",
+            "A higher federal tax on its residents"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "State Q saved this particular worker $612.00. Describe a fictional worker for whom State P would be cheaper instead, and explain which feature of each schedule decides the answer."
+        }
+      ]
+    }
+  ],
+  "remediation": "If State Q looks $2,162.00 cheaper, only the missing income tax has been counted. State Q charges 9% on purchases where State P charges 7.25%, and adds a $1,340 annual levy. Total all the lines in each state before comparing; the real gap is $612.00.",
+  "extension": "Find the level of annual taxable purchases at which the two states would cost this worker the same, and say whether that figure is above or below the $12,000 in the scenario.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What income tax does the worker pay in State P?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What sales tax does the worker pay in State P?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does the worker pay in State P in total?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What sales tax does the worker pay in State Q?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the worker pay in State Q in total, including the annual levy?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much less does this worker pay in State Q?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What does State Q recover through, in place of an income tax?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "State Q saved this particular worker $612.00. Describe a fictional worker for whom State P would be cheaper instead, and explain which feature of each schedule decides the answer."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u07-l05.package.json",
+    "sourcePackageSha256": "524643b8545fcd9042ca83fc1e643634babbaf0dc014da17f89cde677ef60dfe",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u07-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

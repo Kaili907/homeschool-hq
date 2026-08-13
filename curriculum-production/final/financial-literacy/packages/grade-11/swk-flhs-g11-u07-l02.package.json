@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l02",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: tax-advantaged accounts as a planning tool"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "tax-advantaged accounts as a planning tool",
+  "objective": "Compute the tax effect of a fictional pre-tax contribution, express it as a net cost, and explain why the saving equals the marginal rate rather than the effective rate.",
+  "scenario": "Ignatius Bellweather-Osun is deciding about a contribution to a fictional pre-tax account. The tax schedule below is invented: its deduction, thresholds, and rates were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule and contribution figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is gross income less a standard deduction of $11,400, and tax is 10% on the first $9,800 of taxable income, 14% between $9,800 and $38,400, and 22% between $38,400 and $85,400. Ignatius earns $58,900. A contribution to the fictional pre-tax account reduces taxable income by the amount contributed.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Ignatius’s taxable income before any contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is his tax before the contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "A $6,000 contribution reduces taxable income by that amount. What is the new taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is his tax after the contribution?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure what the contribution actually cost.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much tax does the contribution save?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the net cost of putting $6,000 into the account?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The saving is what percentage of the contribution? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is Ignatius’s effective rate before the contribution, against his $58,900 income? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Why is the saving 22.0% of the contribution rather than 11.9%?",
+          "choices": [
+            "Because a deduction removes income from the top of the stack, where the highest rate applies",
+            "Because pre-tax accounts are taxed at a special rate",
+            "Because the standard deduction is applied twice"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The contribution saves 22.0% while Ignatius’s effective rate is 11.9%. Explain why a deduction is worth the higher figure, and say what would have to be true for the same $6,000 contribution to save less."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Ignatius has $4,680.00 less take-home pay and $6,000 in the account. Say what he has actually gained and what he has given up, and name one thing he would need to know before deciding this is a good trade."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the saving comes out at $714.00, the 11.9% effective rate is being applied to the contribution instead of the 22% marginal rate. The contribution reduces taxable income from $47,500.00 to $41,500.00, and both figures are above $38,400, so the entire $6,000 reduction sits in the 22% band and saves exactly $1,320.00. Recompute both tax figures band by band and subtract.",
+  "extension": "Find the largest contribution that would save the full 22% on every dollar, given that taxable income starts at $47,500.00, and say what rate the next dollar of contribution would save.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Ignatius’s taxable income before any contribution?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is his tax before the contribution?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "A $6,000 contribution reduces taxable income by that amount. What is the new taxable income?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is his tax after the contribution?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much tax does the contribution save?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the net cost of putting $6,000 into the account?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "The saving is what percentage of the contribution? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is Ignatius’s effective rate before the contribution, against his $58,900 income? Give one decimal place."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Why is the saving 22.0% of the contribution rather than 11.9%?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The contribution saves 22.0% while Ignatius’s effective rate is 11.9%. Explain why a deduction is worth the higher figure, and say what would have to be true for the same $6,000 contribution to save less."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Ignatius has $4,680.00 less take-home pay and $6,000 in the account. Say what he has actually gained and what he has given up, and name one thing he would need to know before deciding this is a good trade."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u07-l02.package.json",
+    "sourcePackageSha256": "286f8bdd67e5863b33e4aeedfe4fba6cf80d19351b98c4e7a7ae7339694f56fe",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u07-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

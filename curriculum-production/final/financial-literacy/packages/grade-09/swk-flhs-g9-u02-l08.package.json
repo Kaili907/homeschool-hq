@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l08",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: total cost beyond the sticker price"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "total cost beyond the sticker price",
+  "objective": "Apply the total-cost method to a fictional bundled offer where the item is advertised as free, and find the month at which the two paths cross.",
+  "scenario": "Two fictional carriers offer the same simulated phone. One advertises the handset as free; the other charges for it upfront. Both offers are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional offers in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Offer P: the phone is $0 upfront and the plan is $65 a month on a 24-month contract, with an early termination fee of $240. Offer Q: the phone is $499 upfront and the plan is $38 a month with no contract.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Offer P cost over the full 24 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Offer Q cost over the same 24 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Over 24 months, how much more does the offer with the free phone cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The two paths start in different places and climb at different rates, so they cross somewhere.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "After how many months does Offer Q’s running total first fall below Offer P’s? Give the crossing point to one decimal place."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "A buyer who leaves Offer P after 12 months pays the $240 early termination fee. What has Offer P cost them in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would 12 months of Offer Q have cost the same buyer?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain what the word \"free\" is doing in Offer P, and say which buyer — if any — Offer P is genuinely better for."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the crossing point is being computed by dividing $499 by $65 or by $38, name what the $499 is being repaid out of: only the $27 a month by which Offer P is dearer. Write the two running totals for months 1, 6, 12, and 24 side by side before dividing.",
+  "extension": "Recompute the crossing point if Offer Q’s handset were $349 instead of $499, and say whether the early termination fee still protects Offer P at 12 months.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does Offer P cost over the full 24 months?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does Offer Q cost over the same 24 months?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "Over 24 months, how much more does the offer with the free phone cost?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "After how many months does Offer Q’s running total first fall below Offer P’s? Give the crossing point to one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "A buyer who leaves Offer P after 12 months pays the $240 early termination fee. What has Offer P cost them in total?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would 12 months of Offer Q have cost the same buyer?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain what the word \"free\" is doing in Offer P, and say which buyer — if any — Offer P is genuinely better for."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u02-l08.package.json",
+    "sourcePackageSha256": "35114b67a2f560b1885aee4bd91639e81e3c5360d00c072ad042272af9cabfba",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u02-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

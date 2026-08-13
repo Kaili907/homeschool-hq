@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u06-l01",
+  "lessonId": "ma-g8-financial-literacy-u06-l01",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What do all four risks cost together?",
+        "answer": "$15,600.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(800.00 + 2,500.00 + 12,000.00 + 300.00) = 15,600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 80000
+              },
+              {
+                "op": "money",
+                "cents": 250000
+              },
+              {
+                "op": "money",
+                "cents": 1200000
+              },
+              {
+                "op": "money",
+                "cents": 30000
+              }
+            ]
+          },
+          "trace": "(800.00 + 2,500.00 + 12,000.00 + 300.00) = 15,600.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the largest single risk?",
+        "answer": "$12,000.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "larger of (800.00, 2,500.00, 12,000.00, 300.00) = 12,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "max",
+            "of": [
+              {
+                "op": "money",
+                "cents": 80000
+              },
+              {
+                "op": "money",
+                "cents": 250000
+              },
+              {
+                "op": "money",
+                "cents": 1200000
+              },
+              {
+                "op": "money",
+                "cents": 30000
+              }
+            ]
+          },
+          "trace": "larger of (800.00, 2,500.00, 12,000.00, 300.00) = 12,000.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much of that largest risk would the reserve fail to cover?",
+        "answer": "$7,000.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(larger of (800.00, 2,500.00, 12,000.00, 300.00) - 5,000.00) = 7,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "max",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 80000
+                },
+                {
+                  "op": "money",
+                  "cents": 250000
+                },
+                {
+                  "op": "money",
+                  "cents": 1200000
+                },
+                {
+                  "op": "money",
+                  "cents": 30000
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 500000
+            }
+          },
+          "trace": "(larger of (800.00, 2,500.00, 12,000.00, 300.00) - 5,000.00) = 7,000.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What do the three smaller risks cost together?",
+        "answer": "$3,600.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(800.00 + 2,500.00 + 300.00) = 3,600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 80000
+              },
+              {
+                "op": "money",
+                "cents": 250000
+              },
+              {
+                "op": "money",
+                "cents": 30000
+              }
+            ]
+          },
+          "trace": "(800.00 + 2,500.00 + 300.00) = 3,600.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much reserve would remain after all three?",
+        "answer": "$1,400.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5,000.00 - (800.00 + 2,500.00 + 300.00)) = 1,400.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 500000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 80000
+                },
+                {
+                  "op": "money",
+                  "cents": 250000
+                },
+                {
+                  "op": "money",
+                  "cents": 30000
+                }
+              ]
+            }
+          },
+          "trace": "(5,000.00 - (800.00 + 2,500.00 + 300.00)) = 1,400.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Matching a tool to a risk",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Zephyrine's reserve as the answer to every risk."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The uncovered risk is identified for Zephyrine but no principle is stated."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response states a principle for Zephyrine, that reserves suit frequent smaller costs while insurance suits rare costs too large to absorb, and applies it to her four figures."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do all four risks cost together?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the largest single risk?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of that largest risk would the reserve fail to cover?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the three smaller risks cost together?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much reserve would remain after all three?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Using Zephyrine's figures, explain which risks a reserve is suited to and which need insuring instead, and give the principle behind the split."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do all four risks cost together? Answer: $15,600.00. Verification: (800.00 + 2,500.00 + 12,000.00 + 300.00) = 15,600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is the largest single risk? Answer: $12,000.00. Verification: larger of (800.00, 2,500.00, 12,000.00, 300.00) = 12,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much of that largest risk would the reserve fail to cover? Answer: $7,000.00. Verification: (larger of (800.00, 2,500.00, 12,000.00, 300.00) - 5,000.00) = 7,000.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What do the three smaller risks cost together? Answer: $3,600.00. Verification: (800.00 + 2,500.00 + 300.00) = 3,600.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much reserve would remain after all three? Answer: $1,400.00. Verification: (5,000.00 - (800.00 + 2,500.00 + 300.00)) = 1,400.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Matching a tool to a risk — Not yet: The response treats Zephyrine's reserve as the answer to every risk. Approaching: The uncovered risk is identified for Zephyrine but no principle is stated. Meets: The response states a principle for Zephyrine, that reserves suit frequent smaller costs while insurance suits rare costs too large to absorb, and applies it to her four figures. The response states a principle for Zephyrine, that reserves suit frequent smaller costs while insurance suits rare costs too large to absorb, and applies it to her four figures."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response states a principle for Zephyrine, that reserves suit frequent smaller costs while insurance suits rare costs too large to absorb, and applies it to her four figures."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u06-l01.scoring.json",
+    "sourceScoringSha256": "89dd7fa26ba326e0e5abbd7850413b21db99aca7c651a8e0cc7dbe253f467775",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

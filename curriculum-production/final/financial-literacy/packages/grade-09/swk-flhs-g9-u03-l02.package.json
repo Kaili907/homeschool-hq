@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u03-l02",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: fixed, variable, and periodic expenses"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "fixed, variable, and periodic expenses",
+  "objective": "Sort a fictional household’s costs into fixed, variable, and periodic, convert the periodic ones into monthly equivalents, and produce a monthly total the budget can actually be built on.",
+  "scenario": "The nine costs below belong to a fictional household. Every figure is invented for this exercise and none describes a real household.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional cost list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The fictional costs. Paid every month at the same amount: rent $640, insurance $78, phone $45. Paid every month at a varying amount, shown here as recent averages: groceries $210, fuel $96, entertainment $60. Paid on a longer cycle: vehicle registration $148 once a year, dentist $95 twice a year, an annual software subscription $72 once a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-choice",
+          "text": "Which of the nine costs is the clearest example of a periodic cost?",
+          "choices": [
+            "Rent",
+            "Groceries",
+            "Vehicle registration",
+            "Phone"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "A periodic cost has to be spread across the months before it can sit in a monthly budget. Round each monthly equivalent to the nearest cent.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly equivalent of the $148 annual vehicle registration?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly equivalent of two $95 dentist visits a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly equivalent of the $72 annual subscription?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now build the monthly total.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three fixed costs come to each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do the three variable costs average each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the household’s full monthly cost, including the periodic costs at their monthly equivalents?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "A budget that lists only the fixed and variable costs would show $1,129.00 a month. Explain what goes wrong in the month the $148 registration falls due, and what the household should do with the $34.16 of periodic money in the months it is not due."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a periodic cost is being entered at its full amount in every month, ask what the household would have paid over a whole year under that budget: twelve payments of $148 for one annual registration. Divide first, then enter.",
+  "extension": "Add a fictional $340 car repair that happens roughly every 18 months, compute its monthly equivalent, and say why that one is harder to budget than the registration.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u03-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "Which of the nine costs is the clearest example of a periodic cost?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the monthly equivalent of the $148 annual vehicle registration?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the monthly equivalent of two $95 dentist visits a year?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the monthly equivalent of the $72 annual subscription?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the three fixed costs come to each month?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do the three variable costs average each month?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the household’s full monthly cost, including the periodic costs at their monthly equivalents?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "A budget that lists only the fixed and variable costs would show $1,129.00 a month. Explain what goes wrong in the month the $148 registration falls due, and what the household should do with the $34.16 of periodic money in the months it is not due."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u03-l02.package.json",
+    "sourcePackageSha256": "eaebddddd7543005244ace97ed3ec6bdd1b05b463b7218fc59c8b85d687c81f7",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u03-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

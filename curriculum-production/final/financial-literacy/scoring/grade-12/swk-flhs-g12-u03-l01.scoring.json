@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l01",
+  "lessonId": "ma-g12-financial-literacy-u03-l01",
+  "integratedDomains": [
+    "budgeting",
+    "banking",
+    "saving-investing",
+    "income"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,755.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The five commitments that do not change month to month. Separating these from the variable categories is what makes a variance meaningful: only the variable half can move."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,905.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,755.00 of fixed commitments, $800.00 of planned variable spending, and $350 of savings. Savings is allocated here rather than left as a remainder, which is what makes it possible to see later whether the plan held."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$335.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,240 of take-home pay less the $2,905.00 allocated. This is what should be left over each month if nothing moves."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,554.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three actual monthly totals added. Looking at the run rather than a single month is what separates an unusual month from a plan that is set too low."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$800.00 a month across 3 months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$154.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,554.00 actual against $2,400.00 planned. One month came in under and two came in over, and only the running total shows which way the plan is drifting."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$851.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three months of the planned $335.00 surplus, less the $154.00 the variable categories overran. The planned figure would have been $1,005.00."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "rent + utilities + insurance + phone + transport",
+        "substituted": "1180 + 165 + 142 + 58 + 210",
+        "result": "$1,755.00",
+        "why": "The five commitments that do not change month to month. Separating these from the variable categories is what makes a variance meaningful: only the variable half can move."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 + food + household + personal + savings",
+        "substituted": "#t1-p1 + 480 + 120 + 200 + 350",
+        "result": "$2,905.00",
+        "why": "$1,755.00 of fixed commitments, $800.00 of planned variable spending, and $350 of savings. Savings is allocated here rather than left as a remainder, which is what makes it possible to see later whether the plan held."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "netIncome - #t1-p2",
+        "substituted": "3240 - #t1-p2",
+        "result": "$335.00",
+        "why": "$3,240 of take-home pay less the $2,905.00 allocated. This is what should be left over each month if nothing moves."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "m1 + m2 + m3",
+        "substituted": "862 + 774 + 918",
+        "result": "$2,554.00",
+        "why": "The three actual monthly totals added. Looking at the run rather than a single month is what separates an unusual month from a plan that is set too low."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "(food2 + household2 + personal2) * 3",
+        "substituted": "(480 + 120 + 200) * 3",
+        "result": "$2,400.00",
+        "why": "$800.00 a month across 3 months."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t2-p2",
+        "substituted": "#t2-p1 - #t2-p2",
+        "result": "$154.00",
+        "why": "$2,554.00 actual against $2,400.00 planned. One month came in under and two came in over, and only the running total shows which way the plan is drifting."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 * 3 - #t2-p3",
+        "substituted": "#t1-p3 * 3 - #t2-p3",
+        "result": "$851.00",
+        "why": "Three months of the planned $335.00 surplus, less the $154.00 the variable categories overran. The planned figure would have been $1,005.00."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The plan expected $1,005.00 of surplus after three months and produced $851.00. Say whether these three months show a plan that is set too low or a run of ordinary variation, explain what in the figures supports your reading, and state what you would need to see to be more certain.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Reads the pattern rather than the total: two months over by $62.00 and $118.00 and one month under by $26.00, so the overruns are both larger and more frequent than the underrun.",
+          "Reaches a defensible conclusion — that the $800.00 allowance looks slightly low, or that three months is too short a run to distinguish a low allowance from ordinary variation — and ties it to the figures rather than asserting it.",
+          "States what would settle it: more months of the same pattern, or knowing whether any of the three months contained something one-off that will not repeat."
+        ],
+        "evidenceRequirements": [
+          "Uses the $154.00 cumulative variance and at least two of the individual monthly figures against the $800.00 monthly allowance."
+        ],
+        "lookFors": [
+          "The response distinguishes the direction of the drift from its size.",
+          "Either conclusion is credited when the response says what evidence would change it; a confident verdict from three months without that caveat is not."
+        ],
+        "commonMisconception": "Treating a single month over budget as proof the plan is wrong, or a single month under as proof it is working.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the fixed commitments come to each month?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the plan allocate in total each month, savings included?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What monthly surplus does the plan expect?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What did the variable categories actually cost across the three months?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What did the plan allow for those categories over the same three months?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the cumulative variance after three months?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What surplus has actually accumulated across the three months?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The plan expected $1,005.00 of surplus after three months and produced $851.00. Say whether these three months show a plan that is set too low or a run of ordinary variation, explain what in the figures supports your reading, and state what you would need to see to be more certain."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the fixed commitments come to each month? Answer: $1,755.00. Verification: The five commitments that do not change month to month. Separating these from the variable categories is what makes a variance meaningful: only the variable half can move. t1-p2: What does the plan allocate in total each month, savings included? Answer: $2,905.00. Verification: $1,755.00 of fixed commitments, $800.00 of planned variable spending, and $350 of savings. Savings is allocated here rather than left as a remainder, which is what makes it possible to see later whether the plan held. t1-p3: What monthly surplus does the plan expect? Answer: $335.00. Verification: $3,240 of take-home pay less the $2,905.00 allocated. This is what should be left over each month if nothing moves. t2-p1: What did the variable categories actually cost across the three months? Answer: $2,554.00. Verification: The three actual monthly totals added. Looking at the run rather than a single month is what separates an unusual month from a plan that is set too low. t2-p2: What did the plan allow for those categories over the same three months? Answer: $2,400.00. Verification: $800.00 a month across 3 months. t2-p3: What is the cumulative variance after three months? Answer: $154.00. Verification: $2,554.00 actual against $2,400.00 planned. One month came in under and two came in over, and only the running total shows which way the plan is drifting. t2-p4: What surplus has actually accumulated across the three months? Answer: $851.00. Verification: Three months of the planned $335.00 surplus, less the $154.00 the variable categories overran. The planned figure would have been $1,005.00."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: The plan expected $1,005.00 of surplus after three months and produced $851.00. Say whether these three months show a plan that is set too low or a run of ordinary variation, explain what in the figures supports your reading, and state what you would need to see to be more certain. Reads the pattern rather than the total: two months over by $62.00 and $118.00 and one month under by $26.00, so the overruns are both larger and more frequent than the underrun. Reaches a defensible conclusion — that the $800.00 allowance looks slightly low, or that three months is too short a run to distinguish a low allowance from ordinary variation — and ties it to the figures rather than asserting it. States what would settle it: more months of the same pattern, or knowing whether any of the three months contained something one-off that will not repeat. Uses the $154.00 cumulative variance and at least two of the individual monthly figures against the $800.00 monthly allowance. The response distinguishes the direction of the drift from its size. Either conclusion is credited when the response says what evidence would change it; a confident verdict from three months without that caveat is not."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Reads the pattern rather than the total: two months over by $62.00 and $118.00 and one month under by $26.00, so the overruns are both larger and more frequent than the underrun. Reaches a defensible conclusion — that the $800.00 allowance looks slightly low, or that three months is too short a run to distinguish a low allowance from ordinary variation — and ties it to the figures rather than asserting it. States what would settle it: more months of the same pattern, or knowing whether any of the three months contained something one-off that will not repeat."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u03-l01.scoring.json",
+    "sourceScoringSha256": "3fe55482520d7b1ad77d4d6075bcfed4b60a703545a4d4af76bb1b4758913084",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l08",
+  "lessonId": "ma-g12-financial-literacy-u03-l08",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "budgeting",
+    "banking",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$16,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,100 in each of the 8 working months. None of it arrives in the remaining 4."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,024.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "18% of the $16,800.00. Because no employer withholds it, this money arrives in the household’s account and still is not theirs to spend."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$13,776.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,800.00 received less $3,024.00 that belongs to the tax bill. Budgeting from the $16,800.00 would overstate the household’s income by more than $3,000."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$42,336.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13,776.00 from the seasonal work after its set-aside plus $28,560.00 from the steady income."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$37,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,150 in each of the 12 months, whether or not the seasonal earner is working."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,536.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$42,336.00 of spendable income against $37,800.00 of fixed costs. On an annual view the household is comfortable."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "-$770.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Only the steady $2,380 arrives, against $3,150 of costs. The annual surplus does nothing to help in the month itself."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$3,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$770.00 of shortfall in each of the 4 months. This buffer is separate from the $3,024.00 tax set-aside, and confusing the two would leave the household short of both."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "seasonalMonthly * seasonalMonths",
+        "substituted": "2100 * 8",
+        "result": "$16,800.00",
+        "why": "$2,100 in each of the 8 working months. None of it arrives in the remaining 4."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * setAsideRate",
+        "substituted": "#t1-p1 * 0.18",
+        "result": "$3,024.00",
+        "why": "18% of the $16,800.00. Because no employer withholds it, this money arrives in the household’s account and still is not theirs to spend."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$13,776.00",
+        "why": "$16,800.00 received less $3,024.00 that belongs to the tax bill. Budgeting from the $16,800.00 would overstate the household’s income by more than $3,000."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 + steadyMonthly * 12",
+        "substituted": "#t1-p3 + 2380 * 12",
+        "result": "$42,336.00",
+        "why": "$13,776.00 from the seasonal work after its set-aside plus $28,560.00 from the steady income."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "fixedMonthly * 12",
+        "substituted": "3150 * 12",
+        "result": "$37,800.00",
+        "why": "$3,150 in each of the 12 months, whether or not the seasonal earner is working."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t2-p2",
+        "substituted": "#t2-p1 - #t2-p2",
+        "result": "$4,536.00",
+        "why": "$42,336.00 of spendable income against $37,800.00 of fixed costs. On an annual view the household is comfortable."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "steadyMonthly2 - fixedMonthly2",
+        "substituted": "2380 - 3150",
+        "result": "-$770.00",
+        "why": "Only the steady $2,380 arrives, against $3,150 of costs. The annual surplus does nothing to help in the month itself."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "abs(#t2-p4) * offMonths",
+        "substituted": "abs(#t2-p4) * 4",
+        "result": "$3,080.00",
+        "why": "$770.00 of shortfall in each of the 4 months. This buffer is separate from the $3,024.00 tax set-aside, and confusing the two would leave the household short of both."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This household must hold two separate pools of money that it is not free to spend. Name them with their amounts, explain why keeping them separate matters, and describe how much of the seasonal earner’s $2,100 monthly pay is genuinely available to the household in a working month.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names both pools with figures: $3,024.00 set aside for the tax bill and $3,080.00 held to bridge the 4 off-season months.",
+          "Explains why they must not be pooled: the tax money is owed to someone else and spending it during the off-season creates a bill the household cannot meet, so a single combined balance will look adequate right up to the point it is not.",
+          "Computes or reasons to the available portion of the seasonal pay: $2,100 less the $378.00 tax set-aside is $1,722.00, and part of that must also go toward the off-season buffer, so materially less than $2,100 is genuinely spendable in a working month."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,024.00 tax set-aside and the $3,080.00 off-season buffer, and refers to the -$770.00 monthly off-season position."
+        ],
+        "lookFors": [
+          "The response keeps the two reserves distinct rather than adding them into one target.",
+          "The response recognises that the annual surplus of $4,536.00 is only $1,456.00 more than the $3,080.00 off-season buffer — and does not compare it against the two reserves added together, since the $3,024.00 tax set-aside was already removed before the surplus was computed."
+        ],
+        "commonMisconception": "Treating money that has arrived in an account as money the household owns, when part of it is a tax liability and part is next quarter’s living costs.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the seasonal earner receive across the year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of that must be set aside for tax at 18%?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the seasonal work actually contribute to the household after the set-aside?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the household’s spendable income for the year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do the fixed costs come to across the year?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What surplus does the year produce?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly position in an off-season month?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What must be held in reserve to carry all 4 off-season months?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This household must hold two separate pools of money that it is not free to spend. Name them with their amounts, explain why keeping them separate matters, and describe how much of the seasonal earner’s $2,100 monthly pay is genuinely available to the household in a working month."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the seasonal earner receive across the year? Answer: $16,800.00. Verification: $2,100 in each of the 8 working months. None of it arrives in the remaining 4. t1-p2: How much of that must be set aside for tax at 18%? Answer: $3,024.00. Verification: 18% of the $16,800.00. Because no employer withholds it, this money arrives in the household’s account and still is not theirs to spend. t1-p3: What does the seasonal work actually contribute to the household after the set-aside? Answer: $13,776.00. Verification: $16,800.00 received less $3,024.00 that belongs to the tax bill. Budgeting from the $16,800.00 would overstate the household’s income by more than $3,000. t2-p1: What is the household’s spendable income for the year? Answer: $42,336.00. Verification: $13,776.00 from the seasonal work after its set-aside plus $28,560.00 from the steady income. t2-p2: What do the fixed costs come to across the year? Answer: $37,800.00. Verification: $3,150 in each of the 12 months, whether or not the seasonal earner is working. t2-p3: What surplus does the year produce? Answer: $4,536.00. Verification: $42,336.00 of spendable income against $37,800.00 of fixed costs. On an annual view the household is comfortable. t2-p4: What is the monthly position in an off-season month? Answer: -$770.00. Verification: Only the steady $2,380 arrives, against $3,150 of costs. The annual surplus does nothing to help in the month itself. t2-p5: What must be held in reserve to carry all 4 off-season months? Answer: $3,080.00. Verification: $770.00 of shortfall in each of the 4 months. This buffer is separate from the $3,024.00 tax set-aside, and confusing the two would leave the household short of both."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: This household must hold two separate pools of money that it is not free to spend. Name them with their amounts, explain why keeping them separate matters, and describe how much of the seasonal earner’s $2,100 monthly pay is genuinely available to the household in a working month. Names both pools with figures: $3,024.00 set aside for the tax bill and $3,080.00 held to bridge the 4 off-season months. Explains why they must not be pooled: the tax money is owed to someone else and spending it during the off-season creates a bill the household cannot meet, so a single combined balance will look adequate right up to the point it is not. Computes or reasons to the available portion of the seasonal pay: $2,100 less the $378.00 tax set-aside is $1,722.00, and part of that must also go toward the off-season buffer, so materially less than $2,100 is genuinely spendable in a working month. Uses the $3,024.00 tax set-aside and the $3,080.00 off-season buffer, and refers to the -$770.00 monthly off-season position. The response keeps the two reserves distinct rather than adding them into one target. The response recognises that the annual surplus of $4,536.00 is only $1,456.00 more than the $3,080.00 off-season buffer — and does not compare it against the two reserves added together, since the $3,024.00 tax set-aside was already removed before the surplus was computed."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names both pools with figures: $3,024.00 set aside for the tax bill and $3,080.00 held to bridge the 4 off-season months. Explains why they must not be pooled: the tax money is owed to someone else and spending it during the off-season creates a bill the household cannot meet, so a single combined balance will look adequate right up to the point it is not. Computes or reasons to the available portion of the seasonal pay: $2,100 less the $378.00 tax set-aside is $1,722.00, and part of that must also go toward the off-season buffer, so materially less than $2,100 is genuinely spendable in a working month."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u03-l08.scoring.json",
+    "sourceScoringSha256": "12e40006839faf786021349aaa46e3cedf565f8539014a7713ec0bf1a0731236",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

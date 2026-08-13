@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l06",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: integrating tax reasoning into a whole plan"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "integrating tax reasoning into a whole plan",
+  "objective": "Combine a fictional pre-tax contribution and a fictional credit in one calculation, apply them in the correct order, and measure the effect on the effective rate.",
+  "scenario": "Barnabas Ifeanyi-Ostrowski is building a fictional annual plan in a simulated tax system. The schedule, the contribution, and the credit below were chosen for this course and describe no real tax system.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule and relief figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is gross income less a standard deduction of $11,400, and tax is 10% on the first $9,800 of taxable income, 14% between $9,800 and $38,400, and 22% between $38,400 and $85,400. Barnabas earns $61,500. A pre-tax contribution reduces taxable income; a credit reduces the tax after it has been computed.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Barnabas’s taxable income before any relief?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is his tax before any relief?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "A $5,500 pre-tax contribution reduces taxable income. What is his tax after it?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much does the contribution save?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "A $900 credit is also available. It applies to the tax after the contribution has been taken into account.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the tax after both the contribution and the $900 credit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total tax reduction from both reliefs together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What was his effective rate before any relief, against his $61,500 income? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is his effective rate after both reliefs? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Would applying the $900 credit before the contribution change the final tax?",
+          "choices": [
+            "Yes, applying the credit first would give a different result",
+            "No, the two reliefs act at different points and the order does not change the total"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The two reliefs reduced Barnabas’s tax by $2,110.00 and his effective rate from 12.3% to 8.9%. Say which relief did more, explain why, and describe what would change the answer."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Barnabas’s effective rate fell to 8.9% but his take-home pay also fell by the amount he contributed. Explain why a lower effective rate is not by itself evidence that he is better off."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total reduction comes out at $1,408.00, the $900 credit is being treated as though it reduced taxable income. A credit comes off the tax after it is computed, so it is worth exactly $900.00, while the $5,500 contribution reduces taxable income and is worth 22% of itself. Compute the tax from the reduced taxable income first, then subtract the credit.",
+  "extension": "Find the credit that would be worth the same as the $5,500 contribution at Barnabas’s marginal rate, and say what credit would be needed if his marginal rate were 14% instead.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Barnabas’s taxable income before any relief?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is his tax before any relief?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "A $5,500 pre-tax contribution reduces taxable income. What is his tax after it?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much does the contribution save?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the tax after both the contribution and the $900 credit?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total tax reduction from both reliefs together?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What was his effective rate before any relief, against his $61,500 income? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is his effective rate after both reliefs? Give one decimal place."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Would applying the $900 credit before the contribution change the final tax?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The two reliefs reduced Barnabas’s tax by $2,110.00 and his effective rate from 12.3% to 8.9%. Say which relief did more, explain why, and describe what would change the answer."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Barnabas’s effective rate fell to 8.9% but his take-home pay also fell by the amount he contributed. Explain why a lower effective rate is not by itself evidence that he is better off."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u07-l06.package.json",
+    "sourcePackageSha256": "b303aa3ad99c818ef8c729181e84ad93ad022a0d4b108c6c58dc910c8790afa0",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u07-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

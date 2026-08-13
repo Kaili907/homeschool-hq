@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l07",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: recurring obligations and renewal management"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "recurring obligations and renewal management",
+  "objective": "Aggregate a set of small recurring increases a fictional household accepted, compare them against a one-off purchase it refused, and name the misconception that produced the inconsistency.",
+  "scenario": "The six simulated price increases and the fictional refused purchase described below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional increase list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Across one year the fictional household accepted six increases on services it keeps: $2.00, $3.50, $9.99, $4.25, $6.00, and $1.75 a month. In the same year it refused a one-off purchase of $400 on the grounds that it was too expensive. Assume the six increases stay at the new level and no further increases arrive for 3 years.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the six increases add up to per month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do they come to across one year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do they come to across the 3 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now set the two decisions side by side.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many times the refused $400 purchase is the 3-year cost of the accepted increases? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Over the 3 years, which decision commits the household to more money?",
+          "choices": [
+            "Accepting the six increases",
+            "Making the one-off purchase"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The household refused $400 and accepted $989.64. Name the misconception that makes this feel consistent at the time, and describe a rule the household could adopt that would have caught it — stating what your rule would cost in effort."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two decisions still look consistent, put them on one scale. Convert the monthly increases to a yearly figure of $329.88 and then to $989.64 across the 3 years, and only then set that against the $400. Comparing $9.99 a month with $400 compares a rate against a total.",
+  "extension": "Recompute the 3-year figure assuming each of the six services raises its price by a further 4% each year, and say how much the flat assumption understated.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the six increases add up to per month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do they come to across one year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What do they come to across the 3 years?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many times the refused $400 purchase is the 3-year cost of the accepted increases? Give two decimal places."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Over the 3 years, which decision commits the household to more money?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The household refused $400 and accepted $989.64. Name the misconception that makes this feel consistent at the time, and describe a rule the household could adopt that would have caught it — stating what your rule would cost in effort."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u02-l07.package.json",
+    "sourcePackageSha256": "140ab7cca9cea3e9172e994fb00fa00b80bb9dca4f53f0c8627d141796e9a7ac",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u02-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

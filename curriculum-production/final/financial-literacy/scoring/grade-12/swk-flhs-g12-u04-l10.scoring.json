@@ -1,0 +1,383 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l10",
+  "lessonId": "ma-g12-financial-literacy-u04-l10",
+  "integratedDomains": [
+    "debt",
+    "postsecondary-financing",
+    "income",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$297.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "27.6 thousands at $10.79 each. The payment is fixed by the loan, so it is the same in both scenarios; only the income under it changes."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$35,736.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$297.80 in each of 120 months."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$8,136.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$35,736.00 repaid against $27,600 borrowed."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$46,800 across the 12 months of a year, before tax. The payment share rule is written against gross pay, so gross is the base used in both scenarios."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "7.64%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$297.80 against $3,900.00 — inside the 8% target with room to spare."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,850.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$34,200 across the 12 months of a year — $1,050.00 a month less than scenario A, on the same fixed loan payment."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "10.45%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$297.80 against $2,850.00. The identical payment breaks the graduate’s own 8% target once income is $12,600 lower."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$3,573.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$297.80 in each of 12 months — the annual claim on income before anything else is paid."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$228.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "8% of $2,850.00. The gap between this and $297.80 is $69.80 a month, which is what a longer term or a smaller balance would have to bridge."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balance / 1000 * factor, 2)",
+        "substituted": "round(27600 / 1000 * 10.79, 2)",
+        "result": "$297.80",
+        "why": "27.6 thousands at $10.79 each. The payment is fixed by the loan, so it is the same in both scenarios; only the income under it changes."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * payments",
+        "substituted": "#t1-p1 * 120",
+        "result": "$35,736.00",
+        "why": "$297.80 in each of 120 months."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - balance2",
+        "substituted": "#t1-p2 - 27600",
+        "result": "$8,136.00",
+        "why": "$35,736.00 repaid against $27,600 borrowed."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(salaryA / 12, 2)",
+        "substituted": "round(46800 / 12, 2)",
+        "result": "$3,900.00",
+        "why": "$46,800 across the 12 months of a year, before tax. The payment share rule is written against gross pay, so gross is the base used in both scenarios."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 / #t2-p1 * 100, 2)",
+        "substituted": "round(#t1-p1 / #t2-p1 * 100, 2)",
+        "result": "7.64%",
+        "why": "$297.80 against $3,900.00 — inside the 8% target with room to spare."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(salaryB / 12, 2)",
+        "substituted": "round(34200 / 12, 2)",
+        "result": "$2,850.00",
+        "why": "$34,200 across the 12 months of a year — $1,050.00 a month less than scenario A, on the same fixed loan payment."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t1-p1 / #t2-p3 * 100, 2)",
+        "substituted": "round(#t1-p1 / #t2-p3 * 100, 2)",
+        "result": "10.45%",
+        "why": "$297.80 against $2,850.00. The identical payment breaks the graduate’s own 8% target once income is $12,600 lower."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t1-p1 * 12",
+        "substituted": "#t1-p1 * 12",
+        "result": "$3,573.60",
+        "why": "$297.80 in each of 12 months — the annual claim on income before anything else is paid."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "round(#t2-p3 * cap, 2)",
+        "substituted": "round(#t2-p3 * 0.08, 2)",
+        "result": "$228.00",
+        "why": "8% of $2,850.00. The gap between this and $297.80 is $69.80 a month, which is what a longer term or a smaller balance would have to bridge."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Write a repayment plan for this fictional graduate that works in scenario A and does not fail in scenario B. State what the plan does differently in each case, name what it costs in the weaker case, and say which part of the plan you are least confident about.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Sets out what happens in scenario A with figures: the $297.80 payment takes 7.64% of gross, is affordable as scheduled, and any surplus could be applied to the balance to reduce the $8,136.00 of interest.",
+          "Sets out a concrete response for scenario B rather than an intention: either accepting 10.45% and naming what else in the budget absorbs it, or moving to a longer term that brings the payment toward $228.00 and stating that this raises total repaid.",
+          "Names the cost of the weaker case explicitly — a payment taking 10.45% of gross, or a longer term costing more than $8,136.00 in interest.",
+          "Identifies the least confident element with a reason, most defensibly the assumption that only these two salary outcomes are possible, or that scenario B’s income stays flat rather than recovering."
+        ],
+        "evidenceRequirements": [
+          "Uses the 7.64% and 10.45% payment shares and the $228.00 payment scenario B would support.",
+          "States the total repaid or the total interest under the plan proposed."
+        ],
+        "lookFors": [
+          "The plan is written to be executed in either outcome rather than assuming the better one.",
+          "Several plans are defensible — holding the standard schedule and adjusting spending, or extending the term — and each is credited when its cost is stated.",
+          "The response does not treat the 8% target as a rule that cannot be revisited, provided any revision is justified."
+        ],
+        "commonMisconception": "Building a repayment plan around the expected salary alone, so the plan has nothing to say about the outcome that would actually make it difficult.",
+        "dimensions": [
+          "plan-coherence",
+          "communication-of-uncertainty",
+          "tradeoff-defense",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly payment?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is repaid in total across the 120 payments?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of the total is interest?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is monthly gross pay in scenario A?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What share of gross does the payment take in scenario A, to two decimal places?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is monthly gross pay in scenario B?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What share of gross does the same payment take in scenario B, to two decimal places?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the payment cost across a full year?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What monthly payment would satisfy the 8% target in scenario B?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write a repayment plan for this fictional graduate that works in scenario A and does not fail in scenario B. State what the plan does differently in each case, name what it costs in the weaker case, and say which part of the plan you are least confident about."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the monthly payment? Answer: $297.80. Verification: 27.6 thousands at $10.79 each. The payment is fixed by the loan, so it is the same in both scenarios; only the income under it changes. t1-p2: What is repaid in total across the 120 payments? Answer: $35,736.00. Verification: $297.80 in each of 120 months. t1-p3: How much of the total is interest? Answer: $8,136.00. Verification: $35,736.00 repaid against $27,600 borrowed. t2-p1: What is monthly gross pay in scenario A? Answer: $3,900.00. Verification: $46,800 across the 12 months of a year, before tax. The payment share rule is written against gross pay, so gross is the base used in both scenarios. t2-p2: What share of gross does the payment take in scenario A, to two decimal places? Answer: 7.64%. Verification: $297.80 against $3,900.00 — inside the 8% target with room to spare. t2-p3: What is monthly gross pay in scenario B? Answer: $2,850.00. Verification: $34,200 across the 12 months of a year — $1,050.00 a month less than scenario A, on the same fixed loan payment. t2-p4: What share of gross does the same payment take in scenario B, to two decimal places? Answer: 10.45%. Verification: $297.80 against $2,850.00. The identical payment breaks the graduate’s own 8% target once income is $12,600 lower. t3-p1: What does the payment cost across a full year? Answer: $3,573.60. Verification: $297.80 in each of 12 months — the annual claim on income before anything else is paid. t3-p2: What monthly payment would satisfy the 8% target in scenario B? Answer: $228.00. Verification: 8% of $2,850.00. The gap between this and $297.80 is $69.80 a month, which is what a longer term or a smaller balance would have to bridge."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: Write a repayment plan for this fictional graduate that works in scenario A and does not fail in scenario B. State what the plan does differently in each case, name what it costs in the weaker case, and say which part of the plan you are least confident about. Sets out what happens in scenario A with figures: the $297.80 payment takes 7.64% of gross, is affordable as scheduled, and any surplus could be applied to the balance to reduce the $8,136.00 of interest. Sets out a concrete response for scenario B rather than an intention: either accepting 10.45% and naming what else in the budget absorbs it, or moving to a longer term that brings the payment toward $228.00 and stating that this raises total repaid. Names the cost of the weaker case explicitly — a payment taking 10.45% of gross, or a longer term costing more than $8,136.00 in interest. Identifies the least confident element with a reason, most defensibly the assumption that only these two salary outcomes are possible, or that scenario B’s income stays flat rather than recovering. Uses the 7.64% and 10.45% payment shares and the $228.00 payment scenario B would support. States the total repaid or the total interest under the plan proposed. The plan is written to be executed in either outcome rather than assuming the better one. Several plans are defensible — holding the standard schedule and adjusting spending, or extending the term — and each is credited when its cost is stated. The response does not treat the 8% target as a rule that cannot be revisited, provided any revision is justified."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Sets out what happens in scenario A with figures: the $297.80 payment takes 7.64% of gross, is affordable as scheduled, and any surplus could be applied to the balance to reduce the $8,136.00 of interest. Sets out a concrete response for scenario B rather than an intention: either accepting 10.45% and naming what else in the budget absorbs it, or moving to a longer term that brings the payment toward $228.00 and stating that this raises total repaid. Names the cost of the weaker case explicitly — a payment taking 10.45% of gross, or a longer term costing more than $8,136.00 in interest. Identifies the least confident element with a reason, most defensibly the assumption that only these two salary outcomes are possible, or that scenario B’s income stays flat rather than recovering."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u04-l10.scoring.json",
+    "sourceScoringSha256": "396f403b39950aa38502e3ac055ca2f875e14246563a9645dec15f974a577c59",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

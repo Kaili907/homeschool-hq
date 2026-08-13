@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u05-l02",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Ads, Scams, Borrowing, and Giving",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: persuasion techniques",
+    "focus": "persuasion techniques"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 5 — advertising, risk, borrowing, and giving"
+  ],
+  "objective": "Learners identify specific persuasion techniques in invented advertisements and explain what each one is aimed at rather than whether the product is good.",
+  "scenario": "Jonas is a made-up fourth grader collecting three invented advertisements for a class display. One shows a crowd of happy children, one shouts that only 4 are left, and one is fronted by a made-up sports star. None of the products or ads is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Look at Jonas's three invented advertisements one at a time. Each one is trying to move a different feeling. Name the technique in each before saying whether the product might be any good.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the technique each of Jonas's three advertisements uses, and what feeling it aims at."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Pick the advertisement from Jonas's set that you think would work best on someone your age, and explain the mechanics of why, without deciding whether the product is worth buying.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Which of Jonas's advertisements would work best on someone your age, and what exactly makes it effective?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "None of the three ads said much about the product itself.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What question could Jonas ask about any advertisement to get past the technique to the facts?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner rates the products, cover the product images entirely and have the learner describe only what each of Jonas's advertisements is doing to the viewer.",
+  "extension": "Ask the learner to design a fourth advertisement for Jonas's display that uses no technique at all, and to say why it feels flat.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u05-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u05-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "Name the technique each of Jonas's three advertisements uses, and what feeling it aims at."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "Which of Jonas's advertisements would work best on someone your age, and what exactly makes it effective?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "What question could Jonas ask about any advertisement to get past the technique to the facts?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u05-l02.package.json",
+    "sourcePackageSha256": "12780bb52c268f855e5c4efaaccd12b6bb3fc08297b4e962b2d6efd5b9305243",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u05-l02",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

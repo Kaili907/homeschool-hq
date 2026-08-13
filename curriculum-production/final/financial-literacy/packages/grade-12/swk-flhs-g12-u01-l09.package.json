@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l09",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: reading and verifying a pay statement"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "reading and verifying a pay statement",
+  "objective": "Account for every line that moved between two simulated pay statements after a raise and a benefit change, and judge whether smaller take-home pay means the worker is worse off.",
+  "scenario": "The two simulated pay statements compared below are fictional, as are the employer, the raise, and every rate applied.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional statement figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker is paid over 24 periods a year. Before the change the salary was $50,400 with a retirement election of 5%; after the change it is $54,000 with a retirement election of 7%. The payroll levy is 7.65% of gross. Federal income tax withheld rose by $10.20 a period.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What was gross pay per period before the change?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is gross pay per period after the change?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now account for each line that changed between the two statements.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What was the retirement deduction per period before the change?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the retirement deduction per period after the change?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the payroll levy rise per period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the change in take-home pay per period, once the retirement increase, the levy increase, and the $10.20 of extra income tax are all accounted for?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The fictional worker sees a $150.00 raise turn into $75.82 more in the account and calls it \"half a raise\". Say what is fair and what is unfair in that description, and explain how you would classify the $52.50 that went to retirement."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the take-home change comes out as $150.00, no line below gross has been accounted for. Work down the statement: gross rose $150.00, the retirement deduction rose $52.50, the levy rose $11.48, and income tax rose $10.20. Subtract the last three from the first, and keep them separate so you can say which are costs.",
+  "extension": "Work out what the take-home change would have been had the worker left the retirement election at 5%, and say what that comparison shows about who decided the size of the raise the worker felt.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What was gross pay per period before the change?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is gross pay per period after the change?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What was the retirement deduction per period before the change?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the retirement deduction per period after the change?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the payroll levy rise per period?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the change in take-home pay per period, once the retirement increase, the levy increase, and the $10.20 of extra income tax are all accounted for?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The fictional worker sees a $150.00 raise turn into $75.82 more in the account and calls it \"half a raise\". Say what is fair and what is unfair in that description, and explain how you would classify the $52.50 that went to retirement."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u01-l09.package.json",
+    "sourcePackageSha256": "f9e8712bb929af911a779490d78f4a52eaa20716e0fd3d2ea9f584695661e274",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u01-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

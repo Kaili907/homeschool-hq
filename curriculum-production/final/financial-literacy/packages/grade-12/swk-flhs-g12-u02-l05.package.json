@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l05",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: consumer rights and where to escalate"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "consumer rights and where to escalate",
+  "objective": "Establish which remedies remain open on a fictional failed purchase once one window has closed, price the route the household would otherwise pay for, and order the escalation.",
+  "scenario": "The simulated purchase, the store policy, the manufacturer warranty, and the card issuer’s dispute window described below are all invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional purchase and policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional buyer paid $684 for a simulated appliance using a credit card. The store accepts returns for 30 days and charges a restocking fee of 10%. The manufacturer warranty runs 24 months and covers repair at no charge. The card issuer accepts a dispute up to 120 days from the charge. The appliance fails on day 96, which the fictional warranty administrator counts as 3 whole months of the warranty used. A repair shop quotes $228 for the repair plus a $45 diagnostic fee.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "If a return were still possible, what would the restocking fee be?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would a return inside the window have refunded?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now establish what is still open on day 96, and what the household avoids by using it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many days remain in the card issuer’s dispute window on day 96?",
+          "unit": "days"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many months of manufacturer warranty remain?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the household pay to have the appliance repaired without using the warranty?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Is the store return route available on day 96?",
+          "choices": [
+            "Yes — the appliance is defective, which extends the window",
+            "No — the 30-day return window closed 66 days ago"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Put the remaining routes in the order you would use them, and justify the order with the figures. Say specifically why the 24 days left on one window should affect the order even though that route is not the one you would try first."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the store return looks available, check the policy against the calendar: 30 days from purchase ends on day 30, and the failure is on day 96. A defect does not extend a stated return window. The routes that remain are the ones written to cover a later failure — the 24-month warranty and, for 24 more days, the card dispute.",
+  "extension": "Work out what the household loses by discovering the failure on day 130 instead, and say which single route that change removes.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "If a return were still possible, what would the restocking fee be?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would a return inside the window have refunded?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many days remain in the card issuer’s dispute window on day 96?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many months of manufacturer warranty remain?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would the household pay to have the appliance repaired without using the warranty?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Is the store return route available on day 96?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Put the remaining routes in the order you would use them, and justify the order with the figures. Say specifically why the 24 days left on one window should affect the order even though that route is not the one you would try first."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u02-l05.package.json",
+    "sourcePackageSha256": "71186b70b52587b7cfb9a94487c22b99b99f2128110b16b1b8f586601397e600",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u02-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}
