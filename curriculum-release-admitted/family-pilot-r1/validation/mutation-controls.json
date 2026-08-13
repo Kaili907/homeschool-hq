@@ -1,0 +1,79 @@
+{
+  "overall": "PASS",
+  "controls": [
+    {
+      "mutation": "remove-one-lesson-binding",
+      "result": "DETECTED",
+      "expectedDetection": "binding-totality",
+      "failedChecks": [
+        "binding-totality",
+        "subject-production-totals",
+        "family-production-totals"
+      ]
+    },
+    {
+      "mutation": "duplicate-one-lesson-binding",
+      "result": "DETECTED",
+      "expectedDetection": "binding-uniqueness",
+      "failedChecks": [
+        "binding-totality",
+        "binding-uniqueness",
+        "subject-production-totals",
+        "family-production-totals"
+      ]
+    },
+    {
+      "mutation": "bind-wrong-subject",
+      "result": "DETECTED",
+      "expectedDetection": "binding-identity",
+      "failedChecks": [
+        "binding-identity",
+        "subject-production-totals",
+        "family-production-totals"
+      ]
+    },
+    {
+      "mutation": "replace-science-h4-with-older-source",
+      "result": "DETECTED",
+      "expectedDetection": "science-h4-lineage",
+      "failedChecks": [
+        "science-h4-lineage"
+      ]
+    },
+    {
+      "mutation": "remove-rfl-completion-authority",
+      "result": "DETECTED",
+      "expectedDetection": "rfl-completion-authority",
+      "failedChecks": [
+        "rfl-completion-authority"
+      ]
+    },
+    {
+      "mutation": "mark-dynamic-social-source-static-ready",
+      "result": "DETECTED",
+      "expectedDetection": "social-dynamic-runtime-semantics",
+      "failedChecks": [
+        "social-dynamic-runtime-semantics"
+      ]
+    },
+    {
+      "mutation": "include-grade8-math-reserve-as-active",
+      "result": "DETECTED",
+      "expectedDetection": "math-reserves-excluded",
+      "failedChecks": [
+        "binding-totality",
+        "subject-production-totals",
+        "family-production-totals",
+        "math-reserves-excluded"
+      ]
+    },
+    {
+      "mutation": "strip-finlit-scoring-mode-metadata",
+      "result": "DETECTED",
+      "expectedDetection": "finlit-h3-scoring-contract",
+      "failedChecks": [
+        "finlit-h3-scoring-contract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "sealedReleaseModified": false,
+  "sealedTreeSha": "1f18bb1af429ecac9124d39984b288181c7a154b",
+  "instructionMutationPolicy": "This structural candidate does not rewrite lesson instruction to resolve metadata or standards states.",
+  "entries": [
+    {
+      "correction": "G34_NORMALIZATION_R2",
+      "state": "APPLIED",
+      "scope": {
+        "grades": [
+          3,
+          4
+        ],
+        "subjects": [
+          "arts-and-music",
+          "english-language-arts",
+          "financial-literacy",
+          "health",
+          "mathematics",
+          "physical-education",
+          "ready-for-life",
+          "science",
+          "social-studies",
+          "technology"
+        ]
+      },
+      "stableIds": "PRESERVED",
+      "input": "g34_normalization"
+    },
+    {
+      "correction": "G3_HEALTH_H2",
+      "state": "APPLIED",
+      "scope": {
+        "grades": [
+          3,
+          4
+        ],
+        "subjects": [
+          "health"
+        ]
+      },
+      "note": "The named branch contains H2 source corrections for both Grade 3 and Grade 4 Health; their stable IDs replace the older normalized content binding.",
+      "stableIds": "PRESERVED",
+      "input": "g3_health_h2"
+    },
+    {
+      "correction": "G8_MATH_8_EE_2_180_DAY",
+      "state": "APPLIED_TO_REQUIRED_PATH",
+      "scope": {
+        "grades": [
+          8
+        ],
+        "subjects": [
+          "mathematics"
+        ]
+      },
+      "addedRequiredLessonRefs": [
+        "ma-g8-mathematics-u01-l19",
+        "ma-g8-mathematics-u01-l20",
+        "ma-g8-mathematics-u01-l21",
+        "ma-g8-mathematics-u01-l22"
+      ],
+      "withdrawnToReserveLessonRefs": [
+        "ma-g8-mathematics-u10-l10",
+        "ma-g8-mathematics-u10-l13",
+        "ma-g8-mathematics-u10-l14",
+        "ma-g8-mathematics-u10-l17"
+      ],
+      "requiredDays": 180,
+      "assessmentDelta": 1,
+      "stableIds": "PRESERVED_EXCEPT_EXPLICIT_NEW_IDS",
+      "input": "g8_math_integration"
+    },
+    {
+      "correction": "HS912_NORMALIZATION_R2",
+      "state": "APPLIED",
+      "scope": {
+        "grades": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "subjects": [
+          "arts-and-music",
+          "english-language-arts",
+          "financial-literacy",
+          "health",
+          "mathematics",
+          "physical-education",
+          "ready-for-life",
+          "science",
+          "social-studies",
+          "technology"
+        ]
+      },
+      "stableIds": "PRESERVED",
+      "input": "hs912_normalization"
+    },
+    {
+      "correction": "HS_SCIENCE_H4",
+      "state": "APPLIED",
+      "scope": {
+        "grades": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "subjects": [
+          "science"
+        ]
+      },
+      "idPolicy": "ALIAS_NOT_RENAME",
+      "stableIds": "AUTHORED_MA_HS_IDS_PRESERVED",
+      "input": "hs912_science_h4"
+    },
+    {
+      "correction": "G34_STANDARDS_EVIDENCE_POLICIES",
+      "state": "APPLIED_AS_EVIDENCE",
+      "scope": {
+        "grades": [
+          3,
+          4
+        ]
+      },
+      "instructionEdited": false,
+      "inputs": [
+        "g34_standards_core",
+        "g34_specialty_health_finlit_rfl",
+        "g34_specialty_arts_pe"
+      ]
+    },
+    {
+      "correction": "SOCIAL_DYNAMIC_SOURCES_R3",
+      "state": "ATTACHED_AS_SOURCE_TRACKING",
+      "scope": {
+        "grades": [
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "subjects": [
+          "social-studies"
+        ]
+      },
+      "instructionEdited": false,
+      "input": "social_dynamic_sources"
+    }
+  ]
+}

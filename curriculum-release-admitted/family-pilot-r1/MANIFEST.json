@@ -1,0 +1,56 @@
+{
+  "releaseId": "family-pilot-r1",
+  "releaseVersion": "2.0.0",
+  "classification": "ADMITTED_PRODUCTION_BOUND_FAMILY_PILOT_R1",
+  "admissionStatus": "ADMITTED",
+  "supportedGrades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "unsupportedGrades": [
+    6
+  ],
+  "internalWorldLanguage": "ABSENT",
+  "counts": {
+    "grades": 9,
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699
+  },
+  "productionBindings": {
+    "structuralLessonRefs": 8292,
+    "admittedBindings": 8292,
+    "familyTotals": {
+      "mathematics": 1620,
+      "english-language-arts": 1620,
+      "science": 972,
+      "social-studies": 972,
+      "health-physical-education": 1296,
+      "ready-for-life": 324,
+      "technology-arts-and-music": 984,
+      "financial-literacy": 504
+    }
+  },
+  "assessmentBindings": {
+    "total": 699,
+    "states": {
+      "BOUND": 135,
+      "STRUCTURAL_ONLY": 564
+    },
+    "blocking": 0
+  },
+  "dynamicSocialSources": {
+    "admitted": 12,
+    "runtimeState": "PENDING_SOURCE_ATTACHMENT",
+    "readyTransition": "ATTACHED_SATISFIED"
+  },
+  "sealedRelease100Modified": false
+}

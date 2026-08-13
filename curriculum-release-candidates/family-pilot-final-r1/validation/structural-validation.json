@@ -1,0 +1,156 @@
+{
+  "classification": "FINAL_CURRICULUM_STRUCTURE_READY",
+  "overall": "PASS",
+  "blockingFailures": 0,
+  "checks": [
+    {
+      "check": "exact-supported-grades",
+      "result": "PASS",
+      "detail": "grades=[3, 4, 5, 7, 8, 9, 10, 11, 12]"
+    },
+    {
+      "check": "grade-6-absent",
+      "result": "PASS",
+      "detail": "no structural record has grade 6"
+    },
+    {
+      "check": "exact-ten-subject-families",
+      "result": "PASS",
+      "detail": "subjects=arts-and-music,english-language-arts,financial-literacy,health,mathematics,physical-education,ready-for-life,science,social-studies,technology"
+    },
+    {
+      "check": "world-language-absent",
+      "result": "PASS",
+      "detail": "no internally authored World Language record"
+    },
+    {
+      "check": "complete-grade-subject-matrix",
+      "result": "PASS",
+      "detail": "actual=90 expected=90"
+    },
+    {
+      "check": "unique-course-slots",
+      "result": "PASS",
+      "detail": "unique=90"
+    },
+    {
+      "check": "unique-unit-refs",
+      "result": "PASS",
+      "detail": "unique=698"
+    },
+    {
+      "check": "unique-required-lesson-refs",
+      "result": "PASS",
+      "detail": "unique=8292"
+    },
+    {
+      "check": "unique-assessment-refs",
+      "result": "PASS",
+      "detail": "unique=699"
+    },
+    {
+      "check": "unit-course-integrity",
+      "result": "PASS",
+      "detail": "units=698"
+    },
+    {
+      "check": "lesson-unit-integrity",
+      "result": "PASS",
+      "detail": "lessons=8292"
+    },
+    {
+      "check": "assessment-course-integrity",
+      "result": "PASS",
+      "detail": "assessments=699"
+    },
+    {
+      "check": "unit-lesson-totality",
+      "result": "PASS",
+      "detail": "unitRefs=8292 index=8292"
+    },
+    {
+      "check": "course-derived-counts",
+      "result": "PASS",
+      "detail": "course counts match indexes"
+    },
+    {
+      "check": "schedule-once-per-course-day",
+      "result": "PASS",
+      "detail": "duplicateDays=0 scheduled=8292"
+    },
+    {
+      "check": "production-slot-totality",
+      "result": "PASS",
+      "detail": "slots=8292"
+    },
+    {
+      "check": "production-slots-unbound",
+      "result": "PASS",
+      "detail": "no moving production-final branch imported"
+    },
+    {
+      "check": "science-alias-not-rename",
+      "result": "PASS",
+      "detail": "four HS science aliases preserve authored IDs"
+    },
+    {
+      "check": "standards-ref-totality",
+      "result": "PASS",
+      "detail": "refs=90"
+    },
+    {
+      "check": "advisory-honesty",
+      "result": "PASS",
+      "detail": "advisory states are not promoted to VERBATIM"
+    },
+    {
+      "check": "source-ledger-totality",
+      "result": "PASS",
+      "detail": "inputs=10"
+    },
+    {
+      "check": "sealed-1.0.0-tree-unchanged",
+      "result": "PASS",
+      "detail": "tree=1f18bb1af429ecac9124d39984b288181c7a154b"
+    },
+    {
+      "check": "g8-math-180-day-required-path",
+      "result": "PASS",
+      "detail": "180 required lessons on 180 unique days"
+    },
+    {
+      "check": "expected-release-totals",
+      "result": "PASS",
+      "detail": "courses=90 units=698 lessons=8292 assessments=699"
+    }
+  ],
+  "counts": {
+    "grades": 9,
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699
+  },
+  "advisoryReviewCounts": {
+    "g34ArtsHumanReviewRequired": {
+      "distinctMappings": 4,
+      "citationOccurrences": 72
+    },
+    "g34PhysicalEducationHumanReviewRequired": {
+      "distinctMappings": 6,
+      "citationOccurrences": 288
+    },
+    "g34CoreHumanReviewRequired": {
+      "distinctMappings": 1,
+      "citationOccurrences": 12
+    },
+    "hsDeclaredUnverified": {
+      "distinctMappings": 11
+    },
+    "hsScienceFoundationHumanReview": {
+      "distinctMappings": 1,
+      "unitRecords": 4
+    },
+    "releaseEffect": "ADVISORY"
+  }
+}

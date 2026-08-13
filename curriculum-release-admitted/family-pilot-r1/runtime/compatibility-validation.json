@@ -1,0 +1,24 @@
+{
+  "finalRuntimeSourceCommit": "fe3d9f2fbf29714c49fe95fd9396bb95a614810a",
+  "status": "PASS",
+  "checks": {
+    "supportedGrades": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "grade6Absent": true,
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "schedules": 9,
+    "dynamicSourceRows": 12,
+    "eagerManifestContainsLessonBody": false
+  }
+}
