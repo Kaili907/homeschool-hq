@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u04-l02",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Housing and Living Arrangements",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: reading a sample lease and naming its obligations"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read a provided sample lease excerpt and correctly name what it obligates the tenant to do and what it obligates the landlord to do, so they can recognize the same categories of terms in any lease they encounter later.",
+  "scenario": "A sample lease excerpt is provided for a fictional apartment, Sunrise Apartments. It states: rent is $900 per month, due on the 1st, with a $40 late fee if paid after the 5th. The security deposit is $900, refundable within 21 days of move-out if the unit shows no damage beyond normal wear and tear. The tenant is responsible for carrying renter's insurance, replacing lightbulbs and air filters, keeping the unit reasonably clean, and notifying the landlord within 24 hours of any needed repair. The landlord is responsible for major repairs, including plumbing, heating, and any appliances provided with the unit. Ending the lease requires 60 days of written notice before move-out, and subletting is not allowed without the landlord's written approval. The learner works through this excerpt piece by piece to name exactly what it requires of each party.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The lease excerpt is entirely fictional and provided for this lesson; the learner should not use or reference any real lease or real address."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided sample lease excerpt", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading the sample lease, write your own working definition of the key term.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Before reading the sample lease, what do you think the word 'obligation' means in the context of an agreement like a lease?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Work through the sample lease excerpt in four parts, writing exactly what it states for each.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Payment terms: what is the rent amount, when is it due, and what happens if it's paid late?" },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Deposit terms: how much is the deposit, and under what condition is it refunded, and within what timeframe?" },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "Tenant responsibilities: list everything the excerpt says the tenant must do." },
+        { "ref": "t2-p4", "promptType": "extended-response", "text": "Notice-to-end terms: how much notice is required before moving out, and what does the excerpt say about subletting?" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Sort the excerpt's obligations by who they belong to.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "In your own words, list three things you (as the tenant) would be responsible for doing if you signed this lease, and one thing the landlord is responsible for instead." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what a first-time tenant might overlook.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which clause in this excerpt is one a first-time tenant might not think to look for, and why does missing it matter?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's list in task 3 mixes tenant and landlord responsibilities (for example, listing 'major repairs' as something the tenant must do), reteach by having the learner sort every obligation named in the excerpt into two labeled columns, tenant and landlord, before rewriting the task 3 answer.",
+  "extension": "Provide the learner with a second, slightly more complex lease excerpt that adds a clause the first one didn't have (such as a pet deposit or an early-termination fee) and have them name that new obligation and which party it falls on.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

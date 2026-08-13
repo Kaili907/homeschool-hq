@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u02-l03",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Job Readiness: Applications, Resumes, and Interviews",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: gathering references appropriately"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners identify two people outside their family who could genuinely speak to their reliability or work, and draft the message they would send to ask permission to list each as a reference, without sending it, so they understand what makes an appropriate reference and how to ask respectfully.",
+  "scenario": "The learner names two non-family adults who know their work directly (such as a teacher, coach, club leader, or volunteer supervisor), explains in one sentence what each could honestly speak to, and drafts (but does not send) a short, polite message asking permission to list them as a reference.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This draft is never sent as part of the lesson; no real message is required to reach anyone.",
+    "A reference should be someone who has directly observed the learner's work, not simply someone who likes them; the task requires naming what each person could honestly speak to."
+  ],
+  "simulationAlternative": null,
+  "materials": ["a notebook or document", "the four-part permission-request pattern on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List two non-family adults who have directly observed your work, and one sentence on what each could honestly speak to.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name two people and, for each, one honest thing they could speak to based on what they've actually seen you do." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft a short, polite permission-request message for one of the two people, asking before listing them as a reference.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My draft asks permission before assuming the person agrees to be a reference." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My draft gives enough context (what I'm applying for, and roughly when they might be contacted) that the person can decide." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain why each of your two chosen people is an appropriate reference and not just someone who likes you.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each of your two people, explain what they have directly observed that makes them able to honestly speak to your work, not just a friendly relationship." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what makes a reference request respectful.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Name one thing your draft message does to make it easy for the person to say no if they're not comfortable, and why that matters." }
+      ]
+    }
+  ],
+  "remediation": "If a learner names someone who only knows them socially with nothing to observe about their work, reteach by contrasting 'knows me' with 'has seen me do something specific' using two side-by-side examples, then have the learner reconsider their two choices against that distinction.",
+  "extension": "Have the learner draft a second permission-request message for a person in a different context (for example, a coach instead of a teacher) and compare what details changed between the two messages.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

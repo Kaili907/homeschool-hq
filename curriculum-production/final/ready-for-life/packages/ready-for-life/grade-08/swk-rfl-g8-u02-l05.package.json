@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u02-l05",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Operations and Basic Maintenance",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: utility and fire-safety awareness"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "With a trusted adult present the entire time, learners locate, but do not operate, test, or trigger, three home safety features (the main water shutoff, the electrical breaker or fuse box, and the nearest fire extinguisher or smoke detector) and explain in their own words why each one matters and what situation would call for using it.",
+  "scenario": "With an adult present for every step, the learner walks through their home locating three safety features one at a time: the main water shutoff valve, the electrical breaker or fuse box, and the nearest fire extinguisher or smoke detector. The learner points to or stands next to each one, names it out loud, and explains its purpose, without touching, flipping, testing, or discharging anything.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult walks through the entire home with the learner and stays present for all three location checks; the learner is never in a utility area, near the breaker box, or near a fire extinguisher alone.",
+    "The learner points to and names each safety feature but does not touch, flip, test, or discharge the breaker switches, the water shutoff valve, or the fire extinguisher at any point.",
+    "If any of the three features is inaccessible, damaged, or unclear (for example, a locked utility closet or an unlabeled breaker panel), stop and use the simulation alternative instead of attempting to force access."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If any of the three safety features can't be located in the learner's home, use the floor-plan description on this task sheet instead: a single-story home with the water shutoff in a utility closet near the water heater, the breaker box on an interior garage wall, and a smoke detector in the hallway outside the bedrooms. Identify where each would typically be found in that layout and explain why its location makes sense."
+  },
+  "materials": [
+    "access to the home's main water shutoff, breaker or fuse box, and a fire extinguisher or smoke detector, walked through together with a trusted adult",
+    "paper or a notebook",
+    "a pen or pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before walking through the home, talk with your adult about why these three features exist and what each one is used for in an emergency.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Before you begin, guess in one sentence each: what do you think the water shutoff, the breaker box, and a fire extinguisher or smoke detector are each used for?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present, walk to each of the three safety features one at a time. Stand next to it, name it out loud to your adult, and do not touch, flip, or test it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My adult was present with me for all three location checks."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I located and named the main water shutoff without touching or turning it."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I located and named the breaker or fuse box without touching or flipping any switch."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I located and named the nearest fire extinguisher or smoke detector without touching, testing, or discharging it."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each of the three safety features, explain in detail, without your adult prompting you, what specific emergency situation would call for someone to use it, and what would go wrong in that situation if the feature didn't exist or couldn't be found quickly.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each of the three safety features (the water shutoff, the breaker or fuse box, and the fire extinguisher or smoke detector), explain the specific emergency situation that would call for someone to use it, describe who in the household should be the one to actually operate it in that emergency, and explain what could go wrong if nobody in the household knew where to find it quickly."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what you now know that you didn't before.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which of the three locations did you not know before this lesson, and how would you describe its location to someone else in your household who has also never been shown?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner can locate a feature but cannot explain its emergency purpose in their own words, reteach with a simple 'what happens without it' question for that one feature specifically (for example, 'what happens to a flooding pipe if nobody can shut off the water') before revisiting the explanation.",
+  "extension": "Have the learner ask one other household member to walk them to the same three features from memory, without the learner leading, to check that the location knowledge has been shared beyond just the learner.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

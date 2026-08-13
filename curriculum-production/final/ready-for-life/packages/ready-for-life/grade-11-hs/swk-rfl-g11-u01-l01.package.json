@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u01-l01",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Postsecondary Pathways",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: college, trade, apprenticeship, military, and direct work"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners can name and briefly describe the five broad postsecondary pathways (college, trade, apprenticeship, military, direct work) and use their own actual interests and strengths, not abstract rankings, to sort the five into ones genuinely worth investigating further versus ones that are not a fit right now.",
+  "scenario": "The learner reads short plain-language descriptions of all five pathways, then sorts them against their own real interests and strengths rather than against which pathway sounds most impressive or most common in their household.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson is a written sorting and reflection exercise only; no contact with any outside person or organization is required to complete it."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "the provided five-pathway description sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting anything, write down what you already believe about each pathway, even if you're not sure it's accurate.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Of the five pathways (college, trade, apprenticeship, military, direct work), which one do you currently know the least about, and what is your best guess at what it actually involves day to day?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the five short pathway descriptions, then sort all five into 'worth investigating further' or 'not a fit right now' based on your own interests and strengths.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I sorted all five pathways into one of the two categories, and none are left unsorted." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "For each pathway you placed in 'worth investigating further,' name one specific interest or strength of yours that connects to it." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain your reasoning for the pathways you set aside, in terms of fit rather than prestige.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each pathway you placed in 'not a fit right now,' explain the reasoning in terms of your own interests or strengths, not in terms of which pathway seems more respected or expected." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on whether outside opinions influenced your sort.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Did any pathway end up in a different category than you expected before you started this lesson? What changed your mind?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's sort is driven by which pathway sounds most prestigious or most expected rather than by their own interests and strengths (a sign the task is being completed as a ranking rather than a fit check), reteach by having the learner cover the pathway names and first list three of their own actual interests or strengths, then only afterward match those to pathways one at a time.",
+  "extension": "Have the learner interview themselves in writing by listing one more pathway-relevant strength or interest not already mentioned, and explain which single pathway from the 'worth investigating further' list it most strengthens.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

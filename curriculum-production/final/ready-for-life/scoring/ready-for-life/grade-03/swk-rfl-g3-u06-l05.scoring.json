@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l05",
+  "lessonId": "ma-g3-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Checklist thoroughness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Checklist items are skipped or rushed through without the guardian."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four checklist items are checked together with the guardian."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner notices and raises a problem the four-item checklist does not cover."
+          }
+        ]
+      },
+      {
+        "dimension": "Completion accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The job is marked complete even though a checklist piece is still unfinished."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Any unfinished piece is identified and completed before the job counts as done."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner explains exactly what made the piece incomplete in the first place."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Disagreements between learner and guardian are resolved by rereading the plan's own wording, not by general judgment.",
+      "The check happens in the same space where the job occurred."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

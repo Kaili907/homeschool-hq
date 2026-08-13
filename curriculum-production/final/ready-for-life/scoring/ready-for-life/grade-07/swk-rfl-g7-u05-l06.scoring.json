@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l06",
+  "lessonId": "ma-g7-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Sorting accuracy and evidence",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Items are sorted by guesswork rather than actual last-used information."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least eight items are sorted into keep, remove, or archive based on actual last-used information."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly identifies a borderline item and explains the specific reasoning for its category."
+          }
+        ]
+      },
+      {
+        "dimension": "Pattern analysis",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No percentage is calculated, or no pattern is identified."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A correct percentage is calculated and a specific pattern is named with at least one example."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner connects the pattern to a specific future habit that would prevent it recurring."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Permission was asked before removing anything on a shared device.",
+      "The percentage calculation is shown, not just stated.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

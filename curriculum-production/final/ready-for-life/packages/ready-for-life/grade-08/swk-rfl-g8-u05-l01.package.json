@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u05-l01",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Work, Communication, and Career Readiness",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: skills and interests"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners generate a broad, unfiltered inventory of their own real skills, interests, and current responsibilities, sorting each item into one of three diagnostic categories before any résumé-style organizing happens later in the unit.",
+  "scenario": "Given a blank three-column chart labeled Can Do, Enjoy, and Counted On For, the learner spends several unhurried minutes free-listing anything true about themselves that fits, then checks whether any item actually belongs in a different column than where it first landed.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "a clock, phone timer, or watch",
+    "the three-column chart on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Set a timer for three minutes and think back over the last two weeks before writing anything down.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one moment from the last two weeks when you finished something, fixed something, or helped someone with a task."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Fill the three-column chart: Can Do, Enjoy, and Counted On For. Write at least three real items in each column, and put a star next to any item that honestly belongs in more than one column.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote at least three real items in each of the three columns."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I starred every item that honestly belongs in more than one column instead of listing it only once."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look back over your full chart and choose the two items that surprised you most once they were written down, whether because you had forgotten them or had never thought of them as a skill or interest before. For each of the two items, explain what the item actually is, which column it landed in, and one specific reason it surprised you to see it in writing.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name your two most surprising items, tell which column each one is in, and explain in a few sentences why each one surprised you once you saw it written down."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the difference between the three columns.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which column was hardest to fill, Can Do, Enjoy, or Counted On For, and what made that one harder than the other two?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's chart stays mostly empty or the same single item gets repeated across all three columns, reteach by walking through one recent day together minute by minute, naming anything the learner did, liked, or was asked to handle, before returning to the full two-week window alone.",
+  "extension": "Have the learner ask a trusted adult or friend which of the listed items that person has also noticed in the learner, then add any new items that surface to the correct column.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

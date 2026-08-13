@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u04-l06",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Consumer Tasks and Everyday Agreements",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: where to get help with a consumer problem"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners work through one simulated consumer problem end to end, identifying the specific term at issue, documenting it, drafting the escalation message, and researching a real, current local resource for consumer help if a direct request is refused, completing this unit's performance task.",
+  "scenario": "Using a new provided fictional consumer-problem scenario, the learner identifies the specific term at issue, documents it in the same log format from earlier this unit, drafts an escalation message, then researches one real, current local or regional resource that helps with consumer problems, verified rather than assumed.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The consumer-problem scenario is fictional and provided with this lesson.",
+    "The researched help resource must be a real, current, verifiable source (such as a consumer protection office or local extension service); the learner is not asked to actually contact it as part of this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided new fictional consumer-problem scenario", "the documentation log format from an earlier lesson", "access to research a real local consumer-help resource, or the provided reference summary", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the new fictional scenario and identify the specific term at issue.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the specific term or rule at issue in this scenario, not just a general description of the problem." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Document the problem using the log format from earlier this unit, then draft the escalation message requesting the specific remedy.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write your documentation log entry for this problem: what happened, the date, and the relevant term." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Draft your escalation message, citing the term and requesting the specific remedy it supports." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Research one real, current local or regional resource that helps with consumer problems, and record what it does and how someone would reach it.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Name the resource, what kind of help it actually provides, and how someone would reach it, citing where you found this information." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the full unit.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Of everything this unit covered, which single skill do you think you're most likely to actually use, and why?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's escalation message doesn't connect to the specific term identified in t1, or the researched resource is generic and not verified as real and current, reteach by requiring the escalation message to quote the exact term from t1, and requiring the resource research to name a specific, checkable source rather than a vague 'look it up online.'",
+  "extension": "Have the learner write a short guide, in their own words, that a friend could follow for handling a similar consumer problem, covering all four steps from this lesson.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

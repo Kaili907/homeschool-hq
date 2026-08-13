@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u04-l05",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Consumer Tasks and Everyday Agreements",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: recognising pressure tactics and scams"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read four short fictional messages, some legitimate and some using common pressure tactics, and identify which specific pressure tactic each scam message uses, so they can recognize the pattern rather than memorizing one example.",
+  "scenario": "The learner reads four short fictional messages (a text, an email, and two phone-call summaries) written for this lesson, decides which are legitimate and which are scams, and names the specific tactic used in each scam message.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All four messages are fictional and written for this lesson; no real phone numbers, links, or company names are used.",
+    "If the learner has actually received a message like one of these, remind them not to click any link or reply, and to show a trusted adult the real message separately from this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the four provided fictional messages", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading the four messages, write down what you already think makes a message feel like a scam.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "In your own words, what is one sign that has made you suspicious of a message before, real or imagined?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read each of the four fictional messages and decide whether it is legitimate or a scam.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "Message 1 (a text saying a prize was won and asks to confirm a card number to claim it): legitimate or scam?", "choices": ["Legitimate", "Scam"] },
+        { "ref": "t2-p2", "promptType": "fixed-choice", "text": "Message 2 (an email from a school reminding about a schedule with no links or requests): legitimate or scam?", "choices": ["Legitimate", "Scam"] },
+        { "ref": "t2-p3", "promptType": "fixed-choice", "text": "Message 3 (a call summary claiming an urgent problem that must be fixed in the next ten minutes or there will be serious consequences): legitimate or scam?", "choices": ["Legitimate", "Scam"] },
+        { "ref": "t2-p4", "promptType": "fixed-choice", "text": "Message 4 (a call summary from a caller who will not say which company they represent but asks to 'verify your identity' first): legitimate or scam?", "choices": ["Legitimate", "Scam"] }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each message you marked as a scam, name the specific pressure tactic it uses.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For every message you marked scam, name the tactic (for example: manufactured urgency, unearned reward, refusing to identify themselves, or asking for information a real caller wouldn't need) and quote the exact phrase that gave it away." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what would make you pause before reacting to a real message.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Name one thing you could do before reacting to any message like these, that doesn't depend on already knowing it's a scam." }
+      ]
+    }
+  ],
+  "remediation": "If the learner marks a message correctly but cannot name the specific tactic (just says 'it seemed scammy'), reteach with a two-column reference: tactic name on one side, one example phrase on the other, then have the learner re-sort the same four messages by tactic name rather than by legitimate/scam.",
+  "extension": "Have the learner write one new fictional scam message of their own using a tactic not covered in the original four (for example, pretending to be someone they know), then trade the reasoning with a sibling, parent, or trusted adult who tries to name the tactic without being told.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}

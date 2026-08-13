@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l03",
+  "lessonId": "ma-g5-ready-for-life-u03-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Maintaining zone separation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Zones cross at least once even with adult support."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Zones stay separate for the full guided round."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Zones stay separate across both rounds with no adult correction needed in round two."
+          }
+        ]
+      },
+      {
+        "dimension": "Explaining the risk",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot explain why separation matters beyond 'it's a rule.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names a plausible, specific risk of mixing zones."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names a specific, accurate risk and connects it to the exact handwashing-between-zones step."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Handwashing break happens every time between zones, not just once.",
+      "Adult present and confirming for both rounds.",
+      "Explanation names a real consequence, not a vague safety statement."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

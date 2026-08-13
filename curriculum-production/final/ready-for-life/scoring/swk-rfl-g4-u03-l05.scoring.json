@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l05",
+  "lessonId": "ma-g4-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Food-safety practice during assembly",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Handwashing or surface cleaning is skipped or rushed, or a ready-to-eat ingredient is set on an unconfirmed surface."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The full 20-second handwash and workspace wipe happen before assembly, and ready-to-eat ingredients stay separated from anything unconfirmed clean."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner notices and self-corrects a near mix-up during assembly without adult prompting."
+          }
+        ]
+      },
+      {
+        "dimension": "Explanation of safety reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The description of the assembly does not name a specific moment of checking cleanliness before contact."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names a specific moment they checked a surface or utensil was clean, and the reflection names a real skippable step and its consequence."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the reflection connects the specific step back to a concept from an earlier lesson in this unit, such as cross-contamination or handwashing time."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No stove, oven, appliance, or sharp-bladed knife appears anywhere in the learner's account of the assembly.",
+      "The adult's freshness check on the ingredients happened before assembly began, not after."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

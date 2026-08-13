@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u05-l06",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Digital Life, Purchases, and Consumer Skills",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: digital cleanup"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners sort at least eight apps or files on a device they are allowed to manage into keep, remove, or archive based on actual recent use, then analyze the pattern in what they removed.",
+  "scenario": "The learner reviews the apps or files on a device they are allowed to manage, or a shared device with permission from whoever manages it, and sorts a real set of items into keep, remove, or archive based on how recently and often each is actually used.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner only manages devices or accounts they are allowed to change, and asks first before deleting anything on a shared device.",
+    "When unsure whether an item might still be needed, move it to a trash, recycle, or archive location instead of deleting it permanently, so it can still be recovered."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner has no device they are allowed to manage, they instead sort a provided sample device-storage list of apps and files into keep, remove, or archive, explaining the reason for each decision."
+  },
+  "materials": [
+    "a device the learner is allowed to manage, or a shared device with permission (or the provided sample storage list)",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "List at least eight apps or files on a device you are allowed to manage, or a shared device with permission.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the device and list the eight or more items."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each item, note the last time you actually used it and sort it into keep, remove, or archive based on that actual use, not on how useful it sounds.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted at least eight items into keep, remove, or archive based on actual last use."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I asked permission before removing anything on a shared device."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Count how many items you sorted into remove, calculate what percentage of your total list that represents, and explain the specific pattern you noticed in which types of items tend to go unused, such as game apps from finished games, duplicate files, or old downloads.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Show your remove count, your total count, and the percentage that represents."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Describe the specific pattern you noticed in which types of items you removed, with at least one concrete example."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on keeping a device organized over time.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific habit you will use to prevent this same buildup of unused items in the future, and why checking actual use is more reliable than judging by how useful something sounds."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts items based on guesswork rather than actual use, reteach by checking a device's built-in last-used or last-opened information together for a few sample items before returning to the full list.",
+  "extension": "Have the learner repeat this sort on a second device or account, with permission if it is shared, and compare which device accumulated more unused items and why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

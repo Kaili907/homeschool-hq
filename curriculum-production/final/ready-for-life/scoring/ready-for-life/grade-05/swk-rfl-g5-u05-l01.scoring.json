@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l01",
+  "lessonId": "ma-g5-ready-for-life-u05-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Calendar reading accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Finds the wrong date or event."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Finds today's date and a real event correctly."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Finds the date and event correctly and self-checks the day-count by recounting."
+          }
+        ]
+      },
+      {
+        "dimension": "Day-count accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Count is off by more than one day."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Count is exact or off by one."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Count is exact and the learner explains their counting method."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Event chosen is genuinely within the next two weeks.",
+      "Day-count is verifiable by recounting on the calendar.",
+      "Reflection compares the guess to the actual count specifically."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

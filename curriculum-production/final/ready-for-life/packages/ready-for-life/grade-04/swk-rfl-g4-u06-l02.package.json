@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u06-l02",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: planning steps and materials"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+  ],
+  "objective": "Learners break the contribution they chose in the previous lesson into at least four ordered steps and list the specific materials, information, or household help each step requires, producing a written step-by-step plan they will use to carry out the project later in this unit.",
+  "scenario": "Using the contribution you chose in the previous lesson, you now build the specific plan for it: what needs to happen first, second, and so on, and what you need on hand for each step, so that day four's carry-out work follows a clear order instead of being figured out on the spot.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app",
+    "the contribution choice recorded in the previous lesson"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Picture your chosen contribution from start to finish before writing any steps.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe in one or two sentences what your contribution will look like when it is finished."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Break your contribution into at least four ordered steps, from the very first thing you will do to the very last.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed at least four steps in the order I will actually do them."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Each step describes one specific action, not a vague stage like 'get started.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I checked that no step depends on something that is supposed to happen later, out of order."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each step in your plan, list the specific materials, information, or help from another household member you will need, then mark which of those you already have on hand and which you still need to gather or ask about before the carry-out day later this week.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List the materials or help each step requires, and mark which ones you still need to gather or ask about."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Which single step in your plan needs the most materials or preparation, and why does it need more than the others?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look at your whole ordered plan.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain which step you think could most easily go wrong or get skipped, and what you will do to make sure it doesn't."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's steps are really one big step split into fake pieces (for example 'start,' 'keep going,' 'finish'), reteach by having them narrate out loud what their hands would be doing at each point in the contribution, writing down each new physical action as its own step.",
+  "extension": "Have the learner add a rough time estimate for each step and total it, then compare that total to how much time they realistically expect to have on the carry-out day.",
+  "scoringRef": "scoring/swk-rfl-g4-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

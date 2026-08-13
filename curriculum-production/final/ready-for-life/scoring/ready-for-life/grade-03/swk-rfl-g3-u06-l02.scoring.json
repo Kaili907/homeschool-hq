@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l02",
+  "lessonId": "ma-g3-ready-for-life-u06-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Step list quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are out of order, missing a clear ending, or combine two or more actions into a single step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Four to six ordered, single-action steps run from a gathering step to a finishing step."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and the learner explains why the step order matters for this specific job."
+          }
+        ]
+      },
+      {
+        "dimension": "Materials list completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The materials list is missing an item that a step on the plan actually needs."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every item needed by the step list appears on the materials list."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Proficient, and each material is matched to the specific step that uses it."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The materials list only includes items already available in the learner's own home.",
+      "No single step on the list combines two separate actions into one line."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

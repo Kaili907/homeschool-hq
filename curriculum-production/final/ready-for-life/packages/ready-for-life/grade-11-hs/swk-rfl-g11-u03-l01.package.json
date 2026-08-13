@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u03-l01",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Health and Wellness Self-Management",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: making and preparing for an appointment"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft a written plan and script for scheduling a routine health appointment (what to say, what questions to ask, what information to have ready) without placing a real call, so they build the skill in a low-pressure, private way before ever needing it for real.",
+  "scenario": "Using a fictional but realistic prompt (a routine check-up the learner's household could plausibly need), the learner writes the exact opening line they would use to schedule it, lists the information a scheduler typically asks for, and writes three questions to ask once the appointment is set.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No real appointment is scheduled and no real call is placed for this lesson; the deliverable is a written plan and script only.",
+    "The learner does not need to disclose any real health information, condition, or provider name to complete this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "the provided fictional appointment prompt"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, write down what makes scheduling calls or messages feel awkward or hard.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is the part of scheduling something over phone or message that you'd find hardest, and why?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft the opening line and the information a scheduler typically needs.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write the exact opening sentence you would say or type to schedule the appointment, clearly stating what you need and roughly when." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My draft lists the kind of information a scheduler usually asks for (such as the reason for the visit and available days/times), without needing real personal health details." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write three questions you would ask once the appointment is confirmed.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write three specific questions you'd want answered before the appointment (for example, how to prepare, what to bring, or roughly how long it takes)." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how the plan changes your comfort level.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Having written this out, what part of a real version of this task would you now feel ready for, and what part would you still want help with?" }
+      ]
+    }
+  ],
+  "remediation": "If the opening line is too vague to actually schedule anything (for example, just 'I need an appointment'), reteach by modeling a complete opening line with all three needed parts named explicitly: what you need, roughly when, and one piece of contact information, then have the learner rewrite their line following that same three-part structure.",
+  "extension": "Have the learner write a second version of the plan for a scenario where the first available time doesn't work for their schedule, including what they would say to ask for an alternative.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

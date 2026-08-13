@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l02",
+  "lessonId": "ma-g7-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Boundary accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Boundaries for the knives, stove, or oven are missing, vague, or do not match what the adult actually stated."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Boundaries for at least two real knives, the stove, and the oven are recorded accurately and match what the adult stated."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner correctly sorts all five real independent-task examples into the matching boundary category without adult correction."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about risk",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner cannot explain why a boundary exists beyond restating the rule itself."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner explains a specific, plausible reason a named boundary exists, tied to a real task."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains specifically how adult presence changes the outcome if something goes wrong during that task."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner did not operate the stove, oven, or a knife without the adult present during this lesson.",
+      "The five sorted independent-task examples name real, specific tasks rather than restating the three category labels.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u02-l03",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: washer and dryer safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 04–06"
+  ],
+  "objective": "With an adult, learners practice three specific washer/dryer safety behaviors (checking pockets before loading, not overloading the machine, and never reaching into a running machine) across two supported rounds, then explain why each behavior matters.",
+  "scenario": "With a trusted adult present at the washer and dryer, the learner practices loading a wash following three safety behaviors, first with the adult narrating each check, then a second time with the learner leading and the adult confirming.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult must be present for the entire loading and starting process.",
+    "Hands stay clear of the drum at all times while the machine is running.",
+    "Stop and ask the adult for help if the machine makes an unfamiliar noise or shows an error."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no washer or dryer is available in the home, the learner instead reviews a labeled diagram or short adult-led walkthrough of a washer and dryer (at a laundromat, a relative's home, or a printed diagram) and, with the adult, verbally walks through where and how each of the three checks would happen, then explains each check's purpose the same way as the real-machine reflection."
+  },
+  "materials": [
+    "washer and dryer",
+    "a load of real laundry"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before practicing, name one thing you think could go wrong if someone loaded a washer or dryer without checking it first.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one possible problem."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, load one wash following three checks: pockets checked and emptied, load size checked against the machine's fill line, and hands kept clear of the drum while it's running.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked every pocket on every item before loading."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked the load against the fill line rather than guessing."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I did not reach into the machine at any point while it was running."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "My adult was present for the entire loading and starting process."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Lead a second wash load yourself, with your adult present to confirm, running through the same three checks without being told each one.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which of the three checks did you remember on your own without a reminder, and which one did your adult have to prompt you on?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Explain one behavior in depth.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Pick one of the three safety behaviors and explain, in your own words, exactly what could go wrong if that specific check were skipped — not just 'it's dangerous,' but what would actually happen."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner skips the pocket check specifically, reteach with a five-item practice pile where at least two items have something small hidden in a pocket, and have the learner find both before moving to a real load.",
+  "extension": "Have the learner teach the three safety behaviors to a younger sibling or family member, with the adult present to confirm the teaching is accurate.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

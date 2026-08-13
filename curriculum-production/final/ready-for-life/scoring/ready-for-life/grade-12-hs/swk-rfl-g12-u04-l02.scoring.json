@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l02",
+  "lessonId": "ma-g12-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Careful-reading accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more answers don't actually match what the cited section of the fictional page says."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All three answers correctly match their cited sections."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The easy-to-misread detail identified is genuinely subtle, not something already obvious from a quick skim."
+          }
+        ]
+      },
+      {
+        "dimension": "Skill transfer awareness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reflection response is generic and doesn't name a specific transferable habit."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reflection names a specific reading habit worth carrying forward."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The named habit is directly connected to the misread-detail example from this same lesson."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each answer is traceable to an actual sentence in the fictional sample page.",
+      "No real jurisdiction, real government agency, or real political process is described as fact.",
+      "The learner is never asked to disclose their own age, eligibility, or political views."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

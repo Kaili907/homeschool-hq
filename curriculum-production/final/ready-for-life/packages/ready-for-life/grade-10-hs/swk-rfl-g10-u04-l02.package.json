@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u04-l02",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Consumer Tasks and Everyday Agreements",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: what a receipt, warranty, or confirmation is for"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners examine three provided fictional documents, a receipt, a warranty, and a confirmation, and explain what each one specifically protects and which details on it actually matter if something goes wrong later.",
+  "scenario": "The learner studies three provided fictional sample documents side by side and, for each, names what it proves, how long it's useful for, and the one or two details on it that would matter most in a later problem.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All three documents are fictional samples provided with this lesson; no real transaction, business, or account is involved."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the three provided fictional sample documents", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before studying the samples, write what you currently think each of the three document types is for.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write your current guess at what a receipt, a warranty, and a confirmation are each for." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each of the three sample documents, name what it proves and how long it stays useful.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For the receipt, explain what it proves and for how long it would matter." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "For the warranty, explain what it proves and for how long it would matter." },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "For the confirmation, explain what it proves and for how long it would matter." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each document, name the one or two details on it that would matter most if a problem came up later.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name the one or two most important details on each document, and why those specific details matter more than the rest." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why people lose these documents.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Why do you think people commonly lose or discard documents like these before they'd actually need them?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot distinguish what each document proves (for example, confusing what a receipt proves versus what a warranty proves), reteach with a direct side-by-side contrast naming exactly one thing each document proves that the others don't, then have the learner re-answer using that contrast.",
+  "extension": "Have the learner design a simple system (physical or digital) for keeping these kinds of documents for a set period, and explain why they chose that length of time for each type.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

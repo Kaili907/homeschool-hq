@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u04-l03",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Fueling My Day",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: drinking water across the day"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+  ],
+  "objective": "Learners pick four checkpoints across one day, such as waking up, midday, after active play, and before bed, and drink a cup of water at each checkpoint while jotting a short thirst note beforehand, so they connect the thirst signal to a specific response instead of waiting until very thirsty.",
+  "scenario": "The learner selects four checkpoint moments in an ordinary day, keeps a refillable cup or bottle nearby, and at each checkpoint writes one quick thirst note (not thirsty, a little thirsty, or very thirsty) before drinking a cup of water.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a cup or reusable water bottle",
+    "paper and a pencil for notes"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the day begins, plan out your four checkpoints.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List the four checkpoints in your day when you will drink water today, such as right after waking up, midday, after being active, and before bed."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "At each of the four checkpoints, write a thirst note first, then drink a cup of water.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I drank water at all four checkpoints, not only the ones where I felt very thirsty."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote a thirst note before drinking at every checkpoint, not after."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I used a cup or bottle I could refill instead of guessing at an amount."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I checked whether my thirst note changed between the first checkpoint and the last checkpoint."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look back over all four thirst notes you wrote today.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Did your thirst level go up, go down, or stay about the same across the day? Name the checkpoint where you felt the least thirsty."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Pick one checkpoint from today and think about right after you drank.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one checkpoint where drinking water changed how you felt right afterward, such as feeling less foggy, less tired, or more comfortable."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner waits to drink until they feel very thirsty at every checkpoint, reteach by having them drink at one checkpoint before any thirst signal appears at all, then have them describe in their own words the difference between drinking early and waiting.",
+  "extension": "Have the learner add a fifth checkpoint on a day with more physical activity than usual and compare that day's thirst notes to the original four-checkpoint day.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

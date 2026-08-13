@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u06-l05",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: communication and support network"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners map their real support network by role, such as the adult they would ask about a money question or the adult they would ask about a medical question, without recording any real name, address, phone number, or email address, then identify any gap in the network and a specific step to close it.",
+  "scenario": "Using only roles and relationships, never real names or contact details, the learner builds a private planning page naming, for at least four different kinds of real needs, the adult they would actually go to and why, then checks the map for a gap, a kind of need with no clear person, and writes a specific step to address it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This map uses roles and relationships only, such as 'the adult I would ask about money,' and never records a real name, address, phone number, or email address.",
+    "This is a private planning artifact for the learner's own use; it is not shared publicly and is not a contact list."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or a document for the private role-based network map"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Brainstorm the different kinds of real needs you might have to ask a trusted adult about.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List at least four different kinds of needs where you'd want to ask a trusted adult (for example, a money question, a medical question, a school problem, or emotional support)." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For at least four kinds of needs, name the adult you would actually go to, described by role or relationship only, never by real name.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I named, by role only, the adult I would ask about a money question." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I named, by role only, the adult I would ask about a medical or health question." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I named, by role only, the adult I would ask about a school or academic problem." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I named, by role only, the trusted adult I would go to for emotional support." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Check your map for a gap, a kind of need with no clear person, and address it.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did you find at least one kind of need on your map without a clear person you could name, even just by role?", "choices": ["Yes, I found a gap", "No, every need had someone"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "If you found a gap, name one specific step you could take to fill it. If not, explain how you checked to confirm your network is solid." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why this map matters going forward.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain why having more than one adult you could ask for at least one kind of need matters, even if you already know your first choice well." }
+      ]
+    }
+  ],
+  "remediation": "If a learner writes an actual name, address, phone number, or email instead of a role, reteach by having them cross out the identifying detail and replace it with a role-based description (such as 'the adult who handles the household's money questions') before continuing.",
+  "extension": "Have the learner add a second-choice person for one need, described by role, and explain what they would do if their first-choice adult were unavailable.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

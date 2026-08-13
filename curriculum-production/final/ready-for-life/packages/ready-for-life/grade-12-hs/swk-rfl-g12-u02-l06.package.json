@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u02-l06",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Independent Living Simulation",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: reviewing the month honestly"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners assemble the month's fictional household simulation into one honest review and walk through it with a trusted adult, so the exercise ends with a real second opinion on whether the plan actually holds together.",
+  "scenario": "The learner compiles the month's budget, meal plan, maintenance judgments, transport plan, and disruption response into one written review, then reviews it with an adult who checks that the plan is internally coherent and offers one piece of feedback \u2014 not whether the invented dollar figures match real prices.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The review checks whether the fictional plan is internally coherent, not whether its invented numbers match real prices \u2014 no real financial data is needed for this check."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available for a live review today, the learner completes a structured self-review using the same coherence checklist the adult would use, and schedules the adult review for as soon as one is available; the self-review carries equal credit for completing this lesson."
+  },
+  "materials": [
+    "all of the month's household-simulation artifacts",
+    "the provided coherence-review checklist"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the review, predict what an outside reader would flag first.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "If someone else read your whole month's plan for the first time, what part do you predict they'd question first?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Assemble the month's artifacts into one written review and walk through it with an adult (or self-review).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I assembled the budget, meal plan, maintenance judgments, transport plan, and disruption response into one written review."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I reviewed it with an adult, or completed the structured self-review checklist."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Record the feedback and what you'd change.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "What was the one piece of feedback (from the adult or the self-review checklist), and what specifically would you change about the plan in response to it?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect honestly on the whole month.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Being honest, not just optimistic: could this plan have actually run for a real month, or where would it likely have broken down?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the final reflection claims the plan was flawless with no honest weak point named, reteach by having the learner re-walk each of the five assembled pieces and name the single most fragile one before finalizing the reflection.",
+  "extension": "Have the learner write a one-paragraph 'month two' preview describing what they would change going into a second simulated month, based on this review.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

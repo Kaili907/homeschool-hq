@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l06",
+  "lessonId": "ma-g10-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Presentation completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One or more of the five required capstone components is missing from the presentation." },
+          { "label": "Proficient", "descriptor": "All five components are presented." },
+          { "label": "Advanced", "descriptor": "All five components are presented in a coherent order that a listener could follow easily." }
+        ]
+      },
+      {
+        "dimension": "Honesty of named gaps",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Named gaps are vague or minimizing, with no specific skill or evidence named." },
+          { "label": "Proficient", "descriptor": "Names at least two specific gaps tied to a specific skill." },
+          { "label": "Advanced", "descriptor": "Names two specific gaps, each backed by a specific piece of evidence from the year's actual work." }
+        ]
+      },
+      {
+        "dimension": "Depth of year-end reflection",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names a skill with no supporting evidence from the learner's own work." },
+          { "label": "Proficient", "descriptor": "Names a specific skill with a plausible piece of supporting evidence." },
+          { "label": "Advanced", "descriptor": "Names a specific skill with concrete evidence drawn from an identifiable earlier lesson this year." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The two named gaps are genuinely different from each other and specific, not both variations of 'nervousness.'",
+      "The guardian's summarized response in t3 reflects an actual two-way conversation, not a one-line 'good job.'",
+      "The year-end reflection cites something concrete and specific, not a generic 'I learned a lot this year.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l01",
+  "lessonId": "ma-g8-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Reading and using the fictional schedule",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Selects a bus departure without checking it against the booth's 11:00 a.m. closing time or the walking time on either end of the trip."
+          },
+          {
+            "label": "Developing",
+            "descriptor": "Selects a workable departure time but an arithmetic error leaves the stated arrival time or closing buffer incorrect."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Selects a departure time and correctly calculates ride time, walking time, and arrival time using only the schedule and map details as given."
+          }
+        ]
+      },
+      {
+        "dimension": "Trip plan sequencing and completeness",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Plan lists some elements (a bus time, a walk) but leaves out the leave-home time, the arrival time, or the buffer before closing."
+          },
+          {
+            "label": "Developing",
+            "descriptor": "Plan includes all major elements in order but the explanation for choosing that specific departure is missing or unclear."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Plan states leave-home time, bus departure, ride and walk duration, arrival time, and buffer in order, with a clear reason for the chosen departure."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Departure time chosen leaves at least 15 minutes of buffer before the 11:00 a.m. closing",
+      "Leave-home time correctly accounts for the 6-minute walk to the Oak Street stop"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

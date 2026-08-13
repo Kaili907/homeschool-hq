@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l03",
+  "lessonId": "ma-g12-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Hazard sorting (non-negotiable)",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Any fire, gas, electrical, or structural scenario is sorted outside 'stop and get adult help immediately.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All hazard scenarios are correctly sorted into 'stop and get adult help immediately.'"
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner's explanation shows they recognize the hazard pattern generally, not just for the listed examples."
+          }
+        ]
+      },
+      {
+        "dimension": "Judgment reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The trickiest-scenario explanation restates the sorting decision without explaining the reasoning."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation names a specific deciding factor for each trickiest scenario."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection identifies a genuine gap in the learner's own confidence rather than claiming full mastery."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Zero hazard-involving scenarios appear outside the 'stop and get adult help immediately' column.",
+      "The two trickiest-scenario explanations name a specific factor, not just 'it was hard to decide.'",
+      "The reflection response is honest about a real limit rather than performative confidence."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

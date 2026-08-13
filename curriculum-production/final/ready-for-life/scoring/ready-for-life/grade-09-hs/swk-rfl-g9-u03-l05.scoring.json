@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l05",
+  "lessonId": "ma-g9-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Risk identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The named risk is vague or does not match the specific hazard of the chosen tool or heat source."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The named risk correctly and specifically describes how the chosen item could cause injury if mishandled."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner connects the risk to the exact hand or body position the correct technique is designed to prevent."
+          }
+        ]
+      },
+      {
+        "dimension": "Safe technique demonstration",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The adult confirmation is missing, or the adult reports the technique did not match the guidance sheet even after a correction attempt."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The adult confirms the demonstrated technique correctly matched the guidance sheet, with or without one correction."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the adult confirms the technique was correct on the first attempt with no correction needed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The described technique names a specific body or hand position (such as fingers curled back or handle turned inward), not a general statement like 'be careful.'",
+      "The reflection names one exact future situation and one exact remembered step, not a generic promise to be more careful."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

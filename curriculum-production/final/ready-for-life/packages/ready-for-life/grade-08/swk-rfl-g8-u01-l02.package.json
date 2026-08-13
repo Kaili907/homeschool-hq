@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l02",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: breaking down projects"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners apply a modeled backward-planning technique, demonstrated with a worked example, to break one real project of their own into an ordered sequence of concrete steps, starting from the deadline and working backward to the first action.",
+  "scenario": "A worked example walks through organizing a bedroom closet by Saturday: put everything back, wipe the empty shelves, sort into keep, donate, and toss, then pull everything out onto the floor first, read in that order from the deadline backward. The learner studies that model closely, then applies the exact same backward-from-deadline technique to a real project of their own with a real or realistic deadline.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper",
+    "a pencil or pen",
+    "sticky notes, optional"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Study this worked example once before writing anything. A learner planning a Saturday closet cleanout works backward from the deadline: Step 4, last, put everything back neatly. Step 3, wipe down the empty shelves. Step 2, sort every item into keep, donate, or toss piles. Step 1, first, pull everything out onto the floor. Notice the steps are listed by working backward from 'done' to 'start.'",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, explain why starting from the deadline and working backward is different from just listing steps in the order you'd normally think of them."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Choose one real project of your own with a real or realistic deadline, a school assignment, a room to organize, or preparing for a specific event. Using the same backward technique as the model, write your last step first, then work backward through at least four steps to your very first action.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote my last step, what 'done' looks like, first."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I worked backward through at least four steps to my very first action."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Now put your backward-planned steps in forward order, the order you'll actually carry them out, and add a rough time estimate to each one describing how long you honestly expect that step to take, in minutes, hours, or days.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "List your steps in forward order with a time estimate for each, then identify which single step is most likely to take longer than you estimated, and explain what about that particular step makes it hard to predict."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how this compares to the way you'd normally plan a project.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Did working backward from the deadline change any step you would have otherwise forgotten or left too late? Name it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner writes steps in forward order out of habit despite the model, cover their forward list and have them answer only one question repeatedly: 'right before this last step, what has to already be true?' Chain that question backward until they reach the first action.",
+  "extension": "Have the learner apply the same backward technique to a second, unrelated real project and compare: did the number of steps or the hardest-to-predict step change between the two projects?",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

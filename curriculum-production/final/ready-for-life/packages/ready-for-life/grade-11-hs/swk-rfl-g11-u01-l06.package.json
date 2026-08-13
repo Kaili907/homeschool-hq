@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u01-l06",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Postsecondary Pathways",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: building a shortlist that survives scrutiny"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners produce a documented shortlist comparing at least two genuinely different postsecondary pathways against their own goals, drawing on the requirements, timelines, cost and funding categories, and fit assessment built across the unit, then review the finished shortlist with a guardian so it can withstand real scrutiny before the learner relies on it.",
+  "scenario": "Using the research and reflections from the whole unit, the learner assembles a single shortlist document comparing at least two pathways side by side on requirements, deadlines, cost and funding categories, and setting/support fit, then walks a guardian through the shortlist so the guardian can ask questions and flag anything that looks incomplete or unrealistic before it is finalized.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The guardian review is a conversation with the learner's own guardian about the shortlist document; no outside person is contacted for this lesson.",
+    "The shortlist may reference general cost and funding categories from day 3 but does not require any real household financial figures to be added or reviewed."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian review cannot happen this session, the learner instead completes the shortlist independently and has a trusted adult at their learning site review it using the same guiding questions, with a guardian confirming afterward that the finished shortlist was seen."
+  },
+  "materials": ["paper or notes app", "the learner's day 1-4 notes and research from this unit", "a guardian to review the shortlist with"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before assembling the shortlist, choose the two pathways you will compare and state why they are the right two to put side by side.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Which two pathways will you compare on your shortlist, and why are these two the most useful comparison right now, rather than any other pair?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build the side-by-side shortlist, pulling in requirements, timelines, cost and funding categories, and fit notes from earlier in the unit.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My shortlist includes, for both pathways, the actual entry requirements and a realistic timeline from day 2." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My shortlist includes, for both pathways, the general cost and funding categories from day 3." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My shortlist includes, for both pathways, the setting and support fit notes from day 4." },
+        { "ref": "t2-p4", "promptType": "extended-response", "text": "State the single closest deadline across both pathways, and what needs to happen before that deadline." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Walk your guardian through the finished shortlist and record what they questioned or flagged.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize at least one specific question or concern your guardian raised while reviewing the shortlist, and how you responded or what you changed as a result." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "My guardian reviewed the finished shortlist and confirmed it is complete and realistic." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what this unit changed about how you think about your options.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What is the single most useful thing you learned across this unit that changed how you're thinking about your postsecondary options, and why did it matter?" }
+      ]
+    }
+  ],
+  "remediation": "If the shortlist is missing one of the four required comparison elements (requirements/timeline, cost/funding categories, fit notes, or a deadline) for either pathway, reteach by having the learner locate the specific day's task where that element was already produced and copy the verified information directly into the shortlist rather than re-guessing it from memory.",
+  "extension": "Have the learner add a third pathway from their day-1 list to the shortlist as a backup option, including at minimum its closest deadline and one requirement, so the shortlist has a fallback if either primary pathway falls through.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

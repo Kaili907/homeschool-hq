@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u05-l05",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Support Networks and Contingency Planning",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: building a contingency for the main plan"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners identify the single most likely point of failure in an existing plan and write a specific contingency for it, so their plans include a real backup rather than only an ideal-case version.",
+  "scenario": "Using either a plan the learner already built earlier in the course or a provided example plan (equal credit either way), the learner identifies the one step most likely to fail and writes an 'if this fails, then\u2014' contingency branch with a clear trigger for when to activate it.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Using a provided example plan instead of a real personal one is fully acceptable and earns equal credit; nothing here requires disclosing a real personal plan's details."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "a plan of the learner's choice from earlier in the course, or the provided example plan"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before identifying the weak point, predict what kind of failure is most common in plans like this one.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In general, what kind of thing most often causes a plan like this to fail \u2014 bad timing, missing a resource, or something else? Why do you think that?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Identify the single most likely point of failure in your chosen plan.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named one specific step in the plan as the most likely point of failure."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I explained why that step, specifically, is the weakest one."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write the contingency branch with a clear trigger.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your 'if this fails, then\u2014' contingency for that step, including a clear, specific trigger for when it should be activated (not just 'if it goes wrong')."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on whether one backup is enough.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Is one backup enough for this weak point, or does it need more than one? Why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the identified weak point is vague or clearly not the actual most fragile step (for example, picking an easy step to write about rather than the hardest one), reteach by having the learner rank every step of the plan by failure likelihood before selecting the top one to address.",
+  "extension": "Have the learner write a contingency for the second most likely point of failure as well, and compare how the two contingencies differ.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

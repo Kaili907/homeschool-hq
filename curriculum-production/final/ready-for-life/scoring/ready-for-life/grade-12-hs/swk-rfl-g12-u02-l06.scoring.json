@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l06",
+  "lessonId": "ma-g12-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Assembly completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the five required pieces (budget, meal plan, maintenance judgments, transport plan, disruption response) is missing from the review."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All five pieces are present and assembled into one coherent review."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The review explicitly shows how the pieces connect (for example, how the disruption affected the budget and meal plan together)."
+          }
+        ]
+      },
+      {
+        "dimension": "Honest self-assessment",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The final reflection claims the plan had no real weaknesses."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The final reflection names a specific, genuine weak point."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The named weak point is the same one an outside reader would plausibly flag first, showing accurate self-assessment."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All five month-long artifacts are represented in the final review.",
+      "The guardian confirmation (or self-review) is distinct from the learner's own summary.",
+      "The honest weak-point statement is specific, not a generic 'nothing's perfect.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

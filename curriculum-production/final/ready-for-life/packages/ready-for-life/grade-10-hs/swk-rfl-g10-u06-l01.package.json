@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u06-l01",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 10 Work-Readiness Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: integrating readiness evidence into a portfolio"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners assemble a single master portfolio pulling together their resume, application message, reference plan, and career findings record from earlier units, then honestly identify which pieces feel strong and which feel incomplete before the capstone.",
+  "scenario": "The learner gathers the resume bullet points, application message, reference plan, and career findings record produced earlier this year into one master portfolio document, checking each for completeness and doing an honest self-audit of strengths and gaps.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": ["resume, application message, reference plan, and career findings record from earlier units", "a notebook or document for the master portfolio"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before assembling, predict which piece of your earlier work you think is strongest and which needs the most updating.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name your predicted strongest piece and your predicted weakest piece, and why." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Gather all four pieces into one master portfolio document.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My master portfolio includes my resume bullet points." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My master portfolio includes my application message." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My master portfolio includes my reference plan." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "My master portfolio includes my career findings record." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Honestly audit each piece: is it complete, current, and specific enough to actually use?",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each of the four pieces, note whether it's ready as-is or needs an update, and what specifically it needs." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your prediction from the warm-up.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Was your warm-up prediction accurate? What did the audit reveal that you didn't expect?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's audit just says 'looks good' for every piece without specific evidence, reteach by requiring one specific reason for every judgment (what makes it complete, or what exactly is missing), modeling one worked example before the learner revises the rest.",
+  "extension": "Have the learner ask someone who knows their work (not a family member) to review one piece of the portfolio and note one honest suggestion, adding it to the audit.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l06",
+  "lessonId": "ma-g12-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Recovery specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The three recovery steps are generic and interchangeable across scenarios."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each recovery step responds to what is actually different about its scenario."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The synthesized three-step protocol is genuinely general enough to apply beyond the three given scenarios, not just a restatement of them."
+          }
+        ]
+      },
+      {
+        "dimension": "Tracker integration",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The four earlier artifacts are listed but not connected to each other."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The explanation shows how the four artifacts work together as one system."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner identifies a specific piece most likely to be neglected and reasons honestly about why."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All three lapse scenarios receive a distinct, specific recovery step.",
+      "The three-step protocol is stated generally enough to reuse, not just a copy of one scenario's fix.",
+      "The reflection names a specific piece of the tracker, not a generic 'I'll use all of it.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

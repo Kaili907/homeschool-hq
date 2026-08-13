@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u03-l02",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: handwashing and surface cleaning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+  ],
+  "objective": "Learners perform a timed 20-second soap handwashing routine and an overlapping-stroke counter-wipe technique, then run a second quick water-only rinse and explain why the quick rinse does not remove germs the way the full wash does even though hands may look equally clean.",
+  "scenario": "Before doing any food task, the learner is asked to demonstrate the household's full handwashing routine and a proper counter-wipe technique, timing the wash against the 20-second food-safety standard, then compares that wash to a quick rinse with no soap.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a sink with soap and water",
+    "a clean towel or paper towel",
+    "a timer or clock",
+    "a kitchen counter or clean table surface",
+    "a clean cloth or paper towel for wiping"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before washing, predict how long 20 seconds actually feels like.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Guess how many seconds you think you usually spend washing your hands right now, without timing yourself."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Wash your hands at the sink using soap, scrubbing the front, back, and between your fingers for a full 20 seconds timed on a clock, then wipe a kitchen counter or table surface using a clean cloth in overlapping strokes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I used soap and scrubbed my hands, including between my fingers and around my thumbs, not just my palms."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I timed myself for the full 20 seconds instead of stopping early."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I wiped the counter or surface using overlapping strokes so no spot was missed."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now do a second, quick rinse of your hands with water only, no soap, for about 3 seconds, and compare how each wash felt.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why a 3-second water-only rinse does not remove germs the way a full 20-second soap wash does, even though your hands might look and feel clean after both."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one specific moment today or this week when you would have used the quick rinse instead of the full wash if you had not practiced this."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about surfaces compared to hands.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one way that wiping a counter is similar to washing your hands for food safety, and one way it is different."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner scrubs only their palms and skips between their fingers and around their thumbnails, reteach using a visible marker: rub a dot of washable marker on the back of one hand and between two fingers before washing, then check under a light whether the marker is fully gone after the 20-second wash.",
+  "extension": "Have the learner time and compare wiping the same counter with a dry cloth only versus a cloth dampened with soapy water, then explain in writing which method actually lifted more visible crumbs or residue and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

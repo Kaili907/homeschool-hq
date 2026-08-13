@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u02-l01",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Applications, Deadlines, and Documentation",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: building a deadline and document tracker"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners build a reusable tracker that logs, for a plausible mix of postsecondary options, each option's application deadline, the documents it requires, and where each document currently stands, so that no deadline or missing document can be missed later in the unit by accident.",
+  "scenario": "The learner picks three to five postsecondary options that plausibly fit their own current shortlist (college, trade program, apprenticeship, military, or direct-work certification) and sets up one tracker that will be reused for the rest of the unit, listing each option's deadline and required documents.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner may use real options they are genuinely considering, but no real account is created and no real document is submitted anywhere for this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper, a spreadsheet, or a notes app for the tracker", "any deadline information the learner already has or can look up"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before building the tracker, think about a time a deadline was missed or almost missed, in any part of life.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe one deadline (yours or one you watched someone else deal with) that was almost missed. What caused the close call?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "List three to five postsecondary options and, for each, record its deadline and the documents it requires.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "List each option by name, its application deadline (or your best current estimate), and the specific documents it requires (for example: transcript, references, personal statement, test scores)." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "Every option in my list has a deadline recorded, even if it's an estimate I plan to confirm later." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "Every option in my list has its required documents listed individually, not just 'paperwork' as one item." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Build the actual tracker as a table or list, with one column or field for status per document.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Describe the structure of your tracker (what columns or fields it has) and show its current contents for at least one option, including a status marker for each required document (e.g., not started, requested, in progress, complete)." },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Which format did you use for your tracker?", "choices": ["A physical table on paper", "A spreadsheet", "A notes app or document with a table", "A list format without a table structure"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what the tracker revealed about your current deadline situation.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Now that it's all in one place, which deadline or document on your tracker is the biggest risk right now, and why?" }
+      ]
+    }
+  ],
+  "remediation": "If the tracker lists options but not individual documents per option (a sign the learner is still thinking of 'the application' as one task instead of several trackable pieces), reteach by taking the learner's single most urgent option and modeling how to break just that one application into its separate document line items before asking them to redo the rest of the tracker the same way.",
+  "extension": "Have the learner add a fourth column that estimates how many days each remaining document will realistically take to obtain (e.g., a reference letter takes longer than printing a transcript), then reorder the tracker by which item needs to be started soonest.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

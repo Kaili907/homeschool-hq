@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u02-l02",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Job Readiness: Applications, Resumes, and Interviews",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: writing a short, specific application message"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft a short application message for a fictional opportunity that names the specific role, states one genuine reason they're a fit, and asks for a clear next step, avoiding generic filler phrases that could apply to any opportunity.",
+  "scenario": "The learner reads a provided fictional job posting, then drafts a short application message (four to six sentences) addressed to that specific posting, never a real recipient, naming the role and one genuine, specific reason for their interest.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The job posting is fictional and provided with this lesson; no real employer, business name, or contact address is used, and the message is never sent to anyone."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional job posting", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the fictional job posting and list two or three genuine reasons this specific opportunity interests you.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List two or three specific things about this posting that genuinely interest you, not generic reasons that could apply to any opportunity." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft a four-to-six sentence application message naming the specific role, one genuine reason for your interest, and a clear next step you're asking for.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My message names the specific role from the posting, not a generic 'this position.'" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My message states one genuine, specific reason for my interest, not filler like 'I am a hard worker and team player.'" },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My message asks for a clear next step (such as a chance to talk further)." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read your draft and cut or replace any sentence that is generic filler.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name one sentence you cut or rewrote because it was generic filler, and what you replaced it with." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the difference between generic and specific writing.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain, using your own message as the example, what makes a sentence specific to one posting rather than generic enough to send anywhere." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's message is generic filler ('I am a hard worker and fast learner') with no reference to the specific posting, reteach by circling every phrase that could apply to any job, then requiring each circled phrase be replaced with a detail pulled directly from the posting's actual wording.",
+  "extension": "Have the learner rewrite the same message for a second, different fictional posting, and compare which sentences had to change and which genuinely stayed the same.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

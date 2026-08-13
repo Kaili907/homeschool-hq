@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l02",
+  "lessonId": "ma-g9-ready-for-life-u01-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Concreteness and completeness of the step list",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than five steps are listed, or several steps are vague actions like 'work on it' rather than a specific task." },
+          { "label": "Proficient", "descriptor": "At least five concrete, specific steps are listed that together plausibly cover the assignment from start to submission." },
+          { "label": "Advanced", "descriptor": "At least five concrete, specific steps are listed, each naming a distinct deliverable or action, and together they visibly account for the full scope of the real assignment named in the warm-up." }
+        ]
+      },
+      {
+        "dimension": "Sequencing and time estimation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Steps are not placed in a logical order, or no day/date estimates are given for individual steps." },
+          { "label": "Proficient", "descriptor": "Steps are in a logical order with a day or date estimate for each, ending on or before the actual due date." },
+          { "label": "Advanced", "descriptor": "Steps are in a logical order with realistic day/date estimates, and the learner correctly identifies which step carries the most schedule risk with a specific reason." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "At least five distinct steps that each name a real action tied to the specific assignment, not generic filler like 'work on project' repeated with different dates.",
+      "A final sequence where every step has its own estimated day or date and the last step lands on or before the real due date named in the warm-up."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

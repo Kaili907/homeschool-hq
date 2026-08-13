@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u01-l02",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Career Exploration and Pathway Mapping",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: what a job actually involves day to day"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research the actual day-to-day tasks of one job named in their interest inventory using at least two independent sources, then compare what they find against what they assumed before researching, so they learn to check a job's daily reality rather than judging it by title alone.",
+  "scenario": "The learner selects one job title from their earlier inventory, writes their honest prior assumption about a typical day, then researches using two different sources (such as a career-information resource and a written or video first-person account) and records what a typical day actually involves.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "If the learner cannot access two independent sources, the reference profile provided with this lesson counts as one full source on its own."
+  ],
+  "simulationAlternative": null,
+  "materials": ["a job title from the learner's interest inventory", "access to at least one written or video source about that job, or the provided reference profile", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, write your honest prediction of what a typical day looks like in this job.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "extended-response", "text": "Describe what you currently assume a typical day in this job looks like, hour by hour if you can." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using two sources (or the provided reference profile as one full source), record what a typical day actually involves.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Summarize what your first source says a typical day involves, including one task you did not expect." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Summarize what your second source says, and note any point where the two sources disagree or emphasize different things." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I used two distinct sources, or the provided reference profile counted as one full source." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare your prediction to what you actually found.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Name one specific way your prediction was accurate and one specific way it was wrong, citing what your sources actually said." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how this changes your interest.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Does the real day-to-day make you more or less interested in this job, and what specific task caused that reaction?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's summary just restates the job title (e.g., 'they help people') without naming actual tasks, reteach by modeling the difference between a title-level description and a task-level description using a worked example, then have the learner rewrite their summary naming at least three concrete tasks.",
+  "extension": "Have the learner research the same job at a different level of experience (entry-level versus several years in) and describe how the day-to-day changes with experience.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

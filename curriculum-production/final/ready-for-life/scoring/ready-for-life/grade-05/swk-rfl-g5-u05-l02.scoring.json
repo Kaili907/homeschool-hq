@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l02",
+  "lessonId": "ma-g5-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Routine completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Completes one or two of the three parts."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Completes all three parts."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Completes all three parts and adds a relevant fourth check on their own."
+          }
+        ]
+      },
+      {
+        "dimension": "Real-world follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The next morning still had a preventable problem."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The next morning went smoothly because of the prep."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The next morning went smoothly and the learner names the specific link between one prep step and one smooth outcome."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All three routine parts are named specifically, not vaguely.",
+      "Independent attempt happens without the adult doing any part for the learner.",
+      "Reflection makes a specific before/after comparison."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

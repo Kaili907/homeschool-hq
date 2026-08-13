@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u02-l03",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry Care",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: supervised machine loading"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 2: Clothing and Laundry Care"
+  ],
+  "objective": "Learners load one real washing machine cycle themselves, choosing the water temperature, cycle, and load size that match an already-sorted laundry group and measuring detergent to the marked line, while a trusted adult confirms each decision before the cycle starts.",
+  "scenario": "With a trusted adult present, you take one already-sorted group of laundry to the washing machine and run the whole loading sequence yourself, choosing settings, loading the drum, and measuring detergent, while your adult checks each decision before you press start.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult stays present for the entire loading sequence and confirms the water temperature, cycle, and detergent amount before the learner presses start.",
+    "Do not overfill the drum past the machine's fill line; an overloaded load can unbalance the machine or stop items from washing properly.",
+    "Measure detergent using the marked line on the cap or dispenser rather than guessing, and check with the adult before touching any bleach or stain-treatment product."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a working washing machine is not available, the learner instead studies a picture or diagram of a washing machine control panel alongside a description of an already-sorted laundry group, then writes out every decision they would make in order (temperature, cycle, load size, detergent amount) and the specific reason for each, checked by a trusted adult in their household for accuracy."
+  },
+  "materials": [
+    "one sorted group of laundry ready to wash",
+    "access to a real washing machine",
+    "detergent with a marked measuring line",
+    "a trusted adult"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before touching the machine, look at your sorted laundry group and the machine's control panel with your adult.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe your laundry group (its color or fabric type) and name the machine setting you think matches it best, before your adult confirms."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult checking each step, choose the water temperature and cycle for your group, load the drum without overfilling it, and measure the detergent using the marked line.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I chose a water temperature and cycle that matched my sorted group, and my adult confirmed the choice before I loaded anything."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I loaded the drum loosely enough that items had room to move, not packed to the top."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I measured detergent to the marked line instead of guessing or pouring extra."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Before your adult lets you press start, explain your three setting decisions back to them in your own words, then compare your load size decision to what would happen if you had loaded twice as much.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "State the water temperature, cycle, and detergent amount you chose, and the specific reason for each."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Explain what could go wrong with washing quality or the machine itself if you had loaded twice as much laundry into this same cycle, using what you learned about fill lines and detergent measuring."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare running the machine yourself to when an adult used to load the whole cycle for you.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one decision in this task that you made yourself for the first time, and explain what you would want to double-check the next time you do this without being reminded."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner defaults to picking the hottest setting regardless of the sorted group in front of them, reteach with two contrasting groups laid out side by side, a delicates group and a sturdy-darks group, and have the learner state out loud which temperature belongs with which pile and why before touching the machine again.",
+  "extension": "Have the learner run a second load with a different sorted group, for example a delicates group after washing a sturdy-darks group, and write a short comparison of how their three setting decisions changed between the two loads and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

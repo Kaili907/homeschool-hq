@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u03-l02",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Health and Wellness Self-Management",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: keeping personal health records privately"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners design a private record-keeping template -- the categories to track, where the template would be kept, and who is allowed to see it -- building the organizational skill of managing personal health records before they ever need to enter real information into it.",
+  "scenario": "Working only with an empty structural template (no real entries), the learner decides what categories a personal health record should include, describes where such a record could be kept securely, and sets a rule for who could view it, without recording any of the learner's own real health information anywhere in the template.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson produces an empty structural template only; no real health information, condition, or provider name is entered anywhere in the deliverable.",
+    "If the learner already keeps real records somewhere, they should not copy or reference any of that real content into this assignment."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "a folder or notes app section to test where the template could live (left empty)"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before designing the template, think about what tends to go wrong when personal records are scattered or hard to find.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe a time (yours or someone else's) when not having information organized and easy to find caused a problem -- in any area of life, not necessarily health." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft the category list your template would use to organize personal health records.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "List the categories your health record template would include (for example: upcoming appointments, past visits, ongoing prevention reminders, questions to ask next time). Category names only -- do not fill in any real entries." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My category list contains no real health information, condition names, medications, or provider names -- only the names of the categories themselves." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Decide where the template would be kept and exactly who could see it.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Describe where this template would be stored (for example, a specific notes app or a folder at home) and explain why that location is both easy for you to reach and appropriately private." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Write the access rule: who, specifically, would be allowed to see this record, and under what circumstance would you show it to them?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what having this system ready would change.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Now that the template exists (empty), what would be different the next time you actually needed to look something up or tell a professional your history?" }
+      ]
+    }
+  ],
+  "remediation": "If the category list is too vague to actually be useful (e.g., just 'health stuff'), reteach by having the learner sort a provided list of six sample record types (appointment date, allergy note, question for next visit, vaccination date, prescription refill reminder, provider contact) into the categories they proposed, then add or split categories until every sample fits clearly in exactly one.",
+  "extension": "Have the learner add a fifth category for tracking questions that come up between visits so nothing is forgotten by the next appointment, and write one example of the kind of note that would go there.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

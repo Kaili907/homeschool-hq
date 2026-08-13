@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u01-l03",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Caring for Home and Shared Spaces",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: everything needs a home"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 01–03",
+    "Michigan Health/SEL connections"
+  ],
+  "objective": "Learners assign a specific \"home\" location to five loose household items and practice returning items to those homes with fading adult support across two rounds.",
+  "scenario": "The learner gathers five loose items that don't currently have an obvious storage spot (for example a phone charger, scissors, a specific toy, a hairbrush, a stack of mail) and, with an adult the first time and alone the second, decides on and uses a consistent home for each item.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Use respectful, non-shaming language if an item's home fails on the first try."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the household doesn't have five clearly homeless items on hand, the learner instead selects five items from a printed or hand-drawn room scene, proposes a home for each based on how it's used, and explains their reasoning the same way as the guided task."
+  },
+  "materials": [
+    "five loose household items without a fixed spot",
+    "sticky notes or labels (optional)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before assigning homes, notice: do these five items already have a place they usually end up, or do they end up in different places every time?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe the current, inconsistent pattern for each of the five items."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, choose one home for each of the five items and put each item there for the first time.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "Each of the five items now has one specific spot, not 'somewhere in this room.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I said out loud why that spot makes sense for that item (near where it is used, easy to reach, etc.)."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult only helped me decide, not put the items away for me."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The next day, without your adult's help, find all five items (wherever they ended up) and return each one to its assigned home.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Were all five items still where you left them, or did one drift? What happened to it?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the hardest item to keep in its home.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "What made that item's home less 'sticky' than the others, and what would you change about the spot you chose?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If an item's home keeps failing (drifting back to a random spot), reteach by testing whether the assigned home is actually on the item's normal path of use — move the home to a spot the learner passes when they finish using the item, then retest for two more days.",
+  "extension": "Assign homes for five additional items in a different room and compare, in writing, whether homes were easier or harder to choose the second time.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u01-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

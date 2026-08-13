@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l04",
+  "lessonId": "ma-g9-ready-for-life-u06-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Plan completeness across the four elements",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Plan is missing one or more of route, cost, documents, or check-in, or the elements given are too vague to act on (for example, 'get a ride there')." },
+          { "label": "Proficient", "descriptor": "Plan includes a specific, actionable route, an estimated cost, a document or item list, and a check-in description for the named need." },
+          { "label": "Advanced", "descriptor": "Plan includes all four elements with specific detail, and names a real constraint or skill from an earlier unit by name (for example, a specific budget limit or a specific communication step)." }
+        ]
+      },
+      {
+        "dimension": "Backup-step realism",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No backup step is given, or the backup step repeats the original plan rather than addressing the disruption named." },
+          { "label": "Proficient", "descriptor": "Backup step directly addresses the specific disruption named and is concrete enough to act on." },
+          { "label": "Advanced", "descriptor": "Backup step directly addresses the disruption and accounts for a knock-on effect, such as what happens to the appointment time if the backup is used." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A route or check-in step specific enough to actually follow, a named mode and a named action, not a vague summary.",
+      "A backup step that responds to the specific disruption named in the independent task, not a generic 'ask for help.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u06-l02",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Independent-Living Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: household budget connection"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Using a provided hypothetical income-and-expense template with made-up round numbers, learners connect each budget category to the corresponding time blocks already marked on their fictional persona's one-month calendar from the previous lesson, showing how time and money line up for the same imagined life.",
+  "scenario": "The task sheet provides a fictional budget template for the persona - a made-up monthly income figure and a short list of made-up round-number expense categories such as rent, groceries, and transportation - and the learner matches each expense category to the specific calendar block (work, sleep, errands, or rest) it most affects, then checks whether the persona's invented work-block hours could plausibly produce the invented income figure.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "the persona's one-month calendar skeleton from the previous lesson",
+    "the provided fictional monthly budget template on this task sheet (invented round numbers, not real family finances)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the provided fictional budget template for your persona: a made-up monthly income of $1,800, and made-up round-number monthly expenses of $650 for rent, $100 for utilities, $300 for groceries, $150 for transportation, $200 for savings, and $200 for flexible spending. These numbers are invented for this persona only, not your own family's real finances.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "checklist-item",
+          "text": "I read every category in the persona's fictional budget template before starting."
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "short-response",
+          "text": "Add up the persona's expense categories. Does the total leave money left over from the $1,800 income, use it exactly, or go over? Write the total and which of the three is true."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Match each budget category to the calendar block from the previous lesson that it connects to most directly.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I matched the rent and utilities categories to the persona's sleep/home block."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I matched the transportation category to the persona's errands or work block, whichever fits the persona's month better."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I matched the savings category to a specific recurring moment in the persona's month rather than leaving it unconnected."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Check the whole system for plausibility, not just each piece separately.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Using the number of work-block hours you gave your persona in the previous lesson and a reasonable made-up hourly wage you choose yourself, calculate roughly whether those work hours could plausibly produce the $1,800 fictional monthly income, show your math, and then explain in writing one specific change you would make to either the calendar or the budget template if the numbers do not line up."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the connection between time and money for this fictional persona.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which single budget category most changed how you look at one of the persona's calendar blocks, and why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats the budget and calendar as two unconnected worksheets, sit down together and physically point to one calendar block while tracing your finger to the one budget category it funds or is funded by, repeating for two more pairs before the learner finishes the rest independently.",
+  "extension": "Have the learner invent one unexpected fictional expense (such as a $120 car repair) for the persona and rewrite the budget template to absorb it by trimming exactly one other category, explaining their choice in writing.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u05-l02",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Digital Life, Purchases, and Consumer Skills",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: subscriptions and in-app purchases"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners examine one real existing subscription or in-app purchases screen already present on a household device to identify its exact cost, how often it charges, and the specific steps to cancel it, without signing up for or acquiring anything new.",
+  "scenario": "The learner finds one subscription or in-app purchases screen already present on a device in the household, such as a streaming app, a game, or cloud storage, and reads through its details to answer specific questions about cost and cancellation, without creating any new subscription.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner only opens subscription or account settings on a device or account they are already permitted to use, and does not change, cancel, or agree to anything during this task."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no subscription or in-app purchases screen is available in the household, the learner instead reviews a provided sample subscription screen showing a monthly cost, billing cycle, and cancellation steps, and answers the same questions using that sample."
+  },
+  "materials": [
+    "a household device with an existing subscription or in-app purchases screen (or the provided sample screen)",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think of one subscription, or one game or app with in-app purchases, already active on a device you use or a household device.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the app or service and guess what you think it costs before checking the actual screen."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Open that app's account or subscription settings and read the actual details, without changing or canceling anything yet.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I found the exact cost and how often it charges (weekly, monthly, or yearly)."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I found the specific steps listed for canceling it, without actually canceling it."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Calculate what this subscription would cost over a full year at its current billing rate, then compare that yearly total to the price of a similar one-time item you can think of, explaining which represents a bigger long-term cost.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Show your yearly cost calculation and name the one-time comparison item you chose."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Explain whether the subscription's true yearly cost surprised you, and why a recurring charge matters more than its single billing amount."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on recurring costs versus one-time costs.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific step you would take before agreeing to any future subscription, based on what you learned about how this one bills and cancels."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot locate the actual cost or cancellation steps, reteach by walking through the settings menu together, showing where account, subscription, or billing details are typically found in that specific app.",
+  "extension": "Have the learner compare two different subscriptions (real or from the provided samples) and rank them by true yearly cost rather than by their advertised weekly or monthly price.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

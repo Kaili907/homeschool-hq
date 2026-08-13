@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l06",
+  "lessonId": "ma-g12-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Presentation completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the seven portfolio sections is missing from the presentation or transcript."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All seven sections are presented or included in the transcript."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The presentation shows the sections connecting to each other as one coherent plan, not seven disconnected pieces."
+          }
+        ]
+      },
+      {
+        "dimension": "Challenge-response quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Fewer than two genuine challenge questions are recorded, or the answers simply restate the plan without engaging the question."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least two genuine challenge questions are recorded with answers that actually engage the question."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "At least one answer shows real reasoning under challenge, including honestly acknowledging a limit or uncertainty where genuine."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No audio or video recording exists anywhere for this task; only a written transcript or notes.",
+      "At least two distinct challenge questions and substantive answers are present.",
+      "A 'still deciding' or honestly limited answer to a challenge question is treated as acceptable, not penalized."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

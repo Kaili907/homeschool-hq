@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u01-l05",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Caring for Home and Shared Spaces",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: task sizing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 01–03",
+    "Michigan Health/SEL connections"
+  ],
+  "objective": "Given a list of five household tasks of varying scope, learners correctly sort each into \"one sitting\" or \"needs to be broken into steps,\" and for the ones needing breakdown, write a right-sized first step.",
+  "scenario": "The learner is handed (or writes) a list of five household tasks that range from very small (put away three books) to large (reorganize a closet), and must judge, without adult help, which ones can be done in one sitting and which need to be split into smaller steps.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This is a planning task; no physical task execution is required for scoring."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper and pencil",
+    "a real or provided list of five household tasks"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Quickly recall: what's one task you tried to do all at once recently that turned out to be too big?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe that task briefly."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Sort your five tasks into 'one sitting' and 'needs steps.' For every task in the 'needs steps' pile, write a first step that is genuinely small enough to finish in under ten minutes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "Every task is sorted into exactly one pile."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "For each 'needs steps' task, write the first small step you'd start with."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Rate your task-sizing confidence and choose what happens next.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rate how confident you are in your own task-sizing judgment right now (very / somewhat / not yet). Cite one specific task from your list as evidence for that rating, and choose: ready to try a bigger task on your own, ready to review this again later, or need a different explanation of task sizing."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a 'first step' is still too large to finish in ten minutes (for example 'clean the whole closet' instead of 'take everything off one shelf'), reteach by having the learner time a proposed first step; if it runs long, split it again until it fits the ten-minute window.",
+  "extension": "Give the learner one new, larger task they haven't sized before and have them break it into a full sequence of right-sized steps, not just the first one.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l01",
+  "lessonId": "ma-g3-ready-for-life-u06-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Comparison across options",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Compares fewer than three of the six job options before picking one."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Compares at least three job options using both questions (steps, adult nearby) before picking one."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Compares all six job options and explains, in writing, the specific difference between two close options that tipped the final choice."
+          }
+        ]
+      },
+      {
+        "dimension": "Job specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The picked job cannot be described in any concrete detail, such as where it happens or what it involves."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The picked job is named with a specific location and a general sense of what it involves."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The picked job is described with enough specific detail, such as location and rough action, that a step list could be started immediately."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The written reason for the pick names something specific noticed while comparing options, not a vague preference.",
+      "The job named is an ordinary task achievable in the learner's own home without buying anything new."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u04-l01",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Consumer Tasks and Everyday Agreements",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: reading an everyday agreement before signing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read a provided fictional short agreement (such as a phone repair service form) and identify five specific things it commits the signer to before agreeing, so they build the habit of reading terms rather than skipping to the signature line.",
+  "scenario": "The learner reads a provided fictional short agreement in full, then identifies five specific commitments it contains, such as cost, timing, cancellation terms, and any conditions the reader is easy to miss.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The agreement is entirely fictional and provided with this lesson; no real business, account, or signature is involved."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional agreement document", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading closely, note how you'd normally handle an agreement like this if you were in a hurry.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Honestly describe how much of a document like this you'd normally read before agreeing, in a real hurry-up moment." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the full fictional agreement and identify five specific things it commits the signer to.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "List five specific commitments the agreement contains (for example, a cost, a timing rule, a cancellation term, or a condition)." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I read the entire agreement, not only the first paragraph." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify the single term in the agreement that would be easiest to miss and explain why.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name the term you think is easiest to miss and explain why someone in a hurry might skip over it." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the habit of reading before agreeing.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Name one specific habit you could realistically build to catch easy-to-miss terms without reading every document word for word every time." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's five commitments are vague restatements of the document's topic rather than specific terms (for example, 'it's about repairs' instead of a cost or timing figure), reteach by having them underline every number, date, and conditional word ('if,' 'unless,' 'must') in the document, then rebuild the five commitments from those underlined details.",
+  "extension": "Have the learner rewrite the agreement's hardest-to-find term in one plain sentence, as if explaining it to someone who hasn't read the document at all.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l06",
+  "lessonId": "ma-g3-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Finishing-step accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Marks steps complete without physically re-checking, missing an obviously undone step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly identifies which of the four steps were done versus undone through a physical re-check."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly identifies all four and explains why the specific undone step tends to get skipped."
+          }
+        ]
+      },
+      {
+        "dimension": "Correction follow-through",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Identifies an undone step but does not fix it."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Fixes every undone step found during the check."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Fixes every undone step and names a specific change that would prevent it from recurring, such as moving the trash bag closer next time."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The reflection describes a specific before-and-after state, not a vague \"I fixed it.\"",
+      "The transfer prediction in the independent task names a specific step, not \"I'll try to remember everything.\""
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

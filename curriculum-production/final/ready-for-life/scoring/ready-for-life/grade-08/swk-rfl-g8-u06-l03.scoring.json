@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l03",
+  "lessonId": "ma-g8-ready-for-life-u06-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Plan completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The food plan or transportation plan is missing one or more days, or is left too vague to estimate a cost from."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both plans cover a full week with enough detail to estimate a rough cost."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the transportation choices are matched to specific calendar blocks rather than stated in general terms."
+          }
+        ]
+      },
+      {
+        "dimension": "Budget consistency check",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No cost estimate is shown, or the estimate is not compared against the grocery/transportation budget figures."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both weekly-to-monthly cost estimates are shown and correctly compared against the $300 and $150 fictional figures."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and any category that goes over budget is paired with one specific, workable adjustment."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The food plan describes meals or groceries appropriate for one person living independently, not a whole household's meals.",
+      "No real store names, prices from an actual receipt, or the learner's own family's transportation details appear."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

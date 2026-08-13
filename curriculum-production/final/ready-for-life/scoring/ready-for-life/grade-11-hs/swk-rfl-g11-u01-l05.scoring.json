@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l05",
+  "lessonId": "ma-g11-ready-for-life-u01-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Conversation depth",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner asked the core question but recorded only a one-line answer with no follow-up." },
+          { "label": "Proficient", "descriptor": "Learner asked the core question and at least one follow-up grounded in the person's answer." },
+          { "label": "Advanced", "descriptor": "Learner's follow-up surfaced a specific detail (a cost, a timeline, a skill) not covered by the warm-up assumption." }
+        ]
+      },
+      {
+        "dimension": "Comparing to prior assumption",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Write-up restates the original assumption without engaging what was actually said." },
+          { "label": "Proficient", "descriptor": "Write-up explicitly states whether the conversation confirmed, corrected, or complicated the assumption." },
+          { "label": "Advanced", "descriptor": "Write-up explains specifically which part of the assumption was wrong or incomplete and why." }
+        ]
+      },
+      {
+        "dimension": "Applying it to the shortlist",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection states 'nothing changed' with no reasoning given either way." },
+          { "label": "Proficient", "descriptor": "Reflection gives a specific reason the shortlist did or did not change." },
+          { "label": "Advanced", "descriptor": "Reflection identifies a specific next step (a question to research, a person to ask) prompted by the conversation." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The warm-up assumption is a genuine, specific belief, not a placeholder like 'I don't know much about it.'",
+      "The write-up directly references something the real person said, not a generic restatement.",
+      "Only first name and pathway-related questions were shared, per the safety notes."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

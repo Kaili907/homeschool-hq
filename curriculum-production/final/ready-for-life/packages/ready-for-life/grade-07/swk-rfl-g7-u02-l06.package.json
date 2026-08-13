@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u02-l06",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Care, Laundry, and Maintenance",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: finish-the-loop inspection"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners return to one real home-care task they completed earlier in this unit, inspect its current state against the standard set when it was first done, identify what has held up and what has slipped, and fix at least one slipped item to bring it back to that standard.",
+  "scenario": "The learner picks one task completed earlier in this unit, such as the organizing system from the room or shared-space lesson, the sorted laundry load, or another completed home-care task, re-inspects it several days later against the original standard, documents specific differences between then and now, and does the corrective work needed to restore at least one slipped item.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner cannot access the original space or task result from earlier in the unit, the learner instead selects any household task completed by someone in the household this week, inspects its current state against a reasonable standard for that kind of task, and writes the specific corrective steps needed to bring it back to that standard."
+  },
+  "materials": [
+    "notes or a checklist from the earlier completed task, if kept",
+    "whatever items or tools are needed to fix a specific slipped item"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick one real task you completed earlier in this unit and recall the specific standard you set for it at the time.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the task you are re-inspecting and describe, specifically, what 'done correctly' looked like when you first completed it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Inspect the task's current state and list at least three specific aspects that have held up versus slipped since you first completed it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I compared at least three specific aspects of the task to its original standard, not just a general impression."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I clearly marked each aspect as held up or slipped, with a specific reason."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Fix at least one aspect that has slipped, bringing it back to the original standard, and then re-check that specific aspect to confirm the fix actually worked rather than just assuming it did.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe exactly what you fixed, what you did to fix it, and how you confirmed afterward that the aspect now matches the original standard again."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "checklist-item",
+          "text": "I re-checked the fixed aspect against the original standard rather than assuming the fix worked."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why this aspect slipped in the first place.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific habit or reminder you could build into your routine that would have kept this aspect from slipping, and how you would test whether that habit actually works."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot identify a specific standard from the earlier task, reteach by returning to that earlier lesson's directions with them and rewriting the standard together in concrete, checkable terms before attempting the current inspection.",
+  "extension": "Have the learner set a specific date to check the same task again and predict, in writing, which aspect is most likely to slip next and why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u02-l04",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Applications, Deadlines, and Documentation",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: proofreading and requesting feedback"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners ask a trusted adult to read a draft document (the personal statement from day 3, or another draft document from their tracker) and give specific feedback, then revise based on that feedback, so learners practice receiving and using real critique before a deadline makes revision impossible.",
+  "scenario": "With a guardian's permission and involvement, the learner shares a draft document with a trusted adult, asks two specific questions about it, listens to the feedback, and makes at least one real revision based on what the adult said.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["draft document", "written notes on feedback received", "revised document", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The trusted adult who proofreads can be the supervising guardian or another adult the guardian approves in advance.",
+    "The learner shares only the document itself and the specific questions being asked, not unrelated personal information."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no trusted adult is available to give feedback within the lesson window, the learner instead reads a provided sample draft with planted issues, writes the feedback they would give it as if they were the trusted adult, then revises the sample draft using their own feedback."
+  },
+  "materials": ["a draft document (personal statement or another document from the tracker)", "a trusted adult willing to read and discuss it"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before asking for feedback, write two specific questions you want answered about your draft.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write two specific questions you want your trusted adult to answer about this draft (not just 'is it good?')." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Share the draft with your trusted adult, ask your two questions, and take notes on what they say.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I shared the draft with my trusted adult and asked both of my prepared questions." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Summarize the specific feedback your trusted adult gave in response to each of your two questions." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Make at least one real revision to the draft based on the feedback you received.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Describe the specific change you made to the draft, and quote (or closely paraphrase) the feedback that led to it." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the experience of asking for and using feedback.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Was any part of the feedback hard to hear or hard to act on? What made you decide to use it (or, if you disagreed with a piece of it, what made you decide not to)?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's revision does not clearly connect to the feedback received (a sign the feedback was heard but not actually used), reteach by having the learner and the trusted adult sit down together again, point to the exact sentence or section the feedback was about, and revise that one spot together before the learner completes the rest of the revision independently.",
+  "extension": "Have the learner ask a second trusted adult (or the same adult a second time, after the revision) whether the specific change addressed their original concern, and record that follow-up response.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u02-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u02-l04",
+    "authoredBy": "manual"
+  }
+}

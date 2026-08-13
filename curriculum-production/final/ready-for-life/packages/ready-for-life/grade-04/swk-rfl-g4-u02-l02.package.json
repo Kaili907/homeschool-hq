@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u02-l02",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry Care",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: care symbols and labels"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 2: Clothing and Laundry Care"
+  ],
+  "objective": "Learners examine the care labels sewn into three or four real garments, use a reference guide to match each symbol to its exact instruction, and explain the specific reasoning behind the single most restrictive symbol they find rather than only naming what it means.",
+  "scenario": "You gather three or four garments from your household that have care labels sewn or printed inside them. You read the symbols on each label like a code, translate what each one is telling you to do or avoid, and figure out which single symbol would cause the most damage if it were ignored.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "three or four real garments with care labels",
+    "a printed or written care-symbol reference guide",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Find the care label on one garment and look at it closely before checking any reference guide.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List every symbol you see on this one label, in the order they appear."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using a care-symbol reference guide, match each symbol on your label to its exact meaning, then repeat for two more garments.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I matched every symbol on all three garments to a specific meaning using the reference guide, not a guess."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote down the exact instruction next to each symbol, not just its category name."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I noted which of the three garments had the most restrictive combination of care instructions."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Pick the single most restrictive symbol you found across all three garments, the one that would ruin the garment fastest if ignored, and explain the reasoning behind it, not just what it means.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name the symbol, the garment it is on, and exactly what it tells you to do or avoid."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Explain why ignoring this specific symbol would damage this specific garment: what actually happens to the fabric, shape, or color if you use the wrong heat, chemical, or method?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how you used to just ask an adult what a label meant instead of reading it yourself.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one label symbol you can now read on your own without asking, and explain how reading it yourself changes what you would do differently before starting a wash."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner correctly names a symbol's general category (like 'drying') but not its specific instruction (like 'tumble dry low' versus 'do not tumble dry'), reteach with a three-symbol matching drill isolated from the garments: cover the meanings, show only the symbols, and have the learner state the exact instruction out loud for each before checking the reference guide again.",
+  "extension": "Have the learner find one garment with a symbol not covered in this lesson, such as a dry-clean-only or do-not-iron symbol, research it using the reference guide or a knowledgeable adult in their household, and add the new symbol and its exact meaning to their reference notes.",
+  "scoringRef": "scoring/swk-rfl-g4-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

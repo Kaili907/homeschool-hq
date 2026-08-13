@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u03-l01",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Food Systems, Nutrition, and Cost",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: weekly meal planning for balance and budget"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners build a real one-week meal plan of seven breakfasts, seven lunches, and seven dinners that includes at least one item from each of the five food groups every day, while keeping the estimated weekly total at or under a given budget ceiling, so they can see how nutrition and cost tradeoffs interact in practice.",
+  "scenario": "The learner is given a weekly budget ceiling written on the task sheet and a short list of food group categories (grains, protein, vegetables, fruits, dairy) with example items and estimated per-serving prices. Using only this list and estimation, the learner drafts a full seven-day meal plan and estimates its total cost, adjusting choices until the plan fits the budget without dropping any food group on any day.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This task is a written planning exercise only; no food is prepared, and no money changes hands as part of the lesson."],
+  "simulationAlternative": null,
+  "materials": ["the provided weekly budget ceiling and food-group price list", "paper or a document for the meal plan grid", "a calculator or the ability to add decimals by hand"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before planning, estimate how much a household typically spends on food in one week.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write your estimate for a one-week food total for a household, and list one specific reason your number might be too high or too low." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using the provided food-group price list, fill in one full day of the meal plan grid (breakfast, lunch, dinner) so it includes at least one item from each of the five food groups, and add up its estimated cost.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My sample day includes at least one grain, one protein, one vegetable, one fruit, and one dairy item." },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Show your addition for the sample day's estimated total cost using the provided per-serving prices." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Complete the remaining six days of the meal plan grid, keep every day covering all five food groups, and total the full week's estimated cost against the budget ceiling.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "checklist-item", "text": "Every one of the seven days includes all five food groups at least once." },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Does your seven-day estimated total fit at or under the budget ceiling on the task sheet?", "choices": ["Yes, it fits under or at the ceiling", "No, it goes over the ceiling"] },
+        { "ref": "t3-p3", "promptType": "short-response", "text": "If your total went over the ceiling, name one specific item you swapped for a lower-cost item in the same food group, and give its new estimated price." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the tradeoffs you made while planning.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe one specific tradeoff you made between a food you would have preferred and a lower-cost item you chose instead, and explain how you kept the day nutritionally balanced anyway." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's plan repeats the same one or two food-group items every day without checking the provided list for cheaper same-group alternatives, reteach by having them circle every item in the price list from a single food group and rank those three or four options from lowest to highest estimated price before rebuilding the week.",
+  "extension": "Have the learner replan the same week at a budget ceiling ten percent lower than the original, identifying which two specific items they would substitute first to absorb the cut without dropping a food group.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

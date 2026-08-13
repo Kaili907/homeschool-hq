@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l02",
+  "lessonId": "ma-g5-ready-for-life-u06-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Step-sequence logic",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Steps are listed but out of workable order."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Steps are in a workable, logical order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Steps are in a workable order and the learner identifies a dependency between two specific steps."
+          }
+        ]
+      },
+      {
+        "dimension": "Materials-per-step accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Materials listed generically, not tied to specific steps."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Materials are matched to the specific step that needs them."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Materials are matched to steps and the learner flags one material they still need to obtain or confirm."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Plan is specific to the learner's own chosen contribution, not the sample task.",
+      "Every step has at least one associated material or explicitly needs none.",
+      "Reflection compares the guess to the real plan specifically."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

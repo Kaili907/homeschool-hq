@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l06",
+  "lessonId": "ma-g9-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Note completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Note is missing one or more of the four required parts (what's broken, exact location, duration, urgency level)." },
+          { "label": "Proficient", "descriptor": "Note includes all four required parts clearly and in a logical order." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and each part is written so specifically that no follow-up question would be needed to act on it." }
+        ]
+      },
+      {
+        "dimension": "Specificity and urgency accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The broken item or urgency level is vague, or the urgency reason is missing entirely." },
+          { "label": "Proficient", "descriptor": "The broken item is named specifically, and the urgency level has a clear, specific one-sentence reason." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the reflection accurately names the specific change between rough draft and final note that most improved its usefulness." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The note names a specific item and symptom, not a vague phrase like 'it's broken.'",
+      "The urgency level has a specific stated reason, not just a label chosen without explanation."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

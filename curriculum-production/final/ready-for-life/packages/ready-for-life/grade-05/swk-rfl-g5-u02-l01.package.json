@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u02-l01",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: sorting clothing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 04–06"
+  ],
+  "objective": "Learners sort a real pile of at least eight clothing items into at least three categories (such as color, fabric type, or wash cycle) and explain the sorting rule they used.",
+  "scenario": "Before any washing instruction, the learner is given (or gathers) a mixed pile of at least eight clothing items and sorts them using their own best guess at the rule that matters for washing, then compares that sort to what a care label suggests.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Handling clean, dry clothing only; no washer or dryer operation in this lesson."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If eight real clothing items aren't available to sort, the learner instead sorts eight items from a printed or hand-drawn clothing set using the same one-rule method and checks their rule against a sample care label provided in the lesson."
+  },
+  "materials": [
+    "at least eight clothing items",
+    "one item's care label"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, predict: what do you think matters most when sorting clothes for washing — color, fabric, or something else? Why?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "State your prediction and reasoning."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Sort your pile of at least eight items into at least three groups using one consistent rule, then write down the rule you used.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I used the same rule for every item, not a different reason for each pile."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "State the sorting rule you used in one sentence."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Check one label against your rule.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Check one item's care label. Does your sorting rule match what the label says that item needs? If not, what would you change about your rule?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's piles mix items that would actually need different wash settings (for example a bright red shirt with whites), reteach with a two-pile forced-choice version (this item: darks or lights?) on five items before returning to the full sort.",
+  "extension": "Sort the same pile a second way, using a different rule than the first time (for example fabric type instead of color), and compare which rule would actually matter more on wash day.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

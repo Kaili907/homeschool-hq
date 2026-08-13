@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u02-l04",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Care, Laundry, and Maintenance",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: cleaning-product safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "With a trusted adult present, learners read the labels of at least two real household cleaning products, identify the hazard warnings and active ingredients on each, correctly identify which combinations of common products are dangerous to mix, and use one product safely and correctly on a real surface following its label directions.",
+  "scenario": "The learner and a trusted adult gather two or more real cleaning products from the household, read each label together for its active ingredient and warning text, sort the products into pairs that are safe to use in the same space and pairs that must never be combined, and then, under the adult's direct supervision, use one product on a real surface exactly as its label directs, including ventilation and any dwell time.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Never mix a bleach-based product with an ammonia-based product, such as many glass or window cleaners; combining them produces dangerous fumes.",
+    "Use any cleaning product only in a space with a window open or a fan running, never in a closed room with no airflow.",
+    "If any accidental mixing happens, or you notice a strong or unusual smell, stop immediately, leave the area, and get a trusted adult right away."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the household has only one cleaning product on hand, the learner instead reads that product's label in detail with a trusted adult, identifies every hazard symbol and warning present, and writes which categories of other common products, naming the category rather than combining anything, would be unsafe to mix with it and why."
+  },
+  "materials": [
+    "at least two real household cleaning products with labels",
+    "gloves, if the label recommends them",
+    "a trusted adult",
+    "one real surface that needs cleaning"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "With your trusted adult, gather two or more real cleaning products from the household and read one label fully together.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the product you read closely, its active ingredient if listed, and one specific warning printed on its label."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your trusted adult, sort the gathered products into pairs that are safe to have in the same space and pairs that must never be combined, based on what each label says.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I identified at least one pair of products, or product categories, that must never be mixed, and named why, based on their labels."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My trusted adult reviewed my sorting before I used any product."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Under your trusted adult's direct supervision, use one product on a real surface exactly as its label directs, including how long it should sit on the surface and whether the space needs a window open or a fan running.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe the surface you cleaned, the exact directions on the label for dwell time and ventilation, and whether you followed each one."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "checklist-item",
+          "text": "A trusted adult was present and supervising for the entire time I used the product."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the hazard information on the label with your trusted adult.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific hazard warning from a label in this task that you had not paid attention to before, and how it would change what you do next time you clean."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot name what makes two specific products dangerous together, reteach with the trusted adult by reading the hazard and warning section of two labels aloud side by side and circling the exact words, such as 'do not mix with bleach,' that create the danger, before returning to the sorting task.",
+  "extension": "Have the learner and trusted adult review one more product not used in this task, add its hazard category to the never-mix list, and explain where in the household that product should be stored so it stays separated from anything it should never contact.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u02-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u02-l04",
+    "authoredBy": "manual"
+  }
+}

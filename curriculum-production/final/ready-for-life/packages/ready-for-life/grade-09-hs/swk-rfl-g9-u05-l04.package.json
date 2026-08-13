@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u05-l04",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Professional and Personal Communication",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: receiving and acting on feedback"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read one piece of realistic written feedback provided on this task sheet, such as a coach's note on a scrimmage or a teacher's comment on an essay, identify the specific behaviors the feedback is pointing to, and draft a concrete response plan naming exactly what they will change and how they will know it worked.",
+  "scenario": "The learner reads a sample piece of written feedback printed on this task sheet (a coach's comment after a scrimmage) and, without contacting the feedback-giver, writes a specific plan describing what they will change and how they'll check that the change worked.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["The feedback used in this lesson is a sample provided on the task sheet; the learner does not contact a real coach or teacher as part of this task."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the sample feedback passage printed on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read this feedback a coach left after a scrimmage: 'You had good instincts on defense, but you stopped calling out switches after the first quarter, and twice that led to an open shot for the other team. Talk more, even when you're tired.'",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Separate this feedback into what it praises and what it asks the learner to change, quoting the exact phrase for each." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Identify the specific, observable behavior the feedback wants changed, not just the general topic.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I named the specific behavior (calling out switches) rather than a vague label like 'communication.'" },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I identified when the behavior broke down (after the first quarter) as part of naming the problem." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft a response plan with exactly one specific action you will take and one specific way you will check whether it worked.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "State the one specific action you will take to address the feedback." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "State the one specific way you or someone else could tell whether the action worked (for example, a specific moment during a future scrimmage when you'd expect to hear yourself calling out switches)." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the difference between hearing feedback and acting on it.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain why naming a specific, observable check for whether your change worked matters more than just deciding to 'try harder' or 'do better.'" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's response plan restates the feedback instead of naming an action (e.g., 'I will communicate better'), reteach by having them finish the sentence 'The next time I am in that situation, I will specifically...' before writing anything else, so the plan names a concrete behavior rather than a restated goal.",
+  "extension": "Have the learner draft a second response plan for a different sample piece of feedback (a teacher's comment such as 'Your thesis is unclear in the second paragraph') using the same specific-action-plus-specific-check structure, and compare how the check differs between an athletic skill and a writing skill.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

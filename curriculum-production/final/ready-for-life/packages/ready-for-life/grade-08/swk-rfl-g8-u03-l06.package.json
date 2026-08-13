@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l06",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: cleanup and food-waste reduction"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners review a short food-waste observation log or a cleanup routine, identify one specific recurring habit that causes waste or leaves cleanup incomplete, and revise that one habit with a concrete replacement, explaining why the change should reduce waste or improve cleanup.",
+  "scenario": "Looking back over the past few days of meals in the household, the learner records what got thrown away or left half-finished and why, or walks through the usual after-meal cleanup routine step by step, and then picks the single habit most responsible for waste or an incomplete cleanup and rewrites it into a specific new habit to try next week.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "pencil or pen",
+    "memory of recent meals or the household's usual cleanup routine"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think back over the last several meals before writing anything down.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List two or three specific things that were thrown away, left uneaten, or forgotten in the refrigerator recently, naming the actual food each time."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Walk through the household's usual after-meal cleanup routine step by step, in the order it actually happens, and note where it tends to break down or get skipped.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed the cleanup routine in the actual order it happens, not the order it should happen."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I marked the specific step where cleanup most often gets skipped or rushed."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose the single habit, either from the food-waste list or the cleanup routine, that causes the most repeated waste or the most incomplete cleanup. Rewrite that one habit into a specific, doable replacement you could actually start next week, and explain exactly why the new version should reduce waste or leave the kitchen more finished than the old habit did.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name the one habit you are changing, describe the specific replacement habit, and explain why this particular change should reduce waste or improve cleanup rather than just being a general good intention."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Consider what would make the new habit realistic to keep.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What is the most likely reason this new habit could fail to stick after a week, and what would help you notice if it was slipping?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner names a habit change that is too vague to act on (for example, 'waste less food' or 'clean up better'), reteach by asking two follow-up questions together (what exactly would you do differently, and when specifically would you do it) and having the learner rewrite the habit as one concrete action tied to a specific moment.",
+  "extension": "Have the learner try the new habit for three real days, keep a short log of whether it happened each day, and write a short follow-up on whether the habit reduced waste or improved cleanup as predicted.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

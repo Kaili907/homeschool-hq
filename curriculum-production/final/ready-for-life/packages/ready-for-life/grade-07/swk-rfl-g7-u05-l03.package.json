@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u05-l03",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Digital Life, Purchases, and Consumer Skills",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: comparison shopping"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners compare real prices for the same type of item across two real sources, calculate a per-unit price for each, and decide which represents better value, without completing any purchases.",
+  "scenario": "The learner picks one type of item they might realistically need, such as school supplies or snacks, and compares its price for the same or a very similar item across two real sources, such as two store flyers, two apps already installed, or two price tags seen while out, then decides which option represents better value.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner does not currently have access to two real price sources, they instead compare a provided price list showing the same item type at two different prices, sizes, or added costs (like shipping), and decide which represents better value."
+  },
+  "materials": [
+    "two real price sources for the same type of item, such as flyers, apps already installed, or price tags (or the provided sample price list)",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick one type of item you could compare prices for using two real sources you already have access to.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the item type and your two sources."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Record the price, quantity or size, and any extra cost (like shipping or tax) for the same item type from each of your two sources, then calculate a per-unit price for both.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I recorded price, size or quantity, and any extra cost for both sources."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I calculated a per-unit price (such as cost per ounce or per item) for both sources so they can be fairly compared."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the two per-unit prices you calculated and identify which source is the better value, then explain one factor besides price alone, such as quality, convenience, or return policy, that might change your decision even if the cheaper option is not the one you would choose.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "State which source is the better value by price and by how much per unit."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Explain the non-price factor that could change your decision and why it matters in this specific case."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on comparing value, not just price.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one habit you could use in the future to quickly compare value across two options, and why per-unit price is more reliable than the sticker price alone."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares only the sticker prices without accounting for size or quantity differences, reteach with two mismatched-size examples (like a 12-ounce and a 20-ounce container at different prices) and walk through calculating and comparing per-unit price together.",
+  "extension": "Have the learner add a third real price source for the same item type and re-rank all three by per-unit value.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

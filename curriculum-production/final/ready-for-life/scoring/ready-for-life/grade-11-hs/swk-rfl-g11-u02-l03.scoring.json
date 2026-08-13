@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l03",
+  "lessonId": "ma-g11-ready-for-life-u02-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Opening specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Opening paragraph makes a general statement about facing challenges rather than placing the reader in a specific moment." },
+          { "label": "Proficient", "descriptor": "Opening paragraph begins with a specific moment, action, or detail that grounds the reader in the scene." },
+          { "label": "Advanced", "descriptor": "Opening paragraph's specific detail also hints at the lesson to come, without stating it outright." }
+        ]
+      },
+      {
+        "dimension": "Reflective depth",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Statement names a lesson learned but does not connect it to any specific later choice or action." },
+          { "label": "Proficient", "descriptor": "Statement names a lesson and gives one concrete example of it changing a later choice or action." },
+          { "label": "Advanced", "descriptor": "The connection between lesson and later choice is specific enough that a reader could picture exactly what changed." }
+        ]
+      },
+      {
+        "dimension": "Craft awareness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names a sentence but doesn't explain what makes it work." },
+          { "label": "Proficient", "descriptor": "Reflection names a sentence and gives a real reason grounded in craft (specificity, sensory detail, structure) for why it works." },
+          { "label": "Advanced", "descriptor": "Reflection's reasoning references a specific technique from the lesson (e.g., starting from a moment rather than a summary)." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The fictional-narrator option (Sam) was fully available and, if chosen, treated as a complete and valid response, not a shortcut.",
+      "The word count is roughly in range and the statement stays focused on one challenge rather than listing several.",
+      "Scoring evaluates writing craft only, never the truth, magnitude, or worthiness of the underlying event."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u03-l06",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Workplace Entry and Professional Systems",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: knowing where workplace rights information lives"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners assemble their first-job artifacts into one packet and practice matching workplace-rights questions to the correct type of source, so they finish the unit able to act rather than just having separate pieces of paper.",
+  "scenario": "The learner assembles the week's acceptance reply, unwritten-expectations notes, mistake-report script, and pay-statement notes into one 'first-job packet,' then, using a provided reference sheet describing where workplace-rights information generally lives (an employee handbook, HR, a labor-related government resource, a posted workplace notice), matches each of three fictional questions (about overtime, a safety concern, and being asked to skip a break) to the source category most likely to have the answer.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson uses a provided general reference sheet, not a requirement to look up any real employer's actual policies \u2014 a learner without a current or past job can complete this fully.",
+    "Nothing here is legal advice; the task is matching a question to the right category of source, not answering the question itself."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the week's earlier first-job artifacts",
+    "the provided workplace-rights-source reference sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before matching, guess which of the three fictional questions would be hardest to find an answer to.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Of the three fictional questions (overtime, a safety concern, being asked to skip a break), which do you guess would be hardest to find a reliable answer to, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Assemble the week's artifacts into one packet.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My packet includes the acceptance reply, unwritten-expectations notes, mistake-report script, and pay-statement notes."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Match each fictional question to the source category most likely to answer it, and justify each match.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each of the three fictional questions, name the source category (employee handbook, HR, a labor-related government resource, or a posted workplace notice) most likely to have the answer, and explain why that category fits better than the others."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on finding versus knowing.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Why is knowing where to look sometimes more useful than trying to memorize the answer itself?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner matches all three questions to the same single source category regardless of content, reteach by walking through why a safety concern and a pay question might point to genuinely different sources, then have them re-match using that distinction.",
+  "extension": "Optionally, for a learner who currently has or is about to start a real job, invite them to identify their own real employer's actual equivalent of one of these source categories \u2014 this is not required, and the fictional version above earns full and equal credit for every learner.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

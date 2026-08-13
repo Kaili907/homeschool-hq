@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u01-l03",
+  "lessonId": "ma-g10-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Pathway ordering",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Requirements are listed but not placed in a realistic sequence." },
+          { "label": "Proficient", "descriptor": "Steps are numbered in a mostly realistic order with at most one step out of place." },
+          { "label": "Advanced", "descriptor": "Steps are numbered in a fully realistic order, from starting point to first day on the job." }
+        ]
+      },
+      {
+        "dimension": "Local-verification awareness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No step is flagged as needing local verification; requirements are presented as universally true." },
+          { "label": "Proficient", "descriptor": "At least one step is correctly flagged as depending on local rules." },
+          { "label": "Advanced", "descriptor": "The flagged step is specific (names what varies, such as minimum age or licensing rules) rather than a generic disclaimer." }
+        ]
+      },
+      {
+        "dimension": "Realistic time estimate",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No time estimate is given, or the estimate ignores the pathway just described." },
+          { "label": "Proficient", "descriptor": "Gives a plausible total time estimate consistent with the pathway." },
+          { "label": "Advanced", "descriptor": "Gives a plausible estimate and correctly identifies which single step takes the longest." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The numbered steps read as a genuine sequence (each step depends on the one before it), not a bulleted list of facts.",
+      "The local-verification flag names a specific requirement type, not a vague 'this might vary.'",
+      "The reflection names a concrete difference between the warm-up guess and the researched pathway, not a general 'I was off.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

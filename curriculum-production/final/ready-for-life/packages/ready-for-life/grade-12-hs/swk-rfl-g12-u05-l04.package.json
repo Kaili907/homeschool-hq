@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u05-l04",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Support Networks and Contingency Planning",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: emergency and urgent-help procedures"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners rehearse stating a problem clearly, with context and what's needed, in an urgent-help communication drill with a trusted adult, so clear communication under pressure is practiced ahead of time rather than attempted for the first time during an actual emergency.",
+  "scenario": "Using a provided fictional urgent scenario, the learner rehearses out loud with a trusted adult what they would say to get help \u2014 stating the problem, the location or context, and what's needed \u2014 explicitly framed as a communication-clarity drill, never as a substitute for actually contacting real emergency services in a real emergency.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "written notes",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This is a communication-clarity drill using a fictional scenario; it is never a real emergency contact and must never involve actually contacting emergency services as practice.",
+    "No audio or video recording is made; the adult gives live feedback and the learner writes notes afterward.",
+    "If a learner has an actual urgent concern, this lesson is not the pathway for it \u2014 they should tell a trusted adult immediately and separately from this exercise."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available to role-play, the learner writes both sides of the conversation as a script, then reads only their own side aloud once and self-checks it against the same look-fors."
+  },
+  "materials": [
+    "the provided fictional urgent scenario",
+    "paper or notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before practicing, write down why clear, short sentences matter more than usual in an urgent moment.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Why might short, clear sentences matter even more than usual when someone needs to explain an urgent problem quickly?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, rehearse stating the fictional problem, context, and need clearly.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I clearly stated what the problem was."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I clearly stated the location or context."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I clearly stated what was needed."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Revise your script based on feedback and write the improved version.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your revised version of the urgent-help script, and explain what you changed to make it clearer or faster to say."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on staying calm.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What's one thing that would help you stay clear and calm enough to actually say this if the moment were real?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the script is too vague to actually act on (missing the problem, the context, or the specific need), reteach the three-part structure explicitly with one modeled example, then have the learner rebuild their own script to include all three parts.",
+  "extension": "Have the learner adapt the same three-part structure for a version where they are speaking on behalf of someone else who cannot speak for themselves in the fictional scenario, and explain what changes.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

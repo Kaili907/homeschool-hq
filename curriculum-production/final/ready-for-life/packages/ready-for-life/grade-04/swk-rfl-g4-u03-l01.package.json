@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u03-l01",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Food Safety",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: the kitchen reset in order"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 3: Kitchen Care and Food Safety"
+  ],
+  "objective": "Learners take eight kitchen-reset steps given in a scrambled order, work out on their own what order actually makes sense, and defend two of their placements in writing before comparing their logical order to how kitchen reset really happens at home.",
+  "scenario": "Before being taught the household's official kitchen-reset routine, the learner is handed eight kitchen-reset steps in a mixed-up order and has to figure out, using their own reasoning, what order avoids problems like spills sitting out or trash piling up.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a written or printed list of eight scrambled kitchen-reset steps (or a list the learner writes with an adult)",
+    "paper or a notes app",
+    "a pencil or pen"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read through all eight scrambled kitchen-reset steps before touching a pencil.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which one of the eight steps do you think has to happen first no matter what, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Number all eight steps in the order you think makes the most sense, then check your order against one rule: food and trash items should never sit out longer than they have to.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I numbered all eight steps from 1 to 8 without skipping or repeating a number."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked my order against the food-and-trash rule and changed at least one number if it broke the rule."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Pick two of your step placements and defend them in writing: explain what would go wrong for the kitchen if that step happened too early or too late instead of where you placed it.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For your first chosen step, explain what specific problem would happen if it were done at the wrong point in the reset, using an example such as spilled crumbs, a sour smell, or pests."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Do the same for your second chosen step: name the specific problem that happens if it is done too early or too late."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how your household actually resets the kitchen most days.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Compare the order you wrote to what usually happens at home: is the real order close to your logical order, or different? Name one change you would suggest trying this week."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner orders steps by personal preference, such as doing the easiest step first, rather than by the food-and-trash rule, reteach with a forced-choice drill: present two steps at a time (for example, wipe the counter versus put away food) and have the learner pick which must come first and state the reason, before returning to the full eight-step list.",
+  "extension": "Have the learner write a nine-step version of the reset for a bigger event, such as after preparing a shared snack for several people, adding one new step (like washing a shared serving spoon) in its correct place and explaining exactly where it fits and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u04-l02",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Civic and Legal Adulthood",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: voter registration and participation"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners practice navigating a fictional official-style process page to answer specific questions, so they build the skill of reading a real government or institutional process page carefully before they ever need to use one for real.",
+  "scenario": "Given a provided, entirely invented sample process page modeled on the general shape of a registration process (an eligibility section, a how-to-register section, and a how-to-verify-status section), the learner answers three questions by correctly locating the relevant section, without this lesson describing any real jurisdiction's actual rules.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The sample process page is entirely invented and does not describe any real government process or real jurisdiction's actual rules.",
+    "This lesson does not require the learner to actually register for anything, and does not ask about the learner's own eligibility, age, or political participation."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided fictional sample process page"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading closely, predict which section of an official page people skip past most often.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "When you look at an official-looking page with several sections, which section do you predict people skip past most often, and why might that cause a problem?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read the fictional sample page and answer the three provided questions by citing which section had the answer.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I answered question 1 and named the section where I found it."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I answered question 2 and named the section where I found it."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I answered question 3 and named the section where I found it."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify one detail on the fictional page that could easily be misread, and explain why.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Find one detail on the fictional page that someone could easily misread or misunderstand if they skimmed too fast, and explain what the careful reading actually says."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on transferring the skill.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What is one habit from this exercise (like checking which section actually answers your question) that you'd want to use on a real official page later?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's answers are guesses not actually traceable to the cited section of the fictional page, reteach by having them highlight or quote the exact sentence that supports each answer before finalizing.",
+  "extension": "Once eligible and if they choose to, invite the learner to look up a real, current, official source for an equivalent real process in their own area and compare its structure to the fictional practice page \u2014 entirely optional, not required for full credit.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

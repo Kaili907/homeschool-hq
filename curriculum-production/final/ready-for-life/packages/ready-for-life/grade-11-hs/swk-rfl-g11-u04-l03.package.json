@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u04-l03",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Housing and Living Arrangements",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: utilities, deposits, and setup sequence"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners sequence the steps of a fictional move-in scenario in a logical order and explain what a security deposit is and when it's typically returned, so they understand both the order of operations for moving in and the reasoning a deposit requires.",
+  "scenario": "In a fictional scenario, a person named Sam has a lease starting on the 1st of next month for a fictional apartment. Sam has a list of eight tasks to complete, in no particular order: confirm the lease start date with the landlord, pay the security deposit, contact the electric company to start service, contact the water/sewer provider to start service, schedule internet installation, complete a written move-in walkthrough noting any existing damage, forward mail to the new address, and pack and transport belongings to the new address. The learner puts these in a logical sequence and explains the reasoning.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Sam and the apartment are fictional; the learner does not need to plan or disclose a real move to complete this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided list of eight fictional move-in tasks", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before we define it, write your current understanding of the key concept.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Before we define it, what do you think a security deposit is for?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Put Sam's eight tasks in a logical sequence and explain your reasoning for the first two.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Write Sam's eight tasks in the order you would complete them, and explain why the first two tasks on your list have to happen before the rest." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain what a security deposit is and how it can be affected.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Explain, in your own words, what a security deposit typically is, roughly when it is normally returned after move-out, and one specific thing that could reduce how much of it is returned." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what's easiest to forget in your own sequence.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which step in your sequence would be easiest to forget under real-life time pressure, and what would help you remember it?" }
+      ]
+    }
+  ],
+  "remediation": "If the sequence puts utility setup or belongings transport before confirming the lease start date and paying the deposit, reteach by modeling that authorization steps (confirming the lease, paying the deposit) have to happen before a tenant has the standing to set up services or move belongings in, then have the learner re-sequence using that authorization-first rule.",
+  "extension": "Change the scenario so Sam's move-in date shifts two weeks earlier than planned, and have the learner identify which of the eight tasks now have the tightest new deadline and why.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

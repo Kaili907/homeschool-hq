@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l05",
+  "lessonId": "ma-g7-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Category coverage",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The assembled plate is missing a real item from one or more of the three categories, or the survey of available food is incomplete."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The plate includes at least one real item from each of the three categories, matching the household survey."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner includes more than one real item in at least one category, describing why that combination adds to the balance."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about available ingredients",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No specific tradeoff or constraint from actual availability is named."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific, real tradeoff caused by what was actually available is named and explained."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner compares the flexible approach to what a fixed recipe would have required in a specific, concrete way."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The items named on the plate are real foods actually found in the household survey, not an invented or ideal list.",
+      "The tradeoff explanation ties to a real constraint (what was or was not on hand) rather than a general preference.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u01-l02",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Caring for Home and Shared Spaces",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: ten-minute reset"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 01–03",
+    "Michigan Health/SEL connections"
+  ],
+  "objective": "Learners watch an adult model a ten-minute reset routine for one shared space, then run the same four-step routine (clear, sort, return, wipe) themselves in a different space within about ten minutes.",
+  "scenario": "A trusted adult first walks the learner through a ten-minute reset of one shared space, narrating each of four steps out loud: clear the surfaces, sort items into keep-here or belongs-elsewhere, return the belongs-elsewhere items to their homes, and wipe down the cleared surface. The learner then times themselves running the same four steps in a second shared space.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Use respectful, non-shaming language about the starting condition of either space."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no second shared space is available to reset independently, the learner instead resets the same first space a second time on a different day, timing themselves and comparing their independent time against the adult-modeled time."
+  },
+  "materials": [
+    "timer or clock",
+    "basket or bag for sorting"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the model, predict which of the four reset steps you think will take the most time in this space and why.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the step you predict will take longest and give one reason."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Watch and help with the adult's ten-minute reset of the first space, naming which of the four steps is happening as you go.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I could name the current step (clear, sort, return, or wipe) at least three separate times."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I helped with at least one full step alongside the adult."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I noticed one item that didn't have an obvious 'home' to return to."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Run the same four-step reset on your own in a second shared space, keeping to about ten minutes.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which step took the longest for you, and was that the step you predicted in the warm-up?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the space before and after your reset.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "What is one thing about the four-step order (clear, sort, return, wipe) that made the reset go faster than just cleaning without a set order?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner skips the sort step and tries to clear-and-wipe in one motion, reteach with a smaller five-item practice pile, having them physically separate it into two piles (belongs here / belongs elsewhere) before touching anything else.",
+  "extension": "Have the learner time a reset in a third, messier shared space and write down one change they'd make to the four-step order for a space that messy.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

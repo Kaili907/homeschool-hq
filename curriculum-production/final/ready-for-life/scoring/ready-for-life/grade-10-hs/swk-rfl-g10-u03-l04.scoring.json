@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l04",
+  "lessonId": "ma-g10-ready-for-life-u03-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Report completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The report covers only the problem, without impact or a proposed fix." },
+          { "label": "Proficient", "descriptor": "The report covers what happened, the impact, and a proposed fix." },
+          { "label": "Advanced", "descriptor": "The report covers all three parts clearly and in a logical order, with minimal excuse-making." }
+        ]
+      },
+      {
+        "dimension": "Delivery without a script",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner read the report directly from written notes." },
+          { "label": "Proficient", "descriptor": "Learner delivered the report mostly from memory, glancing at notes occasionally." },
+          { "label": "Advanced", "descriptor": "Learner delivered the report fluently without notes and responded naturally to the adult's questions." }
+        ]
+      },
+      {
+        "dimension": "Reflection on early reporting",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection restates that honesty is good without explaining a real mechanism." },
+          { "label": "Proficient", "descriptor": "Names a plausible reason early reporting works out better." },
+          { "label": "Advanced", "descriptor": "Names a specific reason grounded in the practiced scenario, not a generic platitude." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The planning notes show all three required parts before the spoken delivery happens.",
+      "The post-conversation notes name specific feedback from the adult, not a vague 'it went fine.'",
+      "The reflection avoids treating the mistake itself as evidence of poor character."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

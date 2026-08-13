@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u03-l06",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Helper Safety",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: wiping up and putting away"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 3 — kitchen helper safety and no-heat preparation"
+  ],
+  "objective": "Learners review and practice the end-of-task cleanup routine (rinsing and stacking non-sharp dishes like a cup or bowl near the sink, wiping the cleared counter or table with a damp cloth, returning small tools such as spoons to their storage drawer, and doing a final look-over) by naming what got left undone after a past kitchen task and correcting it on their own counter or table.",
+  "scenario": "Thinking back to the last time they or someone else helped in the kitchen, the learner walks through a four-step wiping-and-putting-away routine on a real counter or table that has a cup, bowl, or spoon left on it: moving the dishes near the sink first, wiping the cleared surface with a damp cloth, returning small tools to their exact drawer or shelf, and doing one final look-over before calling the space done.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Always ask a trusted adult before rinsing or touching any dish that might have been used with raw food.",
+    "Stick to non-sharp items like cups, bowls, and spoons; leave any knife for an adult to handle."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "a damp cloth",
+    "a counter or table with a cup, bowl, or spoon left on it",
+    "a drawer or shelf where small tools belong"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think back to the last time you or someone else helped in the kitchen.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one specific thing that got left out or not put away after that task."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Run the four-step wiping-and-putting-away routine in order: move dishes near the sink, wipe the cleared surface with a damp cloth, return small tools to their exact spot, and finish with a final look-over.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I rinsed and stacked any cup, bowl, or spoon near the sink instead of leaving it on the counter."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wiped the counter or table surface with a damp cloth until crumbs and spills were gone."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I returned small tools, like a spoon or a measuring cup, to the exact drawer or shelf they belong in."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I did one final look-over of the whole space before calling it done."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without this checklist in front of you, run the same four steps again tomorrow after a different snack or meal, from memory.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List the four wiping-and-putting-away steps from memory. Which one is easiest to forget?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare today's cleanup to the thing you noticed was left undone in task one.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain specifically how today's four-step cleanup would have prevented the thing you noticed was left undone earlier."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner wipes the counter but leaves dishes sitting on it instead of moving them near the sink first, reteach by having them do the steps in a fixed order, dishes off the counter first and then wipe, so the surface being wiped is always fully clear before the cloth touches it.",
+  "extension": "Have the learner apply the same four-step wiping-and-putting-away routine to a different shared space, like a bathroom counter after brushing teeth or a craft table after a project, naming what changes and what stays the same about the routine.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

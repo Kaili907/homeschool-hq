@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u04-l04",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Civic and Legal Adulthood",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: reading an official notice and responding"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners draft a response to a fictional official-style notice and review it with a trusted adult, so reading a formal notice and responding correctly becomes a rehearsed skill before a real one with real stakes arrives.",
+  "scenario": "Given a fictional sample official-style notice (an invented sender, an invented reference number, a fictional stated deadline and required action), the learner drafts a response and reviews the draft with an adult who checks that it correctly captures the deadline, the required action, and includes a clarifying question for anything unclear.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "written notes",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The notice, sender, and reference number are entirely invented; no real official notice needs to be shared or discussed.",
+    "This is not legal advice; the review checks whether the response correctly reflects the fictional notice's own stated content, not whether the response is legally correct."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available for a live review today, the learner self-reviews the draft against the same three-point checklist (deadline captured, action captured, clarifying question included) and flags any point they're unsure about."
+  },
+  "materials": [
+    "the provided fictional official-style notice",
+    "the three-point review checklist"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, list what tends to make an official notice confusing to read.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What is one thing that tends to make an official-sounding notice hard to read quickly and correctly?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft a response to the fictional notice and review it with an adult (or self-review).",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My draft response correctly states the deadline from the fictional notice."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My draft response correctly states the required action from the fictional notice."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My draft response includes a clarifying question for anything unclear."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Revise the response based on the review.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "What did the review (adult or self-review) catch that you had gotten wrong or left out, and how did you revise the response?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the reading, not just the writing.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was the hardest part of this task drafting the response, or correctly reading the fictional notice in the first place? Why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the draft misstates the fictional notice's deadline or required action (a comprehension error, not a writing-style issue), reteach by having the learner re-read the notice and underline the exact sentence stating each before rewriting the response.",
+  "extension": "Have the learner draft a second response to a harder fictional notice with a shorter deadline and an ambiguous required action, and explain how their approach changed.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

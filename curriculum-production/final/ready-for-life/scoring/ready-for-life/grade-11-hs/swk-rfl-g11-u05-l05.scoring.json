@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l05",
+  "lessonId": "ma-g11-ready-for-life-u05-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Risk identification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fewer than three risks listed, or risks are generic ('it might not work')." },
+          { "label": "Proficient", "descriptor": "At least three specific risks are listed using scenario details." },
+          { "label": "Advanced", "descriptor": "At least one risk is something noticeable before the deadline itself." }
+        ]
+      },
+      {
+        "dimension": "Fallback specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Fallback is vague ('ask someone else')." },
+          { "label": "Proficient", "descriptor": "Fallback names a specific, workable alternative." },
+          { "label": "Advanced", "descriptor": "Fallback is specific and clearly usable within the scenario's actual constraints." }
+        ]
+      },
+      {
+        "dimension": "Trigger condition quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Trigger is a feeling or vague statement, not a specific date or event." },
+          { "label": "Proficient", "descriptor": "Trigger names a specific date or event tied to the deadline." },
+          { "label": "Advanced", "descriptor": "Trigger is set early enough to leave real time to execute the fallback." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Risks reference specific details from the scenario, not generic uncertainty.",
+      "The fallback plan is concrete enough that the character could act on it immediately.",
+      "The trigger condition names a specific date, event, or piece of information, not a feeling."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

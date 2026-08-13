@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u01-l02",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Postsecondary Pathways",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: entry requirements and realistic timelines"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "For two pathways the learner is seriously considering, learners research and record the actual entry requirements (such as GPA, test scores, application steps, required hours, or qualification standards) and build a realistic timeline, practicing the discipline of verifying requirements from a real source rather than guessing or assuming.",
+  "scenario": "The learner picks two pathways from their day-1 'worth investigating further' list, looks up the actual entry requirements for each from a named, checkable source, and lays out a realistic month-by-month or year-by-year timeline for meeting those requirements before graduation.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Research for this lesson uses publicly available program or organization information; no account is created and no personal or household information is submitted anywhere."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or notes app", "access to look up program or organization information", "day-1 pathway sort (if available)"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, write down what you currently assume the entry requirements are for your two chosen pathways.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name your two chosen pathways, and for each one write your best guess at what it takes to get in or get started, before you check anything." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Look up the actual entry requirements for each pathway from a specific, named source, and record them.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "For pathway one, list the actual entry requirements you found (such as GPA, test scores, application steps, required hours, or qualification standards) and name the specific source you used." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "For pathway two, list the actual entry requirements you found and name the specific source you used." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "For both pathways, I named a specific, checkable source rather than relying on memory or a guess." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Build a realistic timeline for meeting the requirements of each pathway before you'd need them.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each pathway, lay out a realistic timeline of the steps you would need to complete and roughly when, working backward from when the requirement would be due." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your warm-up guesses to what you actually found.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which of your warm-up guesses turned out to be wrong or incomplete once you checked a real source, and what was the gap?" }
+      ]
+    }
+  ],
+  "remediation": "If the recorded requirements are vague or unsourced (for example, 'good grades' with no source named), reteach by modeling how to find one specific, verifiable requirement from a named source together, then have the learner independently find and record one additional specific requirement for each pathway using that same method.",
+  "extension": "Have the learner identify one requirement on either timeline that depends on something outside their direct control (such as a required exam offered only on certain dates, or a minimum age), and write a backup plan for what they would do if that requirement were missed or delayed.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

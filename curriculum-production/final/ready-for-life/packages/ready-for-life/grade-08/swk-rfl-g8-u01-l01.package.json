@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l01",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: long-range planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners identify one real personal goal they are already pursuing, project it across a specific four-week window, and name at least three concrete milestone dates, while taking stock of their current planning habits before building any new system.",
+  "scenario": "Every learner has something already underway right now that hasn't been finished: a video game skill, a musical instrument, a garden bed, a coding project, training for a physical activity, or a craft. This lesson asks the learner to pick that real, unfinished thing and sketch out the next four weeks of it on paper, marking the points where they could actually check whether they're on track.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notebook",
+    "a calendar or a hand-drawn monthly grid",
+    "a pencil or pen"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before mapping anything, take stock of how you currently plan, or don't.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Think back to the last time you tried to reach a goal that took more than a week. What, if anything, did you actually write down or plan ahead of time?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Choose one real goal you are currently pursuing, or genuinely want to start this month, something specific enough that you could describe what finishing it would look like.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named one real goal I am actually working toward, not a hypothetical or made-up one."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "In one sentence, describe exactly what your goal is and what finishing it would look like."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Sketch a four-week timeline for your goal on paper or a calendar grid, marking today's date at the start. Working forward from today, mark at least three milestone dates, checkpoints where you could tell whether you are on track, behind, or ahead, and briefly note what should be true by each one.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "List your three or more milestones by date, and for each one, describe the specific, observable sign that would tell you whether you're on track at that point, not just 'work on it more.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look back at both your warm-up answer and the timeline you just built.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Compare how you approached planning before this lesson to the timeline you just built. What's one planning habit you want to start using for real goals, based on what you noticed?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner struggles to name any milestones, narrow the scope: have them identify just the very next concrete action they could take this week, then work backward one step at a time by asking 'what would need to happen right before that.'",
+  "extension": "Have the learner add a fifth milestone at the very end of the four weeks describing what full completion or mastery would look like, then identify which single milestone is most at risk of slipping and explain why.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

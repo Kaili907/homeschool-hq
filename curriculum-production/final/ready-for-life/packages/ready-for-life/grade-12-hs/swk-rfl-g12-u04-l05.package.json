@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u04-l05",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Civic and Legal Adulthood",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: finding qualified help rather than guessing"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners match five fictional civic/legal/financial/medical-sounding scenarios to the correct category of qualified professional or official source, and explain the risk of guessing instead, so they build the habit of routing hard questions to a real qualified source rather than a random one.",
+  "scenario": "Given five fictional scenarios that sound legal, civic, financial, or medical in nature, the learner identifies the category of qualified professional or official source appropriate for each (without diagnosing, advising, or predicting an outcome) and writes why guessing or asking a random source would be risky specifically for that scenario.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson never provides medical, legal, financial, or immigration advice \u2014 it teaches which category of qualified source to seek, not what the answer is.",
+    "All five scenarios are fictional; no real personal legal, financial, civic, or medical situation needs to be disclosed."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided five fictional scenarios"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before matching, name a time (real or hypothetical) someone you know asked the wrong kind of source for help.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Can you think of a time \u2014 yours or someone else's, real or hypothetical \u2014 when the wrong kind of source was asked for help with something important? What went wrong?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Match each of the five fictional scenarios to the correct category of qualified source.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I matched all five scenarios to a category of qualified professional or official source."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "None of my responses attempt to actually answer the scenario's underlying question myself."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain the risk of guessing for each scenario.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each of the five scenarios, write one sentence on why guessing or asking a random, unqualified source would specifically be risky in that situation."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your own tendency.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Honestly, which of the four categories (legal, civic, financial, medical) would you personally be most tempted to just guess about instead of asking a qualified source? Why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner attempts to actually answer any scenario's underlying question rather than naming the source category, reteach the boundary explicitly \u2014 the task is 'who would you ask,' never 'here's the answer' \u2014 and have them revise any response that crossed that line.",
+  "extension": "Have the learner write one additional fictional scenario of their own that deliberately blends two categories (for example, a situation that's both financial and legal), and explain how they'd decide which qualified source to start with.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}

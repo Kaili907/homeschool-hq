@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u01-l06",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Caring for Home and Shared Spaces",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: finishing the loop"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 01–03",
+    "Michigan Health/SEL connections"
+  ],
+  "objective": "Using a household task the learner started but did not fully finish, learners identify the specific step where the loop broke, get adult-supported correction on that exact step, and complete the loop.",
+  "scenario": "The learner returns to a real, specific task they began earlier (from this unit or elsewhere) and left unfinished — items sorted but not returned, a space cleared but not wiped, laundry washed but not put away — and works with an adult to name exactly where the loop stopped before finishing it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No shame language is used to describe the earlier unfinished attempt, by the adult or the learner."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real unfinished task is available to return to, the learner instead reviews a short written scenario of someone else's stalled task, identifies where the loop likely broke, and writes the one small change that would prevent it next time."
+  },
+  "materials": [
+    "whatever materials the original unfinished task needs"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name the specific task you're returning to, and the exact point where you stopped (not 'I didn't finish' but which step).",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the task and the exact stopping point."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, look at where you stopped and figure out why that step got skipped.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named the exact step where the loop broke, not just 'I got busy.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult and I talked through one specific reason that step is easy to skip."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "We agreed on one small change that would make that step easier to remember next time."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Finish the loop: complete the skipped step and any steps after it, on your own.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe what the finished task looks like now, and confirm every remaining step is done."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Plan for next time.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Next time you start a task like this one, what will you do differently so the loop doesn't break at the same step again?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner can identify that something was left unfinished but can't name the specific step, walk backward through the task's steps together out loud until they can point to the exact one that was skipped.",
+  "extension": "Have the learner check one other task they completed recently for a similar 'almost-finished' pattern and describe whether the same step type tends to get skipped.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

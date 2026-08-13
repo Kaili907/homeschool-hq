@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l05",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: interruptions and recovery"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners catch one real interruption to the planning system they built and trialed in the previous lesson, or realistically design one if none occurs, and document the specific recovery action taken to get the system back on track.",
+  "scenario": "Plans rarely survive a normal day untouched, a sudden chore, an unexpected call, a schedule change. This mastery check asks the learner to watch their real system from the previous lesson for one of those moments, catch it as it happens, and record exactly how they got back on track rather than just noting that something went wrong.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Describe the interruption in terms of your own tasks and time only; don't record private details about another person's schedule or plans.",
+    "If the interruption involves a shared household device or account, check with a trusted adult before changing any settings to work around it."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real interruption occurs by the end of the day, design one plausible interruption specific to your own system and schedule, for example an unplanned task showing up right before your busiest block, then write the specific recovery step you would take exactly as if it had actually happened."
+  },
+  "materials": [
+    "the planning system built in the previous lesson, paper pages or a digital app",
+    "a pen or pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think back to your three-day trial before today.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Was there already a moment in your trial where something unexpected knocked your plan off track? Describe it in one or two sentences, or note that everything went smoothly so far."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Over the course of today, watch for one real interruption to your system, an unplanned task, an interruption to your usual time block, or a forgotten commitment that surfaces suddenly. When it happens, pause and note it immediately: what happened, and about what time.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I noted the interruption within the same day it happened, including roughly what time it occurred."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I described specifically what the interruption was, not just that 'something came up.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Once you've identified the interruption, real, or if none occurred, one you deliberately design as realistic for your normal week, write the specific recovery step you took or would take to get your planning system back on track, not a vague 'I'll try harder,' but an actual action such as moving a task to tomorrow, dropping a lower-priority item, or resetting the rest of the day's list.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Describe the interruption, then explain step by step exactly what you did, or would do, to recover: what got moved, dropped, or changed, and how you decided that was the right call."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what this interruption reveals about your system.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Name one specific change you could make to your system so it would absorb a similar interruption more easily next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's recovery step stays vague ('I just dealt with it'), reteach by walking through the interruption minute by minute together and asking at each point, 'what specific thing did you move, skip, or change right here?' until a concrete action surfaces.",
+  "extension": "Have the learner identify a second, different kind of interruption that could plausibly hit their system, and write a recovery step for it in advance, before it actually happens.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u02-l06",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Operations and Basic Maintenance",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: tenant homeowner and family boundaries"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners analyze three fictional household-responsibility scenarios, decide who should reasonably handle each task, and revise their initial decision after being given one new fact per scenario, practicing the distinction between tenant, homeowner, and family-member responsibilities.",
+  "scenario": "Three fictional households face a repair or upkeep question: a leaking faucet in renter Alex's apartment, a broken porch step at a house co-owned by Priya and Sam, and a cluttered shared garage in a three-generation household. For each, the learner first guesses who should handle it, then receives one new fact and decides whether to keep or revise that guess.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notebook",
+    "a pen or pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before analyzing specific scenarios, think generally about how responsibility for household tasks gets decided.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, what's the difference between a tenant's responsibilities and a landlord's responsibilities when something breaks in a rented home?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read Scenario A (the leaking faucet in renter Alex's apartment) and Scenario B (the cracked porch step at homeowners Priya and Sam's shared house). For each, write your first guess: who should be responsible?",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "short-response",
+          "text": "Scenario A: Who should be responsible for fixing the leaking faucet in Alex's apartment, Alex or the landlord? Give your first guess and a one-sentence reason."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "Scenario B: Who should handle arranging the porch step repair, Priya, Sam, or both together? Give your first guess and a one-sentence reason."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now you're given one new fact for each scenario, plus a third scenario about a cluttered shared garage in a three-generation household. For all three scenarios, decide whether the new information changes your answer, and explain your final decision with specific reasoning tied to the new fact.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For Scenario A, the new fact is that Alex's lease states plumbing repairs beyond simple maintenance are the landlord's responsibility, but tenants must report problems promptly. Does this change your guess, and why or why not? For Scenario B, the new fact is that Priya works from home and is available for contractor access while Sam manages the shared repair budget. Does this change who should take the lead, and why? For Scenario C, three generations share one garage for storage, but only one generation actually uses it regularly. Who should be primarily responsible for organizing it, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about your own revisions.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which of your three original guesses changed the most after the new information, and what does that tell you about how easy it is to assign responsibility without knowing all the facts first?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's revised answers don't actually engage with the new fact (they just restate the original guess), reteach by asking them to state the new fact back in their own words first, then explain specifically how it does or doesn't shift who has the most reasonable claim to the task.",
+  "extension": "Have the learner invent a fourth scenario of their own, describe one twist of new information partway through, and write both their initial guess and their revised answer, following the same before-and-after format.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

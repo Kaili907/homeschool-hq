@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u01-l04",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Planning Systems Under Real Load",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: calendar, reminder, and paper systems"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners set up a real calendar, reminder, or paper planning system loaded with their actual upcoming commitments for the next two weeks, put it into active use, and have a trusted adult confirm it is genuinely being used, so planning moves from a one-time exercise to a working habit.",
+  "scenario": "The learner chooses one system, a phone or computer calendar app, a reminder app, or a paper planner or wall calendar, enters every real commitment they have for the next two weeks (assignments, chores, practices, appointments), and uses it for the household-agreed check-in period, after which a trusted adult confirms the system is actually being consulted and updated.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "No new app, planner, or device is required; free calendar and reminder apps already available on the household's existing devices, or plain paper, are sufficient.",
+    "The learner only enters their own commitments; no other household member's private schedule information needs to be entered.",
+    "Completing this task sheet does not by itself certify active use; a guardian must separately confirm the system is actually being consulted and updated before this lesson counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner cannot get real ongoing use confirmed within this lesson's window, they instead design the complete system in full, specific detail for a fictional sample week: they choose the same tool (calendar app, reminder app, or paper system), fill it with a realistic full week of invented but plausible commitments (specific classes, chores, and activities with specific days and times), and write out exactly how each entry would be created, labeled, and reminded, so the design carries the same level of completeness and specificity as real use would have required."
+  },
+  "materials": ["a calendar app, reminder app, or paper planner/wall calendar already available in the household", "a list of the learner's real upcoming commitments for the next two weeks"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Choose which system you will set up and explain why.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "fixed-choice", "text": "Which system will you set up?", "choices": ["Phone or computer calendar app", "Reminder app", "Paper planner or wall calendar"] },
+        { "ref": "t1-p2", "promptType": "short-response", "text": "Explain in one or two sentences why you chose this system over the others." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Enter every real commitment you have for the next two weeks into your chosen system, including assignments, chores, practices, and appointments.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I entered every assignment I currently know is due in the next two weeks, each on its correct date." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I entered my recurring chore commitments for the next two weeks." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I entered my practice, club, or activity schedule for the next two weeks." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I set at least one reminder or review habit (such as a daily or weekly alert) so I will actually check the system, not just fill it once." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Use the system for the household-agreed check-in period. At the end, have a trusted adult review it with you and confirm it is actively in use.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did your trusted adult confirm the system is currently being consulted and updated, not just filled in once and abandoned?", "choices": ["Yes, confirmed in active use", "No, not yet confirmed"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Describe one specific instance during the check-in period where you actually checked or updated the system in real life." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on setting up and using a real system.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Compare using this real system to how you tracked commitments before this unit. Name one specific moment it already changed what you did or noticed, and one specific weakness you still want to fix about how you're using it." }
+      ]
+    }
+  ],
+  "remediation": "If a learner fills the system with entries once but the trusted adult reports no evidence of ongoing use, reteach by having the learner set one specific, low-effort daily trigger for checking it (such as opening it right after breakfast or right when they sit down to start homework) and practice that trigger for three days with the adult checking in each day, rather than asking the learner to simply 'remember to check it more.'",
+  "extension": "Have the learner add a second, longer-range layer to the same system covering the next full month, then mark which entries are firm dates versus estimates that may shift, explaining how they will revise the estimated ones as real dates are confirmed.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u01-l05",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Postsecondary Pathways",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: talking to people on each pathway"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners talk with one adult who took a postsecondary pathway different from the learner's current top choice (college, trade, apprenticeship, military, or direct work) and record what that person wishes they had known earlier, so the learner's shortlist is informed by more than one pathway's perspective.",
+  "scenario": "With a trusted adult's help identifying who to ask, the learner has a short conversation with someone who went a different route than the learner's current leading choice, asking what that person wishes they'd known before starting.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult helps identify and set up contact with the person the learner will talk to.",
+    "The learner shares only their first name and their questions about the pathway, not other identifying or family details."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no one on a different pathway is reachable, the learner instead reads a provided short first-person account from someone on that pathway and writes out what that person says they wish they had known, using only details in the account."
+  },
+  "materials": ["a notebook or paper for notes", "a way to reach the person that a trusted adult has already approved"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the conversation, write what you currently assume about the pathway you are NOT planning to take.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is one thing you currently assume is true about this other pathway, that you are not fully sure about?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Have the conversation, asking specifically what the person wishes they had known before starting.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I asked what this person wishes they had known before starting on this pathway." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I asked at least one follow-up question based on what they said." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write up what you learned and compare it to your warm-up assumption.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Summarize what the person said they wish they'd known, and state whether it confirmed, corrected, or complicated your warm-up assumption." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how this affects your shortlist.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Does this conversation change anything about your current top-choice pathway or your shortlist, and if so, what specifically?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's write-up only restates the assumption without engaging what the person actually said (a sign the follow-up question was skipped or ignored), reteach active listening by having the learner re-read their own notes and underline the one sentence that was most different from what they expected, then write one sentence explaining why it surprised them.",
+  "extension": "Have the learner have a second conversation with someone on a third pathway (a person on neither their top choice nor the one just discussed) and add that perspective to a short written comparison of all three.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l04",
+  "lessonId": "ma-g7-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Repair statement structure",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The statement re-litigates blame or contains no specific next step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The statement names what happened, its effect on the learner, and one specific fix or next step."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the statement leaves room for the other person's response rather than dictating the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Real conversation and agreement",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The conversation does not happen, or no agreement or next step is reported."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner reports the real conversation, including the other person's response and any agreed next step."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner accurately assesses whether the friction was actually resolved or only partly addressed."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The disagreement addressed is a real, specific one, not an invented example.",
+      "The reflection ties its answer to what was actually said in the conversation, not a general feeling about conflict.",
+      "A learner who completed the simulation/equal-credit alternative instead of the real-world version should be scored on this same rubric using the alternative submission as the evidence — using the sanctioned alternative is not itself a reason to score lower."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

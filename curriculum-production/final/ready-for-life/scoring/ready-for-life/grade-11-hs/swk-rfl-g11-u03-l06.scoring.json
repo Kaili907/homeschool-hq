@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l06",
+  "lessonId": "ma-g11-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Plan completeness across the three parts",
+        "levels": [
+          { "label": "Emerging", "descriptor": "One part (contacts, records, or urgency rule) is missing or minimal." },
+          { "label": "Proficient", "descriptor": "All three parts are present and each reflects skills built earlier in the unit." },
+          { "label": "Advanced", "descriptor": "The three parts are consistent with each other (for example, the record-keeping section says where the same contact info from part one would be found)." }
+        ]
+      },
+      {
+        "dimension": "Appropriate level of detail (role and location, not real private detail)",
+        "levels": [
+          { "label": "Emerging", "descriptor": "At least one entry lists something closer to a real private detail than a role and location." },
+          { "label": "Proficient", "descriptor": "Every entry uses a role-and-location format with no real private detail." },
+          { "label": "Advanced", "descriptor": "The format is also specific enough that a guardian could act on it immediately, not just generic." }
+        ]
+      },
+      {
+        "dimension": "Guardian review substance",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Guardian confirmation is a blanket checkmark with no specific feedback recorded." },
+          { "label": "Proficient", "descriptor": "Guardian confirmation includes at least one specific point about what's realistic, or not, for the household." },
+          { "label": "Advanced", "descriptor": "The plan is revised, or explicitly kept as-is with reasoning, in response to that specific guardian feedback." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real diagnosis, medication, symptom, or account/insurance number appears anywhere in the plan.",
+      "Contact entries use role-and-location format consistently across the plan.",
+      "Guardian confirmation reflects a real conversation, not just a checked box."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

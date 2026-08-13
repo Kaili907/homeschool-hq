@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l03",
+  "lessonId": "ma-g11-ready-for-life-u03-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Timeframe specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "No timeframe is stated, or it is vague (e.g., 'a while')." },
+          { "label": "Proficient", "descriptor": "Names the specific timeframe given in the scenario (four days)." },
+          { "label": "Advanced", "descriptor": "Also describes how the concern has changed over that timeframe." }
+        ]
+      },
+      {
+        "dimension": "Follow-up answer completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Answers only one of the two follow-up questions, or restates the scenario without adding detail." },
+          { "label": "Proficient", "descriptor": "Answers both follow-up questions using specific details drawn from the scenario." },
+          { "label": "Advanced", "descriptor": "Answers connect the two follow-ups into a coherent picture rather than treating them as separate facts." }
+        ]
+      },
+      {
+        "dimension": "Precision reflection",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection is generic ('more detail is better') with no specific consequence named." },
+          { "label": "Proficient", "descriptor": "Names one specific thing a professional could do with the precise version that they couldn't with the vague one." },
+          { "label": "Advanced", "descriptor": "Names two or more specific consequences of the vague version." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Uses only details from the provided fictional scenario -- no real personal health information from the learner's own life appears anywhere.",
+      "Description names a specific timeframe, not a vague duration.",
+      "Follow-up answers reference specific details from the scenario, not generic statements."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

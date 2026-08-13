@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u01-l06",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Planning Systems Under Real Load",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: asking for help before a deadline fails"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners identify a specific early warning sign that a plan is falling behind and draft a concrete, specific help-request statement to a trusted adult or teacher that names the exact problem and the exact help needed, sent early enough to matter rather than after a deadline has already failed.",
+  "scenario": "The learner thinks of a real or plausible situation from this unit's planning work where they started falling behind, identifies the earliest point they could have noticed it, and drafts the specific sentence or two they would actually say or write to a trusted adult or teacher to ask for help at that early point, without sending it to anyone.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This draft is never sent or spoken to anyone as part of the lesson; no real adult or teacher needs to be contacted."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think of a real or plausible situation where a plan started slipping before the deadline arrived.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the situation: what was the task, and what was the earliest specific sign that it was starting to fall behind schedule (not the moment it became a full crisis)?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compare asking for help early to asking after the deadline has already failed.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "Explain one specific thing a trusted adult or teacher could actually do to help if asked at the early warning sign, that they could no longer do once the deadline has already passed." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I identified a specific person (a role, such as 'my history teacher' or 'a trusted adult in my household,' not a name) I would ask for help in this situation." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft the exact help-request statement you would use, naming the specific problem and the specific help you need.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write the exact one-to-three sentence statement you would say or write, naming the specific task, the specific point you're stuck at or behind on, and the specific help you're asking for (more time, an example, clarification, or something else specific)." },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Does your statement name a specific, concrete request rather than a general statement like 'I need help'?", "choices": ["Yes, it names a specific request", "No, it's still general"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what makes it hard to ask early, and how you'd overcome that.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Name one specific reason it's hard to ask for help at the early warning sign rather than waiting, and describe one concrete thing you could do to push yourself to ask at that earlier point next time." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's help-request statement stays vague ('I'm behind, can you help'), reteach by having them fill in three specific blanks out loud first: the exact task name, the exact point they got stuck, and the exact thing they want the other person to do, then combine those three answers directly into the final sentence.",
+  "extension": "Have the learner draft a second version of the same help-request statement addressed to a different person (a peer or teammate instead of an adult), and explain one specific way the wording changes based on who they're asking.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u02-l02",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Independent Living Simulation",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: meal and supply planning at scale"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners build a week-long meal and grocery plan matched to the fictional household budget from the previous lesson, so they practice planning food at a household scale rather than meal-by-meal.",
+  "scenario": "Using the same fictional one-person household and its invented grocery-budget slice, the learner plans seven days of meals, builds a matching shopping list sorted into staples versus perishables, and checks the list's estimated fictional cost against the budget slice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All food items, quantities, and prices in this plan are invented for practice; no real household's actual food budget or real prices are required."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional household budget from the previous lesson",
+    "paper or a notes/spreadsheet document"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before planning, list what tends to go wrong with meal planning if you don't do it at all.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What is one problem that happens when someone buys groceries without any plan at all?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Plan seven days of meals for your fictional household and sort a matching shopping list into staples and perishables.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I planned meals or meal types for all seven days."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I built a shopping list sorted into staples (last a while) and perishables (need to be used soon)."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Estimate the fictional cost of your shopping list and compare it to your budget slice.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Show your estimated fictional total grocery cost and compare it to the grocery-budget slice from your household plan. Does it fit, and if not, what would you cut or change?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the planning process.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What was harder than expected about planning a full week of meals at once instead of day by day?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's shopping list is not clearly derived from the meal plan (items appear with no meal that uses them, or meals reference nothing on the list), reteach by having them trace each planned meal to at least one shopping-list item before finalizing.",
+  "extension": "Have the learner replan the week assuming their fictional grocery budget slice is cut by a third, and explain what strategy they used to still cover seven days.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

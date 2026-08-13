@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u06-l03",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: safety and supervision planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 6: Family Contribution Capstone"
+  ],
+  "objective": "Learners review the ordered plan from the previous lesson step by step, mark which steps need no supervision, an adult nearby, or an adult handling that part directly, and record the specific risk and the specific adult check or action for every step that needs supervision before carrying out the contribution.",
+  "scenario": "Using the plan you built in the previous lesson, you now check it for safety before the carry-out day. For each step, you decide how much adult involvement it genuinely needs and write down exactly what you will ask your adult to check or do, so nothing gets figured out in the moment.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "the ordered plan and materials list from the previous lesson",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Reread your ordered plan step by step before marking anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one step in your plan that you are fully confident you can do without any adult help."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Go through every step in your plan and mark whether it needs no supervision, an adult nearby, or an adult doing that part directly, such as handling a tool, appliance, or cleaning product.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I reviewed every step in my plan, not just the ones that seemed risky at first glance."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I marked each step as no-supervision, adult-nearby, or adult-handles-directly."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I did not mark a step 'no supervision' just because it seemed easy or familiar."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For every step you marked as needing an adult nearby or an adult handling it directly, write down exactly what could go wrong and exactly what you will ask the adult to check or do before that step starts, since a supervision plan only works if it names the specific risk instead of a general 'be careful.'",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List each supervision-needed step next to the specific risk it involves and what you will ask your adult to check or handle."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Which step in your plan needs the most direct adult involvement, and why does that step carry more risk than the others?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about your whole safety review.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain how checking your plan for supervision needs before the carry-out day changes how ready you feel to actually do it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner marks every step 'no supervision needed' to avoid the extra step of asking an adult, reteach by walking through their materials list from the previous lesson together, flagging any tool, appliance, or cleaning product by name, and re-marking only the steps that touch one of those.",
+  "extension": "Have the learner ask the adult who will supervise to review the plan and add one supervision point the learner missed, then compare it to their own list and note the difference.",
+  "scoringRef": "scoring/swk-rfl-g4-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

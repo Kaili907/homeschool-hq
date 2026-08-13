@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l04",
+  "lessonId": "ma-g3-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Variety achieved",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The plate includes fewer than two distinct colors or food groups."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The plate includes four different colors or food groups, confirmed by the guardian."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The plate includes four different colors or food groups, and the learner explains why each item counts as different from the others."
+          }
+        ]
+      },
+      {
+        "dimension": "Naming accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner cannot name the color or food group of the items without help."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names each item's color and food group out loud before eating."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner names each item's color and food group, and identifies which food group was missing from the plate that day."
+          }
+        ]
+      },
+      {
+        "dimension": "Engagement without pressure",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner refuses to name or describe one or more of the four items, or the task is abandoned partway through."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names and briefly describes all four items in a neutral way, regardless of whether any item is familiar or new."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner adds one specific, non-judgmental sensory or descriptive detail for each item, such as its shape, texture, or where it usually shows up in a meal."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The guardian confirms four distinct colors or food groups were actually present, not just named.",
+      "No response applies a moral label to any food item; the language stays limited to color and food group.",
+      "Whether an item is familiar or new to the learner never raises or lowers any score in this dimension.",
+      "If the simulation alternative is used, the drawing or plan still names four distinct colors or food groups."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

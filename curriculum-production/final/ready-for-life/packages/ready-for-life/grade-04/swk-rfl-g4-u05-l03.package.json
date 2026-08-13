@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u05-l03",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Planning, Belongings, and Communication",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: packing and unpacking systems"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 5: Planning, Belongings, and Communication"
+  ],
+  "objective": "Learners pack a real bag for an upcoming real trip out of the house using two different packing systems, first grouping items by category (all clothes together, all supplies together) and then grouping the same items by order of use (first-needed on top), then unpack and repack the bag a second time to compare which system made items easier to find.",
+  "scenario": "The learner has a real bag they will actually use soon, such as a backpack for an activity, an overnight bag, or a bag for a full day out. Instead of packing it once and being told the 'right' way, the learner packs it two different ways and tests which one actually works better for finding things.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a real bag for an upcoming trip or outing",
+    "the real items that need to be packed",
+    "paper or a notes app for recording the comparison"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before packing, lay out everything that needs to go in the bag and look at it as a full set.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List everything you need to pack, and name one item on the list that is easy to forget."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Pack the bag the first way, grouping items by category, so all clothing is together, all supplies are together, and so on.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I grouped every item into a clear category before placing it in the bag."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I timed or roughly counted how long this first pack took."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Fully unpack the bag, then repack the same items a second way: this time order items by when you will need them during the trip, placing first-needed items on top or nearest the opening instead of grouping by category. Compare how quickly you could find one specific item under each system.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Pick one specific item. Under the category system, how long or how many steps did it take to find it? Under the order-of-use system, how long or how many steps did it take?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "For finding items quickly, which packing system worked better for this specific bag?",
+          "choices": [
+            "Grouping by category",
+            "Ordering by use",
+            "About the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what kind of trip you packed for.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why the system you chose as better fits this particular trip, and describe one different kind of trip where the other system might actually work better."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot describe a real difference between the two packing systems, reteach with a small three-item test: pack the same three items twice, once grouped by category and once ordered by use, and have the learner physically retrieve one named item under a timer both times before comparing results.",
+  "extension": "Have the learner design a third, hybrid packing system that combines category grouping and order-of-use, apply it to the same bag, and explain in writing which single idea from each of the first two systems it borrows.",
+  "scoringRef": "scoring/swk-rfl-g4-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

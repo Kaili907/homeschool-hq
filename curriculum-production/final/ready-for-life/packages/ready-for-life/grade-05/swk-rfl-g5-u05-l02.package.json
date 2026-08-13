@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u05-l02",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Communication",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: preparing the night before"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners watch an adult model a three-item night-before prep routine (lay out clothes, pack needed items, check the next day's first commitment) then run the same routine themselves for one real upcoming day.",
+  "scenario": "An adult models a night-before prep routine covering three things: laying out clothes for tomorrow, packing any items needed (school bag, sports gear, etc.), and checking what the first commitment of tomorrow is. The learner then runs the same routine for a real upcoming day on their own.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No overnight or unsupervised nighttime activity is required beyond the learner's normal evening routine."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there's no specific real upcoming day to prep for, the learner instead plans the three-item routine in writing for a hypothetical school or activity day described in the lesson, explaining what they would lay out, pack, and check."
+  },
+  "materials": [
+    "clothes",
+    "a bag or container for packed items",
+    "access to tomorrow's schedule"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the model, think of one morning that went badly because something wasn't ready the night before. What was missing?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe that morning."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Watch your adult model the three-item routine (clothes, packed items, first commitment check) for tomorrow, then narrate it back in your own words.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I could name all three parts of the routine after watching."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I could explain why checking tomorrow's first commitment matters, not just packing items."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I helped with at least one part of the modeled routine."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Run the same three-item routine yourself for a real upcoming night, without your adult doing any part of it for you.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe what you laid out, packed, and checked, and how it matched (or did not) what actually happened the next morning."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare this morning to the bad morning.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Compare this morning to the bad morning from your warm-up. What specifically was different because of the night-before routine?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner completes the routine but the next morning still has a problem, reteach by adding a fourth check specific to whatever went wrong (for example 'check the weather' if clothes were wrong for conditions), then retry for one more night.",
+  "extension": "Run the routine for a night with an unusual next-day event (like an early appointment or something extra to bring) and describe what changed about the routine.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

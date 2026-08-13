@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u01-l03",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "The Adult-Life Operating System",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: recurring obligations across a year"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners build a blank twelve-month obligation calendar and populate it with invented recurring obligations across common categories, so they can see and address clustering before it becomes a real problem rather than after.",
+  "scenario": "Given four provided obligation categories (a housing-type payment, a utility-type payment, a subscription, and an annual renewal), the learner assigns each an invented recurring month or months across a blank twelve-month calendar, then identifies any month carrying an unusually heavy invented load.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All obligations and their months are invented for this practice; no real bill, account, or payment amount is required."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "a blank twelve-month calendar grid (paper or digital)",
+    "the four provided obligation categories"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before filling in the calendar, predict which time of year might end up the heaviest.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Before you fill anything in, which time of year do you predict will end up carrying the most obligations, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Place each of the four obligation categories onto the twelve-month calendar with an invented recurrence.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I placed the housing-type payment on the calendar with a monthly or other invented recurrence."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I placed the utility-type payment on the calendar."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I placed the subscription and the annual renewal on the calendar."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify the heaviest month and propose one way to smooth it out.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Which month carries the most obligations on your calendar, and what is one realistic way you could smooth that load (for example, moving a renewal date, or planning ahead for it)?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on whether your prediction was right.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was your warm-up prediction correct? What did seeing it laid out on the calendar change about your thinking?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner spreads all four categories evenly with no clustering at all (which is unlikely to reflect how annual renewals and subscriptions actually land), reteach by having them reconsider the annual renewal specifically \u2014 ask when a one-time-per-year item is more likely to coincide with a monthly one, and revise.",
+  "extension": "Have the learner add a fifth, self-chosen obligation category of their own invention and recalculate whether it changes which month is heaviest.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

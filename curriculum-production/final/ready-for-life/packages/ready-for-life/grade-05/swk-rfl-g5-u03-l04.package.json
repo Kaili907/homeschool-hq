@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u03-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Basic Food Safety",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: safe tool identification"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 07–09"
+  ],
+  "objective": "With an adult, learners examine a set of at least six real kitchen tools and correctly identify which are safe for independent use, which require adult supervision, and which are adult-only, explaining the reasoning for each category.",
+  "scenario": "With a trusted adult, the learner lays out at least six real kitchen tools — a mix that should include something clearly safe for independent use (a mixing spoon), something that needs supervision (a vegetable peeler), and something adult-only (a chef's knife) — and sorts each tool into one of the three categories before the adult confirms.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult is present for the entire sorting activity.",
+    "The learner handles adult-only tools only to look at them, with the adult holding or guiding, never using them unsupervised."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If six real kitchen tools with adult supervision aren't available together, the learner instead sorts six tools shown in a printed or hand-drawn kitchen-tool set into the same three categories and explains their reasoning in writing, which the adult reviews and confirms afterward."
+  },
+  "materials": [
+    "at least six real kitchen tools spanning the three safety categories"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, name one kitchen tool you're already sure is safe for you to use alone, and one you're sure is adult-only.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the two tools."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, lay out at least six kitchen tools and sort each into: safe alone, needs supervision, or adult-only.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "Every tool is sorted into exactly one of the three categories."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For each tool, I said out loud one reason for its category (sharp edge, heat, moving parts, etc.)."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult confirmed or corrected each sort before I moved to the next tool."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write a short reference list of your six tools and their categories, in your own words, that you could hand to a younger sibling.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List each tool, its category, and the one-sentence reason."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the hardest tool to categorize.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Pick the one tool that was hardest to categorize. What made its category less obvious than the others?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner sorts a tool into the wrong category (especially under-estimating risk), reteach by having the adult demonstrate the specific hazard for that exact tool (for example showing how a peeler blade can still cut) before re-sorting just that one tool.",
+  "extension": "Sort three additional kitchen tools not covered in the original six, applying the same three-category reasoning without adult prompting before the adult confirms.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

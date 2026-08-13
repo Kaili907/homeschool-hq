@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l05",
+  "lessonId": "ma-g5-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Fold-or-hang sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Sorts fewer than half the items correctly."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Sorts at least five of six items correctly."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Sorts all six correctly and explains the reasoning for the one trickiest item."
+          }
+        ]
+      },
+      {
+        "dimension": "Technique quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Items are folded or hung but shapeless, for example stretched or crumpled."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Folded items are neat and hung items fit their hangers."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Neat and consistent, and the learner names one thing they checked to keep the item’s shape."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Fold edges are visibly straight, not just bunched.",
+      "Hangers match the item's shoulder width.",
+      "Confidence rating is tied to a specific item, not vague."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

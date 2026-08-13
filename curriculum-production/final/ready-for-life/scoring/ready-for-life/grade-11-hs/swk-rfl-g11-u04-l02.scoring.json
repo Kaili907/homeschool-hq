@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l02",
+  "lessonId": "ma-g11-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Obligation identification accuracy",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Missed or misstated at least one of the four categories (payment, deposit, tenant responsibilities, notice-to-end)." },
+          { "label": "Proficient", "descriptor": "All four categories are correctly and specifically stated using details from the excerpt." },
+          { "label": "Advanced", "descriptor": "All four categories are correct and the learner notes a specific consequence tied to each one, such as a late fee, deposit forfeiture risk, or a notice violation." }
+        ]
+      },
+      {
+        "dimension": "Tenant vs. landlord distinction",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Task 3 list places at least one obligation on the wrong party." },
+          { "label": "Proficient", "descriptor": "All listed obligations are correctly attributed to tenant or landlord." },
+          { "label": "Advanced", "descriptor": "The learner explains, for at least one item, why that obligation logically falls on that party." }
+        ]
+      },
+      {
+        "dimension": "Noticing what's easy to miss",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names a clause already covered in task 2 without new insight." },
+          { "label": "Proficient", "descriptor": "Reflection identifies a specific clause and gives a plausible reason it's easy to miss." },
+          { "label": "Advanced", "descriptor": "Reflection also explains a concrete consequence of missing that clause." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All four categories in task 2 use specific figures and terms from the excerpt (dollar amounts, day counts), not vague paraphrase.",
+      "Tenant and landlord responsibilities are not mixed up in task 3.",
+      "No real lease, address, or landlord name is referenced."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u01-l04",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Home Care Routines That Last",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: noticing hazards early"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+  ],
+  "objective": "Learners walk through one real shared space with a trusted adult's permission, identify at least three specific hazards, such as trip hazards, blocked exits, or unsecured items, using a simple urgency rating, and report each finding to a trusted adult without touching, moving, or attempting to fix any hazard themselves.",
+  "scenario": "A trusted adult agrees to a hazard walk-through of one shared space in the household, such as a hallway, stairwell, or main living area. The learner looks closely for anything that could cause a fall, burn, cut, or other injury, rates how urgent each hazard is, and reports the full list to the adult instead of handling any hazard directly.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult walks through the space together with the learner for the entire hazard walk-through.",
+    "The learner points out or describes each hazard but never touches, moves, plugs in, unplugs, or attempts to fix anything themselves.",
+    "If a hazard involves electricity, water near an outlet, or a blocked exit, the learner steps back and lets the adult handle it immediately rather than finishing the rest of the walk-through first."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real walk-through isn't possible right now, the learner instead studies a printed or hand-drawn floor plan of a household space, real or one they know well, and marks three specific spots where a hazard like a trip risk, a blocked exit, or an unsecured item could realistically occur, explaining the urgency rating they would give each one."
+  },
+  "materials": [
+    "one real shared space to walk through",
+    "a trusted adult",
+    "paper or a notes app for recording hazards and urgency ratings"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before walking through the space, think about what kinds of hazards you already know to look for.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List three types of hazards you already know how to spot, such as something you could trip on, something hot, or something blocking a door."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, walk through the shared space slowly and point out anything that could cause a fall, burn, cut, or other injury, without touching it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I pointed out or described each hazard out loud instead of touching, moving, or fixing it myself."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I found at least three specific hazards, not vague ones like 'it's messy.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult confirmed or corrected each hazard I pointed out before we moved to the next one."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each hazard you found, rate how urgent it is using a simple scale and note where exactly it is located.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List each hazard you found with its exact location and an urgency rating of low, medium, or high, based on how likely it is to cause an injury soon."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Pick the single highest-urgency hazard on your list and explain the specific reason it earned that rating instead of a lower one."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the difference between noticing a hazard early and only noticing it after something goes wrong.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why rating a hazard's urgency and reporting it right away matters more than waiting until the hazard causes an actual injury, using the highest-urgency hazard you found as your example."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's hazard list is vague, such as 'messy area' or 'stuff around,' instead of specific and actionable, reteach with a two-question filter for each spot: could this specific thing make someone fall, get burned, or get cut, and exactly where is it, walking through one already-identified hazard together before the learner continues the rest of the space alone with the adult present.",
+  "extension": "Have the learner repeat the hazard walk-through in a second shared space and compare the two spaces' highest-urgency hazard, explaining which space needs attention sooner and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

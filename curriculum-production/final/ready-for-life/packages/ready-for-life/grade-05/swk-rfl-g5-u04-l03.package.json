@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u04-l03",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Building a Fueling Meal",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: meal variety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 10–12"
+  ],
+  "objective": "With an adult, learners practice building two different no-heat meal combinations from the same small set of ingredients, then independently build a third combination on their own, aiming for variety across food groups rather than repeating the same combination.",
+  "scenario": "With an adult, the learner looks at a small set of available no-heat ingredients spanning at least three food groups and practices combining them two different ways, then builds a third combination independently that's meaningfully different from the first two.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No heat source is used; ingredients are chosen to be safe for independent handling."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a varied set of real ingredients isn't available, the learner instead plans three different combinations in writing from a provided list of ingredients spanning multiple food groups, describing each combination and its food groups instead of physically assembling it."
+  },
+  "materials": [
+    "a small set of no-heat ingredients spanning at least three food groups",
+    "a plate or container"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before building anything, name the food groups you can see represented in today's ingredients (for example: grain, protein, fruit or vegetable, dairy).",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List the food groups you see."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, build two different meal combinations from the same ingredient set, using a different food-group mix each time.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My first combination used at least three food groups."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My second combination was meaningfully different from the first, not just the same foods rearranged."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult and I talked through why variety across food groups is useful, not just why it tastes different."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Build a third combination on your own that's different again from the first two.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe your third combination and explain what makes it different from combinations one and two."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your three combinations.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which of your three combinations would you actually want to eat again, and why — taste, how it made you feel, or something else?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's 'different' combinations are actually just rearranged versions of the same food groups, reteach by naming one food group that's missing from what they've built so far and having them add it specifically before trying again.",
+  "extension": "Plan a fourth combination that uses an ingredient the learner rarely chooses, and reflect on what made that ingredient a less automatic pick.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}

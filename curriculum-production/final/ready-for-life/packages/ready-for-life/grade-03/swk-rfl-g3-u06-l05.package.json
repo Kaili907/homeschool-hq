@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u06-l05",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Helper Capstone",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: checking the result"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 6 — family contribution capstone"
+  ],
+  "objective": "With the guardian who supervised day four, learners walk through a finished-loop checklist that checks four specific things — every step from the plan was actually completed, materials were returned to their original spot, the space matches what was pictured on day one, and nothing was left half-finished — with the guardian confirming each item before the job counts as complete.",
+  "scenario": "The learner and the supervising guardian return to the room where the job happened the day before, bringing the original step list. Item by item, they check whether each planned step was actually completed, whether every material went back to where it came from, and whether the space matches the description the learner gave on day one, with the guardian making the final call on any item the two of them see differently.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "guardian confirmation",
+      "learner explanation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "If finishing an incomplete checklist item involves heat, a sharp tool, or a chemical cleaner, the supervising guardian handles that exact step or stays directly present for it before it counts as finished.",
+    "The guardian decides whether re-entering the job space to finish an item needs the same supervision level named in the original plan."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the live check cannot happen right after the job because the guardian was not available at the same time, the learner instead completes a written or drawn walkthrough of the finished-loop checklist from memory, and the guardian confirms afterward, as discussed together, whether each item matches what actually happened."
+  },
+  "materials": [
+    "the original step list and materials list",
+    "the space where the job happened",
+    "the supervising guardian"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking anything, look at the space with fresh eyes, as if seeing it for the first time today.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one thing about the space right now that looks the way you pictured it back on day one."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your guardian, go through the finished-loop checklist one item at a time and mark each one together.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "Every step on the original plan was actually completed, not just started."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Every material used is back in its original spot, not left out."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "The space matches what was pictured on day one, or the difference is explained."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "Nothing about the job was left half-finished."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "For any checklist item that is not yet complete, finish that specific piece of the job right now, with your guardian present, before the check is finished.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "If you found an unfinished item, describe exactly what you did to finish it. If everything was already complete, describe how you and your guardian confirmed that together."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the checking process itself, separate from the job.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one checklist item that was easy to check and one that was harder to check, and explain what made the harder one more difficult to judge."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner and guardian disagree about whether a step counts as finished, reteach by returning to the exact wording of that step on the original plan and asking only whether the plan's own words describe what is now true, rather than debating how good a job it is.",
+  "extension": "Have the learner design one new checklist item that would catch a problem their current four-item checklist might miss, based on something noticed during today's check, and add it to future job checks.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

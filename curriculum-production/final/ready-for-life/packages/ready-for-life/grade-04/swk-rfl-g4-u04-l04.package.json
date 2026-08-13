@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u04-l04",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals, Rest, and Fueling Meals",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: building a plate with variety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 4: Body Signals, Rest, and Fueling Meals"
+  ],
+  "objective": "With a trusted adult, learners plan a real meal or snack plate aiming for variety across at least three food groups, two colors, and two textures using only foods actually available in the household, then build the actual plate and compare it item by item to their plan, explaining any differences.",
+  "scenario": "A trusted adult and the learner are preparing a real meal or snack together. Before the food is served, the learner sketches a quick plan for a plate with a mix of food groups, colors, and textures using what is actually available in the household. After the plate is built, the learner compares the real plate to the plan.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "Check with your household adult before handling any food-prep tools, hot surfaces, or the stove or oven; plate-building itself does not require them.",
+    "Only use foods your household adult says are available and appropriate for you to handle.",
+    "Wash your hands before touching any food for the plate."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real meal or snack is being prepared during this lesson, the learner instead sketches a picture of a real meal from the household's kitchen, from memory or by looking in the refrigerator or pantry without preparing anything, labels the food groups, colors, and textures they see, then writes what they would add to increase variety."
+  },
+  "materials": [
+    "a real meal or snack being prepared in the household",
+    "paper or a notes app for the plan sketch",
+    "a trusted adult present nearby"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before planning, look at what food is actually available for this meal or snack today.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List the foods available for this meal or snack, and name which food group each one belongs to (grains, fruits, vegetables, protein, or dairy)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using only the foods actually available, sketch a quick plan for your plate. Aim for at least three different food groups, at least two different colors, and at least two different textures, like something crunchy and something soft.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My plan includes foods from at least three different food groups."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My plan includes at least two different colors."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My plan includes at least two different textures."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "With your adult, build the actual plate using your plan as a guide, then set your sketch next to the real plate and compare them item by item to see how closely the finished plate matches what you planned.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List any differences between your planned plate and your actual plate, and explain why each change happened, such as running out of an ingredient, an adult suggestion, or changing your mind."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Compared to your plan, did your actual plate end up with more variety, about the same variety, or less variety?",
+          "choices": [
+            "More variety",
+            "About the same variety",
+            "Less variety"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the food groups, colors, and textures you ended up with, not about the amounts of any food.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific way you could add even more variety to this same plate next time, using the food groups, colors, or textures you noticed were missing."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's plan lists three items that are technically different foods but all from the same food group, like three kinds of fruit, reteach with a food-group sorting card set: hand the learner five food picture cards spanning all five groups and have them sort by group first before attempting a new plate plan.",
+  "extension": "Have the learner plan and compare a second plate at a different meal or snack later in the day, then compare which of the two plates achieved more variety and what made the difference.",
+  "scoringRef": "scoring/swk-rfl-g4-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

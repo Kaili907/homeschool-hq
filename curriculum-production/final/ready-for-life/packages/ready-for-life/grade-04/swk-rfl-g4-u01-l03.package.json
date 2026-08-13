@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u01-l03",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Home Care Routines That Last",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: storage that works"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+  ],
+  "objective": "Learners choose one group of real items that currently lacks a working storage spot, try two different ways of storing them, such as grouping by type versus grouping by how often each item is used, and evaluate which storage option actually keeps the items easier to find and put away.",
+  "scenario": "The learner picks a group of items in their household that tend to end up scattered because they don't have a storage spot that works, such as loose art supplies, shoes, or shared game pieces. They test two different ways of organizing those items and judge which one actually works better.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a group of real items that currently lack a working storage spot",
+    "two possible storage containers, shelves, or spots to compare",
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pick one group of items that regularly ends up scattered or hard to find.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the items and describe where they usually end up when they aren't put away."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Set up two different storage options for the same items: Option A grouped one way, like by type, and Option B grouped another way, like by how often each item is used.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I set up Option A and put all the items away using that grouping."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I set up Option B and put all the items away using that different grouping."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I noted how long each option took and whether items fit without being crammed or scattered."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Test both storage options by finding and putting away three specific items under each one.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "Which storage option let you find and put away items faster?",
+          "choices": [
+            "Option A",
+            "Option B",
+            "About the same"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Explain the specific reason Option A or Option B worked better for these particular items: was it how they were grouped, how visible they were, or something else?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about which storage option you will actually keep using.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain which storage option you will keep using for these items going forward and why a storage spot has to match how you actually use the items, not just look organized."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks the storage option that looks neater at a glance but is actually harder to use, for example items sorted alphabetically instead of by frequency of use, reteach by timing both options directly: have the learner retrieve the same three items under each option and compare the two times side by side before choosing.",
+  "extension": "Have the learner set up a third storage option for the same items using a completely different grouping rule and determine whether it beats the winner from the first comparison.",
+  "scoringRef": "scoring/swk-rfl-g4-u01-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u01-l03",
+    "authoredBy": "manual"
+  }
+}

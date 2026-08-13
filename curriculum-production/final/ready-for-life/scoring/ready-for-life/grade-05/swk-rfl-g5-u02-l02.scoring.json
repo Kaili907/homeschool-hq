@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l02",
+  "lessonId": "ma-g5-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Symbol recognition accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Confuses or cannot restate most of the five symbols."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly restates at least four of the five symbols."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly restates all five and explains a real consequence for at least one."
+          }
+        ]
+      },
+      {
+        "dimension": "Independent label interpretation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot interpret new labels without direct help."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Correctly interprets at least two of the three new labels."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Correctly interprets all three and names how they figured out the hardest one."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Explanations are in the learner's own words, not a copied definition.",
+      "At least one real consequence is named specifically, not generically.",
+      "Reflection names an actual strategy used, not 'I just knew it.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

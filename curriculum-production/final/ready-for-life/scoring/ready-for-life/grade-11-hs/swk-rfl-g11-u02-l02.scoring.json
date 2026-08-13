@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u02-l02",
+  "lessonId": "ma-g11-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Gap identification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Warm-up misses one of the two genuinely missing/incomplete items from Jordan's checklist." },
+          { "label": "Proficient", "descriptor": "Warm-up correctly identifies both the missing second reference and the not-started personal statement." },
+          { "label": "Advanced", "descriptor": "Warm-up also notes that the transcript, though 'requested,' is not yet confirmed received, showing attention to status nuance." }
+        ]
+      },
+      {
+        "dimension": "Request message quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Drafted message(s) omit a deadline, a specific helpful detail, or both." },
+          { "label": "Proficient", "descriptor": "Both drafted messages include a clear deadline and at least one specific, useful detail." },
+          { "label": "Advanced", "descriptor": "Messages are also appropriately tailored to their different recipients (reference-giver vs. trusted adult), not interchangeable templates." }
+        ]
+      },
+      {
+        "dimension": "Self-application honesty",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection names a general difficulty without connecting it to a specific part of the practiced skill." },
+          { "label": "Proficient", "descriptor": "Reflection names one specific part of the process as hardest and gives a real reason." },
+          { "label": "Advanced", "descriptor": "Reflection's reasoning is specific enough to suggest a concrete way the learner could prepare for that difficulty." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real transcript, grade, school name, or personal academic record appears anywhere in the response.",
+      "Lead-time estimates are realistic (a reference typically needs more notice than printing a transcript).",
+      "The two drafted messages are addressed to clearly different recipients and are not near-duplicates of each other."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

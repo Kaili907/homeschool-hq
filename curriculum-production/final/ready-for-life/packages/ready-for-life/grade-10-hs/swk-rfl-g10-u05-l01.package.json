@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u05-l01",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Civic Participation and Public Systems",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: finding and verifying current local information"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research one specific piece of local information (such as public library hours) using two independent sources, cross-check them for agreement, and record which source they'd trust more and why, building the habit of verifying rather than assuming information is current.",
+  "scenario": "The learner picks one specific, checkable local fact, finds it from two independent sources, notes whether the sources agree, and if they disagree, decides which is more likely current and explains why.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task researches publicly available local information only; no account, signup, or personal detail is required."
+  ],
+  "simulationAlternative": null,
+  "materials": ["access to two independent sources of local information, or the provided reference example", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Choose one specific, checkable local fact you'd like to verify (such as hours, a schedule, or a requirement).",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "State the specific fact you're going to verify and why it's genuinely useful to know." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Find the fact from two independent sources and record what each says.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "Record what your first source says, and how you'd judge whether it's current." },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Record what your second source says, and how you'd judge whether it's current." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I used two genuinely independent sources, not the same source checked twice." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the two sources. If they agree, explain what made you confident. If they disagree, decide which to trust more.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "State whether your two sources agreed, and explain which one you'd trust more if they didn't, or what made you confident if they did." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why sources can be outdated.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Name one reason a source of local information might be outdated even though it looks official." }
+      ]
+    }
+  ],
+  "remediation": "If a learner checks the same source twice with a different search rather than two genuinely independent sources, reteach by defining 'independent source' concretely (a different organization or a different type of source, such as an official page versus a phone call) and have them redo the check with a truly separate second source.",
+  "extension": "Have the learner verify a second, unrelated local fact using the same two-source method, and compare how confident they felt in each case.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u05-l01",
+    "authoredBy": "manual"
+  }
+}

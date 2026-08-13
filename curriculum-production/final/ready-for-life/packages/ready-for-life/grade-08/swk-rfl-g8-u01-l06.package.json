@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l06",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: asking for support early"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners revise their planning system using evidence from the three-day trial and the interruption recovery, and identify one specific moment where asking a trusted adult, sibling, or peer for help early would have prevented, or did prevent, a bigger problem.",
+  "scenario": "Looking back at the trial and the interruption from the past two lessons, the learner treats their own planning attempt like a case study: deciding what to keep, what to change, and naming one moment where staying quiet about a struggle made things harder than they needed to be, or where speaking up early paid off.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "the trial log and interruption notes from the previous two lessons",
+    "paper or a document",
+    "a pencil or pen"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Reread your three-day trial log and your interruption note from the previous two lessons.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What is the single biggest problem that showed up across both the trial and the interruption?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Revise your planning system based on that evidence: change, add, or remove at least one specific element, a format, a check-in time, a category, to address the biggest problem you just named.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I changed at least one specific, named element of my system."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My change directly addresses the biggest problem I identified, not a random tweak."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Think back over the whole trial and interruption: was there a moment where you struggled alone with a task, a deadline, or the interruption longer than you needed to before getting help, or a moment where you did ask a trusted adult, sibling, or peer early and it clearly helped? Identify that one specific moment.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Describe the specific moment, name who you could have asked, or did ask, a trusted adult, sibling, or peer, and explain exactly what asking early would have changed, or what it did change, about how the problem played out."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Commit to one change in how you'll handle a similar moment next time.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Name one specific kind of situation next week where you'll ask for help earlier than you naturally would, and who you'll ask."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner insists nothing went wrong and no help was ever needed, reteach by pointing to one specific line from their own interruption log and asking directly: at this moment, who could you have told, and what might they have said?",
+  "extension": "Have the learner write one specific sentence they could actually say out loud to ask for help early next time a similar problem starts, and practice saying it once.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

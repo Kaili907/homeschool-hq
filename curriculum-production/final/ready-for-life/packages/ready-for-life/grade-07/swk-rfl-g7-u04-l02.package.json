@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u04-l02",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Communication, Boundaries, and Family Teamwork",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: assertive boundaries"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners build and deliver a three-part assertive statement (the specific situation, how it affects them, and a specific request) to communicate one real limit to a household member this week, rather than staying silent, complaining vaguely, or reacting with frustration.",
+  "scenario": "The learner identifies one real, recurring situation where a limit or boundary is not being respected by someone they live with, such as needing quiet time, personal space, or asking someone to stop an interrupting habit, builds a three-part assertive statement for it, and says it out loud to that person.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real moment arises this week to say the statement aloud, the learner instead writes the full three-part assertive statement as if speaking it, adds a realistic guess at how the household member would likely respond, and writes one follow-up line for that response."
+  },
+  "materials": [
+    "paper or a notes app",
+    "an index card (optional, for practicing the statement before saying it)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think of one specific, real situation where you need to set a limit with someone you live with.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe one real recurring situation where you feel your limits are not being respected, and how you have handled it so far (going along with it, getting frustrated silently, or something else)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build a three-part assertive statement: name the specific situation, name how it affects you, and state a specific request or boundary.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My statement names the specific situation without exaggerating or blaming."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My statement includes a specific, doable request, not just a complaint."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "This week, find one real moment to say your three-part assertive statement out loud to the household member involved, using a calm and steady voice rather than a loud or apologetic one.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write exactly what you said and how the other person responded."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Did you say the full statement as planned, a shortened version, or did you back out?",
+          "choices": [
+            "Full statement",
+            "Shortened version",
+            "Backed out"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on delivering your boundary statement.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain how it felt to state your boundary out loud compared to how you normally handle this situation, and describe one word or phrase you would change next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's statement turns into blaming or apologizing instead of a clear request, reteach by having them rewrite the statement three times, each time cutting any word that blames the other person or excuses the learner's own need, until only the situation, the effect, and the request remain.",
+  "extension": "Have the learner identify a second, different situation needing a boundary and write a three-part assertive statement for it, then compare which of the two situations felt harder to address out loud and why.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u02-l06",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: put-away systems"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 04–06"
+  ],
+  "objective": "Using a specific instance where clean laundry did not make it into its storage spot correctly, learners diagnose the break in their put-away system with an adult and adjust the system so it works next time.",
+  "scenario": "The learner looks at a real, current example of laundry that didn't make it fully into its system — a basket of clean clothes sitting for days, an item in the wrong drawer — and works with an adult to figure out exactly where the system broke down before fixing both the immediate pile and the underlying system.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "No shame language is used toward whoever the pile belongs to."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there is no current backlog of unstored laundry to diagnose, the learner instead reviews a short written scenario describing someone else's stalled put-away system, identifies the likely sticking-point step, and proposes a specific fix the same way as the guided task."
+  },
+  "materials": [
+    "the actual current pile of clean laundry",
+    "storage furniture (drawers, closet, shelf)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Describe the specific put-away problem you're looking at right now — not 'my laundry system doesn't work' but exactly what's out of place.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe the specific problem."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, trace back: at what step did this pile stop moving toward its storage spot?",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named the exact step where the system stopped (washed but not folded, folded but not carried to its room, carried but not put in the drawer, etc.)."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult and I agreed on one specific reason that step is the sticking point."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "We named one small change to the system, not just 'try harder.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Put away the current pile correctly, then test your one system change by doing it again with a second small batch.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Did the system change work the second time? What did you notice?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Explain your updated system.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain your updated put-away system in your own words, from clean-and-dry to fully stored, and name the one step you'll watch most closely next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's proposed fix is vague ('I'll remember next time'), reteach by having them name a specific trigger — a time of day, a location, or a linked habit — that will cue the sticking-point step, then test that trigger with a small batch.",
+  "extension": "Apply the same diagnose-and-fix process to a different put-away system in the home (dishes, school supplies, toys) and compare whether the same sticking-point step shows up there too.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u04-l05",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Communication, Boundaries, and Family Teamwork",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: shared responsibilities"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners draft a specific proposal for dividing a real shared household responsibility, negotiate it with the household member who shares it, and reach one concrete agreement stating who does which part and how often, applying clarifying questions and specific requests from earlier in the unit.",
+  "scenario": "The learner picks one real shared responsibility that is currently unclear or unevenly divided, such as a shared chore, shared space upkeep, or a shared recurring task, drafts a specific proposal for dividing it, and negotiates a final agreement with the household member who shares it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no suitable household member is available to negotiate with this week, the learner instead writes out both sides of the negotiation as an imagined script, including at least one point where the imagined other person pushes back on the original proposal and how the learner would respond."
+  },
+  "materials": [
+    "paper or a notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Identify one real shared responsibility in your household that is currently unclear or unevenly divided.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the shared responsibility and describe what currently happens (who does it, how often, and any friction it causes)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft a specific proposal for dividing the responsibility, including who does which part and how often.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My proposal names specific tasks or parts of the responsibility, not just 'we should share it more.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My proposal includes a specific schedule or trigger for when each part happens."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "This week, present your proposal to the household member who shares this responsibility with you, ask clarifying questions about their preferences, and negotiate until you reach one specific agreement that you both state out loud.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the final agreement exactly as you both stated it, including who does what and how often."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Describe one part of your original proposal that changed during the negotiation and why."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on negotiating this shared responsibility.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain how this negotiated agreement is different from how the responsibility was handled before, and describe what you would check on in one week to see if the agreement is holding."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's proposal stays vague ('we'll take turns'), reteach by having them build a simple two-column list naming each specific part of the responsibility in one column and who does it and how often in the other, before returning to the real negotiation.",
+  "extension": "Have the learner write down what would happen if one person could not do their part on a given day, and use that as an added term the next time they revisit the agreement.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}

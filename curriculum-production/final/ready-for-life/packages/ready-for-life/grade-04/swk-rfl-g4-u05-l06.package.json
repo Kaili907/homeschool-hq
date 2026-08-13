@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u05-l06",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Planning, Belongings, and Communication",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: repairing a missed responsibility"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 5: Planning, Belongings, and Communication"
+  ],
+  "objective": "Learners identify one real responsibility they genuinely missed or fell short on recently, trace the specific reason it was missed, then design and carry out their own repair plan that addresses that specific reason rather than a generic apology, producing a written repair plan and a record of what was actually done.",
+  "scenario": "The learner thinks of something real they were supposed to do this week but did not do, did late, or did poorly, such as a chore, a commitment to someone, or a step from an earlier lesson in this unit. Rather than being told how to fix it, the learner figures out why it happened and decides what repair actually makes sense.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes app to record the plan",
+    "whatever is needed to actually carry out the repair, depending on the responsibility"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think honestly about a real responsibility you missed or fell short on this week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the specific responsibility, and who else, if anyone, was affected by it being missed."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Trace back the specific reason the responsibility was missed, rather than settling for 'I forgot' or 'I didn't feel like it.'",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named a specific cause (for example, no reminder was set, it wasn't written on my calendar, I ran out of time because of something else, I didn't understand what was expected)."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked that my named cause actually explains what happened, not just a guess."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Design your own repair plan that fixes the specific cause you identified, not just a general 'I'll try harder' promise, then carry it out.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What is your repair plan, and how does each step connect back to the specific cause you named in task two?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "What did you actually do to carry out the repair, and is it fully done, partly done, or not yet started?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the difference between fixing the immediate problem and fixing what caused it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain the difference between just apologizing or redoing the task once versus changing the specific thing that caused it to be missed, and describe what you will change going forward so it is less likely to happen again."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's repair plan only addresses the immediate task ('I'll just do it now') without connecting to the cause named in task two, reteach by having the learner draw a simple two-box diagram, cause on the left and repair step on the right, and requiring at least one arrow that clearly connects a specific cause to a specific step before the plan counts as complete.",
+  "extension": "Have the learner check back in three days on whether the repair plan actually prevented the same responsibility from being missed again, and write a short update on whether the cause they identified turned out to be the real one.",
+  "scoringRef": "scoring/swk-rfl-g4-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

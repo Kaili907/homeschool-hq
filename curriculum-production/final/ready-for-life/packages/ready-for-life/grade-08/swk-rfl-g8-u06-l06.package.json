@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u06-l06",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Independent-Living Capstone",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: reflection and backup plans"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "As the unit's final capstone reflection, learners compare the fictional independent-living persona simulation to their own real current habits from earlier in the course, name one real habit they will actually try to build, and write one backup plan for what they will do if that habit does not work the first time.",
+  "scenario": "Stepping outside the fictional persona for the first time in this unit, the learner looks back across the schedule, budget, food and transportation, safety, and document-system work they just finished, compares it honestly to how they currently handle similar things in their own life right now (in general terms only, with no real financial or account details), chooses one specific habit they genuinely want to start, and plans in advance what they will do if that habit does not stick right away.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "the learner's completed persona work from the previous five lessons in this unit, for reference only"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before choosing a habit, compare the simulation to real life honestly.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one part of the persona simulation (schedule, budget, food and transportation, safety plan, or document system) that felt closest to how you actually handle something similar in your own life right now, described only in general terms."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Look for a gap between the simulation and your real current habits.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I identified at least one specific way my persona's plan was more organized or more prepared than my own current habit in that same area."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I described this gap using only general habit language, with no real financial figures, account information, or other identifying details."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Commit to one real, specific habit and plan for the moment it does not go perfectly.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name one real habit from your own life that you will actually try to build in the next month, based on something you noticed while building the persona's plan (for example, a specific way of tracking spending, a specific weekly food-planning step, or a specific document-organizing habit), state exactly when and how often you will do it, and then write one specific backup plan describing what you will do differently if you skip it or it does not work the first time you try."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Close out the capstone by looking back across the whole unit.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Looking back across the entire persona simulation, which single lesson changed how you think about your own independent-living readiness the most, and why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's chosen habit is too vague to act on ('be better with money') or their backup plan just repeats 'try harder,' reteach by rewriting the habit together into a specific action with a specific frequency, then brainstorm two concrete backup options before the learner picks one and finishes independently.",
+  "extension": "Have the learner set a specific check-in date three or four weeks out and write down exactly what evidence would tell them whether the habit is working, not working, or needs the backup plan.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u06-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u06-l06",
+    "authoredBy": "manual"
+  }
+}

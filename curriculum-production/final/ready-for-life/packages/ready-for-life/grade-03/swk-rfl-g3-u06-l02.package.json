@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u06-l02",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Helper Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: listing steps and materials"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 6 — family contribution capstone"
+  ],
+  "objective": "Learners study a worked example that breaks one sample job, wiping down a table, into an ordered list of five specific steps (clear the table, get a damp cloth, wipe in one direction, dry the surface, put the cloth away) plus a short materials list, then apply the same two-part method to their own chosen helper job from the previous lesson: an ordered step list first, followed by a separate materials list.",
+  "scenario": "Using the job picked on day one, the learner first studies the worked example on paper, noting how each step describes one single action and how the materials list only names items the sample job actually uses. The learner then sits at a table or other flat writing surface and writes their own step list and materials list for their own job, checking that no step is missing and no needed item is left off the materials list.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper and a pencil",
+    "the worked example step list",
+    "the job chosen in the previous lesson"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look only at the worked example of the sample job before touching your own job's plan.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In the sample job's step list, which step comes right after getting the damp cloth ready, and why do you think it comes there?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write your own step list for your chosen job, following the same pattern as the worked example: a gathering step first, then the action steps in order, then a finishing step.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My step list starts with a step for gathering or getting ready, not with the main action."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Each step in my list describes one single action, not two or three actions combined into one step."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My step list ends with a step that shows the job is actually finished, such as putting something away or checking the result."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I wrote at least four steps and no more than six steps total."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now write your materials list separately from your step list, without looking back at the worked example.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List every specific item your job needs, using only things already in your home, and next to each item write which step of your plan uses it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your finished list to the worked example.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one step you almost forgot to include in your list and explain how you noticed it was missing."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner writes a materials list before finishing the step list and ends up missing an item a later step needs, reteach by having them read their step list aloud one step at a time, pausing after each step to ask 'what does my hand need to hold right now,' and adding any missed item to the materials list on the spot.",
+  "extension": "Have the learner rewrite their step list a second time using about half as many words per step as the first draft, keeping every step just as clear, to practice writing directions someone else could follow without extra explanation.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

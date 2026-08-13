@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u03-l01",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Skills and Flexible Meal Planning",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: food safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners complete a real, hands-on food-safety check of their own kitchen or wherever their household stores food, examining refrigerator temperature awareness, expiration dates on stored food, and habits that could cause cross-contamination, then compare what they find to safe food-handling practice.",
+  "scenario": "In their own kitchen or wherever their household stores and prepares food, the learner checks the refrigerator's temperature setting or a thermometer if one is present, looks at the dates on several real stored items, and observes how raw and ready-to-eat foods are currently kept apart, without cooking or handling raw meat directly.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner does not have access to a kitchen or stored food to check, they instead sort a provided list of ten food-handling scenarios into 'safe' and 'unsafe' columns and explain the specific rule each unsafe scenario breaks."
+  },
+  "materials": [
+    "access to a refrigerator or the place food is stored in the household",
+    "a few real stored food items with visible dates",
+    "paper or a notes app for recording findings"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking anything, write down what you currently believe are the biggest food-safety risks in a kitchen.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two things you think can make stored or handled food unsafe to eat."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Check the actual refrigerator or food-storage area in your household and record what you find.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked whether the refrigerator has a way to know its temperature (a built-in display or a thermometer) and recorded what I found."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I looked at the dates on at least five real stored food items and noted which, if any, were past their date."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Observe how raw and ready-to-eat foods are currently arranged and stored in your household, then identify at least two specific changes that would reduce the chance of cross-contamination between them.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe exactly where raw items (such as uncooked meat, if any is present) are stored relative to foods that will not be cooked again before eating, and name one specific risk this creates."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name two specific changes you could make to how items are arranged or stored to reduce that risk."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare what you found during your real check to what you believed before you started.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one specific finding from your real check that surprised you or confirmed what you expected, and name one change you could make in your household's food storage or handling based on it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot identify any specific storage or dating issues during the check, reteach using the simulation alternative's scenario list first, then have the learner repeat the real check focusing on one category at a time: temperature, then dates, then separation.",
+  "extension": "Have the learner check one additional real household space where food might be stored, such as a pantry or a separate freezer, and compare what they find there to what they found in the primary refrigerator check.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

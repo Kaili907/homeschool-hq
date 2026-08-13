@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u05-l04",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Asking for Help",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: putting things back"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking"
+  ],
+  "objective": "Learners return every item on their borrowed-things log to its exact owner or storage spot in one sitting, stating out loud where each item goes before placing it there, while a trusted adult directly watches and confirms that each return actually happens.",
+  "scenario": "Using the borrowed-things log from an earlier lesson, or a quick list made today of items currently out of place, the learner gathers each item, names its correct owner or spot out loud, and physically returns it while a trusted adult watches and checks off each completed return.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult directly observes and confirms that each item actually reaches its owner or storage spot, not just that the learner reports it happened."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If there is no borrowed item on hand this week, the learner instead writes, in specific detail, exactly where each of three real belongings in their space would be returned to (the owner, the room, and the shelf or drawer) and explains the return step for each one."
+  },
+  "materials": [
+    "the borrowed-things log or a quick list of out-of-place items",
+    "the items themselves",
+    "a trusted adult"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before returning anything, gather every item that needs to go back today.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List every item you are about to return today."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult watching, return each item one at a time. Say where it belongs before you move it, then place it exactly there.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I said out loud where each item belongs before moving it."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I carried and placed each item in its exact spot, not just somewhere nearby."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I handed items directly to a person if the item belongs to a person rather than a shelf."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "My adult watched and confirmed each return before I moved to the next item."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "After returning everything on today's list, check your space once more on your own for any item you might have missed the first time.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Did a second check turn up any item you missed the first time? Name it and return it, or write 'none found.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look at your space now that every borrowed item is back where it belongs.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific difference you notice in your space now that every borrowed item is returned, and name one thing that will make returning items easier next time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sets an item in a 'close enough' spot instead of its exact spot, or hands it to the wrong person, reteach with a say-it-before-you-place-it rule, practiced on two low-stakes items with the adult checking the exact spot before the learner continues to the rest of the list.",
+  "extension": "Have the learner set up a standing return spot near the exit door so the next batch of borrowed items gets returned the same day they are noticed, instead of piling up first.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u03-l02",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Workplace Entry and Professional Systems",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: unwritten workplace expectations"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners analyze workplace mini-scenarios to identify likely unwritten expectations and name a reliable way to confirm them, so they learn to notice what a written policy doesn't say instead of guessing and hoping.",
+  "scenario": "Given several provided workplace mini-scenarios illustrating a gap between a stated policy and its actual practice (arrival time, break usage, phone use), the learner states what the unwritten expectation likely is for each and names a specific, low-risk way to confirm it rather than guessing.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All workplace mini-scenarios are provided and fictional; no real current or past employer needs to be described or judged."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided set of workplace mini-scenarios"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before analyzing, name one unwritten rule from any group setting you've been part of (school, a team, anything).",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Think of any group you've been part of \u2014 what's one rule that everyone seemed to know but nobody actually announced?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each provided mini-scenario, state the likely unwritten expectation.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I stated the likely unwritten expectation for the arrival-time scenario."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I stated the likely unwritten expectation for the break-usage scenario."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I stated the likely unwritten expectation for the phone-use scenario."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each scenario, name a specific, low-risk way to confirm the expectation rather than guessing.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each of the three scenarios, name a specific, low-risk way you could confirm the real expectation (for example, observing for a day, or asking a specific kind of question) rather than just guessing and hoping."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why unwritten rules exist.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Why do you think workplaces have unwritten expectations that differ from the posted policy at all, instead of just writing everything down?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's confirmation strategies are all the same generic 'just ask' with no specifics, reteach by modeling one concrete, low-risk confirmation method (such as watching what others actually do for the first day before assuming) and have them tailor a distinct method to each scenario.",
+  "extension": "Have the learner write one additional workplace mini-scenario of their own invention with its own written-versus-actual gap, and analyze it the same way.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

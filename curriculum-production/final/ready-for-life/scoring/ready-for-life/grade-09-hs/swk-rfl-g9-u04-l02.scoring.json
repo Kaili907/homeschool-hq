@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l02",
+  "lessonId": "ma-g9-ready-for-life-u04-l02",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Cost comparison accuracy and completeness",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Comparison is missing one of the three required options, or the recorded costs are not tied to the same specific trip." },
+          { "label": "Proficient", "descriptor": "Comparison includes all three options for the same specific trip, with a real or reasonable direct-cost figure recorded for each." },
+          { "label": "Advanced", "descriptor": "Comparison includes all three options with accurate or clearly-labeled-as-estimated figures, and the table clearly isolates direct cost from hidden cost for each option." }
+        ]
+      },
+      {
+        "dimension": "Hidden-cost reasoning",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Learner names a hidden cost only in the warm-up and does not apply it when explaining the final choice, or the final choice is explained using price alone." },
+          { "label": "Proficient", "descriptor": "Learner records one specific hidden cost per option and explains the final choice using at least one of those hidden costs." },
+          { "label": "Advanced", "descriptor": "Learner records specific hidden costs per option and the final-choice explanation weighs a hidden cost against the direct cost, showing the tradeoff explicitly." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Recorded fares and estimates are specific numbers tied to the named trip, not generic price ranges.",
+      "The final-choice explanation cites a specific hidden cost (a number of minutes, a named reliability issue) rather than a vague statement like 'it's more convenient.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

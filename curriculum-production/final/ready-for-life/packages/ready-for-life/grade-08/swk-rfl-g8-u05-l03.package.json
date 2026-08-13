@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u05-l03",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Work, Communication, and Career Readiness",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: professional communication"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners draft a short professional email to a fictional club leader twice in a row, once using provided sentence starters and once using only a short tone checklist, so the scaffolding measurably fades between rounds while the message stays consistently professional.",
+  "scenario": "In round one, the learner uses sentence starters to write Mr. Okafor, the fictional leader of the made-up Northfield Chess Collective, asking to join a Saturday practice session. In round two, using only a short tone-reminder checklist and no sentence starters, the learner writes Mr. Okafor again, this time asking to reschedule because of a conflict, and compares which round felt more natural to write.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Mr. Okafor and the Northfield Chess Collective are fictional; this practice message is never sent to any real person or organization."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "the sentence-starter list on this task sheet",
+    "the tone-reminder checklist on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read two sample opening lines, one casual ('hey so can i come saturday') and one professional ('Hello Mr. Okafor, I'm hoping to join Saturday's practice session.'). Decide which one fits a message to a club leader you don't know well.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-choice",
+          "text": "Which opening line is appropriate for a first message to a club leader you don't know well?",
+          "choices": [
+            "hey so can i come saturday",
+            "Hello Mr. Okafor, I'm hoping to join Saturday's practice session."
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using the sentence starters on this task sheet, write your first email to Mr. Okafor asking to join Saturday's practice session. Fill in every starter with your own specific details instead of leaving any part generic.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Write your full round-one email to Mr. Okafor here, using the sentence starters and adding your own specific details."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I used every sentence starter and replaced its blank with a real, specific detail rather than leaving it generic."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without using any sentence starters this time, write a second email to Mr. Okafor asking to reschedule your Saturday practice slot because of a schedule conflict. Check your message only against the tone-reminder checklist: state your reason clearly, avoid slang, suggest one specific alternative time, and end with a polite closing line.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your full round-two rescheduling email to Mr. Okafor here, making sure it states your reason clearly, avoids slang, suggests one specific alternative time, and ends with a polite closing line."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the two rounds now that the sentence starters are gone.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which round felt more natural to write, and name one specific thing you had to remember on your own in round two that the sentence starters had been reminding you of in round one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's round-two email drifts back toward casual phrasing or drops a required element from the tone checklist, reteach by covering the round-one email and reading only the tone checklist aloud together, checking off each item against the round-two draft one at a time before revising.",
+  "extension": "Have the learner write a third email to Mr. Okafor from scratch, this time declining an invitation to an extra practice they can't attend, using no starters and no checklist, then self-check it against the tone-reminder items from memory.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u05-l03",
+    "authoredBy": "manual"
+  }
+}

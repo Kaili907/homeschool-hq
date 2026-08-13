@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u03-l03",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Care and Basic Food Safety",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: cross-contamination basics"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 07–09"
+  ],
+  "objective": "With an adult, learners practice separating raw-food-risk items from ready-to-eat items using color-coded or labeled zones (cutting boards, plates, or containers) across two supported rounds, then explain the reasoning behind the separation.",
+  "scenario": "With a trusted adult, the learner practices the basics of avoiding cross-contamination by keeping raw-food-risk items (or an adult-designated stand-in) physically separate from ready-to-eat items, using separate cutting boards or containers and separate hand-washing breaks between handling each type, guided fully the first round and leading the second with adult confirmation.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult is present for the entire practice, both rounds.",
+    "Hands are washed between handling the raw-food-risk zone and the ready-to-eat zone every time.",
+    "Stop and ask for help if any raw-food-risk item's condition seems unusual."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If handling an actual raw-food-risk item isn't appropriate for this household, the learner instead uses two clearly labeled stand-in items (for example a red-tagged item representing 'raw' and a green-tagged item representing 'ready-to-eat') to practice the same two-zone separation and hand-washing breaks, with the adult confirming the zones stayed correctly separated."
+  },
+  "materials": [
+    "two cutting boards or containers",
+    "a raw-food-risk item or adult-designated stand-in",
+    "a ready-to-eat item",
+    "sink and soap"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before practicing, name one reason mixing a raw-food-risk item and a ready-to-eat item on the same surface could be a problem.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one reason."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, set up two separate zones (or boards, or containers) — one for the raw-food-risk item, one for a ready-to-eat item — and practice moving between them correctly, washing hands between zones.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I used a separate surface or container for the raw-food-risk item the whole time."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I washed my hands after touching the raw-food-risk item and before touching the ready-to-eat item."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult confirmed the zones stayed separate throughout."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I did not set any ready-to-eat item down on a surface the raw-food-risk item had touched."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Lead a second round of the same two-zone setup yourself, with your adult present to confirm, without being told each step.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which part of keeping the zones separate did you remember on your own, and which part needed a reminder?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Explain the risk of mixing zones.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain, in your own words, exactly what could go wrong if the two zones got mixed up — name a specific risk, not just 'it's unsafe.'"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner sets an item down on the wrong surface even once, reteach with a smaller, slower version — one item at a time with the adult narrating 'raw zone' or 'ready zone' out loud before each placement — before returning to the full two-round practice.",
+  "extension": "Add a third zone (like a zone for washed produce) and have the learner reason through where it fits relative to the first two, explaining their placement to the adult.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

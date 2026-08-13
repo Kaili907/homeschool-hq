@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l05",
+  "lessonId": "ma-g12-ready-for-life-u06-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Review completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the four required pieces was not actually included in the review."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All four pieces were reviewed against the completeness checklist."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The recorded outcome is specific about what was found for each piece, not a single blanket statement."
+          }
+        ]
+      },
+      {
+        "dimension": "Honest reconciliation",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The review claims full completeness in a way that contradicts an earlier honestly-identified gap with no explanation."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Any remaining gap is named honestly, consistent with earlier work."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection shows genuine, non-defensive engagement with being reviewed by someone else."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The guardian confirmation (or self-review) is distinct from the learner's own presentation.",
+      "Review outcomes for each of the four pieces are specific, not a single vague verdict.",
+      "The review record does not judge or attempt to change the learner's chosen life direction."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u06-l02",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: planning steps and materials"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners watch an adult model breaking a task into an ordered sequence of steps with materials listed for each, then build the same kind of plan for their own chosen contribution.",
+  "scenario": "An adult models planning by taking a different sample household task and breaking it into an ordered sequence of steps, naming the materials each step needs. The learner then applies the same planning method to their own chosen contribution from the previous lesson.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This is a planning task; no physical task execution happens in this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper and pencil",
+    "materials for the sample modeled task"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the model, guess: how many separate steps do you think your chosen contribution will actually take?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "State your guess."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Watch your adult model breaking a sample task into ordered steps with materials for each, then ask questions about anything unclear.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I could restate the sample task's step order back in my own words."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I could name which materials went with which step, not just a general materials list."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I asked at least one question about the modeling before starting my own plan."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Break your own chosen contribution into an ordered sequence of steps, listing the materials each step needs.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List your steps in order, with materials noted for each."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your guess to your actual plan.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Was your step-count guess from the warm-up close to your actual plan? What made planning this task easier or harder than you expected?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If steps are listed out of a workable order (for example a later step that depends on an earlier one comes first), reteach by having the learner physically arrange step cards or sticky notes and testing whether each step's materials would actually be ready at that point.",
+  "extension": "Identify one step in the plan that could go wrong and write a specific backup plan for just that step.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

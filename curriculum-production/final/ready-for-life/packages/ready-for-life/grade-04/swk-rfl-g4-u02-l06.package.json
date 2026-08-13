@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g4-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g4-ready-for-life-u02-l06",
+    "courseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothing and Laundry Care",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: a put-away system"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1, Grade 4 Unit 2: Clothing and Laundry Care"
+  ],
+  "objective": "Learners design and test their own put-away system for one specific category of their own clothing, try it on at least three real items, identify the single biggest problem the trial revealed, and revise the system to fix that specific problem.",
+  "scenario": "You look at how your own clothes actually end up scattered around your space and design a simple put-away system, for one specific category, that you think would work better. You try it on a few real items today, then fix the one part that did not work before calling it your system.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a small set of your own clothing to test the system on",
+    "paper or a notes app to sketch or write your system",
+    "your space's existing storage (drawers, shelves, hooks, bins)"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before designing anything, look at one category of your own clothing that tends to end up in the wrong place or in a pile.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the category and describe where those items usually end up instead of where they should go."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Design a simple put-away system for that one category: decide exactly where each type of item in that category should live and why that spot makes sense.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named one specific category, not 'all my clothes.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I chose a specific real spot for the category and wrote down the reason that spot makes sense, such as easy to reach, easy to see, or close to where I get dressed."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I tried my system on at least three real items today."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "After trying your system on real items, check whether it actually worked before deciding anything is finished.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe exactly what happened when you tried your system: did every item fit its planned spot, or did something not work?"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Identify the single biggest problem with your first version of the system and explain specifically why it did not work, using what actually happened during your trial rather than what you expected to happen."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your revised system to your first attempt.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain the one specific change you made to fix the biggest problem, and predict whether this revised system would still work if the number of items in that category doubled."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's category or storage spot stays vague, such as 'all my clothes' or 'somewhere better,' reteach by having them pick up five real items from that category one at a time and name the exact spot for each before writing anything down, then turn that walkthrough directly into their system.",
+  "extension": "Have the learner design a second put-away system for a different category of their own clothing and compare, in writing, which of the two categories was harder to design a working system for and why.",
+  "scoringRef": "scoring/swk-rfl-g4-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g4-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

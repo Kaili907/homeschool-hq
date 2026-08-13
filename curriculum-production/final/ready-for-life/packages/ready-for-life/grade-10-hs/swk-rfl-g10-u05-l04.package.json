@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u05-l04",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Civic Participation and Public Systems",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: voter registration and civic participation in outline"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research the actual eligibility requirements and general registration process for voting where they live, note when they personally would become eligible, and complete a provided fictional practice form to understand the kind of information the real process asks for, without submitting anything or taking any real registration action.",
+  "scenario": "The learner researches the real eligibility rules (age and any other requirement) and the general outline of the registration process for their own location from a current source, records when they personally would become eligible, and fills out a provided fictional practice form modeled on a typical registration form to see what information it actually asks for.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson is research and outline only; no real registration, submission, or account signup happens as part of this task.",
+    "The practice form is fictional and provided with this lesson; it is filled out for understanding only and is not a real government document.",
+    "This lesson presents the general process neutrally and does not advocate for any candidate, party, or position."
+  ],
+  "simulationAlternative": null,
+  "materials": ["access to research real local voter eligibility and registration rules, or the provided reference summary", "the provided fictional practice form", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before researching, write what you currently know or assume about voter eligibility rules.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write your current assumptions about who is eligible to register to vote and when." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Research the actual eligibility requirements and general registration outline for your location, and record when you personally would become eligible.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Record the actual eligibility requirements you found and the general outline of the registration process, naming your source." },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "State when you personally would become eligible based on what you found." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Fill out the provided fictional practice form to see what kind of information the real process actually asks for.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "checklist-item", "text": "I completed the fictional practice form using only the placeholder information it provides, not any of my own real personal details." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Name one piece of information the practice form asks for that surprised you." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on civic participation more broadly.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Beyond voting, name one other way someone your age can genuinely participate in civic life right now, based on what you found." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's eligibility research is vague or based on assumption rather than a verified current source, reteach by requiring the source to be named explicitly and by having the learner state their own eligibility date as a specific calculation from that source's stated rule.",
+  "extension": "Have the learner research one local civic activity open to their current age group (such as a youth council or a community meeting) and describe what participating would actually involve.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

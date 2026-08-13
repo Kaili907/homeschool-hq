@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u04-l03",
+  "lessonId": "ma-g5-ready-for-life-u04-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Variety across combinations",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "All three combinations are essentially the same foods rearranged."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least two of three combinations use a meaningfully different food-group mix."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All three combinations are distinct and the learner explains the food-group reasoning for each."
+          }
+        ]
+      },
+      {
+        "dimension": "Reflection on preference vs. variety",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Reflection only mentions taste."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Reflection names at least one non-taste factor, like how it made them feel."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Reflection compares taste and at least one other factor across specific combinations."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each combination names its food groups explicitly.",
+      "No two combinations are near-identical.",
+      "Reflection is specific to the learner's actual three combinations, not generic."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

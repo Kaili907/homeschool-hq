@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l06",
+  "lessonId": "ma-g8-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Specificity of habit identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The named habit or waste pattern is vague or generic, not tied to an actual recent food or cleanup step."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The named habit is specific and clearly traced back to something listed in the warm-up or guided task."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The named habit is specific, and the learner explains why it is the single most repeated or costly one compared to the others noticed."
+          }
+        ]
+      },
+      {
+        "dimension": "Quality of the revised habit",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The replacement habit is a general intention (for example, 'try harder' or 'be more careful') without a concrete action or moment."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The replacement habit names a concrete action tied to a specific moment, with a clear explanation of why it should help."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The replacement habit is concrete and specific, and the learner also identifies a realistic obstacle to keeping it and a way to notice if it slips."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The cleanup routine in the guided task is described in the order it actually happens, not an idealized order.",
+      "The reflection response names a real, plausible obstacle rather than a dismissive 'nothing could go wrong.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

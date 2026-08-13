@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u05-l02",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Problem Solving Under Constraint",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: generating more than two options"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners are modeled a fictional either/or dilemma, then practice generating at least two additional options that are genuinely different from the original two (not just variations), so they build the habit of widening the option set before evaluating any option.",
+  "scenario": "The learner reads a provided fictional scenario in which a character organizing a weekend fundraiser sees only two ways to reach the goal by a fixed deadline (a bake sale or a car wash), and works through generating and testing additional distinct options before any option is evaluated or chosen.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The scenario is fictional and does not require the learner to plan or carry out any real fundraiser."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided fictional scenario", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before generating new options, note why the character narrowed the choice to just two.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Why might the character have stopped at two options (bake sale or car wash) instead of listing more?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Follow the modeled example of one additional genuinely distinct option, then generate two more of your own that are not just small changes to the original two.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I wrote at least two new options beyond the original bake sale and car wash." },
+        { "ref": "t2-p2", "promptType": "fixed-choice", "text": "For your first new option, is it a genuinely distinct option or a variation of one of the original two?", "choices": ["Genuinely distinct", "A variation of the original two"] },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My second new option changes something different about the plan than my first new option did (not the same kind of change twice)." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each new option, briefly state what makes it fundamentally different from the original two, not just a smaller or bigger version of them.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each of your two new options, explain in one sentence what makes it a genuinely different approach, not a variation of the bake sale or car wash." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Consider what widening the option set changes about decision-making.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What might the character have missed if they had picked between only the bake sale and the car wash without generating any other options?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's 'new' options are just resized or rescheduled versions of the original two (e.g. 'a bigger bake sale' or 'a car wash on a different day'), reteach by naming the specific dimension that changed in each original option (what is being done, who is doing it, where the money comes from) and requiring the next option to change a dimension that neither original option touched.",
+  "extension": "Have the learner generate a fourth option that removes one of the fixed assumptions in the scenario entirely (for example, questioning whether the fundraising goal amount itself is fixed) and explain what changed by challenging that assumption.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

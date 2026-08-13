@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l01",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: meal planning for variety and adequacy"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners sketch out one real or realistic day of meals and check that day against a food-group variety and adequacy checklist, identifying which food groups are missing or repeated.",
+  "scenario": "The learner picks either yesterday's actual meals or a realistic day they could imagine eating, sketches or lists what was on the plate at each meal and snack, and then checks the whole day against a simple food-group checklist to see how many different groups showed up and how many times any one group repeated.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "pencil or pen",
+    "the food-group checklist on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking anything, just remember and jot down what was eaten.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List every meal and snack from one day (real or realistic), naming the actual foods on the plate at each one, not just the meal name."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort each food you listed into a food group: grains, vegetables, fruits, protein, or dairy. Some foods belong in more than one group.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted every food from my list into at least one food group."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I marked which food groups appeared zero times across the whole day."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Using your sorted list, run the day through the variety and adequacy checklist below and write up what you find. For each of the five food groups, state whether it appeared 0 times, 1 to 2 times, or 3 or more times across the day, and name which single meal or snack would be the easiest place to add a missing group without changing anything else about that meal.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Report the count for each of the five food groups across the day, name the group that appeared least often, and describe one specific, realistic food you could add to one specific meal to cover that gap."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Step back and think about the pattern you found.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was the repeated food group a surprise, or did you expect it? Explain in one or two sentences."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts foods into food groups incorrectly (for example, placing a starchy vegetable in the grains group or fruit juice in the fruit group without noting the difference from whole fruit), reteach with three example foods sorted together out loud, explaining the reasoning for each, before the learner re-sorts their own list.",
+  "extension": "Have the learner sketch a revised version of the same day that fixes the gap they found, keeping every meal realistic and something they would actually eat, then compare food-group counts between the original and revised day.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

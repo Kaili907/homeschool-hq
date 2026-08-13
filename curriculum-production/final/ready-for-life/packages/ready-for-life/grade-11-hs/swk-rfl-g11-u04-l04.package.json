@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u04-l04",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Housing and Living Arrangements",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: roommates, shared costs, and written agreements"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a guardian, the learner talks through what a written roommate or shared-cost agreement should cover -- how costs are split, how chores are handled, what happens if someone leaves early -- so the learner has practiced this real conversation once before ever needing to have it with an actual roommate.",
+  "scenario": "The learner sits down with a guardian and, using a provided list of topics that shared-living agreements commonly address (how rent and shared costs are split, how chores and cleaning are handled, what happens if someone needs to move out early, and a policy for guests staying over), talks through each topic as a hypothetical: if the learner were sharing a place with a roommate someday, what would a fair, specific, written answer to each topic look like? No real roommate, real agreement, or real shared housing arrangement exists yet -- this is deliberate practice for a conversation the learner doesn't need to be ready to have for real yet.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This is a planning conversation about a hypothetical future roommate situation; no real roommate, lease, or shared housing arrangement is created or signed.",
+    "The learner shares only as much about household finances or preferences as they and their guardian are comfortable discussing; no specific real dollar amounts need to be disclosed to complete the lesson."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian is not available for a live conversation right now, the learner instead reads a provided sample dialogue between two roommates discussing these same topics, writes what they would add, change, or ask differently if it were their own conversation, and reviews that written work with a guardian afterward for sign-off."
+  },
+  "materials": ["the provided list of common roommate-agreement topics", "notebook or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the conversation, name a conflict a written agreement might have prevented.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name one shared-living conflict you've heard about (from a book, show, or someone you know) that a written agreement might have prevented." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your guardian, talk through each of the four listed topics as a hypothetical.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I discussed with my guardian how rent and shared costs would be split." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I discussed how chores and cleaning would be handled." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I discussed what would happen if a roommate needed to move out early." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I discussed a policy for guests staying over." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Turn the conversation into a concrete list of agreement items.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Based on the conversation, write a list of 5 to 6 specific items you would include in a written roommate/shared-cost agreement. Include one point where you and your guardian saw something differently, if there was one." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the value of practicing this conversation ahead of time.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "What part of this conversation would you have been most likely to skip if you were doing it for real without practicing first, and why would skipping it be risky?" }
+      ]
+    }
+  ],
+  "remediation": "If the task 3 list stays generic ('split things fairly,' 'be respectful about guests') without a concrete mechanism, reteach by modeling one specific mechanism together (for example, 'each roommate pays the percentage of rent matching their room's share of the total square footage' or 'shared costs are tracked in one shared note and settled every payday'), then have the learner rewrite each list item to that same level of specificity.",
+  "extension": "Have the learner draft the actual one-page written agreement based on the finalized list, in a form they could adapt later for a real roommate situation.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u04-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u04-l04",
+    "authoredBy": "manual"
+  }
+}

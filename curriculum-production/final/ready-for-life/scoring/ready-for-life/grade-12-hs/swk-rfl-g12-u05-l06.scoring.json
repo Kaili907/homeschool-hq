@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l06",
+  "lessonId": "ma-g12-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Assembly completeness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more of the five earlier artifacts is missing from the assembled plan."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All five artifacts are present and assembled into one plan."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The assembled plan is organized clearly enough to actually be reused, not just a loose collection."
+          }
+        ]
+      },
+      {
+        "dimension": "Currency and privacy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The review date is vague, or no privacy level is stated."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific review date and an explicit privacy level are both recorded."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection response identifies a realistic, specific reason the plan would actually get revisited, not a generic intention."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "All five earlier artifacts are represented in the assembled plan.",
+      "A specific calendar date, not a vague timeframe, is set for review.",
+      "No full name or other identifying detail replaces the role labels used earlier in the unit."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

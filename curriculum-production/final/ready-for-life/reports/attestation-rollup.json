@@ -1,0 +1,142 @@
+{
+  "status": "PASS",
+  "totalLessons": 324,
+  "guardianAuthorityCount": 81,
+  "learnerAuthorityCount": 243,
+  "byGrade": {
+    "3": {
+      "total": 36,
+      "guardian": 13,
+      "learner": 23
+    },
+    "4": {
+      "total": 36,
+      "guardian": 14,
+      "learner": 22
+    },
+    "5": {
+      "total": 36,
+      "guardian": 7,
+      "learner": 29
+    },
+    "7": {
+      "total": 36,
+      "guardian": 6,
+      "learner": 30
+    },
+    "8": {
+      "total": 36,
+      "guardian": 2,
+      "learner": 34
+    },
+    "9": {
+      "total": 36,
+      "guardian": 10,
+      "learner": 26
+    },
+    "10": {
+      "total": 36,
+      "guardian": 6,
+      "learner": 30
+    },
+    "11": {
+      "total": 36,
+      "guardian": 13,
+      "learner": 23
+    },
+    "12": {
+      "total": 36,
+      "guardian": 10,
+      "learner": 26
+    }
+  },
+  "guardianLessonIds": [
+    "ma-g10-ready-for-life-u01-l04",
+    "ma-g10-ready-for-life-u02-l04",
+    "ma-g10-ready-for-life-u03-l04",
+    "ma-g10-ready-for-life-u04-l04",
+    "ma-g10-ready-for-life-u06-l02",
+    "ma-g10-ready-for-life-u06-l06",
+    "ma-g11-ready-for-life-u01-l04",
+    "ma-g11-ready-for-life-u01-l05",
+    "ma-g11-ready-for-life-u01-l06",
+    "ma-g11-ready-for-life-u02-l04",
+    "ma-g11-ready-for-life-u02-l06",
+    "ma-g11-ready-for-life-u03-l04",
+    "ma-g11-ready-for-life-u03-l06",
+    "ma-g11-ready-for-life-u04-l04",
+    "ma-g11-ready-for-life-u04-l06",
+    "ma-g11-ready-for-life-u05-l04",
+    "ma-g11-ready-for-life-u05-l06",
+    "ma-g11-ready-for-life-u06-l04",
+    "ma-g11-ready-for-life-u06-l06",
+    "ma-g12-ready-for-life-u01-l04",
+    "ma-g12-ready-for-life-u02-l04",
+    "ma-g12-ready-for-life-u02-l06",
+    "ma-g12-ready-for-life-u03-l03",
+    "ma-g12-ready-for-life-u03-l04",
+    "ma-g12-ready-for-life-u04-l04",
+    "ma-g12-ready-for-life-u04-l06",
+    "ma-g12-ready-for-life-u05-l04",
+    "ma-g12-ready-for-life-u06-l05",
+    "ma-g12-ready-for-life-u06-l06",
+    "ma-g3-ready-for-life-u01-l04",
+    "ma-g3-ready-for-life-u01-l05",
+    "ma-g3-ready-for-life-u02-l04",
+    "ma-g3-ready-for-life-u02-l05",
+    "ma-g3-ready-for-life-u03-l04",
+    "ma-g3-ready-for-life-u03-l05",
+    "ma-g3-ready-for-life-u04-l04",
+    "ma-g3-ready-for-life-u04-l05",
+    "ma-g3-ready-for-life-u05-l04",
+    "ma-g3-ready-for-life-u05-l05",
+    "ma-g3-ready-for-life-u06-l04",
+    "ma-g3-ready-for-life-u06-l05",
+    "ma-g3-ready-for-life-u06-l06",
+    "ma-g4-ready-for-life-u01-l04",
+    "ma-g4-ready-for-life-u01-l05",
+    "ma-g4-ready-for-life-u02-l03",
+    "ma-g4-ready-for-life-u02-l04",
+    "ma-g4-ready-for-life-u02-l05",
+    "ma-g4-ready-for-life-u03-l04",
+    "ma-g4-ready-for-life-u03-l05",
+    "ma-g4-ready-for-life-u04-l04",
+    "ma-g4-ready-for-life-u04-l05",
+    "ma-g4-ready-for-life-u05-l04",
+    "ma-g4-ready-for-life-u05-l05",
+    "ma-g4-ready-for-life-u06-l04",
+    "ma-g4-ready-for-life-u06-l05",
+    "ma-g4-ready-for-life-u06-l06",
+    "ma-g5-ready-for-life-u01-l04",
+    "ma-g5-ready-for-life-u02-l03",
+    "ma-g5-ready-for-life-u02-l04",
+    "ma-g5-ready-for-life-u03-l03",
+    "ma-g5-ready-for-life-u03-l04",
+    "ma-g5-ready-for-life-u06-l03",
+    "ma-g5-ready-for-life-u06-l04",
+    "ma-g7-ready-for-life-u02-l04",
+    "ma-g7-ready-for-life-u03-l02",
+    "ma-g7-ready-for-life-u03-l04",
+    "ma-g7-ready-for-life-u06-l02",
+    "ma-g7-ready-for-life-u06-l04",
+    "ma-g7-ready-for-life-u06-l05",
+    "ma-g8-ready-for-life-u02-l05",
+    "ma-g8-ready-for-life-u03-l04",
+    "ma-g9-ready-for-life-u01-l04",
+    "ma-g9-ready-for-life-u02-l04",
+    "ma-g9-ready-for-life-u02-l05",
+    "ma-g9-ready-for-life-u03-l04",
+    "ma-g9-ready-for-life-u03-l05",
+    "ma-g9-ready-for-life-u04-l04",
+    "ma-g9-ready-for-life-u04-l05",
+    "ma-g9-ready-for-life-u05-l05",
+    "ma-g9-ready-for-life-u06-l03",
+    "ma-g9-ready-for-life-u06-l06"
+  ],
+  "invariants": {
+    "guardianHasCorrectSignoff": true,
+    "guardianHasSimulationAlternative": true,
+    "learnerHasNoSignoff": true,
+    "noMediaProofRequired": true
+  }
+}

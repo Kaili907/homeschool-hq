@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u01-l05",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Taking Care of My Own Space",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: right-size jobs"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 1 — personal and shared space care"
+  ],
+  "objective": "With a trusted adult, learners choose one chore from three options scaled by size — a two-minute single-surface job, a five-minute one-zone job, and a fifteen-minute whole-space job — that honestly matches their own time and energy today, then complete that chosen job fully from start to finish while the adult checks the result against a specific \"done\" standard written on that job's card.",
+  "scenario": "A trusted adult writes three job cards of different sizes for a real space, such as straightening the books on one shelf, clearing off a desk and filing the papers in a tray, or emptying a closet floor and sorting items into keep, donate, and trash. The learner reads all three cards, picks the one that fits today, and completes it while the adult checks the finished job against the card's done standard.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "If the fifteen-minute job involves anything heavier than the learner can lift with one hand, such as a full box or a stacked bin, the trusted adult lifts or moves it, not the learner.",
+    "The adult confirms the finished job against the specific \"done\" standard written on the chosen job card before marking it complete, rather than accepting \"I'm done\" on its own."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner does not have a real space with three distinguishable job sizes available today, they instead read three written job-card descriptions, choose which one best fits their current time and energy, and write a step-by-step plan for completing it, including the specific 'done' standard for that job size."
+  },
+  "materials": [
+    "three job cards of different sizes (two-minute, five-minute, fifteen-minute) written by a trusted adult",
+    "the specific supplies each job needs, such as a donation bag or a paper tray",
+    "a trusted adult"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read all three job cards before choosing.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "After reading all three job cards, write down how much time and energy you realistically have right now."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Choose the job card that honestly matches your time and energy, tell your adult which one you picked and why, and gather what you need before starting.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I read all three job-size options before choosing one."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I chose the job size that honestly matches my time and energy today, not the biggest one to impress someone or the smallest one to avoid work."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I told my adult which job I chose and why, before starting."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I gathered anything I needed, such as a donation bag or a paper tray, before starting the job."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Complete your chosen job fully, then show your adult the result.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Complete your chosen job fully, start to finish. When you believe you are done, walk your adult through it and describe exactly what you did, step by step, and how you know it matches the 'done' standard written on your job card."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back to a specific moment during the job.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific moment during the job when you were tempted to switch to a different-sized job instead, and what made you stick with the size you chose."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks the fifteen-minute job to seem impressive and then quits partway through, reteach by having them restart with only the two-minute job, complete it fully against its done standard, and move up to a bigger job only after finishing a smaller one start to finish.",
+  "extension": "Have the learner write three of their own right-sized job cards for a different space, such as the kitchen counter or the entryway, including a specific done standard for each size, and choose one to complete.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u04-l05",
+  "lessonId": "ma-g10-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Legitimate-vs-scam classification",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Classifies two or fewer of the four messages correctly (correct set: 1-scam, 2-legitimate, 3-scam, 4-scam)." },
+          { "label": "Proficient", "descriptor": "Classifies three of the four messages correctly." },
+          { "label": "Advanced", "descriptor": "Classifies all four correctly." }
+        ]
+      },
+      {
+        "dimension": "Naming the specific tactic",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Describes a scam message as generically 'suspicious' or 'scammy' without naming what makes it so." },
+          { "label": "Proficient", "descriptor": "Names a real tactic (urgency, unearned reward, refusal to identify, unnecessary information request) for each scam message and quotes supporting text." },
+          { "label": "Advanced", "descriptor": "Names the tactic, quotes the phrase, and explains in one sentence why a legitimate sender would not need to use it." }
+        ]
+      },
+      {
+        "dimension": "Transfer to a general response",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Reflection response depends on already knowing the message is a scam (e.g., 'I'd just know')." },
+          { "label": "Proficient", "descriptor": "Names a concrete pause-before-reacting step that works regardless of whether the message turns out to be real." },
+          { "label": "Advanced", "descriptor": "Names a pause step and explains why it would not accidentally block a genuinely urgent legitimate message." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The correct classification set is: Message 1 scam, Message 2 legitimate, Message 3 scam, Message 4 scam.",
+      "Each named tactic is quoted with the specific triggering phrase from that message, not a generic restatement.",
+      "The extension's original scam message uses a genuinely different tactic than the four originals, not a reworded copy."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

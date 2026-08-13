@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u02-l06",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Household Independence and Living-Space Systems",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: documenting a maintenance request"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft one clear, complete maintenance-request note for a real or realistic household issue, including what's broken, its exact location, how long it's been an issue, and its urgency level, as an internal documentation exercise that is never sent to any real landlord, employer, or outside party.",
+  "scenario": "The learner picks one real or realistic maintenance issue from their own household (or a provided example if none currently exists), first writes a rough draft, then revises it into a complete maintenance-request note following a four-part structure, practicing the documentation skill without contacting any real outside party.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This note is a writing and documentation exercise only; it is never sent to any real landlord, employer, property manager, or other outside party as part of this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "one real or realistic maintenance issue from your household, or the provided example issue"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Without worrying about structure yet, quickly write down a maintenance issue from your household (or use this example: 'the kitchen faucet drips constantly, even when fully shut off') exactly as you'd first think to describe it.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write your rough, first-pass description of the issue in one or two sentences." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Compare your rough draft to the four required parts of a maintenance-request note: what's broken (a specific item, not just 'it's broken'), the exact location, how long it's been happening, and an urgency level (routine, needs attention soon, or urgent).",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My rough draft names the specific broken item, not just a vague problem." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My rough draft is missing at least one of the four required parts." },
+        { "ref": "t2-p3", "promptType": "short-response", "text": "Which of the four parts (what's broken, exact location, how long, urgency) was missing or weakest in your rough draft?" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Rewrite your note as a complete maintenance-request note with all four parts clearly stated.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your complete maintenance-request note: what's broken (specific item), exact location, how long it's been an issue, and its urgency level with a one-sentence reason for that urgency level." },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "What urgency level did you assign?", "choices": ["Routine", "Needs attention soon", "Urgent"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your rough draft to your final note.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "What specifically changed between your rough draft and your final note, and why does that specific change make the note more useful to whoever eventually reads it?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's note names a vague problem ('the bathroom is broken') instead of a specific item and symptom, reteach by having them answer three short questions first (what part? what does it do wrong? since when?) and only then combine the answers into full sentences.",
+  "extension": "Have the learner write a second maintenance-request note for a lower-urgency issue and explain what specifically in the wording signals the lower urgency compared to their first note.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u02-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u02-l06",
+    "authoredBy": "manual"
+  }
+}

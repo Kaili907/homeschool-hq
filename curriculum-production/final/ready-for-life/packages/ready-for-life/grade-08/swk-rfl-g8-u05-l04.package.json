@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u05-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Work, Communication, and Career Readiness",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: applications and interviews"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners complete a short fictional job application for a made-up part-time role, listing only name, interests, and availability, then rehearse answering and asking interview questions out loud with a willing adult or peer playing a fictional hiring manager, practicing both content and delivery under low-stakes conditions.",
+  "scenario": "The fictional Cedar Lane Smoothie Bar is hiring a part-time crew member. The learner fills out a short application listing only their name, interests, and realistic availability, then sits down with an available adult or peer who reads from a short interviewer script as Jordan Whitfield, the fictional hiring manager, while the learner answers three questions out loud and asks one question back.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "The mock interview is private practice within the household with a willing, available adult or peer, never a real employer, and is never performed publicly or recorded.",
+    "Cedar Lane Smoothie Bar and Jordan Whitfield are entirely fictional; no real application is submitted anywhere."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no partner is available for a live practice interview, write out both a set of five interview questions and your own answers to each instead."
+  },
+  "materials": [
+    "paper or a document",
+    "the fictional job posting on this task sheet",
+    "the interviewer script on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the fictional Cedar Lane Smoothie Bar job posting on this task sheet before filling out anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two things about this fictional role that connect to your own real interests or past responsibilities."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Fill out the short fictional application: your first name, two or three genuine interests, and realistic weekly availability. Do not write a real address, real ID number, or any information beyond what is asked for.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My application lists only my first name, interests, and availability, with no address, phone number, or ID number of any kind."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "short-response",
+          "text": "Write the availability section of your application: which days and roughly which hours you'd realistically be free for a fictional part-time shift."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "With an available adult or peer playing Jordan Whitfield, the fictional hiring manager, sit across from your partner and answer three interview questions out loud: why are you interested in this role, describe a time you finished something on a deadline, and how would you handle being asked to do a task you were not trained for yet. After answering, ask your partner one question back about the fictional role, such as what a typical shift looks like.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Summarize, in your own words, how you answered the deadline question during the live interview and what specific question you asked Jordan Whitfield back at the end."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back on how the live interview actually went.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which of the three questions was hardest to answer out loud, and what would you change about your answer if you could redo it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's spoken answers stay one word or trail off ('I don't know, just because'), reteach by writing one full answer together first using a simple pattern (name the example, what you did, what happened), then have the learner practice saying that written answer out loud twice before attempting a new question unscripted.",
+  "extension": "Have the learner write two follow-up questions Jordan Whitfield might realistically ask after their answers, and practice responding to those on the spot with their partner.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u05-l04",
+    "authoredBy": "manual"
+  }
+}

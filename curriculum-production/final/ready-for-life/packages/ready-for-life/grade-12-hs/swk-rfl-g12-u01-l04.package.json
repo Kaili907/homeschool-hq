@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u01-l04",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "The Adult-Life Operating System",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: secure storage of sensitive documents"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners talk with a trusted adult about what secure document storage would realistically look like in their own household, so they leave with an actual plan rather than a hypothetical one, while never naming or handling the sensitive contents of any real document.",
+  "scenario": "With a trusted adult, the learner discusses and records, at a category level only, where important documents could be kept securely in their household (for example, a locked drawer, a folder a guardian keeps, or a password-protected note that itself contains no real passwords) and confirms the plan is one the household could actually use.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The conversation covers where documents would be kept, never their actual contents, numbers, or any password or PIN.",
+    "No password, PIN, or account credential is ever written down as part of this task, even as an example.",
+    "If a household genuinely has no secure storage option right now, naming that gap honestly is an acceptable outcome \u2014 the task is the conversation and the honest plan, not a guaranteed 'yes.'"
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available for this conversation today, the learner instead designs a secure-storage plan for a fictional household using the same categories and criteria, and explains what they would ask a real adult about when one is available."
+  },
+  "materials": [
+    "paper or a notes document",
+    "the provided secure-storage category checklist"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the conversation, list what you think 'secure' means for a physical document versus a digital one.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, what makes storage 'secure' for a paper document, and what makes storage 'secure' for a digital one? They don't have to be the same answer."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, talk through where important documents could realistically be kept in your household and record the plan by category.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I talked with an adult about where physical documents could be kept securely."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I talked with an adult about where digital records or accounts could be kept securely, without writing down any actual password."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My adult confirmed the plan is realistic for our household, or we honestly named a gap instead."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Summarize the plan in your own words.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "In your own words, summarize the secure-storage plan you and your adult discussed, including any category that is still unresolved."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the conversation.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was there a category that turned out to be more complicated to discuss than you expected? What made it complicated?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's summary describes an idealized plan that does not match what the adult actually confirmed during the conversation, reteach by having the learner re-ask the adult to state the plan back in their own words first, then revise the written summary to match what was actually agreed.",
+  "extension": "Have the learner identify one document category not on the provided checklist that applies to their situation, and add it to the plan with the adult's input.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

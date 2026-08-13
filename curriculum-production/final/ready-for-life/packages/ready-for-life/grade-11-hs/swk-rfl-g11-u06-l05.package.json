@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u06-l05",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 11 Transition-Planning Capstone",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: identifying who helps with what"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners map, in general role terms, who could help with different parts of their transition, matching each part of the plan to a role (such as a school counselor, a guardian, a mentor, or a peer), without needing to name specific real people if they would rather keep the map general.",
+  "scenario": "Using a list of transition plan parts (paperwork and deadlines, financial questions, day-to-day check-ins, emotional support, and logistics such as housing or transportation), the learner matches each part to a role that could help with it, optionally naming a specific person but always free to keep any entry at the role level.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner is never required to name a specific real person; a role-level answer (such as 'a school counselor' or 'a mentor') is a complete and acceptable response for every entry."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided list of transition plan parts", "the provided example role-support map", "paper or a document for the learner's own map"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before mapping, think about the roles available to you in general.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Without naming anyone specifically yet, what kinds of roles (school staff, household members, mentors, peers, community contacts) do you have some access to right now?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each part of the transition plan listed, match it to a role that could realistically help, using the example provided as a model.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I matched at least four different parts of the transition plan to a role that could help with each." },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "For one part of the plan, explain briefly why that particular role is the right fit for that kind of help." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Complete your own role-support map for the full plan, keeping entries at the role level unless you would rather name a specific person.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your completed role-support map, listing each plan part and the role assigned to it. You may name a specific person for any entry, or keep it at the role level — both are complete answers." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on any gaps in your map.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Is there any part of your plan with no role assigned yet, and if so, what kind of role would need to fill that gap?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner leaves multiple plan parts unmatched or assigns the same single role to everything, reteach by walking through one plan part at a time and asking specifically what kind of help it requires (paperwork help looks different from emotional support), then matching a distinct role to each.",
+  "extension": "Have the learner identify one role in their map that is not yet confirmed or contacted, and write a plain, one-line way they could check whether that role is actually available to help.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u06-l05",
+    "authoredBy": "manual"
+  }
+}

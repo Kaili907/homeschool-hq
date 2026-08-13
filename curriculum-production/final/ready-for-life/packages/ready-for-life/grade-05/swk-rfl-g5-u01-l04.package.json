@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u01-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Caring for Home and Shared Spaces",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: hazard recognition"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Ready for Life v1 Lessons 01–03",
+    "Michigan Health/SEL connections"
+  ],
+  "objective": "With a trusted adult, learners walk through two shared spaces in their home and correctly identify at least four real hazards (from categories like sharp edges, trip risks, blocked exits, or unsecured heavy objects), then propose one fix for each.",
+  "scenario": "A trusted adult walks the shared spaces of the home with the learner, and together they look specifically for hazards — not general messiness — such as a cord across a walkway, an unstable stack of items, a blocked doorway, or a sharp edge at a height where someone could bump it. The adult confirms which findings are genuine hazards.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult must be present for the entire walk-through.",
+    "The learner does not touch, move, or attempt to fix any hazard without the adult's direction.",
+    "Stop and ask the adult for help immediately if the walk-through turns up broken glass, exposed wiring, or anything unfamiliar or unclear."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a full walk-through of two shared spaces isn't possible, the learner instead reviews four printed or hand-drawn room scenes with their adult, identifies the hazard in each one, names its category, and proposes a fix — reviewed and confirmed by the adult the same way as the real walk-through."
+  },
+  "materials": [
+    "notebook or paper",
+    "pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before the walk-through, list two hazard categories you already know to look for (for example: trip risk, sharp edge, blocked exit, unsecured heavy object).",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two hazard categories."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present for the entire walk-through, look at two shared spaces together and point out anything you think might be a hazard.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I found at least four things to check, not just one."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My adult confirmed which findings were real hazards and which were not."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "For every hazard my adult confirmed, I could name which category it fit (trip, sharp edge, blocked exit, unsecured object, other)."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I did not touch or try to fix anything without checking with my adult first."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each confirmed hazard, write down one specific fix, in a form your adult reviews before anything gets moved or changed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "List each confirmed hazard and the one fix you would propose for it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the walk-through.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which confirmed hazard surprised you the most — something you wouldn't have noticed on your own before this lesson? What made it easy to miss?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner flags only obvious mess (clutter) rather than genuine hazards, reteach with two contrasting examples distinguishing 'messy but safe' from 'a hazard,' then retry the walk-through focused specifically on the hazard categories from the warm-up.",
+  "extension": "Have the learner do a hazard walk-through of one space outside the home they visit regularly (with an adult), such as a relative's house, and compare which categories of hazard showed up there versus at home.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}

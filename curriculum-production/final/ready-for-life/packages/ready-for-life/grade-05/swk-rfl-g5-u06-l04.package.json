@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-ready-for-life-u06-l04",
+    "courseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Contribution Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: doing the task"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL extension"
+  ],
+  "objective": "Learners carry out their planned family contribution following the adult-confirmed supervision categories from the previous lesson, completing every step of the plan.",
+  "scenario": "With the adult-confirmed plan and supervision categories from the previous lesson, the learner carries out their chosen family contribution — completing the steps marked fully independent on their own, seeking permission before independent-with-permission steps, and having the adult present for every supervision-required step.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The adult is present for the full duration of every step the confirmed plan marked as needing supervision, not a partial check-in.",
+    "If a step turns out to need more supervision than planned once it is underway, the learner stops and asks the adult before continuing."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the planned contribution can't be carried out in real life right now (materials, timing, or access aren't available), the learner instead walks through the full plan verbally or in writing with the adult, step by step, describing exactly what they would do at each step and getting the adult's confirmation that the plan is sound and correctly categorized, in place of physically completing it."
+  },
+  "materials": [
+    "whatever the chosen contribution requires, per the confirmed plan"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before starting, review your confirmed plan: which step are you doing first, and which category (supervised, permission-only, independent) is it in?",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the first step and its category."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Complete every step marked 'needs supervision' with your adult present for the entire step, and every step marked 'needs permission' only after checking in first.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My adult was present for the full duration of every supervision-required step, not just part of it."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked in before starting every permission-only step."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I followed the step order from my confirmed plan rather than skipping around."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Complete the steps marked 'fully independent' on your own, then confirm the whole task is finished against your plan.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Go through your plan step by step and confirm each one is actually done, not just started."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the plan versus the real result.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Now that the task is done, was there a step that turned out harder (or easier) than your plan expected? What would you change about the plan itself, not just your effort?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a step gets skipped or done out of order, stop and return to the plan together with the adult, identifying exactly which step was missed before resuming from that point rather than continuing forward.",
+  "extension": "Identify one part of the finished contribution that could be extended or repeated as an ongoing routine, and sketch what that ongoing version would look like.",
+  "scoringRef": "scoring/ready-for-life/grade-05/swk-rfl-g5-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g5-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

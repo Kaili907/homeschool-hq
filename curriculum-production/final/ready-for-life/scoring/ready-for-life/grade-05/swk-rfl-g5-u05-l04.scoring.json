@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g5-u05-l04",
+  "lessonId": "ma-g5-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Request clarity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Request is vague, missing the item, person, or date."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Request clearly states all three parts."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Request states all three parts and the learner adjusts appropriately if the other person proposes a change."
+          }
+        ]
+      },
+      {
+        "dimension": "Follow-through on return",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Item is not returned by the agreed date, or condition wasn't checked."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Item is returned by the agreed date in the condition borrowed."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Item is returned on time and in good condition, and the learner reflects specifically on what made follow-through easy or hard."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Return date is a specific day, not a vague timeframe.",
+      "Item's condition is actually checked at return, not assumed.",
+      "Reflection response addresses the real outcome, not a hoped-for one."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u04-l01",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Fueling My Day",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: noticing body signals"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+  ],
+  "objective": "Learners identify and record four different body signals (hunger, thirst, tiredness, and needing a bathroom break) as each one shows up during one ordinary day, using neutral signal names instead of mood words, so they build a baseline noticing habit before naming or responding to signals in later lessons.",
+  "scenario": "Across one regular day at home, the learner carries a small card divided into four boxes labeled hunger, thirst, tiredness, and bathroom need, and makes a tally mark in a box each time that signal shows up, without judging whether the timing was convenient.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "an index card or paper divided into four labeled boxes",
+    "a pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before you start tallying, make a guess about today.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Guess which of the four signals (hunger, thirst, tiredness, bathroom need) you think you will notice the most times today, and explain why you picked it."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Every time you notice one of the four signals today, make a tally mark in that box right away.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I made a tally mark within a few minutes of noticing the signal, not at the end of the day from memory."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I used one of the four neutral signal names (hungry, thirsty, tired, need a bathroom break) instead of a mood word like grumpy or bored."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I noticed and tallied at least three separate signal moments today."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I tallied a signal in the box that matched it, not in whichever box was closest."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "At the end of the day, add up the tally marks in each of the four boxes.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which signal did you notice the most times today, and which did you notice the fewest times? Write both totals."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Pick one specific tally mark from today and think back to that exact moment.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific moment today when you noticed a signal and what you were doing right before you noticed it, such as playing outside, reading, or sitting still."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner tallies boredom or restlessness as hunger, reteach with one distinguishing question before any tally is made: did the feeling start in the stomach, or did it start because you were waiting for something to do?",
+  "extension": "Have the learner repeat the same four-box tally on a different kind of day and compare, in writing, which signal showed up in a different order between the two days.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

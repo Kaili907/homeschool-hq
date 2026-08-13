@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u06-l01",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Community Contribution Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: identifying a need"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners spend several days paying close attention to their real household and the people connected to it, then identify one genuine, small, and safe need they could realistically help meet as the starting point of a multi-day community contribution project.",
+  "scenario": "Over the next few days, the learner watches for real, recurring needs in their household or among people the household already knows, such as a neighbor, a relative, or a small group the family already supports, and narrows the list down to one specific need that is safe and realistic for them to help with.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the learner cannot identify a real need on their own after observing, they instead choose one need from this list — organizing a shared household space, weeding or tidying an outdoor area, sorting items for a group the household already supports, or helping a younger household member practice a skill — and explain specifically how that example would apply to their own household."
+  },
+  "materials": [
+    "a notebook or notes app for daily observations",
+    "a household calendar or planner if available"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before observing, think about what 'a need someone could help with' actually means.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe one time recently when you noticed someone in your household or nearby seemed to need help with something, even if you didn't help at the time."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Over at least two different days this week, write down one specific thing you notice that could use help — a task left undone, something a household member mentioned struggling with, or something a neighbor or family friend could use support with.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I recorded at least two separate real observations on two different days."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Each observation names a specific person or group and a specific task or problem, not a vague category."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Review your observations and choose the one need that is smallest in scope, safest to attempt, and most realistic for you to help with inside your household or with people the household already knows well.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name the specific need you chose, who it affects, and why you ruled out your other observations for this project."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Is the need mainly inside your own household, or does it involve a neighbor or another household your family already knows?",
+          "choices": [
+            "Inside my own household",
+            "A neighbor or family friend's household",
+            "A small group my household already supports"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on how you narrowed your choice.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what made this particular need stand out as both genuinely useful and safe enough for you to take on, compared to the other needs you noticed."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner struggles to identify a real need after several days of observation, walk through the household's daily routine together step by step until a specific, genuine possibility surfaces, then have them choose or adapt one of the example needs from the simulation alternative.",
+  "extension": "Have the learner identify a second, unrelated real need and compare which of the two would be more valuable to help with and why, without committing to carry out the second one.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

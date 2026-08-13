@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u02-l01",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Operations and Basic Maintenance",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: cleaning and laundry schedules"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners complete a written self-audit of their current cleaning and laundry habits, documenting which tasks they already perform, how often, and which tasks someone else in the household currently handles, to establish an honest starting point before any new routine is introduced.",
+  "scenario": "Before learning any new system, the learner looks back over the past two weeks and records, task by task, what cleaning and laundry work actually happened in their household and who did it, without judging or changing anything yet.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notebook",
+    "a pen or pencil",
+    "a calendar, planner, or phone calendar app to check dates from the past two weeks"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before recording specifics, take stock of your general sense of the household's cleaning rhythm.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In one or two sentences, describe how cleaning and laundry currently get done in your household — is there a set schedule, or does it happen when something looks dirty?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build a simple two-column list: on the left, write every cleaning or laundry task you can think of (dishes, vacuuming, wiping counters, sorting laundry, folding, trash, bathroom cleaning, and so on). On the right, mark how often each one actually happened in the past two weeks.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I listed at least eight distinct cleaning or laundry tasks that happen in my household."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "For each task, I wrote how often it actually happened in the last two weeks (daily, a few times, once, or not at all)."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "For each task, I noted whether I did it myself, someone else did it, or it didn't get done."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look at your completed list honestly, then answer the following in detail.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Identify the three cleaning or laundry tasks you personally handle most consistently right now, and the three you handle least consistently or not at all. For each of the six tasks, explain in a full sentence why you think that pattern exists — is it a matter of habit, time, skill, someone else usually doing it first, or something else specific to your household?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Consider what surprised you about your own list.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What is one thing this audit revealed about your current cleaning or laundry habits that you didn't expect to see written down?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's list stays vague (just 'cleaning' or 'laundry' as single line items), sit down together and break one category into its true sub-tasks — for laundry alone: sorting, washing, drying, folding, and putting away — until the learner sees each as a separate, trackable task.",
+  "extension": "Have the learner interview one other household member about their perception of the same two weeks, then compare the two records side by side and note any tasks where their accounts genuinely disagree.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

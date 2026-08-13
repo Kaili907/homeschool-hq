@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u03-l01",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Professional Communication",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: professional email and message conventions"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners identify the four structural conventions of a workplace message (subject line, greeting, body, closing) by contrasting a provided casual text-to-a-friend message with a provided workplace message, then draft one workplace message of their own for a fictional scenario using all four conventions.",
+  "scenario": "The learner compares two provided fictional messages side by side, a casual text to a friend and a workplace email about the same underlying situation, names what changed between them, then drafts their own workplace message for a different fictional scenario using the same four-part structure.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Both comparison messages are fictional and provided with this lesson; no real names, employers, or contact details are used."
+  ],
+  "simulationAlternative": null,
+  "materials": ["the provided pair of fictional messages", "a notebook or document"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the casual text and the workplace email about the same situation, and list what's different between them.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List at least three specific differences between the two messages (beyond just 'one is more formal')." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Name the four structural parts of the workplace email: subject line, greeting, body, and closing.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I identified the subject line and what makes it specific rather than vague." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I identified the greeting, body, and closing and what each one does." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Draft your own workplace message for a new fictional scenario, using all four parts.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your workplace message with a subject line, greeting, body, and closing, for the fictional scenario of asking a supervisor to confirm your first-day start time." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on why the structure matters.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Which of the four parts do you think matters most for a workplace reader who is busy and skimming, and why?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's draft is missing a part or blends the greeting into the body with no clear separation, reteach by having them label each of the four parts directly on their draft before revising, using the provided workplace example as a labeled reference.",
+  "extension": "Have the learner rewrite their draft as a very short chat-style workplace message (such as an internal messaging app) and explain which of the four conventions still apply and which relax in that format.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

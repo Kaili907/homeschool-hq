@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l01",
+  "lessonId": "ma-g3-ready-for-life-u02-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Use of the three checks",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Sorts items mostly by guessing or by how long ago they were worn, without naming a stain, smell, or wear-count check."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Applies at least two of the three checks (stain, smell, wear count) consistently across the pile."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Applies all three checks to every item and explains a specific decision using more than one check together."
+          }
+        ]
+      },
+      {
+        "dimension": "Sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Several items are placed in a pile that clearly contradicts the checks the learner just described."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every item lands in a pile that matches the checks the learner described for it."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Every item matches its checks, and the learner correctly identifies the one hardest item and names the specific check that tipped the decision."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner names a specific item, not just a pile count, when describing the hardest decision.",
+      "The reflection response names a specific item and a specific check, not a vague 'some things surprised me.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

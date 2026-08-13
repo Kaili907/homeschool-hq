@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u01-l01",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Taking Care of My Own Space",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: why our spaces matter"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 1 — personal and shared space care"
+  ],
+  "objective": "Learners survey three specific zones of their own space — the floor, one flat surface such as a desk or dresser top, and one closed storage spot such as a drawer or closet shelf — rating each as clear, partly cluttered, or very cluttered based on named items they actually see, then state one specific reason space care matters for themselves and one specific reason it matters for someone else who shares their home.",
+  "scenario": "Before any cleaning happens, the learner walks through their own space with paper and a pencil, stops at three specific zones in order, and records what they find in each one without straightening anything up yet, since today is only about noticing, not fixing.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notebook to record ratings",
+    "a pencil or pen"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before walking around, make a guess.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Which of your three zones — the floor, a flat surface, or a closed storage spot — do you think will turn out the messiest, and why do you think that?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Visit the three zones in order. At each one, name at least three actual items you see before you decide on a rating of clear, partly cluttered, or very cluttered.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I looked at the floor of my space and rated it clear, partly cluttered, or very cluttered, naming at least three items I saw there."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I looked at one flat surface, such as a desk, dresser top, or nightstand, and rated it the same way."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I opened one closed storage spot, such as a drawer, bin, or closet shelf, and rated what I found inside."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I wrote down the specific items that earned each zone its rating, not just the rating word alone."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look back at your three ratings.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name one specific reason keeping these zones clear helps you personally, and one specific reason it helps someone else who lives with you."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back over the past week, not just today.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific time in the last week when clutter in one of these three zones actually caused a problem for you or for someone else in your home. What exactly happened?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner rates every zone as \"clear\" without naming any specific items, the rating is a guess rather than evidence; reteach by requiring the learner to point to and name at least three real items in a zone before any rating word is allowed to be written down.",
+  "extension": "Have the learner repeat the same three-zone survey in a shared family space they do not fully control, such as a hallway or a shared bathroom shelf, and compare in writing whether the shared space rated messier than their own personal zones.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

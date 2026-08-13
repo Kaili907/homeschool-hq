@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g7-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-ready-for-life-u02-l02",
+    "courseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Home Care, Laundry, and Maintenance",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: laundry cycles and labels"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL middle-grades progression"
+  ],
+  "objective": "Learners read the real care labels on at least three garments, correctly interpret the water-temperature, dryer, bleach, and iron symbols on each, sort a real laundry load according to those instructions, and run the load using the wash and dry settings the labels require.",
+  "scenario": "The learner gathers a real load of laundry, reads the care label sewn into each garment, groups the garments by color and by the most restrictive temperature or drying instruction in the group, and washes and dries that load on a household washer and dryer using the settings the labels call for.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "Never overload the washer or dryer past the fill line shown inside the drum; an overloaded load will not get clean or dry and can strain the machine.",
+    "Read every care label before adding any stain-treatment product to a load, since bleach-based and oxygen-based treatments react differently depending on the fabric and dye."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no washer or dryer is available in the household, the learner instead reads the care labels on five real garments, records the exact wash temperature, dryer setting, and any special symbol, such as do-not-bleach, dry-flat, or low-iron, shown on each, and explains in writing what wash and dry settings would be chosen for each garment and why, without running a machine."
+  },
+  "materials": [
+    "at least three real garments with attached care labels",
+    "a real load of laundry",
+    "access to a household washer and dryer, or the garments alone if no machine is available",
+    "laundry detergent already in the household"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the care label inside three different garments before sorting anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "For each of the three garments, write the water-temperature symbol and one other symbol you found, such as bleach, dryer, or iron, and name one symbol you had not noticed on a label before."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort a real load of laundry into groups by color and by the most restrictive temperature or drying instruction found on any label in that group.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I grouped the garments by color first, then checked every label in each color group for the lowest temperature or gentlest instruction."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I set aside any garment whose label instructions did not match the rest of its color group."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Wash and dry one real load using the wash temperature and dryer setting required by the most restrictive label in that load, filling the machine only to the recommended level, and record the exact settings you used for both the washer and the dryer.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name the exact wash temperature and dryer setting you used, and explain which specific garment's label determined those settings."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "checklist-item",
+          "text": "I checked the load against the machine's fill line and did not overload the washer or dryer."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the label instructions to how this load would normally get washed without checking labels.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain one garment in this load that would have been washed or dried incorrectly if you had not checked its label, and what could have gone wrong."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts by color only and ignores temperature or drying symbols, reteach by covering the color of five sample garments and having the learner sort by temperature symbol alone first, then re-layer the color sort on top.",
+  "extension": "Have the learner find one garment with a symbol they cannot identify, look up what that symbol means, and add it to a personal reference list of care-label symbols.",
+  "scoringRef": "scoring/ready-for-life/grade-07/swk-rfl-g7-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g7-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

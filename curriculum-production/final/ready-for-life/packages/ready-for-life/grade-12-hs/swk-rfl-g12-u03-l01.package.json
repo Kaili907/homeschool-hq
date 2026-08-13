@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u03-l01",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Workplace Entry and Professional Systems",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: accepting an offer and simulated onboarding"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners draft a professional offer-acceptance reply and a first-day question list from a fictional job offer, so the mechanics of accepting and preparing for a job are practiced before they matter for real.",
+  "scenario": "Given a short fictional job-offer email (a fictional role, fictional pay rate, and fictional start date), the learner writes a professional reply accepting the offer and lists the specific first-day questions they would still want answered.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The job offer, role, pay rate, and employer are entirely invented; no real job application or real employer needs to be involved."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided fictional job-offer email",
+    "paper or a notes/email-draft document"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, think about what makes a reply sound professional versus casual.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one specific thing that makes a written reply sound professional, and one specific thing that would make it sound too casual for this context."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft a reply accepting the fictional offer.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My reply clearly states that I'm accepting the offer."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My reply confirms or asks about the start date."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "My reply's tone is professional rather than casual."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "List at least five first-day questions you'd still want answered.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "List at least five specific questions you would want answered before or on your first day (for example, about arrival, dress, who to report to, or what to bring), beyond what the fictional offer email already told you."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what felt uncertain.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which first-day question felt most important to you personally, and why that one?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the accept-reply reads as casual (for example, overly informal greetings or no clear acceptance statement), reteach by modeling one clearly professional example reply side-by-side with the learner's draft, then have them revise their own to match the professional register.",
+  "extension": "Have the learner draft a second reply declining a different fictional offer politely and professionally, and compare what changes and what stays the same between the two replies.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u03-l01",
+    "authoredBy": "manual"
+  }
+}

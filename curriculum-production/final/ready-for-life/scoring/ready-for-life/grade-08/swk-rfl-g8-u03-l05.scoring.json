@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l05",
+  "lessonId": "ma-g8-ready-for-life-u03-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Storage accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The container, location, or date is missing or does not match the storage rules for that specific food."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The container fits and seals, the date is written clearly, and the location matches the storage rules for that specific food."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Storage is fully correct, and the learner identifies and fixes a problem with how the food was stored before the task began."
+          }
+        ]
+      },
+      {
+        "dimension": "Timeframe reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot state a safe-use-by date, or the date does not follow from the provided storage rules."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "States a correct safe-use-by date and explains it using the storage rules for that food."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "States a correct safe-use-by date and explains why that specific food category has a shorter or longer window than other food categories."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The described food item and its condition in the warm-up match the storage decision made in the guided task.",
+      "No calorie, medical, or diagnosis-related language is used anywhere in the response; reasoning stays food-safety based."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

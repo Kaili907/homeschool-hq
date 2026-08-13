@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l06",
+  "lessonId": "ma-g8-ready-for-life-u06-l06",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Honest comparison to real habits",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The comparison stays entirely inside the fictional persona, or includes real financial, account, or identifying details instead of general habit language."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The comparison names a specific real current habit in general terms only, with a clear gap or similarity identified against the persona's plan."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the comparison is specific enough that another reader could picture the actual current habit without needing more detail."
+          }
+        ]
+      },
+      {
+        "dimension": "Habit commitment and backup plan",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The chosen habit is too vague to act on, or no backup plan is given for when it does not work."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific habit with a stated frequency is named, along with one specific backup plan for if it does not work the first time."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the backup plan addresses a realistic, specific obstacle rather than a generic restatement of trying harder."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No real financial figures, account numbers, addresses, or other identifying details appear anywhere in the reflection.",
+      "The named habit is genuinely the learner's own, not a restatement of something the fictional persona did."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

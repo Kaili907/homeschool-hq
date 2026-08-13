@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l04",
+  "lessonId": "ma-g9-ready-for-life-u05-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Specificity of the identified behavior",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Restates the feedback's general topic (e.g., 'communication') without naming the specific behavior or when it broke down." },
+          { "label": "Proficient", "descriptor": "Names the specific behavior the feedback points to and when it broke down, using the feedback's own details." },
+          { "label": "Advanced", "descriptor": "Names the specific behavior and moment, and distinguishes clearly between what was praised and what needs to change." }
+        ]
+      },
+      {
+        "dimension": "Concreteness of the response plan",
+        "levels": [
+          { "label": "Emerging", "descriptor": "States an intention to improve generally (e.g., 'try harder') without naming a specific action or a way to check it." },
+          { "label": "Proficient", "descriptor": "Names one specific action and one specific, observable way to check whether it worked." },
+          { "label": "Advanced", "descriptor": "Names one specific action and a check so precise it names a moment or condition where the change should be visible, connecting directly back to where the original behavior broke down." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A response plan that names an action a bystander could actually observe, not a restated intention like 'communicate better.'",
+      "A check for success tied to a specific moment or condition, not a vague 'see if it improves.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g11-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-ready-for-life-u03-l06",
+    "courseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Health and Wellness Self-Management",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: who to call and how, before it is needed"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners build a personal health-management plan template -- who to contact for which kind of need, how personal health records will be kept, and what signs mean urgent help is needed -- and review it with a guardian, producing a single reference document that requires no real private health detail to be useful.",
+  "scenario": "Combining the skills from this unit (scheduling, private record-keeping, describing a concern clearly, and recognizing urgency), the learner builds one reference plan: a contact list template organized by type of need, a short description of where and how personal records will be kept, and the learner's own version of the urgency rule from earlier in the unit. The learner then reviews the finished plan with a guardian, who confirms it is realistic for their household.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["written plan", "guardian confirmation", "learner explanation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The finished plan is a reference template -- it does not include any real diagnosis, medication, symptom detail, or account/insurance numbers.",
+    "Contact list entries are limited to role and where to find how to reach them (for example, 'primary care office -- number kept in phone contacts'), not sensitive account details."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a guardian isn't available right now to review the plan together, the learner instead completes the full plan independently and then writes a short explanation of who they believe would be the right person to review it with and what they would ask that person to confirm."
+  },
+  "materials": ["paper or notes app", "a few minutes of a guardian's time to review the finished plan"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before building the plan, gather what you already have from this unit.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Looking back at this unit, which piece (record-keeping categories, describing a concern, or recognizing urgency) do you feel most confident about already, and which do you still want this plan to help with?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Build the three parts of your personal health-management plan.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "extended-response", "text": "Build a contact list template organized by type of need (for example: routine/preventive care, urgent concerns, questions between visits). For each type, name the role of who to contact and where the actual contact information is kept -- not the real contact information itself." },
+        { "ref": "t2-p2", "promptType": "extended-response", "text": "Write a short description of how your personal records will be kept: what categories, where stored, and who can see them, building on the template from earlier in this unit." },
+        { "ref": "t2-p3", "promptType": "extended-response", "text": "Write your own short version of the urgency rule from earlier in this unit: what signs mean 'seek help now' versus 'can wait,' in your own words." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "guided",
+      "directions": "Review the finished plan with a guardian.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "checklist-item", "text": "I reviewed all three parts of the plan with a guardian." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "My guardian confirmed the plan is realistic for our household (for example, the contact types make sense and the record-keeping location is one we'd actually use)." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the plan as a whole.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Now that the plan exists, what is the one part you're most likely to actually use in the next few months, and why?" }
+      ]
+    }
+  ],
+  "remediation": "If any part of the plan lists a real diagnosis, medication, or specific real contact information rather than a role/category and a general location, reteach by having the learner revise that entry using the same role-and-location format as the other entries (e.g., 'dentist -- number kept in phone contacts' instead of any real detail), checking each entry against that format before the guardian review.",
+  "extension": "Have the learner add one additional contact type not already covered (for example, a counseling resource or a specialist) and write the same role-and-location entry for it.",
+  "scoringRef": "scoring/ready-for-life/grade-11-hs/swk-rfl-g11-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g11-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

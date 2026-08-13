@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g10-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-ready-for-life-u05-l05",
+    "courseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Civic Participation and Public Systems",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: making a request or an enquiry of an office"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners draft a professional inquiry message to a real local public office about a genuine question they have, using the workplace-message conventions from an earlier unit, without sending it.",
+  "scenario": "The learner identifies one real local public office or service (such as a library, transit authority, or health department) and one genuine question they'd actually want answered, then drafts a short, specific inquiry message using the subject-greeting-body-closing structure, kept as a draft only.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This message is drafted for practice only and is never sent as part of this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["a notebook or document", "the subject-greeting-body-closing structure from an earlier unit"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Name one real local public office and one genuine question you'd want answered.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the office and the specific question, and explain why it's a genuine question for you, not a made-up one." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft your inquiry message using the four-part structure: subject line, greeting, body, closing.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My subject line names the specific topic of my question." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My body states exactly one clear question." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My closing includes my name and enough context for the office to respond usefully." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Read your draft as if you were a busy staff member receiving it, and revise anything unclear.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name one thing you revised to make the question easier for a busy staff member to answer quickly." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on inquiring of a public office versus a private business.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "Name one way you'd expect a public office's response process to differ from a private business responding to a customer." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's question is vague or bundles multiple questions into one message, reteach by requiring the body to contain exactly one question stated in a single clear sentence, splitting any multi-part question into the single most important one for this draft.",
+  "extension": "Have the learner draft a second inquiry to a different type of public office and compare which one required more background context to make the question answerable.",
+  "scoringRef": "scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g10-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

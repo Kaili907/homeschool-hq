@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l01",
+  "lessonId": "ma-g12-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Category coverage",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Two or more categories are left completely blank rather than answered with a storage-type label or an honest 'I don't know.'"
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All six categories have either a storage-type label or an honest 'I don't know.'"
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All six categories are answered, and the least-sure category includes a specific, realistic next step rather than a vague one."
+          }
+        ]
+      },
+      {
+        "dimension": "Privacy discipline",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "An actual document number, account number, or other identifier appears anywhere in the response."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Only category and storage-type labels appear; no identifiers are present."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner's own language shows they understand why identifiers are excluded, not just that the rule exists."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No document number, account number, password, or government identifier appears anywhere in the response.",
+      "'I don't know' appears at least once if genuinely applicable, rather than every category being filled in implausibly.",
+      "The least-sure-category step is specific enough that the learner could actually try it this week."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}
