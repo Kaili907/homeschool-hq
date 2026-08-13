@@ -12,22 +12,64 @@
   "essentialQuestion": "How can understanding outdoor, aquatic, and community activity planning help us explain, decide, create, or solve something that matters?",
   "estimatedMinutes": "35–60",
   "materials": [
-    "course notebook or digital equivalent",
-    "pencil or accessible response tool",
-    "unit-specific source, model, manipulatives, safe materials, or approved digital tool"
+    "No specialized equipment is required.",
+    "Weather-appropriate clothing, a paper map, or activity-specific safety equipment may be used only when available and adult-approved.",
+    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
   ],
-  "movementCues": null,
+  "movementCues": [
+    "Scan ahead for surface, traffic, weather, and boundary changes before changing pace or direction.",
+    "Use a pace that allows steady breathing and controlled stopping; shorten the route or turn back before conditions become unsafe.",
+    "Keep posture tall, steps or wheel pushes smooth, and attention on the next safe section of the route.",
+    "State the route, turnaround point, and help plan before beginning; safe decisions matter more than distance or speed.",
+    "Rehearse the pattern slowly, add only one challenge at a time, and use a trusted adult for any environment or equipment check you cannot confirm."
+  ],
+  "ageAppropriateTechnique": "Rehearse the pattern slowly, add only one challenge at a time, and use a trusted adult for any environment or equipment check you cannot confirm.",
+  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Weather-appropriate clothing, a paper map, or activity-specific safety equipment may be used only when available and adult-approved."
+    ],
+    "householdSubstitutes": [
+      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    ],
+    "equalCreditNoEquipment": "Equal-credit home option: mark an indoor route with imaginary points, travel or gesture through it at a controlled pace, and explain the surface, weather, traffic, hydration, and turnaround decisions you would use outdoors. No outdoor trip, bicycle, pool, map, or purchased gear is required."
+  },
+  "safetyRules": [
+    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
+    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
+    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit.",
+    "Do not enter water, roads, isolated areas, or unfamiliar routes for this lesson. Outdoor practice requires a trusted adult, suitable conditions, and the safety equipment appropriate to the activity."
+  ],
+  "stoppingRules": [
+    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
+    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
+    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+  ],
+  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit home option: mark an indoor route with imaginary points, travel or gesture through it at a controlled pace, and explain the surface, weather, traffic, hydration, and turnaround decisions you would use outdoors. No outdoor trip, bicycle, pool, map, or purchased gear is required.",
+  "activitySteps": [
+    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
+    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
+    "Practice: apply the movement cues for cycling or trail etiquette at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
+    "Apply: show, describe, draw, sign, or write one controlled example of cycling or trail etiquette, including the cue or decision that made it work.",
+    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+  ],
+  "executionCategory": "outdoor",
   "commonErrorToWatchFor": null,
   "keyPoints": [],
   "privacySafeScenario": "Plan a safe lifetime-activity experience including permissions, equipment, cost, transport, and contingency options.",
   "studentTask": "Learner completes a new application of cycling or trail etiquette and records both the result and the reasoning, evidence, process, or design choice that produced it.",
   "knowledgeCheck": "In one concise response, show or explain the most important idea about cycling or trail etiquette; then identify one check that would catch an error or weak claim.",
   "completionCriteria": [
-    "The learner completes the central task about cycling or trail etiquette.",
-    "The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
-    "The learner checks or revises the work and can identify a next step."
+    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for cycling or trail etiquette.",
+    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
+    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
+    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
   ],
-  "adaptationChoices": "Provide readable text plus optional audio or read-aloud support; no voice feature is required. Chunk directions into one action at a time and show a worked example or model. Allow typed, handwritten, spoken, drawn, manipulatives-based, or demonstrated responses when the standard permits. Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options. Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media. Preserve the learning target while adjusting quantity, pacing, representation, or response mode.",
+  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
   "extensionChallenge": "Apply cycling or trail etiquette under a new constraint, compare two approaches or perspectives, or teach the idea with an original example without completing another learner’s graded work.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -48,7 +90,9 @@
     "This task never requires calorie counting or a diet or weight-loss goal.",
     "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
   ],
   "sourceProvenance": {
     "sourceBranch": "shared base@656efba (canonical 5/7/8)",

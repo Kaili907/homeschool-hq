@@ -21,6 +21,24 @@
     "estimatedMinutes": { "type": ["string", "null"] },
     "materials": { "type": "array", "items": { "type": "string" } },
     "movementCues": { "type": ["array", "null"], "items": { "type": "string" } },
+    "ageAppropriateTechnique": { "type": "string" },
+    "spaceSetup": { "type": "string" },
+    "equipmentRequirements": {
+      "type": "object",
+      "required": ["required", "optional", "householdSubstitutes", "equalCreditNoEquipment"],
+      "properties": {
+        "required": { "type": "array", "items": { "type": "string" } },
+        "optional": { "type": "array", "items": { "type": "string" } },
+        "householdSubstitutes": { "type": "array", "items": { "type": "string" } },
+        "equalCreditNoEquipment": { "type": "string" }
+      }
+    },
+    "safetyRules": { "type": "array", "items": { "type": "string" } },
+    "stoppingRules": { "type": "array", "items": { "type": "string" } },
+    "accessibleAdaptation": { "type": "string" },
+    "lowSpaceNoEquipmentAlternative": { "type": "string" },
+    "activitySteps": { "type": "array", "items": { "type": "string" } },
+    "executionCategory": { "type": "string" },
     "commonErrorToWatchFor": { "type": ["string", "null"] },
     "keyPoints": { "type": "array", "items": { "type": "string" } },
     "privacySafeScenario": {
@@ -88,6 +106,31 @@
       }
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": { "const": "lesson-task-card" },
+          "subject": { "const": "physical-education" }
+        },
+        "required": ["kind", "subject"]
+      },
+      "then": {
+        "required": [
+          "movementCues",
+          "ageAppropriateTechnique",
+          "spaceSetup",
+          "equipmentRequirements",
+          "safetyRules",
+          "stoppingRules",
+          "accessibleAdaptation",
+          "lowSpaceNoEquipmentAlternative",
+          "activitySteps",
+          "completionCriteria"
+        ]
+      }
+    }
+  ],
   "not": {
     "anyOf": [
       { "required": ["answer_or_scoring_guidance"] },

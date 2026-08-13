@@ -12,9 +12,9 @@
   "essentialQuestion": "How do I keep and move an object as a team?",
   "estimatedMinutes": "30-50",
   "materials": [
-    "open, cleared movement space",
-    "water available throughout",
-    "unit equipment listed in the guardian safety review"
+    "No specialized equipment is required.",
+    "Optional: a soft ball. A rolled pair of socks, crumpled paper, or another soft unbreakable household object is an equivalent substitute.",
+    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
   ],
   "movementCues": [
     "Small touches, ball within one step.",
@@ -22,6 +22,41 @@
     "Head up between touches.",
     "Slow down to keep control in tight space."
   ],
+  "ageAppropriateTechnique": "Practice slowly enough to say each cue, and ask a trusted adult to check the cleared area before movement begins.",
+  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Optional: a soft ball. A rolled pair of socks, crumpled paper, or another soft unbreakable household object is an equivalent substitute."
+    ],
+    "householdSubstitutes": [
+      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    ],
+    "equalCreditNoEquipment": "Equal-credit no-equipment option: rehearse the same ready position, tracking, weight shift, contact shape, and follow-through in slow motion with an imaginary object, then point to or draw its intended path and explain the cue used."
+  },
+  "safetyRules": [
+    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
+    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
+    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit.",
+    "Use only a soft, unbreakable object below shoulder height, away from windows, people, pets, and breakables. Do not use hard balls indoors."
+  ],
+  "stoppingRules": [
+    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
+    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
+    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+  ],
+  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit no-equipment option: rehearse the same ready position, tracking, weight shift, contact shape, and follow-through in slow motion with an imaginary object, then point to or draw its intended path and explain the cue used.",
+  "activitySteps": [
+    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
+    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
+    "Practice: apply the movement cues for dribbling with control while travelling at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
+    "Apply: show, describe, draw, sign, or write one controlled example of dribbling with control while travelling, including the cue or decision that made it work.",
+    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+  ],
+  "executionCategory": "object-control",
   "commonErrorToWatchFor": "Head down throughout, missing teammates. Fix: hold up fingers at random and ask the dribbler to call the number.",
   "keyPoints": [
     "Small touches, ball within one step.",
@@ -33,11 +68,12 @@
   "studentTask": "The learner practises dribbling with control while travelling at a self-selected challenge level, using the adapted alternative whenever it fits better, and names the cue that helped.",
   "knowledgeCheck": "The learner names one cue that helped with dribbling with control while travelling and one adjustment for next time, by demonstrating, describing, drawing, or writing.",
   "completionCriteria": [
-    "The learner takes part in the task about dribbling with control while travelling at a self-selected challenge level.",
-    "The learner uses or names the movement cues for dribbling with control while travelling.",
-    "The learner identifies one adjustment or next step. No score, time, count, or measurement is required."
+    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for dribbling with control while travelling.",
+    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
+    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
+    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
   ],
-  "adaptationChoices": "Foot-skill tasks may be done with a stationary ball, a slower rolled ball, a larger ball, a hand or assistive device in place of the foot, or from a seated position. Travel distance is always adjustable.",
+  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
   "extensionChallenge": "Apply dribbling with control while travelling under one new condition of the learner choosing — different equipment, space, speed, or partner — and describe what changed.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -58,7 +94,9 @@
     "This task never requires calorie counting or a diet or weight-loss goal.",
     "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",

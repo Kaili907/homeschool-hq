@@ -1,0 +1,57 @@
+{
+  "evidenceType": "physical-education-learner-content-repair",
+  "evidenceVersion": "1.0.0",
+  "confirmedBaseline": {
+    "lessons": 972,
+    "missingMovementCues": 756,
+    "equipmentBlockers": 600,
+    "missingRequiredSafety": 324,
+    "zeroActionable": 0,
+    "emptyActivities": 0,
+    "bodyWeightDietFindings": 0,
+    "mandatoryMediaFindings": 0
+  },
+  "repairs": {
+    "movementCueRepairs": 756,
+    "equipmentRepairs": 600,
+    "safetyRepairs": 324,
+    "repairLevel": "shared generator/template"
+  },
+  "after": {
+    "missingMovementCues": 0,
+    "equipmentBlockers": 0,
+    "missingRequiredSafety": 0,
+    "missingAdaptation": 0,
+    "homeUseBlockers": 0,
+    "missingCompletionCriteria": 0
+  },
+  "proofs": {
+    "lessonsAudited": 972,
+    "focusSpecificExecutionCategories": {
+      "balance-strength-mobility": 64,
+      "leadership-inclusion": 106,
+      "locomotor-space": 86,
+      "movement-literacy": 228,
+      "object-control": 64,
+      "outdoor": 50,
+      "rhythm-sequence": 70,
+      "striking-target": 56,
+      "tactics-games": 62,
+      "training-planning": 186
+    },
+    "movementCueRule": "At least three movement cues plus an age-band technique note on every PE lesson.",
+    "adaptationRule": "Every lesson states seated, supported, reduced-range, mobility-aid, solo, and equal-credit response paths.",
+    "homeUseRule": "Every lesson states a cleared low-space setup, no-specialized-equipment requirement, household substitute policy, and equal-credit no-equipment path.",
+    "safetyRule": "Every lesson states environment/equipment checks, controlled-effort rules, at least three stop conditions, and trusted-adult escalation.",
+    "completionRule": "Every lesson has four observable criteria covering setup/path choice, cue use, safety/equipment reasoning, and equal-credit adaptation."
+  },
+  "issueIdsAfter": {
+    "missingMovementCues": [],
+    "equipmentBlockers": [],
+    "missingRequiredSafety": [],
+    "missingAdaptation": [],
+    "homeUseBlockers": [],
+    "missingCompletionCriteria": []
+  },
+  "classification": "PE_CONTENT_READY_FOR_CONVERGENCE"
+}

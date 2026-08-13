@@ -12,21 +12,64 @@
   "essentialQuestion": "How do I design an activity where the least confident person present has a good time?",
   "estimatedMinutes": "35–60",
   "materials": [
-    "equipment appropriate to the designed session",
-    "course notebook or digital equivalent"
+    "No specialized equipment is required.",
+    "Optional household or activity equipment may be used when safe and available, but no wearable, machine, weight, gym membership, or purchased item is required.",
+    "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
   ],
-  "movementCues": null,
+  "movementCues": [
+    "Begin gradually with an easy movement the learner can control, then change only one variable at a time.",
+    "Use feel, breathing, and the ability to speak comfortably to choose a sustainable effort; no device or body measurement is needed.",
+    "Keep posture supported, movements smooth, and breathing continuous; hold or reduce the challenge when technique changes.",
+    "Finish with an easier transition and record the movement choice, safety check, and next adjustment rather than a maximal result.",
+    "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result."
+  ],
+  "ageAppropriateTechnique": "Self-manage the task by rehearsing at low intensity, changing one variable at a time, and choosing control and repeatable technique over a maximal result.",
+  "spaceSetup": "Clear a dry, non-slip area at least two arm-spans wide when available. Mark the boundary with visible household objects or imaginary lines, remove furniture, cords, pets, and breakables, and keep a stable chair or wall nearby if support helps. Low-space path: clear one arm-span while seated or standing and keep every movement in place.",
+  "equipmentRequirements": {
+    "required": [
+      "No specialized equipment is required."
+    ],
+    "optional": [
+      "Optional household or activity equipment may be used when safe and available, but no wearable, machine, weight, gym membership, or purchased item is required."
+    ],
+    "householdSubstitutes": [
+      "Use only soft, unbreakable household items that a trusted adult approves; imaginary equipment and paper planning are always valid substitutes."
+    ],
+    "equalCreditNoEquipment": "Equal-credit home option: build and try or fully describe a short sequence using comfortable in-place marching or rolling, seated reaches, gentle mobility, and paced breathing; justify how it prepares, challenges, and settles the body."
+  },
+  "safetyRules": [
+    "Check the floor, ceiling, footwear or mobility supports, boundary, and any optional item before moving. Keep people, pets, furniture, cords, and breakables outside the boundary.",
+    "Use a self-selected easy-to-moderate challenge, breathe continuously, and choose control over speed, force, distance, or repetition.",
+    "Rest, reduce range or pace, use support, or choose the non-movement planning path at any time without losing credit.",
+    "Use a self-selected easy-to-moderate effort, allow rest at any time, and never use maximal effort, breath-holding, punishment exercise, or exercise through pain."
+  ],
+  "stoppingRules": [
+    "Stop immediately for pain, dizziness, unusual breathing difficulty, a head impact, or any movement that feels unsafe; tell a trusted adult.",
+    "Stop when a person, pet, object, or slippery surface enters the movement area. Reset the area before continuing.",
+    "After a head impact, injury, or symptoms that do not settle with rest, do not resume the activity until a trusted adult or qualified professional says it is safe."
+  ],
+  "accessibleAdaptation": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
+  "lowSpaceNoEquipmentAlternative": "Equal-credit home option: build and try or fully describe a short sequence using comfortable in-place marching or rolling, seated reaches, gentle mobility, and paced breathing; justify how it prepares, challenges, and settles the body.",
+  "activitySteps": [
+    "Setup: read the equipment, space, safety, and stop rules; clear the area and choose the standard or adapted path.",
+    "Prepare: begin with comfortable joint movements and an easy version of the lesson pattern while breathing normally.",
+    "Practice: apply the movement cues for safety planning and responsibility as an organizer at a self-selected easy-to-moderate challenge, resting or reducing the range whenever control changes.",
+    "Apply: show, describe, draw, sign, or write one controlled example of safety planning and responsibility as an organizer, including the cue or decision that made it work.",
+    "Finish: transition to easy movement or rest, then name one safety check and one adjustment for next time. No score, measurement, photo, or recording is needed."
+  ],
+  "executionCategory": "training-planning",
   "commonErrorToWatchFor": null,
   "keyPoints": [],
   "privacySafeScenario": "Design and facilitate one small inclusive activity session, then evaluate it against stated inclusion and safety criteria and revise the design.",
   "studentTask": "Learner applies safety planning and responsibility as an organizer in a new situation at a self-set intensity and records what they did, noticed, and would adjust.",
   "knowledgeCheck": "In one concise response, explain the key idea behind safety planning and responsibility as an organizer and name one adjustment for the next session.",
   "completionCriteria": [
-    "The learner completes or fully describes the safety planning and responsibility as an organizer task using a version their body and setting allow.",
-    "The learner gives a cue, principle, tactic, or documented process rather than an unexplained result.",
-    "The learner self-assesses against the stated criteria and identifies one next adjustment."
+    "The learner clears or accurately describes the safe space and selects the standard, accessible, or no-equipment path for safety planning and responsibility as an organizer.",
+    "The learner completes or fully describes one controlled practice-and-application sequence using at least one stated movement cue; stopping or resting for safety still counts as responsible completion.",
+    "The learner identifies the equipment choice (including none), one safety or stop rule, and one technique adjustment or next step.",
+    "A seated, supported, reduced-range, solo, low-space, or no-equipment version earns the same credit when it demonstrates the same cue and decision."
   ],
-  "adaptationChoices": "The session may be run for one person, for a household group, or delivered as a complete plan with a rehearsed walk-through if no participants are available.",
+  "adaptationChoices": "Use the same cues while seated, supported by a stable chair or wall, using a mobility aid, working through a comfortable reduced range, or describing/gesturing the movement when movement is not appropriate. Work solo or with one trusted adult. The adapted path is assessed for the same control, decision, and explanation and earns equal credit.",
   "extensionChallenge": "Apply safety planning and responsibility as an organizer under a new constraint, in a different activity, or teach the cue to someone else — without completing another learner's graded work.",
   "accessibilitySupports": [
     "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
@@ -49,7 +92,9 @@
     "This task never requires calorie counting or a diet or weight-loss goal.",
     "This task never requires disclosing private medical history, a diagnosis, or sexual history.",
     "This task never requires a photograph, video, or voice recording of the learner as proof.",
-    "This task never requires a public performance or an audience."
+    "This task never requires a public performance or an audience.",
+    "This task never requires maximal effort, exercise as punishment, or movement through pain.",
+    "This task never requires gym access, specialized equipment, or a purchase; the no-equipment path earns equal credit."
   ],
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
