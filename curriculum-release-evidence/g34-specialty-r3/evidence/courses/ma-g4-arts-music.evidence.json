@@ -1,0 +1,394 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g4-arts-music",
+  "grade": 4,
+  "subject": "arts-and-music",
+  "source_artifact": "curriculum-release-normalization/g34-r2/standards/courses/ma-g4-arts-music.standards.json",
+  "official_source_claimed_by_release": "Michigan Visual, Performing, and Applied Arts Standards (MDE)",
+  "citations_total": 204,
+  "distinct_total": 12,
+  "citation_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 0,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 204
+  },
+  "distinct_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 0,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 12
+  },
+  "citations": [
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Connecting",
+      "citation_count": 24,
+      "unit_numbers": [
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "2ef63e23117b752e4ce17a20301a4340ca9b360919f14a8354bf9b332f2a89ee",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Connecting",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44)."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Creating",
+      "citation_count": 12,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_id_set_sha256": "8bd93f3da5cac024440b74b5cadecab2fc259b5fd60cf2650460f947a88b79cd",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Creating",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Candidate alias for a human to rule on: Creating -> CREATE."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Dance – Creating",
+      "citation_count": 12,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_id_set_sha256": "73e064ecf742f3ac5de0b8ffb2eb82b3f3a847c2a200fbd571e90b63170c89ba",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Creating",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Dance' is a real Michigan arts discipline. Candidate alias for a human to rule on: Creating -> CREATE."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Music – Performing",
+      "citation_count": 24,
+      "unit_numbers": [
+        1,
+        3
+      ],
+      "lesson_id_set_sha256": "7300f9ebd8b178c5f96eba96da22793c10d2e7999ad7f25c5852ccc9f73c4030",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Performing",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Music' is a real Michigan arts discipline. Candidate alias for a human to rule on: Performing -> PERFORM."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Music – Responding",
+      "citation_count": 24,
+      "unit_numbers": [
+        1,
+        3
+      ],
+      "lesson_id_set_sha256": "7300f9ebd8b178c5f96eba96da22793c10d2e7999ad7f25c5852ccc9f73c4030",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Responding",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Music' is a real Michigan arts discipline."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Performing/Presenting",
+      "citation_count": 12,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_id_set_sha256": "8bd93f3da5cac024440b74b5cadecab2fc259b5fd60cf2650460f947a88b79cd",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Performing/Presenting",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Candidate alias for a human to rule on: Performing -> PERFORM."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Responding",
+      "citation_count": 24,
+      "unit_numbers": [
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "2ef63e23117b752e4ce17a20301a4340ca9b360919f14a8354bf9b332f2a89ee",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Responding",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44)."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Theatre – Creating",
+      "citation_count": 12,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_id_set_sha256": "73e064ecf742f3ac5de0b8ffb2eb82b3f3a847c2a200fbd571e90b63170c89ba",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Creating",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Theatre' is a real Michigan arts discipline. Candidate alias for a human to rule on: Creating -> CREATE."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Theatre – Performing",
+      "citation_count": 12,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_id_set_sha256": "73e064ecf742f3ac5de0b8ffb2eb82b3f3a847c2a200fbd571e90b63170c89ba",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Performing",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Theatre' is a real Michigan arts discipline. Candidate alias for a human to rule on: Performing -> PERFORM."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Visual Arts – Creating",
+      "citation_count": 24,
+      "unit_numbers": [
+        1,
+        2
+      ],
+      "lesson_id_set_sha256": "9aeaea6a6ba941c2a13d8425f0a4efd5da8c01f5cacfc8e50c783e94574991a3",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Creating",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Visual Arts' is a real Michigan arts discipline. Candidate alias for a human to rule on: Creating -> CREATE."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Visual Arts – Presenting",
+      "citation_count": 12,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_id_set_sha256": "fe8dbb76aea38e6000ab086e48d2636bae743645eb94b4065394bef7552535ce",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Presenting",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Visual Arts' is a real Michigan arts discipline."
+    },
+    {
+      "course_id": "ma-g4-arts-music",
+      "grade": 4,
+      "subject": "arts-and-music",
+      "code_or_strand": "Michigan Arts: Visual Arts – Responding",
+      "citation_count": 12,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_id_set_sha256": "a1fe918f3922b8fa42260b29a9662ee8db7338ebbde76159de2e84e4910de373",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S5-arts-process-not-michigan",
+      "official_anchor": {
+        "doc_id": "mde-arts-glce",
+        "locator": "standard headings throughout; e.g. PDF p. 3",
+        "quote": "Standard 1: Apply skills and knowledge to perform in the arts. | Standard 2: Apply skills and knowledge to create in the arts. | Standard 3: Analyze, describe, and evaluate works of art. | Standard 4: Understand, analyze, and describe the arts in their historical, social, and cultural contexts. | Standard 5: Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+      },
+      "divergence": {
+        "official": "PERFORM; CREATE; ANALYZE; ANALYZE IN CONTEXT; ANALYZE AND MAKE CONNECTIONS",
+        "authored": "Responding",
+        "diff": null
+      },
+      "authority": "contested",
+      "official_document": "mde-arts-glce",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "National Core Arts Standards process vocabulary attributed to Michigan. Occurrences of that vocabulary as a capitalised name across both held Michigan arts documents: {\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0} (it does appear in lower-case prose; it is never a standard or process name). Michigan publishes exact-grade expectations for Grades 3 and 4 in all four disciplines (186 codes: D 53, M 57, T 32, VA 44). Discipline 'Visual Arts' is a real Michigan arts discipline."
+    }
+  ]
+}

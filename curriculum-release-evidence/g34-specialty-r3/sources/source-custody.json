@@ -1,0 +1,171 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "retrieved": "2026-08-12",
+  "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+  "correction_to_the_input_release": "curriculum-release-normalization/g34-r2 records that michigan.gov 'blocks automated retrieval of its own copy' and that 'No code inside a PDF was fetched and transcribed by this session.' Both were true of the tooling those sessions used. They are not true of the host: every document below was fetched directly from michigan.gov on 2026-08-12 and is held here byte for byte.",
+  "documents": [
+    {
+      "doc_id": "mde-health-2025",
+      "file": "mde-health-education-standards-guidelines-2025.pdf",
+      "title": "Michigan Health Education Standards Guidelines",
+      "version_label": "2025, ADA final with edits 12-19-25",
+      "publisher": "Michigan Department of Education",
+      "authority": "Approved by the Michigan State Board of Education 2025-11-13 (per the MDE press release of that date). The document itself carries no approval line; its own title is 'Standards Guidelines' and the press release describes it as guidance to districts under local control.",
+      "linked_from": "https://www.michigan.gov/mde/services/academic-standards",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/ohns/School-Health-and-Safety/Michigan-Health-Education-Standards-Guidelines-2025---ADA-final-with-edits-12-19-25.pdf",
+      "sha256": "e64744d56ba3ba36b968012995f9fed259f74efbb49fbfc91075be8b16defee4",
+      "bytes": 715062,
+      "pages": 70,
+      "held_at": "sources/documents/mde-health-education-standards-guidelines-2025.pdf",
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-pe-2017",
+      "file": "mde-k12-physical-education-standards-2017.pdf",
+      "title": "K-12 Physical Education Standards",
+      "version_label": "May 2017",
+      "publisher": "Michigan Department of Education",
+      "authority": "Adopted by the Michigan State Board of Education, May 2017; the document cover reads 'K-12 PE Standards May 2017'.",
+      "linked_from": "https://www.michigan.gov/mde/services/health-safety/health-education-and-physical-education/physed",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/2019/02/22/K_12_PE_Standards_Aug_17_ADA_compliance918.pdf",
+      "sha256": "88ab7e08a6611015674ebf97e67a7e8ba0aabb9138b9376bf70adecd9018d93c",
+      "bytes": 700543,
+      "pages": 45,
+      "held_at": "sources/documents/mde-k12-physical-education-standards-2017.pdf",
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-cs-2019",
+      "file": "mde-k12-computer-science-standards-2019.pdf",
+      "title": "Michigan K-12 Standards: Computer Science",
+      "version_label": "May 2019",
+      "publisher": "Michigan Department of Education",
+      "authority": "Adopted by the Michigan State Board of Education May 2019; this is the document the live MDE Computer Science standards page serves today as 'K-12 CS Standards'.",
+      "linked_from": "https://www.michigan.gov/mde/services/academic-standards/michigan-k-12-computer-science-standards",
+      "official_url": "https://www.michigan.gov/documents/mde/CompSci_Standards_Accessible_Final_655284_7.pdf",
+      "sha256": "62bedb9e798a0ebb387dbbeafefc1f926c745df1dd564e4b67b41385e0392c3d",
+      "bytes": 1105556,
+      "pages": 32,
+      "held_at": "sources/documents/mde-k12-computer-science-standards-2019.pdf",
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-arts-glce",
+      "file": "mde-arts-standards-benchmarks-glce.pdf",
+      "title": "Michigan Merit Curriculum Standards, Benchmarks, and Grade Level Content Expectations: Visual Arts, Music, Dance, and Theatre",
+      "version_label": "as served from the Academic Standards page on 2026-08-12",
+      "publisher": "Michigan Department of Education",
+      "authority": "The only arts standards document linked from the MDE Academic Standards index page.",
+      "linked_from": "https://www.michigan.gov/mde/services/academic-standards",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Arts_Standards_Benchmarks_GLCE.pdf",
+      "sha256": "f52e0506e30a2277991ae4cebfe75ce157ca0cc3d6ba2b833e15ee8fd9113f2b",
+      "bytes": 723672,
+      "pages": 64,
+      "held_at": "sources/documents/mde-arts-standards-benchmarks-glce.pdf",
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-vpaa-2011",
+      "file": "mde-vpaa-expectations-june-2011.pdf",
+      "title": "Michigan Standards, Benchmarks, and Grade Level Content Expectations for Visual Arts, Music, Dance, and Theater",
+      "version_label": "v.06.2011",
+      "publisher": "Michigan Department of Education",
+      "authority": "The document the lane's own cited page (the Michigan Merit Curriculum arts page) links as 'Visual, Performing and Applied Arts Content Expectations'. Held so the version question is answerable from bytes, not memory.",
+      "linked_from": "https://www.michigan.gov/mde/services/academic-standards/mmc/curriculum/arts",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Year/2014/06/06/Complete_VPAA_Expectations_June_2011_356110_7.pdf",
+      "sha256": "330ca531c64200c0ec5e7bc18083cb76e6eb2c57a21fbe3de25c2d29bcfe845c",
+      "bytes": 368220,
+      "pages": 111,
+      "held_at": "sources/documents/mde-vpaa-expectations-june-2011.pdf",
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-personal-finance",
+      "file": "mde-personal-finance-content-expectations-9-12.pdf",
+      "title": "Michigan Merit Curriculum Personal Finance 9-12 Content Expectations",
+      "version_label": "v5/2023",
+      "publisher": "Michigan Department of Education",
+      "authority": "The content expectations MCL 380.1278a points at; the only standalone Michigan personal-finance standards document. It republishes the Personal Finance category of the K-12 Social Studies Standards, where the same expectations also live.",
+      "linked_from": "https://www.michigan.gov/mde/services/academic-standards/personal-finance",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Personal-Finance/Personal_Finance_Content_Expectations.pdf",
+      "sha256": "ff97640535d7864de8d3333669a5f8d8ab8134ebfa0af5f9f938cf2e91ab2735",
+      "bytes": 537595,
+      "pages": 2,
+      "held_at": "sources/documents/mde-personal-finance-content-expectations-9-12.pdf",
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-social-studies",
+      "file": "mde-k12-social-studies-standards.pdf",
+      "title": "Michigan K-12 Social Studies Standards",
+      "version_label": "as served from the Academic Standards page on 2026-08-12",
+      "publisher": "Michigan Department of Education",
+      "authority": "Held only to answer one question: does Michigan publish exact-grade economics expectations for Grades 3 and 4? It does.",
+      "linked_from": "https://www.michigan.gov/mde/services/academic-standards",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Social_Studies_Standards.pdf",
+      "sha256": "bba06f46bb241ae3cdd698caaeb41baa3c976d96176fef0a9d594a7e98e70b96",
+      "bytes": 1527644,
+      "pages": 147,
+      "held_at": "sources/documents/mde-k12-social-studies-standards.pdf",
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent, which is why earlier sessions recorded the host as unfetchable",
+      "sha256_verified": true
+    }
+  ],
+  "web_observations": [
+    {
+      "observation_id": "cs-live-page-serves-2019-pdf",
+      "url": "https://www.michigan.gov/mde/services/academic-standards/michigan-k-12-computer-science-standards",
+      "observed": "2026-08-12",
+      "finding": "The live page's 'K-12 CS Standards' resource resolves to CompSci_Standards_Accessible_Final_655284_7.pdf (the May 2019 document held here as mde-cs-2019). The only archive link on the page is 'Archived Public Information Session Presentations' - archived meeting presentations, not an archive of superseded standards.",
+      "closes": "standards-reference.md Gap 4"
+    },
+    {
+      "observation_id": "pe-live-page-serves-2017-pdf",
+      "url": "https://www.michigan.gov/mde/services/health-safety/health-education-and-physical-education/physed",
+      "observed": "2026-08-12",
+      "finding": "The live MDE Physical Education page links K_12_PE_Standards_Aug_17_ADA_compliance918.pdf - byte-identical to the document held here as mde-pe-2017. The 2017 standards are current."
+    },
+    {
+      "observation_id": "health-board-approval-2025-11-13",
+      "url": "https://www.michigan.gov/mde/news-and-information/press-releases/2025/11/13/revised-health-education-standards",
+      "observed": "2026-08-12",
+      "finding": "MDE press release, November 13 2025: 'Local Control, Parent Opt-Out Remain Part of Guidelines Approved by State Board of Education'. This is where the approval date comes from; the PDF itself does not state one. The release links a slightly earlier filename (---ADA-Final.pdf); the Academic Standards index links the ---ADA-final-with-edits-12-19-25.pdf held here."
+    },
+    {
+      "observation_id": "arts-index-links-only-glce",
+      "url": "https://www.michigan.gov/mde/services/academic-standards",
+      "observed": "2026-08-12",
+      "finding": "The Academic Standards index lists exactly one arts standards document: 'Standards, Benchmarks, and Grade Level Content Expectations (GLCEs) for Visual Arts, Music, Dance, and Theatre'. No National Core Arts Standards adoption is listed anywhere on the index."
+    },
+    {
+      "observation_id": "personal-finance-is-high-school",
+      "url": "https://www.michigan.gov/mde/services/academic-standards/personal-finance",
+      "observed": "2026-08-12",
+      "finding": "MCL 380.1278a requires a 1/2 credit personal finance course of students entering 8th grade in 2023, satisfied in high school. The page publishes no elementary personal-finance expectations."
+    },
+    {
+      "observation_id": "mde-sel-competencies-exist-but-are-not-academic-standards",
+      "url": "https://www.michigan.gov/mde/services/health-safety/social-emotional-learning-sel",
+      "observed": "2026-08-12",
+      "finding": "MDE publishes 'SEL Competencies and Indicators' (2017) under Health & Safety services. It is not listed on the Academic Standards index and is not an academic standard. Not retrieved into custody: no citation in this release names a competency from it."
+    }
+  ],
+  "extraction": {
+    "library": "pypdf",
+    "version": "6.6.2",
+    "note": "Text comparison is whitespace-normalized. A different pypdf version could shift extraction; the PDF bytes are the record, the extraction is the reading of them."
+  }
+}

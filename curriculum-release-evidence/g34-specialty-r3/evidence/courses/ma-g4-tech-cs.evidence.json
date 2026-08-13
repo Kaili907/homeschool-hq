@@ -1,0 +1,164 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g4-tech-cs",
+  "grade": 4,
+  "subject": "technology",
+  "source_artifact": "curriculum-release-normalization/g34-r2/standards/courses/ma-g4-tech-cs.standards.json",
+  "official_source_claimed_by_release": "Michigan K-12 Computer Science Standards, adopted 2019 (MDE), Level 1B",
+  "citations_total": 60,
+  "distinct_total": 5,
+  "citation_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 60,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 0
+  },
+  "distinct_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 5,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 0
+  },
+  "citations": [
+    {
+      "course_id": "ma-g4-tech-cs",
+      "grade": 4,
+      "subject": "technology",
+      "code_or_strand": "Michigan Computer Science: Algorithms and Programming",
+      "citation_count": 12,
+      "unit_numbers": [
+        4,
+        6
+      ],
+      "lesson_id_set_sha256": "8e9e8fdab383bfa43cb654cdd6cf7422aa9afcd699c35ecf29fe075f54051989",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S4-cs-core-concept-alias",
+      "official_anchor": {
+        "doc_id": "mde-cs-2019",
+        "locator": "PDF p. 6, Core Concepts figure",
+        "quote": "Algorithms and Programming"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-cs-2019",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Michigan organises CS by level, not grade: Level 1B is Upper Elementary, Grades 3-5, so Grade 3 and Grade 4 share the band. 21 Level 1B identifiers exist (e.g. 1B-AP-08, 1B-AP-09, 1B-AP-10) and none is cited. The five Core Concept names appear only in the Core Concepts figure, not as section headings. The five names come from the K-12 CS Framework and Michigan adopted the CSTA standards; Michigan does print them, which is what separates this case from the arts one, where the authored vocabulary appears nowhere in Michigan's text."
+    },
+    {
+      "course_id": "ma-g4-tech-cs",
+      "grade": 4,
+      "subject": "technology",
+      "code_or_strand": "Michigan Computer Science: Computing Systems",
+      "citation_count": 12,
+      "unit_numbers": [
+        2,
+        3
+      ],
+      "lesson_id_set_sha256": "2ffc140281f2d7e6316e5027ba9c175e08f108154e8fb93476cac18e8f6dd787",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S4-cs-core-concept-alias",
+      "official_anchor": {
+        "doc_id": "mde-cs-2019",
+        "locator": "PDF p. 6, Core Concepts figure",
+        "quote": "Computing Systems"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-cs-2019",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Michigan organises CS by level, not grade: Level 1B is Upper Elementary, Grades 3-5, so Grade 3 and Grade 4 share the band. 21 Level 1B identifiers exist (e.g. 1B-AP-08, 1B-AP-09, 1B-AP-10) and none is cited. The five Core Concept names appear only in the Core Concepts figure, not as section headings. The five names come from the K-12 CS Framework and Michigan adopted the CSTA standards; Michigan does print them, which is what separates this case from the arts one, where the authored vocabulary appears nowhere in Michigan's text."
+    },
+    {
+      "course_id": "ma-g4-tech-cs",
+      "grade": 4,
+      "subject": "technology",
+      "code_or_strand": "Michigan Computer Science: Data and Analysis",
+      "citation_count": 12,
+      "unit_numbers": [
+        3,
+        5
+      ],
+      "lesson_id_set_sha256": "540a41d8693e72bc876ca463df6c5d540bdd05b911de403757fc8cba1a538f1e",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S4-cs-core-concept-alias",
+      "official_anchor": {
+        "doc_id": "mde-cs-2019",
+        "locator": "PDF p. 6, Core Concepts figure",
+        "quote": "Data and Analysis"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-cs-2019",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Michigan organises CS by level, not grade: Level 1B is Upper Elementary, Grades 3-5, so Grade 3 and Grade 4 share the band. 21 Level 1B identifiers exist (e.g. 1B-AP-08, 1B-AP-09, 1B-AP-10) and none is cited. The five Core Concept names appear only in the Core Concepts figure, not as section headings. The five names come from the K-12 CS Framework and Michigan adopted the CSTA standards; Michigan does print them, which is what separates this case from the arts one, where the authored vocabulary appears nowhere in Michigan's text."
+    },
+    {
+      "course_id": "ma-g4-tech-cs",
+      "grade": 4,
+      "subject": "technology",
+      "code_or_strand": "Michigan Computer Science: Impacts of Computing",
+      "citation_count": 18,
+      "unit_numbers": [
+        1,
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "fe3bf3457af2b8a337b25ba2742d975940fa11971ad83ef2e7e6adfbfea24676",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S4-cs-core-concept-alias",
+      "official_anchor": {
+        "doc_id": "mde-cs-2019",
+        "locator": "PDF p. 6, Core Concepts figure",
+        "quote": "Impacts of Computing"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-cs-2019",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Michigan organises CS by level, not grade: Level 1B is Upper Elementary, Grades 3-5, so Grade 3 and Grade 4 share the band. 21 Level 1B identifiers exist (e.g. 1B-AP-08, 1B-AP-09, 1B-AP-10) and none is cited. The five Core Concept names appear only in the Core Concepts figure, not as section headings. The five names come from the K-12 CS Framework and Michigan adopted the CSTA standards; Michigan does print them, which is what separates this case from the arts one, where the authored vocabulary appears nowhere in Michigan's text."
+    },
+    {
+      "course_id": "ma-g4-tech-cs",
+      "grade": 4,
+      "subject": "technology",
+      "code_or_strand": "Michigan Computer Science: Networks and the Internet",
+      "citation_count": 6,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_id_set_sha256": "5fe95c8a9c1a35111b20ba8d71a3595bc309aea85c95484bbdf91adccf195afe",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S4-cs-core-concept-alias",
+      "official_anchor": {
+        "doc_id": "mde-cs-2019",
+        "locator": "PDF p. 6, Core Concepts figure",
+        "quote": "Networks and the Internet"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-cs-2019",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Michigan organises CS by level, not grade: Level 1B is Upper Elementary, Grades 3-5, so Grade 3 and Grade 4 share the band. 21 Level 1B identifiers exist (e.g. 1B-AP-08, 1B-AP-09, 1B-AP-10) and none is cited. The five Core Concept names appear only in the Core Concepts figure, not as section headings. The five names come from the K-12 CS Framework and Michigan adopted the CSTA standards; Michigan does print them, which is what separates this case from the arts one, where the authored vocabulary appears nowhere in Michigan's text."
+    }
+  ]
+}

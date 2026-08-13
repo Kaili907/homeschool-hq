@@ -1,0 +1,384 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g3-health",
+  "grade": 3,
+  "subject": "health",
+  "source_artifact": "curriculum-release-normalization/g34-r2/standards/courses/ma-g3-health.standards.json",
+  "official_source_claimed_by_release": "Michigan Health Education Standards Guidelines 2025 (MDE), grade span 3-5",
+  "citations_total": 120,
+  "distinct_total": 13,
+  "citation_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 78,
+    "COMPOSITE_VERIFIED": 36,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 6
+  },
+  "distinct_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 6,
+    "COMPOSITE_VERIFIED": 6,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 1
+  },
+  "citations": [
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Practice 1: Self-Awareness and Analyzing Influences",
+      "citation_count": 12,
+      "unit_numbers": [
+        2,
+        3
+      ],
+      "lesson_id_set_sha256": "0f2fa6fc35c37dfabc1aeb43833ff92fd2ca9de34947513140773c360cba5461",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S1-health-practice-alias",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF pp. 8-11, Practices for Comprehensive Health Education",
+        "quote": "Practice 1: Self-Awareness and Analyzing Influences"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "The 2025 guidelines are organised by grade span, so Grade 3 and Grade 4 both sit in the 3-5 band; no Grade-3-only or Grade-4-only health standard exists. Indicator codes do exist for the band ([5.1.MEH], [5.2.BEPA], [5.2.HR], ...) and none is cited."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Practice 2: Social Awareness, Relationship, and Communication Skills",
+      "citation_count": 12,
+      "unit_numbers": [
+        3,
+        4
+      ],
+      "lesson_id_set_sha256": "759e42d8071c8ed2ba34f0e71eb7744887a807aa5a11c0904f150ab442582a83",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S1-health-practice-alias",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF pp. 8-11, Practices for Comprehensive Health Education",
+        "quote": "Practice 2: Social Awareness, Relationship, and Communication Skills"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "The 2025 guidelines are organised by grade span, so Grade 3 and Grade 4 both sit in the 3-5 band; no Grade-3-only or Grade-4-only health standard exists. Indicator codes do exist for the band ([5.1.MEH], [5.2.BEPA], [5.2.HR], ...) and none is cited."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Practice 3: Information and Resource Seeking",
+      "citation_count": 18,
+      "unit_numbers": [
+        1,
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "1758c959195815ad0c69269a8305abce101a08c09cac4e0760941643b54f85c6",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S1-health-practice-alias",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF pp. 8-11, Practices for Comprehensive Health Education",
+        "quote": "Practice 3: Information and Resource Seeking"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "The 2025 guidelines are organised by grade span, so Grade 3 and Grade 4 both sit in the 3-5 band; no Grade-3-only or Grade-4-only health standard exists. Indicator codes do exist for the band ([5.1.MEH], [5.2.BEPA], [5.2.HR], ...) and none is cited."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Practice 4: Decision Making and Problem Solving",
+      "citation_count": 12,
+      "unit_numbers": [
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "ff545be66e9ea81abc592a74f2c3b8d1f99bcf00b618b420d31c889159f8504d",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S1-health-practice-alias",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF pp. 8-11, Practices for Comprehensive Health Education",
+        "quote": "Practice 4: Decision Making and Problem Solving"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "The 2025 guidelines are organised by grade span, so Grade 3 and Grade 4 both sit in the 3-5 band; no Grade-3-only or Grade-4-only health standard exists. Indicator codes do exist for the band ([5.1.MEH], [5.2.BEPA], [5.2.HR], ...) and none is cited."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Practice 5: Self-Management and Goal Setting",
+      "citation_count": 12,
+      "unit_numbers": [
+        1,
+        2
+      ],
+      "lesson_id_set_sha256": "5ca358e4664367aeb6bb58c8ad0364a5d28c84c39f7cf6ea807c4c7e31f18347",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S1-health-practice-alias",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF pp. 8-11, Practices for Comprehensive Health Education",
+        "quote": "Practice 5: Self-Management and Goal Setting"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "The 2025 guidelines are organised by grade span, so Grade 3 and Grade 4 both sit in the 3-5 band; no Grade-3-only or Grade-4-only health standard exists. Indicator codes do exist for the band ([5.1.MEH], [5.2.BEPA], [5.2.HR], ...) and none is cited."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Practice 6: Advocacy and Health Promotion",
+      "citation_count": 12,
+      "unit_numbers": [
+        4,
+        6
+      ],
+      "lesson_id_set_sha256": "0aa12dc103830e3856b13923d37ca77449cbcdb71fe5cb92c3618491ffc3c43c",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S1-health-practice-alias",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF pp. 8-11, Practices for Comprehensive Health Education",
+        "quote": "Practice 6: Advocacy and Health Promotion"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "The 2025 guidelines are organised by grade span, so Grade 3 and Grade 4 both sit in the 3-5 band; no Grade-3-only or Grade-4-only health standard exists. Indicator codes do exist for the band ([5.1.MEH], [5.2.BEPA], [5.2.HR], ...) and none is cited."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Balanced Eating and Physical Activity",
+      "citation_count": 6,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_id_set_sha256": "0b2aa4878a4247c8f3f12f8d585ab005a750d4e0b2e5a4e8a959b81d3df23cbd",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "COMPOSITE_VERIFIED",
+      "rule_id": "S2-health-topic-composite",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF p. 12 topic list; PDF p. 2/19/32 grade span heading",
+        "quote": "Balanced Eating and Physical Activity [BEPA]  +  Grade Span: 3-5 (by the end of Grade 5)"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Grade span and topic each verify; the combined label is house form."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Community and Environmental Health",
+      "citation_count": 6,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_id_set_sha256": "a5aec824c896f0ef3fe95bce6f94d223ebf894f9760994d7b8df23efab1e2308",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "COMPOSITE_VERIFIED",
+      "rule_id": "S2-health-topic-composite",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF p. 12 topic list; PDF p. 2/19/32 grade span heading",
+        "quote": "Community and Environmental Health [CEH]  +  Grade Span: 3-5 (by the end of Grade 5)"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Grade span and topic each verify; the combined label is house form."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Healthy Relationships",
+      "citation_count": 6,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_id_set_sha256": "2b841f14e9ab873b6a62846d8968bbaa8c9da32b69efb5003529bea7b0435204",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "COMPOSITE_VERIFIED",
+      "rule_id": "S2-health-topic-composite",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF p. 12 topic list; PDF p. 2/19/32 grade span heading",
+        "quote": "Healthy Relationships [HR]  +  Grade Span: 3-5 (by the end of Grade 5)"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Grade span and topic each verify; the combined label is house form."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Mental and Emotional Health",
+      "citation_count": 6,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_id_set_sha256": "e89acc7e696320b894fca54cfc74dc451c8e559647b60610a1a777a1e2aa5dc6",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "COMPOSITE_VERIFIED",
+      "rule_id": "S2-health-topic-composite",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF p. 12 topic list; PDF p. 2/19/32 grade span heading",
+        "quote": "Mental and Emotional Health [MEH]  +  Grade Span: 3-5 (by the end of Grade 5)"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Grade span and topic each verify; the combined label is house form."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Personal Health and Wellness",
+      "citation_count": 6,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_id_set_sha256": "c12057c885e6d8c40ff7cea4198ee0b1d46d6f1da122ebe651713ca3529b0b77",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "COMPOSITE_VERIFIED",
+      "rule_id": "S2-health-topic-composite",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF p. 12 topic list; PDF p. 2/19/32 grade span heading",
+        "quote": "Personal Health and Wellness [PHW]  +  Grade Span: 3-5 (by the end of Grade 5)"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Grade span and topic each verify; the combined label is house form."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Safety and Injury Prevention",
+      "citation_count": 6,
+      "unit_numbers": [
+        5
+      ],
+      "lesson_id_set_sha256": "a6c56ae80a501d8e08d192a3e14dc4720f065d8e68c817ea5d1d9f879945278c",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S2-health-topic-composite",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF p. 12 topic list",
+        "quote": "Balanced Eating and Physical Activity [BEPA]; Community and Environmental Health [CEH]; Healthy Relationships [HR]; Mental and Emotional Health [MEH]; Personal Health and Wellness [PHW]; Safety [SAF]; Sex Education [SE]; Substance Use and Misuse [SU]"
+      },
+      "divergence": {
+        "official": "Safety",
+        "authored": "Safety and Injury Prevention",
+        "diff": [
+          {
+            "op": "insert",
+            "official": "",
+            "authored": "and Injury Prevention"
+          }
+        ]
+      },
+      "authority": "contested",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "The document's topic list is exactly: Balanced Eating and Physical Activity; Community and Environmental Health; Healthy Relationships; Mental and Emotional Health; Personal Health and Wellness; Safety; Sex Education; Substance Use and Misuse. The authored label is not on it."
+    },
+    {
+      "course_id": "ma-g3-health",
+      "grade": 3,
+      "subject": "health",
+      "code_or_strand": "Michigan Health Topic (Grades 3-5): Substance Use and Misuse",
+      "citation_count": 6,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_id_set_sha256": "a5aec824c896f0ef3fe95bce6f94d223ebf894f9760994d7b8df23efab1e2308",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "COMPOSITE_VERIFIED",
+      "rule_id": "S2-health-topic-composite",
+      "official_anchor": {
+        "doc_id": "mde-health-2025",
+        "locator": "PDF p. 12 topic list; PDF p. 2/19/32 grade span heading",
+        "quote": "Substance Use and Misuse [SU]  +  Grade Span: 3-5 (by the end of Grade 5)"
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-health-2025",
+      "grade_resolution": "grade-band-3-5",
+      "exact_grade_codes_available": false,
+      "notes": "Grade span and topic each verify; the combined label is house form."
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "source_artifact": "curriculum-release-normalization/g34-r2/standards/courses/ma-g3-financial-literacy.standards.json",
+  "official_source_claimed_by_release": null,
+  "citations_total": 144,
+  "distinct_total": 9,
+  "citation_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 0,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 108,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 36
+  },
+  "distinct_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 0,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 8,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 1
+  },
+  "citations": [
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Grade 3 economics and mathematics connections",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "9d13aac80eb7b7b9e151f080e98a765849565135b59436174eb8f47f0ee7ee2e",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S8-financial-literacy-progression",
+      "official_anchor": {
+        "doc_id": "mde-social-studies",
+        "locator": "Grade 3 and Grade 4 economics expectations",
+        "quote": "3 – E1.0.1; 3 – E1.0.2; 3 – E1.0.3; ..."
+      },
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": "mde-social-studies",
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Names no framework and no code, so it claims nothing. Recorded because an official elementary anchor does exist and is unused: Michigan publishes 10 Grade 3 and 9 Grade 4 economics expectations in the Social Studies standards. Using them would make this course Michigan-anchored through Social Studies Economics, not through Personal Finance."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing",
+      "citation_count": 6,
+      "unit_numbers": [
+        1
+      ],
+      "lesson_id_set_sha256": "2abd3550af7e0d13047418167c55b9c9160f0b9632048b6b574829fc03d0a37f",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S6-manuel-academy-local",
+      "official_anchor": null,
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": null,
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Manuel Academy elementary progression choice. No Michigan authority claimed."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 2 — earning and work",
+      "citation_count": 6,
+      "unit_numbers": [
+        2
+      ],
+      "lesson_id_set_sha256": "083c543fd40544fa5a14f93d438259df748358943348eee53dea0ab4909cfcc5",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S6-manuel-academy-local",
+      "official_anchor": null,
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": null,
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Manuel Academy elementary progression choice. No Michigan authority claimed."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 3 — spending and comparing",
+      "citation_count": 6,
+      "unit_numbers": [
+        3
+      ],
+      "lesson_id_set_sha256": "d2308d81b251cfde43a184a89e4c378ab64a78fb9507b6abd46c2e869348964b",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S6-manuel-academy-local",
+      "official_anchor": null,
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": null,
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Manuel Academy elementary progression choice. No Michigan authority claimed."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 4 — saving and goals",
+      "citation_count": 6,
+      "unit_numbers": [
+        4
+      ],
+      "lesson_id_set_sha256": "bbc0c21949265d50fbb4d5c811fa2968b0c99b04fdb01747323ff419a7198b48",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S6-manuel-academy-local",
+      "official_anchor": null,
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": null,
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Manuel Academy elementary progression choice. No Michigan authority claimed."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 5 — money tools, privacy, and advertising",
+      "citation_count": 6,
+      "unit_numbers": [
+        5
+      ],
+      "lesson_id_set_sha256": "b480e85d7352fa3c1d4cca1bfc4d849ddd43751012f478b9beb572b09ec09b2a",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S6-manuel-academy-local",
+      "official_anchor": null,
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": null,
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Manuel Academy elementary progression choice. No Michigan authority claimed."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Manuel Academy Financial Literacy G3 Unit 6 — simulated market capstone",
+      "citation_count": 6,
+      "unit_numbers": [
+        6
+      ],
+      "lesson_id_set_sha256": "bb1da7688938ed536317777a0985218524a3c2edbb61d8ddb13e525385a59fbb",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S6-manuel-academy-local",
+      "official_anchor": null,
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": null,
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Manuel Academy elementary progression choice. No Michigan authority claimed."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "9d13aac80eb7b7b9e151f080e98a765849565135b59436174eb8f47f0ee7ee2e",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "LOCAL_COMPOSITION",
+      "rule_id": "S6-manuel-academy-local",
+      "official_anchor": null,
+      "divergence": null,
+      "authority": "manuel-academy",
+      "official_document": null,
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Manuel Academy elementary progression choice. No Michigan authority claimed."
+    },
+    {
+      "course_id": "ma-g3-financial-literacy",
+      "grade": 3,
+      "subject": "financial-literacy",
+      "code_or_strand": "Michigan Personal Finance foundations — introductory",
+      "citation_count": 36,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "lesson_id_set_sha256": "9d13aac80eb7b7b9e151f080e98a765849565135b59436174eb8f47f0ee7ee2e",
+      "release_mapping_status": "human-review",
+      "release_derivation_rule": "R3-financial-literacy-gap-1",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S7-financial-literacy-no-elementary-standard",
+      "official_anchor": {
+        "doc_id": "mde-personal-finance",
+        "locator": "PDF p. 1 title, PDF p. 2 expectations",
+        "quote": "Personal Finance 9 – 12 CONTENT EXPECTATIONS: PF1, PF2, PF3, PF4, PF5, PF6, PF7"
+      },
+      "divergence": null,
+      "authority": "contested",
+      "official_document": "mde-personal-finance",
+      "grade_resolution": "not-applicable",
+      "exact_grade_codes_available": false,
+      "notes": "Michigan's personal-finance framework is Grades 9-12 (PF1-PF7). The held document mentions Grade 3 0 times and Grade 4 0 times. This citation attributes a Michigan personal-finance foundation to Grades 3/4, where Michigan publishes none. A convergence-time policy decision is required; this session will not manufacture the authority."
+    }
+  ]
+}

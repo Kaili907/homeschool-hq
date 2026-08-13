@@ -1,0 +1,107 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "scope": "Grade 3/4 specialty subjects: health, physical education, technology/computer science, arts/music, financial literacy, ready for life (12 courses).",
+  "citations_total": 1854,
+  "citation_records": 104,
+  "distinct_citation_strings_across_package": 68,
+  "by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 534,
+    "COMPOSITE_VERIFIED": 72,
+    "LOCAL_COMPOSITION": 432,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 816
+  },
+  "verified_total": 606,
+  "local_composition_total": 432,
+  "unresolved_total": 816,
+  "by_subject": {
+    "health": {
+      "citations": 246,
+      "distinct": 26,
+      "by_class": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 162,
+        "COMPOSITE_VERIFIED": 72,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 12
+      }
+    },
+    "physical-education": {
+      "citations": 540,
+      "distinct": 10,
+      "by_class": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 252,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 288
+      }
+    },
+    "technology": {
+      "citations": 120,
+      "distinct": 10,
+      "by_class": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 120,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 0
+      }
+    },
+    "arts-and-music": {
+      "citations": 372,
+      "distinct": 22,
+      "by_class": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 372
+      }
+    },
+    "financial-literacy": {
+      "citations": 288,
+      "distinct": 18,
+      "by_class": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 72
+      }
+    },
+    "ready-for-life": {
+      "citations": 288,
+      "distinct": 18,
+      "by_class": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 72
+      }
+    }
+  },
+  "by_grade_resolution": {
+    "exact-grade-available-not-used": 912,
+    "not-applicable": 588,
+    "grade-band-3-5": 354
+  },
+  "by_authority_asserted": {
+    "contested": 816,
+    "manuel-academy": 432,
+    "michigan-mde": 606
+  },
+  "release_mapping_status_before": {
+    "human-review": 576,
+    "unverified": 1278
+  }
+}

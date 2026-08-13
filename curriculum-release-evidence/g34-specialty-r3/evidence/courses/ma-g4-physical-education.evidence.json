@@ -1,0 +1,212 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "course_id": "ma-g4-physical-education",
+  "grade": 4,
+  "subject": "physical-education",
+  "source_artifact": "curriculum-release-normalization/g34-r2/standards/courses/ma-g4-physical-education.standards.json",
+  "official_source_claimed_by_release": "Michigan K-12 Physical Education Standards, adopted 2017 (MDE)",
+  "citations_total": 276,
+  "distinct_total": 5,
+  "citation_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 132,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 144
+  },
+  "distinct_counts_by_class": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 2,
+    "COMPOSITE_VERIFIED": 0,
+    "LOCAL_COMPOSITION": 0,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 3
+  },
+  "citations": [
+    {
+      "course_id": "ma-g4-physical-education",
+      "grade": 4,
+      "subject": "physical-education",
+      "code_or_strand": "Michigan PE Standard 1: Demonstrates competency in a variety of motor skills and movement patterns",
+      "citation_count": 84,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "lesson_id_set_sha256": "fa0716f25758fc026ca77de8c1f228aff0718e8a0ebbbf1d274a8ff96c1a5e5f",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S3-pe-standard-alias",
+      "official_anchor": {
+        "doc_id": "mde-pe-2017",
+        "locator": "PDF pp. 21-30, Grades 3, 4, and 5",
+        "quote": "Standard 1: Demonstrates competency in a variety of motor skills and movement patterns."
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-pe-2017",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "Michigan prints per-grade outcome codes for Grades 3 and 4 (119 of them, e.g. (S1.1.3), (S1.1.4), (S1.10.3)). The citation anchors at the standard level only, which is grade-agnostic."
+    },
+    {
+      "course_id": "ma-g4-physical-education",
+      "grade": 4,
+      "subject": "physical-education",
+      "code_or_strand": "Michigan PE Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+      "citation_count": 96,
+      "unit_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ],
+      "lesson_id_set_sha256": "4fc4cecaeb4825e389550dcdedcce103d5e56020eca670124ae8cf685d0f305d",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S3-pe-standard-alias",
+      "official_anchor": {
+        "doc_id": "mde-pe-2017",
+        "locator": "PDF pp. 21-30, Grades 3, 4, and 5",
+        "quote": "Standard 2: Applies knowledge of concepts, principles, strategies and tactics related to movement and performance."
+      },
+      "divergence": {
+        "official": "Applies knowledge of concepts, principles, strategies and tactics related to movement and performance.",
+        "authored": "Applies knowledge of concepts, principles, strategies and tactics related to movement and physical activities",
+        "diff": [
+          {
+            "op": "replace",
+            "official": "performance",
+            "authored": "physical activities"
+          }
+        ]
+      },
+      "authority": "contested",
+      "official_document": "mde-pe-2017",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "Standard 2 exists and is correctly numbered; the label text attributed to Michigan is not the text Michigan prints."
+    },
+    {
+      "course_id": "ma-g4-physical-education",
+      "grade": 4,
+      "subject": "physical-education",
+      "code_or_strand": "Michigan PE Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+      "citation_count": 12,
+      "unit_numbers": [
+        8
+      ],
+      "lesson_id_set_sha256": "09878468b4ccd06f0e46d41c5a4acad56a1e2fdf29b3d426b12a0b31a99524b3",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S3-pe-standard-alias",
+      "official_anchor": {
+        "doc_id": "mde-pe-2017",
+        "locator": "PDF pp. 21-30, Grades 3, 4, and 5",
+        "quote": "Standard 3: Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical activity and fitness."
+      },
+      "divergence": {
+        "official": "Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical activity and fitness.",
+        "authored": "Demonstrates the knowledge and skills to achieve and maintain a health-enhanced level of physical fitness",
+        "diff": [
+          {
+            "op": "replace",
+            "official": "health-enhancing",
+            "authored": "health-enhanced"
+          },
+          {
+            "op": "delete",
+            "official": "activity and",
+            "authored": ""
+          }
+        ]
+      },
+      "authority": "contested",
+      "official_document": "mde-pe-2017",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "Standard 3 exists and is correctly numbered; the label text attributed to Michigan is not the text Michigan prints."
+    },
+    {
+      "course_id": "ma-g4-physical-education",
+      "grade": 4,
+      "subject": "physical-education",
+      "code_or_strand": "Michigan PE Standard 4: Exhibits responsible personal and social behavior that respects self and others",
+      "citation_count": 48,
+      "unit_numbers": [
+        1,
+        3,
+        5,
+        9
+      ],
+      "lesson_id_set_sha256": "4af4ceb2dd36be2302d76ce8710f70a790e727b2722f4e6c67505255003ca949",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "ALIAS_RESOLVED_VERBATIM",
+      "rule_id": "S3-pe-standard-alias",
+      "official_anchor": {
+        "doc_id": "mde-pe-2017",
+        "locator": "PDF pp. 21-30, Grades 3, 4, and 5",
+        "quote": "Standard 4: Exhibits responsible personal and social behavior that respects self and others."
+      },
+      "divergence": null,
+      "authority": "michigan-mde",
+      "official_document": "mde-pe-2017",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "Michigan prints per-grade outcome codes for Grades 3 and 4 (119 of them, e.g. (S1.1.3), (S1.1.4), (S1.10.3)). The citation anchors at the standard level only, which is grade-agnostic."
+    },
+    {
+      "course_id": "ma-g4-physical-education",
+      "grade": 4,
+      "subject": "physical-education",
+      "code_or_strand": "Michigan PE Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+      "citation_count": 36,
+      "unit_numbers": [
+        7,
+        8,
+        9
+      ],
+      "lesson_id_set_sha256": "6e407388a3258ce66570f1d48f5f154eb7f55f4d627a58607c55d3b9b5a22062",
+      "release_mapping_status": "unverified",
+      "release_derivation_rule": "R5-source-cited-code-unconfirmed",
+      "evidence_class": "HUMAN_REVIEW_REQUIRED",
+      "rule_id": "S3-pe-standard-alias",
+      "official_anchor": {
+        "doc_id": "mde-pe-2017",
+        "locator": "PDF pp. 21-30, Grades 3, 4, and 5",
+        "quote": "Standard 5: Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction."
+      },
+      "divergence": {
+        "official": "Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.",
+        "authored": "Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or other benefits",
+        "diff": [
+          {
+            "op": "replace",
+            "official": "social interaction",
+            "authored": "other benefits"
+          }
+        ]
+      },
+      "authority": "contested",
+      "official_document": "mde-pe-2017",
+      "grade_resolution": "exact-grade-available-not-used",
+      "exact_grade_codes_available": true,
+      "notes": "Standard 5 exists and is correctly numbered; the label text attributed to Michigan is not the text Michigan prints."
+    }
+  ]
+}

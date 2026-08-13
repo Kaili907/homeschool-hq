@@ -1,0 +1,101 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "status": "G34_SPECIALTY_STANDARDS_EVIDENCE_READY",
+  "built": "2026-08-12",
+  "input_release": {
+    "release_id": "manuel-academy-grades-3-4-r2-normalized",
+    "path": "curriculum-release-normalization/g34-r2",
+    "sha256sums_sha256": "7053e78c531447c4131503438bfd7a6c9505709d752d0f398293365af7412008",
+    "read_only": true,
+    "lessons_edited": 0
+  },
+  "scope": {
+    "grades": [
+      3,
+      4
+    ],
+    "courses": [
+      "ma-g3-health",
+      "ma-g4-health",
+      "ma-g3-physical-education",
+      "ma-g4-physical-education",
+      "ma-g3-tech-cs",
+      "ma-g4-tech-cs",
+      "ma-g3-arts-music",
+      "ma-g4-arts-music",
+      "ma-g3-financial-literacy",
+      "ma-g4-financial-literacy",
+      "ma-g3-ready-for-life",
+      "ma-g4-ready-for-life"
+    ],
+    "subjects": [
+      "health",
+      "physical-education",
+      "technology",
+      "arts-and-music",
+      "financial-literacy",
+      "ready-for-life"
+    ]
+  },
+  "counts": {
+    "citations_total": 1854,
+    "citation_records": 104,
+    "distinct_citation_strings_across_package": 68,
+    "by_class": {
+      "VERBATIM_VERIFIED": 0,
+      "ALIAS_RESOLVED_VERBATIM": 534,
+      "COMPOSITE_VERIFIED": 72,
+      "LOCAL_COMPOSITION": 432,
+      "UNVERIFIED": 0,
+      "HUMAN_REVIEW_REQUIRED": 816
+    },
+    "verified_total": 606,
+    "local_composition_total": 432,
+    "unresolved_total": 816
+  },
+  "documents_in_custody": [
+    {
+      "doc_id": "mde-health-2025",
+      "sha256": "e64744d56ba3ba36b968012995f9fed259f74efbb49fbfc91075be8b16defee4",
+      "bytes": 715062,
+      "pages": 70
+    },
+    {
+      "doc_id": "mde-pe-2017",
+      "sha256": "88ab7e08a6611015674ebf97e67a7e8ba0aabb9138b9376bf70adecd9018d93c",
+      "bytes": 700543,
+      "pages": 45
+    },
+    {
+      "doc_id": "mde-cs-2019",
+      "sha256": "62bedb9e798a0ebb387dbbeafefc1f926c745df1dd564e4b67b41385e0392c3d",
+      "bytes": 1105556,
+      "pages": 32
+    },
+    {
+      "doc_id": "mde-arts-glce",
+      "sha256": "f52e0506e30a2277991ae4cebfe75ce157ca0cc3d6ba2b833e15ee8fd9113f2b",
+      "bytes": 723672,
+      "pages": 64
+    },
+    {
+      "doc_id": "mde-vpaa-2011",
+      "sha256": "330ca531c64200c0ec5e7bc18083cb76e6eb2c57a21fbe3de25c2d29bcfe845c",
+      "bytes": 368220,
+      "pages": 111
+    },
+    {
+      "doc_id": "mde-personal-finance",
+      "sha256": "ff97640535d7864de8d3333669a5f8d8ab8134ebfa0af5f9f938cf2e91ab2735",
+      "bytes": 537595,
+      "pages": 2
+    },
+    {
+      "doc_id": "mde-social-studies",
+      "sha256": "bba06f46bb241ae3cdd698caaeb41baa3c976d96176fef0a9d594a7e98e70b96",
+      "bytes": 1527644,
+      "pages": 147
+    }
+  ],
+  "boundary": "Writes only under curriculum-release-evidence/g34-specialty-r3/."
+}

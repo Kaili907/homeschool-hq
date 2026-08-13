@@ -1,0 +1,68 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "findings": [
+    {
+      "id": "F1-arts-wrong-framework",
+      "severity": "high",
+      "subject": "arts-and-music",
+      "citations_affected": 372,
+      "summary": "Every Grade 3/4 arts citation labels National Core Arts Standards process vocabulary as Michigan.",
+      "evidence": "Creating / Performing / Presenting / Producing / Responding / Connecting never appear as a capitalised standard or process name in either held Michigan arts document ({\"Connecting\": 0, \"Creating\": 0, \"Performing\": 0, \"Presenting\": 0, \"Producing\": 0, \"Responding\": 0}); they appear only in lower-case prose ({\"Connecting\": 0, \"Creating\": 22, \"Performing\": 20, \"Presenting\": 8, \"Producing\": 4, \"Responding\": 6}). Michigan's five standards are PERFORM, CREATE, ANALYZE, ANALYZE IN CONTEXT, ANALYZE AND MAKE CONNECTIONS, and Michigan prints 186 exact-grade expectations for Grades 3 and 4 across all four disciplines (D 53, M 57, T 32, VA 44).",
+      "decision_needed": "Either recite Michigan's own standard names and Grade 3/4 codes, or keep the artistic-process framing and disclose it as a non-Michigan framework. Not a lesson edit - a standards-label decision."
+    },
+    {
+      "id": "F2-pe-label-text-diverges",
+      "severity": "high",
+      "subject": "physical-education",
+      "citations_affected": 288,
+      "summary": "PE Standards 2, 3 and 5 are cited with text Michigan does not print.",
+      "evidence": "Standard 2 official: 'Applies knowledge of concepts, principles, strategies and tactics related to movement and performance.'; Standard 3 official: 'Demonstrates the knowledge and skills to achieve and maintain a health-enhancing level of physical activity and fitness.'; Standard 5 official: 'Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and/or social interaction.'",
+      "decision_needed": "Correct the three labels to the printed text, or record that the labels are paraphrase. Standards 1 and 4 are verbatim and unaffected."
+    },
+    {
+      "id": "F3-financial-literacy-michigan-attribution",
+      "severity": "high",
+      "subject": "financial-literacy",
+      "citations_affected": 72,
+      "summary": "'Michigan Personal Finance foundations - introductory' attributes a Michigan framework to Grades 3/4.",
+      "evidence": "Michigan's personal-finance document is titled 'Personal Finance 9 - 12 Content Expectations' and defines PF1-PF7 only. It never mentions Grade 3 or Grade 4. The available official elementary anchor is Social Studies Economics (3 - E1.0.1 ... , 4 - E1.0.2 ...), a different subject.",
+      "decision_needed": "Gap 1 of the release standards reference is still open and this is the citation that pre-empts it. Decide Social Studies Economics, a disclosed non-Michigan framework, or an explicit no-standard label."
+    },
+    {
+      "id": "F4-ready-for-life-michigan-string",
+      "severity": "medium",
+      "subject": "ready-for-life",
+      "citations_affected": 72,
+      "summary": "'Michigan Health/SEL connections' is the one string that puts Michigan's name on a Ready for Life lesson.",
+      "evidence": "Ready for Life has no Michigan framework. The string names no Practice, Topic, indicator or SEL competency. Every other Ready for Life citation is correctly a Manuel Academy local composition.",
+      "decision_needed": "Drop the Michigan wording or replace it with a real Health Practice / Topic anchor from the 3-5 band."
+    },
+    {
+      "id": "F5-health-safety-topic-name",
+      "severity": "medium",
+      "subject": "health",
+      "citations_affected": 12,
+      "summary": "The health topic is cited as 'Safety and Injury Prevention'; Michigan's topic is 'Safety' [SAF].",
+      "evidence": "'Injury Prevention' occurs 0 times in the 2025 guidelines. The document's topic list is: Balanced Eating and Physical Activity; Community and Environmental Health; Healthy Relationships; Mental and Emotional Health; Personal Health and Wellness; Safety; Sex Education; Substance Use and Misuse.",
+      "decision_needed": "Rename the anchor to the printed topic. The other six topics verify."
+    },
+    {
+      "id": "F6-gap-4-computer-science-closed",
+      "severity": "resolved",
+      "subject": "technology",
+      "citations_affected": 120,
+      "summary": "The release's Gap 4 (computer science currency unconfirmed) is closed in favour of the lane.",
+      "evidence": "The live MDE computer science page serves the May 2019 document held here. The 'archive' page the earlier session flagged is an archive of public information session presentations, not of superseded standards. All five authored strand labels are the Core Concept names Michigan prints. Michigan adopted the CSTA standards and the names originate in the K-12 CS Framework - but unlike the arts case, Michigan's own adopted document does print them, which is why these resolve and the arts labels do not.",
+      "decision_needed": "None. Level 1B (Grades 3-5) identifiers exist and are still uncited, which is a granularity choice, not a currency problem."
+    },
+    {
+      "id": "F7-source-retrieval-claim-was-wrong",
+      "severity": "resolved",
+      "subject": "all",
+      "citations_affected": 1854,
+      "summary": "The input release's premise - that michigan.gov cannot be fetched and that no PDF code could be transcribed - does not hold.",
+      "evidence": "Seven official documents were fetched directly from michigan.gov on 2026-08-12 with a desktop User-Agent and are held here by SHA256. That is why this package can classify 0 citations as UNVERIFIED where the release classified 1278.",
+      "decision_needed": "The other subject lanes (science, social studies, mathematics, ELA) inherit the same wrong premise and can be resolved the same way. Out of scope here."
+    }
+  ]
+}

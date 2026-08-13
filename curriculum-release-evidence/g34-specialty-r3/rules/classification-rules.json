@@ -1,0 +1,59 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "classes": {
+    "VERBATIM_VERIFIED": "The citation string in full appears verbatim in the cited official document.",
+    "ALIAS_RESOLVED_VERBATIM": "The citation is a house-prefixed form of one official element; strip the documented prefix and the remainder is verbatim official text, and the prefix's numbering resolves to the document's own numbering.",
+    "COMPOSITE_VERIFIED": "The citation combines two or more separately verified official elements into a string that appears nowhere verbatim.",
+    "LOCAL_COMPOSITION": "A Manuel Academy curricular anchor. Asserts no state authority. A positive classification, not a failure to verify.",
+    "UNVERIFIED": "An official source is named but the exact code or text was not confirmed against the document.",
+    "HUMAN_REVIEW_REQUIRED": "The citation asserts an authority the held document does not support - divergent text, a different framework, or no elementary standard at all. A human must decide; this session will not decide by inventing."
+  },
+  "method": "Each rule is executed, not asserted: the authored string is compared against text extracted from the held PDF during this build. See tools/build-evidence.py.",
+  "rules": [
+    {
+      "id": "S1-health-practice-alias",
+      "subject": "health",
+      "statement": "'Michigan Health Practice <n>: <name>' resolves to ALIAS_RESOLVED_VERBATIM when <name> is byte-equal (whitespace-normalized) to the name printed for Practice <n> on pp. 8-11 of mde-health-2025. The 'Michigan Health Practice' prefix is Manuel Academy house form; the document prints 'Practice <n>:'."
+    },
+    {
+      "id": "S2-health-topic-composite",
+      "subject": "health",
+      "statement": "'Michigan Health Topic (Grades 3-5): <topic>' resolves to COMPOSITE_VERIFIED when both components verify independently: the grade span 'Grade Span: 3-5 (by the end of Grade 5)' and the topic name in the topic list on p. 12. The combined string appears nowhere in the document, so it is composite, not verbatim. A topic name the document does not print is HUMAN_REVIEW_REQUIRED."
+    },
+    {
+      "id": "S3-pe-standard-alias",
+      "subject": "physical-education",
+      "statement": "'Michigan PE Standard <n>: <text>' resolves to ALIAS_RESOLVED_VERBATIM when <text> equals the text printed for Standard <n> in the Grades 3, 4, and 5 section (pp. 21-30) of mde-pe-2017, ignoring a trailing period. Any other text is HUMAN_REVIEW_REQUIRED and the divergence is recorded token by token."
+    },
+    {
+      "id": "S4-cs-core-concept-alias",
+      "subject": "technology",
+      "statement": "'Michigan Computer Science: <strand>' resolves to ALIAS_RESOLVED_VERBATIM when <strand> is one of the five Core Concepts printed in the Core Concepts figure on p. 6 of mde-cs-2019."
+    },
+    {
+      "id": "S5-arts-process-not-michigan",
+      "subject": "arts-and-music",
+      "statement": "'Michigan Arts: [<discipline> - ]<process>' is HUMAN_REVIEW_REQUIRED in every case. The process vocabulary used (Creating / Performing / Presenting / Responding / Connecting) is National Core Arts Standards vocabulary and occurs zero times in either held Michigan arts document. Michigan's five standards are PERFORM, CREATE, ANALYZE, ANALYZE IN CONTEXT, and ANALYZE AND MAKE CONNECTIONS. Where the authored process is a morphological variant of a Michigan verb (Creating/CREATE, Performing/PERFORM) that is recorded as a candidate alias for a human to accept or reject - this package does not accept it, because accepting it would be this session inventing the mapping."
+    },
+    {
+      "id": "S6-manuel-academy-local",
+      "subject": "financial-literacy, ready-for-life",
+      "statement": "A citation that names Manuel Academy, a Manuel Academy unit, or a Manuel Academy baseline is LOCAL_COMPOSITION: a Manuel Academy curricular decision carrying no state authority. This is a positive classification, not a failure to verify."
+    },
+    {
+      "id": "S7-financial-literacy-no-elementary-standard",
+      "subject": "financial-literacy",
+      "statement": "A Grade 3/4 financial-literacy citation that names Michigan is HUMAN_REVIEW_REQUIRED. Michigan's only personal-finance standards document is titled 'Personal Finance 9 - 12 Content Expectations' (PF1-PF7). No elementary personal-finance standard exists to resolve against, so the citation asserts an authority the state does not publish."
+    },
+    {
+      "id": "S8-financial-literacy-progression",
+      "subject": "financial-literacy",
+      "statement": "'Grade <n> economics and mathematics connections' names no framework and no code: it is a Manuel Academy elementary progression label, LOCAL_COMPOSITION. Michigan does publish exact-grade economics expectations for both grades (3 - E1.0.1 ... 3 - E3.0.1; 4 - E1.0.2 ... 4 - E3.0.1) in mde-social-studies; none is cited."
+    },
+    {
+      "id": "S9-ready-for-life-no-michigan-authority",
+      "subject": "ready-for-life",
+      "statement": "Ready for Life is a Manuel Academy course with no Michigan framework. A Ready for Life citation that names Michigan is HUMAN_REVIEW_REQUIRED, never a Michigan standard: it resolves to no practice, topic, indicator or competency in any held document."
+    }
+  ]
+}

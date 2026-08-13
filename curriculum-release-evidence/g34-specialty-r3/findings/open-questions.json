@@ -1,0 +1,35 @@
+{
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "open_questions": [
+    {
+      "id": "Q1",
+      "question": "Should the specialty courses cite exact-grade codes rather than band or standard-level anchors?",
+      "state": "open",
+      "detail": "PE prints Grade 3/4 outcome codes (119 of them) and the arts GLCE prints Grade 3/4 expectation codes (186). Health and computer science are genuinely grade-banded (3-5 / Level 1B) and no exact-grade code exists to cite. This package records which is which; it does not choose."
+    },
+    {
+      "id": "Q2",
+      "question": "Are the health guidelines a standard at all?",
+      "state": "open",
+      "detail": "The document is titled 'Standards Guidelines' and the approving press release describes guidance to districts under local control. Calling a citation against it 'a Michigan standard' is stronger than the source supports; this package says 'Michigan Health Education Standards Guidelines 2025, grade span 3-5' and nothing more."
+    },
+    {
+      "id": "Q3",
+      "question": "Does every authored Practice x Topic pairing exist in the 3-5 band?",
+      "state": "open",
+      "detail": "The guidelines pair only some practices with some topics per grade span. The citations name practices and topics separately, so no pairing is asserted and nothing here contradicts the document - but a lane that later writes indicator codes must check the pairing exists."
+    },
+    {
+      "id": "Q4",
+      "question": "Is any of this educator-reviewed?",
+      "state": "open",
+      "detail": "No. Nothing in this package is a licensed-educator review. Verified means the authored string was compared against the official document's bytes."
+    },
+    {
+      "id": "Q5",
+      "question": "Two health PDF filenames are in circulation.",
+      "state": "open",
+      "detail": "The November 2025 press release links '---ADA-Final.pdf'; the Academic Standards index links '---ADA-final-with-edits-12-19-25.pdf'. This package holds the index one. The differences between them were not diffed."
+    }
+  ]
+}
