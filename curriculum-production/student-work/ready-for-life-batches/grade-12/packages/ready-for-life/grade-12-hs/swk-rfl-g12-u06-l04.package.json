@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u06-l04",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Transition-to-Adulthood Capstone",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: contingencies for the parts most likely to fail"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners run a premortem on their own plan from earlier in the unit, identifying the single step most likely to stall and writing a contingency with a clear trigger, so the plan includes a real backup before it is presented and defended.",
+  "scenario": "After walking through a modeled premortem example on a fictional plan, the learner reviews their own plan statement from earlier in the unit, identifies the one step most likely to fail or stall, and writes a contingency with a specific trigger for activating it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This builds directly on the learner's own plan statement from earlier in the unit; no new private disclosure beyond what was already written is required."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided modeled premortem example",
+    "the learner's own plan statement from earlier in this unit"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before running your own premortem, predict which of your three first steps is most fragile.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Before doing the formal exercise, which of your three first steps do you already suspect is the most fragile, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Follow the modeled premortem structure to identify your plan's most likely point of stalling.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I identified the single step of my plan most likely to fail or stall."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I explained specifically why that step, rather than the others, is the weakest."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write the contingency and its trigger.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your 'if this stalls, then\u2014' contingency for that step, with a specific, recognizable trigger for when to activate it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on whether your prediction matched.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Did the formal premortem confirm your warm-up prediction, or reveal a different weak point? What changed your mind, if anything?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the identified weak point is not clearly the actual most fragile step of the plan (for example, an easy one chosen to write about), reteach by having the learner rank all three first steps by likelihood of stalling before selecting the top one.",
+  "extension": "Have the learner write a second contingency for what happens if the 'still deciding among options' direction from the plan statement remains undecided past the stated timeline.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

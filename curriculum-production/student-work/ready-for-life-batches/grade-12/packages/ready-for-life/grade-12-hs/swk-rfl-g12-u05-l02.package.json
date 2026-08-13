@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u05-l02",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Support Networks and Contingency Planning",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: asking for help before a crisis"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners write what an early ask for help would actually sound like across four fictional scenarios at different concern levels, so asking early becomes a rehearsed script rather than something invented under pressure.",
+  "scenario": "Given four fictional scenarios at mild, moderate, moderate-serious, and serious concern levels, the learner writes what an early ask for help would sound like for each, contrasted with what waiting until crisis would look like.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All four scenarios are fictional; no real personal concern needs to be disclosed to complete this lesson.",
+    "This lesson does not diagnose or advise on any real situation \u2014 it practices the wording of an early ask, not the specifics of any real concern."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided four fictional scenarios and concern-level scale"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before writing, guess why people wait too long to ask for help even when they know they should ask sooner.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Why do you think people often wait longer than they should to ask for help, even when part of them knows they should ask sooner?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write an early-ask script for the mild and moderate scenarios.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote an early-ask script for the mild-concern scenario."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote an early-ask script for the moderate-concern scenario."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write early-ask scripts for the moderate-serious and serious scenarios, and contrast one with what waiting would look like.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write early-ask scripts for the remaining two scenarios. Then, for one of the four, write a contrasting sentence showing what it would sound like if the person waited until crisis instead."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your own concern-level threshold.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "At which concern level do you personally tend to actually ask for help \u2014 mild, moderate, or later? Is that where you'd want it to be?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If all four early-ask scripts sound identical regardless of concern level (no difference in urgency or directness), reteach by contrasting a clearly mild-toned ask with a clearly serious-toned ask side by side, then have the learner revise each script to match its actual concern level.",
+  "extension": "Have the learner write a fifth, self-invented scenario at an even higher concern level than the four provided, and write its early-ask script.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

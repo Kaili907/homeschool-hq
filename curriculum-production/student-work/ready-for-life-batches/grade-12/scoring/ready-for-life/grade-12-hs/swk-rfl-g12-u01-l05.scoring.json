@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l05",
+  "lessonId": "ma-g12-ready-for-life-u01-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Checklist specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Most questions are too vague to actually check against (for example, 'is everything fine?')."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Most questions are specific and checkable against the learner's own systems."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The monthly checklist is genuinely distinct from the weekly one rather than a shorter copy of the same questions."
+          }
+        ]
+      },
+      {
+        "dimension": "Real-use honesty",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reflection claims the checklist will definitely be used every week with no acknowledgment of realistic barriers."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reflection honestly assesses how likely real use is and names at least one barrier."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection also proposes a specific, plausible fix for that barrier."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "At least one checklist question was actually revised as a result of the trial run, not left unchanged.",
+      "The monthly checklist is not simply a copy of the weekly one.",
+      "No real personal details from an actual week are required or present."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

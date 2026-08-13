@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u05-l06",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Support Networks and Contingency Planning",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: keeping the plan current and private"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners assemble the week's support-and-contingency artifacts into one plan and set their own privacy level and review date for it, so the plan is something they will actually keep current rather than something built once and forgotten.",
+  "scenario": "The learner compiles their support-network map, early-ask scripts, threshold sorting, urgent-help script, and contingency branch into one personal support-and-contingency plan, decides and records their own chosen privacy level for it (not shared with anyone by default), and sets a specific date to review and update it.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The assembled plan uses role labels, not full names or other identifying details, consistent with how the support-network map was built.",
+    "The learner chooses their own privacy level for this plan; nothing in this lesson requires sharing it with anyone."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the learner's own artifacts from this unit's earlier lessons",
+    "paper or a private notes document"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before assembling, decide who, if anyone, should ever see this plan.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Before you finalize anything, who \u2014 if anyone \u2014 do you want to be able to see this plan, and why that choice?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Assemble the week's artifacts into one plan.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My assembled plan includes the support-network map, early-ask scripts, threshold sorting, and urgent-help script."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My assembled plan includes the contingency branch from the previous lesson."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Record your chosen privacy level and a review date.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "State your chosen privacy level for this plan (for example, 'private, mine only' or 'shared with one specific trusted adult, by role'), and set a specific date to review and update it. Explain why that review date makes sense."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on what would make you actually use it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Honestly, what would make you actually open and update this plan on your chosen review date instead of forgetting about it?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the review date is left vague ('sometime later') rather than a specific date, or if the privacy level is left unstated, reteach by having the learner commit to an actual calendar date and an explicit privacy choice before the lesson is considered complete.",
+  "extension": "Have the learner write one sentence on what would trigger an unscheduled review of this plan \u2014 some change in life circumstances that should prompt an update before the scheduled review date arrives.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

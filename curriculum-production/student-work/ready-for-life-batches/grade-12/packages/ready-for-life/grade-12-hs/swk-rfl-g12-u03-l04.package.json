@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u03-l04",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Workplace Entry and Professional Systems",
+    "dayInUnit": 4,
+    "phase": "Supervised application",
+    "title": "Supervised application: handling conflict or a mistake professionally"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners rehearse reporting a workplace mistake to a supervisor using a structured script, with a trusted adult playing the supervisor role, so owning a mistake professionally feels routine rather than terrifying when it happens for real.",
+  "scenario": "Given a short fictional workplace-mistake scenario (for example, sending something to the wrong recipient, or being late without notice), the learner rehearses reporting it out loud to a trusted adult playing the supervisor, using a three-part structure (what happened, what I'm doing about it, what I need), then revises based on feedback.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "planning page",
+      "written notes",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "No audio or video recording is made; the adult gives live feedback and the learner writes notes afterward.",
+    "The mistake scenario is fictional and does not require the learner to disclose or discuss any real mistake from their own life."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available to role-play the supervisor, the learner writes both sides of the conversation as a short script, then reads only their own side aloud once and self-checks it against the same look-fors."
+  },
+  "materials": [
+    "the provided fictional workplace-mistake scenario",
+    "paper or notes app"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before practicing, write down what makes reporting your own mistake feel harder than reporting someone else's.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What is one reason reporting your own mistake might feel harder than pointing out someone else's?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult playing the supervisor, report the fictional mistake using the three-part structure.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I stated clearly what happened, without minimizing or over-explaining."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I stated what I was already doing about it."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I stated what I needed, if anything, from the supervisor."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Revise your report based on the feedback and write the improved version.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your revised version of the mistake report, and explain what you changed based on the feedback."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on timing.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "In the fictional scenario, would it have been better to report the mistake sooner, and how would you recognize that same moment in a real situation?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's report spends most of its time minimizing or making excuses rather than stating what happened and what's being done, reteach the three-part structure explicitly, modeling one complete example, before the learner retries their own report using that structure.",
+  "extension": "Have the learner practice a second, harder version: reporting a mistake that was only discovered by someone else first, not self-caught, using the same three-part structure adapted for that harder situation.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u02-l03",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Independent Living Simulation",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: home upkeep and knowing when to call a professional"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners practice sorting household-maintenance situations into 'handle it myself,' 'call a professional,' and 'stop and get adult help immediately' so they build the judgment to make that call quickly and safely when it actually matters.",
+  "scenario": "Given twelve provided generic maintenance scenarios (not tied to the learner's real home), the learner sorts each into one of three columns and explains the deciding factor for the two scenarios they found trickiest to sort.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task uses a provided generic list of scenarios, not an inspection of the learner's actual home, and requires no real hazard exposure.",
+    "Anything resembling fire, gas smell, electrical hazard, or a structural concern always sorts into 'stop and get adult help immediately,' with no exception."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided list of twelve maintenance scenarios"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, name what makes a maintenance issue urgent versus routine to you.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In your own words, what's the difference between a household issue that can wait and one that can't?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort all twelve provided scenarios into the three columns.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted all twelve scenarios into one of the three columns."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Every scenario involving fire, gas smell, electrical hazard, or structural concern is in the 'stop and get adult help immediately' column."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Explain the deciding factor for your two trickiest sorting calls.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Pick the two scenarios that were hardest to sort, and explain what specifically made the decision hard and how you resolved it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your own limits.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Is there a type of task you sorted as 'handle it myself' that you're actually not fully confident about? What would you want to learn before doing it for real?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If any hazard-involving scenario (fire, gas, electrical, structural) is sorted anywhere other than 'stop and get adult help immediately,' this must be corrected before the lesson is considered complete \u2014 reteach the non-negotiable hazard list explicitly and have the learner re-sort those items only.",
+  "extension": "Have the learner write one additional scenario of their own invention for each of the three columns, explaining why each belongs where they placed it.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

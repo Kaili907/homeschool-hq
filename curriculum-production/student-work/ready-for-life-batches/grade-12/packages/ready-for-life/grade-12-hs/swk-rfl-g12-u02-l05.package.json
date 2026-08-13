@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u02-l05",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Independent Living Simulation",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: handling a disruption mid-month"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners absorb a single injected disruption into their fictional household simulation and show what specifically had to change, so they practice adapting a plan under pressure rather than only building plans under ideal conditions.",
+  "scenario": "The learner is given one disruption scenario (a fictional appliance breaks, a fictional bill comes in higher than budgeted, or a fictional missed workday) and must revise their household budget and/or meal plan to absorb it, showing exactly what was cut, delayed, or substituted.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The disruption and all resulting figures are invented for this practice; no real financial hardship needs to be disclosed."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional household budget and meal plan from earlier lessons",
+    "the assigned disruption scenario"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before revising, predict what you'll have to cut before you actually check the numbers.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Before doing any math, what's your gut guess for what will have to give in your plan once this disruption hits?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Recalculate your fictional budget or meal plan to absorb the disruption.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I recalculated the fictional total after the disruption."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I identified specifically what was cut, delayed, or substituted to absorb it."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Show the arithmetic and explain the tradeoff.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Show the before-and-after numbers, and explain in a sentence or two why you chose that particular tradeoff instead of a different one."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your prediction.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was your warm-up guess right about what would have to give? What does that tell you about which parts of your plan are actually flexible?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's revised numbers don't actually balance (the disruption is absorbed on paper without the math adding up), reteach by having them show the running total step by step until the shortfall or cut is arithmetically visible, not just asserted.",
+  "extension": "Have the learner combine this disruption with a second, self-invented one occurring in the same fictional month and show whether the plan can still absorb both.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u02-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u02-l05",
+    "authoredBy": "manual"
+  }
+}

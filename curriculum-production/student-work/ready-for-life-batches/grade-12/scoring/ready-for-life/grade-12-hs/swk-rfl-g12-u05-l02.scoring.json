@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u05-l02",
+  "lessonId": "ma-g12-ready-for-life-u05-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Concern-level calibration",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "All four scripts sound the same regardless of concern level."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The tone and directness of each script noticeably shifts with the concern level."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The waiting-until-crisis contrast sentence makes the cost of delay concretely visible, not just stated abstractly."
+          }
+        ]
+      },
+      {
+        "dimension": "Self-awareness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reflection response is generic and doesn't name an actual personal tendency."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reflection honestly names where the learner's own threshold tends to sit."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection also states whether that threshold is where the learner actually wants it to be, with a reason."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The four scripts are noticeably distinct from each other, not interchangeable.",
+      "The contrast sentence makes a real difference visible between early asking and waiting.",
+      "No real personal concern is disclosed anywhere in the response."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

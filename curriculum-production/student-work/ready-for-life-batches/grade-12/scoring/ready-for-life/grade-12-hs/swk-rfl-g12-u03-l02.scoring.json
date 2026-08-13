@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l02",
+  "lessonId": "ma-g12-ready-for-life-u03-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Expectation identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The stated unwritten expectation just restates the written policy with no gap identified."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A plausible unwritten expectation distinct from the stated policy is identified for each scenario."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The identified expectations show awareness of workplace-specific variation, not a one-size-fits-all guess."
+          }
+        ]
+      },
+      {
+        "dimension": "Confirmation strategy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The confirmation method is the same generic 'ask someone' repeated for every scenario with no specifics."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "A specific, low-risk confirmation method is named for each scenario."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The methods are tailored to each scenario's actual risk level, not interchangeable."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each of the three scenarios gets a genuinely distinct confirmation strategy, not a repeated template.",
+      "The confirmation strategies are low-risk (observing, a general question) rather than confrontational.",
+      "No real employer or coworker is named or described."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

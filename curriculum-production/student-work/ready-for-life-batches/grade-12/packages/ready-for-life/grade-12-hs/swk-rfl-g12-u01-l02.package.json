@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u01-l02",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "The Adult-Life Operating System",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: renewals, expiries, and advance reminders"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners design a three-tier reminder ladder (advance, mid, final) that they can apply to any renewal-type item, then test it on invented examples, so the skill transfers to whatever they actually need to renew later rather than being tied to one specific case.",
+  "scenario": "Working with three fictional renewal-type items and invented dates (for example, a made-up membership, a made-up permit-like renewal, and a made-up subscription), the learner sets an advance reminder, a mid-point check, and a final deadline reminder for each, then explains the spacing logic they used.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All renewal items and dates in this practice are invented; no real account, subscription, or document renewal date is required."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a calendar/notes app",
+    "the three provided fictional renewal-item prompts"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before building the ladder, think about a time a deadline snuck up on you.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Think of any deadline (school or otherwise) that snuck up on you before. What would an earlier reminder have needed to look like to actually help?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For the first fictional renewal item, set an advance, mid, and final reminder with invented dates.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I set an advance reminder well before the invented deadline."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I set a mid-point check-in reminder."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I set a final reminder close to the invented deadline."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Apply the same three-tier ladder to the second and third fictional renewal items, then explain your spacing.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Show the three reminder dates for both remaining fictional items, and explain in one or two sentences why you spaced them the way you did."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on which tier matters most.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Of the three tiers, which one do you think you would be most likely to ignore in real life, and why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's three reminders are bunched close together instead of genuinely staggered (for example, all three within the final week), reteach by having them mark the deadline on a blank timeline first, then place the advance reminder at roughly the timeline's midpoint before adding the other two.",
+  "extension": "Have the learner design a fourth tier for a renewal item with real consequences for missing it entirely (not just inconvenience), and explain what changes about the reminder ladder when the stakes are higher.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u01-l02",
+    "authoredBy": "manual"
+  }
+}

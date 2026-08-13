@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u03-l03",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Workplace Entry and Professional Systems",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: asking for help early and well"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners practice asking a supervisor for help on a fictional stuck-task scenario, out loud with a trusted adult playing the supervisor, before the moment they actually need this script at a real job, so asking early feels routine rather than like an admission of failure.",
+  "scenario": "Given a short fictional workplace scenario where the learner is stuck on a task and unsure whether to keep struggling or ask, the learner practices the ask out loud with a trusted adult playing the supervisor, then revises the ask based on feedback.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["planning page", "written notes", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "No audio or video recording is made; the adult gives live feedback and the learner writes notes afterward.",
+    "The practice scenario is fictional and does not require the learner to discuss any real job or real workplace situation."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult is available to role-play the supervisor, the learner instead writes both sides of the conversation as a short script, then reads only their own side aloud once and self-checks it against the same look-fors."
+  },
+  "materials": ["the provided fictional stuck-task scenario", "paper or notes app"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before practicing, write down what makes asking for help at work feel harder than asking a friend.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "What is one reason asking a supervisor for help might feel harder than asking a classmate or friend?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult playing the supervisor, practice asking for help on the fictional stuck-task scenario, saying what you tried and what you're stuck on.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I stated what I had already tried before asking." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I named specifically what I was stuck on, not just 'I don't get it.'" },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "My adult gave specific feedback on the ask." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Revise your ask based on the feedback and write the improved version.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your revised version of asking for help, and explain what you changed." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the timing of asking for help.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "short-response", "text": "In the fictional scenario, at what point should the character have asked for help, and how would you recognize that same point in a real task?" }
+      ]
+    }
+  ],
+  "remediation": "If the learner's ask omits what they already tried (making it sound like they haven't attempted the task at all), reteach the three-part structure: what I tried, what specifically isn't working, what I need, modeling one complete example before the learner retries their own ask using that structure.",
+  "extension": "Have the learner practice a second, harder version: asking for help after having made a mistake that needs to be reported, not just a task they're stuck on, using the same three-part structure adapted for admitting an error.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

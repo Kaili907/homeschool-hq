@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u01-l05",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "The Adult-Life Operating System",
+    "dayInUnit": 5,
+    "phase": "Independent application",
+    "title": "Independent application: a weekly and monthly review routine"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners design their own weekly and monthly review-routine checklist and test it once on an invented week, so the checklist is refined before they rely on it for real.",
+  "scenario": "The learner drafts a short checklist of questions for a weekly review and a separate, shorter checklist for a monthly review, then runs the weekly checklist against one invented example week to see what the checklist misses.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The trial week used to test the checklist is invented; no real week's private details are required."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a notes document",
+    "the provided example categories a review routine might cover"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting, think about what a review is actually for.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "In one sentence, what should a weekly review actually accomplish that just remembering things in your head wouldn't?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft a weekly review checklist of three to five questions, then a shorter monthly checklist.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I drafted three to five weekly review questions."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I drafted a shorter monthly review checklist that doesn't just repeat the weekly one."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Run your weekly checklist against one invented example week and note what it missed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Walk through your weekly checklist using an invented example week. Did the checklist catch everything that mattered, or did something slip through? Revise the checklist based on what you found."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on realistic use.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Be honest: on a normal week, how likely are you to actually run this checklist, and what would make that more likely?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's checklist questions are too vague to actually answer (for example, 'is everything okay?' instead of something checkable), reteach by modeling one specific, checkable example question, then have the learner rewrite each vague question into a checkable one.",
+  "extension": "Have the learner design a short 'if the review reveals a problem' branch: one sentence on what they do next if the weekly review turns up something that needs fixing.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

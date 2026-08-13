@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u06-l01",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Transition-to-Adulthood Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: assembling four years of evidence into one portfolio"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners build a portfolio index mapping each course component to a portfolio section and honestly name what evidence they already have versus what still needs to be created, so the capstone starts from an accurate map rather than an assumed-complete one.",
+  "scenario": "The learner creates a table of contents for their transition portfolio, listing each of the required sections (pathway and next steps, adult-life systems, independent-living evidence, work readiness, civic and legal checklist, health self-management, support-and-contingency plan) and honestly marking each as 'have it,' 'partially have it,' or 'still need to create it.'",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Naming gaps honestly is expected and does not reduce credit; the point of this lesson is an accurate map, not a falsely complete one."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided list of seven required portfolio sections",
+    "the learner's own materials from this and earlier grades, where available"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before building the index, guess how many of the seven sections you already have solid evidence for.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Before checking anything, guess: how many of the seven required sections do you think you already have solid evidence for?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Mark each of the seven sections honestly.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I marked each of the seven sections as 'have it,' 'partially have it,' or 'still need to create it.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I did not mark any section 'have it' without being able to name the actual evidence."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Prioritize the gaps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Of the sections marked 'partially have it' or 'still need to create it,' which one will you tackle first, and why that one before the others?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on your warm-up guess.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Was your warm-up guess close to accurate? What does the gap between your guess and the real count tell you?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a section is marked 'have it' but the learner cannot name the specific evidence when asked, reteach the honesty standard for this index explicitly and have them relabel it as 'partially have it' or 'still need to create it' instead.",
+  "extension": "Have the learner estimate, in writing, roughly how much time each remaining gap will realistically take to close, and sequence them into a rough plan for the rest of the unit.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

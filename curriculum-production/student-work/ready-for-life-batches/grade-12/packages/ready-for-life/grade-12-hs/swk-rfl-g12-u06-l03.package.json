@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u06-l03",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Transition-to-Adulthood Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: naming remaining support needs without shame"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners practice revising a shame-flavored example statement of remaining support needs into a neutral, useful one, then write their own, so naming what they still need help with becomes a practical planning step rather than an admission of failure.",
+  "scenario": "Given a provided example statement of a remaining support need written in a shame-flavored way, the learner revises it into neutral, useful language using a provided framing guide, then writes their own honest statement of one or more remaining support needs in any area (financial, emotional, informational, or logistical), naming only the type of support needed, not private specifics of why.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The learner's own statement names only the type of support needed, not private details of why it's needed \u2014 this keeps the task useful without requiring personal disclosure.",
+    "No support-need category is treated as more acceptable to admit than another; financial, emotional, informational, and logistical needs are all valid and expected at this stage of life."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided shame-flavored example statement and neutral-framing guide"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before revising, name one word or phrase that makes a statement of need sound like a confession instead of a plan.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What's one word or phrase that tends to make admitting you need help sound like a confession of failure instead of a normal planning step?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Revise the provided shame-flavored example into neutral, useful language.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I revised the example statement using the neutral-framing guide."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "My revised version names the type of support needed without shame language."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write your own honest statement of one or more remaining support needs.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your own honest statement naming one or more support needs you still have (any type is valid), using the same neutral framing, and naming only the type of need \u2014 not private specifics."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the difference writing it made.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Did writing this down in neutral language change how you felt about needing that kind of support? How?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's own statement still carries shame-flavored language despite the guided revision practice (for example, self-critical framing), reteach by having them apply the same neutral-framing guide one more time, this time to their own draft specifically.",
+  "extension": "Have the learner identify, for their own stated need, one specific role (using the role-label pattern from earlier in the course) they could realistically ask.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

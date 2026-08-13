@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u01-l01",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "The Adult-Life Operating System",
+    "dayInUnit": 1,
+    "phase": "Launch and planning",
+    "title": "Launch and planning: records, documents, and where they live"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners build a personal records map \u2014 by category and storage type only, never by document number or identifier \u2014 so they know what kinds of records exist and roughly where each type currently lives, without disclosing any actual identifying information to the lesson.",
+  "scenario": "Using six provided record categories (identification, education, health, financial, housing, employment), the learner records, for each category, only a storage-type label such as 'in a folder at home,' 'kept by a guardian,' 'digital, in an account I have access to,' or honestly 'I don't know' \u2014 never an actual document number, account number, or password.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Only category and storage-type labels are recorded; no actual document numbers, account numbers, or identifiers are ever entered.",
+    "'I don't know' is an acceptable and useful answer for any category \u2014 it is information, not a failure."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a private notes document",
+    "the six provided record categories"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before mapping, guess how many of the six categories you could answer right now without checking anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Of the six categories (identification, education, health, financial, housing, employment), how many do you think you already know the storage type for?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each of the six categories, record a storage-type label or an honest 'I don't know.'",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I recorded a storage-type label or an honest 'I don't know' for identification and education records."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I recorded a storage-type label or an honest 'I don't know' for health and financial records."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I recorded a storage-type label or an honest 'I don't know' for housing and employment records."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Identify the category you are least sure about and describe one step to find out.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Which category are you least sure about, and what is one realistic step you could take to find out its storage type (for example, asking a guardian, or checking a specific folder)?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on having this map.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Did any category surprise you \u2014 either because you knew it immediately or had no idea at all? Why do you think that is?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner records identical storage-type labels for every category without appearing to have actually considered each one separately (a copy-down pattern), reteach by having them describe, out loud, one concrete difference between how two specific categories are actually stored before revising the written answers.",
+  "extension": "Have the learner add a second column noting, for each category, who else besides them can access that record right now, and identify any category where they are the only one who would know where it is.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

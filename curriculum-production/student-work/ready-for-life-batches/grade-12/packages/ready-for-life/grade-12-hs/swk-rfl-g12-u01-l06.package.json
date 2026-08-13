@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u01-l06",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "The Adult-Life Operating System",
+    "dayInUnit": 6,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: what to do when something lapses"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners respond to a set of invented lapse scenarios with a concrete recovery procedure for each, then assemble a personal adult-systems tracker from the week's artifacts, so the unit's separate pieces become one usable system.",
+  "scenario": "Given three invented scenarios in which something lapsed (a membership expired unnoticed, a renewal deadline was missed, and a recurring obligation was forgotten for a month), the learner writes a recovery step for each, then synthesizes a general three-step 'when something lapses' protocol and assembles the week's records map, reminder ladder, obligation calendar, and review routine into one tracker.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "All three lapse scenarios are invented; no real missed deadline or real account needs to be disclosed."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the learner's own artifacts from this unit's earlier lessons",
+    "the three provided lapse scenarios"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before responding, predict which of the three scenarios would be hardest to recover from.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Of the three lapse scenarios (an unnoticed expiration, a missed deadline, a forgotten recurring obligation), which do you predict is hardest to recover from, and why?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Write a concrete recovery step for each of the three invented lapse scenarios.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote a recovery step for the unnoticed-expiration scenario."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wrote a recovery step for the missed-deadline scenario."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I wrote a recovery step for the forgotten-recurring-obligation scenario."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Synthesize a general three-step protocol and assemble the unit's artifacts into one tracker.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write a general three-step 'when something lapses' protocol that could apply beyond just these three scenarios."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "extended-response",
+          "text": "Assemble your records map, reminder ladder, obligation calendar, and review routine from this unit into one described tracker, and explain in a few sentences how the pieces connect."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the assembled tracker.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which single piece of this tracker do you think will be the most useful to you going forward, and which do you think you're most likely to let slide?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner's three recovery steps are interchangeable (the same generic 'fix it' answer applied to all three scenarios), reteach by having them name what specifically is different about each scenario's cause before rewriting a recovery step that responds to that specific cause.",
+  "extension": "Have the learner write a fourth, self-invented lapse scenario that is harder than the three provided, and write its recovery step.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

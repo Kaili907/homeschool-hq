@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/rfl-g12-batch-task-sheet.schema.json",
+  "title": "Ready for Life grade-12 batch student-work task sheet (student projection)",
+  "description": "Learner-facing material for one grade-12 Ready for Life lesson. Carries no rubric criterion or sign-off certification field — those live in the sibling scoring record referenced by scoringRef. Schema forked from the sibling ready-for-life-full corpus, scoped to grade 12 only, since this directory owns curriculum-production/student-work/ready-for-life-batches/grade-12/** exclusively.",
+  "type": "object",
+  "required": [
+    "schemaVersion", "packageId", "lessonRef", "subjectFamily", "objective",
+    "scenario", "isFictionalSimulation", "completionAuthority", "realWorldAction",
+    "tasks", "remediation", "extension", "scoringRef", "integrity"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "pattern": "^swk-rfl-g12-" },
+    "lessonRef": {
+      "type": "object",
+      "required": ["lessonId", "courseId", "grade", "subject", "unitNumber", "unitTitle", "dayInUnit", "phase", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "lessonId": { "type": "string" },
+        "courseId": { "const": "ma-g12-ready-for-life" },
+        "grade": { "const": 12 },
+        "subject": { "const": "ready-for-life" },
+        "unitNumber": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "unitTitle": { "type": "string" },
+        "dayInUnit": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "phase": { "type": "string" },
+        "title": { "type": "string" }
+      }
+    },
+    "subjectFamily": { "const": "ARTS_RFL_PE_PROJECT" },
+    "standardsRefs": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "objective": { "type": "string", "minLength": 1 },
+    "scenario": { "type": "string", "minLength": 1 },
+    "isFictionalSimulation": { "type": "boolean" },
+    "completionAuthority": {
+      "enum": ["learner", "guardian"],
+      "description": "'guardian' means a household-authorized guardian action certifies the task; a learner's own completion click is recorded but never certifying. Reserved for lessons with a genuine real-world, adult-observed component."
+    },
+    "realWorldAction": { "type": "boolean" },
+    "signOff": {
+      "description": "Required and non-null when completionAuthority is 'guardian'; must be null when completionAuthority is 'learner'.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": [
+            "requiresGuardianPermissionBeforeStart", "requiresTrustedAdultSupervision",
+            "certifyingActor", "studentSelfReport", "evidenceTypes", "identifiablePhotoRequired"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "requiresGuardianPermissionBeforeStart": { "const": true },
+            "requiresTrustedAdultSupervision": { "type": "boolean" },
+            "certifyingActor": { "const": "household-authorized guardian" },
+            "studentSelfReport": { "const": "recorded-but-not-certifying" },
+            "evidenceTypes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "identifiablePhotoRequired": { "const": false }
+          }
+        }
+      ]
+    },
+    "safetyNotes": { "type": "array", "items": { "type": "string" } },
+    "simulationAlternative": {
+      "description": "Required and present:true whenever realWorldAction is true, so a learner without safe access to the real materials, adult supervision, transportation, or setting still has an equal-credit way to complete the lesson.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["present", "description"],
+          "additionalProperties": false,
+          "properties": {
+            "present": { "const": true },
+            "description": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "materials": { "type": "array", "items": { "type": "string" } },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["taskId", "kind", "directions", "prompts"],
+        "additionalProperties": false,
+        "properties": {
+          "taskId": { "type": "string" },
+          "kind": { "enum": ["warm-up", "guided", "independent", "performance-task", "reflection"] },
+          "directions": { "type": "string", "minLength": 1 },
+          "prompts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["ref", "promptType", "text"],
+              "additionalProperties": false,
+              "properties": {
+                "ref": { "type": "string" },
+                "promptType": { "enum": ["short-response", "extended-response", "checklist-item", "fixed-choice"] },
+                "text": { "type": "string", "minLength": 1 },
+                "choices": { "type": "array", "items": { "type": "string" }, "minItems": 2, "uniqueItems": true }
+              }
+            }
+          }
+        }
+      }
+    },
+    "remediation": { "type": "string", "minLength": 1 },
+    "extension": { "type": "string", "minLength": 1 },
+    "scoringRef": { "type": "string", "pattern": "^scoring/" },
+    "integrity": {
+      "type": "object",
+      "required": ["sourceStage", "sourceCorpusRef", "sourceLessonId", "authoredBy"],
+      "additionalProperties": false,
+      "properties": {
+        "sourceStage": { "const": "authoring" },
+        "sourceCorpusRef": { "type": "string", "minLength": 1 },
+        "sourceLessonId": { "type": "string" },
+        "authoredBy": { "const": "manual" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "completionAuthority": { "const": "guardian" } } },
+      "then": { "properties": { "signOff": { "type": "object" } } }
+    },
+    {
+      "if": { "properties": { "completionAuthority": { "const": "learner" } } },
+      "then": { "properties": { "signOff": { "type": "null" } } }
+    },
+    {
+      "if": { "properties": { "realWorldAction": { "const": true } } },
+      "then": { "properties": { "simulationAlternative": { "type": "object" } } }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l04",
+  "lessonId": "ma-g12-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Notice comprehension",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The response misstates the fictional notice's deadline or required action."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The response correctly captures both the deadline and the required action."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The response also includes a genuinely useful clarifying question rather than a generic one."
+          }
+        ]
+      },
+      {
+        "dimension": "Review integration",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The revision does not reflect anything the review actually caught."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The revision directly addresses what the review caught."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The final reflection accurately identifies whether reading or writing was the harder part, with a real reason."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The deadline and required action in the final response exactly match the fictional notice.",
+      "A genuine clarifying question is present, not a placeholder.",
+      "No real official notice, real reference number, or real personal legal matter is disclosed."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

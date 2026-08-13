@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u04-l05",
+  "lessonId": "ma-g12-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Source-category matching",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more scenarios are matched to an implausible or overly vague source category."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "All five scenarios are matched to a plausible, specific category of qualified source."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The matches show awareness of overlapping categories where relevant, not forced into a single box."
+          }
+        ]
+      },
+      {
+        "dimension": "Boundary discipline",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "One or more responses attempt to answer the scenario's underlying question instead of naming a source."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Every response stays within naming a source category and the risk of guessing."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The risk explanations are specific to each scenario's actual stakes, not a repeated generic warning."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No response attempts to actually diagnose, advise, or predict an outcome for any scenario.",
+      "Each of the five risk explanations is specific to its own scenario.",
+      "No real personal legal, medical, financial, or immigration situation is disclosed."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

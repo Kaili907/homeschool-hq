@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u02-l02",
+  "lessonId": "ma-g12-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Plan-to-list consistency",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Several shopping-list items don't trace back to any planned meal, or several planned meals have no matching items."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The shopping list is clearly derived from the seven days of planned meals."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Staples and perishables are correctly separated in a way that shows genuine understanding of shelf life, not just labeling."
+          }
+        ]
+      },
+      {
+        "dimension": "Budget fit",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No comparison is made between the estimated cost and the budget slice."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The estimated cost is compared to the budget slice, and any gap is named."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "A specific, workable change is proposed for closing any gap, rather than a vague 'spend less.'"
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Every one of the seven days has at least a meal type planned, not left blank.",
+      "The staples/perishables sort reflects real shelf-life reasoning.",
+      "No real prices, real store names tied to a real purchase, or real account details appear."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

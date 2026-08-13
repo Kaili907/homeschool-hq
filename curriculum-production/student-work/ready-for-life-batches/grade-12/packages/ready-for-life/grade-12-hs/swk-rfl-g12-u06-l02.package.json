@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g12-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-ready-for-life-u06-l02",
+    "courseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Transition-to-Adulthood Capstone",
+    "dayInUnit": 2,
+    "phase": "Skill model",
+    "title": "Skill model: stating the plan, the timeline, and the first three steps"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "objective": "Learners draft a one-page plan statement naming their general direction, an approximate timeline, and the first three concrete steps, with 'still deciding among options' treated as a fully valid direction, so the statement reflects their actual situation rather than a path assumed by the course.",
+  "scenario": "After reviewing a modeled example plan statement for a fictional learner, the learner drafts their own one-page plan: a general direction (which may be a specific path or an honest 'still deciding among options'), an approximate timeline, and the first three concrete steps that apply regardless of which direction is eventually chosen.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "'Still deciding among options' is a fully valid, non-penalized direction \u2014 this lesson never assumes college, a specific job, military service, or any other single path.",
+    "The plan statement is the learner's own private draft; nothing here requires sharing it beyond what the learner chooses."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the provided modeled example plan statement (fictional learner)",
+    "paper or a notes document"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before drafting your own, identify what makes the modeled example plan specific rather than vague.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Looking at the modeled example plan statement, what makes its first three steps specific rather than vague?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Draft your own general direction and approximate timeline.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I stated a general direction \u2014 a specific path or an honest 'still deciding among options.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I stated an approximate timeline for that direction."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Write the first three concrete steps.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write the first three concrete steps you would actually take, regardless of which direction you ultimately choose. Each step should be specific enough that you'd know when it's done."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on certainty versus honesty.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Did you feel any pressure to sound more certain about your direction than you actually are? How did you handle that?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If the three steps are vague enough that the learner couldn't say when any of them is 'done' (for example, 'work on it' or 'figure things out'), reteach by having them rewrite each step with a concrete, checkable completion point, modeling one example first.",
+  "extension": "Have the learner write a second version of the plan statement assuming their first-choice direction becomes unavailable, and identify which of the three first steps would still apply.",
+  "scoringRef": "scoring/ready-for-life/grade-12-hs/swk-rfl-g12-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g12-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}
