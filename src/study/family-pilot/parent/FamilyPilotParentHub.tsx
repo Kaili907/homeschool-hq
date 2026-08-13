@@ -8,6 +8,49 @@ import { allowResume, acknowledgeReview } from './actions'
 import type { FamilyPilotLearnerOption, FamilyPilotSafetyHoldsView } from './types'
 import { FamilyPilotStudentCard } from './FamilyPilotStudentCard'
 
+// A newly-created hold reflows the whole page (the learner's study card and
+// StudentExperience's own open-assignment view both tear down), which can
+// slide THIS button under a rapid second click/tap that was still aimed at
+// whatever used to be there — a double-click-through, not deliberate adult
+// intent. Resolving a hold is safety-critical and must only ever happen from
+// an intentional action, so the control ignores activation until it has been
+// on screen for a beat: long enough that no accidental click-through or
+// pointer replay lands inside it, short enough that a parent who actually
+// looked and clicked never notices a delay.
+const RESOLVE_HOLD_ARM_DELAY_MS = 400
+
+function ResolveHoldButton({
+  holdRef,
+  onResolve,
+}: {
+  readonly holdRef: string
+  readonly onResolve: (holdRef: string) => void
+}) {
+  const [armed, setArmed] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setArmed(true), RESOLVE_HOLD_ARM_DELAY_MS)
+    return () => clearTimeout(timer)
+    // Empty deps: this component only exists for the lifetime of ONE hold —
+    // the list above keys it by holdRef, so a new hold is a fresh mount with
+    // its own fresh arm delay, never a re-render of this one.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return (
+    <button
+      type="button"
+      className="mt-2 min-h-11 rounded-lg bg-slate-800 px-4 py-2 text-sm font-bold text-white"
+      data-armed={armed}
+      onClick={() => {
+        if (armed) onResolve(holdRef)
+      }}
+    >
+      Resolve and let them resume
+    </button>
+  )
+}
+
 export function FamilyPilotParentHub({
   householdRef,
   learners,
@@ -179,13 +222,7 @@ export function FamilyPilotParentHub({
                   <p className="font-semibold text-amber-950">
                     Paused since {hold.createdAt} — {hold.reasonCode}
                   </p>
-                  <button
-                    type="button"
-                    className="mt-2 min-h-11 rounded-lg bg-slate-800 px-4 py-2 text-sm font-bold text-white"
-                    onClick={() => runResolveHold(hold.holdRef)}
-                  >
-                    Resolve and let them resume
-                  </button>
+                  <ResolveHoldButton holdRef={hold.holdRef} onResolve={runResolveHold} />
                 </li>
               ))}
             </ul>

@@ -64,6 +64,18 @@ function holdsSection(page: Page): Locator {
 }
 
 /**
+ * A genuine, deliberate parent action: waits for the arm-delay boundary
+ * (`data-armed="true"`) before clicking. The window before that boundary —
+ * where a rapid click-through must NOT resolve the hold — is covered by
+ * family-pilot-safety-clickthrough.spec.ts.
+ */
+async function resolveHold(page: Page): Promise<void> {
+  const resolveButton = page.getByRole('button', { name: 'Resolve and let them resume' })
+  await expect(resolveButton).toHaveAttribute('data-armed', 'true')
+  await resolveButton.click()
+}
+
+/**
  * Asserts the lesson's Study position is exactly "1 step finished, now on
  * segment 2 (the 'teach' segment)" via the authoritative live Study fields
  * (family-pilot-study's dl, driven straight off the Study runtime's own
@@ -233,7 +245,7 @@ test.describe('Family Pilot — real first pilot flow (browser acceptance)', () 
     })
 
     await test.step('Parent chooses "Resolve and let them resume" and the learner resumes with progress intact', async () => {
-      await page.getByRole('button', { name: 'Resolve and let them resume' }).click()
+      await resolveHold(page)
       await expect(holdsSection(page).getByText('Nothing is paused for Ada right now.')).toBeVisible()
 
       await assignmentCard(page, LESSON_TITLE).getByRole('button', { name: /^Resume / }).click()
@@ -252,7 +264,7 @@ test.describe('Family Pilot — real first pilot flow (browser acceptance)', () 
       expect(secondHoldRef).not.toBe(firstHoldRef)
 
       // Leave Ada in a clean, resumable state before switching learners below.
-      await page.getByRole('button', { name: 'Resolve and let them resume' }).click()
+      await resolveHold(page)
       await expect(holdsSection(page).getByText('Nothing is paused for Ada right now.')).toBeVisible()
     })
 

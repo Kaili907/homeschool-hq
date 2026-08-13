@@ -123,6 +123,19 @@ describe('rendered Family Pilot learner safety trigger', () => {
     await settle()
   }
 
+  /**
+   * A hold's "Resolve and let them resume" button only accepts a click once
+   * it has been armed for a beat (FamilyPilotParentHub's click-through
+   * guard) — this waits past that boundary before the deliberate resolve
+   * click, the same way a real parent's click naturally lands well after the
+   * button appears.
+   */
+  async function waitUntilArmed(button: Element): Promise<void> {
+    for (let tick = 0; tick < 30 && button.getAttribute('data-armed') !== 'true'; tick += 1) {
+      await act(async () => { await new Promise((resolve) => setTimeout(resolve, 20)) })
+    }
+  }
+
   async function addLearner(name: string): Promise<void> {
     const input = container.querySelector<HTMLInputElement>('#family-pilot-new-learner')!
     const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')!.set!
@@ -211,6 +224,7 @@ describe('rendered Family Pilot learner safety trigger', () => {
     expect(textOf(studentSurface(container).querySelector('[role="alert"]'))).toMatch(/adult/i)
 
     // Requirement 10: parent Resolve clears the exact hold.
+    await waitUntilArmed(buttonWithText(holdsSection, 'Resolve and let them resume'))
     await click(buttonWithText(holdsSection, 'Resolve and let them resume'))
     expect(textOf(holdsSection)).toContain('Nothing is paused for Ada')
 
