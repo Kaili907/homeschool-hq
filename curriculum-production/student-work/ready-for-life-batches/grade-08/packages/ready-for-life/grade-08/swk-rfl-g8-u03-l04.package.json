@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: knife heat and appliance safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "With an adult present the entire time, the learner performs an adult-approved bridge-grip cut on a cucumber, moves a hot baking dish from the oven to a cooling rack using oven mitts, and shuts down a stand mixer in the correct order, then explains what could go wrong if any step were skipped.",
+  "scenario": "An adult stays in the kitchen for the whole activity. First the learner slices a cucumber into rounds using a bridge grip the adult has shown them, then the adult and learner together pull a hot baking dish out of the oven and set it on a cooling rack using oven mitts the whole time, and finally the learner runs a stand mixer briefly and shuts it down by turning the dial to off, waiting for the beaters to stop completely, and then unplugging the cord.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation",
+      "planning page"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The adult stays in the kitchen and watches every cut, every oven-to-rack transfer, and every appliance step; the learner never carries a hot dish or handles the knife alone.",
+    "The adult chooses and hands over the knife; the learner does not open a drawer or block to select one.",
+    "If the baking dish feels unstable, the oven mitt slips, or the mixer makes an unusual sound, the learner stops immediately and the adult takes over."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no adult, oven, or stand mixer is available right now, the learner instead watches a video or in-person demonstration of all three steps once, then talks through each one from memory, describing exactly what the demonstrator's hands did and what mistake each step is designed to avoid."
+  },
+  "materials": [
+    "a cutting board",
+    "an age-appropriate kitchen knife chosen by the adult",
+    "one cucumber",
+    "a baking dish that can go in the oven",
+    "oven mitts",
+    "a cooling rack or heat-safe surface",
+    "a stand mixer or hand mixer"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before touching the knife, oven, or mixer, watch your adult demonstrate all three steps one time.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe the bridge grip in your own words: where do the thumb and fingers go, and what shape do they make over the cucumber?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult present the whole time, complete all three steps: slice the cucumber using the bridge grip, help move the hot baking dish from the oven to the cooling rack with oven mitts, and shut down the mixer in the correct order.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I formed a bridge with my thumb and fingers over the cucumber and kept the blade below the bridge the whole cut."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wore oven mitts on both hands and did not touch any part of the hot dish or the oven rack with bare skin."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I turned the mixer dial to off and waited for the beaters to stop completely before unplugging the cord."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without checking your notes, explain each of the three steps back to your adult in your own words.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Which of the three steps did you find hardest to remember or perform correctly, and what specifically about it was tricky?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think through what would happen if a step were skipped or done out of order.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "For each of the three steps, describe one specific thing that could go wrong if it were skipped or rushed, and explain how the correct technique prevents that specific problem."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's bridge grip collapses (fingers flattening onto the board instead of arching over the food), reteach with a dry run on an uncut cucumber end: rebuild the arched hand shape and practice a slow, no-blade pretend cut five times before making a real cut.",
+  "extension": "Have the learner repeat all three steps using a different vegetable and a different small appliance, then write about whether the technique for each step stayed the same or had to change.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

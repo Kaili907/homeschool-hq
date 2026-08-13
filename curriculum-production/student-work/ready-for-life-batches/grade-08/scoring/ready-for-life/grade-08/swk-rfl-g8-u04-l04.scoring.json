@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l04",
+  "lessonId": "ma-g8-ready-for-life-u04-l04",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Document-category accuracy and genericness",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Checklist includes a real-looking ID number, insurance number, or specific real name instead of a general category label."
+          },
+          {
+            "label": "Developing",
+            "descriptor": "Checklist uses general category labels but lists fewer than three relevant document categories."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Checklist lists at least three relevant document categories, each described generically (an ID card, an insurance card, and one more), with no real identifying numbers or names."
+          }
+        ]
+      },
+      {
+        "dimension": "Question quality and topic variety",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Fewer than four questions are written, or most questions cover the same single topic."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "At least four original questions are written, covering at least three different topics, each with a short explanation of why it matters to ask."
+          }
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

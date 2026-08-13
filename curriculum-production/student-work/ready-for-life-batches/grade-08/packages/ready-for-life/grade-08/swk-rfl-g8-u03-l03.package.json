@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l03",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: recipe scaling"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners scale a provided pancake recipe from its original four-serving yield down to two servings and up to six servings, correctly multiplying every ingredient by the same scaling factor, including ingredients measured in fractions.",
+  "scenario": "Starting from one printed pancake recipe written for four servings, the learner first works through a fully guided example scaling it down to two servings, then completes a second example scaling it up to six servings with less support provided, checking that every single ingredient (not just the easy whole numbers) was scaled by the same factor.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "the printed four-serving pancake recipe on this task sheet",
+    "paper or a document",
+    "pencil or pen"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look at the four-serving recipe before scaling anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List every ingredient and amount in the original four-serving recipe, including any measured in fractions like 3/4 cup."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Follow the worked example step by step to scale the recipe down to two servings: find the scaling factor (two servings divided by four servings), then multiply every ingredient by that factor.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I found the scaling factor by dividing the new serving count by the original serving count."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I multiplied every ingredient, including the fractional amounts, by the same scaling factor."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now scale the same original recipe up to six servings on your own, with less step-by-step support than the guided example. Show the scaling factor you used, and write out the new amount for every single ingredient in the recipe, including the ones measured in fractions. Double check your fraction ingredient by converting it to a decimal and back to confirm your answer is reasonable.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Show your scaling factor for six servings and write out every scaled ingredient amount, including how you handled the fractional ingredient specifically."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare the two scaling problems you just solved.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which was harder: scaling down to two servings or scaling up to six servings? Name the specific step that caused the most trouble."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner scales whole-number ingredients correctly but leaves a fractional ingredient unscaled or scales it incorrectly, reteach by converting that one fraction to a decimal together, multiplying by the scaling factor, and converting back to a kitchen-friendly fraction before the learner retries the rest of the fractional ingredients independently.",
+  "extension": "Have the learner scale the same original recipe to an odd serving count, such as five servings, and explain what makes an odd target number harder to work with than an even one.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

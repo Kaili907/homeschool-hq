@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u05-l02",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Work, Communication, and Career Readiness",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: résumé foundations"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners build a one-page skills snapshot from their own genuine experience, transferring real items into four labeled résumé-style sections and then converting the two strongest into full action-verb bullet points, as a first structured draft to revise later in the course.",
+  "scenario": "Using a printed one-page template with four labeled sections, Skills, Activities, Responsibilities, and Interests, the learner first studies one modeled example line to see what makes it specific, then transfers only things they have actually done or are genuinely responsible for into the matching section.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "No last name, address, phone number, or other identifying contact information is required on this practice document."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "a highlighter or colored pen",
+    "the four-section template on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the modeled example line: 'Organized a weekly recycling pickup for four households on the block.' Decide what makes this line specific rather than vague.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two specific details in the example line that a vaguer version like 'I recycle sometimes' would be missing."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Fill the four-section template, Skills, Activities, Responsibilities, and Interests, with at least two genuine items in each section, matching the level of detail in the modeled example wherever you can.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I wrote at least two real items under each of the four sections."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Every item is something I have actually done or am actually responsible for, not something invented to sound impressive."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose your two strongest items from anywhere on the four-section template and rewrite each one as a complete résumé-style bullet point that opens with a strong action verb, such as organized, coached, repaired, or managed. For each rewritten bullet point, explain in one sentence why you picked that specific action verb instead of a more general word like 'did' or 'helped.'",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write your two rewritten bullet points, each starting with an action verb, and for each one explain why you chose that specific verb."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about which section was hardest to fill and why.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which of the four sections was hardest to fill with genuine items, and what made that section harder than the others?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's items stay vague ('I help out,' 'I'm good at stuff'), reteach by revisiting the modeled example line together and asking three follow-up questions for one item (what specifically, how often, what was the result), then have the learner rewrite that one item with the added specifics before revising the rest.",
+  "extension": "Have the learner rewrite all four sections using only action-verb bullet points in the style of the two from the independent task, so the whole page follows one consistent format.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

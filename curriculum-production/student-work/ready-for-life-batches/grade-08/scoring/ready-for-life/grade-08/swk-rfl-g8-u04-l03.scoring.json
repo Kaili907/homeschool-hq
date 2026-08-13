@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u04-l03",
+  "lessonId": "ma-g8-ready-for-life-u04-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Checklist specificity and completeness",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Round 2 checklist items stay generic ('bring the right stuff') or fewer than three items are listed."
+          },
+          {
+            "label": "Developing",
+            "descriptor": "Round 2 checklist lists at least three items, but one or more are vague or only loosely tied to the X-ray scenario."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Round 2 checklist lists at least three specific items clearly tied to the fictional follow-up X-ray appointment."
+          }
+        ]
+      },
+      {
+        "dimension": "Independent application as support fades from Round 1 to Round 2",
+        "levels": [
+          {
+            "label": "Beginning",
+            "descriptor": "Round 2 questions closely copy the wording or structure of the Round 1 sentence starters rather than standing on their own."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Round 2 includes at least two original questions, in the learner's own wording, that were generated without the sentence-starter scaffold."
+          }
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

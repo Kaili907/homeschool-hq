@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel-academy.local/schema/rfl-batch-g8-scoring-record.schema.json",
+  "title": "Ready for Life Grade 8 production batch — scoring record (parent/teacher-only projection)",
+  "description": "Scoring authority for one lesson's task sheet. Never shipped to a learner-facing renderer. Ready for Life is always rubric/judgment-based, never a fixed answer key.",
+  "type": "object",
+  "required": ["schemaVersion", "packageId", "lessonId", "scoringAuthority", "completionAuthority", "nonDiagnosticGuard"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "pattern": "^swk-rfl-g8-" },
+    "lessonId": { "type": "string" },
+    "scoringAuthority": {
+      "type": "object",
+      "required": ["kind", "criteria"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["RUBRIC", "SCORING_JUDGMENT"] },
+        "criteria": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["dimension", "levels"],
+            "additionalProperties": false,
+            "properties": {
+              "dimension": { "type": "string" },
+              "levels": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["label", "descriptor"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "label": { "type": "string" },
+                    "descriptor": { "type": "string", "minLength": 1 }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "lookFors": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "completionAuthority": { "enum": ["learner", "guardian"] },
+    "nonDiagnosticGuard": { "const": "Do not infer effort, motivation, diagnosis, or character from an error." }
+  }
+}

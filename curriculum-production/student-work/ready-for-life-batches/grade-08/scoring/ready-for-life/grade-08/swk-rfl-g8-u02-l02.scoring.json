@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u02-l02",
+  "lessonId": "ma-g8-ready-for-life-u02-l02",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Inventory accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Lists fewer than six items, or quantities are missing or clearly estimated without actually looking."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Lists at least six real items with quantities and a low/adequate/full label applied consistently using the stated rule."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Lists six or more items accurately labeled, and correctly flags an edge case (an item that doesn't fit neatly into one category) with a reasonable resolution."
+          }
+        ]
+      },
+      {
+        "dimension": "Restock reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names items to restock without any stated reason, or the reason is generic."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names two items to restock first with a specific, plausible reason for the priority order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names two items with specific reasoning and weighs multiple factors (usage rate, number of people, substitutability) explicitly."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The inventoried items are genuinely from the chosen category rather than a mismatched or padded list.",
+      "The restock order reasoning connects to the quantities actually recorded, not to an unrelated assumption."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

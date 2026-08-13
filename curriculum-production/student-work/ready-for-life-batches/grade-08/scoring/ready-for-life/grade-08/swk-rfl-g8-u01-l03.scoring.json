@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l03",
+  "lessonId": "ma-g8-ready-for-life-u01-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Grid sorting accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Most tasks are placed inconsistently with the urgent and important definitions, or urgency and importance are treated as the same thing."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Most tasks in both rounds are placed in a box that reasonably matches the definitions given."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "All tasks are placed correctly, and the learner can justify a placement that might look debatable at first glance."
+          }
+        ]
+      },
+      {
+        "dimension": "Independent transfer",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Round two sorting breaks down significantly without the definitions available, or is skipped."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Round two sorting is completed with reasoning close to round one's quality, without re-reading the definitions."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Round two sorting matches or exceeds round one, and the learner names specifically what got easier or harder without support."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The Urgent and Important entries include real, specific dates rather than vague timeframes like 'soon.'",
+      "The Important and Not Urgent reasoning names an actual bigger goal or relationship, not a restated task description."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

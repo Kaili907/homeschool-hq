@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u03-l02",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Meal Planning, Cooking, and Food Management",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: shopping lists and unit costs"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners calculate unit cost (price per ounce, per item, or per serving) from provided sample prices for different package sizes of the same product, then use those unit costs to build an organized shopping list that groups items by store section.",
+  "scenario": "Using a printed sample price table for three products, each shown in two or three different package sizes with a listed price, the learner calculates which size is the better value for each product and then writes a shopping list for a five-dinner week, grouping every item under the store section where it would be found.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a document",
+    "calculator or scratch paper for division",
+    "the sample price table on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look at the sample price table before doing any math.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Without calculating, guess which size of the rice product looks like the better deal, and explain what made you guess that."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each of the three sample products, divide the listed price by the size to find the unit cost, then circle the better-value size for each one.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I calculated a unit cost for every package size listed in the table, not just one size per product."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I circled the size with the lower unit cost for each of the three products."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "short-response",
+          "text": "Was the size with the better unit cost the same size you guessed in the warm-up? If not, what changed your answer?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Plan five realistic dinners for one household using only the sample-priced products and any staple items you assume the household already has. Write a complete shopping list organized under four store-section headings: Produce, Protein, Pantry, and Dairy. For each item on the list, note the package size you chose based on your unit-cost comparison and one sentence explaining why that size makes sense for five dinners rather than being wasteful or running short.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "List your five dinners, then write the full shopping list under the four store-section headings, noting the chosen package size and a one-sentence reason for each item."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how the unit-cost math changed your plan.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Name one item where choosing the larger size instead of the smaller size would have been a mistake for a five-dinner week, and explain why using the numbers."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides price by size backwards (size divided by price) or mismatches units when comparing sizes given in different measurements, reteach with one worked product together step by step, labeling each number with its unit before dividing, then have the learner redo the remaining two products.",
+  "extension": "Have the learner recalculate the shopping list for a ten-dinner week instead of five, and explain which package-size choices change and which stay the same.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

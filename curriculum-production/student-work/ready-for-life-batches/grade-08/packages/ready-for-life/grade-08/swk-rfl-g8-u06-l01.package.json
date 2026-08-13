@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u06-l01",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Independent-Living Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: monthly schedule"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners invent an original fictional independent-living persona - a made-up name, an invented age of eighteen or older, and a brief invented living situation - then produce a first-pass, one-month calendar skeleton for that persona using four broad blocks (work, sleep, errands, rest) without fine-tuning exact times yet.",
+  "scenario": "Working from a blank monthly calendar, the learner invents an adult character who lives independently, gives that character a name, an age of at least eighteen, and one or two sentences of invented circumstances (for example, the kind of home they live in and whether they work full time or part time), then rough-blocks each week of the month into the four broad categories before any later lesson refines the details.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a blank one-month calendar grid",
+    "pencil or pen",
+    "the persona-invention sheet provided on this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Invent the basic identity of your fictional persona before touching the calendar.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Invent a first and last name for your fictional independent-living persona and give them an age of eighteen or older. Write the name and age here."
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "short-response",
+          "text": "In one or two sentences, invent this persona's general living situation (for example, the kind of home they live in and whether they work full time, part time, or attend a training program)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using your persona's basic identity, block out one representative week before spreading it across the month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I marked a work block on my persona's calendar for a realistic number of hours for their job."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I marked a sleep block covering a consistent number of hours each night."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I marked at least one errands block and one rest block somewhere in the week."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Extend your one representative week into a full one-month skeleton, then deliberately vary at least one week so the month is not just the same week copied four times.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Fill in all four (or five) weeks of your persona's month using the same four broad blocks - work, sleep, errands, rest - but change at least one week so it looks noticeably different from the others (for example, an extra errand day, a lighter work week, or a shifted rest day), and briefly explain in writing what real-life event might cause that week to look different for your persona."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look back at the skeleton you just built as a first diagnostic pass, not a final version.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Which of the four blocks (work, sleep, errands, rest) was hardest to place realistically on the calendar for your persona, and why?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's month looks identical week to week with no variation, sit with them on one additional week and brainstorm together one realistic event (a holiday, a doctor visit, a slow work week) that would shift at least one block, then have them revise that single week before moving on.",
+  "extension": "Have the learner add a fifth block category (such as social time or personal projects) to one week of their persona's month and explain how adding it would force them to trim time from one of the original four blocks.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

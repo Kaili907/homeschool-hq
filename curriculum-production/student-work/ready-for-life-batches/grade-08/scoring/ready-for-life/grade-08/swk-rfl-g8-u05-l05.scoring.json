@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u05-l05",
+  "lessonId": "ma-g8-ready-for-life-u05-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Boundary identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The response choice does not match the boundary actually being tested in one or more scenarios."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The response choice correctly addresses the specific boundary at stake in all three scenarios."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner can name the type of boundary (training, honesty, or privacy) for each scenario without prompting."
+          }
+        ]
+      },
+      {
+        "dimension": "Justification quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Justifications restate the chosen option without explaining why it protects the boundary better than the alternatives."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Each justification names the specific boundary at risk and explains why the chosen response protects it."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and at least one justification explains why a tempting-but-wrong option would fail to protect the boundary."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The library-scenario response never involves giving out real or fake personal contact information.",
+      "The hardest-scenario reflection names a specific reason, not a general 'they were all confusing.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

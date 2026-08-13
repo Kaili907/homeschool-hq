@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g8-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-ready-for-life-u01-l04",
+    "courseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Independent Planning and Executive Routines",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: digital and paper systems"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy RFL Grade 8 progression"
+  ],
+  "objective": "Learners design and build one real planning system, either a digital notes or calendar tool or a paper-based system, and run it for an actual three-day trial managing their real, everyday tasks, logging each day what worked and what broke down.",
+  "scenario": "Over the next three real days, the learner puts a planning system to an actual test on their actual life, not a pretend week. They pick either a digital tool already on a household device or a paper-based layout, build its structure before day one starts, and then genuinely use it to track real tasks as those days unfold.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": true,
+  "signOff": null,
+  "safetyNotes": [
+    "If trialing a digital tool, use a notes or calendar app already installed and approved for use on a household device rather than installing anything new for this lesson.",
+    "Keep daily log entries limited to your own task names and times; don't record private details about other people's plans or schedules."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real three-day trial isn't possible right now, for example the days ahead are unusually irregular, walk through three fictional but realistic days on paper: for each day, decide which tool you would use, list two or three plausible real tasks for that day, and predict one specific snag that tool would likely run into on that day."
+  },
+  "materials": [
+    "paper or index cards, for a paper system",
+    "a device with a notes or calendar app already installed, for a digital system",
+    "a pen or pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before building anything, decide whether you'll trial a digital system or a paper system for these three days, based on what you already have and what's easiest to check daily.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-choice",
+          "text": "Which will you trial for the next three days?",
+          "choices": [
+            "A digital app or notes tool I already have",
+            "A paper-based system, index cards, a planner page, or a wall calendar"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Build your system before day one starts: set up the actual structure you'll use, a page per day, a running list, or category columns, whatever fits your chosen tool, and enter your real tasks for day one.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "My system has a real structure built (not just a blank page) before day one begins."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "Day one already has my actual real tasks entered."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Run your system for three real, consecutive days. Each day, actually use it to track your real tasks, add tasks as they come up, check items off as you finish them, and at the end of each day, spend two minutes writing one line about what worked and one line about what didn't.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "For each of your three trial days, write one specific thing that worked well in your system and one specific thing that broke down or felt clunky, for example a task you forgot to log, a step that took too long, or a format that didn't fit how you actually work."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the format you chose compared to the one you didn't.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Would you keep using this system as-is, change one part of it, or switch formats entirely? Name the specific change, if any."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner's three-day log stays vague, 'it was fine,' 'it didn't work,' reteach with a single concrete replay: walk through one real task from that day together and ask exactly where in the system it was added, tracked, and checked off.",
+  "extension": "Have the learner test the opposite format, paper if they used digital, digital if they used paper, for one additional day and compare which one required less daily effort to keep up.",
+  "scoringRef": "scoring/ready-for-life/grade-08/swk-rfl-g8-u01-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0",
+    "sourceLessonId": "ma-g8-ready-for-life-u01-l04",
+    "authoredBy": "manual"
+  }
+}
