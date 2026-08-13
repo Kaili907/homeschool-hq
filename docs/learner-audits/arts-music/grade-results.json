@@ -1,0 +1,336 @@
+{
+  "auditId": "ARTS_MUSIC_LEARNER_AUDIT_R1",
+  "classification": "ARTS_MUSIC_LEARNER_AUDIT_COMPLETE",
+  "baseSha": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "expectedFinalAdmittedCount": 648,
+  "rederivedFinalAdmittedCount": 648,
+  "exactCountMatch": true,
+  "courses": [
+    {
+      "courseRef": "ma-g3-arts-music",
+      "grade": 3,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g4-arts-music",
+      "grade": 4,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g5-arts-and-music",
+      "grade": 5,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g7-arts-and-music",
+      "grade": 7,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g8-arts-and-music",
+      "grade": 8,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g9-arts-and-music",
+      "grade": 9,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g10-arts-and-music",
+      "grade": 10,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g11-arts-and-music",
+      "grade": 11,
+      "lessonCount": 72
+    },
+    {
+      "courseRef": "ma-g12-arts-and-music",
+      "grade": 12,
+      "lessonCount": 72
+    }
+  ],
+  "flagCounts": {
+    "ZERO_ACTIONABLE_WORK": 0,
+    "EMPTY_PROJECT": 0,
+    "MISSING_TASK_STEPS": 0,
+    "MISSING_MATERIALS": 270,
+    "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+    "MISSING_ALTERNATIVE": 0,
+    "EMPTY_CRITIQUE": 0,
+    "EMPTY_RUBRIC": 0,
+    "PUBLIC_POST_REQUIREMENT": 0,
+    "MEDIA_PROOF_REQUIREMENT": 0,
+    "PROJECTION_LOSS": 0,
+    "PLACEHOLDER": 0
+  },
+  "negativeControls": {
+    "passed": true,
+    "controls": [
+      {
+        "name": "empty project",
+        "expected": [
+          "ZERO_ACTIONABLE_WORK",
+          "EMPTY_PROJECT"
+        ],
+        "actual": [
+          "ZERO_ACTIONABLE_WORK",
+          "EMPTY_PROJECT"
+        ],
+        "detected": true
+      },
+      {
+        "name": "missing materials",
+        "expected": [
+          "MISSING_MATERIALS"
+        ],
+        "actual": [
+          "MISSING_MATERIALS"
+        ],
+        "detected": true
+      },
+      {
+        "name": "camera-only evidence",
+        "expected": [
+          "MISSING_ALTERNATIVE",
+          "MEDIA_PROOF_REQUIREMENT"
+        ],
+        "actual": [
+          "MISSING_ALTERNATIVE",
+          "MEDIA_PROOF_REQUIREMENT"
+        ],
+        "detected": true
+      },
+      {
+        "name": "missing rubric",
+        "expected": [
+          "EMPTY_RUBRIC"
+        ],
+        "actual": [
+          "EMPTY_RUBRIC"
+        ],
+        "detected": true
+      },
+      {
+        "name": "browser drops steps",
+        "expected": [
+          "PROJECTION_LOSS"
+        ],
+        "actual": [
+          "PROJECTION_LOSS"
+        ],
+        "detected": true
+      }
+    ]
+  },
+  "grades": [
+    {
+      "grade": 3,
+      "courseRefs": [
+        "ma-g3-arts-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 4,
+      "courseRefs": [
+        "ma-g4-arts-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 5,
+      "courseRefs": [
+        "ma-g5-arts-and-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 7,
+      "courseRefs": [
+        "ma-g7-arts-and-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 8,
+      "courseRefs": [
+        "ma-g8-arts-and-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 9,
+      "courseRefs": [
+        "ma-g9-arts-and-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 10,
+      "courseRefs": [
+        "ma-g10-arts-and-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 11,
+      "courseRefs": [
+        "ma-g11-arts-and-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    },
+    {
+      "grade": 12,
+      "courseRefs": [
+        "ma-g12-arts-and-music"
+      ],
+      "lessonsAudited": 72,
+      "flagCounts": {
+        "ZERO_ACTIONABLE_WORK": 0,
+        "EMPTY_PROJECT": 0,
+        "MISSING_TASK_STEPS": 0,
+        "MISSING_MATERIALS": 30,
+        "UNAVAILABLE_INSTRUMENT_OR_TOOL": 0,
+        "MISSING_ALTERNATIVE": 0,
+        "EMPTY_CRITIQUE": 0,
+        "EMPTY_RUBRIC": 0,
+        "PUBLIC_POST_REQUIREMENT": 0,
+        "MEDIA_PROOF_REQUIREMENT": 0,
+        "PROJECTION_LOSS": 0,
+        "PLACEHOLDER": 0
+      },
+      "safeToBeginMatrix": false
+    }
+  ],
+  "safeToBeginMatrix": false,
+  "topBlockers": [
+    {
+      "flag": "MISSING_MATERIALS",
+      "lessons": 270,
+      "detail": "Reference-dependent model, guided, and investigation lessons do not supply the model/reference/scaffold/work they direct the learner to use."
+    }
+  ]
+}
