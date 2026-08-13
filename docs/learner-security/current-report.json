@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "session": "LEARNER RELEASE SECURITY + PRIVACY ACCEPTANCE R1",
+  "auditedAt": "2026-08-13",
+  "base": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "assemblyTree": "5fb7524024db1a5d7d348449c9b75ab08c77bf4a",
+  "assemblyHead": "fd3c2db8a8c80264953ba7ce0d628f4be16fdb2f",
+  "repairShas": [
+    "4350673d80284066918120157c994672f92c1c53",
+    "c8f5a6b6b9b18317f96b5e2f92d453bde0f0b2b9",
+    "2d43cd014046ad6190d3bb0f672e3313897d63fd",
+    "d78c4f39b6ff97eba830135068c01d21f0893f46",
+    "d161efc876ad7563505897323f80fdb2cb11d5a4",
+    "858fed9c55e49d03e6457cdf8bf3426dadbd1cd3",
+    "dc2cee7fa16ea059218862d0dc42a2bee504269d",
+    "9ab9860741566c2d02421fb36dc6c1eb0ddc9223",
+    "1651f72f222c002a857506ac8537951a9a77e698",
+    "520ce571e7a3e9dc8c60699cfae5f22ee10d56e2",
+    "51792ba67bcc3ec79d35fd55063870b21da82d82",
+    "1d594411fc969f523b76f340fa388a4c24a0b5a2",
+    "f8406fca39c33ba08616ff8ff41a6a0452de47e4",
+    "c759e23263078567ee47a9ac7bd1d34c1e98e119"
+  ],
+  "supportingPrerequisiteShas": [
+    "796b4f1e1a7789f26ce85bcd0478e1e1651f113d"
+  ],
+  "counts": {
+    "lessonsScanned": 8292,
+    "assessmentsScanned": 699,
+    "directAnswerLeaks": 0,
+    "lessonScoringLocatorLeaks": 0,
+    "assessmentScoringLocatorLeaks": 699,
+    "secretFindings": 0,
+    "pinFindings": 4,
+    "bearerFindings": 0,
+    "tutorPrivacyFindings": 2,
+    "backupFindings": 4
+  },
+  "finlit": {
+    "lessonsScanned": 504,
+    "directPreTaskAnswerDisclosures": 0,
+    "scoringLocatorLeaks": 0
+  },
+  "endpointSecurity": {
+    "status": "PASS",
+    "strictRequestBinding": true,
+    "trustedBindingLocatorsOnly": true,
+    "arbitraryFilesystemPathRejected": true,
+    "wrongLessonAndItemRejected": true,
+    "answerOmitted": true,
+    "callerExpectedAnswerRejected": true,
+    "guardianAuthorityPreserved": true,
+    "adversarialTests": "14/14 passed"
+  },
+  "bundleSecurity": {
+    "status": "BLOCKED",
+    "adultMaterialFiles": [
+      "dist/assets/FinalFamilyPilotApp-Ck2Sup9e.js",
+      "dist/assets/Grade5MathPractice-DY2IJK7b.js",
+      "dist/assets/index-DvIPLJfo.js"
+    ],
+    "nodeRuntimeLeakFiles": [],
+    "fakeIndexedDbFiles": [],
+    "localDevelopmentPortFiles": [
+      "dist/assets/index-DvIPLJfo.js"
+    ]
+  },
+  "privacy": {
+    "pinFindings": [
+      "plaintext-learner-and-parent-pin-in-app-state",
+      "profile-sync-uploads-plaintext-pin",
+      "sync-safety-backup-includes-plaintext-pin",
+      "portable-backup-includes-pin-digest"
+    ],
+    "bearerFindings": [],
+    "tutorPrivacyFindings": [
+      "raw-tutor-transcript-and-answer-authority-persisted-in-profile",
+      "raw-tutor-conversation-uploaded-by-profile-sync"
+    ],
+    "privateLearnerNoteFindings": []
+  },
+  "backupSecurity": {
+    "status": "BLOCKED",
+    "findings": [
+      "plaintext-pin-in-sync-safety-backup",
+      "raw-tutor-transcript-in-sync-safety-backup",
+      "adult-answer-authority-in-sync-safety-backup",
+      "pin-digest-in-portable-backup"
+    ],
+    "bearerIncluded": false
+  },
+  "mutationControls": {
+    "mutantsKilled": 30,
+    "mutantsTotal": 30,
+    "testCasesPassed": 35,
+    "testCasesTotal": 35
+  },
+  "blockers": [
+    "699 canonical learner assessment packages expose adultScoringAuthorityRef paths",
+    "3 production browser chunks contain answer-authority material",
+    "1 production browser chunk contains http://localhost:9999",
+    "plaintext learner and parent PINs persist in AppState and profile sync uploads the learner PIN",
+    "raw Tutor messages and correctAnswer persist in profiles and profile sync uploads them",
+    "safety and portable backups contain PIN material; the safety backup also contains Tutor transcripts and adult answer authority",
+    "structured learner projection exact-stat regression test is stale after the repair assembly"
+  ],
+  "classification": "BLOCKED"
+}
