@@ -2,12 +2,10 @@
 
 Two hard rules govern every function here.
 
-1. No fabricated observations. This package supplies no measurement, no
-   observation, no result, and no expected value. Every recording field ships
-   blank. Where a lesson's work can be done without performing the activity,
-   the package routes the learner to data the curriculum source already names
-   as published, and requires the learner to record its provenance — it never
-   prints a number and calls it data.
+1. No fabricated observations. Every recording field ships blank. Supplied
+reference information and deterministic model outputs are labelled as such;
+they are never represented as a learner measurement or as the expected result
+of a physical investigation.
 
 2. No unsafe home experimentation. Every lesson carries a student-visible
    safety brief and an equal-credit alternative that needs no special
@@ -21,7 +19,7 @@ import re
 
 from safety_floor import DATA_BEARING_PHASES, SUPERVISION_PLAIN_WORDS
 
-PACKAGE_VERSION = "1.0.0"
+PACKAGE_VERSION = "2.0.0"
 
 # ---------------------------------------------------------------------------
 # Objective classification and question generation

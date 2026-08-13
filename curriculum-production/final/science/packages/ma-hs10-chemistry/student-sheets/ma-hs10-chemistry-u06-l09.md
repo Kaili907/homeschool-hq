@@ -34,6 +34,10 @@
 - eye protection - REQUIRED for this investigation
 - course notebook or digital equivalent
 - pencil, keyboard, or other accessible response tool
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
 
 ## Safety — read this before you touch anything
 
@@ -111,11 +115,89 @@ Read this before you touch any material. If anything here does not match what is
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: the net energy change is the total energy needed to break all bonds in the reactants minus the total released in forming all bonds in the products.
+- Science brief: if more energy is released in forming bonds than was required to break them, the reaction is exothermic; otherwise it is endothermic.
+- Science brief: bond energy values are averages across compounds, so calculations from them give estimates rather than exact results.
+
+### Evidence check: total bond energy changes
+
+**Candidate claim:** A case report presents this as acceptable science: “computing an energy change from bond breaking alone, ignoring bond formation.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: the net energy change is the total energy needed to break all bonds in the reactants minus the total released in forming all bonds in the products. |
+| E2 | established science reference | Science brief: if more energy is released in forming bonds than was required to break them, the reaction is exothermic; otherwise it is endothermic. |
+| E3 | established science reference | Science brief: bond energy values are averages across compounds, so calculations from them give estimates rather than exact results. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs10-chemistry-u06::total bond energy changes, derived from the reviewed correctness source policy/correctness/ma-hs10-chemistry.correctness.json.
+
+**Supplied unit connections:** bond breaking and bond making; exothermic and endothermic processes; total bond energy changes; thermal energy transfer and equilibration; computational energy models; the second law in everyday systems
+
+**Supplied unit performance task:** Develop a model showing that energy release or absorption depends on total bond energy change, and build a computational energy account for a system you measured.
+
+### Bound task
+
+**Question:** What does evidence E1 through E3 justify about total bond energy changes, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Use the supplied record to build a claim-evidence-reasoning product that another reader can check line by line.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** DELIVERED_MODEL_DATA_ALTERNATIVE
+
+**Materials:**
+
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
+
+**Bond-energy account for reactions not used in the physical route**
+
+| Process | Bonds broken (kJ/mol) | Bonds formed (kJ/mol) | ΔH model = broken - formed |
+| --- | --- | --- | --- |
+| R1 | 920 | 1080 | calculate |
+| R2 | 1250 | 1130 | calculate |
+| R3 | 760 | 760 | calculate |
+| R4 | 1440 | 1595 | calculate |
+
+**Model/source rule:** For this model only, ΔH = total energy assigned to broken bonds minus total energy assigned to formed bonds. These processes are not the household trials in the H4 route.
+
+**Provenance:** Manuel Academy deterministic instructional simulation. Values are model output, not observations, measurements, or a prediction for the hands-on route.
+
+**Do this:**
+
+1. Choose this route instead of the physical route; it earns the same maximum score.
+2. Read the model rule and label every supplied quantity as MODEL OUTPUT.
+3. Calculate each ΔH, classify the modelled energy transfer from the sign, and compare the model with its assumptions. Do not use these values to predict the household temperature trials.
+4. Show calculations, cite row labels, state a limitation of the model, and answer the lesson analysis questions.
+5. Do not combine these model outputs with measurements from the physical route or call them observations.
+
+**Pinned H4 alternative statement (lineage evidence):** Use Epsom salt and baking soda with vinegar only - both mild - and measure and record the temperature change each one produces; no direction or size of change is supplied in advance. This path leaves out the calcium chloride route, so it does not reach the whole target on its own: record your own measurements first, then pair them with a published table of dissolution and reaction enthalpies and bond energies, which supplies the processes this path excludes. Kitchen materials or paper.
+
+The delivered model table above is the package-alone production route. It removes any need to retrieve the published input named by the source statement.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** SAFETY FIRST - SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start any step until they are there. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away.
+**The task.** SAFETY FIRST - SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start any step until they are there. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away. OR Choose the package-alone model-data alternative printed above, follow its five-step procedure, label its inputs MODEL OUTPUT, and complete the analysis, provenance, and limitation work without handling physical-route materials or relying on prior work.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -177,77 +259,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Use Epsom salt and baking soda with vinegar only - both mild - and measure and record the temperature change each one produces; no direction or size of change is supplied in advance. This path leaves out the calcium chloride route, so it does not reach the whole target on its own: record your own measurements first, then pair them with a published table of dissolution and reaction enthalpies and bond energies, which supplies the processes this path excludes. Kitchen materials or paper.
-
-_About the supplied or provided material named above: this package prints none of it. Supplied means a published table, data set, diagram, sequence, case study, observation log, or reference image that an adult retrieves and that you name on the provenance line. Nothing printed here is a record of an observation, so nothing here can be mistaken for yours._
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own temperature-versus-time measurements, plus published bond-energy tables for the model. No temperature change is predicted numerically before measurement.
-
-**Where to find the published data:** see `res-ma-hs10-chemistry-data-sources` in the course resource list. The family retrieves it; no third-party content is copied into this package.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Assemble performance-task evidence for total bond energy changes that an independent reader could check without asking you a single question: the claim, the data behind it with its provenance, the reasoning between them, and the limitations. Anything a reader would have to take on trust is a gap in the evidence, not a detail.
+**Q1.** Build a checkable contribution to the supplied unit performance task — Develop a model showing that energy release or absorption depends on total bond energy change, and build a computational energy account for a system you measured. — using the case and E1-E3. Include claim, evidence, reasoning, limitation, and a recorded revision.
 
 >
 
-**Q2.** Explain total bond energy changes in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain total bond energy changes in your own words using at least two specifically named rows from E1-E3. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply total bond energy changes to a case in Energy in Chemical Systems you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for total bond energy changes. Decide whether E1-E3 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on total bond energy changes against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about total bond energy changes, revise its weakest claim with a named row from E1-E3, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using total bond energy changes as your worked example and citing one piece of your own evidence: Why do some reactions warm their surroundings and others chill them, when both are just rearranging bonds?
+**Q5.** Answer the printed unit question using total bond energy changes as the example. Cite one row from E1-E3, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about total bond energy changes? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E3 is strongest for evaluating the candidate claim about total bond energy changes? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on total bond energy changes cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E3, state one conclusion about total bond energy changes that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about total bond energy changes. Label E1-E3 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -289,4 +333,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs10-chemistry-u06-l09` · lesson `ma-hs10-chemistry-u06-l09` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs10-chemistry-u06-l09` · lesson `ma-hs10-chemistry-u06-l09` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

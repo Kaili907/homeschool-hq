@@ -28,6 +28,10 @@
 - notebook
 - course notebook or digital equivalent
 - pencil, keyboard, or other accessible response tool
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
 
 ## Safety — read this before you touch anything
 
@@ -103,11 +107,91 @@ Read this before you touch any material. If anything here does not match what is
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: in order of increasing frequency and decreasing wavelength the spectrum runs radio, microwave, infrared, visible, ultraviolet, X-ray, gamma.
+- Science brief: all electromagnetic waves travel at the same speed in vacuum, approximately three times ten to the eighth metres per second.
+- Science brief: the regions of the spectrum differ in frequency and wavelength, not in their fundamental nature.
+- Science brief: photon energy increases with frequency, so gamma rays carry far more energy per photon than radio waves.
+
+### Evidence check: the electromagnetic spectrum
+
+**Candidate claim:** A case report presents this as acceptable science: “placing the spectrum regions out of order, such as putting ultraviolet below visible in frequency.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: in order of increasing frequency and decreasing wavelength the spectrum runs radio, microwave, infrared, visible, ultraviolet, X-ray, gamma. |
+| E2 | established science reference | Science brief: all electromagnetic waves travel at the same speed in vacuum, approximately three times ten to the eighth metres per second. |
+| E3 | established science reference | Science brief: the regions of the spectrum differ in frequency and wavelength, not in their fundamental nature. |
+| E4 | established science reference | Science brief: photon energy increases with frequency, so gamma rays carry far more energy per photon than radio waves. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs11-physics-u09::the electromagnetic spectrum, derived from the reviewed correctness source policy/correctness/ma-hs11-physics.correctness.json.
+
+**Supplied unit connections:** the electromagnetic spectrum; absorption of radiation by matter; digital versus analog information; evaluating published claims about radiation; wave-based technologies; energy conversion device design
+
+**Supplied unit performance task:** Complete a physics engineering capstone: design, build, and refine a device that converts one form of energy into another or transmits information, and communicate how wave principles and evidence justify the design.
+
+### Bound task
+
+**Question:** What does evidence E1 through E4 justify about the electromagnetic spectrum, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Choose the H4 physical route or the supplied model-data route, complete that route, and answer from the evidence you actually collected or calculated.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** DELIVERED_MODEL_DATA_ALTERNATIVE
+
+**Materials:**
+
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
+
+**Energy-conversion device model**
+
+| Design | Input energy (J) | Useful output (J) | Time (s) | Material score /5 |
+| --- | --- | --- | --- | --- |
+| A | 1000 | 420 | 20 | 5 |
+| B | 1000 | 510 | 30 | 4 |
+| C | 1200 | 660 | 25 | 3 |
+| D | 800 | 400 | 18 | 2 |
+
+**Model/source rule:** Efficiency=useful output/input; useful power=useful output/time. Material score is an independent design constraint where 5 is best.
+
+**Provenance:** Manuel Academy deterministic instructional simulation. Values are model output, not observations, measurements, or a prediction for the hands-on route.
+
+**Do this:**
+
+1. Choose this route instead of the physical route; it earns the same maximum score.
+2. Read the model rule and label every supplied quantity as MODEL OUTPUT.
+3. Calculate efficiency and power, choose a design under two stated criteria, and defend the trade-off without claiming any design creates energy.
+4. Show calculations, cite row labels, state a limitation of the model, and answer the lesson analysis questions.
+5. Do not combine these model outputs with measurements from the physical route or call them observations.
+
+**Pinned H4 alternative statement (lineage evidence):** Run the shielding test with a radio and household materials only - no build - and complete the capstone as a documented paper design with a modelled energy budget rather than a physical device.
+
+The delivered model table above is the package-alone production route. It removes any need to retrieve the published input named by the source statement.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** SAFETY FIRST - SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start any step until they are there. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away.
+**The task.** SAFETY FIRST - SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start any step until they are there. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away. OR Choose the package-alone model-data alternative printed above, follow its five-step procedure, label its inputs MODEL OUTPUT, and complete the analysis, provenance, and limitation work without handling physical-route materials or relying on prior work.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -169,75 +253,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Run the shielding test with a radio and household materials only - no build - and complete the capstone as a documented paper design with a modelled energy budget rather than a physical device.
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own signal-strength observations across shielding materials and their own device performance trials. Published claims are evaluated, never restated as findings.
-
-**Where to find the published data:** see `res-ma-hs11-physics-data-sources` in the course resource list. The family retrieves it; no third-party content is copied into this package.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Describe the investigation you actually ran on the electromagnetic spectrum — or the alternative path, which is scored the same: the question, the variable you changed, the variables you held constant, what you measured, your uncertainty, and how many trials you completed. Report only values you measured or calculated yourself, or took from a source you name on the provenance line and mark SUPPLIED.
+**Q1.** Complete the route you chose. For the document/model route, use its printed procedure and input table; for the H4 physical route, use the printed safe order and your own blank record. Report the route, evidence IDs or model rows, conclusion about the electromagnetic spectrum, uncertainty, and limitation.
 
 >
 
-**Q2.** Explain the electromagnetic spectrum in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain the electromagnetic spectrum in your own words using at least two specifically named rows from E1-E4. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply the electromagnetic spectrum to a case in Electromagnetic Radiation, Information, and a Physics Engineering Capstone you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for the electromagnetic spectrum. Decide whether E1-E4 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on the electromagnetic spectrum against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about the electromagnetic spectrum, revise its weakest claim with a named row from E1-E4, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using the electromagnetic spectrum as your worked example and citing one piece of your own evidence: How do we send information reliably using something we cannot see?
+**Q5.** Answer the printed unit question using the electromagnetic spectrum as the example. Cite one row from E1-E4, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about the electromagnetic spectrum? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E4 is strongest for evaluating the candidate claim about the electromagnetic spectrum? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on the electromagnetic spectrum cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E4, state one conclusion about the electromagnetic spectrum that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about the electromagnetic spectrum. Label E1-E4 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -281,4 +329,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs11-physics-u09-l07` · lesson `ma-hs11-physics-u09-l07` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs11-physics-u09-l07` · lesson `ma-hs11-physics-u09-l07` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

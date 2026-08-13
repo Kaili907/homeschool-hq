@@ -1,8 +1,8 @@
 {
   "gate": "science student-work safety gate",
   "totalLessons": 972,
-  "checks": 36,
-  "passed": 36,
+  "checks": 37,
+  "passed": 37,
   "failed": 0,
   "status": "PASS",
   "results": [
@@ -71,7 +71,14 @@
     },
     {
       "id": "alternative-promise-matches-package",
-      "description": "An alternative that promises supplied or provided material is accompanied by the clarification that this package prints none of it.",
+      "description": "An alternative that promises supplied or provided material is fulfilled by the package-alone executable route.",
+      "status": "PASS",
+      "problemCount": 0,
+      "problems": []
+    },
+    {
+      "id": "package-alone-learner-content-is-executable",
+      "description": "Every lesson prints a science brief, bound evidence, exact steps, complete materials, and an executable equal-credit route.",
       "status": "PASS",
       "problemCount": 0,
       "problems": []

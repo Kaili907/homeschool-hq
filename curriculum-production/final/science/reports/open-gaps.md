@@ -85,21 +85,16 @@ adult-facing, and free of supplied observations. They cannot prove the keys are 
 review above is for, and it is recorded here rather than implied by a green run. Any future edit to a
 key needs the same treatment.
 
-## 1. The Grade 3–8 equal-credit alternative is derived, not authored
+## 1. The Grade 3–8 equal-credit alternative is derived, not authored — **CLOSED FOR EXECUTABILITY**
 
-The elementary and middle sources name **one** text-only path for all 108 lessons of a course, and it
-is a policy sentence rather than an activity. The package now supplies a concrete per-lesson task
-built from that lesson's own question, focus, and success criteria — plan the investigation in full,
-predict the result, give the reasoning, answer every analysis question from it — and says plainly, on
-every sheet, that the task is derived rather than named by the curriculum.
+The elementary and middle sources name one text-only policy path rather than lesson-specific
+activities. Production now closes the executable-content gap on all 90 investigation days with a
+complete document-evidence investigation: supplied topic-specific evidence, materials, a fixed
+procedure, safety, recording columns, cleanup, and an accessible equal-credit route using the same
+evidence and scoring ceiling. No adult lookup or unavailable resource is required.
 
-That makes the path actionable and equal-credit. It does not make it *equivalent* to the High School
-alternatives, which name a specific paper task and a specific published dataset per unit.
-
-**To close:** author a named, lesson-specific alternative for each of the 90 elementary and
-middle-grade investigation days, on the pattern High School already uses, and publish a
-`res-ma-g{3,4,5,7,8}-science-data-sources` resource so those grades have a data-source list to point
-at. No such resource exists today, which is why elementary Path B asks the adult to name the source.
+This closes the learner-content defect without pretending the immutable source authored the new
+production layer. The package records the production derivation and keeps the source lineage exact.
 
 ## 2. Grade 8 is more restricted than Grade 9
 

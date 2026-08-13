@@ -1,0 +1,365 @@
+{
+  "gate": "science-executable-learner-content-r1",
+  "scope": "Science learner content only; projection, UI, scoring, and global admission excluded",
+  "totalLessons": 972,
+  "lessonsRepaired": 972,
+  "status": "PASS",
+  "counts": {
+    "PLACEHOLDER": 0,
+    "MISSING_DATA": 0,
+    "MISSING_MATERIALS": 0,
+    "NONFUNCTIONAL_ALTERNATIVE": 0,
+    "EXPECTED_RESULT_LEAK": 0,
+    "H4_LINEAGE": 0,
+    "SAFETY": 0,
+    "HS_INVESTIGATION": 0
+  },
+  "highSchoolInvestigations": {
+    "total": 36,
+    "executable": 36,
+    "proof": [
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 1,
+        "day7": "ma-hs10-chemistry-u01-l07",
+        "day9": "ma-hs10-chemistry-u01-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 2,
+        "day7": "ma-hs10-chemistry-u02-l07",
+        "day9": "ma-hs10-chemistry-u02-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 3,
+        "day7": "ma-hs10-chemistry-u03-l07",
+        "day9": "ma-hs10-chemistry-u03-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 4,
+        "day7": "ma-hs10-chemistry-u04-l07",
+        "day9": "ma-hs10-chemistry-u04-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 5,
+        "day7": "ma-hs10-chemistry-u05-l07",
+        "day9": "ma-hs10-chemistry-u05-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 6,
+        "day7": "ma-hs10-chemistry-u06-l07",
+        "day9": "ma-hs10-chemistry-u06-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 7,
+        "day7": "ma-hs10-chemistry-u07-l07",
+        "day9": "ma-hs10-chemistry-u07-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 5,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 8,
+        "day7": "ma-hs10-chemistry-u08-l07",
+        "day9": "ma-hs10-chemistry-u08-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs10-chemistry",
+        "unit": 9,
+        "day7": "ma-hs10-chemistry-u09-l07",
+        "day9": "ma-hs10-chemistry-u09-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 7,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 1,
+        "day7": "ma-hs11-physics-u01-l07",
+        "day9": "ma-hs11-physics-u01-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 2,
+        "day7": "ma-hs11-physics-u02-l07",
+        "day9": "ma-hs11-physics-u02-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 3,
+        "day7": "ma-hs11-physics-u03-l07",
+        "day9": "ma-hs11-physics-u03-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 4,
+        "day7": "ma-hs11-physics-u04-l07",
+        "day9": "ma-hs11-physics-u04-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 5,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 5,
+        "day7": "ma-hs11-physics-u05-l07",
+        "day9": "ma-hs11-physics-u05-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 6,
+        "day7": "ma-hs11-physics-u06-l07",
+        "day9": "ma-hs11-physics-u06-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 5,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 7,
+        "day7": "ma-hs11-physics-u07-l07",
+        "day9": "ma-hs11-physics-u07-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 8,
+        "day7": "ma-hs11-physics-u08-l07",
+        "day9": "ma-hs11-physics-u08-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs11-physics",
+        "unit": 9,
+        "day7": "ma-hs11-physics-u09-l07",
+        "day9": "ma-hs11-physics-u09-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 1,
+        "day7": "ma-hs12-earth-space-environmental-u01-l07",
+        "day9": "ma-hs12-earth-space-environmental-u01-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 5,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 2,
+        "day7": "ma-hs12-earth-space-environmental-u02-l07",
+        "day9": "ma-hs12-earth-space-environmental-u02-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 3,
+        "day7": "ma-hs12-earth-space-environmental-u03-l07",
+        "day9": "ma-hs12-earth-space-environmental-u03-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 4,
+        "day7": "ma-hs12-earth-space-environmental-u04-l07",
+        "day9": "ma-hs12-earth-space-environmental-u04-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 5,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 5,
+        "day7": "ma-hs12-earth-space-environmental-u05-l07",
+        "day9": "ma-hs12-earth-space-environmental-u05-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 6,
+        "day7": "ma-hs12-earth-space-environmental-u06-l07",
+        "day9": "ma-hs12-earth-space-environmental-u06-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 5,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 7,
+        "day7": "ma-hs12-earth-space-environmental-u07-l07",
+        "day9": "ma-hs12-earth-space-environmental-u07-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 8,
+        "day7": "ma-hs12-earth-space-environmental-u08-l07",
+        "day9": "ma-hs12-earth-space-environmental-u08-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs12-earth-space-environmental",
+        "unit": 9,
+        "day7": "ma-hs12-earth-space-environmental-u09-l07",
+        "day9": "ma-hs12-earth-space-environmental-u09-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 1,
+        "day7": "ma-hs9-biology-u01-l07",
+        "day9": "ma-hs9-biology-u01-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 2,
+        "day7": "ma-hs9-biology-u02-l07",
+        "day9": "ma-hs9-biology-u02-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 3,
+        "day7": "ma-hs9-biology-u03-l07",
+        "day9": "ma-hs9-biology-u03-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 4,
+        "day7": "ma-hs9-biology-u04-l07",
+        "day9": "ma-hs9-biology-u04-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 5,
+        "day7": "ma-hs9-biology-u05-l07",
+        "day9": "ma-hs9-biology-u05-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 6,
+        "day7": "ma-hs9-biology-u06-l07",
+        "day9": "ma-hs9-biology-u06-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 4,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 7,
+        "day7": "ma-hs9-biology-u07-l07",
+        "day9": "ma-hs9-biology-u07-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 7,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 8,
+        "day7": "ma-hs9-biology-u08-l07",
+        "day9": "ma-hs9-biology-u08-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 8,
+        "status": "PASS"
+      },
+      {
+        "courseId": "ma-hs9-biology",
+        "unit": 9,
+        "day7": "ma-hs9-biology-u09-l07",
+        "day9": "ma-hs9-biology-u09-l09",
+        "primaryRoute": "H4_PHYSICAL_INVESTIGATION",
+        "alternativeRows": 6,
+        "status": "PASS"
+      }
+    ]
+  },
+  "h4Lineage": {
+    "expectedCommit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+    "expectedLineage": "hs912-science-h4",
+    "highSchoolLessons": 432,
+    "exact": true
+  },
+  "safety": {
+    "verifiedLessons": 972,
+    "findings": 0,
+    "b1Closed": true,
+    "b2Closed": true,
+    "b3Closed": true
+  },
+  "expectedResult": {
+    "protectedLessons": 972,
+    "findings": 0
+  },
+  "problems": []
+}

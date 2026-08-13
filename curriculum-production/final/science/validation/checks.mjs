@@ -371,12 +371,20 @@ export const CHECKS = [
   {
     id: 'alternative-promise-matches-package',
     description:
-      'An alternative that promises supplied or provided material is accompanied by the clarification that this package prints none of it.',
+      'An alternative that promises supplied or provided material is fulfilled by the package-alone executable route.',
     run({ packages, sheets, blocks }) {
       const problems = []
       for (const pkg of packages) {
         const alternative = pkg.equal_credit_safe_alternative
         if (!/\b(supplied|provided)\b/i.test(alternative.text)) continue
+        const delivered = pkg.executable_content?.equal_credit_route
+        const deliveredInput = delivered?.input ?? pkg.executable_content?.supplied_evidence
+        if (delivered?.complete && deliveredInput) {
+          if (!sheets.get(pkg.lesson_id).includes(deliveredInput.title)) {
+            fail(problems, pkg, 'delivered alternative input is absent from the student sheet')
+          }
+          continue
+        }
         const clarification = blocks.text[alternative.clarification_ref]
         if (!clarification) {
           fail(problems, pkg, 'alternative promises supplied material with no clarification')
@@ -384,6 +392,55 @@ export const CHECKS = [
         }
         if (!sheets.get(pkg.lesson_id).includes(clarification)) {
           fail(problems, pkg, 'clarification is not rendered on the student sheet')
+        }
+      }
+      return problems
+    },
+  },
+  {
+    id: 'package-alone-learner-content-is-executable',
+    description:
+      'Every lesson prints a science brief, bound evidence, exact steps, complete materials, and an executable equal-credit route.',
+    run({ packages, sheets }) {
+      const problems = []
+      for (const pkg of packages) {
+        const content = pkg.executable_content
+        if (!content || content.completion_mode !== 'PACKAGE_ALONE') {
+          fail(problems, pkg, 'no package-alone executable content')
+          continue
+        }
+        if (!content.placeholder_free || !content.inputs_complete) {
+          fail(problems, pkg, 'content is marked placeholder or input-incomplete')
+        }
+        if ((content.science_brief ?? []).length < 2) {
+          fail(problems, pkg, 'science brief carries fewer than two topic-specific statements')
+        }
+        if ((content.supplied_evidence?.rows ?? []).length < 2) {
+          fail(problems, pkg, 'no complete supplied evidence record')
+        }
+        if ((content.bound_task?.steps ?? []).length < 4) {
+          fail(problems, pkg, 'bound task has no executable sequence')
+        }
+        const route = content.equal_credit_route
+        if (!route?.complete || !(route.materials ?? []).length) {
+          fail(problems, pkg, 'equal-credit route is not executable')
+        }
+        if (pkg.data_bearing && !(pkg.materials ?? []).length) {
+          fail(problems, pkg, 'investigation has no materials')
+        }
+        if (content.physical_result_disclosed_before_collection !== false) {
+          fail(problems, pkg, 'physical result timing is not protected')
+        }
+        const sheet = sheets.get(pkg.lesson_id) ?? ''
+        for (const marker of [
+          'The science information and exact work for this lesson',
+          content.case?.claim_to_test,
+          content.bound_task?.question,
+          'Equal-credit route — complete and delivered here',
+        ]) {
+          if (!marker || !sheet.includes(marker)) {
+            fail(problems, pkg, `rendered learner sheet omits executable marker: ${marker ?? 'missing'}`)
+          }
         }
       }
       return problems
@@ -1260,8 +1317,8 @@ export const CHECKS = [
         }
         // The footer's claim has to be true of the sheet it sits on.
         const sheet = sheets.get(pkg.lesson_id) ?? ''
-        if (!/No observation, measurement, or expected result is supplied anywhere in this sheet/.test(sheet)) {
-          fail(problems, pkg, 'sheet does not carry the no-supplied-results statement it is held to')
+        if (!/physical-investigation observations and expected results are never supplied before collection/.test(sheet)) {
+          fail(problems, pkg, 'sheet does not carry the protected result-timing statement')
         }
       }
       return problems

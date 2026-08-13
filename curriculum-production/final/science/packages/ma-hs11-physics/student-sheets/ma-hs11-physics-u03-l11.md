@@ -17,9 +17,9 @@
 
 **Materials:**
 
-- course notebook or digital equivalent
-- pencil, keyboard, or other accessible response tool
-- printed or on-screen text, data table, or model for this lesson
+- this complete learner sheet
+- course notebook or response space
+- accessible response tool
 
 ## Safety — read this before you touch anything
 
@@ -81,11 +81,67 @@ This lesson is desk-based and prescribes no handling sequence.
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: analysing a collision requires masses and velocities before and after, with directions, and each carries measurement uncertainty.
+- Science brief: a momentum total that does not balance within uncertainty indicates an unaccounted external force or a measurement problem, and both are investigated rather than assumed.
+- Science brief: comparing kinetic energy before and after classifies the collision, and any energy shortfall is accounted for physically.
+
+### Evidence check: collision analysis from data
+
+**Candidate claim:** A case report presents this as acceptable science: “concluding momentum was not conserved without checking uncertainty or external forces.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: analysing a collision requires masses and velocities before and after, with directions, and each carries measurement uncertainty. |
+| E2 | established science reference | Science brief: a momentum total that does not balance within uncertainty indicates an unaccounted external force or a measurement problem, and both are investigated rather than assumed. |
+| E3 | established science reference | Science brief: comparing kinetic energy before and after classifies the collision, and any energy shortfall is accounted for physically. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs11-physics-u03::collision analysis from data, derived from the reviewed correctness source policy/correctness/ma-hs11-physics.correctness.json.
+
+**Supplied unit connections:** momentum as mass times velocity; conservation of momentum; impulse and contact time; elastic and inelastic collisions; collision analysis from data; engineering a protective device
+
+**Supplied unit performance task:** Design, test, and refine a device that minimises the force on an object during a collision, and use momentum and impulse reasoning plus your own trial data to justify each revision.
+
+### Bound task
+
+**Question:** What does evidence E1 through E3 justify about collision analysis from data, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Without copying the brief, evaluate the candidate claim, interpret the evidence table, and apply the idea to a new example you create.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** ACCESSIBLE_RESPONSE_ROUTE
+
+**Materials:**
+
+- the supplied evidence record
+- a spoken, typed, drawn, or tactile response mode
+
+**Do this:**
+
+1. Use the same E1-E3 record and answer the same bound question.
+2. Respond in an accessible mode without changing the evidence or success criteria.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** The learner completes the unit assessment independently. The tutor may clarify what a prompt is asking but supplies no answer, no worked solution, and no evaluation of correctness during the assessment.
+**The task.** What does evidence E1 through E3 justify about collision analysis from data, and does it support the candidate claim? Follow the five bound steps printed above and cite the supplied evidence IDs.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -120,75 +176,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — this lesson needs no special equipment
-
-No special equipment is needed for this lesson; it is notebook and text based. The unit investigation on Day 7 carries the full alternative path.
-
-**The hands-on day in this unit, and its equal-credit alternative:** Day 7 investigation: Impact-protection design and collision trials | No-special-equipment alternative: Use a sealed water balloon, a small beanbag, or a marshmallow instead of an egg - no biological hazard, no cleanup - or run the collision strand with toy cars only and analyse published crash-test data for the protective design. Both paths meet the same momentum and impulse target.
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own survival counts, drop heights, and cart velocities. Impulse comparisons come from the learner's own trials.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Produce independent mastery evidence for collision analysis from data on a task you have not seen, with no worked example available. Show the reasoning, not only the result — mastery is the reasoning surviving an unfamiliar surface, and an unexplained correct answer does not evidence it.
+**Q1.** Without copying a sentence from the brief, evaluate the printed candidate case about collision analysis from data. Cite E1-E3, write the reasoning in your own words, and correct the case claim so it fits exactly what the record establishes.
 
 >
 
-**Q2.** Explain collision analysis from data in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain collision analysis from data in your own words using at least two specifically named rows from E1-E3. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply collision analysis from data to a case in Momentum, Collisions, and Protective Design you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for collision analysis from data. Decide whether E1-E3 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on collision analysis from data against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about collision analysis from data, revise its weakest claim with a named row from E1-E3, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using collision analysis from data as your worked example and citing one piece of your own evidence: What is conserved in a collision, and how do we use that to keep people safe?
+**Q5.** Answer the printed unit question using collision analysis from data as the example. Cite one row from E1-E3, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about collision analysis from data? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E3 is strongest for evaluating the candidate claim about collision analysis from data? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on collision analysis from data cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E3, state one conclusion about collision analysis from data that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about collision analysis from data. Label E1-E3 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -230,4 +250,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs11-physics-u03-l11` · lesson `ma-hs11-physics-u03-l11` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs11-physics-u03-l11` · lesson `ma-hs11-physics-u03-l11` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

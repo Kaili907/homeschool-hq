@@ -16,9 +16,9 @@
 
 **Materials:**
 
-- course notebook or digital equivalent
-- pencil, keyboard, or other accessible response tool
-- printed or on-screen text, data table, or model for this lesson
+- this complete learner sheet
+- course notebook or response space
+- accessible response tool
 
 ## Safety — read this before you touch anything
 
@@ -80,11 +80,67 @@ This lesson is desk-based and prescribes no handling sequence.
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: a predicted force follows from the stated relationship, the measured quantities, and their units, and it carries the uncertainty of those measurements.
+- Science brief: a prediction states the assumptions it rests on, such as treating a body as a point mass or ignoring intervening material.
+- Science brief: the prediction is then compared against measurement, and disagreement is investigated rather than explained away.
+
+### Evidence check: predicting forces mathematically
+
+**Candidate claim:** A case report presents this as acceptable science: “reporting a calculated force with more precision than the inputs support.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: a predicted force follows from the stated relationship, the measured quantities, and their units, and it carries the uncertainty of those measurements. |
+| E2 | established science reference | Science brief: a prediction states the assumptions it rests on, such as treating a body as a point mass or ignoring intervening material. |
+| E3 | established science reference | Science brief: the prediction is then compared against measurement, and disagreement is investigated rather than explained away. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs11-physics-u04::predicting forces mathematically, derived from the reviewed correctness source policy/correctness/ma-hs11-physics.correctness.json.
+
+**Supplied unit connections:** Newton's law of gravitation; Coulomb's law; inverse-square relationships; comparing gravitational and electrostatic strength; field lines as representations; predicting forces mathematically
+
+**Supplied unit performance task:** Use mathematical representations of Newton's law of gravitation and Coulomb's law to predict and compare forces in real situations, and explain why one dominates at each scale.
+
+### Bound task
+
+**Question:** What does evidence E1 through E3 justify about predicting forces mathematically, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Locate one weakness in an earlier response, revise it with a named evidence code, and state what the revision fixes.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** ACCESSIBLE_RESPONSE_ROUTE
+
+**Materials:**
+
+- the supplied evidence record
+- a spoken, typed, drawn, or tactile response mode
+
+**Do this:**
+
+1. Use the same E1-E3 record and answer the same bound question.
+2. Respond in an accessible mode without changing the evidence or success criteria.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** The learner reworks the specific items missed, using a fresh parallel task rather than the original item, and writes what changed in their thinking.
+**The task.** What does evidence E1 through E3 justify about predicting forces mathematically, and does it support the candidate claim? Follow the five bound steps printed above and cite the supplied evidence IDs.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -119,73 +175,35 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — this lesson needs no special equipment
-
-No special equipment is needed for this lesson; it is notebook and text based. The unit investigation on Day 7 carries the full alternative path.
-
-**The hands-on day in this unit, and its equal-credit alternative:** Day 7 investigation: Electrostatic force behaviour and inverse-square modelling | No-special-equipment alternative: Measure illuminated area against distance with a flashlight and a ruler and work the relationship out from your own measurements; no relationship and no expected value is supplied in advance. Then apply the same mathematics to gravitation and Coulomb's law using published masses and charges. Household items and paper.
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own separation-versus-effect observations and their own calculations from published masses, charges, and distances.
-
-**Where to find the published data:** see `res-ma-hs11-physics-data-sources` in the course resource list. The family retrieves it; no third-party content is copied into this package.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Explain predicting forces mathematically in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q1.** Explain predicting forces mathematically in your own words using at least two specifically named rows from E1-E3. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q2.** Apply predicting forces mathematically to a case in Gravitation and Electrostatic Forces you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q2.** Treat the printed candidate claim as the fresh case for predicting forces mathematically. Decide whether E1-E3 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q3.** Check your work on predicting forces mathematically against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q3.** Check the conclusion about predicting forces mathematically, revise its weakest claim with a named row from E1-E3, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q4.** Answer the unit's essential question in two or three sentences, using predicting forces mathematically as your worked example and citing one piece of your own evidence: Why do gravity and the electric force follow the same mathematical shape while behaving so differently?
+**Q4.** Answer the printed unit question using predicting forces mathematically as the example. Cite one row from E1-E3, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q5.** Which single piece of evidence in your record most strongly supports your conclusion about predicting forces mathematically? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q5.** Which one row in E1-E3 is strongest for evaluating the candidate claim about predicting forces mathematically? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q6.** Name one thing your work on predicting forces mathematically cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q6.** Using the supplied case and E1-E3, state one conclusion about predicting forces mathematically that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q7.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q7.** Audit the inputs used in your response about predicting forces mathematically. Label E1-E3 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -227,4 +245,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs11-physics-u04-l12` · lesson `ma-hs11-physics-u04-l12` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs11-physics-u04-l12` · lesson `ma-hs11-physics-u04-l12` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

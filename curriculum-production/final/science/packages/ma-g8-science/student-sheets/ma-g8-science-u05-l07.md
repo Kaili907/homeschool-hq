@@ -14,9 +14,9 @@
 
 **Materials:**
 
-- course notebook or digital equivalent
-- pencil or accessible response tool
-- unit-specific source, model, manipulatives, safe materials, or approved digital tool
+- this learner sheet with its complete evidence record
+- course notebook or the blank recording table on this sheet
+- pencil, keyboard, or another accessible response tool
 
 ## Safety — read this before you touch anything
 
@@ -89,11 +89,112 @@ This lesson's curriculum source prescribes no fixed procedure, so this package s
 
 Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: earth is about 4.5 billion years old.
+- Science brief: earth's history spans billions of years, and most of it took place before organisms with hard parts existed.
+- Science brief: geologic time is divided into named intervals whose boundaries are marked by major changes in the rock and fossil record.
+- Science brief: relative dating orders events; radiometric dating supplies ages in years, and the two are used together.
+
+### Evidence check: geologic time
+
+**Candidate claim:** A case report presents this as acceptable science: “earth is thousands rather than billions of years old.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: earth is about 4.5 billion years old. |
+| E2 | established science reference | Science brief: earth's history spans billions of years, and most of it took place before organisms with hard parts existed. |
+| E3 | established science reference | Science brief: geologic time is divided into named intervals whose boundaries are marked by major changes in the rock and fossil record. |
+| E4 | established science reference | Science brief: relative dating orders events; radiometric dating supplies ages in years, and the two are used together. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-g8-science-u05::geologic time, derived from the reviewed correctness source policy/correctness/ma-g8-science.correctness.json.
+
+**Supplied unit connections:** geologic time; rock strata and fossils; plate tectonics; cycling of Earth materials; surface processes; evidence for past change
+
+**Supplied unit performance task:** Construct a regional geologic-history explanation from maps, cross-sections, rocks, and fossil data.
+
+### Bound task
+
+**Question:** What does evidence E1 through E4 justify about geologic time, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Carry out the document investigation in the stated order and record the evidence tally before writing a conclusion.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Complete document investigation
+
+**Investigation question:** How well does the supplied evidence support the case claim about geologic time?
+
+**Materials supplied or required:**
+
+- this learner sheet with its complete evidence record
+- course notebook or the blank recording table on this sheet
+- pencil, keyboard, or another accessible response tool
+
+**Procedure:**
+
+1. Read the case claim without deciding whether it is correct.
+2. Write a prediction: strongly supported, partly supported, or not supported.
+3. Read E1 alone and record what it supports and what it cannot decide.
+4. Repeat for each remaining evidence row; do not skip evidence that challenges the prediction.
+5. Tally the evidence by supports, challenges, or does not decide.
+6. Write a conclusion that cites at least two evidence IDs and is no broader than the supplied record.
+7. Name one additional observation or measurement that would make the conclusion stronger.
+
+**Safety for this route:**
+
+- This route is desk work: do not add household substances, heat, electricity, cutting, or an outdoor collection.
+- Take a pause or use a spoken, typed, drawn, or tactile response at any point without losing credit.
+
+**Recording structure:** Evidence ID; Supports / challenges / does not decide; Reason; Limitation
+
+**Cleanup:** Return the sheet and writing tool; recycle scrap paper. No sample or chemical waste is produced.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** ACCESSIBLE_EVIDENCE_SIMULATION
+
+**Materials:**
+
+- the evidence record on this sheet
+- an accessible response tool
+
+**Complete reference-evidence record for this lesson**
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: earth is about 4.5 billion years old. |
+| E2 | established science reference | Science brief: earth's history spans billions of years, and most of it took place before organisms with hard parts existed. |
+| E3 | established science reference | Science brief: geologic time is divided into named intervals whose boundaries are marked by major changes in the rock and fossil record. |
+| E4 | established science reference | Science brief: relative dating orders events; radiometric dating supplies ages in years, and the two are used together. |
+
+**Model/source rule:** Manuel Academy Science learner brief for topic ma-g8-science-u05::geologic time, derived from the reviewed correctness source policy/correctness/ma-g8-science.correctness.json.
+
+**Provenance:** Manuel Academy Science learner brief for topic ma-g8-science-u05::geologic time, derived from the reviewed correctness source policy/correctness/ma-g8-science.correctness.json.
+
+**Do this:**
+
+1. Have the evidence rows read aloud, enlarged, or converted to tactile/one-row-at-a-time cards.
+2. For each row, state supports, challenges, or does not decide and give the reason.
+3. Produce the same conclusion, limitation, and revision required by the primary route.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** Learner completes a new application of geologic time and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**The task.** Complete the document-evidence investigation printed above: classify every supplied evidence row, tally support and challenge, cite at least two evidence IDs in the conclusion, state a limitation, and record one revision.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -101,27 +202,19 @@ _This package prints no measurement, no observation, and no expected result. Eve
 
 ### Your plan — the adult approves this before anything is touched
 
-**My question.** Write the question you are testing about geologic time. It has to be a question your evidence could actually answer.
+**Evidence question.** How well does the supplied evidence support the case claim about geologic time?
 
 >
 
-**What I will change.** Name the one thing you will change. Change one thing only.
+**Prediction before classification.** Choose strongly supported, partly supported, or not supported and give one reason.
 
 >
 
-**What I will keep the same.** List everything you will hold constant so the comparison is fair.
+**Classification rule.** For every row use supports, challenges, or does not decide; no row may be skipped.
 
 >
 
-**What I will measure or observe.** Name the quantity or the observation, and the unit if it has one.
-
->
-
-**Materials I will use.** List only materials this lesson names. If something is not on the lesson's list, it does not go on the table.
-
->
-
-**Adult approval before I start.** The supervising adult reads the plan and the safety brief and confirms the plan and the materials before anything is touched. Only the confirmation is recorded.
+**Completeness check.** Confirm the conclusion will cite at least two evidence IDs and one limitation.
 
 >
 
@@ -155,73 +248,35 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
-
-_About the supplied or provided material named above: this package prints none of it. Supplied means a published table, data set, diagram, sequence, case study, observation log, or reference image that an adult retrieves and that you name on the provenance line. Nothing printed here is a record of an observation, so nothing here can be mistaken for yours._
-
-**Do this instead — the whole lesson on paper:** Complete the lesson on paper: write the full investigation plan for geologic time — question, independent variable, controlled variables, the quantity you would measure with its unit, and how many trials you would run — then state your predicted result and the reasoning behind it. Answer every analysis question below from the plan, the reasoning, and any published source an adult retrieves for you, recorded on the provenance line and marked SUPPLIED. The record table stays empty: you took no measurements, and reporting none is what honest documentation looks like. Close on the lesson's own check — In one concise response, show or explain the most important idea about geologic time; then identify one check that would catch an error or weak claim.
-
-_The curriculum source for these grades names one text-only path for every lesson rather than a lesson-specific activity, so the concrete task above is built from this lesson's own question, focus, and success criteria. A named, lesson-specific alternative for each elementary and middle-grade investigation is an open curriculum-authoring gap, recorded in reports/open-gaps.md._
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Analyse your evidence on geologic time as a set rather than item by item. State an interpretation you could defend, cite the two strongest pieces supporting it, and then state the strongest case against it that your own data would allow. An interpretation with no opposing case considered is not yet defensible.
+**Q1.** Classify every supplied row E1-E4 as supports, challenges, or does not decide the candidate claim about geologic time. Cite the row and explain each classification.
 
 >
 
-**Q2.** Present your findings on geologic time in the representation the task calls for — a labelled model, a data display, a written explanation, or a documented process — and justify why that representation carries the evidence better than a bare statement would.
+**Q2.** Communicate what the supplied record establishes about geologic time in a labelled diagram, table, or paragraph. Include citations to at least two rows from E1-E4 and mark where the representation stops being supported.
 
 >
 
-**Q3.** Identify one place where you checked or revised your work on geologic time. State what you changed, what prompted you to notice it, and why the revision is an improvement against the stated success criteria rather than merely a difference.
+**Q3.** Check your response about geologic time against each success criterion. Revise one sentence by adding or changing a citation to E1-E4; state exactly what the revision fixes.
 
 >
 
-**Q4.** Answer the unit's essential question in two or three sentences, using geologic time as your worked example and citing one piece of your own evidence: How can understanding earth history and geologic processes help us explain, decide, create, or solve something that matters?
+**Q4.** Answer the printed unit question using geologic time as the example. Cite one row from E1-E4, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q5.** Which single piece of evidence in your record most strongly supports your conclusion about geologic time? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q5.** Which one row in E1-E4 is strongest for evaluating the candidate claim about geologic time? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q6.** Name one thing your work on geologic time cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q6.** Using the supplied case and E1-E4, state one conclusion about geologic time that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q7.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q7.** Audit the inputs used in your response about geologic time. Label E1-E4 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -262,4 +317,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-g8-science-u05-l07` · lesson `ma-g8-science-u05-l07` · built from `canonical-1.0.0` at `4056e31`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-g8-science-u05-l07` · lesson `ma-g8-science-u05-l07` · built from `canonical-1.0.0` at `4056e31`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

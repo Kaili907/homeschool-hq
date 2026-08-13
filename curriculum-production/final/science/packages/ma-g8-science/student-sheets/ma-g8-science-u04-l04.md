@@ -14,9 +14,9 @@
 
 **Materials:**
 
-- course notebook or digital equivalent
-- pencil or accessible response tool
-- unit-specific source, model, manipulatives, safe materials, or approved digital tool
+- this complete learner sheet
+- course notebook or response space
+- accessible response tool
 
 ## Safety — read this before you touch anything
 
@@ -89,11 +89,69 @@ This lesson's curriculum source prescribes no fixed procedure, so this package s
 
 Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: variation among individuals in a population arises from mutation and, in sexually reproducing species, from the recombination of parental genetic material.
+- Science brief: individuals in a population differ in heritable traits, and that variation exists before any environmental pressure acts.
+- Science brief: variation arises from mutation and, in sexual reproduction, from new combinations of parental genes.
+- Science brief: without heritable variation there is nothing for natural selection to act on.
+
+### Evidence check: variation
+
+**Candidate claim:** A case report presents this as acceptable science: “variation arises in response to what the population needs.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: variation among individuals in a population arises from mutation and, in sexually reproducing species, from the recombination of parental genetic material. |
+| E2 | established science reference | Science brief: individuals in a population differ in heritable traits, and that variation exists before any environmental pressure acts. |
+| E3 | established science reference | Science brief: variation arises from mutation and, in sexual reproduction, from new combinations of parental genes. |
+| E4 | established science reference | Science brief: without heritable variation there is nothing for natural selection to act on. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-g8-science-u04::variation, derived from the reviewed correctness source policy/correctness/ma-g8-science.correctness.json.
+
+**Supplied unit connections:** fossil evidence; anatomical similarities; embryological evidence; variation; natural selection; population change over generations
+
+**Supplied unit performance task:** Use multiple evidence types to explain a population change without implying that individuals evolve on demand.
+
+### Bound task
+
+**Question:** What does evidence E1 through E4 justify about variation, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Evaluate the case claim independently using at least two evidence codes and one stated limitation.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** ACCESSIBLE_RESPONSE_ROUTE
+
+**Materials:**
+
+- the supplied evidence record
+- a spoken, typed, drawn, or tactile response mode
+
+**Do this:**
+
+1. Use the same E1-E4 record and answer the same bound question.
+2. Respond in an accessible mode without changing the evidence or success criteria.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** Learner completes a new application of variation and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**The task.** What does evidence E1 through E4 justify about variation, and does it support the candidate claim? Follow the five bound steps printed above and cite the supplied evidence IDs.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -128,73 +186,35 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
-
-_About the supplied or provided material named above: this package prints none of it. Supplied means a published table, data set, diagram, sequence, case study, observation log, or reference image that an adult retrieves and that you name on the provenance line. Nothing printed here is a record of an observation, so nothing here can be mistaken for yours._
-
-**Do this instead — the whole lesson on paper:** Complete the lesson on paper: write the full investigation plan for variation — question, independent variable, controlled variables, the quantity you would measure with its unit, and how many trials you would run — then state your predicted result and the reasoning behind it. Answer every analysis question below from the plan, the reasoning, and any published source an adult retrieves for you, recorded on the provenance line and marked SUPPLIED. The record table stays empty: you took no measurements, and reporting none is what honest documentation looks like. Close on the lesson's own check — In one concise response, show or explain the most important idea about variation; then identify one check that would catch an error or weak claim.
-
-_The curriculum source for these grades names one text-only path for every lesson rather than a lesson-specific activity, so the concrete task above is built from this lesson's own question, focus, and success criteria. A named, lesson-specific alternative for each elementary and middle-grade investigation is an open curriculum-authoring gap, recorded in reports/open-gaps.md._
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Work independently, without a template: apply variation in a different representation, context, or design constraint from the one you practised in. State what carried over unchanged and what you had to adapt, because the adaptation is the evidence of understanding.
+**Q1.** Independently evaluate this fully supplied case about variation: A case report presents this as acceptable science: “variation arises in response to what the population needs.” Use at least two rows from E1-E4, correct the claim if needed, and state one limit.
 
 >
 
-**Q2.** Present your findings on variation in the representation the task calls for — a labelled model, a data display, a written explanation, or a documented process — and justify why that representation carries the evidence better than a bare statement would.
+**Q2.** Communicate what the supplied record establishes about variation in a labelled diagram, table, or paragraph. Include citations to at least two rows from E1-E4 and mark where the representation stops being supported.
 
 >
 
-**Q3.** Identify one place where you checked or revised your work on variation. State what you changed, what prompted you to notice it, and why the revision is an improvement against the stated success criteria rather than merely a difference.
+**Q3.** Check your response about variation against each success criterion. Revise one sentence by adding or changing a citation to E1-E4; state exactly what the revision fixes.
 
 >
 
-**Q4.** Answer the unit's essential question in two or three sentences, using variation as your worked example and citing one piece of your own evidence: How can understanding natural selection and adaptation help us explain, decide, create, or solve something that matters?
+**Q4.** Answer the printed unit question using variation as the example. Cite one row from E1-E4, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q5.** Which single piece of evidence in your record most strongly supports your conclusion about variation? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q5.** Which one row in E1-E4 is strongest for evaluating the candidate claim about variation? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q6.** Name one thing your work on variation cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q6.** Using the supplied case and E1-E4, state one conclusion about variation that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q7.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q7.** Audit the inputs used in your response about variation. Label E1-E4 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -235,4 +255,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-g8-science-u04-l04` · lesson `ma-g8-science-u04-l04` · built from `canonical-1.0.0` at `4056e31`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-g8-science-u04-l04` · lesson `ma-g8-science-u04-l04` · built from `canonical-1.0.0` at `4056e31`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

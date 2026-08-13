@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import blocks  # noqa: E402
 import correctness  # noqa: E402
+import executable_content  # noqa: E402
 import render  # noqa: E402
 from blocks import ELEMENTARY_SAFETY_VARIANTS  # noqa: E402
 from package_model import (  # noqa: E402
@@ -475,6 +476,97 @@ def build_package(
     authority = correctness.build_authority(
         lesson, course["course_id"], topics, topic_provenance, data_bearing, supplied
     )
+    learner_content = executable_content.build_executable_content(
+        lesson, course, authority, data_bearing
+    )
+    questions = executable_content.bind_analysis_questions(
+        questions, lesson, learner_content
+    )
+    expected_reasoning = build_expected_reasoning(lesson, questions)
+    if data_bearing and course["family"] == "hs":
+        delivered_task = (
+            "Choose the package-alone model-data alternative printed above, follow its five-step "
+            "procedure, label its inputs MODEL OUTPUT, and complete the analysis, provenance, and "
+            "limitation work without handling physical-route materials or relying on prior work."
+        )
+        if "completes a new application" in data_sheet["lesson_task_verbatim"]:
+            data_sheet["lesson_task_verbatim"] = delivered_task
+        else:
+            data_sheet["lesson_task_verbatim"] = (
+                data_sheet["lesson_task_verbatim"] + " OR " + delivered_task
+            )
+    elif data_bearing:
+        data_sheet["lesson_task_verbatim"] = (
+            "Complete the document-evidence investigation printed above: classify every supplied "
+            "evidence row, tally support and challenge, cite at least two evidence IDs in the "
+            "conclusion, state a limitation, and record one revision."
+        )
+        data_sheet["plan"] = [
+            {
+                "field": "Evidence question",
+                "instruction": learner_content["investigation"]["question"],
+            },
+            {
+                "field": "Prediction before classification",
+                "instruction": "Choose strongly supported, partly supported, or not supported and give one reason.",
+            },
+            {
+                "field": "Classification rule",
+                "instruction": "For every row use supports, challenges, or does not decide; no row may be skipped.",
+            },
+            {
+                "field": "Completeness check",
+                "instruction": "Confirm the conclusion will cite at least two evidence IDs and one limitation.",
+            },
+        ]
+    else:
+        data_sheet["lesson_task_verbatim"] = (
+            learner_content["bound_task"]["question"]
+            + " Follow the five bound steps printed above and cite the supplied evidence IDs."
+        )
+    delivered_route = learner_content["equal_credit_route"]
+    source_alternative_text = equal_credit["text"]
+    equal_credit["source_text_verbatim"] = source_alternative_text
+    if delivered_route.get("input"):
+        delivered_input = delivered_route["input"]
+        supplied["delivery_status"] = "DELIVERED_IN_PACKAGE"
+        supplied["delivered_input_title"] = delivered_input["title"]
+        supplied["delivered_input_kind"] = delivered_input.get("kind", "REFERENCE_EVIDENCE")
+        supplied["delivered_input_rows"] = len(delivered_input["rows"])
+    else:
+        supplied["delivery_status"] = "DELIVERED_IN_EXECUTABLE_CONTENT"
+        supplied["delivered_input_title"] = learner_content["supplied_evidence"]["title"]
+        supplied["delivered_input_kind"] = "REFERENCE_EVIDENCE"
+        supplied["delivered_input_rows"] = len(
+            learner_content["supplied_evidence"]["rows"]
+        )
+
+    if data_bearing and course["family"] == "hs":
+        equal_credit["text"] = (
+            source_alternative_text
+            + " PACKAGE-ALONE DELIVERED ROUTE: use the complete '"
+            + delivered_route["input"]["title"]
+            + "' model table, rule, procedure, and provenance printed on this sheet. "
+            "No lookup, download, account, or unavailable equipment is required."
+        )
+    elif data_bearing:
+        equal_credit["text"] = (
+            "Use the complete reference-evidence record and accessible document-investigation "
+            "procedure printed on this sheet. Classify every evidence row, produce the same "
+            "conclusion and limitation as the primary route, and use the same rubric."
+        )
+    else:
+        equal_credit["text"] = (
+            "Use the complete E-coded evidence record printed on this sheet and respond in a "
+            "spoken, typed, drawn, handwritten, or tactile mode. Answer the same bound question "
+            "and meet the same success criteria."
+        )
+    equal_credit["derived_task"] = " ".join(delivered_route.get("procedure", []))
+    equal_credit["clarification_ref"] = ""
+    equal_credit["is_no_equipment_note"] = False
+    production_materials = executable_content.production_materials(
+        lesson, course, learner_content, data_bearing
+    )
     instruction = build_instruction(lesson, lesson["unit"])
 
     covered = {question["objective_index"] for question in questions}
@@ -514,7 +606,7 @@ def build_package(
         "essential_question": lesson["essential_question"],
         "learning_objectives": lesson["learning_objectives"],
         "success_criteria": lesson["success_criteria"],
-        "materials": filter_materials(lesson["materials"]),
+        "materials": production_materials,
         "accessibility": lesson["accessibility"],
         "home_connection": lesson["home_connection"],
         "source": {
@@ -526,6 +618,7 @@ def build_package(
         "work_type": work_type,
         "data_bearing": data_bearing,
         "instruction": instruction,
+        "executable_content": learner_content,
         # The unit phenomenon carries H3's student-visible SAFETY rule for any
         # hazard-bearing material it names. It reached the machine record only,
         # so the printed sheet asked for observations of a phenomenon it never
@@ -569,6 +662,13 @@ def build_package(
                 if requires_source_integrity
                 else {}
             ),
+            "package_alone_inputs_complete": learner_content["inputs_complete"],
+            "placeholder_free_learner_work": learner_content["placeholder_free"],
+            "materials_complete": learner_content["materials_complete"],
+            "executable_alternative_present": learner_content["equal_credit_route"]["complete"],
+            "physical_result_disclosed_before_collection": learner_content[
+                "physical_result_disclosed_before_collection"
+            ],
         },
     }
 
@@ -725,9 +825,11 @@ def main() -> int:
             ),
         },
         "invariants": [
-            "No observation, measurement, result, or expected value is supplied by this package.",
+            "Every lesson prints the complete science brief, case, evidence record, and exact task required for package-alone completion.",
+            "Supplied values are labelled reference information or deterministic model output, never learner observations.",
+            "No expected physical-investigation result is supplied before evidence collection.",
             "Every recording field ships blank.",
-            "Every lesson carries a student-visible safety brief and an equal-credit safe alternative.",
+            "Every lesson carries a student-visible safety brief and an executable equal-credit safe alternative.",
             "High School safety content comes from H4 only; H3 and H2 are superseded.",
             "Every lesson carries a scientific correctness authority for its topic, adult-facing only.",
             "No correctness key states an expected measurement or any observation.",
@@ -779,8 +881,10 @@ def main() -> int:
         if not path.is_file() or path.suffix not in {".md", ".json", ".jsonl"}:
             continue
         relative = path.relative_to(OUT_ROOT).as_posix()
-        if relative.startswith("reports/production-quality-gate") or relative.startswith(
-            "reports/safety-gate"
+        if (
+            relative.startswith("reports/production-quality-gate")
+            or relative.startswith("reports/safety-gate")
+            or relative.startswith("reports/learner-content-gate")
         ):
             continue
         checksums.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {relative}")

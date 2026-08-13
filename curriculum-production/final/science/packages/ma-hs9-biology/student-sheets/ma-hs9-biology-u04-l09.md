@@ -27,6 +27,10 @@
 - notebook
 - course notebook or digital equivalent
 - pencil, keyboard, or other accessible response tool
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
 
 ## Safety — read this before you touch anything
 
@@ -95,11 +99,93 @@ Read this before you touch any material. If anything here does not match what is
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: positive feedback amplifies the change that triggered it and drives the system away from the starting condition.
+- Science brief: in positive feedback the response reinforces the original change rather than opposing it.
+- Science brief: positive feedback drives processes to completion, such as childbirth, blood clotting, and the rising phase of a nerve impulse.
+- Science brief: positive feedback requires an external stopping condition, because the loop itself does not stabilise.
+
+### Evidence check: positive feedback loops
+
+**Candidate claim:** A case report presents this as acceptable science: “positive feedback means a beneficial outcome and negative feedback a harmful one.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: positive feedback amplifies the change that triggered it and drives the system away from the starting condition. |
+| E2 | established science reference | Science brief: in positive feedback the response reinforces the original change rather than opposing it. |
+| E3 | established science reference | Science brief: positive feedback drives processes to completion, such as childbirth, blood clotting, and the rising phase of a nerve impulse. |
+| E4 | established science reference | Science brief: positive feedback requires an external stopping condition, because the loop itself does not stabilise. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs9-biology-u04::positive feedback loops, derived from the reviewed correctness source policy/correctness/ma-hs9-biology.correctness.json.
+
+**Supplied unit connections:** setpoints and tolerance ranges; negative feedback loops; positive feedback loops; feedback failure and disease; regulation across organ systems; modelling feedback quantitatively
+
+**Supplied unit performance task:** Plan and conduct an investigation using a non-human system that provides evidence a feedback mechanism is maintaining a stable internal condition, then model the loop and identify what would break it.
+
+### Bound task
+
+**Question:** What does evidence E1 through E4 justify about positive feedback loops, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Use the supplied record to build a claim-evidence-reasoning product that another reader can check line by line.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** DELIVERED_MODEL_DATA_ALTERNATIVE
+
+**Materials:**
+
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
+
+**Non-human thermoregulation feedback model**
+
+| Minute | Air temperature (°C) | Body-model temperature (°C) | Cooling response (0-3) |
+| --- | --- | --- | --- |
+| 0 | 22 | 38.0 | 0 |
+| 5 | 30 | 38.3 | 1 |
+| 10 | 34 | 38.6 | 2 |
+| 15 | 34 | 38.5 | 2 |
+| 20 | 30 | 38.2 | 1 |
+| 25 | 22 | 38.0 | 0 |
+
+**Model/source rule:** A fictional ectotherm-control simulation increases a cooling-response index when model temperature exceeds 38.2 °C; the response removes 0.15 °C per index per step.
+
+**Provenance:** Manuel Academy deterministic instructional simulation. Values are model output, not observations, measurements, or a prediction for the hands-on route.
+
+**Do this:**
+
+1. Choose this route instead of the physical route; it earns the same maximum score.
+2. Read the model rule and label every supplied quantity as MODEL OUTPUT.
+3. Plot model temperature and response through time, identify the stimulus-response loop, and state why the table cannot be used as a learner health measurement.
+4. Show calculations, cite row labels, state a limitation of the model, and answer the lesson analysis questions.
+5. Do not combine these model outputs with measurements from the physical route or call them observations.
+
+**Pinned H4 alternative statement (lineage evidence):** Use a published, openly licensed physiological dataset - for example thermoregulation in a non-human animal - and model the feedback loop from that data. Needs only the dataset and paper.
+
+The delivered model table above is the package-alone production route. It removes any need to retrieve the published input named by the source statement.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** SAFETY FIRST - SUPERVISION: an adult must be within earshot and able to reach you. Do not start until they are. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away.
+**The task.** SAFETY FIRST - SUPERVISION: an adult must be within earshot and able to reach you. Do not start until they are. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away. OR Choose the package-alone model-data alternative printed above, follow its five-step procedure, label its inputs MODEL OUTPUT, and complete the analysis, provenance, and limitation work without handling physical-route materials or relying on prior work.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -161,75 +247,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Use a published, openly licensed physiological dataset - for example thermoregulation in a non-human animal - and model the feedback loop from that data. Needs only the dataset and paper.
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner-collected plant or thermal-model measurements, or a published non-human dataset. NO LEARNER BODY OR HEALTH MEASUREMENT IS REQUESTED ANYWHERE IN THIS UNIT.
-
-**Where to find the published data:** see `res-ma-hs9-biology-data-sources` in the course resource list. The family retrieves it; no third-party content is copied into this package.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Assemble performance-task evidence for positive feedback loops that an independent reader could check without asking you a single question: the claim, the data behind it with its provenance, the reasoning between them, and the limitations. Anything a reader would have to take on trust is a gap in the evidence, not a detail.
+**Q1.** Build a checkable contribution to the supplied unit performance task — Plan and conduct an investigation using a non-human system that provides evidence a feedback mechanism is maintaining a stable internal condition, then model the loop and identify what would break it. — using the case and E1-E4. Include claim, evidence, reasoning, limitation, and a recorded revision.
 
 >
 
-**Q2.** Explain positive feedback loops in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain positive feedback loops in your own words using at least two specifically named rows from E1-E4. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply positive feedback loops to a case in Homeostasis and Feedback Mechanisms you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for positive feedback loops. Decide whether E1-E4 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on positive feedback loops against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about positive feedback loops, revise its weakest claim with a named row from E1-E4, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using positive feedback loops as your worked example and citing one piece of your own evidence: How do living systems hold conditions steady while the world around them keeps changing?
+**Q5.** Answer the printed unit question using positive feedback loops as the example. Cite one row from E1-E4, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about positive feedback loops? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E4 is strongest for evaluating the candidate claim about positive feedback loops? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on positive feedback loops cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E4, state one conclusion about positive feedback loops that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about positive feedback loops. Label E1-E4 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -271,4 +321,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs9-biology-u04-l09` · lesson `ma-hs9-biology-u04-l09` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs9-biology-u04-l09` · lesson `ma-hs9-biology-u04-l09` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

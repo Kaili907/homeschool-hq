@@ -10,7 +10,7 @@ Each lesson has:
 
 | Path | Audience | Contents |
 | --- | --- | --- |
-| `packages/<course>/student-sheets/<lesson>.md` | learner | Student-visible safety, blank investigation records, equal-credit alternative, analysis, rubric, remediation, extension |
+| `packages/<course>/student-sheets/<lesson>.md` | learner | Complete science brief, bound case/evidence, exact task, student-visible safety, blank records, delivered equal-credit route, analysis, rubric, remediation, extension |
 | `packages/<course>/scoring/<lesson>.md` | adult | Scientific correctness key, reasoning criteria, non-negotiables, remediation, and guardian safety record |
 | `packages/<course>/work-packages.jsonl` | application | Canonical machine record behind both rendered sheets |
 
@@ -65,11 +65,14 @@ closures. `reports/blockers.md` records the evidence.
 
 ## Non-negotiable production rules
 
+- Every lesson is package-alone executable: the learner receives the actual science brief, case,
+  evidence or model input, and exact steps the work requires.
 - Every lesson carries student-visible safety and an equal-credit safe alternative.
 - Materials, hazards, mitigations, required PPE, safe order, stop conditions, and disposal agree.
-- Recording fields ship blank; no fabricated observation, measurement, or expected result appears.
-- Published-data work names its source and requires learner-recorded provenance; the corpus embeds
-  no invented dataset.
+- Recording fields ship blank; supplied reference/model inputs are labelled and never presented as
+  learner observations or as an expected physical-investigation result.
+- Every numerical alternative is a deterministic instructional model with its equation or rule,
+  provenance, limitations prompt, and a system distinct from the physical route.
 - Investigation correctness constrains methods and conclusions, never a learner's observations.
 - Remediation and extension are present on every lesson.
 
@@ -77,6 +80,7 @@ closures. `reports/blockers.md` records the evidence.
 
 ```bash
 python3 curriculum-production/final/science/tools/build_student_work.py
+node curriculum-production/final/science/validation/validate-learner-content.mjs
 node curriculum-production/final/science/validation/validate-safety.mjs
 node curriculum-production/final/science/validation/run-production-quality-gate.mjs
 node curriculum-production/final/science/validation/mutation-test.mjs
@@ -93,6 +97,7 @@ is separately rebuilt and validated with its own contract, 63 mission checks, an
 - `SOURCE_LEDGER.json` — reconciliation inputs and H3-to-H4 correctness repin proof
 - `SHA256SUMS.txt` — checksum ledger for the committed corpus
 - `reports/coverage.md` — 972-lesson course breakdown
+- `reports/learner-content-gate.md` — zero-shell/input/material/alternative proof and 36/36 High School investigation matrix
 - `reports/safety-gate.md` — rendered safety, correctness, fabrication, and reconciliation checks
 - `reports/production-quality-gate.md` — Production Gate H3 readiness over all 972 lessons
 - `reports/blockers.md` — B1/B2/B3 closure record
