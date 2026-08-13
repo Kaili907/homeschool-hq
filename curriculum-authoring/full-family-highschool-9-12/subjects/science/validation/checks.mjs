@@ -650,5 +650,112 @@ export function runChecks(set, frameworkDoc) {
     fail(noteGaps.map((l) => l.lesson_id), 'the guardian note omits the safe order, the disposal, or the PPE that safety_privacy cannot hold')
       ?? `${hazardLessons.length} hazard-bearing lessons direct the guardian to the safe order, the PPE, and the disposal before the session`)
 
+
+  // ================================================================ H4 source-consistency checks
+  // The H3 review found three source defects the H3 checks could not see: an item the learner is
+  // told to handle that the materials list never names, a safe-order step naming a vessel that two
+  // different vessels answer to, and an equal-credit alternative that pre-stated the result. All
+  // three are defect CLASSES, so the checks below detect the class rather than the three instances.
+
+  // Mitigations, the safe order and the disposal are the three places that ACTIVATE equipment.
+  // The ALTERNATIVE is excluded on purpose: it is the no-special-equipment path, and check F above
+  // already forbids it from requiring equipment, so its nouns are not a prep list.
+  const ACTIVATING_LINE = /^MITIGATION:|^\s+SAFE ORDER \d+\.|^DISPOSAL:/
+  const activatingLines = (l) => briefOf(l).split('\n').filter((ln) => ACTIVATING_LINE.test(ln))
+
+  // --- M. An item the learner is told to handle must be on the materials list -----------------------
+  // Prep happens from the materials list. An item the safe order, a mitigation, or the disposal
+  // activates and the list omits is one the family never had notice to obtain before the session.
+  // "tape" excludes a measuring tape, which is a length instrument and not an adhesive.
+  const EQUIPMENT = [
+    ['apron', /\bapron\b/i], ['tray', /\btray\b/i], ['tarp', /\btarp\b/i], ['dropper', /\bdropper/i],
+    ['strainer', /\bstrainer\b/i], ['stiff card', /\bstiff card\b/i], ['thick paper', /\bthick paper\b/i],
+    ['tape', /(?<!measuring )\btape[sd]?\b/i], ['cushion', /\bcushion\b/i], ['towel', /\btowel\b/i],
+    ['bin liner', /\bbin liner\b/i], ['disinfectant', /\bdisinfect/i], ['cup', /\bcups?\b/i],
+  ]
+  // A tray is role-bearing. A weighing tray sits under the sample on a scale; it is not the work
+  // tray a step stands a cup on. H3 declared only the first and read the second off it, so the
+  // work-tray role is resolved separately and a weighing entry cannot answer for it.
+  const WORK_TRAY_STEP = /\b(work|working|works)\s+(over|in)\s+(a|the|each)?\s*\w*\s*tray\b|\b(on|onto|in)\s+(an?|the)\s+\w*\s*tray\b/i
+  const WEIGHING_CONTEXT = /\bweigh|\bscale\b|under the sample/i
+  const WEIGHING_TRAY_ENTRY = /\btray\b[^,;]{0,40}\b(under the sample|on the scale)\b|\bscale\b[^,;]{0,40}\btray\b/i
+  const undeclared = []
+  for (const l of hazardLessons) {
+    const lines = activatingLines(l)
+    const active = lines.join('\n')
+    for (const [label, re] of EQUIPMENT) {
+      if (!re.test(active)) continue
+      if (l.materials.some((m) => re.test(m))) continue
+      undeclared.push(`${l.lesson_id}: ${label}`)
+    }
+    // A weighing sentence is not a work-tray instruction, so it raises no work-tray requirement.
+    const needsWorkTray = lines.flatMap((ln) => ln.split(/(?<=[.\n])\s*/))
+      .some((sn) => WORK_TRAY_STEP.test(sn) && !WEIGHING_CONTEXT.test(sn))
+    if (needsWorkTray && !l.materials.some((m) => /\btray\b/i.test(m) && !WEIGHING_TRAY_ENTRY.test(m))) {
+      undeclared.push(`${l.lesson_id}: work tray (only a weighing tray is declared)`)
+    }
+  }
+  check('handled-equipment-is-declared-on-the-materials-list', undeclared.length === 0,
+    fail(undeclared, 'a mitigation, safe-order step, or disposal step tells the learner to use an item the materials list never names')
+      ?? `${hazardLessons.length} hazard-bearing lessons declare every item their mitigations, safe order, and disposal activate`)
+
+  // --- N. A reserved vessel is never named by a form a second vessel also answers to ----------------
+  // Where the materials reserve one vessel AWAY from a named material, the safe order may not fall
+  // back on the shared noun. H3 split the equipment and then wrote "the insulated cup" in the step
+  // immediately before the material that vessel may never hold.
+  const VESSEL_NOUN = /\b(cup|vessel|container|jar|bottle|dish|bowl)\b/
+  const ambiguousVessel = []
+  let reservedFound = 0
+  for (const l of hazardLessons) {
+    for (const m of l.materials) {
+      const res = /\bnever holds?\s+([a-z][a-z ]+)/i.exec(m)
+      if (!res) continue
+      const excluded = res[1].trim()
+      const head = m.split(/[-;,]/)[0].trim().toLowerCase()
+      const noun = (VESSEL_NOUN.exec(head) ?? [])[0]
+      if (!noun) continue
+      const adjective = head.replace(/^(a|an|the)\s+/, '').split(/\s+/).find((w) => w !== noun && w.length > 3)
+      if (!adjective) continue
+      reservedFound += 1
+      const bareForm = new RegExp(`\\b${adjective}\\s+(\\w+\\s+)?${noun}\\b`, 'i')
+      const excludedRe = new RegExp(excluded.split(/\s+/).join('\\s+'), 'i')
+      for (const ln of activatingLines(l)) {
+        if (!bareForm.test(ln)) continue
+        // The reservation has to travel with the name, in the same line the learner reads it in.
+        if (excludedRe.test(ln) && /\b(only|never|reserved|dedicated)\b/i.test(ln)) continue
+        ambiguousVessel.push(`${l.lesson_id}: "${ln.trim().slice(0, 72)}"`)
+      }
+    }
+  }
+  check('a-reserved-vessel-is-never-named-ambiguously-in-the-safe-order', ambiguousVessel.length === 0,
+    fail(ambiguousVessel, 'a safe-order step, mitigation, or disposal step names a reserved vessel without carrying the material it may never hold')
+      ?? `${reservedFound} reserved vessel(s) found in the materials; every naming of one carries its reservation`)
+
+  // --- O. The equal-credit alternative states no expected experimental result -----------------------
+  // The alternative is a path to the same target, not a spoiler for it. An alternative that names
+  // the direction of a change, or the relationship, before the learner measures it both pre-states
+  // the result and - as H3 showed - can state it wrongly, because nothing checks the claim.
+  const OUTCOME_CLAIM = [
+    /\bobserve\s+(the\s+)?\w*\s*(cooling|warming|heating|chilling)\b/,
+    /\b(cooling|warming|heating)\s+and\s+\w*\s*(cooling|warming|heating)\b/,
+    /\bdemonstrate\s+the\s+[\w-]+(\s+[\w-]+)?\s+(relationship|law|effect|principle|rule)\b/,
+    /\byou\s+will\s+(see|find|observe|get|measure|notice)\b/,
+    /\bshould\s+(see|find|observe|notice)\b/,
+    /\bconfirm(s|ing)?\s+that\b/,
+    /\bprov(e|es|ing)\s+that\b/,
+    /\bexpect(ed)?\s+(result|value|outcome|reading)\b/,
+    /\bresults?\s+in\s+(a\s+)?(cooling|warming|rise|drop|increase|decrease)\b/,
+  ]
+  const preStated = []
+  for (const l of hazardLessons) {
+    const alt = altOf(l)
+    for (const re of OUTCOME_CLAIM) {
+      for (const hit of affirmativeHitsIn(alt, re.source)) preStated.push(`${l.lesson_id}: "${hit}"`)
+    }
+  }
+  check('equal-credit-alternative-states-no-expected-result', preStated.length === 0,
+    fail(preStated, 'an equal-credit alternative states the result the learner is supposed to measure')
+      ?? `${hazardLessons.length} hazard-bearing lessons state an alternative that pre-states no observation or result`)
+
   return { report, checks }
 }

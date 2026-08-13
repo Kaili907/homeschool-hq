@@ -86,7 +86,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `nearby-adult`
 - **Guardian visibility:** `summary`
-- **Materials:** toy car or cart, string, pulley or smooth table edge, small weights or coins, measuring tape, timer, kitchen scale, notebook
+- **Materials:** toy car or cart, string, pulley or smooth table edge, small weights or coins, a cushion or folded towel for the drop zone below the hanging mass, measuring tape, timer, kitchen scale, notebook
 
 **Hazards**
 
@@ -118,7 +118,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `nearby-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** raw eggs or a small fragile object, padding materials from the household, measuring tape, tray or tarp for the landing zone, toy cars for the collision strand, gloves, notebook
+- **Materials:** raw eggs or a small fragile object, padding materials from the household, measuring tape, tray or tarp for the landing zone, toy cars for the collision strand, a bin liner for the broken egg and any padding that touched it, one household disinfectant spray or wipe, used as labelled and never mixed with any other cleaning product, gloves, notebook
 
 **Hazards**
 
@@ -173,7 +173,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 **Disposal.** Deflate the balloons and put whole balloons and every fragment straight into the bin - fragments are a choking hazard for young children. Recycle the paper pieces. Nothing hazardous is produced.
 
-**No-special-equipment alternative.** Demonstrate the inverse-square relationship with a flashlight and a ruler, measuring illuminated area against distance, then apply the same mathematics to gravitation and Coulomb's law using published masses and charges. Household items and paper.
+**No-special-equipment alternative.** Measure illuminated area against distance with a flashlight and a ruler and work the relationship out from your own measurements; no relationship and no expected value is supplied in advance. Then apply the same mathematics to gravitation and Coulomb's law using published masses and charges. Household items and paper.
 
 **Data provenance.** Learner's own separation-versus-effect observations and their own calculations from published masses, charges, and distances.
 
@@ -211,7 +211,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** insulated cups or a thermos, thermometer, warm and cool water, kitchen scale, timer, notebook, assorted materials for the insulation strand
+- **Materials:** insulated cups or a thermos, thermometer, warm and cool water, kitchen scale, timer, notebook, assorted materials for the insulation strand, stiff card and a rigid container for an adult to clear a broken thermometer
 
 **Hazards**
 
@@ -244,7 +244,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** at least 1 m of thin 28-30 AWG enamelled copper wire, iron nail, single 1.5 V D-cell or AA with holder, compass, strong magnet, coil of many wire turns, multimeter set to a voltage range, paper clips, tray
+- **Materials:** at least 1 m of thin 28-30 AWG enamelled copper wire, iron nail, single 1.5 V D-cell or AA with holder, compass, strong magnet, coil of many wire turns, multimeter set to a voltage range, paper clips, tray, tape for the cell terminals, a closed labelled box for the magnets and a labelled container for used cells
 
 **Hazards**
 
@@ -315,7 +315,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** small radio or phone, aluminium foil, cardboard boxes, assorted household materials, small motor or LED, battery, published claim article about radiation, notebook
+- **Materials:** small radio or phone, aluminium foil, cardboard boxes, assorted household materials, small motor or LED, battery, tape for the battery terminals, published claim article about radiation, notebook
 
 **Hazards**
 

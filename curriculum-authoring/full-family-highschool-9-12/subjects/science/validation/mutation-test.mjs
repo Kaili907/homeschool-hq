@@ -25,6 +25,21 @@ const editSafety = (lesson, fn) => {
   seg.teacher_or_tutor_action = fn(seg.teacher_or_tutor_action)
 }
 
+// The alternative reaches the learner through the brief and the host through the extension.
+// A mutant has to move both, or the check would be reading a field the defect never touched.
+const setAlternative = (set, unitPrefix, text) => {
+  for (const lesson of set.lessons.filter((l) => l.lesson_id.startsWith(unitPrefix))) {
+    for (const e of lesson.extensions ?? []) {
+      if (e.namespace === 'manuel.academy/lab-alternative') e.value.value = text
+    }
+    const seg = safetySegment(lesson)
+    if (!seg) continue
+    seg.teacher_or_tutor_action = seg.teacher_or_tutor_action.split('\n')
+      .map((ln) => ln.startsWith('ALTERNATIVE (equal credit, no special equipment): ')
+        ? `ALTERNATIVE (equal credit, no special equipment): ${text}` : ln).join('\n')
+  }
+}
+
 const MUTANTS = [
   {
     name: 'safety-brief-removed-from-the-student-projection',
@@ -268,7 +283,7 @@ const MUTANTS = [
     apply(set) {
       for (const l of withSafety(set)) {
         if (!l.materials.some((m) => /ice-melt/i.test(m))) continue
-        l.materials = l.materials.map((m) => (/disposable cups for the calcium chloride/i.test(m) ? 'insulated cup' : m))
+        l.materials = l.materials.map((m) => (/double cup for the calcium chloride/i.test(m) ? 'insulated cup' : m))
       }
     },
   },
@@ -379,6 +394,91 @@ const MUTANTS = [
     why: 'safety_privacy has no safe-order or disposal field, so a narrowed note leaves the overnight cool-down learner-only',
     apply(set) {
       for (const l of set.lessons) l.guardian_visibility_note = 'Share the lesson target, completion state, evidence type, and next instructional step. For the Day 7 investigation, share the hazard list, the supervision level, and the stop conditions BEFORE the session.'
+    },
+  },
+  // ---------------------------------------------------------------- H4 source-consistency mutants
+  // Each of the three reintroduces a defect the H3 FINAL corpus actually shipped, or the blind
+  // spot that let it ship, so a check that only asserts a string cannot survive them.
+  {
+    name: 'handled-items-removed-from-an-investigation-materials-list',
+    kills: 'handled-equipment-is-declared-on-the-materials-list',
+    why: 'the shipped defect: the safe order required an apron, a tray, and a dropper that the materials list never named',
+    apply(set) {
+      for (const l of withSafety(set).filter((l) => l.lesson_id.startsWith('ma-hs12-earth-space-environmental-u05'))) {
+        l.materials = l.materials.filter((m) => !/\bapron\b|washable tray|\bdropper\b/i.test(m))
+      }
+    },
+  },
+  {
+    name: 'per-route-cups-removed-while-the-safe-order-still-separates-the-routes',
+    kills: 'handled-equipment-is-declared-on-the-materials-list',
+    why: 'the H3 corpus never declared a cup here, and the incompatible-route separation is written entirely in terms of one cup per route',
+    apply(set) {
+      for (const l of withSafety(set).filter((l) => l.lesson_id.startsWith('ma-hs9-biology-u01'))) {
+        l.materials = l.materials.filter((m) => !/clear plastic cups/i.test(m))
+      }
+    },
+  },
+  {
+    name: 'work-tray-masked-by-a-weighing-tray-entry',
+    kills: 'handled-equipment-is-declared-on-the-materials-list',
+    why: 'the blind spot that hid it: a scale\'s weighing tray answered a plain substring test for the tray a step works over',
+    apply(set) {
+      for (const l of withSafety(set).filter((l) => l.lesson_id.startsWith('ma-hs10-chemistry-u04'))) {
+        l.materials = l.materials.filter((m) => !/separate tray to work over/i.test(m))
+      }
+    },
+  },
+  {
+    name: 'adhesive-tape-dropped-while-the-mitigation-still-tapes-terminals',
+    kills: 'handled-equipment-is-declared-on-the-materials-list',
+    why: 'an item named only in a mitigation is still an item the family has to have on the bench',
+    apply(set) {
+      for (const l of withSafety(set).filter((l) => l.lesson_id.startsWith('ma-hs11-physics-u09'))) {
+        l.materials = l.materials.filter((m) => !/tape for the battery terminals/i.test(m))
+      }
+    },
+  },
+  {
+    name: 'reserved-vessel-named-by-its-bare-shared-noun-in-the-safe-order',
+    kills: 'a-reserved-vessel-is-never-named-ambiguously-in-the-safe-order',
+    why: 'the shipped defect: "the insulated cup" stood immediately before the calcium chloride step, and that cup is reserved from calcium chloride',
+    apply(set) {
+      for (const l of withSafety(set).filter((l) => l.lesson_id.startsWith('ma-hs10-chemistry-u06'))) {
+        editSafety(l, (t) => t.split('\n').map((ln) => /^\s+SAFE ORDER \d+\. Stand the vessel reserved/.test(ln)
+          ? '  SAFE ORDER 4. Set the insulated cup on a tray and record the starting temperature before anything is added.'
+          : ln).join('\n'))
+      }
+    },
+  },
+  {
+    name: 'reservation-dropped-from-the-mitigation-that-names-the-vessel',
+    kills: 'a-reserved-vessel-is-never-named-ambiguously-in-the-safe-order',
+    why: 'the same ambiguity facing the other way: a mitigation may not name the reserved vessel without the material it may never hold',
+    apply(set) {
+      for (const l of withSafety(set).filter((l) => l.lesson_id.startsWith('ma-hs10-chemistry-u06'))) {
+        editSafety(l, (t) => t.split('\n').map((ln) => /^MITIGATION: Each route has its OWN vessel/.test(ln)
+          ? 'MITIGATION: Use an insulated cup on a tray, stir with the thermometer rather than a finger, judge temperature only from the thermometer, and stop if the solution exceeds 50 degrees Celsius.'
+          : ln).join('\n'))
+      }
+    },
+  },
+  {
+    name: 'alternative-pre-states-the-temperature-change',
+    kills: 'equal-credit-alternative-states-no-expected-result',
+    why: 'the shipped defect: the alternative promised "cooling and mild warming" from two endothermic processes, with the exothermic member excluded from the path',
+    apply(set) {
+      setAlternative(set, 'ma-hs10-chemistry-u06',
+        'Use Epsom salt and baking soda with vinegar only - both mild - to observe cooling and mild warming, or work entirely from a published table of dissolution enthalpies and bond energies. Kitchen materials or paper.')
+    },
+  },
+  {
+    name: 'alternative-pre-states-the-relationship-the-learner-measures',
+    kills: 'equal-credit-alternative-states-no-expected-result',
+    why: 'naming the relationship before the measurement is the same defect class as naming the direction of a temperature change',
+    apply(set) {
+      setAlternative(set, 'ma-hs11-physics-u04',
+        'Demonstrate the inverse-square relationship with a flashlight and a ruler, measuring illuminated area against distance, then apply the same mathematics to gravitation and Coulomb\'s law using published masses and charges. Household items and paper.')
     },
   },
 ]

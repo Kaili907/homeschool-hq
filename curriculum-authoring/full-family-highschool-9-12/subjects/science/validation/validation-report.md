@@ -3,7 +3,7 @@
 **Schema set:** 2.0.0  
 **Overall:** **PASS**  
 **Contract issues from `validateAuthoringSet`:** 0  
-**Mission checks:** 60/60 passed
+**Mission checks:** 63/63 passed
 
 The contract check runs the repository's own validator,
 `src/curriculum-authoring/v2/validation.ts`, against this authoring set. The mission checks below
@@ -72,6 +72,9 @@ alternative paths, media independence, and data provenance.
 | non-disableable-prohibitions-reach-the-learner | PASS | all 11 non-disableable prohibitions reach the learner in each of 70 hazard-bearing lessons |
 | hazardous-items-the-learner-handles-are-on-the-materials-list | PASS | every sealed commercial product the learner is told to handle is on the materials list |
 | guardian-note-covers-safe-order-disposal-and-ppe | PASS | 70 hazard-bearing lessons direct the guardian to the safe order, the PPE, and the disposal before the session |
+| handled-equipment-is-declared-on-the-materials-list | PASS | 70 hazard-bearing lessons declare every item their mitigations, safe order, and disposal activate |
+| a-reserved-vessel-is-never-named-ambiguously-in-the-safe-order | PASS | 2 reserved vessel(s) found in the materials; every naming of one carries its reservation |
+| equal-credit-alternative-states-no-expected-result | PASS | 70 hazard-bearing lessons state an alternative that pre-states no observation or result |
 
 ## What a PASS does and does not mean
 

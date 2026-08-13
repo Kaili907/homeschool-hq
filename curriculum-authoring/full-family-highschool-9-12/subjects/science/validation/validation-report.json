@@ -4,8 +4,8 @@
   "overall": "PASS",
   "contract_issues": [],
   "counts": {
-    "checks": 60,
-    "passed": 60,
+    "checks": 63,
+    "passed": 63,
     "failed": 0
   },
   "checks": [
@@ -308,6 +308,21 @@
       "check": "guardian-note-covers-safe-order-disposal-and-ppe",
       "result": "PASS",
       "detail": "70 hazard-bearing lessons direct the guardian to the safe order, the PPE, and the disposal before the session"
+    },
+    {
+      "check": "handled-equipment-is-declared-on-the-materials-list",
+      "result": "PASS",
+      "detail": "70 hazard-bearing lessons declare every item their mitigations, safe order, and disposal activate"
+    },
+    {
+      "check": "a-reserved-vessel-is-never-named-ambiguously-in-the-safe-order",
+      "result": "PASS",
+      "detail": "2 reserved vessel(s) found in the materials; every naming of one carries its reservation"
+    },
+    {
+      "check": "equal-credit-alternative-states-no-expected-result",
+      "result": "PASS",
+      "detail": "70 hazard-bearing lessons state an alternative that pre-states no observation or result"
     }
   ]
 }

@@ -56,7 +56,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** apple or potato slices, lemon juice, cold and room-temperature water, 3% household hydrogen peroxide (optional catalase route), timer, ruler, notebook
+- **Materials:** apple or potato slices, lemon juice, cold and room-temperature water, 3% household hydrogen peroxide (optional catalase route), clear plastic cups plus a marker, one labelled for each route and never shared between the lemon-juice and peroxide routes, a washable tray to work over, timer, ruler, notebook
 
 **Hazards**
 
@@ -91,7 +91,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** strawberries or banana, dish soap, table salt, water, coffee filter or fine strainer, cold rubbing alcohol (isopropyl), clear cup, resealable bag
+- **Materials:** strawberries or banana, dish soap, table salt, water, coffee filter or fine strainer, cold rubbing alcohol (isopropyl), clear cup, a tray to work over, resealable bag
 
 **Hazards**
 
@@ -124,7 +124,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `direct-adult`
 - **Guardian visibility:** `confirmation-required`
-- **Materials:** modelling clay or potato cubes, ruler, food colouring and water (diffusion route), microscope and prepared onion-root-tip slide (optional), notebook
+- **Materials:** modelling clay or potato cubes, ruler, food colouring and water (diffusion route), microscope and prepared onion-root-tip slide (optional), stiff card, thick paper, and tape for an adult to clear and wrap broken slide glass, notebook
 
 **Hazards**
 
@@ -257,7 +257,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `nearby-adult`
 - **Guardian visibility:** `summary`
-- **Materials:** published population dataset, spreadsheet or graph paper, calculator, notebook, dried beans or counters (physical sampling model)
+- **Materials:** published population dataset, spreadsheet or graph paper, calculator, notebook, dried beans or counters (physical sampling model), a shallow tray to count the beans in, a labelled container the beans are counted back into and stored in, out of reach of young children
 
 **Hazards**
 

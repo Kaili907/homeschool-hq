@@ -179,7 +179,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `nearby-adult`
 - **Guardian visibility:** `summary`
-- **Materials:** published seafloor age and crustal age datasets, coloured pencils, graph paper, clear plastic or heatproof container, thermometer, warm water below 50 degrees Celsius, cool water, food colouring (convection route), notebook
+- **Materials:** published seafloor age and crustal age datasets, coloured pencils, graph paper, clear plastic or heatproof container, thermometer, warm water below 50 degrees Celsius, cool water, food colouring (convection route), a washable tray to work over, kept for these investigations, an apron or old clothing that may be permanently stained, a dropper kept for these investigations and never used with food or drink, stiff card, thick paper, and tape for an adult to wrap a cracked container before binning, notebook
 
 **Hazards**
 
@@ -211,7 +211,7 @@ alternative that meets the same learning target: a first-class path, not a conso
 
 - **Supervision:** `nearby-adult`
 - **Guardian visibility:** `summary`
-- **Materials:** soil, sand, and gravel, shallow trays kept for non-food use only, never a baking pan that returns to food use, water, a measuring cup kept for non-food use, timer, ice, thermometer, gloves, published watershed dataset, notebook
+- **Materials:** soil, sand, and gravel, shallow trays kept for non-food use only, never a baking pan that returns to food use, water, a measuring cup kept for non-food use, a large tray kept for non-food use to work over indoors, a strainer kept for non-food use for pouring runoff into an outdoor drain, timer, ice, thermometer, gloves, published watershed dataset, notebook
 
 **Hazards**
 
