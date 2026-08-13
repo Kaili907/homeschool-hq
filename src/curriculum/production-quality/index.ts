@@ -3,6 +3,10 @@ export { evaluateCourseProductionReadiness } from './evaluateCourseProductionRea
 export { summarizeProductionGaps } from './summarizeProductionGaps'
 export { assessContentSpecificity } from './specificity'
 export type { ContentSpecificitySignal } from './specificity'
+export { assessAnswerKeyAuthority, assessAnswerKeyContent } from './answerKeyAuthority'
+export type { AnswerKeyAuthoritySignal, AnswerKeyContentSignal } from './answerKeyAuthority'
+export { detectCredentialRequests } from './credentialRequests'
+export type { CredentialRequestMatch } from './credentialRequests'
 export { READINESS_CODES } from './types'
 export type {
   AlignmentStatus,
@@ -17,5 +21,7 @@ export type {
   ReadinessCode,
   ScoringAuthority,
   ScoringAuthorityKind,
+  ScoringAuthorityVerification,
+  ScoringAuthorityVerificationMethod,
   SubjectFamily,
 } from './types'

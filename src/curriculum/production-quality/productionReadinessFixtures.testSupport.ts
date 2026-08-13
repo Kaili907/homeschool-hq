@@ -31,6 +31,10 @@ export function readyMathLesson(
         present: true,
         text: 'Item 1: 48,352 greater than 48,325, tens place decides at 5 versus 2. Item 2 through 14 follow with full worked solutions and the specific place value that decided each comparison.',
       },
+      verification: {
+        method: 'INDEPENDENT_ORACLE',
+        evidence: 'Every comparison in the key was recomputed from the item\'s own stated digits by the curriculum build\'s place-value comparison checker, independently of the authored answer text; all fourteen items matched.',
+      },
     },
     remediation: {
       present: true,

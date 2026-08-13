@@ -18,17 +18,54 @@ export interface LessonContentBlock {
    * Raw student/teacher-facing text for the component, when available.
    * Optional — callers that only track presence, not text, can omit it;
    * the specificity heuristic simply won't run for that component.
+   *
+   * The one exception is `ScoringAuthority.content` for an `ANSWER_KEY`,
+   * which must carry text: an answer key the gate cannot read is one it
+   * cannot call authoritative.
    */
   readonly text?: string
 }
 
 export type ScoringAuthorityKind = 'ANSWER_KEY' | 'RUBRIC' | 'SCORING_JUDGMENT'
 
+/**
+ * How an answer key's correctness was established. The gate cannot prove an
+ * answer true on its own, so it requires the caller to record *how* the key
+ * was checked, and treats an absent or `UNVERIFIED` method as unproven rather
+ * than as either correct or incorrect.
+ */
+export type ScoringAuthorityVerificationMethod =
+  /** Recomputed/derived independently of the authored key (solver, checker, second generation pass). */
+  | 'INDEPENDENT_ORACLE'
+  /** Checked against the authoritative source, dataset, or standard the item is drawn from. */
+  | 'SOURCE_AUTHORITY'
+  /** A qualified human worked the items and confirmed the key. */
+  | 'HUMAN_VERIFIED'
+  /** Some other defensible verified method; `evidence` must say what it was. */
+  | 'OTHER_VERIFIED_METHOD'
+  /** Explicitly recorded as not yet verified. */
+  | 'UNVERIFIED'
+
+export interface ScoringAuthorityVerification {
+  readonly method: ScoringAuthorityVerificationMethod
+  /**
+   * What was actually done, against what, and by whom — substantive enough for
+   * a reviewer to tell the recorded method apart from a bare claim. A declared
+   * method with no evidence is treated as unverified.
+   */
+  readonly evidence?: string
+}
+
 export interface ScoringAuthority {
   readonly kind: ScoringAuthorityKind
   readonly content: LessonContentBlock
   /** ELA/Social Studies: what counts as an acceptable answer, alongside a rubric. */
   readonly acceptableAnswerCriteria?: LessonContentBlock
+  /**
+   * Required for `ANSWER_KEY` to reach READY. Not consulted for RUBRIC or
+   * SCORING_JUDGMENT, where the criteria themselves are the authority.
+   */
+  readonly verification?: ScoringAuthorityVerification
 }
 
 export type AlignmentStatus = 'ALIGNED' | 'NOT_ALIGNED' | 'UNKNOWN'
@@ -109,12 +146,17 @@ export const READINESS_CODES = [
   'MISSING_INDEPENDENT_WORK',
   'MISSING_SCORING_AUTHORITY',
   'MISSING_ANSWER_KEY',
+  'ANSWER_KEY_NOT_SUBSTANTIVE',
+  'ANSWER_KEY_CONTENT_UNCERTAIN',
+  'ANSWER_KEY_UNVERIFIED',
   'MISSING_RUBRIC',
   'MISSING_REMEDIATION',
   'MISSING_EXTENSION',
   'ASSESSMENT_NOT_ALIGNED',
   'SOURCE_INTEGRITY_GAP',
   'SAFETY_OR_PRIVACY_GAP',
+  'CREDENTIAL_REQUEST',
+  'CREDENTIAL_REQUEST_QUOTED',
   'NEEDS_HUMAN_REVIEW',
 ] as const
 
@@ -125,7 +167,11 @@ export type LessonReadinessStatus = 'READY' | 'NEEDS_HUMAN_REVIEW' | 'NOT_READY'
 export interface LessonReadinessResult {
   readonly lessonId: string
   readonly status: LessonReadinessStatus
-  /** Every gap/flag code that applies. `['READY']` when fully clean. */
+  /**
+   * Every gap/flag code that applies. `['READY']` when fully clean. When any
+   * blocking gap applies the list is the blocking gaps alone; when only
+   * review-level signals apply it is those signals plus `NEEDS_HUMAN_REVIEW`.
+   */
   readonly codes: readonly ReadinessCode[]
   /** Human-readable detail behind each code, for report output. */
   readonly notes: readonly string[]
