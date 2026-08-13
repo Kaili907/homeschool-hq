@@ -126,9 +126,8 @@
       ]
     }
   ],
-  "remediation": "If Revision A comes out at 28.7 months in total rather than 39.7, the 11 months already completed are being dropped. The revision changes only what happens from now on: the plan is 11 months old before the new rate applies. Mark month 11 on a timeline and start the 28.7 months from there.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the monthly amount that would reach the full $12,000 by month 36, and say whether it is closer to the $265 Kwame can manage or to the $400 he originally committed.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

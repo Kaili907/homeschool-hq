@@ -92,9 +92,8 @@
       ]
     }
   ],
-  "remediation": "If the index comes out above 100, the sub-scores are being added before the weights are applied. Compute the five weighted contributions in a column — 33.6, 18.6, 6.0, 7.0, 8.5 — and only then add.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Construct a second fictional lender’s weights, still summing to 1, under which this applicant’s file scores above 80 with no change to any sub-score.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

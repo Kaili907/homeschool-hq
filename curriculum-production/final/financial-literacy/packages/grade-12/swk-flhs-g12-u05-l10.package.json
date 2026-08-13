@@ -116,9 +116,8 @@
       ]
     }
   ],
-  "remediation": "If the required gain comes out as 28%, it is being measured against the original $31,500 rather than the $22,680.00 that remains. The $8,820.00 has to be regained from the reduced balance, which needs 38.89%. The same asymmetry applies to every decline: the recovery percentage always exceeds the fall percentage.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the balance, the required gain, and the fee after a 45% fall instead, and say what the two cases together show about how quickly the required recovery grows.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -105,8 +105,7 @@
     }
   ],
   "remediation": "When a learner counts every coin as one unit, sort the play coins into three piles by type and count each pile in its own skip-count aloud, so quarters are counted by twenty-fives rather than by ones.",
-  "extension": "Ask the learner which single extra play coin would take Dev from $1.30 to exactly $1.50, and to show why no other single coin works.",
-  "scoringRef": "scoring/grade-03/swk-fl-g3-u03-l01.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

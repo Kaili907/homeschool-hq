@@ -100,9 +100,8 @@
       ]
     }
   ],
-  "remediation": "If Offer P still comes out ahead, check that both the $610.00 city tax and the full $2,400 premium have been subtracted from it, and that only the $960 premium has been subtracted from Offer Q. The salary difference of $1,800 is smaller than the $2,050 of extra charges P carries, and that is what reverses the ranking.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the comparison if Offer P could be worked entirely outside the city, so the city tax does not apply, and say how much of the original ranking that one change restores.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

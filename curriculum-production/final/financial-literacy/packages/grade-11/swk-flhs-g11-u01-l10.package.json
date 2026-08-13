@@ -137,9 +137,8 @@
       ]
     }
   ],
-  "remediation": "If the total economic cost comes out at $60,400 or at $48,138, only one of the two halves is in the model. The two years cost Anouk both the money she borrowed, which has grown to $48,138.00, and the wages she did not earn, which come to $60,400.00. Write the cost as a two-line sum before dividing, and label each line so it is clear neither is a duplicate of the other.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the payback period if Anouk repays $9,000 of the balance during the second study year, and say which line of the model that changes and which it leaves alone.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -118,9 +118,8 @@
       ]
     }
   ],
-  "remediation": "If the recovered monthly amount comes out at $185.00, the subscriptions have been left out; if it comes out at $272.00, the whole $87 subscription bill is being counted rather than the $41 that goes unused. Freya still uses three of the six services, so only $41 is recoverable. Write the two recoverable lines separately and check each against the scenario before adding.",
-  "extension": "Work out how many months of the automated $400 it would take to reach $13,560.00, and say what that period represents in terms of the plan Freya already has.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l05.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

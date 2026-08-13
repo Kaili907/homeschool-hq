@@ -106,7 +106,6 @@
   ],
   "remediation": "If the total is landing near the sticker price, list the six costs in a column and tick each one off as it is added; the two easiest to drop are the $120 of required gear, which feels optional, and the $336 of insurance, which is quoted monthly and has to be annualised before it can join the others.",
   "extension": "Recompute the first-year total if the buyer finances the scooter and pays $94 in interest during the first year, and say what that does to the percentage above sticker.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

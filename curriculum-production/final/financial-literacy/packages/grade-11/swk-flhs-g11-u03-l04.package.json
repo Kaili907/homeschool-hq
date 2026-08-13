@@ -133,7 +133,6 @@
   ],
   "remediation": "If the present value of $10,500 comes out above $10,500, the growth factor is being multiplied rather than divided. Moving a figure backwards in time makes it smaller, because a smaller sum today grows into it. Check the direction with a one-year case first: at 5.5%, $1,055 next year is worth $1,000 today, not $1,113.",
   "extension": "Find the annual rate at which the two options would be exactly equal, and say whether a rate above or below it favours taking the money today.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

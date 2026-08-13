@@ -133,7 +133,6 @@
   ],
   "remediation": "If a pathway’s earnings come out too high, the study years are being paid. Rebuild the horizon as a row of 8 boxes per pathway and write a salary only in the boxes after the programme ends: 6 boxes for A, 4 for B, 8 for C. Tuition then comes off the total once, not once a year, and the net position is the row total minus that single subtraction.",
   "extension": "Extend all three pathways to a 20-year horizon with salaries still held flat, and find the first horizon at which Pathway B moves ahead of Pathway C.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

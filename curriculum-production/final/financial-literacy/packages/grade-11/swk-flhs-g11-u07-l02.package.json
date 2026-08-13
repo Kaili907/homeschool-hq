@@ -124,9 +124,8 @@
       ]
     }
   ],
-  "remediation": "If the saving comes out at $714.00, the 11.9% effective rate is being applied to the contribution instead of the 22% marginal rate. The contribution reduces taxable income from $47,500.00 to $41,500.00, and both figures are above $38,400, so the entire $6,000 reduction sits in the 22% band and saves exactly $1,320.00. Recompute both tax figures band by band and subtract.",
-  "extension": "Find the largest contribution that would save the full 22% on every dollar, given that taxable income starts at $47,500.00, and say what rate the next dollar of contribution would save.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l02.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

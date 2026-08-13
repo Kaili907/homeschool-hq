@@ -104,9 +104,8 @@
       ]
     }
   ],
-  "remediation": "If the amount owed comes out as $832.68, only the unauthorised charges have been removed and the $54.00 duplicate is still in the total. Take out everything the cardholder should not pay — $318.40, $96.75, and $54.00 — to reach $778.68, and keep the two categories labelled separately, because they go to different places.",
-  "extension": "Work out what the interest would come to if the disputed $469.15 stayed on the card for 4 months, and say what that implies about how quickly an unauthorised charge should be reported.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l09.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

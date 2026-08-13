@@ -109,9 +109,8 @@
       ]
     }
   ],
-  "remediation": "If the two remedies look interchangeable, ask what the buyer holds at the end of each: under the warranty, a working appliance; under the return, $364.65 and no appliance. Which is better depends entirely on whether the appliance is wanted.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Suppose the warranty covered parts only and the repair needed $110 of labour. Recompute both routes and say whether the day-30 decision would have changed.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

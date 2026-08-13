@@ -105,8 +105,7 @@
     }
   ],
   "remediation": "If a learner restarts at zero, keep the leftover coins physically on the table when the telescope card is removed, so the next goal visibly begins with money already present.",
-  "extension": "Ask the learner what Marcus should do with the $0.50 he ends up over the goal, and to give a reason for the choice.",
-  "scoringRef": "scoring/grade-03/swk-fl-g3-u04-l06.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

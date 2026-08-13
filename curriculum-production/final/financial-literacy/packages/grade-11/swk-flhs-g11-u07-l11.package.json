@@ -120,9 +120,8 @@
       ]
     }
   ],
-  "remediation": "If the loss offset appears to save $3,100, it is being treated as a credit. A loss reduces the taxable gain from $12,600 to $9,500.00, and the tax then falls by the rate applied to that reduction — $372.00 at 15%. Recompute the tax from the reduced gain rather than subtracting the loss from the tax.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the loss that would be needed to bring the tax on the long-held gain down to $1,000, and say whether that loss is larger or smaller than the gain itself.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l11.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

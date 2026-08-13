@@ -150,9 +150,8 @@
       ]
     }
   ],
-  "remediation": "If the balance after month 1 comes out at $9,297.40, the whole $302.60 payment is being subtracted. Only the principal reduces the balance: the first $67.20 of the payment pays interest and leaves the loan no smaller. Build the schedule as four columns — opening balance, interest, principal, closing balance — and check that interest plus principal equals $302.60 in every row.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Continue the schedule to month 6 and compare the interest charged in month 6 with the interest in month 1, stating the fall as a percentage.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

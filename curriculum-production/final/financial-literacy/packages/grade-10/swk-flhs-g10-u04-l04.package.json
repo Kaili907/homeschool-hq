@@ -109,9 +109,8 @@
       ]
     }
   ],
-  "remediation": "If the gap comes out as zero, the loans and work study are being treated as though they lower the cost. Take only the $10,300.00 of gift aid off the $21,400 cost first. What remains, $11,100.00, is what the applicant has to cover — and the $8,100.00 of self-help aid covers all but $3,000.00 of it.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the gap if the scholarship is renewable for only one year while the cost of attendance stays the same, and say what the applicant should ask the fictional institution before accepting.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

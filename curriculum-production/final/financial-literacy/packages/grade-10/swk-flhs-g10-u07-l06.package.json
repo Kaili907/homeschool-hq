@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the cost of the missing records comes out as $1,240, the expense is being confused with the tax it would have saved. The filer does not get the $1,240 back — a deduction only removes that amount from taxed income, which at a 14% marginal rate is worth $173.60.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the penalty and interest if the filer had paid the $1,900 balance on time but filed the return 5 months late anyway, and say which of the two obligations the schedule prices more heavily.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

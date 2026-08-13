@@ -102,7 +102,6 @@
   ],
   "remediation": "If the store return looks available, check the policy against the calendar: 30 days from purchase ends on day 30, and the failure is on day 96. A defect does not extend a stated return window. The routes that remain are the ones written to cover a later failure — the 24-month warranty and, for 24 more days, the card dispute.",
   "extension": "Work out what the household loses by discovering the failure on day 130 instead, and say which single route that change removes.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

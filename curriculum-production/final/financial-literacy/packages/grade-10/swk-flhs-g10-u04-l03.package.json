@@ -122,9 +122,8 @@
       ]
     }
   ],
-  "remediation": "If every month’s interest comes out as $48.00, the rate is being applied to the original $6,000 each time. Month 2 charges interest on $5,848.00, because that is what is owed when month 2 begins. Recompute each month from the balance the previous month left behind.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Carry this loan two more months and describe, in one sentence, what is happening to the gap between the interest and principal portions of the same $200 payment.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

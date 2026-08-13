@@ -107,9 +107,8 @@
       ]
     }
   ],
-  "remediation": "If Vehicle C still looks best, the fee has not been subtracted from the ending balance. The $4 monthly charge runs for all 24 months whatever the yield does, and $96.00 is more than the extra interest the higher yield produced over Vehicle B. Compute each vehicle’s ending balance, then take the fees off before ranking.",
-  "extension": "Find the monthly maintenance fee at which Vehicle C would exactly tie Vehicle B after two years, and say whether a saver could tell from the advertised yields alone that such a fee mattered.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l06.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

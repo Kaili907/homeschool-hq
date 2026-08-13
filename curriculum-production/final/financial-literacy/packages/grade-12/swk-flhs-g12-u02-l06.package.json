@@ -98,8 +98,7 @@
     }
   ],
   "remediation": "If the review concludes the year went to plan, compare the categories rather than the totals. Five of the six differ from plan, and they cancel out to zero only because savings moved to make them. Compute each category’s variance and check whether they sum to the savings shortfall.",
-  "extension": "Rebuild the year with savings fixed at $4,200 and the $1,086.00 taken from the three overspent categories in proportion to their overspend, and say which category takes the largest cut.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l06.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -111,7 +111,6 @@
   ],
   "remediation": "If the learner marks the leftover line as the original error, walk the budget line by line and ask of each: is this line wrong on its own, or only because of a line above it? The leftover line is arithmetically consistent with the (false) starting figure, which is exactly what makes an early error hard to see.",
   "extension": "Rewrite Jaylen’s budget so it works on his real take-home pay while keeping his $200 savings line intact, and say which other line you cut and why.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

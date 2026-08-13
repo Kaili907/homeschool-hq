@@ -105,7 +105,6 @@
   ],
   "remediation": "If the recoup months are coming out implausibly small or large, check that the divisor is the gain over Role 1 and not the role’s whole compensation. Write the subtraction explicitly first ($49,762 - $43,828 = $5,934) before dividing the program cost by it.",
   "extension": "Add a fourth fictional role paying $24.00 an hour with $5,000 of benefits and a 6-month, $2,200 program, and place it in the ranking by recoup time from enrolment.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

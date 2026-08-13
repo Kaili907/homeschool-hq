@@ -99,7 +99,6 @@
   ],
   "remediation": "If a learner combines hours and rate incorrectly, box the rate and the hours separately for Bruno and read the phrase \"fourteen dollars for each hour\" before writing the multiplication.",
   "extension": "Ask the learner how many hours at $14.00 would be needed to match the first period without any commission at all.",
-  "scoringRef": "scoring/grade-05/swk-fl-g5-u02-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

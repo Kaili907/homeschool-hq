@@ -131,9 +131,8 @@
       ]
     }
   ],
-  "remediation": "If the plans are ranked on their premiums, Plan B wins by $1,440.00 and the comparison stops too early. Add what the member pays toward the $4,200 of charges under each plan — $1,800.00 under A and $3,360.00 under B — before comparing. Do the same with the retirement election: the $1,764.00 is available only if $3,528.00 is actually contributed.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Rebuild the whole election set for a fictional hire on the same $58,800 salary who is also repaying $340 a month on a loan, and say which of the three elections that constraint changes first.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

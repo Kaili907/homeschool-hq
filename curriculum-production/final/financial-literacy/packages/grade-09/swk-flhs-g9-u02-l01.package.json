@@ -100,9 +100,8 @@
       ]
     }
   ],
-  "remediation": "If cost per month is being computed as months divided by price, anchor the units out loud: dollars per month means dollars on top, months underneath. Check the Dunlin first, where $52 over 8 months gives an easy $6.50, before returning to the two that need rounding. For the 36-month question, count whole purchases rather than multiplying the monthly rate: you cannot buy four and a half pairs.",
-  "extension": "Suppose the Aria 40 lasted only 12 months rather than 18. Recompute its cost per month and say whether the wired-model ranking changes.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l01.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

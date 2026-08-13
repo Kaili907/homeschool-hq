@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the cost of moving from 6% to 10% comes out at $164.00, the tax effect has been left out. Compute the take-home reduction at each rate first — $216.48 at 6% and $360.80 at 10% — and take the difference between those, not between the two contributions.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute both take-home reductions for a fictional worker whose last dollars fall in a 22% band instead of 12%, and say whether the higher band makes contributing cheaper or dearer in take-home terms.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

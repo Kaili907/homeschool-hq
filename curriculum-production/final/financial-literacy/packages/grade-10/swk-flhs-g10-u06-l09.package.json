@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the belongings event comes out at $500, the coverage limit has not been applied. The deductible leaves $14,100 of loss, but the renters policy will not pay more than its $10,000 limit, so the household bears $4,600.00. Compare each exposure against the limit standing behind it, not against the deductible.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what renters limit would reduce the household’s exposure on the belongings to the $500 deductible, and say whether that change or disability coverage would remove more risk per dollar of premium.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

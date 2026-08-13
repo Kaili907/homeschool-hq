@@ -102,7 +102,6 @@
   ],
   "remediation": "If the renters payout comes out at $14,000.00, the deductible has not been applied; if it comes out at $25,000, the limit has been treated as the payout. Work the terms in order: start from the $14,000 loss, subtract the $500 deductible, then check the result against the $25,000 limit, which only binds if the loss is larger.",
   "extension": "Recompute the renters payout on a fictional loss of $31,000, and say which of the two policy terms decides the answer in that case.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -106,9 +106,8 @@
       ]
     }
   ],
-  "remediation": "If the year looks like a success because income was $1,140.00 above plan, compare the savings rates rather than the income. The plan set 8.97% and the year delivered 7.41%. Then check where the extra went: spending rose $1,788.00, which is more than the extra income, and the difference came out of savings.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what the savings rate would have been had the household spent exactly its planned $42,600, and say how much of the improvement comes from the bonus rather than from any change in behaviour.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

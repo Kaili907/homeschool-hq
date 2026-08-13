@@ -118,9 +118,8 @@
       ]
     }
   ],
-  "remediation": "If the five-year value comes out at $23,753.73, the average is being applied as though it were the actual sequence. The money experienced 11.4%, then -7.2%, and so on, each applied to the balance at the start of that year. Multiply the five growth factors together in order and compare the result with what the average predicted.",
-  "extension": "Find the single constant annual return that would have produced exactly $23,361.88 from $20,000 over five years, and say whether it is above or below the advertised 3.5%.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l06.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

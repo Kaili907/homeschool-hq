@@ -107,9 +107,8 @@
       ]
     }
   ],
-  "remediation": "If State Q looks $2,162.00 cheaper, only the missing income tax has been counted. State Q charges 9% on purchases where State P charges 7.25%, and adds a $1,340 annual levy. Total all the lines in each state before comparing; the real gap is $612.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the level of annual taxable purchases at which the two states would cost this worker the same, and say whether that figure is above or below the $12,000 in the scenario.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

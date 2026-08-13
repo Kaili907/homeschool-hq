@@ -125,7 +125,6 @@
   ],
   "remediation": "If the tax at $51,000 comes out at $8,712.00, the 22% rate is being applied to the whole taxable income. Only the $1,200 above $38,400 reaches 22%; the first $9,800 is still taxed at 10% and the next $28,600 at 14%. Write the three band pieces separately for both incomes before subtracting one total from the other.",
   "extension": "Find the marginal rate that would have to apply above $38,400 for the $1,500 raise to leave the worker exactly no better off, and say whether any real income tax band comes close to it.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

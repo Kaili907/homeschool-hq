@@ -99,7 +99,6 @@
   ],
   "remediation": "If the benefit load exceeds 100%, salary has probably been included in the numerator. The load measures employer-funded benefits against salary, so the $52,000 belongs only underneath.",
   "extension": "Recompute the benefit load for an employee on the same package at a $78,000 salary, and say why the percentage moves even though the health contribution does not.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

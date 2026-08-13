@@ -118,9 +118,8 @@
       ]
     }
   ],
-  "remediation": "If the finance charge comes out as $24,235.20, the amount financed has not been subtracted — that figure is everything Rafael pays, not the extra he pays for the credit. The finance charge is the difference between what is paid in total and what was borrowed. Write the two figures one above the other and subtract before doing anything else with them.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what monthly payment over 84 months would give the same total of payments as the disclosure box, and say how close that is to the advertised $299.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

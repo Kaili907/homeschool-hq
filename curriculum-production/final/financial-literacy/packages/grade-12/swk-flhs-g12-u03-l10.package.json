@@ -121,9 +121,8 @@
       ]
     }
   ],
-  "remediation": "If the allocation treats the employer contribution as a 50% return to be compared with the 22.8% card rate, stop and check what each figure measures. The card rate is charged every year the balance is carried; the employer contribution is a single addition to whatever is put in during that year. Compute what each is worth in dollars over the coming twelve months — $1,080.00 against roughly $457 of interest, which is what the $4,200 balance actually costs while it is being paid down at $460 a month — before ranking them.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Rework the allocation for a fictional household with the same $640 surplus but no employer contribution available at all, and say which of the two remaining claims changes most.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -109,7 +109,6 @@
   ],
   "remediation": "If the tax owed comes out as the sum of two separate calculations, one per job, reread the schedule: it applies once to total income. Add the two salaries first, subtract one $9,000 deduction, then apply the bands to what remains.",
   "extension": "Recompute the shortfall if Job B paid $11,000 instead of $16,000, and say whether the problem gets better or worse as the second job gets smaller.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

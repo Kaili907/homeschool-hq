@@ -120,9 +120,8 @@
       ]
     }
   ],
-  "remediation": "If the eight-year cost per year comes out near $5,451.41, the running costs are being held at $2,960 for all eight years. The scenario raises them to $4,310 from year 6, so the eight-year running total is $27,730.00 and not $23,680. Split the running-cost line into two blocks — five years at the lower rate and three at the higher — before adding the depreciation.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the holding period at which the cost per year is lowest, and say what feature of the running-cost schedule makes that year rather than the last one the answer.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -102,9 +102,8 @@
       ]
     }
   ],
-  "remediation": "If the saving from borrowing less comes out as $2,200 — the raw difference in principal — the repayment multiplier has been dropped. Every dollar not borrowed saves about $1.38, so the saving is near $3,036; the keyed $3,039.60 differs slightly because it uses the exact $7,869.60 total on one side rather than the rounded per-dollar figure on both.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Build a third plan that borrows nothing, state what it requires in hours and advance saving, and say honestly whether it is realistic alongside full-time study.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l11.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

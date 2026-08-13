@@ -105,7 +105,6 @@
   ],
   "remediation": "If the portfolio return comes out as 7.67%, the negative return is being left out of the sum altogether while the other three are still divided by 4. The international fund returned -6%, and at an equal quarter weight it pulls the average down. Add all four returns, including the negative one, before dividing by 4.",
   "extension": "Recompute the equally weighted return if the international fund had instead returned -20% and everything else was unchanged, and say whether the portfolio still finished the year positive.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

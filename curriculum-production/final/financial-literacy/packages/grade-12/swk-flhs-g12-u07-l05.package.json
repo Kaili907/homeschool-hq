@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If shock A appears to be covered, the loan payment has probably been left out. Income stopping does not stop the $198.54 payment, so the 3 months require $6,135.00 of living costs plus $595.62 of loan payments — $6,730.62 against a reserve of $6,400.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what monthly reserve transfer would have covered shock A in full by the end of the year, and say what that transfer would have to displace in the $931.04 surplus.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -98,7 +98,6 @@
   ],
   "remediation": "If utilisation is being computed per card and averaged, note that the report’s combined figure divides the total balance by the total limit. Compute $850 and $2,300 as two separate sums before dividing once.",
   "extension": "Work out the payment that would bring utilisation below 30%, and say why a borrower might target that threshold even though nothing in the report labels it.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

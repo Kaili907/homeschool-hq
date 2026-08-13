@@ -142,9 +142,8 @@
       ]
     }
   ],
-  "remediation": "If the total comes out at $463.56, the whole penalty-rate interest is being counted rather than the extra above the ordinary rate. Obadiah would have paid $42.36 a month in interest regardless; the missed payment costs him the difference of $28.40 a month plus the $39 fee. Compute the two monthly charges side by side and subtract before multiplying by 6.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the cost of the missed payment if the balance were $6,300 instead, and say whether the fee or the penalty interest grows with the balance.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

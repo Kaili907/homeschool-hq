@@ -72,7 +72,6 @@
   ],
   "remediation": "If a learner rates the products, hide the product details and have them describe only what each of Nikolai's techniques does to the shopper.",
   "extension": "Ask the learner to redesign Nikolai's checkout so it informs without steering, and to say what they removed.",
-  "scoringRef": "scoring/grade-08/swk-fl-g8-u02-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

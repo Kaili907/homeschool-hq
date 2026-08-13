@@ -93,9 +93,8 @@
       ]
     }
   ],
-  "remediation": "If the two decisions still look consistent, put them on one scale. Convert the monthly increases to a yearly figure of $329.88 and then to $989.64 across the 3 years, and only then set that against the $400. Comparing $9.99 a month with $400 compares a rate against a total.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the 3-year figure assuming each of the six services raises its price by a further 4% each year, and say how much the flat assumption understated.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

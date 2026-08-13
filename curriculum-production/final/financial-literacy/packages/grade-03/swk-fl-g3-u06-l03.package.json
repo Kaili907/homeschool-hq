@@ -101,8 +101,7 @@
     }
   ],
   "remediation": "When a learner forgets to subtract supplies, write the money-in and the money-out as two separate rows for Nico and require both rows to be filled before any keep-money is written.",
-  "extension": "Ask the learner what price Nico would need so that 4 flowers leave him with exactly $6.00 after supplies, and to show the reasoning.",
-  "scoringRef": "scoring/grade-03/swk-fl-g3-u06-l03.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

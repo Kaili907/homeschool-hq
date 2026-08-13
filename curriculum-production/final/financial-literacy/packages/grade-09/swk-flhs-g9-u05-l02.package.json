@@ -97,7 +97,6 @@
   ],
   "remediation": "If the real return comes out as exactly 2.3%, the two rates are being subtracted. Subtraction is a good estimate but not the calculation: divide 1.054 by 1.031 and subtract 1 to get the real figure.",
   "extension": "Compute the nominal return this investment would have needed to deliver a 4% real return at 3.1% inflation, and say how far that is above 7.1%.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

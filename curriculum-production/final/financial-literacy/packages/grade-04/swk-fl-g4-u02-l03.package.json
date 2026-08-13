@@ -101,8 +101,7 @@
     }
   ],
   "remediation": "If a learner treats 10% as ten dollars, build Hugo's $60.00 as six ten-dollar strips and take one strip as the tenth, so the percentage is seen as a share of the whole rather than a fixed figure.",
-  "extension": "Ask the learner what Hugo's saving percentage would need to be for the saving set-aside alone to reach $9.00 on a $60.00 pay-day.",
-  "scoringRef": "scoring/grade-04/swk-fl-g4-u02-l03.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -101,7 +101,6 @@
   ],
   "remediation": "If a learner subtracts the payment from the balance directly, require the interest line to be computed and removed from the payment first for Gideon.",
   "extension": "Ask the learner to compute Gideon's month three and describe how the interest share of each payment is changing.",
-  "scoringRef": "scoring/grade-08/swk-fl-g8-u04-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

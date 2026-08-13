@@ -109,9 +109,8 @@
       ]
     }
   ],
-  "remediation": "If the amount to move comes out at $84,000 or at $46,200.00, the two allocations are being compared on the wrong side. The growth holding falls from $71,400.00 to $37,800.00, so $33,600.00 moves; the stable holding rises from $12,600.00 to $46,200.00 by the same $33,600.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the loss under each allocation if the stable category also fell, by 5%, and say how much of the protection the reallocation offered survives.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

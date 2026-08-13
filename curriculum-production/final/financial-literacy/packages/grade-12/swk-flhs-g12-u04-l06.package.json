@@ -104,9 +104,8 @@
       ]
     }
   ],
-  "remediation": "If the extended schedule looks cheaper overall, compare the totals rather than the payments. It pays $193.69 for 240 months, which is $46,485.60, against $306.44 for 120 months, which is $36,772.80. A lower payment over a longer term repays more, not less.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the standard payment on the balance after a 12-month pause, and say how much of the pause’s cost shows up as a higher payment rather than as a longer term.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

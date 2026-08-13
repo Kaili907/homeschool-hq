@@ -104,9 +104,8 @@
       ]
     }
   ],
-  "remediation": "If the surplus comes out at $895.94, the $35.10 of card interest has been added to the committed total. Interest is a charge on the balance, not a required monthly payment, and treating it as committed double-counts it once the surplus is allocated to the card. Commit the $2,045.00 of living costs and the $198.54 loan payment only.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the surplus for the same fictional case with rent at $1,340 rather than $1,180, and say what proportion of the surplus a single change in the largest line consumes.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

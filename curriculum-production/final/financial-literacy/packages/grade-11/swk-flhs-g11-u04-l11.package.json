@@ -131,9 +131,8 @@
       ]
     }
   ],
-  "remediation": "If the available housing payment comes out at $2,246.40, the existing $1,142 of payments has not been subtracted from the ceiling. The 36% cap covers all debt payments together, so the existing commitments come out of it first, leaving $1,104.40. Write the ceiling, the existing payments, and the remainder as three separate lines before comparing anything to the $1,380 proposal.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the housing payment at which Anselm’s ratio would sit at 30% rather than 36%, and say what that margin would be worth if his income fell by 10%.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l11.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

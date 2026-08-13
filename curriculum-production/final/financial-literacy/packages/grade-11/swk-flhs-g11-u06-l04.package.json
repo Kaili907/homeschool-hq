@@ -124,9 +124,8 @@
       ]
     }
   ],
-  "remediation": "If Policy 1 comes out paying $10,500.00, the deductible is being subtracted after the limit rather than before. The order is: take the $1,500 deductible off the $18,400 loss to get $16,900.00, then cap that at the $12,000 limit. Write the three steps — loss, less deductible, capped at limit — as separate lines every time.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute all the payments for a loss of $9,000 instead, and say why the two policies cover the whole of it even though their limits are unchanged.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

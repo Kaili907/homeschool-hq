@@ -118,9 +118,8 @@
       ]
     }
   ],
-  "remediation": "If the refinance looks like a clear win, check whether the $625 of fees has been included. The gross saving is $1,198.68 across 42 months, but the fees are paid at the start and come off that, leaving $573.68. Compute the break-even in months first, then compare it against how long the loan is actually expected to run.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the largest fee at which the refinance would still break even by month 18, and say how far that is from the $625 charged.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

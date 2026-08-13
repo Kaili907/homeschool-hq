@@ -105,9 +105,8 @@
       ]
     }
   ],
-  "remediation": "If the mapped score comes out as 75 or 76, the weighted result is being reported without being placed on the 300 to 850 scale. The weighted figure is out of 100; the scale has a floor of 300 and 550 points above it. Take 75.45 percent of those 550 points and add the 300 floor.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out how many points the borrower would gain by moving payment history from 92 to 100 instead, and say which of the two changes is easier to make and which is easier to lose.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

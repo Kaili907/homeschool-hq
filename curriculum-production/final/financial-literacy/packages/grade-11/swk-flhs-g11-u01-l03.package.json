@@ -123,7 +123,6 @@
   ],
   "remediation": "If the expected wage comes out as $49,266.67, the three percentiles are being averaged as equals and the stated 25/50/25 weights are being ignored. Write the three products in a column — 0.25 x $38,900, 0.5 x $47,600, 0.25 x $61,300 — check that the weights sum to 1 before adding, and only then total the column.",
   "extension": "Recompute the expected wage under weights of 40%, 40%, and 20%, and say how much the ten-year median plan would then be overstating a plan built on the expectation.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

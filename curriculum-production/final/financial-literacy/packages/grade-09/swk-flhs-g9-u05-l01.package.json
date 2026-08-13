@@ -99,7 +99,6 @@
   ],
   "remediation": "If the worst-case values come out above the stake, the loss percentage is being added rather than subtracted. Write the multiplier first — a 28% loss means multiplying by 0.72 — and check that the result is smaller than $5,000 before recording it.",
   "extension": "Compute what Option C would have to be worth after one year for the investor to be no worse off than Option A, and express that as a required return.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -95,9 +95,8 @@
       ]
     }
   ],
-  "remediation": "If the per-hour figure is being computed from the $120 offer, reread the question: it asks what escalating recovered beyond the offer, which is the $148.40 difference, not the offer itself.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute both per-hour figures if the dispute had taken 14 hours instead of 4.5, and say at what point the effort stops being worth the amount at stake.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

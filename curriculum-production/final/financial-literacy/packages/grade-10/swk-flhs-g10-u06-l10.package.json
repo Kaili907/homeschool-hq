@@ -115,9 +115,8 @@
       ]
     }
   ],
-  "remediation": "If the policyholder’s total comes out at $1,000.00, only the deductible has been counted. Two of the three coverages hit their limits: medical payments stopped at $5,000.00 against $6,200 of bills, and liability stopped at $25,000.00 against $31,400 of damage. Everything above a limit stays with the policyholder.",
-  "extension": "Recompute the claim with the property damage liability limit raised to $50,000 and everything else unchanged, and say how much of the policyholder’s $8,600.00 that single change removes.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l10.scoring.json",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

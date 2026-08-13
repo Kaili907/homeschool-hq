@@ -124,9 +124,8 @@
       ]
     }
   ],
-  "remediation": "If the credit appears to save the full $1,800, the cap is being ignored. A non-refundable credit cannot reduce tax below zero, and Philippa’s tax is only $1,414.00, so $386.00 has nothing to offset. Compute the tax first, then take the smaller of the tax and the credit.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the income at which Philippa could use the whole $1,800 credit under the non-refundable rule, and say how far above her current $24,300 that is.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

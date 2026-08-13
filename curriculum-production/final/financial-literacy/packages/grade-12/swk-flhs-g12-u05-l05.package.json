@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If account Y looks more expensive at $60,000, the flat $60 may be being applied as a percentage or added twice. Compute each part separately: 0.15% of $60,000 is $90.00, and the flat charge adds $60, for $150.00 in total against account X’s $510.00.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the balance at which the two accounts charge exactly the same fee, and say which structure is cheaper on either side of it.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

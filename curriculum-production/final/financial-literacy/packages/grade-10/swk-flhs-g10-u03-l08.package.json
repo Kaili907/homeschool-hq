@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If Account X is expected to win, notice that two things differ between the offers, not one. Hold the rate at 3.00% and change only the frequency to see that it is worth $18.74; then hold the frequency annual and change only the rate to see that it is worth $45.11. The larger of the two decides the ranking.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the nominal rate Account X would need, still compounded monthly, to match Account Y over the same term, and say how far that is above 3.00%.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -98,7 +98,6 @@
   ],
   "remediation": "If the crossover comes out near 2,000 pages, check the denominator: the gap closes at the difference between the two per-page rates, about $0.068, not at either rate on its own. Compute the two rates unrounded before subtracting.",
   "extension": "Add a fictional Printer C at $89 with a $39 cartridge printing 180 pages, and say at what volume it stops being the cheapest of the three.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u02-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

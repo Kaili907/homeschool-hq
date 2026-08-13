@@ -109,8 +109,7 @@
     }
   ],
   "remediation": "When a learner blends the sources, split the record into two columns headed given and earned, re-enter each pretend amount under the right heading, and only then ask for any comparison between them.",
-  "extension": "Have the learner plan how many more pretend bicycle washes at $2.00 Ben needs before his earnings alone reach $10.00.",
-  "scoringRef": "scoring/grade-03/swk-fl-g3-u02-l05.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

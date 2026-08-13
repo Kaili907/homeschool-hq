@@ -99,7 +99,6 @@
   ],
   "remediation": "If the 30-year figure is coming out near double the 15-year figure, the growth is being treated as if it added a fixed amount each year. Compute 1.06 to the fifth, then square that and multiply once more to reach year 15, and watch the multiplier itself grow.",
   "extension": "Compute what the same $2,000 would reach in 30 years at 4% instead of 6%, and say which mattered more here, the rate or the term.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

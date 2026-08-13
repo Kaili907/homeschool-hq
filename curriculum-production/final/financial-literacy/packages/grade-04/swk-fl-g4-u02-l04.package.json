@@ -102,7 +102,6 @@
   ],
   "remediation": "When a learner reports revenue as profit, use two columns headed money in and money out for Camila, and require both to be filled before the profit line is written.",
   "extension": "Ask the learner how many cups at $0.75 Camila would need to match the profit from 12 cups at $1.00, and to show the reasoning.",
-  "scoringRef": "scoring/grade-04/swk-fl-g4-u02-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

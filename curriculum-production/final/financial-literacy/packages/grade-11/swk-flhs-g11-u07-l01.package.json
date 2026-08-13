@@ -126,7 +126,6 @@
   ],
   "remediation": "If the tax comes out at $11,572.00, the 22% rate is being applied to the whole of the gross income rather than only to the part of taxable income above $38,400. Two things happen first: $11,400 comes off as the standard deduction, and the first $38,400 of what remains is taxed at 10% and 14%. Build the three band pieces as separate rows and check that they add to the total.",
   "extension": "Recompute Ottoline’s total tax and effective rate at a gross income of $96,000, and say how much of her income then reaches the 30% band.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -102,7 +102,6 @@
   ],
   "remediation": "If a learner treats the payment amount as the cost, write Andre's borrowed amount, total repaid, and difference on three separate lines, so interest is isolated as its own figure.",
   "extension": "Ask the learner what interest rate would make Andre's loan cost exactly $2.00, and how they found it.",
-  "scoringRef": "scoring/grade-04/swk-fl-g4-u05-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

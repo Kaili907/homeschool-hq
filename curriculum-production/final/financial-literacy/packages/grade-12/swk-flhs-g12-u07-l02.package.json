@@ -100,9 +100,8 @@
       ]
     }
   ],
-  "remediation": "If the refund comes out at $2,180.00, the pre-tax contribution has not been subtracted, or the whole taxable income has been taxed at 12%. Taxable income is $40,020.00 after both the $2,580 contribution and the $9,000 deduction, and the first $10,400 of it is charged at 10%, not 12%.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what withholding would have produced a refund of exactly zero, and say how much would have had to be withheld each month to achieve it.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

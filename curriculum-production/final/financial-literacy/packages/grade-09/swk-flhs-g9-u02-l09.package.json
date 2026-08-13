@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If the payback comes out near half a year or near seventy, check whether the $150 price gap was divided by the annual saving or by the annual running cost. Write the sentence in words first — the extra $150 is repaid at $21.40 a year — and then divide.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the payback at an electricity rate of $0.26 per kWh and say what that shows about how much the label alone can settle.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

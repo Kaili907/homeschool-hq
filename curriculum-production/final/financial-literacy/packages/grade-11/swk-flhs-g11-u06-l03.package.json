@@ -126,7 +126,6 @@
   ],
   "remediation": "If the expected cost with the policy comes out at $995.00, the whole $600 deductible is being added to the premium. The deductible is only paid in the 6% of years when the loss occurs, so its expected cost is $36.00 and not $600. Write the premium as a certain cost and the deductible as a chance-weighted one before adding them.",
   "extension": "Find the premium at which insuring and self-insuring would cost the same in expected terms, and say how far below the actual $395 that is.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -120,7 +120,6 @@
   ],
   "remediation": "If both comparisons rank the fields the same way, the pathway cost is probably being scaled with the wage. The cost is a single figure paid once — $38,400 for Field A and $21,900 for Field B — and it stays the same whether the wage lands at the median or the 25th percentile. Rebuild each column as twelve identical wage rows and one cost row, and check that only the wage rows changed between the two comparisons.",
   "extension": "Find the 25th-percentile wage Field A would need for the ranking to hold at both percentiles, and say how far that is from the $43,100 it actually pays.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

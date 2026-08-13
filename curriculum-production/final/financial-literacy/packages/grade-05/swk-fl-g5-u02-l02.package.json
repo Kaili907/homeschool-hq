@@ -97,9 +97,8 @@
       ]
     }
   ],
-  "remediation": "If a learner divides the certificate cost by the hourly rate, restate the question as how many $30.00 weekly gains fit inside $120.00 and count the steps before dividing.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Ask the learner what the certificate could cost at most for Ngozi to recover it within 3 weeks, and to justify the figure.",
-  "scoringRef": "scoring/grade-05/swk-fl-g5-u02-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

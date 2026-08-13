@@ -109,9 +109,8 @@
       ]
     }
   ],
-  "remediation": "If the minimum payment looks like real progress, compare the two figures side by side: the payment is $42.00 and the month’s interest is $40.08. Subtract before deciding what the payment accomplished, and notice that the $2,100 balance falls to $2,098.08.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what monthly payment would retire $100 of the card balance in a month, and say how that compares with the required minimum.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

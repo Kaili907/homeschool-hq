@@ -102,8 +102,7 @@
     }
   ],
   "remediation": "If a learner ignores the benefits, list each of Renata's benefits as a line item with a dollar value before either offer is judged.",
-  "extension": "Ask the learner what salary Offer B would need for the two offers to be equal in total compensation, and to show the arithmetic.",
-  "scoringRef": "scoring/grade-07/swk-fl-g7-u01-l04.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

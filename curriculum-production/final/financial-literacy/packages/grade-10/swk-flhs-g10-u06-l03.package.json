@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If Option 1 leaves the renter paying $500, the limit has not been applied. The deductible comes off first, leaving $8,350, and Option 1 will not pay more than its $6,000 limit. The renter bears the difference, $2,850.00, which is what an under-sized limit actually costs.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the coverage limit at which Option 1 and Option 2 would pay the same amount in this loss, and say how a renter could keep a limit correctly sized as they acquire more belongings.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

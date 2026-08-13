@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If allocation A comes out at $91,347.06, the 7% growth rate has been applied to the whole $12,000 and the stable sleeve ignored; if it comes out at $72,931.77, a single blended rate of 6.2% has been applied to the whole balance instead. The two parts grow at different assumed rates and must be compounded separately: $9,600.00 at 7% for 30 years, plus $2,400.00 at 3% for 30 years, added at the end.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute both allocations over 10 years rather than 30, and say what proportion of the 30-year gap has appeared by then.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

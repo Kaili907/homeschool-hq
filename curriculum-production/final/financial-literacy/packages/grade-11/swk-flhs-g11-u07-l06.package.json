@@ -125,7 +125,6 @@
   ],
   "remediation": "If the total reduction comes out at $1,408.00, the $900 credit is being treated as though it reduced taxable income. A credit comes off the tax after it is computed, so it is worth exactly $900.00, while the $5,500 contribution reduces taxable income and is worth 22% of itself. Compute the tax from the reduced taxable income first, then subtract the credit.",
   "extension": "Find the credit that would be worth the same as the $5,500 contribution at Barnabas’s marginal rate, and say what credit would be needed if his marginal rate were 14% instead.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

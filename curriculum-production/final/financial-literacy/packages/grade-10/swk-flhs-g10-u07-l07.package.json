@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the raise looks like it costs more than it pays, compare the two bracket calculations line by line. The first bracket charges $980 in both years. The second charges $4,410 before the raise, because taxable income stops at $41,300.00, and $4,508 after, because taxable income now runs past $42,000 and fills the band. That $98 plus 24% of the $1,300.00 above the threshold is the whole extra tax, $410.00 — against $2,000 of extra gross.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Determine whether any raise from $52,500 could leave the worker keeping only half of it under this schedule, and say what the top rate implies about the smallest share of a raise a worker can keep.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l07.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

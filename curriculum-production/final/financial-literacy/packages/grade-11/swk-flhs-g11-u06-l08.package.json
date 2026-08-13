@@ -120,9 +120,8 @@
       ]
     }
   ],
-  "remediation": "If the two best-value covers come out as liability and stock, check the per-dollar figures rather than the reduction amounts. Liability removes the most in dollars, at $3,300.00, but equipment removes more per premium dollar, at 2.27 against 2.04. Rank on the ratio column, then work down it until the budget runs out.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Find the equipment premium at which the enterprise could afford all three covers within $3,200, and say how much reduction that would add.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

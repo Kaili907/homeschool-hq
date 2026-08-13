@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the level monthly figure comes out as $1,940, the two monthly pay rates are being averaged without weighting them by how many months each one lasts — $2,900 and $980 average to $1,940, but the year holds only 4 months at the higher rate and 8 at the lower. Total the whole year’s income, $19,440.00, and divide that by 12.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Suppose the peak season shortens to 3 months at the same rates. Recompute the level monthly figure and the amount the peak months must now carry, and say which of the two changes more.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l05.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

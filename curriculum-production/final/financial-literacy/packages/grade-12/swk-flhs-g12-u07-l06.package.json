@@ -102,9 +102,8 @@
       ]
     }
   ],
-  "remediation": "If the two plans appear to allocate different amounts, check each against the $931.04 surplus. Plan 1 is $400 plus $331.04 plus $200; Plan 2 is $200 plus $731.04. Both come to $931.04 exactly, and a plan that does not is either leaving money unallocated or spending money that is not there.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Build a third complete plan that clears the card in under 4 months and still adds at least $300 a month to the reserve, and say what it has to give up to do both.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l06.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

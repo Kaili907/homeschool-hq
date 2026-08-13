@@ -100,7 +100,6 @@
   ],
   "remediation": "If a learner subtracts the payment from the balance directly, require the interest line to be computed and subtracted from the payment first for Silas.",
   "extension": "Ask the learner to compute Silas's month three and describe the trend in how much of each payment reaches the balance.",
-  "scoringRef": "scoring/grade-07/swk-fl-g7-u04-l03.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

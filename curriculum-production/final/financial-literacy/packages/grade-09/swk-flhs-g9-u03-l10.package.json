@@ -105,7 +105,6 @@
   ],
   "remediation": "If the repaired deposit is coming out as $360, the $1,800 target balance is being divided by the five remaining months without crediting the $650 already in the account. Write the sentence first — $1,800 needed as a balance, $650 already there, five months left — and then divide what remains.",
   "extension": "Rebuild the plan assuming the saver can manage only $190 a month after the shock, find the month the goal would then be reached, and say what that costs in delay.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

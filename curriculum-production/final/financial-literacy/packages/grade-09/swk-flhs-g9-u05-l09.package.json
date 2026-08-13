@@ -93,7 +93,6 @@
   ],
   "remediation": "If the portfolio return comes out positive, check the sign on Holding 2: a -45% return at weight 0.2 subtracts 9 percentage points, and it is the only negative contribution in the table.",
   "extension": "Find the weight on Holding 2 at which the original portfolio would have exactly broken even in this year, and say what that weight implies.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l09.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -115,8 +115,7 @@
     }
   ],
   "remediation": "If the year-10 basket comes out at $6,499.00, the inflation is being applied as a flat 34% of the original price rather than compounded. Each year’s 3.4% is charged on the previous year’s price, so year 2 costs 3.4% more than year 1 rather than 3.4% more than the start. Build the first three years by hand before using the ten-year form.",
-  "extension": "Find the wage growth rate that would have held the basket at 9.3% of income for the whole decade, and say how close it is to the 3.4% inflation rate.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l02.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

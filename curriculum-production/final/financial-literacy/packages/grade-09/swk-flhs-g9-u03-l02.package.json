@@ -117,7 +117,6 @@
   ],
   "remediation": "If a periodic cost is being entered at its full amount in every month, ask what the household would have paid over a whole year under that budget: twelve payments of $148 for one annual registration. Divide first, then enter.",
   "extension": "Add a fictional $340 car repair that happens roughly every 18 months, compute its monthly equivalent, and say why that one is harder to budget than the registration.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

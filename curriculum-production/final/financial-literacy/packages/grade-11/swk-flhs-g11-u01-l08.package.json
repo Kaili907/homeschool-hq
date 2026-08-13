@@ -118,9 +118,8 @@
       ]
     }
   ],
-  "remediation": "If the crossover comes out at 14.1 years, the 3 training years have been left out of the count. The catching-up only starts once both pathways are working, so the answer is 3 years of gap-building plus 14.1 years of closing it. Draw a timeline with year 3 marked and start the closing count there.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the crossover if the apprenticeship’s qualified wage rises to $55,000 while the programme’s stays at $61,700, and say what that does to the size of the decision.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

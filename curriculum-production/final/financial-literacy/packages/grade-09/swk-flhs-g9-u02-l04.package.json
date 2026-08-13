@@ -102,7 +102,6 @@
   ],
   "remediation": "If the per-100-gram figures come out a hundred times too large or too small, do the division first and the scaling second: $7.14 divided by 680 is about a penny per gram, so per 100 grams it must be about a dollar. Sanity-check against that before recording the answer.",
   "extension": "Add a fictional third option, 2300 grams for $22.54, compute its unit price, and say whether the biggest package is automatically the cheapest per unit.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l04.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

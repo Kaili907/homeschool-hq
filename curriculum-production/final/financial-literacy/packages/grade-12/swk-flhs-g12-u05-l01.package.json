@@ -106,9 +106,8 @@
       ]
     }
   ],
-  "remediation": "If the maximum employer contribution comes out at $2,640.00, both tiers are being matched at 100%. Read the tiers separately: the first 3% of $52,800 is matched dollar for dollar, giving $1,584.00, and the next 2% is matched at 50%, giving $528.00 on a $1,056.00 contribution.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what the plan would be worth to a fictional worker paid $34,000 rather than $52,800, and say whether the 5% ceiling is easier or harder to reach on the lower salary.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

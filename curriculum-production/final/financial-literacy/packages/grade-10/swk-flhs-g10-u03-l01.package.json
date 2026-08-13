@@ -112,9 +112,8 @@
       ]
     }
   ],
-  "remediation": "If the certificate looks like the wrong choice for month-7 money, check what Basic Savings actually pays on that money: the account credits interest once at year end, so a withdrawal in month 7 earns nothing. Compare $28.01 against $0.00, not against the $19.50 a full year would have paid.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each choice response, test every option against the stated facts and eliminate an option only when a fact rules it out. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the fee Everyday Checking would have charged if the balance had stayed at or above $500 in 8 of the 12 months, and say what that implies about a waiver tied to a minimum rather than to an average.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l01.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

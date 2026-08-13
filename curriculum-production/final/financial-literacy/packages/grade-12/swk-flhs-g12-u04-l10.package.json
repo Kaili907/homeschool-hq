@@ -123,9 +123,8 @@
       ]
     }
   ],
-  "remediation": "If both scenarios produce the same percentage, the payment is being recomputed from each salary rather than held fixed. The loan sets the payment at $297.80 regardless of what the graduate earns. Divide that fixed payment by each monthly gross figure — $3,900.00 and $2,850.00 — to get the two shares.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out the balance that would have kept the payment within 8% of gross in scenario B, and say how much less than $27,600 the graduate would have had to borrow.",
-  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

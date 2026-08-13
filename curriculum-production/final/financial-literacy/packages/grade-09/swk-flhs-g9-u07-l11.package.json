@@ -107,7 +107,6 @@
   ],
   "remediation": "If the additional tax comes out as $1,480, the disallowed deduction is being treated as tax rather than as income that becomes taxable again. Apply the 12% marginal rate to the $1,480 before anything else.",
   "extension": "Recompute the whole comparison at a 24% marginal rate and say whether the case for recordkeeping strengthens or weakens as income rises.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l11.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

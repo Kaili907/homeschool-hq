@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the interest comes out near $171.99, the 3.9% is being applied to the full $4,410.00 of deposits. Money deposited in month 11 was in the account for one month, not twelve. The stated basis here is the average of the twelve month-end balances, which is 6.5 times the $367.50 monthly deposit.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Recompute the year with the transfer set at 20% of take-home, and say what the new monthly remainder would be and whether the extra interest or the extra deposits accounts for more of the change.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l10.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

@@ -103,9 +103,8 @@
       ]
     }
   ],
-  "remediation": "If the fee cost looks like $1,900.00, the estimate is charging 0.95% on $10,000 every year. The balance is not $10,000 every year — it grows past $29,000 — and the fee is charged on whatever is there. Compute each fund’s ending balance from its own net rate and subtract, which gives $5,255.45.",
+  "remediation": "Use the fictional scenario and work one graded prompt at a time. For each number response, copy the given fictional quantities into integer cents, choose the operation the wording calls for, calculate, and check the result with an inverse operation or estimate. For each written response, make a claim and support it with at least one detail from the fictional scenario. Use these steps to check the method while keeping every final result in your own response.",
   "extension": "Work out what Fund H would need as a gross return to end level with Fund L after 20 years, and say whether an investor could know in advance that a fund would deliver it.",
-  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l02.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

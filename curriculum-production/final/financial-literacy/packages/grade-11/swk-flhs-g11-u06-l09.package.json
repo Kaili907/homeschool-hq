@@ -124,8 +124,7 @@
     }
   ],
   "remediation": "If the policy looks cheaper than self-insuring, check that the $1,200 deductible is being weighted by the 5% chance rather than added in full. The deductible is only paid in the years a loss occurs, so it contributes $60.00 to the expected cost and not $1,200. Write the premium as a certain cost and the deductible as a chance-weighted one before comparing anything.",
-  "extension": "Find how many years of the $300.00 saving, on top of the growing reserve, would be needed before the household could absorb the whole $7,600 loss.",
-  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l09.scoring.json",
+  "extension": "After submitting the graded work, change one invented amount or assumption in the scenario. Rework the affected response using integer cents whenever money is involved, then explain whether and why the written judgment changes. Keep the variation fictional and do not use real household information.",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true

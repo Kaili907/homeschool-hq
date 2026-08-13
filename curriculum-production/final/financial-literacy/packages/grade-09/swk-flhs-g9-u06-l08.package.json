@@ -103,7 +103,6 @@
   ],
   "remediation": "If reducing looks cheapest, check the arithmetic on the maintenance plan: $220 is spent whether or not the failure happens, and it only removes five percentage points of an 8% chance. The certain spending outweighs what it buys.",
   "extension": "Find the maintenance price at which reducing would beat transferring, and say whether that price seems plausible for what it claims to do.",
-  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l08.scoring.json",
   "financialSafety": {
     "neverRequestsRealCredentials": true,
     "noIndividualizedAdvice": true
