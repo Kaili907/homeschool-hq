@@ -1,0 +1,201 @@
+{
+  "applies_to_every_course": [
+    "non_disableable_prohibitions",
+    "required_privacy_declarations"
+  ],
+  "attribution": {
+    "canonical": {
+      "branch": "curriculum release 1.0.0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "note": "Grade 5/7/8 immutable import; carries no investigation alternative of its own."
+    },
+    "g34": {
+      "branch": "mac/g34-science-social-r1",
+      "commit": "4c6ca4ef904c0b79dc81f85e3cfed946c20c98d6",
+      "note": "Grade 3/4 safety review fix."
+    },
+    "hs-h4": {
+      "branch": "mac/hs912-science-h4",
+      "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+      "note": "H4 source-consistency fix; supersedes H3 and H2. No superseded High School source blob is read by this build."
+    }
+  },
+  "elementary_investigation_clauses": [
+    {
+      "source": "g34",
+      "text": "A responsible adult reviews and approves every investigation before the learner begins; no investigation is done unsupervised."
+    },
+    {
+      "source": "g34",
+      "text": "Never use mains electricity, open flames, or chemicals. Circuits are battery-powered only, using batteries no larger than a household AA/AAA cell."
+    },
+    {
+      "source": "g34",
+      "text": "Heat sources, sharp tools, and cutting require direct adult supervision and are optional in every lesson; the text-only path avoids them entirely."
+    },
+    {
+      "source": "g34",
+      "text": "No photograph, video, or camera use is required at any point; a written or spoken description is always accepted."
+    }
+  ],
+  "equal_credit_alternative_clauses": [
+    {
+      "source": "g34",
+      "text": "Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required."
+    }
+  ],
+  "floor_version": "1.0.0",
+  "global_stop_conditions": [
+    {
+      "elementary_text": "Stop and tell your adult straight away if anyone is hurt or burned, if something spills, if you smell something strong, or if someone comes out in a rash.",
+      "source": "hs-h4",
+      "text": "Stop for any injury, burn, spill, fume, or allergic reaction and tell the supervising adult."
+    },
+    {
+      "elementary_text": "Stop if anything in front of you is not what the lesson says to use.",
+      "source": "hs-h4",
+      "text": "Stop if a material, tool, or step is not the one this lesson specifies."
+    },
+    {
+      "elementary_text": "A burn: hold it under cool running water for 20 minutes and tell your adult. No ice, no butter, no cream.",
+      "source": "hs-h4",
+      "text": "Burn: cool it under running cool water for 20 minutes. Do not use ice, butter, or ointment."
+    },
+    {
+      "elementary_text": "Something in your eye: rinse it under running water for 15 minutes, keeping the eye open, and call your adult while you rinse. Do this before anything else.",
+      "source": "hs-h4",
+      "text": "Splash in an eye: rinse with running water for 15 minutes, holding the eyelid open, before anything else."
+    },
+    {
+      "elementary_text": "A strong smell: leave the room and tell your adult. Do not go back in to tidy up.",
+      "source": "hs-h4",
+      "text": "Fumes or a strong smell: leave the room, open a window from outside the room, and do not go back in to tidy up."
+    },
+    {
+      "elementary_text": "A fire: get everyone out, shut the door behind you, and call the emergency number. Never try to put a fire out yourself, and never throw water on one.",
+      "source": "hs-h4",
+      "text": "Fire: do not use water. Get everyone out, close the door, and call the emergency number. Smother a very small contained flame with a metal pan lid or a fire blanket only if that is safe to do without reaching over it."
+    },
+    {
+      "elementary_text": "If anyone swallows a magnet, a battery, or anything from a lesson, tell an adult at once and get medical help straight away. Do not wait to see if they feel ill.",
+      "source": "hs-h4",
+      "text": "If anyone may have swallowed a magnet, a battery, or any material from a lesson, treat it as an emergency and seek medical help at once. Do not wait for symptoms."
+    },
+    {
+      "elementary_text": "Stopping, taking a break, or swapping to the other path is never failing.",
+      "source": "hs-h4",
+      "text": "A pause, break, or switch to the alternative activity is never treated as failure."
+    }
+  ],
+  "guardian_acknowledgement_clauses": [
+    {
+      "source": "g34",
+      "text": "Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded."
+    }
+  ],
+  "imported_into": {
+    "ma-g3-science": [
+      "global_stop_conditions"
+    ],
+    "ma-g4-science": [
+      "global_stop_conditions"
+    ],
+    "ma-g5-science": [
+      "elementary_investigation_clauses",
+      "equal_credit_alternative_clauses",
+      "guardian_acknowledgement_clauses",
+      "global_stop_conditions"
+    ],
+    "ma-g7-science": [
+      "elementary_investigation_clauses",
+      "equal_credit_alternative_clauses",
+      "guardian_acknowledgement_clauses",
+      "global_stop_conditions"
+    ],
+    "ma-g8-science": [
+      "elementary_investigation_clauses",
+      "equal_credit_alternative_clauses",
+      "guardian_acknowledgement_clauses",
+      "global_stop_conditions"
+    ]
+  },
+  "non_disableable_prohibitions": [
+    {
+      "elementary_text": "Never mix cleaning products together, and never use them in a lesson at all. Cleaning products are not science materials.",
+      "source": "hs-h4",
+      "text": "Never mix household cleaning products; bleach combined with ammonia or acid releases toxic gas."
+    },
+    {
+      "elementary_text": "Never plug anything into a wall socket for a lesson. Small batteries only, and only the ones the lesson names.",
+      "source": "hs-h4",
+      "text": "Never connect any investigation to mains electricity; low-voltage cells only."
+    },
+    {
+      "elementary_text": "Never put a lid, a cap, or a knot on anything that is bubbling, fizzing, rising, or warm. It has to stay open.",
+      "source": "hs-h4",
+      "text": "Never fully seal a reacting, fermenting, oxidising, or warm mixture in any container."
+    },
+    {
+      "elementary_text": "If a bottle says flammable, it stays shut and you tell an adult. No lesson asks you to open one.",
+      "source": "hs-h4",
+      "text": "Never have a flammable liquid open in the same room as a flame, hob, pilot light, heater, lamp, charger, or battery."
+    },
+    {
+      "elementary_text": "No lesson ever uses fire. If a step looks like it needs a flame, stop and tell an adult, because it is the wrong step.",
+      "source": "hs-h4",
+      "text": "Never use alcohol, or any other fuel, for a flame demonstration; no open-flame demonstration is used anywhere in this package."
+    },
+    {
+      "elementary_text": "You never light anything for a lesson - no match, no lighter, no candle, no camping stove - and you never turn on or use a stove, oven, burner, or grill for one, even if an adult already lit it and even if an adult is standing with you. Stay well back from any pilot light or any flame that is already burning, on a stove, heater, water heater, or fireplace. If a step looks like it needs fire, heat from a flame, a stove, or an oven, stop and tell an adult, because it is the wrong step.",
+      "source": "hs-h4",
+      "text": "Never light, strike, or operate an open flame or a hob, burner, or pilot light for any investigation in this package; no lesson requires one."
+    },
+    {
+      "elementary_text": "Never cut or break open a sealed packet - a cold pack, a hand warmer, a glow stick, or a smoke alarm. What is inside can hurt you.",
+      "source": "hs-h4",
+      "text": "Never cut, tear, puncture, or open a sealed commercial product - cold pack, hand warmer, glow stick, or smoke detector."
+    },
+    {
+      "elementary_text": "Never look at the sun. Not with your eyes, and not through glass, a lens, a mirror, or a camera. Not even for a second.",
+      "source": "hs-h4",
+      "text": "Never look at the sun directly or through any lens, filter, grating, or camera."
+    },
+    {
+      "elementary_text": "You never have to send a photo, a video, or a recording of your voice to finish a lesson. Writing it or saying it is always enough.",
+      "source": "hs-h4",
+      "text": "Never require a photograph, video, or voice recording as evidence of completion."
+    },
+    {
+      "elementary_text": "No lesson asks for your weight, your height, your heartbeat, or anything about your health.",
+      "source": "hs-h4",
+      "text": "Never request or record a learner body measurement, health measurement, or medical history."
+    },
+    {
+      "elementary_text": "Never write down a number you did not really measure. If you did not do it, say so - that is always the right answer.",
+      "source": "hs-h4",
+      "text": "Never present invented measurements as real experimental results."
+    }
+  ],
+  "required_privacy_declarations": [
+    {
+      "source": "hs-h4",
+      "text": "Records the learning target, completion state, evidence type, and next step only."
+    },
+    {
+      "source": "hs-h4",
+      "text": "Stores no raw reflection text, no free-text answers, no photograph, no video, and no voice recording."
+    },
+    {
+      "source": "hs-h4",
+      "text": "Requires no camera or video proof of any activity."
+    },
+    {
+      "source": "hs-h4",
+      "text": "Collects no learner body measurement, health measurement, or medical information."
+    },
+    {
+      "source": "hs-h4",
+      "text": "Requires no account creation, purchase, or disclosure of the family's location."
+    }
+  ]
+}
