@@ -1,0 +1,35 @@
+{
+  "alias_id": "math-practice",
+  "applies_to": [
+    "ma-g3-mathematics",
+    "ma-g4-mathematics"
+  ],
+  "problem": "This release prints MP.n for the Standards for Mathematical Practice. The string \"MP\" does not occur anywhere in the primary source.",
+  "source_statement": {
+    "source_id": "mde-mathematics",
+    "locator": "Standards for Mathematical Practice",
+    "reading": "the source prints the eight practices as a numbered list, 1 through 8, each with a title; it prints no code for them"
+  },
+  "direction": "house -> official",
+  "transform": {
+    "house_pattern": "^MP\\.(?P<n>[1-8])$",
+    "official_template": "Standards for Mathematical Practice, practice {n}"
+  },
+  "official_codes_live_in": "mde-mathematics",
+  "inverse_transform": {
+    "official_pattern": "^Standards for Mathematical Practice, practice (?P<n>[1-8])$",
+    "house_template": "MP.{n}"
+  },
+  "reversible": true,
+  "lossless": true,
+  "caveat": "The referent is verified (number and title are printed); the \"MP.\" label is a house/Common Core convention the MDE document does not print.",
+  "pairs": {
+    "MP.1": "Standards for Mathematical Practice, practice 1",
+    "MP.3": "Standards for Mathematical Practice, practice 3",
+    "MP.4": "Standards for Mathematical Practice, practice 4",
+    "MP.5": "Standards for Mathematical Practice, practice 5",
+    "MP.6": "Standards for Mathematical Practice, practice 6",
+    "MP.7": "Standards for Mathematical Practice, practice 7"
+  },
+  "pair_count": 6
+}

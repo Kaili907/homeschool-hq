@@ -1,0 +1,138 @@
+{
+  "release_under_review": "curriculum-release-normalization/g34-r2",
+  "evidence_set": "curriculum-release-evidence/g34-core-r3",
+  "sources": [
+    {
+      "source_id": "mde-mathematics",
+      "title": "Michigan K-12 Standards: Mathematics",
+      "publisher": "Michigan Department of Education",
+      "url": "https://www.michigan.gov/-/media/Project/Websites/mde/Literacy/Content-Standards/Math_Standards.pdf?rev=1e793e2b1e314e4fa1abc754251b5dc9",
+      "file": "sources/mde-mathematics.pdf",
+      "covers": [
+        "ma-g3-mathematics",
+        "ma-g4-mathematics"
+      ],
+      "retrieval": {
+        "method": "HTTPS GET (curl), direct from michigan.gov, no intermediary or mirror",
+        "retrieved_at_utc": "Thu, 13 Aug 2026 02:01:42 GMT",
+        "http_status": "HTTP/2 200",
+        "content_type": "application/pdf",
+        "content_length": 2350541,
+        "server_last_modified": "Fri, 08 Apr 2022 13:29:45 GMT",
+        "server_etag": "bc59ff05b5aa46d6b056a3a5dbe45991",
+        "response_headers_file": "sources/mde-mathematics.pdf.headers.txt"
+      },
+      "pdf": {
+        "bytes": 2350541,
+        "sha256": "dbbd4e341a046f22fa4df1dec4af2fd06b35249ad3e3ff9734a3f03bcd6b1a54",
+        "pages": 94
+      },
+      "extraction": {
+        "text_file": "extract/mde-mathematics.txt",
+        "sha256": "002f761fe56b0ea7e449f8a157c9dc4c65842ce7b90b0c64490e568ebf498192",
+        "extractor": "pypdf 6.6.2, PdfReader.extract_text() per page",
+        "page_markers": "<<<PAGE n>>> delimits each PDF page; n is the 1-based PDF page index, which is not always the printed folio",
+        "snippet_normalisation": "registry snippets collapse runs of whitespace to a single space for legibility, so a snippet may differ from the bytes at its char_offset by whitespace alone. char_offset and the cited code itself are never normalised."
+      }
+    },
+    {
+      "source_id": "mde-english-language-arts",
+      "title": "Michigan K-12 Standards: English Language Arts",
+      "publisher": "Michigan Department of Education",
+      "url": "https://www.michigan.gov/-/media/Project/Websites/mde/Literacy/Content-Standards/ELA_Standards.pdf?rev=0f76588bc2bd48f89165484fa35d2b31",
+      "file": "sources/mde-english-language-arts.pdf",
+      "covers": [
+        "ma-g3-english-language-arts",
+        "ma-g4-english-language-arts"
+      ],
+      "retrieval": {
+        "method": "HTTPS GET (curl), direct from michigan.gov, no intermediary or mirror",
+        "retrieved_at_utc": "Thu, 13 Aug 2026 02:01:42 GMT",
+        "http_status": "HTTP/2 200",
+        "content_type": "application/pdf",
+        "content_length": 3256533,
+        "server_last_modified": "Fri, 08 Apr 2022 13:28:41 GMT",
+        "server_etag": "d7ee831e57884e5a9072c5a47226d431",
+        "response_headers_file": "sources/mde-english-language-arts.pdf.headers.txt"
+      },
+      "pdf": {
+        "bytes": 3256533,
+        "sha256": "5d340bbe90c70f95b937a4b95f099b55543b423e55ac0708ea43fee6a15a4863",
+        "pages": 67
+      },
+      "extraction": {
+        "text_file": "extract/mde-english-language-arts.txt",
+        "sha256": "609ea6f8b8e798be846698de37990c0d6b1511d29e34853d2fad62c7df75c912",
+        "extractor": "pypdf 6.6.2, PdfReader.extract_text() per page",
+        "page_markers": "<<<PAGE n>>> delimits each PDF page; n is the 1-based PDF page index, which is not always the printed folio",
+        "snippet_normalisation": "registry snippets collapse runs of whitespace to a single space for legibility, so a snippet may differ from the bytes at its char_offset by whitespace alone. char_offset and the cited code itself are never normalised."
+      }
+    },
+    {
+      "source_id": "mde-science",
+      "title": "Michigan K-12 Standards: Science (November 2015)",
+      "publisher": "Michigan Department of Education",
+      "url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Literacy/Content-Standards/Science_Standards.pdf?rev=30bad7c0cbc048ceabb5548669b2d76a&hash=7E6FE20EA3F051673EC3B27ABF14FD96",
+      "file": "sources/mde-science.pdf",
+      "covers": [
+        "ma-g3-science",
+        "ma-g4-science"
+      ],
+      "retrieval": {
+        "method": "HTTPS GET (curl), direct from michigan.gov, no intermediary or mirror",
+        "retrieved_at_utc": "Thu, 13 Aug 2026 02:01:43 GMT",
+        "http_status": "HTTP/2 200",
+        "content_type": "application/pdf",
+        "content_length": 944203,
+        "server_last_modified": "Fri, 06 Sep 2024 21:03:17 GMT",
+        "server_etag": "93022f9540e749f1920faa18e11bb97f",
+        "response_headers_file": "sources/mde-science.pdf.headers.txt"
+      },
+      "pdf": {
+        "bytes": 944203,
+        "sha256": "7801c77e30f2e5cb76545bcc86e9cfff1abe57fe22d45bb853a4dc65ac0a5ac0",
+        "pages": 25
+      },
+      "extraction": {
+        "text_file": "extract/mde-science.txt",
+        "sha256": "c3732cbd591e9606c164651cc2e2c5bd96fc0c38a75dffc5aed6fe6b1684e090",
+        "extractor": "pypdf 6.6.2, PdfReader.extract_text() per page",
+        "page_markers": "<<<PAGE n>>> delimits each PDF page; n is the 1-based PDF page index, which is not always the printed folio",
+        "snippet_normalisation": "registry snippets collapse runs of whitespace to a single space for legibility, so a snippet may differ from the bytes at its char_offset by whitespace alone. char_offset and the cited code itself are never normalised."
+      }
+    },
+    {
+      "source_id": "mde-social-studies",
+      "title": "Michigan K-12 Standards: Social Studies (v 6/19)",
+      "publisher": "Michigan Department of Education",
+      "url": "https://www.michigan.gov/-/media/Project/Websites/mde/Academic-Standards/Social_Studies_Standards.pdf?rev=4bab170dd4114e2dbce578723b37ca63",
+      "file": "sources/mde-social-studies.pdf",
+      "covers": [
+        "ma-g3-social-studies",
+        "ma-g4-social-studies"
+      ],
+      "retrieval": {
+        "method": "HTTPS GET (curl), direct from michigan.gov, no intermediary or mirror",
+        "retrieved_at_utc": "Thu, 13 Aug 2026 02:01:43 GMT",
+        "http_status": "HTTP/2 200",
+        "content_type": "application/pdf",
+        "content_length": 1527644,
+        "server_last_modified": "Thu, 15 Feb 2024 21:49:41 GMT",
+        "server_etag": "7effbf61c3904caba222cde219ba0b16",
+        "response_headers_file": "sources/mde-social-studies.pdf.headers.txt"
+      },
+      "pdf": {
+        "bytes": 1527644,
+        "sha256": "bba06f46bb241ae3cdd698caaeb41baa3c976d96176fef0a9d594a7e98e70b96",
+        "pages": 147
+      },
+      "extraction": {
+        "text_file": "extract/mde-social-studies.txt",
+        "sha256": "813c9bef86ff6c04b0290cda956463e51a2004c267b40e6cbae40f3d4d30a438",
+        "extractor": "pypdf 6.6.2, PdfReader.extract_text() per page",
+        "page_markers": "<<<PAGE n>>> delimits each PDF page; n is the 1-based PDF page index, which is not always the printed folio",
+        "snippet_normalisation": "registry snippets collapse runs of whitespace to a single space for legibility, so a snippet may differ from the bytes at its char_offset by whitespace alone. char_offset and the cited code itself are never normalised."
+      }
+    }
+  ]
+}

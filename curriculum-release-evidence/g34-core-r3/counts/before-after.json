@@ -1,0 +1,37 @@
+{
+  "scope": "Grade 3 and Grade 4 core subjects only (mathematics, english-language-arts, science, social-studies); the other 12 courses in the release are untouched.",
+  "citations_total": 2903,
+  "distinct_codes_total": 276,
+  "before": {
+    "source": "curriculum-release-normalization/g34-r2/standards/standards-rollup.json",
+    "by_citation": {
+      "canonical": 1210,
+      "unverified": 1572,
+      "human-review": 121
+    },
+    "unverified_or_human_review_citations": 1693
+  },
+  "after": {
+    "by_citation": {
+      "VERBATIM_VERIFIED": 1560,
+      "ALIAS_RESOLVED_VERBATIM": 0,
+      "COMPOSITE_VERIFIED": 1331,
+      "LOCAL_COMPOSITION": 0,
+      "UNVERIFIED": 0,
+      "HUMAN_REVIEW_REQUIRED": 12
+    },
+    "by_distinct_code": {
+      "VERBATIM_VERIFIED": 124,
+      "ALIAS_RESOLVED_VERBATIM": 0,
+      "COMPOSITE_VERIFIED": 151,
+      "LOCAL_COMPOSITION": 0,
+      "UNVERIFIED": 0,
+      "HUMAN_REVIEW_REQUIRED": 1
+    },
+    "unverified_or_human_review_citations": 12
+  },
+  "delta": {
+    "unverified_or_human_review_citations": -1681,
+    "resolved_against_primary_source_citations": 2891
+  }
+}

@@ -1,0 +1,3 @@
+# Preserve this evidence set byte-for-byte across platforms, so SHA256SUMS.txt
+# and the hashes in sources/source-custody.json stay valid on checkout.
+** -text

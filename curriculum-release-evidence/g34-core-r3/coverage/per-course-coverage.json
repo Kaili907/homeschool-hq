@@ -1,0 +1,253 @@
+{
+  "ma-g3-mathematics": {
+    "course_id": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "official_source": "Michigan K-12 Standards: Mathematics (MDE)",
+    "source_id": "mde-mathematics",
+    "citations": 341,
+    "distinct": 31,
+    "before": {
+      "canonical": 276,
+      "unverified": 0,
+      "human-review": 65
+    },
+    "after_citations": {
+      "COMPOSITE_VERIFIED": 341
+    },
+    "after_distinct": {
+      "COMPOSITE_VERIFIED": 31
+    },
+    "official_inventory_count": 25,
+    "cited_not_in_inventory": [
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6",
+      "MP.7"
+    ],
+    "inventory_not_cited": [],
+    "inventory_scope": "content standards for this grade only; the eight Standards for Mathematical Practice are inventoried separately",
+    "practice_inventory": [
+      "MP.1",
+      "MP.2",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6",
+      "MP.7",
+      "MP.8"
+    ],
+    "practice_cited": [
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6",
+      "MP.7"
+    ]
+  },
+  "ma-g4-mathematics": {
+    "course_id": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "official_source": "Michigan K-12 Standards: Mathematics (MDE)",
+    "source_id": "mde-mathematics",
+    "citations": 327,
+    "distinct": 34,
+    "before": {
+      "canonical": 271,
+      "unverified": 0,
+      "human-review": 56
+    },
+    "after_citations": {
+      "COMPOSITE_VERIFIED": 327
+    },
+    "after_distinct": {
+      "COMPOSITE_VERIFIED": 34
+    },
+    "official_inventory_count": 28,
+    "cited_not_in_inventory": [
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6",
+      "MP.7"
+    ],
+    "inventory_not_cited": [],
+    "inventory_scope": "content standards for this grade only; the eight Standards for Mathematical Practice are inventoried separately",
+    "practice_inventory": [
+      "MP.1",
+      "MP.2",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6",
+      "MP.7",
+      "MP.8"
+    ],
+    "practice_cited": [
+      "MP.1",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6",
+      "MP.7"
+    ]
+  },
+  "ma-g3-english-language-arts": {
+    "course_id": "ma-g3-english-language-arts",
+    "grade": 3,
+    "subject": "english-language-arts",
+    "official_source": "Michigan K-12 Standards: English Language Arts (MDE)",
+    "source_id": "mde-english-language-arts",
+    "citations": 325,
+    "distinct": 42,
+    "before": {
+      "canonical": 325,
+      "unverified": 0,
+      "human-review": 0
+    },
+    "after_citations": {
+      "COMPOSITE_VERIFIED": 325
+    },
+    "after_distinct": {
+      "COMPOSITE_VERIFIED": 42
+    },
+    "official_inventory_count": 42,
+    "cited_not_in_inventory": [],
+    "inventory_not_cited": [],
+    "inventory_scope": "K-5 strand tables, grade column for this grade, excluding standards the source marks \"(Begins in grade n)\" or \"(Not applicable to literature)\"; inventory is at whole-number granularity, so a cited sub-letter (4.W.9a) reads as an uncited parent (4.W.9)"
+  },
+  "ma-g4-english-language-arts": {
+    "course_id": "ma-g4-english-language-arts",
+    "grade": 4,
+    "subject": "english-language-arts",
+    "official_source": "Michigan K-12 Standards: English Language Arts (MDE)",
+    "source_id": "mde-english-language-arts",
+    "citations": 338,
+    "distinct": 44,
+    "before": {
+      "canonical": 338,
+      "unverified": 0,
+      "human-review": 0
+    },
+    "after_citations": {
+      "COMPOSITE_VERIFIED": 338
+    },
+    "after_distinct": {
+      "COMPOSITE_VERIFIED": 44
+    },
+    "official_inventory_count": 43,
+    "cited_not_in_inventory": [
+      "4.W.9a",
+      "4.W.9b"
+    ],
+    "inventory_not_cited": [
+      "4.W.9"
+    ],
+    "inventory_scope": "K-5 strand tables, grade column for this grade, excluding standards the source marks \"(Begins in grade n)\" or \"(Not applicable to literature)\"; inventory is at whole-number granularity, so a cited sub-letter (4.W.9a) reads as an uncited parent (4.W.9)"
+  },
+  "ma-g3-science": {
+    "course_id": "ma-g3-science",
+    "grade": 3,
+    "subject": "science",
+    "official_source": "Michigan K-12 Science Standards, Nov 2015 (MDE, NGSS-derived)",
+    "source_id": "mde-science",
+    "citations": 252,
+    "distinct": 18,
+    "before": {
+      "canonical": 0,
+      "unverified": 252,
+      "human-review": 0
+    },
+    "after_citations": {
+      "VERBATIM_VERIFIED": 252
+    },
+    "after_distinct": {
+      "VERBATIM_VERIFIED": 18
+    },
+    "official_inventory_count": 18,
+    "cited_not_in_inventory": [],
+    "inventory_not_cited": [],
+    "inventory_scope": "performance expectations printed on this grade's pages, including the 3-5 engineering design expectations repeated on them"
+  },
+  "ma-g4-science": {
+    "course_id": "ma-g4-science",
+    "grade": 4,
+    "subject": "science",
+    "official_source": "Michigan K-12 Science Standards, Nov 2015 (MDE, NGSS-derived)",
+    "source_id": "mde-science",
+    "citations": 240,
+    "distinct": 17,
+    "before": {
+      "canonical": 0,
+      "unverified": 240,
+      "human-review": 0
+    },
+    "after_citations": {
+      "VERBATIM_VERIFIED": 240
+    },
+    "after_distinct": {
+      "VERBATIM_VERIFIED": 17
+    },
+    "official_inventory_count": 17,
+    "cited_not_in_inventory": [],
+    "inventory_not_cited": [],
+    "inventory_scope": "performance expectations printed on this grade's pages, including the 3-5 engineering design expectations repeated on them"
+  },
+  "ma-g3-social-studies": {
+    "course_id": "ma-g3-social-studies",
+    "grade": 3,
+    "subject": "social-studies",
+    "official_source": "Michigan K-12 Social Studies Standards, May 2018 + grade-level GLCE PDFs (MDE)",
+    "source_id": "mde-social-studies",
+    "citations": 504,
+    "distinct": 42,
+    "before": {
+      "canonical": 0,
+      "unverified": 504,
+      "human-review": 0
+    },
+    "after_citations": {
+      "VERBATIM_VERIFIED": 504
+    },
+    "after_distinct": {
+      "VERBATIM_VERIFIED": 42
+    },
+    "official_inventory_count": 42,
+    "cited_not_in_inventory": [],
+    "inventory_not_cited": [],
+    "inventory_scope": "content expectations printed inside \"SOCIAL STUDIES CONTENT EXPECTATIONS: GRADE <n>\"; the inquiry-arc tables that precede those sections are excluded"
+  },
+  "ma-g4-social-studies": {
+    "course_id": "ma-g4-social-studies",
+    "grade": 4,
+    "subject": "social-studies",
+    "official_source": "Michigan K-12 Social Studies Standards, May 2018 + grade-level GLCE PDFs (MDE)",
+    "source_id": "mde-social-studies",
+    "citations": 576,
+    "distinct": 48,
+    "before": {
+      "canonical": 0,
+      "unverified": 576,
+      "human-review": 0
+    },
+    "after_citations": {
+      "VERBATIM_VERIFIED": 564,
+      "HUMAN_REVIEW_REQUIRED": 12
+    },
+    "after_distinct": {
+      "VERBATIM_VERIFIED": 47,
+      "HUMAN_REVIEW_REQUIRED": 1
+    },
+    "official_inventory_count": 47,
+    "cited_not_in_inventory": [
+      "4 – E1.0.1"
+    ],
+    "inventory_not_cited": [],
+    "inventory_scope": "content expectations printed inside \"SOCIAL STUDIES CONTENT EXPECTATIONS: GRADE <n>\"; the inquiry-arc tables that precede those sections are excluded"
+  }
+}

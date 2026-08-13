@@ -1,0 +1,23 @@
+[
+  {
+    "course_id": "ma-g4-social-studies",
+    "cited_code": "4 – E1.0.1",
+    "classification": "HUMAN_REVIEW_REQUIRED",
+    "citation_count": 12,
+    "reason": "the cited code is not printed; the primary source prints a malformed variant at the expected position, and every sibling code in the same cluster uses the cited form. Correcting the source is a human ruling, not a verification.",
+    "source_id": "mde-social-studies",
+    "source_printed_variant": "4 – E1.01",
+    "evidence": [
+      {
+        "source_id": "mde-social-studies",
+        "page": 40,
+        "char_offset": 89704,
+        "match": "source-printed-variant",
+        "snippet": "4 – E1.01 Identify a good or service produced in the United States and apply the three ec"
+      }
+    ],
+    "unit_numbers": [
+      8
+    ]
+  }
+]

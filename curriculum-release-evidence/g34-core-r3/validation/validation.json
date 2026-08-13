@@ -1,0 +1,70 @@
+{
+  "checks": [
+    {
+      "check": "release-under-review-untouched",
+      "status": "pass",
+      "detail": "re-hashed 239 files sealed by curriculum-release-normalization/g34-r2/SHA256SUMS.txt; 0 mismatches"
+    },
+    {
+      "check": "before-counts-recomputed-from-release-rollup",
+      "status": "pass",
+      "detail": "core subset of standards-rollup.json: {'canonical': 1210, 'unverified': 1572, 'human-review': 121}; this pass read: {'canonical': 1210, 'unverified': 1572, 'human-review': 121}"
+    },
+    {
+      "check": "totals-recomputed-from-release-index",
+      "status": "pass",
+      "detail": "standards-index.json core subset: 2903 citations / 276 distinct (course, code) pairs; this pass classified 2903 / 276"
+    },
+    {
+      "check": "every-citation-classified-exactly-once",
+      "status": "pass",
+      "detail": "276 rows, 276 unique (course, code) pairs, buckets sum to 2903"
+    },
+    {
+      "check": "verbatim-locators-match-source-bytes",
+      "status": "pass",
+      "detail": "sliced each of the 124 verbatim locators out of the extracted source at its recorded char_offset; 0 differed"
+    },
+    {
+      "check": "evidence-locators-resolve",
+      "status": "pass",
+      "detail": "checked 589 locators across 276 entries for a non-empty snippet and page/offset agreement; 0 bad"
+    },
+    {
+      "check": "evidence-inside-the-cited-grade-section",
+      "status": "pass",
+      "detail": "every science and social studies locator falls inside its own grade section of the source; 0 outside"
+    },
+    {
+      "check": "ela-grade-column-attribution-unambiguous",
+      "status": "pass",
+      "detail": "the three-cell structure resolved for every cited ELA row; rows that did not extract as three cells are refused rather than indexed positionally (0 refused)"
+    },
+    {
+      "check": "alias-round-trips-ela-code-order",
+      "status": "pass",
+      "detail": "exercised all 86 recorded pairs through the map's own transform and inverse; 0 failed"
+    },
+    {
+      "check": "alias-round-trips-math-practice",
+      "status": "pass",
+      "detail": "exercised all 6 recorded pairs through the map's own transform and inverse; 0 failed"
+    },
+    {
+      "check": "no-invented-codes",
+      "status": "pass",
+      "detail": "every one of the 276 cited codes is in the official inventory for its grade, or is an enumerated exception (MP.n practices, ELA sub-letters of an inventoried parent, the one source defect); 0 unexplained"
+    },
+    {
+      "check": "source-hashes-recompute",
+      "status": "pass",
+      "detail": "re-hashed 4 PDFs and 4 extracts against source-custody.json; 0 mismatches"
+    },
+    {
+      "check": "all-sources-are-michigan-gov-primaries",
+      "status": "pass",
+      "detail": "four sources, each a michigan.gov URL returning 200, no mirror in the chain"
+    }
+  ],
+  "status": "pass"
+}
