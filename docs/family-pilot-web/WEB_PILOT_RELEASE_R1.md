@@ -63,6 +63,7 @@ All commands ran at the tested release source SHA unless identified as an unchan
 | Bundle/browser-safety subset | PASS; 4 files, 47 tests |
 | Enabled production-preview Playwright suite | PASS; 4 tests |
 | Default-off production-preview Playwright suite | PASS; 1 test |
+| Enabled production-preview routing smoke | PASS; direct `/family-pilot` deep link, browser Back navigation, and refresh |
 | `npm audit --omit=dev` | PASS; 0 runtime vulnerabilities |
 | Full locked-toolchain `npm audit` | 3 high development/test-tool advisories: direct `@playwright/test`, transitive `playwright` and `nanoid`; fixes available |
 
