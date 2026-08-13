@@ -11,6 +11,11 @@ export default async function startReleaseSurface() {
       host: "127.0.0.1",
       port: 4319,
       strictPort: true,
+      fs: {
+        // The security browser regression imports the root session runtime;
+        // this allowance exists only for the test server.
+        allow: [fileURLToPath(new URL("../../../..", import.meta.url))],
+      },
     },
   });
   await server.listen();

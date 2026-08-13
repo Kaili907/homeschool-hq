@@ -5,6 +5,7 @@
 
 const CACHE = 'homeschool-hq-__BUILD_ID__'
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg']
+const ACTIVATE_ACADEMY_SERVICE_WORKER = 'ACADEMY_ACTIVATE_SERVICE_WORKER'
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -24,6 +25,11 @@ self.addEventListener('activate', (event) => {
   )
 })
 
+self.addEventListener('message', (event) => {
+  if (event.data?.type !== ACTIVATE_ACADEMY_SERVICE_WORKER) return
+  event.waitUntil(self.skipWaiting())
+})
+
 self.addEventListener('fetch', (event) => {
   const req = event.request
   if (req.method !== 'GET') return // never touch API POSTs
@@ -31,6 +37,9 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return // leave cross-origin (Supabase, proxy/APIs) alone
   if (url.pathname.startsWith('/api/')) return // never cache the key-injecting proxy calls
   if (url.pathname.startsWith('/rest/') || url.pathname.startsWith('/auth/')) return // never cache sync calls
+  // Partial media responses must never enter the ordinary static cache. Mixing
+  // a 206 body with a later full-file request can corrupt offline playback.
+  if (req.headers?.has('range') || req.destination === 'video') return
 
   // App navigations: network-first so a fresh deploy loads when online, cached
   // shell when offline.

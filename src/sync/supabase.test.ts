@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createClient } from '@supabase/supabase-js'
 import { defaultAppState } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import {
   getVerifiedAuthContext,
   pushProfiles,
@@ -24,7 +25,7 @@ function rows(): RemoteProfileRow[] {
   return [
     {
       profile_id: profile.id,
-      data: profile,
+      data: toWireProfile(profile),
       updated_at: '2026-07-25T12:00:00.000Z',
     },
   ]
@@ -71,10 +72,21 @@ function canonicalVerificationClient(userId = 'household-a') {
   }
 }
 
-function successfulWriter(result: unknown = { status: 'applied', revision: '1' }) {
+function successfulWriter(
+  result: unknown = { status: 'applied', revision: '1' },
+) {
+  const response =
+    result && typeof result === 'object' && !Array.isArray(result)
+      ? {
+          ...result,
+          mode: 'normal',
+          sync_protocol_version: 2,
+          minimum_supported_sync_version: 2,
+        }
+      : result
   const rpc = vi.fn(
     async (_name: string, _arguments: Record<string, unknown>) => ({
-      data: result,
+      data: response,
       error: null,
     }),
   )
@@ -330,8 +342,9 @@ describe('fixed-token low-level cloud writes', () => {
     )
     expect(writer.rpc).toHaveBeenCalledOnce()
     expect(writer.rpc).toHaveBeenCalledWith(
-      'academy_apply_profile_mutation',
+      'academy_apply_profile_mutation_v2',
       expect.objectContaining({
+        p_sync_protocol_version: 2,
         p_expected_revision: '0',
         p_mutation_id: 'mutation-a',
         p_profiles: expect.any(Array),
@@ -360,7 +373,7 @@ describe('fixed-token low-level cloud writes', () => {
       conflict: true,
       revision: '7',
       error:
-        'Another device updated this household first. Review the refreshed cloud data.',
+        'Another device updated this household first. Review is required; the client will not retry blindly.',
     })
     expect(writer.rpc).toHaveBeenCalledOnce()
   })
@@ -450,7 +463,9 @@ describe('fixed-token low-level cloud writes', () => {
       (() => ({ rpc })) as never,
     )
     expect(JSON.stringify(writeError)).not.toContain(ACCESS_TOKEN)
-    expect(JSON.stringify(writeError)).toContain('[redacted]')
+    expect(JSON.stringify(writeError)).toContain(
+      'authenticated household or synchronization provenance',
+    )
   })
 })
 
@@ -483,7 +498,13 @@ describe('real Supabase SDK mutation fetch boundary', () => {
   }
 
   function appliedResponse() {
-    return new Response(JSON.stringify({ status: 'applied', revision: '1' }), {
+    return new Response(JSON.stringify({
+      status: 'applied',
+      mode: 'normal',
+      sync_protocol_version: 2,
+      minimum_supported_sync_version: 2,
+      revision: '1',
+    }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     })
@@ -551,7 +572,7 @@ describe('real Supabase SDK mutation fetch boundary', () => {
 
       await expect(pending).resolves.toEqual({
         ok: false,
-        error: 'The household authorization changed at mutation dispatch.',
+        error: 'The authenticated household or synchronization provenance did not match.',
       })
       expect(nativeFetch).not.toHaveBeenCalled()
     },
@@ -662,7 +683,7 @@ describe('real Supabase SDK mutation fetch boundary', () => {
 
       await expect(pending).resolves.toEqual({
         ok: false,
-        error: 'The household authorization changed at mutation dispatch.',
+        error: 'The authenticated household or synchronization provenance did not match.',
       })
       expect(nativeFetch).not.toHaveBeenCalled()
     },

@@ -11,6 +11,7 @@ import {
   readLocalStorageKey,
   recordAnswer,
   saveAppState,
+  waitForAppStatePersistence,
   type AppStatePersistenceFailure,
 } from './appState'
 import {
@@ -94,6 +95,27 @@ import {
   type VerifiedStudyRuntimeAdapter,
 } from './study/production/verifiedRuntimeAdapter'
 import { StudyLifecycleBoundary } from './study/lifecycle'
+import { toPortableAppState } from './portableProfile'
+import {
+  APP_STATE_STORAGE_KEY,
+  validateAppStateForSync,
+} from './sync/provenance'
+import { migrateLegacyEducationalCredentials } from './security/credentials'
+import { sanitizeCredentialFreeEducationalData } from './security/appData'
+import {
+  appStateWithLearnerPinSentinels,
+  createBrowserLearnerSecurityApplication,
+  hasLegacyLearnerPinAuthority,
+  lockedLegacyMigrationInput,
+  type LearnerCredentialStateByProfileId,
+  type LearnerSecurityApplication,
+} from './security/application/learnerSecurity'
+import {
+  createBrowserLearnerActivityController,
+  type LearnerActivityController,
+} from './security/session'
+import { cancelStudyForSecurityLifecycleEvent } from './security/study'
+import { configureAcademyUpdatePersistence } from './update/runtime'
 
 const loadPreviewPorts = import.meta.env.DEV
   ? () => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts())
@@ -135,6 +157,8 @@ const Grade5MathPractice = lazy(() =>
 )
 
 type Screen =
+  | { kind: 'securityBoot' }
+  | { kind: 'securityError'; message: string }
   | { kind: 'picker' }
   | { kind: 'kidPin'; profileId: string }
   | { kind: 'kidPinCreate'; profileId: string; firstEntry?: string }
@@ -184,44 +208,59 @@ export default function App() {
       lifecycle: studyProductionLifecycleRef.current,
     })
   }
-  const [state, setState] = useState<AppState>(loaded.state)
+  const lockedInitialState = useMemo(
+    () => appStateWithLearnerPinSentinels(
+      toPortableAppState(lockedLegacyMigrationInput(loaded.state)),
+    ),
+    [loaded],
+  )
+  const [state, setState] = useState<AppState>(lockedInitialState)
+  const stateRef = useRef(state)
+  stateRef.current = state
+  const securityRef = useRef<LearnerSecurityApplication | null>(null)
+  const activityRef = useRef<LearnerActivityController | null>(null)
+  const bootQueueRef = useRef<Promise<void>>(Promise.resolve())
+  const [securityReady, setSecurityReady] = useState(false)
+  const [credentialStateByProfileId, setCredentialStateByProfileId] =
+    useState<LearnerCredentialStateByProfileId>(() => {
+      const initial: Record<string, 'unenrolled'> = Object.create(null)
+      for (const profileId of Object.keys(lockedInitialState.profiles)) {
+        initial[profileId] = 'unenrolled'
+      }
+      return initial
+    })
   const [persistenceFailure, setPersistenceFailure] =
     useState<AppStatePersistenceFailure | null>(null)
   // MOUNT-2: the study route is evaluated before the picker default, so a fresh
   // navigation or refresh at /study-engine with a valid persisted profile lands
   // on the study surface. No active profile or flag-off falls through to the
   // picker/normal app (the loader guarantees a non-null activeProfileId exists).
-  const [screen, setScreen] = useState<Screen>(() => {
-    if (studyEnabled && loaded.state.activeProfileId && isStudyEnginePath(window.location.pathname)) {
-      return { kind: 'studyDashboard' }
-    }
+  const [screen, setScreen] = useState<Screen>({ kind: 'securityBoot' })
     // UI-HOME-1 (MOUNT-2 pattern): an /academy deep link with a valid persisted
     // profile lands on the dashboard shell. Program entries gate the curriculum
     // inside that shell; no persisted learner still falls through to the picker.
-    const bootProfile = loaded.state.activeProfileId
-      ? loaded.state.profiles[loaded.state.activeProfileId]
-      : null
     // MOUNT-G5-MATH (MOUNT-2 pattern): the Grade 5 math practice deep link is
     // honoured only for a grade-5 profile with the flag on; every other case —
     // flag off, wrong grade, no persisted profile — falls through to the picker.
-    if (
-      bootProfile &&
-      grade5MathPracticeAvailableFromHost(bootProfile.grade) &&
-      isGrade5MathPracticePath(window.location.pathname)
-    ) {
-      return { kind: 'g5MathPractice' }
-    }
-    if (bootProfile) {
-      const academyRoute = parseAcademyPath(window.location.pathname)
-      if (academyRoute) return { kind: 'academy', route: academyRoute }
-    }
-    return { kind: 'picker' }
-  })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
   const [parentStudyAuthorization, setParentStudyAuthorization] = useState<StudyAdultAuthorization | null>(null)
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
+
+  const authenticatedScreenFor = (profile: Profile): Screen => {
+    if (studyEnabled && isStudyEnginePath(window.location.pathname)) {
+      return { kind: 'studyDashboard' }
+    }
+    if (
+      grade5MathPracticeAvailableFromHost(profile.grade) &&
+      isGrade5MathPracticePath(window.location.pathname)
+    ) {
+      return { kind: 'g5MathPractice' }
+    }
+    const academyRoute = parseAcademyPath(window.location.pathname)
+    return academyRoute ? { kind: 'academy', route: academyRoute } : { kind: 'home' }
+  }
 
   useEffect(() => {
     let current = true
@@ -238,24 +277,188 @@ export default function App() {
   }, [studyPreviewEnabled])
 
   useEffect(() => {
+    let cancelled = false
+
+    const boot = async () => {
+      const migrationInput = lockedLegacyMigrationInput(loaded.state)
+      const parkedParentPin = loaded.state.parentPin
+      let lockedState: AppState
+
+      if (hasLegacyLearnerPinAuthority(migrationInput)) {
+        const migration = await migrateLegacyEducationalCredentials(
+          migrationInput,
+          {
+            educationalDataPersistence: {
+              write: async (educationalData) => {
+                const compatible = appStateWithLearnerPinSentinels(
+                  educationalData,
+                  parkedParentPin,
+                )
+                const persisted = await saveAppState(compatible)
+                if (!persisted.ok) throw new Error(persisted.error)
+              },
+              read: () => {
+                const raw = localStorage.getItem(APP_STATE_STORAGE_KEY)
+                if (!raw) throw new Error('Migrated educational state is missing.')
+                const validation = validateAppStateForSync(JSON.parse(raw) as unknown)
+                if (!validation.ok) throw new Error(validation.error)
+                if (Object.values(validation.state.profiles).some((profile) => profile.pin !== '')) {
+                  throw new Error('Learner PIN authority remained in educational state.')
+                }
+                return sanitizeCredentialFreeEducationalData(validation.state)
+              },
+            },
+          },
+        )
+        lockedState = appStateWithLearnerPinSentinels(
+          migration.educationalData,
+          parkedParentPin,
+        )
+      } else {
+        lockedState = appStateWithLearnerPinSentinels(
+          toPortableAppState(migrationInput),
+        )
+        const persisted = await saveAppState(lockedState)
+        if (!persisted.ok) throw new Error(persisted.error)
+      }
+
+      if (cancelled) return
+      setState(lockedState)
+
+      const security = createBrowserLearnerSecurityApplication(async (event) => {
+        const endingLearnerAuthority =
+          event.type !== 'learner-authenticated' &&
+          event.type !== 'parent-session-expired' &&
+          event.type !== 'parent-lock'
+        if (endingLearnerAuthority) {
+          const hadPublishedLearner = stateRef.current.activeProfileId !== null
+          const reason = event.type === 'learner-session-expired'
+            ? 'session-expired'
+            : event.type === 'learner-lock'
+              ? 'lock'
+              : event.type === 'learner-sign-out'
+                ? 'logout'
+                : event.type === 'household-switch' || event.type === 'household-sign-out'
+                  ? 'household-switch'
+                  : 'authorization-loss'
+          securityRef.current?.observeAuthorityLoss(reason)
+          studySelectedProfileRef.current = null
+          setState((current) => ({ ...current, activeProfileId: null }))
+          if (hadPublishedLearner) setScreen({ kind: 'picker' })
+          await purgeVoiceCache().catch(() => undefined)
+        }
+        await cancelStudyForSecurityLifecycleEvent(event, {
+          cancel: async (reason) => {
+            await studyVerifiedRuntimeRef.current?.cancel(reason)
+          },
+        })
+      })
+      securityRef.current = security
+
+      const credentialStates = security.credentialStates(lockedState.profiles)
+      const restored = await security.restore(lockedState.profiles)
+      if (cancelled) {
+        await security.close()
+        if (securityRef.current === security) securityRef.current = null
+        return
+      }
+
+      setCredentialStateByProfileId(credentialStates)
+      if (restored.status === 'active') {
+        const profile = lockedState.profiles[restored.profileId]
+        if (!profile) throw new Error('Restored learner profile is unavailable.')
+        setState({ ...lockedState, activeProfileId: restored.profileId })
+        setScreen(authenticatedScreenFor(profile))
+      } else {
+        setState(lockedState)
+        setScreen({ kind: 'picker' })
+      }
+      setSecurityReady(true)
+    }
+
+    bootQueueRef.current = bootQueueRef.current
+      .then(boot)
+      .catch((cause: unknown) => {
+        if (cancelled) return
+        const message = cause instanceof Error
+          ? cause.message
+          : 'Learner security could not be initialized.'
+        setState(lockedInitialState)
+        setSecurityReady(false)
+        setScreen({ kind: 'securityError', message })
+      })
+
+    return () => {
+      cancelled = true
+      activityRef.current?.stop()
+      activityRef.current = null
+      const security = securityRef.current
+      securityRef.current = null
+      if (security) void security.close()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!securityReady) return
     let current = true
     void saveAppState(state).then((result) => {
       if (current) setPersistenceFailure(result.ok ? null : result)
     })
     return () => { current = false }
-  }, [state])
+  }, [securityReady, state])
+
+  useEffect(() => {
+    if (!securityReady) return
+    return configureAcademyUpdatePersistence(async () => {
+      const persisted = await saveAppState(stateRef.current)
+      if (!persisted.ok) throw new Error(persisted.error)
+      await waitForAppStatePersistence()
+    })
+  }, [securityReady])
 
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
-  const sync = useSync(state, setState)
+  const sync = useSync(state, setState, securityReady)
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
 
   useEffect(() => {
+    activityRef.current?.stop()
+    activityRef.current = null
+    const security = securityRef.current
+    if (!securityReady || !active || !security) return
+    try {
+      const activity = createBrowserLearnerActivityController(
+        security.ports.session,
+        (check) => {
+          if (check.status === 'active') return
+          security.observeAuthorityLoss('session-expired')
+          studySelectedProfileRef.current = null
+          setState((current) => ({ ...current, activeProfileId: null }))
+          setScreen({ kind: 'picker' })
+        },
+      )
+      activityRef.current = activity
+      activity.start()
+      return () => {
+        if (activityRef.current === activity) activityRef.current = null
+        activity.stop()
+      }
+    } catch {
+      security.observeAuthorityLoss('authorization-loss')
+      setState((current) => ({ ...current, activeProfileId: null }))
+      setScreen({ kind: 'picker' })
+      void security.end({
+        type: 'authorization-loss',
+        source: 'provenance-loss',
+        occurredAt: new Date().toISOString(),
+      }).catch(() => undefined)
+    }
+  }, [active?.id, securityReady])
+
+  useEffect(() => {
     const productionSelected = studyEnabled && !studyPreviewEnabled
-    const lifecycle = studyProductionLifecycleRef.current!
     const runtime = studyVerifiedRuntimeRef.current!
     if (!productionSelected) {
-      lifecycle.cancel('feature-disabled')
       void runtime.cancel('feature-disabled')
       studyReadinessClientRef.current?.invalidate()
       studySelectedProfileRef.current = null
@@ -263,16 +466,20 @@ export default function App() {
       return
     }
     if (!sync.status.user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
-      lifecycle.cancel('authorization-loss')
-      void runtime.cancel('authorization-loss')
+      const security = securityRef.current
+      if (active && security?.access.status === 'active') {
+        void security.end({
+          type: 'authorization-loss',
+          source: 'provenance-loss',
+          occurredAt: new Date().toISOString(),
+        }).catch(() => undefined)
+      }
       studyReadinessClientRef.current?.invalidate()
       studySelectedProfileRef.current = null
       setStudyProductionStatus('unauthenticated')
       return
     }
     if (!active) {
-      lifecycle.cancel('learner-switch')
-      void runtime.cancel('learner-switch')
       studySelectedProfileRef.current = null
       setStudyProductionStatus('unauthenticated')
       return
@@ -424,17 +631,22 @@ export default function App() {
   const patchActive = (update: (prev: Profile) => Profile) =>
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
-    leaveStudyEnginePath()
-    leaveAcademyPath()
-    leaveGrade5MathPracticePath()
-    void purgeVoiceCache()
-    studyProductionLifecycleRef.current?.cancel('logout')
-    void studyVerifiedRuntimeRef.current?.cancel('logout')
-    studyReadinessClientRef.current?.invalidate()
-    studySelectedProfileRef.current = null
-    setParentStudyAuthorization(null)
-    setState((s) => ({ ...s, activeProfileId: null }))
-    setScreen({ kind: 'picker' })
+    void (async () => {
+      leaveStudyEnginePath()
+      leaveAcademyPath()
+      leaveGrade5MathPracticePath()
+      studyReadinessClientRef.current?.invalidate()
+      studySelectedProfileRef.current = null
+      setParentStudyAuthorization(null)
+      setState((s) => ({ ...s, activeProfileId: null }))
+      setScreen({ kind: 'picker' })
+      const security = securityRef.current
+      if (!security) return
+      await security.end({
+        type: 'logout',
+        occurredAt: new Date().toISOString(),
+      }).catch(() => undefined)
+    })()
   }
   // Begin a practice run and stamp the session start (MT-1 escalation window).
   const startPractice = (p: Profile) => {
@@ -590,12 +802,43 @@ export default function App() {
       }
     : undefined
 
+  const openLearnerPin = (profileId: string) => {
+    const credentialState = credentialStateByProfileId[profileId]
+    setScreen(
+      credentialState === 'unenrolled'
+        ? { kind: 'kidPinCreate', profileId }
+        : { kind: 'kidPin', profileId },
+    )
+  }
+
   // ---------- profile-free screens ----------
+
+  if (screen.kind === 'securityBoot') {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
+        <p role="status" className="rounded-2xl bg-white p-6 font-bold text-slate-700 shadow">
+          Securing learner profiles…
+        </p>
+      </main>
+    )
+  }
+
+  if (screen.kind === 'securityError') {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
+        <div role="alert" className="max-w-lg rounded-2xl bg-white p-6 text-center shadow">
+          <h1 className="text-xl font-extrabold text-rose-700">Learner sign-in is locked</h1>
+          <p className="mt-2 text-sm font-semibold text-slate-600">{screen.message}</p>
+        </div>
+      </main>
+    )
+  }
 
   if (screen.kind === 'picker') {
     return (
       <Picker
         state={state}
+        credentialStateByProfileId={credentialStateByProfileId}
         migrationBanner={
           showMigration && loaded.backupKey
             ? {
@@ -607,10 +850,7 @@ export default function App() {
               }
             : undefined
         }
-        onPick={(profileId) => {
-          const p = state.profiles[profileId]
-          setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
-        }}
+        onPick={openLearnerPin}
         onGrownUps={() =>
           setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
         }
@@ -628,13 +868,14 @@ export default function App() {
             <PinPad
               title={`Hi, ${profile.name}!`}
               subtitle="Enter your secret PIN"
-              onComplete={(pin) => {
-                if (pin === profile.pin) {
-                  setState((s) => ({ ...s, activeProfileId: profile.id }))
-                  setScreen({ kind: 'home' })
-                  return null
-                }
-                return 'Oops — that is not it. Try again!'
+              onComplete={async (pin) => {
+                const security = securityRef.current
+                if (!security) return 'Secure learner sign-in is unavailable.'
+                const result = await security.authenticate(profile.id, pin, 'verify')
+                if (!result.ok) return result.error
+                setState((s) => ({ ...s, activeProfileId: result.profileId }))
+                setScreen(authenticatedScreenFor(profile))
+                return null
               }}
               onCancel={() => setScreen({ kind: 'picker' })}
             />
@@ -644,15 +885,25 @@ export default function App() {
               subtitle={
                 screen.firstEntry ? 'Type your new PIN again to lock it in' : 'Choose a secret 4-digit PIN'
               }
-              onComplete={(pin) => {
+              onComplete={async (pin) => {
                 if (!screen.firstEntry) {
                   setScreen({ kind: 'kidPinCreate', profileId: profile.id, firstEntry: pin })
                   return null
                 }
                 if (pin === screen.firstEntry) {
-                  patchById(profile.id, (prev) => ({ ...prev, pin }))
-                  setState((s) => ({ ...s, activeProfileId: profile.id }))
-                  setScreen({ kind: 'home' })
+                  const security = securityRef.current
+                  if (!security) return 'Secure learner enrollment is unavailable.'
+                  const result = await security.authenticate(profile.id, pin, 'enroll')
+                  const credentialStates = security.credentialStates(stateRef.current.profiles)
+                  setCredentialStateByProfileId(credentialStates)
+                  if (!result.ok) {
+                    if (credentialStates[profile.id] === 'enrolled') {
+                      setScreen({ kind: 'kidPin', profileId: profile.id })
+                    }
+                    return result.error
+                  }
+                  setState((s) => ({ ...s, activeProfileId: result.profileId }))
+                  setScreen(authenticatedScreenFor(profile))
                   return null
                 }
                 setScreen({ kind: 'kidPinCreate', profileId: profile.id })
@@ -761,6 +1012,29 @@ export default function App() {
         state={state}
         onStateChange={setState}
         sync={sync}
+        credentialStateByProfileId={credentialStateByProfileId}
+        onResetLearnerCredential={async (profileId) => {
+          const security = securityRef.current
+          if (!security) throw new Error('Learner security is unavailable.')
+          await security.resetCredential(profileId)
+          setCredentialStateByProfileId(security.credentialStates(stateRef.current.profiles))
+        }}
+        onImportState={async (importedState) => {
+          const security = securityRef.current
+          if (!security) throw new Error('Learner security is unavailable.')
+          await security.end({
+            type: 'authorization-loss',
+            source: 'import-or-replacement',
+            occurredAt: new Date().toISOString(),
+          })
+          const lockedImported = appStateWithLearnerPinSentinels(
+            toPortableAppState({ ...importedState, activeProfileId: null }),
+          )
+          const persisted = await saveAppState(lockedImported)
+          if (!persisted.ok) throw new Error(persisted.error)
+          setState(lockedImported)
+          setCredentialStateByProfileId(security.credentialStates(lockedImported.profiles))
+        }}
         onClose={() => setScreen({ kind: 'parentHub' })}
         onChangeParentPin={() => setScreen({ kind: 'parentPinCreate' })}
       />
@@ -774,10 +1048,8 @@ export default function App() {
     return (
       <Picker
         state={state}
-        onPick={(profileId) => {
-          const p = state.profiles[profileId]
-          setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
-        }}
+        credentialStateByProfileId={credentialStateByProfileId}
+        onPick={openLearnerPin}
         onGrownUps={() =>
           setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
         }

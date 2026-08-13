@@ -71,7 +71,12 @@ describe('reporting surfaces keep reading NOMINAL grade', () => {
 
   it('the sign-in picker reports her grade', () => {
     const html = renderToStaticMarkup(
-      <Picker state={stateWith(decoupledSixthGrader())} onPick={() => {}} onGrownUps={() => {}} />,
+      <Picker
+        state={stateWith(decoupledSixthGrader())}
+        credentialStateByProfileId={{ p3: 'enrolled' }}
+        onPick={() => {}}
+        onGrownUps={() => {}}
+      />,
     )
     expect(html).toContain('6th grade')
     expect(html).not.toContain('5th grade')

@@ -12,6 +12,7 @@ import type {
   ReconciliationPreview,
   RemoteProfileRow,
 } from './types'
+import { toWireProfile } from '../portableProfile'
 
 export interface SyncTransport {
   pull: () => Promise<CloudPullResult>
@@ -166,7 +167,7 @@ export function prepareConfirmedLocalUpload(
 ): { rows: RemoteProfileRow[]; meta: HouseholdSyncMeta } {
   const rows = Object.values(local).map((profile) => ({
     profile_id: profile.id,
-    data: profile,
+    data: toWireProfile(profile),
     updated_at: new Date(now).toISOString(),
   }))
   return {

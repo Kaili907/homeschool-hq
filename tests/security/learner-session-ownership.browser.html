@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learner session ownership harness</title>
+  </head>
+  <body>
+    <script type="module">
+      import { parseProfileId } from '/src/security/contracts/profileId.ts'
+      import {
+        LearnerSessionController,
+        LEARNER_SESSION_STORAGE_KEY,
+      } from '/src/security/session/learnerSession.ts'
+
+      const revocation = {
+        currentEpoch: () => 0,
+        subscribe: () => () => undefined,
+      }
+      const controller = new LearnerSessionController({
+        storage: window.sessionStorage,
+        revocation,
+        ownershipLockManager: navigator.locks,
+      })
+
+      window.runtimeApi = {
+        create: () => controller.create(parseProfileId('p1')),
+        restore: () => controller.restore(),
+        recheck: () => controller.recheck(),
+        close: () => controller.close(),
+        authority: () => controller.session,
+        serialized: () => sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY),
+      }
+      window.runtimeReady = true
+    </script>
+  </body>
+</html>

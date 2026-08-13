@@ -369,7 +369,7 @@ export interface Profile {
   id: string
   name: string
   grade: Grade
-  /** 4-digit, kid-chosen. '' = not set yet (first sign-in creates it). */
+  /** Legacy migration/import field; live educational state must carry only ''. */
   pin: string
   theme: ThemeId
   skills: Partial<Record<SkillId, SkillState>>

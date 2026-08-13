@@ -1,4 +1,5 @@
 import { SCHEMA_VERSION } from '../migration'
+import { isProfileId, parseProfileId } from '../security/contracts'
 import type { AppState, Profile } from '../types'
 import type { HouseholdSyncMeta, RemoteProfileRow } from './types'
 
@@ -17,7 +18,6 @@ const MAX_SYNC_STRING_LENGTH = 1_000_000
 const MAX_SYNC_KEY_LENGTH = 256
 const MAX_SYNC_PAYLOAD_BYTES = 10_000_000
 const MAX_SYNC_PROFILES = 5
-const PROFILE_ID = /^p[1-5]$/
 const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
 const GRADES = new Set(['3', '4', '5', '6', '7', '8', '10', '12'])
 const ACADEMY_GRADES = new Set(['5', '7', '8'])
@@ -807,7 +807,7 @@ export function validateProfileForSync(
 ): value is Profile {
   if (!plainRecord(value)) return false
   return (
-    PROFILE_ID.test(key) &&
+    isProfileId(key) &&
     value.id === key &&
     key.length > 0 &&
     text(value.name) &&
@@ -953,10 +953,9 @@ export function validateRemoteProfileRows(value: unknown): RemoteRowsValidation 
       if (!plainRecord(candidate)) {
         return { ok: false, error: 'The cloud returned an invalid profile row.' }
       }
-      const id = candidate.profile_id
+      const id = parseProfileId(candidate.profile_id)
       if (
-        typeof id !== 'string' ||
-        !PROFILE_ID.test(id) ||
+        !id ||
         ids.has(id) ||
         !validateProfileForSync(id, candidate.data) ||
         typeof candidate.updated_at !== 'string' ||

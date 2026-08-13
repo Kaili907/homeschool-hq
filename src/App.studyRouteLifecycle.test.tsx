@@ -6,6 +6,12 @@ import { isoToday } from './appState'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
 
+vi.mock('./security/application/learnerSecurity', async (importOriginal) => {
+  const original = await importOriginal<typeof import('./security/application/learnerSecurity')>()
+  const { createLearnerSecurityRouteMock } = await import('./test/learnerSecurityRouteMock')
+  return createLearnerSecurityRouteMock(original)
+})
+
 // MOUNT-2 route lifecycle (Session A2). Harness adapted from the recovered
 // mount work (87a8076 / 11a63e2) and src/sync/useSync.mounted.test.tsx; the
 // production study layer (readiness, gateway auth, verified runtime) is mocked
@@ -232,7 +238,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     const App = (await import('./App')).default
     root = createRoot(container as unknown as Element)
     await act(async () => root?.render(<App />))
-    await settle()
+    for (let tick = 0; tick < 5; tick++) await settle()
   }
 
   async function settle() {
@@ -318,7 +324,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     const launchesBeforeSwitch = harness.launches.length
     await act(async () => harness.picker?.onPick('p2'))
     expect(harness.pin?.title).toBe('Hi, Riley!')
-    await act(async () => { harness.pin?.onComplete('2222') })
+    await act(async () => { await harness.pin?.onComplete('2222') })
     await waitFor(() => hasText(container, 'Student Dashboard for Riley'))
     expect(harness.dashboard?.profileId).toBe('p2')
     expect(hasText(container, 'Verified Study workspace')).toBe(false)
@@ -348,7 +354,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await mountApp(seeded('p1'))
     expect(harness.picker).not.toBeNull()
     await act(async () => harness.picker?.onPick('p1'))
-    await act(async () => { harness.pin?.onComplete('1234') })
+    await act(async () => { await harness.pin?.onComplete('1234') })
     await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
     expect(hasText(container, 'Verified Study workspace')).toBe(false)
     expect(hasText(container, 'Study is not available')).toBe(false)
@@ -403,7 +409,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
     await act(async () => harness.picker?.onPick('p2'))
-    await act(async () => { harness.pin?.onComplete('2222') })
+    await act(async () => { await harness.pin?.onComplete('2222') })
     await waitFor(() => hasText(container, 'Student Dashboard for Riley'))
     await act(async () => root?.unmount())
     root = null

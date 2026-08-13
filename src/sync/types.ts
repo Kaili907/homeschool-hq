@@ -1,9 +1,15 @@
-import type { Profile } from '../types'
+import type { WireProfile } from '../portableProfile'
 
-/** One profile row as stored in Supabase. RLS supplies and verifies household_id. */
+/**
+ * One profile row as stored in Supabase. RLS supplies and verifies household_id.
+ *
+ * `data` is the reconciliation engine's credential-free compatibility row, not
+ * a raw Profile. Its `pin` field can only be the blank sentinel and the Sync V2
+ * serializer removes it before dispatch.
+ */
 export interface RemoteProfileRow {
   profile_id: string
-  data: Profile
+  data: WireProfile
   updated_at: string
 }
 

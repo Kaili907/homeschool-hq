@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTheme } from '../theme'
 
 interface PinPadProps {
   title: string
   subtitle?: string
   /** Return an error message to reject (pad shakes + clears), or null to accept. */
-  onComplete: (pin: string) => string | null
+  onComplete: (pin: string) => string | null | Promise<string | null>
   onCancel: () => void
 }
 
@@ -14,27 +14,36 @@ export function PinPad({ title, subtitle, onComplete, onCancel }: PinPadProps) {
   const [digits, setDigits] = useState('')
   const [error, setError] = useState('')
   const [shake, setShake] = useState(0)
+  const [busy, setBusy] = useState(false)
+  const busyRef = useRef(false)
 
-  function press(d: string) {
-    if (digits.length >= 4) return
+  async function press(d: string) {
+    if (busyRef.current || digits.length >= 4) return
     const next = digits + d
     setDigits(next)
     setError('')
     if (next.length === 4) {
-      const err = onComplete(next)
+      busyRef.current = true
+      setBusy(true)
+      let err: string | null
+      try {
+        err = await onComplete(next)
+      } catch {
+        err = 'Secure sign-in could not finish. Please try again.'
+      }
       if (err) {
         setError(err)
         setShake((s) => s + 1)
-        setDigits('')
-      } else {
-        setDigits('')
       }
+      setDigits('')
+      busyRef.current = false
+      setBusy(false)
     }
   }
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-sm flex-col items-center justify-center px-4 py-8">
-      <div className={`${t.card} w-full p-6 text-center`}>
+      <div className={`${t.card} w-full p-6 text-center`} aria-busy={busy}>
         <h1 className={`text-2xl font-extrabold ${t.heading}`}>{title}</h1>
         {subtitle && <p className={`mt-1 text-sm font-semibold ${t.sub}`}>{subtitle}</p>}
 
@@ -56,7 +65,8 @@ export function PinPad({ title, subtitle, onComplete, onCancel }: PinPadProps) {
           {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((d) => (
             <button
               key={d}
-              onClick={() => press(d)}
+              onClick={() => { void press(d) }}
+              disabled={busy}
               className={`${t.choiceIdle} py-4 text-2xl font-extrabold`}
             >
               {d}
@@ -64,15 +74,21 @@ export function PinPad({ title, subtitle, onComplete, onCancel }: PinPadProps) {
           ))}
           <button
             onClick={onCancel}
+            disabled={busy}
             className={`${t.secondaryBtn} py-4 text-sm`}
           >
             Back
           </button>
-          <button onClick={() => press('0')} className={`${t.choiceIdle} py-4 text-2xl font-extrabold`}>
+          <button
+            onClick={() => { void press('0') }}
+            disabled={busy}
+            className={`${t.choiceIdle} py-4 text-2xl font-extrabold`}
+          >
             0
           </button>
           <button
             onClick={() => setDigits(digits.slice(0, -1))}
+            disabled={busy}
             className={`${t.secondaryBtn} py-4 text-xl`}
             aria-label="delete digit"
           >

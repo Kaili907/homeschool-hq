@@ -23,6 +23,9 @@ import { MindsetProfilePanel, MindsetStartDate } from './mindset/MindsetGrownUps
 import { clearJournal } from '../mindset/journalStore'
 import { AttendancePanel } from './attendance/AttendancePanel'
 import { ServiceHoursAdmin } from './service/ServiceHoursAdmin'
+import type {
+  LearnerCredentialStateByProfileId,
+} from '../security/application/learnerSecurity'
 
 interface GrownUpsProps {
   state: AppState
@@ -30,12 +33,25 @@ interface GrownUpsProps {
   onStateChange: Dispatch<SetStateAction<AppState>>
   /** M6 cloud-sync API (identity, status, sync now, migration). */
   sync: SyncApi
+  credentialStateByProfileId: LearnerCredentialStateByProfileId
+  onResetLearnerCredential: (profileId: string) => Promise<void>
+  onImportState: (state: AppState) => Promise<void>
   onClose: () => void
   onChangeParentPin: () => void
 }
 
-export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPin }: GrownUpsProps) {
+export function GrownUps({
+  state,
+  onStateChange,
+  sync,
+  credentialStateByProfileId,
+  onResetLearnerCredential,
+  onImportState,
+  onClose,
+  onChangeParentPin,
+}: GrownUpsProps) {
   const [msg, setMsg] = useState('')
+  const [resettingCredentialId, setResettingCredentialId] = useState<string | null>(null)
   const [expanded, setExpanded] = useState<{
     id: string
     tab: 'template' | 'history' | 'attendance' | 'service' | 'assessments' | 'hs' | 'stars' | 'reading' | 'mindset'
@@ -56,7 +72,7 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
     if (!window.confirm(`Really sure? ${p.name}'s mastery, streaks and missions will be wiped.`)) return
     patchProfile(p.id, (prev) => {
       const fresh = emptyProfile(prev.id, prev.name, prev.grade)
-      return { ...fresh, pin: prev.pin, theme: prev.theme, createdAt: prev.createdAt }
+      return { ...fresh, pin: '', theme: prev.theme, createdAt: prev.createdAt }
     })
     clearJournal(p.id) // her private mindset entries live outside AppState — wipe them too
     setMsg(`${p.name}'s progress was reset.`)
@@ -65,15 +81,19 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
   function handleImport(files: FileList | null) {
     const file = files?.[0]
     if (!file) return
-    file.text().then((text) => {
+    file.text().then(async (text) => {
       const result = importBackup(state, text)
       if (!result.ok) {
         setMsg(`❌ ${result.error}`)
       } else if (
         window.confirm(`${result.note}\n\nThis will overwrite current data. Continue?`)
       ) {
-        onStateChange(result.state)
-        setMsg(`✅ ${result.note}`)
+        try {
+          await onImportState(result.state)
+          setMsg(`✅ ${result.note}`)
+        } catch {
+          setMsg('❌ Imported data could not be applied securely.')
+        }
       }
       if (fileRef.current) fileRef.current.value = ''
     })
@@ -119,7 +139,8 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
                   Grade {p.grade} · {p.theme}
                 </span>
                 <span className="text-xs font-semibold text-slate-500">
-                  {p.pin ? 'PIN set' : 'no PIN yet'} · {masteredCount(p)} skills mastered ·{' '}
+                  {credentialStateByProfileId[p.id] === 'enrolled' ? 'PIN set' :
+                    credentialStateByProfileId[p.id] === 'reset-required' ? 'PIN reset required' : 'no PIN yet'} · {masteredCount(p)} skills mastered ·{' '}
                   {p.totals.questionsAnswered} questions all-time
                 </span>
                 <span className="ml-auto flex gap-2">
@@ -247,11 +268,19 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
                       HS setup
                     </button>
                   )}
-                  {p.pin && (
+                  {credentialStateByProfileId[p.id] !== 'unenrolled' && (
                     <button
+                      disabled={resettingCredentialId !== null}
                       onClick={() => {
-                        if (window.confirm(`Clear ${p.name}'s PIN? She'll choose a new one at next sign-in.`))
-                          patchProfile(p.id, (prev) => ({ ...prev, pin: '' }))
+                        if (!window.confirm(`Clear ${p.name}'s PIN? She'll choose a new one at next sign-in.`)) return
+                        setResettingCredentialId(p.id)
+                        void onResetLearnerCredential(p.id).then(() => {
+                          setMsg(`✅ ${p.name}'s learner PIN was securely reset.`)
+                        }).catch(() => {
+                          setMsg(`❌ ${p.name}'s learner PIN could not be reset.`)
+                        }).finally(() => {
+                          setResettingCredentialId(null)
+                        })
                       }}
                       className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
                     >

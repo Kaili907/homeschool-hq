@@ -8,6 +8,12 @@ import type { AcademyRoute } from './academy/academyRoute'
 import type { StudentDashboardComposition } from './components/academy/dashboard/StudentDashboard'
 import { buildLegacyMissionData } from './components/academy/dashboard/legacyMissionData'
 
+vi.mock('./security/application/learnerSecurity', async (importOriginal) => {
+  const original = await importOriginal<typeof import('./security/application/learnerSecurity')>()
+  const { createLearnerSecurityRouteMock } = await import('./test/learnerSecurityRouteMock')
+  return createLearnerSecurityRouteMock(original)
+})
+
 // UI-HOME-1 default-home lifecycle. The Academy surface is mocked so these tests
 // exercise App's picker/PIN boundary, dashboard composition, deep links, URL
 // normalization, and state preservation rather than AcademyRouter internals.
@@ -254,7 +260,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     const App = (await import('./App')).default
     root = createRoot(container as unknown as Element)
     await act(async () => root?.render(<App />))
-    await settle()
+    for (let tick = 0; tick < 5; tick++) await settle()
   }
 
   async function settle() {
@@ -275,7 +281,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     container = documentTarget.createElement('div')
   }
 
-  it('boots onto the academy surface for a deep link with a persisted grade-5 profile', async () => {
+  it('boots onto the academy surface for a deep link after valid Session restoration', async () => {
     pathname = '/academy/course/ma-g5-mathematics/unit/2/lesson/ma-g5-mathematics-u02-l03'
     const state = seeded('p2')
     state.profiles.p2 = { ...state.profiles.p2, missions: {} }
@@ -298,6 +304,16 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     expect(harness.academy!.dashboard?.mission?.day).toBeUndefined()
     const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
     expect(persisted.profiles.p2.missions).toEqual({})
+  })
+
+  it('keeps a deep link locked when activeProfileId is persisted without a valid Session', async () => {
+    pathname = '/academy/course/ma-g5-mathematics'
+    localStorage.setItem('test:learner-session-restore', 'locked')
+
+    await mountApp(seeded('p2'))
+
+    expect(harness.academy).toBeNull()
+    expect(harness.picker).not.toBeNull()
   })
 
   it('does not create a mission day from direct Academy course navigation', async () => {
@@ -422,7 +438,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
       await act(async () => harness.picker!.onPick('p1'))
       expect(harness.pin?.title).toBe(`Hi, Grade ${grade} learner!`)
       await act(async () => {
-        expect(harness.pin!.onComplete('1234')).toBeNull()
+        await expect(harness.pin!.onComplete('1234')).resolves.toBeNull()
       })
       await settle()
 

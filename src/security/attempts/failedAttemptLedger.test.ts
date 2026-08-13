@@ -1,0 +1,482 @@
+import { describe, expect, it } from 'vitest'
+import { CANONICAL_PROFILE_IDS, parseProfileId } from '../contracts/profileId'
+import {
+  FAILED_ATTEMPT_LOCK_PREFIX,
+  FAILED_ATTEMPT_POLICY,
+  FAILED_ATTEMPT_STORAGE_PREFIX,
+  FailedAttemptLedger,
+  failedAttemptLockName,
+  type AttemptLockManager,
+  type FailedAttemptStatus,
+  type FailedAttemptSubject,
+} from './failedAttemptLedger'
+import type { SecurityStorage } from '../session/runtime'
+
+const START = Date.parse('2026-08-09T12:00:00.000Z')
+const P1 = parseProfileId('p1')!
+const P2 = parseProfileId('p2')!
+const HOUSEHOLD_A = '11111111-1111-4111-8111-111111111111'
+const HOUSEHOLD_B = '22222222-2222-4222-8222-222222222222'
+// Letter-bearing on purpose: lowercasing a digit-only UUID is a no-op, so the
+// existing fixtures cannot witness canonicalization at all.
+const HOUSEHOLD_HEX_LOWER = 'abcdefab-cdef-4abc-8def-abcdefabcdef'
+const HOUSEHOLD_HEX_UPPER = 'ABCDEFAB-CDEF-4ABC-8DEF-ABCDEFABCDEF'
+const HOUSEHOLD_HEX_MIXED = 'AbCdEfAb-cDeF-4AbC-8dEf-AbCdEfAbCdEf'
+
+class MemoryStorage implements SecurityStorage {
+  readonly values = new Map<string, string>()
+  reads = 0
+  writes = 0
+  removals = 0
+
+  getItem(key: string): string | null {
+    this.reads += 1
+    return this.values.get(key) ?? null
+  }
+
+  setItem(key: string, value: string): void {
+    this.writes += 1
+    this.values.set(key, value)
+  }
+
+  removeItem(key: string): void {
+    this.removals += 1
+    this.values.delete(key)
+  }
+}
+
+class SerialAttemptLockManager implements AttemptLockManager {
+  readonly names: string[] = []
+  readonly #tails = new Map<string, Promise<void>>()
+
+  request<T>(
+    name: string,
+    _options: { readonly mode: 'exclusive' },
+    callback: () => T | Promise<T>,
+  ): Promise<T> {
+    this.names.push(name)
+    const tail = this.#tails.get(name) ?? Promise.resolve()
+    const result = tail.then(callback)
+    this.#tails.set(name, result.then(() => undefined, () => undefined))
+    return result
+  }
+}
+
+function setup() {
+  const storage = new MemoryStorage()
+  const locks = new SerialAttemptLockManager()
+  let now = START
+  let clockReads = 0
+  const ledger = new FailedAttemptLedger({
+    storage,
+    clock: () => {
+      clockReads += 1
+      return now
+    },
+    lockManager: locks,
+  })
+  return {
+    ledger,
+    storage,
+    locks,
+    now: () => now,
+    clockReads: () => clockReads,
+    setNow: (value: number) => { now = value },
+    advance: (ms: number) => { now += ms },
+  }
+}
+
+async function failureCycle(
+  ledger: FailedAttemptLedger,
+  subject: FailedAttemptSubject,
+  advance: (ms: number) => void,
+  attempts = 10,
+): Promise<FailedAttemptStatus[]> {
+  const results: FailedAttemptStatus[] = []
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const result = await ledger.recordFailure(subject)
+    results.push(result)
+    if (result.status === 'cooldown') advance(result.remainingMs)
+  }
+  return results
+}
+
+describe('failed PIN attempt ledger', () => {
+  it('implements the approved progressive learner schedule', async () => {
+    const runtime = setup()
+    const subject = { kind: 'learner' as const, profileId: P1 }
+    const results = await failureCycle(runtime.ledger, subject, runtime.advance)
+
+    expect(results.map((result) => result.status)).toEqual([
+      'ready',
+      'ready',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'temporarily-locked',
+    ])
+    expect(results.map((result) => result.status === 'cooldown' ? result.remainingMs : 0)).toEqual([
+      0, 0, 5_000, 15_000, 30_000, 60_000, 60_000, 60_000, 60_000, 0,
+    ])
+    expect(results[9]).toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 10,
+      remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.learner,
+    })
+    expect([...runtime.storage.values.keys()]).toEqual([
+      `${FAILED_ATTEMPT_STORAGE_PREFIX}learner:p1`,
+    ])
+    expect([...runtime.storage.values.values()].join(' ')).not.toMatch(/pin|verifier|secret|1234/i)
+  })
+
+  it('uses unambiguous credential, authority, scope, and encoded-subject lock names', async () => {
+    const runtime = setup()
+    const learner = { kind: 'learner' as const, profileId: P1 }
+    const parent = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
+
+    await Promise.all([runtime.ledger.status(learner), runtime.ledger.status(parent)])
+
+    expect(new Set(runtime.locks.names).size).toBe(2)
+    expect(runtime.locks.names).toEqual([
+      failedAttemptLockName(learner),
+      failedAttemptLockName(parent),
+    ])
+    expect(runtime.locks.names.every((name) => name.startsWith(FAILED_ATTEMPT_LOCK_PREFIX))).toBe(true)
+    expect(failedAttemptLockName(learner)).toContain('pin:learner:profile:')
+    expect(failedAttemptLockName(parent)).toContain('pin:parent:household:')
+    expect(() => failedAttemptLockName(
+      { kind: 'learner', profileId: 'bad\nsubject' } as unknown as FailedAttemptSubject,
+    )).toThrow('invalid')
+  })
+
+  it.each([' p1', 'P1', 'p6', '😀'])('rejects a noncanonical learner attempt subject: %s', (profileId) => {
+    expect(() => failedAttemptLockName(
+      { kind: 'learner', profileId } as unknown as FailedAttemptSubject,
+    )).toThrow('invalid')
+  })
+
+  it.each([' p1', 'p1 ', 'P1', 'p0', 'p01', 'p6', '\u{1F600}'])(
+    'rejects invalid learner attempt activity before lock or storage side effects: %s',
+    async (profileId) => {
+      const runtime = setup()
+      const subject = { kind: 'learner', profileId } as unknown as FailedAttemptSubject
+
+      await expect(runtime.ledger.recordFailure(subject)).rejects.toThrow('invalid')
+      expect(runtime.locks.names).toEqual([])
+      expect(runtime.storage.values.size).toBe(0)
+    },
+  )
+
+  it.each(CANONICAL_PROFILE_IDS)('accepts canonical learner attempt subject %s', async (profileId) => {
+    const runtime = setup()
+    const subject = { kind: 'learner' as const, profileId: parseProfileId(profileId)! }
+
+    await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 0 })
+    expect(runtime.locks.names).toEqual([failedAttemptLockName(subject)])
+  })
+
+  it.each([
+    ['guardian kind', { kind: 'guardian', householdId: HOUSEHOLD_A }],
+    ['admin kind', { kind: 'admin', householdId: HOUSEHOLD_A }],
+    ['empty object', {}],
+    ['missing kind', { profileId: 'p1' }],
+    ['null kind', { kind: null, householdId: HOUSEHOLD_A }],
+    ['numeric kind', { kind: 1, householdId: HOUSEHOLD_A }],
+    ['null subject', null],
+    ['array subject', []],
+    ['learner uppercase profile', { kind: 'learner', profileId: 'P1' }],
+    ['learner out-of-range profile', { kind: 'learner', profileId: 'p6' }],
+    ['learner whitespace profile', { kind: 'learner', profileId: ' p1' }],
+    ['learner missing profile', { kind: 'learner' }],
+    ['learner numeric profile', { kind: 'learner', profileId: 1 }],
+    ['learner extra representation', { kind: 'learner', profileId: 'p1', householdId: HOUSEHOLD_A }],
+    ['parent non-UUID household', { kind: 'parent', householdId: 'household-a' }],
+    ['parent whitespace household', { kind: 'parent', householdId: ` ${HOUSEHOLD_A}` }],
+    ['parent missing household', { kind: 'parent' }],
+    ['parent numeric household', { kind: 'parent', householdId: 1 }],
+    ['parent extra representation', { kind: 'parent', householdId: HOUSEHOLD_A, profileId: 'p1' }],
+    ['parent uppercase leading space', { kind: 'parent', householdId: ` ${HOUSEHOLD_HEX_UPPER}` }],
+    ['parent uppercase trailing space', { kind: 'parent', householdId: `${HOUSEHOLD_HEX_UPPER} ` }],
+    ['parent uppercase non-v4 version', { kind: 'parent', householdId: 'ABCDEFAB-CDEF-5ABC-8DEF-ABCDEFABCDEF' }],
+    ['parent uppercase bad variant', { kind: 'parent', householdId: 'ABCDEFAB-CDEF-4ABC-CDEF-ABCDEFABCDEF' }],
+    ['parent braced uppercase household', { kind: 'parent', householdId: `{${HOUSEHOLD_HEX_UPPER}}` }],
+    ['parent urn uppercase household', { kind: 'parent', householdId: `urn:uuid:${HOUSEHOLD_HEX_UPPER}` }],
+    ['parent uppercase extra representation', { kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER, profileId: 'p1' }],
+  ] as const)(
+    'rejects malformed attempt subject before every side effect: %s',
+    async (_label, input) => {
+      const subject = input as unknown as FailedAttemptSubject
+      const operations = [
+        (ledger: FailedAttemptLedger) => ledger.status(subject),
+        (ledger: FailedAttemptLedger) => ledger.recordFailure(subject),
+        (ledger: FailedAttemptLedger) => ledger.recordSuccess(subject),
+      ]
+
+      expect(() => failedAttemptLockName(subject)).toThrow('Attempt subject ID is invalid.')
+      for (const operation of operations) {
+        const runtime = setup()
+        await expect(operation(runtime.ledger)).rejects.toThrow('Attempt subject ID is invalid.')
+        expect(runtime.clockReads()).toBe(0)
+        expect(runtime.locks.names).toEqual([])
+        expect(runtime.storage.reads).toBe(0)
+        expect(runtime.storage.writes).toBe(0)
+        expect(runtime.storage.removals).toBe(0)
+        expect(runtime.storage.values.size).toBe(0)
+      }
+    },
+  )
+
+  it('keeps learner and Parent counters separate and applies the Parent lock duration', async () => {
+    const runtime = setup()
+    const learner = { kind: 'learner' as const, profileId: P1 }
+    const parent = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
+
+    await runtime.ledger.recordFailure(learner)
+    await expect(runtime.ledger.status(parent)).resolves.toEqual({ status: 'ready', failedAttempts: 0 })
+    const parentResults = await failureCycle(runtime.ledger, parent, runtime.advance)
+    expect(parentResults[9]).toMatchObject({
+      status: 'temporarily-locked',
+      remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.parent,
+    })
+  })
+
+  it('treats equivalent household UUID text as exactly one attempt identity', async () => {
+    const runtime = setup()
+    const spellings = [HOUSEHOLD_HEX_LOWER, HOUSEHOLD_HEX_UPPER, HOUSEHOLD_HEX_MIXED]
+    const results: FailedAttemptStatus[] = []
+    for (let attempt = 1; attempt <= 10; attempt += 1) {
+      const subject = {
+        kind: 'parent' as const,
+        householdId: spellings[attempt % spellings.length],
+      }
+      const result = await runtime.ledger.recordFailure(subject)
+      results.push(result)
+      if (result.status === 'cooldown') runtime.advance(result.remainingMs)
+    }
+
+    // Alternating case must not halve the effective threshold.
+    expect(results[9]).toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 10,
+      remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.parent,
+    })
+    await expect(runtime.ledger.status({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER }))
+      .resolves.toMatchObject({ status: 'temporarily-locked', failedAttempts: 10 })
+
+    // One durable counter and one coordination lock, both spelled lowercase.
+    expect([...runtime.storage.values.keys()]).toEqual([
+      `${FAILED_ATTEMPT_STORAGE_PREFIX}parent:${HOUSEHOLD_HEX_LOWER}`,
+    ])
+    expect(new Set(runtime.locks.names).size).toBe(1)
+    expect(runtime.locks.names[0]).toBe(
+      failedAttemptLockName({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER }),
+    )
+    expect(failedAttemptLockName({ kind: 'parent', householdId: HOUSEHOLD_HEX_MIXED }))
+      .toContain(`pin:parent:household:36:${HOUSEHOLD_HEX_LOWER}`)
+  })
+
+  it('clears the shared household counter through any equivalent spelling', async () => {
+    const runtime = setup()
+    await runtime.ledger.recordFailure({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER })
+    await runtime.ledger.recordFailure({ kind: 'parent', householdId: HOUSEHOLD_HEX_LOWER })
+    await expect(runtime.ledger.status({ kind: 'parent', householdId: HOUSEHOLD_HEX_MIXED }))
+      .resolves.toEqual({ status: 'ready', failedAttempts: 2 })
+
+    await runtime.ledger.recordSuccess({ kind: 'parent', householdId: HOUSEHOLD_HEX_MIXED })
+    await expect(runtime.ledger.status({ kind: 'parent', householdId: HOUSEHOLD_HEX_UPPER }))
+      .resolves.toEqual({ status: 'ready', failedAttempts: 0 })
+    expect(runtime.storage.values.size).toBe(0)
+  })
+
+  it('leaves the approved Parent friction schedule unchanged', async () => {
+    expect(FAILED_ATTEMPT_POLICY).toEqual({
+      genericFailureThroughAttempt: 2,
+      cooldownMsByAttempt: {
+        3: 5_000, 4: 15_000, 5: 30_000, 6: 60_000, 7: 60_000, 8: 60_000, 9: 60_000,
+      },
+      temporaryLockAtAttempt: 10,
+      temporaryLockMs: { learner: 900_000, parent: 1_800_000 },
+    })
+    expect(Object.isFrozen(FAILED_ATTEMPT_POLICY)).toBe(true)
+    expect(Object.isFrozen(FAILED_ATTEMPT_POLICY.temporaryLockMs)).toBe(true)
+
+    const runtime = setup()
+    const results = await failureCycle(
+      runtime.ledger,
+      { kind: 'parent', householdId: HOUSEHOLD_HEX_LOWER },
+      runtime.advance,
+    )
+    expect(results.map((result) => result.status)).toEqual([
+      'ready',
+      'ready',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'cooldown',
+      'temporarily-locked',
+    ])
+    expect(results.map((result) => result.status === 'cooldown' ? result.remainingMs : 0)).toEqual([
+      0, 0, 5_000, 15_000, 30_000, 60_000, 60_000, 60_000, 60_000, 0,
+    ])
+    expect(results[9]).toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 10,
+      remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.parent,
+    })
+  })
+
+  it('allows another attempt after normal lock expiry without erasing history', async () => {
+    const runtime = setup()
+    const subject = { kind: 'learner' as const, profileId: P1 }
+    await failureCycle(runtime.ledger, subject, runtime.advance)
+
+    runtime.advance(FAILED_ATTEMPT_POLICY.temporaryLockMs.learner)
+
+    await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 10 })
+    await expect(runtime.ledger.recordFailure(subject)).resolves.toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 11,
+    })
+  })
+
+  it('serializes two concurrent failures without losing either increment', async () => {
+    const storage = new MemoryStorage()
+    const locks = new SerialAttemptLockManager()
+    const subject = { kind: 'learner' as const, profileId: P1 }
+    const first = new FailedAttemptLedger({ storage, clock: () => START, lockManager: locks })
+    const second = new FailedAttemptLedger({ storage, clock: () => START, lockManager: locks })
+
+    const results = await Promise.all([first.recordFailure(subject), second.recordFailure(subject)])
+
+    expect(results.map((result) => result.failedAttempts)).toEqual([1, 2])
+    await expect(first.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 2 })
+  })
+
+  it('applies the stronger final policy when concurrent failures cross the lock threshold', async () => {
+    const runtime = setup()
+    const subject = { kind: 'learner' as const, profileId: P2 }
+    await failureCycle(runtime.ledger, subject, runtime.advance, 8)
+    const second = new FailedAttemptLedger({
+      storage: runtime.storage,
+      clock: runtime.now,
+      lockManager: runtime.locks,
+    })
+
+    const results = await Promise.all([
+      runtime.ledger.recordFailure(subject),
+      second.recordFailure(subject),
+    ])
+
+    expect(results[0]).toMatchObject({ status: 'cooldown', failedAttempts: 9, remainingMs: 60_000 })
+    expect(results[1]).toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 10,
+      remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.learner,
+    })
+    await expect(runtime.ledger.status(subject)).resolves.toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 10,
+    })
+  })
+
+  it('does not let an earlier concurrent observer overwrite maxObservedAt', async () => {
+    const storage = new MemoryStorage()
+    const locks = new SerialAttemptLockManager()
+    const subject = { kind: 'learner' as const, profileId: P2 }
+    const initial = new FailedAttemptLedger({ storage, clock: () => START, lockManager: locks })
+    await initial.recordFailure(subject)
+    const later = new FailedAttemptLedger({ storage, clock: () => START + 10_000, lockManager: locks })
+    const earlier = new FailedAttemptLedger({ storage, clock: () => START + 5_000, lockManager: locks })
+
+    const laterStatus = later.status(subject)
+    const earlierStatus = earlier.status(subject)
+
+    await expect(laterStatus).resolves.toEqual({ status: 'ready', failedAttempts: 1 })
+    await expect(earlierStatus).resolves.toEqual({ status: 'ledger-invalid', failedAttempts: 1 })
+    expect([...storage.values.values()].join(' ')).toContain('2026-08-09T12:00:10.000Z')
+  })
+
+  it('serializes success/failure races according to operation ordering', async () => {
+    const subject = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
+
+    const failureFirst = setup()
+    await Promise.all([
+      failureFirst.ledger.recordFailure(subject),
+      failureFirst.ledger.recordSuccess(subject),
+    ])
+    await expect(failureFirst.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 0 })
+
+    const successFirst = setup()
+    await Promise.all([
+      successFirst.ledger.recordSuccess(subject),
+      successFirst.ledger.recordFailure(subject),
+    ])
+    await expect(successFirst.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 1 })
+  })
+
+  it('persists a forward observation and fails closed after rollback', async () => {
+    const runtime = setup()
+    const subject = { kind: 'learner' as const, profileId: P1 }
+    await failureCycle(runtime.ledger, subject, runtime.advance)
+    const beforeJump = runtime.now()
+
+    runtime.advance(365 * 24 * 60 * 60 * 1_000)
+    await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 10 })
+    runtime.setNow(beforeJump + FAILED_ATTEMPT_POLICY.temporaryLockMs.learner + 1)
+
+    await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ledger-invalid', failedAttempts: 10 })
+    await expect(runtime.ledger.recordFailure(subject)).resolves.toEqual({ status: 'ledger-invalid', failedAttempts: 10 })
+    await expect(runtime.ledger.recordSuccess(subject)).rejects.toThrow('ledger is invalid')
+  })
+
+  it('reconstructs from persisted state after sleep and preserves lock and rollback protection', async () => {
+    const storage = new MemoryStorage()
+    const locks = new SerialAttemptLockManager()
+    const subject = { kind: 'parent' as const, householdId: HOUSEHOLD_B }
+    let now = START
+    {
+      const original = new FailedAttemptLedger({ storage, clock: () => now, lockManager: locks })
+      await failureCycle(original, subject, (ms) => { now += ms })
+    }
+
+    const lockedAt = now
+    now += FAILED_ATTEMPT_POLICY.temporaryLockMs.parent + 1
+    const restored = new FailedAttemptLedger({ storage, clock: () => now, lockManager: locks })
+    await expect(restored.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 10 })
+
+    now = lockedAt + FAILED_ATTEMPT_POLICY.temporaryLockMs.parent
+    const rolledBackAfterRestore = new FailedAttemptLedger({ storage, clock: () => now, lockManager: locks })
+    await expect(rolledBackAfterRestore.status(subject)).resolves.toEqual({
+      status: 'ledger-invalid',
+      failedAttempts: 10,
+    })
+  })
+
+  it('resets all failure state after a successful attempt', async () => {
+    const runtime = setup()
+    const subject = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
+    await runtime.ledger.recordFailure(subject)
+    await runtime.ledger.recordFailure(subject)
+    await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 2 })
+
+    await runtime.ledger.recordSuccess(subject)
+
+    await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 0 })
+  })
+
+  it('fails closed instead of using an unlocked fallback', async () => {
+    const ledger = new FailedAttemptLedger({ storage: new MemoryStorage(), clock: () => START })
+    const subject = { kind: 'learner' as const, profileId: P1 }
+
+    await expect(ledger.status(subject)).rejects.toThrow('coordination is unavailable')
+    await expect(ledger.recordFailure(subject)).rejects.toThrow('coordination is unavailable')
+    await expect(ledger.recordSuccess(subject)).rejects.toThrow('coordination is unavailable')
+  })
+})

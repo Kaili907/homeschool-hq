@@ -11,6 +11,16 @@ import {
   supabaseUrl,
 } from './config'
 import { validateRemoteProfileRows } from './provenance'
+import { NO_LEARNER_CREDENTIAL } from '../portableProfile'
+import {
+  AcademySyncV2Client,
+  type AcademySyncV2RpcClient,
+} from './protocolV2'
+import {
+  academyUpdateCoordinator,
+  reportAcademySyncCompatibility,
+} from '../update/runtime'
+import type { SyncWriteIntent } from '../update/updateCoordinator'
 import type {
   CloudPullResult,
   CloudPushResult,
@@ -330,51 +340,26 @@ export function onAuthSessionChange(
   return () => data.subscription.unsubscribe()
 }
 
-function parseServerRevision(value: unknown): string | null {
-  if (
-    (typeof value === 'string' && /^(0|[1-9]\d*)$/.test(value)) ||
-    (typeof value === 'number' &&
-      Number.isSafeInteger(value) &&
-      value >= 0)
-  ) {
-    return String(value)
-  }
-  return null
-}
-
-function parseSnapshot(value: unknown): CloudPullResult {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) {
-    return { ok: false, error: 'The cloud returned an invalid sync snapshot.' }
-  }
-  const snapshot = value as Record<string, unknown>
-  const revision = parseServerRevision(snapshot.revision)
-  const rows = validateRemoteProfileRows(snapshot.rows)
-  if (!revision || !rows.ok) {
-    return {
-      ok: false,
-      error: rows.ok ? 'The cloud returned an invalid revision.' : rows.error,
-    }
-  }
-  return { ok: true, rows: rows.rows, revision }
-}
-
 /** Pull failures remain failures; an empty array is returned only on a successful query. */
 export async function pullProfiles(
   client = getSupabaseClient(),
   signal?: AbortSignal,
 ): Promise<CloudPullResult> {
   if (!client) return { ok: false, error: 'Cloud sync is not configured.' }
-  try {
-    let query = client.rpc('academy_sync_snapshot')
-    if (signal) query = query.abortSignal(signal)
-    const { data, error } = await query
-    if (error) return { ok: false, error: error.message }
-    return parseSnapshot(data)
-  } catch {
-    return {
-      ok: false,
-      error: 'Network error while reading cloud data. Retry when online.',
-    }
+  const protocol = new AcademySyncV2Client(
+    client as unknown as AcademySyncV2RpcClient,
+  )
+  const result = await protocol.snapshot({ signal })
+  reportAcademySyncCompatibility(result.state)
+  if (!result.ok) return { ok: false, error: result.message }
+  return {
+    ok: true,
+    revision: result.revision,
+    rows: result.rows.map((row) => ({
+      profile_id: row.profile_id,
+      data: { ...row.data, pin: NO_LEARNER_CREDENTIAL },
+      updated_at: row.updated_at,
+    })),
   }
 }
 
@@ -398,6 +383,7 @@ export async function pushProfiles(
       global: { fetch: guardedFetch },
     }),
   nativeFetch: FetchLike = globalThis.fetch,
+  writeIntent: SyncWriteIntent = 'automatic',
 ): Promise<CloudPushResult> {
   if (rows.length === 0) return { ok: true, revision: expectedRevision }
   if (!supabaseConfigured())
@@ -429,78 +415,84 @@ export async function pushProfiles(
     const validation = validateRemoteProfileRows(rows)
     if (!validation.ok) return { ok: false, error: validation.error }
     const payload = profileRowsForMutation(validation.rows)
-    const fetchAtAuthorizedBoundary = guardedMutationFetch(
-      dispatchStillAuthorized,
-      signal,
-      nativeFetch,
-      () =>
-        verifyPinnedAuthContext(
-          verifiedContext,
-          expectedHouseholdId,
-          verificationClient,
-          signal,
-        ),
-    )
-    const writeClient = createWriteClient(
-      verifiedContext.accessToken,
-      fetchAtAuthorizedBoundary,
-    )
-    let query = writeClient.rpc('academy_apply_profile_mutation', {
-      p_expected_revision: expectedRevision,
-      p_mutation_id: mutationId,
-      p_profiles: payload,
-    })
-    if (signal) query = query.abortSignal(signal)
-    // This early check avoids starting SDK preparation for an already-invalid
-    // operation. The authoritative check is repeated by guarded fetch after
-    // every SDK-internal await and immediately before native fetch.
-    if (!dispatchStillAuthorized() || signal?.aborted) {
-      return {
-        ok: false,
-        error: 'The household authorization changed at mutation dispatch.',
-      }
-    }
-    const { data, error } = await query
-    if (error) {
-      if (
-        error.message.includes('MutationDispatchAuthorizationError') ||
-        error.message.includes('ACADEMY_SYNC_DISPATCH_DENIED')
-      ) {
-        return {
-          ok: false,
-          error: 'The household authorization changed at mutation dispatch.',
+    const gated = await academyUpdateCoordinator.runSyncWrite(
+      writeIntent,
+      async (coordinatorSignal) => {
+        const combined = new AbortController()
+        const abort = () => combined.abort()
+        signal?.addEventListener('abort', abort, { once: true })
+        coordinatorSignal.addEventListener('abort', abort, { once: true })
+        if (signal?.aborted || coordinatorSignal.aborted) combined.abort()
+        try {
+          const dispatchAuthorized = () =>
+            dispatchStillAuthorized() && !coordinatorSignal.aborted
+          const fetchAtAuthorizedBoundary = guardedMutationFetch(
+            dispatchAuthorized,
+            combined.signal,
+            nativeFetch,
+            () =>
+              verifyPinnedAuthContext(
+                verifiedContext,
+                expectedHouseholdId,
+                verificationClient,
+                combined.signal,
+              ),
+          )
+          const writeClient = createWriteClient(
+            verifiedContext.accessToken,
+            fetchAtAuthorizedBoundary,
+          )
+          if (!dispatchAuthorized() || combined.signal.aborted) {
+            return {
+              ok: false as const,
+              error: 'The household authorization changed at mutation dispatch.',
+            }
+          }
+          const protocol = new AcademySyncV2Client(
+            writeClient as unknown as AcademySyncV2RpcClient,
+          )
+          const outcome = await protocol.applyMutation({
+            expectedRevision,
+            mutationId,
+            profiles: payload,
+            signal: combined.signal,
+          })
+          reportAcademySyncCompatibility(outcome.state)
+          if (!outcome.ok) {
+            return {
+              ok: false as const,
+              error: redactAccessToken(
+                outcome.message,
+                verifiedContext.accessToken,
+              ),
+              ...(outcome.classification === 'cas-conflict'
+                ? { conflict: true as const }
+                : {}),
+              ...(outcome.revision ? { revision: outcome.revision } : {}),
+            }
+          }
+          return {
+            ok: true as const,
+            revision: outcome.revision,
+            ...(outcome.status === 'replayed' ? { replayed: true } : {}),
+          }
+        } finally {
+          signal?.removeEventListener('abort', abort)
+          coordinatorSignal.removeEventListener('abort', abort)
         }
-      }
+      },
+    )
+    if (!gated.started) {
       return {
         ok: false,
-        error: redactAccessToken(error.message, verifiedContext.accessToken),
+        error: gated.reason === 'maintenance'
+          ? 'Cloud sync is temporarily paused for maintenance.'
+          : gated.reason === 'update-required'
+            ? 'Cloud sync is stopped until the application is refreshed.'
+            : 'Cloud sync is offline.',
       }
     }
-    if (!data || typeof data !== 'object' || Array.isArray(data)) {
-      return { ok: false, error: 'The cloud returned an invalid CAS result.' }
-    }
-    const result = data as Record<string, unknown>
-    const revision = parseServerRevision(result.revision)
-    if (!revision) {
-      return { ok: false, error: 'The cloud returned an invalid CAS revision.' }
-    }
-    if (result.status === 'conflict') {
-      return {
-        ok: false,
-        conflict: true,
-        revision,
-        error:
-          'Another device updated this household first. Review the refreshed cloud data.',
-      }
-    }
-    if (result.status === 'applied' || result.status === 'replayed') {
-      return {
-        ok: true,
-        revision,
-        ...(result.status === 'replayed' ? { replayed: true } : {}),
-      }
-    }
-    return { ok: false, error: 'The cloud returned an unknown CAS result.' }
+    return gated.value
   } catch (cause) {
     if (cause instanceof MutationDispatchAuthorizationError) {
       return { ok: false, error: cause.message }

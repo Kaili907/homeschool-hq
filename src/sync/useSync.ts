@@ -12,6 +12,7 @@ import {
   waitForAppStatePersistence,
 } from '../appState'
 import type { AppState, Profile } from '../types'
+import { adoptedLearnerCredential } from '../portableProfile'
 import { purgeVoiceCache } from '../tutor/voice'
 import {
   asSignedInUser,
@@ -145,17 +146,30 @@ function appStateWithProfiles(
   }
 }
 
-function profilesFromRows(rows: RemoteProfileRow[]): Record<string, Profile> {
+/**
+ * Adopt cloud rows as educational profiles. Every compatibility PIN field is
+ * blanked; the device-local credential vault remains the sole learner authority.
+ */
+function profilesFromRows(
+  rows: RemoteProfileRow[],
+  local: Record<string, Profile>,
+): Record<string, Profile> {
   const profiles: Record<string, Profile> = Object.create(null)
-  for (const row of rows) profiles[row.profile_id] = row.data
+  for (const row of rows) {
+    profiles[row.profile_id] = {
+      ...row.data,
+      pin: adoptedLearnerCredential(local[row.profile_id]),
+    }
+  }
   return profiles
 }
 
 export function useSync(
   state: AppState,
   setState: Dispatch<SetStateAction<AppState>>,
+  enabled = true,
 ): SyncApi {
-  const configured = supabaseConfigured()
+  const configured = enabled && supabaseConfigured()
   const [online, setOnline] = useState(
     typeof navigator === 'undefined' ? true : navigator.onLine,
   )
@@ -576,6 +590,10 @@ export function useSync(
                 expectedUser.id,
                 finalDispatchAuthorized,
                 operation.controller.signal,
+                undefined,
+                undefined,
+                undefined,
+                operation.id.startsWith('automatic') ? 'automatic' : 'manual',
               )
             },
             finalize: async (finalization) =>
@@ -809,6 +827,14 @@ export function useSync(
   // ownership recovery is deliberately deferred until canonical auth is known.
   useEffect(() => {
     mountedRef.current = true
+    if (!enabled) {
+      setBootstrapped(false)
+      setRecoveryReady(false)
+      return () => {
+        mountedRef.current = false
+        abortOperation()
+      }
+    }
     cleanupLegacySyncStorage()
     let live = true
     void (async () => {
@@ -832,7 +858,7 @@ export function useSync(
       mountedRef.current = false
       abortOperation()
     }
-  }, [abortOperation])
+  }, [abortOperation, enabled])
 
   // The official client restores and refreshes its supported persisted session.
   useEffect(() => {
@@ -868,7 +894,7 @@ export function useSync(
   // A transition may recover only after the canonical current session has been
   // independently verified. Auth callbacks alone are never recovery authority.
   useEffect(() => {
-    if (!bootstrapped) return
+    if (!enabled || !bootstrapped) return
     let live = true
     const controller = new AbortController()
     setRecoveryReady(false)
@@ -938,6 +964,7 @@ export function useSync(
     abortOperation,
     bootstrapped,
     configured,
+    enabled,
     publishCurrentMeta,
     safeSetError,
     setProfilesFromPersistedSync,
@@ -947,7 +974,7 @@ export function useSync(
   // A verified identity auto-resumes only after authenticated transition
   // recovery and with matching durable provenance.
   useEffect(() => {
-    if (!bootstrapped || !recoveryReady) return
+    if (!enabled || !bootstrapped || !recoveryReady) return
     if (!user) {
       metaRef.current = null
       setMeta(null)
@@ -1025,6 +1052,7 @@ export function useSync(
     }
   }, [
     bootstrapped,
+    enabled,
     recoveryReady,
     online,
     persistCurrentMeta,
@@ -1037,6 +1065,10 @@ export function useSync(
   // Persisted state is the authority for provenance. Normal same-tab edits may
   // advance the owned fingerprint; imports always invalidate ownership.
   useEffect(() => {
+    if (!enabled) {
+      snapshotRef.current = state.profiles
+      return
+    }
     const previousFingerprint = stateFingerprintRef.current
     const changed = changedProfiles(snapshotRef.current, state.profiles)
     snapshotRef.current = state.profiles
@@ -1124,6 +1156,7 @@ export function useSync(
   }, [
     abortOperation,
     bootstrapped,
+    enabled,
     online,
     persistCurrentMeta,
     safeSetError,
@@ -1131,7 +1164,7 @@ export function useSync(
   ])
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (!enabled || typeof window === 'undefined') return
     const goOnline = () => setOnline(true)
     const goOffline = () => setOnline(false)
     const importApplying = () => {
@@ -1169,7 +1202,7 @@ export function useSync(
       window.removeEventListener('storage', storageChanged)
       if (pushTimer.current !== null) window.clearTimeout(pushTimer.current)
     }
-  }, [abortOperation, safeSetError])
+  }, [abortOperation, enabled, safeSetError])
 
   const signIn = useCallback(
     async (email: string, password: string) => {
@@ -1395,7 +1428,10 @@ export function useSync(
           'A local safety backup could not be created; cloud data was not applied.',
         )
       }
-      const profiles = profilesFromRows(verifiedRows)
+      const profiles = profilesFromRows(
+        verifiedRows,
+        stateRef.current.profiles,
+      )
       const nextState = appStateWithProfiles(stateRef.current, profiles)
       const next = metaAfterSuccessfulSync(
         loadHouseholdMeta(verifiedUser.id, verifiedUser.email),

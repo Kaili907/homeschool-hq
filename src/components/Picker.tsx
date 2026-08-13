@@ -1,4 +1,7 @@
 import type { AppState, Grade, Profile } from '../types'
+import type {
+  LearnerCredentialStateByProfileId,
+} from '../security/application/learnerSecurity'
 
 const GRADE_EMOJI: Record<Grade, string> = {
   '3': '🦄',
@@ -32,12 +35,19 @@ const CARD_ACCENT: Record<Profile['theme'], string> = {
 
 interface PickerProps {
   state: AppState
+  credentialStateByProfileId: LearnerCredentialStateByProfileId
   migrationBanner?: { onDownload: () => void; onDismiss: () => void }
   onPick: (profileId: string) => void
   onGrownUps: () => void
 }
 
-export function Picker({ state, migrationBanner, onPick, onGrownUps }: PickerProps) {
+export function Picker({
+  state,
+  credentialStateByProfileId,
+  migrationBanner,
+  onPick,
+  onGrownUps,
+}: PickerProps) {
   const profiles = Object.values(state.profiles)
   return (
     <div
@@ -81,7 +91,8 @@ export function Picker({ state, migrationBanner, onPick, onGrownUps }: PickerPro
             <div className="mt-1 truncate text-2xl font-extrabold">{p.name}</div>
             <div className={`text-sm font-bold ${p.theme === 'clean' ? 'text-slate-500' : 'text-white/80'}`}>
               {GRADE_LABEL[p.grade]}
-              {p.pin === '' && ' · first sign-in'}
+              {credentialStateByProfileId[p.id] === 'unenrolled' && ' · first sign-in'}
+              {credentialStateByProfileId[p.id] === 'reset-required' && ' · grown-up help needed'}
             </div>
           </button>
         ))}

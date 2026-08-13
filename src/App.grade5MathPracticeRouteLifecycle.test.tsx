@@ -6,6 +6,12 @@ import { isoToday } from './appState'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
 
+vi.mock('./security/application/learnerSecurity', async (importOriginal) => {
+  const original = await importOriginal<typeof import('./security/application/learnerSecurity')>()
+  const { createLearnerSecurityRouteMock } = await import('./test/learnerSecurityRouteMock')
+  return createLearnerSecurityRouteMock(original)
+})
+
 // MOUNT-G5-MATH route lifecycle. Harness adapted from
 // App.academyRouteLifecycle.test.tsx. The practice surface itself is NOT mocked:
 // the flag-off assertions have to be made against the rendered surface, so these
@@ -200,7 +206,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     const App = (await import('./App')).default
     root = createRoot(container as unknown as Element)
     await act(async () => root?.render(<App />))
-    await settle()
+    for (let tick = 0; tick < 5; tick++) await settle()
   }
 
   async function settle() {
@@ -252,7 +258,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
 
   async function signIn(profileId: string, pin: string) {
     await act(async () => harness.picker?.onPick(profileId))
-    await act(async () => { harness.pin?.onComplete(pin) })
+    await act(async () => { await harness.pin?.onComplete(pin) })
     await settle()
   }
 

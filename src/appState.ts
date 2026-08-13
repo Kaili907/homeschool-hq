@@ -14,6 +14,11 @@ import {
   beginConfirmedImportInvalidation,
   finishConfirmedImportPersistence,
 } from './sync/config'
+import {
+  adoptedLearnerCredential,
+  toPortableAppState,
+  withLocalLearnerCredentials,
+} from './portableProfile'
 
 const V1_KEY = 'homeschool-hq:profile:v1'
 const BACKUP_PREFIX = 'homeschool-hq:backup:v1:'
@@ -285,9 +290,12 @@ export function downloadJson(filename: string, text: string): void {
  * here because reflection TEXT never lives in AppState — it is kept in journalStore's
  * own localStorage slot (see mindset/journalStore.ts). This serializes only AppState,
  * which carries mindset COMPLETION signals but never a girl's words.
+ *
+ * Learner PINs are projected out (see portableProfile.ts): a backup file is
+ * portable educational data, never a credential store.
  */
 export function serializeAllBackup(state: AppState): string {
-  return JSON.stringify(state, null, 2)
+  return JSON.stringify(toPortableAppState(state), null, 2)
 }
 
 export function exportAllBackup(state: AppState): void {
@@ -307,7 +315,7 @@ function backupBeforeImport(current: AppState): boolean {
     const stamp = new Date().toISOString().replace(/[:.]/g, '-')
     localStorage.setItem(
       `${IMPORT_BACKUP_PREFIX}${stamp}`,
-      JSON.stringify(current),
+      JSON.stringify(toPortableAppState(current)),
     )
     return true
   } catch {
@@ -353,7 +361,10 @@ export function importBackup(current: AppState, text: string): ImportResult {
   } catch {
     return { ok: false, error: 'That file is not valid JSON.' }
   }
-  const validatedV2 = validateAppStateForSync(parsed)
+  // Learner PINs in the file are non-authoritative. Blank the exact legacy
+  // field before validation; the device-local credential vault is untouched.
+  const credentialBound = withLocalLearnerCredentials(current, parsed)
+  const validatedV2 = validateAppStateForSync(credentialBound)
   if (validatedV2.ok) {
     if (!backupBeforeImport(current)) {
       return {
@@ -371,7 +382,15 @@ export function importBackup(current: AppState, text: string): ImportResult {
   if (asV1) {
     const merged = {
       ...current,
-      profiles: { ...current.profiles, p1: asV1.profiles.p1 },
+      profiles: {
+        ...current.profiles,
+        // A legacy file establishes no credential. The compatibility field is
+        // blank; device-local vault authority is outside AppState.
+        p1: {
+          ...asV1.profiles.p1,
+          pin: adoptedLearnerCredential(current.profiles.p1),
+        },
+      },
     }
     const validation = validateAppStateForSync(merged)
     if (!validation.ok) {

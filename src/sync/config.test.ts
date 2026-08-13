@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defaultAppState } from '../migration'
+import { toWireProfile } from '../portableProfile'
 import {
   backupLocalForHousehold,
   claimLocalData,
@@ -159,14 +160,19 @@ describe('household-scoped persistence', () => {
     expect(loadHouseholdMeta('household-a').profiles.p1.dirty).toBe(true)
   })
 
-  it('creates a household-scoped safety backup before replacement', () => {
+  it('creates a credential-free household safety backup with educational data', () => {
     const state = defaultAppState()
     state.profiles.p1.name = 'Local child'
+    state.profiles.p1.pin = '6418'
+    state.profiles.p1.totals.questionsAnswered = 37
     const key = backupLocalForHousehold('household-a', state)
     expect(key).toContain('homeschool-hq:backup:sync:household-a:')
-    expect(JSON.parse(localStorage.getItem(key!)!).profiles.p1.name).toBe(
-      'Local child',
-    )
+    const stored = localStorage.getItem(key!)!
+    const backup = JSON.parse(stored)
+    expect(backup.profiles.p1.name).toBe('Local child')
+    expect(backup.profiles.p1.totals.questionsAnswered).toBe(37)
+    expect(Object.hasOwn(backup.profiles.p1, 'pin')).toBe(false)
+    expect(stored).not.toContain('6418')
   })
 })
 
@@ -258,13 +264,21 @@ describe('official Supabase auth and transport', () => {
     }
     const emptyClient = {
       rpc: async () => ({
-        data: { revision: '0', rows: [] },
+        data: {
+          status: 'ok',
+          mode: 'normal',
+          sync_protocol_version: 2,
+          minimum_supported_sync_version: 2,
+          revision: '0',
+          rows: [],
+        },
         error: null,
       }),
     }
     expect(await pullProfiles(failedClient as never)).toEqual({
       ok: false,
-      error: 'offline',
+      error:
+        'The authenticated household or synchronization provenance did not match.',
     })
     expect(await pullProfiles(emptyClient as never)).toEqual({
       ok: true,
@@ -277,6 +291,10 @@ describe('official Supabase auth and transport', () => {
     const malformedClient = {
       rpc: async () => ({
         data: {
+          status: 'ok',
+          mode: 'normal',
+          sync_protocol_version: 2,
+          minimum_supported_sync_version: 2,
           revision: '1',
           rows: [{ profile_id: 'p1', data: {}, updated_at: 'not-a-date' }],
         },
@@ -293,7 +311,7 @@ describe('official Supabase auth and transport', () => {
     const rows: RemoteProfileRow[] = [
       {
         profile_id: 'p1',
-        data: defaultAppState().profiles.p1,
+        data: toWireProfile(defaultAppState().profiles.p1),
         updated_at: '2026-07-24T10:00:00.000Z',
       },
     ]

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learner activity harness</title>
+    <style>
+      body { min-height: 3000px; }
+      button, input { margin: 24px; }
+    </style>
+  </head>
+  <body>
+    <button id="activity-button" type="button">Interact</button>
+    <input id="activity-input" aria-label="Activity input" />
+    <script type="module">
+      import { parseProfileId } from '/src/security/contracts/profileId.ts'
+      import { createBrowserLearnerActivityController } from '/src/security/session/activity.ts'
+      import { LearnerSessionController } from '/src/security/session/learnerSession.ts'
+
+      const revocation = {
+        currentEpoch: () => 0,
+        subscribe: () => () => undefined,
+      }
+      const session = new LearnerSessionController({
+        storage: window.sessionStorage,
+        revocation,
+        ownershipLockManager: navigator.locks,
+      })
+      const activity = createBrowserLearnerActivityController(session)
+
+      window.activityApi = {
+        start: async () => {
+          await session.create(parseProfileId('p1'))
+          activity.start()
+          return session.session.lastMeaningfulActivityAt
+        },
+        lastActivity: () => session.session?.lastMeaningfulActivityAt ?? null,
+        close: async () => {
+          activity.stop()
+          await session.close()
+        },
+      }
+      window.activityReady = true
+    </script>
+  </body>
+</html>
