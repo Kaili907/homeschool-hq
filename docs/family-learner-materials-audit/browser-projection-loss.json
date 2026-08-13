@@ -1,0 +1,405 @@
+{
+  "auditedReleaseSha": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "builder": "scripts/build-final-family-pilot-data.mjs",
+  "finalBrowserDto": "src/curriculum/final-app-data/types.ts",
+  "renderer": "src/study/family-pilot/final-app/FinalFamilyPilotApp.tsx",
+  "overall": {
+    "result": "FAIL_LOSSY_AND_DISPLAY_ONLY",
+    "lessonsCompared": 8292,
+    "sourceChoiceLessons": 1888,
+    "browserStructuralChoiceLessons": 0,
+    "disconnectedResponsePathLessons": 8292,
+    "markdownPayloadsPreservedVerbatim": 1944,
+    "structuredPayloadsProjectedToStrings": 6348
+  },
+  "bySubject": {
+    "mathematics": {
+      "lessonCount": 1620,
+      "sourceSectionCount": 5131,
+      "browserSectionCount": 5131,
+      "sourceItemCount": 15937,
+      "browserDisplayItemCount": 19500,
+      "sectionCountMismatchLessons": 0,
+      "itemCountMismatchLessons": 1260,
+      "sourceChoiceItemCount": 13179,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 1619,
+      "choiceProjectionMode": "FLATTENED_INTO_DISPLAY_STRING",
+      "sourceResponseTypes": [
+        "constructed-response",
+        "multiple-choice",
+        "worked-example"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 1620,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    },
+    "english-language-arts": {
+      "lessonCount": 1620,
+      "sourceSectionCount": 9680,
+      "browserSectionCount": 8640,
+      "sourceItemCount": 4028,
+      "browserDisplayItemCount": 0,
+      "sectionCountMismatchLessons": 1040,
+      "itemCountMismatchLessons": 1620,
+      "sourceChoiceItemCount": 0,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 0,
+      "choiceProjectionMode": "NOT_PRESENT",
+      "sourceResponseTypes": [
+        "source-reading",
+        "written-or-spoken-response"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 1620,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    },
+    "science": {
+      "lessonCount": 972,
+      "sourceSectionCount": 6804,
+      "browserSectionCount": 6804,
+      "sourceItemCount": 6948,
+      "browserDisplayItemCount": 6948,
+      "sectionCountMismatchLessons": 0,
+      "itemCountMismatchLessons": 0,
+      "sourceChoiceItemCount": 0,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 0,
+      "choiceProjectionMode": "NOT_PRESENT",
+      "sourceResponseTypes": [
+        "written-or-performance-offline"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 972,
+      "sourceTaskSemanticsPreserved": 972,
+      "sourceRubricSemanticsPreserved": 972
+    },
+    "social-studies": {
+      "lessonCount": 972,
+      "sourceSectionCount": 7776,
+      "browserSectionCount": 7776,
+      "sourceItemCount": 1944,
+      "browserDisplayItemCount": 1944,
+      "sectionCountMismatchLessons": 0,
+      "itemCountMismatchLessons": 0,
+      "sourceChoiceItemCount": 0,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 0,
+      "choiceProjectionMode": "NOT_PRESENT",
+      "sourceResponseTypes": [
+        "written-or-performance-offline"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 972,
+      "sourceTaskSemanticsPreserved": 972,
+      "sourceRubricSemanticsPreserved": 972
+    },
+    "health": {
+      "lessonCount": 324,
+      "sourceSectionCount": 1944,
+      "browserSectionCount": 3636,
+      "sourceItemCount": 972,
+      "browserDisplayItemCount": 5904,
+      "sectionCountMismatchLessons": 324,
+      "itemCountMismatchLessons": 324,
+      "sourceChoiceItemCount": 0,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 0,
+      "choiceProjectionMode": "NOT_PRESENT",
+      "sourceResponseTypes": [
+        "knowledge-check",
+        "scenario-response"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 324,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    },
+    "physical-education": {
+      "lessonCount": 972,
+      "sourceSectionCount": 5832,
+      "browserSectionCount": 10152,
+      "sourceItemCount": 2916,
+      "browserDisplayItemCount": 18744,
+      "sectionCountMismatchLessons": 972,
+      "itemCountMismatchLessons": 972,
+      "sourceChoiceItemCount": 0,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 0,
+      "choiceProjectionMode": "NOT_PRESENT",
+      "sourceResponseTypes": [
+        "knowledge-check",
+        "performance-or-adapted-response"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 972,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    },
+    "ready-for-life": {
+      "lessonCount": 324,
+      "sourceSectionCount": 1283,
+      "browserSectionCount": 3269,
+      "sourceItemCount": 1987,
+      "browserDisplayItemCount": 3161,
+      "sectionCountMismatchLessons": 324,
+      "itemCountMismatchLessons": 324,
+      "sourceChoiceItemCount": 64,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 46,
+      "choiceProjectionMode": "CHOICES_DROPPED",
+      "sourceResponseTypes": [
+        "checklist-item",
+        "extended-response",
+        "fixed-choice",
+        "short-response"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 324,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    },
+    "financial-literacy": {
+      "lessonCount": 504,
+      "sourceSectionCount": 1740,
+      "browserSectionCount": 4764,
+      "sourceItemCount": 3632,
+      "browserDisplayItemCount": 6199,
+      "sectionCountMismatchLessons": 504,
+      "itemCountMismatchLessons": 504,
+      "sourceChoiceItemCount": 237,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 223,
+      "choiceProjectionMode": "CHOICES_DROPPED",
+      "sourceResponseTypes": [
+        "extended-response",
+        "fixed-choice",
+        "fixed-numeric",
+        "short-response"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 504,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    },
+    "technology": {
+      "lessonCount": 336,
+      "sourceSectionCount": 1788,
+      "browserSectionCount": 5484,
+      "sourceItemCount": 1164,
+      "browserDisplayItemCount": 12195,
+      "sectionCountMismatchLessons": 336,
+      "itemCountMismatchLessons": 336,
+      "sourceChoiceItemCount": 0,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 0,
+      "choiceProjectionMode": "NOT_PRESENT",
+      "sourceResponseTypes": [
+        "project-artifact",
+        "test-or-check"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 336,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    },
+    "arts-and-music": {
+      "lessonCount": 648,
+      "sourceSectionCount": 3456,
+      "browserSectionCount": 10584,
+      "sourceItemCount": 2538,
+      "browserDisplayItemCount": 23836,
+      "sectionCountMismatchLessons": 648,
+      "itemCountMismatchLessons": 648,
+      "sourceChoiceItemCount": 0,
+      "browserStructuralChoiceItemCount": 0,
+      "choiceStructureLostLessons": 0,
+      "choiceProjectionMode": "NOT_PRESENT",
+      "sourceResponseTypes": [
+        "critique",
+        "project-or-performance-artifact"
+      ],
+      "browserInteractiveResponseTypes": [],
+      "disconnectedResponsePathLessons": 648,
+      "sourceTaskSemanticsPreserved": 0,
+      "sourceRubricSemanticsPreserved": 0
+    }
+  },
+  "rendererSupportMatrix": [
+    {
+      "subject": "mathematics",
+      "sourceTypesPresent": [
+        "constructed-response",
+        "multiple-choice",
+        "worked-example"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "constructed-response",
+        "multiple-choice",
+        "worked-example"
+      ],
+      "lostOrDegraded": [
+        "choice identity and selectable options",
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "english-language-arts",
+      "sourceTypesPresent": [
+        "source-reading",
+        "written-or-spoken-response"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "source-reading",
+        "written-or-spoken-response"
+      ],
+      "lostOrDegraded": [
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "science",
+      "sourceTypesPresent": [
+        "written-or-performance-offline"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "written-or-performance-offline"
+      ],
+      "lostOrDegraded": [],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "social-studies",
+      "sourceTypesPresent": [
+        "written-or-performance-offline"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "written-or-performance-offline"
+      ],
+      "lostOrDegraded": [],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "health",
+      "sourceTypesPresent": [
+        "knowledge-check",
+        "scenario-response"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "knowledge-check",
+        "scenario-response"
+      ],
+      "lostOrDegraded": [
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "physical-education",
+      "sourceTypesPresent": [
+        "knowledge-check",
+        "performance-or-adapted-response"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "knowledge-check",
+        "performance-or-adapted-response"
+      ],
+      "lostOrDegraded": [
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "ready-for-life",
+      "sourceTypesPresent": [
+        "checklist-item",
+        "extended-response",
+        "fixed-choice",
+        "short-response"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "checklist-item",
+        "extended-response",
+        "fixed-choice",
+        "short-response"
+      ],
+      "lostOrDegraded": [
+        "choice identity and selectable options",
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "financial-literacy",
+      "sourceTypesPresent": [
+        "extended-response",
+        "fixed-choice",
+        "fixed-numeric",
+        "short-response"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "extended-response",
+        "fixed-choice",
+        "fixed-numeric",
+        "short-response"
+      ],
+      "lostOrDegraded": [
+        "choice identity and selectable options",
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "technology",
+      "sourceTypesPresent": [
+        "project-artifact",
+        "test-or-check"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "project-artifact",
+        "test-or-check"
+      ],
+      "lostOrDegraded": [
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    },
+    {
+      "subject": "arts-and-music",
+      "sourceTypesPresent": [
+        "critique",
+        "project-or-performance-artifact"
+      ],
+      "supportedInteractivelyByFinalApp": [],
+      "renderedDisplayOnly": [
+        "critique",
+        "project-or-performance-artifact"
+      ],
+      "lostOrDegraded": [
+        "response type metadata",
+        "task/rubric object semantics"
+      ],
+      "acceptedAlternateSurfaceRequired": "paper, notebook, physical performance, or external artifact; no accepted interactive response surface is wired in the final app"
+    }
+  ]
+}
