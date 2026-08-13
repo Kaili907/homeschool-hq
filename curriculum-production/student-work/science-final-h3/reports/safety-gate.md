@@ -1,6 +1,6 @@
 # Safety gate — Science student work
 
-972 lessons · 34 checks · **PASS** (34 passed, 0 failed)
+972 lessons · 35 checks · **FAIL** (33 passed, 2 failed)
 
 | Check | Status | Problems |
 | --- | --- | --- |
@@ -36,8 +36,9 @@
 | `correctness-keys-repinned-on-identical-topic-basis` | PASS | 0 |
 | `hazard-phenomenon-never-reaches-a-learner-unbriefed` | PASS | 0 |
 | `non-food-grade-route-never-shares-food-equipment` | PASS | 0 |
-| `ppe-named-in-a-mitigation-is-on-the-materials-list` | PASS | 0 |
+| `ppe-named-in-a-mitigation-is-on-the-materials-list` | FAIL | 2 |
 | `guardian-record-names-safe-order-ppe-and-disposal` | PASS | 0 |
+| `no-path-states-what-will-be-observed` | FAIL | 2 |
 
 ## What each check proves
 
@@ -75,3 +76,14 @@
 - `non-food-grade-route-never-shares-food-equipment` — Any lesson whose pinned source declares a non-food-grade material carries the H3 never-return-to-food-use rule to the learner in its hazard, its safe order, and its disposal.
 - `ppe-named-in-a-mitigation-is-on-the-materials-list` — Protective equipment a mitigation tells the learner to wear — eye protection, gloves, a waterproof dressing — is resolved onto that lesson’s materials list, so it is not assumed to be already at hand.
 - `guardian-record-names-safe-order-ppe-and-disposal` — On every hazard-bearing lesson the adult record states the safe order, the protective equipment, and the disposal, resolved exactly as the learner reads them — the three things H3 found the guardian note had no field for.
+- `no-path-states-what-will-be-observed` — No alternative path, extension, or instruction tells the learner what they will observe. Naming the quantity to measure is fine; naming the outcome is a supplied result, which every sheet’s footer denies this package prints.
+
+## FAIL — `ppe-named-in-a-mitigation-is-on-the-materials-list`
+
+- ma-hs12-earth-space-environmental-u05-l07: mitigation requires apron, which is on no materials list
+- ma-hs12-earth-space-environmental-u05-l09: mitigation requires apron, which is on no materials list
+
+## FAIL — `no-path-states-what-will-be-observed`
+
+- ma-hs10-chemistry-u06-l07: equal-credit alternative states what the learner will observe: "to observe cooling"
+- ma-hs10-chemistry-u06-l09: equal-credit alternative states what the learner will observe: "to observe cooling"

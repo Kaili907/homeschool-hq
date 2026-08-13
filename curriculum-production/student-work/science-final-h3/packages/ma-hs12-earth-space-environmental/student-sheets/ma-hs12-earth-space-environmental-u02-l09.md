@@ -6,6 +6,8 @@
 
 **Unit question:** Where did the atoms in your body actually come from?
 
+**Anchoring phenomenon: The sun has been radiating enormous power for billions of years without burning out or collapsing.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for stellar life cycles that a reader could check independently.

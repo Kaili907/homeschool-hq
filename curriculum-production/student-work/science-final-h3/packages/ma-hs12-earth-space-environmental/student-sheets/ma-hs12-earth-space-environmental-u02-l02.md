@@ -6,6 +6,8 @@
 
 **Unit question:** Where did the atoms in your body actually come from?
 
+**Anchoring phenomenon: The sun has been radiating enormous power for billions of years without burning out or collapsing.**
+
 **What you are aiming at:**
 
 - Explain the sun's energy budget and lifespan using evidence, a model, or a documented process rather than an unsupported answer.

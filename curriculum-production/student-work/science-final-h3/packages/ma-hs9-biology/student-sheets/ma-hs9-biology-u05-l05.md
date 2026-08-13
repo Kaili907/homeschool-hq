@@ -6,6 +6,8 @@
 
 **Unit question:** Where does the matter in a tree come from, and where does the energy in your food actually go?
 
+**Anchoring phenomenon: A large tree grows tonnes of wood while the soil beneath it barely loses mass.**
+
 **What you are aiming at:**
 
 - Explain conservation of matter in metabolism using evidence, a model, or a documented process rather than an unsupported answer.

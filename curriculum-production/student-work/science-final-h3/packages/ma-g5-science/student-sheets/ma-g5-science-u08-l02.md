@@ -66,7 +66,7 @@ This lesson's curriculum source prescribes no fixed procedure, so this package s
 - Never put a lid, a cap, or a knot on anything that is bubbling, fizzing, rising, or warm. It has to stay open.
 - If a bottle says flammable, it stays shut and you tell an adult. No lesson asks you to open one.
 - No lesson ever uses fire. If a step looks like it needs a flame, stop and tell an adult, because it is the wrong step.
-- You never light anything for a lesson - no match, no lighter, no candle, no camping stove - and you never turn on the cooker, the oven, or a burner for one either, even with an adult there. If a step looks like it needs fire or heat from a flame, stop and tell an adult, because it is the wrong step.
+- You never light anything for a lesson - no match, no lighter, no candle, no camping stove - and you never turn on or use a stove, oven, burner, or grill for one, even if an adult already lit it and even if an adult is standing with you. Stay well back from any pilot light or any flame that is already burning, on a stove, heater, water heater, or fireplace. If a step looks like it needs fire, heat from a flame, a stove, or an oven, stop and tell an adult, because it is the wrong step.
 - Never cut or break open a sealed packet - a cold pack, a hand warmer, a glow stick, or a smoke alarm. What is inside can hurt you.
 - Never look at the sun. Not with your eyes, and not through glass, a lens, a mirror, or a camera. Not even for a second.
 - You never have to send a photo, a video, or a recording of your voice to finish a lesson. Writing it or saying it is always enough.

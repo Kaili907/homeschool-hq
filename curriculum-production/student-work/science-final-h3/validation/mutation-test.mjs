@@ -411,6 +411,17 @@ const MUTATIONS = [
       pkg.guardian_record = { ...pkg.guardian_record, disposal_instruction: '' }
     },
   },
+  {
+    check: 'no-path-states-what-will-be-observed',
+    description: 'have an alternative path promise the learner they will observe warming',
+    apply(state) {
+      const pkg = state.packages[0]
+      pkg.equal_credit_safe_alternative = {
+        ...pkg.equal_credit_safe_alternative,
+        text: `${pkg.equal_credit_safe_alternative.text} Use the mild salts to observe warming.`,
+      }
+    },
+  },
 ]
 
 const checkIds = new Set(CHECKS.map((check) => check.id))

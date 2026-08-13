@@ -6,6 +6,8 @@
 
 **Unit question:** If energy is always conserved, why does everything eventually stop?
 
+**Anchoring phenomenon: A bouncing ball returns to a lower height every bounce, yet nothing about it looks like it is losing anything.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about kinetic and potential energy without penalty, and pose a testable question.

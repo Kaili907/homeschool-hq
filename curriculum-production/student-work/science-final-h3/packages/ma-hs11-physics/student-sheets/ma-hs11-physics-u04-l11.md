@@ -6,6 +6,8 @@
 
 **Unit question:** Why do gravity and the electric force follow the same mathematical shape while behaving so differently?
 
+**Anchoring phenomenon: A charged balloon lifts hair against the pull of the entire Earth.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for field lines as representations on a fresh task.

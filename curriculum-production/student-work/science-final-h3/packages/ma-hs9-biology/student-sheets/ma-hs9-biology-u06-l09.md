@@ -6,6 +6,8 @@
 
 **Unit question:** Why does so little of the energy entering an ecosystem reach its top consumers?
 
+**Anchoring phenomenon: A hectare of grassland supports thousands of insects, hundreds of mice, and perhaps one hawk.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for the carbon cycle in ecosystems that a reader could check independently.

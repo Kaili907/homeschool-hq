@@ -6,6 +6,8 @@
 
 **Unit question:** Where does heritable variation come from, and what can probability actually predict about it?
 
+**Anchoring phenomenon: Two siblings share both parents and about half their DNA, yet differ in almost every visible trait.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about chromosomes and gene loci without penalty, and pose a testable question.

@@ -6,6 +6,8 @@
 
 **Unit question:** Why do orbits keep their shape, and what would it take to change one?
 
+**Anchoring phenomenon: A comet spends decades far from the sun and then whips through the inner solar system in weeks.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for orbital period and radius that a reader could check independently.

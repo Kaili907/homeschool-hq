@@ -6,6 +6,8 @@
 
 **Unit question:** How does one change to Earth's surface end up changing systems far away from it?
 
+**Anchoring phenomenon: Removing vegetation from a hillside changes the temperature, the water table, and the air quality of a valley kilometres downstream.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for surface water and groundwater systems that a reader could check independently.

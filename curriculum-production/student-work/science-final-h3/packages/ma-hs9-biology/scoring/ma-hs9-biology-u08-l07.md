@@ -131,7 +131,7 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Run the coin or dice probability trials separately, recording every trial including the ones that look wrong.
 - No family trait, photograph, pedigree, or medical detail is collected at any point.
 
-**Protective equipment:** Eye protection: not required.
+**Protective equipment:** Eye protection: not required. Also required by this lesson: gloves.
 
 **Disposal and clearing up:** Return leaves and seeds to the garden or compost, put beans back in their labelled container out of reach of young children, and wash hands. Beans used as counters are never eaten. No specimen and no family information is stored.
 

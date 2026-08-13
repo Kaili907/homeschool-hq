@@ -6,6 +6,8 @@
 
 **Unit question:** How have Earth and life reshaped each other, and how does that history set where people can live?
 
+**Anchoring phenomenon: Earth's atmosphere contains abundant oxygen, which is chemically reactive and should not persist without something continuously producing it.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for distribution of natural resources that a reader could check independently.

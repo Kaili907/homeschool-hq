@@ -6,6 +6,8 @@
 
 **Unit question:** What stays the same and what changes when a wave crosses into a new material?
 
+**Anchoring phenomenon: A straw in a glass of water looks broken at the surface, and the break shifts as you move your head.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for wave and particle models of light on a fresh task.

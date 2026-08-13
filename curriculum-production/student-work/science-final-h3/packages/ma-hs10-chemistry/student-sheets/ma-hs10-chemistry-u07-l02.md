@@ -6,6 +6,8 @@
 
 **Unit question:** What has to be true at the particle level for a reaction to go faster?
 
+**Anchoring phenomenon: A glow stick snapped in ice water stays bright far longer than an identical one in warm water. SAFETY: the glow stick in this unit is observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, and the contents are never touched or tasted.**
+
 **What you are aiming at:**
 
 - Explain temperature and reaction rate using evidence, a model, or a documented process rather than an unsupported answer.

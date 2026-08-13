@@ -6,6 +6,8 @@
 
 **Unit question:** How do chemists decide what a measurement actually tells them, and how do we work safely with matter at home?
 
+**Anchoring phenomenon: Two people measure the same spoon of salt and get masses that differ by more than the salt they think they added.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of physical and chemical properties, or its stated alternative, and record the learner's own data with its uncertainty.

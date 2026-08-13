@@ -6,6 +6,8 @@
 
 **Unit question:** Why does energy spread out on its own, and never gather itself back up?
 
+**Anchoring phenomenon: A metal spoon and a wooden spoon left in the same room feel like different temperatures to the hand.**
+
 **What you are aiming at:**
 
 - Explain conduction, convection, and radiation using evidence, a model, or a documented process rather than an unsupported answer.

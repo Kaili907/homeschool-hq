@@ -6,6 +6,8 @@
 
 **Unit question:** What lines of evidence support common ancestry, and how should we design a response when human activity threatens biodiversity?
 
+**Anchoring phenomenon: Antibiotic-resistant bacteria appear in hospitals within a few years of a new drug's release.**
+
 **What you are aiming at:**
 
 - Explain adaptation of populations using evidence, a model, or a documented process rather than an unsupported answer.

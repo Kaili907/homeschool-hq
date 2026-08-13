@@ -6,6 +6,8 @@
 
 **Unit question:** What exactly is the relationship among net force, mass, and acceleration - and how would you know?
 
+**Anchoring phenomenon: A loaded wagon and an empty one, pulled with what feels like the same effort, reach very different speeds.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for friction and normal forces on a fresh task.

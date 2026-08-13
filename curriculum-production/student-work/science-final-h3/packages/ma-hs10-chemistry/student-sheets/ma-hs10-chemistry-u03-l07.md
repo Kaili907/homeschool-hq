@@ -6,6 +6,8 @@
 
 **Unit question:** How does what happens between particles explain what a material does in your hand?
 
+**Anchoring phenomenon: Candle wax, table salt, and copper wire all look solid, but only one conducts, only one shatters, and only one melts in a warm room.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of ionic, covalent, and metallic bonding, or its stated alternative, and record the learner's own data with its uncertainty.

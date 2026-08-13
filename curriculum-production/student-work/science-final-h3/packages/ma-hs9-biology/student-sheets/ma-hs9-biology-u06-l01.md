@@ -6,6 +6,8 @@
 
 **Unit question:** Why does so little of the energy entering an ecosystem reach its top consumers?
 
+**Anchoring phenomenon: A hectare of grassland supports thousands of insects, hundreds of mice, and perhaps one hawk.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about trophic levels and energy transfer without penalty, and pose a testable question.

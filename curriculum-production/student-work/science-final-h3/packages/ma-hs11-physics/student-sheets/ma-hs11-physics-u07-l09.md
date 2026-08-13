@@ -6,6 +6,8 @@
 
 **Unit question:** How can a moving magnet create a current in a wire it never touches?
 
+**Anchoring phenomenon: A bicycle light with no battery glows brighter the faster the wheel turns.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for electromagnetic induction that a reader could check independently.

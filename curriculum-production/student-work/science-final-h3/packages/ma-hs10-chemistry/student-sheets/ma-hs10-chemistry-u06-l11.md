@@ -6,6 +6,8 @@
 
 **Unit question:** Why do some reactions warm their surroundings and others chill them, when both are just rearranging bonds?
 
+**Anchoring phenomenon: One instant cold pack and one hand warmer are both sealed pouches you squeeze, and they do opposite things. SAFETY: the cold pack and hand warmer in this unit are observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, and the contents are never touched or tasted.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for computational energy models on a fresh task.

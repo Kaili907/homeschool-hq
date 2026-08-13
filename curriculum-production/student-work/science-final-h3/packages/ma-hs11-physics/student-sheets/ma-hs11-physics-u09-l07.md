@@ -6,6 +6,8 @@
 
 **Unit question:** How do we send information reliably using something we cannot see?
 
+**Anchoring phenomenon: A phone in a metal box loses signal completely, while the same phone behind a wooden door does not.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of the electromagnetic spectrum, or its stated alternative, and record the learner's own data with its uncertainty.

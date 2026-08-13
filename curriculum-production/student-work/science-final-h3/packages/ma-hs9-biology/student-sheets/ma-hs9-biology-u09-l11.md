@@ -6,6 +6,8 @@
 
 **Unit question:** What lines of evidence support common ancestry, and how should we design a response when human activity threatens biodiversity?
 
+**Anchoring phenomenon: Antibiotic-resistant bacteria appear in hospitals within a few years of a new drug's release.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for environmental change and extinction on a fresh task.

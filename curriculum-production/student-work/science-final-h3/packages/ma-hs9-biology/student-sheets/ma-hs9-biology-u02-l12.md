@@ -6,6 +6,8 @@
 
 **Unit question:** How does a sequence of four bases end up determining what a cell can actually do?
 
+**Anchoring phenomenon: Two people with the same rare condition carry changes in the same gene, but one has mild symptoms and the other severe ones.**
+
 **What you are aiming at:**
 
 - Explain mutation and its consequences using evidence, a model, or a documented process rather than an unsupported answer.

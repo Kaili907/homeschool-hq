@@ -6,6 +6,8 @@
 
 **Unit question:** Given real constraints and real trade-offs, what should actually be done?
 
+**Anchoring phenomenon: Two counties facing the same water shortage adopt opposite policies, and both can cite evidence.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of criteria, constraints, and prioritisation, or its stated alternative, and record the learner's own data with its uncertainty.

@@ -18,6 +18,16 @@ const HS_FAILED_BASE_COMMIT = 'f58f7f1eec0a0f93801df4978c00511ec98cc95e'
 /** H2 shipped student-visible defects H3 closed. A High School sheet built from it is stale. */
 const HS_SUPERSEDED_H2_COMMIT = '265ea3a75740ccbeea0dfa02c723514779def052'
 
+
+/** Protective items a lesson can require, named wherever the lesson names them. */
+const PROTECTIVE_EQUIPMENT = [
+  { id: 'eye protection', pattern: /\beye protection\b|\bsafety (?:glasses|goggles)\b/i },
+  { id: 'gloves', pattern: /\bgloves?\b/i },
+  { id: 'waterproof dressing', pattern: /\bwaterproof dressing\b/i },
+  { id: 'apron', pattern: /\bapron\b/i },
+  { id: 'dust mask', pattern: /\bdust mask\b/i },
+]
+
 /** Requirement text that would put a learner in front of a real hazard at home. */
 const UNSAFE_REQUIREMENT_PATTERNS = [
   { id: 'open-flame', pattern: /\b(open flame|bunsen|spirit burner|blowtorch|candle flame)\b/i },
@@ -1132,11 +1142,11 @@ export const CHECKS = [
       'Protective equipment a mitigation tells the learner to wear — eye protection, gloves, a waterproof dressing — is resolved onto that lesson’s materials list, so it is not assumed to be already at hand.',
     run({ packages }) {
       const problems = []
-      const PPE = [
-        { id: 'eye protection', named: /\beye protection\b|\bsafety (?:glasses|goggles)\b/i, listed: /\beye protection\b|\bsafety (?:glasses|goggles)\b/i },
-        { id: 'gloves', named: /\bgloves?\b/i, listed: /\bgloves?\b/i },
-        { id: 'waterproof dressing', named: /\bwaterproof dressing\b/i, listed: /\bwaterproof dressing\b/i },
-      ]
+      const PPE = PROTECTIVE_EQUIPMENT.map((item) => ({
+        id: item.id,
+        named: item.pattern,
+        listed: item.pattern,
+      }))
       let covered = 0
       for (const pkg of packages) {
         const hazards = pkg.safety_brief.hazards ?? []
@@ -1185,15 +1195,67 @@ export const CHECKS = [
             fail(problems, pkg, `${label} is not stated to the learner at all`)
             continue
           }
-          if (recorded !== learnerText) {
-            fail(problems, pkg, `${label} in the guardian record differs from what the learner reads`)
+          // The record may say more than the learner's line — it is the adult's
+          // only summary and the scoring sheet carries no materials list — but
+          // it may never say less.
+          if (!(recorded ?? '').includes(learnerText)) {
+            fail(problems, pkg, `${label} in the guardian record is narrower than what the learner reads`)
           }
-          if (!adultCopy.includes(learnerText)) {
+          if (!adultCopy.includes(recorded)) {
             fail(problems, pkg, `${label} missing from the scoring sheet`)
+          }
+        }
+        // …and it may not be narrower than the lesson either. An adult with no
+        // materials list has to be told every protective item the lesson names.
+        const surfaces = [
+          (pkg.materials ?? []).join(' '),
+          (pkg.safety_brief.hazards ?? []).map((hazard) => hazard.mitigation).join(' '),
+          (brief.safe_order ?? []).join(' '),
+        ].join(' \n')
+        for (const { id, pattern } of PROTECTIVE_EQUIPMENT) {
+          if (!unnegatedMatches(surfaces, pattern).length) continue
+          if (!pattern.test(record.required_ppe ?? '')) {
+            fail(problems, pkg, `lesson requires ${id}, which the guardian record does not name`)
           }
         }
       }
       if (covered === 0) problems.push('no hazard-bearing lesson found, so this check saw nothing')
+      return problems
+    },
+  },
+  {
+    id: 'no-path-states-what-will-be-observed',
+    description:
+      'No alternative path, extension, or instruction tells the learner what they will observe. Naming the quantity to measure is fine; naming the outcome is a supplied result, which every sheet’s footer denies this package prints.',
+    run({ packages, sheets }) {
+      const problems = []
+      // "observe cooling and warming" states an outcome; "observe the
+      // temperature" or "record what happens" states a quantity or a task.
+      const OUTCOME = /\b(?:to |and |will )?(?:observe|see|watch|note)\s+(?:the\s+)?(?:\w+\s+){0,2}(cooling|warming|heating|a rise|a fall|an increase|a decrease|it get (?:hot|cold|warm|cool)\w*)\b/i
+      for (const pkg of packages) {
+        const surfaces = [
+          ['equal-credit alternative', pkg.equal_credit_safe_alternative?.text ?? ''],
+          ['supplied-data alternative', pkg.supplied_data_alternative?.text ?? ''],
+          ['extension', (pkg.extension?.options ?? []).join(' ')],
+          ['instruction', pkg.instruction ?? ''],
+        ]
+        for (const [label, text] of surfaces) {
+          // The shared negation set counts "only" as excluding the risk, which is
+          // right for hazard text and wrong here: "use the mild salts only, to
+          // observe warming" still states the outcome. Scoped set for this class.
+          const OUTCOME_NEGATION = /\b(never|not|no|without|cannot|rather than|instead of)\b/i
+          const global = new RegExp(OUTCOME.source, 'gi')
+          for (const match of text.matchAll(global)) {
+            if (OUTCOME_NEGATION.test(sentenceAround(text, match.index))) continue
+            fail(problems, pkg, `${label} states what the learner will observe: "${match[0].trim()}"`)
+          }
+        }
+        // The footer's claim has to be true of the sheet it sits on.
+        const sheet = sheets.get(pkg.lesson_id) ?? ''
+        if (!/No observation, measurement, or expected result is supplied anywhere in this sheet/.test(sheet)) {
+          fail(problems, pkg, 'sheet does not carry the no-supplied-results statement it is held to')
+        }
+      }
       return problems
     },
   },

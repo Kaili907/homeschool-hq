@@ -1,5 +1,10 @@
 # Science — final student work packages (High School H3)
 
+> **Status: BLOCKED.** The corpus builds and covers all 972 lessons, and the production
+> quality gate passes, but the safety gate fails two checks on real defects in the pinned
+> High School source. See `reports/blockers.md`. Do not ship until B1–B3 are closed at the
+> source and this build is repinned.
+
 Student-ready work packages for every supported Science grade: **972 lessons across 9 courses**,
 grades 3, 4, 5, 7, 8 and High School Biology, Chemistry, Physics, and Earth/Space/Environmental
 Science.
@@ -109,7 +114,7 @@ node curriculum-production/student-work/science-final-h3/validation/mutation-tes
 node curriculum-production/student-work/science-final-h3/validation/verify-checksums.mjs
 ```
 
-- **`validate-safety.mjs`** runs 34 checks that re-derive their expectations from the pinned source
+- **`validate-safety.mjs`** runs 35 checks that re-derive their expectations from the pinned source
   blobs, the hand-authored correctness keys, and the rendered markdown, not from the packages' own
   assurance flags — a package cannot pass by asserting that it passes. Report:
   `reports/safety-gate.md`.

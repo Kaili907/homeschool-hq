@@ -6,6 +6,8 @@
 
 **Unit question:** How do we send information reliably using something we cannot see?
 
+**Anchoring phenomenon: A phone in a metal box loses signal completely, while the same phone behind a wooden door does not.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for wave-based technologies on a fresh task.

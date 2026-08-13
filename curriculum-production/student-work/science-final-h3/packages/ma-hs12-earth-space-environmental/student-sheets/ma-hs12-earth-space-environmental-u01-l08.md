@@ -6,6 +6,8 @@
 
 **Unit question:** How do we reason honestly about systems too large, too slow, or too far away to experiment on?
 
+**Anchoring phenomenon: Two published graphs of the same climate record look like they tell opposite stories, purely because of their axes.**
+
 **What you are aiming at:**
 
 - Explain spatial and temporal scale using evidence, a model, or a documented process rather than an unsupported answer.

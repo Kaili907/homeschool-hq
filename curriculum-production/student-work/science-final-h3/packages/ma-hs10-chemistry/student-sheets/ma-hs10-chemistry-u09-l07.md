@@ -6,6 +6,8 @@
 
 **Unit question:** What changes when the nucleus itself is rearranged, and how should a society weigh the trade-offs?
 
+**Anchoring phenomenon: A smoke detector contains a radioactive source, runs for a decade, and is safe to hold - while a comparable mass of the same isotope in another form would not be. SAFETY: the smoke detector in this unit is observed sealed and from the outside only - never cut, torn, punctured, bitten, dismantled, or opened, and the contents are never touched or tasted.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of nuclear composition and isotopes, or its stated alternative, and record the learner's own data with its uncertainty.

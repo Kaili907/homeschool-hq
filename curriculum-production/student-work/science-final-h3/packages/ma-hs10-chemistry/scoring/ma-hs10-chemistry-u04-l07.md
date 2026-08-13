@@ -140,7 +140,7 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Weigh the dry steel wool in a disposable tray on the scale - it never touches the scale surface, which stays in food use - then set it in a WIDE OPEN metal or ceramic dish. Never a bag, jar, box, or anything with a lid.
 - Leave the open dish undisturbed in a ventilated place away from paper, cloth, and anything that can burn, and re-weigh only once it is completely cool and dry.
 
-**Protective equipment:** Eye protection: required.
+**Protective equipment:** Eye protection: required. Also required by this lesson: gloves, waterproof dressing.
 
 **Disposal and clearing up:** NOTHING FROM THIS INVESTIGATION IS EVER SEALED. Leave the steel wool spread out in its open dish, well away from anything combustible, until it is completely cold and dry - normally overnight. Then rinse it under running water until the water runs clear, squeeze it out, and put it into the OUTDOOR waste bin still wet and cold, loose, never bagged and never with paper or a battery. If the dish is warm at any point, stop, leave the room ventilated, and wait. Pour the vinegar, baking-soda, and cabbage solutions down the drain with the tap running. Bin the disposable weighing tray; it never returns to food use.
 

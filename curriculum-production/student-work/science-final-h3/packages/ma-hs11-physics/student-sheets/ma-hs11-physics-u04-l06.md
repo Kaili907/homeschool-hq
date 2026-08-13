@@ -6,6 +6,8 @@
 
 **Unit question:** Why do gravity and the electric force follow the same mathematical shape while behaving so differently?
 
+**Anchoring phenomenon: A charged balloon lifts hair against the pull of the entire Earth.**
+
 **What you are aiming at:**
 
 - Explain predicting forces mathematically using evidence, a model, or a documented process rather than an unsupported answer.

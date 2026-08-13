@@ -6,6 +6,8 @@
 
 **Unit question:** If atoms are never created or destroyed, why does a reaction so often look like mass disappeared?
 
+**Anchoring phenomenon: Baking soda and vinegar in an open cup lose mass as they fizz; the same reaction in a sealed bag does not. SAFETY: a reacting, fermenting, oxidising, or warm mixture is never sealed in any container in any other lesson; the one sealed trial in this course is the Day 7 investigation, at the quantity that lesson fixes, flat on a tray, never held, with an adult beside you under its safety review.**
+
 **What you are aiming at:**
 
 - Explain balancing equations as bookkeeping using evidence, a model, or a documented process rather than an unsupported answer.

@@ -6,6 +6,8 @@
 
 **Unit question:** What actually sets the ceiling on a population, and what makes an ecosystem resilient when conditions change?
 
+**Anchoring phenomenon: An introduced species explodes for a decade, crashes, and then settles at a level nobody predicted.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of exponential and logistic growth, or its stated alternative, and record the learner's own data with its uncertainty.

@@ -131,6 +131,11 @@ set, and the check is amended to match — rather than the other way round.
 
 ## 4. What the H3 reconciliation changed here, and what it left alone
 
+> Three defects found by independent review during this reconciliation are **blockers**, not
+> gaps, and are written up in `reports/blockers.md`. Two of them fail the safety gate. They
+> are not listed here because a gap is something this package has decided to live with, and
+> these are not.
+
 This tree is the accepted production pipeline repinned from High School H2 (`265ea3a`) onto H3
 (`e7551b9`), so that no High School student sheet keeps shipping from the superseded safety source.
 What that required, and what it did **not** touch:

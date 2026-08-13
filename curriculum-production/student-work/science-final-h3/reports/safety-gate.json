@@ -1,10 +1,10 @@
 {
   "gate": "science student-work safety gate",
   "totalLessons": 972,
-  "checks": 34,
-  "passed": 34,
-  "failed": 0,
-  "status": "PASS",
+  "checks": 35,
+  "passed": 33,
+  "failed": 2,
+  "status": "FAIL",
   "results": [
     {
       "id": "no-prefilled-observations",
@@ -233,9 +233,12 @@
     {
       "id": "ppe-named-in-a-mitigation-is-on-the-materials-list",
       "description": "Protective equipment a mitigation tells the learner to wear — eye protection, gloves, a waterproof dressing — is resolved onto that lesson’s materials list, so it is not assumed to be already at hand.",
-      "status": "PASS",
-      "problemCount": 0,
-      "problems": []
+      "status": "FAIL",
+      "problemCount": 2,
+      "problems": [
+        "ma-hs12-earth-space-environmental-u05-l07: mitigation requires apron, which is on no materials list",
+        "ma-hs12-earth-space-environmental-u05-l09: mitigation requires apron, which is on no materials list"
+      ]
     },
     {
       "id": "guardian-record-names-safe-order-ppe-and-disposal",
@@ -243,6 +246,16 @@
       "status": "PASS",
       "problemCount": 0,
       "problems": []
+    },
+    {
+      "id": "no-path-states-what-will-be-observed",
+      "description": "No alternative path, extension, or instruction tells the learner what they will observe. Naming the quantity to measure is fine; naming the outcome is a supplied result, which every sheet’s footer denies this package prints.",
+      "status": "FAIL",
+      "problemCount": 2,
+      "problems": [
+        "ma-hs10-chemistry-u06-l07: equal-credit alternative states what the learner will observe: \"to observe cooling\"",
+        "ma-hs10-chemistry-u06-l09: equal-credit alternative states what the learner will observe: \"to observe cooling\""
+      ]
     }
   ]
 }

@@ -6,6 +6,8 @@
 
 **Unit question:** Why do gravity and the electric force follow the same mathematical shape while behaving so differently?
 
+**Anchoring phenomenon: A charged balloon lifts hair against the pull of the entire Earth.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of Newton's law of gravitation, or its stated alternative, and record the learner's own data with its uncertainty.

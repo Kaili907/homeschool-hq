@@ -6,6 +6,8 @@
 
 **Unit question:** How can rock that formed at the bottom of an ocean end up on a mountaintop?
 
+**Anchoring phenomenon: Identical fossil species appear on coastlines now separated by an entire ocean.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for convection in Earth's interior that a reader could check independently.

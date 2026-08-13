@@ -6,6 +6,8 @@
 
 **Unit question:** How do interacting systems at every scale from organelle to organism produce a functioning body?
 
+**Anchoring phenomenon: A cut on a finger closes over about a week, but a cut on the cornea can close in a day.**
+
 **What you are aiming at:**
 
 - Explain organelles as interacting subsystems using evidence, a model, or a documented process rather than an unsupported answer.

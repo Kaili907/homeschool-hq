@@ -6,6 +6,8 @@
 
 **Unit question:** How can a reaction be running hard in both directions and still look like nothing is happening?
 
+**Anchoring phenomenon: A sealed bottle of fizzy water looks perfectly still until the cap comes off. SAFETY: a closed carbonated bottle is a pressure vessel: it is never warmed above 40 degrees Celsius, never shaken while closed, and is opened slowly by an adult with the cap pointed away from every face.**
+
 **What you are aiming at:**
 
 - Explain shifting equilibrium by changing conditions using evidence, a model, or a documented process rather than an unsupported answer.

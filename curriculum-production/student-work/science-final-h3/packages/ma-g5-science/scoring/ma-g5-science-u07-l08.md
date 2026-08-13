@@ -110,7 +110,9 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Use household-safe materials only unless a qualified adult approves and supervises the investigation.
 - Wear appropriate eye/hand protection and stop for heat, sharp tools, unknown substances, fumes, spills, or allergic reactions.
 
-**Guardian visibility note:** Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
+**Guardian visibility note:** Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, voice recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.
+
+**Guardian acknowledgement:** Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
 
 **Protective equipment:** No protective equipment is needed for desk work. Eye and hand protection are required the moment heat, sharp tools, or an unknown substance is involved — and this lesson's alternative path avoids all three.
 

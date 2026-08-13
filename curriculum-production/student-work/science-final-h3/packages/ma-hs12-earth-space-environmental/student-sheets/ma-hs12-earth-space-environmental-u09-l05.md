@@ -6,6 +6,8 @@
 
 **Unit question:** Given real constraints and real trade-offs, what should actually be done?
 
+**Anchoring phenomenon: Two counties facing the same water shortage adopt opposite policies, and both can cite evidence.**
+
 **What you are aiming at:**
 
 - Explain sustainability and human population using evidence, a model, or a documented process rather than an unsupported answer.

@@ -6,6 +6,8 @@
 
 **Unit question:** What determines Earth's temperature, and how confident can a forecast honestly be?
 
+**Anchoring phenomenon: Two cities at the same latitude have average winter temperatures nearly twenty degrees apart.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of energy flow into and out of Earth systems, or its stated alternative, and record the learner's own data with its uncertainty.

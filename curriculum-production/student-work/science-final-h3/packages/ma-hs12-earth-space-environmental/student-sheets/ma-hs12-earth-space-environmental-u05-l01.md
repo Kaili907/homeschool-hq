@@ -6,6 +6,8 @@
 
 **Unit question:** How can rock that formed at the bottom of an ocean end up on a mountaintop?
 
+**Anchoring phenomenon: Identical fossil species appear on coastlines now separated by an entire ocean.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about evidence for plate motion without penalty, and pose a testable question.

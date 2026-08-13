@@ -6,6 +6,8 @@
 
 **Unit question:** What actually sets the ceiling on a population, and what makes an ecosystem resilient when conditions change?
 
+**Anchoring phenomenon: An introduced species explodes for a decade, crashes, and then settles at a level nobody predicted.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for interspecific interactions that a reader could check independently.

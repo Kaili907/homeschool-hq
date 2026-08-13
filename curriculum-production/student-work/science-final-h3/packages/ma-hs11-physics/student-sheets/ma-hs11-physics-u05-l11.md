@@ -6,6 +6,8 @@
 
 **Unit question:** If energy is always conserved, why does everything eventually stop?
 
+**Anchoring phenomenon: A bouncing ball returns to a lower height every bounce, yet nothing about it looks like it is losing anything.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for energy transfer and dissipation on a fresh task.

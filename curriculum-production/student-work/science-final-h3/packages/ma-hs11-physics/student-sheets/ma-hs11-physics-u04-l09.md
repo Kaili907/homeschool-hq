@@ -6,6 +6,8 @@
 
 **Unit question:** Why do gravity and the electric force follow the same mathematical shape while behaving so differently?
 
+**Anchoring phenomenon: A charged balloon lifts hair against the pull of the entire Earth.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for inverse-square relationships that a reader could check independently.

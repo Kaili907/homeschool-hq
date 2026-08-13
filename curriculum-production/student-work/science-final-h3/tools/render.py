@@ -293,6 +293,10 @@ def student_sheet(package: dict, shared: dict, floor: dict) -> str:
         "",
         f"**Unit question:** {package['essential_question']}",
         "",
+    ]
+    if package.get("unit_phenomenon"):
+        lines += [f"**{package['unit_phenomenon']}**", ""]
+    lines += [
         "**What you are aiming at:**",
         "",
         _bullets(package["learning_objectives"]),
@@ -491,6 +495,14 @@ def scoring_sheet(package: dict, shared: dict, floor: dict) -> str:
         ]
     if guardian.get("guardian_visibility_note"):
         lines += ["**Guardian visibility note:** " + guardian["guardian_visibility_note"], ""]
+    if (
+        guardian.get("guardian_acknowledgement")
+        and guardian["guardian_acknowledgement"] != guardian.get("guardian_visibility_note")
+    ):
+        lines += [
+            "**Guardian acknowledgement:** " + guardian["guardian_acknowledgement"],
+            "",
+        ]
 
     # The three things an adult has to know before the session starts, and which
     # the source's guardian note has no field for.

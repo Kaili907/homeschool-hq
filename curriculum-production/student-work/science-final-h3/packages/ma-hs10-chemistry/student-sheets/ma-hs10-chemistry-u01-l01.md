@@ -6,6 +6,8 @@
 
 **Unit question:** How do chemists decide what a measurement actually tells them, and how do we work safely with matter at home?
 
+**Anchoring phenomenon: Two people measure the same spoon of salt and get masses that differ by more than the salt they think they added.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about physical and chemical properties without penalty, and pose a testable question.

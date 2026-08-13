@@ -6,6 +6,8 @@
 
 **Unit question:** What observations force the conclusion that the universe has a history?
 
+**Anchoring phenomenon: Nearly every distant galaxy's light is shifted toward red, and the farther away it is, the more shifted it is.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of light spectra and redshift, or its stated alternative, and record the learner's own data with its uncertainty.

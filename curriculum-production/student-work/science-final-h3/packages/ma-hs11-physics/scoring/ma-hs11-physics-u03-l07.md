@@ -129,7 +129,7 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Clean and disinfect after every broken egg before the next trial begins.
 - Wash hands thoroughly after every trial, and never eat or drink in the work area.
 
-**Protective equipment:** Eye protection: not required.
+**Protective equipment:** Eye protection: not required. Also required by this lesson: gloves.
 
 **Disposal and clearing up:** Broken egg, shell, and any padding that touched raw egg go straight into a bin liner and into the bin - contaminated padding is never reused and never laundered with household washing. Wash the tray, tarp, and surfaces with hot soapy water and disinfect them. Bin the gloves and wash hands thoroughly before any food is handled.
 

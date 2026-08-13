@@ -6,6 +6,8 @@
 
 **Unit question:** How do living systems hold conditions steady while the world around them keeps changing?
 
+**Anchoring phenomenon: A house thermostat and a lizard on a rock both keep temperature within a range, but only one of them can be reprogrammed.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about setpoints and tolerance ranges without penalty, and pose a testable question.

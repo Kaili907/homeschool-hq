@@ -6,6 +6,8 @@
 
 **Unit question:** Where did the atoms in your body actually come from?
 
+**Anchoring phenomenon: The sun has been radiating enormous power for billions of years without burning out or collapsing.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of nuclear fusion in stellar cores, or its stated alternative, and record the learner's own data with its uncertainty.

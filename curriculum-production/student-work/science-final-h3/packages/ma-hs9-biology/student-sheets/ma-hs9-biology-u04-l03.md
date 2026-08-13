@@ -6,6 +6,8 @@
 
 **Unit question:** How do living systems hold conditions steady while the world around them keeps changing?
 
+**Anchoring phenomenon: A house thermostat and a lizard on a rock both keep temperature within a range, but only one of them can be reprogrammed.**
+
 **What you are aiming at:**
 
 - Explain positive feedback loops using evidence, a model, or a documented process rather than an unsupported answer.

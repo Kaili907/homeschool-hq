@@ -6,6 +6,8 @@
 
 **Unit question:** What lines of evidence support common ancestry, and how should we design a response when human activity threatens biodiversity?
 
+**Anchoring phenomenon: Antibiotic-resistant bacteria appear in hospitals within a few years of a new drug's release.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of multiple lines of evidence for common ancestry, or its stated alternative, and record the learner's own data with its uncertainty.

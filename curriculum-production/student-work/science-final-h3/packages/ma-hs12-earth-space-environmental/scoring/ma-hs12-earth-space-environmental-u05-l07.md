@@ -140,7 +140,7 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Add colouring with a dropper from the side, without moving the container.
 - Let the water cool before the container is emptied or moved.
 
-**Protective equipment:** Eye protection: not required.
+**Protective equipment:** Eye protection: not required. Also required by this lesson: apron.
 
 **Disposal and clearing up:** Pour the cooled coloured water down the drain with the tap running and rinse the container; wipe the tray and any stained surface immediately. A cracked container is wrapped in thick paper and tape before binning, never put in loose.
 

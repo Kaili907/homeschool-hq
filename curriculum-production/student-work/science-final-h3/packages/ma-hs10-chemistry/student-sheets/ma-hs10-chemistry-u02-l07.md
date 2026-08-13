@@ -6,6 +6,8 @@
 
 **Unit question:** Why does the periodic table predict how an element will behave before anyone tests it?
 
+**Anchoring phenomenon: Published footage shows sodium and potassium, neighbours in one column, reacting with water in strikingly similar ways while argon beside them does nothing at all. Neither metal is handled in this course. SAFETY: these metals react violently with water, are never handled or substituted for anywhere in this course, and the phenomenon is studied from published footage and recorded data only.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of subatomic structure and isotopes, or its stated alternative, and record the learner's own data with its uncertainty.

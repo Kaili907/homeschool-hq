@@ -6,6 +6,8 @@
 
 **Unit question:** How do we describe motion precisely enough that someone else can check us?
 
+**Anchoring phenomenon: A ball rolled down a ramp covers far more distance in its third second than its first, even though nothing pushes it.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about position, displacement, and reference frames without penalty, and pose a testable question.

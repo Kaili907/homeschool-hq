@@ -146,7 +146,7 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Work outdoors or over a large tray, cleaning spills immediately so no surface becomes slippery.
 - Keep hands away from the face throughout and wash them thoroughly before coming indoors.
 
-**Protective equipment:** Eye protection: not required.
+**Protective equipment:** Eye protection: not required. Also required by this lesson: gloves, waterproof dressing.
 
 **Disposal and clearing up:** Return the soil, sand, and gravel outdoors. Pour all muddy runoff outdoors onto ground, or through a strainer into an outdoor drain - NEVER down a kitchen or bathroom sink, where it blocks the trap. The trays, cups, measuring container, and gloves are washed outdoors, stay out of the kitchen, and never return to food use.
 

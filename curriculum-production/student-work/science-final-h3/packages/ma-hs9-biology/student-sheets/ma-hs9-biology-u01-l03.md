@@ -6,6 +6,8 @@
 
 **Unit question:** What counts as biological evidence, and how do the molecules of life make structure and function inseparable?
 
+**Anchoring phenomenon: Two apple slices, one left plain and one coated in lemon juice, brown at very different rates on the same counter.**
+
 **What you are aiming at:**
 
 - Explain carbon and macromolecule structure using evidence, a model, or a documented process rather than an unsupported answer.

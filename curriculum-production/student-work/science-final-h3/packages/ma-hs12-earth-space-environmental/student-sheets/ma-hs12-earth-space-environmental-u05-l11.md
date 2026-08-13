@@ -6,6 +6,8 @@
 
 **Unit question:** How can rock that formed at the bottom of an ocean end up on a mountaintop?
 
+**Anchoring phenomenon: Identical fossil species appear on coastlines now separated by an entire ocean.**
+
 **What you are aiming at:**
 
 - Demonstrate independent mastery evidence for radiometric dating and Earth's age on a fresh task.

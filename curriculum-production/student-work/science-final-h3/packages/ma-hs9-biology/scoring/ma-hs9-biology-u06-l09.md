@@ -140,7 +140,7 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Weigh by placing the sample in a disposable tray on the scale - the sample never touches the scale surface.
 - Open containers outdoors only, at arm's length, with the face turned away, and wash hands thoroughly before coming indoors.
 
-**Protective equipment:** Eye protection: not required.
+**Protective equipment:** Eye protection: not required. Also required by this lesson: gloves.
 
 **Disposal and clearing up:** Bag the containers and contents unopened and put them in the OUTDOOR waste bin. Do not compost indoors and do not empty anything into a food-waste caddy. The container is never sealed while it is decomposing - it is bagged only at the very end, for the outdoor bin. The containers, trays, and gloves are binned with them and never return to kitchen or food use.
 

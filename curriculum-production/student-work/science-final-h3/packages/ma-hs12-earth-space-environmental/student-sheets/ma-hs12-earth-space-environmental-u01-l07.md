@@ -6,6 +6,8 @@
 
 **Unit question:** How do we reason honestly about systems too large, too slow, or too far away to experiment on?
 
+**Anchoring phenomenon: Two published graphs of the same climate record look like they tell opposite stories, purely because of their axes.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of systems and system models, or its stated alternative, and record the learner's own data with its uncertainty.

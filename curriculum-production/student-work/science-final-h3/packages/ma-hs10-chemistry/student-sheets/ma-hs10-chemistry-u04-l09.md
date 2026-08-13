@@ -6,6 +6,8 @@
 
 **Unit question:** What is actually happening to electrons when one substance turns into another?
 
+**Anchoring phenomenon: Recorded mass and temperature data show steel wool left damp in air gaining mass and warming, while identical wool kept dry does not change. SAFETY: damp or warm finely divided iron self-heats as it oxidises and can start a fire, so it is never dampened, warmed, sealed, bagged, boxed, or binned outside the Day 7 investigation, which an adult runs beside you in a wide open dish under that lesson's safety review; on every other day this phenomenon is studied from recorded data only and no steel wool is handled.**
+
 **What you are aiming at:**
 
 - Produce performance-task evidence for outermost electron states in reactions that a reader could check independently.

@@ -247,9 +247,11 @@ ELEMENTARY_SAFETY_VARIANTS = {
         "because it is the wrong step.",
     "Never light, strike, or operate an open flame or a hob, burner, or pilot light for any investigation in this package; no lesson requires one.":
         "You never light anything for a lesson - no match, no lighter, no candle, no camping "
-        "stove - and you never turn on the cooker, the oven, or a burner for one either, even "
-        "with an adult there. If a step looks like it needs fire or heat from a flame, stop and "
-        "tell an adult, because it is the wrong step.",
+        "stove - and you never turn on or use a stove, oven, burner, or grill for one, even if "
+        "an adult already lit it and even if an adult is standing with you. Stay well back from "
+        "any pilot light or any flame that is already burning, on a stove, heater, water heater, "
+        "or fireplace. If a step looks like it needs fire, heat from a flame, a stove, or an "
+        "oven, stop and tell an adult, because it is the wrong step.",
     "Never cut, tear, puncture, or open a sealed commercial product - cold pack, hand warmer, glow stick, or smoke detector.":
         "Never cut or break open a sealed packet - a cold pack, a hand warmer, a glow stick, or a "
         "smoke alarm. What is inside can hurt you.",

@@ -6,6 +6,8 @@
 
 **Unit question:** What actually sets the ceiling on a population, and what makes an ecosystem resilient when conditions change?
 
+**Anchoring phenomenon: An introduced species explodes for a decade, crashes, and then settles at a level nobody predicted.**
+
 **What you are aiming at:**
 
 - Explain ecosystem resilience and disturbance using evidence, a model, or a documented process rather than an unsupported answer.

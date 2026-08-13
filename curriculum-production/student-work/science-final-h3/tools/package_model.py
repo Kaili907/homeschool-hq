@@ -684,13 +684,13 @@ def build_instruction(lesson: dict, unit: dict) -> str:
         "You have met the target when: " + " ".join(lesson["success_criteria"]),
         "The work itself: " + lesson["student_activity"],
     ]
-    phenomenon = _unit_phenomenon(unit)
+    phenomenon = unit_phenomenon(unit)
     if phenomenon:
         parts.insert(1, phenomenon)
     return "\n".join(parts)
 
 
-def _unit_phenomenon(unit: dict) -> str:
+def unit_phenomenon(unit: dict) -> str:
     for extension in unit.get("extensions", []):
         if extension.get("key") == "phenomenon":
             return extension["value"]["value"]

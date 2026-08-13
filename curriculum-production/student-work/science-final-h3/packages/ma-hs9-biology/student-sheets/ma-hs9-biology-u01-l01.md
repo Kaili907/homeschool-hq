@@ -6,6 +6,8 @@
 
 **Unit question:** What counts as biological evidence, and how do the molecules of life make structure and function inseparable?
 
+**Anchoring phenomenon: Two apple slices, one left plain and one coated in lemon juice, brown at very different rates on the same counter.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about biological scale and measurement without penalty, and pose a testable question.

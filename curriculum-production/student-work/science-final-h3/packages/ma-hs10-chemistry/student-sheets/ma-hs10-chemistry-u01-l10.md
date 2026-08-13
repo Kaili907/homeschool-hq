@@ -6,6 +6,8 @@
 
 **Unit question:** How do chemists decide what a measurement actually tells them, and how do we work safely with matter at home?
 
+**Anchoring phenomenon: Two people measure the same spoon of salt and get masses that differ by more than the salt they think they added.**
+
 **What you are aiming at:**
 
 - Explain density and derived quantities using evidence, a model, or a documented process rather than an unsupported answer.

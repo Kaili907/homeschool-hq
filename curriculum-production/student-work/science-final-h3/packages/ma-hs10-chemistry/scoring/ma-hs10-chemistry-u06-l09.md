@@ -138,7 +138,7 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Stir with the thermometer, not a finger, and read temperature only from the thermometer.
 - Stop at 50 degrees Celsius and let the solution stand untouched until it is cool.
 
-**Protective equipment:** Eye protection: required.
+**Protective equipment:** Eye protection: required. Also required by this lesson: gloves.
 
 **Disposal and clearing up:** Let every solution cool to room temperature in its OPEN cup before it is moved; never cap or store a warm solution. Pour cooled Epsom-salt, baking-soda, and vinegar solutions down the drain with the tap running. Dilute a cooled calcium chloride solution with plenty of cold water as it goes down the drain, then bin the disposable cups and stirrer that held it; they never return to food or drinking use. The cold pack and the hand warmer go into the household bin STILL SEALED - never opened, drained, or cut.
 

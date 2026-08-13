@@ -6,6 +6,8 @@
 
 **Unit question:** What is conserved in a collision, and how do we use that to keep people safe?
 
+**Anchoring phenomenon: An egg dropped onto a folded towel survives a fall that shatters it on bare tile.**
+
 **What you are aiming at:**
 
 - Observe the anchoring phenomenon, surface initial thinking about momentum as mass times velocity without penalty, and pose a testable question.

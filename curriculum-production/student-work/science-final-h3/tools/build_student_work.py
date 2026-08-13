@@ -31,6 +31,7 @@ from package_model import (  # noqa: E402
     build_instruction,
     build_remediation,
     is_data_bearing,
+    unit_phenomenon,
 )
 from safety_brief import brief_lines, build_hs_brief, build_k8_brief, resolve  # noqa: E402
 from safety_floor import build_safety_floor  # noqa: E402
@@ -364,6 +365,41 @@ def safety_completeness(
     return ("VERIFIED" if not problems else "GAP"), problems
 
 
+_PPE_TERMS = (
+    ("eye protection", re.compile(r"\beye protection\b|\bsafety (?:glasses|goggles)\b", re.I)),
+    ("gloves", re.compile(r"\bgloves?\b", re.I)),
+    ("waterproof dressing", re.compile(r"\bwaterproof dressing\b", re.I)),
+    ("apron", re.compile(r"\bapron\b", re.I)),
+    ("dust mask", re.compile(r"\bdust mask\b", re.I)),
+)
+
+
+def protective_equipment(lesson: dict, resolved_brief: dict) -> str:
+    """Every protective item this lesson names, not only the eye-protection position.
+
+    H3 resolved gloves and dressings onto the materials list but left the brief's
+    PPE line stating eye protection alone, so the one field an adult reads as the
+    PPE summary understated the lesson. This reads the materials, the mitigations,
+    and the safe order as well, so the summary cannot be narrower than the lesson.
+    """
+    stated = resolved_brief.get("required_ppe", "")
+    surfaces = " \n".join(
+        [
+            " ".join(lesson.get("materials", [])),
+            " ".join(hazard["mitigation"] for hazard in resolved_brief.get("hazards", [])),
+            " ".join(resolved_brief.get("safe_order", [])),
+        ]
+    )
+    extra = [
+        name
+        for name, pattern in _PPE_TERMS
+        if pattern.search(surfaces) and not pattern.search(stated)
+    ]
+    if not extra:
+        return stated
+    return f"{stated} Also required by this lesson: {', '.join(extra)}."
+
+
 def build_package(
     lesson: dict,
     course: dict,
@@ -412,10 +448,15 @@ def build_package(
     # see what the learner had been told to do first, wear, or bin. The record
     # carries all three, resolved exactly as the learner reads them.
     guardian_record["safe_order"] = list(resolved_brief.get("safe_order", []))
-    guardian_record["required_ppe"] = resolved_brief.get("required_ppe", "")
+    guardian_record["required_ppe"] = protective_equipment(lesson, resolved_brief)
     guardian_record["disposal_instruction"] = resolved_brief.get("disposal", "")
+    # Additive only. The source's own visibility note carries the privacy
+    # directive for grades 3-8 and must not be displaced by the acknowledgement.
     if resolved_brief.get("guardian_acknowledgement"):
-        guardian_record["guardian_visibility_note"] = resolved_brief["guardian_acknowledgement"]
+        guardian_record["guardian_acknowledgement"] = resolved_brief["guardian_acknowledgement"]
+        guardian_record.setdefault(
+            "guardian_visibility_note", resolved_brief["guardian_acknowledgement"]
+        )
     safety_status, safety_problems = safety_completeness(
         resolved_brief, guardian_record, course["band"]
     )
@@ -483,6 +524,11 @@ def build_package(
         "work_type": work_type,
         "data_bearing": data_bearing,
         "instruction": instruction,
+        # The unit phenomenon carries H3's student-visible SAFETY rule for any
+        # hazard-bearing material it names. It reached the machine record only,
+        # so the printed sheet asked for observations of a phenomenon it never
+        # stated, and the rule reached nobody who reads the sheet.
+        "unit_phenomenon": unit_phenomenon(lesson["unit"]),
         "safety_brief": brief,
         "data_sheet": data_sheet,
         "supplied_data_alternative": supplied,

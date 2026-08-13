@@ -6,6 +6,8 @@
 
 **Unit question:** Why does energy spread out on its own, and never gather itself back up?
 
+**Anchoring phenomenon: A metal spoon and a wooden spoon left in the same room feel like different temperatures to the hand.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of temperature versus thermal energy, or its stated alternative, and record the learner's own data with its uncertainty.

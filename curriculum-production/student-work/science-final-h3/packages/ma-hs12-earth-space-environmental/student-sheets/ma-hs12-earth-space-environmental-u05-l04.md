@@ -6,6 +6,8 @@
 
 **Unit question:** How can rock that formed at the bottom of an ocean end up on a mountaintop?
 
+**Anchoring phenomenon: Identical fossil species appear on coastlines now separated by an entire ocean.**
+
 **What you are aiming at:**
 
 - Explain continental and oceanic crust formation using evidence, a model, or a documented process rather than an unsupported answer.

@@ -122,7 +122,9 @@ _Reteaching never re-scores the alternative path lower, never requires the hands
 - Wear appropriate eye/hand protection and stop for heat, sharp tools, unknown substances, fumes, spills, or allergic reactions.
 - No photograph, video, or camera use is required at any point; a written or spoken description is always accepted.
 
-**Guardian visibility note:** Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
+**Guardian visibility note:** Share the lesson target, completion state, evidence type, and next instructional step. Do not expose raw private reflections, raw answers, voice recordings, or diagnosis language. For safety-critical tasks, record only the needed guardian confirmation.
+
+**Guardian acknowledgement:** Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
 
 **Protective equipment:** Wear eye protection and hand protection for any hands-on step. If you do not have them, run the alternative path instead; it needs no protective equipment and earns the same credit.
 

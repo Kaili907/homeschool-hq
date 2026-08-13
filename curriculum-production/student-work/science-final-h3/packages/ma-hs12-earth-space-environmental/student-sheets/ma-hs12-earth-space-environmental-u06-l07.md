@@ -6,6 +6,8 @@
 
 **Unit question:** How does one change to Earth's surface end up changing systems far away from it?
 
+**Anchoring phenomenon: Removing vegetation from a hillside changes the temperature, the water table, and the air quality of a valley kilometres downstream.**
+
 **What you are aiming at:**
 
 - Plan and carry out a safe investigation of weathering and erosion, or its stated alternative, and record the learner's own data with its uncertainty.
