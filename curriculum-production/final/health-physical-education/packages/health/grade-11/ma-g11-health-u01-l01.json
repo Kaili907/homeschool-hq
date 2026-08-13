@@ -16,14 +16,18 @@
     "course-supplied fictional product and service descriptions",
     "guardian-approved reference sources"
   ],
-  "keyPoints": [],
+  "keyPoints": [
+    "An anecdote describes one experience, an observation detects a pattern, a controlled trial compares outcomes, and a systematic review synthesizes studies; each supports different claims.",
+    "Check authorship, expertise, evidence, currency, uncertainty, and incentive before using a health message; confidence, popularity, and testimonials are not substitutes for support.",
+    "For evidence hierarchy in plain language: anecdote, observation, trial, review, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support."
+  ],
   "privacySafeScenario": "Produce a consumer-grade evaluation of three fictional health products or services, ranking them on evidence, safety, cost, and accountability, and stating the one piece of missing information that would change the ranking.",
-  "studentTask": "Learner applies evidence hierarchy in plain language: anecdote, observation, trial, review to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
-  "knowledgeCheck": "In one concise response, show or explain the most important idea about evidence hierarchy in plain language: anecdote, observation, trial, review, then name one check that would catch a weak claim or an unsafe step.",
+  "studentTask": "Compare two supplied fictional messages about evidence hierarchy in plain language: anecdote, observation, trial, review. Build a four-row check for source or author, evidence, date or context, and incentive; then choose the stronger message, cite two details, and state what remains uncertain.",
+  "knowledgeCheck": "In two or three sentences, explain the most important distinction in evidence hierarchy in plain language: anecdote, observation, trial, review; use one lesson fact and name the evidence, safety check, or support route that makes the explanation dependable.",
   "completionCriteria": [
-    "The learner completes the central task about evidence hierarchy in plain language: anecdote, observation, trial, review without being asked for any private disclosure.",
-    "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
-    "The learner checks or revises the work and can identify a next step."
+    "The response completes every named part of the evidence hierarchy in plain language: anecdote, observation, trial, review task using the supplied fictional or public case.",
+    "The response uses at least two accurate details from the lesson instruction and distinguishes evidence from assumption.",
+    "The response gives a safe, feasible next step or support route and does not depend on private disclosure, body comparison, or recorded media proof."
   ],
   "adaptationChoices": "Evaluations may be written, tabled, dictated, or completed against a supplied criteria rubric with a reduced item count.",
   "extensionChallenge": "Apply evidence hierarchy in plain language: anecdote, observation, trial, review under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
@@ -53,6 +57,10 @@
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
     "sourceLessonId": "ma-g11-health-u01-l01"
+  },
+  "contentProvenance": {
+    "repairLane": "mac/health-content-repair-r1",
+    "objective": "Explain evidence hierarchy in plain language: anecdote, observation, trial, review accurately using current, reliable health information rather than assumption or anecdote."
   },
   "productionReadiness": {
     "status": "READY",

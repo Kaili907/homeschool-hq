@@ -8,6 +8,7 @@
     "grade3PeAndGrade4": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
     "canonical578": "shared base@656efba (curriculum-content/manuel-academy/1.0.0, grades 5, 7, 8)",
     "hs912": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
+    "healthContentRepair": "mac/health-content-repair-r1 (objective-specific instruction and learner work for Health grades 5 and 7-12)",
     "productionGate": "mac/curriculum-production-gate-h3@49b3c4b86cc7764627bd4cfbd752222849831abf",
     "excluded": "grade 6 — no curriculum authored for it yet (see src/curriculum/grade-authority)"
   },
@@ -28,6 +29,14 @@
     "violationCount": 0,
     "violations": []
   },
+  "healthContentRepair": {
+    "lessonsInScope": 324,
+    "lessonsRepaired": 252,
+    "meaningfulInstructionLessons": 324,
+    "actionableSafeTaskLessons": 324,
+    "placeholderInstructionalLessons": 0,
+    "evidence": "reports/health-content-repair-r1.json"
+  },
   "scoringPolicy": {
     "gateSemantics": "H3",
     "judgmentWorkAuthority": "RUBRIC",
@@ -37,7 +46,7 @@
     "algorithm": "SHA-256",
     "file": "SHA256SUMS.txt",
     "scope": "every corpus file except SHA256SUMS.txt itself",
-    "entries": 2874
+    "entries": 2877
   },
   "byGrade": [
     {

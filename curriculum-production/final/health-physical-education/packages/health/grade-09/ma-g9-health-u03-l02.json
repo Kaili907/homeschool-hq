@@ -16,14 +16,18 @@
     "optional CPR manikin or training kit if the family has one",
     "household emergency contact information"
   ],
-  "keyPoints": [],
+  "keyPoints": [
+    "CPR supports circulation and an AED analyzes heart rhythm and may deliver a shock; awareness is not certification, so learners should use current hands-on training and dispatcher guidance.",
+    "Classify urgency from observable facts, protect scene safety, activate trained help, and stay within current training rather than attempting an unsafe rescue.",
+    "For CPR and AED awareness: what they are, when they are used, and how to get trained, a strong response distinguishes fact from assumption, uses a fictional or public case, and includes a safe next step or appropriate source of support."
+  ],
   "privacySafeScenario": "Produce an emergency-readiness brief for one fictional setting: hazards present, prevention steps, the first three actions in an incident, and who is called. Skills are described and rehearsed verbally or on a manikin if the family has one; no certification is claimed by this course.",
-  "studentTask": "Learner applies CPR and AED awareness: what they are, when they are used, and how to get trained to a new fictional scenario and records the response with the reasoning, evidence, or decision process behind it.",
-  "knowledgeCheck": "In one concise response, show or explain the most important idea about CPR and AED awareness: what they are, when they are used, and how to get trained, then name one check that would catch a weak claim or an unsafe step.",
+  "studentTask": "Read three supplied fictional situations about CPR and AED awareness: what they are, when they are used, and how to get trained. For each, mark routine, urgent, or emergency; list the first safe action, the trained help to contact, and one action a bystander should avoid. Support each classification with a fact from the lesson.",
+  "knowledgeCheck": "In two or three sentences, explain the most important distinction in CPR and AED awareness: what they are, when they are used, and how to get trained; use one lesson fact and name the evidence, safety check, or support route that makes the explanation dependable.",
   "completionCriteria": [
-    "The learner completes the central task about CPR and AED awareness: what they are, when they are used, and how to get trained without being asked for any private disclosure.",
-    "The learner gives evidence, reasoning, a documented process, or a cited source rather than an unsupported claim.",
-    "The learner checks or revises the work and can identify a next step."
+    "The response completes every named part of the CPR and AED awareness: what they are, when they are used, and how to get trained task using the supplied fictional or public case.",
+    "The response uses at least two accurate details from the lesson instruction and distinguishes evidence from assumption.",
+    "The response gives a safe, feasible next step or support route and does not depend on private disclosure, body comparison, or recorded media proof."
   ],
   "adaptationChoices": "Every response step may be described, sequenced, or narrated rather than physically performed. A learner who cannot perform compressions plans and rehearses the call, scene-safety, AED-retrieval, and hand-off roles instead, which are full contributions and are scored as such.",
   "extensionChallenge": "Apply CPR and AED awareness: what they are, when they are used, and how to get trained under a new constraint, compare two approaches, or explain the idea to someone else with an original fictional example, without completing another learner's graded work.",
@@ -53,6 +57,10 @@
   "sourceProvenance": {
     "sourceBranch": "mac/hs912-health-pe-r1@e39e2b343c41a1a800825651159e0e962d5288d7",
     "sourceLessonId": "ma-g9-health-u03-l02"
+  },
+  "contentProvenance": {
+    "repairLane": "mac/health-content-repair-r1",
+    "objective": "Explain CPR and AED awareness: what they are, when they are used, and how to get trained accurately using current, reliable health information rather than assumption or anecdote."
   },
   "productionReadiness": {
     "status": "READY",
