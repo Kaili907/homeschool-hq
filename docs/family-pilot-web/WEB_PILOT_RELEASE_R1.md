@@ -63,8 +63,12 @@ All commands ran at the tested release source SHA unless identified as an unchan
 | Bundle/browser-safety subset | PASS; 4 files, 47 tests |
 | Enabled production-preview Playwright suite | PASS; 4 tests |
 | Default-off production-preview Playwright suite | PASS; 1 test |
+| `npm audit --omit=dev` | PASS; 0 runtime vulnerabilities |
+| Full locked-toolchain `npm audit` | 3 high development/test-tool advisories: direct `@playwright/test`, transitive `playwright` and `nanoid`; fixes available |
 
 The first standalone launch-audit attempt in the clean checkout stopped on the expected missing generated browser manifest. The normal build generated the manifest and lazy payloads; the post-build audit then passed. This was a command-order correction, not a release defect.
+
+The development-tool advisories do not enter the published Vite bundle. They are recorded for a separate dependency-maintenance change; this controlled release does not rewrite the audited lockfile.
 
 ## Browser and storage proof
 
