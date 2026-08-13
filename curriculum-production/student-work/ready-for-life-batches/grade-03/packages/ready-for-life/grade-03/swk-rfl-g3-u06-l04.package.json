@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u06-l04",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Helper Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: doing the helper job"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 6 — family contribution capstone"
+  ],
+  "objective": "With guardian permission granted beforehand, learners carry out their chosen helper job in the exact order listed on their marked-up step list from day three, gathering every material first, then completing each step in sequence and pausing at every step labeled 'adult right there' until the supervising adult is physically present before continuing.",
+  "scenario": "After a guardian has reviewed the step list and supervision labels from day three and given permission to begin, the learner gathers the materials on their list in one spot, then works through the job's steps in order in the actual room where the job happens, following each step's label exactly — adult right there, adult checking in, or learner alone — rather than skipping ahead to an easier step.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The supervising guardian confirms, before the job starts, that the specific job chosen does not involve heat, a sharp tool, or a chemical cleaner unless an adult is directly present for that exact step, matching the labels set on day three.",
+    "The learner does not begin any step labeled 'adult right there' until the supervising adult is physically in the room.",
+    "If the job requires leaving the immediate area, such as a different room, the guardian decides in advance whether that step needs direct supervision or can stay labeled 'learner alone.'"
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the specific planned job cannot happen this week because the room, materials, or guardian availability is not ready, the learner instead carries out a smaller substitute job of the same type and the same category of steps and materials, such as wiping one shelf instead of a whole counter, following the same step-list-and-supervision-label method for equal credit."
+  },
+  "materials": [
+    "the marked-up step list from the previous lesson",
+    "the specific materials named on the learner's own materials list",
+    "a supervising guardian"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before starting, confirm permission with your guardian and gather every material on your list in one spot.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "With your guardian, confirm permission is given for today and name the room where your job will happen."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Work through your step list in order, in the room where the job happens, following each step's supervision label exactly.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I gathered every material on my list before starting the first step."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I completed the steps in the same order they appear on my list."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "For every step labeled 'adult right there,' I waited until my guardian was actually present before doing that step."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I did not skip any step on my list, even a small one."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Finish the job by completing the ending step from your plan, the step that shows the job is done, such as putting a tool away or checking the result.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe exactly what you did for your ending step, and state whether the finished job matches what you pictured when you first planned it."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about how the actual job compared to your written plan.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one specific moment during the job when something happened differently than your plan said it would, and describe what you did about it in the moment."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner skips ahead to a 'learner alone' step before finishing an earlier 'adult right there' step, reteach by covering the step list with a blank sheet except the current step, revealing one step at a time so the learner cannot see or jump to a later step until the current one and its supervision label are addressed.",
+  "extension": "Have the learner time how long the actual job took from first material gathered to the ending step, compare that time to their day-one estimate, and write one sentence about what made the real job faster or slower than expected.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u06-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u06-l04",
+    "authoredBy": "manual"
+  }
+}

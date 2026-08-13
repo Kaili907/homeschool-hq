@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u06-l01",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Helper Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: choosing a helper job"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 6 — family contribution capstone"
+  ],
+  "objective": "Learners review a list of six ordinary household helper jobs — wiping down a table or counter, sweeping a small floor area, sorting a stack of mail or papers, folding a small stack of towels, straightening one shelf or drawer, and matching a basket of loose socks — rate each job on roughly how many steps it takes and whether an adult would need to be nearby, then commit in writing to one specific job they will plan, prepare for, and carry out across the rest of this unit.",
+  "scenario": "Before any cleaning or sorting happens, the learner sits down with a written list of six ordinary jobs that exist in almost any home and a blank sheet of paper. For each job, the learner asks two questions — about how many steps does this take, and would an adult need to be nearby for any part of it — and jots a quick answer, before circling exactly one job as the pick for this unit's family helper project.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a written or printed list of six household helper job options",
+    "paper and a pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before picking anything, read through the full list of six job options once without deciding yet.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one job from the list that you have never fully done before."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "For each of the six jobs, ask the two questions — about how many steps this takes and whether an adult would need to be nearby — and mark a quick answer before moving to the next job.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I read all six job options before ranking or picking any of them."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I estimated the number of steps for at least three different jobs, not just my favorite one."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I noted for each job whether an adult would need to be nearby for any part of it."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I picked exactly one job, not two, as my choice for this unit."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now that you have picked a job, test your choice against three questions on your own.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write your one chosen job, then answer: can it be finished in one sitting, does it use things already in your home, and is it something you have never fully finished before?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back to how you compared the six jobs before picking.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain the specific reason you picked this job over the other five options, based on something you noticed while comparing them, not just 'it seemed easiest.'"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner picks a job they cannot describe in any detail, such as naming it but not what it would involve, reteach by having them narrate out loud what the space looks like before the job and what it should look like after, one sentence at a time, before letting them finalize the pick.",
+  "extension": "Have the learner list two more household jobs not on the original six-job list that would also count as a family helper job, using the same two questions (steps and adult-nearby) to check that each one qualifies.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u06-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u06-l01",
+    "authoredBy": "manual"
+  }
+}

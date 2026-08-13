@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u05-l02",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Asking for Help",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: packing a bag ahead"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking"
+  ],
+  "objective": "Learners choose the specific items tomorrow's plan requires (a water bottle, a folder with any papers due back, a weather-based item such as a jacket or umbrella, and one activity item needed for a specific project or lesson) and pack a bag the night before, placing the packed bag by the exit door so morning does not require last-minute searching.",
+  "scenario": "The night before a lesson day, the learner checks tomorrow's written plan or a spoken reminder from an adult, gathers exactly what tomorrow requires into one bag rather than packing everything they own just in case, and sets the finished bag by the door used to leave the house.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "one bag or backpack",
+    "tomorrow's written or spoken plan",
+    "the specific items tomorrow's plan requires"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before packing, look closely at tomorrow's plan.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "List the three or four specific things tomorrow's plan says you will need."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Working from your list, gather each item one at a time and pack it directly into the bag before moving to the next item.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked tomorrow's plan before picking up a single item."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked the weather, or asked an adult about it, before choosing a weather-based item."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I placed each item directly into the bag, not set down next to it."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I set the packed bag by the exit door once every item was inside."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The next morning, before leaving, compare the packed bag to last night's list without adding anything from memory alone.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Compare the packed bag to your list from last night. Did you need to add anything this morning? If yes, name what was missing and why you think it was missed."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back over the packing process from list to bag by the door.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific item that was easy to forget in the past and what about tonight's process helped you remember to pack it this time."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner packs items for every activity they can imagine instead of only what tomorrow's specific plan requires, reteach with a two-column matching page pairing each plan item to exactly one bag item, so extra items have no matched column to go in.",
+  "extension": "Have the learner pack a bag ahead for a two-day plan, sorting on paper which items are needed both days versus needed on only one of the two days.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u05-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u05-l02",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u02-l04",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothes and Getting Ready",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: folding and hanging"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 2 — clothing care and readiness routines"
+  ],
+  "objective": "From a basket of clean, dry laundry, the learner separates items that should be folded (t-shirts and shorts) from items that wrinkle easily and should be hung (a button shirt or a dress), folds the flat items using a taught sleeves-in, half, half-again sequence, hangs the rest facing the same direction, and puts both groups away in their correct drawer or closet spot with a trusted adult checking the result afterward.",
+  "scenario": "A basket of clean, dry laundry sits on a table near the learner's dresser and closet. The learner sorts the basket into a fold group and a hang group, folds the fold group using the taught sequence, hangs the wrinkle-prone items on hangers facing the same way, and places both groups into their storage spot while a trusted adult is nearby to check the finished result.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "drawing",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner does not stand on a chair, stool, or shelf to reach a high closet rod; if a rod or shelf is out of reach, a trusted adult hangs or places that item instead.",
+    "A trusted adult stays nearby while a sliding or hinged closet door is open so it cannot swing or slide shut on the learner's fingers.",
+    "If a drawer sticks or is hard to open, the learner asks the trusted adult for help rather than forcing it."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real basket of clean laundry or a private drawer and closet are not available this week, the learner instead practices the fold sequence on two borrowed flat items, such as bath towels, and draws a labeled diagram showing exactly where a folded pile and a row of hung items would go in their storage spot."
+  },
+  "materials": [
+    "a basket of clean, dry laundry with both fold-type and hang-type items",
+    "hangers",
+    "a drawer or closet space",
+    "a trusted adult"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before folding or hanging anything, look through the whole basket.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Count how many items in the basket should be folded and how many should be hung, and name one item you were unsure about."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Fold every fold-type item using the taught sleeves-in, half, half-again sequence, then hang every wrinkle-prone item facing the same direction.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I laid each fold-type item flat and tucked the sleeves in before folding it in half, then in half again."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I hung every wrinkle-prone item with the buttons or zipper closed on the hanger."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I turned every hanger to face the same direction on the rod."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I did not stand on furniture to reach a high spot, and asked for help if something was out of reach."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Put both the folded pile and the hung items away in their correct storage spot.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe exactly which drawer or shelf the folded items went into and which part of the closet the hung items went into."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back over the folding and hanging you just finished.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one specific item that was tricky to fold or hang, and describe exactly what you changed to get it right."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner stuffs folded items into a drawer in a loose pile instead of a stack, causing them to wrinkle again right after folding, reteach by having the learner build the stack shortest item first and press each layer flat with a hand before adding the next one.",
+  "extension": "Have the learner apply the same fold sequence to a different flat item, such as a towel or pillowcase, and place it in its own storage spot.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u02-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u02-l04",
+    "authoredBy": "manual"
+  }
+}

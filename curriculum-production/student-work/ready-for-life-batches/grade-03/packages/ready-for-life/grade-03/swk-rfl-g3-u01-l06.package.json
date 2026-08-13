@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u01-l06",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Taking Care of My Own Space",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: finishing the whole job"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 1 — personal and shared space care"
+  ],
+  "objective": "Learners revisit one space they already tidied earlier this week and check it against four specific finishing steps that are often skipped — putting away the tool used, closing any drawers or lids that were opened, wiping the cleared surface, and removing any trash created during the job — correcting on the spot any step they find left undone.",
+  "scenario": "The learner returns to a space they already worked on earlier this week, such as their desk or a shelf, checks each of the four finishing steps by physically touching or pointing to the specific spot in question, fixes anything left undone, and then writes about exactly what they found.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "a space you already tidied earlier this week",
+    "the cleaning tool, bag, or bin you used then, if it is still nearby"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking, make a guess.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Guess which of the four finishing steps — putting away the tool, closing drawers or lids, wiping the surface, or removing trash — you think you skipped last time, and why you think that one."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Go back to the space and physically check each of the four finishing steps by touching or pointing to the specific spot in question.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked whether the tool I used last time, such as a rag, hamper, or bag, got put away or is still sitting out."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked whether every drawer, lid, or door I opened last time got closed."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I checked whether the surface I cleared last time still has dust, crumbs, or marks that need wiping."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I checked whether any trash from last time, such as wrappers, broken items, or scrap paper, is still sitting in the space instead of in the trash."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Think ahead to a space you have not worked on yet this week.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Pick a space you have not worked on yet this week, such as a different shelf or corner, and predict which one of the four finishing steps you are most likely to forget there, based on what you just found today."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the one finishing step you found undone today.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe the one specific finishing step you found undone today, exactly what it looked like before you fixed it, and what it looks like now."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner checks off all four steps as complete without physically re-checking each one, reteach by requiring the learner to touch or point to each specific spot in question, such as the tool's new location or the wiped surface, before that step can be marked complete.",
+  "extension": "Have the learner apply the same four-step finishing check to a space one week from now without being reminded, then compare in writing which of the four steps they remembered on their own versus which one they still needed to check against a written list.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u01-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u01-l06",
+    "authoredBy": "manual"
+  }
+}

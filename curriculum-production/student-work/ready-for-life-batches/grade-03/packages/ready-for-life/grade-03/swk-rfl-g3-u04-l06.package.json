@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u04-l06",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Fueling My Day",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: asking an adult about a signal"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+  ],
+  "objective": "Learners practice a three-part script, naming the signal, describing when it started, and stating what is needed, for telling a trusted adult about a body signal, then apply the script to a specific signal from earlier this week that they noticed but did not mention to anyone.",
+  "scenario": "The learner recalls one specific body signal noticed earlier this week that went unmentioned at the time, and practices saying a three-part script out loud, as if telling a trusted adult about that exact signal right now.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper and a pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Think back over the past several days and pick one signal you remember but did not mention out loud at the time.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the specific signal you noticed but did not mention, such as hunger, thirst, tiredness, needing a bathroom break, or feeling too hot or cold, and about when it happened."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Practice saying the three-part script out loud for the signal you named: name the signal, describe when it started, state what you need.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I said the signal's name first, for example, 'I feel thirsty.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I described when it started, for example, 'since we came inside.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I stated what I need, for example, 'can I get a drink of water.'"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I practiced saying all three parts in order without skipping one."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Pick a different signal than the one you just practiced.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the three-part script for a different signal than the one you practiced, choosing one you have not used yet: hunger, thirst, tiredness, bathroom need, or feeling too hot or cold."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the three parts of the script you just practiced.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe which of the three parts felt hardest, naming the signal, describing when it started, or stating what you need, and explain why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner skips straight to a request without naming the signal or when it started, such as saying only 'can I have a snack,' reteach with a fill-in-the-blank sentence frame that forces the three parts to appear in order before the sentence is considered complete.",
+  "extension": "Have the learner teach the three-part script to someone else by writing out an example conversation that uses all three parts for a brand-new signal.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u04-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u04-l06",
+    "authoredBy": "manual"
+  }
+}

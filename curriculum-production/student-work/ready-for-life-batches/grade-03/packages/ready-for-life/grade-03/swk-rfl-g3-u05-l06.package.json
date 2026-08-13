@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u05-l06",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Time, Belongings, and Asking for Help",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: repairing a forgotten job"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 5 — time, belongings, and help-seeking"
+  ],
+  "objective": "Learners identify one specific job or step from this week that they forgot or skipped entirely, such as a schedule block, a packed bag, or a returned item, complete that job now as a repair action, and design one concrete memory cue that will make it easier to remember next time, without treating the forgotten job as a sign of a character flaw.",
+  "scenario": "The learner looks back over the last few days and names one real job that did not get done on time, does that job now in full, then chooses and tests one concrete memory cue, such as a note by the door, an item moved to a visible spot, or a small checklist taped where the job actually happens.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "paper or a card for the memory cue",
+    "tape or a way to post the cue where the job happens"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before fixing anything, find the exact job that was forgotten.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the one specific job or step you forgot or skipped this week."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Describe the job factually, complete it fully, then design and place a memory cue where the job happens.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I described the forgotten job specifically and factually, not as 'I'm bad at remembering things.'"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I completed the forgotten job fully today."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I chose one concrete memory cue and placed it exactly where the job happens."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I tested the memory cue at least once today to see whether I noticed it."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without re-reading your notes, explain the memory cue using only what the cue itself shows, then check whether that matches your original plan.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Look at the memory cue by itself and explain what job it is supposed to remind you to do. Then say whether that matches the plan you wrote earlier."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the specific job and the specific cue you chose for it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe the specific forgotten job and the specific memory cue you chose, and explain why that particular cue fits the place where the job happens."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner labels themselves ('I'm forgetful,' 'I always mess this up') instead of naming the specific job, reteach by requiring one factual sentence about the job with no character words before any repair action or cue design is allowed to start.",
+  "extension": "Have the learner pick a second job that was forgotten in a different week and design a different memory cue for it, so cues stay matched to the specific job instead of one cue being reused everywhere.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u05-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u05-l06",
+    "authoredBy": "manual"
+  }
+}

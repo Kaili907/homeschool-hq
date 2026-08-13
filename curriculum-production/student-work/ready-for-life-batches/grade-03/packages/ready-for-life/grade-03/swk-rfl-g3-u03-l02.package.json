@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u03-l02",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Helper Safety",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: the kitchen reset"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 3 — kitchen helper safety and no-heat preparation"
+  ],
+  "objective": "Learners follow a modeled four-step 'kitchen reset' routine for getting a counter or table workspace ready before helping: clear the surface of anything not needed, wipe it with a clean cloth, set out only the exact items on a short written list, and finish with a look-only safety scan where the learner looks at, but never touches, the stove knobs and nearby appliances to notice whether each one appears off.",
+  "scenario": "A trusted adult writes a short list of three or four items needed for a planned task and the learner runs the kitchen reset at their own kitchen counter or table: returning clutter to its own spot, wiping the cleared surface with a cloth, laying out exactly the listed items, and finishing with a look-only scan where the learner looks at, without touching, the stove knobs and nearby appliances before calling the reset finished.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "The safety scan is look-only. The learner never touches a stove knob, appliance switch, or knife during this lesson, even just to check whether it is off.",
+    "If anything looks like it might still be on, or the learner is not sure, the correct move is to stop and ask a trusted adult to check — that asking counts as success."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "a clean cloth",
+    "a short written list of three or four items for a planned task",
+    "a kitchen counter or table"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look at your kitchen counter or table before you touch anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name two things sitting on the counter right now that do not belong there for this task."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Run the four-step kitchen reset in order: clear the surface, wipe it with a cloth, set out only the items on your list, and finish with a look-only safety scan: look at, but do not touch, the stove knobs and nearby appliances.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I moved every item that didn't belong on the counter back to its own spot."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I wiped the cleared surface with a clean cloth until it looked and felt clean."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I set out only the exact items on my list, nothing extra."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I looked at (without touching) the stove knobs and any nearby small appliance, and each one appeared off or unplugged, before I finished."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The next time you help in the kitchen this week, run the kitchen reset again without looking back at this sheet before you start.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the four kitchen-reset steps from memory, in order. Which step did you almost skip?"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the safety scan step specifically.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific thing you looked at during your safety scan, like a stove knob or an appliance, and explain why looking at it, without touching it, before starting matters."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner wipes the counter before clearing all the clutter off it, so crumbs and clutter just get pushed around instead of removed, reteach by having them remove every object first and set it in a hand-labeled 'put away' pile before the cloth ever touches the surface.",
+  "extension": "Have the learner run the kitchen reset on a different household surface, like a craft table before a project, adapting the same four steps (clear, wipe, gather exact items, a look-only safety scan) to a space where the thing to look at, never touch, might be an outlet or a pair of scissors instead of a stove.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u03-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u03-l02",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u02-l02",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothes and Getting Ready",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: sorting lights and darks"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 2 — clothing care and readiness routines"
+  ],
+  "objective": "Learners follow a modeled two-group color rule to sort ten clean clothing items — such as a white t-shirt, navy sweatpants, a red sock, a yellow shirt, and a black hoodie — into a light pile and a dark pile, and set aside any brand-new deep-colored item in a third 'might still bleed dye' spot instead of guessing which main pile it belongs in.",
+  "scenario": "Ten clean, dry clothing items of mixed colors are spread across a table or the floor. The learner picks up each item, names its color group out loud, and places it on the light pile, the dark pile, or the 'might still bleed dye' spot reserved for any item that is brand-new and deeply colored.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "ten clean clothing items of mixed colors",
+    "two laundry baskets or two clear floor spots",
+    "a small extra spot for a 'might still bleed dye' item"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting, look over all ten items spread out.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Predict which pile will end up bigger, the light pile or the dark pile, and say why."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort each item one at a time using the modeled color rule: white and pastel items go light, navy, black, and red items go dark, and any brand-new deeply colored item goes to the extra spot.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I placed every white or pastel-colored item on the light pile."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I placed every navy, black, or red item on the dark pile."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I set aside any brand-new deeply colored item on the extra spot instead of guessing."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I checked that all ten items ended up in exactly one of the three spots."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look at any item with more than one color, such as a gray shirt with a red logo.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe one item that had more than one color on it and explain exactly which pile you chose and why."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back over the sort you just finished.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one item you placed in a different pile than you expected before you started, and describe what changed your mind."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts by fabric type or item size instead of color, such as grouping all the socks together regardless of shade, reteach by holding a color swatch card next to each item and asking only 'is this closer to the light swatch or the dark swatch,' removing fabric and size from the decision entirely.",
+  "extension": "Have the learner sort a stack of bath towels and washcloths using the same light-dark rule, noticing whether the same colors that were tricky in clothing are also tricky in towels.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

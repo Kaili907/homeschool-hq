@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l01",
+  "lessonId": "ma-g3-ready-for-life-u01-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Zone survey accuracy",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Assigns a rating to a zone without naming any specific item found there."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Names at least three specific items to support the rating for all three zones."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Names specific items for all three zones and notices a pattern across zones, such as the same type of clutter showing up in more than one place."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about impact",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Gives a vague or generic reason, such as \"it's better,\" for why space care matters."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Gives one specific reason for self and one specific, different reason for someone else who shares the home."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Gives both specific reasons and connects them to the specific past incident described in the reflection."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The reflection response names a specific incident from the past week, not a general statement.",
+      "Ratings are supported by named items rather than a rating word alone."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

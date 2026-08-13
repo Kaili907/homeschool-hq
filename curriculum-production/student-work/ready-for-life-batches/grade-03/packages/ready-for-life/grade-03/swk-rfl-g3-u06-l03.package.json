@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u06-l03",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Family Helper Capstone",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: checking safety and supervision"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 6 — family contribution capstone"
+  ],
+  "objective": "Learners take their own step list from the previous lesson and check each step against three specific hazard categories — heat, a sharp tool, and a chemical cleaner — marking every step with one of three labels: adult right there, adult checking in partway through, or learner alone, so the plan is ready for a guardian's first look before any part of the job actually happens.",
+  "scenario": "Sitting with the step list from day two, the learner goes through it one step at a time and asks the same question for every step: does this step involve heat, a sharp tool, or a chemical cleaner, or does it happen somewhere no one else can see. The learner writes one of three labels next to each step, then shows the marked-up list to a guardian for a first look, without doing any part of the job itself yet.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This lesson is a planning discussion only; the learner does not use heat, sharp tools, or a chemical cleaner during this lesson.",
+    "If any step on the list is unclear, the safe choice is to label it 'adult right there' rather than guess, and that caution counts as success."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the step list from the previous lesson",
+    "a pencil or marker for labeling"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before marking anything, reread your step list from the previous lesson start to finish.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one step on your list that you are already fairly sure would need an adult nearby, and say why."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Go through your step list one step at a time and mark each step adult right there, adult checking in, or learner alone, based on whether it involves heat, a sharp tool, or a chemical cleaner.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked every step on my list, not just the ones that looked risky at first glance."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I used the three specific hazard checks (heat, sharp tool, chemical cleaner) instead of just guessing which steps felt risky."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I wrote one label (adult right there, adult checking in, or learner alone) next to every step."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I showed my marked-up list to a guardian and listened to anything they wanted to add or change."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without any more help, decide on one overall plan for supervision.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Looking at your marked-up list, write one sentence describing what kind of adult supervision your whole job will need overall, using your step labels as evidence."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about whether any step surprised you once you applied the checks.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Was there a step you first thought was safe alone but labeled differently after checking the three hazards? Describe the step and what changed your mind."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner marks every step 'learner alone' without applying the three specific hazard checks, reteach with two contrasting example steps side by side, one with a clear hazard and one without, and have the learner state out loud which of the three checks applies before marking either one.",
+  "extension": "Have the learner pick one step marked 'adult right there' and write a second, safer version of that same step that could be marked 'learner alone' instead, if a safer version exists.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u06-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u06-l03",
+    "authoredBy": "manual"
+  }
+}

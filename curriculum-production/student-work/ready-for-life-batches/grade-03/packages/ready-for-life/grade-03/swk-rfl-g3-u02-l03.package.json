@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u02-l03",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothes and Getting Ready",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: reading a care tag"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 2 — clothing care and readiness routines"
+  ],
+  "objective": "Using a printed care-symbol reference card, the learner locates the sewn-in care tag inside three real garments (for example a t-shirt, a sweater, and a pair of pants), finds the wash-temperature symbol, the drying symbol, and any special warning such as a bleach or iron caution on each one, and matches every symbol to its written meaning on the card.",
+  "scenario": "Three garments are laid on a table, each with its care tag flipped out and visible near the collar or side seam. The learner uses a printed care-symbol reference card to identify the wash-temperature symbol, the drying symbol, and any special warning symbol on each tag, one garment at a time.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "three garments with legible inside care tags",
+    "a printed care-symbol reference card or key"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Find the care tag on the first garment before opening the reference card.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Describe exactly where you found the care tag on the first garment (for example, inside the collar or along the side seam)."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using the reference card, work through each garment's tag in order, symbol by symbol.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I found the wash-temperature symbol on each garment's tag."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I found the drying symbol (tumble dry or line dry) on each garment's tag."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I checked for a special warning symbol, such as no bleach or no iron, on each garment's tag."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I matched every symbol I found to its written meaning on the reference card."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Set the reference card aside, then read the tag on a fourth garment.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Without looking at the reference card first, write down what you think the wash and dry symbols mean on a fourth garment's tag, then check the card once at the end to see how close you were."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back over the three garments you checked.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific care instruction that surprised you, such as a garment that must be washed only by hand or dried flat instead of in a dryer."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner reads the size tag or the brand tag instead of the care tag, since both are often stitched close together near the collar, reteach by pointing out the specific feature of a true care tag — a small block of symbols and a fabric-content list — and having the learner circle only that block on two garments before moving on.",
+  "extension": "Have the learner read the care tag on a bedsheet or pillowcase and compare its washing and drying instructions to the t-shirt's tag from this lesson.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

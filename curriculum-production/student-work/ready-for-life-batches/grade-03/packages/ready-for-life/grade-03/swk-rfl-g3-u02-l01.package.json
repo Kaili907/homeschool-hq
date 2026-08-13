@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u02-l01",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Clothes and Getting Ready",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: sorting clean from dirty"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 2 — clothing care and readiness routines"
+  ],
+  "objective": "Before any instruction, the learner gathers five or six items already worn this week (such as a gym shirt, jeans, socks, and a hoodie) and sorts each one into a 'clean enough to wear again' pile or a 'needs washing' pile using three specific checks: a visible stain, a strong smell near the collar or underarms, and how many times the item has been worn since it was last washed.",
+  "scenario": "The learner spreads a small pile of already-worn clothing across a bed or clear floor space, checks each item one at a time against the three specific tests, and places it into one of two labeled spots — a chair for 'clean enough' and a hamper or basket for 'needs washing' — before receiving any explicit teaching on the topic.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "five or six already-worn clothing items",
+    "a hamper, basket, or laundry bag",
+    "a chair or clear spot for the 'clean enough' pile"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before sorting anything, look at the whole pile of worn clothing.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Guess how many of the items will end up in the 'needs washing' pile, and name the one item you are most sure about."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Pick up each item one at a time and run all three checks before placing it in a pile.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I checked each item for a visible stain or spot before deciding."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I checked the collar and underarm area of each item for a strong smell."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I thought about how many times the item has been worn since its last wash."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I placed every item into exactly one of the two piles, not left in the middle."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Look back at the item that was hardest to decide about.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Name the one item that was hardest to sort, which pile you put it in, and the specific check that made you decide."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back over the whole sorting pile.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific item that looked clean at first glance but failed one of the three checks, or one that looked worn but actually passed all three."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sends an item to the 'needs washing' pile just because it was worn briefly and then taken off again, such as a shirt tried on for only a minute, reteach with a side-by-side example: hold that item next to one that was worn all day, and have the learner run the three checks on both to see the smell and stain tests, not time worn alone, decide the pile.",
+  "extension": "Have the learner apply the same three-check sort to the contents of a school backpack or gym bag, deciding which items inside need to go to the hamper and which can go back in the bag.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u02-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u02-l01",
+    "authoredBy": "manual"
+  }
+}

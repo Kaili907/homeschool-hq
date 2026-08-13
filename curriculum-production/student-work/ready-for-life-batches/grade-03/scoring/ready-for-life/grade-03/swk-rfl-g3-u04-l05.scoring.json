@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l05",
+  "lessonId": "ma-g3-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Routine awareness",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner cannot name any specific step of the bedtime routine."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names three specific steps of the routine in order."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner names three steps in order and explains what each step does to help the body settle."
+          }
+        ]
+      },
+      {
+        "dimension": "Signal recognition",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "No rest signal is named, or a number of hours is given instead of a body signal."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names one specific body signal that indicated readiness for rest, such as heavy eyelids, yawning, or stillness."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The learner names the signal and notices when it appeared relative to the start of the routine."
+          }
+        ]
+      },
+      {
+        "dimension": "Morning connection",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The morning description is vague, such as 'I feel fine,' with no link to the routine."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner names one specific way their body felt rested the next morning, without stating a number of hours."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner connects that feeling back to a specific step in the previous night's routine."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "No response states or implies a specific hour count, bedtime, or wake time as the measure of success.",
+      "No response compares this learner's routine or rest to another person's schedule.",
+      "The guardian confirmation names the routine that was observed, not a judgment of how well the learner slept."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

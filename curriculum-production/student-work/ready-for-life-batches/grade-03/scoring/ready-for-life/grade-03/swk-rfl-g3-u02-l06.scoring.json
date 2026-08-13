@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u02-l06",
+  "lessonId": "ma-g3-ready-for-life-u02-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Depth of the check",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Reports the spot as fine after only a quick glance at the top layer, without lifting or moving anything."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Checks layer by layer and finds at least two specific errors in the storage spot."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Checks layer by layer, finds at least two specific errors, and also checks a second storage spot unprompted."
+          }
+        ]
+      },
+      {
+        "dimension": "Correction quality",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Names an error but leaves it unfixed, or the fix does not actually resolve the specific problem described."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Both named errors are corrected, and the spot is checked again afterward."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Both errors are corrected, and the learner explains why the harder-to-notice error was easy to miss."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each named error is specific (a named item and what was wrong with it), not a vague 'it was messy.'",
+      "The reflection response distinguishes the easy-to-notice error from the hard-to-notice one with a clear reason."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

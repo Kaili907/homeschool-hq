@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u03-l03",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Helper Safety",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: keeping raw food separate"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 3 — kitchen helper safety and no-heat preparation"
+  ],
+  "objective": "Using eight picture cards showing common raw foods (raw chicken, raw eggs, raw ground beef, raw fish) and ready-to-eat foods (a washed apple, sliced bread, cooked pasta, yogurt), learners sort the cards into two labeled piles and explain the specific rule for why raw and ready-to-eat foods must stay apart: no shared cutting board or plate, and hands get washed after touching anything raw.",
+  "scenario": "A trusted adult prints or hand-draws eight picture cards, four raw foods and four ready-to-eat foods, and spreads them face-up on a table. The learner sorts each card into a 'raw' pile or a 'ready-to-eat' pile, states the specific reason a raw card and a ready-to-eat card cannot touch or share a cutting board, and arranges two sheets of paper as pretend plates to show which foods could safely sit together.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This activity uses pictures or drawings only; the learner does not handle real raw food during this lesson.",
+    "Always ask a trusted adult before touching any real raw food, even just to look at it closely."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "eight picture cards or drawings of foods (four raw, four ready-to-eat)",
+    "two sheets of paper to use as pretend plates"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look at all eight picture cards before sorting.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Pick two cards. Guess which pile you think each one belongs in and say why."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort all eight cards into a 'raw' pile and a 'ready-to-eat' pile, stating a reason for each card as you go, then arrange the two paper plates to show which foods could safely sit together.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted all eight cards into a 'raw' pile and a 'ready-to-eat' pile."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I stated a specific reason for at least three of the cards, not just a guess."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I explained why a raw-food card and a ready-to-eat card should not share the same cutting board or plate."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I named washing hands after touching a raw-food card as part of keeping foods separate."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Your adult names three new foods out loud that were not on your original cards. Without any cards in front of you, say which pile each one belongs in and why, then write your answers.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write the three new foods your adult named and which pile, raw or ready-to-eat, each one belongs in."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about a specific mix-up that could happen at a real counter.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Describe one specific way raw and ready-to-eat food could accidentally touch on a counter, like dripping juices or a reused plate, and what a kitchen helper should do instead."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts by food type, like meat versus fruit, instead of raw versus ready-to-eat, reteach with a matched pair such as a raw egg card and a cooked egg card, the same food in two states, so the learner has to sort by whether it is safe to eat right now rather than by category.",
+  "extension": "Have the learner look at a real, closed refrigerator or a picture of a fridge shelf and describe, using the same raw-versus-ready-to-eat rule, whether the shelf arrangement looks safe or which item should be moved to a different spot.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

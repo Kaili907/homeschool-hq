@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u03-l05",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Kitchen Helper Safety",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: a simple no-heat snack"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 3 — kitchen helper safety and no-heat preparation"
+  ],
+  "objective": "Learners plan and independently assemble one simple no-heat snack, such as a piece of fruit with nut butter, cheese with whole-grain crackers, or a yogurt bowl with washed berries, using only cold or room-temperature ingredients and no stove, oven, or sharp chef's knife, while a trusted adult supervises the entire process.",
+  "scenario": "With a trusted adult present in the kitchen the whole time, the learner picks one no-heat snack from two or three adult-approved options, washes their hands, gathers the exact ingredients along with a butter knife or spoon, assembles the snack step by step on a clean plate, and wipes the counter when finished.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "A trusted adult stays in the kitchen for the entire snack-assembly process, from gathering ingredients to wiping the counter.",
+    "The learner uses only a butter knife or spoon; any sharp chef's knife, the stove, the oven, and small appliances stay off-limits and are handled only by the adult if they are needed at all.",
+    "The learner washes hands before starting and keeps any unwashed raw ingredient, like an unwashed piece of fruit, away from ingredients that are already ready to eat."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If independent ingredient access is not available, the adult washes and pre-sets out all ingredients in separate small bowls, and the learner instead plans the snack on paper by drawing or listing the assembly order, then assembles the snack only from the pre-set bowls with the adult handing each bowl over one at a time."
+  },
+  "materials": [
+    "cold or room-temperature snack ingredients (adult-approved)",
+    "a butter knife or spoon",
+    "a clean plate",
+    "a clean cloth for wiping the counter"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before touching any ingredient, look at the two or three snack options your adult offers and pick one.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name the snack you picked and list the ingredients it needs."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Before assembling, wash your hands, gather only the ingredients and tools your snack needs, and check that no sharp knife, stove, or appliance is part of your plan.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I washed my hands before touching any ingredient."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I used only cold or room-temperature ingredients and did not turn on the stove, oven, or any appliance."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I used only a butter knife or a spoon, not a sharp chef's knife."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I kept any unwashed raw ingredient away from ingredients that were already ready to eat until it was washed."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "With your adult watching the whole time, assemble your chosen snack from start to finish on a clean plate, then wipe the counter when you are done.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe the order you assembled your snack in, step by step, from the first ingredient to the last."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the whole process, not just the eating part.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name one specific step where you had to be extra careful and explain what you did to stay safe during that step."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner reaches for a sharp chef's knife or tries to turn on the stove out of habit from watching an adult cook, reteach by having the adult set out only the safe tools, a butter knife and a spoon, in advance, with no sharp or heat-producing tool anywhere on the counter, so the only tools within reach are the correct ones.",
+  "extension": "Have the learner plan and assemble a second no-heat snack later in the week using a different combination of ingredients, this time writing their own ingredient list and step order before an adult approves it, instead of choosing from a list an adult already wrote.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l01",
+  "lessonId": "ma-g3-ready-for-life-u04-l01",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Signal noticing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Tallies land in fewer than two of the four boxes across the whole day."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Tallies land in at least three of the four boxes across the day."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Tallies land in all four boxes, spread across different parts of the day rather than clustered together."
+          }
+        ]
+      },
+      {
+        "dimension": "Neutral naming",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Signals are described with mood words, such as grumpy or bored, instead of the four neutral signal names."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The four neutral signal names are used consistently for every tally."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Neutral signal names are used consistently, and the learner notes the specific activity happening right before each signal."
+          }
+        ]
+      },
+      {
+        "dimension": "Reflection specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The reflection describes a vague feeling without naming a specific signal or moment."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The reflection names a specific signal and the activity happening right before it."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The reflection names a specific signal and activity, and compares that moment to a different moment from later in the day."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Tally marks are made close to the moment the signal happened, not reconstructed from memory at day's end.",
+      "No tally is judged as good or bad timing; the record simply notes that the signal happened."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

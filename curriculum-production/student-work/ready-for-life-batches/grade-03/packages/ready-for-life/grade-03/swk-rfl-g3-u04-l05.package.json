@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u04-l05",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Fueling My Day",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: sleep and rest as fuel"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+  ],
+  "objective": "With a guardian confirming, learners follow their household's usual bedtime routine for one night, naming three specific steps of that routine in order and one body signal that showed their body was ready for rest, so they connect a consistent routine to feeling rested the next morning.",
+  "scenario": "On a regular night, the learner walks through their own household's bedtime routine with a guardian nearby, naming each step out loud as it happens, and the next morning describes how rested their body felt without comparing to a number of hours or to anyone else's schedule.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": [
+      "checklist",
+      "planning page",
+      "learner explanation",
+      "guardian confirmation"
+    ],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This is not a numeric or comparative sleep score; no specific number of hours is required or recorded.",
+    "Bedtime routines look different in every household; there is no single correct routine or wake-up time.",
+    "If a night's schedule does not allow the routine to be observed, use the written or drawn reflection alternative instead."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If the routine cannot be observed on a given night, the learner instead writes or draws a description of a typical bedtime routine from memory, naming the same three steps and the same rest signal, for equal credit."
+  },
+  "materials": [
+    "paper and a pencil for notes"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before bedtime, think about what you already do most nights.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one step you already do most nights before sleeping, such as brushing teeth, reading, or turning off lights."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Walk through your bedtime routine tonight, naming each step out loud as you do it, with your guardian nearby to confirm.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I named each step of my bedtime routine out loud as I did it."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I named one signal that told me my body was ready for rest, such as heavy eyelids, yawning, or feeling still."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I did not compare my bedtime or wake-up time to anyone else's schedule."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "My guardian confirmed the routine happened."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "The next morning, think about how your body felt as you woke up.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe one specific way you could tell your body had rested, such as waking up without being shaken awake, feeling ready to get up, or not feeling foggy, without naming a number of hours."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think back over the steps of your bedtime routine from last night.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Think about one step in your bedtime routine that seemed to help your body settle down the most. Describe that step and why you think it helped."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner tries to measure rest only by a number of hours or by comparing to another person's schedule, reteach by covering the clock entirely and having the learner name only body signals, such as heavy eyelids or yawning, before any time is discussed again.",
+  "extension": "Have the learner run the same routine on a second night and compare, in writing, whether the same rest signal showed up at the same step both nights.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u04-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u04-l05",
+    "authoredBy": "manual"
+  }
+}

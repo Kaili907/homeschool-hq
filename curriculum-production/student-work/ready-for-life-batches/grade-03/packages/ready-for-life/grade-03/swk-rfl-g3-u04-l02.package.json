@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g3-ready-for-life-u04-l02",
+    "courseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Body Signals and Fueling My Day",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: naming a signal kindly"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": [
+    "Manuel Academy Ready for Life elementary sequence — Grade 3",
+    "Ready for Life v1 safety, supervision, and no-shame policy reference",
+    "Michigan Health/SEL connections",
+    "Manuel Academy RFL G3 Unit 4 — body signals, rest, and food variety"
+  ],
+  "objective": "Learners sort four example sentences about body signals into neutral-naming and self-critical groups, then rewrite each self-critical sentence using the calm starter phrase 'My body is telling me,' so they build a habit of describing a signal factually instead of judging themselves for having it.",
+  "scenario": "The learner reads four printed example sentences a kid might say about a body signal, some worded kindly and some worded with frustration or shame, sorts all four into two groups, and rewrites every self-critical sentence into a neutral version using the same naming starter each time.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [],
+  "simulationAlternative": null,
+  "materials": [
+    "the four example sentences provided in this lesson",
+    "paper and a pencil"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read all four example sentences quietly before sorting anything.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Of the four sentences, which one would feel kindest to hear someone say about themselves, and what specific word made it feel kind?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Sort the four sentences into two groups, neutral naming and self-critical, then rewrite each self-critical sentence using the starter 'My body is telling me.'",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "checklist-item",
+          "text": "I sorted all four sentences into 'neutral naming' or 'self-critical' before rewriting any of them."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "checklist-item",
+          "text": "I rewrote each self-critical sentence starting with the exact phrase 'My body is telling me.'"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "checklist-item",
+          "text": "I kept the same signal (hunger, thirst, tiredness, or another signal) in my rewrite instead of changing it to a different signal."
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "checklist-item",
+          "text": "I read my rewritten sentences out loud to check that they sound calm, not judgmental."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Without looking at the four example sentences, apply the same starter phrase to a signal you have felt today.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Write one neutral naming sentence about a signal you have felt today, using the starter 'My body is telling me.'"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think of one sentence you have heard someone say about a body signal that sounded unkind or impatient, from a book, a show, or somewhere you have been.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the unkind sentence you thought of, then write a kinder, neutral version of that same sentence using today's starter phrase."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner rewrites a self-critical sentence by erasing the signal entirely, such as changing it to 'I'm fine,' reteach with a two-column matching drill that requires the specific signal word to appear in every rewrite before it counts as complete.",
+  "extension": "Have the learner write three example naming sentences as if teaching the starter phrase to a favorite character from a book or show, using a different signal in each sentence.",
+  "scoringRef": "scoring/ready-for-life/grade-03/swk-rfl-g3-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "released",
+    "sourceCorpusRef": "curriculum-content/manuel-academy/1.0.0 (branch mac/g34-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g3-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

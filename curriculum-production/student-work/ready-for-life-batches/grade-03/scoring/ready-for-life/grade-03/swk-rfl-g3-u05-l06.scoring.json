@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u05-l06",
+  "lessonId": "ma-g3-ready-for-life-u05-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Repair completion",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The forgotten job is only partly completed, or is described but not actually done."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The forgotten job is completed fully during the lesson."
+          }
+        ]
+      },
+      {
+        "dimension": "Memory cue specificity",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The chosen cue is generic (such as 'try harder to remember') or is not placed where the job actually happens."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The cue is a concrete object or note placed exactly where the job happens, and it is tested at least once."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "The cue is concrete, placed correctly, tested, and the learner explains specifically why that cue fits that job better than a generic reminder would."
+          }
+        ]
+      },
+      {
+        "dimension": "No self-blame framing",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The learner's description of the forgotten job uses character or blame language (such as 'I'm bad at this') instead of naming the job factually."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The learner describes the specific forgotten job factually, with no character or blame language."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The forgotten job is named as a specific task, not a character trait.",
+      "The memory cue is tied to the location where the job happens, not a generic reminder anywhere in the home."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

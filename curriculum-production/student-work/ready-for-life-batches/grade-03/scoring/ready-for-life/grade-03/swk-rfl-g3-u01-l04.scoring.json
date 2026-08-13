@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g3-u01-l04",
+  "lessonId": "ma-g3-ready-for-life-u01-l04",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Hazard identification",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Identifies fewer than two real hazards across both spaces."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Identifies at least four hazards from the target list, confirmed by the adult."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Identifies four or more hazards and correctly names the risk word for each one."
+          }
+        ]
+      },
+      {
+        "dimension": "Boundary respected",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Picks up or attempts to handle a hazardous item during the walkthrough."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Points to or names hazards without touching them; the adult resolves each one."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and independently asks about an ambiguous item before deciding whether it is a hazard."
+          }
+        ]
+      },
+      {
+        "dimension": "Recall and reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "Cannot recall the hazards or match them to risk words afterward."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "Recalls most hazards and matches most of them to the correct risk word."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Recalls all hazards, matches all risk words correctly, and the reflection names a specific fix."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The learner never handles a chemical, medicine, or sharp item during the walk.",
+      "Each hazard is tied to a specific risk word, not a vague \"that's dangerous.\"",
+      "The reflection describes a specific fix, not a general statement that the space is safer."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}
