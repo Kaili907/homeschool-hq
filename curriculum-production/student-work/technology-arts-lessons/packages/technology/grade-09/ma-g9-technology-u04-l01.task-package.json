@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g9-technology-u04-l01",
+  "unit_id": "ma-g9-technology-u04",
+  "source_course_id": "ma-g9-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 9,
+  "grade_dir": "grade-09",
+  "unit_number": 4,
+  "unit_title": "Computing Systems, Hardware, and Abstraction",
+  "day_in_unit": 1,
+  "course_day": 19,
+  "lesson_title": "Launch and diagnostic: layers of abstraction",
+  "phase": "Launch and diagnostic",
+  "work_mode": "PROBE",
+  "focus": "layers of abstraction",
+  "task_type": "debugging_and_testing",
+  "task_label": "Debugging and testing — Diagnostic probe",
+  "scoring_stance": "FORMATIVE_NO_PENALTY",
+  "estimated_minutes": "45–75",
+  "standards": [
+    "Michigan Computer Science: Computing Systems"
+  ],
+  "essential_question": "What is actually happening beneath the interface, and why does the abstraction matter?",
+  "learning_objectives": [
+    "Surface what is already known about layers of abstraction without penalty and establish the unit question.",
+    "Communicate understanding of layers of abstraction using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on layers of abstraction against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on layers of abstraction.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "layer diagram templates or plain paper",
+    "approved simulator, sandboxed environment, or paper walkthrough"
+  ],
+  "task_brief": "Day 1 of \"Computing Systems, Hardware, and Abstraction\" (unit 4, grade 9) is a diagnostic probe on layers of abstraction. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Diagram a computing system across its abstraction layers and document a reproducible troubleshooting protocol. Today's work contributes to that by handling layers of abstraction at the launch and diagnostic stage, against the unit's wider topics of layers of abstraction, binary and data representation, processor memory and storage, and operating systems and processes. This session is formative: it is scored on completeness and honesty of the record, not on getting a polished result.",
+  "primary_task": "Before any explanation of layers of abstraction, record what you already think. Write your current best answer to how layers of abstraction works, then sketch — in words, boxes, or pseudocode — the steps you believe are involved. Predict one input that would make your sketch fail. Then run or hand-trace your own sketch against two inputs you invent and mark where the prediction held and where it broke. Wrong predictions are the point of this task and cost you nothing; an unrecorded prediction is the only way to lose credit. Anchor today's work inside its unit: this session's evidence is about layers of abstraction, and it belongs to \"Computing Systems, Hardware, and Abstraction\", which also covers separate topics such as binary and data representation. Close out with this check before you stop: Name one thing you already understand about layers of abstraction and one thing you want resolved by the end of the unit. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on layers of abstraction., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Surface what is already known about layers of abstraction without penalty and establish the unit question.",
+    "Produce the deliverable for a diagnostic probe: Dated prediction sheet, first-attempt sketch or pseudocode, and a two-input trace showing where the prediction held and broke.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Dated prediction sheet, first-attempt sketch or pseudocode, and a two-input trace showing where the prediction held and broke.",
+  "test_or_check_criteria": [
+    "A written prediction about layers of abstraction exists and is dated before any instruction or reference was consulted.",
+    "At least two self-chosen inputs were traced against the initial sketch, with the outcome of each recorded.",
+    "Each place the prediction held and each place it broke is marked explicitly rather than silently corrected.",
+    "No real account, password, API key, or live system was used — all inputs are invented or sandboxed."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting layers of abstraction.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for layers of abstraction follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for layers of abstraction, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to layers of abstraction works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of layers of abstraction, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking layers of abstraction mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply layers of abstraction under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on layers of abstraction rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Diagram a computing system across its abstraction layers and document a reproducible troubleshooting protocol.",
+    "topics": [
+      "layers of abstraction",
+      "binary and data representation",
+      "processor memory and storage",
+      "operating systems and processes",
+      "hardware and software troubleshooting",
+      "device lifecycle and sustainability"
+    ],
+    "essential_question": "What is actually happening beneath the interface, and why does the abstraction matter?",
+    "assessment_id": "ma-g9-technology-u04-assessment"
+  }
+}

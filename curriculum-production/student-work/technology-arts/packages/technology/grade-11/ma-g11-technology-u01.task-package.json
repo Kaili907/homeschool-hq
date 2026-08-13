@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "unit_id": "ma-g11-technology-u01",
+  "source_course_id": "ma-g11-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 11,
+  "grade_dir": "grade-11",
+  "unit_number": 1,
+  "unit_title": "Software Engineering Practice and Collaborative Version Control",
+  "task_type": "debugging_and_testing",
+  "task_label": "Debugging and testing task",
+  "essential_question": "What separates code that works from software that a team can keep working on?",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming"
+  ],
+  "estimated_days": 6,
+  "project_brief": "Run a full engineering workflow on a small feature with tracked issues, branches, a resolved merge conflict, review notes, and test evidence. This is the grade 11 culminating project for \"Software Engineering Practice and Collaborative Version Control\" (ma-g11-technology-u01, unit 1), built around requirements and user stories, branching merging and conflict resolution, code review and shared standards, refactoring and technical debt, and continuous testing habits. Work from a supplied, intentionally broken example related to requirements and user stories, branching merging and conflict resolution, code review and shared standards, and refactoring and technical debt. Reproduce the failure, isolate the smallest case that triggers it, fix the underlying cause (not just the symptom), and keep a short defect log documenting what was wrong and how you know it is fixed now.",
+  "requirements": [
+    "Address every topic listed for this unit: requirements and user stories, branching merging and conflict resolution, code review and shared standards, refactoring and technical debt, continuous testing habits, and solo and collaborative workflow.",
+    "Meet the performance task as written: Run a full engineering workflow on a small feature with tracked issues, branches, a resolved merge conflict, review notes, and test evidence.",
+    "Show your work or process, not just a final result — a process note, sketch log, commit history, or draft trail.",
+    "Complete the checklist in this package before submitting."
+  ],
+  "primary_task": "Work from a supplied, intentionally broken example related to requirements and user stories, branching merging and conflict resolution, code review and shared standards, and refactoring and technical debt. Reproduce the failure, isolate the smallest case that triggers it, fix the underlying cause (not just the symptom), and keep a short defect log documenting what was wrong and how you know it is fixed now.",
+  "test_or_check_criteria": [
+    "Every claim or design choice in the submission can be traced to requirements and user stories or another named topic from this unit — nothing is left unexplained.",
+    "The submission runs, displays, or demonstrates correctly on at least two different sample inputs or scenarios the student chooses.",
+    "No real password, API key, account credential, precise location, or other real personal/system data appears anywhere in the submission — fictional or sandbox examples only.",
+    "The student can explain, in their own words, why each step or decision was made, not just that it works.",
+    "A defect log lists each bug found, its symptom, its root cause, and the specific change that fixed it.",
+    "At least one test existed (or was written) that failed before the fix and passes after it, proving the fix actually worked."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "This project never touches a real account, a real password or API key, a live production system, or another person's real data. Use fictional names, sandbox environments, local files, or already-approved sample data throughout. Submit code, screenshots of your own sandbox, diagrams, or a written walkthrough — a live public deployment is never required."
+  },
+  "copyright_and_authorship": "The final submitted work must remain your own authorship. A parent, tutor, or AI assistant may help you plan, explain a concept, demonstrate a technique, or give feedback on a draft, but may not produce the graded work itself. Never request, store, or submit a real password, API key, access token, or other real credential; use only fictional accounts and sandboxed or offline systems.",
+  "remediation": "If the project stalls, step back to the smallest version of the task: rebuild just the part covering requirements and user stories in isolation, using a worked example from this unit as a model, then re-attach it to the full project once that smaller piece works and you can explain why.",
+  "extension": "Once the core project is working, extend it to handle a new constraint or edge case related to branching merging and conflict resolution, or compare two different approaches to the same problem and explain the real tradeoff between them in your own words."
+}

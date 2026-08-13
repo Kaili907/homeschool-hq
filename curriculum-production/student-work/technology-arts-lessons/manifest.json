@@ -1,0 +1,163 @@
+{
+  "corpusVersion": "1.0.0",
+  "granularity": "lesson",
+  "subjects": [
+    "technology",
+    "arts-music"
+  ],
+  "scope": "curriculum-production/student-work/technology-arts-lessons/** only",
+  "relationshipToUnitCorpus": {
+    "unitCorpus": "curriculum-production/student-work/technology-arts (108 unit-level packages)",
+    "note": "This corpus is per-LESSON, not a re-cut of the unit corpus. Each of the 984 authored lessons gets its own task and scoring path, whose shape is selected by that lesson's authored `phase` and whose content comes from its authored `focus`, objectives, and success criteria. Measured overlap between a lesson task and its own unit's task package is 0.0826 maximum (5-gram Jaccard) \u2014 see duplicate-report.json."
+  },
+  "generatedFrom": {
+    "g3-4": {
+      "worktree": "mac-worktrees/mac-g34-tech-arts-r1",
+      "branch": "mac/g34-tech-arts-r1",
+      "commit": "a3a9d336a3033c9650b1f9fb81a7f043d7386600",
+      "lessonsPath": "curriculum-authoring/full-family-grade34/subjects/{technology-computer-science,arts-music}/grade-{3,4}/lessons.jsonl"
+    },
+    "canonical-5-7-8": {
+      "worktree": "mac-worktrees/mac-tech-arts-production-lessons-r2",
+      "branch": "mac/tech-arts-production-lessons-r2",
+      "commit": "fb268fe3726eb62412e354967c167dbbb24c1ce5",
+      "lessonsPath": "curriculum-content/manuel-academy/1.0.0/grades/grade-{5,7,8}/courses/{technology,arts-and-music}/lessons.jsonl"
+    },
+    "hs-9-12": {
+      "worktree": "mac-worktrees/mac-hs912-tech-arts-r1",
+      "branch": "mac/hs912-tech-arts-r1",
+      "commit": "627b41c0e794ce31bc5ab7501aec1015930ccbf3",
+      "lessonsPath": "curriculum-authoring/full-family-highschool-9-12/subjects/{technology-computer-science,arts-music}/grade-{09,10,11,12}/lessons.jsonl"
+    },
+    "note": "G3-4 and HS 9-12 sources live in sibling worktrees of the same repository, not merged into this branch. Regenerating requires those worktrees checked out locally at the paths above, or TECH_ARTS_G34_ROOT / TECH_ARTS_HS_ROOT env overrides in src/courses.mjs."
+  },
+  "productionQualityGate": {
+    "source": "src/curriculum/production-quality (this branch, evaluateCourseProductionReadiness)",
+    "subjectFamily": "ARTS_RFL_PE_PROJECT",
+    "rationale": "Both technology/CS and arts/music lesson materials are project- and rubric-scored rather than fixed-answer-key items. The gate's own type contract treats ARTS_RFL_PE_PROJECT as not requiring instruction/workedExample/guidedPractice blocks, since the activity carries the instructional load, and accepts RUBRIC in place of a fixed ANSWER_KEY.",
+    "negativeControlVerified": "The gate was confirmed to reject induced defects (stripped independent work, stripped scoring authority, empty rubric, stripped remediation/extension, unverified alignment, unverified safety status, missing safe alternative, unverified source integrity, generic scaffold phrasing, and sub-floor task text) before the READY result was accepted."
+  },
+  "totals": {
+    "courses": 18,
+    "units": 108,
+    "lessons": 984,
+    "taskPackages": 984,
+    "scoringGuides": 984,
+    "byBand": {
+      "g3-4": {
+        "grades": [
+          3,
+          4
+        ],
+        "technology": 72,
+        "arts-music": 144,
+        "total": 216
+      },
+      "canonical-5-7-8": {
+        "grades": [
+          5,
+          7,
+          8
+        ],
+        "technology": 108,
+        "arts-music": 216,
+        "total": 324
+      },
+      "hs-9-12": {
+        "grades": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "technology": 156,
+        "arts-music": 288,
+        "total": 444
+      }
+    },
+    "bySubject": {
+      "technology": 336,
+      "arts-music": 648
+    },
+    "byScoringStance": {
+      "FORMATIVE_NO_PENALTY": 328,
+      "PROGRESS_EVIDENCE": 548,
+      "SUMMATIVE": 108
+    }
+  },
+  "lessonSpecificity": {
+    "mechanism": "Each authored lesson phase maps to one of 16 work-mode archetypes (PROBE, MODEL, MODEL_A, MODEL_B, GUIDED, GUIDED_A, GUIDED_B, APPLY, BUILD, INVESTIGATE, RETEACH, INCREMENT, DEMONSTRATE, SYNTHESIZE, ASSESS, CORRECT). The mode selects the shape of the work and the rubric dimension set; the lesson's focus, objectives, success criteria, formative check, and unit context supply the content.",
+    "workModesUsed": 16,
+    "distinctRubricDimensionSets": 16,
+    "gradeBandExpectation": "Each task states a grade-specific bar for independence and justification, because several units are shared verbatim between adjacent grade courses (notably grade 4 and grade 5 arts).",
+    "adversarialTopicHandling": "Technology lessons whose authored focus is an attack concept (for example \"phishing and social engineering\") are rendered defensively in student-facing prose as \"recognising and defending against \u2026\". The authored focus, learning_objectives, and lesson_success_criteria fields retain the original wording for provenance.",
+    "registers": {
+      "elementary": "Grades 3-5 receive a plain-language register: ~10 words per sentence, everyday vocabulary, and the task body chunked into one action per step (task_steps). Technology tasks in this band avoid pseudocode, trace tables, boundary cases, defect logs, and root-cause language entirely.",
+      "secondary": "Grades 7-12 receive the full register at ~24 words per sentence, written as connected prose.",
+      "measured": "Mean words per sentence in primary_task: grade 3 = 9.9, grade 4 = 9.9, grade 5 = 9.6, grades 7-12 = 23.3-24.5."
+    }
+  },
+  "gateResult": {
+    "ready": 984,
+    "needsHumanReview": 0,
+    "notReady": 0,
+    "reportFiles": [
+      "gate-report.json",
+      "gate-report.md"
+    ]
+  },
+  "duplicateContentCheck": {
+    "method": "5-gram word-shingle Jaccard over student-facing task text",
+    "exactDuplicateTaskTexts": 0,
+    "maxSiblingSimilarityWithinUnit": 0.4012,
+    "meanSiblingSimilarityWithinUnit": 0.2961,
+    "siblingCeiling": 0.6,
+    "maxSimilarityToOwnUnitLevelTask": 0.0826,
+    "unitEchoCeiling": 0.6,
+    "reportFile": "duplicate-report.json"
+  },
+  "privacyAndCopyrightPolicy": {
+    "technology": "Every lesson's presentation_and_privacy.sandbox_and_credentials_note prohibits real passwords, passphrases, API keys, account credentials, access tokens, precise locations, and any real person's identifiable data, and prohibits signing into, probing, scanning, stressing, or accessing any live, production, school, or third-party system, and prohibits bypassing filters, licences, access controls, or terms of service. No credential-shaped literal appears anywhere in the corpus \u2014 validated by pattern scan.",
+    "artsMusic": "No lesson requires a public performance, exhibition, class presentation, live audience, photograph, camera, or voice recording. Every lesson states a private presentation option that explicitly does not lower the score, and a written/no-audio alternative that scores identically.",
+    "copyright": "Arts lessons require any material the student did not create to be public domain, openly licensed, or a short cited excerpt, with the maker and source credited and no reproduction of full lyrics, complete scores, or whole images as the student's own. Technology lessons require any code, asset, or text not written by the student to be openly licensed or supplied, and cited.",
+    "authorship": "Every lesson states that the graded submission must be the student's own authorship, and that a parent, tutor, or AI tool may explain, demonstrate, or give feedback but must not produce, write, debug, or make any scored part of the work.",
+    "statusSemantics": "A VERIFIED status means the policy invariants for that lesson are enforced by tests/validate-corpus.mjs (credential-literal scan, risk-term-in-context scan, mandated-exposure scan, copyright and authorship assertions). It is not a record of individual human curriculum review."
+  },
+  "verification": {
+    "productionQualityGate": "node --experimental-strip-types tooling/run-ts.mjs run-gate.ts",
+    "duplicateContentCheck": "node tests/duplicate-check.mjs",
+    "structuralAndPolicyValidator": "node tests/validate-corpus.mjs",
+    "schemaConformance": "node tests/schema-check.mjs",
+    "regenerate": "node generate.mjs"
+  },
+  "accessibility": {
+    "authoredOptions": "Every lesson carries its authored accessibility_and_accommodations list verbatim in accessibility_options.",
+    "taskSpecificProvisions": "Every lesson additionally carries task_accessibility_provisions derived from what that task concretely demands \u2014 motor targets, aural or visual elements, studio materials, performance targets, multi-session executive load, and external sources under study. 150 distinct provision sets across the corpus.",
+    "motorTargetRule": "Where the learning target is itself a motor act (keyboarding, mouse and trackpad, instrument technique), an alternate input route is named explicitly and scored identically, because adjusting response mode cannot remove a barrier when the response mode is what is being assessed. Enforced by tests/validate-corpus.mjs."
+  },
+  "independentReview": {
+    "scope": "One accessibility/content reviewer examined the corpus: all 1,968 files parsed programmatically, 112 lesson packages read in narrative detail across all 9 grades, both subjects, and all 16 work modes.",
+    "passedCleanly": [
+      "safety and privacy",
+      "tone and non-deficit framing",
+      "copyright and sourcing",
+      "student authorship",
+      "no mandated camera, voice, recording, or public performance"
+    ],
+    "fixedFollowingReview": [
+      "Reading level was flat from grade 3 to grade 12; grades 3-5 now use a separate plain-language register with chunked steps.",
+      "Grade 3-4 technology tasks carried CS jargon (pseudocode, trace table, boundary case, defect log, root cause) on behavioural digital-citizenship topics; that vocabulary is gone from the elementary band.",
+      "The anchor sentence and several task bodies named an unrelated unit topic as though it were the lesson's own subject, affecting roughly 850 lessons; unit topics are now framed explicitly as other unit content.",
+      "All 54 arts launch lessons were scored on a 'prediction and honesty' rubric dimension their task never asked for; they now use 'baseline and honesty', matching what the arts launch task actually requests.",
+      "Accessibility support was one generic block for grades 3-8; every lesson now carries task-specific provisions, including alternate input routes for the three lessons whose learning target is a motor act.",
+      "Constructions such as 'uses <focus> to' broke grammatically for the 133 lessons whose authored focus is a gerund phrase; those slots were restated."
+    ]
+  },
+  "knownLimitations": [
+    "Grades 7-12 share one task body per work mode. Differentiation across that band comes from the grade-specific expectation sentence and the lesson's own focus and closing check, not from distinct cognitive templates per grade. Grades 3-5 are a genuinely separate register.",
+    "200 lessons in grades 9-12 have an authored focus identical to their unit title, because those units define 6 topics but contain 12 lessons. This is a property of the authored source, which lies outside this corpus's owned path. Those lessons remain distinct from one another by phase and work mode, and the duplicate check passes, but their titles read redundantly.",
+    "A few high-school arts foci are planning or process concepts rather than makeable elements (for example 'materials rights and permissions planning'), so a make-a-piece archetype reads as a stretch on those days.",
+    "The grade 9 technology unit 2 performance task, authored upstream, says a program should serve 'a real user'; the sandbox note constrains it in practice, but the wording could be read as requiring an outside person.",
+    "safety_and_privacy.status is 'VERIFIED' on every scoring guide. It records that the stated policy checks are configured and machine-enforced for that lesson \u2014 not that a human subject-matter reviewer signed off on each lesson individually."
+  ]
+}

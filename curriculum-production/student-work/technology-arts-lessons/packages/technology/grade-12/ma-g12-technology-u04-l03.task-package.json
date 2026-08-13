@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g12-technology-u04-l03",
+  "unit_id": "ma-g12-technology-u04",
+  "source_course_id": "ma-g12-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 12,
+  "grade_dir": "grade-12",
+  "unit_number": 4,
+  "unit_title": "Computing Ethics, Law, Policy, and Societal Impact",
+  "day_in_unit": 3,
+  "course_day": 21,
+  "lesson_title": "Guided practice: accessibility obligations and algorithmic accountability and auditing",
+  "phase": "Guided practice",
+  "work_mode": "GUIDED",
+  "focus": "accessibility obligations and algorithmic accountability and auditing",
+  "task_type": "programming_and_logic",
+  "task_label": "Programming and logic — Guided practice",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "45–75",
+  "standards": [
+    "Michigan Computer Science: Impacts of Computing"
+  ],
+  "essential_question": "Who is accountable when software causes harm, and what does the law actually require?",
+  "learning_objectives": [
+    "Practise accessibility obligations and algorithmic accountability and auditing with prompts, feedback, and gradually reduced support.",
+    "Communicate understanding of accessibility obligations and algorithmic accountability and auditing using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on accessibility obligations and algorithmic accountability and auditing against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on accessibility obligations and algorithmic accountability and auditing.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "primary source excerpts: licences, policies, codes of conduct",
+    "stakeholder-analysis templates"
+  ],
+  "task_brief": "Day 3 of \"Computing Ethics, Law, Policy, and Societal Impact\" (unit 4, grade 12) is a guided practice on accessibility obligations and algorithmic accountability and auditing. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Write an evidence-based policy analysis of a computing practice with stakeholder, legal, and equity findings. Today's work contributes to that by handling accessibility obligations and algorithmic accountability and auditing at the guided practice stage, against the unit's wider topics of intellectual property licensing and attribution, privacy law and data rights, accessibility obligations, and algorithmic accountability and auditing. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Complete two supported problems on accessibility obligations and algorithmic accountability and auditing. On the first, work step by step with prompts available, and after each step write the one-line reason that step is correct. On the second, work without prompts and only check the reference after you commit to an answer. Both problems must show the intermediate states — a trace table, printed values, or a labelled diagram — not just a final result. Then state which of the two felt less certain and name the specific step where your confidence dropped. Anchor today's work inside its unit: this session's evidence is about accessibility obligations and algorithmic accountability and auditing, and it belongs to \"Computing Ethics, Law, Policy, and Societal Impact\", which also covers separate topics such as intellectual property licensing and attribution. Close out with this check before you stop: Show your reasoning on the faded example of accessibility obligations and algorithmic accountability and auditing and identify the check that confirms it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on accessibility obligations and algorithmic accountability and auditing., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Practise accessibility obligations and algorithmic accountability and auditing with prompts, feedback, and gradually reduced support.",
+    "Produce the deliverable for a guided practice: Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Two solved problems with intermediate states shown, per-step reasons on the first, and a named low-confidence step.",
+  "guided_scaffold_note": "Scaffolding for accessibility obligations and algorithmic accountability and auditing fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
+  "test_or_check_criteria": [
+    "Both problems show intermediate states — trace table, printed values, or labelled diagram — not only final answers.",
+    "The first problem carries a per-step reason; the second was attempted before any reference was checked.",
+    "The step where confidence dropped is named specifically, not described as general uncertainty.",
+    "Every result is traceable to accessibility obligations and algorithmic accountability and auditing or another named topic from this unit."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting accessibility obligations and algorithmic accountability and auditing.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for accessibility obligations and algorithmic accountability and auditing follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for accessibility obligations and algorithmic accountability and auditing, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to accessibility obligations and algorithmic accountability and auditing works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of accessibility obligations and algorithmic accountability and auditing, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking accessibility obligations and algorithmic accountability and auditing mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply accessibility obligations and algorithmic accountability and auditing under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on accessibility obligations and algorithmic accountability and auditing rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Write an evidence-based policy analysis of a computing practice with stakeholder, legal, and equity findings.",
+    "topics": [
+      "intellectual property licensing and attribution",
+      "privacy law and data rights",
+      "accessibility obligations",
+      "algorithmic accountability and auditing",
+      "labor economic and environmental effects",
+      "professional codes of conduct"
+    ],
+    "essential_question": "Who is accountable when software causes harm, and what does the law actually require?",
+    "assessment_id": "ma-g12-technology-u04-assessment"
+  }
+}

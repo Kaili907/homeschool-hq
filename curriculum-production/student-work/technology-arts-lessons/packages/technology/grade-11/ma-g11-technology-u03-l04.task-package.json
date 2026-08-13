@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g11-technology-u03-l04",
+  "unit_id": "ma-g11-technology-u03",
+  "source_course_id": "ma-g11-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 11,
+  "grade_dir": "grade-11",
+  "unit_number": 3,
+  "unit_title": "Web and Application Architecture",
+  "day_in_unit": 4,
+  "course_day": 16,
+  "lesson_title": "Application or project: authentication concepts without real credentials and performance and accessibility budgets",
+  "phase": "Application or project",
+  "work_mode": "BUILD",
+  "focus": "authentication concepts without real credentials and performance and accessibility budgets",
+  "task_type": "interface_and_accessibility",
+  "task_label": "Interface and accessibility — Build and test",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "45–75",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Networks and the Internet"
+  ],
+  "essential_question": "How do the pieces of a web application fit together, and where does accessibility live in that structure?",
+  "learning_objectives": [
+    "Advance the unit performance task by applying authentication concepts without real credentials and performance and accessibility budgets to a reviewable increment.",
+    "Communicate understanding of authentication concepts without real credentials and performance and accessibility budgets using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on authentication concepts without real credentials and performance and accessibility budgets against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on authentication concepts without real credentials and performance and accessibility budgets.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, prototyping tool, or paper prototyping materials",
+    "screen reader or keyboard-only testing route"
+  ],
+  "task_brief": "Day 4 of \"Web and Application Architecture\" (unit 3, grade 11) is a build and test on authentication concepts without real credentials and performance and accessibility budgets. It is one step inside the unit — not the whole unit project — and takes about 45–75 minutes. The unit is working toward: Build a multi-view accessible web application against a mock interface with documented architecture decisions. Today's work contributes to that by handling authentication concepts without real credentials and performance and accessibility budgets at the application or project stage, against the unit's wider topics of semantic structure and templating, state and data flow, interfaces and structured data exchange, and storage and caching. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Build a working artifact for a stated need arising in the unit \"Web and Application Architecture\", built around what this session covers: authentication concepts without real credentials and performance and accessibility budgets. Write the requirements and the success conditions first, in testable form, before writing the artifact. Then implement it, run it against at least three cases — a normal case, a boundary case, and a case designed to break it — and log actual versus expected for each. Fix every failing case and re-run. Submit the artifact, the test log, and a short design note explaining one alternative you rejected and why. Anchor today's work inside its unit: this session's evidence is about authentication concepts without real credentials and performance and accessibility budgets, and it belongs to \"Web and Application Architecture\", which also covers separate topics such as semantic structure and templating. Close out with this check before you stop: Show this session’s increment and name what remains before the task is complete. At grade 11 the bar is independent work with sustained self-direction: you set the constraint, defend it, and revise on the evidence of your own checks rather than on being told to.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on authentication concepts without real credentials and performance and accessibility budgets., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Advance the unit performance task by applying authentication concepts without real credentials and performance and accessibility budgets to a reviewable increment.",
+    "Produce the deliverable for a build and test: Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Working artifact, testable requirements written up front, a three-case test log with re-runs, and a design note naming a rejected alternative.",
+  "test_or_check_criteria": [
+    "Requirements and success conditions were written in testable form before implementation began.",
+    "A test log shows at least three cases — normal, boundary, and a deliberate break case — with actual against expected.",
+    "Every failing case was fixed and re-run, with the re-run result recorded.",
+    "A design note names one rejected alternative and the reason for rejecting it.",
+    "Nothing in the artifact uses a real credential, real personal data, or a live external system."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "This work spans sessions, so supply a written milestone plan, explicit checkpoint dates, and a task breakdown. Executive-function load — sequencing, holding the plan in mind, remembering where the work stopped — must not become a silent part of what is being assessed.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting authentication concepts without real credentials and performance and accessibility budgets.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for authentication concepts without real credentials and performance and accessibility budgets follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for authentication concepts without real credentials and performance and accessibility budgets, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to authentication concepts without real credentials and performance and accessibility budgets works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of authentication concepts without real credentials and performance and accessibility budgets, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking authentication concepts without real credentials and performance and accessibility budgets mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply authentication concepts without real credentials and performance and accessibility budgets under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on authentication concepts without real credentials and performance and accessibility budgets rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Build a multi-view accessible web application against a mock interface with documented architecture decisions.",
+    "topics": [
+      "semantic structure and templating",
+      "state and data flow",
+      "interfaces and structured data exchange",
+      "storage and caching",
+      "authentication concepts without real credentials",
+      "performance and accessibility budgets"
+    ],
+    "essential_question": "How do the pieces of a web application fit together, and where does accessibility live in that structure?",
+    "assessment_id": "ma-g11-technology-u03-assessment"
+  }
+}

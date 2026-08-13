@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g12-technology-u05-l10",
+  "unit_id": "ma-g12-technology-u05",
+  "source_course_id": "ma-g12-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 12,
+  "grade_dir": "grade-12",
+  "unit_number": 5,
+  "unit_title": "Capstone Design, Build, and Test",
+  "day_in_unit": 10,
+  "course_day": 34,
+  "lesson_title": "Synthesis and review: capstone design, build, and test",
+  "phase": "Synthesis and review",
+  "work_mode": "SYNTHESIZE",
+  "focus": "capstone design, build, and test",
+  "task_type": "programming_and_logic",
+  "task_label": "Programming and logic — Synthesis",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "60–90",
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Impacts of Computing"
+  ],
+  "essential_question": "How do we build something substantial and prove, at each step, that it works?",
+  "learning_objectives": [
+    "Connect capstone design, build, and test across the unit and assemble the evidence that shows readiness for assessment.",
+    "Communicate understanding of capstone design, build, and test using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on capstone design, build, and test against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on capstone design, build, and test.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, runtime, and version-control tool",
+    "project milestone plan, test log, and accessibility checklist"
+  ],
+  "task_brief": "Day 10 of \"Capstone Design, Build, and Test\" (unit 5, grade 12) is a synthesis on capstone design, build, and test. It is one step inside the unit — not the whole unit project — and takes about 60–90 minutes. The unit is working toward: Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence. Today's work contributes to that by handling capstone design, build, and test at the synthesis and review stage, against the unit's wider topics of problem validation and stakeholders, requirements and success metrics, architecture and build increments, and verification and test evidence. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Connect capstone design, build, and test to the other ideas this unit has built, including requirements and success metrics. Produce a one-page map — concept map, comparison table, or annotated diagram — showing how at least three ideas from the unit relate, with each link labelled by the relationship rather than just drawn. Then work one problem that requires two of those ideas together and show which part of your solution came from which. Name the idea you are least sure of and the specific question you would need answered to be sure. Anchor today's work inside its unit: this session's evidence is about capstone design, build, and test, and it belongs to \"Capstone Design, Build, and Test\", which also covers separate topics such as problem validation and stakeholders. Close out with this check before you stop: Identify which unit evidence is strongest, which is thin, and what would strengthen it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on capstone design, build, and test., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Connect capstone design, build, and test across the unit and assemble the evidence that shows readiness for assessment.",
+    "Produce the deliverable for a synthesis: One-page labelled concept map across at least three unit ideas, plus one two-idea problem with attribution of each part.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "One-page labelled concept map across at least three unit ideas, plus one two-idea problem with attribution of each part.",
+  "test_or_check_criteria": [
+    "The map connects at least three ideas from this unit with each link labelled by relationship, not merely drawn.",
+    "One worked problem genuinely requires two of the mapped ideas together.",
+    "The solution identifies which part came from which idea.",
+    "The least-certain idea is named along with the specific question that would resolve it."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "This work spans sessions, so supply a written milestone plan, explicit checkpoint dates, and a task breakdown. Executive-function load — sequencing, holding the plan in mind, remembering where the work stopped — must not become a silent part of what is being assessed.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting capstone design, build, and test.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for capstone design, build, and test follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for capstone design, build, and test, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to capstone design, build, and test works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of capstone design, build, and test, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking capstone design, build, and test mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply capstone design, build, and test under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on capstone design, build, and test rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Build the capstone system to a testable milestone with verified requirements, automated tests, and accessibility evidence.",
+    "topics": [
+      "problem validation and stakeholders",
+      "requirements and success metrics",
+      "architecture and build increments",
+      "verification and test evidence",
+      "accessibility and privacy verification",
+      "iteration from feedback"
+    ],
+    "essential_question": "How do we build something substantial and prove, at each step, that it works?",
+    "assessment_id": "ma-g12-technology-u05-assessment"
+  }
+}

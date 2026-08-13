@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "lesson_id": "ma-g12-technology-u06-l03",
+  "unit_id": "ma-g12-technology-u06",
+  "source_course_id": "ma-g12-technology",
+  "subject": "technology",
+  "band": "hs-9-12",
+  "grade": 12,
+  "grade_dir": "grade-12",
+  "unit_number": 6,
+  "unit_title": "Capstone Review, Defense, and Transition",
+  "day_in_unit": 3,
+  "course_day": 39,
+  "lesson_title": "Guided practice A: limitations and future work",
+  "phase": "Guided practice A",
+  "work_mode": "GUIDED_A",
+  "focus": "limitations and future work",
+  "task_type": "digital_citizenship_and_safety",
+  "task_label": "Digital citizenship and safety — Guided practice (first pass)",
+  "scoring_stance": "PROGRESS_EVIDENCE",
+  "estimated_minutes": "60–90",
+  "standards": [
+    "Michigan Computer Science: Impacts of Computing",
+    "Algorithms and Programming"
+  ],
+  "essential_question": "What does it mean to defend your own work honestly, including its limits?",
+  "learning_objectives": [
+    "Practise limitations and future work with prompts, feedback, and gradually reduced support.",
+    "Communicate understanding of limitations and future work using subject-appropriate evidence or representation.",
+    "Check, revise, or improve the work on limitations and future work against the stated success criteria."
+  ],
+  "lesson_success_criteria": [
+    "The learner completes the central task on limitations and future work.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "materials": [
+    "course notebook or digital equivalent",
+    "approved editor, runtime, and version-control tool",
+    "project milestone plan, test log, and accessibility checklist"
+  ],
+  "task_brief": "Day 3 of \"Capstone Review, Defense, and Transition\" (unit 6, grade 12) is a guided practice (first pass) on limitations and future work. It is one step inside the unit — not the whole unit project — and takes about 60–90 minutes. The unit is working toward: Defend the capstone in a chosen private or public mode with complete documentation, a response to independent review, and a maintenance and transition plan. Today's work contributes to that by handling limitations and future work at the guided practice a stage, against the unit's wider topics of evidence assembly and documentation, independent review and critique response, limitations and future work, and maintenance security and sunset planning. This session produces reviewable evidence toward the unit performance task.",
+  "primary_task": "Work the first supported pass on limitations and future work. Take two prepared cases and solve each with the scaffold visible, writing after every step the reason that step is legal and what would have gone wrong without it. Record intermediate values or states for both cases. Then mark, on your own work, the single step you would most likely get wrong if the scaffold were removed — that mark is what the second pass will test. Anchor today's work inside its unit: this session's evidence is about limitations and future work, and it belongs to \"Capstone Review, Defense, and Transition\", which also covers separate topics such as evidence assembly and documentation. Close out with this check before you stop: Show your reasoning on the faded example of limitations and future work and identify the check that confirms it. At grade 12 the bar is portfolio-quality independent work you could defend to an outside reader: intent stated, method justified, limitations named honestly, and revision traceable.",
+  "requirements": [
+    "Meet this lesson's own success criteria: The learner completes the central task on limitations and future work., The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer., and The learner checks or revises the work and can name a next step.",
+    "Address the lesson objective: Practise limitations and future work with prompts, feedback, and gradually reduced support.",
+    "Produce the deliverable for a guided practice (first pass): Two scaffolded solutions with per-step reasons, intermediate states, and one flagged fragile step.",
+    "Show the process, not only the result — a trace, test log, draft trail, or commit history.",
+    "Complete the check criteria list in this package before submitting."
+  ],
+  "deliverable": "Two scaffolded solutions with per-step reasons, intermediate states, and one flagged fragile step.",
+  "guided_scaffold_note": "Scaffolding for limitations and future work fades within the session: the first case may be worked with the reference, model, or prompts in view, and the second must be attempted before checking anything. The supporting adult may ask \"what supports that move?\" after a step but should not supply the step. Where the unscaffolded attempt diverges from the scaffolded one, the divergence itself is the thing to examine, not something to erase.",
+  "test_or_check_criteria": [
+    "Two prepared cases are solved with per-step reasons recorded while the scaffold was visible.",
+    "Intermediate values or states are shown for both cases.",
+    "Exactly one step is flagged as the one most likely to fail without the scaffold.",
+    "No real personal data, credential, or production system is referenced in either case."
+  ],
+  "presentation_and_privacy": {
+    "sandbox_and_credentials_note": "Everything in this task runs in a sandbox or on paper. Never use a real password, passphrase, API key, account credential, access token, precise home location, or any real person's identifiable information — invent fictional values instead. Do not sign into, probe, scan, stress, or attempt access to any live, production, school, or third-party system, and do not bypass a filter, licence, access control, or terms of service. Any practice login used in an example must be obviously invented — a silly made-up name paired with a nonsense multi-word phrase — and must never be anything you or anyone in your family actually uses somewhere real. If a task seems to need something real, substitute a made-up stand-in and note the substitution."
+  },
+  "copyright_and_authorship": "The graded submission must be your own authorship. A parent, tutor, or AI tool may explain an idea, demonstrate a technique, or give feedback on a draft, but must not produce, write, debug, or make any part of the work that is scored. Any code, asset, or text you did not write must be openly licensed or supplied for this task, and must be cited in a comment or note naming where it came from and what you changed.",
+  "accessibility_options": [
+    "Provide readable text plus optional audio or read-aloud support; no voice feature is required.",
+    "Chunk directions into one action at a time and show a worked example or model.",
+    "Offer reduced-copying, extended-time, hidden-timer, movement-break, and low-distraction options.",
+    "Use captions, alt text, high-contrast print, keyboard access, and text-only fallbacks for media.",
+    "For any multi-session project, supply a written milestone plan, checkpoint dates, and a task breakdown, so executive-function load is not silently part of what is being assessed.",
+    "Adjust quantity, pacing, representation, or response mode while holding the target constant. Where the target names a specific skill, change how it is evidenced rather than substituting a different skill.",
+    "Accept typed, handwritten, spoken, diagrammed, or demonstrated responses; where code is the target, accept pseudocode, block-based, or annotated-trace evidence.",
+    "Provide screen-reader-compatible editors, adjustable font and contrast, keyboard-only workflows, and an offline paper-and-trace route for every programming task."
+  ],
+  "task_accessibility_provisions": [
+    "Provide a screen-reader-compatible editor, adjustable font size and contrast, and a complete keyboard-only workflow. An offline paper-and-trace route is available for every task here and is scored identically to an on-screen one.",
+    "Breaks, extended time, a hidden timer, reduced copying, and a low-distraction setting are available on request and never reduce the score."
+  ],
+  "safety_and_privacy_rules": [
+    "Use respectful, non-shaming language.",
+    "Allow a pause, break, or alternate response mode without treating it as failure.",
+    "Never use or require a real password, API key, access token, account credential, private message, precise location, or identifiable image; use clearly fictional placeholder values only.",
+    "Keep all security work in sandboxed, simulated, or fictional environments; never scan, probe, exploit, or attempt access against real systems, networks, accounts, services, or people.",
+    "Use approved sites and tools; do not bypass filters, access controls, licensing, or terms of service.",
+    "Treat AI output as a draft to verify and disclose. The tutor may explain concepts, ask diagnostic questions, and help debug, but never silently completes graded project work."
+  ],
+  "media": {
+    "suggestion": "Optional diagram, score excerpt, worked example, source image, demonstration, or short clip supporting limitations and future work.",
+    "required": false,
+    "fallback": "Provide the same information as readable steps, alt text, transcript, tactile or concrete model, or adult demonstration."
+  },
+  "remediation": "Reteaching for limitations and future work follows the signal actually observed, not a fixed script. If the signal is \"prerequisite gap\": Return to the smallest prerequisite needed for limitations and future work, model it in a concrete or text-only representation, then retry one fresh item. If the signal is \"procedure without understanding\": Ask the learner to explain or represent why the approach to limitations and future work works before continuing. If the signal is \"correct but low confidence\": Confirm the reasoning specifically, offer one varied example of limitations and future work, and avoid unnecessary remediation. If the signal is \"repeated error pattern\": Name the observable pattern neutrally, contrast it with a worked example, and schedule a short same-day or next-session review. If the signal is \"requests the answer to graded work\": Explain the concept, ask a diagnostic question, or help isolate the defect. Do not supply the graded artifact, solution code, or finished creative work. If the signal is \"mastery evidence\": Require accurate independent application plus explanation on a later or different occasion before marking limitations and future work mastered. Re-check with one fresh item of the same kind before moving on, and record which signal was seen so the pattern is visible across the unit rather than treated as a one-off.",
+  "extension": "Apply limitations and future work under a new constraint, compare two approaches or perspectives, or explain the idea to someone else using an original example. Treat this as optional depth on limitations and future work rather than extra volume: one harder case done well beats three more of the same. Extension work stays inside the same sandbox rules — no real credentials and no live external systems. Extension work is never required to reach mastery and must not be assigned as a penalty.",
+  "unit_context": {
+    "performance_task": "Defend the capstone in a chosen private or public mode with complete documentation, a response to independent review, and a maintenance and transition plan.",
+    "topics": [
+      "evidence assembly and documentation",
+      "independent review and critique response",
+      "limitations and future work",
+      "maintenance security and sunset planning",
+      "presentation in a chosen private or public mode",
+      "pathways portfolio and transition"
+    ],
+    "essential_question": "What does it mean to defend your own work honestly, including its limits?",
+    "assessment_id": "ma-g12-technology-u06-assessment"
+  }
+}
