@@ -1,75 +1,114 @@
 {
-  "evidence_id": "manuel-academy-g34-specialty-arts-pe-standards-policy-r4",
-  "status": "G34_ARTS_PE_STANDARDS_POLICY_READY",
-  "generated": "2026-08-12",
-  "branch": "mac/g34-specialty-arts-pe-r4",
-  "base_branch": "mac/g34-standards-specialty-r3",
-  "input": {
-    "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
-    "path": "curriculum-release-evidence/g34-specialty-r3",
-    "consumed": [
-      "evidence/citations.jsonl - the arts and physical-education records only",
-      "sources/source-custody.json - to cross-check the SHA256 pins",
-      "sources/documents/*.pdf - three documents, read-only, never copied"
-    ],
-    "modified": "nothing"
-  },
-  "boundary": {
-    "owns": "curriculum-release-evidence/g34-specialty-arts-pe-r4/**",
-    "did_not_touch": [
-      "curriculum lessons",
-      "the normalized release",
-      "curriculum-release-evidence/g34-specialty-r3/** (read-only)"
-    ],
-    "enforced_by": "tools/validate.py asserts no tracked file outside this directory is modified."
-  },
-  "scope": {
-    "in": ["arts-and-music (372 citations)", "physical-education (540 citations, 288 of them unresolved on entry)"],
-    "out": ["health", "technology", "financial-literacy", "ready-for-life", "lesson content of any kind"]
-  },
-  "counts": {
-    "arts": {
-      "citations": 372,
-      "distinct_records": 22,
-      "before_r3": {"HUMAN_REVIEW_REQUIRED": 372},
-      "after_r4": {"CROSSWALK_RESOLVED_STANDARD_LEVEL": 324, "HUMAN_REVIEW_REQUIRED": 48},
-      "verbatim_michigan": 0,
-      "resolved_to_exact_grade_expectation": 0,
-      "still_misattributed_as_authored": 372
-    },
-    "physical_education": {
-      "citations_total": 540,
-      "citations_in_scope": 288,
-      "distinct_records": 10,
-      "before_r3": {"ALIAS_RESOLVED_VERBATIM": 252, "HUMAN_REVIEW_REQUIRED": 288},
-      "after_r4": {"ALIAS_RESOLVED_VERBATIM": 252, "HUMAN_REVIEW_REQUIRED": 288},
-      "newly_resolved": 0,
-      "still_misattributed_as_authored": 288
-    },
-    "unresolved_total": 336,
-    "registry_mappings": 32
-  },
-  "headline_guarantees": [
-    "No arts citation is classified VERBATIM_VERIFIED, ALIAS_RESOLVED_VERBATIM or COMPOSITE_VERIFIED.",
-    "No arts citation is assigned an exact Michigan grade-level expectation code.",
-    "No PE citation is promoted to COMPOSITE_VERIFIED to absorb a misquotation.",
-    "No proposed_correction is applied; this package edits no lesson.",
-    "Every crosswalk is reversible and every mapping is recoverable from the inverse index."
+ "base_branch": "mac/g34-standards-specialty-r3",
+ "boundary": {
+  "did_not_touch": [
+   "curriculum lessons",
+   "the normalized release",
+   "curriculum-release-evidence/g34-specialty-r3/** (read-only)"
   ],
-  "sources": {
-    "custody_model": "REFERENCE_NOT_COPY",
-    "documents_pinned": 3,
-    "held_bytes_match_pin": "3/3",
-    "upstream_refetch_byte_identical": "3/3 on 2026-08-12",
-    "verify_with": "bash sources/refetch-verify.sh"
+  "enforced_by": "tools/validate.py asserts no tracked file outside this directory is modified.",
+  "owns": "curriculum-release-evidence/g34-specialty-arts-pe-r4/**"
+ },
+ "branch": "mac/g34-specialty-arts-pe-r4",
+ "counts": {
+  "arts": {
+   "after_r4": {
+    "CROSSWALK_RESOLVED_STANDARD_LEVEL": 300,
+    "HUMAN_REVIEW_REQUIRED": 72
+   },
+   "before_r3": {
+    "HUMAN_REVIEW_REQUIRED": 372
+   },
+   "citations": 372,
+   "distinct_records": 22,
+   "resolved_to_exact_grade_expectation": 0,
+   "still_misattributed_as_authored": 372,
+   "verbatim_michigan": 0
   },
-  "validation": {
-    "invariants": 21,
-    "mutations": 8,
-    "result": "29 passed, 0 failed",
-    "run_with": "python3 tools/validate.py",
-    "mutation_principle": "Each mutation corrupts an input and must change the verdict or abort the build. A mutation that left the output identical would prove the corresponding rule was asserted in prose rather than executed against the bytes."
+  "physical_education": {
+   "after_r4": {
+    "ALIAS_RESOLVED_VERBATIM": 252,
+    "HUMAN_REVIEW_REQUIRED": 288
+   },
+   "before_r3": {
+    "ALIAS_RESOLVED_VERBATIM": 252,
+    "HUMAN_REVIEW_REQUIRED": 288
+   },
+   "citations_in_scope": 288,
+   "citations_total": 540,
+   "distinct_records": 10,
+   "newly_resolved": 0,
+   "still_misattributed_as_authored": 288
   },
-  "determinism": "Same inputs produce a byte-identical tree. tools/build_r4.py verifies all three SHA256 pins before reading a byte and aborts on mismatch; every literal official string it names is presence-checked against those bytes.",
-  "reversal": "Delete curriculum-release-evidence/g34-specialty-arts-pe-r4/. Every citation returns to its r3 class. Nothing else was written."
+  "registry_mappings": 32,
+  "unresolved_total": 360
+ },
+ "determinism": "Same inputs produce a byte-identical tree. tools/build_r4.py verifies all three SHA256 pins before reading a byte and aborts on mismatch; every literal official string it names is presence-checked against those bytes.",
+ "evidence_id": "manuel-academy-g34-specialty-arts-pe-standards-policy-r4",
+ "generated": "2026-08-12",
+ "headline_guarantees": [
+  "No arts citation is classified VERBATIM_VERIFIED, ALIAS_RESOLVED_VERBATIM or COMPOSITE_VERIFIED.",
+  "No arts citation is assigned an exact Michigan grade-level expectation code.",
+  "No PE citation is promoted to COMPOSITE_VERIFIED to absorb a misquotation.",
+  "No proposed_correction is applied; this package edits no lesson.",
+  "Every crosswalk is reversible and every mapping is recoverable from the inverse index."
+ ],
+ "independent_review": {
+  "confirmed": [
+   "zero capitalised NCAS occurrences in both arts documents (with a split-tolerant search)",
+   "roman-numeral to standard correspondence, 859/859 code occurrences",
+   "all three PE divergences, each authored string occurring 0 times",
+   "'health-enhanced' appears only in the K-2 band",
+   "186 distinct arts codes (53/57/32/44) and 119 PE outcome codes",
+   "no NCAS vocabulary labelled verbatim/alias/composite; no exact grade-level code assigned"
+  ],
+  "defects_found_and_fixed": [
+   "source-custody.json falsely claimed the NCAS definitions were never evidence; the Connecting and Presenting verdicts depend on them. Corrected.",
+   "R4-ARTS-3 was applied to Connecting but not to Presenting, though the dance-presentation evidence was already recorded in the Responding caveat. 24 citations demoted to HUMAN_REVIEW_REQUIRED.",
+   "the arts extractor silently dropped one of two differing texts printed under ART.VA.III.3.3. Now recorded; 187 printed / 186 distinct.",
+   "the R4-ARTS-1 premise guard could not match words split mid-token, which this document does constantly. Now split-tolerant; conclusion unchanged."
+  ],
+  "not_verified_by_the_review": "The upstream re-fetch claims (HTTP 200, byte-identical on 2026-08-12) and the 'only arts document on the MDE index' claim. The review performed no network fetch; it verified the held-bytes-match-pin half only.",
+  "open_dissent": "The review argues Connecting should resolve to Michigan Standard 5 alone, since 10 of the Grade 3/4 expectations containing 'connect'/'relate' sit under Standard 5 and effectively none under Standard 4. The package concedes its Standard 4 half rested on a concept-based inference its own rules forbid, and still leaves the 48 unresolved rather than resolve more on thinner evidence. Recorded in rules/decision-rules.json for a human to rule on.",
+  "ran": "2026-08-13, adversarial, against the PDF bytes"
+ },
+ "input": {
+  "consumed": [
+   "evidence/citations.jsonl - the arts and physical-education records only",
+   "sources/source-custody.json - to cross-check the SHA256 pins",
+   "sources/documents/*.pdf - three documents, read-only, never copied"
+  ],
+  "evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "modified": "nothing",
+  "path": "curriculum-release-evidence/g34-specialty-r3"
+ },
+ "reversal": "Delete curriculum-release-evidence/g34-specialty-arts-pe-r4/. Every citation returns to its r3 class. Nothing else was written.",
+ "scope": {
+  "in": [
+   "arts-and-music (372 citations)",
+   "physical-education (540 citations, 288 of them unresolved on entry)"
+  ],
+  "out": [
+   "health",
+   "technology",
+   "financial-literacy",
+   "ready-for-life",
+   "lesson content of any kind"
+  ]
+ },
+ "sources": {
+  "custody_model": "REFERENCE_NOT_COPY",
+  "documents_pinned": 3,
+  "held_bytes_match_pin": "3/3",
+  "upstream_refetch_byte_identical": "3/3 on 2026-08-12",
+  "verify_with": "bash sources/refetch-verify.sh"
+ },
+ "status": "G34_ARTS_PE_STANDARDS_POLICY_READY",
+ "validation": {
+  "invariants": 21,
+  "mutation_principle": "Each mutation corrupts an input and must change the verdict or abort the build. A mutation that left the output identical would prove the corresponding rule was asserted in prose rather than executed against the bytes.",
+  "mutations": 9,
+  "result": "30 passed, 0 failed",
+  "run_with": "python3 tools/validate.py"
+ }
 }

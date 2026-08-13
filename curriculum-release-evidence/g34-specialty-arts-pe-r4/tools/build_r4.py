@@ -69,6 +69,9 @@ def load_sources():
 
 # ------------------------------------------------------------------ official PE anchors
 
+# Page ranges backing the band cue fallback, derived from the standard headings' own pages.
+PE_BAND_PAGES = [("K-2", 13, 19), ("3-5", 20, 28), ("6-8", 29, 39), ("HS", 40, 44)]
+
 PE_BANDS = [
     ("K-2", "Kindergarten Grade 1 Grade 2"),
     ("3-5", "Grade 3 Grade 4 Grade 5"),
@@ -86,6 +89,11 @@ def extract_pe_standards(pe_pages):
             n, stmt = m.group(1), NORM(m.group(2))
             tail = NORM(t[m.end():m.end() + 80])
             band = next((b for b, cue in PE_BANDS if tail.startswith(cue)), None)
+            if band is None:
+                # The HS section does not repeat a "Level 1 Level 2" cue after every
+                # standard, so fall back to the page range. Without this the extract
+                # silently omits HS statements and reads as if only 3 bands existed.
+                band = next((b for b, lo, hi in PE_BAND_PAGES if lo <= i <= hi), None)
             if band and band not in found[n]:
                 found[n][band] = {"text": stmt, "pdf_page_index": i}
     for n in "12345":
@@ -138,25 +146,36 @@ def extract_arts_codes(arts_pages):
             body = re.split(ARTS_HEADINGS, t[m.end():end])[0]
             body = re.sub(r"\s+([.,;])", r"\1", body).strip()
             key = f"ART.{d}.{s}.{g}.{n}"
-            if key not in out or len(body) > len(out[key]["text"]):
-                out[key] = {"discipline": d, "standard_roman": s, "grade": g,
-                            "index": int(n), "text": body, "pdf_page_index": i}
+            entry = {"discipline": d, "standard_roman": s, "grade": g,
+                     "index": int(n), "text": body, "pdf_page_index": i}
+            if key not in out:
+                out[key] = entry
+            elif NORM(out[key]["text"]) == NORM(body):
+                continue  # same code reprinted identically; not a collision
+            else:
+                # Michigan prints this code twice with DIFFERENT text. Record both rather
+                # than silently keeping one - the discarded one is a real printed
+                # expectation and dropping it shortens a reviewer's shortlist.
+                out[key].setdefault("collisions", []).append(entry)
     return out
 
 
 def capitalised_name_counts(pages_sets):
     """NCAS process words used as a capitalised name, across both arts documents.
 
-    A capitalised name is the word with an initial capital NOT at a sentence start and
-    NOT mid-sentence lowercase. Counted permissively: any initial-capital occurrence.
-    Rule R4-ARTS-1 requires this to be zero.
+    Rule R4-ARTS-1 requires this to be zero, so the search must be harder to fool than
+    the text is to mangle. These PDFs split words mid-token constantly - 'Demonstr ate'
+    appears 38 times, 'mo vement' 38 times - so a plain \bCreating\b would score zero on
+    a heading extracted as 'Cr eating' and the guard would pass a document that broke its
+    own premise. Every letter boundary therefore tolerates optional whitespace.
     """
     counts = {}
     for w in NCAS_PROCESS_WORDS:
+        pat = re.compile(r"(?<![A-Za-z])" + r"\s*".join(w) + r"(?![a-z])")
         n = 0
         for pages in pages_sets:
             for p in pages:
-                n += len(re.findall(rf"\b{w}\b", NORM(p)))
+                n += len(pat.findall(NORM(p)))
         counts[w] = n
     return counts
 
@@ -181,11 +200,18 @@ CROSSWALK = {
         "name_similarity": "Performing / PERFORM share a root. Recorded, not relied on.",
     },
     "Presenting": {
-        "michigan_standards": ["I"],
+        # Michigan has no standard whose SUBJECT is presenting, unlike Creating (CREATE),
+        # Performing (PERFORM) and Responding (ANALYZE). Presentation is therefore housed
+        # differently by discipline, so this process resolves only when the citation names
+        # a discipline. Raised by the r4 independent standards review; see
+        # rules/decision-rules.json "presenting_has_no_home_standard".
+        "michigan_standards": ["I", "III"],
+        "michigan_standards_by_discipline": {"VA": ["I"], "D": ["III"]},
         "ncas_definition": "Interpreting and sharing artistic work; in NCAS the visual-arts analogue of Performing.",
-        "warrant_codes": ["ART.VA.I.3.4", "ART.VA.I.4.4"],
-        "warrant": "Michigan files visual-arts presentation under PERFORM, not under a separate standard: ART.VA.I.3.4 reads 'Select, present, and evaluate personal artwork.' and ART.VA.I.4.4 reads 'Prepare, present, and collaboratively evaluate personal artwork.'",
-        "name_similarity": "None. Presenting and PERFORM do not share a root. This mapping rests entirely on Michigan's own expectation text, which is why it is the case that proves rule R4-ARTS-2.",
+        "warrant_codes": ["ART.VA.I.3.4", "ART.VA.I.4.4", "ART.D.III.3.4", "ART.D.III.4.4"],
+        "warrant": "Michigan files VISUAL-ARTS presentation under PERFORM - ART.VA.I.3.4 'Select, present, and evaluate personal artwork.' and ART.VA.I.4.4 'Prepare, present, and collaboratively evaluate personal artwork.' - but files DANCE presentation under ANALYZE: ART.D.III.3.4 'Demonstrate the ability to create a dance study for presentation to peers.' and ART.D.III.4.4 'Demonstrate the ability to create a dance study to present to peers, then analyze and discuss the process used.' A citation naming Visual Arts resolves to Standard 1; a citation naming no discipline spans Standards 1 and 3 and does not resolve.",
+        "name_similarity": "None. Presenting and PERFORM do not share a root, and neither do Presenting and ANALYZE. Nothing here rests on name similarity.",
+        "discipline_dependent": True,
     },
     "Responding": {
         "michigan_standards": ["III"],
@@ -338,8 +364,17 @@ def classify_arts(rec, arts_codes):
     grade = str(rec["grade"])
 
     components = dict(PROCESS_TOKENS)[token]
-    targets = sorted({r for c in components for r in CROSSWALK[c]["michigan_standards"]},
-                     key=lambda r: ARTS_ROMAN_TO_NUM[r])
+    targets = set()
+    for c in components:
+        cw = CROSSWALK[c]
+        by_disc = cw.get("michigan_standards_by_discipline")
+        # A discipline-dependent process narrows only when the citation names a discipline
+        # Michigan has an answer for; otherwise it keeps every standard it could land on.
+        if by_disc and disc in (by_disc or {}):
+            targets |= set(by_disc[disc])
+        else:
+            targets |= set(cw["michigan_standards"])
+    targets = sorted(targets, key=lambda r: ARTS_ROMAN_TO_NUM[r])
     ambiguous = any(CROSSWALK[c].get("ambiguous") for c in components) or len(targets) > 1
 
     candidates = sorted(k for k, v in arts_codes.items()
@@ -516,9 +551,31 @@ def main():
     by_std = Counter(v["standard_roman"] for v in g34_arts.values())
     pe_codes = pe_outcome_codes(pe_pages)
 
+    # Michigan does not print its standard statements identically everywhere. Recording
+    # only the canonical form would be an exact-text claim this package cannot support.
+    stmt_variants = defaultdict(dict)
+    for i, raw in enumerate(arts_pages):
+        for m in re.finditer(r"Standard\s*([1-5])\s*:\s*(.+?)\s*\(VPAA", NORM(raw)):
+            v = re.sub(r"\s+([.,;])", r"\1", m.group(2)).strip()
+            v = re.split(r"\s*ART\s*\.", v)[0].strip()  # drop a trailing code that ran on
+            stmt_variants[m.group(1)].setdefault(v, []).append(i)
+    variants = {n: [{"statement": v, "pdf_page_indices": pp, "occurrences": len(pp)}
+                    for v, pp in sorted(d.items(), key=lambda kv: -len(kv[1]))]
+                for n, d in sorted(stmt_variants.items())}
+    printed = len(g34_arts) + sum(len(v.get("collisions", [])) for v in g34_arts.values())
+
     (OUT / "sources" / "extracts" / "michigan-arts-anchors.json").write_text(json.dumps({
         "doc_id": "mde-arts-glce",
         "sha256": PINS["mde-arts-glce"],
+        "standard_statement_variants": variants,
+        "standard_statement_variant_note": "Michigan prints more than one wording for some standards, including inside the Grade 3/4 scope: Standard 4 appears as 'Analyze and describe...' (without 'Understand,') on the Theatre and Visual Arts Grade 3 pages, and Standard 2 appears as 'All students will apply skills...' on the Theatre Grade 4 page. The canonical form recorded under 'standards' is the most frequent one, not the only one.",
+        "grade_3_4_expectations_printed": printed,
+        "grade_3_4_expectations_distinct_codes": len(g34_arts),
+        "grade_3_4_code_collisions": {
+            k: {"kept": v["text"], "kept_pdf_page_index": v["pdf_page_index"],
+                "also_printed": [{"text": c["text"], "pdf_page_index": c["pdf_page_index"]} for c in v["collisions"]]}
+            for k, v in sorted(g34_arts.items()) if v.get("collisions")},
+        "grade_3_4_code_collision_note": "Michigan prints ART.VA.III.3.3 twice with different text. The entry on PDF p. 6 sits inside the DANCE Grade 3 ANALYZE block and reads 'Students attend a dance concert and discuss the experience.'; no ART.D.III.3.3 exists anywhere in the document, so this is evidently a Michigan typo for that code. The entry on p. 52 is the genuine Visual Arts one. This package does NOT reassign the p. 6 entry to Dance - that would be inventing a code Michigan does not print. Both are recorded, and a human deciding a Dance Grade 3 ANALYZE citation should know the expectation exists. Consequence: 187 expectations are printed for Grades 3/4 but only 186 distinct codes exist.",
         "standards": {r: {"number": ARTS_ROMAN_TO_NUM[r], "name": n, "statement": s + "."}
                       for r, (n, s) in ARTS_STANDARDS.items()},
         "disciplines": DISCIPLINE_NAME,

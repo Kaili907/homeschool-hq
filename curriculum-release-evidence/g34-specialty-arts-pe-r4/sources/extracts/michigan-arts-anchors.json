@@ -19,6 +19,19 @@
   "IV": 24,
   "V": 26
  },
+ "grade_3_4_code_collision_note": "Michigan prints ART.VA.III.3.3 twice with different text. The entry on PDF p. 6 sits inside the DANCE Grade 3 ANALYZE block and reads 'Students attend a dance concert and discuss the experience.'; no ART.D.III.3.3 exists anywhere in the document, so this is evidently a Michigan typo for that code. The entry on p. 52 is the genuine Visual Arts one. This package does NOT reassign the p. 6 entry to Dance - that would be inventing a code Michigan does not print. Both are recorded, and a human deciding a Dance Grade 3 ANALYZE citation should know the expectation exists. Consequence: 187 expectations are printed for Grades 3/4 but only 186 distinct codes exist.",
+ "grade_3_4_code_collisions": {
+  "ART.VA.III.3.3": {
+   "also_printed": [
+    {
+     "pdf_page_index": 52,
+     "text": "Highlight social trends that influence our emotional reactions to art."
+    }
+   ],
+   "kept": "Students attend a dance concert and discuss the experience.",
+   "kept_pdf_page_index": 6
+  }
+ },
  "grade_3_4_expectation_count": 186,
  "grade_3_4_expectations": {
   "ART.D.I.3.1": {
@@ -1334,12 +1347,22 @@
    "text": "Examine how art expresses cultural traditions."
   },
   "ART.VA.III.3.3": {
+   "collisions": [
+    {
+     "discipline": "VA",
+     "grade": "3",
+     "index": 3,
+     "pdf_page_index": 52,
+     "standard_roman": "III",
+     "text": "Highlight social trends that influence our emotional reactions to art."
+    }
+   ],
    "discipline": "VA",
    "grade": "3",
    "index": 3,
-   "pdf_page_index": 52,
+   "pdf_page_index": 6,
    "standard_roman": "III",
-   "text": "Highlight social trends that influence our emotional reactions to art."
+   "text": "Students attend a dance concert and discuss the experience."
   },
   "ART.VA.III.3.4": {
    "discipline": "VA",
@@ -1510,6 +1533,8 @@
    "text": "Demonstrate cross-curricular connections through a culminating event."
   }
  },
+ "grade_3_4_expectations_distinct_codes": 186,
+ "grade_3_4_expectations_printed": 187,
  "ncas_capitalised_name_occurrences": {
   "Connecting": 0,
   "Creating": 0,
@@ -1519,6 +1544,259 @@
   "Responding": 0
  },
  "sha256": "f52e0506e30a2277991ae4cebfe75ce157ca0cc3d6ba2b833e15ee8fd9113f2b",
+ "standard_statement_variant_note": "Michigan prints more than one wording for some standards, including inside the Grade 3/4 scope: Standard 4 appears as 'Analyze and describe...' (without 'Understand,') on the Theatre and Visual Arts Grade 3 pages, and Standard 2 appears as 'All students will apply skills...' on the Theatre Grade 4 page. The canonical form recorded under 'standards' is the most frequent one, not the only one.",
+ "standard_statement_variants": {
+  "1": [
+   {
+    "occurrences": 40,
+    "pdf_page_indices": [
+     2,
+     3,
+     4,
+     5,
+     7,
+     9,
+     10,
+     12,
+     13,
+     15,
+     19,
+     20,
+     22,
+     23,
+     25,
+     26,
+     28,
+     29,
+     31,
+     32,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     42,
+     44,
+     45,
+     48,
+     49,
+     50,
+     51,
+     52,
+     54,
+     55,
+     57,
+     58,
+     60
+    ],
+    "statement": "Apply skills and knowledge to perform in the arts."
+   }
+  ],
+  "2": [
+   {
+    "occurrences": 38,
+    "pdf_page_indices": [
+     2,
+     3,
+     4,
+     6,
+     7,
+     9,
+     11,
+     12,
+     14,
+     19,
+     21,
+     22,
+     24,
+     25,
+     27,
+     28,
+     30,
+     31,
+     33,
+     35,
+     36,
+     37,
+     38,
+     40,
+     41,
+     42,
+     44,
+     45,
+     48,
+     49,
+     50,
+     51,
+     53,
+     54,
+     55,
+     57,
+     59,
+     60
+    ],
+    "statement": "Apply skills and knowledge to create in the arts."
+   },
+   {
+    "occurrences": 1,
+    "pdf_page_indices": [
+     39
+    ],
+    "statement": "All students will apply skills and knowledge to create in the arts."
+   }
+  ],
+  "3": [
+   {
+    "occurrences": 36,
+    "pdf_page_indices": [
+     2,
+     3,
+     5,
+     6,
+     8,
+     9,
+     11,
+     12,
+     14,
+     16,
+     21,
+     22,
+     24,
+     27,
+     29,
+     30,
+     33,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41,
+     43,
+     44,
+     46,
+     48,
+     49,
+     52,
+     53,
+     54,
+     56,
+     57,
+     59,
+     61
+    ],
+    "statement": "Analyze, describe, and evaluate works of art."
+   },
+   {
+    "occurrences": 1,
+    "pdf_page_indices": [
+     19
+    ],
+    "statement": "All students will analyze, describe, and evaluate works of art."
+   }
+  ],
+  "4": [
+   {
+    "occurrences": 38,
+    "pdf_page_indices": [
+     3,
+     4,
+     5,
+     6,
+     8,
+     10,
+     11,
+     13,
+     15,
+     16,
+     20,
+     21,
+     23,
+     24,
+     26,
+     27,
+     29,
+     30,
+     32,
+     34,
+     35,
+     36,
+     37,
+     39,
+     40,
+     42,
+     43,
+     45,
+     46,
+     48,
+     49,
+     51,
+     53,
+     55,
+     56,
+     58,
+     59,
+     61
+    ],
+    "statement": "Understand, analyze, and describe the arts in their historical, social, and cultural contexts."
+   },
+   {
+    "occurrences": 1,
+    "pdf_page_indices": [
+     38
+    ],
+    "statement": "Analyze and describe the arts in their historical, social, and cultural contexts."
+   }
+  ],
+  "5": [
+   {
+    "occurrences": 37,
+    "pdf_page_indices": [
+     3,
+     4,
+     5,
+     7,
+     8,
+     10,
+     11,
+     13,
+     15,
+     17,
+     20,
+     21,
+     23,
+     24,
+     26,
+     28,
+     29,
+     30,
+     32,
+     34,
+     36,
+     38,
+     39,
+     40,
+     41,
+     42,
+     44,
+     45,
+     47,
+     50,
+     51,
+     52,
+     55,
+     56,
+     58,
+     60,
+     61
+    ],
+    "statement": "Recognize, analyze, and describe connections among the arts; between the arts and other disciplines; between the arts and everyday life."
+   }
+  ]
+ },
  "standards": {
   "I": {
    "name": "PERFORM",

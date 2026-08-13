@@ -1,108 +1,120 @@
 {
-  "evidence_id": "manuel-academy-g34-specialty-arts-pe-standards-policy-r4",
-  "scope": "The two largest unresolved specialty standards review groups from g34-specialty-r3: ARTS/MUSIC (372 citations) and PHYSICAL EDUCATION (288 citations).",
-  "out_of_scope": [
-    "Lesson content. This package classifies citation strings against official standards text. It never opens a lesson to decide what the lesson teaches.",
-    "The 252 PE citations already ALIAS_RESOLVED_VERBATIM in r3 (Standards 1 and 4). They are re-verified here but not reclassified.",
-    "Health, Technology/Computer Science, Financial Literacy, Ready for Life. Untouched."
-  ],
-  "two_tier_principle": {
-    "statement": "An arts or PE citation carries two separable claims: (A) a REFERENT claim - which official element is meant - and (B) a TEXT claim - that the quoted words are the official element's words. A citation can resolve at (A) and fail at (B). This package reports both tiers separately and never lets a resolved referent launder an unresolved text.",
-    "why": "r3 collapsed the tiers into one verdict, which made 372 arts citations indistinguishable from each other when in fact 324 of them have an unambiguous Michigan referent and 48 do not.",
-    "consequence": "'Resolved' in this package always names its tier. No count of 'resolved' here means 'the authored string is Michigan text'."
+ "class_precedence": [
+  "VERBATIM_VERIFIED",
+  "ALIAS_RESOLVED_VERBATIM",
+  "COMPOSITE_VERIFIED",
+  "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+  "HUMAN_REVIEW_REQUIRED"
+ ],
+ "classes": {
+  "ALIAS_RESOLVED_VERBATIM": "Strip the documented Manuel Academy prefix and the remainder is verbatim official text (whitespace-normalized, trailing period ignored), and the prefix's numbering resolves to the document's own numbering. Both the referent and the text claim hold.",
+  "COMPOSITE_VERIFIED": "The citation combines two or more SEPARATELY VERIFIED OFFICIAL elements into a string appearing nowhere verbatim. Every component must be official text. A single official element with a substituted word is NOT a composite.",
+  "CROSSWALK_RESOLVED_STANDARD_LEVEL": "The citation uses an external framework's vocabulary, but that vocabulary maps to exactly ONE Michigan standard under a documented, reversible rule grounded in Michigan's own printed Grade 3/4 expectation text. The referent claim holds at standard granularity. The text claim FAILS - the words are not Michigan's. No exact grade-level expectation is assigned.",
+  "HUMAN_REVIEW_REQUIRED": "The citation asserts an authority the held document does not support, or its Michigan referent is ambiguous across more than one standard. A human must decide; this session will not decide by inventing.",
+  "LOCAL_COMPOSITION": "A Manuel Academy curricular anchor asserting no state authority. Not used in this package's scope.",
+  "VERBATIM_VERIFIED": "The citation string in full appears verbatim in the cited official document. Zero in scope by construction: every citation carries a house prefix."
+ },
+ "evidence_id": "manuel-academy-g34-specialty-arts-pe-standards-policy-r4",
+ "out_of_scope": [
+  "Lesson content. This package classifies citation strings against official standards text. It never opens a lesson to decide what the lesson teaches.",
+  "The 252 PE citations already ALIAS_RESOLVED_VERBATIM in r3 (Standards 1 and 4). They are re-verified here but not reclassified.",
+  "Health, Technology/Computer Science, Financial Literacy, Ready for Life. Untouched."
+ ],
+ "rules": [
+  {
+   "band_discipline": "mde-pe-2017 prints each standard statement once per grade band, and the bands are NOT identical. Standard 3 reads 'health-enhanced ... physical activity and fitness' at K-2 but 'health-enhancing ... physical activity and fitness' at 3-5 and 6-8. A Grade 3/4 citation is judged against the 3-5 band only. Matching a citation against whichever band makes it pass would be the error this rule exists to prevent.",
+   "executed_as": "String equality against text extracted from the pinned PDF at build time.",
+   "id": "R4-PE-1",
+   "statement": "'Michigan PE Standard <n>: <text>' resolves to ALIAS_RESOLVED_VERBATIM when <text>, whitespace-normalized and ignoring a trailing period, equals the statement printed after 'Standard <n>:' in the GRADE 3 / GRADE 4 / GRADE 5 band of mde-pe-2017. The band is selected by the citation's own grade, never by a nearer-matching band.",
+   "subject": "physical-education"
   },
-  "classes": {
-    "ALIAS_RESOLVED_VERBATIM": "Strip the documented Manuel Academy prefix and the remainder is verbatim official text (whitespace-normalized, trailing period ignored), and the prefix's numbering resolves to the document's own numbering. Both the referent and the text claim hold.",
-    "COMPOSITE_VERIFIED": "The citation combines two or more SEPARATELY VERIFIED OFFICIAL elements into a string appearing nowhere verbatim. Every component must be official text. A single official element with a substituted word is NOT a composite.",
-    "CROSSWALK_RESOLVED_STANDARD_LEVEL": "The citation uses an external framework's vocabulary, but that vocabulary maps to exactly ONE Michigan standard under a documented, reversible rule grounded in Michigan's own printed Grade 3/4 expectation text. The referent claim holds at standard granularity. The text claim FAILS - the words are not Michigan's. No exact grade-level expectation is assigned.",
-    "HUMAN_REVIEW_REQUIRED": "The citation asserts an authority the held document does not support, or its Michigan referent is ambiguous across more than one standard. A human must decide; this session will not decide by inventing.",
-    "LOCAL_COMPOSITION": "A Manuel Academy curricular anchor asserting no state authority. Not used in this package's scope.",
-    "VERBATIM_VERIFIED": "The citation string in full appears verbatim in the cited official document. Zero in scope by construction: every citation carries a house prefix."
+  {
+   "id": "R4-PE-2",
+   "meaning_test": "Applied after the string test and capable only of DEMOTING, never promoting: a divergence that preserves meaning stays HUMAN_REVIEW_REQUIRED (a quotation must still be a quotation), and a divergence that changes scope is additionally recorded with the direction of the change (narrowing, broadening, or substitution).",
+   "statement": "A 'Michigan PE Standard <n>: <text>' whose <text> is not the band's printed statement is HUMAN_REVIEW_REQUIRED, even when <n> resolves unambiguously and the divergence is a single noun phrase. It is NOT downgraded to a crosswalk and NOT promoted to COMPOSITE_VERIFIED.",
+   "subject": "physical-education",
+   "why_not_composite": "COMPOSITE_VERIFIED requires every component to be verified official text. 'physical activities', 'health-enhanced level of physical fitness' and 'other benefits' are not official components of the standards they appear in. Classing a word substitution as a composite would let any misquotation pass by pointing at the words that did survive.",
+   "why_not_crosswalk": "CROSSWALK_RESOLVED_STANDARD_LEVEL exists for citations that honestly use another framework's vocabulary. A PE citation does not: it presents itself as a quotation of Michigan Standard <n>. A near-quotation of a named standard is a misquotation, not a crosswalk, and the reader has no cue that the words were changed."
   },
-  "class_precedence": [
-    "VERBATIM_VERIFIED",
-    "ALIAS_RESOLVED_VERBATIM",
-    "COMPOSITE_VERIFIED",
-    "CROSSWALK_RESOLVED_STANDARD_LEVEL",
-    "HUMAN_REVIEW_REQUIRED"
-  ],
-  "rules": [
-    {
-      "id": "R4-PE-1",
-      "subject": "physical-education",
-      "statement": "'Michigan PE Standard <n>: <text>' resolves to ALIAS_RESOLVED_VERBATIM when <text>, whitespace-normalized and ignoring a trailing period, equals the statement printed after 'Standard <n>:' in the GRADE 3 / GRADE 4 / GRADE 5 band of mde-pe-2017. The band is selected by the citation's own grade, never by a nearer-matching band.",
-      "executed_as": "String equality against text extracted from the pinned PDF at build time.",
-      "band_discipline": "mde-pe-2017 prints each standard statement once per grade band, and the bands are NOT identical. Standard 3 reads 'health-enhanced ... physical activity and fitness' at K-2 but 'health-enhancing ... physical activity and fitness' at 3-5 and 6-8. A Grade 3/4 citation is judged against the 3-5 band only. Matching a citation against whichever band makes it pass would be the error this rule exists to prevent."
-    },
-    {
-      "id": "R4-PE-2",
-      "subject": "physical-education",
-      "statement": "A 'Michigan PE Standard <n>: <text>' whose <text> is not the band's printed statement is HUMAN_REVIEW_REQUIRED, even when <n> resolves unambiguously and the divergence is a single noun phrase. It is NOT downgraded to a crosswalk and NOT promoted to COMPOSITE_VERIFIED.",
-      "why_not_crosswalk": "CROSSWALK_RESOLVED_STANDARD_LEVEL exists for citations that honestly use another framework's vocabulary. A PE citation does not: it presents itself as a quotation of Michigan Standard <n>. A near-quotation of a named standard is a misquotation, not a crosswalk, and the reader has no cue that the words were changed.",
-      "why_not_composite": "COMPOSITE_VERIFIED requires every component to be verified official text. 'physical activities', 'health-enhanced level of physical fitness' and 'other benefits' are not official components of the standards they appear in. Classing a word substitution as a composite would let any misquotation pass by pointing at the words that did survive.",
-      "meaning_test": "Applied after the string test and capable only of DEMOTING, never promoting: a divergence that preserves meaning stays HUMAN_REVIEW_REQUIRED (a quotation must still be a quotation), and a divergence that changes scope is additionally recorded with the direction of the change (narrowing, broadening, or substitution)."
-    },
-    {
-      "id": "R4-PE-3",
-      "subject": "physical-education",
-      "statement": "Every HUMAN_REVIEW_REQUIRED PE citation records a proposed_correction: the exact Grade 3-5 band text, its PDF page index, and the token-level diff. The correction is RECORDED, NOT APPLIED. This package edits no lesson.",
-      "reversibility": "Applying a proposed_correction is a pure string replacement with a recorded before-image, so it is exactly reversible."
-    },
-    {
-      "id": "R4-ARTS-1",
-      "subject": "arts-and-music",
-      "statement": "The process vocabulary used by every Grade 3/4 arts citation - Creating, Performing, Presenting, Producing, Responding, Connecting - is National Core Arts Standards vocabulary. It occurs ZERO times as a capitalised standard or process name in either held Michigan arts document. No arts citation may be classified VERBATIM_VERIFIED, ALIAS_RESOLVED_VERBATIM or COMPOSITE_VERIFIED. This holds regardless of how completely the concepts overlap.",
-      "executed_as": "Capitalised-name occurrence count over both pinned arts PDFs at build time; the build aborts if any count is non-zero, because that would mean the premise of this rule had changed."
-    },
-    {
-      "id": "R4-ARTS-2",
-      "subject": "arts-and-music",
-      "statement": "An NCAS process crosswalks to a Michigan standard ONLY when Michigan's own printed Grade 3/4 expectations under that standard exercise the process. The warrant must be an expectation code and its text, not a shared word root. 'Creating' does not map to CREATE because both contain 'creat-'; it maps because ART.M.II.3.1, ART.D.II.3.2, ART.T.II.3.1 and ART.VA.II.3.5 are generative outcomes.",
-      "guard": "The morphological similarity between an NCAS process and a Michigan standard name is recorded but is never sufficient warrant on its own. Presenting -> PERFORM is the case that proves the rule: the names diverge, and the mapping holds anyway because ART.VA.I.3.4 reads 'Select, present, and evaluate personal artwork.'"
-    },
-    {
-      "id": "R4-ARTS-3",
-      "subject": "arts-and-music",
-      "statement": "A process whose warranted expectations fall under exactly ONE Michigan standard is CROSSWALK_RESOLVED_STANDARD_LEVEL. A process whose warranted expectations span TWO OR MORE Michigan standards is HUMAN_REVIEW_REQUIRED, and the candidate standard set is recorded.",
-      "applied": "Connecting spans Michigan Standard 4 (ANALYZE IN CONTEXT) and Standard 5 (ANALYZE AND MAKE CONNECTIONS), because NCAS Connecting carries both 'relate personal experience to make art' and 'relate works to societal, cultural and historical context'. Deciding which half a lesson exercises requires reading the lesson, which is out of scope. It stays unresolved.",
-      "the_responding_connecting_asymmetry": {
-        "challenge": "Why is Responding resolved to Standard 3 while Connecting is not resolved at all, when Michigan spreads analysis across Standards 3, 4 and 5? The asymmetry is the most contestable judgment in this package, so the reasoning is recorded rather than left implicit.",
-        "answer": "The test in R4-ARTS-3 asks whether the AUTHORED PROCESS splits across Michigan standards - not whether the Michigan standard is broader than the process. Those are different failures and only the first creates ambiguity about what a citation refers to.",
-        "responding": "NCAS itself assigns context-relating to Connecting, not to Responding; Responding is perceive / analyze / interpret / evaluate the work. All of that lands on Michigan Standard 3. Michigan Standard 3 is BROADER than Responding - some of its Grade 3/4 expectations are contextual (ART.VA.III.3.2, 'Examine how art expresses cultural traditions.') and one is generative (ART.D.III.3.4) - but a process mapping into a broader standard still has exactly one referent. Breadth in the target does not make the citation ambiguous.",
-        "connecting": "Connecting is not one process landing in a broad standard; it is two anchors landing in two different standards. There is no single Michigan referent to name, so the citation is genuinely ambiguous and no amount of source reading fixes it.",
-        "what_would_overturn_this": "A showing that some identifiable part of NCAS Responding belongs to a Michigan standard other than 3. That would make Responding one-to-many and move its 108 citations into HUMAN_REVIEW_REQUIRED alongside Connecting's 48."
-      }
-    },
-    {
-      "id": "R4-ARTS-4",
-      "subject": "arts-and-music",
-      "statement": "NO arts citation is assigned an exact Michigan grade-level expectation code. Standard-level is the ceiling this package will reach without curriculum judgment.",
-      "why": "Michigan prints 186 exact-grade expectations for Grades 3 and 4. Choosing which one a lesson meets is a curriculum decision about that lesson. A crosswalk that resolved to a code would be this session inventing the mapping, which is the failure mode the task forbids.",
-      "recorded_instead": "Each crosswalk records the candidate_expectation_codes - the full Michigan Grade 3/4 code set under the mapped standard, filtered by discipline where the citation names one - as the shortlist a human chooses from. A shortlist is not an assignment."
-    },
-    {
-      "id": "R4-ARTS-5",
-      "subject": "arts-and-music",
-      "statement": "A discipline qualifier in the citation ('Dance', 'Music', 'Theatre', 'Visual Arts') is verified independently against Michigan's four discipline code segments (D, M, T, VA) and narrows candidate_expectation_codes. A verified discipline never upgrades the class.",
-      "note": "All four disciplines named in the citation set are real Michigan arts disciplines. 'Producing' - the NCAS media-arts process - appears in zero citations, and Michigan publishes no media-arts discipline, so no rule is needed for it."
-    },
-    {
-      "id": "R4-BOTH-1",
-      "subject": "arts-and-music, physical-education",
-      "statement": "Every citation in scope keeps citation_string_status independently of its class. A CROSSWALK_RESOLVED_STANDARD_LEVEL arts citation is still MISATTRIBUTED_AS_AUTHORED, because the string still puts Michigan's name on words Michigan does not print.",
-      "why": "This is the field that stops the crosswalk from being read as a fix. 372 of 372 arts citations and 288 of 288 unresolved PE citations are MISATTRIBUTED_AS_AUTHORED. Resolving the referent changed none of that."
-    },
-    {
-      "id": "R4-BOTH-2",
-      "subject": "arts-and-music, physical-education",
-      "statement": "The registry is reversible: every mapping records the authored string, the Michigan target, the warrant, and the inverse index from Michigan target back to authored strings. Round-trip identity is asserted by tools/validate.py and the build fails if it does not hold.",
-      "reversal_procedure": "Discard registry/crosswalk-registry.json and every citation returns to its r3 class. No lesson, no release file and no r3 byte was modified, so reversal is deletion of this directory."
-    }
-  ],
-  "what_would_change_these_conclusions": [
-    "Michigan adopting the National Core Arts Standards, or publishing a crosswalk of its own. Neither is listed on the MDE Academic Standards index as of 2026-08-12.",
-    "A Michigan arts document that prints the process words as capitalised names. Both held documents print zero.",
-    "A revision of mde-pe-2017 whose Standard 2/3/5 text matches the authored strings. The live MDE PE page served the 2017 document byte-identical on 2026-08-12.",
-    "A licensed arts or PE educator ruling on the 48 ambiguous Connecting citations or accepting the 288 PE corrections. That ruling is the point of HUMAN_REVIEW_REQUIRED and this package does not pre-empt it."
-  ]
+  {
+   "id": "R4-PE-3",
+   "reversibility": "Applying a proposed_correction is a pure string replacement with a recorded before-image, so it is exactly reversible.",
+   "statement": "Every HUMAN_REVIEW_REQUIRED PE citation records a proposed_correction: the exact Grade 3-5 band text, its PDF page index, and the token-level diff. The correction is RECORDED, NOT APPLIED. This package edits no lesson.",
+   "subject": "physical-education"
+  },
+  {
+   "executed_as": "Capitalised-name occurrence count over both pinned arts PDFs at build time; the build aborts if any count is non-zero, because that would mean the premise of this rule had changed.",
+   "id": "R4-ARTS-1",
+   "statement": "The process vocabulary used by every Grade 3/4 arts citation - Creating, Performing, Presenting, Producing, Responding, Connecting - is National Core Arts Standards vocabulary. It occurs ZERO times as a capitalised standard or process name in either held Michigan arts document. No arts citation may be classified VERBATIM_VERIFIED, ALIAS_RESOLVED_VERBATIM or COMPOSITE_VERIFIED. This holds regardless of how completely the concepts overlap.",
+   "subject": "arts-and-music"
+  },
+  {
+   "guard": "The morphological similarity between an NCAS process and a Michigan standard name is recorded but is never sufficient warrant on its own. Presenting is the case that proves it twice over: the names share no root, so the Visual Arts mapping to Standard 1 rests entirely on ART.VA.I.3.4's own words - and because Michigan gives Presenting no home standard, a Presenting citation naming no discipline does not resolve at all. See presenting_has_no_home_standard.",
+   "id": "R4-ARTS-2",
+   "presenting_has_no_home_standard": {
+    "applied": "A Presenting citation resolves only when it names a discipline Michigan has an answer for. 'Visual Arts - Presenting' (24 citations) resolves to Standard 1. 'Performing/Presenting' (24 citations) names no discipline, spans Standards 1 and 3, and was moved to HUMAN_REVIEW_REQUIRED. This corrects an inconsistency in the first r4 build, which recorded ART.D.III.3.4 in the Responding caveat and then failed to apply it to Presenting.",
+    "finding": "Michigan houses presentation differently by discipline. Visual-arts presentation is under Standard 1 (ART.VA.I.3.4, ART.VA.I.4.4) but dance presentation is under Standard 3 (ART.D.III.3.4 'create a dance study for presentation to peers', ART.D.III.4.4 'create a dance study to present to peers'). Unlike Creating, Performing and Responding - each of which has a Michigan standard whose SUBJECT is that process - Presenting has no home standard.",
+    "raised_by": "r4 independent standards review"
+   },
+   "statement": "An NCAS process crosswalks to a Michigan standard ONLY when Michigan's own printed Grade 3/4 expectations under that standard exercise the process. The warrant must be an expectation code and its text, not a shared word root. 'Creating' does not map to CREATE because both contain 'creat-'; it maps because ART.M.II.3.1, ART.D.II.3.2, ART.T.II.3.1 and ART.VA.II.3.5 are generative outcomes.",
+   "subject": "arts-and-music"
+  },
+  {
+   "applied": "Two processes fail the single-target test. CONNECTING is read as spanning Michigan Standard 4 (ANALYZE IN CONTEXT) and Standard 5 (ANALYZE AND MAKE CONNECTIONS) because NCAS carries both 'relate personal experience to make art' and 'relate works to societal, cultural and historical context' - a reading the independent review contests; see independent_review_dissent_2026_08_13. PERFORMING/PRESENTING spans Michigan Standard 1 and Standard 3 because Michigan houses visual-arts presentation under 1 and dance presentation under 3, and that citation names no discipline. Deciding either requires reading the lesson, which is out of scope. Both stay unresolved: 48 + 24 = 72.",
+   "id": "R4-ARTS-3",
+   "independent_review_dissent_2026_08_13": {
+    "conceded": "The Standard 4 half of this package's split rested on ART.M.IV.3.2 ('Describe how elements of music are used in examples from world cultures'), which contains neither 'connect' nor 'relate'. It was mapped to NCAS Connecting anchor 11 by concept - the reasoning rule R4-ARTS-2 forbids everywhere else. The inconsistency is real and is recorded rather than argued away.",
+    "finding": "Michigan's own lexical evidence puts connecting under Standard 5 almost exclusively. Of the Grade 3/4 expectations containing 'connect' or 'relate', 10 sit under Standard V and effectively none under Standard IV. Standard V's own statement - 'connections among the arts; between the arts and other disciplines; between the arts and everyday life' - already covers both NCAS anchors, including the personal/everyday half (ART.M.V.3.3, ART.T.V.4.2) and the societal half (ART.T.V.3.2). A clean mapping of Connecting to Standard 5 alone is defensible.",
+    "raised_by": "r4 independent standards review",
+    "what_a_human_should_decide": "Accept Standard 5 as the sole target for Connecting - in which case 48 citations resolve at standard level and this rule needs rewriting - or keep them open. This package does not decide it.",
+    "why_the_verdict_still_stands": "The remedy for a mapping that rested on weak warrant is not a different mapping resting on a lexical search. Resolving these 48 to Standard 5 would resolve MORE on thinner evidence, in the one direction this package is least willing to be wrong. HUMAN_REVIEW_REQUIRED is the conservative side of a genuine disagreement between two readings, and it is where the 48 stay."
+   },
+   "statement": "A process whose warranted expectations fall under exactly ONE Michigan standard is CROSSWALK_RESOLVED_STANDARD_LEVEL. A process whose warranted expectations span TWO OR MORE Michigan standards is HUMAN_REVIEW_REQUIRED, and the candidate standard set is recorded.",
+   "subject": "arts-and-music",
+   "the_responding_connecting_asymmetry": {
+    "answer": "The test in R4-ARTS-3 asks whether the AUTHORED PROCESS splits across Michigan standards - not whether the Michigan standard is broader than the process. Those are different failures and only the first creates ambiguity about what a citation refers to.",
+    "challenge": "Why is Responding resolved to Standard 3 while Connecting is not resolved at all, when Michigan spreads analysis across Standards 3, 4 and 5? The asymmetry is the most contestable judgment in this package, so the reasoning is recorded rather than left implicit.",
+    "connecting": "Connecting is not one process landing in a broad standard; it is two anchors landing in two different standards. There is no single Michigan referent to name, so the citation is genuinely ambiguous and no amount of source reading fixes it.",
+    "responding": "NCAS itself assigns context-relating to Connecting, not to Responding; Responding is perceive / analyze / interpret / evaluate the work. All of that lands on Michigan Standard 3. Michigan Standard 3 is BROADER than Responding - some of its Grade 3/4 expectations are contextual (ART.VA.III.3.2, 'Examine how art expresses cultural traditions.') and one is generative (ART.D.III.3.4) - but a process mapping into a broader standard still has exactly one referent. Breadth in the target does not make the citation ambiguous.",
+    "what_would_overturn_this": "A showing that some identifiable part of NCAS Responding belongs to a Michigan standard other than 3. That would make Responding one-to-many and move its 108 citations into HUMAN_REVIEW_REQUIRED alongside Connecting's 48."
+   }
+  },
+  {
+   "id": "R4-ARTS-4",
+   "recorded_instead": "Each crosswalk records the candidate_expectation_codes - the full Michigan Grade 3/4 code set under the mapped standard, filtered by discipline where the citation names one - as the shortlist a human chooses from. A shortlist is not an assignment.",
+   "statement": "NO arts citation is assigned an exact Michigan grade-level expectation code. Standard-level is the ceiling this package will reach without curriculum judgment.",
+   "subject": "arts-and-music",
+   "why": "Michigan prints 186 exact-grade expectations for Grades 3 and 4. Choosing which one a lesson meets is a curriculum decision about that lesson. A crosswalk that resolved to a code would be this session inventing the mapping, which is the failure mode the task forbids."
+  },
+  {
+   "id": "R4-ARTS-5",
+   "note": "All four disciplines named in the citation set are real Michigan arts disciplines. 'Producing' - the NCAS media-arts process - appears in zero citations, and Michigan publishes no media-arts discipline, so no rule is needed for it.",
+   "statement": "A discipline qualifier in the citation ('Dance', 'Music', 'Theatre', 'Visual Arts') is verified independently against Michigan's four discipline code segments (D, M, T, VA) and narrows candidate_expectation_codes. A verified discipline never upgrades the class.",
+   "subject": "arts-and-music"
+  },
+  {
+   "id": "R4-BOTH-1",
+   "statement": "Every citation in scope keeps citation_string_status independently of its class. A CROSSWALK_RESOLVED_STANDARD_LEVEL arts citation is still MISATTRIBUTED_AS_AUTHORED, because the string still puts Michigan's name on words Michigan does not print.",
+   "subject": "arts-and-music, physical-education",
+   "why": "This is the field that stops the crosswalk from being read as a fix. 372 of 372 arts citations and 288 of 288 unresolved PE citations are MISATTRIBUTED_AS_AUTHORED. Resolving the referent changed none of that."
+  },
+  {
+   "id": "R4-BOTH-2",
+   "reversal_procedure": "Discard registry/crosswalk-registry.json and every citation returns to its r3 class. No lesson, no release file and no r3 byte was modified, so reversal is deletion of this directory.",
+   "statement": "The registry is reversible: every mapping records the authored string, the Michigan target, the warrant, and the inverse index from Michigan target back to authored strings. Round-trip identity is asserted by tools/validate.py and the build fails if it does not hold.",
+   "subject": "arts-and-music, physical-education"
+  }
+ ],
+ "scope": "The two largest unresolved specialty standards review groups from g34-specialty-r3: ARTS/MUSIC (372 citations) and PHYSICAL EDUCATION (288 citations).",
+ "two_tier_principle": {
+  "consequence": "'Resolved' in this package always names its tier. No count of 'resolved' here means 'the authored string is Michigan text'.",
+  "statement": "An arts or PE citation carries two separable claims: (A) a REFERENT claim - which official element is meant - and (B) a TEXT claim - that the quoted words are the official element's words. A citation can resolve at (A) and fail at (B). This package reports both tiers separately and never lets a resolved referent launder an unresolved text.",
+  "why": "r3 collapsed the tiers into one verdict, which made 372 arts citations indistinguishable from each other when in fact 324 of them have an unambiguous Michigan referent and 48 do not."
+ },
+ "what_would_change_these_conclusions": [
+  "Michigan adopting the National Core Arts Standards, or publishing a crosswalk of its own. Neither is listed on the MDE Academic Standards index as of 2026-08-12.",
+  "A Michigan arts document that prints the process words as capitalised names. Both held documents print zero.",
+  "A revision of mde-pe-2017 whose Standard 2/3/5 text matches the authored strings. The live MDE PE page served the 2017 document byte-identical on 2026-08-12.",
+  "A licensed arts or PE educator ruling on the 48 ambiguous Connecting citations or accepting the 288 PE corrections. That ruling is the point of HUMAN_REVIEW_REQUIRED and this package does not pre-empt it."
+ ]
 }

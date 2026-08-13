@@ -42,15 +42,27 @@
    ]
   },
   "Presenting": {
+   "discipline_dependent": true,
    "michigan_standards": [
-    "I"
+    "I",
+    "III"
    ],
-   "name_similarity": "None. Presenting and PERFORM do not share a root. This mapping rests entirely on Michigan's own expectation text, which is why it is the case that proves rule R4-ARTS-2.",
+   "michigan_standards_by_discipline": {
+    "D": [
+     "III"
+    ],
+    "VA": [
+     "I"
+    ]
+   },
+   "name_similarity": "None. Presenting and PERFORM do not share a root, and neither do Presenting and ANALYZE. Nothing here rests on name similarity.",
    "ncas_definition": "Interpreting and sharing artistic work; in NCAS the visual-arts analogue of Performing.",
-   "warrant": "Michigan files visual-arts presentation under PERFORM, not under a separate standard: ART.VA.I.3.4 reads 'Select, present, and evaluate personal artwork.' and ART.VA.I.4.4 reads 'Prepare, present, and collaboratively evaluate personal artwork.'",
+   "warrant": "Michigan files VISUAL-ARTS presentation under PERFORM - ART.VA.I.3.4 'Select, present, and evaluate personal artwork.' and ART.VA.I.4.4 'Prepare, present, and collaboratively evaluate personal artwork.' - but files DANCE presentation under ANALYZE: ART.D.III.3.4 'Demonstrate the ability to create a dance study for presentation to peers.' and ART.D.III.4.4 'Demonstrate the ability to create a dance study to present to peers, then analyze and discuss the process used.' A citation naming Visual Arts resolves to Standard 1; a citation naming no discipline spans Standards 1 and 3 and does not resolve.",
    "warrant_codes": [
     "ART.VA.I.3.4",
-    "ART.VA.I.4.4"
+    "ART.VA.I.4.4",
+    "ART.D.III.3.4",
+    "ART.D.III.4.4"
    ]
   },
   "Responding": {
@@ -220,10 +232,10 @@
    "authored_citation": "Michigan Arts: Performing/Presenting",
    "authored_discipline": null,
    "authored_process": "Performing/Presenting",
-   "candidate_expectation_count": 25,
+   "candidate_expectation_count": 48,
    "citation_count": 12,
    "course_id": "ma-g3-arts-music",
-   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
    "exact_grade_expectation_assigned": false,
    "framework_of_origin": "National Core Arts Standards (NCAS)",
    "grade": 3,
@@ -231,16 +243,20 @@
    "is_composite_of_official_elements": false,
    "is_crosswalk_only": true,
    "mapping_id": "ARTS::ma-g3-arts-music::Michigan Arts: Performing/Presenting",
-   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "mapping_kind": "CROSSWALK_ONE_TO_MANY_UNRESOLVED",
    "michigan_target_names": [
-    "PERFORM"
+    "PERFORM",
+    "ANALYZE"
    ],
    "michigan_targets": [
-    "I"
+    "I",
+    "III"
    ],
    "reversible": true,
    "warrant_codes": [
     "ART.D.I.3.1",
+    "ART.D.III.3.4",
+    "ART.D.III.4.4",
     "ART.M.I.3.11",
     "ART.T.I.3.2",
     "ART.VA.I.3.4",
@@ -359,6 +375,8 @@
    ],
    "reversible": true,
    "warrant_codes": [
+    "ART.D.III.3.4",
+    "ART.D.III.4.4",
     "ART.VA.I.3.4",
     "ART.VA.I.4.4"
    ]
@@ -514,10 +532,10 @@
    "authored_citation": "Michigan Arts: Performing/Presenting",
    "authored_discipline": null,
    "authored_process": "Performing/Presenting",
-   "candidate_expectation_count": 24,
+   "candidate_expectation_count": 48,
    "citation_count": 12,
    "course_id": "ma-g4-arts-music",
-   "evidence_class": "CROSSWALK_RESOLVED_STANDARD_LEVEL",
+   "evidence_class": "HUMAN_REVIEW_REQUIRED",
    "exact_grade_expectation_assigned": false,
    "framework_of_origin": "National Core Arts Standards (NCAS)",
    "grade": 4,
@@ -525,16 +543,20 @@
    "is_composite_of_official_elements": false,
    "is_crosswalk_only": true,
    "mapping_id": "ARTS::ma-g4-arts-music::Michigan Arts: Performing/Presenting",
-   "mapping_kind": "CROSSWALK_ONE_TO_ONE",
+   "mapping_kind": "CROSSWALK_ONE_TO_MANY_UNRESOLVED",
    "michigan_target_names": [
-    "PERFORM"
+    "PERFORM",
+    "ANALYZE"
    ],
    "michigan_targets": [
-    "I"
+    "I",
+    "III"
    ],
    "reversible": true,
    "warrant_codes": [
     "ART.D.I.3.1",
+    "ART.D.III.3.4",
+    "ART.D.III.4.4",
     "ART.M.I.3.11",
     "ART.T.I.3.2",
     "ART.VA.I.3.4",
@@ -682,6 +704,8 @@
    ],
    "reversible": true,
    "warrant_codes": [
+    "ART.D.III.3.4",
+    "ART.D.III.4.4",
     "ART.VA.I.3.4",
     "ART.VA.I.4.4"
    ]

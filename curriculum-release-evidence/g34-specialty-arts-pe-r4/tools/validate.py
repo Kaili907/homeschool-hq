@@ -63,7 +63,7 @@ def invariants():
 
     a_cross = sum(r["citation_count"] for r in arts if r["evidence_class"] == "CROSSWALK_RESOLVED_STANDARD_LEVEL")
     a_hr = sum(r["citation_count"] for r in arts if r["evidence_class"] == "HUMAN_REVIEW_REQUIRED")
-    check("arts partitions exactly (324 + 48 = 372)", a_cross == 324 and a_hr == 48 and a_cross + a_hr == 372,
+    check("arts partitions exactly (300 + 72 = 372)", a_cross == 300 and a_hr == 72 and a_cross + a_hr == 372,
           f"{a_cross} + {a_hr}")
 
     p_alias = sum(r["citation_count"] for r in pe if r["evidence_class"] == "ALIAS_RESOLVED_VERBATIM")
@@ -116,7 +116,7 @@ def invariants():
           all(m["is_crosswalk_only"] and not m["is_alias"] and not m["is_composite_of_official_elements"]
               for m in reg["mappings"] if m["mapping_id"].startswith("ARTS::")))
 
-    check("unresolved list totals 336 (48 arts + 288 pe)", unres["total_citations_unresolved"] == 336,
+    check("unresolved list totals 360 (72 arts + 288 pe)", unres["total_citations_unresolved"] == 360,
           str(unres["total_citations_unresolved"]))
     check("before/after reports 0 arts resolved to an exact expectation",
           ba["arts"]["resolved_to_exact_grade_expectation"] == 0)
@@ -219,13 +219,28 @@ def mutations():
 
     def m_connecting_single():
         # Collapsing Connecting to one standard must move 48 citations out of review -
-        # proving the 48 are held there by the two-target rule, not by a constant.
+        # proving the 48 are held there by the two-target rule, not by a constant. This is
+        # also the mutation that demonstrates the Connecting verdict's dependence on the
+        # NCAS two-anchor reading, which no Michigan byte supplies.
         B.CROSSWALK = copy.deepcopy(B.CROSSWALK)
         B.CROSSWALK["Connecting"]["michigan_standards"] = ["V"]
         B.CROSSWALK["Connecting"]["ambiguous"] = False
     v, msg = run_build(m_connecting_single)
-    check("collapsing Connecting to one standard resolves the 48 (R4-ARTS-3)",
-          v == "built" and "'CROSSWALK_RESOLVED_STANDARD_LEVEL': 372" in msg, f"{v}: {msg.strip()[:120]}")
+    check("collapsing Connecting to one standard resolves its 48 (R4-ARTS-3)",
+          v == "built" and "'CROSSWALK_RESOLVED_STANDARD_LEVEL': 348" in msg
+          and "'HUMAN_REVIEW_REQUIRED': 24" in msg, f"{v}: {msg.strip()[:130]}")
+
+    def m_presenting_single_home():
+        # Giving Presenting a single home standard must release the 24 discipline-agnostic
+        # Performing/Presenting citations - proving they are held by the discipline-split
+        # evidence (ART.D.III.3.4 vs ART.VA.I.3.4), not by a constant.
+        B.CROSSWALK = copy.deepcopy(B.CROSSWALK)
+        B.CROSSWALK["Presenting"]["michigan_standards"] = ["I"]
+        B.CROSSWALK["Presenting"].pop("michigan_standards_by_discipline", None)
+    v, msg = run_build(m_presenting_single_home)
+    check("giving Presenting one home standard resolves its 24 (R4-ARTS-2)",
+          v == "built" and "'CROSSWALK_RESOLVED_STANDARD_LEVEL': 324" in msg
+          and "'HUMAN_REVIEW_REQUIRED': 48" in msg, f"{v}: {msg.strip()[:130]}")
 
     def m_arts_heading():
         B.ARTS_STANDARDS = copy.deepcopy(B.ARTS_STANDARDS)

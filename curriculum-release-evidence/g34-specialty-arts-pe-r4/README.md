@@ -12,7 +12,7 @@ re-verified against michigan.gov.**
 
 | | Citations | Resolved | Still needs a human |
 | --- | ---: | ---: | ---: |
-| Arts / Music | 372 | 324 *(standard level only)* | 48 |
+| Arts / Music | 372 | 300 *(standard level only)* | 72 |
 | Physical Education (in scope) | 288 | 0 | 288 |
 | Physical Education (already alias-resolved in r3) | 252 | 252 | 0 |
 
@@ -26,10 +26,10 @@ A citation makes two claims that r3 judged as one:
 - **REFERENT** - *which* official element is meant.
 - **TEXT** - that the quoted words *are* that element's words.
 
-Collapsing them is why r3 reported 372 arts citations as one undifferentiated block. In fact 324 of
-them have an unambiguous Michigan referent and 48 do not - a real distinction for whoever has to
+Collapsing them is why r3 reported 372 arts citations as one undifferentiated block. In fact 300 of
+them have an unambiguous Michigan referent and 72 do not - a real distinction for whoever has to
 work the queue. Splitting the tiers is also what stops the crosswalk from becoming a laundering
-device: every one of the 324 still carries `citation_string_status: MISATTRIBUTED_AS_AUTHORED`,
+device: every one of the 300 still carries `citation_string_status: MISATTRIBUTED_AS_AUTHORED`,
 because resolving a referent does not make the words Michigan's.
 
 ## Arts: a crosswalk, and only a crosswalk
@@ -47,30 +47,36 @@ What *can* be done honestly is a crosswalk, warranted by Michigan's own Grade 3/
 | Creating | 120 | Standard 2 CREATE | crosswalk resolved |
 | Responding | 108 | Standard 3 ANALYZE | crosswalk resolved |
 | Performing | 48 | Standard 1 PERFORM | crosswalk resolved |
-| Performing/Presenting | 24 | Standard 1 PERFORM | crosswalk resolved |
-| Presenting | 24 | Standard 1 PERFORM | crosswalk resolved |
+| Presenting *(Visual Arts)* | 24 | Standard 1 PERFORM | crosswalk resolved |
+| **Performing/Presenting** *(no discipline)* | **24** | **Standards 1 *and* 3** | **HUMAN_REVIEW_REQUIRED** |
 | **Connecting** | **48** | **Standards 4 *and* 5** | **HUMAN_REVIEW_REQUIRED** |
 
-**The warrant is expectation text, never a shared word root.** `Presenting -> PERFORM` is the case
-that proves it: the two names share nothing, and the mapping holds anyway because Michigan files
-visual-arts presentation under PERFORM -
+**The warrant is expectation text, never a shared word root.** `Presenting` is the case that proves
+it twice over. The names share nothing, and Michigan files *visual-arts* presentation under PERFORM -
 
 > `ART.VA.I.3.4` Select, present, and evaluate personal artwork.
 > `ART.VA.I.4.4` Prepare, present, and collaboratively evaluate personal artwork.
+
+But Michigan files *dance* presentation under ANALYZE (`ART.D.III.3.4`, `ART.D.III.4.4`). Unlike
+Creating, Performing and Responding, **Presenting has no home standard in Michigan** - so it resolves
+only when the citation names a discipline. `Visual Arts - Presenting` resolves to Standard 1;
+`Performing/Presenting`, which names none, spans Standards 1 and 3 and does not resolve.
 
 Run the same test in reverse and `Creating -> CREATE` earns its mapping from
 `ART.M.II.3.1`, `ART.D.II.3.2`, `ART.T.II.3.1`, `ART.VA.II.3.5` being generative outcomes - not from
 both words containing `creat-`. The build aborts if any warrant code is absent from the document.
 
-**Connecting stays unresolved because it is genuinely two things.** NCAS Connecting carries both
-*relate personal experience to make art* and *relate works to societal, cultural and historical
-context*. Michigan splits those across Standard 5 (`ART.M.V.3.2`, cross-curricular connections) and
-Standard 4 (`ART.M.IV.3.2`, world cultures). Choosing between them for a given lesson means reading
-the lesson, which is out of scope. The shared root `connect-` points at Standard 5 alone and would
-have hidden the Standard 4 half - which is exactly why the rule refuses to use roots as warrant.
+**Connecting stays unresolved, but this is the package's most contested call.** NCAS Connecting
+carries both *relate personal experience to make art* and *relate works to societal, cultural and
+historical context*, which read onto Michigan Standard 5 (`ART.M.V.3.2`) and Standard 4
+(`ART.M.IV.3.2`) respectively. The independent review contests the second half - see *What the
+independent review changed* below - and the contest is real enough that these 48 are held open rather
+than resolved either way.
 
-**No arts citation gets a code.** Michigan prints 186 exact-grade expectations for Grades 3 and 4
-(Dance 53, Music 57, Theatre 32, Visual Arts 44). Picking which one a lesson meets is a curriculum
+**No arts citation gets a code.** Michigan prints **187** exact-grade expectations for Grades 3 and 4
+under **186** distinct codes - `ART.VA.III.3.3` is printed twice with different text, once inside the
+Dance Grade 3 block where no `ART.D.III.3.3` exists. Both are recorded; neither is reassigned.
+By discipline the distinct codes run Dance 53, Music 57, Theatre 32, Visual Arts 44. Picking which one a lesson meets is a curriculum
 judgment about that lesson. Each citation instead carries `candidate_expectation_codes` - the
 Michigan shortlist under its mapped standard, narrowed by discipline where the citation names one,
 between 2 and 25 codes. **A shortlist is not an assignment.**
@@ -78,7 +84,9 @@ between 2 and 25 codes. **A shortlist is not an assignment.**
 One caveat is recorded rather than smoothed over: Michigan's Standard 3 is not a clean analogue of
 NCAS Responding at the expectation level - `ART.D.III.3.4` ("Demonstrate the ability to create a
 dance study for presentation to peers.") is a creation-and-presentation outcome filed under ANALYZE.
-The standard-level mapping holds; the expectation-level partition does not.
+The standard-level mapping holds; the expectation-level partition does not. That same expectation is
+what forced `Performing/Presenting` open, which is the point: Michigan's five standards and NCAS's
+processes do not partition the same way, and the crosswalk only claims what survives that.
 
 ## PE: three misquotations, resolved to zero
 
@@ -142,12 +150,12 @@ g34-specialty-arts-pe-r4/
   evidence/arts-citations.jsonl      22 records, 372 citations
   evidence/pe-citations.jsonl        10 records, 540 citations
   evidence/before-after.json         r3 class -> r4 class, by subject
-  evidence/unresolved.json           the 336 that still need a human, with what to decide
+  evidence/unresolved.json           the 360 that still need a human, with what to decide
   sources/source-custody.json        pins, re-fetch results, extraction provenance
   sources/extracts/*.json            official anchors pulled from the pinned bytes at build time
   sources/refetch-verify.sh          re-verify held bytes AND upstream
   tools/build_r4.py                  regenerates everything
-  tools/validate.py                  21 invariants + 8 mutations
+  tools/validate.py                  21 invariants + 9 mutations
 ```
 
 ## Reproducing
@@ -157,7 +165,7 @@ python3 curriculum-release-evidence/g34-specialty-arts-pe-r4/tools/build_r4.py
 python3 curriculum-release-evidence/g34-specialty-arts-pe-r4/tools/validate.py
 ```
 
-`validate.py` reports **29 passed, 0 failed**. The 8 mutations matter more than the 21 invariants:
+`validate.py` reports **30 passed, 0 failed**. The 9 mutations matter more than the 21 invariants:
 each one deliberately corrupts an input and requires the verdict to change or the build to abort. A
 mutation that left the output identical would prove the rule was decorative. They confirm, among
 other things, that **PE Standard 2 flips to `ALIAS_RESOLVED_VERBATIM` when the source is edited to
@@ -165,14 +173,42 @@ match the authored text** - so the classifier is reading the document, not recit
 verdict - and that **collapsing Connecting to a single standard releases exactly the 48**, so those
 48 are held by the two-target rule rather than by a constant.
 
+## What the independent review changed
+
+An adversarial standards review ran against the PDF bytes after the first build and confirmed the
+zero-occurrence premise, the roman-numeral-to-standard mapping (859/859), all three PE divergences,
+and every count. It also found four real defects, all fixed here:
+
+- **The custody file's central disclaimer was false.** It claimed the NCAS definitions are "never
+  evidence" and that disputing one would disturb no classification. The 48 Connecting citations rest
+  entirely on the NCAS two-anchor reading - no Michigan byte splits Connecting across Standards 4
+  and 5, and the package's own mutation test proves the dependency. Now stated plainly, with the
+  places NCAS *is* load-bearing listed.
+- **R4-ARTS-3 was applied to one process out of four.** The dance-presentation evidence was recorded
+  in the *Responding* caveat and never applied to *Presenting*. Fixed: 24 citations demoted.
+- **A printed expectation was silently dropped** by an extractor that kept the longer body on a key
+  collision. Now recorded, with the count corrected to 187 printed / 186 distinct.
+- **The R4-ARTS-1 premise guard could not see split words** in a document that splits words 38 times
+  per page-set (`Demonstr ate`, `mo vement`). A heading rendered `Cr eating` would have scored zero.
+  The guard is now split-tolerant; the conclusion is unchanged.
+
+The review also argues Connecting should resolve to Standard 5 alone: of the Grade 3/4 expectations
+containing "connect" or "relate", ten sit under Standard 5 and effectively none under Standard 4, and
+the Standard 4 half of the split rested on `ART.M.IV.3.2`, which contains neither word and was mapped
+by concept - the reasoning R4-ARTS-2 forbids everywhere else. **That inconsistency is conceded.** The
+48 stay unresolved anyway, because the remedy for a mapping resting on weak warrant is not a
+different mapping resting on a lexical search, and this is the one direction the package is least
+willing to be wrong in. The dissent is recorded in full in `rules/decision-rules.json` for a human to
+rule on.
+
 ## Read before promoting
 
 - **Nothing here is a licensed-educator review.** A crosswalk is a defensible reading of two
   documents, not a curriculum decision.
-- **324 "resolved" arts citations are resolved at standard level only.** Not one is verbatim
-  Michigan; not one carries an exact grade-level expectation. Any report that cites 324 without that
+- **300 "resolved" arts citations are resolved at standard level only.** Not one is verbatim
+  Michigan; not one carries an exact grade-level expectation. Any report that cites 300 without that
   qualifier is misreporting this package.
-- **336 citations still need a human** - 48 arts (choose Standard 4 or 5, then choose a code) and
+- **360 citations still need a human** - 72 arts (48 Connecting, 24 Performing/Presenting) and
   288 PE (accept the correction, or re-cite against one of the 119 exact-grade outcome codes).
 - **PE gained nothing.** 288 in, 288 out. r3's finding was right; this package verified it
   independently, established that each authored string appears nowhere in the document, and recorded
