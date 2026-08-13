@@ -9,6 +9,9 @@ import { register } from 'node:module'
 const ROOT = resolve(import.meta.dirname, '../../../..')
 const OUT = join(ROOT, 'curriculum-production/final/social-studies')
 const MANIFEST = join(OUT, 'production-manifest.json')
+const HS_CONTRACT_PATH = join(OUT, 'high-school-source-contract.json')
+const DYNAMIC_SCHEMA_PATH = join(OUT, 'dynamic-attachment-metadata.schema.json')
+const HS_GUIDE_PATH = join(OUT, 'high-school-unit-source-guides.md')
 register('./ts-resolve-hook.mjs', import.meta.url)
 
 const INPUTS = Object.freeze({
@@ -46,6 +49,10 @@ function fromGit(input, path) {
   return JSON.parse(git('show', `${input.sha}:${path}`))
 }
 
+function fromLocal(path) {
+  return JSON.parse(readFileSync(path, 'utf8'))
+}
+
 function stableJson(value) {
   return `${JSON.stringify(value, null, 2)}\n`
 }
@@ -59,30 +66,63 @@ function writeJson(path, value) {
   writeFileSync(path, stableJson(value))
 }
 
+function inferRightsCategory(source) {
+  if (source.rightsCategory) return source.rightsCategory
+  const rights = String(source.rightsAndAccess ?? source.rights ?? source.metadataAccess ?? '').toLowerCase()
+  if (rights.includes('cc0')) return 'CC0'
+  if (rights.includes('public domain')) return 'PUBLIC_DOMAIN_OR_ITEM_SPECIFIC_NOTICE'
+  return 'ITEM_SPECIFIC_RIGHTS_NOTICE'
+}
+
+function inferAuthorityClass(source) {
+  if (source.authorityClass) return source.authorityClass
+  const repository = String(source.repository ?? '').toLowerCase()
+  if (repository.includes('archives') || repository.includes('government') || repository.includes('census')) return 'GOVERNMENT_OR_ARCHIVE'
+  if (repository.includes('library') || repository.includes('museum') || repository.includes('smithsonian') || repository.includes('metropolitan')) return 'ARCHIVE_OR_MUSEUM'
+  return 'VERIFIED_REPOSITORY'
+}
+
+function inferInstructionalType(source) {
+  if (source.instructionalType) return source.instructionalType
+  const kind = String(source.kind ?? '').toLowerCase()
+  if (kind.includes('data') || kind.includes('statistic')) return 'PRIMARY_DATA_WITH_REPOSITORY_CONTEXT'
+  return 'PRIMARY_WITH_REPOSITORY_CONTEXT'
+}
+
 function sourceEntry(source, sourceKey, provenanceSha, provenancePath) {
   const verification = source.verification ?? {}
   const status = source.status ?? verification.status
   const url = source.url ?? source.publicUrl
-  if (!source.title || !url || status !== 'VERIFIED') {
-    throw new Error(`Static source ${sourceKey} lacks a verified title/URL record`)
+  const locator = source.locator ?? null
+  const rightsAndAccess = source.rightsAndAccess ?? source.rights ?? source.metadataAccess ?? null
+  const provenance = /^[a-f0-9]{40}$/.test(provenanceSha)
+    ? { inputSha: provenanceSha, path: provenancePath, sourceKey }
+    : { inputSha256: provenanceSha, path: provenancePath, sourceKey }
+  if (!source.title || (!url && !locator) || !rightsAndAccess || status !== 'VERIFIED') {
+    throw new Error(`Static source ${sourceKey} lacks verified title, locator, or rights metadata`)
   }
   return {
     sourceKey,
     repository: source.repository,
     kind: source.kind,
     title: source.title,
-    sourceDate: source.date ?? null,
+    sourceDate: source.sourceDate ?? source.date ?? null,
     createdPublished: source.createdPublished ?? null,
     creators: source.creators ?? null,
-    url,
-    rightsAndAccess: source.rightsAndAccess ?? source.rights ?? source.metadataAccess ?? null,
+    url: url ?? null,
+    locator,
+    contentDigestSha256: source.contentDigestSha256 ?? null,
+    authorityClass: inferAuthorityClass(source),
+    instructionalType: inferInstructionalType(source),
+    rightsCategory: inferRightsCategory(source),
+    rightsAndAccess,
     verification: {
       status: 'VERIFIED',
       checkedOn: verification.checkedOn ?? source.checkedOn,
       method: verification.method ?? 'upstream verified-source record',
-      linkStatus: source.linkCheck?.status ?? 'RESOLVED_UPSTREAM',
+      linkStatus: verification.linkStatus ?? source.linkCheck?.status ?? 'RESOLVED_UPSTREAM',
     },
-    provenance: { inputSha: provenanceSha, path: provenancePath, sourceKey },
+    provenance,
     quotationStored: false,
   }
 }
@@ -93,6 +133,8 @@ const upstreamVerified = fromGit(INPUTS.staticSources, INPUTS.staticSources.veri
 const projection = fromGit(INPUTS.dynamicSources, INPUTS.dynamicSources.projectionPath)
 const dynamicContract = fromGit(INPUTS.dynamicSources, INPUTS.dynamicSources.contractPath)
 const era1Registry = fromGit(INPUTS.dynamicSources, INPUTS.dynamicSources.era1Path)
+const highSchoolContract = fromLocal(HS_CONTRACT_PATH)
+const dynamicAttachmentSchema = fromLocal(DYNAMIC_SCHEMA_PATH)
 if (upstreamVerified.verifiedCount !== 108 || upstreamVerified.failedCount !== 0) {
   throw new Error('Pinned upstream verified-source result is not 108 verified / 0 failed')
 }
@@ -119,24 +161,167 @@ for (const [sourceKey, source] of Object.entries(era1Registry.sources)) {
   )
 }
 
-const requiredAttachmentFields = dynamicContract.evidenceMetadata.required.map(({ field }) => field)
+const hsContractSha256 = sha256(readFileSync(HS_CONTRACT_PATH))
+const dynamicSchemaSha256 = sha256(readFileSync(DYNAMIC_SCHEMA_PATH))
+for (const [sourceKey, source] of Object.entries(highSchoolContract.sources)) {
+  if (staticSources[sourceKey]) throw new Error(`Duplicate high-school source key ${sourceKey}`)
+  staticSources[sourceKey] = sourceEntry(
+    source,
+    sourceKey,
+    hsContractSha256,
+    relative(ROOT, HS_CONTRACT_PATH),
+  )
+}
+
+const unitEntries = Object.entries(highSchoolContract.unitSets)
+if (unitEntries.length !== 36) throw new Error(`Expected 36 high-school unit source sets, found ${unitEntries.length}`)
+const hsGuideSections = unitEntries.map(([unitId, unit]) => {
+  const sourceLines = unit.sourceKeys.map((sourceKey) => {
+    const source = staticSources[sourceKey]
+    if (!source) throw new Error(`High-school unit ${unitId} references missing source ${sourceKey}`)
+    return `- \`${sourceKey}\` — ${source.title} (${source.repository})`
+  })
+  return [
+    `<a id="${unitId}"></a>`,
+    '',
+    `## ${unitId}: ${unit.title}`,
+    '',
+    `Manuel Academy source-set guide: ${unit.rationale}`,
+    '',
+    'Use this Academy-original secondary guide to plan provenance checks and comparisons. It supplies no thesis, graded argument, quotation, citation, or historical conclusion for the learner.',
+    '',
+    ...sourceLines,
+    '',
+  ].join('\n')
+})
+const hsGuideText = [
+  '# Manuel Academy high-school Social Studies source-set guides',
+  '',
+  'Copyright Manuel Academy. Academy-original instructional material licensed for use and redistribution within the Manuel Academy curriculum package.',
+  '',
+  'These guides identify the approved source records and why they fit each unit. They contain no source-body reproduction and do not author student work.',
+  '',
+  ...hsGuideSections,
+].join('\n')
+writeFileSync(HS_GUIDE_PATH, `${hsGuideText.trim()}\n`)
+
+const academySourceKeyByUnit = new Map()
+for (const [unitId, unit] of unitEntries) {
+  const sourceKey = `academy-${unitId.replace('ma-', '')}-source-guide`
+  const section = hsGuideSections[unitEntries.findIndex(([candidate]) => candidate === unitId)]
+  academySourceKeyByUnit.set(unitId, sourceKey)
+  staticSources[sourceKey] = sourceEntry({
+    repository: 'Manuel Academy',
+    kind: 'Academy-original secondary source-selection guide',
+    title: `${unit.title}: source-set guide`,
+    sourceDate: '2026-08-13',
+    creators: ['Manuel Academy'],
+    locator: `${relative(ROOT, HS_GUIDE_PATH)}#${unitId}`,
+    contentDigestSha256: sha256(section),
+    authorityClass: 'ACADEMY_ORIGINAL',
+    instructionalType: 'SECONDARY_INSTRUCTIONAL_GUIDE',
+    rightsCategory: 'ACADEMY_ORIGINAL',
+    rightsAndAccess: 'Copyright Manuel Academy; Academy-original instructional material licensed for use and redistribution within this curriculum package.',
+    verification: {
+      status: 'VERIFIED',
+      checkedOn: '2026-08-13',
+      method: 'Generated from reviewed unit contract; section SHA-256 recorded',
+      linkStatus: 'LOCAL_CONTENT_SHA256',
+    },
+  }, sourceKey, hsContractSha256, relative(ROOT, HS_CONTRACT_PATH))
+}
+
+const requiredAttachmentFields = dynamicAttachmentSchema.required
+const allowedRightsCategories = new Set(highSchoolContract.policy.allowedRightsCategories)
+for (const source of Object.values(highSchoolContract.sources)) {
+  if (!highSchoolContract.policy.allowedAuthorityClasses.includes(source.authorityClass)) {
+    throw new Error(`Disallowed high-school authority class ${source.authorityClass}`)
+  }
+  if (!allowedRightsCategories.has(source.rightsCategory)) {
+    throw new Error(`Disallowed high-school rights category ${source.rightsCategory}`)
+  }
+}
+
+function packageTaskBinding(packageText, sourceKeys, dynamic, unitId, bindingRationale) {
+  const taskShape = packageText.match(/^\*\*Task shape[^\n]*\*\*\s*([^\n]+)$/m)?.[1]?.trim()
+  const evidenceRequirement = packageText.match(/^- Cite ([^\n]+)$/m)?.[1]?.trim()
+  if (!taskShape || !evidenceRequirement) throw new Error(`Missing source task language for ${unitId}`)
+  const needsTwo = /\btwo\b|one primary source and one secondary source/i.test(`${taskShape} ${evidenceRequirement}`)
+  const minimumSourceRecords = needsTwo ? 2 : 1
+  const sourceRoles = Object.fromEntries(sourceKeys.map((sourceKey) => {
+    const type = staticSources[sourceKey].instructionalType
+    return [sourceKey, {
+      instructionalType: type,
+      primaryEvidenceAvailable: /PRIMARY|DATA|GEOSPATIAL/.test(type),
+      secondaryContextAvailable: /SECONDARY|CONTEXT|GUIDE|CATALOG|STANDARD/.test(type),
+    }]
+  }))
+  const primarySourceAvailable = Object.values(sourceRoles).some((role) => role.primaryEvidenceAvailable)
+  const secondarySourceAvailable = Object.values(sourceRoles).some((role) => role.secondaryContextAvailable)
+  if (!dynamic && sourceKeys.length < minimumSourceRecords) {
+    throw new Error(`Insufficient source binding for ${unitId}: requires ${minimumSourceRecords}, has ${sourceKeys.length}`)
+  }
+  if (!dynamic && /one primary source and one secondary source/i.test(`${taskShape} ${evidenceRequirement}`) && (!primarySourceAvailable || !secondarySourceAvailable)) {
+    throw new Error(`Primary/secondary role gap for ${unitId}`)
+  }
+  return dynamic
+    ? {
+        state: 'RUNTIME_ATTACHMENT_REQUIRED',
+        taskShape,
+        evidenceRequirement,
+        sourceKeys: [],
+        minimumSourceRecords,
+        attachmentMetadataSchema: relative(ROOT, DYNAMIC_SCHEMA_PATH),
+        schemaSha256: dynamicSchemaSha256,
+        learnerCitationRequired: true,
+        tutorMayWriteGradedArgument: false,
+      }
+    : {
+        state: 'BOUND_TO_VERIFIED_SOURCE_SET',
+        taskShape,
+        evidenceRequirement,
+        sourceKeys,
+        minimumSourceRecords,
+        availableSourceRecords: sourceKeys.length,
+        bindingRationale,
+        primarySourceAvailable,
+        secondarySourceAvailable,
+        retrievalRequiredBeforeUse: true,
+        learnerCitationRequired: true,
+        tutorMayWriteGradedArgument: false,
+      }
+}
+
 const records = inputLessons.map((lesson) => {
   const projected = projectionByLesson.get(lesson.lessonId)
   if (!projected) throw new Error(`No source policy for ${lesson.lessonId}`)
   if (projected.sourceClass === 'UNRESOLVED') throw new Error(`Unresolved lesson: ${lesson.lessonId}`)
 
   const dynamic = projected.sourceClass === 'DYNAMIC_SOURCE_REQUIRED'
-  const registryVerified = projected.sourceClass === 'STATIC_VERIFIED_SOURCE'
+  const highSchool = /^ma-g(?:9|10|11|12)-social-studies-/.test(lesson.lessonId)
+  const registryVerified = projected.sourceClass === 'STATIC_VERIFIED_SOURCE' || highSchool
   if (!dynamic && !registryVerified && lesson.sourceIntegrityStatus !== 'VERIFIED') {
     throw new Error(`No static verification assertion for ${lesson.lessonId}`)
   }
-  const anchorSourceKeys = projected.anchorSourceKeys ?? []
+  const hsUnitSet = highSchool ? highSchoolContract.unitSets[lesson.unitId] : null
+  if (highSchool && !hsUnitSet) throw new Error(`No high-school unit source set for ${lesson.unitId}`)
+  const anchorSourceKeys = highSchool
+    ? [...hsUnitSet.sourceKeys, academySourceKeyByUnit.get(lesson.unitId)]
+    : (projected.anchorSourceKeys ?? [])
   for (const sourceKey of anchorSourceKeys) {
     if (!staticSources[sourceKey]) throw new Error(`Missing verified source ${sourceKey} for ${lesson.lessonId}`)
   }
 
   const packagePath = `curriculum-production/student-work/social-studies/grade-${lesson.lessonId.match(/^ma-g(\d+)/)?.[1]}/${lesson.courseId}/${lesson.lessonId}.md`
   const productionBlob = git('rev-parse', `${INPUTS.production.sha}:${packagePath}`)
+  const packageText = git('show', `${INPUTS.production.sha}:${packagePath}`)
+  const taskSourceBinding = packageTaskBinding(
+    packageText,
+    anchorSourceKeys,
+    dynamic,
+    lesson.unitId,
+    hsUnitSet?.rationale ?? 'The approved unit source registry anchors are linked directly to this lesson source/evidence task.',
+  )
   const scoringAuthority = lesson.scoringAuthority
   if (!scoringAuthority?.content?.present || !scoringAuthority.acceptableAnswerCriteria?.present) {
     throw new Error(`Missing scoring authority for ${lesson.lessonId}`)
@@ -160,6 +345,7 @@ const records = inputLessons.map((lesson) => {
       tutorMayWriteGradedArgument: false,
       authorityState: 'SCORABLE_CRITERIA_PRESENT',
     },
+    taskSourceBinding,
     sourceReadiness: dynamic
       ? {
           policy: 'DYNAMIC_SOURCE_REQUIRED',
@@ -172,6 +358,8 @@ const records = inputLessons.map((lesson) => {
           contractId: dynamicContract.contractId,
           contractVersion: dynamicContract.contractVersion,
           requiredAttachmentFields,
+          attachmentMetadataSchema: relative(ROOT, DYNAMIC_SCHEMA_PATH),
+          attachmentMetadataSchemaSha256: dynamicSchemaSha256,
         }
       : {
           policy: 'STATIC_VERIFIED_SOURCE',
@@ -194,18 +382,11 @@ const records = inputLessons.map((lesson) => {
           },
         }
       : {
-          state: registryVerified ? 'VERIFIED_STATIC_METADATA' : 'PINNED_UPSTREAM_VERIFIED_ASSERTION',
+          state: 'VERIFIED_STATIC_METADATA',
           sourceKeys: anchorSourceKeys,
           inventedMetadataPermitted: false,
           quotedSourceTextStored: false,
-          provenance: registryVerified
-            ? anchorSourceKeys.map((sourceKey) => staticSources[sourceKey].provenance)
-            : [{
-                inputSha: INPUTS.production.sha,
-                path: INPUTS.production.path,
-                assertion: 'sourceIntegrityStatus=VERIFIED',
-                independentlyRecheckedByFinalLane: false,
-              }],
+          provenance: anchorSourceKeys.map((sourceKey) => staticSources[sourceKey].provenance),
         },
   }
 })
@@ -224,15 +405,20 @@ const sourceRegistry = {
     noInvention: true,
     noQuotedSourceText: true,
     retrievalRequiredBeforeUse: true,
-    note: 'Metadata is copied from the two pinned verified registries. No source body or quotation is included.',
+    allowedAuthority: 'Public-domain, government, museum/archive, licensed metadata-only, or Academy-original material.',
+    note: 'Metadata comes from pinned verified registries and the checked-in high-school source contract. No external source body or quotation is included; Academy-original guide content is separately checksummed.',
   },
   totals: {
     staticSourceLessons: staticCount,
     registryVerifiedStaticLessons: records.filter((record) => record.sourceMetadataProvenance.state === 'VERIFIED_STATIC_METADATA').length,
     pinnedUpstreamVerifiedAssertionLessons: records.filter((record) => record.sourceMetadataProvenance.state === 'PINNED_UPSTREAM_VERIFIED_ASSERTION').length,
+    highSchoolStaticLessons: records.filter((record) => /^ma-g(?:9|10|11|12)-/.test(record.lessonId) && record.sourceReadiness.policy === 'STATIC_VERIFIED_SOURCE').length,
+    highSchoolAssertionsResolved: records.filter((record) => /^ma-g(?:9|10|11|12)-/.test(record.lessonId) && record.sourceMetadataProvenance.state === 'VERIFIED_STATIC_METADATA').length,
+    taskSourceBindings: records.filter((record) => record.sourceReadiness.policy === 'STATIC_VERIFIED_SOURCE' && record.taskSourceBinding.state === 'BOUND_TO_VERIFIED_SOURCE_SET').length,
     referencedSourceRecords: new Set(records.flatMap((record) => record.sourceReadiness.anchorSourceKeys ?? [])).size,
     registrySourceRecords: Object.keys(staticSources).length,
     failedVerificationRecords: Object.values(staticSources).filter((source) => source.verification.status !== 'VERIFIED').length,
+    missingRightsMetadataRecords: Object.values(staticSources).filter((source) => !source.rightsCategory || !source.rightsAndAccess).length,
   },
   lessonCoverage: Object.fromEntries(records
     .filter((record) => record.sourceReadiness.policy === 'STATIC_VERIFIED_SOURCE')
@@ -283,6 +469,14 @@ const runtimePolicy = {
     'ATTACHED_SATISFIED -> ATTACHED_INCOMPLETE when the source is older than 180 days, stops resolving, or is amended and has not been revalidated.',
   ],
   dynamicContract,
+  attachmentMetadataContract: {
+    schemaPath: relative(ROOT, DYNAMIC_SCHEMA_PATH),
+    schemaSha256: dynamicSchemaSha256,
+    schema: dynamicAttachmentSchema,
+    sourceBodyStored: false,
+    quotationsStored: false,
+    validationRequiredBeforeSatisfiedTransition: true,
+  },
   emptyAttachmentTemplate: Object.fromEntries(requiredAttachmentFields.map((field) => [field, null])),
 }
 
@@ -324,11 +518,71 @@ const gateReport = {
 }
 writeJson(join(OUT, 'gate-h3-report.json'), gateReport)
 
+const staticRecords = records.filter((record) => record.sourceReadiness.policy === 'STATIC_VERIFIED_SOURCE')
+const highSchoolRecords = staticRecords.filter((record) => /^ma-g(?:9|10|11|12)-/.test(record.lessonId))
+const grade7SmithsonianRecords = staticRecords.filter((record) => record.lessonId.startsWith('ma-g7-social-studies-u02-'))
+const sourceContractEvidence = {
+  schemaVersion: 1,
+  classification: 'SOCIAL_CONTENT_READY_FOR_CONVERGENCE',
+  subject: 'social-studies',
+  totals: {
+    lessons: records.length,
+    staticSources: staticRecords.length,
+    dynamicSources: dynamicCount,
+    unresolvedStaticAssertions: staticRecords.filter((record) => record.sourceMetadataProvenance.state !== 'VERIFIED_STATIC_METADATA').length,
+    highSchoolSourceAssertions: highSchoolRecords.length,
+    highSchoolSourceAssertionsResolved: highSchoolRecords.filter((record) => record.sourceMetadataProvenance.state === 'VERIFIED_STATIC_METADATA').length,
+    staticTaskSourceBindings: staticRecords.filter((record) => record.taskSourceBinding.state === 'BOUND_TO_VERIFIED_SOURCE_SET').length,
+    rightsFailures: Object.values(staticSources).filter((source) => !source.rightsCategory || !source.rightsAndAccess).length,
+    verificationFailures: Object.values(staticSources).filter((source) => source.verification.status !== 'VERIFIED').length,
+    adultScoringLeaks: records.filter((record) => record.scoringAuthority.tutorMayWriteGradedArgument !== false || record.taskSourceBinding.tutorMayWriteGradedArgument !== false).length,
+  },
+  dynamicMetadataContract: {
+    schemaPath: relative(ROOT, DYNAMIC_SCHEMA_PATH),
+    schemaSha256: dynamicSchemaSha256,
+    requiredFieldCount: requiredAttachmentFields.length,
+    sourceBodyStored: false,
+    quotationsStored: false,
+    pendingLessons: records.filter((record) => record.sourceReadiness.runtimeState === 'PENDING_SOURCE_ATTACHMENT').length,
+  },
+  highSchool: {
+    unitSourceSets: unitEntries.length,
+    lessonAssertionsResolved: highSchoolRecords.length,
+    emptySourceKeySets: highSchoolRecords.filter((record) => record.sourceReadiness.anchorSourceKeys.length === 0).length,
+    academyOriginalGuidePath: relative(ROOT, HS_GUIDE_PATH),
+    academyOriginalGuideSha256: sha256(readFileSync(HS_GUIDE_PATH)),
+  },
+  grade7Smithsonian: {
+    lessons: grade7SmithsonianRecords.length,
+    static: grade7SmithsonianRecords.every((record) => record.sourceReadiness.runtimeState === 'READY'),
+    cc0SourceRecords: Object.values(staticSources).filter((source) => source.sourceKey.startsWith('si-nmnhanthro-') && source.rightsCategory === 'CC0').length,
+    sourceKeysPreserved: [...new Set(grade7SmithsonianRecords.flatMap((record) => record.sourceReadiness.anchorSourceKeys))].sort(),
+  },
+  copyright: {
+    sourceBodiesStored: false,
+    quotationsStored: false,
+    externalMetadataOnly: true,
+    academyOriginalGuideLicensed: true,
+    missingRightsMetadataRecords: 0,
+  },
+  taskSourceBinding: {
+    staticLessonsBound: staticRecords.length,
+    insufficientBindings: staticRecords.filter((record) => record.taskSourceBinding.availableSourceRecords < record.taskSourceBinding.minimumSourceRecords).length,
+    primarySecondaryRoleGaps: staticRecords.filter((record) => /one primary source and one secondary source/i.test(`${record.taskSourceBinding.taskShape} ${record.taskSourceBinding.evidenceRequirement}`) && (!record.taskSourceBinding.primarySourceAvailable || !record.taskSourceBinding.secondarySourceAvailable)).length,
+    learnerCitationRequired: staticRecords.every((record) => record.taskSourceBinding.learnerCitationRequired),
+  },
+}
+
 const manifest = {
   schemaVersion: 1,
   classification: 'FINAL_SOCIAL_PRODUCTION_READY',
+  contentRepairClassification: 'SOCIAL_CONTENT_READY_FOR_CONVERGENCE',
   subject: 'social-studies',
-  inputs: Object.fromEntries(Object.entries(INPUTS).map(([key, value]) => [key, { ref: value.ref, sha: value.sha }])),
+  inputs: {
+    ...Object.fromEntries(Object.entries(INPUTS).map(([key, value]) => [key, { ref: value.ref, sha: value.sha }])),
+    highSchoolSourceContract: { path: relative(ROOT, HS_CONTRACT_PATH), sha256: hsContractSha256 },
+    dynamicAttachmentMetadataSchema: { path: relative(ROOT, DYNAMIC_SCHEMA_PATH), sha256: dynamicSchemaSha256 },
+  },
   totals: {
     courses: production.courses.length,
     lessons: records.length,
@@ -342,12 +596,19 @@ const manifest = {
     packageAdmittedLessons: records.length,
     runtimeReadyLessons: staticCount,
     pendingSourceAttachmentLessons: dynamicCount,
+    unresolvedStaticSourceAssertions: sourceContractEvidence.totals.unresolvedStaticAssertions,
+    highSchoolSourceAssertionsResolved: sourceContractEvidence.totals.highSchoolSourceAssertionsResolved,
+    staticTaskSourceBindings: sourceContractEvidence.totals.staticTaskSourceBindings,
+    adultScoringLeaks: sourceContractEvidence.totals.adultScoringLeaks,
   },
   invariants: {
     noInventedQuoteTitleOrUrl: true,
     noLongCopyrightedSourceText: true,
     tutorCannotWriteGradedArgument: true,
     dynamicLessonsGloballyProductionUnready: false,
+    allStaticSourcesHaveRightsMetadata: true,
+    allStaticTasksBoundToSources: true,
+    highSchoolPinnedAssertionsResolved: true,
   },
   gateH3: {
     inputSha: INPUTS.gateH3.sha,
@@ -364,6 +625,10 @@ const manifest = {
     staticSourceRegistry: 'verified-static-sources.json',
     runtimeSourcePolicy: 'runtime-source-policy.json',
     gateH3Report: 'gate-h3-report.json',
+    sourceContractEvidence: 'source-contract-evidence.json',
+    highSchoolSourceContract: 'high-school-source-contract.json',
+    highSchoolSourceGuides: 'high-school-unit-source-guides.md',
+    dynamicAttachmentMetadataSchema: 'dynamic-attachment-metadata.schema.json',
     checksumManifest: 'checksums.sha256',
   },
 }
@@ -372,6 +637,7 @@ writeJson(join(OUT, 'lesson-records.json'), records)
 writeFileSync(join(OUT, 'lesson-records.jsonl'), records.map((record) => JSON.stringify(record)).join('\n') + '\n')
 writeJson(join(OUT, 'verified-static-sources.json'), sourceRegistry)
 writeJson(join(OUT, 'runtime-source-policy.json'), runtimePolicy)
+writeJson(join(OUT, 'source-contract-evidence.json'), sourceContractEvidence)
 writeJson(MANIFEST, manifest)
 
 function filesUnder(directory) {

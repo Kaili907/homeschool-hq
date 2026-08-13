@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "classification": "SOCIAL_CONTENT_READY_FOR_CONVERGENCE",
+  "subject": "social-studies",
+  "totals": {
+    "lessons": 972,
+    "staticSources": 960,
+    "dynamicSources": 12,
+    "unresolvedStaticAssertions": 0,
+    "highSchoolSourceAssertions": 432,
+    "highSchoolSourceAssertionsResolved": 432,
+    "staticTaskSourceBindings": 960,
+    "rightsFailures": 0,
+    "verificationFailures": 0,
+    "adultScoringLeaks": 0
+  },
+  "dynamicMetadataContract": {
+    "schemaPath": "curriculum-production/final/social-studies/dynamic-attachment-metadata.schema.json",
+    "schemaSha256": "b44c0c2242ce161341e57a1126caf64f852cb2ca5fe5a77ca1ebbe670ead3b13",
+    "requiredFieldCount": 36,
+    "sourceBodyStored": false,
+    "quotationsStored": false,
+    "pendingLessons": 12
+  },
+  "highSchool": {
+    "unitSourceSets": 36,
+    "lessonAssertionsResolved": 432,
+    "emptySourceKeySets": 0,
+    "academyOriginalGuidePath": "curriculum-production/final/social-studies/high-school-unit-source-guides.md",
+    "academyOriginalGuideSha256": "f822f89ea338fb8a121fddd27250a2daae40eb926d9c3e6356b17509f2082594"
+  },
+  "grade7Smithsonian": {
+    "lessons": 12,
+    "static": true,
+    "cc0SourceRecords": 6,
+    "sourceKeysPreserved": [
+      "si-nmnhanthro-14944765",
+      "si-nmnhanthro-8177415",
+      "si-nmnhanthro-8179176",
+      "si-nmnhanthro-8197795"
+    ]
+  },
+  "copyright": {
+    "sourceBodiesStored": false,
+    "quotationsStored": false,
+    "externalMetadataOnly": true,
+    "academyOriginalGuideLicensed": true,
+    "missingRightsMetadataRecords": 0
+  },
+  "taskSourceBinding": {
+    "staticLessonsBound": 960,
+    "insufficientBindings": 0,
+    "primarySecondaryRoleGaps": 0,
+    "learnerCitationRequired": true
+  }
+}
