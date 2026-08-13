@@ -16,6 +16,11 @@
   VITE_USE_PROXY = "true"
   NODE_VERSION = "22"
 
+# Controlled Family Pilot web release. The route stays default-off for
+# production, deploy previews, and every unrelated branch.
+[context."mac/family-pilot-web-release-r1".environment]
+  VITE_FAMILY_PILOT_ENABLED = "true"
+
 # ---- Browser/service-worker cache boundaries ----
 [[headers]]
   for = "/sw.js"

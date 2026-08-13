@@ -101,6 +101,11 @@ function FinalShell({ onExit, children }: { readonly onExit: () => void; readonl
           <button type="button" className="rounded-lg border border-slate-600 px-3 py-2 font-bold" onClick={onExit}>Exit Family Pilot</button>
         </div>
       </header>
+      <aside className="border-b border-cyan-200 bg-cyan-50" data-testid="family-pilot-device-storage-notice">
+        <p className="mx-auto max-w-6xl px-4 py-3 text-sm font-semibold text-slate-700">
+          This pilot currently saves progress in this browser on this device. Download backups regularly. Cross-device sync is coming next.
+        </p>
+      </aside>
       {children}
     </div>
   )
@@ -157,7 +162,7 @@ function MountedFinalFamilyPilot({
   }
 
   if (!app.state.setup.completedAt) {
-    return <FinalShell onExit={onExit}><SetupScreen controller={controller} refresh={refresh} /></FinalShell>
+    return <FinalShell onExit={onExit}><SetupScreen controller={controller} refresh={refresh} restoreInput={restoreInput} onRestore={doRestore} /></FinalShell>
   }
 
   const openStudentRef = app.state.activeStudentRef
@@ -206,7 +211,12 @@ function MountedFinalFamilyPilot({
   )
 }
 
-function SetupScreen({ controller, refresh }: { readonly controller: FinalFamilyPilotController; readonly refresh: () => void }) {
+function SetupScreen({ controller, refresh, restoreInput, onRestore }: {
+  readonly controller: FinalFamilyPilotController
+  readonly refresh: () => void
+  readonly restoreInput: React.RefObject<HTMLInputElement | null>
+  readonly onRestore: (file: File | undefined) => Promise<void>
+}) {
   const [setup, setSetup] = useState<FamilySetupState>(controller.appSnapshot.state.setup)
   const [name, setName] = useState('')
   const [grade, setGrade] = useState<Grade>('5')
@@ -244,6 +254,12 @@ function SetupScreen({ controller, refresh }: { readonly controller: FinalFamily
       </ul>
       {error ? <p className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
       <button type="button" className="mt-6 rounded-lg bg-emerald-700 px-5 py-3 font-extrabold text-white disabled:opacity-50" disabled={setup.students.length === 0} onClick={finish}>Finish family setup</button>
+      <section className="mt-8 rounded-2xl border border-cyan-200 bg-cyan-50 p-5">
+        <h3 className="text-lg font-extrabold">Moving an existing pilot to this browser?</h3>
+        <p className="mt-2 text-slate-700">Restore a Parent Download Backup instead of creating the family again.</p>
+        <button type="button" className="mt-4 rounded-lg border border-cyan-700 bg-white px-4 py-2 font-bold text-cyan-900" onClick={() => restoreInput.current?.click()}>Restore a Family Pilot backup</button>
+        <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void onRestore(event.target.files?.[0])} />
+      </section>
     </main>
   )
 }
