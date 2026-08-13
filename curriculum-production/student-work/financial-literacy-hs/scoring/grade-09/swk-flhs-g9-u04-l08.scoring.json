@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l08",
+  "lessonId": "ma-g9-financial-literacy-u04-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$15,223.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60 payments of $253.72 on the original schedule."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,823.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$15,223.20 repaid against $12,400 borrowed."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$11,608.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "48 payments of $241.85 on the refinanced balance."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,044.64",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12 payments of $253.72 already made before the refinance is considered."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$14,653.44",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,044.64 already paid plus $11,608.80 on the refinanced schedule."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$569.76",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$15,223.20 on the original path against $14,653.44 with the refinance."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "payment * months",
+        "substituted": "253.72 * 60",
+        "result": "$15,223.20",
+        "why": "60 payments of $253.72 on the original schedule."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - borrowed",
+        "substituted": "#t1-p1 - 12400",
+        "result": "$2,823.20",
+        "why": "$15,223.20 repaid against $12,400 borrowed."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "paymentR * monthsR",
+        "substituted": "241.85 * 48",
+        "result": "$11,608.80",
+        "why": "48 payments of $241.85 on the refinanced balance."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "payment2 * paid",
+        "substituted": "253.72 * 12",
+        "result": "$3,044.64",
+        "why": "12 payments of $253.72 already made before the refinance is considered."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 + #t1-p3",
+        "substituted": "#t2-p1 + #t1-p3",
+        "result": "$14,653.44",
+        "why": "$3,044.64 already paid plus $11,608.80 on the refinanced schedule."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1 - #t2-p2",
+        "substituted": "#t1-p1 - #t2-p2",
+        "result": "$569.76",
+        "why": "$15,223.20 on the original path against $14,653.44 with the refinance."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The refinance lowers the rate from 8.4% to 5.1% but saves only $569.76 on a $12,400 loan. Explain why the saving is not larger, and name the one term in the refinance offer that limits it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies that the refinance runs 48 months from month 12, so the borrowing lasts 60 months in total — the same length as the original — rather than finishing 12 months sooner.",
+          "Explains that a rate cut only saves money on the months and balance that remain, and 12 months of the highest-balance period were already paid at 8.4%.",
+          "Uses the total figures, $15,223.20 against $14,653.44, rather than comparing the rates alone."
+        ],
+        "evidenceRequirements": [
+          "Cites the 48-month refinance term alongside the 12 months already paid."
+        ],
+        "lookFors": [
+          "The response notices the monthly payment barely changed, from $253.72 to $241.85, which is the visible sign that the term was extended.",
+          "The response does not treat a lower rate as automatically producing proportional savings."
+        ],
+        "commonMisconception": "Judging a refinance by the change in rate without checking what happens to the term.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

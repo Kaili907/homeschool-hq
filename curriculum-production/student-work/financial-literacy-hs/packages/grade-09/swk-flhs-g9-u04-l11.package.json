@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l11",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 11,
+    "phase": "Defense and extension",
+    "title": "Defense and extension: grants, scholarships, and work study versus loans"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "grants, scholarships, and work study versus loans",
+  "objective": "Price the borrowing needed to close a fictional aid gap over its full repayment life, and defend a plan that mixes work, saving, and borrowing under a stated constraint.",
+  "scenario": "A fictional applicant faces a $5,700 annual gap and must decide how to close it. The loan terms, wage, and figures below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional gap and loan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "If the whole $5,700 gap is borrowed, the fictional terms are 6.8% over 10 years — 120 monthly payments — at a disclosed $65.58 a month. Additional work at the fictional campus wage pays $13.75 an hour.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total repaid if the full gap is borrowed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does borrowing the gap cost in interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does each dollar of this gap cost if it is borrowed? Give the answer to two decimal places."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price a mixed plan: borrow $3,500, earn $1,400 through extra work, and save the rest before the year begins.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many hours of work at $13.75 an hour produce $1,400? Round to the nearest hour.",
+          "unit": "hours"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much must be saved in advance to complete the mixed plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Borrowing $3,500 rather than $5,700 at the same $1.38 per dollar saves how much in eventual repayment? Round to the nearest cent.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Defend the plan.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Defend the mixed plan against the simpler alternative of borrowing the whole $5,700. Say what the mixed plan costs that the simple one does not, and name the condition under which borrowing the whole gap would be the better choice."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The $1.38 per borrowed dollar assumes the loan runs its full 10 years. Say how paying it off in 5 years instead would change that figure, and why the direction of the change is certain even without the new payment amount."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the saving from borrowing less comes out as $2,200 — the raw difference in principal — the repayment multiplier has been dropped. Every dollar not borrowed saves $1.38, not $1.00, so multiply the $2,200 difference by the per-dollar cost.",
+  "extension": "Build a third plan that borrows nothing, state what it requires in hours and advance saving, and say honestly whether it is realistic alongside full-time study.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l11",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

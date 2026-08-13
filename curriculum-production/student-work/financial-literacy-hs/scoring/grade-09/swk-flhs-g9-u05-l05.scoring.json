@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l05",
+  "lessonId": "ma-g9-financial-literacy-u05-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$62,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$312,000 held against a $250,000 limit at one bank in one category."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$156,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$312,000 divided between two banks."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "Nothing",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$156,000 at each bank is below the $250,000 limit that applies separately at each institution."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "Nothing; deposit insurance does not cover investment losses",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Deposit insurance protects against the failure of an insured bank, not against a holding losing value; a 30% fall is the investment behaving as an investment."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$28,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$40,000 reduced by 30%, a loss the household bears in full."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "held - limit",
+        "substituted": "312000 - 250000",
+        "result": "$62,000.00",
+        "why": "$312,000 held against a $250,000 limit at one bank in one category."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "held2 / 2",
+        "substituted": "312000 / 2",
+        "result": "$156,000.00",
+        "why": "$312,000 divided between two banks."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 > limit2",
+        "substituted": "#t1-p2 > 250000",
+        "result": "Nothing",
+        "why": "$156,000 at each bank is below the $250,000 limit that applies separately at each institution."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "fund * (1 - fall)",
+        "substituted": "40000 * (1 - 0.3)",
+        "result": "$28,000.00",
+        "why": "$40,000 reduced by 30%, a loss the household bears in full."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain the difference between the two risks in this scenario — the bank failing and the fund falling — and say what a government agency can and cannot protect against.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Distinguishes the risk that an institution fails, which insurance can cover up to $250,000, from the risk that an investment loses value, which it cannot.",
+          "Explains why the second is uninsurable: the possibility of loss is the reason the holding is expected to return more in the first place.",
+          "Notes what agencies do instead for investments — requiring disclosure, registration, and honest dealing — rather than guaranteeing outcomes."
+        ],
+        "evidenceRequirements": [
+          "Uses the $62,000 uninsured figure and the $28,000 post-fall value as the two contrasting cases."
+        ],
+        "lookFors": [
+          "The response does not treat the absence of investment insurance as a gap in protection.",
+          "The response recognises the split across two banks is a real solution to a real limit, not a trick."
+        ],
+        "commonMisconception": "Assuming that because a financial institution is regulated, the money held there cannot lose value.",
+        "dimensions": [
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 3,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

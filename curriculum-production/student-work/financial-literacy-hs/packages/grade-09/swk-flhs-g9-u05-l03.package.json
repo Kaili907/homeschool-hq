@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l03",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: the importance of diversification"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "the importance of diversification",
+  "objective": "Compute three years of growth for two fictional funds and for an even blend of them, and show what the blend does to the year-to-year swings.",
+  "scenario": "The two fictional funds below posted the simulated annual returns shown. A third option puts half the money in each and rebalances every year. All figures are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional three-year return record in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Fund P returned +18%, then -12%, then +9%. Fund Q returned -4%, then +14%, then +3%. A 50/50 blend rebalanced each year therefore returned +7%, then +1%, then +6%. Each option starts with $2,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Fund P worth after the three years? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Fund Q worth after the three years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the 50/50 blend worth after the three years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the swings rather than the endings.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the spread of Fund P’s annual returns — its best year minus its worst?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the spread of the blend’s annual returns?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more did the blend produce than Fund Q?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The blend ended above both funds and swung far less than Fund P. Explain how holding both can beat holding either, and say what property of these two funds made that possible."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the three-year values come out by adding the percentages, note that a -12% year applies to whatever the +18% year produced, not to the original $2,000. Multiply the three factors in sequence, writing the balance after each year.",
+  "extension": "Recompute the blend if Fund Q had returned +16%, -10%, and +8% — moving with Fund P rather than against it — and say what happens to the spread.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

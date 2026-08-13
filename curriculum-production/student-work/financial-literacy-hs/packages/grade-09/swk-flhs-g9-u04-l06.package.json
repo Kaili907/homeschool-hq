@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l06",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: consequences of missed or minimum payments"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "consequences of missed or minimum payments",
+  "objective": "Track a fictional revolving balance across three months of minimum payments, and show how much of the money paid actually reduced what is owed.",
+  "scenario": "The fictional credit card below carries a balance of $1,200. Its rate, minimum-payment rule, and balance are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional card terms in these directions",
+    "a blank three-row tracking table"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional card charges 24% a year, applied as 2% of the balance each month, and requires a minimum payment of 2.5% of the balance or $25, whichever is greater. Interest is charged first, then the payment is applied. Round each figure to the nearest cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What interest is charged in month 1 on the $1,200 balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the month 1 minimum payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance at the end of month 1?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Repeat the same three steps for month 2, starting from the month 1 closing balance.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What interest is charged in month 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the month 2 minimum payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance at the end of month 2?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work month 3 yourself, then total the three months.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance at the end of month 3?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What was paid in total across the three months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much did the balance actually fall over the three months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Of the $89.55 paid, only $17.91 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the closing balance is falling by the full payment each month, the interest step is being skipped. Work strictly in the stated order: add the interest to the balance, then subtract the payment, and record all three numbers for each month before moving on.",
+  "extension": "Continue the table until the minimum payment first hits the $25 floor, and say how many months that takes and what the balance is then.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

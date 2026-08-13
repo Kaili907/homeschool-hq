@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l07",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: benefits and costs of using credit"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "benefits and costs of using credit",
+  "objective": "Find the error in a fictional claim that a 0% financing offer costs nothing, compute both outcomes the offer allows, and quantify the risk the claim ignores.",
+  "scenario": "A fictional shopper wrote: \"It is 0% financing, so borrowing costs me nothing.\" The simulated offer they were reading is set out below and is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional offer terms in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The fictional offer on a $1,450 purchase: no interest for 12 months, a one-time account setup fee of $99, and deferred interest of 26.9% charged on the full original purchase amount if any balance remains after 12 months.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the balance is paid in full within the 12 months, what has the purchase cost in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Even in that best case, by what percentage does the offer raise the cost of the purchase? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now the other outcome. Suppose $200 of the balance is still owed when the 12 months end.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much deferred interest is charged, at 26.9% of the full original purchase amount?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What has the purchase cost in total in that case?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more is that than paying cash for the item?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Locate the error precisely.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-choice",
+          "text": "What does the fictional shopper’s sentence get wrong?",
+          "choices": [
+            "The rate; the offer is not really 0%",
+            "It reads one term of the offer as though it were the whole price of borrowing",
+            "The arithmetic; $1,450 at 0% is not $1,450",
+            "Nothing; borrowing at 0% is free"
+          ]
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the difference between the best outcome and the worst outcome this offer allows?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the question you would ask before accepting this offer that best separates the $1,549.00 outcome from the $1,939.05 one, and explain why that question, rather than the interest rate, is the one that matters."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the deferred interest is being computed on the $200 still owed, reread the clause: it is charged on the full original purchase amount. Compute 26.9% of $1,450 and note how much larger it is than 26.9% of $200.",
+  "extension": "Work out the monthly payment needed to clear $1,450 within 12 months, and say whether that payment is what the offer’s minimum would have required.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

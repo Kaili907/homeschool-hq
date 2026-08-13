@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l09",
+  "lessonId": "ma-g9-financial-literacy-u05-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "-9.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A weight of 0.2 on a -45% return contributes -9.0 percentage points."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "-1.65%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4.8 - 9.0 + 0.9 + 1.35 + 0.3, so four positive holdings were outweighed by one bad one."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "5.55%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3.6 - 2.25 + 1.5 + 2.25 + 0.45, the same five holdings with the concentration reduced."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "7.20%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.55% against -1.65%, with no change to any holding’s own return."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,728.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7.20 percentage points of difference applied to a $24,000 portfolio."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "w2 * r2",
+        "substituted": "0.2 * -45",
+        "result": "-9.0%",
+        "why": "A weight of 0.2 on a -45% return contributes -9.0 percentage points."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "w1 * r1 + #t1-p1 + w3 * r3 + w4 * r4 + w5 * r5",
+        "substituted": "0.4 * 12 + #t1-p1 + 0.15 * 6 + 0.15 * 9 + 0.1 * 3",
+        "result": "-1.65%",
+        "why": "4.8 - 9.0 + 0.9 + 1.35 + 0.3, so four positive holdings were outweighed by one bad one."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "n1 * m1 + n2 * m2 + n3 * m3 + n4 * m4 + n5 * m5",
+        "substituted": "0.3 * 12 + 0.05 * -45 + 0.25 * 6 + 0.25 * 9 + 0.15 * 3",
+        "result": "5.55%",
+        "why": "3.6 - 2.25 + 1.5 + 2.25 + 0.45, the same five holdings with the concentration reduced."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "7.20%",
+        "why": "5.55% against -1.65%, with no change to any holding’s own return."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(portfolio * #t2-p2 / 100, 2)",
+        "substituted": "round(24000 * #t2-p2 / 100, 2)",
+        "result": "$1,728.00",
+        "why": "7.20 percentage points of difference applied to a $24,000 portfolio."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The re-weighting looks obviously right after the fact. Explain why it would have been much harder to justify beforehand, and state what a diversification rule can and cannot promise.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the -45% return was not known in advance, so the re-weighting could only have been justified as a rule about concentration, not as a prediction about Holding 2.",
+          "Notes that the same re-weighting would have cost the portfolio return if Holding 2 had risen 45% instead.",
+          "States what diversification promises: a narrower range of outcomes, not a higher return."
+        ],
+        "evidenceRequirements": [
+          "Uses the two portfolio returns, -1.65% and 5.55%, and the -45% holding return."
+        ],
+        "lookFors": [
+          "The response resists treating one year’s outcome as proof the re-weighting was correct.",
+          "The response notices that Holding 2 was never removed, only reduced."
+        ],
+        "commonMisconception": "Judging a diversification decision by whether the concentrated holding happened to fall.",
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

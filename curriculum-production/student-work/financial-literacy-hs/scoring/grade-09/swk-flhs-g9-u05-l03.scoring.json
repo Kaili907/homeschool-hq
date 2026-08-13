@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l03",
+  "lessonId": "ma-g9-financial-literacy-u05-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,263.71",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,000 x 1.18 x 0.88 x 1.09, applying each year’s return to the balance the previous year left."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,254.46",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,000 falling 4%, then rising 14%, then rising 3%, each applied to the running balance."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$2,291.08",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,000 x 1.07 x 1.01 x 1.06 — the blend ends above both of the funds it is made from."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "30.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "+18% in the best year against -12% in the worst."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "6.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "+7% in the best year against +1% in the worst; the blend never had a losing year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$36.62",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The blend’s $2,291.08 against Fund Q’s $2,254.46 after the same three years."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(stake * (1 + p1) * (1 + p2) * (1 + p3), 2)",
+        "substituted": "round(2000 * (1 + 0.18) * (1 + -0.12) * (1 + 0.09), 2)",
+        "result": "$2,263.71",
+        "why": "$2,000 x 1.18 x 0.88 x 1.09, applying each year’s return to the balance the previous year left."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(stake2 * (1 + q1) * (1 + q2) * (1 + q3), 2)",
+        "substituted": "round(2000 * (1 + -0.04) * (1 + 0.14) * (1 + 0.03), 2)",
+        "result": "$2,254.46",
+        "why": "$2,000 falling 4%, then rising 14%, then rising 3%, each applied to the running balance."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(stake3 * (1 + b1) * (1 + b2) * (1 + b3), 2)",
+        "substituted": "round(2000 * (1 + 0.07) * (1 + 0.01) * (1 + 0.06), 2)",
+        "result": "$2,291.08",
+        "why": "$2,000 x 1.07 x 1.01 x 1.06 — the blend ends above both of the funds it is made from."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "pBest - pWorst",
+        "substituted": "18 - -12",
+        "result": "30.0%",
+        "why": "+18% in the best year against -12% in the worst."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "bBest - bWorst",
+        "substituted": "7 - 1",
+        "result": "6.0%",
+        "why": "+7% in the best year against +1% in the worst; the blend never had a losing year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$36.62",
+        "why": "The blend’s $2,291.08 against Fund Q’s $2,254.46 after the same three years."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The blend ended above both funds and swung far less than Fund P. Explain how holding both can beat holding either, and say what property of these two funds made that possible.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies that the funds moved in opposite directions in the first two years, so the blend avoided Fund P’s -12% year and Fund Q’s -4% year.",
+          "Explains that avoiding a large loss matters more than matching a large gain, because a loss must be recovered from a smaller base.",
+          "States the property required: the two holdings must not move together, and diversification does nothing if they do."
+        ],
+        "evidenceRequirements": [
+          "Uses both spreads, 30.0% and 6.0%, and at least two of the three ending balances."
+        ],
+        "lookFors": [
+          "The response identifies the opposite movement as the mechanism rather than \"spreading risk\" in general.",
+          "The response does not claim diversification guarantees a higher return; here it happened to, and that needs saying."
+        ],
+        "commonMisconception": "Believing diversification works by owning many things rather than by owning things that do not move together.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "transfer",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

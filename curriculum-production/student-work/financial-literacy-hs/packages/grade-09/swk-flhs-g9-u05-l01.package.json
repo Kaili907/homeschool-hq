@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: risk and expected rate of return"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "risk and expected rate of return",
+  "objective": "Compute the expected gain and the worst-case outcome for three fictional investment options, and describe the relationship between the two.",
+  "scenario": "A fictional investor has $5,000 to place for one year in a simulated market. The three invented options below carry expected returns and stated ranges of possible outcomes; none is a real product.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional option descriptions in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Option A, an insured savings certificate, returns exactly 3% with no other outcome possible. Option B, a bond fund, has an expected return of 4.6% with outcomes ranging from -3% to +11%. Option C, a stock fund, has an expected return of 8.2% with outcomes ranging from -28% to +34%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected one-year gain on Option A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected one-year gain on Option B?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected one-year gain on Option C?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compute the worst case each option allows.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Option B worth at the bottom of its stated range, -3%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Option C worth at the bottom of its stated range, -28%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the full spread of Option C — the distance between its best outcome at +34% and its worst?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Describe the pattern linking each option’s expected gain to its spread of outcomes, and explain what an investor is actually paying for when they accept Option A’s $150 instead of Option C’s $410."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the worst-case values come out above the stake, the loss percentage is being added rather than subtracted. Write the multiplier first — a 28% loss means multiplying by 0.72 — and check that the result is smaller than $5,000 before recording it.",
+  "extension": "Compute what Option C would have to be worth after one year for the investor to be no worse off than Option A, and express that as a required return.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

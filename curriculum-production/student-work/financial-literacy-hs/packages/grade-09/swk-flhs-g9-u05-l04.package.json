@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l04",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: time horizon and goal matching"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "time horizon and goal matching",
+  "objective": "Compute the monthly amount each of three fictional goals requires, and match each goal to a category of holding on the basis of its time horizon.",
+  "scenario": "A fictional saver has three simulated goals at three different distances. The amounts, dates, and holding categories below are invented for this exercise and are not recommendations.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional goals in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Goal 1: $900 for a replacement laptop, needed in 8 months. Goal 2: $7,000 toward a vehicle, needed in 48 months. Goal 3: a long-horizon goal 30 years away, funded by a single $5,000 placement growing at 6% a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much a month does Goal 1 require, assuming no growth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much a month does Goal 2 require, assuming no growth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Goal 3’s single $5,000 placement reach after 30 years at 6% a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now match each goal to a holding category. The categories are: insured cash, which cannot lose value; a bond-type holding, which can lose a little in a bad year; and a stock-type holding, which can lose a lot in a bad year but has the highest long-run expected return.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "Which category fits Goal 1, needed in 8 months?",
+          "choices": [
+            "Insured cash",
+            "A bond-type holding",
+            "A stock-type holding"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which category fits Goal 3, 30 years away?",
+          "choices": [
+            "Insured cash",
+            "A bond-type holding",
+            "A stock-type holding"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If Goal 3’s placement instead grew at 3% a year for the same 30 years, what would it reach?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why the same holding can be the right choice for Goal 3 and the wrong choice for Goal 1, and say what would have to change about Goal 1 for the answer to change."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Goal 2 is being matched to a stock-type holding because 48 months sounds long, put the two deadlines beside the ranges from the first lesson of this unit: a 28% fall on money needed in four years leaves no assurance of recovery by the date.",
+  "extension": "Work out what monthly amount Goal 2 would require if the money grew 3% a year, and say whether the growth changes the category it belongs in.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

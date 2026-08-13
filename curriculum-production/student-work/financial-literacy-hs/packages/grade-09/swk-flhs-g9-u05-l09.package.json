@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l09",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l09",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: the importance of diversification"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "the importance of diversification",
+  "objective": "Compute a fictional portfolio’s weighted return, re-weight it to reduce a concentration, and show what the concentration cost in the year given.",
+  "scenario": "The fictional portfolio below holds five simulated positions with the weights and one-year returns shown. Every holding, weight, and return is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional portfolio table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional portfolio: Holding 1 at weight 0.4 returned +12%. Holding 2 at weight 0.2 returned -45%. Holding 3 at weight 0.15 returned +6%. Holding 4 at weight 0.15 returned +9%. Holding 5 at weight 0.1 returned +3%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did Holding 2 contribute to the portfolio return?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What was the portfolio’s overall return? Give it to two decimal places.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now re-weight, cutting Holding 2 to 0.05 and redistributing: Holding 1 to 0.30, Holding 3 to 0.25, Holding 4 to 0.25, Holding 5 to 0.15. The returns are unchanged.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the re-weighted portfolio have returned? Give it to two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many percentage points better is the re-weighted portfolio in this year?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "On a $24,000 portfolio, what is that difference worth in dollars?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The re-weighting looks obviously right after the fact. Explain why it would have been much harder to justify beforehand, and state what a diversification rule can and cannot promise."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the portfolio return comes out positive, check the sign on Holding 2: a -45% return at weight 0.2 subtracts 9 percentage points, and it is the only negative contribution in the table.",
+  "extension": "Find the weight on Holding 2 at which the original portfolio would have exactly broken even in this year, and say what that weight implies.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

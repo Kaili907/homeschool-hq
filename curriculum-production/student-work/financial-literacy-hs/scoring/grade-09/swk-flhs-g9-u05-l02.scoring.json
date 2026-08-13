@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l02",
+  "lessonId": "ma-g9-financial-literacy-u05-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$4,216.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,000 grown by 5.4% is $4,216.00, which is the nominal value."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,089.23",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,216.00 divided by the price level of 1.031 gives what it buys in January terms."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$89.23",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,089.23 of purchasing power against the $4,000 that went in."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "2.2%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "1.054 divided by 1.031 is 1.02231, so the real return is 2.2% — slightly less than the 2.3% that subtracting the rates would suggest."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Lost purchasing power",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "A 5.4% nominal return against 6.0% inflation leaves the investor able to buy less at the end of the year than at the start, even though the dollar balance rose."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "stake * (1 + nominalRate)",
+        "substituted": "4000 * (1 + 0.054)",
+        "result": "$4,216.00",
+        "why": "$4,000 grown by 5.4% is $4,216.00, which is the nominal value."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(stake2 * (1 + nominalRate2) / (1 + inflation), 2)",
+        "substituted": "round(4000 * (1 + 0.054) / (1 + 0.031), 2)",
+        "result": "$4,089.23",
+        "why": "$4,216.00 divided by the price level of 1.031 gives what it buys in January terms."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - stake3",
+        "substituted": "#t1-p2 - 4000",
+        "result": "$89.23",
+        "why": "$4,089.23 of purchasing power against the $4,000 that went in."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(((1 + nominalRate3) / (1 + inflation2) - 1) * 100, 1)",
+        "substituted": "round(((1 + 0.054) / (1 + 0.031) - 1) * 100, 1)",
+        "result": "2.2%",
+        "why": "1.054 divided by 1.031 is 1.02231, so the real return is 2.2% — slightly less than the 2.3% that subtracting the rates would suggest."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "nominalRate > altInflation",
+        "substituted": "5.4 > 6",
+        "result": "Lost purchasing power",
+        "why": "A 5.4% nominal return against 6.0% inflation leaves the investor able to buy less at the end of the year than at the start, even though the dollar balance rose."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The account balance rose by $216 and the investor got $89.23 better off. Explain where the other $126.77 went, and say why a statement showing only the balance can be misleading.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that $126.77 of the nominal gain was consumed by prices rising 3.1%, so it restored purchasing power rather than adding any.",
+          "States that a statement reports dollars, which do not hold a constant value, so the same balance means less each year prices rise.",
+          "Uses the real return of 2.2% rather than only the dollar figures."
+        ],
+        "evidenceRequirements": [
+          "Uses the $4,216.00 nominal value, the $4,089.23 real value, and the 3.1% inflation rate."
+        ],
+        "lookFors": [
+          "The response does not describe the $126.77 as a fee or a loss taken by anyone.",
+          "The response recognises the investor is genuinely better off, just by less than the balance suggests."
+        ],
+        "commonMisconception": "Reading a rise in an account balance as a rise in what the money can buy.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l08",
+  "lessonId": "ma-g9-financial-literacy-u05-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$18.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18.40 raised 2.2% is $18.8048, which the fictional employer rounds to $18.80."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$18.18",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18.80 divided by the price level of 1.034 gives what the new wage buys in last year’s prices."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$0.22",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18.40 of buying power before against $18.18 after, so the rise did not keep pace."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$387.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$0.22 an hour over 1,760 hours."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "No, prices rose faster than wages",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "A 2.2% rise against 3.4% inflation is a real cut, worth $387.20 across a 1,760-hour year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$19.03",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$18.40 raised by the full 3.4% is $19.0256, which rounds to $19.03."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(wage * (1 + riseRate), 2)",
+        "substituted": "round(18.4 * (1 + 0.022), 2)",
+        "result": "$18.80",
+        "why": "$18.40 raised 2.2% is $18.8048, which the fictional employer rounds to $18.80."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / (1 + inflation), 2)",
+        "substituted": "round(#t1-p1 / (1 + 0.034), 2)",
+        "result": "$18.18",
+        "why": "$18.80 divided by the price level of 1.034 gives what the new wage buys in last year’s prices."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "wage2 - #t1-p2",
+        "substituted": "18.4 - #t1-p2",
+        "result": "$0.22",
+        "why": "$18.40 of buying power before against $18.18 after, so the rise did not keep pace."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 * hours",
+        "substituted": "#t1-p3 * 1760",
+        "result": "$387.20",
+        "why": "$0.22 an hour over 1,760 hours."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "wageRise > inflation",
+        "substituted": "2.2 > 3.4",
+        "result": "No, prices rose faster than wages",
+        "why": "A 2.2% rise against 3.4% inflation is a real cut, worth $387.20 across a 1,760-hour year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(wage3 * (1 + inflation2), 2)",
+        "substituted": "round(18.4 * (1 + 0.034), 2)",
+        "result": "$19.03",
+        "why": "$18.40 raised by the full 3.4% is $19.0256, which rounds to $19.03."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The same method was used earlier on an investment return. Explain what is being measured in both cases, and one way the wage case differs from the investment case.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that both cases divide a nominal amount by the price level to measure what it actually buys.",
+          "Names a genuine difference — a wage is received continuously through the year rather than valued at a single date, or a wage rise persists into future years while a single year’s return does not."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $18.18 real wage figure and the 3.4% price rise."
+        ],
+        "lookFors": [
+          "The response recognises the method transfers unchanged even though the subject is different."
+        ],
+        "commonMisconception": "Judging a pay rise by its percentage without reference to what prices did.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The figure of 3.4% describes prices across a whole simulated economy. Say why an individual worker’s own experience of price rises could differ, and what that means for the $387.20 figure.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that an economy-wide price measure is an average across many goods, and a household buying a different mix faces a different effective rate.",
+          "States that the $387.20 is therefore an estimate based on the average basket, and could be larger or smaller for this worker."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 3.4% figure and the $387.20 annual estimate."
+        ],
+        "lookFors": [
+          "The response does not dismiss the average as useless, only as an average."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l06",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: tax-advantaged accounts in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "tax-advantaged accounts in outline",
+  "objective": "Compare a fictional pre-tax account with a fictional after-tax account over the same term and rate, and identify which figure decides between them.",
+  "scenario": "Two simulated retirement account types are compared below on a $3,000 contribution. The tax rates, the growth rate, and the term are invented for this exercise, and nothing here is tax advice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator with a power function",
+    "the two fictional account descriptions in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Account T takes the contribution before tax: the full $3,000 goes in, and the whole withdrawal is taxed at 15% in 20 years. Account R takes it after tax: the $3,000 is taxed at 22% first and only what remains goes in, but the withdrawal is not taxed. Both grow 6% a year for 20 years.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Account T grow to before any withdrawal tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is left from Account T after the 15% withdrawal tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much actually goes into Account R after the 22% tax on the contribution?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Finish the comparison.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Account R produce after 20 years, with no tax on withdrawal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Account T deliver?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which comparison decides between the two accounts?",
+          "choices": [
+            "The growth rate, since both grow at 6%",
+            "The term, since both run 20 years",
+            "Whether the tax rate at withdrawal is lower or higher than the tax rate today",
+            "The contribution amount, since both start from $3,000"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Account T won here by $673.50. Explain what would have to be true for Account R to win instead, and say why neither answer can be settled with certainty today."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Account R comes out ahead, check that the 22% was taken before the growth rather than after. Only $2,340 grows in Account R, and that difference at the start is what the 20 years of compounding then multiplies.",
+  "extension": "Find the withdrawal tax rate at which the two accounts finish exactly level, and say what that rate means in words.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

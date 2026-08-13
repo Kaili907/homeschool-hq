@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l01",
+  "lessonId": "ma-g9-financial-literacy-u04-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,049.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "24 payments of $43.72, which is the figure a disclosure calls the total of payments."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$209.28",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,049.28 paid in total against $840 of goods received."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "24.9%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$209.28 on an $840 purchase is 0.24914, or 24.9% added to the price."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$840 at $70 a month takes exactly 12 months, with no interest assumed."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Saving $70 a month and paying cash in 12 months",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Paying cash costs $840 against $1,049.28 financed, so waiting saves the $209.28 cost of credit."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "payment * months",
+        "substituted": "43.72 * 24",
+        "result": "$1,049.28",
+        "why": "24 payments of $43.72, which is the figure a disclosure calls the total of payments."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - financed",
+        "substituted": "#t1-p1 - 840",
+        "result": "$209.28",
+        "why": "$1,049.28 paid in total against $840 of goods received."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p2 / financed2 * 100, 1)",
+        "substituted": "round(#t1-p2 / 840 * 100, 1)",
+        "result": "24.9%",
+        "why": "$209.28 on an $840 purchase is 0.24914, or 24.9% added to the price."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "target / setAside",
+        "substituted": "840 / 70",
+        "result": "12",
+        "why": "$840 at $70 a month takes exactly 12 months, with no interest assumed."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 < cash",
+        "substituted": "#t1-p1 < 840",
+        "result": "Saving $70 a month and paying cash in 12 months",
+        "why": "Paying cash costs $840 against $1,049.28 financed, so waiting saves the $209.28 cost of credit."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Saving is cheaper by $209.28 and financing is still sometimes the right choice. Describe one situation in which financing this purchase would be defensible, and one in which it clearly would not, using the figures.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Gives a defensible case for financing that turns on the item being needed now — a tool required for work, a repair that prevents a larger loss — where 12 months of waiting has its own cost.",
+          "Gives a clear case against — a purchase that could wait with no consequence — and identifies the $209.28 as the price of not waiting.",
+          "Treats the monthly figures honestly: $43.72 is easier to fit into a month than $70, which is a real consideration and not merely an illusion."
+        ],
+        "evidenceRequirements": [
+          "Uses the $209.28 cost of credit and both monthly figures, $43.72 and $70."
+        ],
+        "lookFors": [
+          "The response recognises that the smaller monthly payment is not the same as the cheaper option.",
+          "The response does not treat all borrowing as a mistake."
+        ],
+        "commonMisconception": "Comparing credit offers by the monthly payment rather than by the total of payments.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

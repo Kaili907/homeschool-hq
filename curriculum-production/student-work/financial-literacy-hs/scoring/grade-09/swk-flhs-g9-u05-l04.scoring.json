@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l04",
+  "lessonId": "ma-g9-financial-literacy-u05-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$112.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$900 over 8 months, with no growth assumed because 8 months is too short to rely on any."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$145.83",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,000 divided across 48 months, again with no growth assumed at this horizon."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$28,717.46",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,000 x 1.06 to the thirtieth power, with nothing added along the way."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "Insured cash",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "With 8 months to the date and a fixed $900 required, there is no time to recover from a fall, so certainty matters more than expected return."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "A stock-type holding",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A 30-year horizon leaves time to recover from bad years, and over that span the difference in expected return compounds into the largest part of the outcome."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$12,136.31",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,000 x 1.03 to the thirtieth power — less than half the 6% outcome, from a rate difference of three percentage points."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(goal1 / months1, 2)",
+        "substituted": "round(900 / 8, 2)",
+        "result": "$112.50",
+        "why": "$900 over 8 months, with no growth assumed because 8 months is too short to rely on any."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(goal2 / months2, 2)",
+        "substituted": "round(7000 / 48, 2)",
+        "result": "$145.83",
+        "why": "$7,000 divided across 48 months, again with no growth assumed at this horizon."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(placement * pow(1 + rate, years), 2)",
+        "substituted": "round(5000 * pow(1 + 0.06, 30), 2)",
+        "result": "$28,717.46",
+        "why": "$5,000 x 1.06 to the thirtieth power, with nothing added along the way."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(placement2 * pow(1 + lowRate, years2), 2)",
+        "substituted": "round(5000 * pow(1 + 0.03, 30), 2)",
+        "result": "$12,136.31",
+        "why": "$5,000 x 1.03 to the thirtieth power — less than half the 6% outcome, from a rate difference of three percentage points."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Explain why the same holding can be the right choice for Goal 3 and the wrong choice for Goal 1, and say what would have to change about Goal 1 for the answer to change.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that time horizon, not the holding, decides: a holding that can fall sharply is survivable when there are decades to recover and not when the money is needed in 8 months.",
+          "Uses the $28,717.46 and $12,136.31 figures to show what the long horizon is worth, and the fixed $900 requirement to show why Goal 1 cannot absorb a fall.",
+          "Names what would change the answer for Goal 1 — a flexible date, or the goal no longer being required at all."
+        ],
+        "evidenceRequirements": [
+          "Uses the two 30-year figures and at least one of the monthly requirements."
+        ],
+        "lookFors": [
+          "The response treats the deadline as the binding constraint rather than the saver’s comfort with risk.",
+          "The response does not describe stock-type holdings as simply better or simply dangerous."
+        ],
+        "commonMisconception": "Choosing investments by expected return alone, without asking when the money is needed.",
+        "dimensions": [
+          "criteria-application",
+          "transfer",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 2,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l09",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l09",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: what a credit history records and why it matters"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "what a credit history records and why it matters",
+  "objective": "Compute a fictional lender’s published index from weighted factors, test which factor moves it most, and state what the index does not measure.",
+  "scenario": "A fictional lender publishes the simulated scoring model below and applies it to a fictional applicant’s file. The model, the weights, and the sub-scores are invented for this exercise and are not any real credit score.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional model and file in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional model weights five factors: payment history 0.35, credit utilisation 0.30, length of history 0.15, credit mix 0.10, and new credit 0.10. The fictional applicant scores, out of 100: payment history 96, utilisation 62, length 40, mix 70, new credit 85.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the payment history factor contribute to the index?"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the applicant’s overall index? Give it to one decimal place."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Test what would move the index most.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the utilisation sub-score rose from 62 to 90 with everything else unchanged, what would the index become?"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If instead the length-of-history sub-score rose from 40 to 90, what would the index become?"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which of those two improvements raises the index more?",
+          "choices": [
+            "Raising utilisation from 62 to 90",
+            "Raising length of history from 40 to 90",
+            "They raise it equally"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "One of these two improvements is largely within the applicant’s control this year and the other is not. Say which is which, and explain what that means for how much attention the index deserves."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the index comes out above 100, the sub-scores are being added before the weights are applied. Compute the five weighted contributions in a column — 33.6, 18.6, 6.0, 7.0, 8.5 — and only then add.",
+  "extension": "Construct a second fictional lender’s weights, still summing to 1, under which this applicant’s file scores above 80 with no change to any sub-score.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

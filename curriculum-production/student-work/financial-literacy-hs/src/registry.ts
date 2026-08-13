@@ -3,9 +3,13 @@ import type { LessonSpec } from './types.ts'
 import { g09u01 } from './specs/g09u01.ts'
 import { g09u02 } from './specs/g09u02.ts'
 import { g09u03 } from './specs/g09u03.ts'
+import { g09u04 } from './specs/g09u04.ts'
+import { g09u05 } from './specs/g09u05.ts'
 
 export const ALL_SPECS: readonly LessonSpec[] = [
   ...g09u01,
   ...g09u02,
   ...g09u03,
+  ...g09u04,
+  ...g09u05,
 ]

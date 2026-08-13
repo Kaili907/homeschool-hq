@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l08",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: how inflation changes real returns"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "how inflation changes real returns",
+  "objective": "Apply the real-versus-nominal method to wages rather than investments, and determine whether a fictional pay rise left the worker better off.",
+  "scenario": "A fictional worker’s hourly wage rises from $18.40 to a new figure while prices in the same simulated year rise 3.4%. All figures are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional wage and inflation figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional wage of $18.40 an hour rises by 2.2%. Over the same year, prices rise 3.4%, so a basket costing $1.00 now costs $1.034.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the new hourly wage? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the new wage worth in the prices of a year ago? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much purchasing power did the worker lose per hour despite the rise?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Scale the effect up to a working year of 1,760 hours.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Over 1,760 hours, how much purchasing power is lost across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Did this pay rise leave the worker better off?",
+          "choices": [
+            "Yes, wages rose",
+            "No, prices rose faster than wages",
+            "It cannot be determined from these figures"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What hourly wage would have exactly kept pace with prices? Round to the nearest cent.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "The same method was used earlier on an investment return. Explain what is being measured in both cases, and one way the wage case differs from the investment case."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The figure of 3.4% describes prices across a whole simulated economy. Say why an individual worker’s own experience of price rises could differ, and what that means for the $387.20 figure."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the real wage comes out above $18.40, check the direction of the division: dividing by 1.034 must make the figure smaller, because the same dollars buy less. Multiplying by 1.034 answers a different question, the one in t2-p3.",
+  "extension": "Compute the real change if inflation had been 1.4% instead, and state the rule for when a nominal rise is also a real one.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

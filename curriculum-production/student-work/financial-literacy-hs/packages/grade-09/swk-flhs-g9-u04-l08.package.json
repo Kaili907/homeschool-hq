@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l08",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: interest rate, APR, term, and total repaid"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "interest rate, APR, term, and total repaid",
+  "objective": "Apply the rate, term, and total-repaid method to a fictional refinance, computing what the borrower pays in total on each path and what the switch is worth.",
+  "scenario": "A fictional borrower is 12 months into a simulated vehicle loan and has been offered an invented refinance. Every rate, balance, and payment below is fictional.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional loan disclosures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The original fictional loan: $12,400 at 8.4% over 60 months, disclosed payment $253.72. After 12 payments the fictional balance is $10,480. The refinance offer: that balance at 5.1% over 48 months, disclosed payment $241.85.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the original loan cost in total over its full 60 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of that is interest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the refinance cost over its 48 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The 12 payments already made count on either path.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What has the borrower already paid in the first 12 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total paid across the whole borrowing if the refinance is taken?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does refinancing save against staying on the original loan?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The refinance lowers the rate from 8.4% to 5.1% but saves only $569.76 on a $12,400 loan. Explain why the saving is not larger, and name the one term in the refinance offer that limits it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the saving is coming out in the thousands, the 12 payments already made are probably being dropped from one side of the comparison. Both paths include them; only what happens after month 12 differs.",
+  "extension": "Recompute the saving if the refinance ran 36 months at a disclosed $314.61 a month, and say what that shows about which term the borrower should ask for.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

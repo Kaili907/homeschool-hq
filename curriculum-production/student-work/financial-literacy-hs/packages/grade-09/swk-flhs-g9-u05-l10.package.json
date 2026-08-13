@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l10",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: time horizon and goal matching"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "time horizon and goal matching",
+  "objective": "Assemble a fictional three-goal plan matching each goal to a horizon and a holding category, compute what each requires, and defend the allocation against a stated objection.",
+  "scenario": "A fictional saver has $340 a month available and three simulated goals. Every amount, date, and rate below is invented for this exercise; nothing here recommends a real investment.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator with a power function",
+    "the fictional goal list in these directions",
+    "a blank allocation table"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The three fictional goals. Goal A: $1,600 for a certification course, needed in 10 months. Goal B: $9,000 toward a vehicle, needed in 60 months. Goal C: a 25-year goal, funded by placing $5,000 now at an assumed 6% a year and adding nothing.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much a month does Goal A require, assuming no growth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much a month does Goal B require, assuming no growth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Goal C’s $5,000 placement reach in 25 years at 6% a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Check the plan against the money actually available.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do Goals A and B together require each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $340 a month is left over?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Once Goal A is funded after 10 months, how much a month becomes free?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the plan up.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Present the allocation: which holding category each goal belongs in, what each requires, and what happens to the freed $160 after month 10. Then answer this objection: \"Goal A is only 10 months away — put it in the stock-type holding and it will get there faster.\""
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The Goal C projection assumes 6% a year for 25 years. Say what happens to that projection if the actual average is 4%, and how you would present the figure to avoid overstating certainty."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the plan comes out over budget, check whether Goal C is being given a monthly contribution. It is funded by a single $5,000 placement made now, so it requires nothing from the $340 a month.",
+  "extension": "Rebuild the plan for a saver with only $260 a month available, deciding which goal moves and by how long, and state the reasoning behind the choice.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

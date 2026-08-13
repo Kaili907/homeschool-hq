@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u05-l05",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Risk, Return, and Why Diversification Matters",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: the role of government agencies in investing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "the role of government agencies in investing",
+  "objective": "Apply a fictional deposit insurance limit to a simulated household’s balances, compute the uninsured amount, and restructure the holdings so nothing is uninsured.",
+  "scenario": "In this simulated jurisdiction, a government agency insures deposits up to $250,000 per depositor per bank in a single ownership category. The fictional household and its balances below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional balance summary in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household holds $312,000 at one simulated bank, all in a single ownership category. The insurance limit is $250,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the household’s deposit is uninsured?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the household splits the money evenly between two separate insured banks, how much sits at each?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-choice",
+          "text": "After that split, how much is uninsured?",
+          "choices": [
+            "$62,000",
+            "$31,000",
+            "Nothing"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The agency insures deposits. It does not insure investments.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "The household also holds $40,000 in a stock fund at a brokerage. If that fund falls 30% in a year, what does deposit insurance pay?",
+          "choices": [
+            "$12,000, the amount of the fall",
+            "$40,000, the full holding",
+            "Nothing; deposit insurance does not cover investment losses"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would that $40,000 stock fund be worth after a 30% fall?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain the difference between the two risks in this scenario — the bank failing and the fund falling — and say what a government agency can and cannot protect against."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the split still shows an uninsured amount, reread how the limit applies: it is per depositor per bank, so two banks give two separate $250,000 limits. Compare $156,000 with $250,000, not with half of it.",
+  "extension": "Work out the largest total this household could hold fully insured across three banks under the same rule, and say what practical costs that structure carries.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u05-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u05-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

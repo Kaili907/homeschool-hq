@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l06",
+  "lessonId": "ma-g9-financial-literacy-u04-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$24.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The card applies 2% of the balance each month, and 2% of $1,200 is $24.00."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$30.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.5% of $1,200 is $30.00, which is greater than the $25 floor."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,194.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,200 plus $24.00 of interest less the $30.00 paid, so only $6.00 of the payment reduced the balance."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$23.88",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same 2% monthly rate, now applied to the $1,194.00 carried into month 2."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$29.85",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.5% of $1,194.00 is $29.85, still above the $25 floor."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,188.03",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,194.00 plus $23.88 of interest less the $29.85 paid."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$1,182.09",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,188.03 plus $23.76 of interest less the $29.70 minimum payment."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$89.55",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$30.00 plus $29.85 plus $29.70."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "$17.91",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,200 at the start against $1,182.09 at the end."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balance * monthlyRate, 2)",
+        "substituted": "round(1200 * 0.02, 2)",
+        "result": "$24.00",
+        "why": "The card applies 2% of the balance each month, and 2% of $1,200 is $24.00."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "max(round(balance2 * minRate, 2), minFloor)",
+        "substituted": "max(round(1200 * 0.025, 2), 25)",
+        "result": "$30.00",
+        "why": "2.5% of $1,200 is $30.00, which is greater than the $25 floor."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "balance3 + #t1-p1 - #t1-p2",
+        "substituted": "1200 + #t1-p1 - #t1-p2",
+        "result": "$1,194.00",
+        "why": "$1,200 plus $24.00 of interest less the $30.00 paid, so only $6.00 of the payment reduced the balance."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 * monthlyRate2, 2)",
+        "substituted": "round(#t1-p3 * 0.02, 2)",
+        "result": "$23.88",
+        "why": "The same 2% monthly rate, now applied to the $1,194.00 carried into month 2."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "max(round(#t1-p3 * minRate2, 2), minFloor2)",
+        "substituted": "max(round(#t1-p3 * 0.025, 2), 25)",
+        "result": "$29.85",
+        "why": "2.5% of $1,194.00 is $29.85, still above the $25 floor."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p3 + #t2-p1 - #t2-p2",
+        "substituted": "#t1-p3 + #t2-p1 - #t2-p2",
+        "result": "$1,188.03",
+        "why": "$1,194.00 plus $23.88 of interest less the $29.85 paid."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t2-p3 + round(#t2-p3 * monthlyRate3, 2) - max(round(#t2-p3 * minRate3, 2), minFloor3)",
+        "substituted": "#t2-p3 + round(#t2-p3 * 0.02, 2) - max(round(#t2-p3 * 0.025, 2), 25)",
+        "result": "$1,182.09",
+        "why": "$1,188.03 plus $23.76 of interest less the $29.70 minimum payment."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p2 + #t2-p2 + max(round(#t2-p3 * minRate4, 2), minFloor4)",
+        "substituted": "#t1-p2 + #t2-p2 + max(round(#t2-p3 * 0.025, 2), 25)",
+        "result": "$89.55",
+        "why": "$30.00 plus $29.85 plus $29.70."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "start - #t3-p1",
+        "substituted": "1200 - #t3-p1",
+        "result": "$17.91",
+        "why": "$1,200 at the start against $1,182.09 at the end."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Of the $89.55 paid, only $17.91 reduced the balance. Explain where the rest went, and describe what the minimum-payment rule does as the balance falls.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that $71.64 of the $89.55 paid went to interest, and shows this as the difference between the two figures.",
+          "Explains that the minimum is a percentage of the balance, so it shrinks as the balance shrinks, which slows repayment further.",
+          "Notes that the $25 floor eventually takes over, and that until then each month repeats the same pattern at a slightly smaller scale."
+        ],
+        "evidenceRequirements": [
+          "Uses the $89.55 total paid and the $17.91 reduction in balance."
+        ],
+        "lookFors": [
+          "The response identifies the shrinking minimum as a mechanism rather than describing minimum payments as merely \"bad\".",
+          "The response does not claim the interest was hidden; it was charged at the stated rate."
+        ],
+        "commonMisconception": "Assuming a payment reduces the balance by the amount paid.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}
