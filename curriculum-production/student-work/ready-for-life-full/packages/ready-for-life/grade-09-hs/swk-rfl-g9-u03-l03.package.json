@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u03-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Food Systems, Nutrition, and Cost",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: recipe scaling and batch cooking"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners take a provided recipe written for four servings and mathematically scale every ingredient quantity both down to two servings and up to twelve servings, showing the multiplication or division used for each ingredient, so they can adapt any recipe to the number of people actually being fed.",
+  "scenario": "The task sheet provides one complete recipe with ingredient quantities listed for four servings. The learner recalculates every ingredient amount for a two-serving version and a twelve-serving version, showing the math for each ingredient rather than only the final numbers. No cooking happens; this is a math and planning exercise.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This task only requires written calculation; no stove, oven, or knife is used as part of the lesson."],
+  "simulationAlternative": null,
+  "materials": ["the provided four-serving recipe card", "paper or a document for the scaled ingredient tables", "a calculator or the ability to multiply and divide fractions by hand"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before scaling, find the scaling factor you would need to go from four servings to two servings, and from four servings to twelve servings.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Write the scaling factor (as a fraction or decimal) for four servings down to two servings, and the scaling factor for four servings up to twelve servings." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Using the two-serving scaling factor, recalculate the quantity of each ingredient in the recipe, showing the multiplication or division for each one.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "List each ingredient's original four-serving quantity next to its new two-serving quantity, with the calculation shown for each." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "Every ingredient in the original recipe has a corresponding two-serving quantity calculated." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Using the twelve-serving scaling factor, recalculate the quantity of each ingredient on your own, showing your work for each one.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "List each ingredient's original four-serving quantity next to its new twelve-serving quantity, with the calculation shown for each." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "Every ingredient in the original recipe has a corresponding twelve-serving quantity calculated." },
+        { "ref": "t3-p3", "promptType": "short-response", "text": "Name one ingredient where the twelve-serving amount would be awkward to measure exactly (such as a fraction of an egg), and explain how you would round it in practice." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why batch cooking and scaling matter for planning.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one specific reason a household might want to scale this recipe up to twelve servings for batch cooking rather than making the four-serving version three times, using something from your ingredient math to support your answer." }
+      ]
+    }
+  ],
+  "remediation": "If a learner scales some ingredients but not others, or adds instead of multiplies when finding a new quantity, reteach with a single simple ingredient (such as 2 cups of an item) and walk through multiplying by the scaling factor step by step before returning to the full ingredient list.",
+  "extension": "Have the learner scale the same recipe to an odd serving size, such as five or seven servings, and explain how they handled at least one ingredient that no longer divides evenly.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u03-l03",
+    "authoredBy": "manual"
+  }
+}

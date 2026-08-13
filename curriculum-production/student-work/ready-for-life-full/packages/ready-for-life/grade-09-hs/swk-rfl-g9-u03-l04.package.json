@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u03-l04",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Food Systems, Nutrition, and Cost",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: food safety, storage, and reheating"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a trusted adult, learners check three real items in the refrigerator or pantry against provided safe-temperature and shelf-life guidelines, sort each as safe to keep or needing attention, and correctly reheat one real food item to a safe internal temperature or visible doneness sign confirmed by the adult, so they can recognize and prevent foodborne illness risk at home.",
+  "scenario": "With a trusted adult present, the learner selects three real items from the household refrigerator or pantry, checks each against the provided safe-storage guidelines (such as refrigerator temperature range and typical shelf-life windows), and records whether each item is still safe. The learner then reheats one real leftover or refrigerated item using a safe method from the guidance sheet, and the adult confirms the item was heated appropriately before the task counts as complete.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner only handles the stove, microwave, or oven for reheating with the trusted adult present the entire time.",
+    "If an item shows signs of spoilage such as an off smell, mold, or an expired shelf-life window, the learner does not taste it; the adult decides whether to discard it.",
+    "Completing this task sheet never certifies the safety check or reheating by itself; a guardian confirmation is required before the task counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If a real refrigerator or pantry check and reheating session is not possible, the learner instead works from a provided list of ten food items with their storage location and age, sorts each into 'safe to keep' or 'needs attention' using the same safe-storage guidelines, and separately identifies the correct reheating method and target temperature or doneness sign for two of the listed items, explaining the reasoning for each choice."
+  },
+  "materials": ["access to the real household refrigerator or pantry with a trusted adult", "the provided safe-temperature and shelf-life guidance sheet", "a real food item to reheat and a safe way to reheat it (stove, microwave, or oven)", "paper or a notes app to record findings"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before checking, predict which of three items you plan to check might already be past its safe window.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the three items you plan to check and write your prediction for whether each is still safe, based only on what you remember about when it was stored." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, check each of the three items against the guidance sheet's temperature and shelf-life information, and record the result for each.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I checked item one against the guidance sheet and recorded whether it is safe to keep or needs attention." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I checked item two against the guidance sheet and recorded whether it is safe to keep or needs attention." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I checked item three against the guidance sheet and recorded whether it is safe to keep or needs attention." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "With your adult present, choose one real food item to reheat and use the guidance sheet's method to reheat it to a safe internal temperature or visible doneness sign, then have your adult confirm the result.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name the item you reheated, the method you used, and the target temperature or doneness sign from the guidance sheet." },
+        { "ref": "t3-p2", "promptType": "checklist-item", "text": "My adult confirmed the item reached the safe target before I finished the task." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Compare your predictions from the warm-up to what you actually found.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Which item's condition most surprised you compared to your prediction, and explain one specific habit you will change about how you store or check food because of what you found." }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts an item as safe based only on its smell or appearance rather than checking it against the guidance sheet's stated shelf-life window, reteach by covering the item and having them find and read aloud the specific shelf-life range from the guidance sheet before making the safe or needs-attention call again.",
+  "extension": "Have the learner check three additional pantry items against the guidance sheet's shelf-life information and create a short written schedule noting which one they should recheck first and why, based on how close it is to its safe window's end.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l04.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u03-l04",
+    "authoredBy": "manual"
+  }
+}

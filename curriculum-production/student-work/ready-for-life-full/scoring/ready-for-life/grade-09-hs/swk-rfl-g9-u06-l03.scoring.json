@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l03",
+  "lessonId": "ma-g9-ready-for-life-u06-l03",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Task plan quality",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The step-by-step plan for one or both tasks is missing key steps or is too vague to actually follow." },
+          { "label": "Proficient", "descriptor": "The step-by-step plan for both tasks lists clear, ordered steps, including anything to check or gather beforehand." },
+          { "label": "Advanced", "descriptor": "The step-by-step plan for both tasks lists clear, ordered steps, and the learner accurately names a specific real difference between the plan and what actually happened." }
+        ]
+      },
+      {
+        "dimension": "Guardian-confirmed follow-through",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The guardian confirmation for one or both tasks is missing." },
+          { "label": "Proficient", "descriptor": "The guardian confirms both the household task and the food task were completed as planned." },
+          { "label": "Advanced", "descriptor": "The guardian confirms both tasks were completed as planned, and the learner's account of what went differently matches the guardian's confirmation." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A step list specific enough that a guardian could check off each step actually happening, not a vague summary like 'did the chore.'",
+      "A separate guardian confirmation for each of the two tasks, not just one combined confirmation."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

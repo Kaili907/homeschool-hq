@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u05-l05",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 5,
+    "unitTitle": "Professional and Personal Communication",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: conflict de-escalation and repair"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners identify one real, low-stakes disagreement they've had with a real household member, plan what they will say using a three-part repair structure (name the disagreement without blame, state their own part in it, propose one specific next step), then have the real repair conversation with that household member, with a trusted adult confirming afterward that the conversation happened and stayed respectful.",
+  "scenario": "With a trusted adult's guidance, the learner picks one real, low-stakes disagreement with someone in their own household (such as a chore, a shared space, or a scheduling conflict), plans the conversation using the three-part structure, has the real conversation with that household member, and the trusted adult confirms afterward that it happened and stayed respectful.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": false,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "This task is only appropriate for a genuinely low-stakes disagreement (such as a chore, shared space, or schedule); it is never used for a conflict involving anger that feels unsafe, a pattern of ongoing mistreatment, or any topic a trusted adult advises against revisiting.",
+    "The trusted adult decides whether the identified disagreement is appropriate to revisit before the learner starts; if it is not, the learner uses the role-play alternative instead.",
+    "No recording of the conversation is made or required; the trusted adult confirms based on their own knowledge or a short conversation with both people afterward."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If no real disagreement is currently available, or a trusted adult judges an available one is not appropriate to revisit, the learner instead role-plays the entire repair conversation with the trusted adult using a realistic fictional scenario (such as a sibling leaving a shared space messy), taking both the three-part planning step and the full spoken conversation just as seriously as the real version, with the trusted adult giving the same confirmation of respectful delivery at the end."
+  },
+  "materials": ["paper or a document for the conversation plan", "a trusted adult who confirms the conversation afterward"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Identify one real, low-stakes disagreement you've had recently with someone in your household, and check with a trusted adult that it's an appropriate one to revisit.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the disagreement in one or two neutral sentences, without assigning blame." },
+        { "ref": "t1-p2", "promptType": "checklist-item", "text": "A trusted adult confirmed this disagreement is low-stakes and appropriate to revisit." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Plan your repair conversation using the three-part structure: name the disagreement without blame, state your own part in it, propose one specific next step.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "My opening names the disagreement using 'I' language rather than starting with an accusation." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I named one specific thing I could have done differently, not just what the other person did." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I proposed one specific, doable next step, not a vague promise like 'I'll try to do better.'" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Have the real repair conversation with the household member, using your plan as a guide rather than reading it word for word.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did you complete the real conversation with the household member?", "choices": ["Yes, I had the real conversation", "No, I used the role-play alternative with my trusted adult instead"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "What did the other person say or do that you didn't plan for, and how did you respond in the moment?" }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect on the conversation together with your trusted adult.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "What is one thing you would say differently if you had this same kind of conversation again, and why?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner's plan blames the other person entirely and never names their own part, reteach by having them list three things they specifically did or didn't do in the moment of the original disagreement, then choose one for the plan — this shifts the plan from accusation to genuine repair.",
+  "extension": "Have the learner plan and have a second repair conversation about a separate low-stakes disagreement with a different household member, this time also asking that person one specific question about how the disagreement affected them before proposing the next step.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u05-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u05-l05",
+    "authoredBy": "manual"
+  }
+}

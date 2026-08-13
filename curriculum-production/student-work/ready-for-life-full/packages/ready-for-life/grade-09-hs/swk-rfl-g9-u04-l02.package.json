@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l02",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: true cost of transportation options"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners compare the listed or estimated cost of three transportation options (for example, a transit fare, a rideshare fare estimate, and biking or walking) for the same specific trip, factoring in hidden costs such as time and reliability rather than only the direct price.",
+  "scenario": "The learner picks one specific trip they might realistically need to make in their community and compares the listed fare or estimated cost of three different transportation options for that same trip, recording both the direct cost and at least one hidden cost (time, reliability, or effort) for each option.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task only compares listed prices and fare estimates; no payment method, account, or transaction of any kind is needed to complete it.",
+    "If exact fares are not available, the learner uses a reasonable estimate and clearly notes that it is an estimate."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "access to a real or sample transit fare chart",
+    "a rideshare fare-estimate screen or a published example rate for the same trip",
+    "general knowledge of typical biking or walking speed",
+    "paper or a document to build a comparison table"
+  ],
+  "tasks": [
+    { "taskId": "t1", "kind": "warm-up", "directions": "Before comparing exact numbers, think about what 'cost' means for a trip beyond just the ticket price.", "prompts": [
+      { "ref": "t1-p1", "promptType": "short-response", "text": "List at least three things besides the ticket price or fare that could make one transportation option more costly than another for the same trip (consider time, reliability, comfort, or effort)." }
+    ] },
+    { "taskId": "t2", "kind": "guided", "directions": "Pick one specific trip and compare the listed fare or estimated cost of three transportation options for that trip: public transit, a rideshare fare estimate, and biking or walking.", "prompts": [
+      { "ref": "t2-p1", "promptType": "checklist-item", "text": "I named a specific trip with a real start point and end point." },
+      { "ref": "t2-p2", "promptType": "checklist-item", "text": "I recorded the listed fare, or a reasonable fare estimate, for a public transit option." },
+      { "ref": "t2-p3", "promptType": "checklist-item", "text": "I recorded a rideshare fare estimate for the same trip, without requesting an actual ride." },
+      { "ref": "t2-p4", "promptType": "checklist-item", "text": "I estimated the time and effort needed to bike or walk the same trip." }
+    ] },
+    { "taskId": "t3", "kind": "independent", "directions": "For each of the three options, note the direct cost and one hidden cost, then decide which option you would actually choose for this specific trip.", "prompts": [
+      { "ref": "t3-p1", "promptType": "short-response", "text": "Build a simple table or list comparing the three options' direct cost and one hidden cost each (time, reliability, or effort)." },
+      { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Which option would you choose for this specific trip?", "choices": ["Public transit", "Rideshare", "Biking or walking"] },
+      { "ref": "t3-p3", "promptType": "short-response", "text": "Explain your choice using at least one hidden cost, not just the price." }
+    ] },
+    { "taskId": "t4", "kind": "reflection", "directions": "Think about how the 'best' option might change.", "prompts": [
+      { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe one situation (such as bad weather, being in a hurry, or carrying something heavy) that would change which of the three options you'd choose for this same trip, and explain why." }
+    ] }
+  ],
+  "remediation": "If a learner only compares sticker prices and ignores hidden costs, reteach by walking through one worked example where the cheapest listed option actually takes twice as long, naming the specific tradeoff (saving a set amount of money versus losing an hour) before the learner revises their own comparison.",
+  "extension": "Have the learner repeat the comparison for the same trip but during a time when transit runs less frequently (such as late evening or a weekend), and explain how the reduced frequency changes the true cost of the transit option.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l02",
+    "authoredBy": "manual"
+  }
+}

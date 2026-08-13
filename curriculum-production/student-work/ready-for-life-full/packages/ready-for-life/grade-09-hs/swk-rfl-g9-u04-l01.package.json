@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l01",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: route, schedule, and transfer planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read a real or provided public-transit or walking/biking route schedule or map for a specific trip and plan a complete route that includes at least one transfer or waypoint, recording the departure time, transfer point, and arrival time for each leg.",
+  "scenario": "Using a real local transit schedule or route map, or the provided sample schedule, the learner selects a specific start point and end point in the community, plans a route between them that includes at least one transfer or waypoint, and records the timing of each leg of the trip.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task is research and planning only; the learner does not travel the route as part of this lesson.",
+    "If no real transit schedule is available, the learner uses the provided sample schedule instead."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "a real local public-transit schedule or route map, or the provided sample schedule",
+    "paper or a document to record the planned route",
+    "a pencil or pen, or a note-taking app"
+  ],
+  "tasks": [
+    { "taskId": "t1", "kind": "warm-up", "directions": "Before looking at any schedule, think about how you would normally get from one place to another in your area without driving yourself.", "prompts": [
+      { "ref": "t1-p1", "promptType": "short-response", "text": "List every way you could realistically get from your home to a place you go often (such as school, a friend's house, or a store) that does not require driving yourself, including walking, biking, transit, or riding with someone else." }
+    ] },
+    { "taskId": "t2", "kind": "guided", "directions": "Choose a specific start point and end point in your community, then use a real transit schedule/map or the provided sample schedule to find at least one route between them that includes a transfer or waypoint.", "prompts": [
+      { "ref": "t2-p1", "promptType": "checklist-item", "text": "I identified a specific start point and end point for my planned trip." },
+      { "ref": "t2-p2", "promptType": "checklist-item", "text": "I found at least one route that includes a transfer or waypoint (such as changing buses, changing train lines, or stopping partway on a walking or biking route)." },
+      { "ref": "t2-p3", "promptType": "short-response", "text": "Write out each leg of your route in order, including the planned departure time, the transfer or waypoint location, and the estimated arrival time for each leg." }
+    ] },
+    { "taskId": "t3", "kind": "independent", "directions": "Check your planned route for problems by considering what happens if one leg runs late.", "prompts": [
+      { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Does your planned route have enough time between the arrival of one leg and the departure of the next to allow for a short delay?", "choices": ["Yes, there is buffer time built in", "No, the connection is very tight or exact"] },
+      { "ref": "t3-p2", "promptType": "short-response", "text": "If your connection is tight, describe one specific change you could make to the route (an earlier departure, a different transfer point, or a different route) to build in more buffer time." }
+    ] },
+    { "taskId": "t4", "kind": "reflection", "directions": "Think about what made this route easy or hard to plan.", "prompts": [
+      { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain which part of planning this route was hardest to figure out from the schedule or map, and what specific piece of information you needed to look for to solve it." }
+    ] }
+  ],
+  "remediation": "If a learner cannot locate transfer points on a schedule or map, reteach by having them trace a single, already-solved example route with the transfer circled, naming exactly which column, symbol, or line change on the schedule marks a transfer point, before returning to plan their own route.",
+  "extension": "Have the learner plan a second version of the same route using a different mode (for example, switching from a transit-only route to a walking-and-biking route) and compare the total travel time between the two versions.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l01",
+    "authoredBy": "manual"
+  }
+}

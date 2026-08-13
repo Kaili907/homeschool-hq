@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l06",
+  "lessonId": "ma-g9-ready-for-life-u03-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Leftover repurposing plan",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The final plan uses three or fewer of the five leftover ingredients, or does not explain how each ingredient is incorporated."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The final plan uses at least four of the five leftover ingredients with a specific preparation step described for each."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the plan uses all five leftover ingredients within one coherent meal."
+          }
+        ]
+      },
+      {
+        "dimension": "Waste-reduction habit reasoning",
+        "levels": [
+          {
+            "label": "Emerging",
+            "descriptor": "The chosen habit is named without connecting it to the specific ingredient or situation described in the warm-up."
+          },
+          {
+            "label": "Proficient",
+            "descriptor": "The chosen habit is named and clearly connected to how it would have changed the outcome for the specific ingredient from the warm-up."
+          },
+          {
+            "label": "Advanced",
+            "descriptor": "Same as proficient, and the learner explains why that habit specifically fits their household's actual pattern of food waste."
+          }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Each leftover ingredient used in the plan has a specific, named preparation step, not a vague mention like 'use the chicken.'",
+      "The reflection ties one specific named habit from the list directly back to the specific ingredient or scenario described in the warm-up, not a general statement about reducing waste."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

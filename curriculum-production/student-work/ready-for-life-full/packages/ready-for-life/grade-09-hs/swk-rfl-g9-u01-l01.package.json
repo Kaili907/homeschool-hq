@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u01-l01",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Planning Systems Under Real Load",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: semester and multi-week planning"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners honestly diagnose how they currently track semester-length and multi-week commitments, naming the specific method they use (or the absence of one) and identifying at least two concrete gaps where that method has already caused or nearly caused a missed deadline.",
+  "scenario": "The learner reviews the last four weeks of their actual schoolwork, chores, and activities, and answers a structured diagnostic about what planning system they actually use day to day, without inventing a system they don't really use.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This diagnostic asks only about the learner's own study and household habits; it does not require sharing anyone else's schedule or private information."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the learner's own memory of the last four weeks of assignments, chores, and activities"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before analyzing anything, name the tool or method you currently rely on most to remember what is due and when.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe the single method you use most often right now to remember deadlines (examples: a phone reminder app, a paper planner, a wall calendar, memory alone, or something else). Be specific about what it is, not just 'I keep track.'" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Think back over the last four weeks. Answer each question about what actually happened, not what should have happened.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "In the last four weeks, did you turn in an assignment late, forget a commitment, or scramble at the last minute at least once?", "choices": ["Yes, at least once", "No, not that I can recall"] },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Describe one specific instance from the last four weeks where your current method almost failed you or did fail you (what was due, and what happened)." },
+        { "ref": "t2-p3", "promptType": "short-response", "text": "Describe a second specific instance, different from the first, where you lost track of something or planned it late." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I checked whether my method covers commitments that are more than two weeks away, not just this week." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare your current method to what a semester-length system would need to do.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Name one specific gap in your current method: something a full semester of assignments, chores, and activities would require that your method does not currently handle (examples: it has no way to show things due in three weeks, it depends on you remembering verbally, it has no separate space for recurring chores)." },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "Does your current method let you see, in one place, everything due in the next two weeks at once?", "choices": ["Yes, in one place", "No, I'd have to check multiple places or ask someone", "I'm not sure"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Reflect honestly on what you found.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Based on the two specific instances you described, what is the single biggest weakness in how you currently plan, and what would need to change about your method (not your effort or motivation) to fix that specific weakness?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot name two specific instances and instead writes vague statements like 'I sometimes forget things,' walk back through their actual planner, phone, or backpack from the last two weeks with them to find one concrete example together, then have them describe exactly what the method failed to show them at that moment.",
+  "extension": "Have the learner interview one household member about the planning method that person uses for work or household management, then write two sentences on one specific feature of that method the learner's own system currently lacks.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l01.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u01-l01",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u03-l06",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Food Systems, Nutrition, and Cost",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: reducing waste and using leftovers"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners plan how to repurpose a set of five provided leftover ingredients into one new, coherent meal using only items already on hand, and identify one specific waste-reduction habit they will adopt, so they can practice reducing food waste without needing anything additional.",
+  "scenario": "The task sheet lists five leftover ingredients, such as half a rotisserie chicken, cooked rice, a wilting bag of spinach, half an onion, and shredded cheese. The learner plans one new meal that uses at least four of the five ingredients without needing anything else beyond common pantry staples already listed on the sheet, then identifies one waste-reduction habit from the guidance list to adopt going forward.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This task is a written planning exercise only; no food is actually prepared as part of the lesson."],
+  "simulationAlternative": null,
+  "materials": ["the provided list of five leftover ingredients and common pantry staples", "paper or a document for the meal plan", "the provided waste-reduction habit list"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before planning, think about what usually happens to leftover ingredients like these in your household.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Describe what typically happens to an ingredient like wilting spinach or half an onion in your household if it is not used within a few days." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Look at the five leftover ingredients and the common pantry staples list, and brainstorm two possible meals that could use at least four of the five leftovers.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "Name two possible meal ideas and list which four or more of the five leftover ingredients each one would use." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "Both meal ideas use only the provided leftovers and pantry staples, with nothing else needed." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Choose the stronger of your two meal ideas and write out a full plan for it, including how each chosen leftover ingredient is used.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "short-response", "text": "Write the name of your chosen meal and, for each leftover ingredient it uses, describe specifically how that ingredient is incorporated." },
+        { "ref": "t3-p2", "promptType": "fixed-choice", "text": "How many of the five leftover ingredients does your final plan use?", "choices": ["All five", "Four", "Three or fewer"] }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Look at the provided waste-reduction habit list and choose one habit to adopt.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Name the specific waste-reduction habit you chose from the list, and explain how it would have changed what happened to the ingredient you described in the warm-up." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's meal plan only loosely mentions the leftover ingredients without explaining how each one is actually used or prepared, reteach by having them describe, ingredient by ingredient, the exact preparation step (such as 'the spinach is wilted into the rice while it reheats') before finalizing the plan.",
+  "extension": "Have the learner plan a second meal using the one or two leftover ingredients not used in their first plan, combined with a small set of additional common pantry staples, so that all five original leftovers are eventually used across the two plans.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l06.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u03-l06",
+    "authoredBy": "manual"
+  }
+}

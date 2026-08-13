@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u05-l03",
+  "lessonId": "ma-g9-ready-for-life-u05-l03",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Request clarity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Request buries what is being asked inside multiple sentences, or omits a specific follow-up question." },
+          { "label": "Proficient", "descriptor": "Request states the situation, the specific ask, and one follow-up question, each in its own clear sentence." },
+          { "label": "Advanced", "descriptor": "Request meets the Proficient bar and the follow-up question is concrete enough (e.g., a specific day or format) that the recipient could act on it immediately." }
+        ]
+      },
+      {
+        "dimension": "Boundary clarity in the decline",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Decline apologizes repeatedly, hedges with words like 'maybe,' or never states a clear refusal." },
+          { "label": "Proficient", "descriptor": "Decline states a clear refusal in one sentence without blaming a rule or third party." },
+          { "label": "Advanced", "descriptor": "Decline states a clear refusal in one sentence, does not over-apologize, and offers a genuine alternative or explains why none exists." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A decline message whose refusal could be read aloud as a single unambiguous sentence, not diluted across several hedging sentences.",
+      "A request message whose follow-up question names something concrete (a day, a format, a next step) rather than a vague 'let me know.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

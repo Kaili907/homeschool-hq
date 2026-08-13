@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u01-l05",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 1,
+    "unitTitle": "Personal Planning Systems Under Real Load",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: recovery after a missed plan"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Given a scenario in which a planned deadline was missed, learners design a specific recovery plan with concrete next steps, a revised timeline, and one change to prevent the same failure from repeating, demonstrating recovery reasoning rather than assigning blame.",
+  "scenario": "The learner is given a fixed scenario on this task sheet: a two-week research project was due yesterday, but the learner (in the scenario) only has the topic chosen and a rough outline, having lost track of the middle steps after a busy week of practices and a family trip. The learner designs a specific, realistic recovery plan starting from today.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This is a scenario-based judgment task about a provided fictional situation; the learner may reference a real experience of their own if relevant, but is never required to disclose one."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "this task sheet's provided missed-deadline scenario"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Read the scenario: a two-week research project was due yesterday. Only the topic and a rough outline exist so far; the middle steps (finding sources, drafting body sections, revising) never got done because of a busy week of practices and a family trip.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Identify the specific point in the original plan where things most likely broke down, based on what the scenario tells you was and wasn't finished." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "List the concrete work that still remains to finish the project, in the order it needs to happen starting today.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "short-response", "text": "List every remaining concrete step needed to finish the project from where it stands (topic and rough outline only) to a submittable final draft." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "My list includes finding and reading sources, drafting the remaining sections, and a revision pass, not just 'finish the project.'" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Build a specific day-by-day recovery timeline starting today, and decide what to communicate to the teacher.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write a day-by-day recovery timeline (today through however many days you estimate it will take) showing when each remaining step gets done." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Write the specific, honest message you would send the teacher today explaining the project is late and when it will actually be turned in, without making excuses or promises you can't keep." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Identify what would prevent this same breakdown from happening again.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Name one specific change to how the original plan was built (not 'try harder' or 'be more responsible') that would have caught this breakdown before the deadline, and explain exactly how that change would have surfaced the problem earlier." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's recovery timeline is unrealistic (compressing multiple days of drafting and revision into a single evening), reteach by having them estimate, out loud, how long each remaining step actually took them the last time they did something similar, then rebuild the timeline using those real estimates instead of wished-for ones.",
+  "extension": "Have the learner apply the same recovery-planning process to a second scenario with a different cause of breakdown (for example, a group project where a teammate did not finish their part), and compare what changes and what stays the same in the recovery approach.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u01-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u01-l05",
+    "authoredBy": "manual"
+  }
+}

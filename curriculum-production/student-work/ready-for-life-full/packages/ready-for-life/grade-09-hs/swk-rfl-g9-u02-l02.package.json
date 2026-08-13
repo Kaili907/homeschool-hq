@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u02-l02",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Household Independence and Living-Space Systems",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: supply inventory and restocking cycles"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners are shown a simple par-level inventory method (a minimum amount to keep on hand, and a trigger point for restocking) and apply it to one household supply category of their choice, producing a written inventory sheet with current amounts, par levels, and restocking triggers.",
+  "scenario": "After studying a modeled example of a par-level inventory sheet for a household supply category, the learner picks one real category from their own household (such as bathroom supplies, kitchen supplies, or laundry supplies), lists the specific items in it, and builds their own inventory sheet using the same method.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task creates a written inventory sheet only; the learner does not need to check prices, compare listed costs, or add anything to an actual shopping list as part of this lesson."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the modeled par-level example on this task sheet", "access to view the actual supply category in your household"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Study this modeled example: a household tracks bath towels with a par level of 6 (the minimum they always want on hand) and a restock trigger of 2 (once the clean count drops to 2, someone starts a wash load or flags it for restocking).",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "In your own words, explain what a 'par level' and a 'restock trigger' each do in this model." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Pick one household supply category (such as bathroom supplies, kitchen supplies, or laundry supplies) and list every specific item in it.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I named a specific category and listed at least five specific items in it (not just 'bathroom stuff')." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "For each item, I wrote down the current amount on hand." },
+        { "ref": "t2-p3", "promptType": "short-response", "text": "Which item in your category runs out or gets low the fastest, and how do you know?" }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For every item on your list, set a par level and a restock trigger, following the modeled example's format.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "Write your complete inventory sheet: item, current amount, par level, and restock trigger for every item." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Explain why you set one specific item's par level higher or lower than the others." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what this system prevents.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Describe one specific problem (a supply running out at a bad moment) this inventory system would have caught before it happened, using an example from your own household's history." }
+      ]
+    }
+  ],
+  "remediation": "If a learner sets identical par levels and triggers for every item without reasoning, reteach using two contrasting items (one used daily, one used rarely) side by side, asking the learner to explain aloud why a daily-use item needs a higher par level before they revise the full sheet.",
+  "extension": "Have the learner design a second inventory sheet for a completely different supply category and compare which category needs tighter (lower) restock triggers and why.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u02-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u02-l02",
+    "authoredBy": "manual"
+  }
+}

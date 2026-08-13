@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u06-l02",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 6,
+    "unitTitle": "Grade 9 Independence Capstone",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: weekly routine and load balance"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners are modeled how to lay out a full week's real commitments across all five systems (planning, household, food, transportation, communication) in a day-by-day grid, then build their own real capstone-week grid and check it for overload, any day carrying three or more different-system demands, before the capstone week begins.",
+  "scenario": "The task sheet walks through a sample week's grid showing where demands from different systems stack up on the same day, then the learner builds their own seven-day grid for the actual capstone week ahead, entering one real, specific commitment per system per day where it applies, and checks the result for overload.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": ["This weekly grid uses real upcoming commitments for planning purposes only; no commitment is confirmed, changed, or communicated to anyone outside the household as part of this lesson."],
+  "simulationAlternative": null,
+  "materials": ["paper or a document with a seven-day grid", "the learner's real upcoming commitments for the capstone week", "the learner's Unit 1 planning notes"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Study the modeled sample week grid before building your own.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Which day in the modeled sample week has the most demands stacked on it, and what are they?" }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Following the modeled example, fill in a seven-day grid with your own real, specific commitments for the capstone week ahead, including at least one entry per system where it applies.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I listed at least one planning-system commitment with a specific day and action (for example, a due date or a scheduled block of time)." },
+        { "ref": "t2-p2", "promptType": "checklist-item", "text": "I listed at least one household commitment with a specific day and action." },
+        { "ref": "t2-p3", "promptType": "checklist-item", "text": "I listed at least one food commitment with a specific day and action." },
+        { "ref": "t2-p4", "promptType": "checklist-item", "text": "I listed at least one transportation or appointment commitment with a specific day and action." },
+        { "ref": "t2-p5", "promptType": "checklist-item", "text": "I listed at least one communication commitment with a specific day and action." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Count the commitments on each day of your grid and check for overload, a single day carrying three or more demands from different systems.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Does any single day in your grid have three or more commitments from different systems stacked on it?", "choices": ["Yes, at least one day is overloaded", "No, my week is evenly spread"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "If a day was overloaded, name the specific item you moved and which day you moved it to. If not, explain how you counted to confirm your week is balanced." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about what this load-balance check changed before the capstone week starts.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one real conflict this load-balance check helped you catch before the capstone week begins, or, if you found none, explain what specifically you checked to be sure." }
+      ]
+    }
+  ],
+  "remediation": "If a learner's grid entries are too vague to check for overload (for example, 'school stuff' with no day or action named), reteach by requiring every entry to name a specific action and a specific day before it can be counted in the overload check.",
+  "extension": "Have the learner build a light backup version of one already-full day, cutting it down to the single most essential commitment and naming what would happen to the other commitments.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u06-l02.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u06-l02",
+    "authoredBy": "manual"
+  }
+}

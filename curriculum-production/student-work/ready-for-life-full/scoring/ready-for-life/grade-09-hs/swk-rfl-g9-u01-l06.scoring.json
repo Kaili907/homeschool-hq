@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l06",
+  "lessonId": "ma-g9-ready-for-life-u01-l06",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Timing and identification of the early warning sign",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The identified 'early' sign is actually close to or at the deadline, not a genuinely early point where intervention could still have helped." },
+          { "label": "Proficient", "descriptor": "The identified sign is a genuinely early point in the situation, with a plausible explanation of why it counts as early rather than a last-minute crisis." },
+          { "label": "Advanced", "descriptor": "The identified sign is genuinely early, and the learner explains a specific concrete action a trusted adult or teacher could still take at that point that would no longer be possible after the deadline." }
+        ]
+      },
+      {
+        "dimension": "Specificity of the help-request statement",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The drafted statement is generic ('I need help' or 'I'm struggling') and does not name the specific task, sticking point, or requested help." },
+          { "label": "Proficient", "descriptor": "The drafted statement names the specific task and either the specific sticking point or the specific help requested." },
+          { "label": "Advanced", "descriptor": "The drafted statement names the specific task, the specific sticking point, and the specific help requested, all in a way a real adult or teacher could act on immediately." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A help-request statement that names a specific task and a specific, actionable request (such as 'one more day' or 'an example of the first paragraph'), not a general plea for help.",
+      "An early warning sign that is clearly identified as happening well before the deadline, with a specific reason it counts as an early rather than a last-minute sign."
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

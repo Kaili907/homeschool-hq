@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l05",
+  "lessonId": "ma-g9-ready-for-life-u04-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Check-in plan specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Plan is missing a specific check-in method, a specific time or trigger, or a missed-check-in step." },
+          { "label": "Proficient", "descriptor": "Plan names a specific check-in method, a specific time or trigger, and what happens if a check-in is missed." },
+          { "label": "Advanced", "descriptor": "Plan names a specific check-in method, time or trigger, and missed-check-in step, and accounts for more than one leg or point of the outing where relevant." }
+        ]
+      },
+      {
+        "dimension": "Guardian agreement confirmation",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Guardian confirmation is missing, or the final plan does not reflect whether the adult agreed as written or requested a change." },
+          { "label": "Proficient", "descriptor": "Guardian confirms whether they agreed as written or requested a change, and the learner records the final agreed-on plan accurately." },
+          { "label": "Advanced", "descriptor": "Guardian confirms the agreement, the learner records the final plan accurately, and any requested change is clearly incorporated into the written plan." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "Plan names an exact check-in method and time or trigger, not a vague phrase like 'I'll let them know.'",
+      "Guardian confirmation reflects an actual agreed-on plan, including any specific change the adult requested, not a blanket approval."
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l05",
+  "lessonId": "ma-g9-ready-for-life-u02-l05",
+  "scoringAuthority": {
+    "kind": "SCORING_JUDGMENT",
+    "criteria": [
+      {
+        "dimension": "Agreement specificity",
+        "levels": [
+          { "label": "Emerging", "descriptor": "Agreement lacks one or more of the three required parts (specific space and expectation, specific people, specific next step if not followed)." },
+          { "label": "Proficient", "descriptor": "Agreement clearly names the specific space and expectation, exactly who it applies to, and a specific reasonable next step if not followed." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the agreement anticipates and addresses a likely objection before it is proposed." }
+        ]
+      },
+      {
+        "dimension": "Proposal follow-through",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The proposal conversation is not confirmed as having happened, or the learner's account of the household's response is missing or vague." },
+          { "label": "Proficient", "descriptor": "A trusted adult confirms the conversation happened, and the learner records a specific outcome and a specific response from a household member." },
+          { "label": "Advanced", "descriptor": "Same as proficient, and the reflection identifies a specific, usable change to how the learner would propose it next time." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "The agreement names a specific space, specific people, and a specific next step, not a vague goal like 'be more considerate.'",
+      "The guardian confirmation is present and the recorded outcome names a real response from a household member, not just 'it went fine.'"
+    ]
+  },
+  "completionAuthority": "guardian",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

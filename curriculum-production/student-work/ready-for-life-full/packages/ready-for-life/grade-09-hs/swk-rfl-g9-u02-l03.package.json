@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u02-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 2,
+    "unitTitle": "Household Independence and Living-Space Systems",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: basic repairs and when to escalate"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners read six concrete household-issue scenarios and sort each into 'a learner can attempt' or 'needs a qualified adult,' explaining the specific risk factor behind each judgment call.",
+  "scenario": "The task sheet provides six real household-issue scenarios ranging from a loose drawer handle to a gas smell near an appliance. The learner reads each one, decides whether it is appropriate for a learner to handle alone, and writes the specific reasoning, focusing on the risk factors that make the difference (electricity, gas, height, structural damage, or moving mechanical parts).",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This is a judgment and writing task only; the learner does not attempt any actual repair, electrical work, or gas-related task during this lesson.",
+    "Any scenario involving a gas smell, electrical wiring, or structural damage is always sorted as 'needs a qualified adult,' with no exceptions."
+  ],
+  "simulationAlternative": null,
+  "materials": ["paper or a document", "the six household-issue scenarios provided on this task sheet"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before reading the six scenarios, think about what makes a household issue dangerous versus manageable.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "List three specific risk factors (for example, electricity, gas, height) that would make you say a repair needs a qualified adult instead of a learner." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Read all six scenarios and sort each into 'Learner can attempt' or 'Needs a qualified adult.' Scenario A: A drawer handle has come loose and wiggles when you pull it. Scenario B: A wall outlet's plastic cover plate is cracked, but the outlet still works normally. Scenario C: There is a faint smell of gas near the stove. Scenario D: A ceiling fan makes a grinding noise and wobbles visibly when it's running. Scenario E: A toilet's flush handle has to be jiggled to make the water stop running. Scenario F: A window screen has a small tear in the mesh.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "fixed-choice", "text": "Scenario A: A drawer handle has come loose and wiggles when you pull it.", "choices": ["Learner can attempt", "Needs a qualified adult"] },
+        { "ref": "t2-p2", "promptType": "fixed-choice", "text": "Scenario B: A wall outlet's plastic cover plate is cracked, but the outlet still works normally.", "choices": ["Learner can attempt", "Needs a qualified adult"] },
+        { "ref": "t2-p3", "promptType": "fixed-choice", "text": "Scenario C: There is a faint smell of gas near the stove.", "choices": ["Learner can attempt", "Needs a qualified adult"] },
+        { "ref": "t2-p4", "promptType": "fixed-choice", "text": "Scenario D: A ceiling fan makes a grinding noise and wobbles visibly when it's running.", "choices": ["Learner can attempt", "Needs a qualified adult"] },
+        { "ref": "t2-p5", "promptType": "fixed-choice", "text": "Scenario E: A toilet's flush handle has to be jiggled to make the water stop running.", "choices": ["Learner can attempt", "Needs a qualified adult"] },
+        { "ref": "t2-p6", "promptType": "fixed-choice", "text": "Scenario F: A window screen has a small tear in the mesh.", "choices": ["Learner can attempt", "Needs a qualified adult"] }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "For each scenario you marked 'Needs a qualified adult,' explain the specific risk factor that made the difference.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "extended-response", "text": "For each scenario you marked as needing a qualified adult, name the specific risk factor (gas, electricity, height, structural damage, moving mechanical parts) that made it too risky for a learner to attempt alone." },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "Pick one scenario you marked 'Learner can attempt' and explain what would need to be true (the correct tool available, an adult aware of what you're doing) for it to actually be safe to try." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about the pattern across all six scenarios.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "What is the one risk factor that, if present at all, should always mean 'needs a qualified adult' no matter how small the issue seems, and why is that factor different from the others?" }
+      ]
+    }
+  ],
+  "remediation": "If a learner sorts the gas-smell or the electrical scenario as 'learner can attempt,' reteach immediately by separating all six scenarios into two piles by risk type alone (gas or electrical or structural versus cosmetic or simple-mechanical) before returning to individual scenario judgment, since safety-critical categories must be recognized instantly, not reasoned through case by case.",
+  "extension": "Have the learner write two new scenarios of their own, one that clearly belongs in each category, and explain the reasoning for each.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u02-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u02-l03",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u01-l05",
+  "lessonId": "ma-g9-ready-for-life-u01-l05",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Realism and completeness of the recovery plan",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The remaining-steps list or timeline skips necessary work (such as sources or revision) or compresses multiple days of real work into an unrealistic single session." },
+          { "label": "Proficient", "descriptor": "The remaining-steps list covers all necessary work from the scenario's starting point, and the day-by-day timeline is realistic given what is described as already done." },
+          { "label": "Advanced", "descriptor": "The plan covers all necessary work with a realistic timeline, and the teacher message is specific, honest, and states a concrete revised turn-in date rather than a vague apology." }
+        ]
+      },
+      {
+        "dimension": "Root-cause identification and prevention",
+        "levels": [
+          { "label": "Emerging", "descriptor": "The named prevention change is a vague resolution ('be more organized,' 'try harder') that would not have specifically caught this breakdown." },
+          { "label": "Proficient", "descriptor": "The named change is a specific planning mechanism (such as a mid-project check-in date) that plausibly would have surfaced the missed middle steps earlier." },
+          { "label": "Advanced", "descriptor": "The named change is specific and directly tied to the exact point of breakdown identified in the warm-up, with a clear explanation of how it would have surfaced the problem before the deadline." }
+        ]
+      }
+    ],
+    "lookFors": [
+      "A remaining-steps list and timeline that account for finding sources, drafting the missing sections, and revision, not a single vague step like 'finish it.'",
+      "A prevention change that is a concrete planning mechanism (a specific check-in point, a specific milestone date) rather than a general intention like 'stay on top of it.'"
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error."
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u03-l05",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 3,
+    "unitTitle": "Food Systems, Nutrition, and Cost",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: kitchen tool, heat, and appliance safety"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "With a trusted adult present, learners identify and demonstrate safe handling of one real kitchen tool or heat source, such as correctly gripping a knife by its handle with fingers curled back, setting a stove-safety habit like turning pot handles inward, or using an oven mitt to remove a hot item, so they can build one concrete safety habit under direct supervision.",
+  "scenario": "With a trusted adult present the entire time, the learner chooses one real kitchen tool, heat source, or appliance from the guidance sheet's list, explains the specific safety risk it poses, and demonstrates the correct safe-handling technique for it once while the adult watches and confirms it was done correctly.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "guardian",
+  "realWorldAction": true,
+  "signOff": {
+    "requiresGuardianPermissionBeforeStart": true,
+    "requiresTrustedAdultSupervision": true,
+    "certifyingActor": "household-authorized guardian",
+    "studentSelfReport": "recorded-but-not-certifying",
+    "evidenceTypes": ["checklist", "written plan", "learner explanation", "guardian confirmation"],
+    "identifiablePhotoRequired": false
+  },
+  "safetyNotes": [
+    "The learner only demonstrates the chosen technique with the trusted adult present and watching the entire time.",
+    "The learner does not use a knife, stove, or oven unsupervised at any point during or after this lesson.",
+    "Completing this task sheet never certifies the demonstration by itself; a guardian confirmation is required before the task counts as complete."
+  ],
+  "simulationAlternative": {
+    "present": true,
+    "description": "If real handling is not possible, the learner instead reviews the provided set of six short tool-handling scenario descriptions (such as a hand position on a knife, a pot handle position on a stove, or a way of removing a hot pan) and sorts each as safe or unsafe, explaining the specific reason for each call using the same safety criteria as the real demonstration."
+  },
+  "materials": ["access to the real kitchen with a trusted adult present", "the provided kitchen tool and appliance safety guidance sheet", "one real kitchen tool, heat source, or appliance from the guidance sheet's list", "an oven mitt if the chosen demonstration involves a hot item"],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Before demonstrating, choose one tool, heat source, or appliance from the guidance sheet and name the specific risk it poses if handled incorrectly.",
+      "prompts": [
+        { "ref": "t1-p1", "promptType": "short-response", "text": "Name the tool, heat source, or appliance you chose and describe the specific injury or hazard that incorrect handling could cause." }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "With your adult, review the guidance sheet's correct technique for your chosen item before demonstrating it.",
+      "prompts": [
+        { "ref": "t2-p1", "promptType": "checklist-item", "text": "I read the guidance sheet's correct technique for my chosen item before attempting it." },
+        { "ref": "t2-p2", "promptType": "short-response", "text": "Describe the correct technique in your own words, naming the specific hand or body position involved." }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "With your adult watching the entire time, demonstrate the correct safe-handling technique for your chosen item once.",
+      "prompts": [
+        { "ref": "t3-p1", "promptType": "fixed-choice", "text": "Did your adult confirm the demonstration matched the guidance sheet's correct technique?", "choices": ["Yes, my adult confirmed it was correct", "No, my adult had to correct my technique"] },
+        { "ref": "t3-p2", "promptType": "short-response", "text": "If your adult corrected you, describe exactly what changed between your first attempt and the corrected technique." }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Think about why this specific safety habit matters.",
+      "prompts": [
+        { "ref": "t4-p1", "promptType": "extended-response", "text": "Explain one specific situation in the future where forgetting this safety habit could lead to an injury, and name the exact step you will remember to prevent it." }
+      ]
+    }
+  ],
+  "remediation": "If a learner can describe the correct technique in words but their physical demonstration does not match it, such as gripping a knife blade too close to the edge or leaving a pot handle turned outward, reteach by having the adult physically position the learner's hand or the tool correctly once, then have the learner repeat the demonstration from that corrected starting position.",
+  "extension": "Have the learner choose a second tool, heat source, or appliance from the guidance sheet's list and repeat the full demonstration and explanation process for it, comparing what risk it shares with the first item and what risk is different.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l05.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u03-l05",
+    "authoredBy": "manual"
+  }
+}

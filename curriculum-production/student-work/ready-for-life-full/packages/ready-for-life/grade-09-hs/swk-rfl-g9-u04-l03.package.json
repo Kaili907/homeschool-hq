@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-rfl-g9-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-ready-for-life-u04-l03",
+    "courseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "unitNumber": 4,
+    "unitTitle": "Transportation, Travel, and Community Logistics",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: identification and travel documents"
+  },
+  "subjectFamily": "ARTS_RFL_PE_PROJECT",
+  "standardsRefs": ["Manuel Academy RFL 9-12 competencies"],
+  "objective": "Learners research which documents are typically required or useful in a few different travel or appointment contexts (such as a school field trip permission form, a library card, and the identification required for air travel) and build a personal checklist noting which of these they currently have, which they don't, and which they're unsure about.",
+  "scenario": "The learner researches at least three different contexts where identification or documents are typically needed, for example a school field trip permission form, a library card application, and the identification required for domestic or international air travel, then builds a personal checklist noting which items they currently have, which they don't, and which trusted adult in their household could help them get one they're missing.",
+  "isFictionalSimulation": false,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "This task is research and personal inventory only; the learner is never required to possess, produce, or apply for a driver's license or any specific regulated document to complete the lesson.",
+    "If the learner cannot check whether they actually have a listed item, they may mark it 'not sure, need to check with a trusted adult' instead."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "access to general information about common documents (a household reference, a library website, or a school handbook)",
+    "paper or a document to build a personal checklist"
+  ],
+  "tasks": [
+    { "taskId": "t1", "kind": "warm-up", "directions": "Think about times you've needed to prove who you are or provide information to someone outside your household.", "prompts": [
+      { "ref": "t1-p1", "promptType": "short-response", "text": "Describe one time you or someone you know needed to show identification or a specific document, and what that document was." }
+    ] },
+    { "taskId": "t2", "kind": "guided", "directions": "Research what is typically required in three different contexts: a school field trip, applying for or using a library card, and traveling by air.", "prompts": [
+      { "ref": "t2-p1", "promptType": "checklist-item", "text": "I found out what a school typically requires for a field trip (such as a signed permission form)." },
+      { "ref": "t2-p2", "promptType": "checklist-item", "text": "I found out what is typically needed to get or use a library card." },
+      { "ref": "t2-p3", "promptType": "checklist-item", "text": "I found out what kind of identification is typically required for domestic air travel and what is typically required for international air travel (such as a passport)." },
+      { "ref": "t2-p4", "promptType": "short-response", "text": "For each of the three contexts, write one sentence summarizing what is typically required." }
+    ] },
+    { "taskId": "t3", "kind": "independent", "directions": "Build a personal checklist of common identification and documents, marking which ones you currently have, which you don't, and which you're not sure about.", "prompts": [
+      { "ref": "t3-p1", "promptType": "checklist-item", "text": "My checklist includes at least five common documents or forms of identification (examples: school ID, library card, birth certificate, passport, health insurance card)." },
+      { "ref": "t3-p2", "promptType": "short-response", "text": "For each item on your checklist, mark 'have,' 'don't have,' or 'not sure,' and for anything marked 'don't have' or 'not sure,' name the trusted adult in your household you would ask about it." }
+    ] },
+    { "taskId": "t4", "kind": "reflection", "directions": "Think about which document would matter most to have ready.", "prompts": [
+      { "ref": "t4-p1", "promptType": "extended-response", "text": "Of the documents on your checklist that you don't currently have, which one do you think you'll need soonest, and why?" }
+    ] }
+  ],
+  "remediation": "If a learner confuses which documents are required versus optional in a given context (for example, thinking a library card is required for air travel), reteach by sorting a mixed list of documents into three labeled categories, school, library, and air travel, with the learner explaining why each document belongs in that category before rebuilding their personal checklist.",
+  "extension": "Have the learner research one additional context not covered in this lesson, such as what a healthcare appointment or a volunteer role typically asks for, and add it to their checklist.",
+  "scoringRef": "scoring/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l03.scoring.json",
+  "integrity": {
+    "sourceStage": "authoring",
+    "sourceCorpusRef": "curriculum-authoring/full-family-highschool-9-12 (branch mac/hs912-rfl-finlit-r1)",
+    "sourceLessonId": "ma-g9-ready-for-life-u04-l03",
+    "authoredBy": "manual"
+  }
+}
