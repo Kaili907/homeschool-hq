@@ -11,6 +11,12 @@ export type SubjectFamily =
   | 'SCIENCE'
   | 'ARTS_RFL_PE_PROJECT'
 
+/**
+ * `MATH_STRUCTURED_FINLIT` covers two disciplines with different scoring
+ * needs. This names which one, and only Financial Literacy changes behaviour.
+ */
+export type StructuredDiscipline = 'MATH' | 'FINANCIAL_LITERACY'
+
 export interface LessonContentBlock {
   /** Whether this component exists at all in the lesson record. */
   readonly present: boolean
@@ -62,10 +68,57 @@ export interface ScoringAuthority {
   /** ELA/Social Studies: what counts as an acceptable answer, alongside a rubric. */
   readonly acceptableAnswerCriteria?: LessonContentBlock
   /**
+   * Rubric criteria governing the open-response portion of a lesson whose
+   * primary authority is a fixed key. A `MIXED` lesson needs both, and the
+   * fixed key cannot stand in for the judgment half — that substitution is
+   * exactly what leaves open work unscored.
+   */
+  readonly rubric?: LessonContentBlock
+  /**
    * Required for `ANSWER_KEY` to reach READY. Not consulted for RUBRIC or
    * SCORING_JUDGMENT, where the criteria themselves are the authority.
    */
   readonly verification?: ScoringAuthorityVerification
+}
+
+/**
+ * How a lesson's student work is scored, declared by the author rather than
+ * inferred. The gate will not read this off `scoringAuthority.kind` or off
+ * whether a rubric happens to be attached: both are things an author can set
+ * to whatever makes the gate quiet, and neither says what the student is
+ * actually being asked to produce.
+ */
+export type ResponseScoringMode =
+  /** Every item has one settleable correct answer — arithmetic, a total, a fixed choice. */
+  | 'FIXED_OR_COMPUTATIONAL'
+  /** Every item is a judgment, justification, or application with no single correct answer. */
+  | 'JUDGMENT_APPLICATION'
+  /** Both kinds of item in one lesson; both authorities are then required. */
+  | 'MIXED'
+
+export type ItemResponseMode = 'FIXED' | 'OPEN'
+
+/**
+ * One student-facing item, tagged with the kind of response it demands. The
+ * inventory is what stops a declared mode from being a bare assertion: a
+ * lesson that calls itself judgment while its items are fixed contradicts
+ * itself, and the gate can see that without judging any answer's truth.
+ */
+export interface LessonResponseItem {
+  /** Author's item reference, used to say which item contradicts the mode. */
+  readonly ref: string
+  readonly responseMode: ItemResponseMode
+  /**
+   * The student-facing prompt. Optional, but the contradiction check between
+   * a declared-open item and a prompt that plainly demands a computation can
+   * only run when it is supplied.
+   */
+  readonly promptText?: string
+}
+
+export interface ResponseScoringContract {
+  readonly mode: ResponseScoringMode
+  readonly items: readonly LessonResponseItem[]
 }
 
 export type AlignmentStatus = 'ALIGNED' | 'NOT_ALIGNED' | 'UNKNOWN'
@@ -103,6 +156,21 @@ export interface LessonProductionInput {
   readonly independentWork?: LessonContentBlock
 
   readonly scoringAuthority?: ScoringAuthority | null
+
+  /**
+   * Which discipline inside `MATH_STRUCTURED_FINLIT` this lesson belongs to.
+   * Financial Literacy legitimately mixes fixed computation with genuine
+   * judgment work, so it carries `responseScoring` and is failed closed
+   * without it. A lesson that does not say is treated as math and keeps the
+   * fixed-answer-key requirement exactly as it was.
+   */
+  readonly structuredDiscipline?: StructuredDiscipline
+
+  /**
+   * The explicit scoring contract. Required for Financial Literacy; any other
+   * structured lesson may opt in, and every other subject family ignores it.
+   */
+  readonly responseScoring?: ResponseScoringContract
 
   readonly remediation?: LessonContentBlock
   readonly extension?: LessonContentBlock
@@ -150,6 +218,10 @@ export const READINESS_CODES = [
   'ANSWER_KEY_CONTENT_UNCERTAIN',
   'ANSWER_KEY_UNVERIFIED',
   'MISSING_RUBRIC',
+  'RUBRIC_NOT_SUBSTANTIVE',
+  'RUBRIC_CONTENT_UNCERTAIN',
+  'MISSING_RESPONSE_SCORING_MODE',
+  'CONTRADICTORY_RESPONSE_SCORING',
   'MISSING_REMEDIATION',
   'MISSING_EXTENSION',
   'ASSESSMENT_NOT_ALIGNED',
