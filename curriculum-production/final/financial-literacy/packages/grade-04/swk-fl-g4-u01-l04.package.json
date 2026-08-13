@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u01-l04",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Money Choices and Tradeoffs",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: money as a tool",
+    "focus": "money as a tool"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 1 — choices, scarcity, and tradeoffs"
+  ],
+  "objective": "Learners use money as a common measure by converting invented package prices into a price for one item, then compare goods that come in different quantities.",
+  "scenario": "Elena is an invented fourth grader running a pretend bake stall. She sees 6 invented muffins offered for $9.00 and 4 invented rolls offered for $7.00. She wants to know which item is dearer, even though the packages are different sizes.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Turn Elena's $9.00 pack of 6 muffins into a price for one muffin.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does one muffin cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Do the same with Elena's rolls, which come 4 for $7.00, then compare the two per-item prices rather than the two pack prices.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does one roll cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which single item costs Elena more?",
+          "choices": [
+            "One muffin",
+            "One roll",
+            "They cost the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Elena needs 12 muffins for her pretend stall, and the price per muffin does not change.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do 12 muffins cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more would 12 rolls cost than 12 muffins?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The pack prices alone did not settle the question.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "The rolls came in a cheaper pack but cost more each. What did money let Elena compare that counting packs could not?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner compares $7.00 with $9.00 directly, draw Elena's packs as rows of circles and share the price across the circles aloud before any comparison is made.",
+  "extension": "Ask the learner what a 5-roll pack would have to cost for rolls to match the muffin price per item, and to show the reasoning.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u01-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u01-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does one muffin cost?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does one roll cost?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which single item costs Elena more?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do 12 muffins cost?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more would 12 rolls cost than 12 muffins?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "The rolls came in a cheaper pack but cost more each. What did money let Elena compare that counting packs could not?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u01-l04.package.json",
+    "sourcePackageSha256": "b4d3c50c63e912799e67ddb13e23aed1067d7d16ea9ad23973db9a2f5107ac41",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u01-l04",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

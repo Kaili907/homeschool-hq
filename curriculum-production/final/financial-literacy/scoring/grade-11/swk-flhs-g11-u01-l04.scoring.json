@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l04",
+  "lessonId": "ma-g11-financial-literacy-u01-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$62,926.95",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Eleven compounding raises of 3.2% on the $44,500 starting salary, because year 1 receives no raise."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$50,739.44",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same eleven periods at the lower rate. Nothing about the job changed here; only the assumption did."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$12,187.51",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$62,926.95 against $50,739.44 — the whole of this difference is produced by a 2 percentage point change in a rate nobody has observed yet."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "19.4%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$12,187.51 measured against $62,926.95 — the share of the optimistic projection that exists only because of the rate chosen."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7,260.56",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $58,000 target against the $50,739.44 the 1.2% assumption produces."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,926.95",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$62,926.95 against the $58,000 target. The target sits between the two projections, which is what makes the assumption decisive."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Only the 3.2% assumption clears it",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The cautious projection reaches $50,739.44 and misses; the optimistic one reaches $62,926.95 and clears. A target that only one assumption reaches is a target that rests on the assumption."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$52,090.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five compounding raises rather than eleven, on the same $44,500 base."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$10,836.45",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$62,926.95 in year 12 against $52,090.50 in year 6 — more growth arrives in the second half than the first, which is what compounding does to a projection."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(start * pow(1 + fast, 11), 2)",
+        "substituted": "round(44500 * pow(1 + 0.032, 11), 2)",
+        "result": "$62,926.95",
+        "why": "Eleven compounding raises of 3.2% on the $44,500 starting salary, because year 1 receives no raise."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(start2 * pow(1 + slow, 11), 2)",
+        "substituted": "round(44500 * pow(1 + 0.012, 11), 2)",
+        "result": "$50,739.44",
+        "why": "The same eleven periods at the lower rate. Nothing about the job changed here; only the assumption did."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$12,187.51",
+        "why": "$62,926.95 against $50,739.44 — the whole of this difference is produced by a 2 percentage point change in a rate nobody has observed yet."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / #t1-p1 * 100, 1)",
+        "substituted": "round(#t1-p3 / #t1-p1 * 100, 1)",
+        "result": "19.4%",
+        "why": "$12,187.51 measured against $62,926.95 — the share of the optimistic projection that exists only because of the rate chosen."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "target - #t1-p2",
+        "substituted": "58000 - #t1-p2",
+        "result": "$7,260.56",
+        "why": "The $58,000 target against the $50,739.44 the 1.2% assumption produces."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p1 - target2",
+        "substituted": "#t1-p1 - 58000",
+        "result": "$4,926.95",
+        "why": "$62,926.95 against the $58,000 target. The target sits between the two projections, which is what makes the assumption decisive."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p2 >= target3",
+        "substituted": "#t1-p2 >= 58000",
+        "result": "Only the 3.2% assumption clears it",
+        "why": "The cautious projection reaches $50,739.44 and misses; the optimistic one reaches $62,926.95 and clears. A target that only one assumption reaches is a target that rests on the assumption."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(start3 * pow(1 + fast2, 5), 2)",
+        "substituted": "round(44500 * pow(1 + 0.032, 5), 2)",
+        "result": "$52,090.50",
+        "why": "Five compounding raises rather than eleven, on the same $44,500 base."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p1 - #t3-p1",
+        "substituted": "#t1-p1 - #t3-p1",
+        "result": "$10,836.45",
+        "why": "$62,926.95 in year 12 against $52,090.50 in year 6 — more growth arrives in the second half than the first, which is what compounding does to a projection."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Tobias says the projection \"shows\" he will be earning about $63,000 in year 12. Rewrite that claim so it is defensible, and say what evidence would justify picking one of the two rates over the other.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Rewrites the claim as conditional, naming the rate the figure depends on — that $62,926.95 is what year 12 looks like if raises average 3.2% for eleven straight years.",
+          "Names evidence that would support choosing a rate, such as the employer’s actual raise history over several years, or the raise pattern for the same role across the sector.",
+          "Notes that the target of $58,000 falls between the two projections, so the choice of rate decides whether the plan succeeds."
+        ],
+        "evidenceRequirements": [
+          "Cites both year-12 figures, $62,926.95 and $50,739.44, when explaining why the claim needs its condition attached."
+        ],
+        "lookFors": [
+          "The rewritten claim carries the assumption inside it rather than in a footnote.",
+          "The evidence named is something that could actually be gathered before the twelve years elapse.",
+          "The response does not simply average the two rates and present that as the safe answer."
+        ],
+        "commonMisconception": "Treating the output of a projection as a finding about the future rather than a consequence of its inputs.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification",
+          "evidence-use"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "More of the optimistic projection’s growth arrives after year 6 than before it. Explain why, and say what that timing means for someone deciding whether to leave the job in year 5.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that each raise is applied to a larger salary than the last, so equal percentages produce unequal dollar amounts and the later years contribute more.",
+          "Draws the implication that leaving in year 5 forgoes the larger part of the projected growth, so the decision should be judged against $10,836.45 of later growth rather than against the year-5 salary."
+        ],
+        "evidenceRequirements": [
+          "Uses the year-6 figure of $52,090.50 alongside the year-12 figure to show where the growth sits."
+        ],
+        "lookFors": [
+          "The response explains compounding in terms of a growing base rather than restating that the number gets bigger.",
+          "The response treats the later growth as conditional on the same 3.2% assumption holding."
+        ],
+        "dimensions": [
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "Under the 3.2% assumption, what is the year-12 salary?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "Under the 1.2% assumption, what is the year-12 salary?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the year-12 gap between the two assumptions?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "The gap is what percentage of the year-12 salary the optimistic assumption predicts? Give one decimal place."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Under the cautious assumption, by how much does the year-12 salary fall short of the $58,000 target?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Under the optimistic assumption, by how much does the year-12 salary exceed the same target?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Does the $58,000 target survive both assumptions, only the optimistic one, or neither?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "Under the 3.2% assumption, what would the salary be in year 6, which is 5 raises after the start?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of the optimistic projection’s total year-12 growth arrives after year 6?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Tobias says the projection \"shows\" he will be earning about $63,000 in year 12. Rewrite that claim so it is defensible, and say what evidence would justify picking one of the two rates over the other."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "More of the optimistic projection’s growth arrives after year 6 than before it. Explain why, and say what that timing means for someone deciding whether to leave the job in year 5."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: Under the 3.2% assumption, what is the year-12 salary? Answer: $62,926.95. Verification: Eleven compounding raises of 3.2% on the $44,500 starting salary, because year 1 receives no raise. t1-p2: Under the 1.2% assumption, what is the year-12 salary? Answer: $50,739.44. Verification: The same eleven periods at the lower rate. Nothing about the job changed here; only the assumption did. t1-p3: What is the year-12 gap between the two assumptions? Answer: $12,187.51. Verification: $62,926.95 against $50,739.44 — the whole of this difference is produced by a 2 percentage point change in a rate nobody has observed yet. t2-p1: The gap is what percentage of the year-12 salary the optimistic assumption predicts? Give one decimal place. Answer: 19.4%. Verification: $12,187.51 measured against $62,926.95 — the share of the optimistic projection that exists only because of the rate chosen. t2-p2: Under the cautious assumption, by how much does the year-12 salary fall short of the $58,000 target? Answer: $7,260.56. Verification: The $58,000 target against the $50,739.44 the 1.2% assumption produces. t2-p3: Under the optimistic assumption, by how much does the year-12 salary exceed the same target? Answer: $4,926.95. Verification: $62,926.95 against the $58,000 target. The target sits between the two projections, which is what makes the assumption decisive. t2-p4: Does the $58,000 target survive both assumptions, only the optimistic one, or neither? Answer: Only the 3.2% assumption clears it. Verification: The cautious projection reaches $50,739.44 and misses; the optimistic one reaches $62,926.95 and clears. A target that only one assumption reaches is a target that rests on the assumption. t3-p1: Under the 3.2% assumption, what would the salary be in year 6, which is 5 raises after the start? Answer: $52,090.50. Verification: Five compounding raises rather than eleven, on the same $44,500 base. t3-p2: How much of the optimistic projection’s total year-12 growth arrives after year 6? Answer: $10,836.45. Verification: $62,926.95 in year 12 against $52,090.50 in year 6 — more growth arrives in the second half than the first, which is what compounding does to a projection."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: Tobias says the projection \"shows\" he will be earning about $63,000 in year 12. Rewrite that claim so it is defensible, and say what evidence would justify picking one of the two rates over the other. Rewrites the claim as conditional, naming the rate the figure depends on — that $62,926.95 is what year 12 looks like if raises average 3.2% for eleven straight years. Names evidence that would support choosing a rate, such as the employer’s actual raise history over several years, or the raise pattern for the same role across the sector. Notes that the target of $58,000 falls between the two projections, so the choice of rate decides whether the plan succeeds. Cites both year-12 figures, $62,926.95 and $50,739.44, when explaining why the claim needs its condition attached. The rewritten claim carries the assumption inside it rather than in a footnote. The evidence named is something that could actually be gathered before the twelve years elapse. The response does not simply average the two rates and present that as the safe answer. t4-p2: More of the optimistic projection’s growth arrives after year 6 than before it. Explain why, and say what that timing means for someone deciding whether to leave the job in year 5. Explains that each raise is applied to a larger salary than the last, so equal percentages produce unequal dollar amounts and the later years contribute more. Draws the implication that leaving in year 5 forgoes the larger part of the projected growth, so the decision should be judged against $10,836.45 of later growth rather than against the year-5 salary. Uses the year-6 figure of $52,090.50 alongside the year-12 figure to show where the growth sits. The response explains compounding in terms of a growing base rather than restating that the number gets bigger. The response treats the later growth as conditional on the same 3.2% assumption holding."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Rewrites the claim as conditional, naming the rate the figure depends on — that $62,926.95 is what year 12 looks like if raises average 3.2% for eleven straight years. Names evidence that would support choosing a rate, such as the employer’s actual raise history over several years, or the raise pattern for the same role across the sector. Notes that the target of $58,000 falls between the two projections, so the choice of rate decides whether the plan succeeds. Explains that each raise is applied to a larger salary than the last, so equal percentages produce unequal dollar amounts and the later years contribute more. Draws the implication that leaving in year 5 forgoes the larger part of the projected growth, so the decision should be judged against $10,836.45 of later growth rather than against the year-5 salary."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u01-l04.scoring.json",
+    "sourceScoringSha256": "50504077ebb371553908041312f43fe2e1433d54b081abc08e5b7d80439e7477",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u03-l05",
+  "lessonId": "ma-g5-financial-literacy-u03-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What does Kenji's planned month come to?",
+        "answer": "$207.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(80.00 + 45.50 + 32.25 + 50.00) = 207.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 8000
+              },
+              {
+                "op": "money",
+                "cents": 4550
+              },
+              {
+                "op": "money",
+                "cents": 3225
+              },
+              {
+                "op": "money",
+                "cents": 5000
+              }
+            ]
+          },
+          "trace": "(80.00 + 45.50 + 32.25 + 50.00) = 207.75"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much of the $250.00 is unallocated?",
+        "answer": "$42.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(250.00 - (80.00 + 45.50 + 32.25 + 50.00)) = 42.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 25000
+            },
+            "less": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 8000
+                },
+                {
+                  "op": "money",
+                  "cents": 4550
+                },
+                {
+                  "op": "money",
+                  "cents": 3225
+                },
+                {
+                  "op": "money",
+                  "cents": 5000
+                }
+              ]
+            }
+          },
+          "trace": "(250.00 - (80.00 + 45.50 + 32.25 + 50.00)) = 42.25"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How does the planned month sit against Kenji's income?",
+        "answer": "Inside his income",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare (80.00 + 45.50 + 32.25 + 50.00) with 250.00 = Inside his income. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 8000
+                },
+                {
+                  "op": "money",
+                  "cents": 4550
+                },
+                {
+                  "op": "money",
+                  "cents": 3225
+                },
+                {
+                  "op": "money",
+                  "cents": 5000
+                }
+              ]
+            },
+            "right": {
+              "op": "money",
+              "cents": 25000
+            },
+            "whenLess": "Inside his income",
+            "whenEqual": "Exactly at his income",
+            "whenGreater": "Over his income"
+          },
+          "trace": "compare (80.00 + 45.50 + 32.25 + 50.00) with 250.00 = Inside his income"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What does the month cost with the dental cost added?",
+        "answer": "$262.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(80.00 + 45.50 + 32.25 + 50.00 + 55.00) = 262.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 8000
+              },
+              {
+                "op": "money",
+                "cents": 4550
+              },
+              {
+                "op": "money",
+                "cents": 3225
+              },
+              {
+                "op": "money",
+                "cents": 5000
+              },
+              {
+                "op": "money",
+                "cents": 5500
+              }
+            ]
+          },
+          "trace": "(80.00 + 45.50 + 32.25 + 50.00 + 55.00) = 262.75"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much must be cut from the other categories to stay inside $250.00?",
+        "answer": "$12.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((80.00 + 45.50 + 32.25 + 50.00 + 55.00) - 250.00) = 12.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 8000
+                },
+                {
+                  "op": "money",
+                  "cents": 4550
+                },
+                {
+                  "op": "money",
+                  "cents": 3225
+                },
+                {
+                  "op": "money",
+                  "cents": 5000
+                },
+                {
+                  "op": "money",
+                  "cents": 5500
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 25000
+            }
+          },
+          "trace": "((80.00 + 45.50 + 32.25 + 50.00 + 55.00) - 250.00) = 12.75"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Designing slack into a budget",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Kenji's shortfall as bad luck with no lesson drawn."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "More slack is suggested for Kenji but not connected to the size of the unplanned cost."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response connects Kenji's $12.75 shortfall to the size of an ordinary unplanned cost and argues for slack or a dedicated fund sized to that kind of event."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does Kenji's planned month come to?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much of the $250.00 is unallocated?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How does the planned month sit against Kenji's income?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the month cost with the dental cost added?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much must be cut from the other categories to stay inside $250.00?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Kenji had $42.25 unallocated and still had to cut. What does that suggest about how much a budget should leave unassigned?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does Kenji's planned month come to? Answer: $207.75. Verification: (80.00 + 45.50 + 32.25 + 50.00) = 207.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much of the $250.00 is unallocated? Answer: $42.25. Verification: (250.00 - (80.00 + 45.50 + 32.25 + 50.00)) = 42.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How does the planned month sit against Kenji's income? Answer: Inside his income. Verification: compare (80.00 + 45.50 + 32.25 + 50.00) with 250.00 = Inside his income. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What does the month cost with the dental cost added? Answer: $262.75. Verification: (80.00 + 45.50 + 32.25 + 50.00 + 55.00) = 262.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much must be cut from the other categories to stay inside $250.00? Answer: $12.75. Verification: ((80.00 + 45.50 + 32.25 + 50.00 + 55.00) - 250.00) = 12.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Designing slack into a budget — Not yet: The response treats Kenji's shortfall as bad luck with no lesson drawn. Approaching: More slack is suggested for Kenji but not connected to the size of the unplanned cost. Meets: The response connects Kenji's $12.75 shortfall to the size of an ordinary unplanned cost and argues for slack or a dedicated fund sized to that kind of event. The response connects Kenji's $12.75 shortfall to the size of an ordinary unplanned cost and argues for slack or a dedicated fund sized to that kind of event."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response connects Kenji's $12.75 shortfall to the size of an ordinary unplanned cost and argues for slack or a dedicated fund sized to that kind of event."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u03-l05.scoring.json",
+    "sourceScoringSha256": "60a18ee129c77024aeca8efcd04265158331f187048a021bd43ba844ffb6229b",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

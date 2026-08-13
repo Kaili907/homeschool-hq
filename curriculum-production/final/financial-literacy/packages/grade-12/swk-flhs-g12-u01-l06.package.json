@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l06",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: documenting employment records"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "documenting employment records",
+  "objective": "Reconcile a fictional year-end wage summary against the pay statements behind it, locate the box that disagrees with the fictional rules, and price the difference.",
+  "scenario": "The year-end wage summary and the pay statements described below are simulated documents from a fictional employer. No real tax form is reproduced.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional summary and statement figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker was paid $2,240 gross in each of 26 pay periods. Each statement shows federal income tax withheld of $168 and a retirement contribution of 5% of gross. Under the fictional federal rule the retirement contribution is excluded from federal wages; under the fictional state rule it is not, so state wages should equal full gross. The year-end summary reports federal wages of $55,328, state wages of $55,328, and federal tax withheld of $4,368. The state rate is 4.25%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total gross pay the 26 statements add up to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total federal income tax withheld across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the retirement contributions come to for the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now check each reported wage box against the fictional rule that governs it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What should federal wages be, given that the retirement contribution is excluded?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "The summary reports the same $55,328 for state wages. Under the fictional state rule, is that box correct?",
+          "choices": [
+            "Yes — state and federal wages are defined the same way",
+            "No — state wages should be the full $58,240.00"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "At the 4.25% state rate, how much state tax does the understated wage box leave uncollected?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Two different things can make a year-end summary disagree with a worker’s own records: an employer applying a rule wrongly, and wages appearing that the worker never earned. Say which one this case is and how you can tell, and describe what a worker should do differently if the summary had shown gross pay of $71,000 instead."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the state wage box looks correct, check which rule each box is governed by. The federal rule excludes the $2,912.00 of retirement contributions and the state rule does not, so the two boxes should not carry the same figure. Compute each from the $58,240.00 gross separately before comparing either with the summary.",
+  "extension": "Work out what the reconciliation would show if the fictional employer had also excluded a $1,400 pre-tax premium from both wage boxes, and say which of the two boxes would then be right.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total gross pay the 26 statements add up to?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total federal income tax withheld across the year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What do the retirement contributions come to for the year?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What should federal wages be, given that the retirement contribution is excluded?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "The summary reports the same $55,328 for state wages. Under the fictional state rule, is that box correct?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "At the 4.25% state rate, how much state tax does the understated wage box leave uncollected?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Two different things can make a year-end summary disagree with a worker’s own records: an employer applying a rule wrongly, and wages appearing that the worker never earned. Say which one this case is and how you can tell, and describe what a worker should do differently if the summary had shown gross pay of $71,000 instead."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u01-l06.package.json",
+    "sourcePackageSha256": "72b1224218021fe4cd1e81fa8677ae3e434d1504db7a35c8068d073382a63036",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u01-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

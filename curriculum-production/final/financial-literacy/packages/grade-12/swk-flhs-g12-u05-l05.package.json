@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l05",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: fee awareness across account choices"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "fee awareness across account choices",
+  "objective": "Compare a percentage fee against a mixed fee at two fictional balances, identify which structure favours which balance, and weigh a certain cost against an uncertain return.",
+  "scenario": "The two simulated accounts and their fee structures below are invented for this exercise. No real provider, account, or product is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional fee structures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Fictional account X charges 0.85% of the balance each year and nothing else. Fictional account Y charges 0.15% of the balance each year plus a flat $60 a year. Consider a balance of $18,000 and a balance of $60,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does account X charge on an $18,000 balance in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does account Y charge on the same balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much cheaper is account Y at $18,000?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test both at the larger balance, and price the difference over a long period.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does account X charge on a $60,000 balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does account Y charge on a $60,000 balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much cheaper is account Y at $60,000?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Holding the balance at $18,000 and ignoring any growth, what would the fee difference come to over 30 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Fees and returns are both quoted as percentages, but only one of them is known in advance. Explain what follows from that difference, and describe the balances at which the flat $60 component would make account Y the more expensive of the two."
+        }
+      ]
+    }
+  ],
+  "remediation": "If account Y looks more expensive at $60,000, the flat $60 may be being applied as a percentage or added twice. Compute each part separately: 0.15% of $60,000 is $90.00, and the flat charge adds $60, for $150.00 in total against account X’s $510.00.",
+  "extension": "Find the balance at which the two accounts charge exactly the same fee, and say which structure is cheaper on either side of it.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does account X charge on an $18,000 balance in a year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does account Y charge on the same balance?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much cheaper is account Y at $18,000?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does account X charge on a $60,000 balance?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does account Y charge on a $60,000 balance?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much cheaper is account Y at $60,000?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Holding the balance at $18,000 and ignoring any growth, what would the fee difference come to over 30 years?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Fees and returns are both quoted as percentages, but only one of them is known in advance. Explain what follows from that difference, and describe the balances at which the flat $60 component would make account Y the more expensive of the two."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u05-l05.package.json",
+    "sourcePackageSha256": "4ab1d2e0cc4cacf57e89a56cd5572f97bf747ed0cc2dca7e288942d1fee8d043",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u05-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

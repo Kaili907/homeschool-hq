@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l09",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l09",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: depreciation and resale value"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "depreciation and resale value",
+  "objective": "Combine depreciation and rising running costs to find the cost per year of two fictional holding periods, and identify the tension that decides the best time to sell.",
+  "scenario": "Yolanda Castellanos-Njoku owns a fictional vehicle bought for $26,500. The depreciation rate and running costs below are invented figures used to make the tradeoff visible.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional holding-period figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the simplified model the vehicle loses 16% of its value each year. Running costs are $2,960 a year for the first 5 years and $4,310 a year after that, as repairs become more frequent. Round each value to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the vehicle worth after 3 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is it worth after 8 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much value is lost across the first 3 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much value is lost across all 8 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now add the running costs and find the cost per year of each holding period.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do running costs come to across the first 3 years, at $2,960 a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do running costs come to across the full 8 years, at $2,960 for the first 5 and $4,310 for the last 3?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the cost per year of ownership if Yolanda sells at 3 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the cost per year of ownership if she sells at 8 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much does holding for 8 years rather than 3 save per year of ownership?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Two forces pull in opposite directions as a vehicle is held longer. Name both, say which one is winning at eight years and by how much, and describe what would have to happen for the answer to flip."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Yolanda says she will decide by the vehicle’s condition rather than by the cost per year. Say what the cost-per-year figures are still useful for in that case, and what they cannot tell her."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the eight-year cost per year comes out near $5,451.41, the running costs are being held at $2,960 for all eight years. The scenario raises them to $4,310 from year 6, so the eight-year running total is $27,730.00 and not $23,680. Split the running-cost line into two blocks — five years at the lower rate and three at the higher — before adding the depreciation.",
+  "extension": "Find the holding period at which the cost per year is lowest, and say what feature of the running-cost schedule makes that year rather than the last one the answer.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the vehicle worth after 3 years?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is it worth after 8 years?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much value is lost across the first 3 years?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much value is lost across all 8 years?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do running costs come to across the first 3 years, at $2,960 a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do running costs come to across the full 8 years, at $2,960 for the first 5 and $4,310 for the last 3?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the cost per year of ownership if Yolanda sells at 3 years?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the cost per year of ownership if she sells at 8 years?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "How much does holding for 8 years rather than 3 save per year of ownership?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Two forces pull in opposite directions as a vehicle is held longer. Name both, say which one is winning at eight years and by how much, and describe what would have to happen for the answer to flip."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Yolanda says she will decide by the vehicle’s condition rather than by the cost per year. Say what the cost-per-year figures are still useful for in that case, and what they cannot tell her."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u02-l09.package.json",
+    "sourcePackageSha256": "d239c0f53fc3aa591bf40d69674111001deb5e90b3e00b5891aa70f74ab64c8a",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u02-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

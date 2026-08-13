@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l04",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: time value of money applied to real choices"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "time value of money applied to real choices",
+  "objective": "Apply the time value of money to a fictional choice between a sum now and a larger sum later, working the comparison in both directions, and identify the rate at which the choice reverses.",
+  "scenario": "Bartholomew Nwachukwu-Lindgren has a fictional settlement to collect and two simulated payment options. The amounts and the interest rate below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional payment options in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Option A pays $8,000 today. Option B pays $10,500 in 6 years. If Bartholomew takes the money today he can place it where it earns 5.5% a year, compounded annually. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the $8,000 be worth in 6 years at 5.5% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Compared at year 6, how much better is Option A than Option B?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now make the same comparison at today’s date instead, by discounting Option B back at the same 5.5%.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is $10,500 in 6 years worth today at 5.5% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Compared at today’s date, how much better is Option A than Option B?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The two comparisons give different dollar amounts. What is the difference between them?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Show that the two are the same figure at different dates: what does the present-day advantage of $384.92 grow to in 6 years at 5.5%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now test how much the conclusion depends on the 5.5% rate. Suppose the money could only earn 4% a year.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would $8,000 be worth in 6 years at 4% a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "At 4%, how much better is Option B than Option A at year 6?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-choice",
+          "text": "What does the reversal between 5.5% and 4% show?",
+          "choices": [
+            "That Option B is worth more than Option A whenever rates are low",
+            "That the comparison depends on what the money could earn in between, not on the two amounts alone",
+            "That present value is a less reliable method than future value"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why $10,500 in six years can be worth less than $8,000 today, and say what a person would have to know about their own situation before using 5.5% as the rate in this comparison."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The two methods gave $530.74 and $384.92 for the same advantage. Explain why neither is wrong, and say which one you would quote to someone deciding today."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the present value of $10,500 comes out above $10,500, the growth factor is being multiplied rather than divided. Moving a figure backwards in time makes it smaller, because a smaller sum today grows into it. Check the direction with a one-year case first: at 5.5%, $1,055 next year is worth $1,000 today, not $1,113.",
+  "extension": "Find the annual rate at which the two options would be exactly equal, and say whether a rate above or below it favours taking the money today.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would the $8,000 be worth in 6 years at 5.5% a year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "Compared at year 6, how much better is Option A than Option B?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is $10,500 in 6 years worth today at 5.5% a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Compared at today’s date, how much better is Option A than Option B?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "The two comparisons give different dollar amounts. What is the difference between them?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Show that the two are the same figure at different dates: what does the present-day advantage of $384.92 grow to in 6 years at 5.5%?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would $8,000 be worth in 6 years at 4% a year?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "At 4%, how much better is Option B than Option A at year 6?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does the reversal between 5.5% and 4% show?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain why $10,500 in six years can be worth less than $8,000 today, and say what a person would have to know about their own situation before using 5.5% as the rate in this comparison."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "The two methods gave $530.74 and $384.92 for the same advantage. Explain why neither is wrong, and say which one you would quote to someone deciding today."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u03-l04.package.json",
+    "sourcePackageSha256": "e08acc140ac4a1b2c0c3f6df565eece4745cc00a4278ae1748bce8a60cc8a71b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u03-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

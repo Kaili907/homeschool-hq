@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l03",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: comparing full financing packages"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "comparing full financing packages",
+  "objective": "Reduce two fictional financing packages to the borrowing each requires, compare them across four years, and show why the higher-priced option can be the cheaper one.",
+  "scenario": "The two simulated packages below come from fictional institutions and are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional package figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Package M comes from an institution costing $27,800 a year and offers $11,200 of gift aid. Package N comes from one costing $19,400 a year and offers $3,600 of gift aid. Both packages assume a work expectation of $2,600 and a family contribution of $4,200. Assume for now that each year of a four-year programme repeats the same figures.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much must be borrowed in one year under package M?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much must be borrowed in one year under package N?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of package M’s cost does its gift aid cover, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now carry both packages across the full programme.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What share of package N’s cost does its gift aid cover, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total borrowing across four years under package M?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total borrowing across four years under package N?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much more borrowing does package M require across the programme?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which package requires less borrowing across the four years?",
+          "choices": [
+            "Package M",
+            "Package N"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The institution costing $8,400 more a year requires only $800 a year more in borrowing. Explain what makes that possible, and say which single change to the stated assumptions would most alter the comparison and in which direction."
+        }
+      ]
+    }
+  ],
+  "remediation": "If package M looks far more expensive, the comparison is being made on the $27,800 and $19,400 costs. Subtract everything that is not borrowed from each — gift aid, the work expectation, and the family contribution — and compare the $9,800.00 and $9,000.00 that remain. Only that difference has to be repaid.",
+  "extension": "Recompute both four-year totals assuming package M’s gift aid applies only in year one, and say how large the reversal is.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much must be borrowed in one year under package M?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much must be borrowed in one year under package N?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What share of package M’s cost does its gift aid cover, to two decimal places?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What share of package N’s cost does its gift aid cover, to two decimal places?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total borrowing across four years under package M?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the total borrowing across four years under package N?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much more borrowing does package M require across the programme?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Which package requires less borrowing across the four years?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The institution costing $8,400 more a year requires only $800 a year more in borrowing. Explain what makes that possible, and say which single change to the stated assumptions would most alter the comparison and in which direction."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u04-l03.package.json",
+    "sourcePackageSha256": "8cc48c9e300a9ded710baf74a88f29a6ce2c45690d10b37e7eda070f57ed44c9",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u04-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

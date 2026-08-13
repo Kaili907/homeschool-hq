@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u05-l04",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing",
+    "dayInUnit": 4,
+    "phase": "Independent application A",
+    "title": "Independent application A: compound growth and volatility",
+    "focus": "compound growth and volatility"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "objective": "Learners compute invented compound growth over five periods and contrast it with a sequence of equal-sized gains and losses.",
+  "scenario": "Saoirse is an invented eighth grader modelling $10,000.00 two ways: growing at 8% a year for five simulated years, and a volatile pair of years rising 30% then falling 30%. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Grow Saoirse's invented $10,000.00 at 8% a year for five years, compounding annually.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after five years at 8%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now model Saoirse's volatile pair: a 30% rise in year one, then a 30% fall applied to the new balance.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after the 30% rise?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after the following 30% fall?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Quantify the net effect of Saoirse's volatile pair and compare it with two steady years at 8%.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is lost across the volatile pair of years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would two steady years at 8% have produced?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A 30% gain and a 30% loss did not cancel out.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why equal percentage moves in opposite directions leave Saoirse worse off, and what that implies about recovering from a loss."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies both percentages to the original amount, mark the base for each step in Saoirse's sequence before computing.",
+  "extension": "Ask the learner what percentage gain would restore Saoirse's $9,100.00 to $10,000.00, and to show the method.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u05-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u05-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after five years at 8%?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after the 30% rise?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after the following 30% fall?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much is lost across the volatile pair of years?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would two steady years at 8% have produced?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain why equal percentage moves in opposite directions leave Saoirse worse off, and what that implies about recovering from a loss."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u05-l04.package.json",
+    "sourcePackageSha256": "b9053202887bda9effcb2966f07f7cde1b57a17d9b3852e838970944804f0398",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u05-l04",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

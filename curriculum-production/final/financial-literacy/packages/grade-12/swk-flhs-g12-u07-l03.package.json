@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l03",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: integrating all seven expectations into one year"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "integrating all seven expectations into one year",
+  "objective": "Establish the income and tax spine of the fictional capstone case: what is earned, what is set aside before tax, what tax takes, and what actually arrives each month.",
+  "scenario": "This lesson opens the capstone. It runs on Case R, a fictional adult invented for this course, or on a fictional profile the learner invents instead — every figure in which must also be invented. The capstone never asks about the learner’s own money, household, accounts, or filings, and no lesson in it requests any real financial detail.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the Case R figures and fictional tax schedule in these directions",
+    "a page for the capstone record"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Case R is paid $54,600 a year. Before tax, $2,730 goes to a retirement election and $2,040 to a health premium. Under the fictional federal schedule, taxable income is pay less those pre-tax amounts less a standard deduction of $9,000; the schedule charges 10% on the first $10,400 of taxable income and 12% on the band to $44,000. A payroll levy of 7.65%, state tax of 4.25%, and city tax of 1% are all charged on the full $54,600 with no deduction. If you are using a fictional profile of your own instead, substitute your own invented figures throughout and keep them the same in every capstone lesson.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the two pre-tax amounts come to together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the federal income tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now complete the tax picture and find what reaches the account.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the payroll levy, state tax, and city tax come to together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total tax for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is take-home pay for the year, after both the pre-tax elections and all tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly take-home pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Begin the capstone record. Answer in a short paragraph and keep it.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Case R earns $54,600 and has $3,174.58 a month to work with. Write the opening entry of the capstone record: state what the year’s income actually makes available, name the largest single reduction and whether it is a cost or a transfer, and set out the one thing you would want to change about this starting position — with the reason it is worth changing and what changing it would cost."
+        }
+      ]
+    }
+  ],
+  "remediation": "If take-home comes out at $42,865.00, only the tax has been subtracted and the pre-tax elections are still in the figure; if it comes out at $45,138.40, the levy, state, and city charges have been left out. Subtract in the stated order: the $4,770.00 of elections, then all four taxes totalling $11,735.00.",
+  "extension": "Recompute the whole spine for a fictional profile paid $61,000 with the same elections, and say whether the 22% band is reached and what that does to the monthly figure.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the two pre-tax amounts come to together?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is taxable income?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the federal income tax?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the payroll levy, state tax, and city tax come to together?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total tax for the year?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is take-home pay for the year, after both the pre-tax elections and all tax?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is monthly take-home pay?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Case R earns $54,600 and has $3,174.58 a month to work with. Write the opening entry of the capstone record: state what the year’s income actually makes available, name the largest single reduction and whether it is a cost or a transfer, and set out the one thing you would want to change about this starting position — with the reason it is worth changing and what changing it would cost."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u07-l03.package.json",
+    "sourcePackageSha256": "23b264cf2e47ba9400d1a7f899746f5f325491c2a30e1fe0d655dac720f5868a",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u07-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

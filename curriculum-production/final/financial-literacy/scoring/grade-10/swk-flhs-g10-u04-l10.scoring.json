@@ -1,0 +1,350 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l10",
+  "lessonId": "ma-g10-financial-literacy-u04-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$33,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two years at $16,900. This is the figure every other line has to be measured against."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$14,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $5,200 grant and $2,000 scholarship in each of two years. This is the only part that reduces the cost outright."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$17,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,000 of work study, $3,500 of subsidised loan, and $2,000 of unsubsidised loan in each of two years. Every dollar of this is earned or repaid."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$33,800.00 of cost less $14,400.00 of gift aid and $17,000.00 of self-help aid. The applicant has to find this from earnings, family, or further borrowing."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$330.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.5% of $4,000 across 1.5 years at a simple rate. The subsidised $7,000 accrues nothing over the same period."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$11,330.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,000 subsidised plus $4,000 unsubsidised plus the $330.00 that capitalised onto it."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$122.96",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The payment that retires the $11,330.00 balance over 120 months with interest charged monthly on the falling balance."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$14,755.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "120 payments of $122.96, on the stated rounding assumption."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$3,425.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$14,755.20 repaid against the $11,330.00 owed at repayment. Note that the $330.00 of capitalised interest is inside the $11,330.00 and therefore earns interest of its own."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "coaYear * 2",
+        "substituted": "16900 * 2",
+        "result": "$33,800.00",
+        "why": "Two years at $16,900. This is the figure every other line has to be measured against."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "(grantYear + scholarYear) * 2",
+        "substituted": "(5200 + 2000) * 2",
+        "result": "$14,400.00",
+        "why": "The $5,200 grant and $2,000 scholarship in each of two years. This is the only part that reduces the cost outright."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "(workYear + subYear + unsubYear) * 2",
+        "substituted": "(3000 + 3500 + 2000) * 2",
+        "result": "$17,000.00",
+        "why": "$3,000 of work study, $3,500 of subsidised loan, and $2,000 of unsubsidised loan in each of two years. Every dollar of this is earned or repaid."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 - #t1-p2 - #t1-p3",
+        "substituted": "#t1-p1 - #t1-p2 - #t1-p3",
+        "result": "$2,400.00",
+        "why": "$33,800.00 of cost less $14,400.00 of gift aid and $17,000.00 of self-help aid. The applicant has to find this from earnings, family, or further borrowing."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "unsubTotal * fedRate * accrual",
+        "substituted": "4000 * 0.055 * 1.5",
+        "result": "$330.00",
+        "why": "5.5% of $4,000 across 1.5 years at a simple rate. The subsidised $7,000 accrues nothing over the same period."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "subTotal + unsubTotal2 + #t2-p2",
+        "substituted": "7000 + 4000 + #t2-p2",
+        "result": "$11,330.00",
+        "why": "$7,000 subsidised plus $4,000 unsubsidised plus the $330.00 that capitalised onto it."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p3 * (fedRate2 / 12) * pow(1 + fedRate2 / 12, 120) / (pow(1 + fedRate2 / 12, 120) - 1), 2)",
+        "substituted": "round(#t2-p3 * (0.055 / 12) * pow(1 + 0.055 / 12, 120) / (pow(1 + 0.055 / 12, 120) - 1), 2)",
+        "result": "$122.96",
+        "why": "The payment that retires the $11,330.00 balance over 120 months with interest charged monthly on the falling balance."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p4 * 120, 2)",
+        "substituted": "round(#t2-p4 * 120, 2)",
+        "result": "$14,755.20",
+        "why": "120 payments of $122.96, on the stated rounding assumption."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p5 - #t2-p3",
+        "substituted": "#t2-p5 - #t2-p3",
+        "result": "$3,425.20",
+        "why": "$14,755.20 repaid against the $11,330.00 owed at repayment. Note that the $330.00 of capitalised interest is inside the $11,330.00 and therefore earns interest of its own."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Report this plan in four sentences: what the pathway costs, what is given, what is owed, and what repaying it looks like. Then name the single change to the package that would most reduce the total repaid, and defend it with a figure.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Reports the plan accurately: $33,800.00 of cost, $14,400.00 of gift aid, $11,330.00 owed at repayment, and $14,755.20 repaid over 120 months at $122.96 a month.",
+          "Names a specific change — more gift aid, less unsubsidised borrowing, paying the in-school interest, or a shorter repayment term — and supports it with the relevant figure rather than a general preference.",
+          "Recognises that the $2,400.00 gap is unfunded in this plan and must come from somewhere, so a complete report cannot stop at the aid lines."
+        ],
+        "evidenceRequirements": [
+          "Uses the $33,800.00 cost, the $11,330.00 repayment-start balance, and the $3,425.20 of interest."
+        ],
+        "lookFors": [
+          "The response treats work study as earned income requiring hours worked, not as a discount on the cost.",
+          "The response notices that the $330.00 of capitalised interest goes on to earn interest itself over the repayment period."
+        ],
+        "commonMisconception": "Treating a financing plan as complete once the aid lines are listed, without computing the gap or the repayment.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the pathway cost over the two years?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total gift aid over the two years?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the total self-help aid — work study and both loans — over the two years?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What gap remains after every line of aid is used across the two years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much interest accrues on the unsubsidised balance before repayment begins?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the total federal balance when repayment begins?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the level monthly payment over 120 months at 5.5%? Round to the nearest cent."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What is repaid in total over the 120 months?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "How much of that total is interest?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Report this plan in four sentences: what the pathway costs, what is given, what is owed, and what repaying it looks like. Then name the single change to the package that would most reduce the total repaid, and defend it with a figure."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the pathway cost over the two years? Answer: $33,800.00. Verification: Two years at $16,900. This is the figure every other line has to be measured against. t1-p2: What is the total gift aid over the two years? Answer: $14,400.00. Verification: The $5,200 grant and $2,000 scholarship in each of two years. This is the only part that reduces the cost outright. t1-p3: What is the total self-help aid — work study and both loans — over the two years? Answer: $17,000.00. Verification: $3,000 of work study, $3,500 of subsidised loan, and $2,000 of unsubsidised loan in each of two years. Every dollar of this is earned or repaid. t2-p1: What gap remains after every line of aid is used across the two years? Answer: $2,400.00. Verification: $33,800.00 of cost less $14,400.00 of gift aid and $17,000.00 of self-help aid. The applicant has to find this from earnings, family, or further borrowing. t2-p2: How much interest accrues on the unsubsidised balance before repayment begins? Answer: $330.00. Verification: 5.5% of $4,000 across 1.5 years at a simple rate. The subsidised $7,000 accrues nothing over the same period. t2-p3: What is the total federal balance when repayment begins? Answer: $11,330.00. Verification: $7,000 subsidised plus $4,000 unsubsidised plus the $330.00 that capitalised onto it. t2-p4: What is the level monthly payment over 120 months at 5.5%? Round to the nearest cent. Answer: $122.96. Verification: The payment that retires the $11,330.00 balance over 120 months with interest charged monthly on the falling balance. t2-p5: What is repaid in total over the 120 months? Answer: $14,755.20. Verification: 120 payments of $122.96, on the stated rounding assumption. t2-p6: How much of that total is interest? Answer: $3,425.20. Verification: $14,755.20 repaid against the $11,330.00 owed at repayment. Note that the $330.00 of capitalised interest is inside the $11,330.00 and therefore earns interest of its own."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Report this plan in four sentences: what the pathway costs, what is given, what is owed, and what repaying it looks like. Then name the single change to the package that would most reduce the total repaid, and defend it with a figure. Reports the plan accurately: $33,800.00 of cost, $14,400.00 of gift aid, $11,330.00 owed at repayment, and $14,755.20 repaid over 120 months at $122.96 a month. Names a specific change — more gift aid, less unsubsidised borrowing, paying the in-school interest, or a shorter repayment term — and supports it with the relevant figure rather than a general preference. Recognises that the $2,400.00 gap is unfunded in this plan and must come from somewhere, so a complete report cannot stop at the aid lines. Uses the $33,800.00 cost, the $11,330.00 repayment-start balance, and the $3,425.20 of interest. The response treats work study as earned income requiring hours worked, not as a discount on the cost. The response notices that the $330.00 of capitalised interest goes on to earn interest itself over the repayment period."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Reports the plan accurately: $33,800.00 of cost, $14,400.00 of gift aid, $11,330.00 owed at repayment, and $14,755.20 repaid over 120 months at $122.96 a month. Names a specific change — more gift aid, less unsubsidised borrowing, paying the in-school interest, or a shorter repayment term — and supports it with the relevant figure rather than a general preference. Recognises that the $2,400.00 gap is unfunded in this plan and must come from somewhere, so a complete report cannot stop at the aid lines."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u04-l10.scoring.json",
+    "sourceScoringSha256": "759b3ceba99e6a7f9895fdd87cc7ea4b994e132e5a6d794d15243a0754768e95",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

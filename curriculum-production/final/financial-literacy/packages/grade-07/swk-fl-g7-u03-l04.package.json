@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u03-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u03-l04",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Budgeting and Saving",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: goal-based saving",
+    "focus": "goal-based saving"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3 foundations"
+  ],
+  "objective": "Learners convert invented goals into required monthly contributions and evaluate whether competing goals fit the money available.",
+  "scenario": "Odile is an invented seventh grader planning a pretend $2,400.00 goal over 15 months. She also wants to know what a slower $120.00 a month would do to the timeline. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Work out the monthly contribution Odile's invented goal requires over 15 months.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What monthly amount reaches $2,400.00 in 15 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now reverse the question: at $120.00 a month, work out how long Odile's goal takes and how far behind she is at month 15.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole months does $120.00 a month need?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is still missing at month 15 under the slower plan?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Odile adds a second invented goal of $900.00 over 15 months alongside the first, with $220.00 a month available in total.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What monthly amount does the second goal require?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far short of both goals is $220.00 a month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Both goals fit exactly, with nothing to spare.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Odile's two goals consume every available dollar. Explain the risk in a plan with no slack, and what you would change."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides in the wrong direction, restate the question as sharing the goal amount equally across the months and check the units of the answer.",
+  "extension": "Ask the learner to rebuild Odile's two goals leaving at least $20.00 a month unassigned, and to show the new timelines.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u03-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u03-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What monthly amount reaches $2,400.00 in 15 months?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many whole months does $120.00 a month need?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much is still missing at month 15 under the slower plan?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What monthly amount does the second goal require?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How far short of both goals is $220.00 a month?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Odile's two goals consume every available dollar. Explain the risk in a plan with no slack, and what you would change."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-07/swk-fl-g7-u03-l04.package.json",
+    "sourcePackageSha256": "77f9bc149375ebdf0a273925953cf407fa1d3d013330569d2836c7e12314e58d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g7-financial-literacy-u03-l04",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

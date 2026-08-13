@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l01",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: how credit reporting and scoring work"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "how credit reporting and scoring work",
+  "objective": "Compute a fictional credit score from stated category weights, recompute it after a change in one category, and identify which input the borrower can actually move.",
+  "scenario": "The Meridian Score described below is a fictional scoring model invented for this exercise. Its categories, weights, and scale are made up and match no real scoring model. No learner is asked for a real credit score or credit file.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional scoring model in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional Meridian Score rates a file from 0 to 100 in each of five categories, weights them, and maps the weighted result onto a scale that runs from 300 to 850. The invented weights are: payment history 40%, amounts owed 25%, length of history 15%, new credit 12%, and credit mix 8%. A fictional borrower’s file scores 92 on payment history, 55 on amounts owed, 70 on length of history, 80 on new credit, and 60 on credit mix.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the borrower’s weighted category score, out of 100?"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Mapped onto the 300 to 850 scale, what is the borrower’s score?"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "The amounts-owed category is driven by utilisation. The borrower owes $4,260 against total limits of $9,000. What is the utilisation?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The borrower pays down $1,860 of the balance. Nothing else about the file changes: the same accounts stay open, so total limits are unchanged, and the amounts-owed category score rises from 55 to 78. Recompute.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after the paydown?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the new utilisation?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the new weighted category score, out of 100?"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the new score on the 300 to 850 scale?"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How many points did the paydown move the score?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Using the stated weights, explain why paying down a balance moved this fictional score while opening a new account to raise total limits might not help as much as it appears. Then say what a scoring model of this kind can and cannot tell a lender."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the mapped score comes out as 75 or 76, the weighted result is being reported without being placed on the 300 to 850 scale. The weighted figure is out of 100; the scale has a floor of 300 and 550 points above it. Take 75.45 percent of those 550 points and add the 300 floor.",
+  "extension": "Work out how many points the borrower would gain by moving payment history from 92 to 100 instead, and say which of the two changes is easier to make and which is easier to lose.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the borrower’s weighted category score, out of 100?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "Mapped onto the 300 to 850 scale, what is the borrower’s score?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "The amounts-owed category is driven by utilisation. The borrower owes $4,260 against total limits of $9,000. What is the utilisation?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after the paydown?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the new utilisation?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the new weighted category score, out of 100?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the new score on the 300 to 850 scale?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "How many points did the paydown move the score?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Using the stated weights, explain why paying down a balance moved this fictional score while opening a new account to raise total limits might not help as much as it appears. Then say what a scoring model of this kind can and cannot tell a lender."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u04-l01.package.json",
+    "sourcePackageSha256": "8f4062ffdee5348572174da998fb73a37f650325f2ea6a91c9d9332c46d37e46",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u04-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,481 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l10",
+  "lessonId": "ma-g11-financial-literacy-u05-l10",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$46,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "55% of $84,000, the largest of the three target holdings."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$55,347.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$46,200.00 grown by 19.8% — the holding that causes the drift."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$24,847.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$25,200.00 at the start, reduced by 1.4%."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$13,129.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$12,600.00 at the start, grown by 4.2%."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$93,324.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$55,347.60 in stocks, $24,847.20 in bonds, and $13,129.20 in cash."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "59.31%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$55,347.60 of $93,324.00 — over four percentage points above the 55% target, from performance alone."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$4,019.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$55,347.60 held against a target of $51,328.20, which is 55% of the new total."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A target of $27,997.20 against the $24,847.20 held — the fund that lost money is the one that receives."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$869.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A target of $13,998.60 against the $13,129.20 held."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$4,019.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,150.00 into bonds and $869.40 into cash, exactly matching the $4,019.40 sold from stocks — no money enters or leaves the portfolio, which is the check that the rebalance is correct."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "11.1%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$93,324.00 against $84,000 — well below the stock fund’s 19.8%, because only 55% of the portfolio was in it."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "The two purchases totalling exactly the amount sold",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "All three statements are true after a correct rebalance, but only the balance of purchases against the sale is a check that would fail if a target had been miscomputed; a weight can be set to 55% and a total can be preserved even when the other two holdings are wrong."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(total * stockWeight, 2)",
+        "substituted": "round(84000 * 0.55, 2)",
+        "result": "$46,200.00",
+        "why": "55% of $84,000, the largest of the three target holdings."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * (1 + stockReturn), 2)",
+        "substituted": "round(#t1-p1 * (1 + 0.198), 2)",
+        "result": "$55,347.60",
+        "why": "$46,200.00 grown by 19.8% — the holding that causes the drift."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(total2 * bondWeight * (1 - bondReturn), 2)",
+        "substituted": "round(84000 * 0.3 * (1 - 0.014), 2)",
+        "result": "$24,847.20",
+        "why": "$25,200.00 at the start, reduced by 1.4%."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(total3 * cashWeight * (1 + cashReturn), 2)",
+        "substituted": "round(84000 * 0.15 * (1 + 0.042), 2)",
+        "result": "$13,129.20",
+        "why": "$12,600.00 at the start, grown by 4.2%."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 + #t1-p3 + #t1-p4",
+        "substituted": "#t1-p2 + #t1-p3 + #t1-p4",
+        "result": "$93,324.00",
+        "why": "$55,347.60 in stocks, $24,847.20 in bonds, and $13,129.20 in cash."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p2 / #t2-p1 * 100, 2)",
+        "substituted": "round(#t1-p2 / #t2-p1 * 100, 2)",
+        "result": "59.31%",
+        "why": "$55,347.60 of $93,324.00 — over four percentage points above the 55% target, from performance alone."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p2 - #t2-p1 * stockWeight2, 2)",
+        "substituted": "round(#t1-p2 - #t2-p1 * 0.55, 2)",
+        "result": "$4,019.40",
+        "why": "$55,347.60 held against a target of $51,328.20, which is 55% of the new total."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p1 * bondWeight2 - #t1-p3, 2)",
+        "substituted": "round(#t2-p1 * 0.3 - #t1-p3, 2)",
+        "result": "$3,150.00",
+        "why": "A target of $27,997.20 against the $24,847.20 held — the fund that lost money is the one that receives."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p1 * cashWeight2 - #t1-p4, 2)",
+        "substituted": "round(#t2-p1 * 0.15 - #t1-p4, 2)",
+        "result": "$869.40",
+        "why": "A target of $13,998.60 against the $13,129.20 held."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t2-p4 + #t2-p5",
+        "substituted": "#t2-p4 + #t2-p5",
+        "result": "$4,019.40",
+        "why": "$3,150.00 into bonds and $869.40 into cash, exactly matching the $4,019.40 sold from stocks — no money enters or leaves the portfolio, which is the check that the rebalance is correct."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round((#t2-p1 - total4) / total4 * 100, 1)",
+        "substituted": "round((#t2-p1 - 84000) / 84000 * 100, 1)",
+        "result": "11.1%",
+        "why": "$93,324.00 against $84,000 — well below the stock fund’s 19.8%, because only 55% of the portfolio was in it."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t2-p6 == #t2-p3",
+        "substituted": "#t2-p6 == #t2-p3",
+        "result": "The two purchases totalling exactly the amount sold",
+        "why": "All three statements are true after a correct rebalance, but only the balance of purchases against the sale is a check that would fail if a target had been miscomputed; a weight can be set to 55% and a total can be preserved even when the other two holdings are wrong."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "A trustee objects that the policy sells $4,019.40 of the fund that returned 19.8% to buy more of one that lost money. Answer the objection, state what the policy is actually managing, and name the circumstance in which the objection would be right.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Answers the objection by identifying what the policy manages: the mix of the portfolio, which drifted from 55% to 59.31% without any decision being taken.",
+          "States that the policy makes no claim about which fund will do better next, so selling the strong performer is not a prediction that it will fall.",
+          "Names a circumstance in which the objection has force, such as trading costs or tax on the sale making the rebalance cost more than the drift is worth, or the target weights themselves no longer suiting the portfolio’s purpose."
+        ],
+        "evidenceRequirements": [
+          "Cites the 59.31% drifted stock weight against the 55% target, and the $4,019.40 trade.",
+          "Refers to the check that the two purchases total exactly the amount sold."
+        ],
+        "lookFors": [
+          "The defence rests on managing the mix, not on a view about future returns.",
+          "The circumstance conceded is a real one rather than a token concession.",
+          "A response noting that the portfolio returned 11.1% against the stock fund’s 19.8% is showing what the mix does."
+        ],
+        "commonMisconception": "Reading a rebalancing rule as a forecast about which holding will do better.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "The policy rebalances once a year. Say what would change if it rebalanced monthly instead, and what would change if it rebalanced every five years.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that monthly rebalancing keeps the mix closer to target but trades far more often, raising costs and any tax on sales.",
+          "States that a five-year interval allows much larger drift, so the portfolio could spend years at a mix well beyond 59.31% before any correction."
+        ],
+        "evidenceRequirements": [
+          "Uses the 59.31% drift reached in a single year as the reference point for both alternatives."
+        ],
+        "lookFors": [
+          "Both directions are addressed, not only one.",
+          "The response treats the interval as a tradeoff between drift and cost."
+        ],
+        "dimensions": [
+          "transfer",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 11,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What was held in the stock fund at the start, at 55% of $84,000?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the stock fund worth after returning 19.8%?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the bond fund worth after losing 1.4%, having started at 30% of $84,000?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the cash holding worth after returning 4.2%, having started at 15% of $84,000?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the portfolio worth at the end of the year?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What share of the portfolio is now in the stock fund? Give two decimal places."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of the stock fund must be sold to return it to 55%?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much must be added to the bond fund to return it to 30%?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much must be added to cash to return it to 15%?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "Check the trades balance: what do the two purchases come to together?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What did the portfolio return over the year as a whole? Give one decimal place."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "Which figure shows the rebalance has been computed correctly?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "A trustee objects that the policy sells $4,019.40 of the fund that returned 19.8% to buy more of one that lost money. Answer the objection, state what the policy is actually managing, and name the circumstance in which the objection would be right."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "The policy rebalances once a year. Say what would change if it rebalanced monthly instead, and what would change if it rebalanced every five years."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What was held in the stock fund at the start, at 55% of $84,000? Answer: $46,200.00. Verification: 55% of $84,000, the largest of the three target holdings. t1-p2: What is the stock fund worth after returning 19.8%? Answer: $55,347.60. Verification: $46,200.00 grown by 19.8% — the holding that causes the drift. t1-p3: What is the bond fund worth after losing 1.4%, having started at 30% of $84,000? Answer: $24,847.20. Verification: $25,200.00 at the start, reduced by 1.4%. t1-p4: What is the cash holding worth after returning 4.2%, having started at 15% of $84,000? Answer: $13,129.20. Verification: $12,600.00 at the start, grown by 4.2%. t2-p1: What is the portfolio worth at the end of the year? Answer: $93,324.00. Verification: $55,347.60 in stocks, $24,847.20 in bonds, and $13,129.20 in cash. t2-p2: What share of the portfolio is now in the stock fund? Give two decimal places. Answer: 59.31%. Verification: $55,347.60 of $93,324.00 — over four percentage points above the 55% target, from performance alone. t2-p3: How much of the stock fund must be sold to return it to 55%? Answer: $4,019.40. Verification: $55,347.60 held against a target of $51,328.20, which is 55% of the new total. t2-p4: How much must be added to the bond fund to return it to 30%? Answer: $3,150.00. Verification: A target of $27,997.20 against the $24,847.20 held — the fund that lost money is the one that receives. t2-p5: How much must be added to cash to return it to 15%? Answer: $869.40. Verification: A target of $13,998.60 against the $13,129.20 held. t2-p6: Check the trades balance: what do the two purchases come to together? Answer: $4,019.40. Verification: $3,150.00 into bonds and $869.40 into cash, exactly matching the $4,019.40 sold from stocks — no money enters or leaves the portfolio, which is the check that the rebalance is correct. t3-p1: What did the portfolio return over the year as a whole? Give one decimal place. Answer: 11.1%. Verification: $93,324.00 against $84,000 — well below the stock fund’s 19.8%, because only 55% of the portfolio was in it. t3-p2: Which figure shows the rebalance has been computed correctly? Answer: The two purchases totalling exactly the amount sold. Verification: All three statements are true after a correct rebalance, but only the balance of purchases against the sale is a check that would fail if a target had been miscomputed; a weight can be set to 55% and a total can be preserved even when the other two holdings are wrong."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t4-p1: A trustee objects that the policy sells $4,019.40 of the fund that returned 19.8% to buy more of one that lost money. Answer the objection, state what the policy is actually managing, and name the circumstance in which the objection would be right. Answers the objection by identifying what the policy manages: the mix of the portfolio, which drifted from 55% to 59.31% without any decision being taken. States that the policy makes no claim about which fund will do better next, so selling the strong performer is not a prediction that it will fall. Names a circumstance in which the objection has force, such as trading costs or tax on the sale making the rebalance cost more than the drift is worth, or the target weights themselves no longer suiting the portfolio’s purpose. Cites the 59.31% drifted stock weight against the 55% target, and the $4,019.40 trade. Refers to the check that the two purchases total exactly the amount sold. The defence rests on managing the mix, not on a view about future returns. The circumstance conceded is a real one rather than a token concession. A response noting that the portfolio returned 11.1% against the stock fund’s 19.8% is showing what the mix does. t4-p2: The policy rebalances once a year. Say what would change if it rebalanced monthly instead, and what would change if it rebalanced every five years. States that monthly rebalancing keeps the mix closer to target but trades far more often, raising costs and any tax on sales. States that a five-year interval allows much larger drift, so the portfolio could spend years at a mix well beyond 59.31% before any correction. Uses the 59.31% drift reached in a single year as the reference point for both alternatives. Both directions are addressed, not only one. The response treats the interval as a tradeoff between drift and cost."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Answers the objection by identifying what the policy manages: the mix of the portfolio, which drifted from 55% to 59.31% without any decision being taken. States that the policy makes no claim about which fund will do better next, so selling the strong performer is not a prediction that it will fall. Names a circumstance in which the objection has force, such as trading costs or tax on the sale making the rebalance cost more than the drift is worth, or the target weights themselves no longer suiting the portfolio’s purpose. States that monthly rebalancing keeps the mix closer to target but trades far more often, raising costs and any tax on sales. States that a five-year interval allows much larger drift, so the portfolio could spend years at a mix well beyond 59.31% before any correction."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 12 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 12,
+      "contractFixedItemCount": 12,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u05-l10.scoring.json",
+    "sourceScoringSha256": "9d4917f51931b146ded54e03085c489a196d61a5343474640be2bcfb52567ce8",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

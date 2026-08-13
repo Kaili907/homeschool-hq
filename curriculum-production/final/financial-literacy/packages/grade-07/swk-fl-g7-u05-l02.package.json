@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u05-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u05-l02",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Investing, Risk, and Protection",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: risk return and time horizon",
+    "focus": "risk return and time horizon"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners compute invented compound growth at two rates over the same horizon and quantify how much the rate difference is worth.",
+  "scenario": "Anika is an invented seventh grader modelling $1,000.00 over three simulated years at two invented rates: 5% a year and 2% a year, each compounding annually. All figures are invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Grow Anika's invented $1,000.00 at 5% a year for three years, compounding each year on the new balance.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after three years at 5%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Run the same three years at Anika's lower invented rate of 2%, then compare the two ending balances.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after three years at 2%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the 5% rate produce over three years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare the compounded result at 5% with what simple interest at the same rate would have produced over three years.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would three years of simple interest at 5% produce as a balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does compounding add over simple interest in three years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Three years made compounding worth less than eight dollars.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Compounding added little over three years in Anika's model. Explain what changes over a much longer horizon and why time matters more than the first few years suggest."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner multiplies the first year's interest by three, write out each of Anika's three years in sequence with its own opening balance.",
+  "extension": "Ask the learner to project Anika's 5% balance for a fourth and fifth year and describe how the yearly increase changes.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u05-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u05-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after three years at 5%?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after three years at 2%?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the 5% rate produce over three years?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would three years of simple interest at 5% produce as a balance?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does compounding add over simple interest in three years?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Compounding added little over three years in Anika's model. Explain what changes over a much longer horizon and why time matters more than the first few years suggest."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-07/swk-fl-g7-u05-l02.package.json",
+    "sourcePackageSha256": "50f832bcbf85a139e4f2daabe919359224eaed0898d924c1267d59128f29d83c",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g7-financial-literacy-u05-l02",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

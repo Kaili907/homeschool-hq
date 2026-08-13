@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u01-l07",
+  "lessonId": "ma-g8-financial-literacy-u01-l07",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Evaluating sources by interest and scope",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response ranks Greta's sources by how convincing they sound."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "One weakness is identified for Greta but the interests behind the sources are not addressed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies the provider's commercial interest, the undated statistics, and the single-case interview as distinct weaknesses in Greta's set, and says who benefits from each."
+          }
+        ]
+      },
+      {
+        "dimension": "Specifying decision-grade evidence",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No evidence requirement is stated for Greta."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Evidence is named for Greta but with no route to obtaining it."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response specifies what Greta needs, such as dated placement rates from an independent body, and names where each piece could come from."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names the brochure's commercial interest explicitly.",
+      "Flags the missing date on the statistics table.",
+      "Distinguishes what a single interview can and cannot show.",
+      "Specifies at least one independent source Greta could seek."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What is the main weakness of each of Greta's three sources, and who benefits from each being believed?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What evidence would justify Greta's decision, and where could each piece come from?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is one worker's enthusiasm useful evidence about some questions and useless about others?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Evaluating sources by interest and scope — Not yet: The response ranks Greta's sources by how convincing they sound. Approaching: One weakness is identified for Greta but the interests behind the sources are not addressed. Meets: The response identifies the provider's commercial interest, the undated statistics, and the single-case interview as distinct weaknesses in Greta's set, and says who benefits from each. Specifying decision-grade evidence — Not yet: No evidence requirement is stated for Greta. Approaching: Evidence is named for Greta but with no route to obtaining it. Meets: The response specifies what Greta needs, such as dated placement rates from an independent body, and names where each piece could come from. Names the brochure's commercial interest explicitly. Flags the missing date on the statistics table. Distinguishes what a single interview can and cannot show. Specifies at least one independent source Greta could seek."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names the brochure's commercial interest explicitly. Flags the missing date on the statistics table. Distinguishes what a single interview can and cannot show. Specifies at least one independent source Greta could seek."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u01-l07.scoring.json",
+    "sourceScoringSha256": "1a937b327d9d7f87b520a8d1f63891e8c294e1fc0c529f827a67d94935b035a2",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

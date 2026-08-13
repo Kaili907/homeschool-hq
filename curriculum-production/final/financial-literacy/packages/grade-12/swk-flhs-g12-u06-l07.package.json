@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l07",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: coverage an independent adult typically needs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "coverage an independent adult typically needs",
+  "objective": "Price what a fictional adult saved by dropping two policies against what those policies would have paid on stated events, and establish exactly what that comparison does and does not show.",
+  "scenario": "The fictional policies, premiums, and the two simulated events below are invented for this exercise. The events are stated cases used to price exposure; nothing here establishes how likely either one is.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms and event figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional adult dropped renters cover at $17 a month and disability cover at $24 a month, keeping auto and health. The renters policy would have paid a property loss less a $500 deductible. The disability policy would have replaced 60% of a $3,900 monthly income while the holder was unable to work. Consider a stated property loss of $9,400 and a stated period of 5 months unable to work.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the two dropped premiums save across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would the renters policy have paid on the stated $9,400 loss?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the disability policy have paid across the stated 5 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now set the two figures side by side and be precise about what the comparison establishes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would the two policies have paid across both stated events?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many times the annual saving is that? Give two decimal places."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Does this calculation show that dropping the two policies was the wrong decision?",
+          "choices": [
+            "Yes — the potential payouts far exceed the saving",
+            "No — it prices the exposure without saying how likely either event is"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The 41.87 ratio is striking and does not by itself settle anything. Explain what would have to be added to make it a basis for a decision, and describe the situation in which dropping the disability cover is more serious than dropping the renters cover."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the disability figure comes out at $19,500.00, the full monthly income is being replaced rather than 60% of it. The stated policy replaces $2,340.00 a month, and over 5 months that is $11,700.00. Apply the replacement rate before multiplying by the number of months.",
+  "extension": "Recompute the disability figure for a stated interruption of 14 months rather than 5, and say which of the two policies the change makes more valuable.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the two dropped premiums save across a year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would the renters policy have paid on the stated $9,400 loss?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would the disability policy have paid across the stated 5 months?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would the two policies have paid across both stated events?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many times the annual saving is that? Give two decimal places."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Does this calculation show that dropping the two policies was the wrong decision?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The 41.87 ratio is striking and does not by itself settle anything. Explain what would have to be added to make it a basis for a decision, and describe the situation in which dropping the disability cover is more serious than dropping the renters cover."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u06-l07.package.json",
+    "sourcePackageSha256": "7154ca4e917a19acd9289c7380ac5d43fa6cd012a8f0e22ea2a159bb98b67c50",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u06-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

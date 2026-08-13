@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l01",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: progressive brackets, marginal versus effective rate"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "progressive brackets, marginal versus effective rate",
+  "objective": "Compute a fictional worker’s income tax bracket by bracket from taxable income, then distinguish the marginal rate from the effective rate on taxable income and on gross income.",
+  "scenario": "The simulated tax schedule below is invented for this exercise. Its deduction, thresholds, and rates are not the published figures of any real tax system, and a real return has many more steps than this.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional federal schedule, taxable income is gross income less a standard deduction of $11,200. The schedule then charges 10% on the first $9,800 of taxable income, 14% on taxable income between $9,800 and $42,000, and 24% on taxable income above $42,000. A fictional worker has a gross income of $58,000. Work out the deduction first — the rates apply to taxable income, never to gross.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the worker’s taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the first bracket?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the second bracket?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now finish the calculation and state the result three different ways.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is charged on the third bracket?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total federal income tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the effective rate on taxable income — the total tax divided by taxable income?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the effective rate on gross income?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "What rate would apply to one additional dollar of this worker’s gross income?",
+          "choices": [
+            "10%",
+            "14%",
+            "24%",
+            "11.45%"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This worker has a 24% marginal rate, a 14.19% effective rate on taxable income, and an 11.45% effective rate on gross income. Explain what question each of the three rates answers, and say which one a person should use when deciding whether extra work is worth taking on."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total comes out near $13,920, the 24% rate is being applied to the whole $58,000. Two things happen before any rate is applied: $11,200 comes off as the standard deduction, and the taxable income that remains is then split across the three bands. Only the $4,800 above $42,000 is charged at 24%.",
+  "extension": "Recompute all three rates for a fictional worker with a gross income of $30,000 under the same schedule, and say which of the three moves most between the two workers.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the worker’s taxable income?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much tax is charged on the first bracket?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much tax is charged on the second bracket?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much tax is charged on the third bracket?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total federal income tax?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the effective rate on taxable income — the total tax divided by taxable income?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the effective rate on gross income?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What rate would apply to one additional dollar of this worker’s gross income?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "This worker has a 24% marginal rate, a 14.19% effective rate on taxable income, and an 11.45% effective rate on gross income. Explain what question each of the three rates answers, and say which one a person should use when deciding whether extra work is worth taking on."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u07-l01.package.json",
+    "sourcePackageSha256": "6f6a5f78ac14a96675ce5ae0798ed389f2611da489d0cf1fa880c4a7dde32ecb",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u07-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

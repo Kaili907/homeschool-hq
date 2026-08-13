@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l02",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: simulated onboarding paperwork and elections"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "simulated onboarding paperwork and elections",
+  "objective": "Work a set of simulated pre-tax elections through to their effect on the fictional income tax and on the payroll levy, and show why the two behave differently.",
+  "scenario": "The onboarding packet below is simulated. The employer, the plan, the salary, and every rate in the fictional tax schedule are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional onboarding terms and tax schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional hire is paid $48,600 a year. At onboarding they elect a retirement contribution of 6% of pay and a health premium of $1,800 a year, and both are taken before income tax is calculated. Under the fictional federal schedule, taxable income is pay less those pre-tax elections less a standard deduction of $9,000; the schedule then charges 10% on the first $10,400 of taxable income and 12% on the next band, which runs to $44,000. A separate payroll levy of 7.65% is charged on all pay, with no deduction and no election subtracted first.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual retirement contribution the election creates?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is taxable income under the fictional schedule after both elections and the standard deduction?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the fictional federal income tax on that taxable income?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for the payroll levy, and compare how the two respond to the same election.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the payroll levy for the year at 7.65%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Does electing the 6% retirement contribution reduce the payroll levy this fictional worker owes?",
+          "choices": [
+            "Yes — the levy is charged on pay after the election",
+            "No — the levy is charged on the full $48,600 of pay"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The retirement election removes $2,916.00 from taxable income, all of it inside the 12% band. What income tax does the election save this year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fictional colleague says the 6% election \"costs nothing because the tax saving covers it\". Using the two figures you computed, say what is right and what is wrong in that claim, and explain what the $2,916.00 actually does to this year’s spendable pay."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the payroll levy comes out near $3,494.83, the retirement election has been subtracted before the 7.65% was applied. Reread the schedule: the levy is charged on all pay, with no deduction and no election taken off first. Only the income tax calculation gets the $2,916.00, the $1,800.00, and the $9,000.00.",
+  "extension": "Recompute the taxable income, the income tax, and the levy if the same fictional worker raises the retirement election to 10%, and say which of the three figures does not move.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the annual retirement contribution the election creates?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is taxable income under the fictional schedule after both elections and the standard deduction?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the fictional federal income tax on that taxable income?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the payroll levy for the year at 7.65%?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Does electing the 6% retirement contribution reduce the payroll levy this fictional worker owes?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "The retirement election removes $2,916.00 from taxable income, all of it inside the 12% band. What income tax does the election save this year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A fictional colleague says the 6% election \"costs nothing because the tax saving covers it\". Using the two figures you computed, say what is right and what is wrong in that claim, and explain what the $2,916.00 actually does to this year’s spendable pay."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u01-l02.package.json",
+    "sourcePackageSha256": "99b17f9c385387d60a61f5d6276b741cfbbbf9311addcc63b6cd24aeb408cb6e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u01-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l03",
+  "lessonId": "ma-g11-financial-literacy-u05-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "2.6",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.8 less 3.2. This is the common approximation, and the next item shows what it misses."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "2.52%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Dividing 1.058 by 1.032 asks how much more the money buys, rather than how much larger the two percentages are. The subtraction slightly overstates the answer."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "0.08",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2.6 against 2.52 — small in one year, and the next task shows what it becomes over twelve."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$78,684.29",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Twelve years of compounding at the nominal rate — the figure a statement would show."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$58,373.58",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same twelve years applied to prices — what it takes to buy in year 12 what $40,000 buys today."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$53,917.74",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Dividing the $78,684.29 nominal value by twelve years of price growth converts it into money of today’s purchasing power."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$38,684.29",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$78,684.29 against the $40,000 invested — the holding has almost doubled on paper."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$13,917.74",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$53,917.74 of purchasing power against the $40,000 it started with — barely more than a third of the nominal gain."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "36.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13,917.74 of the $38,684.29 nominal gain — the other 64% is the price level catching up."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "nominalPoints - inflationPoints",
+        "substituted": "5.8 - 3.2",
+        "result": "2.6",
+        "why": "5.8 less 3.2. This is the common approximation, and the next item shows what it misses."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round((1 + nominal) / (1 + inflation) * 100 - 100, 2)",
+        "substituted": "round((1 + 0.058) / (1 + 0.032) * 100 - 100, 2)",
+        "result": "2.52%",
+        "why": "Dividing 1.058 by 1.032 asks how much more the money buys, rather than how much larger the two percentages are. The subtraction slightly overstates the answer."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p1 - #t1-p2, 2)",
+        "substituted": "round(#t1-p1 - #t1-p2, 2)",
+        "result": "0.08",
+        "why": "2.6 against 2.52 — small in one year, and the next task shows what it becomes over twelve."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(start * pow(1 + nominal2, 12), 2)",
+        "substituted": "round(40000 * pow(1 + 0.058, 12), 2)",
+        "result": "$78,684.29",
+        "why": "Twelve years of compounding at the nominal rate — the figure a statement would show."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(start2 * pow(1 + inflation2, 12), 2)",
+        "substituted": "round(40000 * pow(1 + 0.032, 12), 2)",
+        "result": "$58,373.58",
+        "why": "The same twelve years applied to prices — what it takes to buy in year 12 what $40,000 buys today."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / pow(1 + inflation3, 12), 2)",
+        "substituted": "round(#t2-p1 / pow(1 + 0.032, 12), 2)",
+        "result": "$53,917.74",
+        "why": "Dividing the $78,684.29 nominal value by twelve years of price growth converts it into money of today’s purchasing power."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p1 - start3",
+        "substituted": "#t2-p1 - 40000",
+        "result": "$38,684.29",
+        "why": "$78,684.29 against the $40,000 invested — the holding has almost doubled on paper."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 - start4",
+        "substituted": "#t2-p3 - 40000",
+        "result": "$13,917.74",
+        "why": "$53,917.74 of purchasing power against the $40,000 it started with — barely more than a third of the nominal gain."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "round(#t2-p5 / #t2-p4 * 100, 1)",
+        "substituted": "round(#t2-p5 / #t2-p4 * 100, 1)",
+        "result": "36.0%",
+        "why": "$13,917.74 of the $38,684.29 nominal gain — the other 64% is the price level catching up."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The holding nearly doubles in nominal terms and gains 36.0% of that in real terms. Explain what \"real\" is measuring, and say when a nominal figure is nonetheless the right one to use.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a real figure measures what the money can buy, by removing the effect of prices having risen over the same period.",
+          "States when nominal is correct: for a fixed obligation stated in dollars, such as repaying a $40,000 loan or meeting a fixed-price commitment, where the number rather than the purchasing power is what matters.",
+          "Uses the $78,684.29 and $53,917.74 figures to show what the conversion does."
+        ],
+        "evidenceRequirements": [
+          "Cites both the nominal and real year-12 values."
+        ],
+        "lookFors": [
+          "The response defines real in terms of purchasing power rather than as \"adjusted\".",
+          "The nominal case named is one where the dollar amount genuinely is the relevant quantity.",
+          "A response noting that a goal defined in today’s goods must be planned in real terms is applying the idea well."
+        ],
+        "commonMisconception": "Treating a nominal return as a gain in what money can buy.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The subtraction overstates the real return by 0.08 percentage points a year. Say whether that approximation is good enough here, and name a situation where it would not be.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Judges the approximation acceptable at these rates for a rough figure, since 2.6 against 2.52 is a small relative error over one year.",
+          "Names a situation where it fails, such as high inflation where the two rates are large, or a long horizon where the annual error compounds."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 2.6 and 2.52 figures when judging the approximation."
+        ],
+        "lookFors": [
+          "The judgement is made against a stated use rather than in the abstract.",
+          "The failure case names why the error grows, not just that it does."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "Subtracting one rate from the other, what is the approximate real return in percentage points?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the exact real return, found by dividing the growth factor by the price factor? Give two decimal places."
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "By how many percentage points does the subtraction overstate the exact figure? Give two decimal places."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is $40,000 worth after 12 years at the 5.8% nominal return?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would $40,000 of goods cost after 12 years at 3.2% inflation?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the year-12 holding worth in today’s dollars?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the nominal gain across the 12 years?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What is the real gain, in today’s dollars?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "What share of the nominal gain survives in real terms? Give one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The holding nearly doubles in nominal terms and gains 36.0% of that in real terms. Explain what \"real\" is measuring, and say when a nominal figure is nonetheless the right one to use."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "The subtraction overstates the real return by 0.08 percentage points a year. Say whether that approximation is good enough here, and name a situation where it would not be."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: Subtracting one rate from the other, what is the approximate real return in percentage points? Answer: 2.6. Verification: 5.8 less 3.2. This is the common approximation, and the next item shows what it misses. t1-p2: What is the exact real return, found by dividing the growth factor by the price factor? Give two decimal places. Answer: 2.52%. Verification: Dividing 1.058 by 1.032 asks how much more the money buys, rather than how much larger the two percentages are. The subtraction slightly overstates the answer. t1-p3: By how many percentage points does the subtraction overstate the exact figure? Give two decimal places. Answer: 0.08. Verification: 2.6 against 2.52 — small in one year, and the next task shows what it becomes over twelve. t2-p1: What is $40,000 worth after 12 years at the 5.8% nominal return? Answer: $78,684.29. Verification: Twelve years of compounding at the nominal rate — the figure a statement would show. t2-p2: What would $40,000 of goods cost after 12 years at 3.2% inflation? Answer: $58,373.58. Verification: The same twelve years applied to prices — what it takes to buy in year 12 what $40,000 buys today. t2-p3: What is the year-12 holding worth in today’s dollars? Answer: $53,917.74. Verification: Dividing the $78,684.29 nominal value by twelve years of price growth converts it into money of today’s purchasing power. t2-p4: What is the nominal gain across the 12 years? Answer: $38,684.29. Verification: $78,684.29 against the $40,000 invested — the holding has almost doubled on paper. t2-p5: What is the real gain, in today’s dollars? Answer: $13,917.74. Verification: $53,917.74 of purchasing power against the $40,000 it started with — barely more than a third of the nominal gain. t2-p6: What share of the nominal gain survives in real terms? Give one decimal place. Answer: 36.0%. Verification: $13,917.74 of the $38,684.29 nominal gain — the other 64% is the price level catching up."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The holding nearly doubles in nominal terms and gains 36.0% of that in real terms. Explain what \"real\" is measuring, and say when a nominal figure is nonetheless the right one to use. Explains that a real figure measures what the money can buy, by removing the effect of prices having risen over the same period. States when nominal is correct: for a fixed obligation stated in dollars, such as repaying a $40,000 loan or meeting a fixed-price commitment, where the number rather than the purchasing power is what matters. Uses the $78,684.29 and $53,917.74 figures to show what the conversion does. Cites both the nominal and real year-12 values. The response defines real in terms of purchasing power rather than as \"adjusted\". The nominal case named is one where the dollar amount genuinely is the relevant quantity. A response noting that a goal defined in today’s goods must be planned in real terms is applying the idea well. t3-p2: The subtraction overstates the real return by 0.08 percentage points a year. Say whether that approximation is good enough here, and name a situation where it would not be. Judges the approximation acceptable at these rates for a rough figure, since 2.6 against 2.52 is a small relative error over one year. Names a situation where it fails, such as high inflation where the two rates are large, or a long horizon where the annual error compounds. Refers to the 2.6 and 2.52 figures when judging the approximation. The judgement is made against a stated use rather than in the abstract. The failure case names why the error grows, not just that it does."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that a real figure measures what the money can buy, by removing the effect of prices having risen over the same period. States when nominal is correct: for a fixed obligation stated in dollars, such as repaying a $40,000 loan or meeting a fixed-price commitment, where the number rather than the purchasing power is what matters. Uses the $78,684.29 and $53,917.74 figures to show what the conversion does. Judges the approximation acceptable at these rates for a rough figure, since 2.6 against 2.52 is a small relative error over one year. Names a situation where it fails, such as high inflation where the two rates are large, or a long horizon where the annual error compounds."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u05-l03.scoring.json",
+    "sourceScoringSha256": "c966952dbdd6b1deadbad8e2841001eea866990161750160013df19182cf8d4f",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

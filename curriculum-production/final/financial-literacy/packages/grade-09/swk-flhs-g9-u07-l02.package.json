@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u07-l02",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes, Take-Home Pay, and Your First Forms",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: how withholding changes take-home pay"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "how withholding changes take-home pay",
+  "objective": "Show how a fictional change in withholding moves take-home pay without changing the tax owed, and compute the refund or bill each setting produces.",
+  "scenario": "A fictional worker earns $3,100 a month and can set withholding at either of two simulated rates. The tax actually owed for the year is stated below and does not change with the setting.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional withholding figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Monthly gross is $3,100. Setting A withholds 16% of gross; Setting B withholds 12%. The tax actually owed for the whole year is $4,900 under either setting.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly take-home pay under Setting A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly take-home pay under Setting B?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Setting B put in the worker’s hands each month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now look at the whole year and settle up against the $4,900 owed.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld over the year under Setting A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What refund or bill does Setting A produce against the $4,900 owed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld over the year under Setting B, and how does it compare with the $4,900 owed? Give the shortfall.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The two settings produce a $1,052 refund and a $436 bill, and the tax owed is $4,900 either way. Explain what withholding actually changes, and say which setting you would argue for and on what grounds."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the refund and the bill both appear to change the tax owed, write $4,900 at the top of the page and leave it there through both calculations. Withholding is a series of payments toward that one figure, and the settling-up at filing is the difference.",
+  "extension": "Find the withholding rate that would produce neither a refund nor a bill on this income, and say why hitting it exactly is difficult in practice.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u07-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u07-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is monthly take-home pay under Setting A?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is monthly take-home pay under Setting B?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does Setting B put in the worker’s hands each month?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much is withheld over the year under Setting A?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What refund or bill does Setting A produce against the $4,900 owed?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much is withheld over the year under Setting B, and how does it compare with the $4,900 owed? Give the shortfall."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The two settings produce a $1,052 refund and a $436 bill, and the tax owed is $4,900 either way. Explain what withholding actually changes, and say which setting you would argue for and on what grounds."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u07-l02.package.json",
+    "sourcePackageSha256": "d483bb9cbff2f6e0270182f46ee844d58c84ea695c8cc6f0476b08306a860bb1",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u07-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

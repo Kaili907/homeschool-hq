@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l10",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: FAFSA and the aid application process"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "FAFSA and the aid application process",
+  "objective": "Compare two fictional aid offers with very different sticker prices, compute the gap each leaves, and defend a recommendation from the gaps rather than the prices.",
+  "scenario": "The two simulated aid offers below come from invented colleges for a fictional applicant. No real institution, cost, or aid programme is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional aid offers in these directions",
+    "a blank comparison sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Offer 1, from the fictional Ridgeway College: cost of attendance $18,900; grant $6,200; scholarship $1,500; work study $2,000; subsidised loan $3,500. Offer 2, from the fictional Halloway University: cost of attendance $31,500; grant $14,800; scholarship $4,000; work study $2,500; subsidised loan $3,500.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What gap does Offer 1 leave after all four aid lines?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What gap does Offer 2 leave?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much higher is Offer 2’s cost of attendance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much higher is Offer 2’s gap?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Look at what kind of aid closes each gap.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of Offer 2’s cost is covered by gift aid? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of Offer 1’s cost is covered by gift aid? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the comparison up.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one offer for an applicant who can contribute $4,000 a year and does not want to borrow beyond the subsidised loan. Use the gaps, not the sticker prices, and say what each offer would require the applicant to do about the shortfall."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one thing you would need to know about these offers, not stated above, before treating either gap as the real annual cost for four years."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the recommendation is being driven by the $12,600 sticker difference, cover the cost-of-attendance line on both offers and reread them from the gap upward. The applicant pays the gap, not the sticker.",
+  "extension": "Recompute both gaps for a second year in which each college raises its cost 4% and holds aid flat, and say which offer is more exposed to that change.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What gap does Offer 1 leave after all four aid lines?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What gap does Offer 2 leave?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much higher is Offer 2’s cost of attendance?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much higher is Offer 2’s gap?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What percentage of Offer 2’s cost is covered by gift aid? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What percentage of Offer 1’s cost is covered by gift aid? Round to one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Recommend one offer for an applicant who can contribute $4,000 a year and does not want to borrow beyond the subsidised loan. Use the gaps, not the sticker prices, and say what each offer would require the applicant to do about the shortfall."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Name one thing you would need to know about these offers, not stated above, before treating either gap as the real annual cost for four years."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u04-l10.package.json",
+    "sourcePackageSha256": "cf03d70e62bf6bd0628fa1d6dcd557f43d08e4d4fd97edbdf0c47abb55fc4f1b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u04-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

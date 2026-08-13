@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u01-l06",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Money, Choices, and Values",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: family differences and dignity",
+    "focus": "family differences and dignity"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations",
+    "Grade 5 economics connections"
+  ],
+  "objective": "Learners explain why invented households with identical simulated income make different plans, and practise discussing money without ranking families.",
+  "scenario": "Halle is an invented fifth grader in a pretend classroom exercise. Two made-up households each plan $900.00 of simulated monthly income: one puts a large share into a repair fund and a used car, the other into rent closer to work and no car at all. Both plans balance and neither household is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Discuss only the invented households on this sheet; do not describe any real family's income or spending."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read both invented plans with Halle. Each solves the problem of getting to work, and each pays for that solution in a different place. Describe the two approaches before evaluating either.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "How does each of Halle's invented households solve the same problem, and where does each one spend to do it?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "A classmate says the car-free household is obviously smarter. Write a response that engages with the actual tradeoffs rather than agreeing or dismissing.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What would each household have to give up to switch to the other plan, and why does that make ranking them unreliable?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Classroom talk about money can reach real families quickly.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What is one way to keep this discussion about the invented plans rather than about real classmates?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner ranks the plans, remove the totals and re-read both as descriptions of constraints, then ask which constraint they would be willing to live under.",
+  "extension": "Ask the learner to write a third $900.00 plan for Halle's exercise that solves the same problem a third way, and to name its tradeoff.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u01-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u01-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "How does each of Halle's invented households solve the same problem, and where does each one spend to do it?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What would each household have to give up to switch to the other plan, and why does that make ranking them unreliable?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "What is one way to keep this discussion about the invented plans rather than about real classmates?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-05/swk-fl-g5-u01-l06.package.json",
+    "sourcePackageSha256": "8fcc201f59208c4b417208e2ddc85bf823f3579219fac3918502c7fcb1dac34c",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g5-financial-literacy-u01-l06",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

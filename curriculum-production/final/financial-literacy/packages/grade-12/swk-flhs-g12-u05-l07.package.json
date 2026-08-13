@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l07",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: employer retirement plans and matching in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "employer retirement plans and matching in outline",
+  "objective": "Reproduce the loss a fictional worker created by front-loading contributions against a per-period employer contribution, and compute the rate that would have avoided it.",
+  "scenario": "The fictional plan rules, cap, and salary below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan rules and pay figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker earns $60,000 a year, paid monthly at $5,000 a month, and elected to contribute 12% of each month’s pay. Under the fictional plan rules the worker may contribute no more than $4,800 in a year, and the employer adds 50% of what the worker contributes on the first 5% of that month’s pay — calculated separately in each month, with nothing carried forward.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the worker contribute each month at 12%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "After how many months is the $4,800 annual cap reached?"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the largest employer contribution available in a single month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price the consequence, and find the rate that would have avoided it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What employer contribution was earned across the 8 contributing months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What employer contribution was lost across the remaining months of the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What contribution rate would have spread the $4,800 evenly across the whole year, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What employer contribution would that rate have produced across the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The worker saved the same $4,800 and received $500.00 less. Name precisely what caused that, explain why a higher contribution rate produced a worse result, and state which plan rule the worker would have to check to know this could happen."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the loss comes out as zero, the employer contribution is being treated as an annual calculation. The stated rule calculates it in each month separately, with nothing carried forward, so months 9 to 12 produce nothing. Count $125.00 for each month in which the worker actually contributed, and compare that with $125.00 for all 12.",
+  "extension": "Work out what the loss would be if the worker had elected 20% instead of 12%, and say whether the loss grows in proportion to the rate.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the worker contribute each month at 12%?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "After how many months is the $4,800 annual cap reached?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the largest employer contribution available in a single month?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What employer contribution was earned across the 8 contributing months?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What employer contribution was lost across the remaining months of the year?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What contribution rate would have spread the $4,800 evenly across the whole year, to two decimal places?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What employer contribution would that rate have produced across the year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The worker saved the same $4,800 and received $500.00 less. Name precisely what caused that, explain why a higher contribution rate produced a worse result, and state which plan rule the worker would have to check to know this could happen."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u05-l07.package.json",
+    "sourcePackageSha256": "59d6e57a7f4e778c8d4baedf73d360c7c87ea5dd028c802f1f3ff87688915855",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u05-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l05",
+  "lessonId": "ma-g11-financial-literacy-u07-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,848.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "22% of the $8,400 gain — the rate that applies to the holder’s top dollars of income."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,008.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of the same $8,400 gain, under the longer-holding rule."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$840.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,848.00 against $1,008.00 — a saving produced by the date of the sale rather than by anything about the holding itself."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$6,552.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,400 less $1,848.00 of tax — what the holder actually retains under the shorter-holding rule."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7,392.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,400 less $1,008.00 of tax — the same gain retained under the longer-holding rule."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "88.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,392.00 of $8,400 — exactly what a 12% rate leaves, against the 78.0% left by the 22% rate."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "11.4%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Selling now nets $6,552.00. Waiting nets 88% of whatever the gain has become, so the break-even gain is $840.00 / 0.88 = $954.55 below $8,400, or 11.4% of it. A smaller gain also carries a smaller tax, which is why the break-even fall is larger than the saving measured against the gain."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "The price fall that would cancel the tax saving from waiting",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The rate saved is 10 percentage points, the difference between 22% and 12%; the share kept under the longer rule is 88.0%; and 11.4% is the fall in the gain that would leave exactly the $6,552.00 that selling now produces."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(gain * marginalRate, 2)",
+        "substituted": "round(8400 * 0.22, 2)",
+        "result": "$1,848.00",
+        "why": "22% of the $8,400 gain — the rate that applies to the holder’s top dollars of income."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(gain2 * longRate, 2)",
+        "substituted": "round(8400 * 0.12, 2)",
+        "result": "$1,008.00",
+        "why": "12% of the same $8,400 gain, under the longer-holding rule."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$840.00",
+        "why": "$1,848.00 against $1,008.00 — a saving produced by the date of the sale rather than by anything about the holding itself."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "gain3 - #t1-p1",
+        "substituted": "8400 - #t1-p1",
+        "result": "$6,552.00",
+        "why": "$8,400 less $1,848.00 of tax — what the holder actually retains under the shorter-holding rule."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "gain4 - #t1-p2",
+        "substituted": "8400 - #t1-p2",
+        "result": "$7,392.00",
+        "why": "$8,400 less $1,008.00 of tax — the same gain retained under the longer-holding rule."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / gain5 * 100, 1)",
+        "substituted": "round(#t2-p2 / 8400 * 100, 1)",
+        "result": "88.0%",
+        "why": "$7,392.00 of $8,400 — exactly what a 12% rate leaves, against the 78.0% left by the 22% rate."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t1-p3 / (1 - longRate3) / gain6 * 100, 1)",
+        "substituted": "round(#t1-p3 / (1 - 0.12) / 8400 * 100, 1)",
+        "result": "11.4%",
+        "why": "Selling now nets $6,552.00. Waiting nets 88% of whatever the gain has become, so the break-even gain is $840.00 / 0.88 = $954.55 below $8,400, or 11.4% of it. A smaller gain also carries a smaller tax, which is why the break-even fall is larger than the saving measured against the gain."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Waiting past 18 months saves $840.00 and introduces a risk. Explain the tradeoff precisely, and say what would make waiting clearly the right decision and what would make it clearly the wrong one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the tradeoff in figures: a certain $840.00 of tax saving against exposure to a fall of up to 11.4% in the gain, plus whatever further movement occurs.",
+          "Names a condition making waiting right, such as being close to the 18-month point so the exposure is brief, or having no need for the money.",
+          "Names a condition making it wrong, such as needing the proceeds sooner, or the holding being volatile enough that a 11.4% move is routine."
+        ],
+        "evidenceRequirements": [
+          "Cites the $840.00 saving and the 11.4% break-even fall."
+        ],
+        "lookFors": [
+          "The response treats the tax saving as certain and the price movement as uncertain.",
+          "Both conditions are specific to the figures rather than general.",
+          "A response noting that the tax tail should not wag the investment dog is making a legitimate point, provided it engages with the $840.00."
+        ],
+        "commonMisconception": "Treating a tax saving as a reason to hold an asset regardless of what happens to its value.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The tax difference here comes from the date of a sale, not from anything about the holding. Say what that implies about when a disposal decision should be reviewed, and name one thing the fictional rules leave out.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the holding period should be checked before any disposal, because the same sale on two different dates produces different tax on identical facts.",
+          "Names something the outline omits, such as how losses offset gains, what happens when a holding is bought in instalments, or the treatment of income received while holding."
+        ],
+        "evidenceRequirements": [
+          "Refers to the 18-month threshold and to the $840.00 difference it produces."
+        ],
+        "lookFors": [
+          "The response identifies the date as a controllable input.",
+          "The omission named is a real feature of tax rules on disposals."
+        ],
+        "dimensions": [
+          "assumption-identification",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the tax if the holding is sold within 18 months, at the 22% marginal rate?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the tax if the holding is sold after 18 months, at the flat 12%?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much does waiting past the 18-month point save in tax?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is kept from the gain if sold within 18 months?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is kept if sold after 18 months?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What share of the gain is kept under the longer-holding rule? Give one decimal place."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How far could the holding’s value fall before waiting stopped being worth it? Give one decimal place."
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What does the 11.4% figure describe?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Waiting past 18 months saves $840.00 and introduces a risk. Explain the tradeoff precisely, and say what would make waiting clearly the right decision and what would make it clearly the wrong one."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "The tax difference here comes from the date of a sale, not from anything about the holding. Say what that implies about when a disposal decision should be reviewed, and name one thing the fictional rules leave out."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the tax if the holding is sold within 18 months, at the 22% marginal rate? Answer: $1,848.00. Verification: 22% of the $8,400 gain — the rate that applies to the holder’s top dollars of income. t1-p2: What is the tax if the holding is sold after 18 months, at the flat 12%? Answer: $1,008.00. Verification: 12% of the same $8,400 gain, under the longer-holding rule. t1-p3: How much does waiting past the 18-month point save in tax? Answer: $840.00. Verification: $1,848.00 against $1,008.00 — a saving produced by the date of the sale rather than by anything about the holding itself. t2-p1: What is kept from the gain if sold within 18 months? Answer: $6,552.00. Verification: $8,400 less $1,848.00 of tax — what the holder actually retains under the shorter-holding rule. t2-p2: What is kept if sold after 18 months? Answer: $7,392.00. Verification: $8,400 less $1,008.00 of tax — the same gain retained under the longer-holding rule. t2-p3: What share of the gain is kept under the longer-holding rule? Give one decimal place. Answer: 88.0%. Verification: $7,392.00 of $8,400 — exactly what a 12% rate leaves, against the 78.0% left by the 22% rate. t2-p4: How far could the holding’s value fall before waiting stopped being worth it? Give one decimal place. Answer: 11.4%. Verification: Selling now nets $6,552.00. Waiting nets 88% of whatever the gain has become, so the break-even gain is $840.00 / 0.88 = $954.55 below $8,400, or 11.4% of it. A smaller gain also carries a smaller tax, which is why the break-even fall is larger than the saving measured against the gain. t2-p5: What does the 11.4% figure describe? Answer: The price fall that would cancel the tax saving from waiting. Verification: The rate saved is 10 percentage points, the difference between 22% and 12%; the share kept under the longer rule is 88.0%; and 11.4% is the fall in the gain that would leave exactly the $6,552.00 that selling now produces."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Waiting past 18 months saves $840.00 and introduces a risk. Explain the tradeoff precisely, and say what would make waiting clearly the right decision and what would make it clearly the wrong one. States the tradeoff in figures: a certain $840.00 of tax saving against exposure to a fall of up to 11.4% in the gain, plus whatever further movement occurs. Names a condition making waiting right, such as being close to the 18-month point so the exposure is brief, or having no need for the money. Names a condition making it wrong, such as needing the proceeds sooner, or the holding being volatile enough that a 11.4% move is routine. Cites the $840.00 saving and the 11.4% break-even fall. The response treats the tax saving as certain and the price movement as uncertain. Both conditions are specific to the figures rather than general. A response noting that the tax tail should not wag the investment dog is making a legitimate point, provided it engages with the $840.00. t3-p2: The tax difference here comes from the date of a sale, not from anything about the holding. Say what that implies about when a disposal decision should be reviewed, and name one thing the fictional rules leave out. States that the holding period should be checked before any disposal, because the same sale on two different dates produces different tax on identical facts. Names something the outline omits, such as how losses offset gains, what happens when a holding is bought in instalments, or the treatment of income received while holding. Refers to the 18-month threshold and to the $840.00 difference it produces. The response identifies the date as a controllable input. The omission named is a real feature of tax rules on disposals."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States the tradeoff in figures: a certain $840.00 of tax saving against exposure to a fall of up to 11.4% in the gain, plus whatever further movement occurs. Names a condition making waiting right, such as being close to the 18-month point so the exposure is brief, or having no need for the money. Names a condition making it wrong, such as needing the proceeds sooner, or the holding being volatile enough that a 11.4% move is routine. States that the holding period should be checked before any disposal, because the same sale on two different dates produces different tax on identical facts. Names something the outline omits, such as how losses offset gains, what happens when a holding is bought in instalments, or the treatment of income received while holding."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u07-l05.scoring.json",
+    "sourceScoringSha256": "29c75079aaff5d021290f3db56d8cd993cbb6f7718fd3dc568bb60a643eabe67",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

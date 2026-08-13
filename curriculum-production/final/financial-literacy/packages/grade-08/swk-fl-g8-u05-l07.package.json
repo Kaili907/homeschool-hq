@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l07",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u05-l07",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing",
+    "dayInUnit": 7,
+    "phase": "Investigation or close reading",
+    "title": "Investigation or close reading: risk return liquidity and time horizon",
+    "focus": "risk return liquidity and time horizon"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "objective": "Learners evaluate invented claims about an investment opportunity and decide what evidence would be needed before committing.",
+  "scenario": "Viggo is an invented eighth grader studying a pretend pitch: guaranteed 20% monthly returns, a testimonial from a friend who has already been paid, pressure to join before a made-up deadline, and returns paid from new members' deposits. All of it is invented for study.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "This pitch is invented for study; never send money to an arrangement promising guaranteed high returns."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Examine each feature of Viggo's invented pitch. One of them describes where the money actually comes from. Say what each feature reveals before judging the pitch overall.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What does each feature of Viggo's pitch reveal, and which one alone is enough to reject it?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Explain why the friend having been paid is not evidence that the arrangement works, and set out what evidence would be needed before anyone committed money.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Why is the paid friend weak evidence, and what evidence would actually be required?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "The word guaranteed did a lot of work in the pitch.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "What would have to be true for a return to be genuinely guaranteed, and why is 20% a month not?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner is persuaded by the testimonial, ask where the money paid to the friend came from in Viggo's pitch, and rebuild the judgement from that answer.",
+  "extension": "Ask the learner to write the two questions that would expose Viggo's pitch fastest, and to say why each works.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u05-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u05-l07",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What does each feature of Viggo's pitch reveal, and which one alone is enough to reject it?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why is the paid friend weak evidence, and what evidence would actually be required?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "What would have to be true for a return to be genuinely guaranteed, and why is 20% a month not?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u05-l07.package.json",
+    "sourcePackageSha256": "5c7f42f9d60bf3bcb5fa8a0de0eaa2b44739250daf59e55e7ee9575b0682cedb",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u05-l07",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

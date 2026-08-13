@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l06",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: distinguishing evidence from prediction in claims"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "distinguishing evidence from prediction in claims",
+  "objective": "Distinguish a fictional fund’s recorded five-year result from what an average of its yearly returns would predict, and quantify the gap the distinction creates.",
+  "scenario": "Augustin Belmonte-Kirilenko is reviewing a simulated advertisement for a fictional fund. The fund, its returns, and the claims below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional five-year record in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional fund’s 5 yearly returns were 11.4%, -7.2%, 14.8%, 2.1%, and -3.6%. The advertisement says the fund \"has averaged 3.5% a year\". A fictional holding of $20,000 was invested at the start of the five years. Round to the stated precision.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the arithmetic mean of the five yearly returns? Give two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the $20,000 actually worth after the five years, applying each return in turn?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would $20,000 be worth after five years at the advertised 3.5% average?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the advertised average overstate what actually happened?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure the record itself.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the actual gain across the five years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total growth across the five years as a percentage? Give two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The two losing years were -7.2% and -3.6%. What do they come to together in percentage points? Give one decimal place.",
+          "unit": "percentage points"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which of the advertisement’s possible claims is a statement of evidence rather than a prediction?",
+          "choices": [
+            "\"The fund has averaged 3.5% a year\"",
+            "\"The fund is expected to return 3.5% a year\"",
+            "\"The fund will return 3.5% a year\""
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The advertisement’s 3.5% figure is correct and overstates the result by $391.85. Explain how both can be true, and say what figure the advertisement should have quoted instead."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Suppose the advertisement said instead that the fund \"is expected to return 3.5% a year\". Say what evidence would be needed to support that claim, and whether the five-year record supplies it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the five-year value comes out at $23,753.73, the average is being applied as though it were the actual sequence. The money experienced 11.4%, then -7.2%, and so on, each applied to the balance at the start of that year. Multiply the five growth factors together in order and compare the result with what the average predicted.",
+  "extension": "Find the single constant annual return that would have produced exactly $23,361.88 from $20,000 over five years, and say whether it is above or below the advertised 3.5%.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the arithmetic mean of the five yearly returns? Give two decimal places."
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the $20,000 actually worth after the five years, applying each return in turn?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would $20,000 be worth after five years at the advertised 3.5% average?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the advertised average overstate what actually happened?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the actual gain across the five years?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total growth across the five years as a percentage? Give two decimal places."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "The two losing years were -7.2% and -3.6%. What do they come to together in percentage points? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Which of the advertisement’s possible claims is a statement of evidence rather than a prediction?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The advertisement’s 3.5% figure is correct and overstates the result by $391.85. Explain how both can be true, and say what figure the advertisement should have quoted instead."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Suppose the advertisement said instead that the fund \"is expected to return 3.5% a year\". Say what evidence would be needed to support that claim, and whether the five-year record supplies it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u05-l06.package.json",
+    "sourcePackageSha256": "aef91795ed7961254c99ebd04453cff1477120f92bba12d2aba5f4d01c973ba1",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u05-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

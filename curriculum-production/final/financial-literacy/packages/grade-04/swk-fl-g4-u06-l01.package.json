@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u06-l01",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Simulated Marketplace Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: a product or service idea",
+    "focus": "a product or service idea"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 6 — simulated marketplace capstone"
+  ],
+  "objective": "Learners compare invented start-up costs across three pretend market ideas and test a production run against a fixed simulated budget.",
+  "scenario": "Ismail is an invented fourth grader choosing between three pretend market ideas with invented start-up costs of $18.00 for a printed card set, $24.50 for a plant stand, and $11.25 for beeswax wraps. His simulated start-up budget is $50.00.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Look across Ismail's three invented start-up costs.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the lowest start-up cost among Ismail's ideas?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Find the spread between Ismail's dearest and cheapest ideas, then compare two of them head to head.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more is the dearest start-up than the cheapest?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Between the card set and the plant stand, which costs less to start?",
+          "choices": [
+            "The card set",
+            "The plant stand",
+            "They cost the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Ismail picks the beeswax wraps and wants to run 4 separate batches, each costing the same start-up amount in materials.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do 4 batches of wraps cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of Ismail's $50.00 budget is left?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The cheapest idea was not automatically the right one.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What would Ismail need to know about customers before the lowest start-up cost becomes the best choice?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats the lowest cost as the answer, have them write next to each of Ismail's ideas who would buy it and why, before any comparison is made.",
+  "extension": "Ask the learner how many plant stands Ismail could start inside the same $50.00 and what that means for his choice.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u06-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u06-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the lowest start-up cost among Ismail's ideas?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much more is the dearest start-up than the cheapest?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Between the card set and the plant stand, which costs less to start?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do 4 batches of wraps cost?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of Ismail's $50.00 budget is left?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "What would Ismail need to know about customers before the lowest start-up cost becomes the best choice?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u06-l01.package.json",
+    "sourcePackageSha256": "fccfdaf2656472fb7ea7cb502bcbfbb280d37985fb8475a96a8259eb451055d3",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u06-l01",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

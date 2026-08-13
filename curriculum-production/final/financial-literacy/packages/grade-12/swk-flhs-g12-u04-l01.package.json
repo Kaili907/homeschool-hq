@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l01",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: completing a simulated aid application workflow"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "completing a simulated aid application workflow",
+  "objective": "Work a simulated aid offer from cost of attendance through to the amount still unmet, and distinguish aid that is given from aid that must be earned or repaid.",
+  "scenario": "The simulated cost figures and aid offer below belong to a fictional applicant at a fictional institution. No real award letter, institution, or applicant is described, and no personal information is requested anywhere in this lesson.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional cost and award figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional institution states a cost of attendance made up of tuition and fees $11,400, housing and food $9,800, books and supplies $1,150, transport $900, and personal costs $1,250. The simulated aid workflow produces a contribution figure of $4,200 for this applicant. The award offers two grants, of $6,500 and $2,000, and a work-study opportunity worth $2,400.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the full cost of attendance for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the applicant’s calculated need under this simulated workflow?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of the two grants?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now work the offer through to what is actually left unmet.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What need remains after the grants are applied?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What remains after the work-study opportunity is also counted?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the cost of attendance do the grants cover, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Is the $2,400 of work-study the same kind of aid as the $6,500 grant?",
+          "choices": [
+            "Yes — both reduce what the applicant must find",
+            "No — work-study must be earned by working hours that may not materialise"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This award covers a substantial part of the cost and still leaves $9,400.00 unmet. Sort the three parts of the offer by how reliable each is, justify the ordering with the figures, and say what the fictional applicant should establish about the work-study before counting on it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the unmet amount comes out at $16,000.00, the $4,200 contribution figure and the $2,400 work-study have not been applied — that figure is simply the $24,500.00 cost less the $8,500.00 of grants. If it comes out near $13,000, the calculation has started from tuition of $11,400 rather than from the full cost of attendance; books, transport, housing and food, and personal costs are all part of what the year costs.",
+  "extension": "Recompute the unmet amount for a fictional applicant whose contribution figure is $1,500 instead, and say which single line in the calculation moves and by how much.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the full cost of attendance for the year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the applicant’s calculated need under this simulated workflow?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of the two grants?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What need remains after the grants are applied?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What remains after the work-study opportunity is also counted?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What share of the cost of attendance do the grants cover, to two decimal places?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Is the $2,400 of work-study the same kind of aid as the $6,500 grant?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "This award covers a substantial part of the cost and still leaves $9,400.00 unmet. Sort the three parts of the offer by how reliable each is, justify the ordering with the figures, and say what the fictional applicant should establish about the work-study before counting on it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u04-l01.package.json",
+    "sourcePackageSha256": "a9cef2b259e7655b55e977f8e7b51aee399ef046cbed4c9f5bab3928b5e88b0d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u04-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

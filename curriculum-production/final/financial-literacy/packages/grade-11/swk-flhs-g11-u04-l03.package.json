@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l03",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: refinancing, consolidation, and their tradeoffs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "refinancing, consolidation, and their tradeoffs",
+  "objective": "Compare a fictional consolidation offer against the loans it replaces on both monthly payment and total cost, and identify what the borrower is buying with the difference.",
+  "scenario": "Ingrid Bassey-Moreau has been sent the simulated consolidation offer below. The lenders, balances, rates, and fees are invented, and no real product is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional loan and offer terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Ingrid currently pays $355.20 a month on Loan 1, which has 40 payments left, and $246.90 a month on Loan 2, which has 28 payments left. The consolidation offer replaces both with a single payment of $391.15 a month for 60 months, plus a $450 arrangement fee charged at the start.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total remaining on Loan 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total remaining on Loan 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would Ingrid pay in total if she kept both loans to the end?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What would the consolidation cost in total, counting the 60 payments and the $450 fee?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put the two sides against each other.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the consolidation cost in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the monthly payment under the consolidation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Across the 28 months while both current loans still run, what does the monthly relief add up to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "The extra cost is what percentage of what Ingrid would otherwise pay? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "What is Ingrid actually buying with the extra $2,797.80?",
+          "choices": [
+            "A lower total cost of borrowing",
+            "A lower monthly payment and a longer time in debt",
+            "A reduction in the amount she owes"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Describe a situation in which Ingrid should accept this offer and one in which she should refuse it. For each, name the figure that decides it."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The relief is $210.95 a month only while both current loans would still be running. Explain what happens to the comparison after month 28, and why that matters for judging the offer."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the consolidation appears cheaper, the $450 fee is probably missing or the term is being taken as 40 months rather than 60. The offer replaces both loans with 60 payments, so its total is $23,469.00 of payments plus the fee. Write both sides as a single total each — $21,121.20 against $23,919.00 — before looking at any monthly figure.",
+  "extension": "Find the consolidated monthly payment that would make the offer cost the same in total as keeping both loans, including the fee, and say whether it would still provide monthly relief.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total remaining on Loan 1?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total remaining on Loan 2?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would Ingrid pay in total if she kept both loans to the end?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What would the consolidation cost in total, counting the 60 payments and the $450 fee?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the consolidation cost in total?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much lower is the monthly payment under the consolidation?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Across the 28 months while both current loans still run, what does the monthly relief add up to?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "The extra cost is what percentage of what Ingrid would otherwise pay? Give one decimal place."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What is Ingrid actually buying with the extra $2,797.80?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Describe a situation in which Ingrid should accept this offer and one in which she should refuse it. For each, name the figure that decides it."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The relief is $210.95 a month only while both current loans would still be running. Explain what happens to the comparison after month 28, and why that matters for judging the offer."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u04-l03.package.json",
+    "sourcePackageSha256": "d3399869046dfb87eb7265bb170e564f3fbfcaff2d154d5929dc2939f86d4bbb",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u04-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

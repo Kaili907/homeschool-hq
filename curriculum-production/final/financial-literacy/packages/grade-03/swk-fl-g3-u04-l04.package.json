@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u04-l04",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Saving for a Goal",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: adding a little each week",
+    "focus": "adding a little each week"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 4 — saving and goals"
+  ],
+  "objective": "Learners see that a small steady deposit accumulates, measure the remaining gap to a goal, and test what raising the weekly amount does.",
+  "scenario": "Emeka is an invented third grader who saves $0.75 of pretend money a week, which feels far too small to matter. His imaginary goal is a $5.00 model rocket kit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Follow Emeka's small deposits for four weeks at $0.75 each.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much has Emeka saved after four weeks?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add one more week at the same $0.75, then measure how far Emeka still is from the $5.00 kit.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much has Emeka saved after five weeks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far is Emeka from the $5.00 kit after five weeks?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Emeka doubles his deposit to $1.50 a week for the next two weeks, on top of the $3.75 he already has.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Emeka have after those two bigger weeks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "How does that compare with the $5.00 kit?",
+          "choices": [
+            "Not enough yet",
+            "Exactly enough",
+            "More than enough"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Seventy-five cents did not look like much at the start.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Emeka almost gave up because $0.75 felt too small. What do his weekly totals show about small amounts that keep repeating?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner cannot see the accumulation, stack seventy-five-cent coin groups in a column one week at a time and mark the $5.00 line on the wall of the stack, so growth toward the line is watched rather than calculated.",
+  "extension": "Ask the learner how many $0.75 weeks alone would have reached $5.00 without the doubling, and to explain how they counted.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u04-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u04-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much has Emeka saved after four weeks?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much has Emeka saved after five weeks?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How far is Emeka from the $5.00 kit after five weeks?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does Emeka have after those two bigger weeks?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How does that compare with the $5.00 kit?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Emeka almost gave up because $0.75 felt too small. What do his weekly totals show about small amounts that keep repeating?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-03/swk-fl-g3-u04-l04.package.json",
+    "sourcePackageSha256": "0210261b3ef13f5b79180bc6bc553b9d521b262fa1f0491d47206ed6844a6758",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g3-financial-literacy-u04-l04",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

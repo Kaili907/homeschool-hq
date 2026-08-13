@@ -1,0 +1,391 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l07",
+  "lessonId": "ma-g11-financial-literacy-u01-l07",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$47,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The worksheet’s tuition arithmetic is correct on its own terms; the error is not here, which is worth establishing before looking further."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "3.6",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The division is also correct. The worksheet fails not by miscalculating but by dividing the wrong numerator, which is the harder error to see."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$100,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Three years at $33,600 that the student does not receive. Held flat here so the correction to the worksheet is visible on its own."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$148,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The worksheet’s $47,700.00 plus the $100,800.00 it never counted."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "11.2",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$148,500.00 against the same annual advantage the worksheet used — the conclusion moves from before the fourth year to past the eleventh."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$10,335.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Taking 22% off the $13,250 gross advantage leaves what actually arrives to pay down the cost."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "14.4",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$148,500.00 against the $10,335.00 that actually arrives each year, rather than against the gross figure."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "10.8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14.4 years against the 3.6 the worksheet reported — the two errors together move the answer by more than a decade."
+        }
+      },
+      {
+        "ref": "t3-p4",
+        "answer": "The total cost line, \"$47,700\"",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The tuition line is right and the division is arithmetically right; the first defective step is labelling $47,700.00 as the total cost when it is only the tuition, which is what makes every line below it wrong."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "annual * 3",
+        "substituted": "15900 * 3",
+        "result": "$47,700.00",
+        "why": "The worksheet’s tuition arithmetic is correct on its own terms; the error is not here, which is worth establishing before looking further."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / advantage, 1)",
+        "substituted": "round(#t1-p1 / 13250, 1)",
+        "result": "3.6",
+        "why": "The division is also correct. The worksheet fails not by miscalculating but by dividing the wrong numerator, which is the harder error to see."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "forgone * 3",
+        "substituted": "33600 * 3",
+        "result": "$100,800.00",
+        "why": "Three years at $33,600 that the student does not receive. Held flat here so the correction to the worksheet is visible on its own."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 + #t2-p1",
+        "substituted": "#t1-p1 + #t2-p1",
+        "result": "$148,500.00",
+        "why": "The worksheet’s $47,700.00 plus the $100,800.00 it never counted."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / advantage2, 1)",
+        "substituted": "round(#t2-p2 / 13250, 1)",
+        "result": "11.2",
+        "why": "$148,500.00 against the same annual advantage the worksheet used — the conclusion moves from before the fourth year to past the eleventh."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(advantage3 * (1 - taxRate), 2)",
+        "substituted": "round(13250 * (1 - 0.22), 2)",
+        "result": "$10,335.00",
+        "why": "Taking 22% off the $13,250 gross advantage leaves what actually arrives to pay down the cost."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "round(#t2-p2 / #t3-p1, 1)",
+        "substituted": "round(#t2-p2 / #t3-p1, 1)",
+        "result": "14.4",
+        "why": "$148,500.00 against the $10,335.00 that actually arrives each year, rather than against the gross figure."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "#t3-p2 - #t1-p2",
+        "substituted": "#t3-p2 - #t1-p2",
+        "result": "10.8",
+        "why": "14.4 years against the 3.6 the worksheet reported — the two errors together move the answer by more than a decade."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Every arithmetic step in the original worksheet is correct, and its conclusion is still wrong by more than ten years. Explain how that happens, and give one check that would have caught it before the conclusion was written.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Locates the defect in the definition of \"total cost\" rather than in any calculation, and names the $100,800.00 of forgone earnings as what the label excluded.",
+          "Explains that correct operations on an incomplete input produce a confidently wrong result, so checking the arithmetic would never have found this.",
+          "Gives a concrete check, such as asking what the student’s position would be in each of the three study years, or comparing against simply staying in work."
+        ],
+        "evidenceRequirements": [
+          "Cites the worksheet’s 3.6-year conclusion against the corrected 14.4 years, and names the omitted figure."
+        ],
+        "lookFors": [
+          "The response distinguishes an arithmetic error from a modelling error.",
+          "The proposed check is one that interrogates the inputs, not one that re-does the division.",
+          "The response does not claim the worksheet miscalculated; it did not."
+        ],
+        "commonMisconception": "Believing that verifying every calculation is the same as verifying a conclusion.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t4-p2",
+        "prompt": "The tax correction moved the answer from 11.2 years to 14.4 years. Explain why applying tax to the advantage but not to the tuition is the right way round, and name one figure in the corrected model you would still want to check.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the advantage is income and is taxed before it can be spent, while the tuition was paid from money already taxed, so comparing a gross inflow against a net outflow overstates the repayment.",
+          "Names a figure worth checking with a reason, such as whether the $13,250 advantage holds for the whole payback period, or whether the $33,600 forgone wage would have risen."
+        ],
+        "evidenceRequirements": [
+          "Refers to the after-tax advantage of $10,335.00 and to the gross figure it came from."
+        ],
+        "lookFors": [
+          "The response reasons about matching gross to gross and net to net.",
+          "The figure chosen for further checking comes with a reason it might be wrong."
+        ],
+        "dimensions": [
+          "criteria-application",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "Confirm the worksheet’s own cost line: what is 3 years of tuition at $15,900 a year?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "Confirm the worksheet’s payback line: $47,700 divided by the $13,250 advantage, to one decimal place."
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What are the total earnings given up across the 3 study years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the true cost of the programme, counting tuition and forgone earnings together?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the corrected payback period against the same $13,250 advantage? Give one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the salary advantage after the simplified 22% tax?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the payback period using the true cost and the after-tax advantage? Give one decimal place."
+        },
+        {
+          "ref": "t3-p3",
+          "responseMode": "FIXED",
+          "promptText": "How many years separate the worksheet’s answer from the fully corrected one? Give one decimal place."
+        },
+        {
+          "ref": "t3-p4",
+          "responseMode": "FIXED",
+          "promptText": "Which line of the worksheet is the first one that is actually wrong?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Every arithmetic step in the original worksheet is correct, and its conclusion is still wrong by more than ten years. Explain how that happens, and give one check that would have caught it before the conclusion was written."
+        },
+        {
+          "ref": "t4-p2",
+          "responseMode": "OPEN",
+          "promptText": "The tax correction moved the answer from 11.2 years to 14.4 years. Explain why applying tax to the advantage but not to the tuition is the right way round, and name one figure in the corrected model you would still want to check."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: Confirm the worksheet’s own cost line: what is 3 years of tuition at $15,900 a year? Answer: $47,700.00. Verification: The worksheet’s tuition arithmetic is correct on its own terms; the error is not here, which is worth establishing before looking further. t1-p2: Confirm the worksheet’s payback line: $47,700 divided by the $13,250 advantage, to one decimal place. Answer: 3.6. Verification: The division is also correct. The worksheet fails not by miscalculating but by dividing the wrong numerator, which is the harder error to see. t2-p1: What are the total earnings given up across the 3 study years? Answer: $100,800.00. Verification: Three years at $33,600 that the student does not receive. Held flat here so the correction to the worksheet is visible on its own. t2-p2: What is the true cost of the programme, counting tuition and forgone earnings together? Answer: $148,500.00. Verification: The worksheet’s $47,700.00 plus the $100,800.00 it never counted. t2-p3: What is the corrected payback period against the same $13,250 advantage? Give one decimal place. Answer: 11.2. Verification: $148,500.00 against the same annual advantage the worksheet used — the conclusion moves from before the fourth year to past the eleventh. t3-p1: What is the salary advantage after the simplified 22% tax? Answer: $10,335.00. Verification: Taking 22% off the $13,250 gross advantage leaves what actually arrives to pay down the cost. t3-p2: What is the payback period using the true cost and the after-tax advantage? Give one decimal place. Answer: 14.4. Verification: $148,500.00 against the $10,335.00 that actually arrives each year, rather than against the gross figure. t3-p3: How many years separate the worksheet’s answer from the fully corrected one? Give one decimal place. Answer: 10.8. Verification: 14.4 years against the 3.6 the worksheet reported — the two errors together move the answer by more than a decade. t3-p4: Which line of the worksheet is the first one that is actually wrong? Answer: The total cost line, \"$47,700\". Verification: The tuition line is right and the division is arithmetically right; the first defective step is labelling $47,700.00 as the total cost when it is only the tuition, which is what makes every line below it wrong."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t4-p1: Every arithmetic step in the original worksheet is correct, and its conclusion is still wrong by more than ten years. Explain how that happens, and give one check that would have caught it before the conclusion was written. Locates the defect in the definition of \"total cost\" rather than in any calculation, and names the $100,800.00 of forgone earnings as what the label excluded. Explains that correct operations on an incomplete input produce a confidently wrong result, so checking the arithmetic would never have found this. Gives a concrete check, such as asking what the student’s position would be in each of the three study years, or comparing against simply staying in work. Cites the worksheet’s 3.6-year conclusion against the corrected 14.4 years, and names the omitted figure. The response distinguishes an arithmetic error from a modelling error. The proposed check is one that interrogates the inputs, not one that re-does the division. The response does not claim the worksheet miscalculated; it did not. t4-p2: The tax correction moved the answer from 11.2 years to 14.4 years. Explain why applying tax to the advantage but not to the tuition is the right way round, and name one figure in the corrected model you would still want to check. Explains that the advantage is income and is taxed before it can be spent, while the tuition was paid from money already taxed, so comparing a gross inflow against a net outflow overstates the repayment. Names a figure worth checking with a reason, such as whether the $13,250 advantage holds for the whole payback period, or whether the $33,600 forgone wage would have risen. Refers to the after-tax advantage of $10,335.00 and to the gross figure it came from. The response reasons about matching gross to gross and net to net. The figure chosen for further checking comes with a reason it might be wrong."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Locates the defect in the definition of \"total cost\" rather than in any calculation, and names the $100,800.00 of forgone earnings as what the label excluded. Explains that correct operations on an incomplete input produce a confidently wrong result, so checking the arithmetic would never have found this. Gives a concrete check, such as asking what the student’s position would be in each of the three study years, or comparing against simply staying in work. Explains that the advantage is income and is taxed before it can be spent, while the tuition was paid from money already taxed, so comparing a gross inflow against a net outflow overstates the repayment. Names a figure worth checking with a reason, such as whether the $13,250 advantage holds for the whole payback period, or whether the $33,600 forgone wage would have risen."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u01-l07.scoring.json",
+    "sourceScoringSha256": "8b1668103d6c0a461664764fa8f07162f3cf79a2504414cbc6a71b72b03dbaa2",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

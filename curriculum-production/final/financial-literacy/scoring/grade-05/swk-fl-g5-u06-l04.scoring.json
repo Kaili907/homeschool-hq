@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u06-l04",
+  "lessonId": "ma-g5-financial-literacy-u06-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Communicating a product problem",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Petra say nothing, or wait until a buyer complains."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Petra tells buyers but no remedy is offered and no plan for reaching them is given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has Petra tell buyers proactively, explains how she could reach them before the stall closes, and offers a concrete remedy such as a refund or replacement."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning about honesty and trust",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats silence as acceptable because sales are already made."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Honesty is asserted for Petra without connecting it to consequences."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Petra's buyers paid for something that does not work as described, and that disclosure protects both them and her reputation for any future stall."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "States clearly what buyers were led to expect.",
+      "Has Petra initiate the disclosure rather than wait.",
+      "Offers a concrete remedy.",
+      "Rejects \"nobody complained\" as a justification."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What do Petra's buyers currently believe, and what does she now know that they do not?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should Petra communicate, to whom, and what should she offer?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is \"nobody complained\" not a good enough reason for Petra to stay quiet?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Communicating a product problem — Not yet: The response has Petra say nothing, or wait until a buyer complains. Approaching: Petra tells buyers but no remedy is offered and no plan for reaching them is given. Meets: The response has Petra tell buyers proactively, explains how she could reach them before the stall closes, and offers a concrete remedy such as a refund or replacement. Reasoning about honesty and trust — Not yet: The response treats silence as acceptable because sales are already made. Approaching: Honesty is asserted for Petra without connecting it to consequences. Meets: The response explains that Petra's buyers paid for something that does not work as described, and that disclosure protects both them and her reputation for any future stall. States clearly what buyers were led to expect. Has Petra initiate the disclosure rather than wait. Offers a concrete remedy. Rejects \"nobody complained\" as a justification."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States clearly what buyers were led to expect. Has Petra initiate the disclosure rather than wait. Offers a concrete remedy. Rejects \"nobody complained\" as a justification."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": [
+      {
+        "itemRef": "independent-work",
+        "scope": "INDEPENDENT_WORK_TEXT",
+        "promptText": "Write what Petra should tell buyers and how she should tell them, given the stall closes tomorrow and she has already been paid.",
+        "resolution": "CONFIRMED_OPEN_JUDGMENT",
+        "rationale": "“Already been paid” is scenario context, not a request to calculate pay. The learner must decide what to disclose, whom to contact, and what remedy to offer; the substantive source rubric supplies acceptable judgment criteria."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u06-l04.scoring.json",
+    "sourceScoringSha256": "546fea9a9a4f4baec40dc8999c350d8f71d1c0840b4da239c967299ce5bbeb28",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

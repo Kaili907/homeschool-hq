@@ -1,0 +1,379 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l02",
+  "lessonId": "ma-g11-financial-literacy-u03-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$6,775.59",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Ten years of compounding at 3.4% on $4,850. Nothing about the basket changed; only its price did."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,925.59",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,775.59 against the $4,850 it costs today — a rise of nearly 40% on a rate that sounds small each year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$64,011.91",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Ten years of compounding at 2.1% on $52,000. The wage rises too, which is why the comparison has to be made in shares rather than in dollars."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "9.3%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,850 against $52,000 — the starting position."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "10.6%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,775.59 against $64,011.91. Both figures grew, but not at the same rate."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "1.3",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10.6% against 9.3%. The share rises because prices compound faster than the wage; over this ten-year horizon that comes to 1.3 points, and the gap keeps widening beyond it."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$72,855.81",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $6,775.59 basket divided by the 9.3% share — the income that would have held the position level."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$8,843.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$72,855.81 needed against $64,011.91 projected — the annual cost of a wage growing 1.3 points slower than prices, measured at the end of the decade."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(basket * pow(1 + inflation, 10), 2)",
+        "substituted": "round(4850 * pow(1 + 0.034, 10), 2)",
+        "result": "$6,775.59",
+        "why": "Ten years of compounding at 3.4% on $4,850. Nothing about the basket changed; only its price did."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - basket2",
+        "substituted": "#t1-p1 - 4850",
+        "result": "$1,925.59",
+        "why": "$6,775.59 against the $4,850 it costs today — a rise of nearly 40% on a rate that sounds small each year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(income * pow(1 + growth, 10), 2)",
+        "substituted": "round(52000 * pow(1 + 0.021, 10), 2)",
+        "result": "$64,011.91",
+        "why": "Ten years of compounding at 2.1% on $52,000. The wage rises too, which is why the comparison has to be made in shares rather than in dollars."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(basket3 / income2 * 100, 1)",
+        "substituted": "round(4850 / 52000 * 100, 1)",
+        "result": "9.3%",
+        "why": "$4,850 against $52,000 — the starting position."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p1 / #t1-p3 * 100, 1)",
+        "substituted": "round(#t1-p1 / #t1-p3 * 100, 1)",
+        "result": "10.6%",
+        "why": "$6,775.59 against $64,011.91. Both figures grew, but not at the same rate."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 - #t2-p1",
+        "substituted": "#t2-p2 - #t2-p1",
+        "result": "1.3",
+        "why": "10.6% against 9.3%. The share rises because prices compound faster than the wage; over this ten-year horizon that comes to 1.3 points, and the gap keeps widening beyond it."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t1-p1 / targetShare, 2)",
+        "substituted": "round(#t1-p1 / 0.093, 2)",
+        "result": "$72,855.81",
+        "why": "The $6,775.59 basket divided by the 9.3% share — the income that would have held the position level."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p4 - #t1-p3",
+        "substituted": "#t2-p4 - #t1-p3",
+        "result": "$8,843.90",
+        "why": "$72,855.81 needed against $64,011.91 projected — the annual cost of a wage growing 1.3 points slower than prices, measured at the end of the decade."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Emeka’s wage rises every year for ten years and he is worse off at the end. Explain how, and say what the difference between 3.4% and 2.1% means in plain terms for someone reading a pay rise letter.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a rising wage is only a gain if it rises faster than the prices it has to cover, and that 2.1% against 3.4% means it does not.",
+          "Translates the comparison for a pay-rise letter: a raise below the inflation rate is a fall in what the wage buys, even though the number on the payslip is larger.",
+          "Uses the share figures — 9.3% rising to 10.6% — rather than the dollar amounts alone, since both dollar figures grew."
+        ],
+        "evidenceRequirements": [
+          "Cites both shares, 9.3% and 10.6%, and both rates, 3.4% and 2.1%."
+        ],
+        "lookFors": [
+          "The response reasons in shares or in purchasing power, not in dollars alone.",
+          "The plain-terms translation is usable by someone who has not done the arithmetic.",
+          "The response does not claim Emeka’s income fell; it did not."
+        ],
+        "commonMisconception": "Reading any wage increase as an improvement in living standards.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "communication-of-uncertainty",
+          "evidence-use"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "This model applies one inflation rate to everything Emeka buys. Name one way that simplification could understate or overstate his real position, and say which computed figure it would move.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names a specific way the single rate misleads — different goods inflating at different rates, or the basket itself changing as he substitutes cheaper goods.",
+          "Ties the point to a figure, most defensibly the $6,775.59 year-10 basket cost, and gives a direction."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $6,775.59 basket figure or the 10.6% share when describing what the simplification affects."
+        ],
+        "lookFors": [
+          "The response identifies a mechanism rather than saying inflation \"varies\".",
+          "The direction of the effect is stated, not left open."
+        ],
+        "commonMisconception": "Assuming a single published inflation rate describes every household equally.",
+        "dimensions": [
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the same basket cost after 10 years of 3.4% inflation?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much more does the basket cost after the decade?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is Emeka’s income after 10 years of 2.1% growth?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What share of today’s income does today’s basket take? Give one decimal place."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What share of the year-10 income does the year-10 basket take? Give one decimal place."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "By how many percentage points has the basket’s share of income risen?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What would Emeka’s year-10 income need to be for the basket to take the same 9.3% share it takes today?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "By how much does the projected year-10 income fall short of that?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Emeka’s wage rises every year for ten years and he is worse off at the end. Explain how, and say what the difference between 3.4% and 2.1% means in plain terms for someone reading a pay rise letter."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "This model applies one inflation rate to everything Emeka buys. Name one way that simplification could understate or overstate his real position, and say which computed figure it would move."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the same basket cost after 10 years of 3.4% inflation? Answer: $6,775.59. Verification: Ten years of compounding at 3.4% on $4,850. Nothing about the basket changed; only its price did. t1-p2: How much more does the basket cost after the decade? Answer: $1,925.59. Verification: $6,775.59 against the $4,850 it costs today — a rise of nearly 40% on a rate that sounds small each year. t1-p3: What is Emeka’s income after 10 years of 2.1% growth? Answer: $64,011.91. Verification: Ten years of compounding at 2.1% on $52,000. The wage rises too, which is why the comparison has to be made in shares rather than in dollars. t2-p1: What share of today’s income does today’s basket take? Give one decimal place. Answer: 9.3%. Verification: $4,850 against $52,000 — the starting position. t2-p2: What share of the year-10 income does the year-10 basket take? Give one decimal place. Answer: 10.6%. Verification: $6,775.59 against $64,011.91. Both figures grew, but not at the same rate. t2-p3: By how many percentage points has the basket’s share of income risen? Answer: 1.3. Verification: 10.6% against 9.3%. The share rises because prices compound faster than the wage; over this ten-year horizon that comes to 1.3 points, and the gap keeps widening beyond it. t2-p4: What would Emeka’s year-10 income need to be for the basket to take the same 9.3% share it takes today? Answer: $72,855.81. Verification: The $6,775.59 basket divided by the 9.3% share — the income that would have held the position level. t2-p5: By how much does the projected year-10 income fall short of that? Answer: $8,843.90. Verification: $72,855.81 needed against $64,011.91 projected — the annual cost of a wage growing 1.3 points slower than prices, measured at the end of the decade."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Emeka’s wage rises every year for ten years and he is worse off at the end. Explain how, and say what the difference between 3.4% and 2.1% means in plain terms for someone reading a pay rise letter. Explains that a rising wage is only a gain if it rises faster than the prices it has to cover, and that 2.1% against 3.4% means it does not. Translates the comparison for a pay-rise letter: a raise below the inflation rate is a fall in what the wage buys, even though the number on the payslip is larger. Uses the share figures — 9.3% rising to 10.6% — rather than the dollar amounts alone, since both dollar figures grew. Cites both shares, 9.3% and 10.6%, and both rates, 3.4% and 2.1%. The response reasons in shares or in purchasing power, not in dollars alone. The plain-terms translation is usable by someone who has not done the arithmetic. The response does not claim Emeka’s income fell; it did not. t3-p2: This model applies one inflation rate to everything Emeka buys. Name one way that simplification could understate or overstate his real position, and say which computed figure it would move. Names a specific way the single rate misleads — different goods inflating at different rates, or the basket itself changing as he substitutes cheaper goods. Ties the point to a figure, most defensibly the $6,775.59 year-10 basket cost, and gives a direction. Refers to the $6,775.59 basket figure or the 10.6% share when describing what the simplification affects. The response identifies a mechanism rather than saying inflation \"varies\". The direction of the effect is stated, not left open."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that a rising wage is only a gain if it rises faster than the prices it has to cover, and that 2.1% against 3.4% means it does not. Translates the comparison for a pay-rise letter: a raise below the inflation rate is a fall in what the wage buys, even though the number on the payslip is larger. Uses the share figures — 9.3% rising to 10.6% — rather than the dollar amounts alone, since both dollar figures grew. Names a specific way the single rate misleads — different goods inflating at different rates, or the basket itself changing as he substitutes cheaper goods. Ties the point to a figure, most defensibly the $6,775.59 year-10 basket cost, and gives a direction."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u03-l02.scoring.json",
+    "sourceScoringSha256": "1f32b5a808d4ae9a6c06c3aad77d187cbc9cf1dc76056546bd04a2c569558488",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: a written rule for market declines"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "a written rule for market declines",
+  "objective": "Compute what a fictional decline costs and what recovering from it requires, compare holding against selling under a stated recovery assumption, and identify what the comparison assumes.",
+  "scenario": "The fictional balance, the simulated decline, and the stated recovery assumption below are invented for this exercise. The assumption that the category regains its earlier level is made only so the two courses of action can be compared; nothing here establishes that any real decline is recovered.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional balance and decline figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional balance of $24,000 falls by 32%. The investor contributes $300 a month and is deciding whether to continue. For the comparison that follows, assume the category later regains exactly the level it held before the fall, and that money moved to cash earns nothing in the meantime. Whether and when such a recovery happens is not something this exercise establishes.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance immediately after the 32% fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What percentage gain on the reduced balance would restore the original $24,000, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare continuing to contribute with moving to cash, under the stated recovery assumption.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is contributed over the next 12 months at $300 a month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If those contributions are made at the depressed level, what are they worth once the category regains its earlier level?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the account worth in total on that course of action?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "If instead the investor sells at the depressed level and holds everything in cash, what do they have?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is the difference between the two courses of action?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write a rule this fictional investor could set down in advance about what to do in a decline. State what evidence in this lesson supports it, and — importantly — name the assumption the $9,374.12 figure rests on and what your rule does if that assumption does not hold."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the recovery figure comes out as 32%, the gain is being calculated on the original $24,000 rather than on what remains. After the fall the base is $16,320.00, and $7,680.00 has to be regained from there — which is 47.06% of the smaller base.",
+  "extension": "Work out the gain needed to recover from a 50% fall, and say what pattern the answers to the two cases suggest about how the required gain grows as the fall deepens.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance immediately after the 32% fall?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What percentage gain on the reduced balance would restore the original $24,000, to two decimal places?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is contributed over the next 12 months at $300 a month?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "If those contributions are made at the depressed level, what are they worth once the category regains its earlier level?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the account worth in total on that course of action?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "If instead the investor sells at the depressed level and holds everything in cash, what do they have?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What is the difference between the two courses of action?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Write a rule this fictional investor could set down in advance about what to do in a decline. State what evidence in this lesson supports it, and — importantly — name the assumption the $9,374.12 figure rests on and what your rule does if that assumption does not hold."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u05-l04.package.json",
+    "sourcePackageSha256": "439c5480e23ba1437707abd04e0e47c54bf22d43d879c035b31d00e20b94d050",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u05-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

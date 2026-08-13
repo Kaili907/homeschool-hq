@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u04-l06",
+  "lessonId": "ma-g5-financial-literacy-u04-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Evaluating security practices",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats all four of Levi's habits as equally acceptable."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The risky habits are identified for Levi but the reason each is risky is not given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies the reused password and the taped note as risky for Levi and explains the concrete consequence of each, such as one breach unlocking everything."
+          }
+        ]
+      },
+      {
+        "dimension": "Producing a usable recommendation",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "Levi's recommendation is impractical or ignores the memory objection."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A recommendation is made for Levi but the objection is dismissed rather than answered."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Levi's recommendation is something a household would actually follow and it answers the memory objection directly, for example by using a manager or a memorable passphrase."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Identifies both risky habits in the invented list.",
+      "Explains what reusing one password across accounts makes possible.",
+      "Recommends practices a real household could sustain.",
+      "Connects link-clicking to reaching a fake login page."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "Which of Levi's four habits reduce risk, and what does each of the risky ones actually make possible?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should Levi recommend, and how does the recommendation answer the objection that it is too hard to remember?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is how someone reaches a login page as important as the strength of the password?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Evaluating security practices — Not yet: The response treats all four of Levi's habits as equally acceptable. Approaching: The risky habits are identified for Levi but the reason each is risky is not given. Meets: The response identifies the reused password and the taped note as risky for Levi and explains the concrete consequence of each, such as one breach unlocking everything. Producing a usable recommendation — Not yet: Levi's recommendation is impractical or ignores the memory objection. Approaching: A recommendation is made for Levi but the objection is dismissed rather than answered. Meets: Levi's recommendation is something a household would actually follow and it answers the memory objection directly, for example by using a manager or a memorable passphrase. Identifies both risky habits in the invented list. Explains what reusing one password across accounts makes possible. Recommends practices a real household could sustain. Connects link-clicking to reaching a fake login page."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies both risky habits in the invented list. Explains what reusing one password across accounts makes possible. Recommends practices a real household could sustain. Connects link-clicking to reaching a fake login page."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u04-l06.scoring.json",
+    "sourceScoringSha256": "c67b6c15d1a6b12196b33826a40e3bf4985c74ec80a0c1baeb16102790b440e1",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

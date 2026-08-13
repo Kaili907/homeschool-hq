@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l03",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: depreciation and resale value"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "depreciation and resale value",
+  "objective": "Apply a declining-balance depreciation model to a fictional vehicle across five years, show that the loss is front-loaded, and contrast it with a straight-line assumption.",
+  "scenario": "Beatriz Sandoval-Haugen owns a fictional vehicle bought new for $23,400. The depreciation rate below is an invented simplification and no real vehicle loses value on so regular a schedule.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional depreciation figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the simplified model, the vehicle loses 17% of whatever it is worth at the start of each year. Round each value to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the vehicle worth after 1 year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is it worth after 3 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is it worth after 5 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure the loss rather than the remaining value.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much value does the vehicle lose in its first year alone?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much value does it lose across all 5 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "The first year’s loss is what percentage of the whole five-year loss? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "A straight-line assumption would spread the fall from $23,400 to a $6,000 value evenly across the 5 years. What annual loss does that give?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "For someone planning to sell after only 1 year, which model gives the more favourable and more misleading answer?",
+          "choices": [
+            "The straight-line model, which understates the first year’s loss",
+            "The declining-balance model, which understates the first year’s loss",
+            "Both models agree in the first year"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why buying a vehicle and selling it after one year is expensive even if nothing goes wrong with it, and say what that implies about how long a buyer should plan to keep one."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Both models are simplifications. Name one thing about real vehicle values that neither the 17% declining-balance model nor the straight-line model captures, and say which of the computed figures it would move most."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the three-year value comes out at $11,466.00, the 17% is being taken from the original price three times rather than from the value at the start of each year. Build the schedule as a ladder: $23,400 to $19,422.00, then 17% off that, then 17% off the result. Each year’s loss is smaller than the last, which is exactly what the straight-line model misses.",
+  "extension": "Find the first year in which the declining-balance value rises above the straight-line value, and explain why the two schedules must cross rather than run parallel.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the vehicle worth after 1 year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is it worth after 3 years?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is it worth after 5 years?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much value does the vehicle lose in its first year alone?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much value does it lose across all 5 years?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "The first year’s loss is what percentage of the whole five-year loss? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "A straight-line assumption would spread the fall from $23,400 to a $6,000 value evenly across the 5 years. What annual loss does that give?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "For someone planning to sell after only 1 year, which model gives the more favourable and more misleading answer?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain why buying a vehicle and selling it after one year is expensive even if nothing goes wrong with it, and say what that implies about how long a buyer should plan to keep one."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Both models are simplifications. Name one thing about real vehicle values that neither the 17% declining-balance model nor the straight-line model captures, and say which of the computed figures it would move most."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u02-l03.package.json",
+    "sourcePackageSha256": "1ef34bb7dcb38634cd95312a8098a5e2a25bcc88b71d5e797ea0021fe4173a2d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u02-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

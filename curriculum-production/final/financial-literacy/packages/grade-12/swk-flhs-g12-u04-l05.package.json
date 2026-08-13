@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l05",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: building and protecting credit responsibly"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "building and protecting credit responsibly",
+  "objective": "Compute credit utilisation for a fictional account across three situations, and separate what utilisation measures from what it does not.",
+  "scenario": "The fictional accounts, limits, and balances below are invented for this exercise. No real credit file, score, or account is described, and nothing here is a recommendation to any real person.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional first card has a limit of $1,500 and currently carries a balance of $940. The cardholder pays it down to $285. Later a second fictional card with a limit of $2,000 is opened and left unused, so the balance stays at $285 across a combined limit. A widely quoted guideline suggests keeping utilisation at or below 30%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is utilisation on the first card at a balance of $940, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is utilisation after the balance is paid down to $285?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is utilisation once the second card raises the combined limit, with the balance unchanged at $285?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now separate the two ways the ratio moved.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how many percentage points did paying the balance down reduce utilisation? Give two decimal places.",
+          "unit": "percentage points"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Opening the second card moved utilisation from 19.00% to 8.14%. Did the cardholder’s debt fall?",
+          "choices": [
+            "Yes — utilisation fell, so less is owed",
+            "No — the balance stayed at $285 and only the limit changed"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What balance would sit exactly at the 30% guideline on the combined $3,500 limit?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Utilisation improved twice, once by repayment and once by a larger limit. Explain why only one of those changes improved the fictional cardholder’s actual position, and say what risk the second change introduces that the ratio does not show."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the third figure comes out at 19.00%, the balance is still being compared with the original $1,500 limit. Once a second card is open, utilisation across the file compares the total balance with the total limit: $285 against $3,500. Compute each of the three figures with its own denominator before comparing them.",
+  "extension": "Work out what balance on the combined limit would return utilisation to 62.67%, and say how much more debt that represents than the original $940.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is utilisation on the first card at a balance of $940, to two decimal places?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is utilisation after the balance is paid down to $285?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is utilisation once the second card raises the combined limit, with the balance unchanged at $285?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "By how many percentage points did paying the balance down reduce utilisation? Give two decimal places."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Opening the second card moved utilisation from 19.00% to 8.14%. Did the cardholder’s debt fall?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What balance would sit exactly at the 30% guideline on the combined $3,500 limit?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Utilisation improved twice, once by repayment and once by a larger limit. Explain why only one of those changes improved the fictional cardholder’s actual position, and say what risk the second change introduces that the ratio does not show."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u04-l05.package.json",
+    "sourcePackageSha256": "b521746ea5a3999f84e2727008584216e9ae882518672ba192395169da64e88a",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u04-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

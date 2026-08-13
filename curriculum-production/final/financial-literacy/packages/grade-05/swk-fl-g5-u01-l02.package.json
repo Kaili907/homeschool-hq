@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u01-l02",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Money, Choices, and Values",
+    "dayInUnit": 2,
+    "phase": "Explicit model",
+    "title": "Explicit model: scarcity and tradeoffs",
+    "focus": "scarcity and tradeoffs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations",
+    "Grade 5 economics connections"
+  ],
+  "objective": "Learners evaluate every pairing of invented options against a fixed simulated limit, identify which fit, and quantify both overshoot and unused money.",
+  "scenario": "Bo is an invented fifth grader with $120.00 of simulated trip money. Three made-up excursions cost $78.50 for a caving trip, $54.25 for a river walk, and $39.90 for a museum day. Bo can pick at most two.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Bo's caving trip with the river walk.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the caving trip and river walk cost together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Measure that pair against Bo's $120.00, then test the caving trip paired with the museum day instead.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the caving and river pair overshoot $120.00?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $120.00 is left after the caving trip and museum day?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Test Bo's last pairing, the river walk with the museum day, and compare what it leaves against the other affordable pair.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $120.00 is left after the river walk and museum day?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more does that pair leave than the caving and museum pair?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Two of Bo's three pairs fit, and they leave very different amounts.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Which affordable pair should Bo choose, and what would make the more expensive pair worth the smaller leftover?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner tests pairs at random and loses track, make a three-row table of Bo's pairs with total and leftover columns and require every row to be filled before any decision.",
+  "extension": "Ask the learner what the caving trip would need to cost for all three of Bo's pairs to fit inside $120.00.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u01-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u01-l02",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the caving trip and river walk cost together?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the caving and river pair overshoot $120.00?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of the $120.00 is left after the caving trip and museum day?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much of the $120.00 is left after the river walk and museum day?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more does that pair leave than the caving and museum pair?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Which affordable pair should Bo choose, and what would make the more expensive pair worth the smaller leftover?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-05/swk-fl-g5-u01-l02.package.json",
+    "sourcePackageSha256": "d9f51436663ce2e0a44d0fa83c9aee0082e5ff8af76768d0925ab30f6535d626",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g5-financial-literacy-u01-l02",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

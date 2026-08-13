@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u01-l04",
+  "lessonId": "ma-g5-financial-literacy-u01-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much does the 20% discount take off?",
+        "answer": "$9.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(20% of 45.00) = 9.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "percent",
+            "of": {
+              "op": "money",
+              "cents": 4500
+            },
+            "bps": 2000,
+            "round": "exact"
+          },
+          "trace": "(20% of 45.00) = 9.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the discounted price?",
+        "answer": "$36.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(45.00 - (20% of 45.00)) = 36.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 4500
+            },
+            "less": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 4500
+              },
+              "bps": 2000,
+              "round": "exact"
+            }
+          },
+          "trace": "(45.00 - (20% of 45.00)) = 36.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "What would a true half-price jacket cost?",
+        "answer": "$22.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(45.00 / 2) = 22.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 4500
+            },
+            "by": 2,
+            "round": "exact"
+          },
+          "trace": "(45.00 / 2) = 22.50"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How far is the real discounted price from a true half price?",
+        "answer": "$13.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((45.00 - (20% of 45.00)) - (45.00 / 2)) = 13.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "diff",
+              "from": {
+                "op": "money",
+                "cents": 4500
+              },
+              "less": {
+                "op": "percent",
+                "of": {
+                  "op": "money",
+                  "cents": 4500
+                },
+                "bps": 2000,
+                "round": "exact"
+              }
+            },
+            "less": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 4500
+              },
+              "by": 2,
+              "round": "exact"
+            }
+          },
+          "trace": "((45.00 - (20% of 45.00)) - (45.00 / 2)) = 13.50"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What would a $60.00 coat cost after the same 20% off?",
+        "answer": "$48.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(60.00 - (20% of 60.00)) = 48.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 6000
+            },
+            "less": {
+              "op": "percent",
+              "of": {
+                "op": "money",
+                "cents": 6000
+              },
+              "bps": 2000,
+              "round": "exact"
+            }
+          },
+          "trace": "(60.00 - (20% of 60.00)) = 48.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Testing an advertising claim",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Delphine's headline as equivalent to the stated percentage."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The discrepancy is noticed but the reason for the vaguer wording is not addressed."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Delphine's headline works on impression while the banner carries the checkable fact, and that the arithmetic settles which one to trust."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does the 20% discount take off?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the discounted price?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would a true half-price jacket cost?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How far is the real discounted price from a true half price?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would a $60.00 coat cost after the same 20% off?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "The banner was accurate and the headline was not. Why would an advertisement put both on the same page?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does the 20% discount take off? Answer: $9.00. Verification: (20% of 45.00) = 9.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is the discounted price? Answer: $36.00. Verification: (45.00 - (20% of 45.00)) = 36.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: What would a true half-price jacket cost? Answer: $22.50. Verification: (45.00 / 2) = 22.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How far is the real discounted price from a true half price? Answer: $13.50. Verification: ((45.00 - (20% of 45.00)) - (45.00 / 2)) = 13.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What would a $60.00 coat cost after the same 20% off? Answer: $48.00. Verification: (60.00 - (20% of 60.00)) = 48.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Testing an advertising claim — Not yet: The response treats Delphine's headline as equivalent to the stated percentage. Approaching: The discrepancy is noticed but the reason for the vaguer wording is not addressed. Meets: The response explains that Delphine's headline works on impression while the banner carries the checkable fact, and that the arithmetic settles which one to trust. The response explains that Delphine's headline works on impression while the banner carries the checkable fact, and that the arithmetic settles which one to trust."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Delphine's headline works on impression while the banner carries the checkable fact, and that the arithmetic settles which one to trust."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u01-l04.scoring.json",
+    "sourceScoringSha256": "8a89eef4e1ddc19316d95af7f7e68eeeac671836017dc7feb6e604f65375d2b0",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l01",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: return on a pathway: cost, time, debt, and earnings"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "return on a pathway: cost, time, debt, and earnings",
+  "objective": "Build an eight-year net position for three fictional post-secondary pathways, rank them, and state the horizon at which the ranking is being decided.",
+  "scenario": "Priya Raghunathan is a fictional eleventh-grader. The three pathways below, their costs, and their salaries are invented for this exercise and describe no real programme, employer, or wage.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional pathway summaries in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Pathway A is a fictional two-year technical certificate costing $9,400 a year in tuition. Pathway B is a fictional four-year degree costing $18,600 a year. Pathway C is going straight to work with no tuition at all. Count the whole horizon as the first 8 years after high school.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total tuition for Pathway A across its 2 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total tuition for Pathway B across its 4 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now the earnings side. Pathway A earns $41,200 a year once the certificate is finished, which gives 6 earning years inside the horizon: years 3 through 8. Pathway B earns $56,800 a year and has 4 earning years, years 5 through 8. Pathway C earns $31,500 a year for all 8 years. Hold each salary flat across the horizon.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Pathway A earn across the horizon, counting only its 6 earning years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does Pathway B earn across the horizon, counting only its 4 earning years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does Pathway C earn across the horizon, earning in all 8 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Net position is what a pathway earned across the horizon less what its tuition cost. Work these without help.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Pathway A’s net position at the end of year 8?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Pathway B’s net position at the end of year 8?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much does Pathway C’s eight-year position exceed the better of the other two?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p4",
+          "promptType": "fixed-choice",
+          "text": "Ranked by net position at the end of year 8, which pathway comes first?",
+          "choices": [
+            "Pathway A, the 2-year certificate",
+            "Pathway B, the 4-year degree",
+            "Pathway C, straight to work"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences, using the figures you computed.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Pathway C finishes first at year 8 and finishes last on salary. Explain what the eight-year horizon is doing to the ranking, and say what you would expect to happen to the ranking at year 20 and why."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "Every salary in this model is held flat for eight years. Name one way that assumption favours a particular pathway, and say which computed figure would move most if it were dropped."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a pathway’s earnings come out too high, the study years are being paid. Rebuild the horizon as a row of 8 boxes per pathway and write a salary only in the boxes after the programme ends: 6 boxes for A, 4 for B, 8 for C. Tuition then comes off the total once, not once a year, and the net position is the row total minus that single subtraction.",
+  "extension": "Extend all three pathways to a 20-year horizon with salaries still held flat, and find the first horizon at which Pathway B moves ahead of Pathway C.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total tuition for Pathway A across its 2 years?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total tuition for Pathway B across its 4 years?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does Pathway A earn across the horizon, counting only its 6 earning years?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does Pathway B earn across the horizon, counting only its 4 earning years?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much does Pathway C earn across the horizon, earning in all 8 years?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Pathway A’s net position at the end of year 8?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Pathway B’s net position at the end of year 8?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how much does Pathway C’s eight-year position exceed the better of the other two?"
+      },
+      {
+        "ref": "t3-p4",
+        "responseMode": "FIXED",
+        "promptText": "Ranked by net position at the end of year 8, which pathway comes first?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Pathway C finishes first at year 8 and finishes last on salary. Explain what the eight-year horizon is doing to the ranking, and say what you would expect to happen to the ranking at year 20 and why."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "Every salary in this model is held flat for eight years. Name one way that assumption favours a particular pathway, and say which computed figure would move most if it were dropped."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u01-l01.package.json",
+    "sourcePackageSha256": "b6827742061568de4cbe174ed21a4caf78ef669e0dd61ff151e102766b477523",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u01-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

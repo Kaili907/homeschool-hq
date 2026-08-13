@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l04",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: stating and testing assumptions in a projection"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "stating and testing assumptions in a projection",
+  "objective": "Recompute a fictional twelve-year salary projection under two stated raise assumptions, measure the gap the assumption alone creates, and test the projection against a target.",
+  "scenario": "Tobias Ferndale-Aquino is a fictional laboratory technician whose twelve-year projection is printed below. Every wage and growth rate in it is invented, and the projection is a simulated planning exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional projection assumptions in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The projection starts at a salary of $44,500 in year 1 and applies a raise at the start of each year after that. Year 12 is therefore 11 raises after the start. The optimistic assumption is 3.2% a year; the cautious assumption is 1.2% a year. Round each result to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under the 3.2% assumption, what is the year-12 salary?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under the 1.2% assumption, what is the year-12 salary?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the year-12 gap between the two assumptions?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Tobias wants a year-12 salary of at least $58,000. Test both assumptions against that target.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "The gap is what percentage of the year-12 salary the optimistic assumption predicts? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under the cautious assumption, by how much does the year-12 salary fall short of the $58,000 target?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under the optimistic assumption, by how much does the year-12 salary exceed the same target?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Does the $58,000 target survive both assumptions, only the optimistic one, or neither?",
+          "choices": [
+            "Both assumptions clear it",
+            "Only the 3.2% assumption clears it",
+            "Neither assumption clears it"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One more comparison, to separate the effect of the rate from the effect of the horizon.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under the 3.2% assumption, what would the salary be in year 6, which is 5 raises after the start?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the optimistic projection’s total year-12 growth arrives after year 6?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Tobias says the projection \"shows\" he will be earning about $63,000 in year 12. Rewrite that claim so it is defensible, and say what evidence would justify picking one of the two rates over the other."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "More of the optimistic projection’s growth arrives after year 6 than before it. Explain why, and say what that timing means for someone deciding whether to leave the job in year 5."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the year-12 figure comes out at $64,940.61, twelve raises are being applied instead of eleven. Year 1 is the starting salary with no raise on it, so year 2 has one raise and year 12 has eleven. Count the raises on a number line from year 1 to year 12 before choosing the exponent, and check the year-6 case, which should show 5.",
+  "extension": "Find the constant annual raise, to the nearest tenth of a percent, that would put the year-12 salary exactly at the $58,000 target, and say whether it is closer to the cautious or the optimistic assumption.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "Under the 3.2% assumption, what is the year-12 salary?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "Under the 1.2% assumption, what is the year-12 salary?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the year-12 gap between the two assumptions?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "The gap is what percentage of the year-12 salary the optimistic assumption predicts? Give one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Under the cautious assumption, by how much does the year-12 salary fall short of the $58,000 target?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Under the optimistic assumption, by how much does the year-12 salary exceed the same target?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Does the $58,000 target survive both assumptions, only the optimistic one, or neither?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "Under the 3.2% assumption, what would the salary be in year 6, which is 5 raises after the start?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of the optimistic projection’s total year-12 growth arrives after year 6?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Tobias says the projection \"shows\" he will be earning about $63,000 in year 12. Rewrite that claim so it is defensible, and say what evidence would justify picking one of the two rates over the other."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "More of the optimistic projection’s growth arrives after year 6 than before it. Explain why, and say what that timing means for someone deciding whether to leave the job in year 5."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u01-l04.package.json",
+    "sourcePackageSha256": "a91bb0679e855ea36cd262291369cf9813adb7b46f0b14e4f2d5ff2f0c6615f8",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u01-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u01-l05",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Needs, Wants, and Choosing",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: private choices and different families",
+    "focus": "private choices and different families"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing"
+  ],
+  "objective": "Learners compare two invented families who spend the same pretend amount very differently, and practise talking about money choices without ranking families or repeating private details.",
+  "scenario": "Zuri is a made-up third grader whose class runs a pretend planning activity. Two invented families each plan $10.00 of imaginary market money: the first plans rice, beans, and fruit; the second plans bread, soup, and a birthday candle for a sibling. Both plans are complete and neither family is real.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Talk only about the two invented families on this sheet; do not describe any real household's money."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Read both invented plans with Zuri. The first family put every pretend dollar into food that lasts the week. The second family kept a little back for a birthday candle. Notice what each plan protects before you say anything about which you prefer.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "Name one thing the first invented family's plan takes care of, and one thing the second family's plan takes care of."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Zuri's classmate says the second family \"wasted\" money on the candle. Write what you would say back. Remember that both families finished their pretend plan and neither ran out of money.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "Explain why two families can spend the same pretend $10.00 in different ways and both plans can still be good ones."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Money information about a real family belongs to that family.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "A friend tells you something about what their family can afford. What is the kind thing to do with what they told you?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner ranks the families, cover the price column entirely and re-read both plans as stories about what each family cared about, then ask which plan would be missing something if the other family had written it.",
+  "extension": "Ask the learner to write a third invented $10.00 plan that protects something neither family protected, and to name what it gives up in exchange.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u01-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u01-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "Name one thing the first invented family's plan takes care of, and one thing the second family's plan takes care of."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain why two families can spend the same pretend $10.00 in different ways and both plans can still be good ones."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A friend tells you something about what their family can afford. What is the kind thing to do with what they told you?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-03/swk-fl-g3-u01-l05.package.json",
+    "sourcePackageSha256": "dacbfb652bb5c2a4674edc12debba8a176403185e6b3c794a3e21fae8902b128",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g3-financial-literacy-u01-l05",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

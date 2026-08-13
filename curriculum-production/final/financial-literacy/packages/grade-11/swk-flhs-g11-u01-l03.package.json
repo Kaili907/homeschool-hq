@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l03",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: earnings variation within a field, not just the median"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "earnings variation within a field, not just the median",
+  "objective": "Work with a fictional field’s earnings distribution rather than its median alone, compute a probability-weighted expectation, and quantify how much a median-only ten-year plan overstates a lower-percentile outcome.",
+  "scenario": "Odalys Ferreira-Nkemelu is a fictional careers counsellor. The percentile figures below describe an invented occupation and are not drawn from any published wage survey.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional percentile table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "For the invented field, the 25th percentile earns $38,900 a year, the median earns $47,600, and the 75th percentile earns $61,300.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the spread between the 75th percentile and the 25th percentile in this fictional field?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "The spread is what percentage of the median? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Treat the three percentiles as a simplified fictional distribution: a 25% chance of landing at the 25th-percentile wage, a 50% chance of landing at the median, and a 25% chance of landing at the 75th-percentile wage. This is a teaching simplification, not how a real wage distribution is shaped.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the probability-weighted expected wage under this simplified distribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the expected wage differ from the median wage?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Odalys now builds two 10-year plans for the same fictional field: one that assumes the median wage every year and one that assumes the 25th-percentile wage every year. Hold each wage flat.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the 10-year plan total at the median wage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the 10-year plan total at the 25th-percentile wage?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the median plan overstate the 25th-percentile plan across the decade?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p4",
+          "promptType": "fixed-numeric",
+          "text": "The overstatement is what percentage of the median plan? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Odalys writes that \"planning on the median is planning on a coin flip\". Using the figures you computed, say what is right about that description and what is misleading about it."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The expected wage of $48,850.00 came out above the median of $47,600. Explain what feature of the fictional distribution produces that, and say whether the expected wage or the median is the better figure to build a minimum plan on."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the expected wage comes out as $49,266.67, the three percentiles are being averaged as equals and the stated 25/50/25 weights are being ignored. Write the three products in a column — 0.25 x $38,900, 0.5 x $47,600, 0.25 x $61,300 — check that the weights sum to 1 before adding, and only then total the column.",
+  "extension": "Recompute the expected wage under weights of 40%, 40%, and 20%, and say how much the ten-year median plan would then be overstating a plan built on the expectation.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the spread between the 75th percentile and the 25th percentile in this fictional field?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "The spread is what percentage of the median? Give one decimal place."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the probability-weighted expected wage under this simplified distribution?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the expected wage differ from the median wage?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the 10-year plan total at the median wage?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the 10-year plan total at the 25th-percentile wage?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the median plan overstate the 25th-percentile plan across the decade?"
+      },
+      {
+        "ref": "t3-p4",
+        "responseMode": "FIXED",
+        "promptText": "The overstatement is what percentage of the median plan? Give one decimal place."
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Odalys writes that \"planning on the median is planning on a coin flip\". Using the figures you computed, say what is right about that description and what is misleading about it."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "The expected wage of $48,850.00 came out above the median of $47,600. Explain what feature of the fictional distribution produces that, and say whether the expected wage or the median is the better figure to build a minimum plan on."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u01-l03.package.json",
+    "sourcePackageSha256": "ac25ca694d0e14c0e46fe0e1b716cbcec7c5b6533a7426922125e429cf861635",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u01-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

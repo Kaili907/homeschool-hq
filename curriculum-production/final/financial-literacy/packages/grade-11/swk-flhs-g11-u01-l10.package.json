@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l10",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: stating and testing assumptions in a projection"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "stating and testing assumptions in a projection",
+  "objective": "Build a complete fictional pathway model that carries borrowing cost, forgone earnings, and a stated salary advantage through to a payback period, then re-run it under a weaker assumption and defend the recommendation.",
+  "scenario": "Anouk Rasmussen-Diallo is a fictional applicant to an invented two-year programme. Every figure below — tuition, the interest rule, the wages — is simulated for this performance task and describes no real lender or institution.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional programme and loan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional programme runs 2 years at $21,300 a year, entirely borrowed. The invented loan rule is classroom simple interest: 6.5% a year charged on the full borrowed amount for each of the 2 study years, with nothing repaid until study ends. This is a simplified teaching model and not how a real amortising student loan accrues.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total amount borrowed across the 2 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under the stated simple-interest rule, how much interest accrues across the 2 study years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance owed when repayment begins?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "During the 2 study years Anouk would otherwise earn $30,200 a year. After the programme she expects $57,900 against the $33,500 she would earn without it. Build the full model.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What earnings does Anouk give up across the 2 study years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total economic cost of the pathway, counting the balance owed and the earnings given up?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual salary advantage the programme is expected to produce?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How long does the pathway take to pay back at that advantage? Give one decimal place.",
+          "unit": "years"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now stress the model. Suppose the salary advantage turns out to be only $18,300 a year.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the payback period under the weaker advantage? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much longer is the payback under the weaker assumption? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-choice",
+          "text": "A reviewer asks which single input the recommendation is most exposed to. Which is the defensible answer?",
+          "choices": [
+            "The 6.5% interest rate, because it is the only rate in the model",
+            "The $24,400 salary advantage, because it is the only input the payback is divided by",
+            "The $21,300 tuition, because it is the largest single figure"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write your recommendation. Answer both.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend for or against the programme for Anouk. State the payback period you are relying on, the assumptions the recommendation rests on, and the single piece of evidence that would most change your mind."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The loan in this task uses a simplified simple-interest rule. Explain what a real amortising loan would do differently, and say whether that would make the payback period longer or shorter than the 4.4 years you computed."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total economic cost comes out at $60,400 or at $48,138, only one of the two halves is in the model. The two years cost Anouk both the money she borrowed, which has grown to $48,138.00, and the wages she did not earn, which come to $60,400.00. Write the cost as a two-line sum before dividing, and label each line so it is clear neither is a duplicate of the other.",
+  "extension": "Recompute the payback period if Anouk repays $9,000 of the balance during the second study year, and say which line of the model that changes and which it leaves alone.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total amount borrowed across the 2 years?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "Under the stated simple-interest rule, how much interest accrues across the 2 study years?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance owed when repayment begins?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What earnings does Anouk give up across the 2 study years?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total economic cost of the pathway, counting the balance owed and the earnings given up?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the annual salary advantage the programme is expected to produce?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How long does the pathway take to pay back at that advantage? Give one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the payback period under the weaker advantage? Give one decimal place."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much longer is the payback under the weaker assumption? Give one decimal place."
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "A reviewer asks which single input the recommendation is most exposed to. Which is the defensible answer?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Recommend for or against the programme for Anouk. State the payback period you are relying on, the assumptions the recommendation rests on, and the single piece of evidence that would most change your mind."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "The loan in this task uses a simplified simple-interest rule. Explain what a real amortising loan would do differently, and say whether that would make the payback period longer or shorter than the 4.4 years you computed."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u01-l10.package.json",
+    "sourcePackageSha256": "9cfd89ba0382ee23dfd17baefee74097cd22ab7b48da6d0ebdae236609bc2eb4",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u01-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

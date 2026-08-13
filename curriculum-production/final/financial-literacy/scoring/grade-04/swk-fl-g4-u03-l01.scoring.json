@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u03-l01",
+  "lessonId": "ma-g4-financial-literacy-u03-l01",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the price per pen in the 3-pen pack?",
+        "answer": "$1.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(4.50 / 3) = 1.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 450
+            },
+            "by": 3,
+            "round": "exact"
+          },
+          "trace": "(4.50 / 3) = 1.50"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "What is the price per pen in the 5-pen pack?",
+        "answer": "$1.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(6.25 / 5) = 1.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "divide",
+            "of": {
+              "op": "money",
+              "cents": 625
+            },
+            "by": 5,
+            "round": "exact"
+          },
+          "trace": "(6.25 / 5) = 1.25"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "Which pack gives Yara the lower price per pen?",
+        "answer": "The 5-pen pack",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare (6.25 / 5) with (4.50 / 3) = The 5-pen pack. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 625
+              },
+              "by": 5,
+              "round": "exact"
+            },
+            "right": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 450
+              },
+              "by": 3,
+              "round": "exact"
+            },
+            "whenLess": "The 5-pen pack",
+            "whenEqual": "They are the same per pen",
+            "whenGreater": "The 3-pen pack"
+          },
+          "trace": "compare (6.25 / 5) with (4.50 / 3) = The 5-pen pack"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What would 10 pens cost at the better per-pen price?",
+        "answer": "$12.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((6.25 / 5) x 10) = 12.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "divide",
+              "of": {
+                "op": "money",
+                "cents": 625
+              },
+              "by": 5,
+              "round": "exact"
+            },
+            "times": 10
+          },
+          "trace": "((6.25 / 5) x 10) = 12.50"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How much would that save against 10 pens at the worse per-pen price?",
+        "answer": "$2.50",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(((4.50 / 3) x 10) - ((6.25 / 5) x 10)) = 2.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "divide",
+                "of": {
+                  "op": "money",
+                  "cents": 450
+                },
+                "by": 3,
+                "round": "exact"
+              },
+              "times": 10
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "divide",
+                "of": {
+                  "op": "money",
+                  "cents": 625
+                },
+                "by": 5,
+                "round": "exact"
+              },
+              "times": 10
+            }
+          },
+          "trace": "(((4.50 / 3) x 10) - ((6.25 / 5) x 10)) = 2.50"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Explaining unit price",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response says the cheaper sticker price is the better deal for Yara."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Per-pen price is used for Yara but the explanation does not address the sticker price confusion."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Yara's bigger pack costs more in total but less for each pen, and that per-pen price is what makes the two comparable."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the price per pen in the 3-pen pack?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the price per pen in the 5-pen pack?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Which pack gives Yara the lower price per pen?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What would 10 pens cost at the better per-pen price?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much would that save against 10 pens at the worse per-pen price?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Yara's better-value pack had the higher sticker price. Explain to a classmate how both of those can be true."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the price per pen in the 3-pen pack? Answer: $1.50. Verification: (4.50 / 3) = 1.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: What is the price per pen in the 5-pen pack? Answer: $1.25. Verification: (6.25 / 5) = 1.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: Which pack gives Yara the lower price per pen? Answer: The 5-pen pack. Verification: compare (6.25 / 5) with (4.50 / 3) = The 5-pen pack. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What would 10 pens cost at the better per-pen price? Answer: $12.50. Verification: ((6.25 / 5) x 10) = 12.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How much would that save against 10 pens at the worse per-pen price? Answer: $2.50. Verification: (((4.50 / 3) x 10) - ((6.25 / 5) x 10)) = 2.50. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Explaining unit price — Not yet: The response says the cheaper sticker price is the better deal for Yara. Approaching: Per-pen price is used for Yara but the explanation does not address the sticker price confusion. Meets: The response explains that Yara's bigger pack costs more in total but less for each pen, and that per-pen price is what makes the two comparable. The response explains that Yara's bigger pack costs more in total but less for each pen, and that per-pen price is what makes the two comparable."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Yara's bigger pack costs more in total but less for each pen, and that per-pen price is what makes the two comparable."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-04/swk-fl-g4-u03-l01.scoring.json",
+    "sourceScoringSha256": "796de706b578d7ed40ac503877526fddff69121236f5c1c0e1bd4ad2cbf652e5",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

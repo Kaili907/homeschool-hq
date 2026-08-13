@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u06-l02",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: accept, reduce, or transfer a risk"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "accept, reduce, or transfer a risk",
+  "objective": "Price the three standard responses to a single fictional risk — accept it, reduce it, transfer it — and show that the cheapest in expectation is not always the right choice.",
+  "scenario": "A fictional cyclist faces a simulated 15% annual chance of the bicycle being stolen, at a loss of $620. The lock, the policy, and all figures below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the three fictional options in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Accept the risk: do nothing and bear the loss if it happens. Reduce it: a $70 lock cuts the annual chance from 15% to 5%. Transfer it: a policy costs $85 a year and pays the loss less a $100 deductible.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does accepting the risk cost per year in expectation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does reducing the risk cost per year in expectation, counting the lock?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does transferring the risk cost per year in expectation, counting the deductible?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Expected cost is only one of the two things that matter. Now look at the worst case each option allows.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the worst single-year cost of accepting the risk?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the worst single-year cost of transferring the risk?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which option is cheapest in expected annual cost?",
+          "choices": [
+            "Accept the risk",
+            "Reduce the risk with the lock",
+            "Transfer the risk with the policy"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The three options cost almost the same in expectation but differ sharply in their worst case. Recommend one for a cyclist who has $150 in savings, and defend it against the option with the lowest expected cost."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the reduce option comes out cheapest, check whether the $70 lock was included. The lock is paid whether or not the bicycle is stolen, so it is added in full, not multiplied by any probability.",
+  "extension": "Find the lock price at which reducing becomes the cheapest option in expectation, and say whether that changes the worst-case argument.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u06-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does accepting the risk cost per year in expectation?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does reducing the risk cost per year in expectation, counting the lock?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does transferring the risk cost per year in expectation, counting the deductible?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the worst single-year cost of accepting the risk?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the worst single-year cost of transferring the risk?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which option is cheapest in expected annual cost?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The three options cost almost the same in expectation but differ sharply in their worst case. Recommend one for a cyclist who has $150 in savings, and defend it against the option with the lowest expected cost."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u06-l02.package.json",
+    "sourcePackageSha256": "39daaf97b38c38b0009a0ba9ed14492b1ac3f9582bdcda397afa2e2b448de5a3",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u06-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l07",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: total cost of ownership over a holding period"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "total cost of ownership over a holding period",
+  "objective": "Diagnose a fictional purchase comparison that selects on monthly payment, recompute both offers on total cost, and state the condition under which the worksheet’s choice would nonetheless be right.",
+  "scenario": "Jocasta Mbeki-Larsen is a fictional student checking the simulated worksheet below. The offers, the payments, and the worksheet’s conclusion are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional worksheet reproduced in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The worksheet reads: \"Same vehicle, $17,400 financed either way. Offer 1: $421 a month for 48 months. Offer 2: $348 a month for 72 months. Offer 2 saves $73 every month. Choose Offer 2.\" Both offers finance the same amount and neither has a deposit.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "Confirm the worksheet’s monthly saving: how much less is Offer 2 each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under Offer 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of payments under Offer 2?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Both offers finance the same $17,400, so the amount paid above that is the cost of the credit.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest cost of Offer 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest cost of Offer 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much extra interest does the worksheet’s recommended offer cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Across the 48 months both offers share, how much does the monthly saving on Offer 2 add up to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Locate the defect precisely.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "After the 48 months of Offer 1 have ended, how much is still owed on Offer 2 in remaining payments?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which statement identifies the worksheet’s actual error?",
+          "choices": [
+            "It computed the monthly saving incorrectly",
+            "It compared two offers on a per-month figure without holding the number of months constant",
+            "It used the wrong amount financed for Offer 2"
+          ]
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-choice",
+          "text": "Which offer costs less in total?",
+          "choices": [
+            "Offer 1, at 48 months",
+            "Offer 2, at 72 months",
+            "They cost the same in total"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "The worksheet’s arithmetic is correct and its conclusion costs $4,848.00. Explain how a correct figure produced a wrong decision, and give the one additional line the worksheet needed."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "Describe a situation in which choosing Offer 2 would be defensible despite costing $4,848.00 more, and say what the buyer would have to accept for that choice to make sense."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Offer 2 still looks cheaper after the interest is computed, check that 72 payments are being counted and not 48. The two offers do not run for the same time, so the only fair comparison is what each costs in total: $20,208.00 against $25,056.00. Write both totals before comparing anything per month.",
+  "extension": "Find the monthly payment Offer 2 would need over its 72 months to match Offer 1’s total cost, and say whether that payment would still be lower than $421.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "Confirm the worksheet’s monthly saving: how much less is Offer 2 each month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of payments under Offer 1?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of payments under Offer 2?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the interest cost of Offer 1?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the interest cost of Offer 2?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much extra interest does the worksheet’s recommended offer cost?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Across the 48 months both offers share, how much does the monthly saving on Offer 2 add up to?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "After the 48 months of Offer 1 have ended, how much is still owed on Offer 2 in remaining payments?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which statement identifies the worksheet’s actual error?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which offer costs less in total?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "The worksheet’s arithmetic is correct and its conclusion costs $4,848.00. Explain how a correct figure produced a wrong decision, and give the one additional line the worksheet needed."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "Describe a situation in which choosing Offer 2 would be defensible despite costing $4,848.00 more, and say what the buyer would have to accept for that choice to make sense."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u02-l07.package.json",
+    "sourcePackageSha256": "fa9ef2d21ff9bce0e94ac8fa37fcd394933fb22923d8d554ff0f6a025ed6fa22",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u02-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

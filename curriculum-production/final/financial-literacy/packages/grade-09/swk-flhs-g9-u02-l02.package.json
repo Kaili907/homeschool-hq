@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l02",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: total cost beyond the sticker price"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "total cost beyond the sticker price",
+  "objective": "Build the first-year total cost of a fictional purchase from its sticker price plus tax, required equipment, registration, insurance, and maintenance, and express the total as a percentage above sticker.",
+  "scenario": "A fictional buyer is looking at a made-up used scooter advertised at a sticker price of $1,250. Every additional cost below is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional cost list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The sticker price is $1,250. Sales tax is 6% of the sticker price. Registration is $85 once. A helmet and lock, required before riding, come to $120. Insurance is $28 a month. Routine maintenance is $95 for the first year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is the sales tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of insurance cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now total the first year and compare it with the advertised price.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total cost of the first year of ownership?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more than the sticker price is that?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By what percentage does the first-year total exceed the sticker price? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Second-year costs are not the same as first-year costs.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "Assuming insurance and maintenance stay the same and nothing else recurs, what does the second year cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Sort the six costs into one-time and recurring, and explain which sort matters more to someone deciding whether they can afford to keep the scooter, as opposed to whether they can afford to buy it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total is landing near the sticker price, list the six costs in a column and tick each one off as it is added; the two easiest to drop are the $120 of required gear, which feels optional, and the $336 of insurance, which is quoted monthly and has to be annualised before it can join the others.",
+  "extension": "Recompute the first-year total if the buyer finances the scooter and pays $94 in interest during the first year, and say what that does to the percentage above sticker.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much is the sales tax?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does a year of insurance cost?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total cost of the first year of ownership?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more than the sticker price is that?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By what percentage does the first-year total exceed the sticker price? Round to one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "Assuming insurance and maintenance stay the same and nothing else recurs, what does the second year cost?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Sort the six costs into one-time and recurring, and explain which sort matters more to someone deciding whether they can afford to keep the scooter, as opposed to whether they can afford to buy it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u02-l02.package.json",
+    "sourcePackageSha256": "66be43f9a1d005c7e226a257e26f76bbba4aeaa392f877467e6e73403e78cbad",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u02-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u04-l04",
+  "lessonId": "ma-g3-financial-literacy-u04-l04",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much has Emeka saved after four weeks?",
+        "answer": "$3.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(0.75 x 4) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 75
+            },
+            "times": 4
+          },
+          "trace": "(0.75 x 4) = 3.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much has Emeka saved after five weeks?",
+        "answer": "$3.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(0.75 x 5) = 3.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 75
+            },
+            "times": 5
+          },
+          "trace": "(0.75 x 5) = 3.75"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How far is Emeka from the $5.00 kit after five weeks?",
+        "answer": "$1.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(5.00 - (0.75 x 5)) = 1.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 500
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 75
+              },
+              "times": 5
+            }
+          },
+          "trace": "(5.00 - (0.75 x 5)) = 1.25"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much does Emeka have after those two bigger weeks?",
+        "answer": "$6.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((0.75 x 5) + (1.50 x 2)) = 6.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 75
+                },
+                "times": 5
+              },
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 150
+                },
+                "times": 2
+              }
+            ]
+          },
+          "trace": "((0.75 x 5) + (1.50 x 2)) = 6.75"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How does that compare with the $5.00 kit?",
+        "answer": "More than enough",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare ((0.75 x 5) + (1.50 x 2)) with 5.00 = More than enough. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 75
+                  },
+                  "times": 5
+                },
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 150
+                  },
+                  "times": 2
+                }
+              ]
+            },
+            "right": {
+              "op": "money",
+              "cents": 500
+            },
+            "whenLess": "Not enough yet",
+            "whenEqual": "Exactly enough",
+            "whenGreater": "More than enough"
+          },
+          "trace": "compare ((0.75 x 5) + (1.50 x 2)) with 5.00 = More than enough"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning about steady saving",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response agrees that Emeka's $0.75 is too small to bother with, ignoring the totals."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Emeka is said to be making progress but no total from the task is used as evidence."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response uses Emeka's running totals to show that a small repeated amount reaches a real goal, and notes that repetition, not size, did the work."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much has Emeka saved after four weeks?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much has Emeka saved after five weeks?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How far is Emeka from the $5.00 kit after five weeks?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Emeka have after those two bigger weeks?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How does that compare with the $5.00 kit?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Emeka almost gave up because $0.75 felt too small. What do his weekly totals show about small amounts that keep repeating?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much has Emeka saved after four weeks? Answer: $3.00. Verification: (0.75 x 4) = 3.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much has Emeka saved after five weeks? Answer: $3.75. Verification: (0.75 x 5) = 3.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How far is Emeka from the $5.00 kit after five weeks? Answer: $1.25. Verification: (5.00 - (0.75 x 5)) = 1.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much does Emeka have after those two bigger weeks? Answer: $6.75. Verification: ((0.75 x 5) + (1.50 x 2)) = 6.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How does that compare with the $5.00 kit? Answer: More than enough. Verification: compare ((0.75 x 5) + (1.50 x 2)) with 5.00 = More than enough. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reasoning about steady saving — Not yet: The response agrees that Emeka's $0.75 is too small to bother with, ignoring the totals. Approaching: Emeka is said to be making progress but no total from the task is used as evidence. Meets: The response uses Emeka's running totals to show that a small repeated amount reaches a real goal, and notes that repetition, not size, did the work. The response uses Emeka's running totals to show that a small repeated amount reaches a real goal, and notes that repetition, not size, did the work."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response uses Emeka's running totals to show that a small repeated amount reaches a real goal, and notes that repetition, not size, did the work."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u04-l04.scoring.json",
+    "sourceScoringSha256": "990856de37265777130a4d97c040ca1dc442dd8ce11774108aa278a409de9470",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

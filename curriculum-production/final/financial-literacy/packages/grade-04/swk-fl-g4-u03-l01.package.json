@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u03-l01",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending Plans and Comparing",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: unit price and comparing",
+    "focus": "unit price and comparing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 3 — spending plans and comparison"
+  ],
+  "objective": "Learners convert invented multi-pack prices into per-item prices, identify the better value, and apply it to a larger order.",
+  "scenario": "Yara is a made-up fourth grader stocking a pretend classroom supply shelf. One invented option is 3 pens for $4.50; another is 5 of the same pens for $6.25. She needs to know which is the better value per pen.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Turn Yara's 3-for-$4.50 option into a price per pen.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per pen in the 3-pen pack?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Do the same for Yara's 5-for-$6.25 option, then compare the two per-pen prices rather than the pack prices.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per pen in the 5-pen pack?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Which pack gives Yara the lower price per pen?",
+          "choices": [
+            "The 3-pen pack",
+            "The 5-pen pack",
+            "They are the same per pen"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Yara needs 10 pens, and both packs can be bought more than once at the same per-pen price.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would 10 pens cost at the better per-pen price?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would that save against 10 pens at the worse per-pen price?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The bigger pack cost more on the shelf.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Yara's better-value pack had the higher sticker price. Explain to a classmate how both of those can be true."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner compares sticker prices, draw Yara's two packs as rows of pens with the price written above and share the price across the pens aloud before comparing anything.",
+  "extension": "Ask the learner what a 4-pen pack would need to cost to beat Yara's best per-pen price, and to justify it.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u03-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u03-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the price per pen in the 3-pen pack?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the price per pen in the 5-pen pack?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which pack gives Yara the lower price per pen?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would 10 pens cost at the better per-pen price?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much would that save against 10 pens at the worse per-pen price?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Yara's better-value pack had the higher sticker price. Explain to a classmate how both of those can be true."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u03-l01.package.json",
+    "sourcePackageSha256": "4b91a417475c53ff540a4a43d44e79b9ef0a7db19dd5f253d08772d00602a2f1",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u03-l01",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

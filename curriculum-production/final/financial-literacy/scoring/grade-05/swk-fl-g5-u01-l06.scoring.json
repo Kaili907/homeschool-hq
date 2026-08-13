@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u01-l06",
+  "lessonId": "ma-g5-financial-literacy-u01-l06",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Explaining tradeoffs without ranking",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response declares one of Halle's households better with money."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Both of Halle's plans are accepted but the tradeoffs are not identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies what each of Halle's households gains and gives up, and explains that different circumstances make each plan defensible."
+          }
+        ]
+      },
+      {
+        "dimension": "Keeping the discussion respectful",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response drifts into judging real families or repeating private details."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says to be careful without naming a concrete practice."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response names a concrete practice for Halle's class, such as speaking only about the invented households, and explains why it protects classmates."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names the transport problem both invented plans are solving.",
+      "Identifies at least one thing each household gives up.",
+      "Avoids ranking either household as smarter or better.",
+      "Proposes a concrete way to keep the discussion off real families."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "How does each of Halle's invented households solve the same problem, and where does each one spend to do it?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What would each household have to give up to switch to the other plan, and why does that make ranking them unreliable?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "What is one way to keep this discussion about the invented plans rather than about real classmates?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Explaining tradeoffs without ranking — Not yet: The response declares one of Halle's households better with money. Approaching: Both of Halle's plans are accepted but the tradeoffs are not identified. Meets: The response identifies what each of Halle's households gains and gives up, and explains that different circumstances make each plan defensible. Keeping the discussion respectful — Not yet: The response drifts into judging real families or repeating private details. Approaching: The response says to be careful without naming a concrete practice. Meets: The response names a concrete practice for Halle's class, such as speaking only about the invented households, and explains why it protects classmates. Names the transport problem both invented plans are solving. Identifies at least one thing each household gives up. Avoids ranking either household as smarter or better. Proposes a concrete way to keep the discussion off real families."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names the transport problem both invented plans are solving. Identifies at least one thing each household gives up. Avoids ranking either household as smarter or better. Proposes a concrete way to keep the discussion off real families."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u01-l06.scoring.json",
+    "sourceScoringSha256": "faf4eafb159c56422ae1652ed435c51bba1c0f484488672500afba90b97ae1db",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

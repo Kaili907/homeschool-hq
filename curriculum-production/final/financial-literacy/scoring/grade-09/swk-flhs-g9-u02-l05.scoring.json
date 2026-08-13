@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l05",
+  "lessonId": "ma-g9-financial-literacy-u02-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$43.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% off $48.00 is $4.80 off, leaving $43.20."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$19.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60% off $48.00 would leave $19.20 — the price the headline invites a shopper to expect."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$24.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$43.20 actually paid against $19.20 implied by the headline."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "14.2%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One item at 60% and eleven at 10% gives 170 percentage points across 12 items, an average of 14.166%, or 14.2%."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "No, one item is discounted 60%, so the claim is literally true",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The words \"up to\" make the claim true if any single item reaches 60%, and exactly one does — which is why literal truth is a weak test of an advertising claim."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "regular - regular * discount",
+        "substituted": "48 - 48 * 0.1",
+        "result": "$43.20",
+        "why": "10% off $48.00 is $4.80 off, leaving $43.20."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "regular2 - regular2 * headline",
+        "substituted": "48 - 48 * 0.6",
+        "result": "$19.20",
+        "why": "60% off $48.00 would leave $19.20 — the price the headline invites a shopper to expect."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$24.00",
+        "why": "$43.20 actually paid against $19.20 implied by the headline."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round((deepCount * deepPct + shallowCount * shallowPct) / total, 1)",
+        "substituted": "round((1 * 60 + 11 * 10) / 12, 1)",
+        "result": "14.2%",
+        "why": "One item at 60% and eleven at 10% gives 170 percentage points across 12 items, an average of 14.166%, or 14.2%."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "itemsAt60 >= 1",
+        "substituted": "1 >= 1",
+        "result": "No, one item is discounted 60%, so the claim is literally true",
+        "why": "The words \"up to\" make the claim true if any single item reaches 60%, and exactly one does — which is why literal truth is a weak test of an advertising claim."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The headline is literally true and still misleads. Explain how, then rewrite it as a claim a shopper could verify before entering the store.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that \"up to\" describes the maximum across the sale, not the typical discount, and that 11 of the 12 items are at 10%.",
+          "Uses the 14.2% average, or the 1-in-12 count, to show how unrepresentative the 60% figure is.",
+          "Rewrites the claim in checkable terms — naming the typical discount, the number of items at each level, or which items are deeply discounted."
+        ],
+        "evidenceRequirements": [
+          "Cites the item counts (1 at 60%, 11 at 10%) and at least one computed figure from this lesson."
+        ],
+        "lookFors": [
+          "The rewritten claim is verifiable before purchase, not merely more modest in tone.",
+          "The response separates literal truth from the impression the claim creates."
+        ],
+        "commonMisconception": "Judging an advertising claim only by whether it is technically false.",
+        "dimensions": [
+          "evidence-use",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the sale price of the item the shopper wants?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What would that same item cost if the headline discount of 60% applied to it?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the gap between what the headline suggests and what the shopper would actually pay?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the average discount across all 12 sale items? Round to one decimal place."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Is the headline claim \"Save up to 60%\" false as stated?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The headline is literally true and still misleads. Explain how, then rewrite it as a claim a shopper could verify before entering the store."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the sale price of the item the shopper wants? Answer: $43.20. Verification: 10% off $48.00 is $4.80 off, leaving $43.20. t1-p2: What would that same item cost if the headline discount of 60% applied to it? Answer: $19.20. Verification: 60% off $48.00 would leave $19.20 — the price the headline invites a shopper to expect. t1-p3: What is the gap between what the headline suggests and what the shopper would actually pay? Answer: $24.00. Verification: $43.20 actually paid against $19.20 implied by the headline. t2-p1: What is the average discount across all 12 sale items? Round to one decimal place. Answer: 14.2%. Verification: One item at 60% and eleven at 10% gives 170 percentage points across 12 items, an average of 14.166%, or 14.2%. t2-p2: Is the headline claim \"Save up to 60%\" false as stated? Answer: No, one item is discounted 60%, so the claim is literally true. Verification: The words \"up to\" make the claim true if any single item reaches 60%, and exactly one does — which is why literal truth is a weak test of an advertising claim."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. t3-p1: The headline is literally true and still misleads. Explain how, then rewrite it as a claim a shopper could verify before entering the store. Explains that \"up to\" describes the maximum across the sale, not the typical discount, and that 11 of the 12 items are at 10%. Uses the 14.2% average, or the 1-in-12 count, to show how unrepresentative the 60% figure is. Rewrites the claim in checkable terms — naming the typical discount, the number of items at each level, or which items are deeply discounted. Cites the item counts (1 at 60%, 11 at 10%) and at least one computed figure from this lesson. The rewritten claim is verifiable before purchase, not merely more modest in tone. The response separates literal truth from the impression the claim creates."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that \"up to\" describes the maximum across the sale, not the typical discount, and that 11 of the 12 items are at 10%. Uses the 14.2% average, or the 1-in-12 count, to show how unrepresentative the 60% figure is. Rewrites the claim in checkable terms — naming the typical discount, the number of items at each level, or which items are deeply discounted."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u02-l05.scoring.json",
+    "sourceScoringSha256": "921cbfb70526e7467d805805589a12b8e2f6f8b54c1040dccbc9e1cb33e4aca3",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

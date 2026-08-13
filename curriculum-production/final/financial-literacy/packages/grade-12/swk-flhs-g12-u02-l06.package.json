@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l06",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: annual spending review and adjustment"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "annual spending review and adjustment",
+  "objective": "Reconcile a fictional year of actual spending against plan category by category, show that savings absorbed the whole net overspend, and identify which adjustment the figures support.",
+  "scenario": "The plan and the year of actual spending compared below belong to a fictional household. Every figure is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan and actual figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household planned, for the year: housing $15,420, food $6,600, transport $4,800, insurance $2,448, discretionary $3,000, and savings $4,200. It actually spent: housing $15,420, food $7,284, transport $4,116, insurance $2,619, discretionary $3,915, and saved $3,114.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the household plan to allocate across all six categories?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What did the household actually allocate across the same six categories?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The totals agree, so work category by category to find what actually happened.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much did discretionary spending exceed its plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much did savings fall short of its plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the three categories that exceeded plan — food, insurance, and discretionary — come to in total overspend?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Netting off the one category that came in under plan, what is the net overspend outside savings?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The year came in exactly on total and $1,086.00 short on savings. Explain what that equality shows about how this plan actually worked, and propose one change to the plan for next year, saying what it would cost the household."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the review concludes the year went to plan, compare the categories rather than the totals. Five of the six differ from plan, and they cancel out to zero only because savings moved to make them. Compute each category’s variance and check whether they sum to the savings shortfall.",
+  "extension": "Rebuild the year with savings fixed at $4,200 and the $1,086.00 taken from the three overspent categories in proportion to their overspend, and say which category takes the largest cut.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What did the household plan to allocate across all six categories?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What did the household actually allocate across the same six categories?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "By how much did discretionary spending exceed its plan?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "By how much did savings fall short of its plan?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What do the three categories that exceeded plan — food, insurance, and discretionary — come to in total overspend?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Netting off the one category that came in under plan, what is the net overspend outside savings?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The year came in exactly on total and $1,086.00 short on savings. Explain what that equality shows about how this plan actually worked, and propose one change to the plan for next year, saying what it would cost the household."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u02-l06.package.json",
+    "sourcePackageSha256": "fcf1a52a87db39f9de2d48f82cc908c2dba764be07487c0cbff7274a14784fe7",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u02-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

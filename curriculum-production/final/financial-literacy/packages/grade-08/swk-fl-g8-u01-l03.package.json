@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u01-l03",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income",
+    "dayInUnit": 3,
+    "phase": "Guided practice A",
+    "title": "Guided practice A: gross pay deductions and net pay",
+    "focus": "gross pay deductions and net pay"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "objective": "Learners apply several stated payroll deduction rates to an invented gross figure and compute net pay and the total deduction burden.",
+  "scenario": "Cleo is a made-up eighth grader reading a pretend pay statement with $4,200.00 of invented monthly gross pay. Simulated deductions are 7.65% payroll tax, 11% federal withholding, and 4.25% state withholding. This is a teaching example, not a real statement.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Apply the invented 7.65% payroll deduction to Cleo's $4,200.00 gross.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld for simulated payroll tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Apply the federal and state withholding rates to the same gross figure, keeping each as its own line.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld federally at 11%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld by the state at 4.25%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Total Cleo's three deductions and compute net pay, then project the annual deduction burden.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly net pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do the deductions come to across 12 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Nearly a quarter of gross pay never arrived.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Cleo's figures, explain what the payroll deduction funds differently from the withholding lines, and why one may be refundable and the other is not."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner applies later rates to the reduced balance, mark Cleo's gross as the base for all three rates and recompute each from that marked figure.",
+  "extension": "Ask the learner what single combined rate would produce the same total deduction from Cleo's gross, and to show the method.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u01-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u01-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much is withheld for simulated payroll tax?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much is withheld federally at 11%?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much is withheld by the state at 4.25%?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the monthly net pay?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do the deductions come to across 12 months?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Using Cleo's figures, explain what the payroll deduction funds differently from the withholding lines, and why one may be refundable and the other is not."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u01-l03.package.json",
+    "sourcePackageSha256": "7bc85b4e34a033e7cdfad934f1818b4570db3bcb3921f876572e595c30b81631",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u01-l03",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

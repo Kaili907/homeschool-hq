@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u03-l03",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending and Budgeting",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: sales tax concept",
+    "focus": "sales tax concept"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2 foundations",
+    "PF3 foundations"
+  ],
+  "objective": "Learners apply a simulated sales-tax percentage to invented subtotals, compute totals due, and plan a purchase that must include tax.",
+  "scenario": "Lior is a made-up fifth grader shopping in an invented town with a 6.5% simulated sales tax. The first invented subtotal is $240.00. The tax rate and prices are invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Apply the invented 6.5% simulated tax to Lior's $240.00 subtotal.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much simulated tax is added?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Find Lior's total due, then run the same rate on a smaller invented subtotal of $80.00.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total due on the $240.00 subtotal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total due on an $80.00 subtotal?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Lior has $300.00 to spend including tax and is considering a $282.00 invented subtotal.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total due on a $282.00 subtotal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Can Lior cover that with $300.00?",
+          "choices": [
+            "Yes, with money left",
+            "It comes out exactly even",
+            "No, the total is over"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "A subtotal well under the limit still failed at the register.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What rule of thumb could Lior use while shopping so the tax never causes this surprise?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner treats 6.5% as $6.50, work the tax on $100.00 for Lior first so the rate is anchored per hundred before other subtotals are attempted.",
+  "extension": "Ask the learner for the largest whole-dollar subtotal Lior could cover with $300.00 including 6.5% tax, and how they narrowed it.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u03-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u03-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much simulated tax is added?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total due on the $240.00 subtotal?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total due on an $80.00 subtotal?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total due on a $282.00 subtotal?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Can Lior cover that with $300.00?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "What rule of thumb could Lior use while shopping so the tax never causes this surprise?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-05/swk-fl-g5-u03-l03.package.json",
+    "sourcePackageSha256": "4e9a9f1f4f3e35833701759ae4a583421576462bd4358f159333636b25b29504",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g5-financial-literacy-u03-l03",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

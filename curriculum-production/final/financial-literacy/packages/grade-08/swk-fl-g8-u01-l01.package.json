@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u01-l01",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: career and education pathways",
+    "focus": "career and education pathways"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "objective": "Learners compare two invented career pathways by computing the cost of training, the annual earnings gap it produces, and the multi-year position after the cost is repaid.",
+  "scenario": "Adaora is a made-up eighth grader comparing two pretend pathways. Path A requires a $12,000.00 invented two-year program and then pays $42,000.00 a simulated year. Path B needs no program and pays $30,000.00 a year. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the annual earnings gap between Adaora's two invented pathways once Path A is under way.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more does Path A pay each simulated year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Set the $12,000.00 program cost against that annual gap, then project five simulated years of each pathway before any cost is subtracted.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many whole years of the gap repay the program cost?",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Path A earn across five simulated years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Subtract the program cost from Path A and compare the five-year positions.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Path A worth over five years after the program cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more is that than five years of Path B?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The model ignored the two years spent studying.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Adaora's comparison leaves out the earnings forgone during the program. Explain how including them would change the picture and what else the model omits."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner subtracts the program cost from the annual gap rather than the cumulative total, separate Adaora's calculation into an annual line and a one-off line before combining them.",
+  "extension": "Ask the learner to redo Adaora's comparison including two years of forgone Path B earnings, and to state the new five-year difference.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u01-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u01-l01",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much more does Path A pay each simulated year?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many whole years of the gap repay the program cost?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does Path A earn across five simulated years?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Path A worth over five years after the program cost?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more is that than five years of Path B?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Adaora's comparison leaves out the earnings forgone during the program. Explain how including them would change the picture and what else the model omits."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u01-l01.package.json",
+    "sourcePackageSha256": "2b910e3b1eaa690ec71e61c56e0c82ab13481e5e454eca417f7b3dafc85d94ad",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u01-l01",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

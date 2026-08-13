@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u03-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Banking Systems, Interest Mechanics, and Inflation",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: compounding frequency and its effect"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "compounding frequency and its effect",
+  "objective": "Compute one year of growth on the same deposit at the same nominal rate compounded annually, quarterly, and monthly, and express the difference as the effective annual rate the depositor actually receives.",
+  "scenario": "The simulated deposit and the three crediting schedules below are invented for this exercise. All three quote the same 4% nominal annual rate and differ only in how often interest is added.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional deposit terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional depositor places $4,000 for one year at a 4% nominal annual rate. Under quarterly compounding the account adds one quarter of the nominal rate at the end of each of the 4 quarters, and each addition earns interest for the rest of the year. Under monthly compounding it adds one twelfth of the nominal rate at the end of each month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "Compounded once at the end of the year, how much interest does the deposit earn?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after one year with quarterly compounding? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much interest is that, and how does it compare with the once-a-year figure?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for monthly compounding, then state each schedule as an effective annual rate — the single once-a-year rate that would produce the same ending balance.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after one year with monthly compounding? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does monthly compounding produce?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "State the quarterly schedule as an effective annual rate.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "State the monthly schedule as an effective annual rate.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "All three schedules advertise the same 4% rate but pay three different amounts. Explain what the effective annual rate is for, and say what a depositor should ask for when two accounts quote the same nominal rate."
+        }
+      ]
+    }
+  ],
+  "remediation": "If quarterly compounding comes out as $164.00, the rate is being applied four times in full rather than a quarter of it applied four times. Each quarter adds one fourth of 4%, which is 1%, to whatever is in the account at that moment. Compute the four quarterly balances one at a time and watch the interest itself start earning.",
+  "extension": "Work out what the same $4,000 would earn in a year at 4% compounded daily, and say whether the gap from monthly to daily is larger or smaller than the gap from annual to quarterly.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u03-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u03-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "Compounded once at the end of the year, how much interest does the deposit earn?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after one year with quarterly compounding? Round to the nearest cent."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much interest is that, and how does it compare with the once-a-year figure?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after one year with monthly compounding? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does monthly compounding produce?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "State the quarterly schedule as an effective annual rate."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "State the monthly schedule as an effective annual rate."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "All three schedules advertise the same 4% rate but pay three different amounts. Explain what the effective annual rate is for, and say what a depositor should ask for when two accounts quote the same nominal rate."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u03-l02.package.json",
+    "sourcePackageSha256": "d027726de2f12477abcaa3b6cdafbf74aeb021e3018329d2dbc3517ade9c6d8f",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u03-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

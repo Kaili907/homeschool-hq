@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g3-financial-literacy-u02-l03",
+    "courseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Where Money Comes From",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: skills grow with practice",
+    "focus": "skills grow with practice"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 2 — earning and work"
+  ],
+  "objective": "Learners track an invented count of finished work across three weeks of practice, find the growth between weeks, and project a steady rate forward.",
+  "scenario": "Ivy is a made-up third grader learning to fold napkins at a pretend family restaurant. In week one she folds 4 napkins in ten minutes, in week two she folds 7, and in week three she folds 9. These counts are invented to show what practice does.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compare Ivy's first week with her third week.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many more napkins does Ivy fold in week three than in week one?",
+          "unit": "napkins"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now look at all three of Ivy's practice weeks together, then check whether the second week was really an improvement on the first.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many napkins does Ivy fold across all three weeks?",
+          "unit": "napkins"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "How does Ivy's week two compare with her week one?",
+          "choices": [
+            "Fewer in week two",
+            "The same in both weeks",
+            "More in week two"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Suppose Ivy holds steady at her week-three speed of 9 napkins for the next four practice weeks.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many napkins would Ivy fold across those four weeks?",
+          "unit": "napkins"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many more is that than her first three weeks put together?",
+          "unit": "napkins"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Ivy did not get faster by accident.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "What does Ivy's week-by-week change show about what practice does to a skill someone gets paid for?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner adds instead of comparing, write Ivy's three weekly counts on separate cards and slide the week-one card directly beneath the week-three card, so the question of how many more is answered by looking at the gap between two rows.",
+  "extension": "Have the learner sketch what Ivy's fourth week might look like if practice keeps helping but she cannot fold faster than twelve, and explain the ceiling.",
+  "scoringRef": "scoring/grade-03/swk-fl-g3-u02-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g3-financial-literacy-u02-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many more napkins does Ivy fold in week three than in week one?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many napkins does Ivy fold across all three weeks?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How does Ivy's week two compare with her week one?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many napkins would Ivy fold across those four weeks?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many more is that than her first three weeks put together?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "What does Ivy's week-by-week change show about what practice does to a skill someone gets paid for?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-03/swk-fl-g3-u02-l03.package.json",
+    "sourcePackageSha256": "498497705e32596e8806c56ca0538fb4c242f68d6f6ad4a37f4c7434c03a38e1",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-3/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g3-financial-literacy-u02-l03",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

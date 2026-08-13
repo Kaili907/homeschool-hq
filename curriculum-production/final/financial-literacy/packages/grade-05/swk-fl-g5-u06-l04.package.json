@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u06-l04",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "Marketplace Capstone",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: customer communication",
+    "focus": "customer communication"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1-PF6 foundations"
+  ],
+  "objective": "Learners decide how to tell customers about a problem with an invented product and weigh honesty against short-term sales.",
+  "scenario": "Petra is an invented fifth grader who has already sold 12 pretend candles when she notices the invented wicks burn out halfway down. Buyers have not complained yet, the stall closes tomorrow, and everything here is invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Lay out Petra's invented situation: what buyers were told, what she now knows, and who is affected. Keep what she knows separate from what she fears.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What do Petra's buyers currently believe, and what does she now know that they do not?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Write what Petra should tell buyers and how she should tell them, given the stall closes tomorrow and she has already been paid.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should Petra communicate, to whom, and what should she offer?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Saying nothing would probably work out fine for the stall.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is \"nobody complained\" not a good enough reason for Petra to stay quiet?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner counsels silence, ask what they would want to be told as a buyer of Petra's candles, and rebuild the answer from there.",
+  "extension": "Ask the learner to write the exact notice Petra could post at her stall, in under three sentences.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u06-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u06-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What do Petra's buyers currently believe, and what does she now know that they do not?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What should Petra communicate, to whom, and what should she offer?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why is \"nobody complained\" not a good enough reason for Petra to stay quiet?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-05/swk-fl-g5-u06-l04.package.json",
+    "sourcePackageSha256": "422dbd2db980fc66547bdaf2d09447a975b15c11d804fce8642e4cb2288ac506",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g5-financial-literacy-u06-l04",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

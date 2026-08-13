@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u01-l07",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: gross pay versus take-home pay"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "gross pay versus take-home pay",
+  "objective": "Locate the first wrong line in a fictional budget built on gross pay, correct it, and quantify how far the error carried through the rest of the plan.",
+  "scenario": "Below is a fictional monthly budget written by Jaylen Foster, a made-up worker. It contains one mistake made early and carried through. No part of it describes a real person or a real paycheck.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "the fictional budget as written in these directions",
+    "calculator"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Jaylen wrote: \"Gross pay $2,150 a month. That is what I have to work with. Rent $700, phone $55, car $240, food $300, savings $200. Total planned $1,495. Left over $655.\" His fictional employer withholds 21.4% of gross.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-choice",
+          "text": "Which line of Jaylen’s budget is the first one that is wrong?",
+          "choices": [
+            "The gross pay figure of $2,150",
+            "The claim that $2,150 is what he has to work with",
+            "The total planned spending of $1,495",
+            "The leftover figure of $655"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Correct the budget from the start.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is withheld from Jaylen’s $2,150 gross pay at 21.4%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Jaylen’s actual take-home pay for the month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "His five planned amounts are $700, $55, $240, $300, and $200. What do they total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Work these without help.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is actually left over each month after the planned spending?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much did Jaylen’s leftover figure of $655 overstate what he really has?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Name the misconception behind Jaylen’s error, and give a check he could run on any future budget in under a minute that would catch this same mistake."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the learner marks the leftover line as the original error, walk the budget line by line and ask of each: is this line wrong on its own, or only because of a line above it? The leftover line is arithmetically consistent with the (false) starting figure, which is exactly what makes an early error hard to see.",
+  "extension": "Rewrite Jaylen’s budget so it works on his real take-home pay while keeping his $200 savings line intact, and say which other line you cut and why.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u01-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "Which line of Jaylen’s budget is the first one that is wrong?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much is withheld from Jaylen’s $2,150 gross pay at 21.4%?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Jaylen’s actual take-home pay for the month?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "His five planned amounts are $700, $55, $240, $300, and $200. What do they total?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is actually left over each month after the planned spending?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "By how much did Jaylen’s leftover figure of $655 overstate what he really has?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Name the misconception behind Jaylen’s error, and give a check he could run on any future budget in under a minute that would catch this same mistake."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u01-l07.package.json",
+    "sourcePackageSha256": "8964a859fbb42977d41dc9675c5f2d4b7368b3fbfce938f853f60b70f1d08185",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u01-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

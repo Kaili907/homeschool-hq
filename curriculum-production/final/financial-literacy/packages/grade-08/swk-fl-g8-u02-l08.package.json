@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l08",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u02-l08",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services",
+    "dayInUnit": 8,
+    "phase": "Reteach and varied practice",
+    "title": "Reteach and varied practice: comparison shopping and unit cost",
+    "focus": "comparison shopping and unit cost"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "objective": "Learners re-practise unit-price conversion on invented liquid measures and apply the better rate to a larger requirement.",
+  "scenario": "Rosalie is an invented eighth grader comparing two pretend bottles: 900 millilitres for $6.30 and 1.5 litres for $9.75. Working in 100-millilitre units, that is 9 units and 15 units. All prices are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Convert Rosalie's 900-millilitre bottle, which is 9 units, into a price per 100 millilitres.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per 100 millilitres in the smaller bottle?",
+          "unit": "USD per 100 mL"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Convert the 1.5-litre bottle, which is 15 units, and compare Rosalie's two normalised prices.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the price per 100 millilitres in the larger bottle?",
+          "unit": "USD per 100 mL"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much lower is the better rate per 100 millilitres?",
+          "unit": "USD per 100 mL"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Rosalie needs 3 litres, which is 30 hundred-millilitre units, and either bottle can be bought repeatedly.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would 3 litres cost at the better rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the better rate save on 3 litres?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The rate gap was five cents per unit.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "short-response",
+          "text": "Explain the general method Rosalie used, in a form that would work for any two package sizes."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner divides by the raw millilitres, agree the common unit for Rosalie first and count how many of that unit each bottle holds.",
+  "extension": "Ask the learner what a 2-litre bottle would need to cost to beat Rosalie's best rate, and to show the reasoning.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u02-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u02-l08",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the price per 100 millilitres in the smaller bottle?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the price per 100 millilitres in the larger bottle?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much lower is the better rate per 100 millilitres?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would 3 litres cost at the better rate?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does the better rate save on 3 litres?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain the general method Rosalie used, in a form that would work for any two package sizes."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u02-l08.package.json",
+    "sourcePackageSha256": "72696982e385381363d614807b79990cfe7d774887887de790a3b2de2131394e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u02-l08",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

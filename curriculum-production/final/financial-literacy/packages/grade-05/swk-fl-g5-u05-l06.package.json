@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g5-financial-literacy-u05-l06",
+    "courseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Borrowing, Giving, and Risk",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: scams",
+    "focus": "scams"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners analyse an invented scam message for its structure and choose a response that neither engages nor escalates.",
+  "scenario": "Bilal is an invented fifth grader who receives a made-up message: a package cannot be delivered, a small fee must be paid within one hour, and a link leads to a page asking for card details. The message is invented for practice and no real details exist.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "Never enter card, bank, or password details in response to any message; this scenario is invented for practice."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Break the invented message down with Bilal: a plausible story, a deadline, a small amount, and a request for card details. Say what each part is doing rather than whether the story is true.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What job does each part of the message do, and why is the small fee amount deliberately small?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Write what Bilal should do, in order, including how to check whether a delivery problem is real without using anything in the message.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should Bilal do step by step, and how can he check the story without using the link or number in the message?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "The message would have cost only a few dollars if it worked.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is the real risk much larger than the small fee the message asks for?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner focuses on whether a package exists, set the story aside entirely and ask what the sender gains if the card details are entered.",
+  "extension": "Ask the learner to write the version of this message a real delivery service could legitimately send, and to say what is missing from it.",
+  "scoringRef": "scoring/grade-05/swk-fl-g5-u05-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g5-financial-literacy-u05-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What job does each part of the message do, and why is the small fee amount deliberately small?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What should Bilal do step by step, and how can he check the story without using the link or number in the message?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why is the real risk much larger than the small fee the message asks for?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-05/swk-fl-g5-u05-l06.package.json",
+    "sourcePackageSha256": "98432c1e9de981cf554bd9b52a647eaf4b425992320eebed7b1337ccdf67bc3b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g5-financial-literacy-u05-l06",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

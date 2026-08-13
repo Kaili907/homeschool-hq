@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l06",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: reviewing protection after a life change"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "reviewing protection after a life change",
+  "objective": "Reprice a fictional household’s whole protection set after a life change, attribute the increase to its causes, and identify the coverage gap the change created.",
+  "scenario": "The fictional household, the simulated move, and the invented premiums below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional before-and-after premiums in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Before the change the fictional household paid $17 a month for renters cover on $25,000 of property, $118 for auto, and $186 for single health cover, with no life cover. After moving and adding a dependent it would pay $26 for renters, $149 for auto in the new area, $402 for family health cover, and $28 for a new term life policy. The property is now worth $38,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did protection cost each month before the change?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would it cost each month after the change?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much does the monthly cost rise?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now attribute the increase and check what the change left uncovered.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the increase come to across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the increase is the health change and the new life cover together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the renters cover had been left at $25,000, how much of the property would be uncovered?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Of the $284.00 increase, $244.00 follows the dependent and $40.00 follows the move. Explain what that tells the household about which parts of a protection review are triggered by which kind of life change, and say why the $13,000.00 figure is more urgent than any of the premium increases."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the increase attributable to the dependent comes out at $216.00, the new life cover has been left out. The dependent produced two changes: health rising from $186 to $402, which is $216.00, and $28 of life cover that did not exist before. Together they are $244.00 of the $284.00 total.",
+  "extension": "Work out what the household would pay if it raised renters cover to $38,000 at a premium of $34 a month, and say whether that changes which life event drove most of the increase.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What did protection cost each month before the change?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would it cost each month after the change?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how much does the monthly cost rise?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the increase come to across a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of the increase is the health change and the new life cover together?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "If the renters cover had been left at $25,000, how much of the property would be uncovered?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Of the $284.00 increase, $244.00 follows the dependent and $40.00 follows the move. Explain what that tells the household about which parts of a protection review are triggered by which kind of life change, and say why the $13,000.00 figure is more urgent than any of the premium increases."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u06-l06.package.json",
+    "sourcePackageSha256": "4517393f4558610b78845a69a340a1259a41f21fd0bba0e0bcbe58a332f555c4",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u06-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

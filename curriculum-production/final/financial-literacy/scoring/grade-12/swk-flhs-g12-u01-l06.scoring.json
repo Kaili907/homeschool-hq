@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l06",
+  "lessonId": "ma-g12-financial-literacy-u01-l06",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "consumer-protection",
+    "fraud"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$58,240.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,240 in each of 26 periods. This is the figure every box on the summary is reconciled against."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,368.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$168 in each of 26 periods, which matches the $4,368 the summary reports. This box reconciles."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$2,912.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5% of $2,240 is $112 a period, across 26 periods. This is the amount the federal rule excludes and the state rule does not."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$55,328.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,240.00 of gross less the $2,912.00 excluded. This matches the $55,328 the summary reports, so the federal wage box reconciles."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "No — state wages should be the full $58,240.00",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The stated state rule does not exclude the retirement contribution, so state wages should equal full gross of $58,240.00. The summary has carried the federal figure across into a box governed by a different rule. This is read off the stated rules rather than decided by a comparison of two computed amounts."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$123.76",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4.25% of the $2,912.00 wrongly excluded from state wages. Only the excluded amount is mis-taxed; the rest of the state wage base was reported correctly."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "perPeriodGross * periods",
+        "substituted": "2240 * 26",
+        "result": "$58,240.00",
+        "why": "$2,240 in each of 26 periods. This is the figure every box on the summary is reconciled against."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "perPeriodFed * periods2",
+        "substituted": "168 * 26",
+        "result": "$4,368.00",
+        "why": "$168 in each of 26 periods, which matches the $4,368 the summary reports. This box reconciles."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "perPeriodGross2 * retireRate * periods3",
+        "substituted": "2240 * 0.05 * 26",
+        "result": "$2,912.00",
+        "why": "5% of $2,240 is $112 a period, across 26 periods. This is the amount the federal rule excludes and the state rule does not."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 - #t1-p3",
+        "substituted": "#t1-p1 - #t1-p3",
+        "result": "$55,328.00",
+        "why": "$58,240.00 of gross less the $2,912.00 excluded. This matches the $55,328 the summary reports, so the federal wage box reconciles."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p3 * stateRate, 2)",
+        "substituted": "round(#t1-p3 * 0.0425, 2)",
+        "result": "$123.76",
+        "why": "4.25% of the $2,912.00 wrongly excluded from state wages. Only the excluded amount is mis-taxed; the rest of the state wage base was reported correctly."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Two different things can make a year-end summary disagree with a worker’s own records: an employer applying a rule wrongly, and wages appearing that the worker never earned. Say which one this case is and how you can tell, and describe what a worker should do differently if the summary had shown gross pay of $71,000 instead.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies this as a rule-application error: every figure traces to the worker’s own 26 statements, and the discrepancy is confined to which rule was applied to the state wage box.",
+          "States the diagnostic: the statements and the summary agree on what was paid, so nothing unexplained has been added, and the disagreement is about treatment rather than about amount earned.",
+          "Describes a different response to unexplained wages of $71,000: that figure cannot be reconciled to any statement the worker holds, which is a possible sign that earnings have been reported in their name, and it warrants raising the discrepancy promptly and keeping records rather than simply requesting a corrected box."
+        ],
+        "evidenceRequirements": [
+          "Uses the $58,240.00 reconciled gross and the $2,912.00 retirement total to show the discrepancy is fully explained."
+        ],
+        "lookFors": [
+          "The response distinguishes an amount that reconciles from an amount that does not.",
+          "The response treats unexplained earnings as something to be checked and documented, without asserting that fraud has certainly occurred."
+        ],
+        "commonMisconception": "Treating every disagreement between a pay record and a year-end summary as the same kind of problem with the same remedy.",
+        "dimensions": [
+          "error-diagnosis",
+          "evidence-use",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total gross pay the 26 statements add up to?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total federal income tax withheld across the year?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What do the retirement contributions come to for the year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What should federal wages be, given that the retirement contribution is excluded?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "The summary reports the same $55,328 for state wages. Under the fictional state rule, is that box correct?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "At the 4.25% state rate, how much state tax does the understated wage box leave uncollected?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Two different things can make a year-end summary disagree with a worker’s own records: an employer applying a rule wrongly, and wages appearing that the worker never earned. Say which one this case is and how you can tell, and describe what a worker should do differently if the summary had shown gross pay of $71,000 instead."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the total gross pay the 26 statements add up to? Answer: $58,240.00. Verification: $2,240 in each of 26 periods. This is the figure every box on the summary is reconciled against. t1-p2: What is the total federal income tax withheld across the year? Answer: $4,368.00. Verification: $168 in each of 26 periods, which matches the $4,368 the summary reports. This box reconciles. t1-p3: What do the retirement contributions come to for the year? Answer: $2,912.00. Verification: 5% of $2,240 is $112 a period, across 26 periods. This is the amount the federal rule excludes and the state rule does not. t2-p1: What should federal wages be, given that the retirement contribution is excluded? Answer: $55,328.00. Verification: $58,240.00 of gross less the $2,912.00 excluded. This matches the $55,328 the summary reports, so the federal wage box reconciles. t2-p2: The summary reports the same $55,328 for state wages. Under the fictional state rule, is that box correct? Answer: No — state wages should be the full $58,240.00. Verification: The stated state rule does not exclude the retirement contribution, so state wages should equal full gross of $58,240.00. The summary has carried the federal figure across into a box governed by a different rule. This is read off the stated rules rather than decided by a comparison of two computed amounts. t2-p3: At the 4.25% state rate, how much state tax does the understated wage box leave uncollected? Answer: $123.76. Verification: 4.25% of the $2,912.00 wrongly excluded from state wages. Only the excluded amount is mis-taxed; the rest of the state wage base was reported correctly."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. t3-p1: Two different things can make a year-end summary disagree with a worker’s own records: an employer applying a rule wrongly, and wages appearing that the worker never earned. Say which one this case is and how you can tell, and describe what a worker should do differently if the summary had shown gross pay of $71,000 instead. Identifies this as a rule-application error: every figure traces to the worker’s own 26 statements, and the discrepancy is confined to which rule was applied to the state wage box. States the diagnostic: the statements and the summary agree on what was paid, so nothing unexplained has been added, and the disagreement is about treatment rather than about amount earned. Describes a different response to unexplained wages of $71,000: that figure cannot be reconciled to any statement the worker holds, which is a possible sign that earnings have been reported in their name, and it warrants raising the discrepancy promptly and keeping records rather than simply requesting a corrected box. Uses the $58,240.00 reconciled gross and the $2,912.00 retirement total to show the discrepancy is fully explained. The response distinguishes an amount that reconciles from an amount that does not. The response treats unexplained earnings as something to be checked and documented, without asserting that fraud has certainly occurred."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies this as a rule-application error: every figure traces to the worker’s own 26 statements, and the discrepancy is confined to which rule was applied to the state wage box. States the diagnostic: the statements and the summary agree on what was paid, so nothing unexplained has been added, and the disagreement is about treatment rather than about amount earned. Describes a different response to unexplained wages of $71,000: that figure cannot be reconciled to any statement the worker holds, which is a possible sign that earnings have been reported in their name, and it warrants raising the discrepancy promptly and keeping records rather than simply requesting a corrected box."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u01-l06.scoring.json",
+    "sourceScoringSha256": "a4f0d117b8f32a7c7bd916613ddd14adc9e3589c509a56a617b3943d27a9b7b6",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

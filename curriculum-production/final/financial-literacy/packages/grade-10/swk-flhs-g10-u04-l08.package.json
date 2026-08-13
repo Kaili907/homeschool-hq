@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l08",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l08",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: secured, unsecured, revolving, and installment credit"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "secured, unsecured, revolving, and installment credit",
+  "objective": "Apply the revolving-credit model to a deferred-interest offer, compute what a small remaining balance triggers, and express the result as the cost of the final payment.",
+  "scenario": "The simulated store promotion below is invented for this exercise. Under its stated terms, no interest is charged if the full purchase is repaid within the promotional period, and if any balance remains at the end of it, interest is charged on the entire original purchase amount for the whole promotional period.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional promotion terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional shopper buys an $1,800 item under a promotion offering no interest for 12 months. The promotional rate is 26.99%, and under the stated terms it applies to the full original purchase amount for the whole 12 months if any balance is left at the end. The shopper plans to clear the purchase in equal monthly amounts across the 12 months.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What equal monthly payment clears the purchase within the promotional period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "The shopper misses the final payment, leaving $150 outstanding at the end of month 12. Under the stated terms, what interest is charged?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the shopper now owe in total at the end of month 12?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put a price on the missed payment itself.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "The retroactive interest is how many times the $150 that was left unpaid? Round to two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Counting the retroactive interest, the shopper paid what percentage of the sticker price?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Under the stated terms, what determines whether the interest is charged?",
+          "choices": [
+            "How large the remaining balance is at the end of the promotion",
+            "Whether any balance at all remains at the end of the promotion",
+            "How many payments were made during the promotion"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain the difference between interest that is waived and interest that is deferred, and say what a shopper should set up at the moment of purchase so that this promotion behaves the way it appears to."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the retroactive interest is computed on the $150 left over, read the promotion’s terms again: the rate applies to the entire original purchase amount for the whole promotional period. The base is the $1,800 that was bought, not the balance that happened to remain.",
+  "extension": "Work out what monthly payment would have cleared the purchase in 11 months instead of 12, and say what that extra margin is worth given the $485.82 at stake.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What equal monthly payment clears the purchase within the promotional period?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "The shopper misses the final payment, leaving $150 outstanding at the end of month 12. Under the stated terms, what interest is charged?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does the shopper now owe in total at the end of month 12?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "The retroactive interest is how many times the $150 that was left unpaid? Round to two decimal places."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Counting the retroactive interest, the shopper paid what percentage of the sticker price?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Under the stated terms, what determines whether the interest is charged?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain the difference between interest that is waived and interest that is deferred, and say what a shopper should set up at the moment of purchase so that this promotion behaves the way it appears to."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u04-l08.package.json",
+    "sourcePackageSha256": "5203fcfb18023b389bbd1b8aa4592297a82a1ef41d71bc11d72716208219a004",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u04-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

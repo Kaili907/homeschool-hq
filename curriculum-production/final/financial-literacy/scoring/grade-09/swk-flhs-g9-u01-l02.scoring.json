@@ -1,0 +1,289 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l02",
+  "lessonId": "ma-g9-financial-literacy-u01-l02",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,020.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The match is a percentage of salary, so 3% of $34,000 is $1,020."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$38,620.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Total compensation adds employer-paid items to salary: $34,000 + $3,600 + $1,020."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$36,865.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Offer B adds only its 1% match: $36,500 + $365, with no health contribution to include."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Offer A, from Brightleaf",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Offer A totals $38,620 against Offer B’s $36,865, so the offer with the lower salary line is worth more once benefits are counted."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$1,307.69",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "A day of Offer A’s salary is $34,000 / 260 = $130.769..., and ten of them come to $1,307.69 after rounding to the cent."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$1,755.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,620 less $36,865, the two totals computed above."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "salaryA * matchA",
+        "substituted": "34000 * 0.03",
+        "result": "$1,020.00",
+        "why": "The match is a percentage of salary, so 3% of $34,000 is $1,020."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "salaryA2 + healthA + #t1-p1",
+        "substituted": "34000 + 3600 + #t1-p1",
+        "result": "$38,620.00",
+        "why": "Total compensation adds employer-paid items to salary: $34,000 + $3,600 + $1,020."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "salaryB + salaryB * matchB",
+        "substituted": "36500 + 36500 * 0.01",
+        "result": "$36,865.00",
+        "why": "Offer B adds only its 1% match: $36,500 + $365, with no health contribution to include."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "sA + hA + sA * mA > sB + sB * mB",
+        "substituted": "34000 + 3600 + 34000 * 0.03 > 36500 + 36500 * 0.01",
+        "result": "Offer A, from Brightleaf",
+        "why": "Offer A totals $38,620 against Offer B’s $36,865, so the offer with the lower salary line is worth more once benefits are counted."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(salary / workYear * daysOff, 2)",
+        "substituted": "round(34000 / 260 * 10, 2)",
+        "result": "$1,307.69",
+        "why": "A day of Offer A’s salary is $34,000 / 260 = $130.769..., and ten of them come to $1,307.69 after rounding to the cent."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t1-p2 - #t2-p1",
+        "substituted": "#t1-p2 - #t2-p1",
+        "result": "$1,755.00",
+        "why": "$38,620 less $36,865, the two totals computed above."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "A friend of Nadia’s says Riverbend is obviously the better offer because it pays $2,500 more. Say what that comparison leaves out and what it would take for Riverbend to actually be worth more.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that the $2,500 salary difference ignores the $3,600 health contribution and the difference in retirement match.",
+          "Names a specific condition under which Riverbend could still be the better choice, such as Nadia already being covered by health insurance so the $3,600 is worth nothing to her."
+        ],
+        "evidenceRequirements": [
+          "Refers to at least one employer-paid figure from Offer A — the $3,600 health contribution or the $1,020 match — as the thing the salary comparison omits."
+        ],
+        "lookFors": [
+          "The response treats the health contribution as compensation only if Nadia would otherwise have to buy that coverage.",
+          "The response does not simply restate that Offer A totals more; it says which omitted item carries the difference."
+        ],
+        "commonMisconception": "Reading the salary line as the whole of what a job pays.",
+        "dimensions": [
+          "tradeoff-defense",
+          "evidence-use",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is Brightleaf’s retirement match worth in a year, at 3% of salary?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total annual compensation of Offer A, counting salary, the health contribution, and the retirement match?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the total annual compensation of Offer B?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Which offer provides more total annual compensation?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What are Brightleaf’s 10 paid days off worth in a year, valued at Offer A’s daily rate?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how much does Offer A’s total compensation exceed Offer B’s, before counting paid days off?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "A friend of Nadia’s says Riverbend is obviously the better offer because it pays $2,500 more. Say what that comparison leaves out and what it would take for Riverbend to actually be worth more."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much is Brightleaf’s retirement match worth in a year, at 3% of salary? Answer: $1,020.00. Verification: The match is a percentage of salary, so 3% of $34,000 is $1,020. t1-p2: What is the total annual compensation of Offer A, counting salary, the health contribution, and the retirement match? Answer: $38,620.00. Verification: Total compensation adds employer-paid items to salary: $34,000 + $3,600 + $1,020. t2-p1: What is the total annual compensation of Offer B? Answer: $36,865.00. Verification: Offer B adds only its 1% match: $36,500 + $365, with no health contribution to include. t2-p2: Which offer provides more total annual compensation? Answer: Offer A, from Brightleaf. Verification: Offer A totals $38,620 against Offer B’s $36,865, so the offer with the lower salary line is worth more once benefits are counted. t3-p1: What are Brightleaf’s 10 paid days off worth in a year, valued at Offer A’s daily rate? Answer: $1,307.69. Verification: A day of Offer A’s salary is $34,000 / 260 = $130.769..., and ten of them come to $1,307.69 after rounding to the cent. t3-p2: By how much does Offer A’s total compensation exceed Offer B’s, before counting paid days off? Answer: $1,755.00. Verification: $38,620 less $36,865, the two totals computed above."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t4-p1: A friend of Nadia’s says Riverbend is obviously the better offer because it pays $2,500 more. Say what that comparison leaves out and what it would take for Riverbend to actually be worth more. States that the $2,500 salary difference ignores the $3,600 health contribution and the difference in retirement match. Names a specific condition under which Riverbend could still be the better choice, such as Nadia already being covered by health insurance so the $3,600 is worth nothing to her. Refers to at least one employer-paid figure from Offer A — the $3,600 health contribution or the $1,020 match — as the thing the salary comparison omits. The response treats the health contribution as compensation only if Nadia would otherwise have to buy that coverage. The response does not simply restate that Offer A totals more; it says which omitted item carries the difference."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that the $2,500 salary difference ignores the $3,600 health contribution and the difference in retirement match. Names a specific condition under which Riverbend could still be the better choice, such as Nadia already being covered by health insurance so the $3,600 is worth nothing to her."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 2
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u01-l02.scoring.json",
+    "sourceScoringSha256": "4aebf74087b92f3899974c9c08bfdbd2c960055cbaf8f884c9e5fa34b28ddc3f",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

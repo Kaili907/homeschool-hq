@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l08",
+  "lessonId": "ma-g10-financial-literacy-u06-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "2% of the $180,000 coverage limit. Because it is calculated on the limit, this figure is the same for a small loss and a large one."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$43,900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $3,600.00 deductible comes off the $47,500 loss, leaving $43,900.00, which is below the $180,000 limit, so the limit does not bind."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Exactly the deductible, because the limit was not reached. This matches the pattern from the flat-deductible policies, even though the deductible was computed differently."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$180,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $3,600.00 deductible off the $195,000 loss leaves $191,400, which exceeds the $180,000 limit, so the limit binds and the policy pays the full $180,000.00 — not the limit less the deductible."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$15,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $195,000 loss less the $180,000.00 paid — more than four times the deductible, because the limit bound and the homeowner carries everything above it."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$46,500 against $43,900.00. The percentage deductible is $2,600.00 larger than the flat one here, and it grows with the coverage limit rather than staying fixed."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "It would rise",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "The deductible is 2% of the coverage limit, so raising the limit raises it too. Buying more coverage under this structure also increases what the homeowner bears on every windstorm claim, which is not obvious from the word \"deductible\" alone."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "dwelling * windPct",
+        "substituted": "180000 * 0.02",
+        "result": "$3,600.00",
+        "why": "2% of the $180,000 coverage limit. Because it is calculated on the limit, this figure is the same for a small loss and a large one."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "min(loss1 - #t1-p1, dwelling2)",
+        "substituted": "min(47500 - #t1-p1, 180000)",
+        "result": "$43,900.00",
+        "why": "The $3,600.00 deductible comes off the $47,500 loss, leaving $43,900.00, which is below the $180,000 limit, so the limit does not bind."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "loss1b - #t1-p2",
+        "substituted": "47500 - #t1-p2",
+        "result": "$3,600.00",
+        "why": "Exactly the deductible, because the limit was not reached. This matches the pattern from the flat-deductible policies, even though the deductible was computed differently."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "min(loss2 - #t1-p1, dwelling3)",
+        "substituted": "min(195000 - #t1-p1, 180000)",
+        "result": "$180,000.00",
+        "why": "The $3,600.00 deductible off the $195,000 loss leaves $191,400, which exceeds the $180,000 limit, so the limit binds and the policy pays the full $180,000.00 — not the limit less the deductible."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "loss2b - #t2-p1",
+        "substituted": "195000 - #t2-p1",
+        "result": "$15,000.00",
+        "why": "The $195,000 loss less the $180,000.00 paid — more than four times the deductible, because the limit bound and the homeowner carries everything above it."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "min(loss1c - flatDed, dwelling4) - #t1-p2",
+        "substituted": "min(47500 - 1000, 180000) - #t1-p2",
+        "result": "$2,600.00",
+        "why": "$46,500 against $43,900.00. The percentage deductible is $2,600.00 larger than the flat one here, and it grows with the coverage limit rather than staying fixed."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "newLimit > oldLimit",
+        "substituted": "220000 > 180000",
+        "result": "It would rise",
+        "why": "The deductible is 2% of the coverage limit, so raising the limit raises it too. Buying more coverage under this structure also increases what the homeowner bears on every windstorm claim, which is not obvious from the word \"deductible\" alone."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The payout rule was the same in this lesson as in the flat-deductible ones, but one input was computed differently. State the rule in a form that covers both, explain what changes when a deductible is set as a percentage of the limit, and say what a homeowner should check before raising a coverage limit.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the rule in a form that survives the change: work out the deductible however the policy defines it, subtract it from the loss, and pay that amount up to the coverage limit.",
+          "Explains that a percentage deductible scales with the limit rather than with the loss, so it is fixed across losses of different sizes but moves whenever the limit changes.",
+          "Advises checking how the deductible is defined before raising a limit, since under this structure more coverage also means a larger amount borne on every claim."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,600.00 deductible, the $43,900.00 payout, and the $15,000.00 the homeowner bore on the larger loss."
+        ],
+        "lookFors": [
+          "The response separates how the deductible is computed from how the payout is computed.",
+          "The response notices that raising the limit has two opposing effects and does not treat more coverage as strictly better."
+        ],
+        "commonMisconception": "Assuming a deductible is always a flat amount that does not change when the coverage limit changes.",
+        "dimensions": [
+          "transfer",
+          "criteria-application",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the windstorm deductible in dollars?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "On the $47,500 loss, what does the policy pay?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the homeowner pay on that loss?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "On the $195,000 loss, what does the policy pay?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the homeowner pay on that loss?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "If the policy had carried a flat $1,000 deductible instead, how much more would it have paid on the $47,500 loss?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "If the homeowner raised the dwelling coverage limit to $220,000, what would happen to the windstorm deductible?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The payout rule was the same in this lesson as in the flat-deductible ones, but one input was computed differently. State the rule in a form that covers both, explain what changes when a deductible is set as a percentage of the limit, and say what a homeowner should check before raising a coverage limit."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the windstorm deductible in dollars? Answer: $3,600.00. Verification: 2% of the $180,000 coverage limit. Because it is calculated on the limit, this figure is the same for a small loss and a large one. t1-p2: On the $47,500 loss, what does the policy pay? Answer: $43,900.00. Verification: The $3,600.00 deductible comes off the $47,500 loss, leaving $43,900.00, which is below the $180,000 limit, so the limit does not bind. t1-p3: What does the homeowner pay on that loss? Answer: $3,600.00. Verification: Exactly the deductible, because the limit was not reached. This matches the pattern from the flat-deductible policies, even though the deductible was computed differently. t2-p1: On the $195,000 loss, what does the policy pay? Answer: $180,000.00. Verification: The $3,600.00 deductible off the $195,000 loss leaves $191,400, which exceeds the $180,000 limit, so the limit binds and the policy pays the full $180,000.00 — not the limit less the deductible. t2-p2: What does the homeowner pay on that loss? Answer: $15,000.00. Verification: The $195,000 loss less the $180,000.00 paid — more than four times the deductible, because the limit bound and the homeowner carries everything above it. t2-p3: If the policy had carried a flat $1,000 deductible instead, how much more would it have paid on the $47,500 loss? Answer: $2,600.00. Verification: $46,500 against $43,900.00. The percentage deductible is $2,600.00 larger than the flat one here, and it grows with the coverage limit rather than staying fixed. t2-p4: If the homeowner raised the dwelling coverage limit to $220,000, what would happen to the windstorm deductible? Answer: It would rise. Verification: The deductible is 2% of the coverage limit, so raising the limit raises it too. Buying more coverage under this structure also increases what the homeowner bears on every windstorm claim, which is not obvious from the word \"deductible\" alone."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The payout rule was the same in this lesson as in the flat-deductible ones, but one input was computed differently. State the rule in a form that covers both, explain what changes when a deductible is set as a percentage of the limit, and say what a homeowner should check before raising a coverage limit. States the rule in a form that survives the change: work out the deductible however the policy defines it, subtract it from the loss, and pay that amount up to the coverage limit. Explains that a percentage deductible scales with the limit rather than with the loss, so it is fixed across losses of different sizes but moves whenever the limit changes. Advises checking how the deductible is defined before raising a limit, since under this structure more coverage also means a larger amount borne on every claim. Uses the $3,600.00 deductible, the $43,900.00 payout, and the $15,000.00 the homeowner bore on the larger loss. The response separates how the deductible is computed from how the payout is computed. The response notices that raising the limit has two opposing effects and does not treat more coverage as strictly better."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States the rule in a form that survives the change: work out the deductible however the policy defines it, subtract it from the loss, and pay that amount up to the coverage limit. Explains that a percentage deductible scales with the limit rather than with the loss, so it is fixed across losses of different sizes but moves whenever the limit changes. Advises checking how the deductible is defined before raising a limit, since under this structure more coverage also means a larger amount borne on every claim."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u06-l08.scoring.json",
+    "sourceScoringSha256": "b42ddb451de2207fcb90e287aecaa979ae96f9de37ce3bde098d67e0966d7950",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

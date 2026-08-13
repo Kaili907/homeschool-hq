@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g4-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g4-financial-literacy-u03-l05",
+    "courseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "Spending Plans and Comparing",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: a one-week simulated budget",
+    "focus": "a one-week simulated budget"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 3 — spending plans and comparison"
+  ],
+  "objective": "Learners build a one-week simulated budget from invented categories, check it against invented income, and test what one unplanned addition does to the balance.",
+  "scenario": "Sena is a made-up fourth grader building a pretend one-week budget from $45.00 of simulated income. Her invented categories are $12.00 for food, $9.50 for transport, $6.25 for supplies, and $10.00 for saving.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Total Sena's four invented budget categories.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Sena's planned week come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Check the plan against Sena's $45.00 of simulated income, and say what the leftover means for the week.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $45.00 is unallocated?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "How does Sena's planned week compare with her income?",
+          "choices": [
+            "Inside her income",
+            "Exactly at her income",
+            "Over her income"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "An unplanned invented $8.00 school trip fee lands mid-week, and Sena refuses to cut her saving category.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the week cost with the trip fee added?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much must Sena cut from the other categories to stay inside $45.00?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "The unplanned fee was larger than the unallocated money.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Sena kept her saving category untouched. Was that the right call here, and what would change your answer?"
+        }
+      ]
+    }
+  ],
+  "remediation": "When a learner cannot find the required cut, write Sena's new total and her income as two numbers on one line and have the subtraction produce the cut directly, rather than reworking every category.",
+  "extension": "Ask the learner to rebuild Sena's week with the trip fee included and the saving category intact, and to show the new category amounts.",
+  "scoringRef": "scoring/grade-04/swk-fl-g4-u03-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "mac/g34-rfl-finlit-r1",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g4-financial-literacy-u03-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does Sena's planned week come to?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much of the $45.00 is unallocated?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How does Sena's planned week compare with her income?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the week cost with the trip fee added?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much must Sena cut from the other categories to stay inside $45.00?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Sena kept her saving category untouched. Was that the right call here, and what would change your answer?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-04/swk-fl-g4-u03-l05.package.json",
+    "sourcePackageSha256": "3bf957bbcb47bde5b03b9762236a8be55a72f96fb9ba6a1483d1b8eaf7ca285a",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "mac/g34-rfl-finlit-r1",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-4/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g4-financial-literacy-u03-l05",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

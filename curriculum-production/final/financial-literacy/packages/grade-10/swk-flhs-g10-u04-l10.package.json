@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l10",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: the FAFSA process, dependency, and aid packaging"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "the FAFSA process, dependency, and aid packaging",
+  "objective": "Build a complete two-year financing plan for a fictional pathway from gift aid, work study, and loans, then compute the repayment shape of the debt it creates.",
+  "scenario": "The simulated two-year pathway, its costs, and its aid are invented for this exercise. In-school interest on the unsubsidised balance accrues at a simple annual rate and capitalises once at repayment, and the repayment figures assume every monthly payment equals the rounded level payment. No real institution or applicant is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pathway figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional two-year pathway costs $16,900 a year. Each year the applicant receives a $5,200 grant, a $2,000 scholarship, $3,000 of work study, a $3,500 subsidised loan, and a $2,000 unsubsidised loan. Over the two years that is $7,000 of subsidised borrowing and $4,000 of unsubsidised borrowing.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the pathway cost over the two years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total gift aid over the two years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total self-help aid — work study and both loans — over the two years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Now finish the plan. The $4,000 of unsubsidised borrowing actually arrives as $2,000 in each of the two years; this model collapses that into a single balance accruing 5.5% simple interest for 1.5 years, which is the average time the two halves are outstanding, and capitalising once. A real schedule tracks each disbursement separately. Both federal loans are then repaid together at 5.5% over 120 months, on the level-payment basis used earlier in this unit.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What gap remains after every line of aid is used across the two years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest accrues on the unsubsidised balance before repayment begins?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total federal balance when repayment begins?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the level monthly payment over 120 months at 5.5%? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is repaid in total over the 120 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "How much of that total is interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences, using the figures you computed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Report this plan in four sentences: what the pathway costs, what is given, what is owed, and what repaying it looks like. Then name the single change to the package that would most reduce the total repaid, and defend it with a figure."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the repayment-start balance comes out as $11,000.00, the in-school accrual has been left out. The subsidised $7,000 accrues nothing, but the unsubsidised $4,000 accrues 5.5% for 1.5 years and that $330.00 capitalises onto the balance before the first payment is due.",
+  "extension": "Recompute the monthly payment and total repaid if the applicant pays the unsubsidised interest during school instead of letting it capitalise, and say how much of the saving comes from the $330.00 itself and how much from the interest it would have earned.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the pathway cost over the two years?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total gift aid over the two years?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the total self-help aid — work study and both loans — over the two years?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What gap remains after every line of aid is used across the two years?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much interest accrues on the unsubsidised balance before repayment begins?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the total federal balance when repayment begins?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the level monthly payment over 120 months at 5.5%? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What is repaid in total over the 120 months?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "How much of that total is interest?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Report this plan in four sentences: what the pathway costs, what is given, what is owed, and what repaying it looks like. Then name the single change to the package that would most reduce the total repaid, and defend it with a figure."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u04-l10.package.json",
+    "sourcePackageSha256": "33aedb9af7167a27ebd0fb171a8b59789d4cff2b865e497db851d3ed2406a501",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u04-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

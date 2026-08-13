@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l06",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: self-employment and multiple income streams"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "self-employment and multiple income streams",
+  "objective": "Compute what a fictional freelancer actually keeps after business expenses, self-employment tax, and self-funded health cover, and compare it with a fictional employed alternative.",
+  "scenario": "A fictional freelancer and a fictional employee are compared below. Every figure, including the simplified tax treatment, is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional income situations in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional freelancer invoices $41,000 a year and has $7,400 of business expenses. Under the simplified fictional rule used here, self-employment tax is 15.3% of net business income. Health cover bought individually costs $5,400 a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the freelancer’s net business income after expenses?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the self-employment tax under the simplified fictional rule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the freelancer keep after self-employment tax and health cover?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The fictional employed alternative pays $38,000, with the employer paying half the payroll tax so the employee pays 7.65%, and providing health cover worth $6,900.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the employee keep after their payroll tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much better off is the employee before counting the health benefit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the freelancer need to invoice to match the employee’s position, treating the $6,900 health benefit as part of what the employee receives? Give the shortfall the freelancer must close.",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The freelancer invoices $3,000 more than the employee earns and ends up far behind. Explain where the gap comes from, and name two things the freelancer gets that this comparison does not price."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the freelancer looks ahead, check whether the comparison started from $41,000 rather than $33,600. Revenue is what comes in; income is what is left after the costs of producing it, and only the second is comparable with a salary.",
+  "extension": "Recompute the freelancer’s position with $2,200 of expenses instead of $7,400 and no health cover purchased, and say what each change assumes about their circumstances.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the freelancer’s net business income after expenses?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the self-employment tax under the simplified fictional rule?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does the freelancer keep after self-employment tax and health cover?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the employee keep after their payroll tax?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much better off is the employee before counting the health benefit?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would the freelancer need to invoice to match the employee’s position, treating the $6,900 health benefit as part of what the employee receives? Give the shortfall the freelancer must close."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The freelancer invoices $3,000 more than the employee earns and ends up far behind. Explain where the gap comes from, and name two things the freelancer gets that this comparison does not price."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-10/swk-flhs-g10-u01-l06.package.json",
+    "sourcePackageSha256": "3046a7ee16c2e7d8ed3ebc1f4b454696f91bcd4d38c357d1220934759fcf335b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u01-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

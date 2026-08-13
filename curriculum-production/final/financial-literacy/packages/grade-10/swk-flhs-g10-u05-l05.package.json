@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u05-l05",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Markets, Vehicles, and Regulation",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: tax-advantaged account types compared"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "tax-advantaged account types compared",
+  "objective": "Compute the after-tax result of the same fictional contribution in a pre-tax account, an after-tax account, and an ordinary taxable account, and identify the single condition that decides between the first two.",
+  "scenario": "The three simulated account types and the tax rates below are invented for this exercise. This simplified model applies one flat rate to a whole withdrawal and ignores contribution limits, penalties, employer contributions, and required distributions. It also taxes every year’s growth in the ordinary account at the full rate as it is earned, where a real taxable account defers tax on gains until they are realised and may tax them at a different rate, so the cost it computes for that account is an upper bound. It is a teaching model, not a description of any real account, and it is not advice about anyone’s own saving.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account rules in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Carry every calculation through without rounding, and round only the figure a question actually asks for — rounding a running total and then reusing it will move the last cent. A fictional saver has $4,000 of income to commit for 25 years at a simulated 6% annual growth rate. The pre-tax account takes the whole $4,000 before tax and taxes the withdrawal. The after-tax account takes the $4,000 after tax is paid on it and does not tax the withdrawal. The ordinary account takes the $4,000 after tax and taxes the growth each year. The tax rate is 22% now.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the pre-tax account hold after 25 years, before any withdrawal tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the withdrawal is taxed at 22%, what does the saver keep from the pre-tax account? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much actually goes into the after-tax account, once 22% tax is paid on the $4,000 first?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now grow the after-tax account, then test what happens if the rate at withdrawal is 12% rather than 22%, and finally compare with the ordinary taxable account, where each year’s growth is taxed at 22% as it is earned.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the after-tax account hold after 25 years, with no tax due on withdrawal? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Suppose the saver’s rate at withdrawal is 12% instead. What does the pre-tax account leave then? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much better off is the pre-tax account in that case?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does the ordinary taxable account hold after 25 years, with each year’s 6% growth taxed at 22% as it is earned? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much does the annual taxing of growth cost against the after-tax account?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Under this model the pre-tax and after-tax accounts finished exactly level at $13,390.64. State the single condition that made them equal, say which one wins if that condition breaks in each direction, and name one thing this simplified model leaves out."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the pre-tax account looks like an automatic winner, compare what each one taxes. Taxing $4,000 at the start and growing $3,120.00, or growing $4,000 and taxing the result, give the same answer when the rate is the same — both come to $13,390.64. Only a change in the rate between the two moments separates them.",
+  "extension": "Work out which account wins if the rate at withdrawal is 30%, and say what a saver would need to know about a future they cannot see in order to choose confidently.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u05-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u05-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the pre-tax account hold after 25 years, before any withdrawal tax?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "If the withdrawal is taxed at 22%, what does the saver keep from the pre-tax account? Round to the nearest cent."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much actually goes into the after-tax account, once 22% tax is paid on the $4,000 first?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the after-tax account hold after 25 years, with no tax due on withdrawal? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Suppose the saver’s rate at withdrawal is 12% instead. What does the pre-tax account leave then? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much better off is the pre-tax account in that case?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What does the ordinary taxable account hold after 25 years, with each year’s 6% growth taxed at 22% as it is earned? Round to the nearest cent."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "How much does the annual taxing of growth cost against the after-tax account?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Under this model the pre-tax and after-tax accounts finished exactly level at $13,390.64. State the single condition that made them equal, say which one wins if that condition breaks in each direction, and name one thing this simplified model leaves out."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u05-l05.package.json",
+    "sourcePackageSha256": "83b437bcd91b16e363ccbad66d676d0cb8f48e89c7df4bebd8c10bfc0ec8d4d5",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u05-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

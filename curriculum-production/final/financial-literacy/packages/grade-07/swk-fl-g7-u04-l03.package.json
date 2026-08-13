@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u04-l03",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "Credit and Borrowing",
+    "dayInUnit": 3,
+    "phase": "Guided practice",
+    "title": "Guided practice: minimum payments",
+    "focus": "minimum payments"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4 foundations"
+  ],
+  "objective": "Learners compute monthly interest on an invented revolving balance and see how much of a minimum payment reduces principal.",
+  "scenario": "Silas is a made-up seventh grader modelling a pretend revolving balance of $800.00 at an invented 1.5% monthly interest rate, with a $25.00 minimum payment. Nothing here is a real account.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "This balance and rate are invented for the exercise; never enter a real card or account number anywhere on this sheet."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute one month of interest on Silas's invented $800.00 balance at 1.5%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest is charged in month one?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Split the $25.00 minimum payment into the part that covers interest and the part that reduces the balance, then find the new balance.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the $25.00 payment reduces the balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after month one?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Run month two on the new balance, remembering the interest is charged on what is now owed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest is charged in month two?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after month two?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Two payments of $25.00 reduced the balance by about $26.00.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Using Silas's figures, explain why paying only the minimum takes so long, and estimate what would change if the payment were doubled."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner subtracts the payment from the balance directly, require the interest line to be computed and subtracted from the payment first for Silas.",
+  "extension": "Ask the learner to compute Silas's month three and describe the trend in how much of each payment reaches the balance.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u04-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u04-l03",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much interest is charged in month one?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much of the $25.00 payment reduces the balance?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after month one?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much interest is charged in month two?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after month two?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Using Silas's figures, explain why paying only the minimum takes so long, and estimate what would change if the payment were doubled."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-07/swk-fl-g7-u04-l03.package.json",
+    "sourcePackageSha256": "a69c6e732d532db6289f5848f7ca522bf7c5071a1797abfb0db475d2f84cdf59",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g7-financial-literacy-u04-l03",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

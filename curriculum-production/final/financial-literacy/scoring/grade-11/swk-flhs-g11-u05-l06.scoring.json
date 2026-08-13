@@ -1,0 +1,392 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l06",
+  "lessonId": "ma-g11-financial-literacy-u05-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "3.50%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The five returns added and divided by 5. The advertisement’s figure is arithmetically correct, which is what makes the rest of the lesson necessary."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$23,361.88",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Each year’s return is applied to whatever the holding was worth at the start of that year, which is what actually happened to the money."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$23,753.73",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Five years of steady growth at the advertised average — the figure a reader would expect the average to describe."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$391.85",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$23,753.73 against $23,361.88. The average is true about the yearly figures and false about the money, because losses take a larger share of a bigger balance than the same percentage gain returns."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,361.88",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$23,361.88 against the $20,000 invested."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "16.81%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,361.88 against $20,000 — the figure that describes the whole period rather than a typical year within it."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "-10.8",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The two negative years added — the part of the record an average absorbs into a single positive figure."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "\"The fund has averaged 3.5% a year\"",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "Only the first describes something that has already happened and can be checked against the five recorded returns; the other two make claims about years that have not occurred and no record can establish."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round((y1 + y2 + y3 + y4 + y5) / 5 * 100, 2)",
+        "substituted": "round((0.114 + -0.072 + 0.148 + 0.021 + -0.036) / 5 * 100, 2)",
+        "result": "3.50%",
+        "why": "The five returns added and divided by 5. The advertisement’s figure is arithmetically correct, which is what makes the rest of the lesson necessary."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(start * (1 + r1) * (1 + r2) * (1 + r3) * (1 + r4) * (1 + r5), 2)",
+        "substituted": "round(20000 * (1 + 0.114) * (1 + -0.072) * (1 + 0.148) * (1 + 0.021) * (1 + -0.036), 2)",
+        "result": "$23,361.88",
+        "why": "Each year’s return is applied to whatever the holding was worth at the start of that year, which is what actually happened to the money."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(start2 * pow(1 + #t1-p1 / 100, 5), 2)",
+        "substituted": "round(20000 * pow(1 + #t1-p1 / 100, 5), 2)",
+        "result": "$23,753.73",
+        "why": "Five years of steady growth at the advertised average — the figure a reader would expect the average to describe."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$391.85",
+        "why": "$23,753.73 against $23,361.88. The average is true about the yearly figures and false about the money, because losses take a larger share of a bigger balance than the same percentage gain returns."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - start3",
+        "substituted": "#t1-p2 - 20000",
+        "result": "$3,361.88",
+        "why": "$23,361.88 against the $20,000 invested."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 / start4 * 100, 2)",
+        "substituted": "round(#t2-p1 / 20000 * 100, 2)",
+        "result": "16.81%",
+        "why": "$3,361.88 against $20,000 — the figure that describes the whole period rather than a typical year within it."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "loss1 + loss2",
+        "substituted": "-7.2 + -3.6",
+        "result": "-10.8",
+        "why": "The two negative years added — the part of the record an average absorbs into a single positive figure."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The advertisement’s 3.5% figure is correct and overstates the result by $391.85. Explain how both can be true, and say what figure the advertisement should have quoted instead.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the mean is a correct average of the five percentages, but percentages compound rather than add, so applying the average as a growth rate produces a larger result than the actual sequence did.",
+          "Explains the mechanism: a loss removes a share of a balance that a later equal-sized gain is applied to a smaller base of, so negative years cost more than the average suggests.",
+          "Names the better figure: the total 16.81% across the period, or the compound annual rate implied by it."
+        ],
+        "evidenceRequirements": [
+          "Cites the $23,361.88 actual result against the $23,753.73 the average implies."
+        ],
+        "lookFors": [
+          "The response distinguishes averaging percentages from compounding them.",
+          "The suggested replacement figure is one that could be checked against the record.",
+          "The response does not accuse the advertisement of arithmetic error; the 3.5% is right."
+        ],
+        "commonMisconception": "Reading an average of yearly returns as the rate that would have produced the same result.",
+        "dimensions": [
+          "error-diagnosis",
+          "reasoning-from-figures",
+          "criteria-application"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Suppose the advertisement said instead that the fund \"is expected to return 3.5% a year\". Say what evidence would be needed to support that claim, and whether the five-year record supplies it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that a claim about expectation is about years that have not happened, so it needs a stated basis — a model, a stated strategy, or a much longer record — rather than five observations.",
+          "Concludes that the record does not supply it, noting that five years including two losing ones is a small sample from which to project."
+        ],
+        "evidenceRequirements": [
+          "Refers to the five-year record, including the -7.2% and -3.6% years, when judging what it can support."
+        ],
+        "lookFors": [
+          "The response asks what would justify the claim rather than only rejecting it.",
+          "The response identifies the sample size or the variability as the limitation."
+        ],
+        "dimensions": [
+          "communication-of-uncertainty",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the arithmetic mean of the five yearly returns? Give two decimal places."
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the $20,000 actually worth after the five years, applying each return in turn?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What would $20,000 be worth after five years at the advertised 3.5% average?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "By how much does the advertised average overstate what actually happened?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the actual gain across the five years?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total growth across the five years as a percentage? Give two decimal places."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "The two losing years were -7.2% and -3.6%. What do they come to together in percentage points? Give one decimal place."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Which of the advertisement’s possible claims is a statement of evidence rather than a prediction?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The advertisement’s 3.5% figure is correct and overstates the result by $391.85. Explain how both can be true, and say what figure the advertisement should have quoted instead."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Suppose the advertisement said instead that the fund \"is expected to return 3.5% a year\". Say what evidence would be needed to support that claim, and whether the five-year record supplies it."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the arithmetic mean of the five yearly returns? Give two decimal places. Answer: 3.50%. Verification: The five returns added and divided by 5. The advertisement’s figure is arithmetically correct, which is what makes the rest of the lesson necessary. t1-p2: What is the $20,000 actually worth after the five years, applying each return in turn? Answer: $23,361.88. Verification: Each year’s return is applied to whatever the holding was worth at the start of that year, which is what actually happened to the money. t1-p3: What would $20,000 be worth after five years at the advertised 3.5% average? Answer: $23,753.73. Verification: Five years of steady growth at the advertised average — the figure a reader would expect the average to describe. t1-p4: By how much does the advertised average overstate what actually happened? Answer: $391.85. Verification: $23,753.73 against $23,361.88. The average is true about the yearly figures and false about the money, because losses take a larger share of a bigger balance than the same percentage gain returns. t2-p1: What is the actual gain across the five years? Answer: $3,361.88. Verification: $23,361.88 against the $20,000 invested. t2-p2: What is the total growth across the five years as a percentage? Give two decimal places. Answer: 16.81%. Verification: $3,361.88 against $20,000 — the figure that describes the whole period rather than a typical year within it. t2-p3: The two losing years were -7.2% and -3.6%. What do they come to together in percentage points? Give one decimal place. Answer: -10.8. Verification: The two negative years added — the part of the record an average absorbs into a single positive figure. t2-p4: Which of the advertisement’s possible claims is a statement of evidence rather than a prediction? Answer: \"The fund has averaged 3.5% a year\". Verification: Only the first describes something that has already happened and can be checked against the five recorded returns; the other two make claims about years that have not occurred and no record can establish."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: The advertisement’s 3.5% figure is correct and overstates the result by $391.85. Explain how both can be true, and say what figure the advertisement should have quoted instead. Explains that the mean is a correct average of the five percentages, but percentages compound rather than add, so applying the average as a growth rate produces a larger result than the actual sequence did. Explains the mechanism: a loss removes a share of a balance that a later equal-sized gain is applied to a smaller base of, so negative years cost more than the average suggests. Names the better figure: the total 16.81% across the period, or the compound annual rate implied by it. Cites the $23,361.88 actual result against the $23,753.73 the average implies. The response distinguishes averaging percentages from compounding them. The suggested replacement figure is one that could be checked against the record. The response does not accuse the advertisement of arithmetic error; the 3.5% is right. t3-p2: Suppose the advertisement said instead that the fund \"is expected to return 3.5% a year\". Say what evidence would be needed to support that claim, and whether the five-year record supplies it. Explains that a claim about expectation is about years that have not happened, so it needs a stated basis — a model, a stated strategy, or a much longer record — rather than five observations. Concludes that the record does not supply it, noting that five years including two losing ones is a small sample from which to project. Refers to the five-year record, including the -7.2% and -3.6% years, when judging what it can support. The response asks what would justify the claim rather than only rejecting it. The response identifies the sample size or the variability as the limitation."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the mean is a correct average of the five percentages, but percentages compound rather than add, so applying the average as a growth rate produces a larger result than the actual sequence did. Explains the mechanism: a loss removes a share of a balance that a later equal-sized gain is applied to a smaller base of, so negative years cost more than the average suggests. Names the better figure: the total 16.81% across the period, or the compound annual rate implied by it. Explains that a claim about expectation is about years that have not happened, so it needs a stated basis — a model, a stated strategy, or a much longer record — rather than five observations. Concludes that the record does not supply it, noting that five years including two losing ones is a small sample from which to project."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 7,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u05-l06.scoring.json",
+    "sourceScoringSha256": "dd4d4f8e28c0d0d1814aee9251746a659ab2c19bb1d5a7878f085cb56e4c32ce",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l03",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u07-l03",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Planning and Its Interaction With Everything Else",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: credits versus deductions in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "credits versus deductions in outline",
+  "objective": "Compute the tax effect of a fictional deduction and a fictional credit of the same size, and express how many times more the credit is worth.",
+  "scenario": "Rosamund Kiplagat-Feldman is comparing two fictional tax reliefs. The schedule below is invented: its deduction, thresholds, and rates were chosen for this course and describe no real tax system, and real credits carry eligibility rules this outline omits.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional tax schedule and relief figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Under the fictional schedule, taxable income is gross income less a standard deduction of $11,400, and tax is 10% on the first $9,800 of taxable income and 14% between $9,800 and $38,400. Rosamund earns $46,300. A deduction reduces taxable income; a credit reduces the tax itself.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Rosamund’s taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is her tax before any relief?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "With a $2,000 deduction, what is her tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "With a $2,000 credit instead, what is her tax?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare the two reliefs directly.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the $2,000 deduction save?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the $2,000 credit save?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many times more is the credit worth than the deduction? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How large a deduction would be needed to save as much as the $2,000 credit?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "For a filer at a higher marginal rate, what happens to the gap between a credit and a deduction of the same size?",
+          "choices": [
+            "The gap narrows, because the deduction saves more",
+            "The gap widens, because the credit saves more",
+            "The gap is unchanged, because both are fixed amounts"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A credit of $2,000 is worth 7.14 times a deduction of $2,000 here. Explain the mechanism, and say what that difference implies about who each kind of relief helps most."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "A deduction of $14,285.71 would be needed to match the credit. Say what that figure tells you about how deductions and credits should be compared, and why headline sizes are misleading."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the deduction appears to save $2,000, it is being treated as though it came off the tax. A deduction reduces taxable income from $34,900.00 to $32,900, and the tax then falls by 14% of that $2,000, which is $280.00. Recompute the tax from the reduced taxable income rather than subtracting the relief from the tax.",
+  "extension": "Find the marginal rate at which a $2,000 deduction and a $2,000 credit would be worth the same, and say whether any band in this fictional schedule reaches it.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u07-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u07-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Rosamund’s taxable income?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is her tax before any relief?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "With a $2,000 deduction, what is her tax?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "With a $2,000 credit instead, what is her tax?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does the $2,000 deduction save?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does the $2,000 credit save?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How many times more is the credit worth than the deduction? Give two decimal places."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How large a deduction would be needed to save as much as the $2,000 credit?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "For a filer at a higher marginal rate, what happens to the gap between a credit and a deduction of the same size?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A credit of $2,000 is worth 7.14 times a deduction of $2,000 here. Explain the mechanism, and say what that difference implies about who each kind of relief helps most."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "A deduction of $14,285.71 would be needed to match the credit. Say what that figure tells you about how deductions and credits should be compared, and why headline sizes are misleading."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u07-l03.package.json",
+    "sourcePackageSha256": "5632279dcdfd0a199bf989e0dc68af72b25d4a3313e95956386e85b5224a6d3c",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u07-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

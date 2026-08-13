@@ -1,0 +1,398 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l08",
+  "lessonId": "ma-g11-financial-literacy-u06-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,290.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7% of the $47,000 above the deductible."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,357.50",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "15% of the $9,050 above the deductible — the most frequent risk and the smallest reduction."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$3,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3% of the $110,000 above the deductible — the rarest risk and the largest reduction."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "2.27",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,290.00 of reduction for $1,450 of premium — the best value of the three."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "2.04",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,300.00 of reduction for $1,620 of premium — slightly worse value than the equipment cover despite removing more."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "1.53",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,357.50 of reduction for $890 of premium — the weakest of the three on this measure."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,070.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,450 and $1,620 — within the $3,200 budget, with the stock cover left unbought."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$130.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,200 less $3,070.00. The remaining $130.00 is far short of the $890 the stock cover costs."
+        }
+      },
+      {
+        "ref": "t2-p6",
+        "answer": "$6,590.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,290.00 and $3,300.00, bought for $3,070.00 of premium — the enterprise removes more expected loss than it spends."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(equipChance * (equipLoss - equipDeductible), 2)",
+        "substituted": "round(0.07 * (52000 - 5000), 2)",
+        "result": "$3,290.00",
+        "why": "7% of the $47,000 above the deductible."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(stockChance * (stockLoss - stockDeductible), 2)",
+        "substituted": "round(0.15 * (9800 - 750), 2)",
+        "result": "$1,357.50",
+        "why": "15% of the $9,050 above the deductible — the most frequent risk and the smallest reduction."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(liabChance * (liabLoss - liabDeductible), 2)",
+        "substituted": "round(0.03 * (120000 - 10000), 2)",
+        "result": "$3,300.00",
+        "why": "3% of the $110,000 above the deductible — the rarest risk and the largest reduction."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p1 / equipPremium, 2)",
+        "substituted": "round(#t1-p1 / 1450, 2)",
+        "result": "2.27",
+        "why": "$3,290.00 of reduction for $1,450 of premium — the best value of the three."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p3 / liabPremium, 2)",
+        "substituted": "round(#t1-p3 / 1620, 2)",
+        "result": "2.04",
+        "why": "$3,300.00 of reduction for $1,620 of premium — slightly worse value than the equipment cover despite removing more."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p2 / stockPremium, 2)",
+        "substituted": "round(#t1-p2 / 890, 2)",
+        "result": "1.53",
+        "why": "$1,357.50 of reduction for $890 of premium — the weakest of the three on this measure."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "equipPremium2 + liabPremium2",
+        "substituted": "1450 + 1620",
+        "result": "$3,070.00",
+        "why": "$1,450 and $1,620 — within the $3,200 budget, with the stock cover left unbought."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "budget - #t2-p4",
+        "substituted": "3200 - #t2-p4",
+        "result": "$130.00",
+        "why": "$3,200 less $3,070.00. The remaining $130.00 is far short of the $890 the stock cover costs."
+      },
+      {
+        "ref": "t2-p6",
+        "expression": "#t1-p1 + #t1-p3",
+        "substituted": "#t1-p1 + #t1-p3",
+        "result": "$6,590.00",
+        "why": "$3,290.00 and $3,300.00, bought for $3,070.00 of premium — the enterprise removes more expected loss than it spends."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The same per-dollar method used for a household is applied here to an enterprise. Say what carries over unchanged, and explain why the $120,000 liability risk deserves separate treatment even though it ranks second on the measure.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what carries over: expected loss is still chance multiplied by the amount above the deductible, and per-dollar ranking still allows policies with different premiums to be compared.",
+          "Explains why liability is different in kind: a $120,000 loss is larger than the enterprise could survive, so leaving it uncovered risks the whole operation rather than a bad year.",
+          "Notes that the per-dollar measure treats a survivable loss and a fatal one identically, which is precisely why it cannot be the only input."
+        ],
+        "evidenceRequirements": [
+          "Cites the 2.27 and 2.04 per-dollar figures and the $120,000 liability loss."
+        ],
+        "lookFors": [
+          "The response identifies survivability as the dimension the measure omits.",
+          "The response says what carries over as well as what does not.",
+          "A response arguing liability should be bought first regardless of the ratio is making the intended argument."
+        ],
+        "commonMisconception": "Applying a value-for-money ranking to risks whose consequences differ in kind.",
+        "dimensions": [
+          "transfer",
+          "criteria-application",
+          "tradeoff-defense"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "The stock cover goes unbought and stock is the most likely loss at 15%. Say what the enterprise is accepting, and what it could do with the $130.00 left over.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States what is accepted: a 15% annual chance of a $9,800 loss, of which $1,357.50 of expected cost is now carried rather than transferred.",
+          "Proposes a use for the $130.00 with a reason, such as beginning a reserve against the stock risk or against the $5,000 and $10,000 deductibles now carried."
+        ],
+        "evidenceRequirements": [
+          "Refers to the $1,357.50 reduction forgone and the $130.00 remaining."
+        ],
+        "lookFors": [
+          "The response notices that the two purchased covers carry large deductibles that are themselves uncovered exposure.",
+          "The proposed use is connected to a named risk."
+        ],
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What expected annual loss does the equipment cover remove?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What expected annual loss does the stock cover remove?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What expected annual loss does the liability cover remove?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much expected loss does the equipment cover remove per premium dollar? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much does the liability cover remove per premium dollar? Give two decimal places."
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much does the stock cover remove per premium dollar? Give two decimal places."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Taking the two best-value covers, equipment then liability, what do the premiums come to?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "How much of the budget is left, and how far short is it of the stock premium?"
+        },
+        {
+          "ref": "t2-p6",
+          "responseMode": "FIXED",
+          "promptText": "What total expected annual loss do the two purchased covers remove?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The same per-dollar method used for a household is applied here to an enterprise. Say what carries over unchanged, and explain why the $120,000 liability risk deserves separate treatment even though it ranks second on the measure."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "The stock cover goes unbought and stock is the most likely loss at 15%. Say what the enterprise is accepting, and what it could do with the $130.00 left over."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What expected annual loss does the equipment cover remove? Answer: $3,290.00. Verification: 7% of the $47,000 above the deductible. t1-p2: What expected annual loss does the stock cover remove? Answer: $1,357.50. Verification: 15% of the $9,050 above the deductible — the most frequent risk and the smallest reduction. t1-p3: What expected annual loss does the liability cover remove? Answer: $3,300.00. Verification: 3% of the $110,000 above the deductible — the rarest risk and the largest reduction. t2-p1: How much expected loss does the equipment cover remove per premium dollar? Give two decimal places. Answer: 2.27. Verification: $3,290.00 of reduction for $1,450 of premium — the best value of the three. t2-p2: How much does the liability cover remove per premium dollar? Give two decimal places. Answer: 2.04. Verification: $3,300.00 of reduction for $1,620 of premium — slightly worse value than the equipment cover despite removing more. t2-p3: How much does the stock cover remove per premium dollar? Give two decimal places. Answer: 1.53. Verification: $1,357.50 of reduction for $890 of premium — the weakest of the three on this measure. t2-p4: Taking the two best-value covers, equipment then liability, what do the premiums come to? Answer: $3,070.00. Verification: $1,450 and $1,620 — within the $3,200 budget, with the stock cover left unbought. t2-p5: How much of the budget is left, and how far short is it of the stock premium? Answer: $130.00. Verification: $3,200 less $3,070.00. The remaining $130.00 is far short of the $890 the stock cover costs. t2-p6: What total expected annual loss do the two purchased covers remove? Answer: $6,590.00. Verification: $3,290.00 and $3,300.00, bought for $3,070.00 of premium — the enterprise removes more expected loss than it spends."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The same per-dollar method used for a household is applied here to an enterprise. Say what carries over unchanged, and explain why the $120,000 liability risk deserves separate treatment even though it ranks second on the measure. States what carries over: expected loss is still chance multiplied by the amount above the deductible, and per-dollar ranking still allows policies with different premiums to be compared. Explains why liability is different in kind: a $120,000 loss is larger than the enterprise could survive, so leaving it uncovered risks the whole operation rather than a bad year. Notes that the per-dollar measure treats a survivable loss and a fatal one identically, which is precisely why it cannot be the only input. Cites the 2.27 and 2.04 per-dollar figures and the $120,000 liability loss. The response identifies survivability as the dimension the measure omits. The response says what carries over as well as what does not. A response arguing liability should be bought first regardless of the ratio is making the intended argument. t3-p2: The stock cover goes unbought and stock is the most likely loss at 15%. Say what the enterprise is accepting, and what it could do with the $130.00 left over. States what is accepted: a 15% annual chance of a $9,800 loss, of which $1,357.50 of expected cost is now carried rather than transferred. Proposes a use for the $130.00 with a reason, such as beginning a reserve against the stock risk or against the $5,000 and $10,000 deductibles now carried. Refers to the $1,357.50 reduction forgone and the $130.00 remaining. The response notices that the two purchased covers carry large deductibles that are themselves uncovered exposure. The proposed use is connected to a named risk."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States what carries over: expected loss is still chance multiplied by the amount above the deductible, and per-dollar ranking still allows policies with different premiums to be compared. Explains why liability is different in kind: a $120,000 loss is larger than the enterprise could survive, so leaving it uncovered risks the whole operation rather than a bad year. Notes that the per-dollar measure treats a survivable loss and a fatal one identically, which is precisely why it cannot be the only input. States what is accepted: a 15% annual chance of a $9,800 loss, of which $1,357.50 of expected cost is now carried rather than transferred. Proposes a use for the $130.00 with a reason, such as beginning a reserve against the stock risk or against the $5,000 and $10,000 deductibles now carried."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 6,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u06-l08.scoring.json",
+    "sourceScoringSha256": "617ae944122115abf24d7febb6f77ae8b3a5d37d1ffca1d03852075ec0c785b8",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

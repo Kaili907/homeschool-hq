@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l08",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l08",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: allocating a limited protection budget"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "allocating a limited protection budget",
+  "objective": "Transfer the protection-budget method to a fictional enterprise where one uncovered risk exceeds the whole enterprise, and say what that changes about the ranking.",
+  "scenario": "Caspian Obiora-Halstead advises a fictional two-person enterprise on its protection budget. The risks, premiums, deductibles, and budget below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional enterprise risk table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The budget is $3,200 a year. Equipment cover costs $1,450, has a $5,000 deductible, and the risk is a 7% chance of a $52,000 loss. Stock cover costs $890, has a $750 deductible, and the risk is a 15% chance of a $9,800 loss. Liability cover costs $1,620, has a $10,000 deductible, and the risk is a 3% chance of a $120,000 loss.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What expected annual loss does the equipment cover remove?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What expected annual loss does the stock cover remove?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What expected annual loss does the liability cover remove?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now rank by reduction per premium dollar and allocate the $3,200 budget.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much expected loss does the equipment cover remove per premium dollar? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does the liability cover remove per premium dollar? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does the stock cover remove per premium dollar? Give two decimal places.",
+          "unit": "ratio"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Taking the two best-value covers, equipment then liability, what do the premiums come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much of the budget is left, and how far short is it of the stock premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "What total expected annual loss do the two purchased covers remove?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The same per-dollar method used for a household is applied here to an enterprise. Say what carries over unchanged, and explain why the $120,000 liability risk deserves separate treatment even though it ranks second on the measure."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The stock cover goes unbought and stock is the most likely loss at 15%. Say what the enterprise is accepting, and what it could do with the $130.00 left over."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two best-value covers come out as liability and stock, check the per-dollar figures rather than the reduction amounts. Liability removes the most in dollars, at $3,300.00, but equipment removes more per premium dollar, at 2.27 against 2.04. Rank on the ratio column, then work down it until the budget runs out.",
+  "extension": "Find the equipment premium at which the enterprise could afford all three covers within $3,200, and say how much reduction that would add.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What expected annual loss does the equipment cover remove?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What expected annual loss does the stock cover remove?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What expected annual loss does the liability cover remove?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much expected loss does the equipment cover remove per premium dollar? Give two decimal places."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does the liability cover remove per premium dollar? Give two decimal places."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much does the stock cover remove per premium dollar? Give two decimal places."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Taking the two best-value covers, equipment then liability, what do the premiums come to?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "How much of the budget is left, and how far short is it of the stock premium?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "What total expected annual loss do the two purchased covers remove?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The same per-dollar method used for a household is applied here to an enterprise. Say what carries over unchanged, and explain why the $120,000 liability risk deserves separate treatment even though it ranks second on the measure."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The stock cover goes unbought and stock is the most likely loss at 15%. Say what the enterprise is accepting, and what it could do with the $130.00 left over."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u06-l08.package.json",
+    "sourcePackageSha256": "29bcc866467e18fdc9b8b0697e40cc2c642c9ba95dec1cf74fcd3af37d83aa3b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u06-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

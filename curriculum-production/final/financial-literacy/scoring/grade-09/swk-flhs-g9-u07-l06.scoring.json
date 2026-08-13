@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u07-l06",
+  "lessonId": "ma-g9-financial-literacy-u07-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,992.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Taxable income is $35,000 after the $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $24,600."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$5,676.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,366.00 payroll, $1,870.00 state, and $440.00 city."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$34,332.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$44,000 less $9,668.00 of total tax."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$32,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The five planned allocations added: $21,600 + $2,640 + $2,400 + $3,600 + $1,860."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$2,232.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$34,332.00 of take-home against $32,100.00 allocated."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "22.0%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$9,668.00 of tax on $44,000 of gross income."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "bracket * lowRate + (income - deduction - bracket) * highRate",
+        "substituted": "10400 * 0.1 + (44000 - 9000 - 10400) * 0.12",
+        "result": "$3,992.00",
+        "why": "Taxable income is $35,000 after the $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $24,600."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "income2 * payroll + income2 * state + income2 * city",
+        "substituted": "44000 * 0.0765 + 44000 * 0.0425 + 44000 * 0.01",
+        "result": "$5,676.00",
+        "why": "$3,366.00 payroll, $1,870.00 state, and $440.00 city."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "income3 - #t1-p1 - #t1-p2",
+        "substituted": "44000 - #t1-p1 - #t1-p2",
+        "result": "$34,332.00",
+        "why": "$44,000 less $9,668.00 of total tax."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "essentials + debt + reserve + investing + insurance",
+        "substituted": "21600 + 2640 + 2400 + 3600 + 1860",
+        "result": "$32,100.00",
+        "why": "The five planned allocations added: $21,600 + $2,640 + $2,400 + $3,600 + $1,860."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t2-p1",
+        "substituted": "#t1-p3 - #t2-p1",
+        "result": "$2,232.00",
+        "why": "$34,332.00 of take-home against $32,100.00 allocated."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round((#t1-p1 + #t1-p2) / income4 * 100, 1)",
+        "substituted": "round((#t1-p1 + #t1-p2) / 44000 * 100, 1)",
+        "result": "22.0%",
+        "why": "$9,668.00 of tax on $44,000 of gross income."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Maps each line to a topic — income and taxes to the top of the plan, essentials to spending, the reserve to saving and protection, the debt line to credit, and the investing line to long-horizon growth.",
+          "Gives the $2,232 a specific job rather than leaving it as slack, and says why that job was chosen.",
+          "Names a cut line and defends the choice against the alternative, recognising that a 10% income fall is about $3,433 of take-home and cannot come from the unallocated amount alone."
+        ],
+        "evidenceRequirements": [
+          "Uses the $34,332.00 take-home figure, the $32,100.00 allocated total, and at least two individual allocation lines."
+        ],
+        "lookFors": [
+          "The response does not cut the insurance line without acknowledging the risk exposure that creates.",
+          "The response treats tax as a first claim on income rather than as one of the discretionary lines."
+        ],
+        "commonMisconception": "Building a plan from gross income and treating tax as an expense to be trimmed alongside the others.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the federal income tax?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What do payroll, state, and city taxes come to together?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is take-home income for the year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the five allocations total?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much of take-home pay is unallocated?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What percentage of gross income goes to tax? Round to one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the federal income tax? Answer: $3,992.00. Verification: Taxable income is $35,000 after the $9,000 deduction; $1,040 on the first $10,400 plus 12% of the remaining $24,600. t1-p2: What do payroll, state, and city taxes come to together? Answer: $5,676.00. Verification: $3,366.00 payroll, $1,870.00 state, and $440.00 city. t1-p3: What is take-home income for the year? Answer: $34,332.00. Verification: $44,000 less $9,668.00 of total tax. t2-p1: What do the five allocations total? Answer: $32,100.00. Verification: The five planned allocations added: $21,600 + $2,640 + $2,400 + $3,600 + $1,860. t2-p2: How much of take-home pay is unallocated? Answer: $2,232.00. Verification: $34,332.00 of take-home against $32,100.00 allocated. t2-p3: What percentage of gross income goes to tax? Round to one decimal place. Answer: 22.0%. Verification: $9,668.00 of tax on $44,000 of gross income."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Present the plan and show how each of the seven topics from this course appears in it. Say what the $2,232 unallocated should do, and name the one line you would cut first if income fell 10%. Maps each line to a topic — income and taxes to the top of the plan, essentials to spending, the reserve to saving and protection, the debt line to credit, and the investing line to long-horizon growth. Gives the $2,232 a specific job rather than leaving it as slack, and says why that job was chosen. Names a cut line and defends the choice against the alternative, recognising that a 10% income fall is about $3,433 of take-home and cannot come from the unallocated amount alone. Uses the $34,332.00 take-home figure, the $32,100.00 allocated total, and at least two individual allocation lines. The response does not cut the insurance line without acknowledging the risk exposure that creates. The response treats tax as a first claim on income rather than as one of the discretionary lines."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Maps each line to a topic — income and taxes to the top of the plan, essentials to spending, the reserve to saving and protection, the debt line to credit, and the investing line to long-horizon growth. Gives the $2,232 a specific job rather than leaving it as slack, and says why that job was chosen. Names a cut line and defends the choice against the alternative, recognising that a 10% income fall is about $3,433 of take-home and cannot come from the unallocated amount alone."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u07-l06.scoring.json",
+    "sourceScoringSha256": "9fb173d5d17b9dacf5003b866df1b7bf19eb07067d5ea5bf0a08cb2019959f2d",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

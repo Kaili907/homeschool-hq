@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l09",
+  "lessonId": "ma-g10-financial-literacy-u01-l09",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$350,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$35,000 a year for 10 years at the higher wage."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$208,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$350,000 of extra earnings less the $142,000 full cost."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "-$85,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "60% of $142,000 spent with nothing gained, so the result is a loss of $85,200."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$96,584.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "62% of a $208,000 gain plus 38% of an $85,200 loss."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$111,416.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$208,000 against $96,584 — the completion risk costs more than half the headline gain."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "29.1%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Breaking even requires the expected gain to offset the expected loss, which happens at a completion rate of $85,200 / $293,200, or 29.1%."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "annualGain * years",
+        "substituted": "35000 * 10",
+        "result": "$350,000.00",
+        "why": "$35,000 a year for 10 years at the higher wage."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - cost",
+        "substituted": "#t1-p1 - 142000",
+        "result": "$208,000.00",
+        "why": "$350,000 of extra earnings less the $142,000 full cost."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "0 - cost2 * incurredShare",
+        "substituted": "0 - 142000 * 0.6",
+        "result": "-$85,200.00",
+        "why": "60% of $142,000 spent with nothing gained, so the result is a loss of $85,200."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(pComplete * #t1-p2 + (1 - pComplete) * #t1-p3, 2)",
+        "substituted": "round(0.62 * #t1-p2 + (1 - 0.62) * #t1-p3, 2)",
+        "result": "$96,584.00",
+        "why": "62% of a $208,000 gain plus 38% of an $85,200 loss."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 - #t2-p1",
+        "substituted": "#t1-p2 - #t2-p1",
+        "result": "$111,416.00",
+        "why": "$208,000 against $96,584 — the completion risk costs more than half the headline gain."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(0 - #t1-p3 / (#t1-p2 - #t1-p3) * 100, 1)",
+        "substituted": "round(0 - #t1-p3 / (#t1-p2 - #t1-p3) * 100, 1)",
+        "result": "29.1%",
+        "why": "Breaking even requires the expected gain to offset the expected loss, which happens at a completion rate of $85,200 / $293,200, or 29.1%."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The expected result is still strongly positive at $96,584, and no individual ever receives that amount. Explain what the expected value is useful for and what it hides, and say what an individual should ask about their own situation instead.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that no one experiences $96,584: individuals get either $208,000 or -$85,200, and the expected value is a cohort average.",
+          "Explains what it is useful for — comparing pathways at the policy or planning level, and showing that the completion rate matters as much as the wage gain.",
+          "Names what an individual should ask: what predicts completion for someone in their circumstances, and whether they could survive the -$85,200 outcome."
+        ],
+        "evidenceRequirements": [
+          "Uses the $208,000 and -$85,200 outcomes and the $96,584 expected value."
+        ],
+        "lookFors": [
+          "The response notes the 62% completion rate is a cohort figure and may not describe any particular person.",
+          "The response does not conclude that the pathway is a bad idea; the expected value is clearly positive."
+        ],
+        "commonMisconception": "Reading an expected value as the outcome an individual should plan on receiving.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "assumption-identification",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What does the pathway gain over 10 years for someone who completes it, before subtracting cost?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the net 10-year result for someone who completes?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the net result for someone who does not complete, incurring 60% of the cost with no gain?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the expected 10-year result across the cohort?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much lower is the expected result than the result for someone who completes?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "At what completion rate would the expected result fall to zero? Round to one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The expected result is still strongly positive at $96,584, and no individual ever receives that amount. Explain what the expected value is useful for and what it hides, and say what an individual should ask about their own situation instead."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What does the pathway gain over 10 years for someone who completes it, before subtracting cost? Answer: $350,000.00. Verification: $35,000 a year for 10 years at the higher wage. t1-p2: What is the net 10-year result for someone who completes? Answer: $208,000.00. Verification: $350,000 of extra earnings less the $142,000 full cost. t1-p3: What is the net result for someone who does not complete, incurring 60% of the cost with no gain? Answer: -$85,200.00. Verification: 60% of $142,000 spent with nothing gained, so the result is a loss of $85,200. t2-p1: What is the expected 10-year result across the cohort? Answer: $96,584.00. Verification: 62% of a $208,000 gain plus 38% of an $85,200 loss. t2-p2: How much lower is the expected result than the result for someone who completes? Answer: $111,416.00. Verification: $208,000 against $96,584 — the completion risk costs more than half the headline gain. t2-p3: At what completion rate would the expected result fall to zero? Round to one decimal place. Answer: 29.1%. Verification: Breaking even requires the expected gain to offset the expected loss, which happens at a completion rate of $85,200 / $293,200, or 29.1%."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Identifying the assumption — Not yet: No assumption is named. Approaching: An assumption is named but it is not one the conclusion actually depends on. Meets: A load-bearing assumption is named and its effect on the conclusion is stated. Exceeds: A load-bearing assumption is named, tested against the scenario, and bounded. Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: The expected result is still strongly positive at $96,584, and no individual ever receives that amount. Explain what the expected value is useful for and what it hides, and say what an individual should ask about their own situation instead. States that no one experiences $96,584: individuals get either $208,000 or -$85,200, and the expected value is a cohort average. Explains what it is useful for — comparing pathways at the policy or planning level, and showing that the completion rate matters as much as the wage gain. Names what an individual should ask: what predicts completion for someone in their circumstances, and whether they could survive the -$85,200 outcome. Uses the $208,000 and -$85,200 outcomes and the $96,584 expected value. The response notes the 62% completion rate is a cohort figure and may not describe any particular person. The response does not conclude that the pathway is a bad idea; the expected value is clearly positive."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "States that no one experiences $96,584: individuals get either $208,000 or -$85,200, and the expected value is a cohort average. Explains what it is useful for — comparing pathways at the policy or planning level, and showing that the completion rate matters as much as the wage gain. Names what an individual should ask: what predicts completion for someone in their circumstances, and whether they could survive the -$85,200 outcome."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-10/swk-flhs-g10-u01-l09.scoring.json",
+    "sourceScoringSha256": "e2959c12d71ed6d0fe472e27ee510f7d772769f73561ad211df5061f2e5a6b91",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

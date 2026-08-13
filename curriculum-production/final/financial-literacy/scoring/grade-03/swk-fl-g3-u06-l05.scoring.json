@@ -1,0 +1,307 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u06-l05",
+  "lessonId": "ma-g3-financial-literacy-u06-l05",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "What is the correct total of Halima's four sales?",
+        "answer": "$9.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.50 + 2.50 + 3.00 + 1.75) = 9.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 250
+              },
+              {
+                "op": "money",
+                "cents": 250
+              },
+              {
+                "op": "money",
+                "cents": 300
+              },
+              {
+                "op": "money",
+                "cents": 175
+              }
+            ]
+          },
+          "trace": "(2.50 + 2.50 + 3.00 + 1.75) = 9.75"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "By how much is Halima's written total off?",
+        "answer": "$0.25",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.50 + 2.50 + 3.00 + 1.75) - 9.50) = 0.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 300
+                },
+                {
+                  "op": "money",
+                  "cents": 175
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 950
+            }
+          },
+          "trace": "((2.50 + 2.50 + 3.00 + 1.75) - 9.50) = 0.25"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "Using the correct total, what does Halima keep after supplies?",
+        "answer": "$4.75",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.50 + 2.50 + 3.00 + 1.75) - 5.00) = 4.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 300
+                },
+                {
+                  "op": "money",
+                  "cents": 175
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 500
+            }
+          },
+          "trace": "((2.50 + 2.50 + 3.00 + 1.75) - 5.00) = 4.75"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What are Halima's total sales for the whole day?",
+        "answer": "$12.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.50 + 2.50 + 3.00 + 1.75 + 2.25) = 12.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "money",
+                "cents": 250
+              },
+              {
+                "op": "money",
+                "cents": 250
+              },
+              {
+                "op": "money",
+                "cents": 300
+              },
+              {
+                "op": "money",
+                "cents": 175
+              },
+              {
+                "op": "money",
+                "cents": 225
+              }
+            ]
+          },
+          "trace": "(2.50 + 2.50 + 3.00 + 1.75 + 2.25) = 12.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "What does she keep after supplies for the whole day?",
+        "answer": "$7.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.50 + 2.50 + 3.00 + 1.75 + 2.25) - 5.00) = 7.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 250
+                },
+                {
+                  "op": "money",
+                  "cents": 300
+                },
+                {
+                  "op": "money",
+                  "cents": 175
+                },
+                {
+                  "op": "money",
+                  "cents": 225
+                }
+              ]
+            },
+            "less": {
+              "op": "money",
+              "cents": 500
+            }
+          },
+          "trace": "((2.50 + 2.50 + 3.00 + 1.75 + 2.25) - 5.00) = 7.00"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Separating sales from what is kept",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats Halima's $12.00 and $7.00 as if one of them is simply wrong."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The difference is noticed for Halima but the supplies are not named as the reason."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that Halima's $5.00 of supplies was paid out of the $12.00 taken in, so what she keeps is what is left after that cost."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the correct total of Halima's four sales?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "By how much is Halima's written total off?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Using the correct total, what does Halima keep after supplies?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What are Halima's total sales for the whole day?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does she keep after supplies for the whole day?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Halima took in $12.00 but kept $7.00. Explain to a classmate why those two numbers are different."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the correct total of Halima's four sales? Answer: $9.75. Verification: (2.50 + 2.50 + 3.00 + 1.75) = 9.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: By how much is Halima's written total off? Answer: $0.25. Verification: ((2.50 + 2.50 + 3.00 + 1.75) - 9.50) = 0.25. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: Using the correct total, what does Halima keep after supplies? Answer: $4.75. Verification: ((2.50 + 2.50 + 3.00 + 1.75) - 5.00) = 4.75. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What are Halima's total sales for the whole day? Answer: $12.00. Verification: (2.50 + 2.50 + 3.00 + 1.75 + 2.25) = 12.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: What does she keep after supplies for the whole day? Answer: $7.00. Verification: ((2.50 + 2.50 + 3.00 + 1.75 + 2.25) - 5.00) = 7.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Separating sales from what is kept — Not yet: The response treats Halima's $12.00 and $7.00 as if one of them is simply wrong. Approaching: The difference is noticed for Halima but the supplies are not named as the reason. Meets: The response explains that Halima's $5.00 of supplies was paid out of the $12.00 taken in, so what she keeps is what is left after that cost. The response explains that Halima's $5.00 of supplies was paid out of the $12.00 taken in, so what she keeps is what is left after that cost."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response explains that Halima's $5.00 of supplies was paid out of the $12.00 taken in, so what she keeps is what is left after that cost."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u06-l05.scoring.json",
+    "sourceScoringSha256": "7f80f8e8ee47ac9a70c2eabc1a04eb8381f9bf78813bb01a61f3c3a4700d12e1",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

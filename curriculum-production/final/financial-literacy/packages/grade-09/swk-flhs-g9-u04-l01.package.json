@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: benefits and costs of using credit"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "benefits and costs of using credit",
+  "objective": "Compute the cost of credit on a fictional financed purchase from its disclosed total of payments, and compare it against waiting and paying cash.",
+  "scenario": "A fictional retailer offers financing on a made-up $840 purchase. The disclosure figures below are invented for this exercise; no real credit offer is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional financing disclosure in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional disclosure states: amount financed $840, 24 monthly payments of $43.72.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of all payments over the 24 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the credit itself cost — the amount paid above the $840 financed?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "The cost of credit is what percentage of the purchase price? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The alternative is to wait and pay cash. The buyer can set aside $70 a month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months of saving $70 does it take to reach $840?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Comparing the two paths on money alone, which costs less?",
+          "choices": [
+            "Financing now, at $43.72 a month for 24 months",
+            "Saving $70 a month and paying cash in 12 months"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Saving is cheaper by $209.28 and financing is still sometimes the right choice. Describe one situation in which financing this purchase would be defensible, and one in which it clearly would not, using the figures."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the cost of credit is being read as the $43.72 payment, name what each number is: $43.72 is a payment, $1,049.28 is everything paid, and $840 is what was received. The cost of credit is the gap between the last two.",
+  "extension": "Recompute the cost of credit if the same $840 were financed over 12 months at $74.55 a month, and say what the comparison shows about term length.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of all payments over the 24 months?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the credit itself cost — the amount paid above the $840 financed?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "The cost of credit is what percentage of the purchase price? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many months of saving $70 does it take to reach $840?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Comparing the two paths on money alone, which costs less?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Saving is cheaper by $209.28 and financing is still sometimes the right choice. Describe one situation in which financing this purchase would be defensible, and one in which it clearly would not, using the figures."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u04-l01.package.json",
+    "sourcePackageSha256": "a9b74cc67ad1ad5f27585c5e1dcfbf7c81b2fb5535ef5f135f638bc6878f29eb",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u04-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

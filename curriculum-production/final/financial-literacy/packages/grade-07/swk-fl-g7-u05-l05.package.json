@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u05-l05",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u05-l05",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "Investing, Risk, and Protection",
+    "dayInUnit": 5,
+    "phase": "Mastery check",
+    "title": "Mastery check: insurance purpose",
+    "focus": "insurance purpose"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners compute the full cost of an invented insurance arrangement including premiums and deductible, and compare it against bearing a loss unprotected.",
+  "scenario": "Nils is a made-up seventh grader modelling a pretend policy: $45.00 a month in invented premiums, a $500.00 deductible, and a covered invented $3,200.00 repair. All figures are invented and describe no real policy.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult.",
+    "This policy is invented for the exercise and is not a recommendation about any real insurance product."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute a simulated year of Nils's invented premiums at $45.00 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do 12 months of premiums cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add the deductible Nils pays on the claim to the year of premiums to reach his total cost in the year of the repair.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total cost in the claim year with the policy?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much better off is Nils with the policy in that year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Model three quiet simulated years with no claim at all, then compare against the single claim year.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do three quiet years of premiums cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "Across those three quiet years plus the claim year, how much better off is Nils than paying the repair unprotected?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Four years of premiums nearly matched the repair.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain what Nils is actually buying with the premiums, and describe the situation in which the policy is worth having even if the arithmetic comes out roughly even."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner omits the deductible, list Nils's premiums and deductible as separate labelled lines before any total is computed.",
+  "extension": "Ask the learner how many quiet years Nils could pay for before the policy costs more than the repair, and to show the reasoning.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u05-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u05-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do 12 months of premiums cost?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total cost in the claim year with the policy?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much better off is Nils with the policy in that year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do three quiet years of premiums cost?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Across those three quiet years plus the claim year, how much better off is Nils than paying the repair unprotected?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain what Nils is actually buying with the premiums, and describe the situation in which the policy is worth having even if the arithmetic comes out roughly even."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-07/swk-fl-g7-u05-l05.package.json",
+    "sourcePackageSha256": "b035b6a5744eb57eaa1bd8abb4072bc34f35d8612b8031f228bb97b094e00854",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g7-financial-literacy-u05-l05",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

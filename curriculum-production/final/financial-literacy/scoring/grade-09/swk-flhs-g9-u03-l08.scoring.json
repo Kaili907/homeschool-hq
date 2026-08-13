@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l08",
+  "lessonId": "ma-g9-financial-literacy-u03-l08",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$51.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$612 a year spread over twelve months is exactly $51.00, regardless of it being billed twice."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$13.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$640 over 48 months is $13.3333, which rounds to $13.33."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$10.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$124 a year over twelve months is $10.3333, which rounds to $10.33."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$12.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$148 over twelve months is $12.3333, which rounds to $12.33."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$393.99",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$219 loan + $88 fuel + $51.00 insurance + $13.33 tyres + $10.33 oil + $12.33 registration."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$282.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $219 loan payment, the $51.00 monthly share of insurance, and the $12.33 share of registration are all owed whether the vehicle covers 200 miles or 2,000. Fuel moves with use, and tyres and oil changes come round sooner the more it is driven."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "insurance / 12",
+        "substituted": "612 / 12",
+        "result": "$51.00",
+        "why": "$612 a year spread over twelve months is exactly $51.00, regardless of it being billed twice."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(tyres / (tyreYears * 12), 2)",
+        "substituted": "round(640 / (4 * 12), 2)",
+        "result": "$13.33",
+        "why": "$640 over 48 months is $13.3333, which rounds to $13.33."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(oil * 2 / 12, 2)",
+        "substituted": "round(62 * 2 / 12, 2)",
+        "result": "$10.33",
+        "why": "$124 a year over twelve months is $10.3333, which rounds to $10.33."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(registration / 12, 2)",
+        "substituted": "round(148 / 12, 2)",
+        "result": "$12.33",
+        "why": "$148 over twelve months is $12.3333, which rounds to $12.33."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "loan + fuel + #t1-p1 + #t1-p2 + #t1-p3 + #t2-p1",
+        "substituted": "219 + 88 + #t1-p1 + #t1-p2 + #t1-p3 + #t2-p1",
+        "result": "$393.99",
+        "why": "$219 loan + $88 fuel + $51.00 insurance + $13.33 tyres + $10.33 oil + $12.33 registration."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "loan2 + #t1-p1 + #t2-p1",
+        "substituted": "219 + #t1-p1 + #t2-p1",
+        "result": "$282.33",
+        "why": "The $219 loan payment, the $51.00 monthly share of insurance, and the $12.33 share of registration are all owed whether the vehicle covers 200 miles or 2,000. Fuel moves with use, and tyres and oil changes come round sooner the more it is driven."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The owner has a month where money is short by $60. Say which of the six vehicle costs can actually absorb that cut, which cannot, and what happens if the cut is taken from the wrong one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Identifies fuel, at $88 a month, as the line that responds immediately to driving less, and notes that tyres and oil at $23.66 a month respond too but only over a longer horizon.",
+          "States that the loan, insurance, and registration — $282.33 a month — are committed regardless of use and cannot be reduced by choice in a single month, and explains the consequence of missing them.",
+          "Explains that cutting the periodic set-asides — tyres and oil at $23.66 a month, and registration at $12.33 — does not remove the cost but moves it to the month the bill arrives."
+        ],
+        "evidenceRequirements": [
+          "Uses at least three of the six monthly figures in the argument, including the $88 fuel line."
+        ],
+        "lookFors": [
+          "The response treats skipping an oil change as deferring a cost with a possible larger cost later, not as a saving.",
+          "The response notices that use-independence and billing cadence sort these costs differently — registration is periodic in cadence but committed in use — and says which axis it is using."
+        ],
+        "commonMisconception": "Treating a periodic set-aside as spare money because no bill is due this month.",
+        "dimensions": [
+          "transfer",
+          "plan-coherence",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of the annual insurance?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of a $640 set of tyres lasting 4 years?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of two $62 oil changes a year?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the monthly equivalent of the $148 annual registration?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the vehicle cost per month in total?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of that monthly total is committed regardless of how much the vehicle is driven?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "The owner has a month where money is short by $60. Say which of the six vehicle costs can actually absorb that cut, which cannot, and what happens if the cut is taken from the wrong one."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the monthly equivalent of the annual insurance? Answer: $51.00. Verification: $612 a year spread over twelve months is exactly $51.00, regardless of it being billed twice. t1-p2: What is the monthly equivalent of a $640 set of tyres lasting 4 years? Answer: $13.33. Verification: $640 over 48 months is $13.3333, which rounds to $13.33. t1-p3: What is the monthly equivalent of two $62 oil changes a year? Answer: $10.33. Verification: $124 a year over twelve months is $10.3333, which rounds to $10.33. t2-p1: What is the monthly equivalent of the $148 annual registration? Answer: $12.33. Verification: $148 over twelve months is $12.3333, which rounds to $12.33. t2-p2: What does the vehicle cost per month in total? Answer: $393.99. Verification: $219 loan + $88 fuel + $51.00 insurance + $13.33 tyres + $10.33 oil + $12.33 registration. t2-p3: How much of that monthly total is committed regardless of how much the vehicle is driven? Answer: $282.33. Verification: The $219 loan payment, the $51.00 monthly share of insurance, and the $12.33 share of registration are all owed whether the vehicle covers 200 miles or 2,000. Fuel moves with use, and tyres and oil changes come round sooner the more it is driven."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: The owner has a month where money is short by $60. Say which of the six vehicle costs can actually absorb that cut, which cannot, and what happens if the cut is taken from the wrong one. Identifies fuel, at $88 a month, as the line that responds immediately to driving less, and notes that tyres and oil at $23.66 a month respond too but only over a longer horizon. States that the loan, insurance, and registration — $282.33 a month — are committed regardless of use and cannot be reduced by choice in a single month, and explains the consequence of missing them. Explains that cutting the periodic set-asides — tyres and oil at $23.66 a month, and registration at $12.33 — does not remove the cost but moves it to the month the bill arrives. Uses at least three of the six monthly figures in the argument, including the $88 fuel line. The response treats skipping an oil change as deferring a cost with a possible larger cost later, not as a saving. The response notices that use-independence and billing cadence sort these costs differently — registration is periodic in cadence but committed in use — and says which axis it is using."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Identifies fuel, at $88 a month, as the line that responds immediately to driving less, and notes that tyres and oil at $23.66 a month respond too but only over a longer horizon. States that the loan, insurance, and registration — $282.33 a month — are committed regardless of use and cannot be reduced by choice in a single month, and explains the consequence of missing them. Explains that cutting the periodic set-asides — tyres and oil at $23.66 a month, and registration at $12.33 — does not remove the cost but moves it to the month the bill arrives."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 6 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs/scoring/grade-09/swk-flhs-g9-u03-l08.scoring.json",
+    "sourceScoringSha256": "9a6acfb3f3889d3976fd9bac492b34d14c103f87cf58972b82fed779ebd11eee",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

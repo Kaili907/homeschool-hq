@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l05",
+  "lessonId": "ma-g10-financial-literacy-u06-l05",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,653.72",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The four charges added. This is the amount at stake before any liability cap is applied."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$50.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,653.72 is capped at $50 by the schedule’s fastest tier. The cap applies to the total, not to each charge."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Day 12 is past the 2-business-day tier but within 60 days, so the $500 cap applies."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,603.72",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The full $1,653.72 against the $50.00 cap. Nothing about the fraud changed between those two outcomes — only when it was reported."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$500.00 against $50.00. Ten days of not looking at a statement moved the amount owed by $450.00."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "How quickly the charges are reported",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The charges have already happened and the investigation is the institution’s to run. The one variable in the holder’s hands is the reporting date, and the schedule prices it at $50.00, $500.00, or the whole $1,653.72."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "c1 + c2 + c3 + c4",
+        "substituted": "312.48 + 89.99 + 1204 + 47.25",
+        "result": "$1,653.72",
+        "why": "The four charges added. This is the amount at stake before any liability cap is applied."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "min(#t1-p1, capFast)",
+        "substituted": "min(#t1-p1, 50)",
+        "result": "$50.00",
+        "why": "The $1,653.72 is capped at $50 by the schedule’s fastest tier. The cap applies to the total, not to each charge."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "min(#t1-p1, capMid)",
+        "substituted": "min(#t1-p1, 500)",
+        "result": "$500.00",
+        "why": "Day 12 is past the 2-business-day tier but within 60 days, so the $500 cap applies."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$1,603.72",
+        "why": "The full $1,653.72 against the $50.00 cap. Nothing about the fraud changed between those two outcomes — only when it was reported."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$450.00",
+        "why": "$500.00 against $50.00. Ten days of not looking at a statement moved the amount owed by $450.00."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write the first four things a fictional person should do on finding unauthorised charges, in order, and explain why the order matters given this schedule. Say which step you would not delay even by a day.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Gives an ordered, actionable sequence — contact the institution to report and freeze the account, record the date and time of the report, request written confirmation, and review recent statements for anything else — and puts contacting the institution first.",
+          "Explains the order using the schedule: every tier is defined by elapsed time, so the step that starts the clock has to come before documentation, disputes, or investigation.",
+          "Identifies the report itself as the step not to delay, and supports it with the $450.00 cost of an eleven-day delay or the $1,603.72 cost of missing the 60-day window."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,653.72 total and at least two of the three liability outcomes."
+        ],
+        "lookFors": [
+          "The response puts reporting before gathering evidence, because the tiers are defined by time rather than by the quality of the report.",
+          "The response does not blame the account holder for the fraud; the schedule prices response time, not fault."
+        ],
+        "commonMisconception": "Waiting to assemble a complete account of what happened before reporting, when the liability tiers are set by the reporting date.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What do the unauthorised charges come to?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the holder reports the next day, what do they owe under the schedule?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "If instead the holder reports on day 12, what do they owe?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does reporting the next day save against reporting after 60 days?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much does the delay from day 1 to day 12 cost?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Under this simulated schedule, what does the account holder control?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Write the first four things a fictional person should do on finding unauthorised charges, in order, and explain why the order matters given this schedule. Say which step you would not delay even by a day."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What do the unauthorised charges come to? Answer: $1,653.72. Verification: The four charges added. This is the amount at stake before any liability cap is applied. t1-p2: If the holder reports the next day, what do they owe under the schedule? Answer: $50.00. Verification: The $1,653.72 is capped at $50 by the schedule’s fastest tier. The cap applies to the total, not to each charge. t1-p3: If instead the holder reports on day 12, what do they owe? Answer: $500.00. Verification: Day 12 is past the 2-business-day tier but within 60 days, so the $500 cap applies. t2-p1: How much does reporting the next day save against reporting after 60 days? Answer: $1,603.72. Verification: The full $1,653.72 against the $50.00 cap. Nothing about the fraud changed between those two outcomes — only when it was reported. t2-p2: How much does the delay from day 1 to day 12 cost? Answer: $450.00. Verification: $500.00 against $50.00. Ten days of not looking at a statement moved the amount owed by $450.00. t2-p3: Under this simulated schedule, what does the account holder control? Answer: How quickly the charges are reported. Verification: The charges have already happened and the investigation is the institution’s to run. The one variable in the holder’s hands is the reporting date, and the schedule prices it at $50.00, $500.00, or the whole $1,653.72."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Write the first four things a fictional person should do on finding unauthorised charges, in order, and explain why the order matters given this schedule. Say which step you would not delay even by a day. Gives an ordered, actionable sequence — contact the institution to report and freeze the account, record the date and time of the report, request written confirmation, and review recent statements for anything else — and puts contacting the institution first. Explains the order using the schedule: every tier is defined by elapsed time, so the step that starts the clock has to come before documentation, disputes, or investigation. Identifies the report itself as the step not to delay, and supports it with the $450.00 cost of an eleven-day delay or the $1,603.72 cost of missing the 60-day window. Uses the $1,653.72 total and at least two of the three liability outcomes. The response puts reporting before gathering evidence, because the tiers are defined by time rather than by the quality of the report. The response does not blame the account holder for the fraud; the schedule prices response time, not fault."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Gives an ordered, actionable sequence — contact the institution to report and freeze the account, record the date and time of the report, request written confirmation, and review recent statements for anything else — and puts contacting the institution first. Explains the order using the schedule: every tier is defined by elapsed time, so the step that starts the clock has to come before documentation, disputes, or investigation. Identifies the report itself as the step not to delay, and supports it with the $450.00 cost of an eleven-day delay or the $1,603.72 cost of missing the 60-day window."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u06-l05.scoring.json",
+    "sourceScoringSha256": "fd4b11bd6a465a42ee197bd08729753142d2d145b12ad26b91893fd67327f9dc",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

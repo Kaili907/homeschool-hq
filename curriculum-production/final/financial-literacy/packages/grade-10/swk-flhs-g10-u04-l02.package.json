@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l02",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: secured, unsecured, revolving, and installment credit"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "secured, unsecured, revolving, and installment credit",
+  "objective": "Classify four fictional credit products as secured or unsecured and revolving or installment, compute one month of interest on each, and show what a revolving minimum payment actually retires.",
+  "scenario": "The four simulated credit accounts below are invented for this exercise. No real lender, card, or borrower is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the four fictional account terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional household holds four accounts. A car loan of $9,400 at a 7.2% annual percentage rate, secured by the car and repaid on a fixed schedule. A credit card carrying $2,100 at a 22.9% annual percentage rate, unsecured, with a balance the household chooses each month. A personal loan of $3,000 at an 11.5% annual percentage rate, unsecured and on a fixed schedule. A secured credit card with a $500 limit backed by a $500 cash deposit and no balance carried. For each, one month of interest is the annual rate divided by 12, applied to the balance, rounded to the nearest cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is one month of interest on the credit card balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is one month of interest on the car loan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is one month of interest on the personal loan?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now look at what a revolving minimum payment does. The fictional card requires a minimum payment of 2% of the balance each month, and applies that payment to the month’s interest first.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the minimum payment on the $2,100 card balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "After the month’s interest is covered, how much of that minimum payment reduces the balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the balance never changed, what would a year of interest on the card cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which of the four accounts has no contractual end date by which the balance must be repaid?",
+          "choices": [
+            "The car loan",
+            "The credit card",
+            "The personal loan",
+            "The secured card deposit"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The car loan carries the largest balance but the card is the account to worry about. Using the two axes — secured or unsecured, revolving or installment — explain why, and say what the $500 deposit behind the secured card is actually doing."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the minimum payment looks like real progress, compare the two figures side by side: the payment is $42.00 and the month’s interest is $40.08. Subtract before deciding what the payment accomplished, and notice that the $2,100 balance falls to $2,098.08.",
+  "extension": "Work out what monthly payment would retire $100 of the card balance in a month, and say how that compares with the required minimum.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is one month of interest on the credit card balance?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is one month of interest on the car loan?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is one month of interest on the personal loan?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the minimum payment on the $2,100 card balance?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "After the month’s interest is covered, how much of that minimum payment reduces the balance?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "If the balance never changed, what would a year of interest on the card cost?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Which of the four accounts has no contractual end date by which the balance must be repaid?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The car loan carries the largest balance but the card is the account to worry about. Using the two axes — secured or unsecured, revolving or installment — explain why, and say what the $500 deposit behind the secured card is actually doing."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u04-l02.package.json",
+    "sourcePackageSha256": "d030f66f903a80e4a5ba793b531acc2075fbc520854584678e50e0a99cd7ae36",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u04-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

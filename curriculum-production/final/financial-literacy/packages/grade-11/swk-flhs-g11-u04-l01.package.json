@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l01",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: amortisation schedules and total interest"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "amortisation schedules and total interest",
+  "objective": "Build the first three months of a fictional loan’s amortisation schedule from the balance and the rate, and show how the split between interest and principal moves as the balance falls.",
+  "scenario": "Rosalind Quintero-Fitzgerald has a fictional loan from a simulated lender. The balance, rate, and payment below are invented, and this is a full amortisation schedule rather than a simplified flat-interest model.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional loan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The loan starts at $9,600. Interest is charged at 0.7% of the outstanding balance each month, which is an 8.4% annual rate. The payment is $302.60 a month for 36 months. Each month, interest is charged first and whatever is left of the payment reduces the balance. Round interest to the cent each month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest is charged in month 1, at 0.7% of the $9,600 balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the month-1 payment of $302.60 reduces the balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after the month-1 payment?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now carry the schedule forward. Month 2 charges 0.7% of the balance you just computed, and month 3 charges 0.7% of the balance after month 2.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest is charged in month 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much principal does the month-2 payment repay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after the month-2 payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much interest is charged in month 3?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much principal is repaid across the first 3 months in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Now look at the loan as a whole.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of all 36 payments?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total interest paid across the loan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of the first payment goes to interest rather than to the balance? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t3-p4",
+          "promptType": "fixed-choice",
+          "text": "Why does an identical $302.60 payment repay more of the balance in month 2 than in month 1?",
+          "choices": [
+            "Because the lender charges less interest as a reward for paying on time",
+            "Because interest is charged on a balance that the month-1 payment already reduced",
+            "Because the principal portion of a payment is fixed in advance"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Explain why this loan cannot be costed by multiplying the balance by the rate and by the number of years, and say what a schedule like this one shows that a single total-interest figure does not."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "Suppose Rosalind paid an extra $100 in month 1 only. Say which figures in the schedule change and which do not, and roughly what the extra $100 saves over the life of the loan."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the balance after month 1 comes out at $9,297.40, the whole $302.60 payment is being subtracted. Only the principal reduces the balance: the first $67.20 of the payment pays interest and leaves the loan no smaller. Build the schedule as four columns — opening balance, interest, principal, closing balance — and check that interest plus principal equals $302.60 in every row.",
+  "extension": "Continue the schedule to month 6 and compare the interest charged in month 6 with the interest in month 1, stating the fall as a percentage.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much interest is charged in month 1, at 0.7% of the $9,600 balance?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of the month-1 payment of $302.60 reduces the balance?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after the month-1 payment?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much interest is charged in month 2?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much principal does the month-2 payment repay?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after the month-2 payment?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much interest is charged in month 3?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "How much principal is repaid across the first 3 months in total?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of all 36 payments?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total interest paid across the loan?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "What percentage of the first payment goes to interest rather than to the balance? Give one decimal place."
+      },
+      {
+        "ref": "t3-p4",
+        "responseMode": "FIXED",
+        "promptText": "Why does an identical $302.60 payment repay more of the balance in month 2 than in month 1?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain why this loan cannot be costed by multiplying the balance by the rate and by the number of years, and say what a schedule like this one shows that a single total-interest figure does not."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "Suppose Rosalind paid an extra $100 in month 1 only. Say which figures in the schedule change and which do not, and roughly what the extra $100 saves over the life of the loan."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u04-l01.package.json",
+    "sourcePackageSha256": "2b868cd79486b82585c2f4f3ca9b615edc544db357db2a26e42a1fa842f4bbf5",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u04-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l05",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: adjusting after a plan fails a month"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "adjusting after a plan fails a month",
+  "objective": "Recalculate a fictional annual savings plan after a month that produced nothing, add the cost of restoring a drawn-down reserve, and state the total monthly commitment the recovery now requires.",
+  "scenario": "The fictional household, its savings target, and the simulated repair that interrupted it are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional savings plan and event in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household set out to save $3,600 across the year at $300 a month. It saved $300 in each of the first 4 months. In month 5 a simulated vehicle repair of $940 meant nothing was saved: the $300 that would have been saved went to the repair, $340 came from the reserve, and the remaining $300 came out of that month’s ordinary spending. That leaves 7 months of the year remaining.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much had been saved by the end of month 4?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the annual target is still outstanding?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now work out what finishing the year on target actually requires.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What must be saved each month across the remaining 7 months to reach the target?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more per month is that than the original plan?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the $340 taken from the reserve is also replaced across the same 7 months, what does that add each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the total monthly commitment for the rest of the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Holding the $3,600 target fixed pushes the monthly commitment to $391.43. Set out one alternative that keeps the household’s monthly figure closer to $300, say precisely what it gives up, and explain which of the two you would put to this household first."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the required monthly figure comes out at $200.00, the outstanding $2,400.00 is being spread across 12 months rather than the 7 that remain. Only 7 months are left, and $2,400.00 of the target is outstanding. Divide by 7, then add the reserve replacement separately rather than folding it into the same figure.",
+  "extension": "Recompute the monthly commitment if the household decides to replace the reserve over 12 months instead of 7, and say what that choice costs in protection during the intervening months.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much had been saved by the end of month 4?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of the annual target is still outstanding?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What must be saved each month across the remaining 7 months to reach the target?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much more per month is that than the original plan?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "If the $340 taken from the reserve is also replaced across the same 7 months, what does that add each month?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the total monthly commitment for the rest of the year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Holding the $3,600 target fixed pushes the monthly commitment to $391.43. Set out one alternative that keeps the household’s monthly figure closer to $300, say precisely what it gives up, and explain which of the two you would put to this household first."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u03-l05.package.json",
+    "sourcePackageSha256": "e1cf5951edc4007f3d6ba2322497ed5a4673b37ac8b4b6b98d140d3c0efc819d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u03-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

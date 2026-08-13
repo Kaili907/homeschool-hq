@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u02-l01",
+  "lessonId": "ma-g3-financial-literacy-u02-l01",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much does Sam earn from three pretend walks?",
+        "answer": "$6.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.00 x 3) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 200
+            },
+            "times": 3
+          },
+          "trace": "(2.00 x 3) = 6.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How much does Sam earn from five pretend walks?",
+        "answer": "$10.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(2.00 x 5) = 10.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 200
+            },
+            "times": 5
+          },
+          "trace": "(2.00 x 5) = 10.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How much more does Sam earn in the five-walk week than in the three-walk week?",
+        "answer": "$4.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.00 x 5) - (2.00 x 3)) = 4.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 200
+              },
+              "times": 5
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 200
+              },
+              "times": 3
+            }
+          },
+          "trace": "((2.00 x 5) - (2.00 x 3)) = 4.00"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "What has Sam earned in total from the five walks and the raking?",
+        "answer": "$13.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((2.00 x 5) + 3.00) = 13.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "sum",
+            "of": [
+              {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 200
+                },
+                "times": 5
+              },
+              {
+                "op": "money",
+                "cents": 300
+              }
+            ]
+          },
+          "trace": "((2.00 x 5) + 3.00) = 13.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "Is that enough for the $15.00 pretend scooter?",
+        "answer": "Not yet enough",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "compare ((2.00 x 5) + 3.00) with 15.00 = Not yet enough. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "select",
+            "left": {
+              "op": "sum",
+              "of": [
+                {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 200
+                  },
+                  "times": 5
+                },
+                {
+                  "op": "money",
+                  "cents": 300
+                }
+              ]
+            },
+            "right": {
+              "op": "money",
+              "cents": 1500
+            },
+            "whenLess": "Not yet enough",
+            "whenEqual": "Exactly enough",
+            "whenGreater": "More than enough"
+          },
+          "trace": "compare ((2.00 x 5) + 3.00) with 15.00 = Not yet enough"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Connecting work to income",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response says only that Sam has money, without naming any work behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Sam's walking and raking are mentioned but not described as the trade that produced the pay."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response states that Sam traded his time and effort on the walks and the raking for the pretend pay, so the money came from work he did."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Sam earn from three pretend walks?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much does Sam earn from five pretend walks?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much more does Sam earn in the five-walk week than in the three-walk week?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "What has Sam earned in total from the five walks and the raking?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "Is that enough for the $15.00 pretend scooter?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "Sam's pretend money did not appear on its own. What did he trade to get it?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much does Sam earn from three pretend walks? Answer: $6.00. Verification: (2.00 x 3) = 6.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How much does Sam earn from five pretend walks? Answer: $10.00. Verification: (2.00 x 5) = 10.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How much more does Sam earn in the five-walk week than in the three-walk week? Answer: $4.00. Verification: ((2.00 x 5) - (2.00 x 3)) = 4.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: What has Sam earned in total from the five walks and the raking? Answer: $13.00. Verification: ((2.00 x 5) + 3.00) = 13.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: Is that enough for the $15.00 pretend scooter? Answer: Not yet enough. Verification: compare ((2.00 x 5) + 3.00) with 15.00 = Not yet enough. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Connecting work to income — Not yet: The response says only that Sam has money, without naming any work behind it. Approaching: Sam's walking and raking are mentioned but not described as the trade that produced the pay. Meets: The response states that Sam traded his time and effort on the walks and the raking for the pretend pay, so the money came from work he did. The response states that Sam traded his time and effort on the walks and the raking for the pretend pay, so the money came from work he did."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response states that Sam traded his time and effort on the walks and the raking for the pretend pay, so the money came from work he did."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u02-l01.scoring.json",
+    "sourceScoringSha256": "0774c5949cbb1a92d314ec273400587b9b6d4becfb20fcb3ddefce98df15f941",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

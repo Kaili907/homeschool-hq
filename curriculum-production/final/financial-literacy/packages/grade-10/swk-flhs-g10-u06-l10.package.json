@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l10",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: how a claim process works"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "how a claim process works",
+  "objective": "Work a fictional multi-part claim through three coverages that each have their own rule, total what the insurer pays and what the policyholder bears, and check that the two reconcile to the loss.",
+  "scenario": "The simulated accident and the simulated policy below are invented for this exercise. Each of the three coverages has its own limit and its own deductible rule, and each is applied separately to the part of the loss it covers.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy declarations in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional auto policy carries three coverages. Collision has a $14,000 limit and a $1,000 deductible. Medical payments has a $5,000 limit and no deductible. Property damage liability has a $25,000 limit and no deductible. In a simulated accident the policyholder’s own car sustains $9,800 of damage, the policyholder’s own medical bills come to $6,200, and the policyholder is responsible for $31,400 of damage to another party’s property. Apply each coverage separately, subtracting its deductible from its part of the loss and capping the result at its limit.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does collision pay for the policyholder’s car?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does medical payments coverage pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does property damage liability pay for the other party’s property?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Now total both sides of the claim and check that they reconcile.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the insurer pay in total across the three coverages?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the policyholder bear on their own car?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the policyholder bear on their own medical bills?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the policyholder responsible for on the other party’s property?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What does the policyholder bear in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "Check the work: what do the insurer’s payments and the policyholder’s costs come to together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences, using the figures you computed.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Report this claim to the fictional policyholder: what the policy paid, what they owe, and which single coverage limit was most costly to have set where it was. Then say which limit you would raise first and what raising it would not fix."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the policyholder’s total comes out at $1,000.00, only the deductible has been counted. Two of the three coverages hit their limits: medical payments stopped at $5,000.00 against $6,200 of bills, and liability stopped at $25,000.00 against $31,400 of damage. Everything above a limit stays with the policyholder.",
+  "extension": "Recompute the claim with the property damage liability limit raised to $50,000 and everything else unchanged, and say how much of the policyholder’s $8,600.00 that single change removes.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does collision pay for the policyholder’s car?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does medical payments coverage pay?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does property damage liability pay for the other party’s property?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the insurer pay in total across the three coverages?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the policyholder bear on their own car?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does the policyholder bear on their own medical bills?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the policyholder responsible for on the other party’s property?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "What does the policyholder bear in total?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "Check the work: what do the insurer’s payments and the policyholder’s costs come to together?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Report this claim to the fictional policyholder: what the policy paid, what they owe, and which single coverage limit was most costly to have set where it was. Then say which limit you would raise first and what raising it would not fix."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u06-l10.package.json",
+    "sourcePackageSha256": "103d0ad0002c5e2635f8fd81ed560466a9d86a4940a3810d2c61b358e70602d1",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u06-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

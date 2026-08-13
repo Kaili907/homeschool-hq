@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u01-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u01-l02",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Education, Career, and Lifetime Earnings Tradeoffs",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: opportunity cost of years not earning"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "opportunity cost of years not earning",
+  "objective": "Compute the earnings a fictional adult gives up across four full-time study years when the wage he leaves would itself have grown, add that to tuition to reach a true cost, and convert it into a recovery period.",
+  "scenario": "Marcus Delacroix-Whitfield is a fictional warehouse coordinator considering four years of full-time study. His current wage, the raise pattern, and the tuition below are simulated figures for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional wage and tuition figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Marcus earns $32,000 this year. If he keeps working instead of studying, his employer’s pattern gives him a raise of 2.5% at the start of each following year. Study takes 4 years, during which he would earn nothing. Round each year to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What would Marcus earn in the first of the four years if he kept working?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would he earn in the second year, after one raise of 2.5%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would he earn in the third year, after two raises of 2.5%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What would he earn in the fourth year, after three raises of 2.5%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Tuition is $12,750 a year for each of the 4 study years. Once he finishes, the qualification is expected to raise his pay by $19,400 a year over what he would otherwise have been earning.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are the total earnings Marcus gives up across all four study years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total tuition across the 4 study years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the true cost of the four years, counting both the tuition and the earnings given up?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "At an advantage of $19,400 a year, how many years of work does it take to recover the true cost? Give one decimal place.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which of the two parts of the true cost is larger for Marcus?",
+          "choices": [
+            "The tuition he pays",
+            "The earnings he gives up",
+            "They are equal"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A friend tells Marcus the programme \"costs $51,000\". Explain what that figure leaves out, why the omitted part is easy to miss, and what it does to the recovery period."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The model gives Marcus a raise of 2.5% in each year he is not studying. Say what would happen to the true cost if that raise pattern were smaller, and name one thing about his job that would make the 2.5% assumption unsafe."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the forgone total comes out at $128,000, the four years are being valued at $32,000 each and the raises are being dropped. The wage Marcus is giving up rises while he studies, so year 3 gives up $33,620.00 and not $32,000.00. Build the four years as separate rows, apply 2.5% to the previous row rather than to the first row, and only then add the column.",
+  "extension": "Recompute the true cost and the recovery period for a 2-year version of the same programme at the same tuition rate, and say why the recovery period does not simply halve.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u01-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u01-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What would Marcus earn in the first of the four years if he kept working?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What would he earn in the second year, after one raise of 2.5%?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would he earn in the third year, after two raises of 2.5%?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What would he earn in the fourth year, after three raises of 2.5%?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What are the total earnings Marcus gives up across all four study years?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total tuition across the 4 study years?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the true cost of the four years, counting both the tuition and the earnings given up?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "At an advantage of $19,400 a year, how many years of work does it take to recover the true cost? Give one decimal place."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Which of the two parts of the true cost is larger for Marcus?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A friend tells Marcus the programme \"costs $51,000\". Explain what that figure leaves out, why the omitted part is easy to miss, and what it does to the recovery period."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The model gives Marcus a raise of 2.5% in each year he is not studying. Say what would happen to the true cost if that raise pattern were smaller, and name one thing about his job that would make the 2.5% assumption unsafe."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u01-l02.package.json",
+    "sourcePackageSha256": "60fbe3eb5a3a8e859df6351dc1a17640a28bca29210f5437e2c60fe69a34d9f3",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u01-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

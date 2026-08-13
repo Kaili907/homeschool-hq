@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u06-l04",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: premium, deductible, and coverage limit"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "premium, deductible, and coverage limit",
+  "objective": "Apply a fictional policy’s premium, deductible, and coverage limit to two claims of different sizes, and identify which term binds in each case.",
+  "scenario": "The simulated policy below has a premium, a deductible, and a coverage limit. Both claims are invented for this exercise, and no real policy is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional policy: premium $58 a month, deductible $750 per claim, coverage limit $12,000. The insurer pays the loss less the deductible, up to the limit.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the policy cost in premiums over a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "On a $4,300 claim, how much does the insurer pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "On that $4,300 claim, how much does the policyholder pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now a much larger claim: $19,000.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "On a $19,000 claim, how much does the insurer pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "On that claim, how much does the policyholder pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which policy term decided the policyholder’s cost on the $19,000 claim?",
+          "choices": [
+            "The premium",
+            "The deductible",
+            "The coverage limit"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The policyholder paid $750 on one claim and $7,000 on another. Explain which term protected them in each case, and say what question they should ask about the limit before renewing."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the insurer’s payment on the large claim comes out as $18,250, the limit has been skipped. Compute the uncapped figure first, then compare it with $12,000 and take the smaller — that comparison is what a coverage limit does.",
+  "extension": "Find the claim size at which the coverage limit first begins to bind, and state it as a rule in terms of the deductible and the limit.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u06-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the policy cost in premiums over a year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "On a $4,300 claim, how much does the insurer pay?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "On that $4,300 claim, how much does the policyholder pay?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "On a $19,000 claim, how much does the insurer pay?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "On that claim, how much does the policyholder pay?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which policy term decided the policyholder’s cost on the $19,000 claim?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The policyholder paid $750 on one claim and $7,000 on another. Explain which term protected them in each case, and say what question they should ask about the limit before renewing."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u06-l04.package.json",
+    "sourcePackageSha256": "20b74d25b81dbb7d2f049bdc7dd71370b49421e10b71e57f20c64149b508052e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u06-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

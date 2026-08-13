@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l09",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: resolving a billing error or dispute"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "resolving a billing error or dispute",
+  "objective": "Separate unauthorised charges from a merchant billing error on a simulated card statement, compute what is genuinely owed, and route each category to the right remedy.",
+  "scenario": "The simulated card statement below and every charge on it are fictional. No real card, account, or merchant is involved, and no card details appear anywhere in this lesson.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional statement summary in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The simulated statement totals $1,247.83. It includes two charges the cardholder did not make and does not recognise, for $318.40 and $96.75. It also includes a charge of $54.00 from a merchant the cardholder did use, billed twice for one purchase. The rest of the statement is charges the cardholder made and accepts. Interest runs at 1.65% a month on any balance carried, except that while an amount is formally in dispute the fictional issuer charges no interest on it and does not treat it as late.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the two unrecognised charges come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total of everything the cardholder should not have to pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is genuinely owed on this statement?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now route each category and price the delay.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "Which of the disputed amounts should be reported to the card issuer as charges the cardholder did not make, rather than taken up with a merchant first?",
+          "choices": [
+            "The $415.15 of unrecognised charges",
+            "The $54.00 duplicate charge",
+            "All $469.15 together"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the disputed $469.15 were carried on the card for one month at 1.65% rather than being disputed, what would the interest be?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "The card issuer’s minimum payment for the month is $35. Does the genuinely owed amount exceed it?",
+          "choices": [
+            "Yes — the owed amount is well above the minimum",
+            "No — the minimum is larger than what is owed"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Two problems on one statement need two different responses. Explain why the $415.15 and the $54.00 are not the same kind of problem, say what each response should be, and name one action the cardholder should take about the $415.15 that has nothing to do with this statement."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount owed comes out as $832.68, only the unauthorised charges have been removed and the $54.00 duplicate is still in the total. Take out everything the cardholder should not pay — $318.40, $96.75, and $54.00 — to reach $778.68, and keep the two categories labelled separately, because they go to different places.",
+  "extension": "Work out what the interest would come to if the disputed $469.15 stayed on the card for 4 months, and say what that implies about how quickly an unauthorised charge should be reported.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the two unrecognised charges come to?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total of everything the cardholder should not have to pay?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is genuinely owed on this statement?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "Which of the disputed amounts should be reported to the card issuer as charges the cardholder did not make, rather than taken up with a merchant first?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "If the disputed $469.15 were carried on the card for one month at 1.65% rather than being disputed, what would the interest be?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "The card issuer’s minimum payment for the month is $35. Does the genuinely owed amount exceed it?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Two problems on one statement need two different responses. Explain why the $415.15 and the $54.00 are not the same kind of problem, say what each response should be, and name one action the cardholder should take about the $415.15 that has nothing to do with this statement."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u02-l09.package.json",
+    "sourcePackageSha256": "91a19b24231542dc14d3db346fa899e6185cbef20195ccf2e7c206b7e6f581e6",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u02-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

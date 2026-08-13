@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l03",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: pathway cost: certificate, apprenticeship, or degree"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "pathway cost: certificate, apprenticeship, or degree",
+  "objective": "Compute the full cost of three fictional pathways including earnings given up, and find how long each takes to repay against a stated baseline.",
+  "scenario": "A fictional school-leaver could work now at $32,000 a year or take one of three invented pathways. Every cost, duration, and wage below is fictional.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pathway table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The baseline is working now at $32,000 a year. Pathway A, a certificate: 14 months, tuition $9,400, earning $12,000 a year during it, then $44,000. Pathway B, an apprenticeship: 36 months, no tuition, earning $28,000 a year during it, then $58,000. Pathway C, a degree: 48 months, tuition $46,000, earning $8,000 a year during it, then $67,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What earnings does Pathway A give up against the baseline over its 14 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Pathway A’s full cost, tuition plus forgone earnings?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is Pathway C’s full cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find how long the higher wage takes to repay each pathway’s full cost, measured against the $32,000 baseline.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many years does Pathway A take to repay its cost? Round to two decimal places.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many years does Pathway B take to repay its cost? Round to two decimal places.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many years does Pathway C take to repay its cost? Round to two decimal places.",
+          "unit": "years"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Pathway B repays fastest and Pathway C ends at the highest wage. Explain why the payback figures do not settle the choice on their own, and name what a 20-year view would add."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Pathway B appears to cost nothing, note that it still gives up $4,000 a year against the baseline for three years. Zero tuition is not zero cost when the alternative pays more during the same period.",
+  "extension": "Compute total earnings over 20 years from the start of each pathway, counting the during-pathway years at their stated wages, and say whether the ranking changes.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What earnings does Pathway A give up against the baseline over its 14 months?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Pathway A’s full cost, tuition plus forgone earnings?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is Pathway C’s full cost?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many years does Pathway A take to repay its cost? Round to two decimal places."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many years does Pathway B take to repay its cost? Round to two decimal places."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How many years does Pathway C take to repay its cost? Round to two decimal places."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Pathway B repays fastest and Pathway C ends at the highest wage. Explain why the payback figures do not settle the choice on their own, and name what a 20-year view would add."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-10/swk-flhs-g10-u01-l03.package.json",
+    "sourcePackageSha256": "b1ba437d644a7dd25bb3bd3276139094c07c3e8a54eea56726b2c6ead6a1a4ad",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u01-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

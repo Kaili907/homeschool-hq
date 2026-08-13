@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u06-l05",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Naming Risk and Deciding What to Do About It",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: identity protection and everyday safeguards"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "identity protection and everyday safeguards",
+  "objective": "Price the cost of recovering from a fictional identity theft, compare it with the cost of two safeguards, and decide which safeguard is worth its price.",
+  "scenario": "A fictional person’s details appear in a simulated data breach. The cleanup costs and the safeguard prices below are invented for this exercise. Nothing here asks for or refers to any real personal information.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional cleanup and safeguard figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional cleanup takes 26 hours of the person’s own time, of which 6 hours are taken from paid work at $17.20 an hour. Fees for certified post and replacement documents come to $145. The chance of a breach leading to this kind of cleanup in a year is 4%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are the lost wages from the 6 hours taken from paid work?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total out-of-pocket and lost-wage cost of one cleanup?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the expected annual cost of this risk at a 4% chance?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Two safeguards are available. A credit freeze costs nothing and blocks most new accounts from being opened in the person’s name; it does not stop misuse of accounts that already exist. A monitoring service costs $14.99 a month and alerts the person after something has already happened.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the monitoring service cost for a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Compared with the expected annual cost of the risk, is the monitoring service worth its price on these figures alone?",
+          "choices": [
+            "Yes, it costs less than the expected loss",
+            "No, it costs more than the expected loss"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more does the monitoring service cost than the expected annual loss?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The free safeguard prevents the loss and the paid one reports it afterwards. Explain why that difference matters more than the price, and name two figures in this lesson that a real decision would need but that the calculation above does not contain."
+        }
+      ]
+    }
+  ],
+  "remediation": "If all 26 hours are being priced at $17.20, reread the directions: only 6 of them were taken from paid work. The other 20 are a real cost with no dollar figure attached, which is worth naming rather than inventing a number for.",
+  "extension": "Price all 26 hours at the $17.20 wage, recompute the comparison, and say whether that changes the conclusion about the monitoring service.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u06-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u06-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What are the lost wages from the 6 hours taken from paid work?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total out-of-pocket and lost-wage cost of one cleanup?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the expected annual cost of this risk at a 4% chance?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the monitoring service cost for a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Compared with the expected annual cost of the risk, is the monitoring service worth its price on these figures alone?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more does the monitoring service cost than the expected annual loss?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The free safeguard prevents the loss and the paid one reports it afterwards. Explain why that difference matters more than the price, and name two figures in this lesson that a real decision would need but that the calculation above does not contain."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u06-l05.package.json",
+    "sourcePackageSha256": "25d14e11475fc874ca986f11f5681672edfe2ef533c3f223a174315142a0206e",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u06-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l02",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: repayment ordering strategies compared"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "repayment ordering strategies compared",
+  "objective": "Compare a highest-rate-first and a smallest-balance-first ordering on the same fictional debt set, quantify the interest difference the ordering produces, and name what each strategy optimises.",
+  "scenario": "Ambrose Nakagawa-Silva holds three fictional debts from simulated lenders. Every balance, rate, and minimum payment below is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional debt table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Debt A is $1,850 at 8.2% a year with a $55 minimum. Debt B is $4,300 at 24.6% a year with a $95 minimum. Debt C is $7,200 at 12.1% a year with a $140 minimum. Ambrose has $250 a month above the minimums. Monthly interest is the annual rate divided by 12, charged on the balance.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does Debt A charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does Debt B charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does Debt C charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the total interest charged across all three debts in the first month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Smallest-balance-first sends the extra $250 to Debt A; highest-rate-first sends it to Debt B. For the two clearing times below, ignore interest so the ordering effect is isolated; this understates both times slightly and is a deliberate simplification.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under smallest-balance-first, how many months does Debt A take, paying its $55 minimum plus the $250 extra? Give one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under highest-rate-first, how many months does Debt B take, paying its $95 minimum plus the $250 extra? Give one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Directing the $250 at Debt B rather than Debt A moves it from a debt charging 8.2% to one charging 24.6%. How much interest does that save in a month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "If that saving held for 12 months, what would it come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which debt generates the most interest in the first month?",
+          "choices": [
+            "Debt A, at 8.2%",
+            "Debt B, at 24.6%",
+            "Debt C, at 12.1%"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name what each of the two orderings optimises, say which one you would recommend to Ambrose, and state what you would need to know about him before the recommendation could be final."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Debt C has the largest balance and generates $72.60 of interest a month while never being targeted by either strategy. Explain what happens to it in the meantime, and why neither strategy starts there."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the monthly interest figures come out twelve times too large, the annual rate is being applied without dividing by 12. Debt B at 24.6% a year charges $1,057.80 over a year but $88.15 in a month. Convert every rate to a monthly figure first, and sanity-check that the three monthly charges total $173.39 rather than something near $2,080.",
+  "extension": "Work out which debt would generate the most interest in a month if Debt C’s balance were $9,500 instead, and say what that shows about ranking debts by rate alone.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does Debt A charge in the first month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does Debt B charge in the first month?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does Debt C charge in the first month?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the total interest charged across all three debts in the first month?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "Under smallest-balance-first, how many months does Debt A take, paying its $55 minimum plus the $250 extra? Give one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Under highest-rate-first, how many months does Debt B take, paying its $95 minimum plus the $250 extra? Give one decimal place."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Directing the $250 at Debt B rather than Debt A moves it from a debt charging 8.2% to one charging 24.6%. How much interest does that save in a month?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "If that saving held for 12 months, what would it come to?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Which debt generates the most interest in the first month?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Name what each of the two orderings optimises, say which one you would recommend to Ambrose, and state what you would need to know about him before the recommendation could be final."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Debt C has the largest balance and generates $72.60 of interest a month while never being targeted by either strategy. Explain what happens to it in the meantime, and why neither strategy starts there."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u04-l02.package.json",
+    "sourcePackageSha256": "76d22311f6be3088eac9e233e5ba20d57e41e7b1f9db439e52b402cd99d11bd8",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u04-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

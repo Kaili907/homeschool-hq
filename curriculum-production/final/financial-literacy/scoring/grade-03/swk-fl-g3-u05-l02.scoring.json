@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g3-u05-l02",
+  "lessonId": "ma-g3-financial-literacy-u05-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Protecting private money information",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response has Amara type the number, or treats the prize as worth the risk."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says Amara should refuse but gives no reason and names no adult."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response has Amara refuse, keeps the family number private, and brings the invented message to a trusted adult rather than answering it alone."
+          }
+        ]
+      },
+      {
+        "dimension": "Sorting shareable from private",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response treats all money talk as secret, or all of it as fine to share."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Amara's example is given on only one side of the line."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response gives one thing Amara could safely discuss, such as saving for a goal, and one that stays private, such as card or account numbers."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Refuses the invented request outright rather than negotiating with it.",
+      "Names a trusted adult as the next step for Amara.",
+      "Identifies the requested number as belonging to the family, not to Amara.",
+      "Distinguishes a safe topic from private account information."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What exactly is the invented game character asking Amara for, and who does that information really belong to?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "What should Amara do about the request, and why does it not matter that the message sounded nice?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Name one money thing that is fine to talk about at school and one that stays inside the family."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Protecting private money information — Not yet: The response has Amara type the number, or treats the prize as worth the risk. Approaching: The response says Amara should refuse but gives no reason and names no adult. Meets: The response has Amara refuse, keeps the family number private, and brings the invented message to a trusted adult rather than answering it alone. Sorting shareable from private — Not yet: The response treats all money talk as secret, or all of it as fine to share. Approaching: Amara's example is given on only one side of the line. Meets: The response gives one thing Amara could safely discuss, such as saving for a goal, and one that stays private, such as card or account numbers. Refuses the invented request outright rather than negotiating with it. Names a trusted adult as the next step for Amara. Identifies the requested number as belonging to the family, not to Amara. Distinguishes a safe topic from private account information."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Refuses the invented request outright rather than negotiating with it. Names a trusted adult as the next step for Amara. Identifies the requested number as belonging to the family, not to Amara. Distinguishes a safe topic from private account information."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-03/swk-fl-g3-u05-l02.scoring.json",
+    "sourceScoringSha256": "a60a9cb39567007035a79b969f2bf25675beff3823658d3c0a2e9bd5055da577",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

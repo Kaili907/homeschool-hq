@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u06-l09",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Insurance Structures and Identity Protection",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: matching coverage level to actual exposure"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "matching coverage level to actual exposure",
+  "objective": "Measure a fictional household’s three largest exposures against the coverage standing behind each, identify the largest uncovered gap, and total what the household would bear.",
+  "scenario": "The simulated household, its coverage, and its exposures below are invented for this exercise. Each property policy pays the loss minus its deductible, capped at its coverage limit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional household coverage summary in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional household earns $52,000 a year from one earner. Its belongings are worth $14,600, covered by a renters policy with a $10,000 limit and a $500 deductible. Its car is worth $12,300, covered by collision with a $12,300 limit and a $1,000 deductible. The household holds no disability coverage. Consider three separate events: the earner unable to work for 6 months, a total loss of the belongings, and a total loss of the car.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much income does the household lose if the earner cannot work for 6 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "In a total loss of the belongings, what does the renters policy pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the household bear in that event?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for the car, then rank the three exposures.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "In a total loss of the car, what does collision pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the household bear in that event?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Of the three events, what is the largest amount the household would have to bear?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "If all three events happened in the same year, what would the household bear in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The household insures a $12,300 car down to a $1,000 exposure and leaves a $26,000.00 income exposure entirely uncovered. Explain why this pattern is common, and recommend the single change you would make first, defending it against the alternative of raising the renters limit."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the belongings event comes out at $500, the coverage limit has not been applied. The deductible leaves $14,100 of loss, but the renters policy will not pay more than its $10,000 limit, so the household bears $4,600.00. Compare each exposure against the limit standing behind it, not against the deductible.",
+  "extension": "Work out what renters limit would reduce the household’s exposure on the belongings to the $500 deductible, and say whether that change or disability coverage would remove more risk per dollar of premium.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u06-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u06-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much income does the household lose if the earner cannot work for 6 months?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "In a total loss of the belongings, what does the renters policy pay?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What does the household bear in that event?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "In a total loss of the car, what does collision pay?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does the household bear in that event?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Of the three events, what is the largest amount the household would have to bear?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "If all three events happened in the same year, what would the household bear in total?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The household insures a $12,300 car down to a $1,000 exposure and leaves a $26,000.00 income exposure entirely uncovered. Explain why this pattern is common, and recommend the single change you would make first, defending it against the alternative of raising the renters limit."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u06-l09.package.json",
+    "sourcePackageSha256": "e71055cbf868181b4a0fca018b49ad2bc0d3648b12aa744f54e34a13ed9c3088",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u06-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

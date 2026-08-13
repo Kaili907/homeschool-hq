@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u02-l06",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u02-l06",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "Consumer Decisions and Contracts",
+    "dayInUnit": 6,
+    "phase": "Correction and reflection",
+    "title": "Correction and reflection: fraud and consumer protection",
+    "focus": "fraud and consumer protection"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2 foundations",
+    "PF6 foundations"
+  ],
+  "objective": "Learners work through an invented consumer-protection situation, identifying what evidence matters and what escalation path exists.",
+  "scenario": "Kiona is an invented seventh grader studying a pretend case: an online order arrived damaged, the invented seller says the return window closed two days ago, and the customer has photos taken on the day of delivery. Everything here is invented for practice.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Set out Kiona's invented case in order: what was promised, what arrived, what evidence exists, and what the seller now claims. Keep evidence separate from opinion.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What evidence does the customer in Kiona's case actually hold, and why does the timing of the photos matter?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Write the steps the customer should take, in order, from contacting the seller through to any escalation, and say what each step should include.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What steps should the customer take, in what order, and what should each communication contain?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "The seller is relying on a deadline.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why does a damaged-on-arrival item raise a different question from a change-of-mind return?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner leads with escalation, ask what a complaint body would want to see first, and rebuild the order from that answer.",
+  "extension": "Ask the learner to draft the first three sentences of the customer's message to the invented seller.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u02-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u02-l06",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What evidence does the customer in Kiona's case actually hold, and why does the timing of the photos matter?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What steps should the customer take, in what order, and what should each communication contain?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why does a damaged-on-arrival item raise a different question from a change-of-mind return?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-07/swk-fl-g7-u02-l06.package.json",
+    "sourcePackageSha256": "1762af16b65d2f09d354cd87fb3aaeae26df35ff167a806db1304a8e2db61103",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g7-financial-literacy-u02-l06",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

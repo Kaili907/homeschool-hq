@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u04-l08",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u04-l08",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Debt Strategy and Repayment Analysis",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: repayment ordering strategies compared"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "repayment ordering strategies compared",
+  "objective": "Transfer the repayment-ordering method to a fictional debt set where the highest rate is not the largest interest line, and say what that changes about the ranking.",
+  "scenario": "Zephyrine Adebayo-Voss holds three fictional debts with the simulated terms below. All balances, rates, and payments are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional debt table in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The card holds $920 at 26.9% a year with a $180 minimum. The credit-union loan holds $3,450 at 7.4% a year with a $95 minimum. The store plan holds $6,100 at 15.8% a year with a $205 minimum. Zephyrine has $310 a month above the minimums. Monthly interest is the annual rate divided by 12.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the card charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the credit-union loan charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much interest does the store plan charge in the first month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the total interest across all three debts in the first month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now apply the ordering rules. For the clearing time, ignore interest, as in the earlier lesson; this is a deliberate simplification that understates the time slightly.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "The card is both the highest rate and the smallest balance, so both strategies target it. How many months does it take at its $180 minimum plus the $310 extra? Give one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Once the card is cleared, directing the $310 at the store plan rather than the credit-union loan moves it from 7.4% to 15.8%. How much interest does that save in a month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total first-month interest does the store plan generate? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Which debt charges more interest in the first month, the card at 26.9% or the credit-union loan at 7.4%?",
+          "choices": [
+            "The card, at 26.9%",
+            "The credit-union loan, at 7.4%",
+            "They charge the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "In the earlier debt set the highest rate also produced the largest interest charge, and here it does not. Say what changed, what still transfers from the earlier method, and what a borrower should look at rather than the rate alone."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The store plan generates 65.7% of the monthly interest and neither strategy targets it first. Say whether that is a flaw in the strategies, and what Zephyrine should do about it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the card looks like the largest interest charge because its rate is highest, compute all three charges before ranking anything. Interest is the rate multiplied by the balance: 26.9% of $920 is $20.62 while 7.4% of $3,450 is $21.28. Write the three products in a column and rank the column, not the rates.",
+  "extension": "Find the card balance at which its interest charge would match the store plan’s $80.32, and say whether that balance is plausible for a card of this kind.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u04-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u04-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does the card charge in the first month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does the credit-union loan charge in the first month?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much interest does the store plan charge in the first month?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the total interest across all three debts in the first month?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "The card is both the highest rate and the smallest balance, so both strategies target it. How many months does it take at its $180 minimum plus the $310 extra? Give one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Once the card is cleared, directing the $310 at the store plan rather than the credit-union loan moves it from 7.4% to 15.8%. How much interest does that save in a month?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What share of the total first-month interest does the store plan generate? Give one decimal place."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Which debt charges more interest in the first month, the card at 26.9% or the credit-union loan at 7.4%?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "In the earlier debt set the highest rate also produced the largest interest charge, and here it does not. Say what changed, what still transfers from the earlier method, and what a borrower should look at rather than the rate alone."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The store plan generates 65.7% of the monthly interest and neither strategy targets it first. Say whether that is a flaw in the strategies, and what Zephyrine should do about it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u04-l08.package.json",
+    "sourcePackageSha256": "39b5bee2922d9ff2c374667c2a7d5331d6c6201cd476ac78bea5518539adf1c4",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u04-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

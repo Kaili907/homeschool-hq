@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u05-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u05-l10",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Portfolio Reasoning, Inflation, and Tax Effects",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: rebalancing rules and why they are written in advance"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "rebalancing rules and why they are written in advance",
+  "objective": "Apply a fictional three-asset rebalancing policy after a year of drift, compute every trade it requires, and defend the policy against the objection that it sells what is working.",
+  "scenario": "Isadora Krisztina-Mensah administers a fictional three-asset portfolio under a simulated written policy. All holdings, returns, and target weights below are invented for this performance task.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional portfolio and policy in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The policy targets 55% in a stock fund, 30% in a bond fund, and 15% in cash, and rebalances once a year. The portfolio began the year at $84,000 exactly on target. Over the year the stock fund returned 19.8%, the bond fund lost 1.4%, and cash returned 4.2%. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What was held in the stock fund at the start, at 55% of $84,000?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the stock fund worth after returning 19.8%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the bond fund worth after losing 1.4%, having started at 30% of $84,000?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the cash holding worth after returning 4.2%, having started at 15% of $84,000?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Now apply the policy and compute every trade it requires.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the portfolio worth at the end of the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of the portfolio is now in the stock fund? Give two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the stock fund must be sold to return it to 55%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much must be added to the bond fund to return it to 30%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much must be added to cash to return it to 15%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "Check the trades balance: what do the two purchases come to together?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One more figure before the defence.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the portfolio return over the year as a whole? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which figure shows the rebalance has been computed correctly?",
+          "choices": [
+            "The stock weight returning to exactly 55%",
+            "The two purchases totalling exactly the amount sold",
+            "The portfolio total staying at $93,324.00 after the trades"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write your defence of the policy. Answer both.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "A trustee objects that the policy sells $4,019.40 of the fund that returned 19.8% to buy more of one that lost money. Answer the objection, state what the policy is actually managing, and name the circumstance in which the objection would be right."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The policy rebalances once a year. Say what would change if it rebalanced monthly instead, and what would change if it rebalanced every five years."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the purchases do not add up to the amount sold, at least one target has been taken as a share of the original $84,000 rather than of the new $93,324.00 total. Every target is a share of the portfolio as it now stands. Compute the new total first, then all three targets from it, and check that the three targets themselves add back to $93,324.00 before working out any trade.",
+  "extension": "Recompute the trades if the policy targeted 45% stocks, 35% bonds, and 20% cash, and say which holding would then have drifted furthest from its target.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u05-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u05-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What was held in the stock fund at the start, at 55% of $84,000?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the stock fund worth after returning 19.8%?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the bond fund worth after losing 1.4%, having started at 30% of $84,000?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is the cash holding worth after returning 4.2%, having started at 15% of $84,000?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the portfolio worth at the end of the year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What share of the portfolio is now in the stock fund? Give two decimal places."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much of the stock fund must be sold to return it to 55%?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much must be added to the bond fund to return it to 30%?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "How much must be added to cash to return it to 15%?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "Check the trades balance: what do the two purchases come to together?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What did the portfolio return over the year as a whole? Give one decimal place."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which figure shows the rebalance has been computed correctly?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "A trustee objects that the policy sells $4,019.40 of the fund that returned 19.8% to buy more of one that lost money. Answer the objection, state what the policy is actually managing, and name the circumstance in which the objection would be right."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "The policy rebalances once a year. Say what would change if it rebalanced monthly instead, and what would change if it rebalanced every five years."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u05-l10.package.json",
+    "sourcePackageSha256": "85b11baaf8071ef311fc22c806965ac7ef9d256a06552b6fe256b949a427271a",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u05-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l02",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: enrolment timing and coverage gaps"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "enrolment timing and coverage gaps",
+  "objective": "Measure a fictional coverage gap in days, price bridging it, and compare that against what one uncovered event would cost.",
+  "scenario": "The fictional employment dates, the simulated continuation cover, and the invented visit cost below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional coverage dates and costs in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Counting days from the fictional worker’s last day, the last day the old plan covers is day 18 and the first day the new plan covers is day 80, so the uncovered stretch runs from day 19 to day 79 inclusive. Continuation cover is available at $612 for each 30-day period or part of one, and 3 such periods are needed to span the gap. Under the new plan a fictional emergency visit costing $4,850 would leave the member paying a $250 copay plus 20% of the rest; with no cover at all the member pays the whole amount.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many days is the gap in cover?",
+          "unit": "days"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does bridging the whole gap with continuation cover cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "With cover in place, what would the member pay toward the $4,850 visit?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now set the cost of the gap against the cost of bridging it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more would the visit cost during the gap than it would with cover?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Comparing the two figures alone, is bridging the gap cheaper than one uncovered visit of this size?",
+          "choices": [
+            "Yes — bridging costs less than the extra exposure on one event",
+            "No — bridging costs more than the event would"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The comparison above is not a proof that bridging is right. Explain what it leaves out, describe the case for going uncovered for the 61 days, and say what fact about the gap the worker should confirm first whichever way they decide."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the bridging cost comes out at $1,224.00, the gap is being covered with 2 periods rather than 3. A 61-day gap runs past two full 30-day periods, and a part period is charged in full, so 3 periods are needed. Count the periods against the 61 days before multiplying by $612.",
+  "extension": "Work out the bridging cost if the new plan’s cover began on day 79 instead of day 80, and say why removing a single day changes the cost by $612.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many days is the gap in cover?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does bridging the whole gap with continuation cover cost?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "With cover in place, what would the member pay toward the $4,850 visit?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much more would the visit cost during the gap than it would with cover?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Comparing the two figures alone, is bridging the gap cheaper than one uncovered visit of this size?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The comparison above is not a proof that bridging is right. Explain what it leaves out, describe the case for going uncovered for the 61 days, and say what fact about the gap the worker should confirm first whichever way they decide."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u06-l02.package.json",
+    "sourcePackageSha256": "46fdbfe5c5ad9b2bad62ca49ba5cca6fcad85be733e879951f7b3d0990241925",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u06-l02",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

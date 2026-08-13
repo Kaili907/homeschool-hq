@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l05",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u03-l05",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: emergency reserves and stress-testing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "emergency reserves and stress-testing",
+  "objective": "Express a fictional emergency reserve as months of essential spending, apply two simultaneous shocks to it, and re-measure what is left.",
+  "scenario": "A fictional household keeps a simulated emergency reserve. Its essential monthly spending, its reserve, and the two shocks below are all invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional household figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household spends $1,480 a month on essentials and holds a reserve of $3,700.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months of essential spending does the reserve cover? Round to one decimal place.",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now stress-test it. Two shocks land in the same month: a car repair of $620, and two weeks of lost income worth $740 that the household must cover from the reserve.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is left in the reserve after both shocks?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many months of essentials does the reserve now cover? Round to one decimal place.",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much would the household have to add to get back to the original 2.5 months of cover?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "The household can put $170 a month toward rebuilding the reserve.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months of $170 does it take to rebuild the reserve to $3,700? Round to the nearest month.",
+          "unit": "months"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "If a second $620 repair happened during those 8 months, would the reserve still cover one full month of essentials at its lowest point?",
+          "choices": [
+            "Yes, it would stay above one month of essentials",
+            "No, it would fall below one month of essentials"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Measuring a reserve in months rather than in dollars changes what it tells you. Explain the difference, and say what would happen to this household’s months of cover if its essential spending rose to $1,850 with the reserve unchanged at $2,340."
+        }
+      ]
+    }
+  ],
+  "remediation": "If months of cover is coming out as a dollar figure, name the units aloud: dollars divided by dollars-per-month leaves months. Check the first answer against a rough estimate — $1,480 twice is close to $3,000, so the answer must be a little over 2.",
+  "extension": "Work out the reserve this household would need for a 6-month cover target, and say how long $170 a month takes to reach it from $2,340.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u03-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many months of essential spending does the reserve cover? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is left in the reserve after both shocks?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How many months of essentials does the reserve now cover? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much would the household have to add to get back to the original 2.5 months of cover?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many months of $170 does it take to rebuild the reserve to $3,700? Round to the nearest month."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "If a second $620 repair happened during those 8 months, would the reserve still cover one full month of essentials at its lowest point?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Measuring a reserve in months rather than in dollars changes what it tells you. Explain the difference, and say what would happen to this household’s months of cover if its essential spending rose to $1,850 with the reserve unchanged at $2,340."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u03-l05.package.json",
+    "sourcePackageSha256": "0ef7a4abfb87ce98bf76ce9d8fa112e69c120dcf79aab78b70227ac95e6d9a32",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u03-l05",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

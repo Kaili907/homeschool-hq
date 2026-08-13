@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l04",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: FAFSA and the aid application process"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "FAFSA and the aid application process",
+  "objective": "Read a fictional aid offer, separate gift aid from earned aid and borrowed aid, and compute the gap the applicant must still cover.",
+  "scenario": "The aid offer below is a simulated document for a fictional applicant at an invented college. No real institution, applicant, or aid programme is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional aid offer in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional offer lists a cost of attendance of $21,400 for the year, and four lines of aid: a grant of $4,800, a scholarship of $2,500, work study of $2,200, and a subsidised loan of $3,500.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much of the offer is gift aid — money that is neither earned by working nor repaid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do all four aid lines total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What gap remains between the cost of attendance and the total aid offered?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The three kinds of aid are not equivalent.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of the cost of attendance is covered by gift aid? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If work study is not counted as aid — because it must be worked for — what is the effective gap?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which single line of this offer will still be owed after the year is over?",
+          "choices": [
+            "The $4,800 grant",
+            "The $2,500 scholarship",
+            "The $2,200 work study",
+            "The $3,500 subsidised loan"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The offer presents all four lines under one heading and one total. Explain why totalling them can mislead an applicant, and write the two or three figures you would put at the top of the offer instead."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the gap comes out at $14,100, only the gift aid has been subtracted. Subtract all four lines to find the accounting gap of $8,400 first, then reason separately about which lines are genuinely aid.",
+  "extension": "Recompute both gaps if the scholarship is renewable for four years but the grant is one year only, and state the four-year picture.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much of the offer is gift aid — money that is neither earned by working nor repaid?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do all four aid lines total?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What gap remains between the cost of attendance and the total aid offered?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What percentage of the cost of attendance is covered by gift aid? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "If work study is not counted as aid — because it must be worked for — what is the effective gap?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which single line of this offer will still be owed after the year is over?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The offer presents all four lines under one heading and one total. Explain why totalling them can mislead an applicant, and write the two or three figures you would put at the top of the offer instead."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u04-l04.package.json",
+    "sourcePackageSha256": "2f09883923c1027fb7ba5eea2f6ac0e037e761a2ec1d3252b4f0e89d0386d678",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u04-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

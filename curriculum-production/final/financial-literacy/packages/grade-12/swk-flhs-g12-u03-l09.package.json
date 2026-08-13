@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l09",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: emergency fund sizing and use"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "emergency fund sizing and use",
+  "objective": "Track a fictional emergency reserve through a year of contributions and two withdrawals, express the closing balance in months of cover, and judge whether the reserve did its job.",
+  "scenario": "The fictional reserve, the two simulated emergencies, and the contributions below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional reserve record in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household began the year with $7,200 in reserve, against essential costs of $2,400 a month. It contributed $260 in each of the 10 months in which nothing went wrong. In month 3 it withdrew $1,850 and in month 8 it withdrew $2,640, and contributed nothing in either of those months.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What was contributed to the reserve across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What was withdrawn across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What did the reserve hold at the end of the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now judge the closing position against what the reserve is for.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How many months of essential costs does the closing balance cover? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far below the original 3-month position does the year end?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "At $260 a month, how many months would it take to restore the reserve to $7,200? Give one decimal place."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The reserve fell from 3 months of cover to 2.21 months across the year. Decide whether this reserve worked or failed, defend your answer with the figures, and say what the two withdrawals suggest about whether $260 a month is the right contribution."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the closing balance comes out at $5,830.00, contributions have been counted for all 12 months. The household contributed in only the 10 months without a withdrawal, so the year added $2,600.00 rather than $3,120.00. Apply the contributions and the two withdrawals to the $7,200 opening balance in turn.",
+  "extension": "Work out what contribution rate would have held the reserve at $7,200 across this year, and say what else in the household budget would have to give to fund it.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What was contributed to the reserve across the year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What was withdrawn across the year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What did the reserve hold at the end of the year?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How many months of essential costs does the closing balance cover? Give two decimal places."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How far below the original 3-month position does the year end?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "At $260 a month, how many months would it take to restore the reserve to $7,200? Give one decimal place."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The reserve fell from 3 months of cover to 2.21 months across the year. Decide whether this reserve worked or failed, defend your answer with the figures, and say what the two withdrawals suggest about whether $260 a month is the right contribution."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u03-l09.package.json",
+    "sourcePackageSha256": "9984df363c1706932c9c502633b02b724623701afffa75b4d5263a3b0a805a3d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u03-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

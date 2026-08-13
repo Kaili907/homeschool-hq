@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l08",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: withholding accuracy and adjusting it"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "withholding accuracy and adjusting it",
+  "objective": "Carry the withholding method onto a fictional case with a second income no employer withholds from, and derive the quarterly amount that has to be set aside.",
+  "scenario": "The fictional wages, side income, and invented self-employment levy below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional income figures and tax schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker earned $38,400 in wages, with $2,780 of federal income tax withheld, and $9,600 from independent work with nothing withheld. Under the fictional schedule, taxable income is total income less a standard deduction of $9,000, charged at 10% on the first $10,400 and 12% above it to $44,000. A fictional self-employment levy of 15.3% applies to the independent income only.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is taxable income for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the federal income tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the self-employment levy on the independent income?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find what is still owed and what has to be set aside for it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is owed in total for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What remains owed after the wages withholding is credited?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Spread across 4 quarterly set-asides, how much is that each time?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the amount still owed is attributable to the independent income itself — income tax on it at the 12% band plus the 15.3% levy?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Someone earning $9,600 from independent work might reasonably plan around having $9,600. Explain what is wrong with that, describe the practice you would recommend for a fictional person in this position, and say what makes the 32.93% figure specific to this case rather than a general rule."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount owed comes out at $1,692.00, only the income tax has been counted and the self-employment levy has been left out; if it comes out at $5,940.80, the $2,780 already withheld has not been credited. Add both charges, then subtract what the employer already collected. Note that the whole $3,160.80 is not caused by the side work: $540.00 of it is wage tax the employer under-withheld.",
+  "extension": "Recompute the quarterly set-aside for a fictional worker with the same $9,600 of independent income but only $16,000 of wages, and say why the share of the side income committed to tax falls.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is taxable income for the year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the federal income tax?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the self-employment levy on the independent income?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is owed in total for the year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What remains owed after the wages withholding is credited?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Spread across 4 quarterly set-asides, how much is that each time?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much of the amount still owed is attributable to the independent income itself — income tax on it at the 12% band plus the 15.3% levy?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Someone earning $9,600 from independent work might reasonably plan around having $9,600. Explain what is wrong with that, describe the practice you would recommend for a fictional person in this position, and say what makes the 32.93% figure specific to this case rather than a general rule."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u07-l08.package.json",
+    "sourcePackageSha256": "ecada6af0f3d248b76216ac91d819cc0c275ab3a3f61009fc89cd48610483f01",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u07-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

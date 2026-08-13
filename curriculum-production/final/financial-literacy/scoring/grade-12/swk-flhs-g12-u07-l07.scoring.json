@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l07",
+  "lessonId": "ma-g12-financial-literacy-u07-l07",
+  "integratedDomains": [
+    "taxes",
+    "income",
+    "saving-investing",
+    "consumer-protection"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$38,310.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$49,800 less the $2,490 pre-tax contribution and the $9,000 standard deduction."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,389.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,040.00 on the first $10,400 plus 12% of the remaining $27,910.00."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$40,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Wages less the standard deduction only, with the $2,490 pre-tax contribution left in. Reproducing the filer’s own figure is what allows each error to be priced separately."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,896.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12% of $40,800.00. The filer treated the band they fell in as the rate on everything they earned."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$506.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,896.00 computed against $4,389.20 correct. Both errors pushed the figure in the same direction."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$298.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $2,490 wrongly included would have been taxed at the 12% band it falls in, so this error alone accounts for $298.80."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$208.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The remainder of the $506.80 once the first error is accounted for. It equals 2% of the $10,400 first band, which is what charging 12% instead of 10% on that band costs."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wages - pretax - deduction",
+        "substituted": "49800 - 2490 - 9000",
+        "result": "$38,310.00",
+        "why": "$49,800 less the $2,490 pre-tax contribution and the $9,000 standard deduction."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "band1 * lowRate + (#t1-p1 - band1) * midRate",
+        "substituted": "10400 * 0.1 + (#t1-p1 - 10400) * 0.12",
+        "result": "$4,389.20",
+        "why": "$1,040.00 on the first $10,400 plus 12% of the remaining $27,910.00."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "wages2 - deduction2",
+        "substituted": "49800 - 9000",
+        "result": "$40,800.00",
+        "why": "Wages less the standard deduction only, with the $2,490 pre-tax contribution left in. Reproducing the filer’s own figure is what allows each error to be priced separately."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 * flatRate",
+        "substituted": "#t1-p3 * 0.12",
+        "result": "$4,896.00",
+        "why": "12% of $40,800.00. The filer treated the band they fell in as the rate on everything they earned."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$506.80",
+        "why": "$4,896.00 computed against $4,389.20 correct. Both errors pushed the figure in the same direction."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "pretax2 * midRate2",
+        "substituted": "2490 * 0.12",
+        "result": "$298.80",
+        "why": "The $2,490 wrongly included would have been taxed at the 12% band it falls in, so this error alone accounts for $298.80."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 - #t2-p3",
+        "substituted": "#t2-p2 - #t2-p3",
+        "result": "$208.00",
+        "why": "The remainder of the $506.80 once the first error is accounted for. It equals 2% of the $10,400 first band, which is what charging 12% instead of 10% on that band costs."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Both errors made the filer overpay. Explain why the second error — applying one rate to everything — would produce a very different result for a filer with much higher income, and give one check that would have caught both errors without redoing the whole return.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the band structure: applying the top band to all income overstates the tax by the difference between the bands on every dollar below the threshold, so the error grows with how much income sits in the lower bands and would be far larger for a filer reaching the 22% band.",
+          "Quantifies the present case: the error is exactly 2% of the $10,400 first band, which is $208.00, and a filer in the 22% band would overstate by considerably more.",
+          "Gives a workable check — comparing the computed tax against the income as a percentage and asking whether it can exceed the top band applied, or checking that the first $10,400 was charged at 10%."
+        ],
+        "evidenceRequirements": [
+          "Uses the $506.80 total overstatement and its split into $298.80 and $208.00."
+        ],
+        "lookFors": [
+          "The response attributes each part of the overstatement to the right error.",
+          "The response recognises that the marginal band is not the rate on all income."
+        ],
+        "commonMisconception": "Believing that reaching a tax band means all income is taxed at that band’s rate, rather than only the income above the threshold.",
+        "dimensions": [
+          "error-diagnosis",
+          "transfer",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the correct taxable income?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the correct tax?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What taxable income did the filer use?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What tax did the filer compute, applying 12% to all of their taxable income?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "By how much did the filer overstate the tax?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much of the overstatement comes from leaving the pre-tax contribution in taxable income?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much comes from applying 12% to the whole of taxable income rather than 10% to the first band?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Both errors made the filer overpay. Explain why the second error — applying one rate to everything — would produce a very different result for a filer with much higher income, and give one check that would have caught both errors without redoing the whole return."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the correct taxable income? Answer: $38,310.00. Verification: $49,800 less the $2,490 pre-tax contribution and the $9,000 standard deduction. t1-p2: What is the correct tax? Answer: $4,389.20. Verification: $1,040.00 on the first $10,400 plus 12% of the remaining $27,910.00. t1-p3: What taxable income did the filer use? Answer: $40,800.00. Verification: Wages less the standard deduction only, with the $2,490 pre-tax contribution left in. Reproducing the filer’s own figure is what allows each error to be priced separately. t2-p1: What tax did the filer compute, applying 12% to all of their taxable income? Answer: $4,896.00. Verification: 12% of $40,800.00. The filer treated the band they fell in as the rate on everything they earned. t2-p2: By how much did the filer overstate the tax? Answer: $506.80. Verification: $4,896.00 computed against $4,389.20 correct. Both errors pushed the figure in the same direction. t2-p3: How much of the overstatement comes from leaving the pre-tax contribution in taxable income? Answer: $298.80. Verification: The $2,490 wrongly included would have been taxed at the 12% band it falls in, so this error alone accounts for $298.80. t2-p4: How much comes from applying 12% to the whole of taxable income rather than 10% to the first band? Answer: $208.00. Verification: The remainder of the $506.80 once the first error is accounted for. It equals 2% of the $10,400 first band, which is what charging 12% instead of 10% on that band costs."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Both errors made the filer overpay. Explain why the second error — applying one rate to everything — would produce a very different result for a filer with much higher income, and give one check that would have caught both errors without redoing the whole return. Explains the band structure: applying the top band to all income overstates the tax by the difference between the bands on every dollar below the threshold, so the error grows with how much income sits in the lower bands and would be far larger for a filer reaching the 22% band. Quantifies the present case: the error is exactly 2% of the $10,400 first band, which is $208.00, and a filer in the 22% band would overstate by considerably more. Gives a workable check — comparing the computed tax against the income as a percentage and asking whether it can exceed the top band applied, or checking that the first $10,400 was charged at 10%. Uses the $506.80 total overstatement and its split into $298.80 and $208.00. The response attributes each part of the overstatement to the right error. The response recognises that the marginal band is not the rate on all income."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains the band structure: applying the top band to all income overstates the tax by the difference between the bands on every dollar below the threshold, so the error grows with how much income sits in the lower bands and would be far larger for a filer reaching the 22% band. Quantifies the present case: the error is exactly 2% of the $10,400 first band, which is $208.00, and a filer in the 22% band would overstate by considerably more. Gives a workable check — comparing the computed tax against the income as a percentage and asking whether it can exceed the top band applied, or checking that the first $10,400 was charged at 10%."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u07-l07.scoring.json",
+    "sourceScoringSha256": "c5407a6370510f97bc9cfca4058378a1e4fef7bf158422439cffc8ddae90b45d",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

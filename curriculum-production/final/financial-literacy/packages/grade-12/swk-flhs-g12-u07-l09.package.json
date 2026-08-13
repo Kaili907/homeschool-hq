@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l09",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: integrating all seven expectations into one year"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "integrating all seven expectations into one year",
+  "objective": "Total the fictional capstone year across every strand — spending, borrowing, retirement, protection, tax, and reserve — and identify what remains unallocated.",
+  "scenario": "This lesson totals the whole simulated year for Case R, the fictional adult, or for the learner’s invented fictional profile. Every figure is invented, and the capstone at no point uses or asks for the learner’s own financial information.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the Case R annual figures in these directions",
+    "the capstone record"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "For Case R the year’s figures are: take-home pay $38,095, living costs $2,045 a month, a student loan payment of $198.54 a month, a retirement contribution of $2,730 with an employer contribution of $1,365, a health premium of $2,040 taken before tax, renters insurance of $18 a month inside the living costs, total tax of $11,735, and a reserve transfer of $400 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do living costs come to across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do the loan payments come to across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What goes into retirement across the year, counting both contributions?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now complete the year and find what has not been accounted for.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the year’s insurance premiums come to, counting the pre-tax health premium and renters insurance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is added to the reserve across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Of the take-home pay, how much is left once living costs, loan payments, and the reserve transfer are taken out?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Write the annual summary page of the capstone record.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write the annual summary. Report where the year’s money went across every strand, say which single figure you think best describes whether the year went well, and decide what to do with the $6,372.52 that remains — defending the decision and naming what it forgoes."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the unallocated figure comes out at $4,332.52, the $2,040 health premium has been subtracted from take-home pay; if it comes out at $3,642.52, the $2,730 retirement contribution has. Both were taken before tax and so are already outside the $38,095 of take-home. Subtract only the living costs, the loan payments, and the reserve transfer.",
+  "extension": "Rebuild the annual summary with living costs 6% higher and everything else unchanged, and say what happens to the unallocated figure and to the plan that depends on it.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do living costs come to across the year?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What do the loan payments come to across the year?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What goes into retirement across the year, counting both contributions?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the year’s insurance premiums come to, counting the pre-tax health premium and renters insurance?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is added to the reserve across the year?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Of the take-home pay, how much is left once living costs, loan payments, and the reserve transfer are taken out?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Write the annual summary. Report where the year’s money went across every strand, say which single figure you think best describes whether the year went well, and decide what to do with the $6,372.52 that remains — defending the decision and naming what it forgoes."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u07-l09.package.json",
+    "sourcePackageSha256": "4600b7d4cd0ca5a8057a838005814b7a09f45808ab0b5b8b1cebef74bcf5fc23",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u07-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

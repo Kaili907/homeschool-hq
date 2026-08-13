@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l10",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: time value of money applied to real choices"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "time value of money applied to real choices",
+  "objective": "Build a five-year fictional plan in which expenses inflate against a flat income, absorb a one-year shock, and defend which goal is protected when the surplus falls.",
+  "scenario": "Casimir Adeleke-Fontaine is building a five-year plan for a fictional household. The income, expenses, inflation rate, and shock below are invented figures for this performance task.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional five-year plan figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The household takes home $58,400 a year and this does not change across the five years. Expenses are $44,200 in year 1 and rise 3.1% a year. Round to the cent.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the surplus in year 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What are the expenses in year 5, which is 4 years of inflation after year 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the surplus in year 5?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the surplus has been lost by year 5?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "In year 3 a one-off cost of $6,800 arrives. Expenses that year have had 2 years of inflation applied.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are the ordinary expenses in year 3?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the year-3 surplus after the ordinary expenses and the $6,800 one-off?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much smaller is the year-3 surplus than the year-1 surplus?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "The plan commits $7,200 a year to a savings goal. By how much does the year-3 surplus fall short of that commitment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "Does the year-5 surplus still cover the $7,200 commitment, and with how much to spare?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One more figure for the recommendation.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "By year 5, what share of income do expenses take? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which single change would most protect the plan across all five years?",
+          "choices": [
+            "Building a reserve in years 1 and 2 large enough to absorb the year-3 shock",
+            "Increasing the savings commitment above $7,200 in year 1",
+            "Deferring the savings commitment until year 4"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write your plan. Answer both.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Present a five-year plan for this household. Say what you protect and what you let go, name the year the plan is tightest and by how much, and state the assumption whose failure would do the most damage."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The income is held flat for five years while expenses rise 3.1% a year. Say whether that is a pessimistic or an optimistic assumption, and what the year-5 surplus would look like if income rose 2% a year instead."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the year-5 expenses come out at $51,489.13, five years of inflation are being applied instead of four. Year 1 is the base and has had no inflation applied to it, so year 5 is four compounding steps away. Check the year-3 figure the same way: it should be two steps, giving $46,982.88 and not $48,439.35.",
+  "extension": "Find the first year in which the surplus falls below the $7,200 commitment if no shock occurs at all, and say what that date tells you about how long this plan can run unchanged.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the surplus in year 1?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What are the expenses in year 5, which is 4 years of inflation after year 1?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the surplus in year 5?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much of the surplus has been lost by year 5?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What are the ordinary expenses in year 3?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the year-3 surplus after the ordinary expenses and the $6,800 one-off?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much smaller is the year-3 surplus than the year-1 surplus?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "The plan commits $7,200 a year to a savings goal. By how much does the year-3 surplus fall short of that commitment?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Does the year-5 surplus still cover the $7,200 commitment, and with how much to spare?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "By year 5, what share of income do expenses take? Give one decimal place."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which single change would most protect the plan across all five years?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Present a five-year plan for this household. Say what you protect and what you let go, name the year the plan is tightest and by how much, and state the assumption whose failure would do the most damage."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "The income is held flat for five years while expenses rise 3.1% a year. Say whether that is a pessimistic or an optimistic assumption, and what the year-5 surplus would look like if income rose 2% a year instead."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u03-l10.package.json",
+    "sourcePackageSha256": "42ea41ff579e9f13c8b1312379e10964e2d6d9df96e358baf1e3cd25c840f689",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u03-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l01",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: evaluating and responding to an offer"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "evaluating and responding to an offer",
+  "objective": "Separate the cash an offer pays from the total compensation it reports, compute both for two fictional offers, and state which figure answers which question.",
+  "scenario": "Two simulated written offers are set out below. Both employers, both salaries, and every benefit figure are fictional and exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional offer terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Offer A: salary $52,000 a year; the employer adds a retirement contribution of 4% of salary; the employer pays $4,800 a year toward the health premium and the employee pays $1,560 a year. Offer B: salary $55,400 a year; no retirement contribution; the employer pays $2,400 a year toward the health premium and the employee pays $3,120 a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the employer contribute to retirement each year under Offer A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total compensation Offer A reports — salary, employer retirement contribution, and the employer’s share of the health premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the total compensation Offer B reports on the same definition?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compute what each offer actually puts in a bank account before tax, which is the only figure that can pay a bill.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under Offer A, what is salary less the employee’s own share of the health premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under Offer B, what is salary less the employee’s own share of the health premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Before income tax, which offer leaves the fictional graduate more money able to pay rent this year?",
+          "choices": [
+            "Offer A",
+            "Offer B"
+          ]
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "By how much does Offer A’s reported total compensation exceed Offer B’s?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Offer A wins on total compensation and Offer B wins on spendable salary. Say which measure answers \"can I afford to move out this year\" and which answers \"which employer is putting more resources behind this job\", and name the one condition under which the $2,080 retirement contribution should count for very little."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Offer A wins both comparisons, the $4,800 employer premium share is probably being added to spendable pay. Trace where each figure goes: the employer’s $4,800 goes to the insurer directly and never reaches the worker’s account, while the employee’s $1,560 comes out of the salary. Rebuild the spendable figure using only salary and the employee’s own deduction.",
+  "extension": "Suppose Offer A’s retirement contribution only vests after three years of service. Recompute what Offer A is worth to a fictional worker who expects to leave after two, and say which measure changes.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the employer contribute to retirement each year under Offer A?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the total compensation Offer A reports — salary, employer retirement contribution, and the employer’s share of the health premium?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the total compensation Offer B reports on the same definition?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "Under Offer A, what is salary less the employee’s own share of the health premium?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Under Offer B, what is salary less the employee’s own share of the health premium?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Before income tax, which offer leaves the fictional graduate more money able to pay rent this year?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "By how much does Offer A’s reported total compensation exceed Offer B’s?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Offer A wins on total compensation and Offer B wins on spendable salary. Say which measure answers \"can I afford to move out this year\" and which answers \"which employer is putting more resources behind this job\", and name the one condition under which the $2,080 retirement contribution should count for very little."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u01-l01.package.json",
+    "sourcePackageSha256": "f8130582c2057003567a269aca2dce3fe1fd36bc9732efe5cfadb78643c6c95d",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u01-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

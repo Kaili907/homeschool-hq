@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u02-l04",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Comparing a Purchase Before You Make It",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: the role of government in consumer information"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "the role of government in consumer information",
+  "objective": "Use fictional unit-price label information to compare two package sizes that cannot be compared by their shelf prices, and quantify the saving the comparison reveals.",
+  "scenario": "Two fictional brands sell the same simulated product in different package sizes. Both shelf tags carry a unit price, which in this simulated jurisdiction the seller is required to display.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional shelf tag figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional tags: Brand Verano, 680 grams for $7.14. Brand Solmar, 1150 grams for $11.73.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is Brand Verano’s price per 100 grams?",
+          "unit": "USD per 100 g"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Brand Solmar’s price per 100 grams?",
+          "unit": "USD per 100 g"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-choice",
+          "text": "Which brand is cheaper per unit of product?",
+          "choices": [
+            "Brand Verano",
+            "Brand Solmar",
+            "They cost the same per unit"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Quantify what the unit-price comparison is worth.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Buying 1150 grams of product, how much does the shopper save by choosing Solmar over buying the same quantity at Verano’s unit price?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "A household buys 1150 grams of this product every month. What does the difference come to over a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Explain what a required unit-price label does that a shelf price alone cannot, and why a rule requiring it is aimed at sellers rather than at shoppers."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The yearly difference here is small. Give one reason a shopper might still choose Verano, and one reason the unit-price rule is worth having even when the differences are small."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the per-100-gram figures come out a hundred times too large or too small, do the division first and the scaling second: $7.14 divided by 680 is about a penny per gram, so per 100 grams it must be about a dollar. Sanity-check against that before recording the answer.",
+  "extension": "Add a fictional third option, 2300 grams for $22.54, compute its unit price, and say whether the biggest package is automatically the cheapest per unit.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u02-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u02-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is Brand Verano’s price per 100 grams?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Brand Solmar’s price per 100 grams?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which brand is cheaper per unit of product?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "Buying 1150 grams of product, how much does the shopper save by choosing Solmar over buying the same quantity at Verano’s unit price?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "A household buys 1150 grams of this product every month. What does the difference come to over a year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Explain what a required unit-price label does that a shelf price alone cannot, and why a rule requiring it is aimed at sellers rather than at shoppers."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The yearly difference here is small. Give one reason a shopper might still choose Verano, and one reason the unit-price rule is worth having even when the differences are small."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u02-l04.package.json",
+    "sourcePackageSha256": "9b9075c36ee0c1d4ad51803c2558be3a0bf26f5ef349819471d9a0bc9e0f66d4",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u02-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

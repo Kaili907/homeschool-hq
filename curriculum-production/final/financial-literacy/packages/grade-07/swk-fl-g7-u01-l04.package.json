@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g7-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g7-financial-literacy-u01-l04",
+    "courseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "Income, Skills, and Work Choices",
+    "dayInUnit": 4,
+    "phase": "Application or project",
+    "title": "Application or project: benefits",
+    "focus": "benefits"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1 foundations"
+  ],
+  "objective": "Learners compute total compensation by adding invented benefit values to salary, and compare two offers that differ in structure.",
+  "scenario": "Renata is an invented seventh grader comparing two pretend job offers. Offer A pays $3,000.00 a month with an invented $250.00 health contribution, a 5% retirement match, and a $60.00 transit benefit. Offer B pays $3,200.00 a month with no benefits at all.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "Compute the invented 5% retirement match on Offer A's $3,000.00 salary.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly retirement match worth?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Add all three invented benefits to Offer A's salary to reach total monthly compensation.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are Offer A's three benefits worth together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is Offer A's total monthly compensation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Compare Offer A's total compensation with Offer B's salary-only $3,200.00.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more is Offer A worth in total compensation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which offer pays more in cash each month, before benefits?",
+          "choices": [
+            "Offer A",
+            "Offer B",
+            "They pay the same cash"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "One offer wins on cash and the other on total value.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Under what circumstances should Renata take the offer with less total compensation? Be specific about what would make cash more valuable than benefits."
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner ignores the benefits, list each of Renata's benefits as a line item with a dollar value before either offer is judged.",
+  "extension": "Ask the learner what salary Offer B would need for the two offers to be equal in total compensation, and to show the arithmetic.",
+  "scoringRef": "scoring/grade-07/swk-fl-g7-u01-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g7-financial-literacy-u01-l04",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the monthly retirement match worth?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What are Offer A's three benefits worth together?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is Offer A's total monthly compensation?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much more is Offer A worth in total compensation?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which offer pays more in cash each month, before benefits?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Under what circumstances should Renata take the offer with less total compensation? Be specific about what would make cash more valuable than benefits."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-07/swk-fl-g7-u01-l04.package.json",
+    "sourcePackageSha256": "4df87e8bf41f695ab98c53037458e1de42090bb3d41c2c1b0f48afc695a79dbc",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g7-financial-literacy-u01-l04",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

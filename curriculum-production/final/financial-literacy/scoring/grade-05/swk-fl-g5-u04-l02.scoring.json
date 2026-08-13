@@ -1,0 +1,262 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g5-u04-l02",
+  "lessonId": "ma-g5-financial-literacy-u04-l02",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "FIXED_ANSWER_KEY",
+    "answerTextPresent": true,
+    "fixedItemCount": 5,
+    "rubricCriterionCount": 1,
+    "answerDerivation": "independent-recompute",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "ANSWER_KEY",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "promptText": "How much has Iker saved after 12 weeks?",
+        "answer": "$270.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(22.50 x 12) = 270.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "scale",
+            "of": {
+              "op": "money",
+              "cents": 2250
+            },
+            "times": 12
+          },
+          "trace": "(22.50 x 12) = 270.00"
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "promptText": "How far is Iker from the $360.00 target?",
+        "answer": "$90.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "(360.00 - (22.50 x 12)) = 90.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "money",
+              "cents": 36000
+            },
+            "less": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 2250
+              },
+              "times": 12
+            }
+          },
+          "trace": "(360.00 - (22.50 x 12)) = 90.00"
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "promptText": "How many more whole weeks does the gap need?",
+        "answer": "4",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "whole periods to reach (360.00 - (22.50 x 12)) at 22.50 per period = 4. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "periodsToReach",
+            "target": {
+              "op": "diff",
+              "from": {
+                "op": "money",
+                "cents": 36000
+              },
+              "less": {
+                "op": "scale",
+                "of": {
+                  "op": "money",
+                  "cents": 2250
+                },
+                "times": 12
+              }
+            },
+            "perPeriod": {
+              "op": "money",
+              "cents": 2250
+            }
+          },
+          "trace": "whole periods to reach (360.00 - (22.50 x 12)) at 22.50 per period = 4"
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "promptText": "How much is in the fund right after the withdrawal?",
+        "answer": "$195.00",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "((22.50 x 12) - 75.00) = 195.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "diff",
+            "from": {
+              "op": "scale",
+              "of": {
+                "op": "money",
+                "cents": 2250
+              },
+              "times": 12
+            },
+            "less": {
+              "op": "money",
+              "cents": 7500
+            }
+          },
+          "trace": "((22.50 x 12) - 75.00) = 195.00"
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "promptText": "How many whole weeks at $22.50 now reach the $360.00 target?",
+        "answer": "8",
+        "verification": {
+          "method": "independent-recompute",
+          "reasoning": "whole periods to reach (360.00 - ((22.50 x 12) - 75.00)) at 22.50 per period = 8. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement.",
+          "computation": {
+            "op": "periodsToReach",
+            "target": {
+              "op": "diff",
+              "from": {
+                "op": "money",
+                "cents": 36000
+              },
+              "less": {
+                "op": "diff",
+                "from": {
+                  "op": "scale",
+                  "of": {
+                    "op": "money",
+                    "cents": 2250
+                  },
+                  "times": 12
+                },
+                "less": {
+                  "op": "money",
+                  "cents": 7500
+                }
+              }
+            },
+            "perPeriod": {
+              "op": "money",
+              "cents": 2250
+            }
+          },
+          "trace": "whole periods to reach (360.00 - ((22.50 x 12) - 75.00)) at 22.50 per period = 8"
+        }
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Reasoning about a fund used as intended",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response calls Iker's withdrawal a mistake with no reference to the fund's purpose."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The purpose is noted for Iker but the delay is not weighed against it."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response takes a position on Iker's withdrawal, weighing the delay against the fact that the fund existed precisely for unplanned costs."
+          }
+        ]
+      }
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much has Iker saved after 12 weeks?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How far is Iker from the $360.00 target?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many more whole weeks does the gap need?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much is in the fund right after the withdrawal?"
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "FIXED",
+          "promptText": "How many whole weeks at $22.50 now reach the $360.00 target?"
+        },
+        {
+          "ref": "t4-p1",
+          "responseMode": "OPEN",
+          "promptText": "The repair fund existed for unplanned costs, and using it delayed the target. Was using it a failure of the plan? Argue your position."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: How much has Iker saved after 12 weeks? Answer: $270.00. Verification: (22.50 x 12) = 270.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p1: How far is Iker from the $360.00 target? Answer: $90.00. Verification: (360.00 - (22.50 x 12)) = 90.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t2-p2: How many more whole weeks does the gap need? Answer: 4. Verification: whole periods to reach (360.00 - (22.50 x 12)) at 22.50 per period = 4. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p1: How much is in the fund right after the withdrawal? Answer: $195.00. Verification: ((22.50 x 12) - 75.00) = 195.00. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement. t3-p2: How many whole weeks at $22.50 now reach the $360.00 target? Answer: 8. Verification: whole periods to reach (360.00 - ((22.50 x 12) - 75.00)) at 22.50 per period = 8. Recomputed by finlit-g38-oracle@1 from the figures stated in this task sheet's own fictional scenario, then compared against the separately authored answer; the build refuses to emit on any disagreement."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Reasoning about a fund used as intended — Not yet: The response calls Iker's withdrawal a mistake with no reference to the fund's purpose. Approaching: The purpose is noted for Iker but the delay is not weighed against it. Meets: The response takes a position on Iker's withdrawal, weighing the delay against the fact that the fund existed precisely for unplanned costs. The response takes a position on Iker's withdrawal, weighing the delay against the fact that the fund existed precisely for unplanned costs."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "The response takes a position on Iker's withdrawal, weighing the delay against the fact that the fund existed precisely for unplanned costs."
+      },
+      "verification": {
+        "method": "INDEPENDENT_ORACLE",
+        "evidence": "All 5 fixed answers retain their source item computations, traces, and reasoning. The source authority tag records finlit-g38-oracle@1 verdict AGREES; the independent Python decimal cross-check reported 900/900 agreements corpus-wide."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 5,
+      "contractFixedItemCount": 5,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 1,
+      "acceptableAnswerCriteriaCount": 1
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-05/swk-fl-g5-u04-l02.scoring.json",
+    "sourceScoringSha256": "de14f76f2c8aaed8772837bad2bdc487afa853a45130c3d5a2ed09d21d04ec7e",
+    "sourceAuthorityKind": "ANSWER_KEY",
+    "sourceAuthorityPreserved": true
+  }
+}

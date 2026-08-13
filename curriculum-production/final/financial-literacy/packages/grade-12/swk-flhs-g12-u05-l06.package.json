@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l06",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: avoiding fraud and high-pressure offers"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "avoiding fraud and high-pressure offers",
+  "objective": "Test a fictional investment claim by compounding it out, compare the implied result against a stated alternative, and name the features that identify the offer as one to refuse.",
+  "scenario": "The offer described below is a fictional construction for this exercise. No real firm, promoter, product, or scheme is described, and nothing here identifies any actual offer.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional offer terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional promoter offers a \"guaranteed 18% a month, compounded\", asks for a $250 joining fee, requires a decision within 48 hours, and says the opportunity closes after that. A fictional stable savings account is available paying 3% a year. Test the claim on a $1,000 stake.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the 18% monthly claim held for a year, what would a $1,000 stake become?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What annual return does that imply, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the same stake become in a year in the fictional 3% account?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Before deciding anything, note two things a saver can actually do: promoters and the products they sell are listed on a public register kept by the financial regulator, and the full terms of any offer can be requested in writing before any money moves. Now size what is actually at stake and identify the warning signs.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How far apart are the two outcomes after a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If a fictional saver paid the joining fee and invested $2,500, and the offer turns out to be worthless, what have they lost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which feature of this offer is the clearest sign that it should be refused rather than investigated further?",
+          "choices": [
+            "The joining fee of $250",
+            "A return described as both very high and guaranteed",
+            "The 48-hour deadline"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Set out the checks a fictional saver should run before parting with any money, and explain why a 48-hour deadline makes those checks harder rather than unnecessary. Say what the saver should do about their own information as well as their money."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the yearly figure comes out at $1,180.00, the 18% has been applied once rather than compounded monthly as the offer states. Multiply by 1.18 twelve times over — once for each month — and the claim resolves to $7,287.59, which is what makes it testable.",
+  "extension": "Work out what the fictional 3% account would return over 10 years on $1,000, and say what that comparison shows about the kind of growth a genuine long-horizon plan relies on.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "If the 18% monthly claim held for a year, what would a $1,000 stake become?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What annual return does that imply, to two decimal places?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would the same stake become in a year in the fictional 3% account?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How far apart are the two outcomes after a year?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "If a fictional saver paid the joining fee and invested $2,500, and the offer turns out to be worthless, what have they lost?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which feature of this offer is the clearest sign that it should be refused rather than investigated further?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Set out the checks a fictional saver should run before parting with any money, and explain why a 48-hour deadline makes those checks harder rather than unnecessary. Say what the saver should do about their own information as well as their money."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u05-l06.package.json",
+    "sourcePackageSha256": "05670ee4d5ff5bb5b1fc7cb5365dfd88347e57edd8a6133596c2a8126e882c03",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u05-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

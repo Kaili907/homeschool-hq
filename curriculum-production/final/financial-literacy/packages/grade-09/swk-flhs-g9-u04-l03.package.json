@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u04-l03",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: What Credit Costs and What Aid Is",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: what a credit history records and why it matters"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "what a credit history records and why it matters",
+  "objective": "Read a fictional credit report, compute credit utilisation and on-time payment rate from it, and identify what the report does and does not record.",
+  "scenario": "The simulated credit report below belongs to a fictional person. Every account, limit, and balance is invented, and no real credit file is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional credit report summary in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional report shows two revolving accounts. Card A: balance $640, limit $1,500. Card B: balance $210, limit $800. It also shows 24 scheduled payments over the last two years, of which 22 were on time.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the total balance across both cards?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the overall credit utilisation — total balance as a percentage of total limit? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What percentage of the 24 scheduled payments were made on time? Round to one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The borrower pays $300 toward Card A.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the new utilisation after the $300 payment? Round to one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "Set the $300 payment aside for a moment and go back to the original balances. Closing Card B would remove its $800 limit and its $210 balance. What would that do to the 37.0% utilisation?",
+          "choices": [
+            "Lower it",
+            "Raise it",
+            "Leave it unchanged"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A credit report records what this person did with credit. Name two things it records that the figures above show, and two things about their finances it does not record at all, and say why the gap matters when a lender uses it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If utilisation is being computed per card and averaged, note that the report’s combined figure divides the total balance by the total limit. Compute $850 and $2,300 as two separate sums before dividing once.",
+  "extension": "Work out the payment that would bring utilisation below 30%, and say why a borrower might target that threshold even though nothing in the report labels it.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u04-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u04-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the total balance across both cards?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the overall credit utilisation — total balance as a percentage of total limit? Round to one decimal place."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What percentage of the 24 scheduled payments were made on time? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the new utilisation after the $300 payment? Round to one decimal place."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Set the $300 payment aside for a moment and go back to the original balances. Closing Card B would remove its $800 limit and its $210 balance. What would that do to the 37.0% utilisation?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "A credit report records what this person did with credit. Name two things it records that the figures above show, and two things about their finances it does not record at all, and say why the gap matters when a lender uses it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u04-l03.package.json",
+    "sourcePackageSha256": "73266960a7caaab68d0dd48af22d0d478bb094f62b5a2102d3cb7c8cc5c8289c",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u04-l03",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

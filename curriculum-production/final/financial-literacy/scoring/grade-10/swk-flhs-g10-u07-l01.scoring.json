@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l01",
+  "lessonId": "ma-g10-financial-literacy-u07-l01",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$46,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,000 of gross income less the $11,200 standard deduction. Every rate below is applied to this figure, not to the $58,000."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$980.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "10% of the first $9,800 of taxable income. Every filer with at least this much taxable income pays exactly this on the first bracket, whatever they earn above it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$4,508.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14% of the band from $9,800 to $42,000, which is $32,200 wide. This worker’s taxable income runs past the top of this band, so the whole band is charged."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,152.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "24% of the taxable income above $42,000, which is $4,800 here. Only this last slice is charged at 24%."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$6,640.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980.00 plus $4,508.00 plus $1,152.00, the three bracket amounts added."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "14.19%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,640.00 against $46,800.00 of taxable income. This is well below the 24% marginal rate, because only the top slice is taxed at 24%."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "11.45%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,640.00 against the $58,000 of gross income. Lower again, because the $11,200 deduction removed income from the calculation entirely."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "24%",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Taxable income of $46,800.00 is above the $42,000 threshold, so an additional dollar falls in the top bracket and is charged at 24%. That is the marginal rate, and it is the rate that applies to a change rather than to the whole income."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gross - stdDed",
+        "substituted": "58000 - 11200",
+        "result": "$46,800.00",
+        "why": "$58,000 of gross income less the $11,200 standard deduction. Every rate below is applied to this figure, not to the $58,000."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "b1 * r1",
+        "substituted": "9800 * 0.1",
+        "result": "$980.00",
+        "why": "10% of the first $9,800 of taxable income. Every filer with at least this much taxable income pays exactly this on the first bracket, whatever they earn above it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "(b2 - b1b) * r2",
+        "substituted": "(42000 - 9800) * 0.14",
+        "result": "$4,508.00",
+        "why": "14% of the band from $9,800 to $42,000, which is $32,200 wide. This worker’s taxable income runs past the top of this band, so the whole band is charged."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "(#t1-p1 - b2b) * r3",
+        "substituted": "(#t1-p1 - 42000) * 0.24",
+        "result": "$1,152.00",
+        "why": "24% of the taxable income above $42,000, which is $4,800 here. Only this last slice is charged at 24%."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 + #t1-p3 + #t2-p1",
+        "substituted": "#t1-p2 + #t1-p3 + #t2-p1",
+        "result": "$6,640.00",
+        "why": "$980.00 plus $4,508.00 plus $1,152.00, the three bracket amounts added."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 / #t1-p1 * 100",
+        "substituted": "#t2-p2 / #t1-p1 * 100",
+        "result": "14.19%",
+        "why": "$6,640.00 against $46,800.00 of taxable income. This is well below the 24% marginal rate, because only the top slice is taxed at 24%."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 / gross2 * 100",
+        "substituted": "#t2-p2 / 58000 * 100",
+        "result": "11.45%",
+        "why": "$6,640.00 against the $58,000 of gross income. Lower again, because the $11,200 deduction removed income from the calculation entirely."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t1-p1 > threshold",
+        "substituted": "#t1-p1 > 42000",
+        "result": "24%",
+        "why": "Taxable income of $46,800.00 is above the $42,000 threshold, so an additional dollar falls in the top bracket and is charged at 24%. That is the marginal rate, and it is the rate that applies to a change rather than to the whole income."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This worker has a 24% marginal rate, a 14.19% effective rate on taxable income, and an 11.45% effective rate on gross income. Explain what question each of the three rates answers, and say which one a person should use when deciding whether extra work is worth taking on.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Assigns each rate a distinct question: the marginal rate answers what the next dollar costs, the effective rate on taxable income answers what the taxed income bore on average, and the effective rate on gross answers what share of everything earned went to this tax.",
+          "Identifies the marginal rate as the one that governs a decision about extra work, since extra income is taxed at the top of the stack rather than at the average.",
+          "Notes that all three figures are correct descriptions of the same $6,640.00, so quoting one as \"the tax rate\" without saying which is what causes confusion."
+        ],
+        "evidenceRequirements": [
+          "Uses the $6,640.00 total and at least two of the three rates."
+        ],
+        "lookFors": [
+          "The response ties each rate to a decision or a question rather than ranking them.",
+          "The response recognises that the gap between 24% and 11.45% comes from the bracket structure and the deduction together, not from either alone."
+        ],
+        "commonMisconception": "Treating a filer’s top bracket as the rate applied to all of their income.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the worker’s taxable income?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "How much tax is charged on the first bracket?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much tax is charged on the second bracket?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much tax is charged on the third bracket?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the total federal income tax?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the effective rate on taxable income — the total tax divided by taxable income?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is the effective rate on gross income?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "What rate would apply to one additional dollar of this worker’s gross income?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "This worker has a 24% marginal rate, a 14.19% effective rate on taxable income, and an 11.45% effective rate on gross income. Explain what question each of the three rates answers, and say which one a person should use when deciding whether extra work is worth taking on."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the worker’s taxable income? Answer: $46,800.00. Verification: $58,000 of gross income less the $11,200 standard deduction. Every rate below is applied to this figure, not to the $58,000. t1-p2: How much tax is charged on the first bracket? Answer: $980.00. Verification: 10% of the first $9,800 of taxable income. Every filer with at least this much taxable income pays exactly this on the first bracket, whatever they earn above it. t1-p3: How much tax is charged on the second bracket? Answer: $4,508.00. Verification: 14% of the band from $9,800 to $42,000, which is $32,200 wide. This worker’s taxable income runs past the top of this band, so the whole band is charged. t2-p1: How much tax is charged on the third bracket? Answer: $1,152.00. Verification: 24% of the taxable income above $42,000, which is $4,800 here. Only this last slice is charged at 24%. t2-p2: What is the total federal income tax? Answer: $6,640.00. Verification: $980.00 plus $4,508.00 plus $1,152.00, the three bracket amounts added. t2-p3: What is the effective rate on taxable income — the total tax divided by taxable income? Answer: 14.19%. Verification: $6,640.00 against $46,800.00 of taxable income. This is well below the 24% marginal rate, because only the top slice is taxed at 24%. t2-p4: What is the effective rate on gross income? Answer: 11.45%. Verification: $6,640.00 against the $58,000 of gross income. Lower again, because the $11,200 deduction removed income from the calculation entirely. t2-p5: What rate would apply to one additional dollar of this worker’s gross income? Answer: 24%. Verification: Taxable income of $46,800.00 is above the $42,000 threshold, so an additional dollar falls in the top bracket and is charged at 24%. That is the marginal rate, and it is the rate that applies to a change rather than to the whole income."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: This worker has a 24% marginal rate, a 14.19% effective rate on taxable income, and an 11.45% effective rate on gross income. Explain what question each of the three rates answers, and say which one a person should use when deciding whether extra work is worth taking on. Assigns each rate a distinct question: the marginal rate answers what the next dollar costs, the effective rate on taxable income answers what the taxed income bore on average, and the effective rate on gross answers what share of everything earned went to this tax. Identifies the marginal rate as the one that governs a decision about extra work, since extra income is taxed at the top of the stack rather than at the average. Notes that all three figures are correct descriptions of the same $6,640.00, so quoting one as \"the tax rate\" without saying which is what causes confusion. Uses the $6,640.00 total and at least two of the three rates. The response ties each rate to a decision or a question rather than ranking them. The response recognises that the gap between 24% and 11.45% comes from the bracket structure and the deduction together, not from either alone."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Assigns each rate a distinct question: the marginal rate answers what the next dollar costs, the effective rate on taxable income answers what the taxed income bore on average, and the effective rate on gross answers what share of everything earned went to this tax. Identifies the marginal rate as the one that governs a decision about extra work, since extra income is taxed at the top of the stack rather than at the average. Notes that all three figures are correct descriptions of the same $6,640.00, so quoting one as \"the tax rate\" without saying which is what causes confusion."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 8 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 8,
+      "contractFixedItemCount": 8,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u07-l01.scoring.json",
+    "sourceScoringSha256": "78ac6b05941f795255431882a872ef7dc44e43f2a12ab653ed28fe7a58133992",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l05",
+  "lessonId": "ma-g12-financial-literacy-u04-l05",
+  "integratedDomains": [
+    "credit",
+    "debt",
+    "consumer-protection",
+    "banking"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "62.67%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$940 measured against the $1,500 limit. Utilisation is a ratio of balance to available credit, not a measure of whether payments were made."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "19.00%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$285 against the same $1,500 limit, now inside the 30% guideline."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "8.14%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$285 measured against a combined limit of $3,500. Nothing about the debt changed; only the denominator did."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "43.67",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "From 62.67% to 19.00%. This fall came from reducing what is owed by $655."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "No — the balance stayed at $285 and only the limit changed",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The stated facts hold the balance at $285 while the combined limit rises to $3,500. Utilisation improved without any repayment, which is exactly why the ratio should not be read as a measure of how much is owed. This follows from the scenario’s own figures."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,050.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "30% of the combined $3,500 limit. On the original $1,500 limit the same guideline allowed only $450, so the second card raised the balance the guideline permits by $600."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(bal1 / limit1 * 100, 2)",
+        "substituted": "round(940 / 1500 * 100, 2)",
+        "result": "62.67%",
+        "why": "$940 measured against the $1,500 limit. Utilisation is a ratio of balance to available credit, not a measure of whether payments were made."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(bal2 / limit2 * 100, 2)",
+        "substituted": "round(285 / 1500 * 100, 2)",
+        "result": "19.00%",
+        "why": "$285 against the same $1,500 limit, now inside the 30% guideline."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(bal3 / (limit3 + limit4) * 100, 2)",
+        "substituted": "round(285 / (1500 + 2000) * 100, 2)",
+        "result": "8.14%",
+        "why": "$285 measured against a combined limit of $3,500. Nothing about the debt changed; only the denominator did."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "43.67",
+        "why": "From 62.67% to 19.00%. This fall came from reducing what is owed by $655."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "(limit5 + limit6) * target",
+        "substituted": "(1500 + 2000) * 0.3",
+        "result": "$1,050.00",
+        "why": "30% of the combined $3,500 limit. On the original $1,500 limit the same guideline allowed only $450, so the second card raised the balance the guideline permits by $600."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Utilisation improved twice, once by repayment and once by a larger limit. Explain why only one of those changes improved the fictional cardholder’s actual position, and say what risk the second change introduces that the ratio does not show.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Distinguishes the two movements: the fall from 62.67% to 19.00% came from repaying $655, while the fall to 8.14% came only from a larger denominator with the debt unchanged at $285.",
+          "States that only the repayment improved the position, because only repayment reduced what is owed and what interest is charged on.",
+          "Names the risk the ratio hides: the guideline now permits a $1,050.00 balance rather than $450, so a larger limit makes it easier to carry more debt while the reported ratio still looks healthy."
+        ],
+        "evidenceRequirements": [
+          "Uses the 19.00% and 8.14% figures and the unchanged $285 balance, and refers to the $1,050.00 guideline balance."
+        ],
+        "lookFors": [
+          "The response separates a change in the numerator from a change in the denominator.",
+          "The response does not recommend any course of action for a real person’s credit."
+        ],
+        "commonMisconception": "Reading a falling utilisation ratio as evidence that debt is falling, when a higher limit moves the ratio without changing the balance at all.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "error-diagnosis",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is utilisation on the first card at a balance of $940, to two decimal places?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is utilisation after the balance is paid down to $285?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is utilisation once the second card raises the combined limit, with the balance unchanged at $285?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "By how many percentage points did paying the balance down reduce utilisation? Give two decimal places."
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "Opening the second card moved utilisation from 19.00% to 8.14%. Did the cardholder’s debt fall?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What balance would sit exactly at the 30% guideline on the combined $3,500 limit?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Utilisation improved twice, once by repayment and once by a larger limit. Explain why only one of those changes improved the fictional cardholder’s actual position, and say what risk the second change introduces that the ratio does not show."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is utilisation on the first card at a balance of $940, to two decimal places? Answer: 62.67%. Verification: $940 measured against the $1,500 limit. Utilisation is a ratio of balance to available credit, not a measure of whether payments were made. t1-p2: What is utilisation after the balance is paid down to $285? Answer: 19.00%. Verification: $285 against the same $1,500 limit, now inside the 30% guideline. t1-p3: What is utilisation once the second card raises the combined limit, with the balance unchanged at $285? Answer: 8.14%. Verification: $285 measured against a combined limit of $3,500. Nothing about the debt changed; only the denominator did. t2-p1: By how many percentage points did paying the balance down reduce utilisation? Give two decimal places. Answer: 43.67. Verification: From 62.67% to 19.00%. This fall came from reducing what is owed by $655. t2-p2: Opening the second card moved utilisation from 19.00% to 8.14%. Did the cardholder’s debt fall? Answer: No — the balance stayed at $285 and only the limit changed. Verification: The stated facts hold the balance at $285 while the combined limit rises to $3,500. Utilisation improved without any repayment, which is exactly why the ratio should not be read as a measure of how much is owed. This follows from the scenario’s own figures. t2-p3: What balance would sit exactly at the 30% guideline on the combined $3,500 limit? Answer: $1,050.00. Verification: 30% of the combined $3,500 limit. On the original $1,500 limit the same guideline allowed only $450, so the second card raised the balance the guideline permits by $600."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Utilisation improved twice, once by repayment and once by a larger limit. Explain why only one of those changes improved the fictional cardholder’s actual position, and say what risk the second change introduces that the ratio does not show. Distinguishes the two movements: the fall from 62.67% to 19.00% came from repaying $655, while the fall to 8.14% came only from a larger denominator with the debt unchanged at $285. States that only the repayment improved the position, because only repayment reduced what is owed and what interest is charged on. Names the risk the ratio hides: the guideline now permits a $1,050.00 balance rather than $450, so a larger limit makes it easier to carry more debt while the reported ratio still looks healthy. Uses the 19.00% and 8.14% figures and the unchanged $285 balance, and refers to the $1,050.00 guideline balance. The response separates a change in the numerator from a change in the denominator. The response does not recommend any course of action for a real person’s credit."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Distinguishes the two movements: the fall from 62.67% to 19.00% came from repaying $655, while the fall to 8.14% came only from a larger denominator with the debt unchanged at $285. States that only the repayment improved the position, because only repayment reduced what is owed and what interest is charged on. Names the risk the ratio hides: the guideline now permits a $1,050.00 balance rather than $450, so a larger limit makes it easier to carry more debt while the reported ratio still looks healthy."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u04-l05.scoring.json",
+    "sourceScoringSha256": "a09c027ec6151990978bee70fab9a35cae8a796665d8cb315b5a3638fe3b2459",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

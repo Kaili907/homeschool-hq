@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u04-l07",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u04-l07",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Credit Systems, Scores, and Financing Aid",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: how credit reporting and scoring work"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "how credit reporting and scoring work",
+  "objective": "Test three fictional claims about credit reporting against computed figures, and identify which one costs money and which one only costs accuracy.",
+  "scenario": "The three simulated claims below were written by a fictional student for this exercise and are deliberately wrong. No real credit bureau, scoring model, or credit file is described, and no learner is asked about their own credit.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional claims in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional student’s first claim: \"You have to carry a balance to build credit, so leaving $1,500 on the card is the smart move.\" The fictional card charges a 24.9% annual percentage rate, with one month of interest computed as one twelfth of that rate on the balance, rounded to the nearest cent. Assume the balance is held at $1,500 all year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does one month of carrying that balance cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of carrying it cost, charging each month and rounding to the cent?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The student’s second claim: \"Closing my oldest card will tidy up my file and help my score.\" The fictional file has $1,900 of balances against $9,500 of total limits. Closing the card removes $3,500 of limit, leaving $6,000, and the balances do not change. The third claim: \"I should not check my own report, because every check lowers the score.\" In the fictional model, a borrower requesting their own report is recorded as a review that carries no scoring weight, while a lender’s request in an application does carry weight.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the utilisation before the card is closed?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the utilisation after the card is closed?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how many percentage points did closing the card move utilisation? Give the number of points, without a percent sign.",
+          "unit": "percentage points"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Under the stated fictional model, which of the student’s three claims is simply false rather than costly?",
+          "choices": [
+            "That a balance must be carried to build credit",
+            "That closing the oldest card helps the score",
+            "That checking your own report lowers the score"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Correct each of the three claims in one sentence, then rank them by how much acting on them would cost over a year and defend the ranking with figures."
+        }
+      ]
+    }
+  ],
+  "remediation": "If closing the card looks like it should help, write the utilisation as a fraction and change only what actually changed. The $1,900 of balances stays where it is; the $9,500 of limits falls to $6,000. A smaller denominator over the same numerator is a larger ratio, and utilisation rises from 20.00% to 31.67%.",
+  "extension": "Work out how much of the $1,900 balance would have to be repaid to hold utilisation at 20.00% after the card is closed, and say which is easier: keeping the account open or finding that money.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u04-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u04-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does one month of carrying that balance cost?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What does a year of carrying it cost, charging each month and rounding to the cent?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the utilisation before the card is closed?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the utilisation after the card is closed?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how many percentage points did closing the card move utilisation? Give the number of points, without a percent sign."
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Under the stated fictional model, which of the student’s three claims is simply false rather than costly?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Correct each of the three claims in one sentence, then rank them by how much acting on them would cost over a year and defend the ranking with figures."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u04-l07.package.json",
+    "sourcePackageSha256": "855e3af5faf9549e5daa47757fcc76142c800e1fe991afe1dded6c927590ff39",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u04-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

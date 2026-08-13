@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l06",
+  "lessonId": "ma-g10-financial-literacy-u07-l06",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,090.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,850 with receipts plus $1,240 without. All of it was genuinely spent; only part of it can be proved."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$259.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14% of the $1,850 that can be substantiated. A deduction is worth the marginal rate times the amount, as the previous lesson established."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$432.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14% of the whole $3,090.00 of real expenses."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$173.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$432.60 that full records would have saved against the $259.00 the receipts actually delivered. The money was genuinely spent; the deduction was lost for want of proof."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$475.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5% of the $1,900 balance for each of 5 months. The penalty is charged on the balance due, so a filer who owes nothing has much less at stake in being late."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$57.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.6% of the $1,900 balance for each of 5 months. Interest is much smaller than the penalty here, which is worth noticing: the cost of being late is mostly the penalty."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$705.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$173.60 of lost deduction plus $475.00 of penalty plus $57.00 of interest. None of this reflects any additional income or spending — it is entirely the cost of how the year was documented and when the return was filed."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "documented + undocumented",
+        "substituted": "1850 + 1240",
+        "result": "$3,090.00",
+        "why": "$1,850 with receipts plus $1,240 without. All of it was genuinely spent; only part of it can be proved."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "documented2 * marginal",
+        "substituted": "1850 * 0.14",
+        "result": "$259.00",
+        "why": "14% of the $1,850 that can be substantiated. A deduction is worth the marginal rate times the amount, as the previous lesson established."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 * marginal2",
+        "substituted": "#t1-p1 * 0.14",
+        "result": "$432.60",
+        "why": "14% of the whole $3,090.00 of real expenses."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - #t1-p2",
+        "substituted": "#t1-p3 - #t1-p2",
+        "result": "$173.60",
+        "why": "$432.60 that full records would have saved against the $259.00 the receipts actually delivered. The money was genuinely spent; the deduction was lost for want of proof."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "balanceDue * penaltyRate * lateMonths",
+        "substituted": "1900 * 0.05 * 5",
+        "result": "$475.00",
+        "why": "5% of the $1,900 balance for each of 5 months. The penalty is charged on the balance due, so a filer who owes nothing has much less at stake in being late."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "balanceDue2 * interestRate * lateMonths2",
+        "substituted": "1900 * 0.006 * 5",
+        "result": "$57.00",
+        "why": "0.6% of the $1,900 balance for each of 5 months. Interest is much smaller than the penalty here, which is worth noticing: the cost of being late is mostly the penalty."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p1 + #t2-p2 + #t2-p3",
+        "substituted": "#t2-p1 + #t2-p2 + #t2-p3",
+        "result": "$705.60",
+        "why": "$173.60 of lost deduction plus $475.00 of penalty plus $57.00 of interest. None of this reflects any additional income or spending — it is entirely the cost of how the year was documented and when the return was filed."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Of the $705.60, decide which part was cheapest to have avoided and defend your answer. Then write three recordkeeping habits that would address the larger of the two problems, and say when in the year each one has to happen.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Compares the $173.60 from missing records against the $532.00 from filing late, and defends which was cheaper to avoid rather than asserting it.",
+          "Gives three concrete habits with timing — filing on time or requesting an extension by the deadline, keeping receipts as expenses occur rather than reconstructing them, and setting money aside for a known balance due during the year.",
+          "Notes that the penalty is charged on the balance due, so reducing what is owed at filing reduces the exposure to being late as well."
+        ],
+        "evidenceRequirements": [
+          "Uses the $173.60, $475.00, and $57.00 components and the $705.60 total."
+        ],
+        "lookFors": [
+          "The response ties each habit to a point in the year rather than listing intentions.",
+          "A response arguing either way on which was cheaper to avoid is defensible if it compares the two amounts explicitly."
+        ],
+        "commonMisconception": "Treating recordkeeping as a filing-season task rather than something that has to happen as expenses occur.",
+        "dimensions": [
+          "plan-coherence",
+          "criteria-application",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What were the filer’s deductible expenses in total, documented or not?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What tax does the documented amount actually save at a 14% marginal rate?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What would the full $3,090.00 have saved if all of it had been documented?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What did the missing records cost in extra tax?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is the late-filing penalty?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is the interest charged over the same period?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "What did poor recordkeeping and late filing cost the filer altogether?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Of the $705.60, decide which part was cheapest to have avoided and defend your answer. Then write three recordkeeping habits that would address the larger of the two problems, and say when in the year each one has to happen."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What were the filer’s deductible expenses in total, documented or not? Answer: $3,090.00. Verification: $1,850 with receipts plus $1,240 without. All of it was genuinely spent; only part of it can be proved. t1-p2: What tax does the documented amount actually save at a 14% marginal rate? Answer: $259.00. Verification: 14% of the $1,850 that can be substantiated. A deduction is worth the marginal rate times the amount, as the previous lesson established. t1-p3: What would the full $3,090.00 have saved if all of it had been documented? Answer: $432.60. Verification: 14% of the whole $3,090.00 of real expenses. t2-p1: What did the missing records cost in extra tax? Answer: $173.60. Verification: $432.60 that full records would have saved against the $259.00 the receipts actually delivered. The money was genuinely spent; the deduction was lost for want of proof. t2-p2: What is the late-filing penalty? Answer: $475.00. Verification: 5% of the $1,900 balance for each of 5 months. The penalty is charged on the balance due, so a filer who owes nothing has much less at stake in being late. t2-p3: What is the interest charged over the same period? Answer: $57.00. Verification: 0.6% of the $1,900 balance for each of 5 months. Interest is much smaller than the penalty here, which is worth noticing: the cost of being late is mostly the penalty. t2-p4: What did poor recordkeeping and late filing cost the filer altogether? Answer: $705.60. Verification: $173.60 of lost deduction plus $475.00 of penalty plus $57.00 of interest. None of this reflects any additional income or spending — it is entirely the cost of how the year was documented and when the return was filed."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. t3-p1: Of the $705.60, decide which part was cheapest to have avoided and defend your answer. Then write three recordkeeping habits that would address the larger of the two problems, and say when in the year each one has to happen. Compares the $173.60 from missing records against the $532.00 from filing late, and defends which was cheaper to avoid rather than asserting it. Gives three concrete habits with timing — filing on time or requesting an extension by the deadline, keeping receipts as expenses occur rather than reconstructing them, and setting money aside for a known balance due during the year. Notes that the penalty is charged on the balance due, so reducing what is owed at filing reduces the exposure to being late as well. Uses the $173.60, $475.00, and $57.00 components and the $705.60 total. The response ties each habit to a point in the year rather than listing intentions. A response arguing either way on which was cheaper to avoid is defensible if it compares the two amounts explicitly."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Compares the $173.60 from missing records against the $532.00 from filing late, and defends which was cheaper to avoid rather than asserting it. Gives three concrete habits with timing — filing on time or requesting an extension by the deadline, keeping receipts as expenses occur rather than reconstructing them, and setting money aside for a known balance due during the year. Notes that the penalty is charged on the balance due, so reducing what is owed at filing reduces the exposure to being late as well."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u07-l06.scoring.json",
+    "sourceScoringSha256": "4b0d863daf71048822bdbf334480d0456b996310257360122fd59535dfc7cb2c",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

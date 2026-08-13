@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u07-l06",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Tax Structure, Withholding, and Filing",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: recordkeeping and filing-readiness"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "recordkeeping and filing-readiness",
+  "objective": "Price the tax cost of undocumented deductions and the cost of filing late under a stated fictional penalty schedule, and compare the two.",
+  "scenario": "The simulated penalty and interest schedule below is invented for this exercise. It is shaped like the penalties real tax systems charge — a monthly percentage of the balance due, capped after a few months, plus separate interest — but its rates and cap are made up, and no real authority’s schedule should be inferred from it. The point being taught is how the pieces combine.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional record summary and penalty schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional filer had $1,850 of deductible expenses with receipts and a further $1,240 that were genuinely incurred but for which no record was kept. Only documented expenses can be deducted. The filer’s marginal rate is 14%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What were the filer’s deductible expenses in total, documented or not?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What tax does the documented amount actually save at a 14% marginal rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would the full $3,090.00 have saved if all of it had been documented?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price the missing records and the late filing. Under the fictional schedule, a late return carries a penalty of 5% of the balance due for each month it is late, up to 5 months, plus interest of 0.6% of the balance due per month over the same period. This filer’s balance due is $1,900 and the return is filed 5 months late.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the missing records cost in extra tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the late-filing penalty?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the interest charged over the same period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What did poor recordkeeping and late filing cost the filer altogether?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Of the $705.60, decide which part was cheapest to have avoided and defend your answer. Then write three recordkeeping habits that would address the larger of the two problems, and say when in the year each one has to happen."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the cost of the missing records comes out as $1,240, the expense is being confused with the tax it would have saved. The filer does not get the $1,240 back — a deduction only removes that amount from taxed income, which at a 14% marginal rate is worth $173.60.",
+  "extension": "Recompute the penalty and interest if the filer had paid the $1,900 balance on time but filed the return 5 months late anyway, and say which of the two obligations the schedule prices more heavily.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u07-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u07-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What were the filer’s deductible expenses in total, documented or not?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What tax does the documented amount actually save at a 14% marginal rate?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What would the full $3,090.00 have saved if all of it had been documented?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What did the missing records cost in extra tax?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the late-filing penalty?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the interest charged over the same period?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What did poor recordkeeping and late filing cost the filer altogether?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Of the $705.60, decide which part was cheapest to have avoided and defend your answer. Then write three recordkeeping habits that would address the larger of the two problems, and say when in the year each one has to happen."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/packages/grade-10/swk-flhs-g10-u07-l06.package.json",
+    "sourcePackageSha256": "fe9d6c132c8caf1d5e64e932fdd02f756e40c718e4f92a52ab75d6ab8d57884b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u07-l06",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

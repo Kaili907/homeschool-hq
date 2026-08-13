@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u01-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-financial-literacy-u01-l10",
+    "courseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Compensation Packages and Career Pathways",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: labour market information and how to read it"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "labour market information and how to read it",
+  "objective": "Combine fictional labour market data with pathway costs into a single recommendation, and state the evidence and the uncertainty behind it.",
+  "scenario": "A fictional advisor has the simulated occupational data and pathway costs below for an invented region. Nothing here describes a real occupation, programme, or published statistic.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional data tables in these directions",
+    "a blank recommendation sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Occupation M: median wage $53,700, 10th percentile $37,200, about 2,900 openings a year, growth 9%. Entry requires a 20-month programme costing $16,800, during which a learner earns $10,000 a year against a $32,000 baseline. Occupation N: median wage $71,400, 10th percentile $44,600, about 620 openings a year, growth 1%. Entry requires a 48-month programme costing $52,000, during which a learner earns $9,000 a year against the same baseline.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the full cost of the pathway into Occupation M?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the full cost of the pathway into Occupation N?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Using the 10th percentile rather than the median as the realistic entry wage, how long does Occupation M take to repay its pathway cost? Round to two decimal places.",
+          "unit": "years"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Do the same for Occupation N, and then compare at the median.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "At its 10th percentile wage, how long does Occupation N take to repay its pathway cost? Round to two decimal places.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "At its median wage, how long does Occupation M take to repay? Round to two decimal places.",
+          "unit": "years"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "At its median wage, how long does Occupation N take to repay? Round to two decimal places.",
+          "unit": "years"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Write the recommendation.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one pathway for a learner who can fund at most $20,000 of tuition and needs to be earning above the baseline within three years. Use the entry-wage figures, not the median figures, as your working assumption, and say what you are assuming and why."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name the single figure in this lesson you would most want verified before giving this recommendation to a real person, and say how you would try to verify it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two pathways look similar, compute the entry-wage gain for each first: $5,200 a year for M against $12,600 for N. That gap, not the tuition, is why N repays in a comparable time despite costing nearly three times as much.",
+  "extension": "Recompute both paybacks assuming the learner reaches the median wage after five years at the entry wage, and say how much that assumption is worth.",
+  "scoringRef": "scoring/grade-10/swk-flhs-g10-u01-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g10-financial-literacy-u01-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the full cost of the pathway into Occupation M?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is the full cost of the pathway into Occupation N?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "Using the 10th percentile rather than the median as the realistic entry wage, how long does Occupation M take to repay its pathway cost? Round to two decimal places."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "At its 10th percentile wage, how long does Occupation N take to repay its pathway cost? Round to two decimal places."
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "At its median wage, how long does Occupation M take to repay? Round to two decimal places."
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "At its median wage, how long does Occupation N take to repay? Round to two decimal places."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Recommend one pathway for a learner who can fund at most $20,000 of tuition and needs to be earning above the baseline within three years. Use the entry-wage figures, not the median figures, as your working assumption, and say what you are assuming and why."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Name the single figure in this lesson you would most want verified before giving this recommendation to a real person, and say how you would try to verify it."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-10/swk-flhs-g10-u01-l10.package.json",
+    "sourcePackageSha256": "8bd1abb9d9b6ec038e3b2e6148990bb0ec252763a328af4d567d5b8e2c76ff70",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g10-financial-literacy-u01-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

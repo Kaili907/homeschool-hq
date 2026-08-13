@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u07-l10",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u07-l10",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes and Financial Plan Capstone",
+    "dayInUnit": 10,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: public goods and policy tradeoffs",
+    "focus": "public goods and policy tradeoffs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7",
+    "PF1–PF7 synthesis"
+  ],
+  "objective": "Learners synthesise the case for and against funding an invented public good collectively, and articulate a defensible position.",
+  "scenario": "Sabelo is an invented eighth grader preparing a pretend position paper on whether a community should fund an invented flood-defence project through taxes, when only some households are at risk but everyone would pay.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Set out the strongest case on each side of Sabelo's invented question, without indicating which one you favour. Each case should be one a reasonable person could hold.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What is the strongest argument for collective funding in Sabelo's case, and the strongest argument against?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Take a position and defend it, addressing directly the households that would pay without being at risk.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What should Sabelo's community do, and how does your position answer households that pay without direct benefit?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Flood damage does not stay inside property lines.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "How does the way a risk spreads affect whether it should be funded collectively?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner writes only one side, have them argue Sabelo's opposite position in three sentences before writing their own.",
+  "extension": "Ask the learner to propose a funding split for Sabelo's project that reflects differing exposure, and to name its weakness.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u07-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u07-l10",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What is the strongest argument for collective funding in Sabelo's case, and the strongest argument against?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What should Sabelo's community do, and how does your position answer households that pay without direct benefit?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "How does the way a risk spreads affect whether it should be funded collectively?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u07-l10.package.json",
+    "sourcePackageSha256": "c89705a2ff95d3eeca588c68ad7d1625bc8a228d67c39b9e9cd1eef8be4d748b",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u07-l10",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

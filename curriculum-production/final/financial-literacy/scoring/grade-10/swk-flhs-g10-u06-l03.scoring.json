@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g10-u06-l03",
+  "lessonId": "ma-g10-financial-literacy-u06-l03",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$8,850.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The five categories added. Doing this inventory before choosing a limit is what makes the choice a measurement rather than a guess."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $500 deductible off the $8,850.00 loss leaves $8,350, which exceeds the $6,000 limit, so the limit binds and Option 1 pays $6,000.00."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$2,850.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $8,850.00 loss less the $6,000.00 paid — nearly six times the $500 deductible, because the limit was set below the exposure."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$8,350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $500 deductible off the $8,850.00 loss leaves $8,350.00, which is below the $10,000 limit, so the limit does not bind and the whole remainder is paid."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Exactly the deductible, because the limit is above the exposure. This is what a correctly sized limit does."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,350.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,350.00 against $6,000.00 — the difference the higher limit makes on this particular loss, and it exists only because the exposure is above $6,000."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$70.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$290 against $220. The comparison the renter has to make is this $70.00 a year against the $2,350.00 it would pay in a total loss, weighted by how likely such a loss is."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "electronics + furniture + clothing + kitchen + bike",
+        "substituted": "2400 + 3100 + 1800 + 900 + 650",
+        "result": "$8,850.00",
+        "why": "The five categories added. Doing this inventory before choosing a limit is what makes the choice a measurement rather than a guess."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "min(#t1-p1 - ded, limit1)",
+        "substituted": "min(#t1-p1 - 500, 6000)",
+        "result": "$6,000.00",
+        "why": "The $500 deductible off the $8,850.00 loss leaves $8,350, which exceeds the $6,000 limit, so the limit binds and Option 1 pays $6,000.00."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$2,850.00",
+        "why": "The $8,850.00 loss less the $6,000.00 paid — nearly six times the $500 deductible, because the limit was set below the exposure."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "min(#t1-p1 - ded2, limit2)",
+        "substituted": "min(#t1-p1 - 500, 10000)",
+        "result": "$8,350.00",
+        "why": "The $500 deductible off the $8,850.00 loss leaves $8,350.00, which is below the $10,000 limit, so the limit does not bind and the whole remainder is paid."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 - #t2-p1",
+        "substituted": "#t1-p1 - #t2-p1",
+        "result": "$500.00",
+        "why": "Exactly the deductible, because the limit is above the exposure. This is what a correctly sized limit does."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t1-p2",
+        "substituted": "#t2-p1 - #t1-p2",
+        "result": "$2,350.00",
+        "why": "$8,350.00 against $6,000.00 — the difference the higher limit makes on this particular loss, and it exists only because the exposure is above $6,000."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "prem2 - prem1",
+        "substituted": "290 - 220",
+        "result": "$70.00",
+        "why": "$290 against $220. The comparison the renter has to make is this $70.00 a year against the $2,350.00 it would pay in a total loss, weighted by how likely such a loss is."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Option 2 costs $70.00 more a year and pays $2,350.00 more in a total loss. Explain how a renter should decide between them without knowing whether a fire will happen, and say what would have to change about the inventory for Option 1 to become the better fit.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Frames the decision around the size of the loss the renter could absorb unaided rather than around whether a fire is expected: bearing $2,850.00 unexpectedly is the risk Option 1 leaves open.",
+          "States what would change the answer: an inventory worth less than about $6,500, so that the $6,000 limit covers the loss after the deductible and the extra premium buys nothing.",
+          "Notes that the $70.00 is paid every year while the $2,350.00 arrives only in a total loss, so the comparison depends on how likely such a loss is and on how badly it would land."
+        ],
+        "evidenceRequirements": [
+          "Uses the $8,850.00 exposure, both payouts, and the $70.00 premium difference."
+        ],
+        "lookFors": [
+          "The response ties the limit to the measured inventory rather than to a general preference for more or less coverage.",
+          "The response recognises that a limit above the exposure buys nothing extra, so more coverage is not automatically better."
+        ],
+        "commonMisconception": "Choosing a coverage limit by what feels affordable rather than by measuring the exposure it has to stand behind.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the renter’s total exposure — the value of everything on the list?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "In the total loss, what does Option 1 pay?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What does the renter bear under Option 1?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "In the same total loss, what does Option 2 pay?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What does the renter bear under Option 2?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "How much more does Option 2 pay in this loss?"
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "How much more does Option 2 cost in annual premium?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Option 2 costs $70.00 more a year and pays $2,350.00 more in a total loss. Explain how a renter should decide between them without knowing whether a fire will happen, and say what would have to change about the inventory for Option 1 to become the better fit."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the renter’s total exposure — the value of everything on the list? Answer: $8,850.00. Verification: The five categories added. Doing this inventory before choosing a limit is what makes the choice a measurement rather than a guess. t1-p2: In the total loss, what does Option 1 pay? Answer: $6,000.00. Verification: The $500 deductible off the $8,850.00 loss leaves $8,350, which exceeds the $6,000 limit, so the limit binds and Option 1 pays $6,000.00. t1-p3: What does the renter bear under Option 1? Answer: $2,850.00. Verification: The $8,850.00 loss less the $6,000.00 paid — nearly six times the $500 deductible, because the limit was set below the exposure. t2-p1: In the same total loss, what does Option 2 pay? Answer: $8,350.00. Verification: The $500 deductible off the $8,850.00 loss leaves $8,350.00, which is below the $10,000 limit, so the limit does not bind and the whole remainder is paid. t2-p2: What does the renter bear under Option 2? Answer: $500.00. Verification: Exactly the deductible, because the limit is above the exposure. This is what a correctly sized limit does. t2-p3: How much more does Option 2 pay in this loss? Answer: $2,350.00. Verification: $8,350.00 against $6,000.00 — the difference the higher limit makes on this particular loss, and it exists only because the exposure is above $6,000. t2-p4: How much more does Option 2 cost in annual premium? Answer: $70.00. Verification: $290 against $220. The comparison the renter has to make is this $70.00 a year against the $2,350.00 it would pay in a total loss, weighted by how likely such a loss is."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Communicating uncertainty — Not yet: The conclusion is stated as certain when the scenario does not support that. Approaching: Uncertainty is mentioned in general terms only. Meets: The response says what is not known and how it limits the conclusion. Exceeds: The response says what is not known, how it limits the conclusion, and what would resolve it. Applying the stated criteria — Not yet: The criteria are not used. Approaching: Some criteria are used and others are dropped without saying why. Meets: Every stated criterion is applied and the result of each is reported. Exceeds: Every criterion is applied and the response says which one decided the outcome. Defending the tradeoff — Not yet: A choice is asserted with no cost acknowledged. Approaching: A choice is defended but what it gives up is not named. Meets: The choice is defended and what it costs or forecloses is named specifically. Exceeds: The choice is defended, its cost is named, and the strongest case against it is answered. t3-p1: Option 2 costs $70.00 more a year and pays $2,350.00 more in a total loss. Explain how a renter should decide between them without knowing whether a fire will happen, and say what would have to change about the inventory for Option 1 to become the better fit. Frames the decision around the size of the loss the renter could absorb unaided rather than around whether a fire is expected: bearing $2,850.00 unexpectedly is the risk Option 1 leaves open. States what would change the answer: an inventory worth less than about $6,500, so that the $6,000 limit covers the loss after the deductible and the extra premium buys nothing. Notes that the $70.00 is paid every year while the $2,350.00 arrives only in a total loss, so the comparison depends on how likely such a loss is and on how badly it would land. Uses the $8,850.00 exposure, both payouts, and the $70.00 premium difference. The response ties the limit to the measured inventory rather than to a general preference for more or less coverage. The response recognises that a limit above the exposure buys nothing extra, so more coverage is not automatically better."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Frames the decision around the size of the loss the renter could absorb unaided rather than around whether a fire is expected: bearing $2,850.00 unexpectedly is the risk Option 1 leaves open. States what would change the answer: an inventory worth less than about $6,500, so that the $6,000 limit covers the loss after the deductible and the extra premium buys nothing. Notes that the $70.00 is paid every year while the $2,350.00 arrives only in a total loss, so the comparison depends on how likely such a loss is and on how badly it would land."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 7 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 7,
+      "contractFixedItemCount": 7,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g10-completion-r4",
+    "inputCommit": "32cca3ea91986c555f204bc901d28494a6be4180",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-10/scoring/grade-10/swk-flhs-g10-u06-l03.scoring.json",
+    "sourceScoringSha256": "3f2e54975e17d618560112cf98d97b01edec10fdd737b4e5623712ede17933b3",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

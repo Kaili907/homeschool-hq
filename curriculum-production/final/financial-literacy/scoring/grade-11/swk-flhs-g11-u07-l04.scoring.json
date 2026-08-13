@@ -1,0 +1,378 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u07-l04",
+  "lessonId": "ma-g11-financial-literacy-u07-l04",
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$15,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Revenue less allowable expenses. Self-employment income is taxed on the profit, not on the money coming in."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$49,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$34,200 of employment income plus $15,400.00 of net self-employment income."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$38,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$49,600.00 less $11,400 — just under the $38,400 threshold, so none of it reaches the 22% band."
+        }
+      },
+      {
+        "ref": "t1-p4",
+        "answer": "$4,956.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$980.00 in the 10% band plus 14% of the $28,400 above it."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,186.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "14.2% of $15,400.00. The employment income does not attract this charge, so it is the price of the second income source rather than of income generally."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7,142.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,956.00 of income tax and $2,186.80 of self-employment contribution."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "14.4%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,142.80 against $49,600.00 — noticeably higher than income tax alone would suggest, because of the self-employment contribution."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$546.70",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,186.80 spread across 4 instalments. An employee never sees this because the employer withholds throughout the year."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "14.2%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Exactly the stated rate, which is the check that it has been charged on the right base — the profit, not the revenue."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "revenue - expenses",
+        "substituted": "21800 - 6400",
+        "result": "$15,400.00",
+        "why": "Revenue less allowable expenses. Self-employment income is taxed on the profit, not on the money coming in."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "employment + #t1-p1",
+        "substituted": "34200 + #t1-p1",
+        "result": "$49,600.00",
+        "why": "$34,200 of employment income plus $15,400.00 of net self-employment income."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - deduction",
+        "substituted": "#t1-p2 - 11400",
+        "result": "$38,200.00",
+        "why": "$49,600.00 less $11,400 — just under the $38,400 threshold, so none of it reaches the 22% band."
+      },
+      {
+        "ref": "t1-p4",
+        "expression": "round(band1 * rate1 + (#t1-p3 - band1) * rate2, 2)",
+        "substituted": "round(9800 * 0.1 + (#t1-p3 - 9800) * 0.14, 2)",
+        "result": "$4,956.00",
+        "why": "$980.00 in the 10% band plus 14% of the $28,400 above it."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p1 * seRate, 2)",
+        "substituted": "round(#t1-p1 * 0.142, 2)",
+        "result": "$2,186.80",
+        "why": "14.2% of $15,400.00. The employment income does not attract this charge, so it is the price of the second income source rather than of income generally."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p4 + #t2-p1",
+        "substituted": "#t1-p4 + #t2-p1",
+        "result": "$7,142.80",
+        "why": "$4,956.00 of income tax and $2,186.80 of self-employment contribution."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / #t1-p2 * 100, 1)",
+        "substituted": "round(#t2-p2 / #t1-p2 * 100, 1)",
+        "result": "14.4%",
+        "why": "$7,142.80 against $49,600.00 — noticeably higher than income tax alone would suggest, because of the self-employment contribution."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p1 / 4, 2)",
+        "substituted": "round(#t2-p1 / 4, 2)",
+        "result": "$546.70",
+        "why": "$2,186.80 spread across 4 instalments. An employee never sees this because the employer withholds throughout the year."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p1 / #t1-p1 * 100, 1)",
+        "substituted": "round(#t2-p1 / #t1-p1 * 100, 1)",
+        "result": "14.2%",
+        "why": "Exactly the stated rate, which is the check that it has been charged on the right base — the profit, not the revenue."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Lachlan’s side business brought in $21,800 and his tax rose by more than the income tax on it alone. Explain what the self-employment contribution adds, and say what a person starting a side business should set aside from each payment received.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains that the net $15,400.00 attracts both income tax and the 14.2% self-employment contribution, while employment income of the same size would attract only the income tax in this schedule.",
+          "Gives usable advice grounded in the figures: setting aside roughly 28% of net self-employment income covers both the 14% income tax band and the 14.2% contribution.",
+          "Notes that nothing is withheld, so the amount has to be set aside deliberately and paid in instalments of $546.70."
+        ],
+        "evidenceRequirements": [
+          "Cites the $2,186.80 self-employment contribution and the $4,956.00 income tax."
+        ],
+        "lookFors": [
+          "The set-aside percentage is derived from the two rates rather than guessed.",
+          "The response distinguishes revenue from net income when describing what to set aside.",
+          "A response noting that expenses reduce both charges is reading the structure correctly."
+        ],
+        "commonMisconception": "Assuming self-employment income is taxed in the same way as employment income.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "transfer"
+        ]
+      },
+      {
+        "ref": "t3-p2",
+        "prompt": "Taxable income came to $38,200.00, just under the $38,400 threshold. Say what would happen to the tax on the next $1,000 of self-employment profit, and why the answer is not simply 14%.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that $200 of the next $1,000 stays in the 14% band and $800 falls into the 22% band, giving $204 of income tax rather than $140.",
+          "Adds that the same $1,000 also attracts the 14.2% self-employment contribution, so the total on it is about $346."
+        ],
+        "evidenceRequirements": [
+          "Uses the $38,200.00 taxable income and the $38,400 threshold in the calculation."
+        ],
+        "lookFors": [
+          "The response splits the $1,000 across the two bands rather than applying one rate.",
+          "The self-employment contribution is included in the total."
+        ],
+        "commonMisconception": "Applying a single marginal rate to income that straddles a threshold.",
+        "dimensions": [
+          "transfer",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is Lachlan’s net self-employment income?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is his total income from both sources?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is his taxable income after the standard deduction?"
+        },
+        {
+          "ref": "t1-p4",
+          "responseMode": "FIXED",
+          "promptText": "What is his income tax?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the 14.2% self-employment contribution on the net self-employment income?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "What is his total tax, counting income tax and the self-employment contribution?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "What is his effective rate against total income? Give one decimal place."
+        },
+        {
+          "ref": "t2-p4",
+          "responseMode": "FIXED",
+          "promptText": "Nothing is withheld from the self-employment income, so the $2,186.80 must be paid in 4 quarterly instalments. How much is each?"
+        },
+        {
+          "ref": "t2-p5",
+          "responseMode": "FIXED",
+          "promptText": "The self-employment contribution is what share of the net self-employment income it is charged on? Give one decimal place."
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Lachlan’s side business brought in $21,800 and his tax rose by more than the income tax on it alone. Explain what the self-employment contribution adds, and say what a person starting a side business should set aside from each payment received."
+        },
+        {
+          "ref": "t3-p2",
+          "responseMode": "OPEN",
+          "promptText": "Taxable income came to $38,200.00, just under the $38,400 threshold. Say what would happen to the tax on the next $1,000 of self-employment profit, and why the answer is not simply 14%."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is Lachlan’s net self-employment income? Answer: $15,400.00. Verification: Revenue less allowable expenses. Self-employment income is taxed on the profit, not on the money coming in. t1-p2: What is his total income from both sources? Answer: $49,600.00. Verification: $34,200 of employment income plus $15,400.00 of net self-employment income. t1-p3: What is his taxable income after the standard deduction? Answer: $38,200.00. Verification: $49,600.00 less $11,400 — just under the $38,400 threshold, so none of it reaches the 22% band. t1-p4: What is his income tax? Answer: $4,956.00. Verification: $980.00 in the 10% band plus 14% of the $28,400 above it. t2-p1: What is the 14.2% self-employment contribution on the net self-employment income? Answer: $2,186.80. Verification: 14.2% of $15,400.00. The employment income does not attract this charge, so it is the price of the second income source rather than of income generally. t2-p2: What is his total tax, counting income tax and the self-employment contribution? Answer: $7,142.80. Verification: $4,956.00 of income tax and $2,186.80 of self-employment contribution. t2-p3: What is his effective rate against total income? Give one decimal place. Answer: 14.4%. Verification: $7,142.80 against $49,600.00 — noticeably higher than income tax alone would suggest, because of the self-employment contribution. t2-p4: Nothing is withheld from the self-employment income, so the $2,186.80 must be paid in 4 quarterly instalments. How much is each? Answer: $546.70. Verification: $2,186.80 spread across 4 instalments. An employee never sees this because the employer withholds throughout the year. t2-p5: The self-employment contribution is what share of the net self-employment income it is charged on? Give one decimal place. Answer: 14.2%. Verification: Exactly the stated rate, which is the check that it has been charged on the right base — the profit, not the revenue."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. Reasoning from the figures — Not yet: A conclusion is stated with no figures behind it. Approaching: Figures are quoted but the step from figure to conclusion is missing. Meets: The response shows which figures drive the conclusion and how. Exceeds: The response also says how large a change in a figure would flip the conclusion. Transfer to the new case — Not yet: The method from the earlier case is restated without being applied. Approaching: The method is applied but a difference in the new case is ignored. Meets: The method is applied and adjusted for what is different in the new case. Exceeds: The method is applied, adjusted, and the limit of the transfer is stated. t3-p1: Lachlan’s side business brought in $21,800 and his tax rose by more than the income tax on it alone. Explain what the self-employment contribution adds, and say what a person starting a side business should set aside from each payment received. Explains that the net $15,400.00 attracts both income tax and the 14.2% self-employment contribution, while employment income of the same size would attract only the income tax in this schedule. Gives usable advice grounded in the figures: setting aside roughly 28% of net self-employment income covers both the 14% income tax band and the 14.2% contribution. Notes that nothing is withheld, so the amount has to be set aside deliberately and paid in instalments of $546.70. Cites the $2,186.80 self-employment contribution and the $4,956.00 income tax. The set-aside percentage is derived from the two rates rather than guessed. The response distinguishes revenue from net income when describing what to set aside. A response noting that expenses reduce both charges is reading the structure correctly. t3-p2: Taxable income came to $38,200.00, just under the $38,400 threshold. Say what would happen to the tax on the next $1,000 of self-employment profit, and why the answer is not simply 14%. States that $200 of the next $1,000 stays in the 14% band and $800 falls into the 22% band, giving $204 of income tax rather than $140. Adds that the same $1,000 also attracts the 14.2% self-employment contribution, so the total on it is about $346. Uses the $38,200.00 taxable income and the $38,400 threshold in the calculation. The response splits the $1,000 across the two bands rather than applying one rate. The self-employment contribution is included in the total."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Explains that the net $15,400.00 attracts both income tax and the 14.2% self-employment contribution, while employment income of the same size would attract only the income tax in this schedule. Gives usable advice grounded in the figures: setting aside roughly 28% of net self-employment income covers both the 14% income tax band and the 14.2% contribution. Notes that nothing is withheld, so the amount has to be set aside deliberately and paid in instalments of $546.70. States that $200 of the next $1,000 stays in the 14% band and $800 falls into the 22% band, giving $204 of income tax rather than $140. Adds that the same $1,000 also attracts the 14.2% self-employment contribution, so the total on it is about $346."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 9 independently recomputed or comparison-derived fixed answers and 0 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 9,
+      "contractFixedItemCount": 9,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 5,
+      "acceptableAnswerCriteriaCount": 5
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/scoring/grade-11/swk-flhs-g11-u07-l04.scoring.json",
+    "sourceScoringSha256": "6e3707b61ad8a9aed5fc8a4fb0f0fbc13a0d7939fe3649c3b3d0ab4ebf07a8e2",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

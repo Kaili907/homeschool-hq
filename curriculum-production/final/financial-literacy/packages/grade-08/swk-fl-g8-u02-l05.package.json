@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u02-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-financial-literacy-u02-l05",
+    "courseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services",
+    "dayInUnit": 5,
+    "phase": "Concept model B",
+    "title": "Concept model B: consumer rights and complaint steps",
+    "focus": "consumer rights and complaint steps"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "objective": "Learners construct an escalation path for an invented consumer dispute and identify what evidence supports each step.",
+  "scenario": "Ondine is a made-up eighth grader studying a pretend dispute: a $340.00 invented appliance failed in week three, the seller refers the buyer to the manufacturer, the manufacturer refers them back, and the buyer holds a receipt and a dated fault video.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every amount, person, business, and account in this task is invented for practice. Nothing here refers to a real household.",
+    "Never write a real bank account, card, PIN, password, Social Security, or tax number on this sheet; the task never asks for one.",
+    "This is education, not individualized financial advice. Real money decisions belong to a trusted adult."
+  ],
+  "materials": [
+    "pencil or accessible response tool",
+    "this task sheet"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Lay out Ondine's invented dispute: what the buyer paid for, what failed, what evidence exists, and what each party is claiming. Keep evidence separate from assertion.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "short-response",
+          "text": "What evidence does the buyer in Ondine's case hold, and what does each piece establish?"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Set out the buyer's steps in order, from first contact to external escalation, and say what each communication should contain and what it should request.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "extended-response",
+          "text": "What steps should the buyer take, in what order, and what should each one contain and ask for?"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Both parties pointed at each other.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Why is being passed between seller and manufacturer itself a fact worth recording?"
+        }
+      ]
+    }
+  ],
+  "remediation": "If a learner starts with an external complaint, ask what that body would ask to see first, and rebuild the order from that answer.",
+  "extension": "Ask the learner to draft the opening paragraph of the buyer's written request in Ondine's case.",
+  "scoringRef": "scoring/grade-08/swk-fl-g8-u02-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "1.0.0",
+    "sourceRef": "worktree",
+    "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+    "sourceLessonId": "ma-g8-financial-literacy-u02-l05",
+    "authoredBy": "manual",
+    "answerDerivedFromSourceGuidance": false
+  },
+  "responseScoring": {
+    "mode": "JUDGMENT_APPLICATION",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "OPEN",
+        "promptText": "What evidence does the buyer in Ondine's case hold, and what does each piece establish?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "OPEN",
+        "promptText": "What steps should the buyer take, in what order, and what should each one contain and ask for?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Why is being passed between seller and manufacturer itself a fact worth recording?"
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-g38/packages/grade-08/swk-fl-g8-u02-l05.package.json",
+    "sourcePackageSha256": "fd15edf112e77c47b4ed7375a9fe28646327961c9aba3bf077956f9561143731",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "1.0.0",
+      "sourceRef": "worktree",
+      "sourcePath": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy/lessons.jsonl",
+      "sourceLessonId": "ma-g8-financial-literacy-u02-l05",
+      "authoredBy": "manual",
+      "answerDerivedFromSourceGuidance": false
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

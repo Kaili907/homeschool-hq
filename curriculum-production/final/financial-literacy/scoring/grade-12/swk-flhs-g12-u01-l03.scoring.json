@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l03",
+  "lessonId": "ma-g12-financial-literacy-u01-l03",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "banking",
+    "consumer-protection"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,160.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$56,160 spread across 26 pay periods. Every other line on the statement is checked against this figure."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$165.24",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "7.65% of the $2,160.00 gross. This is the correct base under the stated schedule."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$156.98",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The retirement deduction is $108.00, leaving $2,052.00, and 7.65% of that is $156.98 — which is exactly the figure printed. That reproduces the number on the statement and identifies the base the employer used."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$8.26",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$165.24 correct against $156.98 withheld."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$214.76",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8.26 in each of 26 periods. A per-period error small enough to overlook is what makes the annual figure worth computing."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "No — the levy is owed on gross, so the shortfall remains due",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The schedule states the levy is charged on gross pay. An employer computing it on the wrong base changes what was collected, not what is owed, so the $214.76 is a liability the employee still carries. This is the fact of the stated schedule, not a comparison between two figures."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "annual / periods",
+        "substituted": "56160 / 26",
+        "result": "$2,160.00",
+        "why": "$56,160 spread across 26 pay periods. Every other line on the statement is checked against this figure."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * levyRate, 2)",
+        "substituted": "round(#t1-p1 * 0.0765, 2)",
+        "result": "$165.24",
+        "why": "7.65% of the $2,160.00 gross. This is the correct base under the stated schedule."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round((#t1-p1 - #t1-p1 * retireRate) * levyRate2, 2)",
+        "substituted": "round((#t1-p1 - #t1-p1 * 0.05) * 0.0765, 2)",
+        "result": "$156.98",
+        "why": "The retirement deduction is $108.00, leaving $2,052.00, and 7.65% of that is $156.98 — which is exactly the figure printed. That reproduces the number on the statement and identifies the base the employer used."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - #t1-p3",
+        "substituted": "#t1-p2 - #t1-p3",
+        "result": "$8.26",
+        "why": "$165.24 correct against $156.98 withheld."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 * periods2",
+        "substituted": "#t2-p1 * 26",
+        "result": "$214.76",
+        "why": "$8.26 in each of 26 periods. A per-period error small enough to overlook is what makes the annual figure worth computing."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Describe what this fictional employee should do next, in order, and say what they should keep. Explain why raising it at $8.26 a period is better than raising it at $214.76.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Gives an ordered course of action: keep the statement, put the discrepancy to the employer’s payroll department in writing with the two figures, and keep a copy of what was sent and any reply.",
+          "Explains that the error compounds silently — each period adds $8.26, so raising it early caps the liability, while waiting until year end leaves $214.76 to settle at once.",
+          "Notes that the goal is a corrected calculation going forward, not an accusation: the wrong base is an error to be shown, and the arithmetic is what shows it."
+        ],
+        "evidenceRequirements": [
+          "Uses both the $8.26 per-period difference and the $214.76 annual figure to justify raising it early."
+        ],
+        "lookFors": [
+          "The response names written documentation rather than a verbal mention alone.",
+          "The response identifies the wrong base — pay after the retirement deduction — rather than only saying the number is wrong."
+        ],
+        "commonMisconception": "Assuming an amount an employer withheld must be the amount owed, so a small discrepancy can be ignored.",
+        "dimensions": [
+          "error-diagnosis",
+          "plan-coherence",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  },
+  "adultOnly": true,
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "MIXED",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "FIXED",
+          "promptText": "What is the gross pay for one period?"
+        },
+        {
+          "ref": "t1-p2",
+          "responseMode": "FIXED",
+          "promptText": "What should the payroll levy be for one period, charged on gross as the schedule states?"
+        },
+        {
+          "ref": "t1-p3",
+          "responseMode": "FIXED",
+          "promptText": "The statement’s levy matches 7.65% of gross after the 5% retirement deduction. What does that base produce?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "FIXED",
+          "promptText": "How much less than the correct amount was withheld in this one period?"
+        },
+        {
+          "ref": "t2-p2",
+          "responseMode": "FIXED",
+          "promptText": "If the same base is used all year, what does the shortfall come to across the 26 periods?"
+        },
+        {
+          "ref": "t2-p3",
+          "responseMode": "FIXED",
+          "promptText": "Under the stated schedule, is the under-withheld levy money the fictional employee gets to keep?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "Describe what this fictional employee should do next, in order, and say what they should keep. Explain why raising it at $8.26 a period is better than raising it at $214.76."
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "ANSWER_KEY",
+      "content": {
+        "present": true,
+        "text": "t1-p1: What is the gross pay for one period? Answer: $2,160.00. Verification: $56,160 spread across 26 pay periods. Every other line on the statement is checked against this figure. t1-p2: What should the payroll levy be for one period, charged on gross as the schedule states? Answer: $165.24. Verification: 7.65% of the $2,160.00 gross. This is the correct base under the stated schedule. t1-p3: The statement’s levy matches 7.65% of gross after the 5% retirement deduction. What does that base produce? Answer: $156.98. Verification: The retirement deduction is $108.00, leaving $2,052.00, and 7.65% of that is $156.98 — which is exactly the figure printed. That reproduces the number on the statement and identifies the base the employer used. t2-p1: How much less than the correct amount was withheld in this one period? Answer: $8.26. Verification: $165.24 correct against $156.98 withheld. t2-p2: If the same base is used all year, what does the shortfall come to across the 26 periods? Answer: $214.76. Verification: $8.26 in each of 26 periods. A per-period error small enough to overlook is what makes the annual figure worth computing. t2-p3: Under the stated schedule, is the under-withheld levy money the fictional employee gets to keep? Answer: No — the levy is owed on gross, so the shortfall remains due. Verification: The schedule states the levy is charged on gross pay. An employer computing it on the wrong base changes what was collected, not what is owed, so the $214.76 is a liability the employee still carries. This is the fact of the stated schedule, not a comparison between two figures."
+      },
+      "rubric": {
+        "present": true,
+        "text": "Diagnosing the error — Not yet: The error is not located. Approaching: The response says the work is wrong but not where or why. Meets: The response locates the first wrong step and states the misconception behind it. Exceeds: The response locates the error, names the misconception, and gives a check that would have caught it. Use of evidence from the scenario — Not yet: No scenario detail is cited. Approaching: Scenario detail is cited but not the detail the claim needs. Meets: Every claim points to the specific scenario figure, term, or document line behind it. Exceeds: Evidence is cited and the response notes where the scenario is silent. Coherence of the plan — Not yet: The parts of the plan contradict each other or do not add up. Approaching: The plan adds up but one part is not connected to the rest. Meets: The plan adds up and each part is consistent with the others and with the constraint. Exceeds: The plan adds up, is internally consistent, and states what would break it first. t3-p1: Describe what this fictional employee should do next, in order, and say what they should keep. Explain why raising it at $8.26 a period is better than raising it at $214.76. Gives an ordered course of action: keep the statement, put the discrepancy to the employer’s payroll department in writing with the two figures, and keep a copy of what was sent and any reply. Explains that the error compounds silently — each period adds $8.26, so raising it early caps the liability, while waiting until year end leaves $214.76 to settle at once. Notes that the goal is a corrected calculation going forward, not an accusation: the wrong base is an error to be shown, and the arithmetic is what shows it. Uses both the $8.26 per-period difference and the $214.76 annual figure to justify raising it early. The response names written documentation rather than a verbal mention alone. The response identifies the wrong base — pay after the retirement deduction — rather than only saying the number is wrong."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Gives an ordered course of action: keep the statement, put the discrepancy to the employer’s payroll department in writing with the two figures, and keep a copy of what was sent and any reply. Explains that the error compounds silently — each period adds $8.26, so raising it early caps the liability, while waiting until year end leaves $214.76 to settle at once. Notes that the goal is a corrected calculation going forward, not an accusation: the wrong base is an error to be shown, and the arithmetic is what shows it."
+      },
+      "verification": {
+        "method": "OTHER_VERIFIED_METHOD",
+        "evidence": "The source lane fail-closed exact-rational oracle records 5 independently recomputed or comparison-derived fixed answers and 1 asserted fact choices for this lesson, with per-item reasoning and committed worked solutions; oracle findings are zero. The final reconciliation adds 0 independently recomputed fixed supplement(s) where stated."
+      }
+    },
+    "fixedAuthority": {
+      "present": true,
+      "sourceFixedItemCount": 6,
+      "contractFixedItemCount": 6,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 4,
+      "acceptableAnswerCriteriaCount": 3
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/scoring/grade-12/swk-flhs-g12-u01-l03.scoring.json",
+    "sourceScoringSha256": "972d85cd6556d6bc34f210c7fdc03e2cadd4d97c908d5198fb2022251bee4454",
+    "sourceAuthorityKind": "HYBRID",
+    "sourceAuthorityPreserved": true
+  }
+}

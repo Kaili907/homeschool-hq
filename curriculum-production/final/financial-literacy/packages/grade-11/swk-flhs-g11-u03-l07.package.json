@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u03-l07",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u03-l07",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Multi-Year Planning, Inflation, and Goal Conflict",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: sequencing competing multi-year goals"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "sequencing competing multi-year goals",
+  "objective": "Diagnose a fictional savings plan that funds goals in the wrong order, recompute the completion dates under a deadline-first sequence, and quantify what the ordering error costs.",
+  "scenario": "Delphine Abubakar-Norgaard is reviewing the simulated savings plan below. The goals, deadlines, and monthly capacity are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan reproduced in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "warm-up",
+      "directions": "The plan saves $520 a month and funds one goal at a time. Its stated order is: the holiday fund of $3,100 with no deadline, then the roof repair of $5,200 due by month 10, then the tuition deposit of $2,700 due by month 18. The plan concludes: \"All three goals are affordable within 18 months.\" Give month figures to one decimal place.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How long does the $3,100 holiday fund take at $520 a month?",
+          "unit": "months"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How long does the $5,200 roof repair take on its own?",
+          "unit": "months"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How long does the $2,700 tuition deposit take on its own?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now apply the plan’s stated order and check both deadlines.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under the plan’s order, in which month is the roof repair funded?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under the plan’s order, in which month is the tuition deposit funded?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how many months does the roof repair miss its month-10 deadline?",
+          "unit": "months"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "By how many months does the tuition deposit miss its month-18 deadline?",
+          "unit": "months"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Reorder the goals so the earliest deadline is funded first, and check the same deadlines again.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "Funding the roof first, in which month is the tuition deposit funded?",
+          "unit": "months"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "Under the corrected order, by how many months does the tuition deposit now beat its deadline?",
+          "unit": "months"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-choice",
+          "text": "What was actually wrong with the original plan?",
+          "choices": [
+            "It committed more money than $520 a month could provide",
+            "It funded an undated goal ahead of two dated ones",
+            "It miscalculated how long each goal takes on its own"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "The plan said all three goals were affordable within 18 months, and every figure behind that claim was correct. Explain what the claim was actually about, what it was read as, and give a rule that would prevent the error."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "Under the corrected order the holiday fund is last and finishes in month 21.2. Say whether that is a real cost of the correction, and what would have to be true for the original order to have been defensible."
+        }
+      ]
+    }
+  ],
+  "remediation": "If both deadlines appear to be met under the original order, the goals are being checked against their own durations rather than their completion dates. The roof takes 10.0 months but does not start until month 6.0, so it completes at month 16.0. Write each goal as a start month and an end month before comparing anything to a deadline.",
+  "extension": "Find whether any ordering of the three goals meets both deadlines with margin to spare, and say what that tells you about how tight this plan is.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u03-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u03-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How long does the $3,100 holiday fund take at $520 a month?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How long does the $5,200 roof repair take on its own?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How long does the $2,700 tuition deposit take on its own?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "Under the plan’s order, in which month is the roof repair funded?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "Under the plan’s order, in which month is the tuition deposit funded?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how many months does the roof repair miss its month-10 deadline?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "By how many months does the tuition deposit miss its month-18 deadline?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "Funding the roof first, in which month is the tuition deposit funded?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Under the corrected order, by how many months does the tuition deposit now beat its deadline?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "What was actually wrong with the original plan?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "The plan said all three goals were affordable within 18 months, and every figure behind that claim was correct. Explain what the claim was actually about, what it was read as, and give a rule that would prevent the error."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "Under the corrected order the holiday fund is last and finishes in month 21.2. Say whether that is a real cost of the correction, and what would have to be true for the original order to have been defensible."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u03-l07.package.json",
+    "sourcePackageSha256": "d4a569cdaf295c88ece11524b08f78b769752c90d323a99d05a69e0e6d1d8eb1",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u03-l07",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

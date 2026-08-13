@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u01-l09",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u01-l09",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Income, Benefits, and the Cost of Getting Qualified",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: payroll deductions a worker is likely to see"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "payroll deductions a worker is likely to see",
+  "objective": "Compare two fictional pay periods that differ only by a pre-tax retirement contribution, and account for where every dollar of the take-home difference went.",
+  "scenario": "Amara Whitfield is a fictional office assistant. The two simulated pay periods below are identical except that she started a retirement contribution in the second. All figures are invented.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional pay periods in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "In both fictional periods, gross pay is $1,850 and combined income tax — federal plus state — is withheld at 18% of taxable wages. Social Security and Medicare are charged on the full $1,850 in both periods and are not shown here, because a pre-tax retirement contribution does not reduce them. In period 1 she contributed nothing to retirement. In period 2 she contributed 5% of gross, taken out before income tax is calculated.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "In period 1, how much tax is withheld?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is her period 1 take-home pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "guided",
+      "directions": "Now work period 2. The retirement contribution comes out first, and tax is charged on what remains.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much goes into retirement in period 2, at 5% of gross?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What are her income-taxable wages in period 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much tax is withheld in period 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is her period 2 take-home pay?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "Account for the whole difference between the two periods.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how much did take-home pay fall from period 1 to period 2?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much less tax was withheld in period 2 than in period 1?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p3",
+          "promptType": "fixed-numeric",
+          "text": "Add the fall in take-home pay to the tax saved. What figure from period 2 does the total equal?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Amara set aside $92.50 but her take-home pay fell by less than that. Explain where the rest came from, and state one thing the $92.50 costs her that the arithmetic above does not show."
+        }
+      ]
+    }
+  ],
+  "remediation": "If period 2 is coming out with income tax on the full $1,850, mark the order of operations on the stub: contribution first, then income tax on what is left. Compute the two income-taxable figures side by side, $1,850 and $1,757.50, before any tax is applied — and note that the payroll-tax base stays at $1,850 in both periods.",
+  "extension": "Recompute period 2 with the contribution taken after tax instead of before, and state exactly how much the pre-tax treatment was worth.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u01-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u01-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "In period 1, how much tax is withheld?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is her period 1 take-home pay?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much goes into retirement in period 2, at 5% of gross?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What are her income-taxable wages in period 2?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much tax is withheld in period 2?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What is her period 2 take-home pay?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "By how much did take-home pay fall from period 1 to period 2?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much less tax was withheld in period 2 than in period 1?"
+      },
+      {
+        "ref": "t3-p3",
+        "responseMode": "FIXED",
+        "promptText": "Add the fall in take-home pay to the tax saved. What figure from period 2 does the total equal?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Amara set aside $92.50 but her take-home pay fell by less than that. Explain where the rest came from, and state one thing the $92.50 costs her that the arithmetic above does not show."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u01-l09.package.json",
+    "sourcePackageSha256": "0e628dc242ff9ce622ac088bb18f2ad8529383a1fac3e67e1cb1666935660439",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u01-l09",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

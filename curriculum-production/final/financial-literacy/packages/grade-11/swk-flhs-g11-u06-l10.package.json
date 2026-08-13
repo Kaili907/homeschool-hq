@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u06-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u06-l10",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: coverage gaps and overlapping policies"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "coverage gaps and overlapping policies",
+  "objective": "Compute what three fictional policies pay in sequence against a single large loss, locate every remaining gap, and defend a recommendation about what to change.",
+  "scenario": "Thelonius Vandermeer-Ekwueme is working a fictional claim against three simulated policies. All losses, deductibles, limits, and premiums below are invented for this performance task.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A single covered loss of $26,700 has occurred. Policy A applies first, with a $2,000 deductible and a $15,000 limit. Policy B applies to what Policy A leaves, with a $500 deductible and a $7,000 limit. Policy C applies to what Policy B leaves, with no deductible and a $3,000 limit. Apply each policy’s deductible before its limit.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Policy A pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the loss remains after Policy A has paid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much does Policy B pay, against what remains?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much of the loss remains after Policy B has paid?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "performance-task",
+      "directions": "Finish the claim and account for every dollar.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Policy C pay, against what remains?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does Thelonius pay out of pocket?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much did the three policies pay between them?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What share of the loss was covered? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "The three annual premiums are $1,180, $430, and $295. What do they come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p6",
+          "promptType": "fixed-numeric",
+          "text": "How many times the annual premium total is the amount the three policies paid? Give two decimal places.",
+          "unit": "ratio"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "independent",
+      "directions": "One check before the recommendation.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the largest loss this arrangement could fully cover?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-choice",
+          "text": "Which single change would have covered this $26,700 loss in full?",
+          "choices": [
+            "Raising Policy C’s limit from $3,000 to $4,700",
+            "Removing Policy A’s $2,000 deductible",
+            "Raising Policy A’s limit from $15,000 to $15,800"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write your recommendation. Answer both.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Recommend one change to this arrangement. State what it would have cost on this claim, what it would cost in a year with no claim, and why you chose it over the alternatives."
+        },
+        {
+          "ref": "t4-p2",
+          "promptType": "short-response",
+          "text": "The policies paid 13.12 times the annual premium on this claim. Say why that figure is a poor measure of whether the arrangement is worth holding, and what would be a better one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the three policies appear to cover the whole loss, check that each limit is being applied to what its own policy was asked to pay. Policy B receives $11,700.00, takes its $500 deductible, and is then capped at $7,000 — it does not pay the remaining $4,200. Write four lines for each policy: amount received, less deductible, capped at limit, amount passed on.",
+  "extension": "Recompute the whole claim for a loss of $14,000 instead, and say why the arrangement covers the whole of it, deductibles included.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u06-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u06-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does Policy A pay?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much of the loss remains after Policy A has paid?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much does Policy B pay, against what remains?"
+      },
+      {
+        "ref": "t1-p4",
+        "responseMode": "FIXED",
+        "promptText": "How much of the loss remains after Policy B has paid?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does Policy C pay, against what remains?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much does Thelonius pay out of pocket?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much did the three policies pay between them?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "What share of the loss was covered? Give one decimal place."
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "The three annual premiums are $1,180, $430, and $295. What do they come to?"
+      },
+      {
+        "ref": "t2-p6",
+        "responseMode": "FIXED",
+        "promptText": "How many times the annual premium total is the amount the three policies paid? Give two decimal places."
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "FIXED",
+        "promptText": "What is the largest loss this arrangement could fully cover?"
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "FIXED",
+        "promptText": "Which single change would have covered this $26,700 loss in full?"
+      },
+      {
+        "ref": "t4-p1",
+        "responseMode": "OPEN",
+        "promptText": "Recommend one change to this arrangement. State what it would have cost on this claim, what it would cost in a year with no claim, and why you chose it over the alternatives."
+      },
+      {
+        "ref": "t4-p2",
+        "responseMode": "OPEN",
+        "promptText": "The policies paid 13.12 times the annual premium on this claim. Say why that figure is a poor measure of whether the arrangement is worth holding, and what would be a better one."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u06-l10.package.json",
+    "sourcePackageSha256": "7c4730f4f13b78c376402412ebbe4fe513f5f1bebadcaaf81d6790c06ce75645",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u06-l10",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g11-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g11-financial-literacy-u02-l04",
+    "courseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Major Purchase Analysis Under Constraint",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: how a large purchase constrains other goals"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "how a large purchase constrains other goals",
+  "objective": "Compute what a fictional vehicle costs each month in total, measure it against take-home pay and the rest of a monthly plan, and quantify what the purchase displaces.",
+  "scenario": "Malik Sørensen-Adeyemi is a fictional warehouse supervisor with the simulated monthly figures below. No real household budget, wage, or account is involved.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional monthly plan in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The vehicle would cost $389 a month in payments, $118 a month in insurance, and $132 a month in fuel. Malik’s take-home pay is $2,840 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the vehicle cost Malik each month in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of Malik’s $2,840 take-home pay does the vehicle take? Give one decimal place.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share would the $389 payment alone have suggested? Give one decimal place.",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The rest of Malik’s plan is housing at $1,180, food at $460, and utilities and phone at $235 a month. His savings goal is $450 a month.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do housing, food, and utilities come to each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is left each month once those commitments and the vehicle are paid?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much does that fall short of the $450 savings goal?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "Across the 60 months of the loan, how much saving does that monthly shortfall represent?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "Which figure most fairly answers the question \"can Malik afford this vehicle?\"",
+          "choices": [
+            "The $389 monthly payment, because that is what the lender requires",
+            "The $639.00 monthly total, because insurance and fuel are also required to drive it",
+            "The $326.00 left over, because a positive balance means it is affordable"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer each in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Nothing in Malik’s plan goes negative, yet the purchase has a real cost beyond the money. Describe what the purchase displaces, quantify it over the life of the loan, and say what that would mean if an unexpected $900 bill arrived in month 14."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "The payment alone reads as 13.7% of take-home pay and the full cost reads as 22.5%. Explain which of the two a lender is more likely to use and why, and say what that means for a buyer reading a lender’s approval as advice."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the leftover comes out at $576.00, only the $389 payment is in the plan and the insurance and fuel are missing. The vehicle costs $639.00 a month, not $389.00. Rebuild the month as a single column — take-home at the top, then every commitment including all three vehicle lines — and check the column has as many rows as the scenario has commitments.",
+  "extension": "Find the largest monthly payment Malik could take on and still meet the $450 savings goal, holding insurance and fuel unchanged, and say how much less vehicle that implies.",
+  "scoringRef": "scoring/grade-11/swk-flhs-g11-u02-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g11-financial-literacy-u02-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the vehicle cost Malik each month in total?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What share of Malik’s $2,840 take-home pay does the vehicle take? Give one decimal place."
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What share would the $389 payment alone have suggested? Give one decimal place."
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do housing, food, and utilities come to each month?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is left each month once those commitments and the vehicle are paid?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "By how much does that fall short of the $450 savings goal?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Across the 60 months of the loan, how much saving does that monthly shortfall represent?"
+      },
+      {
+        "ref": "t2-p5",
+        "responseMode": "FIXED",
+        "promptText": "Which figure most fairly answers the question \"can Malik afford this vehicle?\""
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Nothing in Malik’s plan goes negative, yet the purchase has a real cost beyond the money. Describe what the purchase displaces, quantify it over the life of the loan, and say what that would mean if an unexpected $900 bill arrived in month 14."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "The payment alone reads as 13.7% of take-home pay and the full cost reads as 22.5%. Explain which of the two a lender is more likely to use and why, and say what that means for a buyer reading a lender’s approval as advice."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g11-completion-r4",
+    "inputCommit": "d0ebfd73d241b0edbbe4c37c6991452cbdfd9ae0",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-11/packages/grade-11/swk-flhs-g11-u02-l04.package.json",
+    "sourcePackageSha256": "444ae6442a2f4b88744da38af3a0c2cb174306c6d28dc2b38db096b90c642619",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g11-financial-literacy-u02-l04",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

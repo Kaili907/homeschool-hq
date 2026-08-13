@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "packageId": "swk-fl-g8-u05-l07",
+  "lessonId": "ma-g8-financial-literacy-u05-l07",
+  "adultOnly": true,
+  "authorityTag": {
+    "gate": "H2",
+    "authorityClass": "RUBRIC_JUDGMENT",
+    "answerTextPresent": true,
+    "fixedItemCount": 0,
+    "rubricCriterionCount": 2,
+    "answerDerivation": "not-applicable-judgment",
+    "derivedFromSourceGenericGuidance": false,
+    "oracleId": "finlit-g38-oracle@1",
+    "oracleVerdict": "AGREES"
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "scoringAuthority": {
+    "kind": "RUBRIC",
+    "criteria": [
+      {
+        "dimension": "Identifying an unsustainable structure",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response evaluates Viggo's pitch only on whether the returns sound attractive."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The pitch is doubted for Viggo but the source of the payouts is not identified."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response identifies that returns in Viggo's pitch are paid from new deposits rather than from any activity, and treats that alone as decisive."
+          }
+        ]
+      },
+      {
+        "dimension": "Assessing testimonial evidence",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The response accepts the paid friend as proof for Viggo."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The testimonial is doubted for Viggo but no reason is given."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response explains that early participants in Viggo's structure are paid precisely to attract others, so being paid early is expected and proves nothing about sustainability."
+          }
+        ]
+      }
+    ],
+    "acceptableAnswerCriteria": [
+      "Names the payout source as the decisive feature.",
+      "Explains why early payouts are consistent with a collapsing structure.",
+      "Rejects the deadline as a pressure tactic.",
+      "States what a genuine guarantee would require."
+    ]
+  },
+  "productionGateH3": {
+    "gateCommit": "49b3c4b86cc7764627bd4cfbd752222849831abf",
+    "subjectFamily": "MATH_STRUCTURED_FINLIT",
+    "structuredDiscipline": "FINANCIAL_LITERACY",
+    "responseScoring": {
+      "mode": "JUDGMENT_APPLICATION",
+      "items": [
+        {
+          "ref": "t1-p1",
+          "responseMode": "OPEN",
+          "promptText": "What does each feature of Viggo's pitch reveal, and which one alone is enough to reject it?"
+        },
+        {
+          "ref": "t2-p1",
+          "responseMode": "OPEN",
+          "promptText": "Why is the paid friend weak evidence, and what evidence would actually be required?"
+        },
+        {
+          "ref": "t3-p1",
+          "responseMode": "OPEN",
+          "promptText": "What would have to be true for a return to be genuinely guaranteed, and why is 20% a month not?"
+        }
+      ]
+    },
+    "scoringAuthority": {
+      "kind": "RUBRIC",
+      "content": {
+        "present": true,
+        "text": "Identifying an unsustainable structure — Not yet: The response evaluates Viggo's pitch only on whether the returns sound attractive. Approaching: The pitch is doubted for Viggo but the source of the payouts is not identified. Meets: The response identifies that returns in Viggo's pitch are paid from new deposits rather than from any activity, and treats that alone as decisive. Assessing testimonial evidence — Not yet: The response accepts the paid friend as proof for Viggo. Approaching: The testimonial is doubted for Viggo but no reason is given. Meets: The response explains that early participants in Viggo's structure are paid precisely to attract others, so being paid early is expected and proves nothing about sustainability. Names the payout source as the decisive feature. Explains why early payouts are consistent with a collapsing structure. Rejects the deadline as a pressure tactic. States what a genuine guarantee would require."
+      },
+      "acceptableAnswerCriteria": {
+        "present": true,
+        "text": "Names the payout source as the decisive feature. Explains why early payouts are consistent with a collapsing structure. Rejects the deadline as a pressure tactic. States what a genuine guarantee would require."
+      }
+    },
+    "fixedAuthority": {
+      "present": false,
+      "sourceFixedItemCount": 0,
+      "contractFixedItemCount": 0,
+      "supplements": [],
+      "sourceOracleEvidencePreserved": true
+    },
+    "rubricAuthority": {
+      "present": true,
+      "rubricCriterionCount": 2,
+      "acceptableAnswerCriteriaCount": 4
+    },
+    "promptModeHumanReview": []
+  },
+  "productionProvenance": {
+    "inputLane": "mac/finlit-production-g38-r3",
+    "inputCommit": "72bc1441f05ee4c1ccb58748e7e9fee37360b934",
+    "sourceScoringPath": "curriculum-production/student-work/financial-literacy-g38/scoring/grade-08/swk-fl-g8-u05-l07.scoring.json",
+    "sourceScoringSha256": "c5be1ac522e5d59224518b08c68d57e6fdc07fdeaf7a8077d05ce88466ce869b",
+    "sourceAuthorityKind": "RUBRIC",
+    "sourceAuthorityPreserved": true
+  }
+}

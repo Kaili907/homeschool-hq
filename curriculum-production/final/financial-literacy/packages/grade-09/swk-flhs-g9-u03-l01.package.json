@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g9-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-financial-literacy-u03-l01",
+    "courseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Building a Budget That Survives a Surprise",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: incentives to set aside income for future consumption"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "incentives to set aside income for future consumption",
+  "objective": "Compare the size of two incentives to set money aside — a fictional deposit match and account interest — and say which one actually moves the decision.",
+  "scenario": "A fictional community credit union runs a simulated matched-savings programme. Every rate and amount below is invented for this exercise; no real account or programme is involved.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional programme terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional programme: a saver who deposits $25 a month for 12 months receives a match of 50% of everything deposited. The account also pays 3.4% a year on the balance. A plain checking account at the same fictional credit union pays 0.05% a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does the saver deposit over the 12 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is the match worth?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after deposits and match, before any interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare that with what interest adds. Apply each rate to the $450 balance for one year.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "If the $450 balance sat in the account for a full year, how much would interest at 3.4% add?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would the same balance earn in a year at the checking rate of 0.05%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which incentive is larger for this saver in the first year?",
+          "choices": [
+            "The deposit match",
+            "The 3.4% interest",
+            "They are about the same"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a few sentences.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking."
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "short-response",
+          "text": "Name one condition in the fictional programme that would have to be checked before treating the $150 match as certain."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the match is being computed as 50% of the final balance rather than of deposits, restate the rule in the programme’s own words: the match is on everything deposited, and the deposits total $300. Compute the deposits first and hold that figure before applying the match.",
+  "extension": "Work out what annual interest rate a plain savings account would need in order to add $150 to a $450 balance in one year, and say whether such a rate is plausible.",
+  "scoringRef": "scoring/grade-09/swk-flhs-g9-u03-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g9-financial-literacy-u03-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "How much does the saver deposit over the 12 months?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much is the match worth?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "What is the balance after deposits and match, before any interest?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "If the $450 balance sat in the account for a full year, how much would interest at 3.4% add?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "How much would the same balance earn in a year at the checking rate of 0.05%?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "Which incentive is larger for this saver in the first year?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "Rank the three incentives in this scenario — the match, the 3.4% interest, and the 0.05% checking interest — by how much each one should influence where the saver puts the money, and explain the ranking."
+      },
+      {
+        "ref": "t3-p2",
+        "responseMode": "OPEN",
+        "promptText": "Name one condition in the fictional programme that would have to be checked before treating the $150 match as certain."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-production-hs-r3",
+    "inputCommit": "2a2d5247b7ebf607ab7872f0e1c9f3bed874dec3",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs/packages/grade-09/swk-flhs-g9-u03-l01.package.json",
+    "sourcePackageSha256": "e8de91fdb7e73c632a1740be9d464e724694ee730ad4a17636c857829c76f1b0",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g9-financial-literacy-u03-l01",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}

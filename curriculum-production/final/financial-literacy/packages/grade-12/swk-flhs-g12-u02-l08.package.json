@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l08",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: a major purchase inside a live plan"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "a major purchase inside a live plan",
+  "objective": "Carry the total-cost method onto a larger fictional purchase that changes three budget lines at once, and test the result against the surplus that has to carry it.",
+  "scenario": "The simulated vehicle, loan terms, insurance change, and running costs below belong to a fictional household and are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional vehicle and budget figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional vehicle is priced at $9,600. The household would put $1,600 down and make 48 monthly payments of $196. Insurance would rise from $71 a month to $118 a month, and fuel and maintenance are estimated at $145 a month. The household currently has $520 a month of surplus.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the loan payments come to over the full term?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is handed over in total, including the down payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much more than the vehicle’s price is that?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find what the purchase does to the monthly budget, not just to the price.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the vehicle add to monthly outgoings, counting the payment, the insurance increase, and running costs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What surplus is left each month once the vehicle is in the budget?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the surplus does the vehicle consume, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Does the full monthly cost of the vehicle fit inside the household’s surplus?",
+          "choices": [
+            "Yes — but with $132.00 a month to spare",
+            "No — the monthly cost exceeds the surplus"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The purchase fits the surplus and consumes 74.62% of it for 48 months. Argue either that this household should proceed or that it should not, using the figures, and state the single fact about the household you would most want to know before backing your own argument."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the vehicle looks like it consumes only about 38% of the surplus, the test is being run on the $196 payment alone. A vehicle brings three changes: the payment, the $47 rise in insurance, and $145 of running costs. Add all three to $388.00 before comparing with the $520 surplus.",
+  "extension": "Find the largest monthly loan payment this household could take on while keeping at least $250 a month of surplus, and say what vehicle price that implies over the same 48-month term.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  },
+  "responseScoring": {
+    "mode": "MIXED",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "responseMode": "FIXED",
+        "promptText": "What do the loan payments come to over the full term?"
+      },
+      {
+        "ref": "t1-p2",
+        "responseMode": "FIXED",
+        "promptText": "What is handed over in total, including the down payment?"
+      },
+      {
+        "ref": "t1-p3",
+        "responseMode": "FIXED",
+        "promptText": "How much more than the vehicle’s price is that?"
+      },
+      {
+        "ref": "t2-p1",
+        "responseMode": "FIXED",
+        "promptText": "What does the vehicle add to monthly outgoings, counting the payment, the insurance increase, and running costs?"
+      },
+      {
+        "ref": "t2-p2",
+        "responseMode": "FIXED",
+        "promptText": "What surplus is left each month once the vehicle is in the budget?"
+      },
+      {
+        "ref": "t2-p3",
+        "responseMode": "FIXED",
+        "promptText": "What share of the surplus does the vehicle consume, to two decimal places?"
+      },
+      {
+        "ref": "t2-p4",
+        "responseMode": "FIXED",
+        "promptText": "Does the full monthly cost of the vehicle fit inside the household’s surplus?"
+      },
+      {
+        "ref": "t3-p1",
+        "responseMode": "OPEN",
+        "promptText": "The purchase fits the surplus and consumes 74.62% of it for 48 months. Argue either that this household should proceed or that it should not, using the figures, and state the single fact about the household you would most want to know before backing your own argument."
+      }
+    ]
+  },
+  "productionProvenance": {
+    "reconciliation": "FINAL FINANCIAL LITERACY PRODUCTION RECONCILIATION R1",
+    "inputLane": "mac/finlit-g12-completion-r4",
+    "inputCommit": "08ea28f9885f45646fd342542660cd6992a96dad",
+    "sourcePackagePath": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12/packages/grade-12/swk-flhs-g12-u02-l08.package.json",
+    "sourcePackageSha256": "133c74caa087675b1c1d963e224ce8003bfd21a3a72b8cbb455ecc3b69d4fc6c",
+    "sourceCurriculum": {
+      "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+      "sourceLessonId": "ma-g12-financial-literacy-u02-l08",
+      "sourceStage": "authoring",
+      "authoredBy": "manual"
+    },
+    "sourceCurriculumUntouched": true,
+    "familyPilotFirst": true
+  }
+}
