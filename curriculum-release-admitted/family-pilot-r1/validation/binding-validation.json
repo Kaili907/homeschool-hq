@@ -1,0 +1,90 @@
+{
+  "classification": "ADMITTED_PRODUCTION_BOUND_FAMILY_PILOT_R1",
+  "overall": "PASS",
+  "blockingFailures": 0,
+  "structuralCounts": {
+    "grades": 9,
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699
+  },
+  "subjectProductionTotals": {
+    "mathematics": 1620,
+    "english-language-arts": 1620,
+    "science": 972,
+    "social-studies": 972,
+    "health-physical-education": 1296,
+    "ready-for-life": 324,
+    "technology-arts-and-music": 984,
+    "financial-literacy": 504
+  },
+  "productionBindingCount": 8292,
+  "assessmentBindingCounts": {
+    "BOUND": 135,
+    "STRUCTURAL_ONLY": 564
+  },
+  "assessmentBlockingCount": 0,
+  "checks": [
+    {
+      "check": "binding-totality",
+      "result": "PASS",
+      "detail": "bindings=8292 missing=0 extra=0"
+    },
+    {
+      "check": "binding-uniqueness",
+      "result": "PASS",
+      "detail": "duplicateOrNonUnitRefs=0"
+    },
+    {
+      "check": "binding-identity",
+      "result": "PASS",
+      "detail": "mismatches=0"
+    },
+    {
+      "check": "subject-production-totals",
+      "result": "PASS",
+      "detail": "{\"arts-and-music\": 648, \"english-language-arts\": 1620, \"financial-literacy\": 504, \"health\": 324, \"mathematics\": 1620, \"physical-education\": 972, \"ready-for-life\": 324, \"science\": 972, \"social-studies\": 972, \"technology\": 336}"
+    },
+    {
+      "check": "family-production-totals",
+      "result": "PASS",
+      "detail": "{\"english-language-arts\": 1620, \"financial-literacy\": 504, \"health-physical-education\": 1296, \"mathematics\": 1620, \"ready-for-life\": 324, \"science\": 972, \"social-studies\": 972, \"technology-arts-and-music\": 984}"
+    },
+    {
+      "check": "math-reserves-excluded",
+      "result": "PASS",
+      "detail": "activeReserveBindings=0"
+    },
+    {
+      "check": "science-h4-lineage",
+      "result": "PASS",
+      "detail": "invalidHighSchoolScience=0"
+    },
+    {
+      "check": "social-dynamic-runtime-semantics",
+      "result": "PASS",
+      "detail": "dynamicLessons=12"
+    },
+    {
+      "check": "rfl-completion-authority",
+      "result": "PASS",
+      "detail": "learner=243 guardian=81"
+    },
+    {
+      "check": "finlit-h3-scoring-contract",
+      "result": "PASS",
+      "detail": "{\"JUDGMENT_APPLICATION\": 36, \"MIXED\": 468}"
+    },
+    {
+      "check": "production-gate-h3-evidence",
+      "result": "PASS",
+      "detail": "all bindings carry READY Gate H3 evidence"
+    },
+    {
+      "check": "grade-6-absent",
+      "result": "PASS",
+      "detail": "no binding claims Grade 6"
+    }
+  ]
+}

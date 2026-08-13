@@ -1,0 +1,23 @@
+{
+  "adapter": "STRUCTURAL_INDEX_TO_RELEASE_CANDIDATE_2_0_0",
+  "admissionImplementation": "src/curriculum/release-admission",
+  "functionsExercised": [
+    "inspectCandidate",
+    "validateCandidate",
+    "admitCandidate",
+    "buildBrowserCatalogProjection",
+    "buildReleaseRegistryEntry",
+    "buildReadinessEvidence"
+  ],
+  "counts": {
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699,
+    "schedules": 9,
+    "resources": 1,
+    "standard_frameworks": 1
+  },
+  "advisoryStandardsAuthorityStatus": "verified-local-custody-wrapper",
+  "advisoryMappingStatus": "human-review"
+}

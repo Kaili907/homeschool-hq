@@ -1,0 +1,55 @@
+{
+  "overall": "PASS",
+  "sources": [
+    {
+      "source": "mathematics",
+      "checked": 3387,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "science",
+      "checked": 1981,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "social-studies",
+      "checked": 10,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "health-physical-education",
+      "checked": 2874,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "ready-for-life",
+      "checked": 648,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "financial-literacy",
+      "checked": 1008,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "english-language-arts",
+      "checked": 1,
+      "failures": [],
+      "status": "PASS",
+      "method": "immutable corpus tree plus 1,620/1,620 Gate H3 rerun"
+    },
+    {
+      "source": "technology-arts-and-music",
+      "checked": 1,
+      "failures": [],
+      "status": "PASS",
+      "method": "immutable corpus tree plus 984/984 lesson-level gate"
+    }
+  ]
+}

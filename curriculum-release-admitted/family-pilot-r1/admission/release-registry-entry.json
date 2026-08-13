@@ -1,0 +1,207 @@
+{
+  "report_version": 1,
+  "release_version": "2.0.0",
+  "candidate_id": "manuel-academy-family-pilot-r1",
+  "schema_set_version": "2.0.0",
+  "admission_status": "ADMITTED",
+  "graduation_complete": true,
+  "grades": [
+    {
+      "grade": 3,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 4,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 5,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 7,
+      "courses": 10,
+      "units": 77,
+      "lessons": 900,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 8,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 9,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 10,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 11,
+      "courses": 10,
+      "units": 78,
+      "lessons": 936,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    },
+    {
+      "grade": 12,
+      "courses": 10,
+      "units": 78,
+      "lessons": 948,
+      "subjects": [
+        "arts-and-music",
+        "english-language-arts",
+        "financial-literacy",
+        "health",
+        "mathematics",
+        "physical-education",
+        "ready-for-life",
+        "science",
+        "social-studies",
+        "technology"
+      ]
+    }
+  ],
+  "subjects": [
+    "arts-and-music",
+    "english-language-arts",
+    "financial-literacy",
+    "health",
+    "mathematics",
+    "physical-education",
+    "ready-for-life",
+    "science",
+    "social-studies",
+    "technology"
+  ],
+  "counts": {
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699,
+    "schedules": 9,
+    "resources": 1,
+    "standard_frameworks": 1
+  },
+  "standards_custody": [
+    {
+      "framework_ref": "family-pilot-advisory-standards",
+      "custodian": "Manuel Academy Family Pilot release evidence custodian",
+      "attested_framework_version": "family-pilot-r1",
+      "evidence_locator": "curriculum-release-candidates/family-pilot-final-r1/standards-evidence-refs.json"
+    }
+  ],
+  "safety_privacy_gate": {
+    "gate_id": "family-pilot-production-binding-gate-h3",
+    "status": "passed",
+    "reviewed_release_version": "2.0.0",
+    "evidence_locator": "curriculum-release-admitted/family-pilot-r1/validation/binding-validation.json"
+  }
+}
