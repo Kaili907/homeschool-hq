@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "artifact": "hosted-study-sync-staging-rollback-checklist-template",
+  "scope": "future separately authorized non-production apply only",
+  "hostedApplyAuthorized": false,
+  "instructions": "Copy this template into the approved external evidence location. Do not change the checked-in template. Every item must be independently evidenced before a future apply tool may be considered.",
+  "items": [
+    {
+      "id": "backup_captured",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "provider backup identifier, UTC timestamp, target project ref, retention window"
+    },
+    {
+      "id": "restore_owner_named",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "named person authorized and available to initiate restore"
+    },
+    {
+      "id": "restore_window_approved",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "approved maintenance and recovery window with timezone"
+    },
+    {
+      "id": "pre_apply_inventory_preserved",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "read-only inventory artifact hash and immutable storage reference"
+    },
+    {
+      "id": "feature_flags_disabled",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "VITE_FAMILY_PILOT_ENABLED, VITE_STUDY_ENGINE_ENABLED, and ACADEMY_STUDY_ENABLED are exact false"
+    },
+    {
+      "id": "workers_disabled",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "scheduled and manual Study consumers cannot execute against the target"
+    },
+    {
+      "id": "rollback_stop_criteria_approved",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "operator and reviewer acknowledge every rollback/stop criterion in the runbook"
+    },
+    {
+      "id": "additive_recovery_owner_named",
+      "requiredBeforeApply": true,
+      "status": "PENDING",
+      "evidenceRequired": "owner for a separately reviewed additive recovery migration after any committed failure"
+    }
+  ]
+}
