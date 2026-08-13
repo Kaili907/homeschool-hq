@@ -1,0 +1,63 @@
+{
+  "schema_version": "manuel-academy-hs912-coverage-requirements-registry-1.0",
+  "lane": "mac/hs912-release-normalization-r2",
+  "scope_disclaimer": "A curriculum and coverage design audit against the Michigan Merit Curriculum. Not a legal opinion. It does not decide whether the MMC binds this family, and it makes no claim about diploma validity, accreditation, or credit recognition.",
+  "graduation_completeness": {
+    "verdict": "NOT_GRADUATION_COMPLETE",
+    "basis": "MMC world language is NOT_COVERED with a 0.5 credit irreducible remainder.",
+    "asserted_by_this_lane": false,
+    "guard": "No artifact in curriculum-release-normalization/hs912-r2 claims graduation completeness. validate-normalization.mjs fails the run if any file in this lane does."
+  },
+  "requirements": [
+    {
+      "requirement": "MMC_WORLD_LANGUAGE",
+      "authority": "MCL 380.1278a(2)",
+      "verdict": "NOT_COVERED",
+      "credits_required": 2.0,
+      "irreducible_remainder_credits": 0.5,
+      "owner": "DIRECTOR",
+      "detail": "No World Language subject family exists in the ten-family model. At most 1.0 credit is substitutable (additional VPAA or a department-approved formal CTE program) and at most a further 0.5 if the personal finance half-credit is directed here. At least 0.5 credit of genuine language study at Novice High proficiency remains uncovered.",
+      "see": "credit-coverage-map.md#e--world-language-the-ruling",
+      "changed_by_this_lane": false
+    },
+    {
+      "requirement": "MMC_ONLINE_LEARNING_EXPERIENCE",
+      "authority": "MCL 380.1278a(1)(b)(i)",
+      "verdict": "PARTIALLY_COVERED",
+      "credits_required": 0.0,
+      "irreducible_remainder_credits": null,
+      "owner": "mac/hs912-tech-arts-r1",
+      "detail": "Assigned to ma-g9-technology by this contract. Not credit-bearing, so it will not surface in any credit tally. Becomes COVERED when the Technology session delivers an identifiable online learning experience and names where the evidence lives.",
+      "see": "credit-coverage-map.md#c--online-learning-experience",
+      "changed_by_this_lane": false
+    },
+    {
+      "requirement": "MMC_PERSONAL_FINANCE_DISPLACEMENT",
+      "authority": "MCL 380.1278a(3)",
+      "verdict": "REQUIRES_DIRECTOR_DECISION",
+      "credits_required": 0.5,
+      "irreducible_remainder_credits": null,
+      "owner": "DIRECTOR",
+      "detail": "The personal finance half-credit displaces 0.5 of mathematics, VPAA, or world language as determined by the board; it is not additive and the 18-credit total is unchanged. Directing it at world language is the only option that reduces a real gap.",
+      "see": "credit-coverage-map.md#d--personal-finance-displaces-it-does-not-add",
+      "changed_by_this_lane": false
+    },
+    {
+      "requirement": "READY_FOR_LIFE_STANDARDS_ANCHOR",
+      "authority": null,
+      "verdict": "REQUIRES_DIRECTOR_DECISION",
+      "credits_required": 0.0,
+      "irreducible_remainder_credits": null,
+      "owner": "DIRECTOR",
+      "detail": "No coded MDE standards set could be verified for this family. It must either bind to an official framework or state plainly that it is locally defined and makes no state standards claim.",
+      "see": "standards-reference.md",
+      "changed_by_this_lane": false
+    }
+  ],
+  "world_language_guard": {
+    "requirement": "MMC_WORLD_LANGUAGE",
+    "verdict": "NOT_COVERED",
+    "rule": "World Language stays NOT_COVERED unless real delivered content exists. No world-language course, unit, lesson or assessment exists in this candidate, and this lane does not create one. The verdict is re-derived from delivered content by the validator, not copied.",
+    "owner": "DIRECTOR"
+  }
+}

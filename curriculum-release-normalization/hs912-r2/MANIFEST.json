@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "normalization_id": "manuel-academy-hs912-r2",
+  "lane": "mac/hs912-release-normalization-r2",
+  "normalized_on": "2026-08-12",
+  "input_candidate": {
+    "path": "curriculum-release-candidates/hs912-r1",
+    "assembled_by": "mac/hs912-assembly-r1",
+    "input_status": "BLOCKED"
+  },
+  "scope": {
+    "owns": "curriculum-release-normalization/hs912-r2/**",
+    "reads": [
+      "curriculum-release-candidates/hs912-r1/**"
+    ],
+    "writes_outside_scope": "none",
+    "authored_content_edited": "none \u2014 no unit, lesson, assessment, identifier, standards citation or credit value in any lane was changed"
+  },
+  "blockers_addressed": [
+    {
+      "code": "SCIENCE_ID_SCHEME_CONFLICT",
+      "resolution": "ALIAS_REGISTRY",
+      "artifact": "registries/course-id-alias-registry.json",
+      "renamed_any_stable_id": false
+    },
+    {
+      "code": "STANDARD_UNTRACEABLE",
+      "scope": "mathematics MP.1-MP.7",
+      "resolution": "CUSTODY_REPAIR_AND_ALIAS_MAP",
+      "artifact": "standards/mathematical-practice-map.json",
+      "edited_math_instruction": false
+    }
+  ],
+  "science": {
+    "status": "PENDING_H3_IMPORT",
+    "content_in_candidate_from_branch": "mac/hs912-science-h2",
+    "content_in_candidate_sha": "265ea3a75740ccbeea0dfa02c723514779def052",
+    "successor_branch": "mac/hs912-science-h3",
+    "successor_pinned": false,
+    "successor_sha_observed": "e7551b959112fcd9e6868d614799028cf22acf5d",
+    "successor_sha_observed_at": "2026-08-12 (normalization run)",
+    "successor_note": "mac/hs912-science-h3 is a moving branch. This lane does not wait for it and does not pin it. The SHA above is an observation at build time and will go stale by design \u2014 it already moved past the H2 commit the candidate imported during this session. What matters is that the successor still carries all four stable course ids, which the validator re-checks read-only from git. Treat the alias registry, not this SHA, as the durable artifact."
+  },
+  "derived_counts": {
+    "high_school_courses": 40,
+    "courses_canonical_shape": 36,
+    "courses_native_v2_shape": 4,
+    "units": 312,
+    "lessons": 3756,
+    "assessments": 312,
+    "courses_normalized": 36,
+    "courses_pending_h3_import": 4,
+    "session_divergences": 15
+  },
+  "counts_asserted": false,
+  "graduation_completeness": {
+    "verdict": "NOT_GRADUATION_COMPLETE",
+    "basis": "MMC world language is NOT_COVERED with a 0.5 credit irreducible remainder.",
+    "asserted_by_this_lane": false,
+    "guard": "No artifact in curriculum-release-normalization/hs912-r2 claims graduation completeness. validate-normalization.mjs fails the run if any file in this lane does."
+  },
+  "registries": [
+    "registries/course-id-alias-registry.json",
+    "registries/release-course-registry.json",
+    "registries/standards-evidence-registry.json",
+    "registries/coverage-requirements-registry.json",
+    "registries/schedule-registry.json",
+    "standards/mathematical-practice-map.json"
+  ]
+}

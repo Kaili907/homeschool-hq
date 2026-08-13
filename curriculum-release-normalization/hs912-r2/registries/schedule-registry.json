@@ -1,0 +1,129 @@
+{
+  "schema_version": "manuel-academy-hs912-schedule-registry-1.0",
+  "lane": "mac/hs912-release-normalization-r2",
+  "planes_note": "Two schedule planes exist and are recorded separately rather than merged. The canonical plane is four per-grade CSVs covering the nine canonical-shape families. The science plane is the native schema-set 2.0.0 schedules.json. This lane does not synthesise canonical science schedule rows: doing so would mean translating another lane's record shape, which is authoring, not normalization.",
+  "canonical_plane": [
+    {
+      "grade": 9,
+      "plane": "CANONICAL",
+      "source": "curriculum-release-candidates/hs912-r1/schedules/grade-9/daily-schedule.csv",
+      "rows": 828,
+      "distinct_lessons_scheduled": 828,
+      "duplicate_rows": 0,
+      "unresolved_lesson_refs": 0,
+      "courses_scheduled": 9,
+      "courses_expected_canonical": 9,
+      "science_present": false
+    },
+    {
+      "grade": 10,
+      "plane": "CANONICAL",
+      "source": "curriculum-release-candidates/hs912-r1/schedules/grade-10/daily-schedule.csv",
+      "rows": 828,
+      "distinct_lessons_scheduled": 828,
+      "duplicate_rows": 0,
+      "unresolved_lesson_refs": 0,
+      "courses_scheduled": 9,
+      "courses_expected_canonical": 9,
+      "science_present": false
+    },
+    {
+      "grade": 11,
+      "plane": "CANONICAL",
+      "source": "curriculum-release-candidates/hs912-r1/schedules/grade-11/daily-schedule.csv",
+      "rows": 828,
+      "distinct_lessons_scheduled": 828,
+      "duplicate_rows": 0,
+      "unresolved_lesson_refs": 0,
+      "courses_scheduled": 9,
+      "courses_expected_canonical": 9,
+      "science_present": false
+    },
+    {
+      "grade": 12,
+      "plane": "CANONICAL",
+      "source": "curriculum-release-candidates/hs912-r1/schedules/grade-12/daily-schedule.csv",
+      "rows": 840,
+      "distinct_lessons_scheduled": 840,
+      "duplicate_rows": 0,
+      "unresolved_lesson_refs": 0,
+      "courses_scheduled": 9,
+      "courses_expected_canonical": 9,
+      "science_present": false
+    }
+  ],
+  "science_plane": [
+    {
+      "grade": 9,
+      "plane": "NATIVE_SCHEMA_SET_2_0_0",
+      "authored_course_id": "ma-hs9-biology",
+      "release_slot_id": "ma-g9-science",
+      "source": "curriculum-release-candidates/hs912-r1/science/authoring-set/schedules.json",
+      "schedule_ids": [
+        "ma-hs9-biology-schedule"
+      ],
+      "scheduled_lesson_refs": 108,
+      "distinct_lessons_scheduled": 108,
+      "lessons_delivered": 108,
+      "covers_every_lesson_exactly_once": true
+    },
+    {
+      "grade": 10,
+      "plane": "NATIVE_SCHEMA_SET_2_0_0",
+      "authored_course_id": "ma-hs10-chemistry",
+      "release_slot_id": "ma-g10-science",
+      "source": "curriculum-release-candidates/hs912-r1/science/authoring-set/schedules.json",
+      "schedule_ids": [
+        "ma-hs10-chemistry-schedule"
+      ],
+      "scheduled_lesson_refs": 108,
+      "distinct_lessons_scheduled": 108,
+      "lessons_delivered": 108,
+      "covers_every_lesson_exactly_once": true
+    },
+    {
+      "grade": 11,
+      "plane": "NATIVE_SCHEMA_SET_2_0_0",
+      "authored_course_id": "ma-hs11-physics",
+      "release_slot_id": "ma-g11-science",
+      "source": "curriculum-release-candidates/hs912-r1/science/authoring-set/schedules.json",
+      "schedule_ids": [
+        "ma-hs11-physics-schedule"
+      ],
+      "scheduled_lesson_refs": 108,
+      "distinct_lessons_scheduled": 108,
+      "lessons_delivered": 108,
+      "covers_every_lesson_exactly_once": true
+    },
+    {
+      "grade": 12,
+      "plane": "NATIVE_SCHEMA_SET_2_0_0",
+      "authored_course_id": "ma-hs12-earth-space-environmental",
+      "release_slot_id": "ma-g12-science",
+      "source": "curriculum-release-candidates/hs912-r1/science/authoring-set/schedules.json",
+      "schedule_ids": [
+        "ma-hs12-earth-space-environmental-schedule"
+      ],
+      "scheduled_lesson_refs": 108,
+      "distinct_lessons_scheduled": 108,
+      "lessons_delivered": 108,
+      "covers_every_lesson_exactly_once": true
+    }
+  ],
+  "coverage": {
+    "canonical_lessons_delivered": 3324,
+    "canonical_lessons_scheduled": 3324,
+    "canonical_complete_both_directions": true,
+    "science_lessons_delivered": 432,
+    "science_lessons_scheduled": 432,
+    "science_complete_both_directions": true,
+    "high_school_lessons_delivered": 3756,
+    "high_school_lessons_scheduled": 3756
+  },
+  "open_gap": {
+    "code": "SCIENCE_NOT_IN_CANONICAL_SCHEDULE",
+    "severity": "PENDING_NOT_BLOCKING",
+    "detail": "The four canonical per-grade CSVs schedule the nine canonical families only. Science is scheduled completely on its own plane. A single unified per-grade schedule becomes derivable once science is imported in the contract record shape.",
+    "owner": "science H3 import"
+  }
+}

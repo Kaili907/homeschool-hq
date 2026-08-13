@@ -1,0 +1,124 @@
+{
+  "schema_version": "manuel-academy-hs912-mathematical-practice-map-1.0",
+  "lane": "mac/hs912-release-normalization-r2",
+  "purpose": "Resolve the mathematics lane's MP.N citation tokens to the Standards for Mathematical Practice as printed in the official Michigan document, so the citations are traceable at the release layer without editing a single line of mathematics instruction.",
+  "official_source": {
+    "document_title": "Michigan K-12 Standards Mathematics",
+    "publisher": "Michigan Department of Education",
+    "url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Literacy/Content-Standards/Math_Standards.pdf",
+    "sha256": "dbbd4e341a046f22fa4df1dec4af2fd06b35249ad3e3ff9734a3f03bcd6b1a54",
+    "pages_total": 94,
+    "section_heading_as_printed": "mathematics | Standards for mathematical Practice",
+    "section_pdf_pages": [
+      8,
+      9,
+      10
+    ],
+    "section_printed_pages": [
+      6,
+      7,
+      8
+    ],
+    "high_school_restatement_heading_as_printed": "mathematical Practices",
+    "retrieved_on": "2026-08-12",
+    "retrieved_by": "mac/hs912-release-normalization-r2"
+  },
+  "independent_verification": {
+    "performed_by": "mac/hs912-release-normalization-r2",
+    "method": "The document was retrieved directly from michigan.gov and hashed. Its SHA-256 equals the digest recorded in the mathematics lane's own standards-custody.md, so this lane and the mathematics lane demonstrably read the same bytes. Page count 94 also matches. The practice section was then extracted and searched.",
+    "sha256_matches_math_lane_custody": true,
+    "token_MP_occurrences_in_official_document": 0,
+    "token_MP_dot_N_occurrences_in_official_document": 0,
+    "token_MPN_occurrences_in_official_document": 0,
+    "practices_printed_in_official_document": 8,
+    "printed_label_form_in_practice_section": "bare ordinal, e.g. '1 Make sense of problems and persevere in solving them.'",
+    "printed_label_form_in_high_school_overviews": "dotted ordinal under the heading 'mathematical Practices', e.g. '1. Make sense of problems and persevere in solving them.'"
+  },
+  "verdict": {
+    "referents": "REAL_AND_VERBATIM_IN_OFFICIAL_SOURCE",
+    "code_form": "NOT_PRINTED_BY_OFFICIAL_SOURCE",
+    "classification": "ALIAS_RESOLVED_VERBATIM",
+    "not_invented": true,
+    "summary": "The mathematics lane did not invent a standard. It used a community shorthand for a standard that is genuinely in the official Michigan document, and its custody extract covered only the content standards, so the practices were never captured. The defect is custody and traceability, not instruction."
+  },
+  "practices": [
+    {
+      "alias_token": "MP.1",
+      "official_ordinal": 1,
+      "official_label_as_printed": "1",
+      "statement_verbatim": "Make sense of problems and persevere in solving them.",
+      "cited_by_mathematics_lane": true
+    },
+    {
+      "alias_token": "MP.2",
+      "official_ordinal": 2,
+      "official_label_as_printed": "2",
+      "statement_verbatim": "Reason abstractly and quantitatively.",
+      "cited_by_mathematics_lane": true
+    },
+    {
+      "alias_token": "MP.3",
+      "official_ordinal": 3,
+      "official_label_as_printed": "3",
+      "statement_verbatim": "Construct viable arguments and critique the reasoning of others.",
+      "cited_by_mathematics_lane": true
+    },
+    {
+      "alias_token": "MP.4",
+      "official_ordinal": 4,
+      "official_label_as_printed": "4",
+      "statement_verbatim": "Model with mathematics.",
+      "cited_by_mathematics_lane": true
+    },
+    {
+      "alias_token": "MP.5",
+      "official_ordinal": 5,
+      "official_label_as_printed": "5",
+      "statement_verbatim": "Use appropriate tools strategically.",
+      "cited_by_mathematics_lane": true
+    },
+    {
+      "alias_token": "MP.6",
+      "official_ordinal": 6,
+      "official_label_as_printed": "6",
+      "statement_verbatim": "Attend to precision.",
+      "cited_by_mathematics_lane": true
+    },
+    {
+      "alias_token": "MP.7",
+      "official_ordinal": 7,
+      "official_label_as_printed": "7",
+      "statement_verbatim": "Look for and make use of structure.",
+      "cited_by_mathematics_lane": true
+    },
+    {
+      "alias_token": "MP.8",
+      "official_ordinal": 8,
+      "official_label_as_printed": "8",
+      "statement_verbatim": "Look for and express regularity in repeated reasoning.",
+      "cited_by_mathematics_lane": false
+    }
+  ],
+  "citation_census": {
+    "tokens_cited": [
+      "MP.1",
+      "MP.2",
+      "MP.3",
+      "MP.4",
+      "MP.5",
+      "MP.6",
+      "MP.7"
+    ],
+    "tokens_not_cited": [
+      "MP.8"
+    ],
+    "practices_available": 8,
+    "practices_cited": 7
+  },
+  "standing_advisory": {
+    "code": "MP_CODE_FORM_IS_LANE_SHORTHAND",
+    "severity": "ADVISORY_NOT_BLOCKING",
+    "detail": "This map makes the citations traceable; it does not make MP.N an official token. The mathematics lane should either adopt the printed ordinal form or keep this map as the custody of record and reference it from its own standards-custody.md.",
+    "owner": "mac/hs912-math-r1"
+  }
+}

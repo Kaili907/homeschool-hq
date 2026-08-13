@@ -1,0 +1,786 @@
+{
+  "schema_version": "manuel-academy-hs912-release-course-registry-1.0",
+  "lane": "mac/hs912-release-normalization-r2",
+  "count_policy": "Unit and lesson counts are unbound by release/course-matrix.json (count_policy). Counts here are observed by re-derivation from delivered files and are never asserted against a pre-agreed total. recommended_sessions is a matrix recommendation, so session_alignment DIVERGENT is a recorded observation, not a failure.",
+  "derived_counts": {
+    "high_school_courses": 40,
+    "courses_canonical_shape": 36,
+    "courses_native_v2_shape": 4,
+    "units": 312,
+    "lessons": 3756,
+    "assessments": 312,
+    "courses_normalized": 36,
+    "courses_pending_h3_import": 4,
+    "session_divergences": 15
+  },
+  "credit_recommendation_by_grade": {
+    "9": 6.75,
+    "10": 6.5,
+    "11": 6.5,
+    "12": 6.5
+  },
+  "credit_recommendation_total": 26.25,
+  "credit_caveat": "Credit recommendations are the matrix's own recommendations carried forward. They are not a graduation tally and do not establish credit recognition. See coverage-requirements-registry.json.",
+  "courses": [
+    {
+      "release_slot_id": "ma-g9-arts-and-music",
+      "authored_course_id": "ma-g9-arts-and-music",
+      "grade": 9,
+      "subject": "arts-and-music",
+      "course_name": "Foundations of Visual and Media Arts",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 72,
+      "observed": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-arts-and-music",
+      "authored_course_id": "ma-g10-arts-and-music",
+      "grade": 10,
+      "subject": "arts-and-music",
+      "course_name": "Music, Theatre, and Performance Foundations",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 72,
+      "observed": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-arts-and-music",
+      "authored_course_id": "ma-g11-arts-and-music",
+      "grade": 11,
+      "subject": "arts-and-music",
+      "course_name": "Studio Art, Composition, and Applied Design",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 72,
+      "observed": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-arts-and-music",
+      "authored_course_id": "ma-g12-arts-and-music",
+      "grade": 12,
+      "subject": "arts-and-music",
+      "course_name": "Arts Capstone: Portfolio and Exhibition",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 72,
+      "observed": {
+        "units": 6,
+        "lessons": 72,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-english-language-arts",
+      "authored_course_id": "ma-g9-english-language-arts",
+      "grade": 9,
+      "subject": "english-language-arts",
+      "course_name": "English 9: Foundations of Literary Analysis and Argument",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-english-language-arts",
+      "authored_course_id": "ma-g10-english-language-arts",
+      "grade": 10,
+      "subject": "english-language-arts",
+      "course_name": "English 10: World Literature and Rhetoric",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-english-language-arts",
+      "authored_course_id": "ma-g11-english-language-arts",
+      "grade": 11,
+      "subject": "english-language-arts",
+      "course_name": "English 11: American Literature, Research, and Synthesis",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-english-language-arts",
+      "authored_course_id": "ma-g12-english-language-arts",
+      "grade": 12,
+      "subject": "english-language-arts",
+      "course_name": "English 12: Global Literature, Composition, and Portfolio Capstone",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-financial-literacy",
+      "authored_course_id": "ma-g9-financial-literacy",
+      "grade": 9,
+      "subject": "financial-literacy",
+      "course_name": "Personal Finance",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 90,
+      "observed": {
+        "units": 7,
+        "lessons": 72,
+        "assessments": 7
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -18,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-financial-literacy",
+      "authored_course_id": "ma-g10-financial-literacy",
+      "grade": 10,
+      "subject": "financial-literacy",
+      "course_name": "Consumer Economics and Credit",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 72,
+      "observed": {
+        "units": 7,
+        "lessons": 72,
+        "assessments": 7
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-financial-literacy",
+      "authored_course_id": "ma-g11-financial-literacy",
+      "grade": 11,
+      "subject": "financial-literacy",
+      "course_name": "Investing, Insurance, and Risk Management",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 72,
+      "observed": {
+        "units": 7,
+        "lessons": 72,
+        "assessments": 7
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-financial-literacy",
+      "authored_course_id": "ma-g12-financial-literacy",
+      "grade": 12,
+      "subject": "financial-literacy",
+      "course_name": "Financial Transition to Adulthood",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 72,
+      "observed": {
+        "units": 7,
+        "lessons": 72,
+        "assessments": 7
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-health",
+      "authored_course_id": "ma-g9-health",
+      "grade": 9,
+      "subject": "health",
+      "course_name": "Health and Wellness I",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 90,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -54,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-health",
+      "authored_course_id": "ma-g10-health",
+      "grade": 10,
+      "subject": "health",
+      "course_name": "Health II: Mental Health and Community Wellness",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.25,
+      "recommended_sessions": 36,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-health",
+      "authored_course_id": "ma-g11-health",
+      "grade": 11,
+      "subject": "health",
+      "course_name": "Health III: Consumer Health, Safety, and Emergency Response",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.25,
+      "recommended_sessions": 36,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-health",
+      "authored_course_id": "ma-g12-health",
+      "grade": 12,
+      "subject": "health",
+      "course_name": "Health IV: Adult Health Transition",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.25,
+      "recommended_sessions": 36,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-mathematics",
+      "authored_course_id": "ma-g9-mathematics",
+      "grade": 9,
+      "subject": "mathematics",
+      "course_name": "Algebra I",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-mathematics",
+      "authored_course_id": "ma-g10-mathematics",
+      "grade": 10,
+      "subject": "mathematics",
+      "course_name": "Geometry",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-mathematics",
+      "authored_course_id": "ma-g11-mathematics",
+      "grade": 11,
+      "subject": "mathematics",
+      "course_name": "Algebra II",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-mathematics",
+      "authored_course_id": "ma-g12-mathematics",
+      "grade": 12,
+      "subject": "mathematics",
+      "course_name": "Precalculus with Statistics",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 10,
+        "lessons": 180,
+        "assessments": 10
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-physical-education",
+      "authored_course_id": "ma-g9-physical-education",
+      "grade": 9,
+      "subject": "physical-education",
+      "course_name": "Personal Fitness and Lifetime Activity",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 90,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": 18,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-physical-education",
+      "authored_course_id": "ma-g10-physical-education",
+      "grade": 10,
+      "subject": "physical-education",
+      "course_name": "Team, Individual, and Dual Activities",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 108,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-physical-education",
+      "authored_course_id": "ma-g11-physical-education",
+      "grade": 11,
+      "subject": "physical-education",
+      "course_name": "Strength, Conditioning, and Training Design",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 108,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-physical-education",
+      "authored_course_id": "ma-g12-physical-education",
+      "grade": 12,
+      "subject": "physical-education",
+      "course_name": "Lifelong Wellness and Independent Training Capstone",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 108,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-ready-for-life",
+      "authored_course_id": "ma-g9-ready-for-life",
+      "grade": 9,
+      "subject": "ready-for-life",
+      "course_name": "Ready for Life 9: Personal Management and Learning Systems",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.25,
+      "recommended_sessions": 36,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-ready-for-life",
+      "authored_course_id": "ma-g10-ready-for-life",
+      "grade": 10,
+      "subject": "ready-for-life",
+      "course_name": "Ready for Life 10: Career Exploration and Workplace Communication",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.25,
+      "recommended_sessions": 36,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-ready-for-life",
+      "authored_course_id": "ma-g11-ready-for-life",
+      "grade": 11,
+      "subject": "ready-for-life",
+      "course_name": "Ready for Life 11: Postsecondary Planning and Portfolio",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.25,
+      "recommended_sessions": 36,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-ready-for-life",
+      "authored_course_id": "ma-g12-ready-for-life",
+      "grade": 12,
+      "subject": "ready-for-life",
+      "course_name": "Ready for Life 12: Independent Adult Living Capstone",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.25,
+      "recommended_sessions": 36,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "ALIGNED",
+      "session_delta": 0,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-social-studies",
+      "authored_course_id": "ma-g9-social-studies",
+      "grade": 9,
+      "subject": "social-studies",
+      "course_name": "United States History and Geography (1870 to the Present)",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-social-studies",
+      "authored_course_id": "ma-g10-social-studies",
+      "grade": 10,
+      "subject": "social-studies",
+      "course_name": "World History and Geography",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-social-studies",
+      "authored_course_id": "ma-g11-social-studies",
+      "grade": 11,
+      "subject": "social-studies",
+      "course_name": "Civics and Economics",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-social-studies",
+      "authored_course_id": "ma-g12-social-studies",
+      "grade": 12,
+      "subject": "social-studies",
+      "course_name": "Contemporary Global Issues and Civic Capstone",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-technology",
+      "authored_course_id": "ma-g9-technology",
+      "grade": 9,
+      "subject": "technology",
+      "course_name": "Computer Science Principles and Digital Citizenship",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 90,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -54,
+      "scheduled_in": "schedules/grade-9/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-technology",
+      "authored_course_id": "ma-g10-technology",
+      "grade": 10,
+      "subject": "technology",
+      "course_name": "Programming I",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 90,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -54,
+      "scheduled_in": "schedules/grade-10/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-technology",
+      "authored_course_id": "ma-g11-technology",
+      "grade": 11,
+      "subject": "technology",
+      "course_name": "Data, Systems, and Applied Computing",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 90,
+      "observed": {
+        "units": 6,
+        "lessons": 36,
+        "assessments": 6
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -54,
+      "scheduled_in": "schedules/grade-11/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-technology",
+      "authored_course_id": "ma-g12-technology",
+      "grade": 12,
+      "subject": "technology",
+      "course_name": "Cybersecurity, AI Literacy, and Computing Capstone",
+      "shape": "CANONICAL",
+      "status": "NORMALIZED",
+      "credit_recommendation": 0.5,
+      "recommended_sessions": 90,
+      "observed": {
+        "units": 6,
+        "lessons": 48,
+        "assessments": 6
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -42,
+      "scheduled_in": "schedules/grade-12/daily-schedule.csv (candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g9-science",
+      "authored_course_id": "ma-hs9-biology",
+      "grade": 9,
+      "subject": "science",
+      "course_name": "Biology",
+      "shape": "NATIVE_SCHEMA_SET_2_0_0",
+      "status": "PENDING_H3_IMPORT",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "science/authoring-set/schedules.json (native, candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g10-science",
+      "authored_course_id": "ma-hs10-chemistry",
+      "grade": 10,
+      "subject": "science",
+      "course_name": "Chemistry",
+      "shape": "NATIVE_SCHEMA_SET_2_0_0",
+      "status": "PENDING_H3_IMPORT",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "science/authoring-set/schedules.json (native, candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g11-science",
+      "authored_course_id": "ma-hs11-physics",
+      "grade": 11,
+      "subject": "science",
+      "course_name": "Physics",
+      "shape": "NATIVE_SCHEMA_SET_2_0_0",
+      "status": "PENDING_H3_IMPORT",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "science/authoring-set/schedules.json (native, candidate hs912-r1)"
+    },
+    {
+      "release_slot_id": "ma-g12-science",
+      "authored_course_id": "ma-hs12-earth-space-environmental",
+      "grade": 12,
+      "subject": "science",
+      "course_name": "Earth, Space, and Environmental Systems",
+      "shape": "NATIVE_SCHEMA_SET_2_0_0",
+      "status": "PENDING_H3_IMPORT",
+      "credit_recommendation": 1.0,
+      "recommended_sessions": 180,
+      "observed": {
+        "units": 9,
+        "lessons": 108,
+        "assessments": 9
+      },
+      "session_alignment": "DIVERGENT",
+      "session_delta": -72,
+      "scheduled_in": "science/authoring-set/schedules.json (native, candidate hs912-r1)"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": "manuel-academy-hs912-standards-evidence-registry-1.0",
+  "lane": "mac/hs912-release-normalization-r2",
+  "class_vocabulary": {
+    "VERBATIM": "the cited string occurs verbatim in the owning lane's custody documents",
+    "COMPOSITE_VERIFIED": "a lane-composed label every component of which the lane evidences",
+    "DECLARED_UNVERIFIED": "the owning lane itself declares the citation unverified; accepted, non-blocking, and not evidence of alignment",
+    "ALIAS_RESOLVED_VERBATIM": "the cited token is not printed by the official source, but resolves through a published alias table to a statement that is verbatim in that source, with the source pinned by digest",
+    "UNTRACEABLE": "none of the above; blocking"
+  },
+  "honesty_rule": "A lane's own declaration outranks any text match made at the release layer. ALIAS_RESOLVED_VERBATIM records two facts at once: the referent is verified and the code form is not. It must never be collapsed into VERBATIM.",
+  "families": [
+    {
+      "family": "arts-and-music",
+      "standards_framework": "michigan-visual-performing-applied-arts-standards",
+      "distinct_strings_cited": 20,
+      "classification_source": "curriculum-release-candidates/hs912-r1/arts-and-music/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 20,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": true,
+      "note": null
+    },
+    {
+      "family": "english-language-arts",
+      "standards_framework": "michigan-ela-standards-grades-9-12",
+      "distinct_strings_cited": 82,
+      "classification_source": "curriculum-release-candidates/hs912-r1/english-language-arts/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 82,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": true,
+      "note": null
+    },
+    {
+      "family": "financial-literacy",
+      "standards_framework": "michigan-personal-finance-expectations",
+      "distinct_strings_cited": 8,
+      "classification_source": "curriculum-release-candidates/hs912-r1/financial-literacy/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 8,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": true,
+      "note": null
+    },
+    {
+      "family": "health",
+      "standards_framework": "michigan-health-education-standards",
+      "distinct_strings_cited": 26,
+      "classification_source": "curriculum-release-candidates/hs912-r1/health/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 25,
+        "DECLARED_UNVERIFIED": 1,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": false,
+      "note": "Composite lane labels built from published components; the bracketed 9-12 band codes are extrapolated from a template, which the lane states openly. One citation is lane-declared UNVERIFIED."
+    },
+    {
+      "family": "mathematics",
+      "standards_framework": "michigan-mathematics-standards-high-school",
+      "distinct_strings_cited": 163,
+      "classification_source": "curriculum-release-candidates/hs912-r1/mathematics/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 156,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 7,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": true,
+      "note": "The seven MP.N tokens are reclassified by this lane from UNTRACEABLE to ALIAS_RESOLVED_VERBATIM. The referent statement of each is verbatim in the official Michigan document; the MP.N token form is not printed by that document and remains a lane shorthand. See standards/mathematics-mathematical-practice-custody.md.",
+      "mathematical_practice_resolution": {
+        "tokens_reclassified": [
+          "MP.1",
+          "MP.2",
+          "MP.3",
+          "MP.4",
+          "MP.5",
+          "MP.6",
+          "MP.7"
+        ],
+        "from_class": "UNTRACEABLE",
+        "to_class": "ALIAS_RESOLVED_VERBATIM",
+        "basis": "standards/mathematical-practice-map.json"
+      }
+    },
+    {
+      "family": "physical-education",
+      "standards_framework": "michigan-physical-education-standards",
+      "distinct_strings_cited": 10,
+      "classification_source": "curriculum-release-candidates/hs912-r1/physical-education/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 10,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": false,
+      "note": "Every citation in this family is lane-declared UNVERIFIED. Accepted and non-blocking under release/authoring-boundaries.md \u00a77, but it is not evidence of state-standard alignment and must not be read as equivalent to a verbatim-verified family."
+    },
+    {
+      "family": "ready-for-life",
+      "standards_framework": "manuel-academy-ready-for-life-progression",
+      "distinct_strings_cited": 4,
+      "classification_source": "curriculum-release-candidates/hs912-r1/ready-for-life/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 4,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": true,
+      "note": "No coded MDE framework is bound to this family. See the READY_FOR_LIFE_STANDARDS_ANCHOR entry in coverage-requirements-registry.json \u2014 a Director decision, still open."
+    },
+    {
+      "family": "social-studies",
+      "standards_framework": "michigan-social-studies-standards-high-school",
+      "distinct_strings_cited": 162,
+      "classification_source": "curriculum-release-candidates/hs912-r1/social-studies/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 162,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": true,
+      "note": null
+    },
+    {
+      "family": "technology",
+      "standards_framework": "michigan-k12-computer-science-standards",
+      "distinct_strings_cited": 11,
+      "classification_source": "curriculum-release-candidates/hs912-r1/technology/standards-coverage.md (carried forward)",
+      "classes": {
+        "VERBATIM": 11,
+        "COMPOSITE_VERIFIED": 0,
+        "DECLARED_UNVERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "UNTRACEABLE": 0
+      },
+      "evidences_a_verbatim_state_standard": true,
+      "note": null
+    },
+    {
+      "family": "science",
+      "standards_framework": "michigan-science-standards-high-school",
+      "distinct_strings_cited": 72,
+      "classification_source": "NOT_CLASSIFIED_BY_THIS_LANE \u2014 science carries PENDING_H3_IMPORT; its standards evidence is the lane's own standards-alignment.md and standard-framework.json, imported verbatim.",
+      "classes": {
+        "VERBATIM": null,
+        "COMPOSITE_VERIFIED": null,
+        "DECLARED_UNVERIFIED": null,
+        "ALIAS_RESOLVED_VERBATIM": null,
+        "UNTRACEABLE": null
+      },
+      "evidences_a_verbatim_state_standard": null,
+      "note": "Deliberately unclassified. Building a release-layer classification for content that is about to be re-imported would produce a registry keyed to a superseded input. Classification is owed at H3 import."
+    }
+  ],
+  "totals": {
+    "VERBATIM": 443,
+    "COMPOSITE_VERIFIED": 25,
+    "DECLARED_UNVERIFIED": 11,
+    "ALIAS_RESOLVED_VERBATIM": 7,
+    "UNTRACEABLE": 0
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "overall": "HS912_NORMALIZED_RELEASE_READY",
+  "blocking": 0,
+  "advisory": 18,
+  "findings": [
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-financial-literacy delivers 72 lessons against a recommended 90 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-health delivers 36 lessons against a recommended 90 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-physical-education delivers 108 lessons against a recommended 90 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-social-studies delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g10-social-studies delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g11-social-studies delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g12-social-studies delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-technology delivers 36 lessons against a recommended 90 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g10-technology delivers 36 lessons against a recommended 90 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g11-technology delivers 36 lessons against a recommended 90 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g12-technology delivers 48 lessons against a recommended 90 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g9-science delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g10-science delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g11-science delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "SESSION_COUNT_DIVERGENCE",
+      "message": "ma-g12-science delivers 108 lessons against a recommended 180 sessions"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "STANDARDS_EVIDENCE_UNEVEN",
+      "message": "health and physical-education evidence no verbatim state standard; lane-declared UNVERIFIED and composite labels are accepted but are not evidence of alignment"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "MP_PRACTICE_NOT_CITED",
+      "message": "the official document carries 8 practices; mathematics cites 7. Not cited: MP.8"
+    },
+    {
+      "severity": "ADVISORY",
+      "code": "MP_CODE_FORM_IS_LANE_SHORTHAND",
+      "message": "MP.N is a lane shorthand made traceable by this map, not an official Michigan token; adopting the printed ordinal form belongs to mac/hs912-math-r1"
+    }
+  ],
+  "notes": [
+    {
+      "severity": "NOTE",
+      "code": "CHILD_ID_RULE_SCOPED",
+      "message": "8 delivered resource id(s) embed a course id without being prefixed by it; declared out of scope rather than mis-resolved"
+    },
+    {
+      "severity": "NOTE",
+      "code": "SCIENCE_NOT_IN_CANONICAL_SCHEDULE",
+      "message": "science is scheduled completely on its native plane; a unified per-grade schedule is owed at H3 import"
+    },
+    {
+      "severity": "NOTE",
+      "code": "SOURCE_NOT_REFETCHED",
+      "message": "the official document was not re-fetched in this run; the transcription is checked against the frozen copy in this validator. Run with --verify-source to re-check against michigan.gov"
+    },
+    {
+      "severity": "NOTE",
+      "code": "WORLD_LANGUAGE_NOT_COVERED",
+      "message": "no world-language directory, course id, subject field or matrix allocation exists across 10 discovered families; NOT_COVERED is re-derived, not copied"
+    },
+    {
+      "severity": "NOTE",
+      "code": "NO_GRADUATION_CLAIM",
+      "message": "no artifact in this lane claims graduation completeness; every file was scanned with no exemptions (1 negated statement(s) read and allowed)"
+    },
+    {
+      "severity": "NOTE",
+      "code": "H3_IDS_STABLE",
+      "message": "the successor branch still carries all four stable science course ids; the alias registry survives the import as keyed"
+    },
+    {
+      "severity": "NOTE",
+      "code": "SCIENCE_PENDING_H3_IMPORT",
+      "message": "the four science courses are recorded PENDING_H3_IMPORT"
+    },
+    {
+      "severity": "NOTE",
+      "code": "RELEASE_VALIDATOR_HANDOFF",
+      "message": "release/validate-high-school.mjs is owned by mac/hs912-release-r1 and is not edited here. It needs two changes before it can pass this candidate: read the alias registry, and fix the polarity defect in its body-assessment denylist (432 inverted findings, recorded in hs912-r1 assembly-report.md §5)"
+    }
+  ]
+}

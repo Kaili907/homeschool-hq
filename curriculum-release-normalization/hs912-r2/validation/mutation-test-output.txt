@@ -1,0 +1,49 @@
+  killed   rename a stable science course id  ->  SCIENCE_ID_RENAMED
+  killed   drop a slot from the alias registry  ->  ALIAS_REGISTRY_INCOMPLETE
+  killed   falsify a child-id-rule claim  ->  CHILD_ID_RULE_CLAIM_WRONG
+  killed   falsify the alias registry's own counts block  ->  ALIAS_COUNTS_WRONG
+  killed   tell consumers the aliased child ids resolve as identity  ->  CHILD_ID_RULE_LABEL_WRONG
+  killed   relabel every identity course as an alias  ->  ALIAS_RELATIONSHIP_WRONG
+  killed   stop declaring the non-resolving identifier class  ->  CHILD_ID_RULE_SCOPE_UNDECLARED
+  killed   inflate a course lesson count  ->  COURSE_COUNT_MISMATCH
+  killed   delete five course rows  ->  COURSE_ROWS_MISSING
+  killed   hide a session divergence  ->  SESSION_ALIGNMENT_WRONG
+  killed   falsify a recommended session count  ->  RECOMMENDED_SESSIONS_DRIFT
+  killed   falsify a course grade  ->  COURSE_GRADE_WRONG
+  killed   drift a credit recommendation  ->  CREDIT_DRIFT
+  killed   falsify the credit total  ->  CREDIT_TOTAL_WRONG
+  killed   assert counts instead of observing  ->  COUNTS_ASSERTED
+  killed   falsify a schedule row count  ->  SCHEDULE_CLAIM_WRONG
+  killed   falsify the schedule detail numbers  ->  SCHEDULE_CLAIM_WRONG
+  killed   falsify the schedule coverage numbers  ->  SCHEDULE_COVERAGE_CLAIM_WRONG
+  killed   invent a science schedule id  ->  SCIENCE_SCHEDULE_CLAIM_WRONG
+  killed   merge the two schedule planes  ->  SCHEDULE_PLANE_CONFUSION
+  killed   stop declaring the schedule gap  ->  SCHEDULE_GAP_UNDECLARED
+  killed   launder MP citations into VERBATIM  ->  STANDARDS_CLASS_DRIFT
+  killed   leave untraceable citations behind  ->  STANDARDS_CLASS_DRIFT
+  killed   launder health composite labels into verbatim  ->  STANDARDS_CLASS_DRIFT
+  killed   destroy social studies verbatim evidence  ->  STANDARDS_CLASS_DRIFT
+  killed   launder PE declared-unverified into verbatim  ->  STANDARDS_CLASS_DRIFT
+  killed   pre-classify science standards  ->  SCIENCE_STANDARDS_PRECLASSIFIED
+  killed   bind ready-for-life to an invented framework  ->  FRAMEWORK_DRIFT
+  killed   corrupt a practice statement in map and evidence together  ->  MP_STATEMENT_WRONG
+  killed   re-attribute the official source  ->  MP_SOURCE_DRIFT
+  killed   claim MP.N is an official token  ->  MP_VERDICT_OVERSTATED
+  killed   claim MP tokens appear in the official document  ->  MP_VERDICT_INCONSISTENT
+  killed   overstate the printed practice label  ->  MP_LABEL_OVERSTATED
+  killed   drift the pinned source digest  ->  MP_SOURCE_DRIFT
+  killed   falsify the MP citation census flag  ->  MP_CENSUS_WRONG
+  killed   falsify the MP citation census list  ->  MP_CENSUS_WRONG
+  killed   mark world language covered  ->  WORLD_LANGUAGE_OVERSTATED
+  killed   zero the world language irreducible remainder  ->  COVERAGE_FIELD_CHANGED
+  killed   drop a declared coverage gap  ->  COVERAGE_GAP_DROPPED
+  killed   claim completeness in prose  ->  GRADUATION_CLAIM
+  killed   claim completeness behind a stray negation  ->  GRADUATION_CLAIM
+  killed   flip the graduation verdict  ->  GRADUATION_CLAIM
+  killed   mark science normalized before import  ->  SCIENCE_STATUS_WRONG
+  killed   pin the moving H3 branch  ->  H3_PINNED
+  killed   falsify the science provenance  ->  SCIENCE_PROVENANCE_WRONG
+  killed   plant world-language content in the candidate  ->  WORLD_LANGUAGE_CONTENT_FOUND
+
+46/46 mutants killed
+  clean     the honest negated statement is read and allowed

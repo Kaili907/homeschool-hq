@@ -1,0 +1,40 @@
+Manuel Academy 9-12 release-normalization validation (hs912-r2)
+overall: HS912_NORMALIZED_RELEASE_READY
+blocking: 0   advisory: 18   notes: 8
+derived counts (observed, never asserted):
+  high_school_courses: 40
+  courses_canonical_shape: 36
+  courses_native_v2_shape: 4
+  units: 312
+  lessons: 3756
+  assessments: 312
+  courses_normalized: 36
+  courses_pending_h3_import: 4
+  session_divergences: 15
+findings:
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-financial-literacy delivers 72 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-health delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-physical-education delivers 108 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g10-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g11-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g12-social-studies delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-technology delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g10-technology delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g11-technology delivers 36 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g12-technology delivers 48 lessons against a recommended 90 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g9-science delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g10-science delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g11-science delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] SESSION_COUNT_DIVERGENCE — ma-g12-science delivers 108 lessons against a recommended 180 sessions
+  [ADVISORY] STANDARDS_EVIDENCE_UNEVEN — health and physical-education evidence no verbatim state standard; lane-declared UNVERIFIED and composite labels are accepted but are not evidence of alignment
+  [ADVISORY] MP_PRACTICE_NOT_CITED — the official document carries 8 practices; mathematics cites 7. Not cited: MP.8
+  [ADVISORY] MP_CODE_FORM_IS_LANE_SHORTHAND — MP.N is a lane shorthand made traceable by this map, not an official Michigan token; adopting the printed ordinal form belongs to mac/hs912-math-r1
+  [NOTE] CHILD_ID_RULE_SCOPED — 8 delivered resource id(s) embed a course id without being prefixed by it; declared out of scope rather than mis-resolved
+  [NOTE] SCIENCE_NOT_IN_CANONICAL_SCHEDULE — science is scheduled completely on its native plane; a unified per-grade schedule is owed at H3 import
+  [NOTE] SOURCE_REVERIFIED — official document re-fetched and re-checked: digest matches, 0 MP tokens, all 8 statements present
+  [NOTE] WORLD_LANGUAGE_NOT_COVERED — no world-language directory, course id, subject field or matrix allocation exists across 10 discovered families; NOT_COVERED is re-derived, not copied
+  [NOTE] NO_GRADUATION_CLAIM — no artifact in this lane claims graduation completeness; every file was scanned with no exemptions (1 negated statement(s) read and allowed)
+  [NOTE] H3_IDS_STABLE — the successor branch still carries all four stable science course ids; the alias registry survives the import as keyed
+  [NOTE] SCIENCE_PENDING_H3_IMPORT — the four science courses are recorded PENDING_H3_IMPORT
+  [NOTE] RELEASE_VALIDATOR_HANDOFF — release/validate-high-school.mjs is owned by mac/hs912-release-r1 and is not edited here. It needs two changes before it can pass this candidate: read the alias registry, and fix the polarity defect in its body-assessment denylist (432 inverted findings, recorded in hs912-r1 assembly-report.md §5)
