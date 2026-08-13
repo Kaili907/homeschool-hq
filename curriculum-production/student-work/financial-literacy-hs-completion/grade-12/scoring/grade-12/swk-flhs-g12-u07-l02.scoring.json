@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l02",
+  "lessonId": "ma-g12-financial-literacy-u07-l02",
+  "integratedDomains": [
+    "taxes",
+    "income",
+    "budgeting",
+    "debt"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$40,020.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$51,600 of wages less the $2,580 pre-tax contribution and the $9,000 standard deduction."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,594.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,040.00 on the first $10,400 plus 12% of the remaining $29,620.00."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$5,194.40 withheld against $4,594.40 owed. The worker was correct about nothing in particular; the employer collected $600.00 more than the schedule required."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$50.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$600.00 across the 12 months. The refund arrives as a single sum, but it left the worker’s pay in twelve instalments."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$129.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "21.6% of $600 for a year, treating the balance as outstanding throughout — a simplification, since applying $50 a month would reduce the balance steadily and cost less than this. It is an upper bound on what the over-withholding cost."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "No — it is the worker’s own pay, over-collected and returned without interest",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The amount owed under the schedule was $4,594.40 whatever the withholding was. The $600.00 is wages that were withheld beyond that and returned later with nothing added, which is what the interest comparison prices."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "wages - pretax - deduction",
+        "substituted": "51600 - 2580 - 9000",
+        "result": "$40,020.00",
+        "why": "$51,600 of wages less the $2,580 pre-tax contribution and the $9,000 standard deduction."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "band1 * lowRate + (#t1-p1 - band1) * midRate",
+        "substituted": "10400 * 0.1 + (#t1-p1 - 10400) * 0.12",
+        "result": "$4,594.40",
+        "why": "$1,040.00 on the first $10,400 plus 12% of the remaining $29,620.00."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "withheld - #t1-p2",
+        "substituted": "5194.4 - #t1-p2",
+        "result": "$600.00",
+        "why": "$5,194.40 withheld against $4,594.40 owed. The worker was correct about nothing in particular; the employer collected $600.00 more than the schedule required."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(#t1-p3 / 12, 2)",
+        "substituted": "round(#t1-p3 / 12, 2)",
+        "result": "$50.00",
+        "why": "$600.00 across the 12 months. The refund arrives as a single sum, but it left the worker’s pay in twelve instalments."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p3 * cardApr, 2)",
+        "substituted": "round(#t1-p3 * 0.216, 2)",
+        "result": "$129.60",
+        "why": "21.6% of $600 for a year, treating the balance as outstanding throughout — a simplification, since applying $50 a month would reduce the balance steadily and cost less than this. It is an upper bound on what the over-withholding cost."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Some people deliberately over-withhold. Make the strongest case for and against this fictional worker adjusting their withholding so the refund is close to zero, and say what fact about the worker would decide it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Makes the case for adjusting: the $50.00 a month is the worker’s own pay, and used against a balance charged at 21.6% it is worth up to $129.60 a year, which a refund paying no interest does not provide.",
+          "Makes the case against adjusting: over-withholding is a form of forced saving that reliably produces $600.00 once a year, and a worker who would spend the $50.00 a month gets nothing from the adjustment.",
+          "Names the deciding fact: what would actually happen to the $50.00 each month — whether it would reach a balance or a reserve, or be absorbed into ordinary spending.",
+          "Notes the risk in the other direction: adjusting too far produces an amount owed at filing rather than a refund, which has to be met."
+        ],
+        "evidenceRequirements": [
+          "Uses the $50.00 monthly over-collection and the $129.60 upper-bound interest figure."
+        ],
+        "lookFors": [
+          "Both cases are made on the figures; the response is not scored on which it prefers.",
+          "The response treats the forced-saving argument as real rather than dismissing it.",
+          "The response makes no recommendation about any actual person’s withholding."
+        ],
+        "commonMisconception": "Treating a large refund as a good outcome, without noticing that it is money withheld from pay all year and returned without interest.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

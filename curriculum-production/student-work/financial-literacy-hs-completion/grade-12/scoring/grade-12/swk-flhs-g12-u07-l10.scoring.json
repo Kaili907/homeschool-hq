@@ -1,0 +1,287 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l10",
+  "lessonId": "ma-g12-financial-literacy-u07-l10",
+  "integratedDomains": [
+    "income",
+    "taxes",
+    "budgeting",
+    "debt",
+    "credit",
+    "saving-investing",
+    "insurance-risk",
+    "multi-variable-decision"
+  ],
+  "isCapstone": true,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$55,965.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$54,600 of pay plus the $1,365 the employer contributes. The employer amount is real value that never appears in a paycheque, so it belongs in a total-resources figure and not in a cash-flow one."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$16,505.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,735 of tax plus $4,770 of pre-tax elections. Only the tax is a cost; the elections buy cover and fund an account Case R still owns."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "29.49%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,505.00 measured against $55,965.00. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$11,172.48",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$931.04 in each of the 12 months. This is the amount the plan actually directs, as distinct from the amount the year consumes."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$6,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,600 opening balance plus $4,800.00 added, assuming nothing was withdrawn."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "3.13",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,400.00 against $2,045 a month. Stating a reserve in months rather than dollars is what makes it meaningful against this household’s own costs."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$6,495.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,730 elected, $1,365 from the employer, and $2,400 saved on top. Of this, $4,095.00 was arranged before any surplus decision was made."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "gross + employerContribution",
+        "substituted": "54600 + 1365",
+        "result": "$55,965.00",
+        "why": "$54,600 of pay plus the $1,365 the employer contributes. The employer amount is real value that never appears in a paycheque, so it belongs in a total-resources figure and not in a cash-flow one."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "totalTax + preTaxElections",
+        "substituted": "11735 + 4770",
+        "result": "$16,505.00",
+        "why": "$11,735 of tax plus $4,770 of pre-tax elections. Only the tax is a cost; the elections buy cover and fund an account Case R still owns."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p2 / #t1-p1 * 100, 2)",
+        "substituted": "round(#t1-p2 / #t1-p1 * 100, 2)",
+        "result": "29.49%",
+        "why": "$16,505.00 measured against $55,965.00. Naming the share is useful provided the plan also says how much of it is cost and how much is transfer."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(monthlyAllocation * 12, 2)",
+        "substituted": "round(931.04 * 12, 2)",
+        "result": "$11,172.48",
+        "why": "$931.04 in each of the 12 months. This is the amount the plan actually directs, as distinct from the amount the year consumes."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "openingReserve + reserveMonthly * 12",
+        "substituted": "1600 + 400 * 12",
+        "result": "$6,400.00",
+        "why": "The $1,600 opening balance plus $4,800.00 added, assuming nothing was withdrawn."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p2 / essentials, 2)",
+        "substituted": "round(#t2-p2 / 2045, 2)",
+        "result": "3.13",
+        "why": "$6,400.00 against $2,045 a month. Stating a reserve in months rather than dollars is what makes it meaningful against this household’s own costs."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "ownContribution + employerContribution2 + extraContribution",
+        "substituted": "2730 + 1365 + 2400",
+        "result": "$6,495.00",
+        "why": "$2,730 elected, $1,365 from the employer, and $2,400 saved on top. Of this, $4,095.00 was arranged before any surplus decision was made."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Write the complete capstone plan for this fictional case. Cover what the year makes available, what it commits, what it builds, and how it is protected. State the three tradeoffs the plan makes and what each one costs, name the assumption the whole plan is most sensitive to, and say explicitly what a reader would have to believe for a different plan to be better than yours.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Reports the year accurately across strands, using at least the $55,965.00 of total resources, the $16,505.00 that never becomes cash, and the $11,172.48 allocated from surplus.",
+          "States what the plan builds with figures: a reserve of $6,400.00 covering 3.13 months of living costs, and $6,495.00 into retirement.",
+          "Names three genuine tradeoffs with costs attached — for example reserve against card repayment, extra retirement saving against liquidity, or the retirement election against monthly take-home — rather than listing three good things the plan does.",
+          "Identifies the most sensitive assumption and says why, most defensibly the continuity of income, since the stress test showed a 3-month loss exceeding the reserve, or the stability of the $1,180 rent as the largest single cost.",
+          "States what would have to be true for a different plan to be better, so the document presents its own conclusion as one defensible answer rather than the answer.",
+          "Distinguishes cost from transfer throughout, treating tax as cost and retirement contributions as retained."
+        ],
+        "evidenceRequirements": [
+          "Uses at least five distinct figures drawn from across the capstone, including the reserve of $6,400.00 and the retirement total of $6,495.00.",
+          "Attaches a cost to each of the three named tradeoffs.",
+          "States the condition under which a different plan would be preferable."
+        ],
+        "lookFors": [
+          "The plan is internally consistent: the monthly allocations sum to $931.04 and the annual figures follow from them.",
+          "Very different plans earn full credit — a reserve-first plan, a debt-first plan, and a retirement-weighted plan are all defensible on these figures.",
+          "A plan that claims to be the only sensible course is marked down on the uncertainty dimension however strong its arithmetic.",
+          "A plan built on a learner-invented fictional profile is scored on the same criteria, provided its figures are internally consistent and invented."
+        ],
+        "commonMisconception": "Presenting a financial plan as the correct answer, when a plan is a set of tradeoffs that different reasonable priorities would settle differently.",
+        "defensibleAlternatives": [
+          "A protection-first plan that builds the reserve past $6,730.62 before anything else, accepting slower repayment and less retirement saving.",
+          "A debt-first plan that clears the $1,950 card and then attacks the $18,400 loan balance ahead of schedule, accepting a thinner reserve for longer.",
+          "A long-horizon plan that raises the retirement election to at least 6% and contributes the extra $2,400, accepting less liquidity in exchange for more invested early.",
+          "A balanced plan that sequences all three — card first, then reserve to three months, then retirement — provided the sequencing is stated and the figures still sum to $931.04 a month."
+        ],
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "evidence-use",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l02",
+  "lessonId": "ma-g12-financial-literacy-u02-l02",
+  "integratedDomains": [
+    "budgeting",
+    "credit",
+    "debt",
+    "consumer-protection",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$1,488.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "12 payments of $124. This is what is actually handed over, which the monthly figure on its own does not show."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$148.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,488.00 against the $1,340 cash price. This is the price of spreading the payments, whatever the offer calls it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,602.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "18 payments of $89. The lower monthly figure buys a longer term, and the total is what shows the cost of that."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$262.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,602.00 against $1,340. The smaller monthly payment costs $114.00 more in total than the 12-month offer does."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "11.04%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$148.00 measured against the $1,340 cash price. This is the added cost over the whole 12 months, not an annual interest rate, and it should not be compared with one."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$760.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,100 less the $1,340 paid. The reserve is what the household would otherwise draw on if something else fails, so spending it has a cost that does not appear on any offer."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Yes — $124 is inside the $180 surplus",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$124 against $180 of surplus leaves $56 a month spare. Affordability of the payment is a separate question from whether the $148.00 extra is worth paying."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "payment12 * term12",
+        "substituted": "124 * 12",
+        "result": "$1,488.00",
+        "why": "12 payments of $124. This is what is actually handed over, which the monthly figure on its own does not show."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - cashPrice",
+        "substituted": "#t1-p1 - 1340",
+        "result": "$148.00",
+        "why": "$1,488.00 against the $1,340 cash price. This is the price of spreading the payments, whatever the offer calls it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "payment18 * term18",
+        "substituted": "89 * 18",
+        "result": "$1,602.00",
+        "why": "18 payments of $89. The lower monthly figure buys a longer term, and the total is what shows the cost of that."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 - cashPrice2",
+        "substituted": "#t1-p3 - 1340",
+        "result": "$262.00",
+        "why": "$1,602.00 against $1,340. The smaller monthly payment costs $114.00 more in total than the 12-month offer does."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p2 / cashPrice3 * 100, 2)",
+        "substituted": "round(#t1-p2 / 1340 * 100, 2)",
+        "result": "11.04%",
+        "why": "$148.00 measured against the $1,340 cash price. This is the added cost over the whole 12 months, not an annual interest rate, and it should not be compared with one."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "fund - cashPrice4",
+        "substituted": "2100 - 1340",
+        "result": "$760.00",
+        "why": "$2,100 less the $1,340 paid. The reserve is what the household would otherwise draw on if something else fails, so spending it has a cost that does not appear on any offer."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "payment < surplus",
+        "substituted": "124 < 180",
+        "result": "Yes — $124 is inside the $180 surplus",
+        "why": "$124 against $180 of surplus leaves $56 a month spare. Affordability of the payment is a separate question from whether the $148.00 extra is worth paying."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The cash route costs $148.00 less than the 12-month offer but leaves the reserve at $760.00. Make the strongest case for each route using the figures, and say what you would need to know about this fictional household to prefer one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Makes the case for cash on the figures: it avoids $148.00 of added cost, and the $180 monthly surplus can rebuild the reserve from $760.00 back toward $2,100 in under eight months.",
+          "Makes the case for financing on the figures: it keeps $1,340 of reserve intact against a second failure, and the $124 payment fits inside the $180 surplus with $56 to spare.",
+          "Names what would decide it — how exposed the household is to another unplanned expense, how secure the income behind the $180 surplus is, or whether anything else is already claiming that surplus."
+        ],
+        "evidenceRequirements": [
+          "Uses the $148.00 added cost and the $760.00 remaining reserve, and refers to the $180 monthly surplus."
+        ],
+        "lookFors": [
+          "The response prices the reserve as protection rather than as idle money.",
+          "Either route is credited when the case is made on the figures; the response is not scored on which one it picks."
+        ],
+        "commonMisconception": "Treating the cheapest total as automatically the right choice, without asking what paying cash leaves the household exposed to.",
+        "dimensions": [
+          "tradeoff-defense",
+          "reasoning-from-figures",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

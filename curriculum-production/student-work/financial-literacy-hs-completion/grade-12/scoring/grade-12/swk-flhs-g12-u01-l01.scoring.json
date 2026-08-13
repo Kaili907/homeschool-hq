@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l01",
+  "lessonId": "ma-g12-financial-literacy-u01-l01",
+  "integratedDomains": [
+    "income",
+    "insurance-risk",
+    "saving-investing",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4% of the $52,000 salary. This is money paid into a retirement account on the worker’s behalf; it is real value but it is not available to spend this year."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$58,880.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$52,000 salary plus the $2,080 retirement contribution plus the $4,800 the employer pays toward the premium. This is the figure an offer letter leads with, and none of the last two components arrives as spendable pay."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$57,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$55,400 salary plus the $2,400 employer premium share. Offer B has no retirement contribution to add."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$50,440.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,560 the employee pays comes out of the $52,000 salary. The employer’s $4,800 share never passes through the worker’s pay at all, so it cannot be added here."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$52,280.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$55,400 less the $3,120 employee premium share."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Offer B",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$52,280.00 of spendable salary under B against $50,440.00 under A. Rent is paid out of this figure, not out of total compensation."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,880.00 against $57,800.00. The two offers therefore rank in opposite orders on the two measures, which is the point of the lesson."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "salary * matchRate",
+        "substituted": "52000 * 0.04",
+        "result": "$2,080.00",
+        "why": "4% of the $52,000 salary. This is money paid into a retirement account on the worker’s behalf; it is real value but it is not available to spend this year."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "salary2 + #t1-p1 + employerHealth",
+        "substituted": "52000 + #t1-p1 + 4800",
+        "result": "$58,880.00",
+        "why": "$52,000 salary plus the $2,080 retirement contribution plus the $4,800 the employer pays toward the premium. This is the figure an offer letter leads with, and none of the last two components arrives as spendable pay."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "salaryB + employerHealthB",
+        "substituted": "55400 + 2400",
+        "result": "$57,800.00",
+        "why": "$55,400 salary plus the $2,400 employer premium share. Offer B has no retirement contribution to add."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "salary3 - employeeHealth",
+        "substituted": "52000 - 1560",
+        "result": "$50,440.00",
+        "why": "The $1,560 the employee pays comes out of the $52,000 salary. The employer’s $4,800 share never passes through the worker’s pay at all, so it cannot be added here."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "salaryB2 - employeeHealthB",
+        "substituted": "55400 - 3120",
+        "result": "$52,280.00",
+        "why": "$55,400 less the $3,120 employee premium share."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p2 > #t2-p1",
+        "substituted": "#t2-p2 > #t2-p1",
+        "result": "Offer B",
+        "why": "$52,280.00 of spendable salary under B against $50,440.00 under A. Rent is paid out of this figure, not out of total compensation."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p2 - #t1-p3",
+        "substituted": "#t1-p2 - #t1-p3",
+        "result": "$1,080.00",
+        "why": "$58,880.00 against $57,800.00. The two offers therefore rank in opposite orders on the two measures, which is the point of the lesson."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Offer A wins on total compensation and Offer B wins on spendable salary. Say which measure answers \"can I afford to move out this year\" and which answers \"which employer is putting more resources behind this job\", and name the one condition under which the $2,080 retirement contribution should count for very little.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States that spendable salary — $50,440.00 against $52,280.00 — is the measure that answers an affordability question, because employer-paid premiums and retirement contributions cannot be used to pay rent in the year they are earned.",
+          "States that total compensation — $58,880.00 against $57,800.00 — measures what the employer commits in total, and is the right frame for comparing the value of the whole package rather than this year’s cash.",
+          "Names a condition that discounts the retirement contribution: a vesting requirement the worker may not stay long enough to meet, or an immediate cash need that a locked retirement account cannot meet."
+        ],
+        "evidenceRequirements": [
+          "Uses both the $58,880.00 total compensation figure and the $50,440.00 spendable salary figure, and states which question each answers."
+        ],
+        "lookFors": [
+          "The response keeps the two measures distinct rather than averaging them into a single ranking.",
+          "The response does not treat the employer premium share as worthless; it is real value that simply cannot pay a bill this year."
+        ],
+        "commonMisconception": "Ranking two offers on the largest number printed in the letter, without asking whether that number can be spent.",
+        "dimensions": [
+          "criteria-application",
+          "reasoning-from-figures",
+          "tradeoff-defense"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

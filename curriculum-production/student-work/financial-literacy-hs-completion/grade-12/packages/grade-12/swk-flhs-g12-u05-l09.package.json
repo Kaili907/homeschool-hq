@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l09",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: allocation for a decades-long horizon"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "allocation for a decades-long horizon",
+  "objective": "Reallocate a fictional balance as the horizon shortens, quantify how much must move, and compare what a stated fall would cost under each allocation.",
+  "scenario": "The fictional balance, the two allocations, and the stated fall below are invented for this exercise. The fall is a scenario used to compare exposure, not a prediction.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional allocation figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional balance of $84,000 is held 85% in a growth category and 15% in a stable category, an allocation chosen when the money was not needed for decades. The investor now expects to need it in about five years and is considering moving to 45% growth and 55% stable.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much is in the growth category under the current allocation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is in the stable category under the current allocation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much would be in the growth category under the proposed allocation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now size the change and what it does to exposure.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much would be in the stable category under the proposed allocation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much would have to move from growth to stable?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the growth category fell 30%, what would that cost under the current allocation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What would the same fall cost under the proposed allocation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "How much smaller is the loss under the proposed allocation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why a shortening horizon changes the right allocation even though nothing about the categories themselves has changed, and say what the reallocation costs the fictional investor that the loss figures do not show."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount to move comes out at $84,000 or at $46,200.00, the two allocations are being compared on the wrong side. The growth holding falls from $71,400.00 to $37,800.00, so $33,600.00 moves; the stable holding rises from $12,600.00 to $46,200.00 by the same $33,600.00.",
+  "extension": "Work out the loss under each allocation if the stable category also fell, by 5%, and say how much of the protection the reallocation offered survives.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

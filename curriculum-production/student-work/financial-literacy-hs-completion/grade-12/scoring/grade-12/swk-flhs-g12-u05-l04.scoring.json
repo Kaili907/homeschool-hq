@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l04",
+  "lessonId": "ma-g12-financial-literacy-u05-l04",
+  "integratedDomains": [
+    "saving-investing",
+    "insurance-risk",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$16,320.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$24,000 reduced by 32%, leaving 68% of the original balance."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "47.06%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $7,680.00 lost measured against the $16,320.00 that remains. A 32% fall needs a 47.06% gain to undo, because the gain is calculated on a smaller base than the fall was."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$300 in each of 12 months. The same amount is contributed on either course of action; only where it goes differs."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$5,294.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Money put in at the depressed level rises in the same proportion as the balance does, from $16,320.00 back to $24,000. The $3,600.00 contributed therefore recovers to $5,294.12 under the stated assumption."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$29,294.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The original balance restored to $24,000 plus the $5,294.12 the year’s contributions are worth."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$19,920.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $16,320.00 realised plus $3,600.00 contributed to cash, which earns nothing under the stated assumption."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$9,374.12",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$29,294.12 against $19,920.00, under the stated recovery assumption. The whole gap depends on that assumption holding."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "portfolio * (1 - decline)",
+        "substituted": "24000 * (1 - 0.32)",
+        "result": "$16,320.00",
+        "why": "$24,000 reduced by 32%, leaving 68% of the original balance."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round((portfolio2 - #t1-p1) / #t1-p1 * 100, 2)",
+        "substituted": "round((24000 - #t1-p1) / #t1-p1 * 100, 2)",
+        "result": "47.06%",
+        "why": "The $7,680.00 lost measured against the $16,320.00 that remains. A 32% fall needs a 47.06% gain to undo, because the gain is calculated on a smaller base than the fall was."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "monthly * months",
+        "substituted": "300 * 12",
+        "result": "$3,600.00",
+        "why": "$300 in each of 12 months. The same amount is contributed on either course of action; only where it goes differs."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t2-p1 * portfolio3 / #t1-p1, 2)",
+        "substituted": "round(#t2-p1 * 24000 / #t1-p1, 2)",
+        "result": "$5,294.12",
+        "why": "Money put in at the depressed level rises in the same proportion as the balance does, from $16,320.00 back to $24,000. The $3,600.00 contributed therefore recovers to $5,294.12 under the stated assumption."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "portfolio4 + #t2-p2",
+        "substituted": "24000 + #t2-p2",
+        "result": "$29,294.12",
+        "why": "The original balance restored to $24,000 plus the $5,294.12 the year’s contributions are worth."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p1 + #t2-p1",
+        "substituted": "#t1-p1 + #t2-p1",
+        "result": "$19,920.00",
+        "why": "The $16,320.00 realised plus $3,600.00 contributed to cash, which earns nothing under the stated assumption."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "#t2-p3 - #t2-p4",
+        "substituted": "#t2-p3 - #t2-p4",
+        "result": "$9,374.12",
+        "why": "$29,294.12 against $19,920.00, under the stated recovery assumption. The whole gap depends on that assumption holding."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Write a rule this fictional investor could set down in advance about what to do in a decline. State what evidence in this lesson supports it, and — importantly — name the assumption the $9,374.12 figure rests on and what your rule does if that assumption does not hold.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States a rule in advance and in concrete terms — for example continuing scheduled contributions through a decline and not selling on a fall alone, with any change requiring a stated reason unrelated to the fall itself.",
+          "Identifies the load-bearing assumption explicitly: the entire $9,374.12 gap depends on the category regaining its earlier level, which the lesson assumes rather than shows.",
+          "Says what the rule does if the assumption fails: names a circumstance in which selling is right regardless of the market — money needed at a fixed date, or a change in the investor’s circumstances — so the rule is not simply \"always hold\".",
+          "Uses the 47.06% figure to explain why a decline is harder to undo than it looks, without claiming the gain will occur."
+        ],
+        "evidenceRequirements": [
+          "Uses the $9,374.12 difference and the 47.06% recovery figure, and names the recovery assumption behind both."
+        ],
+        "lookFors": [
+          "The rule is written to be applied before a decline, when the decision is easier to make well.",
+          "A response that concludes \"markets always recover\" is not credited; the lesson assumes a recovery for the sake of comparison and says so.",
+          "The response distinguishes selling because of a fall from selling because the money is needed."
+        ],
+        "commonMisconception": "Reading a percentage fall and the percentage gain that reverses it as the same size, when a 32% fall requires a 47.06% gain to undo.",
+        "dimensions": [
+          "plan-coherence",
+          "assumption-identification",
+          "communication-of-uncertainty"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

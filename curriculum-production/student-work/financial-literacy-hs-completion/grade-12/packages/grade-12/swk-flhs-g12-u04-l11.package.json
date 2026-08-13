@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l11",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l11",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 11,
+    "phase": "Defense and extension",
+    "title": "Defense and extension: building and protecting credit responsibly"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "building and protecting credit responsibly",
+  "objective": "Quantify the effect of a disputed account on a fictional credit picture, establish the correct first response, and defend a protection plan that addresses both accuracy and behaviour.",
+  "scenario": "The fictional accounts, the simulated credit report entry, and the invented figures below exist only for this exercise. No real credit file, score, or account is described, and no account number, password, or identifier appears anywhere in this lesson.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account and report figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional borrower has one card with a limit of $4,000 carrying a balance of $1,180, and has made payments on time in 34 of the last 36 months. A simulated credit report also lists an account the borrower did not open, with a balance of $2,350 against a limit of $3,000.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is utilisation on the borrower’s own card, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What proportion of the last 36 months carried an on-time payment, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would utilisation be if the disputed account were counted, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now size the damage and establish the right first move.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "By how many percentage points does the disputed account raise utilisation? Give two decimal places.",
+          "unit": "percentage points"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "What is the right first response to the $2,350 account the borrower did not open?",
+          "choices": [
+            "Pay it down to reduce utilisation",
+            "Report it as an account the borrower did not open and have it investigated"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What balance on the borrower’s own $4,000 limit would sit at 25% utilisation?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Write and defend the plan.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write a protection plan for this fictional borrower that covers both the disputed account and their own behaviour, and defend it. Explain why the two halves need different kinds of action, and say what you would tell the borrower to expect that the arithmetic here cannot promise."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the combined utilisation comes out at 58.75%, the disputed balance has been added to the numerator without adding its $3,000 limit to the denominator. Both accounts contribute to both sides of the ratio: $3,530 of balance against $7,000 of limit. Compute each version of the ratio with its matching limit before comparing them.",
+  "extension": "Work out what utilisation would be if the disputed account were removed but the borrower had opened a third fictional card with a $2,500 limit and no balance, and say which of the two changes helps the ratio more.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l11.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l11",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

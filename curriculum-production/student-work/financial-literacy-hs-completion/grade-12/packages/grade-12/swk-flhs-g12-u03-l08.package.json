@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l08",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: irregular income and cash-flow timing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "irregular income and cash-flow timing",
+  "objective": "Carry the irregular-income method onto a fictional household where one income stops for part of the year and part of it is owed in tax, and size the buffer the off-season requires.",
+  "scenario": "The fictional household, the simulated seasonal work, and the invented self-employment set-aside rate below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional household income and cost figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "One fictional earner works seasonally, receiving $2,100 a month for 8 months of the year and nothing for the other 4 months. Under the fictional rules that apply to this work, 18% of that pay must be set aside for tax and is not available to spend. The other earner takes home $2,380 every month all year. The household’s fixed costs are $3,150 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the seasonal earner receive across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of that must be set aside for tax at 18%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the seasonal work actually contribute to the household after the set-aside?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the household against the year and against its worst months.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the household’s spendable income for the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do the fixed costs come to across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What surplus does the year produce?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly position in an off-season month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What must be held in reserve to carry all 4 off-season months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This household must hold two separate pools of money that it is not free to spend. Name them with their amounts, explain why keeping them separate matters, and describe how much of the seasonal earner’s $2,100 monthly pay is genuinely available to the household in a working month."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the household looks comfortable throughout, check the off-season months on their own. The annual surplus is $4,536.00, but in each of the 4 months without seasonal pay only $2,380 arrives against $3,150 of costs. Compute the monthly position first, then multiply by the number of months it persists.",
+  "extension": "Work out what happens to both reserves if the seasonal work shortens to 7 months at the same monthly rate, and say which of the two grows faster.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

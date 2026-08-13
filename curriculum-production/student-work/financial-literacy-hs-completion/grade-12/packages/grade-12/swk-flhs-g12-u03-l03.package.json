@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l03",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: emergency fund sizing and use"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "emergency fund sizing and use",
+  "objective": "Size a fictional emergency reserve on two different bases, measure the existing reserve against each, and set a contribution that closes the gap over a stated period.",
+  "scenario": "The fictional household’s costs and existing reserve below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional cost breakdown in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household’s essential monthly costs are rent $1,285, utilities $180, food $520, insurance $165, transport $240, and minimum debt payments $310. Beyond those it spends $640 a month on things it could stop. It currently holds $4,860 in reserve and wants to reach a 3-month target within 18 months.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the essential monthly costs come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is a 3-month reserve sized on essential costs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is a 3-month reserve sized on total spending instead?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now measure where the household stands and what it would take to close the gap.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much do the two targets differ by?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many months of essential costs does the current $4,860 reserve cover? Give one decimal place."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What monthly contribution reaches the essential-cost target within the 18 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Argue for sizing this household’s reserve on the $2,700.00 essential figure or on the $3,340.00 total figure. Use the figures, name what your choice assumes about how the household would behave during an emergency, and say which assumption is the weaker one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two targets come out the same, the $640 of discretionary spending is being included in both or excluded from both. Build the essential figure from the six costs that continue regardless, then add the $640 separately to build the total figure. The gap between the two targets is exactly three months of that $640.",
+  "extension": "Work out how long the current $4,860 reserve would last if the household cut only half of its discretionary spending during an emergency, and compare that with the 1.8 months found here.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

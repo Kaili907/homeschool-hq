@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l07",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: operating a budget month over month"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "operating a budget month over month",
+  "objective": "Locate why a fictional budget that shows a monthly surplus produces an annual deficit, convert the missing expenses to their monthly equivalent, and state the correction.",
+  "scenario": "The fictional household’s monthly budget and its list of simulated irregular expenses below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional budget and irregular expense list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household’s monthly budget shows a surplus of $180 and includes every expense that arrives monthly. It does not include four expenses that arrive on other schedules: auto insurance of $612 charged twice a year, a registration and licensing charge of $285 once a year, holiday costs of $900 once a year, and routine medical costs of $420 once a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the four irregular expenses come to across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly equivalent of those expenses?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the household’s true monthly position once that is included?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now express the same error across the whole year.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What annual surplus does the budget as written imply?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the actual annual position?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "By how much must monthly spending fall for the year to break even?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This budget is arithmetically correct and still wrong. Name the error precisely, explain why it would feel like it was working for most of the year, and describe the change that fixes it rather than merely detecting it."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the annual position comes out as $2,160.00, the four irregular expenses have not been brought in. Total them to $2,829.00 first — remembering the insurance is charged twice — and set that against the apparent annual surplus. The monthly equivalent, $235.75, is larger than the $180 surplus, which is why the year finishes negative.",
+  "extension": "List the months in which each irregular expense falls and work out the largest single-month shortfall the household would face, then say how that differs from the $55.75 monthly average correction.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

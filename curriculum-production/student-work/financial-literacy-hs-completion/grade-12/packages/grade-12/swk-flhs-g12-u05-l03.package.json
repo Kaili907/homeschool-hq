@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l03",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: allocation for a decades-long horizon"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "allocation for a decades-long horizon",
+  "objective": "Apply a stated illustrative growth assumption to two fictional allocations across a long horizon, compare the results, and state what the illustration does not establish.",
+  "scenario": "The two simulated allocations and the illustrative rates below are invented for this exercise. The rates are assumptions chosen to show how compounding works over a long period; they are not predictions, and no real fund, market, or product is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional allocations and illustrative rates in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional balance of $12,000 is split between a growth category and a stable category. Allocation A puts 80% in growth and 20% in stable; allocation B puts 40% in growth and 60% in stable. For this illustration only, assume the growth category averages 7% a year and the stable category 3% a year, every year for 30 years. Real results vary year to year and are not known in advance; these two rates are chosen to make the arithmetic of compounding visible.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does allocation A place in the growth category?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does allocation A place in the stable category?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under the stated illustration, what would allocation A be worth after the 30 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for allocation B and compare.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does allocation B place in the growth category?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does allocation B place in the stable category?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under the same illustration, what would allocation B be worth after the 30 years?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How far apart are the two results under the illustration?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "State what this calculation does establish and what it does not. Then explain why a fictional investor who needs the money in 3 years rather than 30 might reasonably prefer allocation B, even though allocation A is far ahead in this illustration."
+        }
+      ]
+    }
+  ],
+  "remediation": "If allocation A comes out near $91,000, a single blended rate has probably been applied to the whole $12,000. The two parts grow at different assumed rates and must be compounded separately: $9,600.00 at 7% for 30 years, plus $2,400.00 at 3% for 30 years, added at the end.",
+  "extension": "Recompute both allocations over 10 years rather than 30, and say what proportion of the 30-year gap has appeared by then.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

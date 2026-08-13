@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l10",
+  "lessonId": "ma-g12-financial-literacy-u03-l10",
+  "integratedDomains": [
+    "budgeting",
+    "debt",
+    "credit",
+    "saving-investing",
+    "income",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$79.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 22.8% on $4,200. This is what the balance costs the household every month it is carried."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,080.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "50% of the first 4% of the $54,000 salary. It is available only if the worker contributes; nothing arrives automatically."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$180.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4% of $54,000 spread across the 12 months. Contributing more than this is still saving but earns nothing further from the employer."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$8,550.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "3 months of the $2,850 essential figure."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$7,650.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,550.00 target against $900 held. At any plausible contribution this gap takes years, which is itself a finding."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$460.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$640 of surplus less the $180.00 that secures the full $1,080.00 employer contribution."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,819.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,200 plus $79.80 of interest less a $460.00 payment."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "50.00%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,080.00 measured against the $2,160.00 the worker contributes. It is a one-time addition on money contributed, not an annual rate of return, and it should not be compared directly with the 22.8% charged on the card."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "9.1",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,200 at $460.00 a month, ignoring interest as the prompt states. Because interest continues, the real figure is somewhat higher, so this is a floor rather than a schedule."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(cardBalance * cardApr / 12, 2)",
+        "substituted": "round(4200 * 0.228 / 12, 2)",
+        "result": "$79.80",
+        "why": "One twelfth of 22.8% on $4,200. This is what the balance costs the household every month it is carried."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "salary * matchTier * matchShare",
+        "substituted": "54000 * 0.04 * 0.5",
+        "result": "$1,080.00",
+        "why": "50% of the first 4% of the $54,000 salary. It is available only if the worker contributes; nothing arrives automatically."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(salary2 * matchTier2 / 12, 2)",
+        "substituted": "round(54000 * 0.04 / 12, 2)",
+        "result": "$180.00",
+        "why": "4% of $54,000 spread across the 12 months. Contributing more than this is still saving but earns nothing further from the employer."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "essential * 3",
+        "substituted": "2850 * 3",
+        "result": "$8,550.00",
+        "why": "3 months of the $2,850 essential figure."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - reserve",
+        "substituted": "#t2-p1 - 900",
+        "result": "$7,650.00",
+        "why": "$8,550.00 target against $900 held. At any plausible contribution this gap takes years, which is itself a finding."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "surplus - #t1-p3",
+        "substituted": "640 - #t1-p3",
+        "result": "$460.00",
+        "why": "$640 of surplus less the $180.00 that secures the full $1,080.00 employer contribution."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "cardBalance2 + #t1-p1 - #t2-p3",
+        "substituted": "4200 + #t1-p1 - #t2-p3",
+        "result": "$3,819.80",
+        "why": "$4,200 plus $79.80 of interest less a $460.00 payment."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "round(#t1-p2 / (salary3 * matchTier3) * 100, 2)",
+        "substituted": "round(#t1-p2 / (54000 * 0.04) * 100, 2)",
+        "result": "50.00%",
+        "why": "$1,080.00 measured against the $2,160.00 the worker contributes. It is a one-time addition on money contributed, not an annual rate of return, and it should not be compared directly with the 22.8% charged on the card."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "round(cardBalance3 / #t2-p3, 1)",
+        "substituted": "round(4200 / #t2-p3, 1)",
+        "result": "9.1",
+        "why": "$4,200 at $460.00 a month, ignoring interest as the prompt states. Because interest continues, the real figure is somewhat higher, so this is a floor rather than a schedule."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Allocate the whole $640 a month across the three claims and defend it. State what your allocation gives up, and name the claim you would fund differently if the household told you its income was uncertain for the next year.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Allocates the full $640 across the three claims with a figure against each, and shows the parts add to $640 rather than leaving a remainder undescribed.",
+          "Defends the treatment of the retirement contribution with the figures: $180.00 a month secures $1,080.00 a year, which is a 50.00% addition to money contributed and is not available later if skipped.",
+          "Defends the balance between the card and the reserve using both the $79.80 monthly interest and the $7,650.00 reserve gap, rather than asserting one is more important.",
+          "States what the allocation sacrifices — for example that prioritising the card leaves the reserve near $900 for months, or that funding the reserve leaves the balance attracting close to $79.80 a month for longer.",
+          "Names what would change under uncertain income and why, most defensibly shifting toward the reserve because a household with no reserve meets the next shock by borrowing at 22.8%."
+        ],
+        "evidenceRequirements": [
+          "Uses the $180.00 contribution that secures the employer amount, the $79.80 monthly card interest, and the $7,650.00 reserve shortfall.",
+          "Shows the allocation summing to the full $640."
+        ],
+        "lookFors": [
+          "The response does not compare the 50.00% employer addition directly with the 22.8% annual rate as though both were annual returns.",
+          "Several allocations are defensible — securing the employer contribution and splitting the rest, or clearing the card first and building the reserve after — and each is credited when the sacrifice is named.",
+          "An allocation that skips the employer contribution entirely is credited only if it says explicitly what the $1,080.00 is being given up for."
+        ],
+        "commonMisconception": "Ranking the three claims by their headline percentages alone, when a 50.00% addition on contributions, a 22.8% annual charge, and an unquantified protection against future borrowing are not the same kind of number.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "criteria-application",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

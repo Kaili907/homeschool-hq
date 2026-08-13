@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l03",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: reading and verifying a pay statement"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "reading and verifying a pay statement",
+  "objective": "Verify each withholding line on a simulated pay statement against the stated rates, locate the line the employer computed on the wrong base, and size the error across a full year.",
+  "scenario": "The pay statement reproduced below is simulated, and the employer that issued it is fictional. No real payroll record is involved.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pay statement figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional employee earns $56,160 a year, paid over 26 pay periods. A retirement contribution of 5% of gross is deducted each period. The payroll levy is 7.65% and the schedule states it is charged on gross pay, before any deduction. The statement in front of the employee shows a levy of $156.98 for the period.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the gross pay for one period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What should the payroll levy be for one period, charged on gross as the schedule states?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "The statement’s levy matches 7.65% of gross after the 5% retirement deduction. What does that base produce?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now size the error and decide what it is.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much less than the correct amount was withheld in this one period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the same base is used all year, what does the shortfall come to across the 26 periods?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Under the stated schedule, is the under-withheld levy money the fictional employee gets to keep?",
+          "choices": [
+            "Yes — the employer set the amount, so the employee owes nothing further",
+            "No — the levy is owed on gross, so the shortfall remains due"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "short-response",
+          "text": "Describe what this fictional employee should do next, in order, and say what they should keep. Explain why raising it at $8.26 a period is better than raising it at $214.76."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the correct levy comes out as $156.98, the retirement deduction is being taken off before the 7.65% is applied. The schedule says the levy is charged on gross pay. Compute 7.65% of the $2,160.00 gross first, and only then compare it with what the statement printed.",
+  "extension": "Work out what the per-period and annual shortfall would be for a fictional colleague on the same statement format earning $2,700.00 a period with the same 5% election, and say whether the annual figure grows faster than pay does.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

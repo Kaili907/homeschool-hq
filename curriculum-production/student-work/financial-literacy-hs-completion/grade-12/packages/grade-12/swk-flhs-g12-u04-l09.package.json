@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l09",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 9,
+    "phase": "Synthesis and review",
+    "title": "Synthesis and review: comparing full financing packages"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "comparing full financing packages",
+  "objective": "Project two fictional financing packages across two years with rising costs and fixed aid, and show how borrowing diverges from the first-year comparison.",
+  "scenario": "The two simulated packages and the fictional cost increase below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional package terms and cost increase in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Package P costs $26,200 in year one with $12,400 of gift aid. Package Q costs $21,000 in year one with $5,200 of gift aid. Both assume a family contribution of $4,000 and work of $2,500 each year. Costs at both institutions rise 3% in year two, and both gift aid awards stay at their year-one amounts.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What must be borrowed in year one under package P?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does package P cost in year two after the 3% increase?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What must be borrowed in year two under package P?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now do the same for package Q and compare the two years together.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What must be borrowed in year one under package Q?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does package Q cost in year two?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What must be borrowed in year two under package Q?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the two-year borrowing under package P?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is the two-year borrowing under package Q?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Package P costs more every year and requires less borrowing in both. Explain what makes that happen, and say what a fictional applicant should ask each institution that this two-year projection assumes an answer to."
+        }
+      ]
+    }
+  ],
+  "remediation": "If both packages show the same borrowing in year two as in year one, the 3% cost increase has not been applied, or it has been applied to the aid as well. The aid stays at $12,400 and $5,200; only the costs move, to $26,986.00 and $21,630.00. The whole increase therefore lands on the amount borrowed.",
+  "extension": "Extend both packages to four years at the same 3% annual increase and fixed aid, and say whether the gap between them widens or narrows.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l09.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l09",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

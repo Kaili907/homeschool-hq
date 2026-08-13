@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l08",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: setting a contribution rate inside a real budget"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "setting a contribution rate inside a real budget",
+  "objective": "Put a fictional employer contribution and a fictional interest charge on a comparable annual footing, and judge a case where the two claims on one budget are different kinds of quantity.",
+  "scenario": "The fictional salary, the simulated card balance, and the invented plan terms below exist only for this exercise. Nothing here advises any real person about borrowing or saving.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pay, plan, and balance figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker earns $45,600 a year paid monthly. The employer contributes 100% of what the worker puts in, up to the first 4% of pay. The worker also carries a simulated card balance of $2,900 charged at 19.2% a year, applied as one twelfth of that rate each month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly gross pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What monthly contribution earns the full employer amount?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put both claims on the same annual footing.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the card balance cost in interest in one month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the employer contribution worth across a full year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the card cost across a year if the balance stays where it is?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Over the coming year, which is the larger amount?",
+          "choices": [
+            "The employer contribution available",
+            "The interest the card would charge"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The employer contribution is larger in dollars, and the card balance is the more urgent problem in other ways. Explain why comparing 100% with 19.2% directly is a mistake, and describe an allocation of $300 a month across the two claims that you could defend, naming what it gives up."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two claims are ranked by comparing 100% with 19.2%, stop and convert both to dollars over the same year. The employer contribution is worth $1,824.00 if $152.00 is contributed monthly; the card costs $556.80 if the balance stays at $2,900. Only figures built the same way can be ranked.",
+  "extension": "Recompute both annual figures for a fictional worker with a $9,400 card balance at the same rate, and say at what balance the ranking would reverse.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

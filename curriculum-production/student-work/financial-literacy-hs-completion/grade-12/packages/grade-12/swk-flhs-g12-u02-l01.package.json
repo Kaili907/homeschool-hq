@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l01",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: recurring obligations and renewal management"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "recurring obligations and renewal management",
+  "objective": "Annualise a fictional household’s recurring obligations, reprice them after a year of renewals, and express the increase as the monthly figure a budget would have to absorb.",
+  "scenario": "The recurring obligations below belong to a fictional household. Every provider, price, and renewal increase is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional obligation list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household pays rent of $1,285 a month, auto insurance of $612 charged twice a year, a phone plan of $84 a month, internet at $69 a month, and a streaming bundle at $46 a month. At renewal the rent rises 4.5% and the auto insurance rises 7%. The phone plan is unchanged. The internet promotion ends and the price becomes $92 a month. The streaming bundle rises by $5 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the five obligations cost the household over the current year in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of rent cost after the 4.5% renewal increase?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of auto insurance cost after the 7% increase?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now reprice the rest and find what the year of renewals costs.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of internet cost once the promotion ends?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of the streaming bundle cost after the $5 increase?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What will the five obligations cost over the coming year in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the increase across the whole year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What does that increase come to per month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "None of these five increases was chosen by the household, and none was individually large. Explain how a household ends up paying $92.97 more a month without deciding to, and name the two obligations on this list you would put a renewal date against first, with your reason."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the annual total comes out near $23,000, the auto insurance is probably being multiplied by 12. Read the billing cycle on each line before annualising: the $612 premium is charged twice a year, and everything else on the list is monthly. Convert each obligation to a yearly figure on its own cycle, then add.",
+  "extension": "Work out what the household would have to cancel outright to absorb the $92.97 a month without touching rent, and say whether that is achievable from the list as given.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l05",
+  "lessonId": "ma-g12-financial-literacy-u05-l05",
+  "integratedDomains": [
+    "saving-investing",
+    "consumer-protection",
+    "banking",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$153.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.85% of $18,000. A percentage fee rises with the balance and is charged whatever the account earns."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$87.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.15% of $18,000, which is $27.00, plus the flat $60. The flat component is the larger part at this balance."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$66.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$153.00 charged by account X against $87.00 by account Y. At this balance the flat $60 is what keeps account Y from being cheaper still."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$510.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.85% of $60,000. The fee has more than tripled because the balance has."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$150.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "0.15% of $60,000, which is $90.00, plus the flat $60. The flat part is now the smaller share."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$360.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$510.00 against $150.00. The advantage widens as the balance grows, because the difference in percentage rates applies to more money."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,980.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$66.00 a year for 30 years. Holding the balance flat is a stated simplification: with a growing balance the difference would be larger, so this is a floor."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "small * feeX",
+        "substituted": "18000 * 0.0085",
+        "result": "$153.00",
+        "why": "0.85% of $18,000. A percentage fee rises with the balance and is charged whatever the account earns."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "small2 * feeY + flatY",
+        "substituted": "18000 * 0.0015 + 60",
+        "result": "$87.00",
+        "why": "0.15% of $18,000, which is $27.00, plus the flat $60. The flat component is the larger part at this balance."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$66.00",
+        "why": "$153.00 charged by account X against $87.00 by account Y. At this balance the flat $60 is what keeps account Y from being cheaper still."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "large * feeX2",
+        "substituted": "60000 * 0.0085",
+        "result": "$510.00",
+        "why": "0.85% of $60,000. The fee has more than tripled because the balance has."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "large2 * feeY2 + flatY2",
+        "substituted": "60000 * 0.0015 + 60",
+        "result": "$150.00",
+        "why": "0.15% of $60,000, which is $90.00, plus the flat $60. The flat part is now the smaller share."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t2-p2",
+        "substituted": "#t2-p1 - #t2-p2",
+        "result": "$360.00",
+        "why": "$510.00 against $150.00. The advantage widens as the balance grows, because the difference in percentage rates applies to more money."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p3 * horizon",
+        "substituted": "#t1-p3 * 30",
+        "result": "$1,980.00",
+        "why": "$66.00 a year for 30 years. Holding the balance flat is a stated simplification: with a growing balance the difference would be larger, so this is a floor."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Fees and returns are both quoted as percentages, but only one of them is known in advance. Explain what follows from that difference, and describe the one balance at which the flat $60 component would make account Y the more expensive of the two.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the asymmetry: the 0.85% and 0.15% fees are charged with certainty whatever happens, while any return is not known in advance, so a fee difference is a firmer basis for a decision than an expected return is.",
+          "Uses the figures to show the scale: $66.00 a year at $18,000 and $360.00 at $60,000, or at least $1,980.00 across 30 years on a flat balance.",
+          "Reasons about the crossover: account Y is dearer only when the flat $60 outweighs the saving from the lower percentage, which requires a balance small enough that 0.70% of it is less than $60 — under roughly $8,571."
+        ],
+        "evidenceRequirements": [
+          "Uses the $153.00 and $87.00 fees at $18,000 and the $510.00 and $150.00 fees at $60,000."
+        ],
+        "lookFors": [
+          "The response treats the fee as the certain quantity in the comparison.",
+          "A crossover estimate is credited when the reasoning is right, even if the figure is approximate."
+        ],
+        "commonMisconception": "Dismissing a fee difference of well under one percent as too small to matter, without applying it to the balance and the number of years it is charged for.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "communication-of-uncertainty",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

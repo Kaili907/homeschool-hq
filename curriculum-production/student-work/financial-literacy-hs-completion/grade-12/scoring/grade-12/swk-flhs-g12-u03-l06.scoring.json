@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l06",
+  "lessonId": "ma-g12-financial-literacy-u03-l06",
+  "integratedDomains": [
+    "budgeting",
+    "saving-investing",
+    "income",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "8.97%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,200 measured against $46,800 of planned income. Expressing savings as a rate is what allows a year with different income to be compared with the plan at all."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "7.41%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,552 measured against the $47,940 actually received. The rate fell even though income rose, which is the finding the dollar figures alone would obscure."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,140.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$47,940 against $46,800 planned. This is money the plan never allocated, so nothing in the plan decided where it went."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,788.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$44,388 against $42,600 planned."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$648.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,552 saved against $4,200 planned. The shortfall is exactly the amount by which the overspend exceeded the extra income."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "156.84%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,788.00 of extra spending against $1,140.00 of extra income. A figure above 100% is the point: spending rose by more than the whole of the additional income."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "No — savings finished below plan despite the extra income",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "Spending rose $1,788.00 against $1,140.00 of extra income, so the extra income was absorbed entirely and $648.00 more was taken from savings on top of it."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(plannedSavings / plannedIncome * 100, 2)",
+        "substituted": "round(4200 / 46800 * 100, 2)",
+        "result": "8.97%",
+        "why": "$4,200 measured against $46,800 of planned income. Expressing savings as a rate is what allows a year with different income to be compared with the plan at all."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(actualSavings / actualIncome * 100, 2)",
+        "substituted": "round(3552 / 47940 * 100, 2)",
+        "result": "7.41%",
+        "why": "$3,552 measured against the $47,940 actually received. The rate fell even though income rose, which is the finding the dollar figures alone would obscure."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "actualIncome2 - plannedIncome2",
+        "substituted": "47940 - 46800",
+        "result": "$1,140.00",
+        "why": "$47,940 against $46,800 planned. This is money the plan never allocated, so nothing in the plan decided where it went."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "actualSpending - plannedSpending",
+        "substituted": "44388 - 42600",
+        "result": "$1,788.00",
+        "why": "$44,388 against $42,600 planned."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "plannedSavings2 - actualSavings2",
+        "substituted": "4200 - 3552",
+        "result": "$648.00",
+        "why": "$3,552 saved against $4,200 planned. The shortfall is exactly the amount by which the overspend exceeded the extra income."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / #t1-p3 * 100, 2)",
+        "substituted": "round(#t2-p1 / #t1-p3 * 100, 2)",
+        "result": "156.84%",
+        "why": "$1,788.00 of extra spending against $1,140.00 of extra income. A figure above 100% is the point: spending rose by more than the whole of the additional income."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p1 > #t1-p3",
+        "substituted": "#t2-p1 > #t1-p3",
+        "result": "No — savings finished below plan despite the extra income",
+        "why": "Spending rose $1,788.00 against $1,140.00 of extra income, so the extra income was absorbed entirely and $648.00 more was taken from savings on top of it."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Diagnosing the error",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The error is not located."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The response says the work is wrong but not where or why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response locates the first wrong step and states the misconception behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response locates the error, names the misconception, and gives a check that would have caught it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Income rose by $1,140.00 and savings fell by $648.00. Explain how a household can end a better-than-planned year with less saved than it planned, and name one change to how the plan handles unexpected income that would have produced a different result.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the mechanism: the plan allocated the expected $46,800 but had no rule for the additional $1,140.00, so it defaulted into spending, and savings remained the residual that absorbed the rest.",
+          "Uses the rate comparison to show the year was worse than the plan on the measure that matters: 7.41% actual against 8.97% planned, even though the dollar income was higher.",
+          "Names a concrete change — for example a standing rule that a fixed share of any unplanned income is transferred to savings on receipt, or moving the $4,200 to a scheduled transfer at the start of each month so it is not available to spend."
+        ],
+        "evidenceRequirements": [
+          "Uses the 8.97% and 7.41% savings rates and the $1,140.00 of extra income."
+        ],
+        "lookFors": [
+          "The response identifies the absence of a rule as the cause, rather than describing the household as undisciplined.",
+          "The response uses the rate rather than the dollar amount to judge whether the year improved."
+        ],
+        "commonMisconception": "Judging a year by whether income rose, when the savings rate can fall at the same time and is the measure the plan was actually set in.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "error-diagnosis"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

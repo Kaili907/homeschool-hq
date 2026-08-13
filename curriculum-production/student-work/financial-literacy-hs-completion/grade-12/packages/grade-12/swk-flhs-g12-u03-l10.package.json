@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l10",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: paying down debt while saving"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "paying down debt while saving",
+  "objective": "Quantify all three claims on a fictional household’s monthly surplus — an employer retirement contribution, a card balance, and a reserve — and produce a defended allocation of the whole amount.",
+  "scenario": "The fictional household, its simulated card balance, and the invented employer contribution terms below exist only for this exercise. Nothing here advises any real person about their own borrowing or saving.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional household figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household has $640 a month of surplus. It carries a simulated card balance of $4,200 charged at 22.8% a year, applied as one twelfth of that rate each month. Its reserve holds $900 against essential costs of $2,850 a month. The employer adds 50% of whatever the worker contributes to retirement, up to the first 4% of a $54,000 salary.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What interest does the card balance attract in one month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the largest employer retirement contribution available in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What monthly contribution earns the full employer amount?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now size the other two claims and see what is left once the employer contribution is secured.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is a 3-month reserve target on essential costs?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How far short of that target is the reserve?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the $180.00 retirement contribution is made first, what surplus remains?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "If that whole $460.00 went to the card, what would the balance be after one month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Put the retirement contribution on a comparable footing before deciding anything.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "The employer adds $1,080.00 on a worker contribution of $2,160.00 a year. What is that as a percentage of what the worker puts in?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "At $460.00 a month, how many months would clear the $4,200 balance if no further interest were charged? Give one decimal place."
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write the allocation. Every dollar of the $640 must be accounted for.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Allocate the whole $640 a month across the three claims and defend it. State what your allocation gives up, and name the claim you would fund differently if the household told you its income was uncertain for the next year."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the allocation treats the employer contribution as a 50% return to be compared with the 22.8% card rate, stop and check what each figure measures. The card rate is charged every year the balance is carried; the employer contribution is a single addition to whatever is put in during that year. Compute what each is worth in dollars over the coming twelve months — $1,080.00 against roughly $957 of interest on the current balance — before ranking them.",
+  "extension": "Rework the allocation for a fictional household with the same $640 surplus but no employer contribution available at all, and say which of the two remaining claims changes most.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

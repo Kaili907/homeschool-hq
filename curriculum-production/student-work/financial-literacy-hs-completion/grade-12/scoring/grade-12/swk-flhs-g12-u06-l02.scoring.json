@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l02",
+  "lessonId": "ma-g12-financial-literacy-u06-l02",
+  "integratedDomains": [
+    "insurance-risk",
+    "income",
+    "budgeting",
+    "consumer-protection"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "61",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Day 79 when the new cover starts, less day 18 when the old cover ends. The gap arises from two dates neither of which the worker chose, which is why it has to be checked rather than assumed away."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$1,836.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$612 for each of the 3 periods needed. Because a part period is charged in full, the 61-day gap costs the same as a 90-day one would."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,170.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $250 copay plus 20% of the remaining $4,600. This is what the same event costs when cover is in force."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,680.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The full $4,850 paid without cover against $1,170.00 with it. This is the exposure the gap creates for a single event of this size."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "Yes — bridging costs less than the extra exposure on one event",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$1,836.00 to bridge against $3,680.00 of extra exposure on one such visit. The comparison is only between these two figures; it assumes an event of exactly this size and says nothing about how likely one is."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "newStart - oldEnd",
+        "substituted": "79 - 18",
+        "result": "61",
+        "why": "Day 79 when the new cover starts, less day 18 when the old cover ends. The gap arises from two dates neither of which the worker chose, which is why it has to be checked rather than assumed away."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "continuation * periods",
+        "substituted": "612 * 3",
+        "result": "$1,836.00",
+        "why": "$612 for each of the 3 periods needed. Because a part period is charged in full, the 61-day gap costs the same as a 90-day one would."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "copay + (visitCost - copay) * coins",
+        "substituted": "250 + (4850 - 250) * 0.2",
+        "result": "$1,170.00",
+        "why": "The $250 copay plus 20% of the remaining $4,600. This is what the same event costs when cover is in force."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "visitCost2 - #t1-p3",
+        "substituted": "4850 - #t1-p3",
+        "result": "$3,680.00",
+        "why": "The full $4,850 paid without cover against $1,170.00 with it. This is the exposure the gap creates for a single event of this size."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 < #t2-p1",
+        "substituted": "#t1-p2 < #t2-p1",
+        "result": "Yes — bridging costs less than the extra exposure on one event",
+        "why": "$1,836.00 to bridge against $3,680.00 of extra exposure on one such visit. The comparison is only between these two figures; it assumes an event of exactly this size and says nothing about how likely one is."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The comparison above is not a proof that bridging is right. Explain what it leaves out, describe the case for going uncovered for the 61 days, and say what fact about the gap the worker should confirm first whichever way they decide.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Names what the comparison omits: it assumes exactly one event of exactly $4,850, whereas the gap could pass with nothing at all — in which case $1,836.00 buys nothing — or could bring a far larger cost that the comparison understates.",
+          "Makes the case for going uncovered honestly: $1,836.00 is certain and the event is not, so a worker with reserves able to absorb a large bill may reasonably accept 61 days of exposure.",
+          "Names the fact to confirm: the two dates themselves — whether the old cover truly ends on day 18 and the new cover truly begins on day 79 — since a shorter gap might need fewer periods and a longer one more, and the whole calculation rests on them."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,836.00 bridging cost and the $3,680.00 extra exposure, and refers to the 61-day gap."
+        ],
+        "lookFors": [
+          "The response treats the single-event comparison as an illustration rather than as a decision rule.",
+          "Either decision is credited when the certainty of the premium is weighed against the uncertainty of the event."
+        ],
+        "commonMisconception": "Treating a comparison against one hypothetical event as though it settled whether cover is worth buying.",
+        "dimensions": [
+          "communication-of-uncertainty",
+          "tradeoff-defense",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 4,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

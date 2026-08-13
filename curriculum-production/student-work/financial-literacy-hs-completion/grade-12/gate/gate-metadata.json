@@ -1,0 +1,1362 @@
+{
+  "schemaVersion": "1.0",
+  "lane": "curriculum-production/student-work/financial-literacy-hs-completion/grade-12",
+  "grade": 12,
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+  "gateContract": "src/curriculum/production-quality — ScoringAuthorityKind is ANSWER_KEY | RUBRIC | SCORING_JUDGMENT, and a MATH_STRUCTURED_FINLIT lesson requires a fixed ANSWER_KEY.",
+  "modeMapping": [
+    "Every grade 12 lesson in this lane is authored as mixed work, so its lane scoring kind is HYBRID: at least one fixed item the oracle recomputed, and at least one judgment item scored by rubric.",
+    "HYBRID projects to the gate as ANSWER_KEY, which the gate requires for MATH_STRUCTURED_FINLIT. The projection is only legitimate because the fixed half genuinely exists and was verified; fixedItemCount and oracleVerifiedFixedAnswers are published per lesson so the claim can be audited rather than trusted.",
+    "The rubric half is not discarded by the projection. rubricItemCount records it, and the full acceptable-answer criteria, evidence requirements, and look-fors live in each lesson’s scoring record.",
+    "projectGateMode throws rather than downgrading a lesson that has lost its fixed items, so a lesson can never reach the gate still claiming a key it no longer carries."
+  ],
+  "counts": {
+    "lessons": 72,
+    "byLaneKind": {
+      "HYBRID": 72
+    },
+    "byGateMode": {
+      "ANSWER_KEY": 72
+    },
+    "fixedItems": 482,
+    "rubricItems": 72
+  },
+  "lessons": [
+    {
+      "packageId": "swk-flhs-g12-u01-l01",
+      "lessonId": "ma-g12-financial-literacy-u01-l01",
+      "unit": 1,
+      "day": 1,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "income",
+        "insurance-risk",
+        "saving-investing",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l02",
+      "lessonId": "ma-g12-financial-literacy-u01-l02",
+      "unit": 1,
+      "day": 2,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "saving-investing",
+        "insurance-risk"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l03",
+      "lessonId": "ma-g12-financial-literacy-u01-l03",
+      "unit": 1,
+      "day": 3,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "banking",
+        "consumer-protection"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l04",
+      "lessonId": "ma-g12-financial-literacy-u01-l04",
+      "unit": 1,
+      "day": 4,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "insurance-risk",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l05",
+      "lessonId": "ma-g12-financial-literacy-u01-l05",
+      "unit": 1,
+      "day": 5,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 5,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "income",
+        "budgeting",
+        "saving-investing",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l06",
+      "lessonId": "ma-g12-financial-literacy-u01-l06",
+      "unit": 1,
+      "day": 6,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "consumer-protection",
+        "fraud"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l07",
+      "lessonId": "ma-g12-financial-literacy-u01-l07",
+      "unit": 1,
+      "day": 7,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "insurance-risk",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l08",
+      "lessonId": "ma-g12-financial-literacy-u01-l08",
+      "unit": 1,
+      "day": 8,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 8,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "budgeting",
+        "banking"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l09",
+      "lessonId": "ma-g12-financial-literacy-u01-l09",
+      "unit": 1,
+      "day": 9,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "saving-investing",
+        "budgeting"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u01-l10",
+      "lessonId": "ma-g12-financial-literacy-u01-l10",
+      "unit": 1,
+      "day": 10,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 10,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 10,
+      "integratedDomains": [
+        "income",
+        "insurance-risk",
+        "saving-investing",
+        "budgeting",
+        "taxes",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l01",
+      "lessonId": "ma-g12-financial-literacy-u02-l01",
+      "unit": 2,
+      "day": 1,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 8,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8,
+      "integratedDomains": [
+        "budgeting",
+        "consumer-protection",
+        "banking",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l02",
+      "lessonId": "ma-g12-financial-literacy-u02-l02",
+      "unit": 2,
+      "day": 2,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "budgeting",
+        "credit",
+        "debt",
+        "consumer-protection",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l03",
+      "lessonId": "ma-g12-financial-literacy-u02-l03",
+      "unit": 2,
+      "day": 3,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "consumer-protection",
+        "banking",
+        "budgeting",
+        "credit"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l04",
+      "lessonId": "ma-g12-financial-literacy-u02-l04",
+      "unit": 2,
+      "day": 4,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "budgeting",
+        "consumer-protection",
+        "saving-investing",
+        "banking"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l05",
+      "lessonId": "ma-g12-financial-literacy-u02-l05",
+      "unit": 2,
+      "day": 5,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "consumer-protection",
+        "credit",
+        "insurance-risk",
+        "budgeting"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l06",
+      "lessonId": "ma-g12-financial-literacy-u02-l06",
+      "unit": 2,
+      "day": 6,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "budgeting",
+        "saving-investing",
+        "insurance-risk",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l07",
+      "lessonId": "ma-g12-financial-literacy-u02-l07",
+      "unit": 2,
+      "day": 7,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 5,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "budgeting",
+        "consumer-protection",
+        "saving-investing",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l08",
+      "lessonId": "ma-g12-financial-literacy-u02-l08",
+      "unit": 2,
+      "day": 8,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "credit",
+        "debt",
+        "budgeting",
+        "insurance-risk",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l09",
+      "lessonId": "ma-g12-financial-literacy-u02-l09",
+      "unit": 2,
+      "day": 9,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "fraud",
+        "consumer-protection",
+        "credit",
+        "banking"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u02-l10",
+      "lessonId": "ma-g12-financial-literacy-u02-l10",
+      "unit": 2,
+      "day": 10,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 9,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 9,
+      "integratedDomains": [
+        "budgeting",
+        "consumer-protection",
+        "saving-investing",
+        "banking",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l01",
+      "lessonId": "ma-g12-financial-literacy-u03-l01",
+      "unit": 3,
+      "day": 1,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "budgeting",
+        "banking",
+        "saving-investing",
+        "income"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l02",
+      "lessonId": "ma-g12-financial-literacy-u03-l02",
+      "unit": 3,
+      "day": 2,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "income",
+        "budgeting",
+        "banking",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l03",
+      "lessonId": "ma-g12-financial-literacy-u03-l03",
+      "unit": 3,
+      "day": 3,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "saving-investing",
+        "budgeting",
+        "insurance-risk",
+        "debt"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l04",
+      "lessonId": "ma-g12-financial-literacy-u03-l04",
+      "unit": 3,
+      "day": 4,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "debt",
+        "credit",
+        "saving-investing",
+        "budgeting"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l05",
+      "lessonId": "ma-g12-financial-literacy-u03-l05",
+      "unit": 3,
+      "day": 5,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "budgeting",
+        "saving-investing",
+        "insurance-risk",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l06",
+      "lessonId": "ma-g12-financial-literacy-u03-l06",
+      "unit": 3,
+      "day": 6,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "budgeting",
+        "saving-investing",
+        "income",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l07",
+      "lessonId": "ma-g12-financial-literacy-u03-l07",
+      "unit": 3,
+      "day": 7,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "budgeting",
+        "insurance-risk",
+        "banking",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l08",
+      "lessonId": "ma-g12-financial-literacy-u03-l08",
+      "unit": 3,
+      "day": 8,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 8,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "budgeting",
+        "banking",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l09",
+      "lessonId": "ma-g12-financial-literacy-u03-l09",
+      "unit": 3,
+      "day": 9,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "saving-investing",
+        "insurance-risk",
+        "budgeting",
+        "debt"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u03-l10",
+      "lessonId": "ma-g12-financial-literacy-u03-l10",
+      "unit": 3,
+      "day": 10,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 9,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 9,
+      "integratedDomains": [
+        "budgeting",
+        "debt",
+        "credit",
+        "saving-investing",
+        "income",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l01",
+      "lessonId": "ma-g12-financial-literacy-u04-l01",
+      "unit": 4,
+      "day": 1,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "postsecondary-financing",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l02",
+      "lessonId": "ma-g12-financial-literacy-u04-l02",
+      "unit": 4,
+      "day": 2,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 5,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "postsecondary-financing",
+        "debt",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l03",
+      "lessonId": "ma-g12-financial-literacy-u04-l03",
+      "unit": 4,
+      "day": 3,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 8,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8,
+      "integratedDomains": [
+        "postsecondary-financing",
+        "debt",
+        "consumer-protection",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l04",
+      "lessonId": "ma-g12-financial-literacy-u04-l04",
+      "unit": 4,
+      "day": 4,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "debt",
+        "postsecondary-financing",
+        "income",
+        "budgeting"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l05",
+      "lessonId": "ma-g12-financial-literacy-u04-l05",
+      "unit": 4,
+      "day": 5,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "credit",
+        "debt",
+        "consumer-protection",
+        "banking"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l06",
+      "lessonId": "ma-g12-financial-literacy-u04-l06",
+      "unit": 4,
+      "day": 6,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "debt",
+        "postsecondary-financing",
+        "budgeting",
+        "consumer-protection",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l07",
+      "lessonId": "ma-g12-financial-literacy-u04-l07",
+      "unit": 4,
+      "day": 7,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "postsecondary-financing",
+        "debt",
+        "consumer-protection",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l08",
+      "lessonId": "ma-g12-financial-literacy-u04-l08",
+      "unit": 4,
+      "day": 8,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "postsecondary-financing",
+        "debt",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l09",
+      "lessonId": "ma-g12-financial-literacy-u04-l09",
+      "unit": 4,
+      "day": 9,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 8,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8,
+      "integratedDomains": [
+        "postsecondary-financing",
+        "debt",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l10",
+      "lessonId": "ma-g12-financial-literacy-u04-l10",
+      "unit": 4,
+      "day": 10,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 9,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 9,
+      "integratedDomains": [
+        "debt",
+        "postsecondary-financing",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u04-l11",
+      "lessonId": "ma-g12-financial-literacy-u04-l11",
+      "unit": 4,
+      "day": 11,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "credit",
+        "fraud",
+        "consumer-protection",
+        "debt",
+        "banking"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l01",
+      "lessonId": "ma-g12-financial-literacy-u05-l01",
+      "unit": 5,
+      "day": 1,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "saving-investing",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l02",
+      "lessonId": "ma-g12-financial-literacy-u05-l02",
+      "unit": 5,
+      "day": 2,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "saving-investing",
+        "taxes",
+        "budgeting",
+        "income"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l03",
+      "lessonId": "ma-g12-financial-literacy-u05-l03",
+      "unit": 5,
+      "day": 3,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "saving-investing",
+        "multi-variable-decision",
+        "budgeting",
+        "insurance-risk"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l04",
+      "lessonId": "ma-g12-financial-literacy-u05-l04",
+      "unit": 5,
+      "day": 4,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "saving-investing",
+        "insurance-risk",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l05",
+      "lessonId": "ma-g12-financial-literacy-u05-l05",
+      "unit": 5,
+      "day": 5,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "saving-investing",
+        "consumer-protection",
+        "banking",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l06",
+      "lessonId": "ma-g12-financial-literacy-u05-l06",
+      "unit": 5,
+      "day": 6,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "fraud",
+        "saving-investing",
+        "consumer-protection",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l07",
+      "lessonId": "ma-g12-financial-literacy-u05-l07",
+      "unit": 5,
+      "day": 7,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "saving-investing",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l08",
+      "lessonId": "ma-g12-financial-literacy-u05-l08",
+      "unit": 5,
+      "day": 8,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "saving-investing",
+        "debt",
+        "credit",
+        "budgeting",
+        "income"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l09",
+      "lessonId": "ma-g12-financial-literacy-u05-l09",
+      "unit": 5,
+      "day": 9,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 8,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8,
+      "integratedDomains": [
+        "saving-investing",
+        "insurance-risk",
+        "multi-variable-decision",
+        "budgeting"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u05-l10",
+      "lessonId": "ma-g12-financial-literacy-u05-l10",
+      "unit": 5,
+      "day": 10,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 8,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 8,
+      "integratedDomains": [
+        "saving-investing",
+        "insurance-risk",
+        "consumer-protection",
+        "budgeting",
+        "fraud",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l01",
+      "lessonId": "ma-g12-financial-literacy-u06-l01",
+      "unit": 6,
+      "day": 1,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "insurance-risk",
+        "budgeting",
+        "income",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l02",
+      "lessonId": "ma-g12-financial-literacy-u06-l02",
+      "unit": 6,
+      "day": 2,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 5,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "insurance-risk",
+        "income",
+        "budgeting",
+        "consumer-protection"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l03",
+      "lessonId": "ma-g12-financial-literacy-u06-l03",
+      "unit": 6,
+      "day": 3,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "insurance-risk",
+        "saving-investing",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l04",
+      "lessonId": "ma-g12-financial-literacy-u06-l04",
+      "unit": 6,
+      "day": 4,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "fraud",
+        "consumer-protection",
+        "insurance-risk",
+        "banking"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l05",
+      "lessonId": "ma-g12-financial-literacy-u06-l05",
+      "unit": 6,
+      "day": 5,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "fraud",
+        "consumer-protection",
+        "credit",
+        "banking",
+        "insurance-risk"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l06",
+      "lessonId": "ma-g12-financial-literacy-u06-l06",
+      "unit": 6,
+      "day": 6,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "insurance-risk",
+        "budgeting",
+        "income",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l07",
+      "lessonId": "ma-g12-financial-literacy-u06-l07",
+      "unit": 6,
+      "day": 7,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "insurance-risk",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l08",
+      "lessonId": "ma-g12-financial-literacy-u06-l08",
+      "unit": 6,
+      "day": 8,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "insurance-risk",
+        "postsecondary-financing",
+        "budgeting",
+        "consumer-protection"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l09",
+      "lessonId": "ma-g12-financial-literacy-u06-l09",
+      "unit": 6,
+      "day": 9,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "insurance-risk",
+        "saving-investing",
+        "income",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u06-l10",
+      "lessonId": "ma-g12-financial-literacy-u06-l10",
+      "unit": 6,
+      "day": 10,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "fraud",
+        "consumer-protection",
+        "insurance-risk",
+        "banking",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l01",
+      "lessonId": "ma-g12-financial-literacy-u07-l01",
+      "unit": 7,
+      "day": 1,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "taxes",
+        "income",
+        "saving-investing",
+        "banking"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l02",
+      "lessonId": "ma-g12-financial-literacy-u07-l02",
+      "unit": 7,
+      "day": 2,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 5,
+      "integratedDomains": [
+        "taxes",
+        "income",
+        "budgeting",
+        "debt"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l03",
+      "lessonId": "ma-g12-financial-literacy-u07-l03",
+      "unit": 7,
+      "day": 3,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "saving-investing",
+        "insurance-risk",
+        "budgeting",
+        "multi-variable-decision"
+      ],
+      "isCapstone": true
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l04",
+      "lessonId": "ma-g12-financial-literacy-u07-l04",
+      "unit": 7,
+      "day": 4,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "budgeting",
+        "debt",
+        "credit",
+        "saving-investing",
+        "insurance-risk",
+        "income"
+      ],
+      "isCapstone": true
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l05",
+      "lessonId": "ma-g12-financial-literacy-u07-l05",
+      "unit": 7,
+      "day": 5,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "budgeting",
+        "insurance-risk",
+        "saving-investing",
+        "debt",
+        "income",
+        "multi-variable-decision"
+      ],
+      "isCapstone": true
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l06",
+      "lessonId": "ma-g12-financial-literacy-u07-l06",
+      "unit": 7,
+      "day": 6,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "budgeting",
+        "debt",
+        "saving-investing",
+        "credit",
+        "insurance-risk",
+        "multi-variable-decision"
+      ],
+      "isCapstone": true
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l07",
+      "lessonId": "ma-g12-financial-literacy-u07-l07",
+      "unit": 7,
+      "day": 7,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "taxes",
+        "income",
+        "saving-investing",
+        "consumer-protection"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l08",
+      "lessonId": "ma-g12-financial-literacy-u07-l08",
+      "unit": 7,
+      "day": 8,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "taxes",
+        "income",
+        "budgeting",
+        "banking",
+        "multi-variable-decision"
+      ],
+      "isCapstone": false
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l09",
+      "lessonId": "ma-g12-financial-literacy-u07-l09",
+      "unit": 7,
+      "day": 9,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "budgeting",
+        "taxes",
+        "debt",
+        "saving-investing",
+        "insurance-risk",
+        "income",
+        "multi-variable-decision"
+      ],
+      "isCapstone": true
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l10",
+      "lessonId": "ma-g12-financial-literacy-u07-l10",
+      "unit": 7,
+      "day": 10,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 7,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 7,
+      "integratedDomains": [
+        "income",
+        "taxes",
+        "budgeting",
+        "debt",
+        "credit",
+        "saving-investing",
+        "insurance-risk",
+        "multi-variable-decision"
+      ],
+      "isCapstone": true
+    },
+    {
+      "packageId": "swk-flhs-g12-u07-l11",
+      "lessonId": "ma-g12-financial-literacy-u07-l11",
+      "unit": 7,
+      "day": 11,
+      "laneScoringKind": "HYBRID",
+      "gateScoringMode": "ANSWER_KEY",
+      "fixedItemCount": 6,
+      "rubricItemCount": 1,
+      "oracleVerifiedFixedAnswers": 6,
+      "integratedDomains": [
+        "budgeting",
+        "insurance-risk",
+        "debt",
+        "saving-investing",
+        "income",
+        "taxes",
+        "multi-variable-decision"
+      ],
+      "isCapstone": true
+    }
+  ]
+}

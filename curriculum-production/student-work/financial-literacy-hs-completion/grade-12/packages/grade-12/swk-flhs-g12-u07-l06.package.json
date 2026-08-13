@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l06",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 6,
+    "phase": "Comparison and analysis",
+    "title": "Comparison and analysis: presenting and defending the capstone plan"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "presenting and defending the capstone plan",
+  "objective": "Compare two complete allocations of the fictional capstone surplus on their own terms, confirm both are internally consistent, and defend one without treating the other as wrong.",
+  "scenario": "This lesson compares two plans for Case R, the fictional adult, or for the learner’s invented fictional profile. Both plans are complete and defensible; the capstone does not have one correct answer, and neither does this lesson.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the two fictional plans in these directions",
+    "the capstone record"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Case R has a monthly surplus of $931.04 and a card balance of $1,950. Plan 1 allocates $400 to the reserve, $331.04 to the card, and $200 to extra retirement saving. Plan 2 allocates $200 to the reserve and $731.04 to the card, with nothing extra to retirement.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much does Plan 1 add to the reserve across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much does Plan 2 add to the reserve across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Ignoring interest, how many months would Plan 1 take to clear the card? Give one decimal place."
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now complete both plans and check they are consistent.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Ignoring interest, how many months would Plan 2 take to clear the card? Give one decimal place."
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much extra retirement saving does Plan 1 add across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does Plan 1 allocate in total each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What does Plan 2 allocate in total each month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Write the comparison into the capstone record.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Both plans allocate exactly $931.04 and both are internally consistent. Defend one of them as the plan you would put forward for this fictional case. Say what your choice gives up, state the circumstance in which the other plan would be the better one, and identify the figure that would most change your answer."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two plans appear to allocate different amounts, check each against the $931.04 surplus. Plan 1 is $400 plus $331.04 plus $200; Plan 2 is $200 plus $731.04. Both come to $931.04 exactly, and a plan that does not is either leaving money unallocated or spending money that is not there.",
+  "extension": "Build a third complete plan that clears the card in under 4 months and still adds at least $300 a month to the reserve, and say what it has to give up to do both.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l06.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l06",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

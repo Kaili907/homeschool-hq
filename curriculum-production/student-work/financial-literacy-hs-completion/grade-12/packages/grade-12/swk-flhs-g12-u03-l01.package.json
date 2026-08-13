@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l01",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: operating a budget month over month"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "operating a budget month over month",
+  "objective": "Operate a fictional budget across three months, accumulate the variance the variable categories produce, and report the surplus that actually exists rather than the one that was planned.",
+  "scenario": "The budget and the three months of spending below belong to a fictional adult. Every figure is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional budget and monthly totals in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional adult takes home $3,240 a month. The fixed commitments are rent $1,180, utilities $165, insurance $142, phone $58, and transport $210. The plan allows $480 for food, $120 for household, and $200 for personal spending, and sets aside $350 for savings. Across the first three months the variable categories actually came to $862, $774, and $918.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the fixed commitments come to each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the plan allocate in total each month, savings included?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What monthly surplus does the plan expect?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now run the plan forward against what actually happened over the 3 months.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the variable categories actually cost across the three months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What did the plan allow for those categories over the same three months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the cumulative variance after three months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What surplus has actually accumulated across the three months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The plan expected $1,005.00 of surplus after three months and produced $851.00. Say whether these three months show a plan that is set too low or a run of ordinary variation, explain what in the figures supports your reading, and state what you would need to see to be more certain."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the accumulated surplus comes out at $1,005.00, the variance has not been carried into it. The plan produces $335.00 a month only if the variable categories land on $800.00; they came to $2,554.00 rather than $2,400.00 over the three months, so $154.00 of the expected surplus has already been spent.",
+  "extension": "Rewrite the variable allowance so that it would have covered all three months as they actually happened, and say what has to be reduced elsewhere to keep the same $350 of savings.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

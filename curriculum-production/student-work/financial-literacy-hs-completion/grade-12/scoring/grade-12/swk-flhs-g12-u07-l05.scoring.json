@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l05",
+  "lessonId": "ma-g12-financial-literacy-u07-l05",
+  "integratedDomains": [
+    "budgeting",
+    "insurance-risk",
+    "saving-investing",
+    "debt",
+    "income",
+    "multi-variable-decision"
+  ],
+  "isCapstone": true,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$6,135.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,045 a month for the 3 months. These costs do not stop when income does, which is what makes the shock a cash problem rather than only an income problem."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$595.62",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$198.54 in each of the 3 months. A loan payment is an obligation rather than a discretionary cost, so it belongs in the shock calculation."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$6,730.62",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,135.00 of living costs plus $595.62 of loan payments across the 3 months with no income."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$6,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $1,600 opening balance plus $4,800.00 added across the 12 months. This assumes no withdrawal during the year, which is the best case rather than the expected one."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$330.62",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,730.62 needed against $6,400.00 held. The plan comes close and does not quite hold, which is a more useful finding than a plan that fails outright."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$2,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6,400.00 less the $4,200 expense. Shock B is absorbed without borrowing, which is exactly what the reserve is for."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "1.08",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,200.00 against $2,045 a month. Surviving one shock leaves the fictional adult barely covered against a second, which is the position a stress test is meant to reveal."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "essentials * 3",
+        "substituted": "2045 * 3",
+        "result": "$6,135.00",
+        "why": "$2,045 a month for the 3 months. These costs do not stop when income does, which is what makes the shock a cash problem rather than only an income problem."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "loanPayment * 3",
+        "substituted": "198.54 * 3",
+        "result": "$595.62",
+        "why": "$198.54 in each of the 3 months. A loan payment is an obligation rather than a discretionary cost, so it belongs in the shock calculation."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$6,730.62",
+        "why": "$6,135.00 of living costs plus $595.62 of loan payments across the 3 months with no income."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "openingReserve + monthlyTransfer * 12",
+        "substituted": "1600 + 400 * 12",
+        "result": "$6,400.00",
+        "why": "The $1,600 opening balance plus $4,800.00 added across the 12 months. This assumes no withdrawal during the year, which is the best case rather than the expected one."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 - #t2-p1",
+        "substituted": "#t1-p3 - #t2-p1",
+        "result": "$330.62",
+        "why": "$6,730.62 needed against $6,400.00 held. The plan comes close and does not quite hold, which is a more useful finding than a plan that fails outright."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - repairCost",
+        "substituted": "#t2-p1 - 4200",
+        "result": "$2,200.00",
+        "why": "$6,400.00 less the $4,200 expense. Shock B is absorbed without borrowing, which is exactly what the reserve is for."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "round(#t2-p3 / essentials2, 2)",
+        "substituted": "round(#t2-p3 / 2045, 2)",
+        "result": "1.08",
+        "why": "$2,200.00 against $2,045 a month. Surviving one shock leaves the fictional adult barely covered against a second, which is the position a stress test is meant to reveal."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Record what this stress test found. State plainly which shock the plan survives and which it does not, decide what to change in response, and say what your change costs elsewhere in the plan. Explain why leaving the plan as it is could also be defended.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "States the findings correctly: shock B is absorbed with $2,200.00 remaining, and shock A falls short by $330.62 even after a full year of untouched saving.",
+          "Notes what makes the shock A result worse than it looks: the $6,400.00 assumes nothing was withdrawn all year, and after shock B the reserve covers only 1.08 months.",
+          "Proposes a specific change with its cost — raising the monthly transfer above $400 and naming what loses that money, extending the loan term to reduce the $198.54, or reducing a living cost line and saying which.",
+          "Explains why no change is also defensible: the shortfall is $330.62 on a 3-month total loss of income, which is a narrow miss against a severe scenario, and the surplus may have more valuable work to do against the card at 21.6%."
+        ],
+        "evidenceRequirements": [
+          "Uses the $6,730.62 requirement for shock A, the $6,400.00 reserve, and the $330.62 shortfall.",
+          "States the cost of the proposed change in figures or clearly named terms."
+        ],
+        "lookFors": [
+          "The response distinguishes the shock the plan survives from the one it does not, rather than reporting a single verdict.",
+          "The response notices that the $6,400.00 figure assumes an untouched year."
+        ],
+        "commonMisconception": "Treating a reserve that survives one shock as adequate, without checking what it covers once that shock has been paid for.",
+        "defensibleAlternatives": [
+          "Raise the monthly reserve transfer above $400 until the reserve clears $6,730.62, accepting slower progress on the card balance.",
+          "Leave the transfer at $400 and clear the $1,950 card balance first, on the grounds that removing a 21.6% charge strengthens the plan against every future month.",
+          "Accept the $330.62 shortfall as a tolerable gap against a severe scenario and change nothing, provided the record says so explicitly rather than by omission."
+        ],
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

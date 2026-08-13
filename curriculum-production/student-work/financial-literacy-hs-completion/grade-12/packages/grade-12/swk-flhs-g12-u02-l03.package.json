@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l03",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l03",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 3,
+    "phase": "Concept model B",
+    "title": "Concept model B: resolving a billing error or dispute"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "resolving a billing error or dispute",
+  "objective": "Separate the disputed lines on a simulated statement from the lines genuinely owed, total a claim that reaches back over earlier statements, and state what should still be paid while the dispute runs.",
+  "scenario": "The statement examined below is simulated and the provider is fictional. No real account or billing record is involved.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional statement lines in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The simulated statement totals $415.89 and shows five lines: a service charge of $148.20; a second identical service charge of $148.20 for the same period; a late fee of $39.00 although the previous payment posted on time; a plan charge of $67.50 where the agreed rate is $61.50; and $12.99 for an added service the household did request and use. The plan has been billed at the wrong rate on this statement and on the 3 statements before it.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the duplicate service charge and the late fee come to together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much is the plan overcharged each month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the disputed amounts on this statement come to?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now build the full claim and work out what should still be paid.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much was overcharged across the 3 earlier statements?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the total claim, this statement and the earlier ones together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What should the household pay on this statement while the dispute is open?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Should the $12.99 charge for the added service the household requested and used form part of the dispute?",
+          "choices": [
+            "Yes — it appears on the same statement as the errors",
+            "No — the household requested and used that service"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Set out what the household should put in writing to the provider, and explain why paying $222.69 rather than either $0.00 or the full $415.89 is the strongest position while the dispute is open."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the amount to pay comes out as $204.69, the $12.99 added service has been treated as disputed. Work line by line: the duplicate $148.20, the $39.00 late fee, and the $6.00 overcharge are wrong; the original $148.20 service charge, the $61.50 that was properly owed, and the $12.99 are right. Subtract only the first group from $415.89.",
+  "extension": "Work out what the claim would grow to if the rate error ran for 9 more cycles before being corrected, and say what that implies about how quickly a recurring error should be raised.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l03.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l03",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

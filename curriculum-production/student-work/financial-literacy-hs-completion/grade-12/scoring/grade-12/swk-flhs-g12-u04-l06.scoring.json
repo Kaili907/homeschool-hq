@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l06",
+  "lessonId": "ma-g12-financial-literacy-u04-l06",
+  "integratedDomains": [
+    "debt",
+    "postsecondary-financing",
+    "budgeting",
+    "consumer-protection",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$306.44",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "28.4 thousands at $10.79 a month each. This is the payment the borrower can no longer meet."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$193.69",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The same balance at the 240-payment factor. Doubling the term does not halve the payment, because interest accrues for twice as long."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$112.75",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$306.44 against $193.69. This is the relief the route delivers each month."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$46,485.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$193.69 in each of 240 months."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$36,772.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$306.44 in each of 120 months."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$9,712.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$46,485.60 against $36,772.80. The $112.75 of monthly relief is bought with nearly $10,000 more repaid across the loan."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,533.60",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "5.4% of $28,400 added over the year of the pause. Nothing is repaid during that year, so the balance the borrower returns to is larger than the one they left."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(balance / 1000 * standardFactor, 2)",
+        "substituted": "round(28400 / 1000 * 10.79, 2)",
+        "result": "$306.44",
+        "why": "28.4 thousands at $10.79 a month each. This is the payment the borrower can no longer meet."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(balance2 / 1000 * extendedFactor, 2)",
+        "substituted": "round(28400 / 1000 * 6.82, 2)",
+        "result": "$193.69",
+        "why": "The same balance at the 240-payment factor. Doubling the term does not halve the payment, because interest accrues for twice as long."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - #t1-p2",
+        "substituted": "#t1-p1 - #t1-p2",
+        "result": "$112.75",
+        "why": "$306.44 against $193.69. This is the relief the route delivers each month."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 * extendedPayments",
+        "substituted": "#t1-p2 * 240",
+        "result": "$46,485.60",
+        "why": "$193.69 in each of 240 months."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p1 * standardPayments",
+        "substituted": "#t1-p1 * 120",
+        "result": "$36,772.80",
+        "why": "$306.44 in each of 120 months."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 - #t2-p2",
+        "substituted": "#t2-p1 - #t2-p2",
+        "result": "$9,712.80",
+        "why": "$46,485.60 against $36,772.80. The $112.75 of monthly relief is bought with nearly $10,000 more repaid across the loan."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "balance3 * annualRate",
+        "substituted": "28400 * 0.054",
+        "result": "$1,533.60",
+        "why": "5.4% of $28,400 added over the year of the pause. Nothing is repaid during that year, so the balance the borrower returns to is larger than the one they left."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Both routes give this fictional borrower relief and both cost money. Argue for one of them, using the figures, and state what you would need to know about the borrower’s situation for your choice to be the right one.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Argues for the extended schedule on the figures: it lowers the payment permanently by $112.75, and the $9,712.80 cost is spread across twenty years rather than falling due at once.",
+          "Argues for the pause on the figures: it costs $1,533.60, far less than $9,712.80, and it leaves the standard schedule intact once the difficulty passes.",
+          "Names the decisive fact: whether the drop in income is temporary or lasting. A pause suits a difficulty expected to end within the year; an extended schedule suits an income that will not return to the level the $306.44 payment assumed.",
+          "Notes that the two routes are not exclusive in principle, and that neither reduces what is owed."
+        ],
+        "evidenceRequirements": [
+          "Uses the $9,712.80 extra repaid under the extended schedule and the $1,533.60 added by the pause."
+        ],
+        "lookFors": [
+          "The response ties the choice to the expected duration of the income drop rather than to which figure is smaller.",
+          "The response recognises that the pause defers rather than reduces the obligation."
+        ],
+        "commonMisconception": "Choosing the route with the smaller headline cost, without asking whether the relief it gives lasts as long as the difficulty it is meant to address.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 7,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

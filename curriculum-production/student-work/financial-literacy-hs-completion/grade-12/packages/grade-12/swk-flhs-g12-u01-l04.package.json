@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: benefit enrolment decisions and deadlines"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "benefit enrolment decisions and deadlines",
+  "objective": "Price two fictional health plans at a stated level of use, identify which is cheaper there, and state what the comparison depends on that the year cannot be known in advance.",
+  "scenario": "The two simulated plans below, their premiums, and the fictional year of covered charges are invented for this exercise. No real insurer or policy is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Both fictional plans are paid for over 26 pay periods. The Silver plan costs $95 a period, has a deductible of $1,500, then the plan pays 80% of further covered charges and the member pays 20%, with a cap of $4,000 on what the member can pay in a year. The Bronze plan costs $42 a period, has a deductible of $3,600, then the member pays 30%, with a cap of $6,500. Enrolment closes on a stated date; a member who does not choose is enrolled in neither plan until the following year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of Silver premiums cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does a year of Bronze premiums cost?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "The fictional year turns out to bring $6,000 of covered charges. Price both plans against that year.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "Under Silver, what does the member pay toward the $6,000 of charges?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the full cost of the Silver year — premiums and the member’s share together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Under Bronze, what does the member pay toward the same $6,000 of charges?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What is the full cost of the Bronze year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-choice",
+          "text": "At $6,000 of covered charges, which plan costs the member less for the year in total?",
+          "choices": [
+            "Silver",
+            "Bronze"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Silver wins at $6,000 of charges, but the member has to choose before the year happens. Explain what a member would need to believe about the coming year to choose Bronze and still be reasoning well, and say what the two caps — $4,000 and $6,500 — protect against that the premiums do not."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Bronze looks cheaper, the comparison probably stopped at the premiums, where Bronze is $1,378.00 cheaper. Add the member’s share of the $6,000 in charges to each: $2,400.00 for Silver and $4,320.00 for Bronze. It is the $1,920.00 difference in cost sharing that reverses the ranking.",
+  "extension": "Find the level of covered charges at which the two fictional plans cost the same for the year, and say what that figure tells a member who has no idea what the year will bring.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

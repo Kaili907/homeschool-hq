@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l10",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: documenting assumptions and tradeoffs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "documenting assumptions and tradeoffs",
+  "objective": "Produce the fictional capstone plan document: what the year makes available, what it commits, what it builds, and what it assumes — with every claim carrying a figure.",
+  "scenario": "This is the capstone performance task, written for Case R, the fictional adult, or for the fictional profile the learner invented. It is entirely about the fictional case: no part of it asks what the learner earns, owes, owns, holds, is insured for, or has filed.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the Case R figures in these directions",
+    "the complete capstone record"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "For Case R: pay of $54,600 with an employer retirement contribution of $1,365, total tax of $11,735, pre-tax elections of $4,770, a monthly allocation of $931.04, an opening reserve of $1,600 with $400 a month added, living costs of $2,045 a month, an own retirement contribution of $2,730, and a further $2,400 of extra retirement saving across the year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the year make available in total, counting the employer contribution?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much of the year never becomes spendable cash, counting tax and the pre-tax elections?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total resources is that, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now assemble what the year builds.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is allocated from the surplus across the whole year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the reserve hold at the end of the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How many months of living costs does that reserve cover? Give two decimal places."
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "One more figure before writing.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much goes into retirement across the year in total, counting Case R’s own contribution, the employer contribution, and the extra saving?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write the capstone plan document. Every claim carries a figure.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the complete capstone plan for this fictional case. Cover what the year makes available, what it commits, what it builds, and how it is protected. State the three tradeoffs the plan makes and what each one costs, name the assumption the whole plan is most sensitive to, and say explicitly what a reader would have to believe for a different plan to be better than yours."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the total resources figure comes out at $54,600, the employer retirement contribution has been left out; if the share of resources that never becomes cash comes out near 21%, only the tax has been counted and the $4,770 of pre-tax elections has not. Build the numerator from both, then say in the plan how much of it is cost and how much is transfer.",
+  "extension": "Rewrite the plan for a fictional profile with the same pay but $520 a month of childcare costs, and say which of your three tradeoffs changes first.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

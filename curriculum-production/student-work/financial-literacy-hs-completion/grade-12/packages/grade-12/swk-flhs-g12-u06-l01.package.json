@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l01",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: coverage an independent adult typically needs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "coverage an independent adult typically needs",
+  "objective": "Total a fictional adult’s coverage costs, express them against income, and compute what one policy would actually pay on a stated loss.",
+  "scenario": "The four simulated policies below and the fictional loss used to test one of them are invented for this exercise. No real insurer, policy, or product is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional policy terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional adult earns $46,800 a year and holds four simulated policies: renters cover at $17 a month, auto at $118, the employee share of health at $186, and disability at $24. The renters policy covers personal property up to $25,000 after a deductible of $500.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the four policies cost each month together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do they cost across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What share of income does that represent, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the smallest policy against a stated loss.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "A fictional fire destroys $14,000 of personal property. What does the renters policy pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Netting off a full year of renters premiums, what is the household ahead by in that year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which of the four policies protects the largest potential loss for the smallest premium?",
+          "choices": [
+            "Renters, at $17 a month",
+            "Auto, at $118 a month",
+            "Health, at $186 a month"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "A fictional friend says renters cover is \"not worth it\" because $204 a year buys nothing in most years. Explain what that argument gets right and what it misses, and say what the household would have to be able to absorb for the friend to be correct."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the renters payout comes out at $14,000.00, the deductible has not been applied; if it comes out at $25,000, the limit has been treated as the payout. Work the terms in order: start from the $14,000 loss, subtract the $500 deductible, then check the result against the $25,000 limit, which only binds if the loss is larger.",
+  "extension": "Recompute the renters payout on a fictional loss of $31,000, and say which of the two policy terms decides the answer in that case.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

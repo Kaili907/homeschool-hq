@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l01",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: completing a simulated tax return from fictional documents"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "completing a simulated tax return from fictional documents",
+  "objective": "Build a simulated tax return from fictional documents, compute what is owed and what was withheld, and distinguish the band the last dollars fall in from the rate the whole income actually bears.",
+  "scenario": "The simulated documents and every figure below belong to a fictional filer. No real tax form, filing, or taxpayer is described, and no lesson in this unit asks about anyone’s own tax affairs.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional document figures and tax schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional documents report wages of $47,300, a pre-tax retirement contribution of $2,365 already excluded from taxable wages by the employer, interest income of $186, and federal income tax withheld of $4,410. Under the fictional federal schedule, taxable income is wages less the pre-tax contribution, plus interest income, less a standard deduction of $9,000; the schedule then charges 10% on the first $10,400 of taxable income and 12% on the band above it, which runs to $44,000. A separate payroll levy of 7.65% is charged on wages with no deduction.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is taxable income under the fictional schedule?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What federal income tax does the schedule produce?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "The documents show $4,410 withheld. What is the refund or the amount still owed?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put the income tax alongside the other federal charge, and express what the year actually cost.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the payroll levy on wages at 7.65%?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do the two federal charges come to together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the federal income tax as a share of wages, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "The filer’s last dollars are taxed at 12%, and income tax comes to 8.72% of wages. Which figure describes what one more dollar of wages would cost in income tax?",
+          "choices": [
+            "The 8.72% share of wages",
+            "The 12% band the last dollars fall in"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This fictional filer receives $283.48 back and paid $7,744.97 in federal charges across the year. Explain why the refund is a poor measure of what the year cost, and say which single figure you would put in front of someone who wanted to understand their own tax position — and why."
+        }
+      ]
+    }
+  ],
+  "remediation": "If taxable income comes out at $38,300.00, the $186 of interest has been left out or the pre-tax contribution has been subtracted twice. Work in the stated order: wages less the pre-tax contribution, plus interest, less the $9,000 deduction. The interest is added because nothing excludes it.",
+  "extension": "Recompute the return for a fictional filer with the same wages but $1,900 of interest income, and say which of the two figures — income tax or payroll levy — changes and why the other does not.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

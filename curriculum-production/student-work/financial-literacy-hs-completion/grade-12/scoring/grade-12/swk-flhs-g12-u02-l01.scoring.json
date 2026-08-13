@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l01",
+  "lessonId": "ma-g12-financial-literacy-u02-l01",
+  "integratedDomains": [
+    "budgeting",
+    "consumer-protection",
+    "banking",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$19,032.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Rent and the three monthly services are charged 12 times; the auto insurance is charged twice. Putting everything on an annual basis first is what makes obligations billed on different cycles comparable at all."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$16,113.90",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The current annual rent of $15,420.00 raised by 4.5%. Applying the increase to the annual figure avoids a rounded monthly rent that would not multiply back to the year."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,309.68",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Two charges of $612 raised by 7%. The premium renews on its own cycle, so it is easy to leave out of a review organised around monthly bills."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$1,104.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$92 a month for 12 months. Nothing was renegotiated here — the increase happened because a promotional period ended on its own schedule."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$612.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$51 a month for 12 months. The smallest increase on the list still costs $60 more across the year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$20,147.58",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$16,113.90 of rent, $1,309.68 of insurance, $1,008.00 of phone, $1,104.00 of internet, and $612.00 of streaming."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$1,115.58",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,147.58 against $19,032.00. No single renewal in the list looks large; the total does."
+        }
+      },
+      {
+        "ref": "t2-p5",
+        "answer": "$92.97",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,115.58 across 12 months. This is the figure a monthly budget has to find, and it arrives without any new decision having been made."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "rent * 12 + auto * 2 + phone * 12 + internet * 12 + streaming * 12",
+        "substituted": "1285 * 12 + 612 * 2 + 84 * 12 + 69 * 12 + 46 * 12",
+        "result": "$19,032.00",
+        "why": "Rent and the three monthly services are charged 12 times; the auto insurance is charged twice. Putting everything on an annual basis first is what makes obligations billed on different cycles comparable at all."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(rent2 * 12 * (1 + rentRise), 2)",
+        "substituted": "round(1285 * 12 * (1 + 0.045), 2)",
+        "result": "$16,113.90",
+        "why": "The current annual rent of $15,420.00 raised by 4.5%. Applying the increase to the annual figure avoids a rounded monthly rent that would not multiply back to the year."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(auto2 * 2 * (1 + autoRise), 2)",
+        "substituted": "round(612 * 2 * (1 + 0.07), 2)",
+        "result": "$1,309.68",
+        "why": "Two charges of $612 raised by 7%. The premium renews on its own cycle, so it is easy to leave out of a review organised around monthly bills."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "internetNew * 12",
+        "substituted": "92 * 12",
+        "result": "$1,104.00",
+        "why": "$92 a month for 12 months. Nothing was renegotiated here — the increase happened because a promotional period ended on its own schedule."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "(streaming2 + streamRise) * 12",
+        "substituted": "(46 + 5) * 12",
+        "result": "$612.00",
+        "why": "$51 a month for 12 months. The smallest increase on the list still costs $60 more across the year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t1-p2 + #t1-p3 + phone2 * 12 + #t2-p1 + #t2-p2",
+        "substituted": "#t1-p2 + #t1-p3 + 84 * 12 + #t2-p1 + #t2-p2",
+        "result": "$20,147.58",
+        "why": "$16,113.90 of rent, $1,309.68 of insurance, $1,008.00 of phone, $1,104.00 of internet, and $612.00 of streaming."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p3 - #t1-p1",
+        "substituted": "#t2-p3 - #t1-p1",
+        "result": "$1,115.58",
+        "why": "$20,147.58 against $19,032.00. No single renewal in the list looks large; the total does."
+      },
+      {
+        "ref": "t2-p5",
+        "expression": "round(#t2-p4 / 12, 2)",
+        "substituted": "round(#t2-p4 / 12, 2)",
+        "result": "$92.97",
+        "why": "$1,115.58 across 12 months. This is the figure a monthly budget has to find, and it arrives without any new decision having been made."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "None of these five increases was chosen by the household, and none was individually large. Explain how a household ends up paying $92.97 more a month without deciding to, and name the two obligations on this list you would put a renewal date against first, with your reason.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the mechanism: each obligation renews automatically on its own schedule, so continuing is the default and the household only faces a decision if it creates one.",
+          "Names the aggregation problem: five increases that each look small are only visible as $1,115.58 once they are put on a common annual basis.",
+          "Selects two obligations with a stated reason — for example rent at $16,113.90 because it is the largest single line and the 4.5% increase on it is $693.90 of the total, and internet at $1,104.00 because a promotional expiry is the one increase with an obvious point of negotiation."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,115.58 annual increase and the $92.97 monthly figure, and cites at least one individual obligation’s own annual cost."
+        ],
+        "lookFors": [
+          "The response ranks by the size of the increase or the prospect of changing it, not by which service feels least necessary.",
+          "The response treats the renewal date as the moment leverage exists, rather than treating any month as equivalent."
+        ],
+        "commonMisconception": "Judging a recurring obligation by its monthly price rather than by its annual cost, so a $5 increase and a 4.5% rent increase are weighed as if comparable.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "plan-coherence",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 8,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

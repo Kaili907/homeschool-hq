@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: repayment projection against expected income"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "repayment projection against expected income",
+  "objective": "Project a fictional loan’s monthly payment, total repaid, and total interest, and test the payment against expected income using a stated share rule.",
+  "scenario": "The fictional balance, the invented rate, and the simulated payment factor below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional loan terms and payment factor in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional graduate finishes with a balance of $32,000 at a fixed 5.4%, repaid over 120 monthly payments. Under the fictional payment factor table, that combination costs $10.79 a month for every $1,000 borrowed. The graduate expects to start work at $44,000 a year, and applies a guideline that the payment should stay under 10% of monthly gross pay.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is repaid in total across the 120 payments?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of that is interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the payment against the income that has to carry it.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is expected monthly gross pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of monthly gross does the payment take, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Does the projected payment satisfy the graduate’s 10% guideline?",
+          "choices": [
+            "Yes — but with little room to spare",
+            "No — the payment exceeds the guideline"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This projection passes the guideline at 9.42%. Explain what the guideline is measuring and what it is not, and say why testing the payment against gross rather than take-home pay makes the result look better than the graduate’s month will feel."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the monthly payment comes out at $10.79 or at $345,280, the balance has not been converted into thousands before the factor is applied. The factor prices each $1,000 borrowed, so $32,000 is 32 units of the factor: 32 times $10.79.",
+  "extension": "Recompute the payment, the total repaid, and the share of gross for the same balance over 180 payments at a factor of $8.15 per $1,000, and say what the longer term buys and what it costs.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

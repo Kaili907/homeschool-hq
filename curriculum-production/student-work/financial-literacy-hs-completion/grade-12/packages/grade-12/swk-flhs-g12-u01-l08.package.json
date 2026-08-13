@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l08",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: simulated onboarding paperwork and elections"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "simulated onboarding paperwork and elections",
+  "objective": "Compute a full-year fictional tax liability across two employers, compare it with what each employer withheld on its own, and plan for the gap the method leaves.",
+  "scenario": "The two fictional employers and the simulated pay below are invented for this exercise, as is every rate in the tax schedule applied to them.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional pay history and tax schedule in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker earned $3,900 a month for the first 7 months of the year, then $5,400 a month for the remaining 5 months at a new employer. Under the fictional federal schedule, taxable income is total pay less a standard deduction of $9,000; the schedule charges 10% on the first $10,400 of taxable income, 12% on the band from $10,400 to $44,000, and 22% above $44,000. Each employer withholds as though its own pay were the worker’s only income for the year: it subtracts the whole $9,000 deduction from that job’s pay and applies the bands from the bottom.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the first job pay across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What did the second job pay across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is total pay for the year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compute what is actually owed, then what was actually withheld.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is taxable income for the year after one standard deduction?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the federal income tax owed on that taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What did the first employer withhold, treating its own pay as the only income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What did the second employer withhold on the same basis?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p5",
+          "promptType": "fixed-numeric",
+          "text": "What is still owed when the year is filed?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The fictional worker will owe $1,418.00 at filing through no error of their own. Explain why the withholding method produces this, and set out one workable plan for meeting the bill, stating what your plan requires the worker to do each month."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the tax owed comes out at $3,940.00, the two employers’ separate calculations are being added together. The schedule applies once, to total income. Add the two jobs to $54,300.00, subtract one $9,000 deduction, and then work through all three bands — including the 22% band above $44,000, which neither employer reached.",
+  "extension": "Work out how much extra the second employer would have to withhold in each of its 5 monthly payments to clear the $1,418.00 by year end, and say what that does to the worker’s monthly budget.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

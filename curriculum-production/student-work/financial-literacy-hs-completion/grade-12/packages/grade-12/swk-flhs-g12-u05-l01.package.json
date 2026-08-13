@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l01",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 1,
+    "phase": "Launch and diagnostic",
+    "title": "Launch and diagnostic: employer retirement plans and matching in outline"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "employer retirement plans and matching in outline",
+  "objective": "Compute the whole employer contribution a fictional tiered plan makes available, find the worker contribution that earns it, and identify where further contributions stop earning more.",
+  "scenario": "The simulated plan summary below belongs to a fictional employer. Every rate and figure in it is invented for this exercise, and no real plan, provider, or product is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan terms in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional employer contributes 100% of what the worker puts in on the first 3% of pay, and 50% of what the worker puts in on the next 2% of pay. Nothing further is contributed on anything above 5% of pay. The worker is paid $52,800 a year.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the employer contribute on the first tier, when the worker contributes 3% of pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the employer contribute on the second tier, when the worker contributes the next 2% of pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the largest employer contribution available in a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find what the worker has to put in, and where putting in more stops helping.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What must the worker contribute across the year to reach the full 5% of pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "The employer contribution measured against the worker’s own $2,640.00 is what percentage, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "A worker raises their contribution from 5% of pay to 8%. Does the employer contribution rise?",
+          "choices": [
+            "Yes — the employer contributes on everything the worker puts in",
+            "No — nothing is contributed on pay above the 5% ceiling"
+          ]
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "A worker who contributes only 3% of pay leaves how much of the employer contribution unclaimed?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why the two tiers of this plan are not equally valuable to the fictional worker, and say what a worker would need to be true about the rest of their budget for stopping at 3% to be a reasonable decision rather than an oversight."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the maximum employer contribution comes out at $2,640.00, both tiers are being matched at 100%. Read the tiers separately: the first 3% of $52,800 is matched dollar for dollar, giving $1,584.00, and the next 2% is matched at 50%, giving $528.00 on a $1,056.00 contribution.",
+  "extension": "Work out what the plan would be worth to a fictional worker paid $34,000 rather than $52,800, and say whether the 5% ceiling is easier or harder to reach on the lower salary.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l01.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l01",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

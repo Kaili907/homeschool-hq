@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: documenting assumptions and tradeoffs"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "documenting assumptions and tradeoffs",
+  "objective": "Build the fictional capstone case’s monthly commitments, find the surplus that remains, and document the assumptions and the forgone employer contribution the plan rests on.",
+  "scenario": "This lesson continues the capstone on Case R, the fictional adult from the previous lesson, or on the fictional profile the learner invented. All figures are invented; nothing about the learner’s own finances is used or requested at any point.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the Case R figures in these directions",
+    "the capstone record begun in the previous lesson"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Case R is paid $54,600 a year and has monthly take-home pay of $3,174.58. Monthly costs are rent $1,180, utilities $155, food $430, transport $210, phone $52, and renters insurance $18. A student loan balance of $18,400 is repaid over 120 payments at the fictional factor of $10.79 a month per $1,000 borrowed. A card balance of $1,950 is charged at 21.6% a year. The employer contributes 50% of what Case R puts in, up to the first 6% of pay; Case R currently elects 5%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the monthly living costs come to?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly student loan payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the card balance cost in interest each month?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find the surplus, and check what the current retirement election leaves on the table.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is committed each month, counting living costs and the loan payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What monthly surplus remains?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What employer retirement contribution does the current 5% election earn across the year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much employer contribution is left unclaimed by electing 5% rather than 6%?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Add to the capstone record. Write the assumptions page.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Write the assumptions page of the capstone record. State the three assumptions this monthly plan most depends on, say for each what would happen to the $931.04 surplus if it turned out to be wrong, and decide whether to raise the retirement election to 6% — defending whichever way you decide."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the surplus comes out at $895.94, the $35.10 of card interest has been added to the committed total. Interest is a charge on the balance, not a required monthly payment, and treating it as committed double-counts it once the surplus is allocated to the card. Commit the $2,045.00 of living costs and the $198.54 loan payment only.",
+  "extension": "Recompute the surplus for the same fictional case with rent at $1,340 rather than $1,180, and say what proportion of the surplus a single change in the largest line consumes.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

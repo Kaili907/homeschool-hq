@@ -4,10 +4,16 @@ import { g12u01 } from './specs/g12u01.ts'
 import { g12u02 } from './specs/g12u02.ts'
 import { g12u03 } from './specs/g12u03.ts'
 import { g12u04 } from './specs/g12u04.ts'
+import { g12u05 } from './specs/g12u05.ts'
+import { g12u06 } from './specs/g12u06.ts'
+import { g12u07 } from './specs/g12u07.ts'
 
 export const ALL_SPECS: readonly LessonSpec[] = [
   ...g12u01,
   ...g12u02,
   ...g12u03,
   ...g12u04,
+  ...g12u05,
+  ...g12u06,
+  ...g12u07,
 ]

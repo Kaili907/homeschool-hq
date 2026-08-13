@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l05",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: identity-incident response, step by step"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "identity-incident response, step by step",
+  "objective": "Quantify the exposure in a fictional identity incident, show how the stated reporting window changes liability, and set the response in order.",
+  "scenario": "The simulated incident below is a fictional construction for this exercise. No real account, institution, or identifier appears anywhere in this lesson, and none is requested.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional incident figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A total of 3 fictional accounts have been opened in the person’s name, carrying charges of $1,240, $380, and $2,115. Under the fictional rules that apply here, a holder who reports within the stated window is liable for at most $50 on each account; a holder who reports after it is liable for up to $500 on each. A fictional monitoring service costs $13.99 a month and would be kept for 24 months.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the fraudulent charges come to in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the most the person is liable for if all three are reported inside the window?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the most they are liable for if all three are reported after the window?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price what promptness is worth and what follows the incident.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does reporting inside the window save?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What would 24 months of the monitoring service cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "What should the person do first on discovering the accounts?",
+          "choices": [
+            "Pay the smallest charge to stop it growing",
+            "Report the accounts as not theirs and have the fraud recorded",
+            "Wait to see whether more accounts appear"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Set out the response to this incident in order, with a reason for the position of each step. Explain why the $3,735.00 is not the right measure of what the person stands to lose, and say what they should refuse to do even if someone contacting them about the incident asks."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the liability comes out at $3,735.00, the charges are being treated as the exposure. Under the stated rules the holder is liable for at most $50 per account when reported inside the window, which is $150.00 across the 3 accounts. The $3,735.00 is what must be disputed, not what must be paid.",
+  "extension": "Work out the liability if a fourth fictional account for $60 were found, reported late, and say whether the per-account cap or the charge decides that one.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

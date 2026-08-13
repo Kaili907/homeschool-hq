@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l08",
+  "lessonId": "ma-g12-financial-literacy-u04-l08",
+  "integratedDomains": [
+    "postsecondary-financing",
+    "debt",
+    "income",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,200.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,400 across the 12 months of a year."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$256.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "8% of $3,200.00. This applicant has chosen a tighter rule than the 10% used for the ten-year case, which matters because the shorter term makes each borrowed dollar cost more per month."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$13,403.14",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$256.00 divided by the $19.10 charged per $1,000, scaled back to dollars. The five-year term nearly doubles the monthly cost per $1,000 compared with a ten-year term, which is what holds this ceiling down."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$17,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $14,600 programme cost plus $2,800 of tools. The tools are a required cost of entering the trade, so leaving them out would understate what has to be financed."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$3,996.86",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$17,400.00 needed against $13,403.14 the payment rule supports."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "No — the cost exceeds the ceiling by $3,996.86",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$17,400.00 against a ceiling of $13,403.14. The rule is not broken by the pathway being unaffordable in general; it is broken by financing all of it with borrowing."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(expectedIncome / 12, 2)",
+        "substituted": "round(38400 / 12, 2)",
+        "result": "$3,200.00",
+        "why": "$38,400 across the 12 months of a year."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * shareCap, 2)",
+        "substituted": "round(#t1-p1 * 0.08, 2)",
+        "result": "$256.00",
+        "why": "8% of $3,200.00. This applicant has chosen a tighter rule than the 10% used for the ten-year case, which matters because the shorter term makes each borrowed dollar cost more per month."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p2 / factor * 1000, 2)",
+        "substituted": "round(#t1-p2 / 19.1 * 1000, 2)",
+        "result": "$13,403.14",
+        "why": "$256.00 divided by the $19.10 charged per $1,000, scaled back to dollars. The five-year term nearly doubles the monthly cost per $1,000 compared with a ten-year term, which is what holds this ceiling down."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "programmeCost + tools",
+        "substituted": "14600 + 2800",
+        "result": "$17,400.00",
+        "why": "The $14,600 programme cost plus $2,800 of tools. The tools are a required cost of entering the trade, so leaving them out would understate what has to be financed."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - #t1-p3",
+        "substituted": "#t2-p1 - #t1-p3",
+        "result": "$3,996.86",
+        "why": "$17,400.00 needed against $13,403.14 the payment rule supports."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 > #t1-p3",
+        "substituted": "#t2-p1 > #t1-p3",
+        "result": "No — the cost exceeds the ceiling by $3,996.86",
+        "why": "$17,400.00 against a ceiling of $13,403.14. The rule is not broken by the pathway being unaffordable in general; it is broken by financing all of it with borrowing."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      },
+      {
+        "dimension": "Transfer to the new case",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The method from the earlier case is restated without being applied."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The method is applied but a difference in the new case is ignored."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The method is applied and adjusted for what is different in the new case."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The method is applied, adjusted, and the limit of the transfer is stated."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The pathway costs $3,996.86 more than the ceiling allows. Give two different ways this fictional applicant could close that gap without breaking the rule, price each, and say which you would try first and why.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Gives two genuinely different routes with figures — for example earning and contributing roughly $3,997 before or during the programme, buying tools over time out of earnings rather than financing them, or finding a programme costing less.",
+          "Prices each route rather than naming it, showing how it brings the financed amount to $13,403.14 or below.",
+          "Chooses one and justifies it against the applicant’s situation, recognising that the tools at $2,800 are the component most likely to be spread over time.",
+          "Notes what each route costs that is not money — time before starting, a longer path to qualification, or working while studying."
+        ],
+        "evidenceRequirements": [
+          "Uses the $13,403.14 ceiling and the $17,400.00 total cost, and shows each proposed route closing the $3,996.86 gap."
+        ],
+        "lookFors": [
+          "The routes respect the ceiling rather than arguing the rule should be relaxed.",
+          "A response that argues for relaxing the rule is credited only if it states what payment share it would accept instead and what that costs monthly."
+        ],
+        "commonMisconception": "Assuming a shorter loan term is always better, without noticing that it raises the monthly cost per $1,000 and so lowers how much can be borrowed at all.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "transfer"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

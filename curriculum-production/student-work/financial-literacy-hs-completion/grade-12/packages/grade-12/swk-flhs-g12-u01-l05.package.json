@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l05",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 5,
+    "phase": "Applied simulation",
+    "title": "Applied simulation: income changes across a career stage"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "income changes across a career stage",
+  "objective": "Compound a fictional salary across repeated annual raises, price the permanent effect of one raise that never happened, and state the assumption the projection rests on.",
+  "scenario": "The career path below belongs to a fictional worker at a fictional employer. Every salary and raise in it is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional salary history in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional worker starts at $46,000 a year and receives a raise of 3% at the end of each of the next 5 years. Each raise applies to the salary as it then stands, not to the starting salary.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the salary after all 5 raises? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much higher is that than the starting salary?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now suppose the raise in year 3 never happens and the other 4 raises go ahead as scheduled at 3% each.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the salary at the end of the same period with only 4 raises? Round to the nearest cent.",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual gap the missed raise leaves at the end of the period?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Assume the gap stays at that same amount in each of the next 10 years, with no further raises on either path. What does the missed raise cost across those 10 years?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The $15,532.00 rests on holding the gap flat for 10 years. Say why that assumption makes the figure a floor rather than a best estimate, and name one other thing the projection leaves out that could push the true cost either up or down."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the five-raise salary comes out at $52,900.00, each raise is being taken as 3% of the original $46,000 and added five times. A raise applies to the salary as it then stands. Multiply by 1.03 once for each year in turn and compare the running figures — the gap between the two methods is what compounding is.",
+  "extension": "Recompute the ten-year cost with the gap growing by 3% a year instead of staying flat, and say how much the flat-gap simplification understated.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l05.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l05",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

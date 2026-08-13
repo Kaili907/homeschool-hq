@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u03-l02",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 3,
+    "unitTitle": "PF3 — Budgeting and Saving: Running the Adult Budget",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: irregular income and cash-flow timing"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF3"
+  ],
+  "focus": "irregular income and cash-flow timing",
+  "objective": "Establish that a fictional irregular income covers its obligations in total, find the month in which it does not, and size the buffer that timing alone requires.",
+  "scenario": "The simulated six-month income record below belongs to a fictional worker paid per project. Every figure is invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional income record in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Over 6 months the fictional worker received $1,850, $4,320, $900, $3,780, $2,640, and $4,110. Fixed obligations are $2,470 every month and fall due whether or not a payment has arrived.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What did the 6 months bring in altogether?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the average monthly income across the 6 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What do the fixed obligations come to over the same 6 months?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now find the month the average conceals.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What surplus did the 6 months produce in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "In the weakest month, income was $900. What was the position in that month alone?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much must be held in reserve to carry that month without borrowing?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Across the whole 6 months, is the income sufficient to meet the obligations?",
+          "choices": [
+            "Yes — but only if the timing is bridged",
+            "No — the income falls short over the period"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "This income is sufficient over 6 months and insufficient in month 3. Explain why an average of $2,933.33 is a misleading basis for planning here, and describe how you would run this budget so that month 3 is survivable — naming what your method requires the worker to do in a strong month."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the conclusion is that this worker cannot afford their obligations, compare the totals: $17,600.00 received against $14,820.00 due. The income is adequate. Now compare month 3 alone: $900 against $2,470. Both statements are true, and the second one is about timing rather than adequacy.",
+  "extension": "Work out the buffer needed if the two weakest months fell consecutively, and say how much larger the reserve would have to be than the $1,570.00 found here.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u03-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u03-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

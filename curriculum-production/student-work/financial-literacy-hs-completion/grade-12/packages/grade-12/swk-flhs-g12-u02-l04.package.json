@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: subscription and service audits"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "subscription and service audits",
+  "objective": "Audit a fictional household’s recurring services against actual use, total what cancellation would recover, and express the recovery as a share of the whole outlay.",
+  "scenario": "The eight simulated services below, their prices, and the fictional household’s use of them are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional service list in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional household pays for eight services. Seven are billed monthly: A at $15.99, B at $8.49, C at $22.00, D at $6.99, F at $11.99, G at $9.99, and H at $17.50. One, E, is billed once a year at $54.00. The household used A, C, E, and G in the last month. It has not used B, D, or F for most of the year. H duplicates what C already provides.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the seven monthly services cost in one month, together?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What do all eight services cost across a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now separate the services by whether they are used, and price what the audit could recover.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What do the three unused services — B, D, and F — cost across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the duplicate service H cost across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What would cancelling all four recover in a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What share of the total annual outlay does that recovery represent, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Cancelling B, D, and F is straightforward. Cancelling H is a different kind of decision. Explain the difference, and say what the household should verify before cancelling H that it does not need to verify before cancelling the other three."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the annual total comes out as $1,115.40, the $54.00 annual service has been left out; if it comes out near $14,032, the annual charge has been multiplied by 12 as well. Annualise each line on its own billing cycle: seven services at twelve charges each, and one service at a single charge.",
+  "extension": "Rank the eight services by annual cost rather than monthly price, and say which service the two orderings disagree about most.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

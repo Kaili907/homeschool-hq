@@ -1,0 +1,298 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l10",
+  "lessonId": "ma-g12-financial-literacy-u01-l10",
+  "integratedDomains": [
+    "income",
+    "insurance-risk",
+    "saving-investing",
+    "budgeting",
+    "taxes",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$2,450.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58,800 across 24 periods. Every per-period cost below is set against this."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$3,528.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "6% of $58,800 — the ceiling above which the employer adds nothing further. Contributing less leaves part of the employer contribution unclaimed; contributing more is still saving, but earns no additional employer money."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$1,764.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "50% of the first 6% of $58,800. It is paid only on what the worker actually contributes, so it is available rather than automatic."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,832.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$118 in each of the 24 pay periods. The premium is charged whether or not any care is used, so it is the floor of a Plan A year."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,392.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$58 in each of the 24 pay periods, and likewise unavoidable. Plan B’s premium floor is $1,440.00 lower than Plan A’s."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The first $1,200 in full, then 20% of the remaining $3,000."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "$3,360.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The first $3,000 in full, then 30% of the remaining $1,200."
+        }
+      },
+      {
+        "ref": "t3-p1",
+        "answer": "$4,632.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,832.00 of premiums plus $1,800.00 of cost sharing."
+        }
+      },
+      {
+        "ref": "t3-p2",
+        "answer": "$4,752.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$1,392.00 of premiums plus $3,360.00 of cost sharing."
+        }
+      },
+      {
+        "ref": "t3-p3",
+        "answer": "Plan A",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$4,632.00 against $4,752.00 — a difference of $120.00, which is small enough that a different level of use would reverse it."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "salary / periods",
+        "substituted": "58800 / 24",
+        "result": "$2,450.00",
+        "why": "$58,800 across 24 periods. Every per-period cost below is set against this."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "salary3 * matchTier2",
+        "substituted": "58800 * 0.06",
+        "result": "$3,528.00",
+        "why": "6% of $58,800 — the ceiling above which the employer adds nothing further. Contributing less leaves part of the employer contribution unclaimed; contributing more is still saving, but earns no additional employer money."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "salary2 * matchTier * matchShare",
+        "substituted": "58800 * 0.06 * 0.5",
+        "result": "$1,764.00",
+        "why": "50% of the first 6% of $58,800. It is paid only on what the worker actually contributes, so it is available rather than automatic."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "premiumA * periods2",
+        "substituted": "118 * 24",
+        "result": "$2,832.00",
+        "why": "$118 in each of the 24 pay periods. The premium is charged whether or not any care is used, so it is the floor of a Plan A year."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "premiumB * periods3",
+        "substituted": "58 * 24",
+        "result": "$1,392.00",
+        "why": "$58 in each of the 24 pay periods, and likewise unavoidable. Plan B’s premium floor is $1,440.00 lower than Plan A’s."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "deductibleA + (charges - deductibleA) * coinsA",
+        "substituted": "1200 + (4200 - 1200) * 0.2",
+        "result": "$1,800.00",
+        "why": "The first $1,200 in full, then 20% of the remaining $3,000."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "deductibleB + (charges2 - deductibleB) * coinsB",
+        "substituted": "3000 + (4200 - 3000) * 0.3",
+        "result": "$3,360.00",
+        "why": "The first $3,000 in full, then 30% of the remaining $1,200."
+      },
+      {
+        "ref": "t3-p1",
+        "expression": "#t2-p1 + #t2-p3",
+        "substituted": "#t2-p1 + #t2-p3",
+        "result": "$4,632.00",
+        "why": "$2,832.00 of premiums plus $1,800.00 of cost sharing."
+      },
+      {
+        "ref": "t3-p2",
+        "expression": "#t2-p2 + #t2-p4",
+        "substituted": "#t2-p2 + #t2-p4",
+        "result": "$4,752.00",
+        "why": "$1,392.00 of premiums plus $3,360.00 of cost sharing."
+      },
+      {
+        "ref": "t3-p3",
+        "expression": "#t3-p1 < #t3-p2",
+        "substituted": "#t3-p1 < #t3-p2",
+        "result": "Plan A",
+        "why": "$4,632.00 against $4,752.00 — a difference of $120.00, which is small enough that a different level of use would reverse it."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t4-p1",
+        "prompt": "Write the complete set of first-year elections you would defend for this fictional hire: a retirement contribution rate, a health plan, and what must happen before the enrolment window closes. Justify each with a figure, and name the one election you would change first if the hire told you their expected medical use was much lower.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Sets a retirement contribution and justifies it against the $3,528.00 needed to earn the full $1,764.00 employer contribution, either by reaching it or by stating explicitly what competing use of the cash makes a lower rate defensible.",
+          "Chooses a health plan and justifies it with the year totals — $4,632.00 for Plan A against $4,752.00 for Plan B — rather than with the premium alone.",
+          "Addresses the deadline as a decision in its own right: missing the window leaves the hire with no health plan and no employer retirement contribution for a full year, so the cost of not choosing is the whole $1,764.00 plus uninsured exposure.",
+          "Names Plan B as the election to revisit under lower expected use, and gives the reason: Plan B is $1,440.00 cheaper in premiums, which wins whenever cost sharing stays small."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,764.00 employer contribution and both plan-year totals, $4,632.00 and $4,752.00.",
+          "States the consequence of missing the enrolment window in figures, not only in words."
+        ],
+        "lookFors": [
+          "The three elections are consistent with one another and with the $2,450.00 of gross pay per period.",
+          "A contribution rate below 6% is accepted when the response names what the cash is needed for instead; it is not accepted when offered without a reason.",
+          "The response treats the $120.00 gap between the plans as narrow rather than decisive."
+        ],
+        "commonMisconception": "Treating an enrolment deadline as an administrative detail rather than as the point at which the default — no coverage and no employer contribution — becomes the outcome.",
+        "dimensions": [
+          "plan-coherence",
+          "tradeoff-defense",
+          "criteria-application",
+          "evidence-use"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 9,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

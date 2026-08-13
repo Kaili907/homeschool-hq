@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l06",
+  "lessonId": "ma-g12-financial-literacy-u06-l06",
+  "integratedDomains": [
+    "insurance-risk",
+    "budgeting",
+    "income",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$321.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three premiums held before the change. There was no life cover, so nothing is added for it here."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$605.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The four premiums after the change, including the newly added life cover."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$284.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$605.00 against $321.00 — nearly double, from a move and one dependent."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$3,408.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$284.00 in each of 12 months. A change of this size has to be found in the budget, so it belongs in the review rather than being absorbed silently."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$244.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $216.00 rise in health plus the $28 of new life cover. Both follow from the dependent rather than from the move, and together they are the great majority of the $284.00."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$13,000.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$38,000 of property against a $25,000 limit. This gap costs nothing in premium and would only appear at the moment of a claim, which is what makes it the most easily missed part of the review."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "rentersOld + autoOld + healthOld",
+        "substituted": "17 + 118 + 186",
+        "result": "$321.00",
+        "why": "The three premiums held before the change. There was no life cover, so nothing is added for it here."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "rentersNew + autoNew + healthNew + lifeNew",
+        "substituted": "26 + 149 + 402 + 28",
+        "result": "$605.00",
+        "why": "The four premiums after the change, including the newly added life cover."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p2 - #t1-p1",
+        "substituted": "#t1-p2 - #t1-p1",
+        "result": "$284.00",
+        "why": "$605.00 against $321.00 — nearly double, from a move and one dependent."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p3 * 12",
+        "substituted": "#t1-p3 * 12",
+        "result": "$3,408.00",
+        "why": "$284.00 in each of 12 months. A change of this size has to be found in the budget, so it belongs in the review rather than being absorbed silently."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "(healthNew2 - healthOld2) + lifeNew2",
+        "substituted": "(402 - 186) + 28",
+        "result": "$244.00",
+        "why": "The $216.00 rise in health plus the $28 of new life cover. Both follow from the dependent rather than from the move, and together they are the great majority of the $284.00."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "propertyNew - coverOld",
+        "substituted": "38000 - 25000",
+        "result": "$13,000.00",
+        "why": "$38,000 of property against a $25,000 limit. This gap costs nothing in premium and would only appear at the moment of a claim, which is what makes it the most easily missed part of the review."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Of the $284.00 increase, $244.00 follows the dependent and $40.00 follows the move. Explain what that tells the household about which parts of a protection review are triggered by which kind of life change, and say why the $13,000.00 figure is more urgent than any of the premium increases.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Draws the distinction: a new dependent changes who needs to be covered and adds cover types, producing $244.00 of the increase, while a move changes what the same cover costs, producing the remaining $40.00.",
+          "Draws the practical conclusion: a change in household composition needs a review of what policies exist at all, while a move needs a review of the prices and terms of the policies already held.",
+          "Explains the urgency of the gap: the $13,000.00 of uncovered property costs nothing now and is discovered only when a claim is made, at which point it cannot be fixed, whereas every premium increase is visible immediately."
+        ],
+        "evidenceRequirements": [
+          "Uses the $244.00 attributable to the dependent, the $40.00 attributable to the move, and the $13,000.00 uncovered property."
+        ],
+        "lookFors": [
+          "The response identifies limits as something to review, not only premiums.",
+          "The response treats an invisible gap as more dangerous than a visible cost."
+        ],
+        "commonMisconception": "Reviewing protection after a life change by comparing premiums, which surfaces every price rise and none of the coverage limits that stopped matching the household.",
+        "dimensions": [
+          "reasoning-from-figures",
+          "criteria-application",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

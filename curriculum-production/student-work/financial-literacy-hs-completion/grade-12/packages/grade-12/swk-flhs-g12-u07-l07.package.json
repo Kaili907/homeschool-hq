@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u07-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u07-l07",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 7,
+    "unitTitle": "PF7 — Paying Taxes: Taxes and the Simulated Adult Finance Capstone",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: completing a simulated tax return from fictional documents"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF7"
+  ],
+  "focus": "completing a simulated tax return from fictional documents",
+  "objective": "Reproduce two independent errors on a fictional return, compute the correct liability, and attribute the overstatement to each error separately.",
+  "scenario": "The fictional return and the errors on it below are invented for this exercise. No real filing or taxpayer is described.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional return figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional filer had wages of $49,800 and a pre-tax retirement contribution of $2,490. The fictional schedule allows a standard deduction of $9,000 and charges 10% on the first $10,400 of taxable income and 12% above it. The filer made two mistakes: they left the pre-tax contribution in taxable income, and they applied 12% to the whole of it rather than 10% to the first band.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the correct taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the correct tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What taxable income did the filer use?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price each error on its own.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What tax did the filer compute, applying 12% to all of their taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much did the filer overstate the tax?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the overstatement comes from leaving the pre-tax contribution in taxable income?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "How much comes from applying 12% to the whole of taxable income rather than 10% to the first band?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Both errors made the filer overpay. Explain why the second error — applying one rate to everything — would produce a very different result for a filer with much higher income, and give one check that would have caught both errors without redoing the whole return."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the two errors do not add to $506.80, check each separately. Leaving $2,490 in taxable income costs 12% of it, which is $298.80. Charging the first $10,400 at 12% rather than 10% costs 2% of $10,400, which is $208.00. Together they account for the whole overstatement.",
+  "extension": "Recompute both errors for a fictional filer with taxable income of $58,000 under the same schedule, where the 22% band applies, and say which error grows more.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u07-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u07-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

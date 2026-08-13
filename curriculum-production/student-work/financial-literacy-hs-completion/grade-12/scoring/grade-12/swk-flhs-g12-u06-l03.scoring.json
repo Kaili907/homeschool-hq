@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l03",
+  "lessonId": "ma-g12-financial-literacy-u06-l03",
+  "integratedDomains": [
+    "insurance-risk",
+    "saving-investing",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The three deductibles added. This is what the household would have to produce in cash if one claim were made on each policy in the same year, and it is a floor a reserve can be sized against because it comes from the policies themselves."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$7,100.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $5,600 cap on health, plus the auto and renters deductibles. The cap, not the deductible, is what bounds a health year with substantial claims in it."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$900.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$3,300.00 against $2,400 held."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$4,700.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$7,100.00 against $2,400 held. The two targets differ by $3,800.00, which is the difference between the health deductible and the health cap."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "4.9",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$900.00 at $185 a month. A target this close is worth naming, because it can be reached inside a year."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "25.4",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,700.00 at the same $185 a month — more than two years, during which the household is exposed to the difference."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "healthDed + autoDed + rentersDed",
+        "substituted": "1800 + 1000 + 500",
+        "result": "$3,300.00",
+        "why": "The three deductibles added. This is what the household would have to produce in cash if one claim were made on each policy in the same year, and it is a floor a reserve can be sized against because it comes from the policies themselves."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "oopMax + autoDed2 + rentersDed2",
+        "substituted": "5600 + 1000 + 500",
+        "result": "$7,100.00",
+        "why": "The $5,600 cap on health, plus the auto and renters deductibles. The cap, not the deductible, is what bounds a health year with substantial claims in it."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 - reserve",
+        "substituted": "#t1-p1 - 2400",
+        "result": "$900.00",
+        "why": "$3,300.00 against $2,400 held."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - reserve2",
+        "substituted": "#t1-p2 - 2400",
+        "result": "$4,700.00",
+        "why": "$7,100.00 against $2,400 held. The two targets differ by $3,800.00, which is the difference between the health deductible and the health cap."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "round(#t1-p3 / monthly, 1)",
+        "substituted": "round(#t1-p3 / 185, 1)",
+        "result": "4.9",
+        "why": "$900.00 at $185 a month. A target this close is worth naming, because it can be reached inside a year."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t2-p1 / monthly2, 1)",
+        "substituted": "round(#t2-p1 / 185, 1)",
+        "result": "25.4",
+        "why": "$4,700.00 at the same $185 a month — more than two years, during which the household is exposed to the difference."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Choose which of the two targets this fictional household should work to first and defend it with the figures. Explain what the household is exposed to under your choice, and say why sizing a reserve from the policies rather than from a general rule is useful here.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Chooses a target and defends it — the $3,300.00 floor because 4.9 months makes it achievable and it covers the common case of one claim per policy, or the $7,100.00 figure because it is the only one that covers a bad health year.",
+          "States the exposure that remains under the choice: working to the floor leaves the household $3,800.00 short of a bad health year, while working to the larger figure leaves 25.4 months during which even the floor is not fully funded.",
+          "Explains the method: both targets are read off the household’s own deductibles and cap, so they answer what this household would actually have to produce, which a general rule expressed in months of expenses does not."
+        ],
+        "evidenceRequirements": [
+          "Uses the $3,300.00 and $7,100.00 targets and both month figures, 4.9 and 25.4."
+        ],
+        "lookFors": [
+          "The response uses the health cap rather than the health deductible when describing the worse year.",
+          "Either target is credited when the remaining exposure is named."
+        ],
+        "commonMisconception": "Sizing a reserve only against the deductibles, when the annual cap is what governs the cost of a year with more than one significant claim in it.",
+        "dimensions": [
+          "criteria-application",
+          "tradeoff-defense",
+          "plan-coherence"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

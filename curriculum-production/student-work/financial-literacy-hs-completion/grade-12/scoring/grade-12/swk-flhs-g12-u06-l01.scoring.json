@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l01",
+  "lessonId": "ma-g12-financial-literacy-u06-l01",
+  "integratedDomains": [
+    "insurance-risk",
+    "budgeting",
+    "income",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$345.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The four monthly premiums added. Health is much the largest at $186, and renters much the smallest at $17, which is worth holding in mind before the payout is computed."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$4,140.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$345.00 in each of the 12 months. Premiums are paid whether or not anything is claimed, which is what makes them a budget line rather than a contingency."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "8.85%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$4,140.00 measured against $46,800 of income. Expressing protection as a share of income is how it can be compared with the other claims on a budget."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$13,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $14,000 loss less the $500 deductible. The $25,000 limit is not reached, so it does not reduce the payout; the deductible is the only reduction that applies."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$13,296.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$13,500.00 paid out against $204.00 of premiums for the year. This is the arithmetic of a year in which the loss happens; in a year without one the household is $204.00 down, and both are ordinary outcomes for a policy."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "Renters, at $17 a month",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The renters policy covers up to $25,000 of property for $204.00 a year, the smallest premium of the four against a stated limit far larger than the premium. The comparison follows from the stated terms; it does not mean renters cover is the most important policy, only the one with the largest stated limit per dollar of premium."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "renters + auto + health + disability",
+        "substituted": "17 + 118 + 186 + 24",
+        "result": "$345.00",
+        "why": "The four monthly premiums added. Health is much the largest at $186, and renters much the smallest at $17, which is worth holding in mind before the payout is computed."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 * 12",
+        "substituted": "#t1-p1 * 12",
+        "result": "$4,140.00",
+        "why": "$345.00 in each of the 12 months. Premiums are paid whether or not anything is claimed, which is what makes them a budget line rather than a contingency."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "round(#t1-p2 / income * 100, 2)",
+        "substituted": "round(#t1-p2 / 46800 * 100, 2)",
+        "result": "8.85%",
+        "why": "$4,140.00 measured against $46,800 of income. Expressing protection as a share of income is how it can be compared with the other claims on a budget."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "loss - deductible",
+        "substituted": "14000 - 500",
+        "result": "$13,500.00",
+        "why": "The $14,000 loss less the $500 deductible. The $25,000 limit is not reached, so it does not reduce the payout; the deductible is the only reduction that applies."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - renters2 * 12",
+        "substituted": "#t2-p1 - 17 * 12",
+        "result": "$13,296.00",
+        "why": "$13,500.00 paid out against $204.00 of premiums for the year. This is the arithmetic of a year in which the loss happens; in a year without one the household is $204.00 down, and both are ordinary outcomes for a policy."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "A fictional friend says renters cover is \"not worth it\" because $204 a year buys nothing in most years. Explain what that argument gets right and what it misses, and say what the household would have to be able to absorb for the friend to be correct.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Grants the point: in a year with no loss the policy costs $204.00 and returns nothing, and most years are like that, so the argument is not simply wrong about the common case.",
+          "States what it misses: insurance is bought for the uncommon case, and a single $14,000 loss returns $13,500.00 — more than sixty years of premiums — which is exactly the shape of risk a premium exists to convert into a fixed cost.",
+          "Names the condition under which the friend would be right: a household able to absorb the full loss out of its own reserves without borrowing or hardship has less need to transfer the risk, so the argument turns on what the household could actually withstand."
+        ],
+        "evidenceRequirements": [
+          "Uses the $204.00 annual renters premium and the $13,500.00 payout on the stated loss."
+        ],
+        "lookFors": [
+          "The response frames insurance as converting a large uncertain loss into a small certain cost.",
+          "The response does not claim the policy is worth it because a loss is likely; it is not."
+        ],
+        "commonMisconception": "Judging a policy by whether it paid out this year, which is the one thing a policy is not designed to do reliably.",
+        "dimensions": [
+          "tradeoff-defense",
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

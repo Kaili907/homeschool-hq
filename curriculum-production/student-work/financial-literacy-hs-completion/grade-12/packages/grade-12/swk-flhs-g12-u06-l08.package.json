@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l08",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l08",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 8,
+    "phase": "Transfer to a new case",
+    "title": "Transfer to a new case: enrolment timing and coverage gaps"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "enrolment timing and coverage gaps",
+  "objective": "Apply the coverage-gap method to a fictional enrolment deadline, compare three routes annually, and price what missing the window costs.",
+  "scenario": "The fictional plan options, prices, and enrolment window below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional plan options in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional young adult’s cover under a family plan ends on a stated date. A school plan costs $1,842 a year but must be taken within 31 days of that date. A fictional marketplace plan costs $268 a month and can be taken at any time. Continuation of the old cover costs $604 a month.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the school plan work out to per month?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does the marketplace plan cost across a year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does continuation cost across a year?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price the window itself.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much cheaper is a year on the school plan than a year of continuation?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "If the window is missed and continuation is used for 4 months until the next enrolment opportunity, what does that cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Is the cost of missing the 31-day window larger than a full year of the school plan?",
+          "choices": [
+            "Yes — bridging for 4 months costs more than the whole school year",
+            "No — bridging is the cheaper option"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why the 31-day window is the most important figure in this lesson even though it is not a price, and say what a fictional person should have in place before that date arrives so the decision is not made by default."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the school plan looks more expensive than the marketplace plan, the annual and monthly prices are being compared directly. Put both on the same basis: the school plan is $153.50 a month, against $268 a month for the marketplace plan and $604 for continuation.",
+  "extension": "Work out the cheapest total cost of the first year if the window is missed by one day and continuation is used until the next opportunity, and say how much of the school plan’s advantage survives.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l08.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l08",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

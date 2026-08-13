@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u06-l04",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u06-l04",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Protecting an Adult Household",
+    "dayInUnit": 4,
+    "phase": "Guided practice",
+    "title": "Guided practice: securing documents and accounts safely"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF6"
+  ],
+  "focus": "securing documents and accounts safely",
+  "objective": "Price what replacing a fictional household’s critical documents would cost in money and time, compare that with the cost of protecting them, and state what must never be stored insecurely.",
+  "scenario": "The fictional documents, replacement costs, and protection options below are invented for this exercise. No real document, account, or credential is described, and none is requested.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional replacement costs and protection prices in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Replacing the fictional household’s critical documents would cost $32 for a birth record, $165 for a travel document, $42 for a licence, and $68 for title papers. Doing so would also take about 14 hours, which this exercise values at $22 an hour purely to make the time comparable with the fees.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What are the replacement fees in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is the 14 hours worth at the stated rate?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does losing the documents cost altogether on this basis?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now price protecting them instead.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "A fire-resistant document box costs $78 and a secure digital backup service $4.50 a month. What does protection cost in the first year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "How many times the first-year protection cost is the cost of losing the documents? Give two decimal places."
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-choice",
+          "text": "Which of these should never be kept in the digital backup alongside scanned documents?",
+          "choices": [
+            "Copies of the licence and title papers",
+            "Account passwords and security answers written in plain text",
+            "A list of which documents exist and where the originals are"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why the $615.00 figure understates what losing these documents would actually cost a household, and describe how you would organise document and account protection so that a single failure does not expose everything at once."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the protection cost comes out at $82.50, the backup service has been counted once rather than for the year. The box is a single $78 purchase and the service is $4.50 every month, so the first year is $78 plus twelve payments of $4.50.",
+  "extension": "Work out the five-year cost of protection given that the box is bought once, and compare it with the $615.00 replacement figure.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u06-l04.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u06-l04",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

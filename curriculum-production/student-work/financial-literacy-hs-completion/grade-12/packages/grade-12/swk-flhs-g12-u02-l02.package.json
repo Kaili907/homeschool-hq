@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u02-l02",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 2,
+    "unitTitle": "PF2 — Buying Goods and Services: Running a Household's Spending",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: a major purchase inside a live plan"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF2"
+  ],
+  "focus": "a major purchase inside a live plan",
+  "objective": "Price a fictional replacement purchase three ways, express the financing cost as a share of the cash price, and weigh it against what paying cash does to the household’s reserve.",
+  "scenario": "The simulated appliance, the three payment offers, and the fictional household’s reserve below are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional purchase offers in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional replacement costs $1,340 paid in cash. The seller also offers 12 monthly payments of $124 with nothing down, or 18 monthly payments of $89 with nothing down. The household holds $2,100 in an emergency reserve and has $180 a month of surplus after everything else is paid.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the 12-month offer cost in total?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "How much more than the cash price is that?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the 18-month offer cost in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now put the three routes on a common footing, and check what each does to the reserve.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "How much more than the cash price does the 18-month offer cost?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Express the extra cost of the 12-month offer as a percentage of the cash price, to two decimal places.",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "If the household pays cash, what is left in the emergency reserve?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-choice",
+          "text": "Can the 12-month payment be met out of the household’s stated monthly surplus?",
+          "choices": [
+            "Yes — $124 is inside the $180 surplus",
+            "No — the payment exceeds the surplus"
+          ]
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "The cash route costs $148.00 less than the 12-month offer but leaves the reserve at $760.00. Make the strongest case for each route using the figures, and say what you would need to know about this fictional household to prefer one."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the 18-month offer looks cheapest, the comparison is being made on the monthly payment, where $89 is indeed the smallest figure. Multiply each offer out to its total — $1,488.00 and $1,602.00 against $1,340 cash — before ranking. A longer term lowers the payment and raises the total.",
+  "extension": "Work out how many months of the $180 surplus it takes to rebuild the reserve to $2,100 after paying cash, and say what the household is exposed to during that period.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u02-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u02-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

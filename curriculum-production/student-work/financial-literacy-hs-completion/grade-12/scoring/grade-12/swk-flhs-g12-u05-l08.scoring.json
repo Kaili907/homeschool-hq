@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l08",
+  "lessonId": "ma-g12-financial-literacy-u05-l08",
+  "integratedDomains": [
+    "saving-investing",
+    "debt",
+    "credit",
+    "budgeting",
+    "income"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$3,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$45,600 across the 12 months of a year."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$152.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "4% of $3,800.00. At a 100% match the employer adds the same $152.00, so the worker’s $152.00 becomes $304.00 in the account."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$46.40",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "One twelfth of 19.2% on $2,900."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$1,824.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$152.00 in each of 12 months, if the worker contributes throughout."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$556.80",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$46.40 in each of 12 months, holding the balance at $2,900 — a simplification, since any repayment reduces both the balance and the charge."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "The employer contribution available",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$1,824.00 against $556.80 on the stated assumptions. The comparison is only valid because both have been converted to dollars over the same year; the 100% employer rate and the 19.2% annual rate are not comparable as percentages."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "round(salary / 12, 2)",
+        "substituted": "round(45600 / 12, 2)",
+        "result": "$3,800.00",
+        "why": "$45,600 across the 12 months of a year."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 * tier, 2)",
+        "substituted": "round(#t1-p1 * 0.04, 2)",
+        "result": "$152.00",
+        "why": "4% of $3,800.00. At a 100% match the employer adds the same $152.00, so the worker’s $152.00 becomes $304.00 in the account."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "round(cardBalance * cardApr / 12, 2)",
+        "substituted": "round(2900 * 0.192 / 12, 2)",
+        "result": "$46.40",
+        "why": "One twelfth of 19.2% on $2,900."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p2 * 12",
+        "substituted": "#t1-p2 * 12",
+        "result": "$1,824.00",
+        "why": "$152.00 in each of 12 months, if the worker contributes throughout."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "#t2-p1 * 12",
+        "substituted": "#t2-p1 * 12",
+        "result": "$556.80",
+        "why": "$46.40 in each of 12 months, holding the balance at $2,900 — a simplification, since any repayment reduces both the balance and the charge."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t2-p2 > #t2-p3",
+        "substituted": "#t2-p2 > #t2-p3",
+        "result": "The employer contribution available",
+        "why": "$1,824.00 against $556.80 on the stated assumptions. The comparison is only valid because both have been converted to dollars over the same year; the 100% employer rate and the 19.2% annual rate are not comparable as percentages."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Defending the tradeoff",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A choice is asserted with no cost acknowledged."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "A choice is defended but what it gives up is not named."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The choice is defended and what it costs or forecloses is named specifically."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The choice is defended, its cost is named, and the strongest case against it is answered."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "The employer contribution is larger in dollars, and the card balance is the more urgent problem in other ways. Explain why comparing 100% with 19.2% directly is a mistake, and describe an allocation of $300 a month across the two claims that you could defend, naming what it gives up.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains why the percentages are not comparable: 100% is a one-time addition to money contributed, while 19.2% is a rate charged every year the balance is carried, so the two describe different things and only a dollar figure over a stated period compares them.",
+          "Proposes a specific allocation of the $300 with figures — for example $152.00 to secure the full employer contribution and $148.00 to the card — and shows the parts summing to $300.",
+          "Names what the allocation gives up: a slower reduction in the $2,900 balance, or a smaller employer contribution than the $1,824.00 available.",
+          "Recognises that the $556.80 figure assumes the balance stays put, so paying it down reduces the charge as well as the balance."
+        ],
+        "evidenceRequirements": [
+          "Uses the $1,824.00 annual employer contribution and the $556.80 annual interest, and shows an allocation summing to $300."
+        ],
+        "lookFors": [
+          "The response converts both claims to dollars before ranking them.",
+          "More than one allocation is defensible and each is credited when the sacrifice is named.",
+          "The response does not present a course of action as advice for a real person."
+        ],
+        "commonMisconception": "Ranking a matching rate against an interest rate by comparing the two percentages, when one applies once to contributions and the other applies annually to a balance.",
+        "dimensions": [
+          "tradeoff-defense",
+          "plan-coherence",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 5,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

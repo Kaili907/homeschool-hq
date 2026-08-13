@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u05-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u05-l10",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: a written rule for market declines"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF5"
+  ],
+  "focus": "a written rule for market declines",
+  "objective": "Assemble the figures a fictional decline policy has to be built on — the fall, the recovery required, continued contributions, and the fee charged throughout — and write the policy.",
+  "scenario": "The fictional balance, contribution, fee, and decline below are invented for this exercise. The decline is a scenario for planning purposes and is not a forecast.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional account figures in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "A fictional account holds $31,500, receives $340 a month, and is charged an annual fee of 0.22% of the balance. Plan for a scenario in which the balance falls 28%.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the balance after a 28% fall?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What gain on the reduced balance would restore $31,500, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual fee at the reduced balance?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now carry the account forward through 18 months of continued contributions.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is contributed over 18 months?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "Ignoring any further movement in the balance, what does the account hold after those contributions?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is the annual fee at that balance?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "By how much has the annual fee risen?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Put the fee in the terms the policy will have to justify.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What proportion of the 18 months of contributions does one year of the fee represent, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write the policy. Attach a figure to each part of it.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write the decline policy this fictional investor should set down now, before any fall occurs. Cover what happens to contributions, what would and would not count as a reason to sell, and how the policy handles anyone who contacts the investor during a decline offering to help. State plainly what your policy cannot guarantee."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the required gain comes out as 28%, it is being measured against the original $31,500 rather than the $22,680.00 that remains. The $8,820.00 has to be regained from the reduced balance, which needs 38.89%. The same asymmetry applies to every decline: the recovery percentage always exceeds the fall percentage.",
+  "extension": "Recompute the balance, the required gain, and the fee after a 45% fall instead, and say what the two cases together show about how quickly the required recovery grows.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u05-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u05-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

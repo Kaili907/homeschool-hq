@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u01-l07",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u01-l07",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 1,
+    "unitTitle": "PF1 — Earning Income: Entering the Workforce: Offers, Onboarding, and Pay",
+    "dayInUnit": 7,
+    "phase": "Error and misconception analysis",
+    "title": "Error and misconception analysis: evaluating and responding to an offer"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF1"
+  ],
+  "focus": "evaluating and responding to an offer",
+  "objective": "Locate the first wrong step in a fictional offer comparison, redo it correctly across salary, a local tax, and a benefit cost, and name the misconception behind the error.",
+  "scenario": "The comparison below was made by a fictional candidate about two fictional offers. The salaries, rates, and premiums are invented for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional offer terms and the candidate’s working in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "Offer P pays $61,000 and is based in a city that charges a 1% city income tax on pay; the employee pays $2,400 a year toward the health premium and there is no employer retirement contribution. Offer Q pays $59,200 with no city income tax; the employee pays $960 a year toward the health premium and the employer contributes 3% of salary to retirement. The fictional candidate compared $61,000 with $59,200, concluded that P paid more, and stopped there.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the 1% city income tax cost under Offer P?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What does Offer P leave after the city tax and the employee’s health premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "What does the employer contribute to retirement under Offer Q?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now redo the ranking properly.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does Offer Q leave after the employee’s health premium?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-choice",
+          "text": "On spendable pay after the city tax and the health premium, which offer pays more?",
+          "choices": [
+            "Offer P",
+            "Offer Q"
+          ]
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "Adding the employer retirement contribution, what is Offer Q worth in total?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Name the first step at which the fictional candidate’s comparison went wrong, state the misconception behind it, and give one check that would have exposed the error before a decision was made."
+        }
+      ]
+    }
+  ],
+  "remediation": "If Offer P still comes out ahead, check that both the $610.00 city tax and the full $2,400 premium have been subtracted from it, and that only the $960 premium has been subtracted from Offer Q. The salary difference of $1,800 is smaller than the $2,050 of extra charges P carries, and that is what reverses the ranking.",
+  "extension": "Recompute the comparison if Offer P could be worked entirely outside the city, so the city tax does not apply, and say how much of the original ranking that one change restores.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u01-l07.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u01-l07",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

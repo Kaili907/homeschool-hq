@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u03-l02",
+  "lessonId": "ma-g12-financial-literacy-u03-l02",
+  "integratedDomains": [
+    "income",
+    "budgeting",
+    "banking",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$17,600.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The six payments added. This is the figure that decides whether the work pays enough; it says nothing about whether the bills can be met on time."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$2,933.33",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$17,600.00 spread evenly across 6 months. No month actually delivered this amount, which is the limitation of planning from an average."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$14,820.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$2,470 in each of the 6 months, due on schedule regardless of when income arrives."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$2,780.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$17,600.00 received against $14,820.00 owed. On the whole period the income is more than adequate."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "-$1,570.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$900 received against $2,470 due. The negative figure is the point: a period that is comfortably in surplus overall still contains a month that cannot pay its bills."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$1,570.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The size of the shortfall, held in advance. This buffer is not saving toward anything; it exists solely because income and obligations are out of step."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "Yes — but only if the timing is bridged",
+        "verification": {
+          "method": "derived-from-comparison",
+          "reasoning": "$17,600.00 against $14,820.00 leaves $2,780.00 over. Sufficiency and solvency are different questions, and this income record answers them differently."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "m1 + m2 + m3 + m4 + m5 + m6",
+        "substituted": "1850 + 4320 + 900 + 3780 + 2640 + 4110",
+        "result": "$17,600.00",
+        "why": "The six payments added. This is the figure that decides whether the work pays enough; it says nothing about whether the bills can be met on time."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "round(#t1-p1 / 6, 2)",
+        "substituted": "round(#t1-p1 / 6, 2)",
+        "result": "$2,933.33",
+        "why": "$17,600.00 spread evenly across 6 months. No month actually delivered this amount, which is the limitation of planning from an average."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "fixed * 6",
+        "substituted": "2470 * 6",
+        "result": "$14,820.00",
+        "why": "$2,470 in each of the 6 months, due on schedule regardless of when income arrives."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p1 - #t1-p3",
+        "substituted": "#t1-p1 - #t1-p3",
+        "result": "$2,780.00",
+        "why": "$17,600.00 received against $14,820.00 owed. On the whole period the income is more than adequate."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "lowMonth - fixed2",
+        "substituted": "900 - 2470",
+        "result": "-$1,570.00",
+        "why": "$900 received against $2,470 due. The negative figure is the point: a period that is comfortably in surplus overall still contains a month that cannot pay its bills."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "abs(#t2-p2)",
+        "substituted": "abs(#t2-p2)",
+        "result": "$1,570.00",
+        "why": "The size of the shortfall, held in advance. This buffer is not saving toward anything; it exists solely because income and obligations are out of step."
+      },
+      {
+        "ref": "t2-p4",
+        "expression": "#t1-p1 > #t1-p3",
+        "substituted": "#t1-p1 > #t1-p3",
+        "result": "Yes — but only if the timing is bridged",
+        "why": "$17,600.00 against $14,820.00 leaves $2,780.00 over. Sufficiency and solvency are different questions, and this income record answers them differently."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Identifying the assumption",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No assumption is named."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "An assumption is named but it is not one the conclusion actually depends on."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "A load-bearing assumption is named and its effect on the conclusion is stated."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "A load-bearing assumption is named, tested against the scenario, and bounded."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This income is sufficient over 6 months and insufficient in month 3. Explain why an average of $2,933.33 is a misleading basis for planning here, and describe how you would run this budget so that month 3 is survivable — naming what your method requires the worker to do in a strong month.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Explains the flaw in the average: it describes a month that never occurred, and obligations fall due monthly while income does not arrive monthly, so the gap is a timing problem the average cannot express.",
+          "Describes a method that holds back money in strong months — for example paying a fixed monthly amount to the household from a separate holding account and leaving the rest to accumulate — and names $1,570.00 as the minimum the buffer must reach before month 3.",
+          "States what the method requires in a strong month: treating the $4,320 or $4,110 as partly reserved rather than available, which is a discipline the arithmetic alone will not enforce."
+        ],
+        "evidenceRequirements": [
+          "Uses the $2,780.00 six-month surplus and the $1,570.00 month-3 shortfall, and refers to at least one strong month by amount."
+        ],
+        "lookFors": [
+          "The response separates whether the income is enough from whether it arrives in time.",
+          "The response names where the buffer is held, rather than assuming it stays untouched in a general account."
+        ],
+        "commonMisconception": "Planning irregular income from its average, which hides every month in which the money has not yet arrived.",
+        "dimensions": [
+          "plan-coherence",
+          "reasoning-from-figures",
+          "assumption-identification"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 1,
+    "assertedChoices": 0,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

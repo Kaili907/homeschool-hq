@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l10",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 10,
+    "phase": "Unit performance task",
+    "title": "Unit performance task: repayment projection against expected income"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "repayment projection against expected income",
+  "objective": "Project a fictional repayment against a strong and a weak career outcome, establish the payment each supports, and write a plan that survives both.",
+  "scenario": "The fictional balance, the invented payment factor, and the two simulated salary outcomes below exist only for this exercise.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional loan terms and salary scenarios in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional graduate finishes with $27,600 borrowed, repaid over 120 monthly payments at a factor of $10.79 per $1,000. Scenario A is a starting salary of $46,800; scenario B is $34,200. The graduate wants the payment to stay within 8% of monthly gross in whichever scenario occurs.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is the monthly payment?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What is repaid in total across the 120 payments?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "How much of the total is interest?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now test the same payment against both career outcomes.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly gross pay in scenario A?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "What share of gross does the payment take in scenario A, to two decimal places?",
+          "unit": "percent"
+        },
+        {
+          "ref": "t2-p3",
+          "promptType": "fixed-numeric",
+          "text": "What is monthly gross pay in scenario B?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t2-p4",
+          "promptType": "fixed-numeric",
+          "text": "What share of gross does the same payment take in scenario B, to two decimal places?",
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "performance-task",
+      "directions": "Quantify what scenario B would require before writing anything.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "fixed-numeric",
+          "text": "What does the payment cost across a full year?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t3-p2",
+          "promptType": "fixed-numeric",
+          "text": "What monthly payment would satisfy the 8% target in scenario B?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t4",
+      "kind": "reflection",
+      "directions": "Write the repayment plan. Give figures for both scenarios.",
+      "prompts": [
+        {
+          "ref": "t4-p1",
+          "promptType": "extended-response",
+          "text": "Write a repayment plan for this fictional graduate that works in scenario A and does not fail in scenario B. State what the plan does differently in each case, name what it costs in the weaker case, and say which part of the plan you are least confident about."
+        }
+      ]
+    }
+  ],
+  "remediation": "If both scenarios produce the same percentage, the payment is being recomputed from each salary rather than held fixed. The loan sets the payment at $297.80 regardless of what the graduate earns. Divide that fixed payment by each monthly gross figure — $3,900.00 and $2,850.00 — to get the two shares.",
+  "extension": "Work out the balance that would have kept the payment within 8% of gross in scenario B, and say how much less than $27,600 the graduate would have had to borrow.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l10.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l10",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l02",
+  "lessonRef": {
+    "lessonId": "ma-g12-financial-literacy-u04-l02",
+    "courseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "unitNumber": 4,
+    "unitTitle": "PF4 — Using Credit: Financing Adult Life and Postsecondary Costs",
+    "dayInUnit": 2,
+    "phase": "Concept model A",
+    "title": "Concept model A: setting a personal borrowing limit before shopping"
+  },
+  "subjectFamily": "MATH_STRUCTURED_FINLIT",
+  "standardsRefs": [
+    "PF4",
+    "PF4.1"
+  ],
+  "focus": "setting a personal borrowing limit before shopping",
+  "objective": "Derive a borrowing ceiling for a fictional student from expected earnings and a payment share rule, and compare it with a ceiling set by a rule of thumb.",
+  "scenario": "The fictional expected earnings, the invented payment factor table, and the simulated rules below exist only for this exercise. Nothing here sets a borrowing limit for any real person.",
+  "isFictionalSimulation": true,
+  "completionAuthority": "learner",
+  "realWorldAction": false,
+  "signOff": null,
+  "safetyNotes": [
+    "Every figure, person, employer, institution, offer, account, and document on this task sheet is fictional and exists only for practice.",
+    "No real transaction is part of this lesson, and no real bank, card, brokerage, tax, or login detail is ever requested. If a task sheet ever appears to ask for one, stop and tell a trusted adult.",
+    "This lesson teaches general financial concepts and does not advise anyone about their own money. For a real decision, talk with a trusted adult or a qualified licensed professional."
+  ],
+  "simulationAlternative": null,
+  "materials": [
+    "calculator",
+    "the fictional earnings figure and payment factor in these directions"
+  ],
+  "tasks": [
+    {
+      "taskId": "t1",
+      "kind": "guided",
+      "directions": "The fictional student expects to start work at $41,600 a year in the field they intend to enter. They adopt a rule that the loan payment should take no more than 10% of expected monthly gross pay. Under the fictional payment factor table, a loan repaid over ten years at the rate offered costs $10.60 a month for every $1,000 borrowed.",
+      "prompts": [
+        {
+          "ref": "t1-p1",
+          "promptType": "fixed-numeric",
+          "text": "What is expected monthly gross pay?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p2",
+          "promptType": "fixed-numeric",
+          "text": "What monthly payment does the 10% rule allow?",
+          "unit": "USD"
+        },
+        {
+          "ref": "t1-p3",
+          "promptType": "fixed-numeric",
+          "text": "Using the payment factor, what total borrowing does that payment support?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t2",
+      "kind": "independent",
+      "directions": "Now compare that ceiling with a common rule of thumb.",
+      "prompts": [
+        {
+          "ref": "t2-p1",
+          "promptType": "fixed-choice",
+          "text": "A widely repeated rule says total borrowing should not exceed one year of expected starting pay, which here is $41,600. Which of the two rules binds — that is, which produces the lower ceiling?",
+          "choices": [
+            "The one-year-of-pay rule, at $41,600",
+            "The payment share rule, at $32,704.72"
+          ]
+        },
+        {
+          "ref": "t2-p2",
+          "promptType": "fixed-numeric",
+          "text": "By how much do the two ceilings differ?",
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "taskId": "t3",
+      "kind": "reflection",
+      "directions": "Answer in a short paragraph.",
+      "prompts": [
+        {
+          "ref": "t3-p1",
+          "promptType": "extended-response",
+          "text": "Explain why deriving a ceiling before looking at any programme is different from working out afterwards whether the payments are affordable, and name the assumption in the $32,704.72 figure that would most change it if it were wrong."
+        }
+      ]
+    }
+  ],
+  "remediation": "If the ceiling comes out near $3,466.67, the monthly payment has been divided by the factor without scaling back to thousands. The factor is quoted per $1,000 borrowed, so dividing $346.67 by $10.60 gives the number of thousands, which must then be multiplied by 1000 to reach the balance.",
+  "extension": "Recompute the ceiling for the same student under a rule allowing 8% of gross rather than 10%, and say how much less programme cost that ceiling could absorb.",
+  "scoringRef": "scoring/grade-12/swk-flhs-g12-u04-l02.scoring.json",
+  "financialSafety": {
+    "neverRequestsRealCredentials": true,
+    "noIndividualizedAdvice": true
+  },
+  "integrity": {
+    "sourceCorpusVersion": "mac/hs912-rfl-finlit-r1@481296a9e794",
+    "sourceLessonId": "ma-g12-financial-literacy-u04-l02",
+    "sourceStage": "authoring",
+    "authoredBy": "manual"
+  }
+}

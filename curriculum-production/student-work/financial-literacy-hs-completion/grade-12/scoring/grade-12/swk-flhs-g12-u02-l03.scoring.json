@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u02-l03",
+  "lessonId": "ma-g12-financial-literacy-u02-l03",
+  "integratedDomains": [
+    "consumer-protection",
+    "banking",
+    "budgeting",
+    "credit"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$187.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The second $148.20 charge bills the same period twice, and the $39.00 late fee is charged against a payment the statement itself shows arrived on time. Both are errors of fact rather than disagreements about price."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$6.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$67.50 billed against the $61.50 agreed. Unlike the duplicate, this is a rate error that repeats every cycle until it is corrected."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$193.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$187.20 of duplicate and late fee plus the $6.00 overcharge on this cycle. The $12.99 added service is not in dispute and is deliberately excluded."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$18.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$6.00 on each of the 3 earlier statements. That money has already been paid, so recovering it is a refund claim rather than a deduction from what is due now."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$211.20",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$193.20 on this statement plus $18.00 already paid on earlier ones."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "$222.69",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The $415.89 total less the $193.20 disputed on this statement. Paying the undisputed remainder keeps the account current, so the provider cannot add a genuine late fee on top of an argument about a mistaken one."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "No — the household requested and used that service",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "The statement facts say this service was requested and used, so the charge is correct. Including a valid charge in a dispute weakens the credibility of the claims that are sound; this follows from the stated facts rather than from any comparison."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "duplicate + lateFee",
+        "substituted": "148.2 + 39",
+        "result": "$187.20",
+        "why": "The second $148.20 charge bills the same period twice, and the $39.00 late fee is charged against a payment the statement itself shows arrived on time. Both are errors of fact rather than disagreements about price."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "billedRate - agreedRate",
+        "substituted": "67.5 - 61.5",
+        "result": "$6.00",
+        "why": "$67.50 billed against the $61.50 agreed. Unlike the duplicate, this is a rate error that repeats every cycle until it is corrected."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "#t1-p1 + #t1-p2",
+        "substituted": "#t1-p1 + #t1-p2",
+        "result": "$193.20",
+        "why": "$187.20 of duplicate and late fee plus the $6.00 overcharge on this cycle. The $12.99 added service is not in dispute and is deliberately excluded."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 * priorMonths",
+        "substituted": "#t1-p2 * 3",
+        "result": "$18.00",
+        "why": "$6.00 on each of the 3 earlier statements. That money has already been paid, so recovering it is a refund claim rather than a deduction from what is due now."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t1-p3 + #t2-p1",
+        "substituted": "#t1-p3 + #t2-p1",
+        "result": "$211.20",
+        "why": "$193.20 on this statement plus $18.00 already paid on earlier ones."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "statementTotal - #t1-p3",
+        "substituted": "415.89 - #t1-p3",
+        "result": "$222.69",
+        "why": "The $415.89 total less the $193.20 disputed on this statement. Paying the undisputed remainder keeps the account current, so the provider cannot add a genuine late fee on top of an argument about a mistaken one."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Use of evidence from the scenario",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "No scenario detail is cited."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Scenario detail is cited but not the detail the claim needs."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every claim points to the specific scenario figure, term, or document line behind it."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Evidence is cited and the response notes where the scenario is silent."
+          }
+        ]
+      },
+      {
+        "dimension": "Coherence of the plan",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The parts of the plan contradict each other or do not add up."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "The plan adds up but one part is not connected to the rest."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The plan adds up and each part is consistent with the others and with the constraint."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The plan adds up, is internally consistent, and states what would break it first."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "Set out what the household should put in writing to the provider, and explain why paying $222.69 rather than either $0.00 or the full $415.89 is the strongest position while the dispute is open.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Specifies what the written claim contains: each disputed line identified separately with its amount, the reason it is wrong, and the total of $211.20 including the $18.00 from the 3 earlier statements.",
+          "Explains why paying nothing is weak: the $222.69 is genuinely owed, and withholding it invites a real late fee and a mark against the account that the dispute would not cover.",
+          "Explains why paying everything is weak: paying the $193.20 concedes the disputed amount and converts the claim into a request for a refund the household must then chase.",
+          "Notes that the rate error will recur at $6.00 a cycle until corrected, so the letter must ask for the rate to be fixed going forward and not only for money back."
+        ],
+        "evidenceRequirements": [
+          "Uses the $211.20 total claim and the $222.69 undisputed amount, and distinguishes the one-off errors from the recurring rate error."
+        ],
+        "lookFors": [
+          "The response separates the recurring error from the one-off errors and asks for different remedies for each.",
+          "The response keeps the valid $12.99 charge out of the claim."
+        ],
+        "commonMisconception": "Treating a disputed statement as all-or-nothing, so the household either pays everything or pays nothing while the argument runs.",
+        "dimensions": [
+          "plan-coherence",
+          "evidence-use",
+          "criteria-application"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-flhs-g12-u04-l01",
+  "lessonId": "ma-g12-financial-literacy-u04-l01",
+  "integratedDomains": [
+    "postsecondary-financing",
+    "income",
+    "budgeting",
+    "multi-variable-decision"
+  ],
+  "isCapstone": false,
+  "scoringAuthority": {
+    "kind": "HYBRID",
+    "items": [
+      {
+        "ref": "t1-p1",
+        "answer": "$24,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "All five components added. Tuition alone is $11,400, which is less than half the figure the year actually costs — the reason cost of attendance is defined to include the rest."
+        }
+      },
+      {
+        "ref": "t1-p2",
+        "answer": "$20,300.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "Cost of attendance less the $4,200 contribution figure the workflow produced. Need is defined by the workflow’s own arithmetic, not by what the applicant feels able to pay."
+        }
+      },
+      {
+        "ref": "t1-p3",
+        "answer": "$8,500.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "The two grants added. Grants are the only part of this offer that is neither earned by working nor repaid later."
+        }
+      },
+      {
+        "ref": "t2-p1",
+        "answer": "$11,800.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$20,300.00 of need less $8,500.00 of grants."
+        }
+      },
+      {
+        "ref": "t2-p2",
+        "answer": "$9,400.00",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$11,800.00 less the $2,400 work-study figure. Counting work-study here assumes the hours are actually available and actually worked, which the award does not guarantee."
+        }
+      },
+      {
+        "ref": "t2-p3",
+        "answer": "34.69%",
+        "verification": {
+          "method": "recomputed",
+          "reasoning": "$8,500.00 measured against the $24,500.00 cost. Expressed this way, an award that looks substantial in dollars can be seen against the whole cost it has to meet."
+        }
+      },
+      {
+        "ref": "t2-p4",
+        "answer": "No — work-study must be earned by working hours that may not materialise",
+        "verification": {
+          "method": "asserted-fixed-value",
+          "reasoning": "A grant reduces the bill outright, while work-study is an opportunity to earn money by working a job that must exist, be obtained, and be worked around study. The offer states it as an opportunity, so treating it as certain is a reading the document does not support."
+        }
+      }
+    ],
+    "workedSolution": [
+      {
+        "ref": "t1-p1",
+        "expression": "tuition + housing + books + transport + personal",
+        "substituted": "11400 + 9800 + 1150 + 900 + 1250",
+        "result": "$24,500.00",
+        "why": "All five components added. Tuition alone is $11,400, which is less than half the figure the year actually costs — the reason cost of attendance is defined to include the rest."
+      },
+      {
+        "ref": "t1-p2",
+        "expression": "#t1-p1 - contribution",
+        "substituted": "#t1-p1 - 4200",
+        "result": "$20,300.00",
+        "why": "Cost of attendance less the $4,200 contribution figure the workflow produced. Need is defined by the workflow’s own arithmetic, not by what the applicant feels able to pay."
+      },
+      {
+        "ref": "t1-p3",
+        "expression": "grant1 + grant2",
+        "substituted": "6500 + 2000",
+        "result": "$8,500.00",
+        "why": "The two grants added. Grants are the only part of this offer that is neither earned by working nor repaid later."
+      },
+      {
+        "ref": "t2-p1",
+        "expression": "#t1-p2 - #t1-p3",
+        "substituted": "#t1-p2 - #t1-p3",
+        "result": "$11,800.00",
+        "why": "$20,300.00 of need less $8,500.00 of grants."
+      },
+      {
+        "ref": "t2-p2",
+        "expression": "#t2-p1 - workStudy",
+        "substituted": "#t2-p1 - 2400",
+        "result": "$9,400.00",
+        "why": "$11,800.00 less the $2,400 work-study figure. Counting work-study here assumes the hours are actually available and actually worked, which the award does not guarantee."
+      },
+      {
+        "ref": "t2-p3",
+        "expression": "round(#t1-p3 / #t1-p1 * 100, 2)",
+        "substituted": "round(#t1-p3 / #t1-p1 * 100, 2)",
+        "result": "34.69%",
+        "why": "$8,500.00 measured against the $24,500.00 cost. Expressed this way, an award that looks substantial in dollars can be seen against the whole cost it has to meet."
+      }
+    ],
+    "criteria": [
+      {
+        "dimension": "Communicating uncertainty",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The conclusion is stated as certain when the scenario does not support that."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Uncertainty is mentioned in general terms only."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response says what is not known and how it limits the conclusion."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response says what is not known, how it limits the conclusion, and what would resolve it."
+          }
+        ]
+      },
+      {
+        "dimension": "Applying the stated criteria",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "The criteria are not used."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Some criteria are used and others are dropped without saying why."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "Every stated criterion is applied and the result of each is reported."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "Every criterion is applied and the response says which one decided the outcome."
+          }
+        ]
+      },
+      {
+        "dimension": "Reasoning from the figures",
+        "levels": [
+          {
+            "label": "Not yet",
+            "descriptor": "A conclusion is stated with no figures behind it."
+          },
+          {
+            "label": "Approaching",
+            "descriptor": "Figures are quoted but the step from figure to conclusion is missing."
+          },
+          {
+            "label": "Meets",
+            "descriptor": "The response shows which figures drive the conclusion and how."
+          },
+          {
+            "label": "Exceeds",
+            "descriptor": "The response also says how large a change in a figure would flip the conclusion."
+          }
+        ]
+      }
+    ],
+    "judgment": [
+      {
+        "ref": "t3-p1",
+        "prompt": "This award covers a substantial part of the cost and still leaves $9,400.00 unmet. Sort the three parts of the offer by how reliable each is, justify the ordering with the figures, and say what the fictional applicant should establish about the work-study before counting on it.",
+        "scoredBy": "rubric",
+        "exactKey": null,
+        "acceptableAnswerCriteria": [
+          "Orders the three correctly with reasons: the $8,500.00 of grants is the most reliable because it reduces the bill directly, work-study at $2,400 is least reliable because it depends on hours actually being worked, and any borrowing is certain money now against a repayment obligation later.",
+          "Uses the arithmetic to show what is at stake: if the work-study does not materialise the gap is $11,800.00 rather than $9,400.00, a difference of $2,400.",
+          "Names what to establish about work-study — whether a position is guaranteed, how many hours a week it requires, and whether those hours are compatible with the course load."
+        ],
+        "evidenceRequirements": [
+          "Uses the $9,400.00 remaining gap and the $8,500.00 grant total, and states what the gap becomes if work-study is excluded."
+        ],
+        "lookFors": [
+          "The response treats an award letter as a set of different instruments rather than one number.",
+          "The response does not describe borrowing as aid, while also not describing it as a failure of the offer."
+        ],
+        "commonMisconception": "Adding every line of an aid offer into a single total, so money that must be earned or repaid is counted as though it reduced the cost in the same way a grant does.",
+        "dimensions": [
+          "criteria-application",
+          "communication-of-uncertainty",
+          "reasoning-from-figures"
+        ]
+      }
+    ]
+  },
+  "completionAuthority": "learner",
+  "nonDiagnosticGuard": "Do not infer effort, motivation, diagnosis, or character from an error.",
+  "oracle": {
+    "method": "every fixed answer above was recomputed from the item's own stated scenario parameters, not transcribed",
+    "arithmetic": "exact rational arithmetic over BigInt; no binary floating point",
+    "failsClosed": true,
+    "recomputedNumericAnswers": 6,
+    "comparisonDerivedChoices": 0,
+    "assertedChoices": 1,
+    "limits": "Recomputation establishes that the key follows from the stated figures. It does not by itself establish that the model chosen is the right model for the scenario; that is carried by the per-item reasoning, the parameter-visibility check, and human review."
+  }
+}
