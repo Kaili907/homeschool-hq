@@ -355,6 +355,58 @@ test('complete family workflow survives a real browser-process reopen and stays 
   }
 })
 
+test('a second fresh browser is independent until a Parent Download Backup is restored', async ({}, testInfo) => {
+  const profileA = testInfo.outputPath('transfer-browser-a')
+  const profileB = testInfo.outputPath('transfer-browser-b')
+  let contextA: BrowserContext | null = await chromium.launchPersistentContext(profileA, { headless: true, acceptDownloads: true })
+  let contextB: BrowserContext | null = null
+
+  try {
+    const pageA = contextA.pages()[0] ?? await contextA.newPage()
+    await setupFamily(pageA, [{ name: 'Transfer Student', grade: '5' }])
+    await expect(pageA.getByTestId('family-pilot-device-storage-notice')).toContainText('saves progress in this browser on this device')
+    await assign(pageA, 'Transfer Student', LESSON.a)
+    const browserAState = await supportState(pageA)
+    const studentRef = browserAState.app.setup.students[0].studentRef
+    await openStudent(pageA, 'Transfer Student')
+    await startFromHome(pageA, LESSON.a)
+    await continueStep(pageA)
+    await pageA.getByRole('button', { name: 'Save and exit' }).click()
+
+    await parentStudent(pageA, 'Transfer Student')
+    await pageA.getByRole('button', { name: 'Backup' }).click()
+    const downloadPromise = pageA.waitForEvent('download')
+    await pageA.getByRole('button', { name: 'Download backup' }).click()
+    const backupPath = testInfo.outputPath('cross-browser-family-pilot-backup.json')
+    await (await downloadPromise).saveAs(backupPath)
+    const browserAStudy = studyDocument(await idbRecords(pageA), studentRef)
+
+    await contextA.close()
+    contextA = null
+
+    contextB = await chromium.launchPersistentContext(profileB, { headless: true, acceptDownloads: true })
+    const pageB = contextB.pages()[0] ?? await contextB.newPage()
+    await pageB.goto(APP_URL)
+    await expect(pageB.getByRole('heading', { name: 'Set up your learners' })).toBeVisible()
+    await expect(pageB.getByText('Transfer Student', { exact: true })).toHaveCount(0)
+    expect((await supportState(pageB)).app?.setup.students ?? []).toEqual([])
+
+    const chooserPromise = pageB.waitForEvent('filechooser')
+    await pageB.getByRole('button', { name: 'Restore a Family Pilot backup' }).click()
+    await (await chooserPromise).setFiles(backupPath)
+    await expect(pageB.getByRole('heading', { name: 'Household learning' })).toBeVisible()
+    await expect(pageB.getByLabel('Parent student')).toContainText('Transfer Student')
+    expect(studyDocument(await idbRecords(pageB), studentRef)).toEqual(browserAStudy)
+
+    await openStudent(pageB, 'Transfer Student')
+    await resumeFromHome(pageB, LESSON.a)
+    await expect(pageB.getByText('Step 2 of 3', { exact: true })).toBeVisible()
+  } finally {
+    await contextA?.close()
+    await contextB?.close()
+  }
+})
+
 test('a refused real IndexedDB write does not advance visible or supporting state', async ({ page }) => {
   await page.addInitScript(() => {
     const original = IDBObjectStore.prototype.put
