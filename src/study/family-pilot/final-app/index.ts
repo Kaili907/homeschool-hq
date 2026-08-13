@@ -1,4 +1,5 @@
 export * from './state'
 export * from './controller'
 export * from './backup'
+export * from './learner-response'
 export { FinalFamilyPilotApp } from './FinalFamilyPilotApp'
