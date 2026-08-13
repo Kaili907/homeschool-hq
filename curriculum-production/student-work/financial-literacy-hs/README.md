@@ -16,8 +16,8 @@ The answer here is not to assert harder. It is to make the corpus fail closed.
 
 ## Status
 
-**Partial: 82 of 288 lessons authored.** Grade 9 is complete (72/72) and
-grade 10 stands at 10/72; grades 11 and 12 are not started.
+**Partial: 92 of 288 lessons authored.** Grade 9 is complete (72/72) and
+grade 10 stands at 20/72; grades 11 and 12 are not started.
 `tests/corpus.test.ts` fails until every source lesson is authored, and reports
 the exact count outstanding. Run `node --experimental-strip-types src/report.ts`
 for the current position.
@@ -149,7 +149,7 @@ pinned SHA, so they require the repository but not a checkout of the source bran
 
 ## Outstanding
 
-- 206 lessons remain unauthored: grade 10 units 2-7 (62 lessons), grade 11
+- 196 lessons remain unauthored: grade 10 units 3-7 (52 lessons), grade 11
   (72), and grade 12 (72), including the grade 12 unit 7 simulated adult-finance
   capstone. The coverage test fails closed until they are authored, and names the
   first missing lesson ids in its failure output.
