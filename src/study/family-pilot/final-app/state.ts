@@ -8,6 +8,7 @@ import {
 } from '../safety'
 import type { FamilySetupState, FamilySetupStudent } from '../setup'
 import type { FamilyPilotStudySession } from '../study'
+import { validateDynamicSocialSourceBundle } from './dynamicSource'
 
 export const FINAL_FAMILY_PILOT_APP_STATE_KEY =
   'manuel-academy.study.final-family-pilot-app.v1' as const
@@ -34,6 +35,8 @@ export interface FinalFamilyPilotSourceAttachment {
   readonly title: string
   readonly publisher: string
   readonly publishedAt: string
+  readonly metadata: readonly Readonly<Record<string, unknown>>[]
+  readonly adultAttestedAt: string
   readonly attachedAt: string
   readonly status: 'ATTACHED_SATISFIED'
 }
@@ -75,6 +78,7 @@ export interface FinalFamilyPilotAppStateV1 {
   readonly safety: FamilyPilotSafetyStateV1
   /** One-way local access checks. PINs themselves are never stored. */
   readonly pinDigests: Readonly<Record<string, string>>
+  readonly parentPinDigest: string | null
 }
 
 export type FinalFamilyPilotAppStoreStatus = 'ready' | 'recovered' | 'read-only' | 'unavailable'
@@ -147,6 +151,7 @@ export function emptyFinalFamilyPilotAppState(
     attestations: Object.freeze([]),
     safety: Object.freeze({ schemaVersion: 1, holds: Object.freeze([]) }),
     pinDigests: Object.freeze({}),
+    parentPinDigest: null,
   })
 }
 
@@ -209,9 +214,15 @@ function parseSource(value: unknown): FinalFamilyPilotSourceAttachment | null {
   if (
     !isRef(value.studentRef) || !isRef(value.assignmentRef) || !isRef(value.lessonRef) ||
     !isRef(value.sourceRef) || !isText(value.title) || !isText(value.publisher) ||
-    !isInstant(value.publishedAt) || !isInstant(value.attachedAt) ||
+    !isInstant(value.publishedAt) || !Array.isArray(value.metadata) || value.metadata.length < 2 ||
+    !isInstant(value.adultAttestedAt) || !isInstant(value.attachedAt) ||
     value.status !== 'ATTACHED_SATISFIED'
   ) return null
+  try {
+    validateDynamicSocialSourceBundle({ lessonRef: value.lessonRef, sources: value.metadata, adultAttested: true })
+  } catch {
+    return null
+  }
   return Object.freeze(value as unknown as FinalFamilyPilotSourceAttachment)
 }
 
@@ -257,7 +268,7 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
     !(value.activeStudentRef === null || isRef(value.activeStudentRef)) ||
     !Array.isArray(value.sessions) || !Array.isArray(value.sourceAttachments) || !Array.isArray(value.attestations) ||
     !(value.assessmentAssignments === undefined || Array.isArray(value.assessmentAssignments)) ||
-    !isRecord(value.pinDigests)
+    !isRecord(value.pinDigests) || !(value.parentPinDigest === null || isText(value.parentPinDigest))
   ) return { state: null, safetyRecovery: safety.recoveryState }
   const sessions = value.sessions.map(parseSession)
   const sources = value.sourceAttachments.map(parseSource)
@@ -289,6 +300,7 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
       attestations: Object.freeze(attestations as FinalFamilyPilotAttestationRecord[]),
       safety: safety.state,
       pinDigests: Object.freeze(pinDigests),
+      parentPinDigest: value.parentPinDigest as string | null,
     }),
   }
 }

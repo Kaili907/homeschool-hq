@@ -29,6 +29,25 @@ export type FinalLearnerProductionMaterial = {
   readonly lessonRef: string
   readonly title: string
   readonly subject: SupportedSubject
+  readonly essentialQuestion?: string
+  readonly materials?: readonly string[]
+  readonly successCriteria?: readonly string[]
+  readonly rubricCriteria?: readonly unknown[]
+  readonly simulationAlternative?: unknown
+  readonly activitySetup?: unknown
+  readonly learnerResource?: unknown
+  readonly keyPoints?: readonly string[]
+  readonly movementCues?: readonly string[]
+  readonly technique?: string
+  readonly spaceSetup?: string
+  readonly accessibleAdaptation?: string
+  readonly noEquipmentAlternative?: string
+  readonly commonErrorToWatchFor?: string
+  readonly safetyRules?: readonly string[]
+  readonly stoppingRules?: readonly string[]
+  readonly equipmentRequirements?: unknown
+  readonly activitySteps?: readonly string[]
+  readonly sourceMetadata?: unknown
 } & (
   | {
       readonly format: 'structured'

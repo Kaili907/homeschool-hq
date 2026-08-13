@@ -258,6 +258,7 @@ function addTextSection(sections, lessonRef, key, title, body, prompts = [], res
 function projectGeneralSections(value, lessonRef, stats) {
   const sections = []
   addTextSection(sections, lessonRef, 'lesson-goal', 'Lesson goal', value.objective)
+  addTextSection(sections, lessonRef, 'learning-objectives', 'Learning objectives', null, value.learning_objectives)
   addTextSection(sections, lessonRef, 'scenario', 'Scenario', value.scenario || value.privacySafeScenario)
   addTextSection(sections, lessonRef, 'student-task', 'Student task', value.studentTask, [],
     value.subject === 'physical-education' ? 'ACTIVITY_EVIDENCE' : 'CONSTRUCTED_RESPONSE')
@@ -271,13 +272,19 @@ function projectGeneralSections(value, lessonRef, stats) {
   addTextSection(sections, lessonRef, 'optional-reflection', 'Optional reflection', value.optionalReflection?.prompt)
   addTextSection(sections, lessonRef, 'media-fallback', 'Media fallback', value.media?.fallback)
   addTextSection(sections, lessonRef, 'safety-notes', 'Safety notes', null, value.safetyNotes)
-  addTextSection(sections, lessonRef, 'accessibility-supports', 'Accessibility supports', null,
-    value.accessibilitySupports || value.accessibility_options || value.task_accessibility_provisions)
+  addTextSection(sections, lessonRef, 'accessibility-supports', 'Accessibility supports', null, value.accessibilitySupports)
+  addTextSection(sections, lessonRef, 'accessibility-options', 'Accessibility options', null, value.accessibility_options)
+  addTextSection(sections, lessonRef, 'task-accessibility-provisions', 'Task accessibility provisions', null,
+    value.task_accessibility_provisions)
   addTextSection(sections, lessonRef, 'requirements', 'Requirements', null, value.requirements)
   addTextSection(sections, lessonRef, 'success-criteria', 'Success criteria', null,
     value.lesson_success_criteria || value.completionCriteria)
   addTextSection(sections, lessonRef, 'rubric-facing-criteria', 'Rubric-facing criteria', null,
     value.critique_criteria || value.test_or_check_criteria)
+  addTextSection(sections, lessonRef, 'safety-and-privacy-rules', 'Safety and privacy rules', null,
+    value.safety_and_privacy_rules)
+  addTextSection(sections, lessonRef, 'copyright-and-authorship', 'Copyright and authorship',
+    value.copyright_and_authorship)
   addTextSection(sections, lessonRef, 'never-requires', 'This lesson never requires', null, value.neverRequires)
   if (typeof value.sourceReference === 'string') {
     addTextSection(sections, lessonRef, 'source-reading', 'Source or reading', value.sourceReference)
@@ -361,6 +368,13 @@ export function projectJsonLearnerMaterial(value, binding, fallbackTitle, option
     scoringMode: asText(value.responseScoring?.mode),
     activitySetup: value.activity_setup,
     learnerResource: value.learner_resource,
+    keyPoints: asStrings(value.keyPoints),
+    movementCues: asStrings(value.movementCues),
+    technique: asText(value.ageAppropriateTechnique),
+    spaceSetup: asText(value.spaceSetup),
+    accessibleAdaptation: asText(value.accessibleAdaptation),
+    noEquipmentAlternative: asText(value.lowSpaceNoEquipmentAlternative),
+    commonErrorToWatchFor: asText(value.commonErrorToWatchFor),
     safetyRules: asStrings(value.safetyRules),
     stoppingRules: asStrings(value.stoppingRules),
     equipmentRequirements: value.equipmentRequirements,

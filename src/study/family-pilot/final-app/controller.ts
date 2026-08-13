@@ -50,6 +50,7 @@ import {
 } from '../safety'
 import type { FamilySetupStudent } from '../setup'
 import type { FamilyPilotStudySession, FamilyPilotStudySnapshot } from '../study'
+import { validateDynamicSocialSourceBundle } from './dynamicSource'
 import {
   digestLocalPin,
   loadFinalFamilyPilotAppState,
@@ -223,6 +224,16 @@ export class FinalFamilyPilotController {
       else pinDigests[studentRef] = digestLocalPin(pin)
       return { ...state, pinDigests: Object.freeze(pinDigests) }
     })
+  }
+
+  setParentPin(pin: string): void {
+    if (!/^\d{4}$/.test(pin)) throw new Error('A local parent PIN must contain exactly four digits.')
+    this.#commitApp((state) => ({ ...state, parentPinDigest: digestLocalPin(pin) }))
+  }
+
+  verifyParentPin(pin: string): boolean {
+    const verifier = this.#appSnapshot.state.parentPinDigest
+    return Boolean(verifier && /^\d{4}$/.test(pin) && verifier === digestLocalPin(pin))
   }
 
   coursesFor(student: FamilySetupStudent, subject?: AcademySubject) {
@@ -513,23 +524,25 @@ export class FinalFamilyPilotController {
   attachDynamicSource(input: {
     readonly studentRef: string
     readonly assignmentRef: string
-    readonly title: string
-    readonly publisher: string
-    readonly publishedAt: string
+    readonly sources: readonly unknown[]
+    readonly adultAttested: boolean
   }): FinalFamilyPilotSourceAttachment {
     const assignment = this.#assignment(input.studentRef, input.assignmentRef)
-    if (!assignment || !input.title.trim() || !input.publisher.trim() || !Number.isFinite(Date.parse(input.publishedAt))) {
-      throw new Error('Complete source title, publisher, and publication date are required.')
-    }
+    if (!assignment) throw new Error('That assignment is unavailable.')
+    const metadata = validateDynamicSocialSourceBundle({ lessonRef: assignment.lessonRef, sources: input.sources, adultAttested: input.adultAttested })
+    const first = metadata[0]
+    const now = this.#at()
     const attachment: FinalFamilyPilotSourceAttachment = Object.freeze({
       studentRef: input.studentRef,
       assignmentRef: input.assignmentRef,
       lessonRef: assignment.lessonRef,
-      sourceRef: `source:${hashRef(`${input.studentRef}:${input.assignmentRef}:${input.title}:${input.publishedAt}`)}`,
-      title: input.title.trim(),
-      publisher: input.publisher.trim(),
-      publishedAt: new Date(input.publishedAt).toISOString(),
-      attachedAt: this.#at(),
+      sourceRef: `source:${hashRef(`${input.studentRef}:${input.assignmentRef}:${String(first.attachmentId)}`)}`,
+      title: String(first.sourceTitle),
+      publisher: String(first.responsibleParty),
+      publishedAt: new Date(`${String(first.retrievedOn)}T00:00:00.000Z`).toISOString(),
+      metadata,
+      adultAttestedAt: now,
+      attachedAt: now,
       status: 'ATTACHED_SATISFIED',
     })
     this.#commitApp((state) => ({
