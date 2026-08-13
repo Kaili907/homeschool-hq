@@ -219,27 +219,56 @@ beforeAll(async () => {
       throw new Error(`Failed to apply ${files[index]}`, { cause: error })
     }
   }
-  const currentLocalDate = (await database.query<{ local_date: string }>(`
-    select to_char(clock_timestamp() at time zone 'America/New_York', 'YYYY-MM-DD') as local_date
-  `)).rows[0].local_date
   await database.exec(`
     update public.academy_guardian_student_access
     set permission_level = 'identity_manager'
     where household_id in ('${HOUSEHOLD_A}', '${HOUSEHOLD_B}');
   `)
+  // Households live in different timezones (seeded by study_engine_fixtures.sql:
+  // household A = America/New_York, household B = UTC). A single shared
+  // "current local date" is wrong whenever the two zones straddle a calendar
+  // boundary, so each learner's intendedLocalDate is derived from that
+  // learner's own household_timezone, all evaluated against one shared instant.
+  const instant = (await database.query<{ instant: string }>(
+    'select clock_timestamp() as instant',
+  )).rows[0].instant
+  const localDateFor = async (household: string) => (await database.query<{ local_date: string }>(`
+    select to_char($1::timestamptz at time zone settings.household_timezone, 'YYYY-MM-DD') as local_date
+    from public.academy_study_household_settings as settings
+    where settings.household_id = $2
+  `, [instant, household])).rows[0].local_date
   learnerA = await issueLearner(
     GUARDIAN_A, HOUSEHOLD_A, STUDENT_A,
-    '15100000-0000-4000-8000-000000000001', 'lesson-pilot-a', currentLocalDate,
+    '15100000-0000-4000-8000-000000000001', 'lesson-pilot-a', await localDateFor(HOUSEHOLD_A),
   )
   learnerB = await issueLearner(
     GUARDIAN_B, HOUSEHOLD_B, STUDENT_B,
-    '15200000-0000-4000-8000-000000000002', 'lesson-pilot-b', currentLocalDate,
+    '15200000-0000-4000-8000-000000000002', 'lesson-pilot-b', await localDateFor(HOUSEHOLD_B),
   )
 }, 120_000)
 
 afterAll(async () => database?.close())
 
 describe.sequential('family pilot — supervised learner progress persistence smoke', () => {
+  it('regression: a single instant can map to different calendar dates across household timezones', async () => {
+    // Pins the bug class this fixture was fixed for: households A (America/New_York)
+    // and B (UTC) can disagree on "today" for the same instant, so a single
+    // shared intendedLocalDate computed in one timezone and reused for both
+    // learners is unsound. This assertion is instant-based, not wall-clock-based,
+    // so it stays true regardless of when the suite runs.
+    const instant = '2026-08-13T03:00:00.000Z'
+    const rows = await database.query<{ zone: string; local_date: string }>(`
+      select zone, to_char($1::timestamptz at time zone zone, 'YYYY-MM-DD') as local_date
+      from unnest(array['America/New_York', 'UTC']) as zone
+    `, [instant])
+    const byZone = Object.fromEntries(rows.rows.map((row) => [row.zone, row.local_date]))
+    expect(byZone).toEqual({
+      'America/New_York': '2026-08-12',
+      UTC: '2026-08-13',
+    })
+    expect(byZone['America/New_York']).not.toBe(byZone.UTC)
+  })
+
   it('learner A starts a session, checkpoints progress, and reads it back', async () => {
     const begun = await runtime(learnerA.tokenDigest, 'session:begin', learnerA.beginRequest)
     expect(begun.body).toMatchObject({ status: 'begun', state: 'active', revision: 1 })
