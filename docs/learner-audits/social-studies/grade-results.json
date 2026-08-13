@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "auditBase": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "classification": "SOCIAL_LEARNER_AUDIT_COMPLETE",
+  "overallResult": "FAIL",
+  "safeToBeginMatrix": {
+    "3": false,
+    "4": false,
+    "5": false,
+    "7": false,
+    "8": false,
+    "9": false,
+    "10": false,
+    "11": false,
+    "12": false
+  },
+  "grades": [
+    {
+      "grade": 3,
+      "lessons": 108,
+      "staticSourceLessons": 96,
+      "dynamicSourceLessons": 12,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 0,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 12,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 96,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 4,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 0,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 108,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 5,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 0,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 108,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 7,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 0,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 108,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 8,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 0,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 108,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 9,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 108,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 10,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 108,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 11,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 108,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    },
+    {
+      "grade": 12,
+      "lessons": 108,
+      "staticSourceLessons": 108,
+      "dynamicSourceLessons": 0,
+      "safeToBegin": 0,
+      "blocked": 108,
+      "flags": {
+        "MISSING_STATIC_SOURCE": 0,
+        "UNRESOLVED_SOURCE": 108,
+        "DYNAMIC_SOURCE_POLICY_ERROR": 0,
+        "EMPTY_EVIDENCE_TASK": 0,
+        "EMPTY_ARGUMENT_TASK": 0,
+        "ZERO_ACTIONABLE_WORK": 0,
+        "UNSUPPORTED_RESPONSE": 0,
+        "PROJECTION_LOSS": 0,
+        "COPYRIGHT_SOURCE_PROBLEM": 0,
+        "SCORING_LEAK": 0,
+        "PLACEHOLDER": 0
+      },
+      "result": "FAIL"
+    }
+  ]
+}

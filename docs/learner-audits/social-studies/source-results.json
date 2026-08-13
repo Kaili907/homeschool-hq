@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "auditBase": "c81ddb6e04bc1c3629212327d47817c1b5677477",
+  "lessonsAudited": 972,
+  "declaredPolicy": {
+    "staticSourceLessons": 960,
+    "dynamicSourceLessons": 12
+  },
+  "static": {
+    "result": "FAIL",
+    "lessons": 960,
+    "verifiedRegistryMetadataLessons": 528,
+    "unresolvedPinnedAssertionLessons": 432,
+    "missingOrInvalidRegistryLessons": 0,
+    "exactVerifiedSourcesVisibleInLearnerMaterial": 0,
+    "exactVerifiedSourcesLostFromLearnerProjection": 528,
+    "note": "Grades 3-8 have verified registry records but those keys/titles/URLs are not projected to learners; Grades 9-12 have named source labels but zero source keys and only an unrechecked upstream assertion."
+  },
+  "dynamic": {
+    "result": "FAIL",
+    "lessons": 12,
+    "intendedPendingStateCorrect": 12,
+    "blockedBeforeAttachment": 12,
+    "contractRequiredFields": 21,
+    "learnerEnteredFields": [
+      "publishedAt",
+      "publisher",
+      "title"
+    ],
+    "representedContractFields": [
+      "sourceDate",
+      "responsibleParty",
+      "sourceTitle"
+    ],
+    "contractRepresentable": false,
+    "fullyValidatedBeforeSatisfied": false,
+    "policyErrorLessons": 12
+  },
+  "grade7Era1": {
+    "result": "FAIL",
+    "lessons": 12,
+    "policy": [
+      "STATIC_VERIFIED_SOURCE"
+    ],
+    "sourceKeys": [
+      "si-nmnhanthro-14944765",
+      "si-nmnhanthro-8177415",
+      "si-nmnhanthro-8179176",
+      "si-nmnhanthro-8197795"
+    ],
+    "allRecordsVerified": true,
+    "allRecordsSmithsonian": true,
+    "exactRecordsVisibleToLearner": 0,
+    "note": "The four Smithsonian records are valid and statically assigned, but learner Markdown names unrelated generic repositories and the browser binding omits the source keys/metadata."
+  },
+  "registry": {
+    "sourceRecords": 114,
+    "validSourceRecords": 114,
+    "quotationStoredRecords": 0,
+    "rightsMetadataPresentRecords": 114
+  },
+  "flagCounts": {
+    "MISSING_STATIC_SOURCE": 0,
+    "UNRESOLVED_SOURCE": 432,
+    "DYNAMIC_SOURCE_POLICY_ERROR": 12,
+    "EMPTY_EVIDENCE_TASK": 0,
+    "EMPTY_ARGUMENT_TASK": 0,
+    "ZERO_ACTIONABLE_WORK": 0,
+    "UNSUPPORTED_RESPONSE": 0,
+    "PROJECTION_LOSS": 528,
+    "COPYRIGHT_SOURCE_PROBLEM": 0,
+    "SCORING_LEAK": 0,
+    "PLACEHOLDER": 0
+  },
+  "negativeControls": {
+    "staticSourceRemoved": {
+      "expectedFlag": "MISSING_STATIC_SOURCE",
+      "detected": true
+    },
+    "dynamicReadyBeforeAttachment": {
+      "expectedFlag": "DYNAMIC_SOURCE_POLICY_ERROR",
+      "detected": true
+    },
+    "questionDeleted": {
+      "expectedFlag": "EMPTY_EVIDENCE_TASK",
+      "detected": true
+    },
+    "sourceOrBrowserContentLoss": {
+      "expectedFlag": "PROJECTION_LOSS",
+      "detected": true
+    },
+    "adultScoringLeak": {
+      "expectedFlag": "SCORING_LEAK",
+      "detected": true
+    }
+  }
+}
