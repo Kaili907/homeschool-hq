@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "classification": "FINAL_SOCIAL_PRODUCTION_READY",
+  "contentRepairClassification": "SOCIAL_CONTENT_READY_FOR_CONVERGENCE",
   "subject": "social-studies",
   "inputs": {
     "production": {
@@ -18,6 +19,14 @@
     "gateH3": {
       "ref": "mac/curriculum-production-gate-h3",
       "sha": "49b3c4b86cc7764627bd4cfbd752222849831abf"
+    },
+    "highSchoolSourceContract": {
+      "path": "curriculum-production/final/social-studies/high-school-source-contract.json",
+      "sha256": "9304c0e029325ae8af4e9bb9a318fd046b72bf79a94647d78d6fddf9c55f9728"
+    },
+    "dynamicAttachmentMetadataSchema": {
+      "path": "curriculum-production/final/social-studies/dynamic-attachment-metadata.schema.json",
+      "sha256": "b44c0c2242ce161341e57a1126caf64f852cb2ca5fe5a77ca1ebbe670ead3b13"
     }
   },
   "totals": {
@@ -32,13 +41,20 @@
     "unresolvedWithoutPolicy": 0,
     "packageAdmittedLessons": 972,
     "runtimeReadyLessons": 960,
-    "pendingSourceAttachmentLessons": 12
+    "pendingSourceAttachmentLessons": 12,
+    "unresolvedStaticSourceAssertions": 0,
+    "highSchoolSourceAssertionsResolved": 432,
+    "staticTaskSourceBindings": 960,
+    "adultScoringLeaks": 0
   },
   "invariants": {
     "noInventedQuoteTitleOrUrl": true,
     "noLongCopyrightedSourceText": true,
     "tutorCannotWriteGradedArgument": true,
-    "dynamicLessonsGloballyProductionUnready": false
+    "dynamicLessonsGloballyProductionUnready": false,
+    "allStaticSourcesHaveRightsMetadata": true,
+    "allStaticTasksBoundToSources": true,
+    "highSchoolPinnedAssertionsResolved": true
   },
   "gateH3": {
     "inputSha": "49b3c4b86cc7764627bd4cfbd752222849831abf",
@@ -59,6 +75,10 @@
     "staticSourceRegistry": "verified-static-sources.json",
     "runtimeSourcePolicy": "runtime-source-policy.json",
     "gateH3Report": "gate-h3-report.json",
+    "sourceContractEvidence": "source-contract-evidence.json",
+    "highSchoolSourceContract": "high-school-source-contract.json",
+    "highSchoolSourceGuides": "high-school-unit-source-guides.md",
+    "dynamicAttachmentMetadataSchema": "dynamic-attachment-metadata.schema.json",
     "checksumManifest": "checksums.sha256"
   }
 }

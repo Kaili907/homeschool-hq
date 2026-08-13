@@ -281,27 +281,443 @@
       ]
     }
   },
+  "attachmentMetadataContract": {
+    "schemaPath": "curriculum-production/final/social-studies/dynamic-attachment-metadata.schema.json",
+    "schemaSha256": "b44c0c2242ce161341e57a1126caf64f852cb2ca5fe5a77ca1ebbe670ead3b13",
+    "schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://manuel.academy/schemas/social-studies/dynamic-source-attachment-v2.json",
+      "title": "Social Studies dynamic source attachment metadata",
+      "description": "Metadata-only record for a source retrieved for a learner-selected Grade 3 civic issue. Source bodies and quotations are deliberately excluded.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attachmentId",
+        "lessonRef",
+        "unitRef",
+        "issueStatement",
+        "sourceIdentifier",
+        "sourceTitle",
+        "responsibleParty",
+        "sourceDate",
+        "sourceVersionOrEdition",
+        "retrievalLocation",
+        "retrievedOn",
+        "retrievedByRole",
+        "retrievalStatus",
+        "mediaType",
+        "language",
+        "sourceKind",
+        "authorityTier",
+        "authorityVerified",
+        "primaryOrSecondary",
+        "primaryOrSecondaryReason",
+        "interestDisclosure",
+        "relevanceToIssue",
+        "limitsNoted",
+        "rightsCategory",
+        "rightsStatement",
+        "publicAccess",
+        "selectedByRole",
+        "selectedOn",
+        "readInFull",
+        "contentSafetyReviewedByRole",
+        "readingLevelReviewedByRole",
+        "previewedForSafetyAndLevel",
+        "containsLearnerPersonalData",
+        "containsOtherMinorPersonalData",
+        "quotedTextStored",
+        "contentDigestSha256"
+      ],
+      "properties": {
+        "attachmentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "lessonRef": {
+          "type": "string",
+          "pattern": "^ma-g3-social-studies-u09-l(?:0[1-9]|1[0-2])$"
+        },
+        "unitRef": {
+          "const": "ma-g3-social-studies-u09"
+        },
+        "issueStatement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Learner's own issue statement; not generated or rewritten by the tutor."
+        },
+        "sourceIdentifier": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "description": "Record, docket, report, publication, dataset, or locally assigned learner-evidence identifier copied from the retrieved source context."
+        },
+        "sourceTitle": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "responsibleParty": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "sourceDate": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 80,
+          "description": "Published, adopted, filed, recorded, updated, or collected date as the source gives it."
+        },
+        "sourceVersionOrEdition": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "retrievalLocation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "description": "Retrieved URL, records reference, publication/page reference, or described physical document; never a search-result snippet."
+        },
+        "retrievedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "retrievedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "retrievalStatus": {
+          "const": "OPENED_AND_READABLE"
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "language": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "sourceKind": {
+          "enum": [
+            "OFFICIAL_RECORD",
+            "AGENCY_DATA_OR_REPORT",
+            "PARTY_STATEMENT",
+            "INDEPENDENT_REPORTING",
+            "LEARNER_COLLECTED"
+          ]
+        },
+        "authorityTier": {
+          "enum": [
+            "TIER_1_OFFICIAL_RECORD",
+            "TIER_2_PARTY_STATEMENT",
+            "TIER_3_INDEPENDENT_REPORTING",
+            "TIER_4_LEARNER_COLLECTED"
+          ]
+        },
+        "authorityVerified": {
+          "const": true
+        },
+        "primaryOrSecondary": {
+          "enum": [
+            "PRIMARY",
+            "SECONDARY"
+          ]
+        },
+        "primaryOrSecondaryReason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Learner-authored reason; an adult may verify presence but may not supply wording."
+        },
+        "interestDisclosure": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "relevanceToIssue": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 750
+        },
+        "limitsNoted": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 750
+        },
+        "rightsCategory": {
+          "enum": [
+            "PUBLIC_DOMAIN",
+            "GOVERNMENT_RECORD",
+            "CC0",
+            "CC_BY",
+            "CC_BY_SA",
+            "LICENSED_LINK_ONLY",
+            "FAIR_USE_MINIMAL_EXCERPT",
+            "LEARNER_COLLECTED_WITH_CONSENT"
+          ]
+        },
+        "rightsStatement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 750,
+          "description": "Copied or faithfully summarized from the retrieved source's rights/access notice; no license may be guessed."
+        },
+        "publicAccess": {
+          "type": "boolean"
+        },
+        "selectedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "selectedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "readInFull": {
+          "const": true
+        },
+        "contentSafetyReviewedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "readingLevelReviewedByRole": {
+          "enum": [
+            "PARENT",
+            "TUTOR",
+            "TEACHER"
+          ]
+        },
+        "previewedForSafetyAndLevel": {
+          "const": true
+        },
+        "containsLearnerPersonalData": {
+          "const": false
+        },
+        "containsOtherMinorPersonalData": {
+          "const": false
+        },
+        "quotedTextStored": {
+          "const": false,
+          "description": "The attachment stores no source body and no quotation. Any quotation is transcribed by the learner directly into learner work."
+        },
+        "contentDigestSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Optional digest of retrieved bytes for change detection; never a substitute for retrieval and review."
+        },
+        "participantRole": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "consentRecorded": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "OFFICIAL_RECORD"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_1_OFFICIAL_RECORD"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "AGENCY_DATA_OR_REPORT"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_1_OFFICIAL_RECORD"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "PARTY_STATEMENT"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_2_PARTY_STATEMENT"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "INDEPENDENT_REPORTING"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_3_INDEPENDENT_REPORTING"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": {
+                "const": "LEARNER_COLLECTED"
+              }
+            },
+            "required": [
+              "sourceKind"
+            ]
+          },
+          "then": {
+            "required": [
+              "participantRole",
+              "consentRecorded"
+            ],
+            "properties": {
+              "authorityTier": {
+                "const": "TIER_4_LEARNER_COLLECTED"
+              },
+              "rightsCategory": {
+                "const": "LEARNER_COLLECTED_WITH_CONSENT"
+              },
+              "participantRole": {
+                "type": "string",
+                "minLength": 1
+              },
+              "consentRecorded": {
+                "const": true
+              }
+            }
+          }
+        }
+      ],
+      "x-unit-sufficiency": {
+        "minimumAttachments": 2,
+        "requiresAtLeastOneAuthorityTier": [
+          "TIER_1_OFFICIAL_RECORD",
+          "TIER_3_INDEPENDENT_REPORTING"
+        ],
+        "partyOrLearnerCollectedMayNotStandAlone": true,
+        "differentResponsiblePartiesWhenContested": true,
+        "sameIssueStatementRequiredAcrossUnit": true
+      },
+      "x-readiness": {
+        "defaultState": "PENDING_SOURCE_ATTACHMENT",
+        "validIntermediateState": "ATTACHED_INCOMPLETE",
+        "satisfiedState": "ATTACHED_SATISFIED",
+        "schemaValidationAloneDoesNotMakeReady": true,
+        "adultAttestationRequired": true,
+        "revalidateAfterDays": 180,
+        "revalidateOnIssueChange": true,
+        "revalidateOnRetrievalFailure": true,
+        "revalidateOnSourceAmendment": true
+      },
+      "x-authorship-boundary": {
+        "tutorMayLocateAndExplainSources": true,
+        "tutorMayAskGuidingQuestions": true,
+        "tutorMayWriteGradedArgument": false,
+        "tutorMayWriteLearnerCitation": false,
+        "tutorMaySupplyPrimarySecondaryReason": false
+      }
+    },
+    "sourceBodyStored": false,
+    "quotationsStored": false,
+    "validationRequiredBeforeSatisfiedTransition": true
+  },
   "emptyAttachmentTemplate": {
     "attachmentId": null,
     "lessonRef": null,
     "unitRef": null,
     "issueStatement": null,
+    "sourceIdentifier": null,
     "sourceTitle": null,
     "responsibleParty": null,
     "sourceDate": null,
+    "sourceVersionOrEdition": null,
     "retrievalLocation": null,
     "retrievedOn": null,
-    "retrievedBy": null,
+    "retrievedByRole": null,
+    "retrievalStatus": null,
+    "mediaType": null,
+    "language": null,
     "sourceKind": null,
     "authorityTier": null,
+    "authorityVerified": null,
     "primaryOrSecondary": null,
     "primaryOrSecondaryReason": null,
     "interestDisclosure": null,
     "relevanceToIssue": null,
     "limitsNoted": null,
-    "selectedBy": null,
+    "rightsCategory": null,
+    "rightsStatement": null,
+    "publicAccess": null,
+    "selectedByRole": null,
     "selectedOn": null,
     "readInFull": null,
-    "previewedForSafetyAndLevel": null
+    "contentSafetyReviewedByRole": null,
+    "readingLevelReviewedByRole": null,
+    "previewedForSafetyAndLevel": null,
+    "containsLearnerPersonalData": null,
+    "containsOtherMinorPersonalData": null,
+    "quotedTextStored": null,
+    "contentDigestSha256": null
   }
 }
