@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "lesson-scoring-guide",
+  "lessonId": "ma-g4-health-u04-l03",
+  "courseId": "ma-g4-health",
+  "grade": 4,
+  "subject": "health",
+  "scoringAuthority": "RUBRIC",
+  "successCriteria": [
+    "The learner completes the central task about listening and perspective-taking.",
+    "The learner gives a reason, an example, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name one next step."
+  ],
+  "scoringGuidance": "Score the stated learning target, accuracy, reasoning, and revision. Accept multiple valid approaches that meet the criteria. Never infer effort, character, health status, body size, family circumstance, or diagnosis from an error or from a learner choosing an opt-out or alternate response.",
+  "masteryRule": "Do not mark mastery from one answer. Use scenario response, decision process, communication practice, safety planning, and applied evidence; require accurate independent evidence and successful transfer or retrieval on at least two separate occasions. Optional private reflection is never scored and never used as mastery evidence.",
+  "remediation": "Return to the smallest prerequisite needed for listening and perspective-taking, model it concretely or in text only, then retry one fresh scenario.",
+  "adaptiveRoutes": [
+    {
+      "signal": "prerequisite gap",
+      "action": "Return to the smallest prerequisite needed for listening and perspective-taking, model it concretely or in text only, then retry one fresh scenario."
+    },
+    {
+      "signal": "procedure without understanding",
+      "action": "Ask the learner to explain why the healthy choice about listening and perspective-taking works before continuing."
+    },
+    {
+      "signal": "correct but low confidence",
+      "action": "Confirm the reasoning specifically, offer one varied example of listening and perspective-taking, and avoid unnecessary remediation."
+    },
+    {
+      "signal": "repeated error pattern",
+      "action": "Name the observable pattern neutrally, never as a character or health judgment, contrast it with a worked example, and schedule a short review."
+    },
+    {
+      "signal": "mastery evidence",
+      "action": "Require accurate independent application plus explanation of listening and perspective-taking on a later or different occasion before marking it mastered."
+    }
+  ],
+  "guardianOrParentVisibility": "Share the lesson target, completion state, evidence type, any guardian safety confirmation, and the next instructional step. Do not expose raw private reflections, raw answers, recordings, or any diagnosis language. Study records completion and progress metadata only; it does not persist raw health reflections.",
+  "guardianSafetyReview": {
+    "equipment": "None.",
+    "environment": "Indoor setting.",
+    "movement_hazards": "None expected.",
+    "food_or_allergy_note": "None. This unit covers personal-safety and consent rules; guardians may wish to preview it.",
+    "guardian_confirmation_required": true
+  },
+  "safetyAndPrivacyNotes": [
+    "Use respectful, non-shaming language about bodies, food, ability, family, and health.",
+    "Never require body weight, height, BMI, body-fat percentage, calorie counting, dieting, weight-loss goals, or body measurement of any kind.",
+    "Never require disclosure of private medical history, mental-health diagnosis, trauma, family circumstances, or sexual history.",
+    "Never require a photograph or video recording of the learner or the learner body.",
+    "Keep every scenario fictional; the learner may always answer about a made-up character instead of themselves.",
+    "Allow a pause, break, opt-out, or alternate response mode without treating it as failure.",
+    "Direct urgent safety, health, or mental-health concerns to a trusted adult or qualified professional; this course is not diagnosis, therapy, or treatment."
+  ],
+  "sourceProvenance": {
+    "sourceBranch": "mac/g34-health-pe-r1@d0ebaa010cd01d7565967b4578d415dc7c8ee434",
+    "sourceLessonId": "ma-g4-health-u04-l03"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "codes": [
+      "READY"
+    ],
+    "notes": []
+  }
+}
