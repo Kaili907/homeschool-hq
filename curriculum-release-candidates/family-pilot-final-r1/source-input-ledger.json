@@ -1,0 +1,92 @@
+[
+  {
+    "inputId": "g34_normalization",
+    "namedRef": "mac/g34-release-normalization-r2",
+    "commitSha": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+    "path": "curriculum-release-normalization/g34-r2",
+    "treeSha": "68132382b042499ea2741957fb965712448c4a08",
+    "role": "normalized Grade 3/4 structural plane",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "sealed_1_0_0",
+    "namedRef": "sealed curriculum-content/manuel-academy/1.0.0",
+    "commitSha": "4056e31d8beb36622be5ac27ea7f20145266343b",
+    "path": "curriculum-content/manuel-academy/1.0.0",
+    "treeSha": "1f18bb1af429ecac9124d39984b288181c7a154b",
+    "role": "canonical sealed Grade 5/7/8 source; read only",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "hs912_normalization",
+    "namedRef": "mac/hs912-release-normalization-r2",
+    "commitSha": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-normalization/hs912-r2",
+    "treeSha": "45c1bae36479d20cf58203e4653a792a47f524ae",
+    "role": "normalized Grade 9-12 registry and canonical source snapshot",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "hs912_science_h4",
+    "namedRef": "mac/hs912-science-h4",
+    "commitSha": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+    "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science",
+    "treeSha": "00fcdbe6ac12f8983d521958015a0d628fe434bc",
+    "role": "high-school science H4 correction source",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "g3_health_h2",
+    "namedRef": "mac/g3-health-h2",
+    "commitSha": "50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
+    "path": "curriculum-authoring/full-family-grade34/subjects/health",
+    "treeSha": "588ca1d53f29387d1069494737866c652b467de9",
+    "role": "Grade 3/4 Health H2 correction source",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "g8_math_integration",
+    "namedRef": "mac/g8-math-remediation-integration-r2",
+    "commitSha": "6cde12f62d2ff432f45c5a6bb45f7d5a5f19b0de",
+    "path": "curriculum-release-corrections",
+    "treeSha": "7baec63e3a3007b2f01debab6a67c84440252f93",
+    "role": "Grade 8 mathematics 8.EE.2 180-day integration",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "g34_standards_core",
+    "namedRef": "mac/g34-standards-core-r3",
+    "commitSha": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+    "path": "curriculum-release-evidence/g34-core-r3",
+    "treeSha": "1c2a5bde95092a912148e64308e5f596977883ba",
+    "role": "Grade 3/4 core standards evidence policy",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "g34_specialty_health_finlit_rfl",
+    "namedRef": "mac/g34-specialty-health-finlit-rfl-r4",
+    "commitSha": "6e2e2fd091c7d9e46571d07f143545c6153c2402",
+    "path": "curriculum-release-evidence/g34-specialty-health-finlit-rfl-r4",
+    "treeSha": "80c644058c57e603f2e0a1e373a9ad515742a5d1",
+    "role": "Grade 3/4 specialty standards evidence policy",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "g34_specialty_arts_pe",
+    "namedRef": "mac/g34-specialty-arts-pe-r4",
+    "commitSha": "c8bc5042215287fe5c655d78dda33ca6b742461e",
+    "path": "curriculum-release-evidence/g34-specialty-arts-pe-r4",
+    "treeSha": "3fffcad76cd41a0ecff5a86cb03e67c52876f484",
+    "role": "Grade 3/4 Arts/PE evidence policy with honest advisory states",
+    "importMode": "PINNED_REFERENCE"
+  },
+  {
+    "inputId": "social_dynamic_sources",
+    "namedRef": "mac/social-dynamic-sources-r3",
+    "commitSha": "5c013cfa8b48086287ac11a366c5cdf0a47c7cef",
+    "path": "curriculum-production/source-resolution/social-studies-dynamic",
+    "treeSha": "ce698ec9889b217c50641c0bba2ba4fb7f8ab171",
+    "role": "dynamic Social Studies source projection",
+    "importMode": "PINNED_REFERENCE"
+  }
+]

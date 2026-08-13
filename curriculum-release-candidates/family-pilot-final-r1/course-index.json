@@ -1,0 +1,1816 @@
+[
+  {
+    "releaseSlotId": "ma-g3-arts-music",
+    "authoredCourseId": "ma-g3-arts-music",
+    "grade": 3,
+    "subject": "arts-and-music",
+    "title": "Grade 3 Arts And Music",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/arts-and-music"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-english-language-arts",
+    "authoredCourseId": "ma-g3-english-language-arts",
+    "grade": 3,
+    "subject": "english-language-arts",
+    "title": "Grade 3 English Language Arts",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/english-language-arts"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-financial-literacy",
+    "authoredCourseId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "title": "Grade 3 Financial Literacy",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/financial-literacy"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-health",
+    "authoredCourseId": "ma-g3-health",
+    "grade": 3,
+    "subject": "health",
+    "title": "Grade 3 Health",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g3_health_h2",
+      "commit": "50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
+      "path": "curriculum-authoring/full-family-grade34/subjects/health/grade-3"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-mathematics",
+    "authoredCourseId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "title": "Grade 3 Mathematics",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/mathematics"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-physical-education",
+    "authoredCourseId": "ma-g3-physical-education",
+    "grade": 3,
+    "subject": "physical-education",
+    "title": "Grade 3 Physical Education",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/physical-education"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-ready-for-life",
+    "authoredCourseId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "title": "Grade 3 Ready For Life",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/ready-for-life"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-science",
+    "authoredCourseId": "ma-g3-science",
+    "grade": 3,
+    "subject": "science",
+    "title": "Grade 3 Science",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/science"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-social-studies",
+    "authoredCourseId": "ma-g3-social-studies",
+    "grade": 3,
+    "subject": "social-studies",
+    "title": "Grade 3 Social Studies",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/social-studies"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g3-tech-cs",
+    "authoredCourseId": "ma-g3-tech-cs",
+    "grade": 3,
+    "subject": "technology",
+    "title": "Grade 3 Technology",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-3/courses/technology"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-arts-music",
+    "authoredCourseId": "ma-g4-arts-music",
+    "grade": 4,
+    "subject": "arts-and-music",
+    "title": "Grade 4 Arts And Music",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/arts-and-music"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-english-language-arts",
+    "authoredCourseId": "ma-g4-english-language-arts",
+    "grade": 4,
+    "subject": "english-language-arts",
+    "title": "Grade 4 English Language Arts",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/english-language-arts"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-financial-literacy",
+    "authoredCourseId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "title": "Grade 4 Financial Literacy",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/financial-literacy"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-health",
+    "authoredCourseId": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "title": "Grade 4 Health",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g3_health_h2",
+      "commit": "50399a6fb6ae095907c0fde25db2a15ca85c6f1f",
+      "path": "curriculum-authoring/full-family-grade34/subjects/health/grade-4"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-mathematics",
+    "authoredCourseId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "title": "Grade 4 Mathematics",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/mathematics"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-physical-education",
+    "authoredCourseId": "ma-g4-physical-education",
+    "grade": 4,
+    "subject": "physical-education",
+    "title": "Grade 4 Physical Education",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/physical-education"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-ready-for-life",
+    "authoredCourseId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "title": "Grade 4 Ready For Life",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/ready-for-life"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-science",
+    "authoredCourseId": "ma-g4-science",
+    "grade": 4,
+    "subject": "science",
+    "title": "Grade 4 Science",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/science"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-social-studies",
+    "authoredCourseId": "ma-g4-social-studies",
+    "grade": 4,
+    "subject": "social-studies",
+    "title": "Grade 4 Social Studies",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/social-studies"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g4-tech-cs",
+    "authoredCourseId": "ma-g4-tech-cs",
+    "grade": 4,
+    "subject": "technology",
+    "title": "Grade 4 Technology",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/grades/grade-4/courses/technology"
+    },
+    "normalizationSource": {
+      "input": "g34_normalization",
+      "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+      "path": "curriculum-release-normalization/g34-r2/course-index.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g5-arts-and-music",
+    "authoredCourseId": "ma-g5-arts-and-music",
+    "grade": 5,
+    "subject": "arts-and-music",
+    "title": "Grade 5 Arts and Music",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/arts-and-music"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-english-language-arts",
+    "authoredCourseId": "ma-g5-english-language-arts",
+    "grade": 5,
+    "subject": "english-language-arts",
+    "title": "Grade 5 English Language Arts",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/english-language-arts"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-financial-literacy",
+    "authoredCourseId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "title": "Grade 5 Financial Literacy",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/financial-literacy"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-health",
+    "authoredCourseId": "ma-g5-health",
+    "grade": 5,
+    "subject": "health",
+    "title": "Grade 5 Health",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/health"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-mathematics",
+    "authoredCourseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "title": "Grade 5 Mathematics",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/mathematics"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-physical-education",
+    "authoredCourseId": "ma-g5-physical-education",
+    "grade": 5,
+    "subject": "physical-education",
+    "title": "Grade 5 Physical Education",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/physical-education"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-ready-for-life",
+    "authoredCourseId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "title": "Grade 5 Ready for Life",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/ready-for-life"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-science",
+    "authoredCourseId": "ma-g5-science",
+    "grade": 5,
+    "subject": "science",
+    "title": "Grade 5 Science",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/science"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-social-studies",
+    "authoredCourseId": "ma-g5-social-studies",
+    "grade": 5,
+    "subject": "social-studies",
+    "title": "Grade 5 Social Studies",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/social-studies"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g5-technology",
+    "authoredCourseId": "ma-g5-technology",
+    "grade": 5,
+    "subject": "technology",
+    "title": "Grade 5 Technology and Computer Science",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/technology"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-arts-and-music",
+    "authoredCourseId": "ma-g7-arts-and-music",
+    "grade": 7,
+    "subject": "arts-and-music",
+    "title": "Grade 7 Arts and Music",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/arts-and-music"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-english-language-arts",
+    "authoredCourseId": "ma-g7-english-language-arts",
+    "grade": 7,
+    "subject": "english-language-arts",
+    "title": "Grade 7 English Language Arts",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/english-language-arts"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-financial-literacy",
+    "authoredCourseId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "title": "Grade 7 Financial Literacy",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/financial-literacy"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-health",
+    "authoredCourseId": "ma-g7-health",
+    "grade": 7,
+    "subject": "health",
+    "title": "Grade 7 Health",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/health"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-mathematics",
+    "authoredCourseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "title": "Grade 7 Mathematics",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/mathematics"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-physical-education",
+    "authoredCourseId": "ma-g7-physical-education",
+    "grade": 7,
+    "subject": "physical-education",
+    "title": "Grade 7 Physical Education",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/physical-education"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-ready-for-life",
+    "authoredCourseId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "title": "Grade 7 Ready for Life",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/ready-for-life"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-science",
+    "authoredCourseId": "ma-g7-science",
+    "grade": 7,
+    "subject": "science",
+    "title": "Grade 7 Science",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/science"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-social-studies",
+    "authoredCourseId": "ma-g7-social-studies",
+    "grade": 7,
+    "subject": "social-studies",
+    "title": "Grade 7 Social Studies",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/social-studies"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g7-technology",
+    "authoredCourseId": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "title": "Grade 7 Technology and Computer Science",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/technology"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-arts-and-music",
+    "authoredCourseId": "ma-g8-arts-and-music",
+    "grade": 8,
+    "subject": "arts-and-music",
+    "title": "Grade 8 Arts and Music",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/arts-and-music"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-english-language-arts",
+    "authoredCourseId": "ma-g8-english-language-arts",
+    "grade": 8,
+    "subject": "english-language-arts",
+    "title": "Grade 8 English Language Arts",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/english-language-arts"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-financial-literacy",
+    "authoredCourseId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "title": "Grade 8 Financial Literacy",
+    "unitCount": 7,
+    "lessonCount": 72,
+    "assessmentCount": 7,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/financial-literacy"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-health",
+    "authoredCourseId": "ma-g8-health",
+    "grade": 8,
+    "subject": "health",
+    "title": "Grade 8 Health",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/health"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-mathematics",
+    "authoredCourseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "title": "Grade 8 Mathematics",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 11,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/mathematics"
+    },
+    "correctionSource": {
+      "input": "g8_math_integration",
+      "commit": "6cde12f62d2ff432f45c5a6bb45f7d5a5f19b0de",
+      "path": "curriculum-release-corrections/grade8-mathematics-integration"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g8-physical-education",
+    "authoredCourseId": "ma-g8-physical-education",
+    "grade": 8,
+    "subject": "physical-education",
+    "title": "Grade 8 Physical Education",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/physical-education"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-ready-for-life",
+    "authoredCourseId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "title": "Grade 8 Ready for Life",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/ready-for-life"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-science",
+    "authoredCourseId": "ma-g8-science",
+    "grade": 8,
+    "subject": "science",
+    "title": "Grade 8 Science",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/science"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-social-studies",
+    "authoredCourseId": "ma-g8-social-studies",
+    "grade": 8,
+    "subject": "social-studies",
+    "title": "Grade 8 Social Studies",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/social-studies"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g8-technology",
+    "authoredCourseId": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "title": "Grade 8 Technology and Computer Science",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "contentSource": {
+      "input": "sealed_1_0_0",
+      "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+      "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/technology"
+    },
+    "correctionSource": null
+  },
+  {
+    "releaseSlotId": "ma-g9-arts-and-music",
+    "authoredCourseId": "ma-g9-arts-and-music",
+    "grade": 9,
+    "subject": "arts-and-music",
+    "title": "Foundations of Visual and Media Arts",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/arts-and-music/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-english-language-arts",
+    "authoredCourseId": "ma-g9-english-language-arts",
+    "grade": 9,
+    "subject": "english-language-arts",
+    "title": "English 9: Foundations of Literary Analysis and Argument",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/english-language-arts/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-financial-literacy",
+    "authoredCourseId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "title": "Personal Finance",
+    "unitCount": 7,
+    "lessonCount": 72,
+    "assessmentCount": 7,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/financial-literacy/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-health",
+    "authoredCourseId": "ma-g9-health",
+    "grade": 9,
+    "subject": "health",
+    "title": "Health and Wellness I",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/health/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-mathematics",
+    "authoredCourseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "title": "Algebra I",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/mathematics/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-physical-education",
+    "authoredCourseId": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "title": "Personal Fitness and Lifetime Activity",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/physical-education/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-ready-for-life",
+    "authoredCourseId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "title": "Ready for Life 9: Personal Management and Learning Systems",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/ready-for-life/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-science",
+    "authoredCourseId": "ma-hs9-biology",
+    "grade": 9,
+    "subject": "science",
+    "title": "Biology",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "ALIAS_NOT_RENAME",
+    "status": "STRUCTURALLY_ADMITTED_H4",
+    "contentSource": {
+      "input": "hs912_science_h4",
+      "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-social-studies",
+    "authoredCourseId": "ma-g9-social-studies",
+    "grade": 9,
+    "subject": "social-studies",
+    "title": "United States History and Geography (1870 to the Present)",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/social-studies/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g9-technology",
+    "authoredCourseId": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "title": "Computer Science Principles and Digital Citizenship",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/technology/grade-9"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-arts-and-music",
+    "authoredCourseId": "ma-g10-arts-and-music",
+    "grade": 10,
+    "subject": "arts-and-music",
+    "title": "Music, Theatre, and Performance Foundations",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/arts-and-music/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-english-language-arts",
+    "authoredCourseId": "ma-g10-english-language-arts",
+    "grade": 10,
+    "subject": "english-language-arts",
+    "title": "English 10: World Literature and Rhetoric",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/english-language-arts/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-financial-literacy",
+    "authoredCourseId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "title": "Consumer Economics and Credit",
+    "unitCount": 7,
+    "lessonCount": 72,
+    "assessmentCount": 7,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/financial-literacy/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-health",
+    "authoredCourseId": "ma-g10-health",
+    "grade": 10,
+    "subject": "health",
+    "title": "Health II: Mental Health and Community Wellness",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/health/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-mathematics",
+    "authoredCourseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "title": "Geometry",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/mathematics/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-physical-education",
+    "authoredCourseId": "ma-g10-physical-education",
+    "grade": 10,
+    "subject": "physical-education",
+    "title": "Team, Individual, and Dual Activities",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/physical-education/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-ready-for-life",
+    "authoredCourseId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "title": "Ready for Life 10: Career Exploration and Workplace Communication",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/ready-for-life/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-science",
+    "authoredCourseId": "ma-hs10-chemistry",
+    "grade": 10,
+    "subject": "science",
+    "title": "Chemistry",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "ALIAS_NOT_RENAME",
+    "status": "STRUCTURALLY_ADMITTED_H4",
+    "contentSource": {
+      "input": "hs912_science_h4",
+      "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-social-studies",
+    "authoredCourseId": "ma-g10-social-studies",
+    "grade": 10,
+    "subject": "social-studies",
+    "title": "World History and Geography",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/social-studies/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g10-technology",
+    "authoredCourseId": "ma-g10-technology",
+    "grade": 10,
+    "subject": "technology",
+    "title": "Programming I",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/technology/grade-10"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-arts-and-music",
+    "authoredCourseId": "ma-g11-arts-and-music",
+    "grade": 11,
+    "subject": "arts-and-music",
+    "title": "Studio Art, Composition, and Applied Design",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/arts-and-music/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-english-language-arts",
+    "authoredCourseId": "ma-g11-english-language-arts",
+    "grade": 11,
+    "subject": "english-language-arts",
+    "title": "English 11: American Literature, Research, and Synthesis",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/english-language-arts/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-financial-literacy",
+    "authoredCourseId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "title": "Investing, Insurance, and Risk Management",
+    "unitCount": 7,
+    "lessonCount": 72,
+    "assessmentCount": 7,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/financial-literacy/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-health",
+    "authoredCourseId": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "title": "Health III: Consumer Health, Safety, and Emergency Response",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/health/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-mathematics",
+    "authoredCourseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "title": "Algebra II",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/mathematics/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-physical-education",
+    "authoredCourseId": "ma-g11-physical-education",
+    "grade": 11,
+    "subject": "physical-education",
+    "title": "Strength, Conditioning, and Training Design",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/physical-education/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-ready-for-life",
+    "authoredCourseId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "title": "Ready for Life 11: Postsecondary Planning and Portfolio",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/ready-for-life/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-science",
+    "authoredCourseId": "ma-hs11-physics",
+    "grade": 11,
+    "subject": "science",
+    "title": "Physics",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "ALIAS_NOT_RENAME",
+    "status": "STRUCTURALLY_ADMITTED_H4",
+    "contentSource": {
+      "input": "hs912_science_h4",
+      "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-social-studies",
+    "authoredCourseId": "ma-g11-social-studies",
+    "grade": 11,
+    "subject": "social-studies",
+    "title": "Civics and Economics",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/social-studies/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g11-technology",
+    "authoredCourseId": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "title": "Data, Systems, and Applied Computing",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/technology/grade-11"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-arts-and-music",
+    "authoredCourseId": "ma-g12-arts-and-music",
+    "grade": 12,
+    "subject": "arts-and-music",
+    "title": "Arts Capstone: Portfolio and Exhibition",
+    "unitCount": 6,
+    "lessonCount": 72,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/arts-and-music/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-english-language-arts",
+    "authoredCourseId": "ma-g12-english-language-arts",
+    "grade": 12,
+    "subject": "english-language-arts",
+    "title": "English 12: Global Literature, Composition, and Portfolio Capstone",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/english-language-arts/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-financial-literacy",
+    "authoredCourseId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "title": "Financial Transition to Adulthood",
+    "unitCount": 7,
+    "lessonCount": 72,
+    "assessmentCount": 7,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/financial-literacy/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-health",
+    "authoredCourseId": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "title": "Health IV: Adult Health Transition",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/health/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-mathematics",
+    "authoredCourseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "title": "Precalculus with Statistics",
+    "unitCount": 10,
+    "lessonCount": 180,
+    "assessmentCount": 10,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/mathematics/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-physical-education",
+    "authoredCourseId": "ma-g12-physical-education",
+    "grade": 12,
+    "subject": "physical-education",
+    "title": "Lifelong Wellness and Independent Training Capstone",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/physical-education/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-ready-for-life",
+    "authoredCourseId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "title": "Ready for Life 12: Independent Adult Living Capstone",
+    "unitCount": 6,
+    "lessonCount": 36,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/ready-for-life/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-science",
+    "authoredCourseId": "ma-hs12-earth-space-environmental",
+    "grade": 12,
+    "subject": "science",
+    "title": "Earth, Space, and Environmental Systems",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "ALIAS_NOT_RENAME",
+    "status": "STRUCTURALLY_ADMITTED_H4",
+    "contentSource": {
+      "input": "hs912_science_h4",
+      "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+      "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-social-studies",
+    "authoredCourseId": "ma-g12-social-studies",
+    "grade": 12,
+    "subject": "social-studies",
+    "title": "Contemporary Global Issues and Civic Capstone",
+    "unitCount": 9,
+    "lessonCount": 108,
+    "assessmentCount": 9,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/social-studies/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  },
+  {
+    "releaseSlotId": "ma-g12-technology",
+    "authoredCourseId": "ma-g12-technology",
+    "grade": 12,
+    "subject": "technology",
+    "title": "Cybersecurity, AI Literacy, and Computing Capstone",
+    "unitCount": 6,
+    "lessonCount": 48,
+    "assessmentCount": 6,
+    "idPolicy": "STABLE_ID",
+    "status": "NORMALIZED",
+    "contentSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-candidates/hs912-r1/technology/grade-12"
+    },
+    "normalizationSource": {
+      "input": "hs912_normalization",
+      "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+      "path": "curriculum-release-normalization/hs912-r2/registries/release-course-registry.json"
+    }
+  }
+]

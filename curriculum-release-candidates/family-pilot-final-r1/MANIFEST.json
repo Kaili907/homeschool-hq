@@ -1,0 +1,68 @@
+{
+  "releaseId": "family-pilot-final-r1",
+  "classification": "FINAL_CURRICULUM_STRUCTURE_READY",
+  "releaseType": "STRUCTURAL_CURRICULUM_RELEASE_CANDIDATE",
+  "supportedGrades": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "unsupportedGrades": [
+    6
+  ],
+  "internalSubjectFamilies": [
+    "arts-and-music",
+    "english-language-arts",
+    "financial-literacy",
+    "health",
+    "mathematics",
+    "physical-education",
+    "ready-for-life",
+    "science",
+    "social-studies",
+    "technology"
+  ],
+  "externalWorldLanguage": {
+    "tracking": "SEPARATE",
+    "blocksFamilyPilotStudy": false,
+    "internallyAuthoredCourseCount": 0
+  },
+  "counts": {
+    "grades": 9,
+    "courses": 90,
+    "units": 698,
+    "lessons": 8292,
+    "assessments": 699
+  },
+  "standardsReviewEffect": "ADVISORY_UNLESS_AN_EXPLICIT_RELEASE_CONTRACT_SAYS_BLOCKING",
+  "productionBindings": {
+    "state": "UNBOUND",
+    "slotCount": 8292,
+    "contractKey": [
+      "grade",
+      "subject",
+      "lessonRef"
+    ]
+  },
+  "artifacts": [
+    "course-index.json",
+    "unit-index.json",
+    "lesson-index.jsonl",
+    "assessment-index.json",
+    "schedules/schedule-index.json",
+    "schedules/lesson-schedule.jsonl",
+    "standards-evidence-refs.json",
+    "source-input-ledger.json",
+    "grade-subject-matrix.json",
+    "correction-overlay-ledger.json",
+    "production-binding-slots.jsonl",
+    "validation/structural-validation.json",
+    "SHA256SUMS.txt"
+  ]
+}

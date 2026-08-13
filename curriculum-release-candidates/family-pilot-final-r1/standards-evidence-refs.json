@@ -1,0 +1,1556 @@
+[
+  {
+    "releaseSlotId": "ma-g3-arts-music",
+    "grade": 3,
+    "subject": "arts-and-music",
+    "status": "HUMAN_REVIEW_REQUIRED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_arts_pe",
+        "commit": "c8bc5042215287fe5c655d78dda33ca6b742461e",
+        "path": "curriculum-release-evidence/g34-specialty-arts-pe-r4/registry/crosswalk-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "HUMAN_REVIEW_REQUIRED",
+        "distinctMappings": 2,
+        "citationOccurrences": 36
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-english-language-arts",
+    "grade": 3,
+    "subject": "english-language-arts",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-financial-literacy",
+    "grade": 3,
+    "subject": "financial-literacy",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_health_finlit_rfl",
+        "commit": "6e2e2fd091c7d9e46571d07f143545c6153c2402",
+        "path": "curriculum-release-evidence/g34-specialty-health-finlit-rfl-r4/evidence/crosswalk.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-health",
+    "grade": 3,
+    "subject": "health",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_health_finlit_rfl",
+        "commit": "6e2e2fd091c7d9e46571d07f143545c6153c2402",
+        "path": "curriculum-release-evidence/g34-specialty-health-finlit-rfl-r4/evidence/crosswalk.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-mathematics",
+    "grade": 3,
+    "subject": "mathematics",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-physical-education",
+    "grade": 3,
+    "subject": "physical-education",
+    "status": "HUMAN_REVIEW_REQUIRED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_arts_pe",
+        "commit": "c8bc5042215287fe5c655d78dda33ca6b742461e",
+        "path": "curriculum-release-evidence/g34-specialty-arts-pe-r4/registry/crosswalk-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "HUMAN_REVIEW_REQUIRED",
+        "distinctMappings": 3,
+        "citationOccurrences": 144
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-ready-for-life",
+    "grade": 3,
+    "subject": "ready-for-life",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_health_finlit_rfl",
+        "commit": "6e2e2fd091c7d9e46571d07f143545c6153c2402",
+        "path": "curriculum-release-evidence/g34-specialty-health-finlit-rfl-r4/evidence/crosswalk.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-science",
+    "grade": 3,
+    "subject": "science",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-social-studies",
+    "grade": 3,
+    "subject": "social-studies",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g3-tech-cs",
+    "grade": 3,
+    "subject": "technology",
+    "status": "NORMALIZED_EVIDENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_normalization",
+        "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+        "path": "curriculum-release-normalization/g34-r2/standards/courses/ma-g3-tech-cs.standards.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-arts-music",
+    "grade": 4,
+    "subject": "arts-and-music",
+    "status": "HUMAN_REVIEW_REQUIRED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_arts_pe",
+        "commit": "c8bc5042215287fe5c655d78dda33ca6b742461e",
+        "path": "curriculum-release-evidence/g34-specialty-arts-pe-r4/registry/crosswalk-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "HUMAN_REVIEW_REQUIRED",
+        "distinctMappings": 2,
+        "citationOccurrences": 36
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-english-language-arts",
+    "grade": 4,
+    "subject": "english-language-arts",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-financial-literacy",
+    "grade": 4,
+    "subject": "financial-literacy",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_health_finlit_rfl",
+        "commit": "6e2e2fd091c7d9e46571d07f143545c6153c2402",
+        "path": "curriculum-release-evidence/g34-specialty-health-finlit-rfl-r4/evidence/crosswalk.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-health",
+    "grade": 4,
+    "subject": "health",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_health_finlit_rfl",
+        "commit": "6e2e2fd091c7d9e46571d07f143545c6153c2402",
+        "path": "curriculum-release-evidence/g34-specialty-health-finlit-rfl-r4/evidence/crosswalk.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-mathematics",
+    "grade": 4,
+    "subject": "mathematics",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-physical-education",
+    "grade": 4,
+    "subject": "physical-education",
+    "status": "HUMAN_REVIEW_REQUIRED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_arts_pe",
+        "commit": "c8bc5042215287fe5c655d78dda33ca6b742461e",
+        "path": "curriculum-release-evidence/g34-specialty-arts-pe-r4/registry/crosswalk-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "HUMAN_REVIEW_REQUIRED",
+        "distinctMappings": 3,
+        "citationOccurrences": 144
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-ready-for-life",
+    "grade": 4,
+    "subject": "ready-for-life",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_specialty_health_finlit_rfl",
+        "commit": "6e2e2fd091c7d9e46571d07f143545c6153c2402",
+        "path": "curriculum-release-evidence/g34-specialty-health-finlit-rfl-r4/evidence/crosswalk.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-science",
+    "grade": 4,
+    "subject": "science",
+    "status": "EVIDENCE_POLICY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-social-studies",
+    "grade": 4,
+    "subject": "social-studies",
+    "status": "HUMAN_REVIEW_REQUIRED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_standards_core",
+        "commit": "29fc136ace384248c0df96c4fea3b5bf6ee9da95",
+        "path": "curriculum-release-evidence/g34-core-r3/registry/evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "HUMAN_REVIEW_REQUIRED",
+        "distinctMappings": 1,
+        "citationOccurrences": 12
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g4-tech-cs",
+    "grade": 4,
+    "subject": "technology",
+    "status": "NORMALIZED_EVIDENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "g34_normalization",
+        "commit": "e16c943dc1d320fc6a57d6a7baa570eebdd63d26",
+        "path": "curriculum-release-normalization/g34-r2/standards/courses/ma-g4-tech-cs.standards.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-arts-and-music",
+    "grade": 5,
+    "subject": "arts-and-music",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-english-language-arts",
+    "grade": 5,
+    "subject": "english-language-arts",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-financial-literacy",
+    "grade": 5,
+    "subject": "financial-literacy",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-health",
+    "grade": 5,
+    "subject": "health",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-physical-education",
+    "grade": 5,
+    "subject": "physical-education",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-ready-for-life",
+    "grade": 5,
+    "subject": "ready-for-life",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-science",
+    "grade": 5,
+    "subject": "science",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-social-studies",
+    "grade": 5,
+    "subject": "social-studies",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g5-technology",
+    "grade": 5,
+    "subject": "technology",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-arts-and-music",
+    "grade": 7,
+    "subject": "arts-and-music",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-english-language-arts",
+    "grade": 7,
+    "subject": "english-language-arts",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-financial-literacy",
+    "grade": 7,
+    "subject": "financial-literacy",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-health",
+    "grade": 7,
+    "subject": "health",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-physical-education",
+    "grade": 7,
+    "subject": "physical-education",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-ready-for-life",
+    "grade": 7,
+    "subject": "ready-for-life",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-science",
+    "grade": 7,
+    "subject": "science",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-social-studies",
+    "grade": 7,
+    "subject": "social-studies",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-arts-and-music",
+    "grade": 8,
+    "subject": "arts-and-music",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-english-language-arts",
+    "grade": 8,
+    "subject": "english-language-arts",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-financial-literacy",
+    "grade": 8,
+    "subject": "financial-literacy",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-health",
+    "grade": 8,
+    "subject": "health",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-physical-education",
+    "grade": 8,
+    "subject": "physical-education",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-ready-for-life",
+    "grade": 8,
+    "subject": "ready-for-life",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-science",
+    "grade": 8,
+    "subject": "science",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-social-studies",
+    "grade": 8,
+    "subject": "social-studies",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "status": "SEALED_REFERENCE_CARRIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "sealed_1_0_0",
+        "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+        "path": "curriculum-content/manuel-academy/1.0.0/standards/standards-reference.md"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-arts-and-music",
+    "grade": 9,
+    "subject": "arts-and-music",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-english-language-arts",
+    "grade": 9,
+    "subject": "english-language-arts",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-financial-literacy",
+    "grade": 9,
+    "subject": "financial-literacy",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-health",
+    "grade": 9,
+    "subject": "health",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-physical-education",
+    "grade": 9,
+    "subject": "physical-education",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 10
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-ready-for-life",
+    "grade": 9,
+    "subject": "ready-for-life",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-science",
+    "grade": 9,
+    "subject": "science",
+    "status": "H4_EVIDENCE_CARRIED_WITH_FOUNDATION_ADVISORY",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      },
+      {
+        "input": "hs912_science_h4",
+        "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+        "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/standard-framework.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "human-review",
+        "distinctMappings": 1,
+        "unitRecords": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-social-studies",
+    "grade": 9,
+    "subject": "social-studies",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g9-technology",
+    "grade": 9,
+    "subject": "technology",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-arts-and-music",
+    "grade": 10,
+    "subject": "arts-and-music",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-english-language-arts",
+    "grade": 10,
+    "subject": "english-language-arts",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-financial-literacy",
+    "grade": 10,
+    "subject": "financial-literacy",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-health",
+    "grade": 10,
+    "subject": "health",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-physical-education",
+    "grade": 10,
+    "subject": "physical-education",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 10
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-ready-for-life",
+    "grade": 10,
+    "subject": "ready-for-life",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-science",
+    "grade": 10,
+    "subject": "science",
+    "status": "H4_EVIDENCE_CARRIED_WITH_FOUNDATION_ADVISORY",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      },
+      {
+        "input": "hs912_science_h4",
+        "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+        "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/standard-framework.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "human-review",
+        "distinctMappings": 1,
+        "unitRecords": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-social-studies",
+    "grade": 10,
+    "subject": "social-studies",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g10-technology",
+    "grade": 10,
+    "subject": "technology",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-arts-and-music",
+    "grade": 11,
+    "subject": "arts-and-music",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-english-language-arts",
+    "grade": 11,
+    "subject": "english-language-arts",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-financial-literacy",
+    "grade": 11,
+    "subject": "financial-literacy",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-health",
+    "grade": 11,
+    "subject": "health",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-physical-education",
+    "grade": 11,
+    "subject": "physical-education",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 10
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-ready-for-life",
+    "grade": 11,
+    "subject": "ready-for-life",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-science",
+    "grade": 11,
+    "subject": "science",
+    "status": "H4_EVIDENCE_CARRIED_WITH_FOUNDATION_ADVISORY",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      },
+      {
+        "input": "hs912_science_h4",
+        "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+        "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/standard-framework.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "human-review",
+        "distinctMappings": 1,
+        "unitRecords": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-social-studies",
+    "grade": 11,
+    "subject": "social-studies",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g11-technology",
+    "grade": 11,
+    "subject": "technology",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-arts-and-music",
+    "grade": 12,
+    "subject": "arts-and-music",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-english-language-arts",
+    "grade": 12,
+    "subject": "english-language-arts",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-financial-literacy",
+    "grade": 12,
+    "subject": "financial-literacy",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-health",
+    "grade": 12,
+    "subject": "health",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-physical-education",
+    "grade": 12,
+    "subject": "physical-education",
+    "status": "DECLARED_UNVERIFIED_ADVISORY_PRESENT",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "DECLARED_UNVERIFIED",
+        "distinctMappings": 10
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-ready-for-life",
+    "grade": 12,
+    "subject": "ready-for-life",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-science",
+    "grade": 12,
+    "subject": "science",
+    "status": "H4_EVIDENCE_CARRIED_WITH_FOUNDATION_ADVISORY",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      },
+      {
+        "input": "hs912_science_h4",
+        "commit": "a86780a315b5a6ba4f134f35b7033f35707b0e52",
+        "path": "curriculum-authoring/full-family-highschool-9-12/subjects/science/authoring-set/standard-framework.json"
+      }
+    ],
+    "advisoryReview": [
+      {
+        "state": "human-review",
+        "distinctMappings": 1,
+        "unitRecords": 1
+      }
+    ],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-social-studies",
+    "grade": 12,
+    "subject": "social-studies",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  },
+  {
+    "releaseSlotId": "ma-g12-technology",
+    "grade": 12,
+    "subject": "technology",
+    "status": "EVIDENCE_REGISTRY_APPLIED",
+    "releaseEffect": "ADVISORY",
+    "evidenceRefs": [
+      {
+        "input": "hs912_normalization",
+        "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+        "path": "curriculum-release-normalization/hs912-r2/registries/standards-evidence-registry.json"
+      }
+    ],
+    "advisoryReview": [],
+    "honestyRule": "No HUMAN_REVIEW_REQUIRED, DECLARED_UNVERIFIED, alias-resolved, or local-composition state is promoted to Michigan-verbatim."
+  }
+]
