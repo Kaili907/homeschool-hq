@@ -1,0 +1,219 @@
+{
+  "policy_id": "manuel-academy-g34-health-finlit-rfl-standards-policy-r4",
+  "retrieved": "2026-08-12",
+  "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent",
+  "documents": [
+    {
+      "doc_id": "mde-sel-2017",
+      "file": "mde-sel-competencies-indicators-2017.pdf",
+      "title": "Michigan Department of Education Early Childhood to Grade 12 Social and Emotional Learning (SEL) Competencies and Indicators",
+      "version_label": "2017",
+      "publisher": "Michigan Department of Education",
+      "authority": "Published by MDE under Health & Safety services, NOT under Academic Standards. The document's own first page states that Michigan's Content State Standards focus on academics and that SEL competencies address other aspects of learning - so it describes itself as a companion to the standards, not as one. It is not listed on the MDE Academic Standards index (a web observation, not a byte fact). The K-12 competencies cited here carry no State Board adoption line; the document does say its separate EARLY CHILDHOOD competencies 'come from State Board of Education (SBE) approved standards', which is a different band and is not cited by this package.",
+      "is_academic_standard": false,
+      "linked_from": "https://www.michigan.gov/mde/services/health-safety/social-emotional-learning-sel",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Year/2018/04/12/SEL_Competencies-_ADA_Compliant_FINAL.pdf",
+      "sha256": "17d23981b703594f56b518de425c7e2235bb1b356dca4cb68d81b3f0862a3d0d",
+      "held_for": "Answers, from bytes, whether the Ready for Life string 'Michigan Health/SEL connections' has any official support at all. It does - and the same bytes show that support is not a standard.",
+      "held_at": "sources/documents/mde-sel-competencies-indicators-2017.pdf",
+      "custody": "held-in-this-package",
+      "bytes": 848045,
+      "pages": 61,
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-health-2025-alt",
+      "file": "mde-health-education-standards-guidelines-2025-press-release-variant.pdf",
+      "title": "Michigan Health Education Standards Guidelines (press-release filename variant)",
+      "version_label": "2025, ADA Final",
+      "publisher": "Michigan Department of Education",
+      "authority": "The same guidelines, at the filename the MDE press release of 2025-11-13 links. r3 recorded that two filenames were in circulation and that the difference had not been diffed. This package holds the second one so the question is answerable from bytes.",
+      "is_academic_standard": false,
+      "linked_from": "https://www.michigan.gov/mde/news-and-information/press-releases/2025/11/13/revised-health-education-standards",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/ohns/School-Health-and-Safety/Michigan-Health-Education-Standards-Guidelines-2025---ADA-Final.pdf",
+      "sha256": "17dc768b41b517a82f861849ae314781c723e08e87691504c38ab71aae670e15",
+      "held_for": "Second witness for the health resolution, and the answer to r3 open question Q5. The two files differ on exactly one PDF page, in the Grades 6-8 band, outside this package's scope - see the doc_pair_diff in source-custody.json.",
+      "held_at": "sources/documents/mde-health-education-standards-guidelines-2025-press-release-variant.pdf",
+      "custody": "held-in-this-package",
+      "bytes": 722823,
+      "pages": 70,
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-pf-course-credit",
+      "file": "mde-personal-finance-course-credit-requirements.pdf",
+      "title": "Personal Finance Course/Credit Requirements (Michigan Merit Curriculum)",
+      "version_label": "as served from the Academic Standards page on 2026-08-12",
+      "publisher": "Michigan Department of Education",
+      "authority": "The Michigan Merit Curriculum course/credit document for personal finance. Reproduces MCL 380.1278a(3), which conditions a HIGH SCHOOL DIPLOMA on a 1/2 credit personal finance course.",
+      "is_academic_standard": false,
+      "linked_from": "https://www.michigan.gov/mde/services/academic-standards",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Personal-Finance/Personal_Finance_Course_Credit.pdf",
+      "sha256": "34dd182eac9e374105d3fc85b14a221ec5563212cd29e5a0a453654e88f698a8",
+      "held_for": "Second, independent proof that Michigan's personal finance requirement is a high school diploma credit. r3 proved it from the content expectations; this proves it from the credit rule and the statute it quotes.",
+      "held_at": "sources/documents/mde-personal-finance-course-credit-requirements.pdf",
+      "custody": "held-in-this-package",
+      "bytes": 254267,
+      "pages": 8,
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent",
+      "sha256_verified": true
+    },
+    {
+      "doc_id": "mde-health-2025",
+      "path": "sources/documents/mde-health-education-standards-guidelines-2025.pdf",
+      "title": "Michigan Health Education Standards Guidelines",
+      "version_label": "2025, ADA final with edits 12-19-25",
+      "sha256": "e64744d56ba3ba36b968012995f9fed259f74efbb49fbfc91075be8b16defee4",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/ohns/School-Health-and-Safety/Michigan-Health-Education-Standards-Guidelines-2025---ADA-final-with-edits-12-19-25.pdf",
+      "custody": "inherited-from-g34-specialty-r3",
+      "held_at": "../g34-specialty-r3/sources/documents/mde-health-education-standards-guidelines-2025.pdf",
+      "bytes": 715062,
+      "pages": 70,
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent",
+      "sha256_verified": true,
+      "note": "Not copied. The build verifies these bytes against r3's pinned SHA256 before reading them, so there is one custody chain, not two copies that could drift apart."
+    },
+    {
+      "doc_id": "mde-social-studies",
+      "path": "sources/documents/mde-k12-social-studies-standards.pdf",
+      "title": "Michigan K-12 Social Studies Standards",
+      "version_label": "v 6/19",
+      "sha256": "bba06f46bb241ae3cdd698caaeb41baa3c976d96176fef0a9d594a7e98e70b96",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Social_Studies_Standards.pdf",
+      "custody": "inherited-from-g34-specialty-r3",
+      "held_at": "../g34-specialty-r3/sources/documents/mde-k12-social-studies-standards.pdf",
+      "bytes": 1527644,
+      "pages": 147,
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent",
+      "sha256_verified": true,
+      "note": "Not copied. The build verifies these bytes against r3's pinned SHA256 before reading them, so there is one custody chain, not two copies that could drift apart."
+    },
+    {
+      "doc_id": "mde-personal-finance",
+      "path": "sources/documents/mde-personal-finance-content-expectations-9-12.pdf",
+      "title": "Michigan Merit Curriculum Personal Finance 9-12 Content Expectations",
+      "version_label": "v5/2023",
+      "sha256": "ff97640535d7864de8d3333669a5f8d8ab8134ebfa0af5f9f938cf2e91ab2735",
+      "official_url": "https://www.michigan.gov/mde/-/media/Project/Websites/mde/Academic-Standards/Personal-Finance/Personal_Finance_Content_Expectations.pdf",
+      "custody": "inherited-from-g34-specialty-r3",
+      "held_at": "../g34-specialty-r3/sources/documents/mde-personal-finance-content-expectations-9-12.pdf",
+      "bytes": 537595,
+      "pages": 2,
+      "retrieved": "2026-08-12",
+      "retrieval_method": "curl with a desktop browser User-Agent; michigan.gov serves 200 to that and 403 to the default agent",
+      "sha256_verified": true,
+      "note": "Not copied. The build verifies these bytes against r3's pinned SHA256 before reading them, so there is one custody chain, not two copies that could drift apart."
+    }
+  ],
+  "absence_assertions": [
+    {
+      "id": "A1",
+      "doc_id": "mde-health-2025",
+      "needle": "Injury Prevention",
+      "why": "'Safety and Injury Prevention' is not a name the Michigan health document prints.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    },
+    {
+      "id": "A2",
+      "doc_id": "mde-personal-finance",
+      "needle": "Grade 3",
+      "why": "Michigan's personal finance content expectations never mention Grade 3.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    },
+    {
+      "id": "A3",
+      "doc_id": "mde-personal-finance",
+      "needle": "Grade 4",
+      "why": "Michigan's personal finance content expectations never mention Grade 4.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    },
+    {
+      "id": "A4",
+      "doc_id": "mde-pf-course-credit",
+      "needle": "Grade 3",
+      "why": "The personal finance credit rule never mentions Grade 3.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    },
+    {
+      "id": "A5",
+      "doc_id": "mde-pf-course-credit",
+      "needle": "elementary",
+      "why": "The personal finance credit rule never mentions elementary grades.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    },
+    {
+      "id": "A6",
+      "doc_id": "mde-sel-2017",
+      "needle": "Ready for Life",
+      "why": "No Michigan document names a Ready for Life course, framework or sequence.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    },
+    {
+      "id": "A7",
+      "doc_id": "mde-health-2025",
+      "needle": "Ready for Life",
+      "why": "No Michigan document names a Ready for Life course, framework or sequence.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    },
+    {
+      "id": "A8",
+      "doc_id": "mde-health-2025",
+      "needle": "Personal Finance",
+      "why": "The health guidelines carry no personal finance content.",
+      "occurrences": 0,
+      "verified_against_held_bytes": true
+    }
+  ],
+  "doc_pair_diff": {
+    "pair": [
+      "mde-health-2025",
+      "mde-health-2025-alt"
+    ],
+    "closes": "g34-specialty-r3 open question Q5",
+    "method": "Both PDFs extracted page by page with pypdf and compared under this package's normalization, 70 pages against 70 pages.",
+    "pages_differing": [
+      20
+    ],
+    "difference": "PDF page 20 only. The Academic-Standards-index copy held in r3 prints 'abstinence).'; the press-release copy held here prints 'abstinence, contraception).' Nothing else differs anywhere in either document.",
+    "bearing_on_this_package": "None. PDF page 20 is in the Grades 6-8 band (codes 8.x) and the difference is in Sex Education wording. Every anchor this package cites - the topic list, the grade span label, Safety [5.5.SAF] 1 and 3, Safety [5.3.SAF] 2 - is byte-identical in both, and 'Injury Prevention' occurs zero times in both."
+  },
+  "web_observations": [
+    {
+      "observation_id": "sel-published-under-health-safety-not-academic-standards",
+      "url": "https://www.michigan.gov/mde/services/health-safety/social-emotional-learning-sel",
+      "observed": "2026-08-12",
+      "finding": "The MDE SEL page publishes 'Social and Emotional Learning Competencies' (the 2017 document held here), a talking-points sheet and a fact sheet. The same page also links the Health Education Standards Guidelines held in r3 - which is where the authored phrase 'Health/SEL' most likely comes from. Neither the page nor the document calls the competencies a standard."
+    },
+    {
+      "observation_id": "academic-standards-index-omits-sel-and-elementary-pf",
+      "url": "https://www.michigan.gov/mde/services/academic-standards",
+      "observed": "2026-08-12",
+      "finding": "The Academic Standards index lists no SEL document and no elementary personal finance document. Under Personal Finance it lists only the 9-12 Content Expectations and the Course/Credit Requirements held here. It does list the Health Education Standards Guidelines and the K-12 Social Studies Standards."
+    },
+    {
+      "observation_id": "mcl-380-1278a-is-a-diploma-condition",
+      "url": "https://www.michigan.gov/mde/services/academic-standards/personal-finance",
+      "observed": "2026-08-12",
+      "finding": "MCL 380.1278a(3), reproduced in the held course/credit document, conditions a high school diploma on a 1/2 credit personal finance course for pupils entering grade 8 in 2023 or after. It is a graduation requirement, not an elementary content standard."
+    }
+  ],
+  "extraction": {
+    "library": "pypdf",
+    "version": "6.6.2",
+    "note": "Quotes below are published in the form the documents print. The presence CHECK is looser than that: before comparing, both the held text and the quote are whitespace-collapsed, layout bullets are dropped, en/em dashes are folded to hyphens, and EVERY hyphen between two letters is removed. That last rule is what undoes PDF line-break hyphenation ('ser - vices'), but it also folds genuine hyphenation, so 'well-rounded' and 'wellrounded' compare equal and the check could not tell them apart. It is applied identically to both sides. The PDF bytes are the record; the extraction is the reading of them."
+  }
+}

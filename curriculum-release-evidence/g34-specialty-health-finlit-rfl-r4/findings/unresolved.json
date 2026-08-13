@@ -1,0 +1,68 @@
+{
+  "policy_id": "manuel-academy-g34-health-finlit-rfl-standards-policy-r4",
+  "human_review_remaining_in_scope": 0,
+  "unresolved_cases": [
+    {
+      "id": "U1",
+      "kind": "out-of-scope-by-brief",
+      "subject": "arts-and-music",
+      "citations": 372,
+      "state": "HUMAN_REVIEW_REQUIRED",
+      "detail": "F1-arts-wrong-framework. Every Grade 3/4 arts citation labels National Core Arts Standards process vocabulary as Michigan. Untouched here.",
+      "recommendation": "Same shape as P2: Michigan prints 186 exact-grade Grade 3/4 arts expectations. Either cite them or disclose the process framing as non-Michigan. Does not need an educator to decide."
+    },
+    {
+      "id": "U2",
+      "kind": "out-of-scope-by-brief",
+      "subject": "physical-education",
+      "citations": 288,
+      "state": "HUMAN_REVIEW_REQUIRED",
+      "detail": "F2-pe-label-text-diverges. PE Standards 2, 3 and 5 are cited with text Michigan does not print. Untouched here.",
+      "recommendation": "Same shape as P1: the official text is printed and unambiguous, so a relabel resolves it. Standards 1 and 4 already verify."
+    },
+    {
+      "id": "U3",
+      "kind": "carried-open-question",
+      "subject": "health, ready-for-life",
+      "citations": 0,
+      "state": "OPEN",
+      "detail": "r3 Q2: the Michigan Health Education Standards Guidelines is titled guidelines and the approving press release describes guidance to districts under local control. This package inherits that limit and does not upgrade the document to 'standards' anywhere.",
+      "recommendation": "A release-level wording decision, not a per-citation one. Whatever is decided must apply to all 246 health citations at once."
+    },
+    {
+      "id": "U4",
+      "kind": "closed-here",
+      "subject": "health",
+      "citations": 0,
+      "state": "CLOSED",
+      "detail": "r3 Q5: two health PDF filenames are in circulation (the November 2025 press release links '---ADA-Final.pdf'; the Academic Standards index links the '---ADA-final-with-edits-12-19-25.pdf' held in r3). Both are now held and diffed page by page. They differ on PDF page 20 only: 'abstinence).' against 'abstinence, contraception).' - Grades 6-8 Sex Education wording. Every anchor this package cites is byte-identical in both and neither prints 'Injury Prevention'. See source-custody.json#doc_pair_diff.",
+      "recommendation": "None. The question is answered. A lane citing the Grades 6-8 Sex Education band must pick a copy deliberately; no Grade 3/4 lane is affected."
+    },
+    {
+      "id": "U5",
+      "kind": "scope-boundary",
+      "subject": "financial-literacy",
+      "citations": 0,
+      "state": "OPEN",
+      "detail": "The crosswalk records 27 Grade 3/4 financial-literacy concepts that no Michigan exact-grade economics expectation covers, across 10 partial and 2 uncovered units - among them needs and wants, saving and savings goals at Grade 3, money tools, money privacy, advertising, budgeting and spending plans, borrowing and giving. Each is named as uncovered rather than anchored to something looser.",
+      "recommendation": "Nothing to fix. These stay LOCAL_COMPOSITION with no supporting anchor, which is the honest state. Recorded so a later lane does not read blank coverage as an oversight."
+    }
+  ],
+  "human_review_recommendations": [
+    {
+      "id": "HR1",
+      "priority": "none-required-in-scope",
+      "recommendation": "No in-scope citation still needs a human to decide a classification. All 156 are determined by the held documents."
+    },
+    {
+      "id": "HR2",
+      "priority": "advisory",
+      "recommendation": "A licensed health educator should sanity-check the Ready for Life unit-to-Health-indicator correspondences before the crosswalk is shown to families as anything more than a study aid. That is a review of pedagogy, not of provenance - the provenance is settled here."
+    },
+    {
+      "id": "HR3",
+      "priority": "advisory",
+      "recommendation": "Nothing in this package is a licensed-educator review. 'Verified' means an authored string was compared against an official document's bytes."
+    }
+  ]
+}

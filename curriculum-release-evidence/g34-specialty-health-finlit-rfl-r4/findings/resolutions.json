@@ -1,0 +1,166 @@
+{
+  "policy_id": "manuel-academy-g34-health-finlit-rfl-standards-policy-r4",
+  "resolutions": [
+    {
+      "resolution_id": "R4-HEALTH-SAFETY-ALIAS",
+      "closes_finding": "F5-health-safety-topic-name",
+      "subject": "health",
+      "authored_string": "Michigan Health Topic (Grades 3-5): Safety and Injury Prevention",
+      "citations_affected": 12,
+      "verdict": "ALIAS_DEFENSIBLE_LABEL_NOT_OFFICIAL",
+      "from_class": "HUMAN_REVIEW_REQUIRED",
+      "to_class": "COMPOSITE_VERIFIED",
+      "release_action": "RELABEL_REQUIRED",
+      "required_label": "Michigan Health Topic (Grades 3-5): Safety",
+      "reasoning": [
+        "Referent is unique. The Grades 3-5 band prints exactly two safety groupings, Safety [5.3.SAF] and Safety [5.5.SAF], and both carry the same topic name: Safety [SAF]. There is no second candidate topic the authored label could mean, so mapping it does not require a human to choose between alternatives.",
+        "The added words are substantively supported by that same topic. Safety [5.5.SAF] 1 reads 'reduce the risk of injuries in various situations' and lists fire prevention and pedestrian, water, firearm and motor-vehicle contexts; [5.5.SAF] 3 covers contacting help when someone is poisoned or injured. Injury prevention is what Michigan's Safety topic teaches at this band.",
+        "The words are still not Michigan's. 'Injury Prevention' occurs zero times in the document (absence assertion A1). No other topic absorbs it: Personal Health and Wellness [5.5.PHW] 1 mentions pedestrian and sun safety and protective equipment only as examples of health-promoting behaviour, and prints no injury topic.",
+        "So the mapping is defensible and the label is not. The anchor resolves; the printed topic name must be used.",
+        "Checked against both copies. r3 recorded that two health PDF filenames were in circulation and had not been diffed. Both are now held and diffed: they differ on one page, in the Grades 6-8 Sex Education wording. Every anchor this resolution rests on is byte-identical in both, and neither prints 'Injury Prevention'. The open question the finding depended on is closed, not deferred."
+      ],
+      "official_support": [
+        {
+          "anchor_id": "H-topic-list",
+          "doc_id": "mde-health-2025",
+          "locator": "PDF p. 12, 'Within each practice ... topics'",
+          "quote": "Balanced Eating and Physical Activity [BEPA] Community and Environmental Health [CEH] Healthy Relationships [HR] Mental and Emotional Health [MEH] Personal Health and Wellness [PHW] Safety [SAF] Substance Use and Misuse [SU] Sex Education [SE]",
+          "verified_against_held_bytes": true,
+          "occurrences": 1
+        },
+        {
+          "anchor_id": "H-grade-span-3-5",
+          "doc_id": "mde-health-2025",
+          "locator": "PDF pp. 32-37 section head",
+          "quote": "Grade Span: 3-5 (by the end of Grade 5)",
+          "verified_against_held_bytes": true,
+          "occurrences": 6
+        },
+        {
+          "anchor_id": "H-SAF-5-5",
+          "doc_id": "mde-health-2025",
+          "locator": "PDF p. 35, Practice 5, Safety [5.5.SAF] 1",
+          "quote": "Safety [5.5.SAF] 1. Describe ways to promote personal safety and reduce the risk of injuries in various situations",
+          "verified_against_held_bytes": true,
+          "occurrences": 1
+        },
+        {
+          "anchor_id": "H-SAF-5-5-examples",
+          "doc_id": "mde-health-2025",
+          "locator": "PDF p. 35, Safety [5.5.SAF] 1 examples",
+          "quote": "during physical activity, around motor vehicles, around firearms, around loud noise or music, around water, fire prevention, during a fire, as a pedestrian",
+          "verified_against_held_bytes": true,
+          "occurrences": 2
+        },
+        {
+          "anchor_id": "H-SAF-5-5-3",
+          "doc_id": "mde-health-2025",
+          "locator": "PDF p. 35, Safety [5.5.SAF] 3",
+          "quote": "Identify and demonstrate how to contact appropriate resources when someone is poisoned or injured and needs help",
+          "verified_against_held_bytes": true,
+          "occurrences": 1
+        }
+      ],
+      "why_not_human_review": "r3 held this for a human because the authored label was not on the topic list. The document answers the question it was held for: exactly one topic can be meant, and that topic's own 3-5 indicators cover the extra words. Choosing the printed name over an unprinted expansion is not a judgement call - it is the rule the package already applies to the other six topics."
+    },
+    {
+      "resolution_id": "R4-FINLIT-NO-MI-PF-AT-G34",
+      "closes_finding": "F3-financial-literacy-michigan-attribution",
+      "subject": "financial-literacy",
+      "authored_string": "Michigan Personal Finance foundations — introductory",
+      "citations_affected": 72,
+      "verdict": "NO_MICHIGAN_ELEMENTARY_PF_STANDARD_EXISTS",
+      "from_class": "HUMAN_REVIEW_REQUIRED",
+      "to_class": "CROSSWALK_SUPPORTING",
+      "release_action": "RELABEL_REQUIRED",
+      "required_label": "per-course; see evidence/crosswalk.json",
+      "reasoning": [
+        "Michigan's only standalone personal finance standards document is Personal Finance 9 - 12 Content Expectations (PF1-PF7). It mentions Grade 3 zero times and Grade 4 zero times (absence assertions A2, A3).",
+        "The credit rule held here says the same thing from the other direction: MCL 380.1278a(3) conditions a HIGH SCHOOL DIPLOMA on a 1/2 credit personal finance course for pupils entering grade 8 in 2023 or after. It mentions neither Grade 3, Grade 4 nor elementary grades at all (absence assertions A4, A5).",
+        "No PF code may therefore be manufactured for Grades 3/4, and the phrase 'Michigan Personal Finance' may not stand on a Grade 3/4 lesson.",
+        "Michigan does publish exact-grade economics expectations for both grades in the K-12 Social Studies Standards - 3 - E1.0.1 through 3 - E3.0.1 and 4 - E1.01 through 4 - E3.0.1. Those are real, official, exact-grade and citable. They belong to a different subject, so they support the course; they do not govern it.",
+        "The Manuel Academy progression itself stays what it already is: LOCAL_COMPOSITION. This resolution separates the two rather than merging them."
+      ],
+      "official_support": [
+        {
+          "anchor_id": "PF-title",
+          "doc_id": "mde-personal-finance",
+          "locator": "PDF p. 1 title",
+          "quote": "Personal Finance",
+          "verified_against_held_bytes": true,
+          "occurrences": 5
+        },
+        {
+          "anchor_id": "PFCC-statute",
+          "doc_id": "mde-pf-course-credit",
+          "locator": "PDF p. 8 (printed p. 6), Appendix B, MCL 380.1278a(3)",
+          "quote": "Beginning with pupils entering grade 8 in 2023, the board of a school district or board of directors of a public school academy shall not award a high school diploma to a pupil unless the pupil completes a ½ credit course in personal finance",
+          "verified_against_held_bytes": true,
+          "occurrences": 1
+        },
+        {
+          "anchor_id": "SS-econ-head-g3",
+          "doc_id": "mde-social-studies",
+          "locator": "PDF p. 33, Grade 3 ECONOMICS",
+          "quote": "ECONOMICS Individually and collaboratively, students will engage in planned inquiries to investigate the economy of Michigan. E1 Market Economy",
+          "verified_against_held_bytes": true,
+          "occurrences": 2
+        }
+      ],
+      "why_not_human_review": "r3 held this open because it would not choose between Social Studies economics, a disclosed non-Michigan framework, and an explicit no-standard label. The brief for this package makes that choice: the official economics expectations are a supporting crosswalk, never a personal finance code. Nothing is invented - every anchor below is a code Michigan prints for that exact grade."
+    },
+    {
+      "resolution_id": "R4-RFL-SUPPORTING-NOT-STANDARD",
+      "closes_finding": "F4-ready-for-life-michigan-string",
+      "subject": "ready-for-life",
+      "authored_string": "Michigan Health/SEL connections",
+      "citations_affected": 72,
+      "verdict": "SUPPORT_EXISTS_BUT_IS_NOT_A_STANDARD",
+      "from_class": "HUMAN_REVIEW_REQUIRED",
+      "to_class": "CROSSWALK_SUPPORTING",
+      "release_action": "RELABEL_REQUIRED",
+      "required_label": "Supporting connection: Michigan Health Education Standards Guidelines (grade span 3-5) and MDE SEL Competencies and Indicators (2017), band 3-5 — not a Michigan standard",
+      "reasoning": [
+        "Support exists, and it is now in custody. MDE publishes SEL Competencies and Indicators (2017) with five competencies, lettered indicators 1A-5C, and a 3-5 benchmark band for each - real text that genuinely corresponds to Ready for Life unit content. r3 recorded this document as existing but did not retrieve it; this package holds it byte for byte.",
+        "The same bytes show it is not a standard. Its first page reads 'Currently, Michigan has Content State Standards that focus on academics. However, there is little that attend to the other aspects of learning for children/students.' - it positions itself beside the standards, not among them. It is published under Health & Safety services, is absent from the MDE Academic Standards index, and carries no State Board adoption line.",
+        "The Health Education Standards Guidelines 3-5 band does supply real anchors for the Ready for Life units on food, rest, safety, time and help-seeking. r3's open question Q2 still stands over all of them: that document is titled guidelines and the approving press release describes guidance to districts under local control.",
+        "So the string may become a supporting connection with named anchors, and may never become a state-standard claim. Ready for Life stays Manuel Academy authorship; Michigan has approved no part of the sequence (absence assertions A6, A7)."
+      ],
+      "official_support": [
+        {
+          "anchor_id": "SEL-not-a-standard",
+          "doc_id": "mde-sel-2017",
+          "locator": "PDF p. 1, opening paragraph",
+          "quote": "Currently, Michigan has Content State Standards that focus on academics. However, there is little that attend to the other aspects of learning for children/students.",
+          "verified_against_held_bytes": true,
+          "occurrences": 1
+        },
+        {
+          "anchor_id": "SEL-companion-to-health",
+          "doc_id": "mde-sel-2017",
+          "locator": "PDF p. 1",
+          "quote": "In combination with the Michigan Health Education Standards, SEL competencies help support a well-rounded education",
+          "verified_against_held_bytes": true,
+          "occurrences": 1
+        },
+        {
+          "anchor_id": "SEL-competency-table",
+          "doc_id": "mde-sel-2017",
+          "locator": "PDF p. 3, competency/indicator table",
+          "quote": "Self-Awareness 1A. Demonstrate an awareness of their emotions",
+          "verified_against_held_bytes": true,
+          "occurrences": 1
+        },
+        {
+          "anchor_id": "H-grade-span-3-5",
+          "doc_id": "mde-health-2025",
+          "locator": "PDF pp. 32-37 section head",
+          "quote": "Grade Span: 3-5 (by the end of Grade 5)",
+          "verified_against_held_bytes": true,
+          "occurrences": 6
+        }
+      ],
+      "why_not_human_review": "r3 asked a human to drop the Michigan wording or replace it with a real anchor. Both halves are now answerable from bytes: real anchors exist, and their own documents say what they are not. The policy names the anchors and forbids the standard claim."
+    }
+  ]
+}

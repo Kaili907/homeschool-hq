@@ -1,0 +1,35 @@
+{
+  "policy_id": "manuel-academy-g34-health-finlit-rfl-standards-policy-r4",
+  "inherits": "manuel-academy-g34-specialty-standards-evidence-r3 rules/classification-rules.json (S1-S9)",
+  "method": "Each rule is executed, not asserted: every quoted anchor is presence-checked against the held PDF bytes during this build, and every absence assertion is re-counted. A failure aborts before a file is written.",
+  "rules": [
+    {
+      "id": "P1-health-topic-alias-unique-referent",
+      "subject": "health",
+      "supersedes": "S2-health-topic-composite (the HUMAN_REVIEW_REQUIRED branch)",
+      "statement": "'Michigan Health Topic (Grades 3-5): <label>' where <label> is not on the printed topic list resolves to COMPOSITE_VERIFIED under a mandatory relabel when BOTH hold: (a) exactly one printed topic can be the referent, and (b) the extra words are substantively covered by that topic's own indicators in the cited grade span. The relabel is to the printed topic name. If two or more topics could be meant, or the extra words are covered by no indicator, the citation stays HUMAN_REVIEW_REQUIRED."
+    },
+    {
+      "id": "P2-financial-literacy-crosswalk-not-pf-code",
+      "subject": "financial-literacy",
+      "supersedes": "S7-financial-literacy-no-elementary-standard",
+      "statement": "A Grade 3/4 financial-literacy citation naming Michigan resolves to CROSSWALK_SUPPORTING when it is relabelled to exact-grade Michigan K-12 Social Studies Economics expectations for that grade, with governing authority manuel-academy. No PF1-PF7 code may be assigned to Grades 3/4 under any circumstance: Michigan's personal finance expectations are 9-12 and its credit rule is a high school diploma condition. Where no exact-grade economics expectation covers a unit, the crosswalk records coverage 'none' and names what is uncovered rather than reaching for a looser anchor."
+    },
+    {
+      "id": "P3-ready-for-life-supporting-connection-only",
+      "subject": "ready-for-life",
+      "supersedes": "S9-ready-for-life-no-michigan-authority",
+      "statement": "A Ready for Life citation naming Michigan resolves to CROSSWALK_SUPPORTING when relabelled to name the supporting documents and disclaim standard status, and when each unit's anchors are quoted from held bytes. Governing authority stays manuel-academy. A Ready for Life citation may never carry authority michigan-mde, and the MDE SEL Competencies may never be described as a standard."
+    },
+    {
+      "id": "P4-relabel-is-not-a-lesson-edit",
+      "subject": "all",
+      "statement": "A resolution may mandate a citation label; it may not edit a lesson. Until a lesson-editing lane applies required_label, the release still reads what authored_class describes. Both counts are published so neither can be mistaken for the other."
+    },
+    {
+      "id": "P5-coverage-is-reported-not-padded",
+      "subject": "all",
+      "statement": "Crosswalk coverage is one of full, partial, none. 'partial' and 'none' name the uncovered concepts. A unit with no official anchor gets no anchor."
+    }
+  ]
+}

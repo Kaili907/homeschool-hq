@@ -1,0 +1,155 @@
+{
+  "policy_id": "manuel-academy-g34-health-finlit-rfl-standards-policy-r4",
+  "input_evidence_id": "manuel-academy-g34-specialty-standards-evidence-r3",
+  "release_id": "manuel-academy-grades-3-4-r2-normalized",
+  "in_scope_citations": 822,
+  "in_scope_records": 62,
+  "by_class_after": {
+    "VERBATIM_VERIFIED": 0,
+    "ALIAS_RESOLVED_VERBATIM": 162,
+    "COMPOSITE_VERIFIED": 84,
+    "CROSSWALK_SUPPORTING": 144,
+    "LOCAL_COMPOSITION": 432,
+    "UNVERIFIED": 0,
+    "HUMAN_REVIEW_REQUIRED": 0
+  },
+  "by_subject": {
+    "health": {
+      "citations": 246,
+      "before": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 162,
+        "COMPOSITE_VERIFIED": 72,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 12
+      },
+      "after": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 162,
+        "COMPOSITE_VERIFIED": 84,
+        "CROSSWALK_SUPPORTING": 0,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 0
+      },
+      "resolved_human_review": 12
+    },
+    "financial-literacy": {
+      "citations": 288,
+      "before": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 72
+      },
+      "after": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "CROSSWALK_SUPPORTING": 72,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 0
+      },
+      "resolved_human_review": 72
+    },
+    "ready-for-life": {
+      "citations": 288,
+      "before": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 72
+      },
+      "after": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "CROSSWALK_SUPPORTING": 72,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 0
+      },
+      "resolved_human_review": 72
+    }
+  },
+  "by_authority_after": {
+    "manuel-academy": 576,
+    "michigan-mde": 246
+  },
+  "by_release_action": {
+    "NONE": 666,
+    "RELABEL_REQUIRED": 156
+  },
+  "counts": {
+    "in_scope_subjects": [
+      "health",
+      "financial-literacy",
+      "ready-for-life"
+    ],
+    "in_scope_citations": 822,
+    "in_scope_records": 62,
+    "citations_reclassified": 156,
+    "records_reclassified": 6,
+    "human_review_resolved": 156,
+    "human_review_remaining_in_scope": 0,
+    "local_composition_in_scope": 432,
+    "crosswalk_supporting_in_scope": 144,
+    "relabels_required": 6
+  },
+  "invariants": [
+    {
+      "id": "I1",
+      "rule": "No Grade 3/4 citation may contain the phrase 'Michigan Personal Finance', a PF1-PF7 code, or any claim that Michigan publishes elementary personal finance standards.",
+      "scope": "Checked against required_label, i.e. the post-relabel state. The release as it stands TODAY still carries 'Michigan Personal Finance foundations — introductory' on 72 citations; that is what authored_class records, and this invariant does not claim otherwise.",
+      "execution": "executed",
+      "result": "PASS",
+      "failures": []
+    },
+    {
+      "id": "I2",
+      "rule": "No Ready for Life citation may assert Michigan authorship, adoption, approval or alignment-as-standard. Supporting connection wording only.",
+      "scope": "Every ready-for-life record in the registry, changed or not.",
+      "execution": "executed",
+      "result": "PASS",
+      "failures": []
+    },
+    {
+      "id": "I3",
+      "rule": "A CROSSWALK_SUPPORTING citation must name at least one official anchor carrying doc_id, locator and a quote presence-checked against held bytes, and must record governing authority manuel-academy.",
+      "scope": "Every record whose policy_class is CROSSWALK_SUPPORTING.",
+      "execution": "executed",
+      "result": "PASS",
+      "failures": []
+    },
+    {
+      "id": "I4",
+      "rule": "Any substring a citation presents as an official topic, standard or code name must be byte-present in the cited document.",
+      "scope": "Every relabelled record in every subject, via its resolution's label_official_names. Each entry must be a substring of required_label AND its byte_form must be present in the named held document.",
+      "execution": "executed",
+      "result": "PASS",
+      "failures": []
+    },
+    {
+      "id": "I5",
+      "rule": "MDE SEL Competencies and Indicators (2017) may be cited as a supporting framework and never as an academic standard.",
+      "scope": "Two executed checks: the document's own self-positioning sentence is byte-present, and no ready-for-life record carries authority michigan-mde. The further fact that the document is absent from the MDE Academic Standards index is a WEB OBSERVATION, recorded in source-custody.json, not an executed check.",
+      "execution": "executed-in-part; index absence is a web observation",
+      "result": "PASS",
+      "failures": []
+    },
+    {
+      "id": "I6",
+      "rule": "A citation naming a Michigan health topic must use the topic name printed on the topic list; expansions of it are not official names.",
+      "scope": "Subsumed by I4; kept as the health-specific statement of the same rule.",
+      "execution": "executed",
+      "result": "PASS",
+      "failures": []
+    }
+  ]
+}

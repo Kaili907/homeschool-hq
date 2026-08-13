@@ -1,0 +1,708 @@
+{
+  "policy_id": "manuel-academy-g34-health-finlit-rfl-standards-policy-r4",
+  "what_this_is": "Topical correspondence asserted by Manuel Academy between its own units and official Michigan text held in custody. It is not a standards alignment, was not produced or endorsed by MDE, and is not an educator review.",
+  "courses": {
+    "ma-g3-financial-literacy": {
+      "course_id": "ma-g3-financial-literacy",
+      "governing_authority": "manuel-academy",
+      "governing_authority_note": "The course is a Manuel Academy composition. The anchors below support it; they do not govern it and Michigan has approved no part of the sequence.",
+      "supporting_document": "mde-social-studies",
+      "supporting_scope": "Grade 3 Economics (E1 Market Economy, E2 National Economy, E3 International Economy)",
+      "required_label": "Michigan K-12 Social Studies Standards, Grade 3 Economics (E1-E3) — supporting connection, not a personal finance standard",
+      "units": [
+        {
+          "unit": 1,
+          "title": "needs, wants, and choosing",
+          "coverage": "partial",
+          "uncovered": [
+            "needs",
+            "wants",
+            "3 – E1.0.1 covers choice and opportunity cost; 'needs' and 'wants' occur zero times in Michigan's Grade 3 economics expectations"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-3-E1.0.1",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 33",
+              "quote": "3 – E1.0.1 Using a Michigan example, explain how scarcity, choice, and opportunity cost affect what is produced and consumed",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 2,
+          "title": "earning and work",
+          "coverage": "partial",
+          "uncovered": [
+            "personal earning",
+            "wages",
+            "household income"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-3-E1.0.4",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 34",
+              "quote": "3 – E1.0.4 Describe how entrepreneurs combine natural, human, and capital resources to produce goods and services in Michigan",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-3-E1.0.5",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 34",
+              "quote": "3 – E1.0.5 Explain the role of entrepreneurship and business development in Michigan's economic future",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 3,
+          "title": "spending and comparing",
+          "coverage": "partial",
+          "uncovered": [
+            "comparison shopping",
+            "unit price"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-3-E1.0.2",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 33",
+              "quote": "3 – E1.0.2 Identify incentives that influence economic decisions people make in Michigan",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 4,
+          "title": "saving and goals",
+          "coverage": "none",
+          "uncovered": [
+            "saving",
+            "savings goals",
+            "Michigan publishes no Grade 3 economics expectation about saving; the nearest official text is Grade 4 (4 – E1.0.3 lists 'saving money' as a positive-incentive example)"
+          ],
+          "anchors": []
+        },
+        {
+          "unit": 5,
+          "title": "money tools, privacy, and advertising",
+          "coverage": "none",
+          "uncovered": [
+            "money tools",
+            "money privacy",
+            "advertising",
+            "no Grade 3 economics expectation addresses any of the three; the incentives expectation 3 – E1.0.2 was considered and rejected as too loose to anchor them"
+          ],
+          "anchors": []
+        },
+        {
+          "unit": 6,
+          "title": "simulated market capstone",
+          "coverage": "partial",
+          "uncovered": [
+            "running a simulated market"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-3-E2.0.1",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 34",
+              "quote": "3 – E2.0.1 Using a Michigan example, explain how specialization leads to increased interdependence",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-3-E3.0.1",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 34",
+              "quote": "3 – E3.0.1 Identify products produced in other countries and consumed by people in Michigan",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        }
+      ],
+      "coverage_summary": {
+        "full": 0,
+        "partial": 4,
+        "none": 2
+      }
+    },
+    "ma-g4-financial-literacy": {
+      "course_id": "ma-g4-financial-literacy",
+      "governing_authority": "manuel-academy",
+      "governing_authority_note": "The course is a Manuel Academy composition. The anchors below support it; they do not govern it and Michigan has approved no part of the sequence.",
+      "supporting_document": "mde-social-studies",
+      "supporting_scope": "Grade 4 Economics (E1 Market Economy, E2 National Economy, E3 International Economy)",
+      "required_label": "Michigan K-12 Social Studies Standards, Grade 4 Economics (E1-E3) — supporting connection, not a personal finance standard",
+      "units": [
+        {
+          "unit": 1,
+          "title": "choices, scarcity, and tradeoffs",
+          "coverage": "partial",
+          "uncovered": [
+            "scarcity and opportunity cost are the Grade 3 expectation (3 – E1.0.1), not a Grade 4 one"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-4-E1.01",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 40 (printed as 'E1.01' in the document)",
+              "quote": "4 – E1.01 Identify a good or service produced in the United States and apply the three economic questions all economies must address",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-4-E1.0.2",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 40",
+              "quote": "4 – E1.0.2 Describe characteristics of a market economy",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 2,
+          "title": "earning, work, and enterprise",
+          "coverage": "partial",
+          "uncovered": [
+            "enterprise and entrepreneurship are Grade 3 expectations (3 – E1.0.4, 3 – E1.0.5); 'entrepreneur' occurs zero times in Michigan's Grade 4 economics expectations"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-4-E1.0.5",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 41",
+              "quote": "4 – E1.0.5 Explain how specialization and division of labor increase productivity",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-4-E1.0.7",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 41",
+              "quote": "4 – E1.0.7 Describe the role of money in the exchange of goods and services",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 3,
+          "title": "spending plans and comparison",
+          "coverage": "partial",
+          "uncovered": [
+            "budgeting",
+            "spending plans"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-4-E1.0.4",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 41",
+              "quote": "4 – E1.0.4 Explain how price affects decisions about purchasing goods and services",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-4-E1.0.6",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 41",
+              "quote": "4 – E1.0.6 Explain how competition among buyers results in higher prices, and competition among sellers results in lower prices",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 4,
+          "title": "saving, goals, and money privacy",
+          "coverage": "partial",
+          "uncovered": [
+            "money privacy",
+            "saving appears only as an example of a positive incentive, not as an expectation in its own right"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-4-E1.0.3",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 40",
+              "quote": "4 – E1.0.3 Describe how positive and negative incentives influence behavior in a market economy",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-4-E1.0.3-saving",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 40, positive-incentive examples",
+              "quote": "Examples of positive incentives may include but are not limited to: responding to a sale, saving money, earning money",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 5,
+          "title": "advertising, risk, borrowing, and giving",
+          "coverage": "partial",
+          "uncovered": [
+            "advertising",
+            "financial risk",
+            "borrowing",
+            "giving"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-4-E1.0.3",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 40",
+              "quote": "4 – E1.0.3 Describe how positive and negative incentives influence behavior in a market economy",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 6,
+          "title": "simulated marketplace capstone",
+          "coverage": "partial",
+          "uncovered": [
+            "running a simulated marketplace"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SS-4-E1.0.2",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 40",
+              "quote": "4 – E1.0.2 Describe characteristics of a market economy",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-4-E1.0.8",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 41",
+              "quote": "4 – E1.0.8 List goods and services governments provide in a market economy and explain how these goods and services are funded",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SS-4-E3.0.1",
+              "doc_id": "mde-social-studies",
+              "locator": "PDF p. 41",
+              "quote": "4 – E3.0.1 Identify advantages and disadvantages of global competition",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        }
+      ],
+      "coverage_summary": {
+        "full": 0,
+        "partial": 6,
+        "none": 0
+      }
+    },
+    "ma-g3-ready-for-life": {
+      "course_id": "ma-g3-ready-for-life",
+      "governing_authority": "manuel-academy",
+      "governing_authority_note": "The course is a Manuel Academy composition. The anchors below support it; they do not govern it and Michigan has approved no part of the sequence.",
+      "supporting_document": "mde-health-2025 + mde-sel-2017",
+      "supporting_scope": "Health Education Standards Guidelines grade span 3-5; SEL Competencies and Indicators (2017) band 3-5",
+      "required_label": "Supporting connection: Michigan Health Education Standards Guidelines (grade span 3-5) and MDE SEL Competencies and Indicators (2017), band 3-5 — not a Michigan standard",
+      "units": [
+        {
+          "unit": 1,
+          "title": "personal and shared space care",
+          "coverage": "partial",
+          "uncovered": [
+            "home space care",
+            "chores"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SEL-1D",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF pp. 19-20, indicator 1D, band 3-5",
+              "quote": "Define what it means to be responsible and can identify things for which they are responsible",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SEL-5C",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF p. 60, indicator 5C, band 3-5",
+              "quote": "Identify and organize materials needed to be prepared for class",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 2,
+          "title": "clothing care and readiness routines",
+          "coverage": "partial",
+          "uncovered": [
+            "clothing care",
+            "laundry"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SEL-5C",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF p. 60, indicator 5C, band 3-5",
+              "quote": "Identify and organize materials needed to be prepared for class",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-PHW-5-5",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 36, Personal Health and Wellness [5.5.PHW] 1",
+              "quote": "Personal Health and Wellness [5.5.PHW] 1. Describe personal behaviors and strategies that promote health and/or avoid health risks",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 3,
+          "title": "kitchen helper safety and no-heat preparation",
+          "coverage": "partial",
+          "uncovered": [
+            "kitchen tasks",
+            "food preparation"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "H-SAF-5-5",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, Practice 5, Safety [5.5.SAF] 1",
+              "quote": "Safety [5.5.SAF] 1. Describe ways to promote personal safety and reduce the risk of injuries in various situations",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-SAF-5-5-examples",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, Safety [5.5.SAF] 1 examples",
+              "quote": "during physical activity, around motor vehicles, around firearms, around loud noise or music, around water, fire prevention, during a fire, as a pedestrian",
+              "verified_against_held_bytes": true,
+              "occurrences": 2
+            },
+            {
+              "anchor_id": "H-SAF-5-5-3",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, Safety [5.5.SAF] 3",
+              "quote": "Identify and demonstrate how to contact appropriate resources when someone is poisoned or injured and needs help",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 4,
+          "title": "body signals, rest, and food variety",
+          "coverage": "full",
+          "uncovered": [],
+          "anchors": [
+            {
+              "anchor_id": "H-PHW-5-5",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 36, Personal Health and Wellness [5.5.PHW] 1",
+              "quote": "Personal Health and Wellness [5.5.PHW] 1. Describe personal behaviors and strategies that promote health and/or avoid health risks",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-PHW-5-5-examples",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 36, [5.5.PHW] 1 examples",
+              "quote": "pedestrian safety, sun safety, protecting oneself from infectious diseases, adequate sleep, good nutrition, protective equipment, appropriate screen time, hearing protection, being physically active",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-BEPA-5-4-2",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 34, Balanced Eating and Physical Activity [5.4.BEPA] 2",
+              "quote": "Identify and describe hunger and fullness indicators and how these can inform nutrition-related decision-making",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-BEPA-5-4-8",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 34, [5.4.BEPA] 8",
+              "quote": "Recognize that individuals have different food-related needs, preferences, and traditions",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 5,
+          "title": "time, belongings, and help-seeking",
+          "coverage": "full",
+          "uncovered": [],
+          "anchors": [
+            {
+              "anchor_id": "H-MEH-5-5-10",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, Mental and Emotional Health [5.5.MEH] 10",
+              "quote": "Identify a variety of strategies for planning, prioritizing, and managing time",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-SAF-5-3",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 34, Practice 3, Safety [5.3.SAF] 2",
+              "quote": "Locate trusted adults (including parents or guardians) from whom to get help if boundaries are being violated",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SEL-5C",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF p. 60, indicator 5C, band 3-5",
+              "quote": "Identify and organize materials needed to be prepared for class",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 6,
+          "title": "family contribution capstone",
+          "coverage": "partial",
+          "uncovered": [
+            "family contribution as a course capstone"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SEL-3B",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF pp. 36-37, indicator 3B, band 3-5",
+              "quote": "Identify roles they have that contribute to their school, home, and neighboring community",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-MEH-5-5-9",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, [5.5.MEH] 9",
+              "quote": "Identify and demonstrate strategies and behaviors to overcome barriers and help meet personal responsibilities",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        }
+      ],
+      "coverage_summary": {
+        "full": 2,
+        "partial": 4,
+        "none": 0
+      }
+    },
+    "ma-g4-ready-for-life": {
+      "course_id": "ma-g4-ready-for-life",
+      "governing_authority": "manuel-academy",
+      "governing_authority_note": "The course is a Manuel Academy composition. The anchors below support it; they do not govern it and Michigan has approved no part of the sequence.",
+      "supporting_document": "mde-health-2025 + mde-sel-2017",
+      "supporting_scope": "Health Education Standards Guidelines grade span 3-5; SEL Competencies and Indicators (2017) band 3-5",
+      "required_label": "Supporting connection: Michigan Health Education Standards Guidelines (grade span 3-5) and MDE SEL Competencies and Indicators (2017), band 3-5 — not a Michigan standard",
+      "units": [
+        {
+          "unit": 1,
+          "title": "durable home-care routines",
+          "coverage": "partial",
+          "uncovered": [
+            "home-care routines"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SEL-1D",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF pp. 19-20, indicator 1D, band 3-5",
+              "quote": "Define what it means to be responsible and can identify things for which they are responsible",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SEL-5C",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF p. 60, indicator 5C, band 3-5",
+              "quote": "Identify and organize materials needed to be prepared for class",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-MEH-5-5-9",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, [5.5.MEH] 9",
+              "quote": "Identify and demonstrate strategies and behaviors to overcome barriers and help meet personal responsibilities",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 2,
+          "title": "clothing and laundry care with supervision",
+          "coverage": "partial",
+          "uncovered": [
+            "clothing care",
+            "laundry"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SEL-5C",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF p. 60, indicator 5C, band 3-5",
+              "quote": "Identify and organize materials needed to be prepared for class",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-PHW-5-5",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 36, Personal Health and Wellness [5.5.PHW] 1",
+              "quote": "Personal Health and Wellness [5.5.PHW] 1. Describe personal behaviors and strategies that promote health and/or avoid health risks",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 3,
+          "title": "kitchen care and food safety",
+          "coverage": "partial",
+          "uncovered": [
+            "kitchen care",
+            "food safety practice"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "H-SAF-5-5",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, Practice 5, Safety [5.5.SAF] 1",
+              "quote": "Safety [5.5.SAF] 1. Describe ways to promote personal safety and reduce the risk of injuries in various situations",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-SAF-5-5-3",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, Safety [5.5.SAF] 3",
+              "quote": "Identify and demonstrate how to contact appropriate resources when someone is poisoned or injured and needs help",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-BEPA-5-4-8",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 34, [5.4.BEPA] 8",
+              "quote": "Recognize that individuals have different food-related needs, preferences, and traditions",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 4,
+          "title": "body signals, rest, and fueling meals",
+          "coverage": "full",
+          "uncovered": [],
+          "anchors": [
+            {
+              "anchor_id": "H-PHW-5-5-examples",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 36, [5.5.PHW] 1 examples",
+              "quote": "pedestrian safety, sun safety, protecting oneself from infectious diseases, adequate sleep, good nutrition, protective equipment, appropriate screen time, hearing protection, being physically active",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-BEPA-5-4-2",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 34, Balanced Eating and Physical Activity [5.4.BEPA] 2",
+              "quote": "Identify and describe hunger and fullness indicators and how these can inform nutrition-related decision-making",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 5,
+          "title": "planning, belongings, and communication",
+          "coverage": "full",
+          "uncovered": [],
+          "anchors": [
+            {
+              "anchor_id": "H-MEH-5-5-10",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, Mental and Emotional Health [5.5.MEH] 10",
+              "quote": "Identify a variety of strategies for planning, prioritizing, and managing time",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SEL-5B",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF pp. 57-58, indicator 5B, band 3-5",
+              "quote": "Demonstrate academic behaviors and self-regulation skills such as organization, completing assignments, planning",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "SEL-4A",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF pp. 45-46, indicator 4A, band 3-5",
+              "quote": "Use attentive listening skills to foster better communication",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        },
+        {
+          "unit": 6,
+          "title": "family contribution capstone",
+          "coverage": "partial",
+          "uncovered": [
+            "family contribution as a course capstone"
+          ],
+          "anchors": [
+            {
+              "anchor_id": "SEL-3B",
+              "doc_id": "mde-sel-2017",
+              "locator": "PDF pp. 36-37, indicator 3B, band 3-5",
+              "quote": "Identify roles they have that contribute to their school, home, and neighboring community",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            },
+            {
+              "anchor_id": "H-MEH-5-5-9",
+              "doc_id": "mde-health-2025",
+              "locator": "PDF p. 35, [5.5.MEH] 9",
+              "quote": "Identify and demonstrate strategies and behaviors to overcome barriers and help meet personal responsibilities",
+              "verified_against_held_bytes": true,
+              "occurrences": 1
+            }
+          ]
+        }
+      ],
+      "coverage_summary": {
+        "full": 2,
+        "partial": 4,
+        "none": 0
+      }
+    }
+  }
+}

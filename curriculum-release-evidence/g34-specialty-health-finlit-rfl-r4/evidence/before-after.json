@@ -1,0 +1,135 @@
+{
+  "policy_id": "manuel-academy-g34-health-finlit-rfl-standards-policy-r4",
+  "in_scope": {
+    "subjects": [
+      "health",
+      "financial-literacy",
+      "ready-for-life"
+    ],
+    "citations": 822,
+    "records": 62,
+    "before": {
+      "VERBATIM_VERIFIED": 0,
+      "ALIAS_RESOLVED_VERBATIM": 162,
+      "COMPOSITE_VERIFIED": 72,
+      "LOCAL_COMPOSITION": 432,
+      "UNVERIFIED": 0,
+      "HUMAN_REVIEW_REQUIRED": 156
+    },
+    "after": {
+      "VERBATIM_VERIFIED": 0,
+      "ALIAS_RESOLVED_VERBATIM": 162,
+      "COMPOSITE_VERIFIED": 84,
+      "CROSSWALK_SUPPORTING": 144,
+      "LOCAL_COMPOSITION": 432,
+      "UNVERIFIED": 0,
+      "HUMAN_REVIEW_REQUIRED": 0
+    }
+  },
+  "by_subject": {
+    "health": {
+      "citations": 246,
+      "before": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 162,
+        "COMPOSITE_VERIFIED": 72,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 12
+      },
+      "after": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 162,
+        "COMPOSITE_VERIFIED": 84,
+        "CROSSWALK_SUPPORTING": 0,
+        "LOCAL_COMPOSITION": 0,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 0
+      },
+      "resolved_human_review": 12
+    },
+    "financial-literacy": {
+      "citations": 288,
+      "before": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 72
+      },
+      "after": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "CROSSWALK_SUPPORTING": 72,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 0
+      },
+      "resolved_human_review": 72
+    },
+    "ready-for-life": {
+      "citations": 288,
+      "before": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 72
+      },
+      "after": {
+        "VERBATIM_VERIFIED": 0,
+        "ALIAS_RESOLVED_VERBATIM": 0,
+        "COMPOSITE_VERIFIED": 0,
+        "CROSSWALK_SUPPORTING": 72,
+        "LOCAL_COMPOSITION": 216,
+        "UNVERIFIED": 0,
+        "HUMAN_REVIEW_REQUIRED": 0
+      },
+      "resolved_human_review": 72
+    }
+  },
+  "package_wide": {
+    "note": "g34-specialty-r3 totals with this package's three resolutions applied. arts-and-music and physical-education are unchanged.",
+    "citations_total": 1854,
+    "before": {
+      "VERBATIM_VERIFIED": 0,
+      "ALIAS_RESOLVED_VERBATIM": 534,
+      "COMPOSITE_VERIFIED": 72,
+      "LOCAL_COMPOSITION": 432,
+      "UNVERIFIED": 0,
+      "HUMAN_REVIEW_REQUIRED": 816
+    },
+    "after": {
+      "VERBATIM_VERIFIED": 0,
+      "ALIAS_RESOLVED_VERBATIM": 534,
+      "COMPOSITE_VERIFIED": 84,
+      "CROSSWALK_SUPPORTING": 144,
+      "LOCAL_COMPOSITION": 432,
+      "UNVERIFIED": 0,
+      "HUMAN_REVIEW_REQUIRED": 660
+    }
+  },
+  "counts": {
+    "in_scope_subjects": [
+      "health",
+      "financial-literacy",
+      "ready-for-life"
+    ],
+    "in_scope_citations": 822,
+    "in_scope_records": 62,
+    "citations_reclassified": 156,
+    "records_reclassified": 6,
+    "human_review_resolved": 156,
+    "human_review_remaining_in_scope": 0,
+    "local_composition_in_scope": 432,
+    "crosswalk_supporting_in_scope": 144,
+    "relabels_required": 6
+  },
+  "release_mapping_status_before_r3": {
+    "human-review": 576,
+    "unverified": 1278
+  }
+}
