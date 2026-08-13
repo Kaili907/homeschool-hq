@@ -1,6 +1,7 @@
 import type { FinalCatalogLesson } from '../../../curriculum/final-runtime'
 import type {
   FinalFamilyPilotCatalog,
+  FinalLearnerAssessmentMaterial,
   FinalLearnerProductionMaterial,
   FinalProductionBinding,
 } from '../../../curriculum/final-app-data'
@@ -57,6 +58,8 @@ import {
   type FinalFamilyPilotAppStateV1,
   type FinalFamilyPilotAppStoreOptions,
   type FinalFamilyPilotSourceAttachment,
+  type FinalAssessmentAssignmentStatus,
+  type FinalFamilyPilotAssessmentAssignment,
 } from './state'
 
 export interface FinalFamilyPilotControllerOptions {
@@ -93,6 +96,10 @@ function hashRef(value: string): string {
 
 export function finalAssignmentRef(studentRef: string, lessonRef: string): string {
   return `assignment:${hashRef(studentRef)}:${hashRef(lessonRef)}`
+}
+
+export function finalAssessmentAssignmentRef(studentRef: string, assessmentRef: string): string {
+  return `assessment:${hashRef(studentRef)}:${hashRef(assessmentRef)}`
 }
 
 export function academySubjectToStudySubject(subject: AcademySubject): StudySubject {
@@ -253,6 +260,101 @@ export class FinalFamilyPilotController {
     const record = this.#assignment(studentRef, assignmentRef)
     if (!record) throw new Error('The assignment could not be saved.')
     return record
+  }
+
+  assessmentAssignments(studentRef?: string): readonly FinalFamilyPilotAssessmentAssignment[] {
+    return this.#appSnapshot.state.assessmentAssignments.filter((item) => !studentRef || item.studentRef === studentRef)
+  }
+
+  assessmentsFor(student: FamilySetupStudent, courseRef?: string) {
+    return this.#catalog.listAssessments(courseRef).filter((assessment) => {
+      const expectedGrade = student.workingGradeBySubject[assessment.subject] ?? student.nominalGrade
+      return student.enabledSubjects.includes(assessment.subject) && Number(expectedGrade) === assessment.grade
+    })
+  }
+
+  async assignAssessment(studentRef: string, assessmentRef: string): Promise<FinalFamilyPilotAssessmentAssignment> {
+    const student = this.#studentSetup(studentRef)
+    if (!student) throw new Error('Student configuration is unavailable.')
+    const binding = this.#catalog.listAssessments().find((item) => item.assessmentRef === assessmentRef)
+    const material = await this.#catalog.getAssessment(assessmentRef)
+    if (!binding || !material || material.assessmentRef !== assessmentRef || material.courseRef !== binding.courseRef) {
+      throw new Error('That admitted assessment material is unavailable.')
+    }
+    const expectedGrade = student.workingGradeBySubject[material.subject] ?? student.nominalGrade
+    if (!student.enabledSubjects.includes(material.subject) || Number(expectedGrade) !== material.grade) {
+      throw new Error('That assessment is not enabled at this student’s working grade.')
+    }
+    if (!material.learnerTasks.length || material.productionReadiness.structuralOnly !== false || material.productionReadiness.answerMaterialIncluded !== false) {
+      throw new Error('That assessment failed its learner-material admission contract.')
+    }
+    const assignmentRef = finalAssessmentAssignmentRef(studentRef, assessmentRef)
+    const existing = this.#appSnapshot.state.assessmentAssignments.find((item) => item.assignmentRef === assignmentRef)
+    if (existing) return existing
+    const now = this.#at()
+    const assignment: FinalFamilyPilotAssessmentAssignment = Object.freeze({
+      assignmentRef,
+      assessmentRef,
+      studentRef,
+      courseRef: material.courseRef,
+      subject: material.subject,
+      grade: material.grade,
+      title: `${material.location.unitTitle} assessment`,
+      authorityClass: material.completionScoringAuthorityClass,
+      status: 'PLANNED',
+      createdAt: now,
+      updatedAt: now,
+      completedAt: null,
+    })
+    this.#commitApp((state) => ({
+      ...state,
+      assessmentAssignments: Object.freeze([...state.assessmentAssignments, assignment]),
+    }))
+    return assignment
+  }
+
+  async loadAssessment(studentRef: string, assignmentRef: string): Promise<{
+    readonly assignment: FinalFamilyPilotAssessmentAssignment
+    readonly material: FinalLearnerAssessmentMaterial
+  }> {
+    const assignment = this.#appSnapshot.state.assessmentAssignments.find((item) =>
+      item.studentRef === studentRef && item.assignmentRef === assignmentRef)
+    if (!assignment) throw new Error('That assessment assignment is unavailable.')
+    const material = await this.#catalog.getAssessment(assignment.assessmentRef)
+    if (!material || material.courseRef !== assignment.courseRef || material.grade !== assignment.grade || material.subject !== assignment.subject) {
+      throw new Error('That assessment binding is unavailable.')
+    }
+    if (!this.assessmentSourceReady(studentRef, material)) {
+      throw new Error(`This assessment is blocked until qualifying source metadata is attached to ${material.location.assessmentLessonRef ?? 'its source lesson'}.`)
+    }
+    if (assignment.status === 'PLANNED') this.updateAssessmentStatus(studentRef, assignmentRef, 'ACTIVE')
+    return { assignment: this.#appSnapshot.state.assessmentAssignments.find((item) => item.assignmentRef === assignmentRef) ?? assignment, material }
+  }
+
+  assessmentSourceReady(studentRef: string, material: FinalLearnerAssessmentMaterial): boolean {
+    if (!material.productionReadiness.requiresSourceAttachment) return true
+    const lessonRef = material.location.assessmentLessonRef
+    return Boolean(lessonRef && this.#appSnapshot.state.sourceAttachments.some((item) =>
+      item.studentRef === studentRef && item.lessonRef === lessonRef && item.status === 'ATTACHED_SATISFIED'))
+  }
+
+  updateAssessmentStatus(studentRef: string, assignmentRef: string, status: FinalAssessmentAssignmentStatus): void {
+    const current = this.#appSnapshot.state.assessmentAssignments.find((item) => item.studentRef === studentRef && item.assignmentRef === assignmentRef)
+    if (!current) throw new Error('That assessment assignment is unavailable.')
+    if (status === 'CERTIFIED' && current.authorityClass === 'AUTO_SCOREABLE' && current.status !== 'PENDING_ASSESSMENT') {
+      throw new Error('Trusted scoring must complete before certification.')
+    }
+    const now = this.#at()
+    this.#commitApp((state) => ({
+      ...state,
+      assessmentAssignments: Object.freeze(state.assessmentAssignments.map((item) =>
+        item.assignmentRef !== assignmentRef || item.studentRef !== studentRef ? item : Object.freeze({
+          ...item,
+          status,
+          updatedAt: now,
+          completedAt: status === 'CERTIFIED' ? now : null,
+        }))),
+    }))
   }
 
   async readiness(studentRef: string, assignmentRef: string): Promise<FinalFamilyPilotReadinessView> {

@@ -31,12 +31,12 @@ function has(result, code) {
   assert.ok(result.findingCodes.includes(code), `${code} not found in ${result.findingCodes.join(', ')}`)
 }
 
-test('full population gate inspects exactly 8,292 lessons and 699 assessments and fails the current base', () => {
+test('full population gate inspects exactly 8,292 lessons and 699 assessments and passes the convergence release', () => {
   const report = runAudit({ build: true, quiet: true })
   assert.deepEqual(report.counts, { courses: 90, lessons: 8292, assessments: 699 })
-  assert.equal(report.releaseReady, false)
-  assert.equal(report.lessonGate.ready, 0)
-  assert.equal(report.assessmentGate.blocked, 699)
+  assert.equal(report.releaseReady, true)
+  assert.equal(report.lessonGate.ready, 8292)
+  assert.equal(report.assessmentGate.ready, 699)
   assert.equal(report.matrix.length, 90)
 })
 
@@ -145,6 +145,38 @@ test('negative control: unsafe pending Social Studies source state', () => {
   has(result, 'UNSAFE_SOURCE_STATE')
 })
 
+test('positive control: a dynamic Social source remains safely blocked until its complete attachment contract is satisfied', () => {
+  const result = inspect('social-studies', {
+    binding: {
+      sourceReadinessKind: 'DYNAMIC_SOURCE_REQUIRED',
+      sourceRuntimeState: 'PENDING_SOURCE_ATTACHMENT',
+      sourceReadinessContract: {
+        lessonLaunch: 'BLOCKED_PENDING_SOURCE',
+        becomesRunnableWhen: 'ATTACHED_SATISFIED',
+      },
+    },
+    markdown: '## 3. Independent response\n\nExplain the evidence.\n\n## 4. Rubric',
+    projected: { itemRef: 'independent-response', responseKind: 'CONSTRUCTED_RESPONSE' },
+  })
+  assert.equal(result.findingCodes.includes('UNSAFE_SOURCE_STATE'), false)
+})
+
+test('positive control: authoritative DISABLED launch token is also fail-closed for a pending dynamic Social source', () => {
+  const result = inspect('social-studies', {
+    binding: {
+      sourceReadinessKind: 'DYNAMIC_SOURCE_REQUIRED',
+      sourceRuntimeState: 'PENDING_SOURCE_ATTACHMENT',
+      sourceReadinessContract: {
+        lessonLaunch: 'DISABLED',
+        becomesRunnableWhen: 'ATTACHED_SATISFIED',
+      },
+    },
+    markdown: '## 3. Independent response\n\nExplain the evidence.\n\n## 4. Rubric',
+    projected: { itemRef: 'independent-response', responseKind: 'CONSTRUCTED_RESPONSE' },
+  })
+  assert.equal(result.findingCodes.includes('UNSAFE_SOURCE_STATE'), false)
+})
+
 test('negative controls: missing assessment material and workflow', () => {
   const result = inspectAssessment({ assessmentRef: 'missing', releaseSlotId: 'course', grade: 9, subject: 'science', state: 'STRUCTURAL_ONLY', productionPackageRef: null }, process.cwd(), false)
   assert.deepEqual(result.findingCodes, ['MISSING_ASSESSMENT_LEARNER_MATERIAL', 'ASSESSMENT_WORKFLOW_MISSING'])
@@ -217,4 +249,60 @@ test('subject-aware positive controls do not require PE, Arts, or RFL to look li
     assert.equal(result.findingCodes.includes('EMPTY_REQUIRED_MASTERY'), false)
     assert.equal(result.findingCodes.includes('ZERO_ACTIONABLE_NORMAL_LESSON'), false)
   }
+})
+
+test('positive controls recognize repaired Science, Technology, PE, and ELA execution contracts', () => {
+  const science = inspect('science', {
+    markdown: '**Q1.** Explain what E1 supports.',
+    scienceRecord: {
+      grade: 3,
+      work_type: 'STUDENT_WORK_SHEET',
+      materials: ['this complete learner sheet'],
+      executable_content: {
+        inputs_complete: true,
+        materials_complete: true,
+        placeholder_free: true,
+        bound_task: { question: 'What does E1 support?', steps: ['Read.', 'Cite.', 'Revise.'] },
+        supplied_evidence: { rows: [{}, {}, {}] },
+      },
+      assurances: { executable_alternative_present: true },
+    },
+    projected: { itemRef: 'Q1', responseKind: 'CONSTRUCTED_RESPONSE' },
+  })
+  const technology = inspect('technology', {
+    value: {
+      primary_task: 'Use the complete supplied case and record the checks.',
+      work_mode: 'MODEL',
+      task_type: 'debugging_and_testing',
+      activity_setup: {
+        central_input: { starter_code: 'const value = 1;' },
+        expected_behavior_and_specification: ['a', 'b', 'c', 'd'],
+        test_cases: [{}, {}, {}],
+        execution_method: { primary: 'browser', manual: 'paper' },
+        debugging_target: { target: 'repair the loop' },
+        equal_credit_alternative: { method: 'paper trace' },
+      },
+    },
+    projected: { itemRef: 'primary-task', responseKind: 'ACTIVITY_EVIDENCE' },
+  })
+  const pe = inspect('physical-education', {
+    value: {
+      studentTask: 'Complete or describe the controlled sequence.',
+      materials: ['No specialized equipment is required.'],
+      movementCues: ['Look ahead.', 'Slow before turning.'],
+      safetyRules: ['Check the space and use a self-selected challenge level.'],
+      stoppingRules: ['Stop if pain, dizziness, or breathing difficulty begins.'],
+      completionCriteria: ['Name the cue and the safety check.'],
+    },
+    projected: { itemRef: 'student-task', responseKind: 'ACTIVITY_EVIDENCE' },
+  })
+  const ela = inspect('english-language-arts', {
+    value: { independentEvidenceTask: { text: 'Write a claim and support it with one exact detail.' } },
+    material: {
+      format: 'structured',
+      sourceMetadata: { selectionInstructions: 'A'.repeat(260) },
+      sections: [{ title: 'Independent evidence', items: [{ itemRef: 'independent-evidence', responseKind: 'CONSTRUCTED_RESPONSE' }] }],
+    },
+  })
+  for (const result of [science, technology, pe, ela]) assert.deepEqual(result.findingCodes, [])
 })

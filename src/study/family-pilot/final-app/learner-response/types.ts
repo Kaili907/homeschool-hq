@@ -146,9 +146,11 @@ export interface LearnerMaterialItemDto {
   readonly itemRef?: string
   readonly ref?: string
   readonly kind?: string
+  readonly itemKind?: string
   readonly itemType?: string
   readonly prompt?: string
-  readonly responseType?: LearnerResponseType
+  readonly responseType?: string
+  readonly responseKind?: LearnerResponseType
   readonly choices?: readonly (string | { readonly id?: string; readonly ref?: string; readonly label: string })[]
   readonly workedSolution?: { readonly steps?: readonly string[] }
 }

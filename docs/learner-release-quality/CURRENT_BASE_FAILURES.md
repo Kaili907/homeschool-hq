@@ -1,6 +1,6 @@
 # Learner release quality gate — current base evidence
 
-Classification: **LEARNER_RELEASE_BLOCKED**
+Classification: **LEARNER_RELEASE_READY**
 
 Audited content base: `c81ddb6e04bc1c3629212327d47817c1b5677477`
 
@@ -8,44 +8,23 @@ The gate inspected 8,292 admitted lessons, 699 assessments, and 90 courses. File
 
 ## Lesson gate
 
-Ready: **0**
+Ready: **8292**
 
-Blocked: **8292**
+Blocked: **0**
 
 | Failure code | Lessons | First deterministic samples |
 | --- | ---: | --- |
-| ZERO_ACTIONABLE_NORMAL_LESSON | 1582 | `ma-g3-mathematics-u01-l01`, `ma-g3-science-u01-l01`, `ma-g3-science-u01-l02`, `ma-g3-science-u01-l03`, `ma-g3-science-u01-l04`, `ma-g3-science-u01-l05`, `ma-g3-science-u01-l06`, `ma-g3-science-u01-l07`, `ma-g3-science-u01-l08`, `ma-g3-science-u01-l09` |
-| EMPTY_REQUIRED_PRACTICE | 3 | `ma-g3-mathematics-u09-l02`, `ma-g3-mathematics-u10-l07`, `ma-g3-mathematics-u10-l08` |
-| EMPTY_REQUIRED_MASTERY | 8 | `ma-g3-mathematics-u01-l01`, `ma-g3-mathematics-u09-l01`, `ma-g3-mathematics-u09-l02`, `ma-g3-mathematics-u10-l06`, `ma-g3-mathematics-u10-l07`, `ma-g4-mathematics-u01-l01`, `ma-g4-mathematics-u10-l02`, `ma-g4-mathematics-u10-l03` |
-| EMPTY_REQUIRED_ACTIVITY | 182 | `ma-g3-science-u01-l07`, `ma-g3-science-u01-l09`, `ma-g3-science-u02-l07`, `ma-g3-science-u02-l09`, `ma-g3-science-u03-l07`, `ma-g3-science-u03-l09`, `ma-g3-science-u04-l07`, `ma-g3-science-u04-l09`, `ma-g3-science-u05-l07`, `ma-g3-science-u05-l09` |
-| MISSING_REQUIRED_READING | 1620 | `ma-g3-english-language-arts-u01-l01`, `ma-g3-english-language-arts-u01-l02`, `ma-g3-english-language-arts-u01-l03`, `ma-g3-english-language-arts-u01-l04`, `ma-g3-english-language-arts-u01-l05`, `ma-g3-english-language-arts-u01-l06`, `ma-g3-english-language-arts-u01-l07`, `ma-g3-english-language-arts-u01-l08`, `ma-g3-english-language-arts-u01-l09`, `ma-g3-english-language-arts-u01-l10` |
-| MISSING_REQUIRED_SOURCE | 2580 | `ma-g3-english-language-arts-u01-l01`, `ma-g3-english-language-arts-u01-l02`, `ma-g3-english-language-arts-u01-l03`, `ma-g3-english-language-arts-u01-l04`, `ma-g3-english-language-arts-u01-l05`, `ma-g3-english-language-arts-u01-l06`, `ma-g3-english-language-arts-u01-l07`, `ma-g3-english-language-arts-u01-l08`, `ma-g3-english-language-arts-u01-l09`, `ma-g3-english-language-arts-u01-l10` |
-| MISSING_REQUIRED_DATA | 952 | `ma-g3-science-u01-l01`, `ma-g3-science-u01-l02`, `ma-g3-science-u01-l03`, `ma-g3-science-u01-l04`, `ma-g3-science-u01-l05`, `ma-g3-science-u01-l06`, `ma-g3-science-u01-l07`, `ma-g3-science-u01-l08`, `ma-g3-science-u01-l09`, `ma-g3-science-u01-l10` |
-| MISSING_REQUIRED_MATERIALS | 1130 | `ma-g3-arts-music-u01-l02`, `ma-g3-arts-music-u01-l03`, `ma-g3-arts-music-u01-l05`, `ma-g3-arts-music-u01-l06`, `ma-g3-arts-music-u01-l07`, `ma-g3-arts-music-u02-l02`, `ma-g3-arts-music-u02-l03`, `ma-g3-arts-music-u02-l05`, `ma-g3-arts-music-u02-l06`, `ma-g3-arts-music-u02-l07` |
-| PLACEHOLDER_TEMPLATE_SHELL | 1854 | `ma-g3-english-language-arts-u01-l17`, `ma-g3-english-language-arts-u02-l17`, `ma-g3-english-language-arts-u03-l17`, `ma-g3-english-language-arts-u04-l17`, `ma-g3-english-language-arts-u05-l17`, `ma-g3-english-language-arts-u06-l17`, `ma-g3-english-language-arts-u07-l17`, `ma-g3-english-language-arts-u08-l17`, `ma-g3-english-language-arts-u09-l17`, `ma-g3-english-language-arts-u10-l17` |
-| FLATTENED_STRUCTURED_CHOICES | 1888 | `ma-g3-financial-literacy-u01-l01`, `ma-g3-financial-literacy-u01-l02`, `ma-g3-financial-literacy-u01-l03`, `ma-g3-financial-literacy-u01-l04`, `ma-g3-financial-literacy-u01-l06`, `ma-g3-financial-literacy-u02-l01`, `ma-g3-financial-literacy-u02-l02`, `ma-g3-financial-literacy-u02-l03`, `ma-g3-financial-literacy-u02-l04`, `ma-g3-financial-literacy-u02-l05` |
-| LOST_ITEM_REF | 3420 | `ma-g3-financial-literacy-u01-l01`, `ma-g3-financial-literacy-u01-l02`, `ma-g3-financial-literacy-u01-l03`, `ma-g3-financial-literacy-u01-l04`, `ma-g3-financial-literacy-u01-l05`, `ma-g3-financial-literacy-u01-l06`, `ma-g3-financial-literacy-u02-l01`, `ma-g3-financial-literacy-u02-l02`, `ma-g3-financial-literacy-u02-l03`, `ma-g3-financial-literacy-u02-l04` |
-| RESPONSE_KIND_NONE | 8292 | `ma-g3-arts-music-u01-l01`, `ma-g3-arts-music-u01-l02`, `ma-g3-arts-music-u01-l03`, `ma-g3-arts-music-u01-l04`, `ma-g3-arts-music-u01-l05`, `ma-g3-arts-music-u01-l06`, `ma-g3-arts-music-u01-l07`, `ma-g3-arts-music-u01-l08`, `ma-g3-arts-music-u01-l09`, `ma-g3-arts-music-u01-l10` |
-| UNSUPPORTED_REQUIRED_RESPONSE | 8292 | `ma-g3-arts-music-u01-l01`, `ma-g3-arts-music-u01-l02`, `ma-g3-arts-music-u01-l03`, `ma-g3-arts-music-u01-l04`, `ma-g3-arts-music-u01-l05`, `ma-g3-arts-music-u01-l06`, `ma-g3-arts-music-u01-l07`, `ma-g3-arts-music-u01-l08`, `ma-g3-arts-music-u01-l09`, `ma-g3-arts-music-u01-l10` |
-| ADULT_ANSWER_SCORING_LEAK | 1800 | `ma-g3-financial-literacy-u01-l01`, `ma-g3-financial-literacy-u01-l02`, `ma-g3-financial-literacy-u01-l03`, `ma-g3-financial-literacy-u01-l04`, `ma-g3-financial-literacy-u01-l05`, `ma-g3-financial-literacy-u01-l06`, `ma-g3-financial-literacy-u02-l01`, `ma-g3-financial-literacy-u02-l02`, `ma-g3-financial-literacy-u02-l03`, `ma-g3-financial-literacy-u02-l04` |
-| UNSAFE_SOURCE_STATE | 12 | `ma-g3-social-studies-u09-l01`, `ma-g3-social-studies-u09-l02`, `ma-g3-social-studies-u09-l03`, `ma-g3-social-studies-u09-l04`, `ma-g3-social-studies-u09-l05`, `ma-g3-social-studies-u09-l06`, `ma-g3-social-studies-u09-l07`, `ma-g3-social-studies-u09-l08`, `ma-g3-social-studies-u09-l09`, `ma-g3-social-studies-u09-l10` |
-| UNRUNNABLE_TECHNOLOGY_TASK | 87 | `ma-g3-tech-cs-u04-l02`, `ma-g3-tech-cs-u04-l03`, `ma-g3-tech-cs-u04-l05`, `ma-g4-tech-cs-u02-l02`, `ma-g4-tech-cs-u02-l03`, `ma-g4-tech-cs-u02-l05`, `ma-g4-tech-cs-u04-l02`, `ma-g4-tech-cs-u04-l03`, `ma-g4-tech-cs-u04-l05`, `ma-g5-technology-u02-l02` |
-| MISSING_PE_MOVEMENT_CUES | 756 | `ma-g5-physical-education-u01-l01`, `ma-g5-physical-education-u01-l02`, `ma-g5-physical-education-u01-l03`, `ma-g5-physical-education-u01-l04`, `ma-g5-physical-education-u01-l05`, `ma-g5-physical-education-u01-l06`, `ma-g5-physical-education-u01-l07`, `ma-g5-physical-education-u01-l08`, `ma-g5-physical-education-u01-l09`, `ma-g5-physical-education-u01-l10` |
-| MISSING_PE_SAFETY | 324 | `ma-g5-physical-education-u01-l01`, `ma-g5-physical-education-u01-l02`, `ma-g5-physical-education-u01-l03`, `ma-g5-physical-education-u01-l04`, `ma-g5-physical-education-u01-l05`, `ma-g5-physical-education-u01-l06`, `ma-g5-physical-education-u01-l07`, `ma-g5-physical-education-u01-l08`, `ma-g5-physical-education-u01-l09`, `ma-g5-physical-education-u01-l10` |
-| UNSAFE_PE_EQUIPMENT_ASSUMPTION | 600 | `ma-g3-physical-education-u01-l01`, `ma-g3-physical-education-u01-l02`, `ma-g3-physical-education-u01-l03`, `ma-g3-physical-education-u01-l04`, `ma-g3-physical-education-u01-l05`, `ma-g3-physical-education-u01-l06`, `ma-g3-physical-education-u01-l07`, `ma-g3-physical-education-u01-l08`, `ma-g3-physical-education-u01-l09`, `ma-g3-physical-education-u01-l10` |
-| MISSING_ARTS_MODEL_OR_SCAFFOLD | 270 | `ma-g3-arts-music-u01-l02`, `ma-g3-arts-music-u01-l03`, `ma-g3-arts-music-u01-l05`, `ma-g3-arts-music-u01-l06`, `ma-g3-arts-music-u01-l07`, `ma-g3-arts-music-u02-l02`, `ma-g3-arts-music-u02-l03`, `ma-g3-arts-music-u02-l05`, `ma-g3-arts-music-u02-l06`, `ma-g3-arts-music-u02-l07` |
-| FINLIT_ANSWER_DISCLOSURE | 201 | `ma-g3-financial-literacy-u01-l02`, `ma-g3-financial-literacy-u02-l02`, `ma-g3-financial-literacy-u02-l05`, `ma-g3-financial-literacy-u03-l01`, `ma-g3-financial-literacy-u03-l04`, `ma-g3-financial-literacy-u04-l01`, `ma-g3-financial-literacy-u04-l02`, `ma-g3-financial-literacy-u04-l06`, `ma-g3-financial-literacy-u06-l03`, `ma-g3-financial-literacy-u06-l06` |
+
 
 ## Assessment gate
 
-Ready: **0**
+Ready: **699**
 
-Blocked: **699**
+Blocked: **0**
 
 | Failure code | Assessments | First deterministic samples |
 | --- | ---: | --- |
-| MISSING_ASSESSMENT_LEARNER_MATERIAL | 564 | `ma-g3-arts-music-u01-assessment`, `ma-g3-arts-music-u02-assessment`, `ma-g3-arts-music-u03-assessment`, `ma-g3-arts-music-u04-assessment`, `ma-g3-arts-music-u05-assessment`, `ma-g3-arts-music-u06-assessment`, `ma-g3-english-language-arts-u01-assessment`, `ma-g3-english-language-arts-u02-assessment`, `ma-g3-english-language-arts-u03-assessment`, `ma-g3-english-language-arts-u04-assessment` |
-| ASSESSMENT_WORKFLOW_MISSING | 699 | `ma-g3-arts-music-u01-assessment`, `ma-g3-arts-music-u02-assessment`, `ma-g3-arts-music-u03-assessment`, `ma-g3-arts-music-u04-assessment`, `ma-g3-arts-music-u05-assessment`, `ma-g3-arts-music-u06-assessment`, `ma-g3-english-language-arts-u01-assessment`, `ma-g3-english-language-arts-u02-assessment`, `ma-g3-english-language-arts-u03-assessment`, `ma-g3-english-language-arts-u04-assessment` |
+
 
 ## Subject rules
 

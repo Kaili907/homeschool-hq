@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { loadFinalFamilyPilotCatalog, type FinalLearnerProductionMaterial } from '../../../curriculum/final-app-data'
+import {
+  loadFinalFamilyPilotCatalog,
+  type FinalLearnerAssessmentMaterial,
+  type FinalLearnerProductionMaterial,
+} from '../../../curriculum/final-app-data'
 import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
 import { FamilyPilotStudentLogin } from '../auth'
 import { exportFinalFamilyPilotBackup, downloadFinalFamilyPilotBackup, restoreFinalFamilyPilotBackup } from './backup'
@@ -41,6 +45,10 @@ import {
   type LearnerResponsePresentation,
 } from './learner-response'
 import { digestLocalPin } from './state'
+import {
+  BrowserAssessmentRuntime,
+  type FinalAssessmentAttemptV1,
+} from './assessment'
 
 const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
   mathematics: 'Mathematics',
@@ -174,14 +182,25 @@ function MountedFinalFamilyPilot({
   if (openAssignmentRef && openStudentRef) {
     return (
       <FinalShell onExit={onExit}>
-        <LessonSurface
-          key={`${openStudentRef}:${openAssignmentRef}`}
-          controller={controller}
-          studentRef={openStudentRef}
-          assignmentRef={openAssignmentRef}
-          onExit={() => { setOpenAssignmentRef(null); refresh() }}
-          refresh={refresh}
-        />
+        {openAssignmentRef.startsWith('assessment:') ? (
+          <AssessmentSurface
+            key={`${openStudentRef}:${openAssignmentRef}`}
+            controller={controller}
+            studentRef={openStudentRef}
+            assignmentRef={openAssignmentRef}
+            onExit={() => { setOpenAssignmentRef(null); refresh() }}
+            refresh={refresh}
+          />
+        ) : (
+          <LessonSurface
+            key={`${openStudentRef}:${openAssignmentRef}`}
+            controller={controller}
+            studentRef={openStudentRef}
+            assignmentRef={openAssignmentRef}
+            onExit={() => { setOpenAssignmentRef(null); refresh() }}
+            refresh={refresh}
+          />
+        )}
       </FinalShell>
     )
   }
@@ -294,12 +313,18 @@ function StudentSurface({ controller, onOpen, refresh }: {
   const record = controller.coreSnapshot.state.students.find((item) => item.studentRef === active)
   if (!student || !record) return <p className="p-6" role="alert">Student state is unavailable.</p>
   const assignments = record.assignments.filter((item) => item.state !== 'abandoned')
+  const assessmentAssignments = controller.assessmentAssignments(active)
   const homeAssignments = assignments.map((item) => ({
     assignmentRef: item.assignmentRef,
     title: item.title,
     subject: SUBJECT_LABEL[item.subject as AcademySubject] ?? item.subject,
     status: item.state === 'planned' ? 'not-started' as const : item.state === 'completed' ? 'completed' as const : 'in-progress' as const,
-  }))
+  })).concat(assessmentAssignments.map((item) => ({
+    assignmentRef: item.assignmentRef,
+    title: item.title,
+    subject: `${SUBJECT_LABEL[item.subject]} assessment`,
+    status: item.status === 'PLANNED' ? 'not-started' as const : item.status === 'CERTIFIED' ? 'completed' as const : 'in-progress' as const,
+  })))
   const inProgress = homeAssignments.find((item) => item.status === 'in-progress') ?? null
   const holds = controller.openSafetyHolds(active)
   const schedule = buildDailySchedule({
@@ -327,6 +352,10 @@ function StudentSurface({ controller, onOpen, refresh }: {
           const item = schedule.find((held) => held.scheduleItemRef === ref)
           if (item?.assignmentRef) onOpen(item.assignmentRef)
         }} />
+        {assessmentAssignments.length ? <section className="mt-5 rounded-2xl border bg-white p-5" data-testid="family-pilot-assessment-schedule">
+          <h2 className="text-xl font-extrabold">Assessment schedule</h2>
+          <ul className="mt-3 space-y-2">{assessmentAssignments.map((assessment) => <li key={assessment.assignmentRef} className="flex items-center justify-between gap-3 rounded-lg bg-slate-100 p-3"><span><strong>{assessment.title}</strong><br /><span className="text-sm">{assessment.status.replaceAll('_', ' ')}</span></span><button type="button" className="rounded-lg bg-cyan-700 px-3 py-2 font-bold text-white" onClick={() => onOpen(assessment.assignmentRef)}>{assessment.status === 'PLANNED' ? 'Start assessment' : 'Open assessment'}</button></li>)}</ul>
+        </section> : null}
       </div>
     </div>
   )
@@ -394,6 +423,8 @@ function ParentAssignments({ controller, student, onOpen, refresh }: {
   const [error, setError] = useState('')
   const assignments = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)?.assignments ?? []
   const selectedCourse = courses.find((item) => item.courseRef === courseRef) ?? courses[0]
+  const availableAssessments = selectedCourse ? controller.assessmentsFor(student, selectedCourse.courseRef) : []
+  const assessmentAssignments = controller.assessmentAssignments(student.studentRef)
 
   useEffect(() => {
     let live = true
@@ -445,6 +476,22 @@ function ParentAssignments({ controller, student, onOpen, refresh }: {
           onResumeAssignment={onOpen}
         />
       ) : null}
+      {selectedCourse ? <section className="rounded-2xl border bg-white p-5" data-testid="family-pilot-assessment-assignment">
+        <h3 className="text-xl font-extrabold">Assessments</h3>
+        <p className="mt-1 text-sm text-slate-600">All assessment prompts are learner material. Responses are saved in IndexedDB before submission; answer authority never enters the browser.</p>
+        <ul className="mt-3 space-y-2">{availableAssessments.map((assessment) => {
+          const assigned = assessmentAssignments.find((item) => item.assessmentRef === assessment.assessmentRef)
+          return <li key={assessment.assessmentRef} className="flex flex-wrap items-center justify-between gap-3 rounded-lg bg-slate-100 p-3">
+            <span><strong>{assessment.assessmentRef}</strong><br /><span className="text-sm">{assessment.authorityClass.replaceAll('_', ' ')}{assigned ? ` · ${assigned.status.replaceAll('_', ' ')}` : ''}</span></span>
+            {assigned ? <button type="button" className="rounded-lg border bg-white px-3 py-2 font-bold" onClick={() => onOpen(student.studentRef, assigned.assignmentRef)}>Open</button> : <button type="button" className="rounded-lg bg-cyan-700 px-3 py-2 font-bold text-white" onClick={async () => { try { await controller.assignAssessment(student.studentRef, assessment.assessmentRef); refresh() } catch (cause) { setError(messageOf(cause)) } }}>Assign assessment</button>}
+          </li>
+        })}</ul>
+      </section> : null}
+      {assessmentAssignments.filter((item) => ['ADULT_REVIEW_REQUIRED', 'PENDING_GUARDIAN_ATTESTATION'].includes(item.status)).map((assessment) => <section key={assessment.assignmentRef} className="rounded-2xl border border-amber-300 bg-amber-50 p-5">
+        <h3 className="font-extrabold">Assessment authority pending</h3>
+        <p className="mt-1">{assessment.title} · {assessment.status.replaceAll('_', ' ')}</p>
+        <button type="button" className="mt-3 rounded-lg bg-emerald-700 px-4 py-2 font-bold text-white" onClick={() => { controller.updateAssessmentStatus(student.studentRef, assessment.assignmentRef, 'CERTIFIED'); refresh() }}>{assessment.status === 'ADULT_REVIEW_REQUIRED' ? 'Record rubric review complete' : 'Guardian attest and certify'}</button>
+      </section>)}
       {assignments.filter((assignment) => bindingByAssignment[assignment.assignmentRef]?.sourceReadinessKind === 'DYNAMIC_SOURCE_REQUIRED').map((assignment) => (
         <DynamicSourceCard key={assignment.assignmentRef} controller={controller} student={student} assignment={assignment} attached={controller.appSnapshot.state.sourceAttachments.some((item) => item.studentRef === student.studentRef && item.assignmentRef === assignment.assignmentRef)} refresh={refresh} />
       ))}
@@ -572,6 +619,7 @@ function ParentReports({ controller, student, refresh }: {
     },
   }
   const report = buildStudentWeeklyReport(snapshot, { startDate: '2000-01-01', endDate: '2100-12-31' })
+  const assessmentAssignments = controller.assessmentAssignments(student.studentRef)
   const subjectRows = Object.entries(coreStudent.assignments
     .filter((item) => item.state !== 'abandoned')
     .reduce<Record<string, FamilyPilotAssignmentRecordV1[]>>((groups, item) => {
@@ -585,11 +633,109 @@ function ParentReports({ controller, student, refresh }: {
         <h3 className="text-xl font-extrabold">Subject and grade progress</h3>
         <ul className="mt-3 space-y-2">{subjectRows.map(([subject, assignments]) => <li key={subject} className="rounded-lg bg-slate-100 p-3 font-semibold">{SUBJECT_LABEL[subject as AcademySubject] ?? subject} · Working Grade {student.workingGradeBySubject[subject as AcademySubject] ?? student.nominalGrade} · {assignments?.filter((item) => item.state === 'completed').length ?? 0}/{assignments?.length ?? 0} completed</li>)}</ul>
         <p className="mt-3 font-semibold">Pending guardian attestations: {controller.pendingAttestations(student.studentRef).length}</p>
+        <p className="font-semibold">Assessments: {assessmentAssignments.filter((item) => item.status === 'CERTIFIED').length}/{assessmentAssignments.length} certified · {assessmentAssignments.filter((item) => item.status === 'PENDING_ASSESSMENT').length} trusted-scoring pending · {assessmentAssignments.filter((item) => item.status === 'ADULT_REVIEW_REQUIRED').length} rubric review pending</p>
         <p className="font-semibold">Open safety holds: {controller.openSafetyHolds(student.studentRef).length}</p>
         <button type="button" className="mt-3 rounded-lg border px-3 py-2 font-bold" onClick={refresh}>Refresh report</button>
       </section>
     </div>
   )
+}
+
+function AssessmentSurface({ controller, studentRef, assignmentRef, onExit, refresh }: {
+  readonly controller: FinalFamilyPilotController
+  readonly studentRef: string
+  readonly assignmentRef: string
+  readonly onExit: () => void
+  readonly refresh: () => void
+}) {
+  const runtime = useMemo(() => new BrowserAssessmentRuntime(), [assignmentRef, studentRef])
+  const [material, setMaterial] = useState<FinalLearnerAssessmentMaterial | null>(null)
+  const [attempt, setAttempt] = useState<FinalAssessmentAttemptV1 | null>(null)
+  const [drafts, setDrafts] = useState<Record<string, string>>({})
+  const [busyTask, setBusyTask] = useState<string | null>('loading')
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    let live = true
+    void controller.loadAssessment(studentRef, assignmentRef).then(async (loaded) => {
+      const stored = await runtime.load({ studentRef, assignmentRef, assessmentRef: loaded.material.assessmentRef })
+      if (!live) return
+      setMaterial(loaded.material)
+      setAttempt(stored)
+      setDrafts(Object.fromEntries(Object.entries(stored.responses).map(([taskRef, response]) => [taskRef, String(response.value)])))
+      setBusyTask(null)
+      refresh()
+    }).catch((error: unknown) => { if (live) { setMessage(messageOf(error)); setBusyTask(null) } })
+    return () => { live = false }
+  }, [assignmentRef, controller, refresh, runtime, studentRef])
+
+  const saveTask = async (taskRef: string) => {
+    if (!material || !attempt || !drafts[taskRef]?.trim()) { setMessage('Enter a response before saving.'); return }
+    setBusyTask(taskRef)
+    try {
+      const saved = await runtime.saveResponse({ studentRef, assignmentRef, assessmentRef: material.assessmentRef, taskRef, value: drafts[taskRef] })
+      setAttempt(saved)
+      controller.updateAssessmentStatus(studentRef, assignmentRef, 'ACTIVE')
+      setMessage('Response saved and verified in durable device storage.')
+      refresh()
+    } catch (error) { setMessage(messageOf(error)) }
+    setBusyTask(null)
+  }
+
+  const submitAssessment = async () => {
+    if (!material || !attempt) return
+    const missing = material.learnerTasks.filter((task) => !attempt.responses[task.taskRef])
+    if (missing.length) { setMessage(`Save all required responses first (${missing.length} remaining).`); return }
+    const status = material.completionScoringAuthorityClass === 'AUTO_SCOREABLE'
+      ? 'PENDING_ASSESSMENT' as const
+      : material.completionScoringAuthorityClass === 'RUBRIC_REQUIRED'
+        ? 'ADULT_REVIEW_REQUIRED' as const
+        : material.completionScoringAuthorityClass === 'GUARDIAN_REQUIRED'
+          ? 'PENDING_GUARDIAN_ATTESTATION' as const
+          : 'CERTIFIED' as const
+    setBusyTask('submit')
+    try {
+      const saved = await runtime.setStatus(attempt, status)
+      setAttempt(saved)
+      controller.updateAssessmentStatus(studentRef, assignmentRef, status)
+      setMessage(status === 'PENDING_ASSESSMENT'
+        ? 'Submitted. Trusted scoring is unavailable offline, so this remains PENDING_ASSESSMENT; no correctness was fabricated.'
+        : status === 'ADULT_REVIEW_REQUIRED'
+          ? 'Submitted for adult rubric review.'
+          : status === 'PENDING_GUARDIAN_ATTESTATION'
+            ? 'Submitted. Guardian attestation is required before certification.'
+            : 'Completion evidence submitted and certified.')
+      refresh()
+    } catch (error) { setMessage(messageOf(error)) }
+    setBusyTask(null)
+  }
+
+  if (busyTask === 'loading') return <main className="mx-auto max-w-4xl p-6"><p role="status">Loading admitted assessment material and durable attempt…</p></main>
+  if (!material || !attempt) return <main className="mx-auto max-w-4xl p-6"><p role="alert">{message || 'Assessment unavailable.'}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back</button></main>
+
+  return <main className="mx-auto max-w-4xl px-4 py-6" data-assessment-ref={material.assessmentRef}>
+    <button type="button" className="rounded-lg border px-3 py-2 font-bold" onClick={onExit}>Back to Home</button>
+    <section className="mt-4 rounded-2xl border bg-white p-6">
+      <p className="text-xs font-bold uppercase tracking-widest text-cyan-700">Admitted learner assessment · {material.completionScoringAuthorityClass.replaceAll('_', ' ')}</p>
+      <h1 className="mt-1 text-3xl font-extrabold">{material.location.unitTitle} assessment</h1>
+      <p className="mt-2 font-semibold">{material.location.courseTitle} · Grade {material.grade}</p>
+      <ul className="mt-4 list-disc space-y-1 pl-5">{material.instructions.map((instruction) => <li key={instruction}>{instruction}</li>)}</ul>
+      <div className="mt-6 space-y-5">{material.learnerTasks.map((task, index) => {
+        const saved = Boolean(attempt.responses[task.taskRef])
+        return <section key={task.taskRef} className="rounded-xl bg-slate-50 p-4" data-assessment-task-ref={task.taskRef}>
+          <h2 className="font-extrabold">Task {index + 1}</h2>
+          {task.directions ? <p className="mt-1 text-sm text-slate-600">{task.directions}</p> : null}
+          <p className="mt-2 whitespace-pre-wrap">{task.prompt}</p>
+          {task.choices?.length ? <fieldset className="mt-3 space-y-2"><legend className="sr-only">Choose one response</legend>{task.choices.map((choice) => <label key={choice} className="flex gap-2"><input type="radio" name={task.taskRef} value={choice} checked={drafts[task.taskRef] === choice} onChange={(event) => setDrafts((held) => ({ ...held, [task.taskRef]: event.target.value }))} />{choice}</label>)}</fieldset> : <textarea aria-label={`Response for task ${index + 1}`} className="mt-3 min-h-28 w-full rounded-lg border bg-white p-3" value={drafts[task.taskRef] ?? ''} onChange={(event) => setDrafts((held) => ({ ...held, [task.taskRef]: event.target.value }))} />}
+          <button type="button" className="mt-3 rounded-lg bg-cyan-700 px-3 py-2 font-bold text-white disabled:opacity-50" disabled={busyTask !== null} onClick={() => void saveTask(task.taskRef)}>{saved ? 'Save updated response' : 'Save response'}</button>
+          {saved ? <span className="ml-3 text-sm font-bold text-emerald-700">Saved in IndexedDB</span> : null}
+        </section>
+      })}</div>
+      <button type="button" className="mt-6 rounded-lg bg-emerald-700 px-5 py-3 font-extrabold text-white disabled:opacity-50" disabled={busyTask !== null || attempt.status === 'CERTIFIED'} onClick={() => void submitAssessment()}>{attempt.status === 'CERTIFIED' ? 'Certified' : 'Submit assessment'}</button>
+      <p className="mt-3 font-semibold" role="status">Status: {attempt.status.replaceAll('_', ' ')}</p>
+      {message ? <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 font-semibold" role="alert">{message}</p> : null}
+    </section>
+  </main>
 }
 
 function MaterialView({ material }: { readonly material: FinalLearnerProductionMaterial }) {

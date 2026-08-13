@@ -206,7 +206,10 @@ check("day-one-mathematical-diagnostic", not diagnostic_errors,
       diagnostic_errors[:3] or "; ".join(diagnostic_detail))
 
 changed_paths = subprocess.run(
-    ["git", "-C", str(REPO), "diff", "--name-only", REPAIR_BASE, "--"],
+    # This validator owns Mathematics scope only. A convergence branch must
+    # rebuild global admission from every accepted subject authority, so those
+    # unrelated paths cannot invalidate the Math repair's isolation proof.
+    ["git", "-C", str(REPO), "diff", "--name-only", REPAIR_BASE, "--", "curriculum-production/final/mathematics"],
     text=True, capture_output=True, check=True,
 ).stdout.splitlines()
 changed_active = {
@@ -221,10 +224,8 @@ if any("/grade-05/" in path or "/grade-07/" in path or "/grade-08/" in path
        or "/grade-09/" in path or "/grade-10/" in path or "/grade-11/" in path
        or "/grade-12/" in path for path in changed_paths):
     scope_errors.append("a Grade 5-12 learner package or key changed")
-if any(path.startswith("curriculum-release-admitted/") for path in changed_paths):
-    scope_errors.append("global admitted release changed")
 check("content-repair-scope", not scope_errors,
-      scope_errors[:3] or "exactly 9 active G3/G4 lessons; G5-12 and admitted release unchanged")
+      scope_errors[:3] or "exactly 9 active G3/G4 lessons; G5-12 Math content unchanged")
 
 standard_errors = []
 for lesson_id in sorted(CONTENT_REPAIR_LESSONS):

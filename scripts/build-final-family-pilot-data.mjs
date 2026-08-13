@@ -25,6 +25,7 @@ const bindings = (await readFile(new URL('production-bindings.jsonl', ADMITTED),
   .trim()
   .split('\n')
   .map((line) => JSON.parse(line))
+const assessmentBindings = await readJson(new URL('assessment-bindings.json', ADMITTED))
 
 function packagePath(ref) {
   const separator = ref.indexOf(':')
@@ -36,11 +37,42 @@ function packagePath(ref) {
   return new URL(relative, ROOT)
 }
 
+function projectAssessmentPackage(pkg) {
+  const projected = {
+    schemaVersion: pkg.schemaVersion,
+    kind: pkg.kind,
+    assessmentRef: pkg.assessmentRef,
+    courseRef: pkg.courseRef,
+    grade: pkg.grade,
+    subject: pkg.subject,
+    location: pkg.location,
+    standards: pkg.standards,
+    instructions: pkg.instructions,
+    learnerTasks: pkg.learnerTasks,
+    responseMode: pkg.responseMode,
+    completionScoringAuthorityClass: pkg.completionScoringAuthorityClass,
+    learnerSuccessCriteria: pkg.learnerSuccessCriteria,
+    accommodations: pkg.accommodations,
+    productionReadiness: pkg.productionReadiness,
+  }
+  const serialized = JSON.stringify(projected)
+  if (/answerKeyRef|answerAuthorityRef|adultScoringAuthorityRef|scoringAuthorityRef|correctAnswer|answerIndex|expectedAnswer|scoringGuide/i.test(serialized)) {
+    throw new Error(`Learner assessment ${pkg.assessmentRef} contains adult scoring authority`)
+  }
+  return projected
+}
+
 const bindingsByCourse = new Map()
 for (const binding of bindings) {
   const bucket = bindingsByCourse.get(binding.courseRef) ?? []
   bucket.push(binding)
   bindingsByCourse.set(binding.courseRef, bucket)
+}
+const assessmentBindingsByCourse = new Map()
+for (const binding of assessmentBindings) {
+  const bucket = assessmentBindingsByCourse.get(binding.releaseSlotId) ?? []
+  bucket.push(binding)
+  assessmentBindingsByCourse.set(binding.releaseSlotId, bucket)
 }
 
 await rm(OUTPUT, { recursive: true, force: true })
@@ -92,7 +124,33 @@ for (const course of runtimeManifest.courses) {
     }
     materials[binding.lessonRef] = material
   }
-  const payload = JSON.stringify({ courseRef: course.courseRef, lessons: safeRows, bindings: safeBindings, materials })
+  const safeAssessmentBindings = {}
+  const assessments = {}
+  for (const binding of assessmentBindingsByCourse.get(course.courseRef) ?? []) {
+    const pkg = JSON.parse(await readFile(packagePath(binding.productionPackageRef), 'utf8'))
+    if (pkg.assessmentRef !== binding.assessmentRef || pkg.courseRef !== course.courseRef) {
+      throw new Error(`Assessment binding identity mismatch: ${binding.assessmentRef}`)
+    }
+    safeAssessmentBindings[binding.assessmentRef] = {
+      assessmentRef: binding.assessmentRef,
+      courseRef: binding.releaseSlotId,
+      unitRef: binding.unitRef,
+      grade: binding.grade,
+      subject: binding.subject,
+      authorityClass: binding.authorityClass,
+      responseMode: binding.responseMode,
+      state: binding.state,
+    }
+    assessments[binding.assessmentRef] = projectAssessmentPackage(pkg)
+  }
+  const payload = JSON.stringify({
+    courseRef: course.courseRef,
+    lessons: safeRows,
+    bindings: safeBindings,
+    materials,
+    assessmentBindings: safeAssessmentBindings,
+    assessments,
+  })
   if (/answerKeyRef|scoringAuthorityRef|scoringRef|correctAnswer|answerIndex|answer[-_]keys?|\/scoring\/|scoring[-_]guide|teacher[-_]guide/i.test(payload)) {
     throw new Error(`Learner payload for ${course.courseRef} contains an adult/scoring field`)
   }
@@ -107,6 +165,16 @@ await writeFile(
     admissionStatus: releaseManifest.admissionStatus,
     counts: releaseManifest.counts,
     productionBindings: bindings.length,
+    assessmentBindings: assessmentBindings.length,
+    assessments: assessmentBindings.map((binding) => ({
+      assessmentRef: binding.assessmentRef,
+      courseRef: binding.releaseSlotId,
+      unitRef: binding.unitRef,
+      grade: binding.grade,
+      subject: binding.subject,
+      authorityClass: binding.authorityClass,
+      responseMode: binding.responseMode,
+    })),
     dynamicSocialSources: releaseManifest.dynamicSocialSources,
     structuredProjection: projectionStats,
     runtime: runtimeManifest,

@@ -89,6 +89,25 @@ async function resumeFromHome(page: Page, lesson: Lesson) {
 async function continueStep(page: Page) {
   const status = page.getByRole('status').filter({ hasText: /^Step \d+ of \d+$/ })
   const before = await status.textContent()
+  for (let attempt = 0; attempt < 24; attempt += 1) {
+    const submitChoice = page.getByRole('button', { name: 'Submit answer', exact: true })
+    if (await submitChoice.isVisible().catch(() => false)) {
+      await page.getByRole('radio').first().check()
+      await submitChoice.click()
+      await page.waitForTimeout(25)
+      continue
+    }
+    const submitText = page.getByRole('button', { name: 'Submit', exact: true })
+    if (await submitText.isVisible().catch(() => false)) {
+      await page.getByLabel(/Your response|Describe what you completed/).fill('Browser proof response saved before Study advances.')
+      const completion = page.getByRole('checkbox', { name: 'I completed the action described above.' })
+      if (await completion.isVisible().catch(() => false)) await completion.check()
+      await submitText.click()
+      await page.waitForTimeout(25)
+      continue
+    }
+    break
+  }
   await page.getByRole('button', { name: 'Continue', exact: true }).click()
   await expect.poll(async () => (await status.count()) ? status.textContent() : 'finished').not.toBe(before)
 }
@@ -97,7 +116,7 @@ async function finishThreeStepLesson(page: Page) {
   await expect(page.getByText('Step 1 of 3', { exact: true })).toBeVisible()
   await continueStep(page)
   await continueStep(page)
-  await page.getByRole('button', { name: 'Continue', exact: true }).click()
+  await continueStep(page)
 }
 
 async function supportState(page: Page) {
@@ -241,7 +260,7 @@ test('complete family workflow survives a real browser-process reopen and stays 
     await openStudent(page, 'Avery Synthetic', '1357')
     await resumeFromHome(page, LESSON.a)
     await expect(page.getByText('Step 3 of 3', { exact: true })).toBeVisible()
-    await page.getByRole('button', { name: 'Continue', exact: true }).click()
+    await continueStep(page)
     await expect(page.getByRole('heading', { name: `${LESSON.a.title}: lesson complete` })).toBeVisible()
     await page.getByRole('button', { name: 'Done' }).click()
 

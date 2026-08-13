@@ -32,6 +32,22 @@ const stableRef = (lessonRef, sourceRef, fallback) => {
 
 const projectChoices = (choices) => asStrings(choices)
 
+function finalizeItemStats(sections, stats) {
+  const items = sections.flatMap((section) => Array.isArray(section.items) ? section.items : [])
+  stats.itemsProjected = items.length
+  stats.choiceItemsProjected = items.filter((item) => Array.isArray(item.choices) && item.choices.length).length
+  stats.choicesPreserved = items.reduce((sum, item) => sum + (Array.isArray(item.choices) ? item.choices.length : 0), 0)
+}
+
+function responseKindFor(itemKind, responseMode, choices = []) {
+  if (itemKind === 'worked-example' || responseMode === 'instructional-example') return 'READ'
+  if (choices.length || itemKind === 'multiple-choice') return 'CHOICE'
+  const value = `${itemKind || ''} ${responseMode || ''}`.toLowerCase()
+  if (/numeric|number|calculation|fixed/.test(value)) return 'NUMERIC'
+  if (/short/.test(value)) return 'TEXT'
+  return 'CONSTRUCTED_RESPONSE'
+}
+
 function projectWorkedSolution(item, sectionKind, stats) {
   if (!item.workedSolution) return null
   if (sectionKind !== 'instructional-example' || item.kind !== 'worked-example') {
@@ -51,6 +67,7 @@ function projectMathItem(item, section, lessonRef, itemIndex, stats) {
   stats.itemsProjected += 1
   stats.choicesPreserved += choices.length
   if (choices.length) stats.choiceItemsProjected += 1
+  const responseKind = responseKindFor(item.kind, item.responseExpectation || item.responseType, choices)
   return compactObject({
     itemRef: stableRef(lessonRef, item.ref, `${section.sectionId || section.kind}-item-${itemIndex + 1}`),
     itemKind: asText(item.kind),
@@ -63,7 +80,8 @@ function projectMathItem(item, section, lessonRef, itemIndex, stats) {
         ? 'constructed-response'
         : item.kind === 'worked-example'
           ? 'instructional-example'
-          : undefined,
+          : asText(item.responseType),
+    responseKind,
     responseExpectation: asText(item.responseExpectation),
     standard: asText(item.standard),
     workedSolution: workedSolution || undefined,
@@ -101,6 +119,7 @@ function projectTaskSections(value, lessonRef, stats) {
       stats.itemsProjected += 1
       stats.choicesPreserved += choices.length
       if (choices.length) stats.choiceItemsProjected += 1
+      const responseKind = responseKindFor(prompt.promptType, responseModes.get(prompt.ref) || prompt.responseType, choices)
       return compactObject({
         itemRef: stableRef(lessonRef, prompt.ref, `${task.taskId || `task-${taskIndex + 1}`}-prompt-${promptIndex + 1}`),
         sourceItemRef: asText(prompt.ref),
@@ -109,6 +128,7 @@ function projectTaskSections(value, lessonRef, stats) {
         prompt: asText(prompt.text),
         choices: choices.length ? choices : undefined,
         responseType: responseModes.get(prompt.ref) || asText(prompt.responseType) || asText(prompt.promptType),
+        responseKind,
         unit: asText(prompt.unit),
       })
     })
@@ -210,28 +230,41 @@ function projectSocialSources(binding, socialSourceRegistry, stats) {
   })
 }
 
-function addTextSection(sections, lessonRef, key, title, body, prompts = []) {
+function addTextSection(sections, lessonRef, key, title, body, prompts = [], responseKind = null) {
   const text = asText(body)
   const safePrompts = asStrings(prompts)
   if (!text && !safePrompts.length) return
-  sections.push(compactObject({
+  const section = compactObject({
     sectionRef: `${lessonRef}#${key}`,
     sectionKind: key,
     title,
     body: text,
     prompts: safePrompts,
-  }))
+  })
+  if (responseKind && text) {
+    section.items = [{
+      itemRef: `${lessonRef}#${key}`,
+      sourceItemRef: key,
+      itemKind: key,
+      prompt: text,
+      responseType: responseKind,
+      responseKind,
+      choices: [],
+    }]
+  }
+  sections.push(section)
 }
 
 function projectGeneralSections(value, lessonRef, stats) {
   const sections = []
   addTextSection(sections, lessonRef, 'lesson-goal', 'Lesson goal', value.objective)
   addTextSection(sections, lessonRef, 'scenario', 'Scenario', value.scenario || value.privacySafeScenario)
-  addTextSection(sections, lessonRef, 'student-task', 'Student task', value.studentTask)
+  addTextSection(sections, lessonRef, 'student-task', 'Student task', value.studentTask, [],
+    value.subject === 'physical-education' ? 'ACTIVITY_EVIDENCE' : 'CONSTRUCTED_RESPONSE')
   addTextSection(sections, lessonRef, 'task-brief', 'Task brief', value.task_brief)
-  addTextSection(sections, lessonRef, 'primary-task', 'Primary task', value.primary_task)
-  addTextSection(sections, lessonRef, 'knowledge-check', 'Knowledge check', value.knowledgeCheck)
-  addTextSection(sections, lessonRef, 'independent-evidence', 'Independent evidence', value.independentEvidenceTask)
+  addTextSection(sections, lessonRef, 'primary-task', 'Primary task', value.primary_task, [], 'ACTIVITY_EVIDENCE')
+  addTextSection(sections, lessonRef, 'knowledge-check', 'Knowledge check', value.knowledgeCheck, [], 'CONSTRUCTED_RESPONSE')
+  addTextSection(sections, lessonRef, 'independent-evidence', 'Independent evidence', value.independentEvidenceTask, [], 'CONSTRUCTED_RESPONSE')
   addTextSection(sections, lessonRef, 'adaptation-choices', 'Adaptation choices', value.adaptationChoices)
   addTextSection(sections, lessonRef, 'deliverable', 'Deliverable', value.deliverable)
   addTextSection(sections, lessonRef, 'extension', 'Extension', value.extensionChallenge || value.extension)
@@ -246,6 +279,9 @@ function projectGeneralSections(value, lessonRef, stats) {
   addTextSection(sections, lessonRef, 'rubric-facing-criteria', 'Rubric-facing criteria', null,
     value.critique_criteria || value.test_or_check_criteria)
   addTextSection(sections, lessonRef, 'never-requires', 'This lesson never requires', null, value.neverRequires)
+  if (typeof value.sourceReference === 'string') {
+    addTextSection(sections, lessonRef, 'source-reading', 'Source or reading', value.sourceReference)
+  }
 
   const steps = projectTaskSteps(value, lessonRef, stats)
   if (steps.length) {
@@ -296,6 +332,15 @@ export function projectJsonLearnerMaterial(value, binding, fallbackTitle, option
   const simulationDescription = asText(value.simulationAlternative?.description)
   const elaSources = projectElaSources(value.sourceReference, stats)
   const socialSources = projectSocialSources(binding, options.socialSourceRegistry, stats)
+  if (elaSources?.selectionInstructions) {
+    sections.unshift({
+      sectionRef: `${lessonRef}#source-reading`,
+      sectionKind: 'source-reading',
+      title: 'Source or reading',
+      body: elaSources.selectionInstructions,
+      prompts: [],
+    })
+  }
 
   const material = compactObject({
     dtoVersion: STRUCTURED_PROJECTION_VERSION,
@@ -314,9 +359,16 @@ export function projectJsonLearnerMaterial(value, binding, fallbackTitle, option
       : undefined,
     workMode: asText(value.work_mode),
     scoringMode: asText(value.responseScoring?.mode),
+    activitySetup: value.activity_setup,
+    learnerResource: value.learner_resource,
+    safetyRules: asStrings(value.safetyRules),
+    stoppingRules: asStrings(value.stoppingRules),
+    equipmentRequirements: value.equipmentRequirements,
+    activitySteps: asStrings(value.activitySteps),
     sourceMetadata: elaSources || socialSources || undefined,
     sections,
   })
+  finalizeItemStats(sections, stats)
   assertLearnerSafeMaterial(material)
   return { material, stats }
 }
@@ -426,11 +478,43 @@ function extractRubric(markdown) {
   return rows.map((row) => Object.fromEntries(headers.map((header, index) => [header, row[index] || ''])))
 }
 
+function attachMarkdownResponseItems(sections, markdown, lessonRef, subject) {
+  const questions = [...markdown.matchAll(/^\*\*Q(\d+)\.\*\*\s*([^\n]+)/gm)]
+  if (questions.length) {
+    const target = sections.find((section) => /analysis-question/i.test(section.sectionKind)) ?? sections.at(-1)
+    target.items = questions.map((match) => ({
+      itemRef: `${lessonRef}#Q${match[1]}`,
+      sourceItemRef: `Q${match[1]}`,
+      itemKind: 'question',
+      prompt: match[2].trim(),
+      responseType: 'CONSTRUCTED_RESPONSE',
+      responseKind: 'CONSTRUCTED_RESPONSE',
+      choices: [],
+    }))
+  }
+  if (subject === 'social-studies') {
+    const prompt = markdown.match(/## 3\. Independent response\n\n([\s\S]*?)(?:\n\n## 4\.|$)/)?.[1]?.trim()
+    if (prompt) {
+      const target = sections.find((section) => /independent-response/i.test(section.sectionKind)) ?? sections.at(-1)
+      target.items = [{
+        itemRef: `${lessonRef}#independent-response`,
+        sourceItemRef: 'independent-response',
+        itemKind: 'independent-response',
+        prompt,
+        responseType: 'CONSTRUCTED_RESPONSE',
+        responseKind: 'CONSTRUCTED_RESPONSE',
+        choices: [],
+      }]
+    }
+  }
+}
+
 export function projectMarkdownLearnerMaterial(markdown, binding, fallbackTitle, options = {}) {
   const stats = initialStats()
   const sanitized = sanitizeMarkdown(markdown, binding.subject)
   stats.adultFieldsRemoved += sanitized.removed
   const sections = splitMarkdownSections(sanitized.markdown, binding.lessonRef)
+  attachMarkdownResponseItems(sections, sanitized.markdown, binding.lessonRef, binding.subject)
   const inlineMaterials = extractMarkdownValue(sanitized.markdown, 'Materials')
   const materials = inlineMaterials
     ? inlineMaterials.split(';').map((item) => item.trim()).filter(Boolean)
@@ -458,6 +542,7 @@ export function projectMarkdownLearnerMaterial(markdown, binding, fallbackTitle,
     sections,
     markdown: sanitized.markdown,
   })
+  finalizeItemStats(sections, stats)
   assertLearnerSafeMaterial(material)
   return { material, stats }
 }

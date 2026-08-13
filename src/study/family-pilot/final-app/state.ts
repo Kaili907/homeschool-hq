@@ -38,6 +38,30 @@ export interface FinalFamilyPilotSourceAttachment {
   readonly status: 'ATTACHED_SATISFIED'
 }
 
+export type FinalAssessmentAssignmentStatus =
+  | 'PLANNED'
+  | 'ACTIVE'
+  | 'PENDING_ASSESSMENT'
+  | 'ADULT_REVIEW_REQUIRED'
+  | 'PENDING_GUARDIAN_ATTESTATION'
+  | 'CERTIFIED'
+
+/** Response bodies stay in IndexedDB; this record is schedule/report metadata only. */
+export interface FinalFamilyPilotAssessmentAssignment {
+  readonly assignmentRef: string
+  readonly assessmentRef: string
+  readonly studentRef: string
+  readonly courseRef: string
+  readonly subject: AcademySubject
+  readonly grade: number
+  readonly title: string
+  readonly authorityClass: 'AUTO_SCOREABLE' | 'RUBRIC_REQUIRED' | 'GUARDIAN_REQUIRED' | 'COMPLETION_ONLY'
+  readonly status: FinalAssessmentAssignmentStatus
+  readonly createdAt: string
+  readonly updatedAt: string
+  readonly completedAt: string | null
+}
+
 export interface FinalFamilyPilotAppStateV1 {
   readonly schemaVersion: typeof FINAL_FAMILY_PILOT_APP_SCHEMA_VERSION
   readonly householdRef: string
@@ -46,6 +70,7 @@ export interface FinalFamilyPilotAppStateV1 {
   readonly activeStudentRef: string | null
   readonly sessions: readonly FinalFamilyPilotSavedSession[]
   readonly sourceAttachments: readonly FinalFamilyPilotSourceAttachment[]
+  readonly assessmentAssignments: readonly FinalFamilyPilotAssessmentAssignment[]
   readonly attestations: readonly FinalFamilyPilotAttestationRecord[]
   readonly safety: FamilyPilotSafetyStateV1
   /** One-way local access checks. PINs themselves are never stored. */
@@ -118,6 +143,7 @@ export function emptyFinalFamilyPilotAppState(
     activeStudentRef: null,
     sessions: Object.freeze([]),
     sourceAttachments: Object.freeze([]),
+    assessmentAssignments: Object.freeze([]),
     attestations: Object.freeze([]),
     safety: Object.freeze({ schemaVersion: 1, holds: Object.freeze([]) }),
     pinDigests: Object.freeze({}),
@@ -189,6 +215,20 @@ function parseSource(value: unknown): FinalFamilyPilotSourceAttachment | null {
   return Object.freeze(value as unknown as FinalFamilyPilotSourceAttachment)
 }
 
+function parseAssessmentAssignment(value: unknown): FinalFamilyPilotAssessmentAssignment | null {
+  if (!isRecord(value)) return null
+  if (
+    !isRef(value.assignmentRef) || !isRef(value.assessmentRef) || !isRef(value.studentRef) ||
+    !isRef(value.courseRef) || !ACADEMY_SUBJECTS.includes(value.subject as AcademySubject) ||
+    !Number.isInteger(value.grade) || !isText(value.title) ||
+    !['AUTO_SCOREABLE', 'RUBRIC_REQUIRED', 'GUARDIAN_REQUIRED', 'COMPLETION_ONLY'].includes(value.authorityClass as string) ||
+    !['PLANNED', 'ACTIVE', 'PENDING_ASSESSMENT', 'ADULT_REVIEW_REQUIRED', 'PENDING_GUARDIAN_ATTESTATION', 'CERTIFIED'].includes(value.status as string) ||
+    !isInstant(value.createdAt) || !isInstant(value.updatedAt) ||
+    !(value.completedAt === null || isInstant(value.completedAt))
+  ) return null
+  return Object.freeze(value as unknown as FinalFamilyPilotAssessmentAssignment)
+}
+
 function parseAttestation(value: unknown): FinalFamilyPilotAttestationRecord | null {
   if (!isRecord(value)) return null
   if (
@@ -216,12 +256,14 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
     !setup || !isRef(value.householdRef) || !isInstant(value.updatedAt) ||
     !(value.activeStudentRef === null || isRef(value.activeStudentRef)) ||
     !Array.isArray(value.sessions) || !Array.isArray(value.sourceAttachments) || !Array.isArray(value.attestations) ||
+    !(value.assessmentAssignments === undefined || Array.isArray(value.assessmentAssignments)) ||
     !isRecord(value.pinDigests)
   ) return { state: null, safetyRecovery: safety.recoveryState }
   const sessions = value.sessions.map(parseSession)
   const sources = value.sourceAttachments.map(parseSource)
+  const assessmentAssignments = (value.assessmentAssignments ?? []).map(parseAssessmentAssignment)
   const attestations = value.attestations.map(parseAttestation)
-  if (sessions.some((item) => !item) || sources.some((item) => !item) || attestations.some((item) => !item)) {
+  if (sessions.some((item) => !item) || sources.some((item) => !item) || assessmentAssignments.some((item) => !item) || attestations.some((item) => !item)) {
     return { state: null, safetyRecovery: safety.recoveryState }
   }
   const pinDigests: Record<string, string> = {}
@@ -232,6 +274,7 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
   const studentRefs = new Set(setup.students.map((item) => item.studentRef))
   if (value.activeStudentRef !== null && !studentRefs.has(value.activeStudentRef)) return { state: null, safetyRecovery: safety.recoveryState }
   if ((sessions as FinalFamilyPilotSavedSession[]).some((item) => !studentRefs.has(item.studentRef))) return { state: null, safetyRecovery: safety.recoveryState }
+  if ((assessmentAssignments as FinalFamilyPilotAssessmentAssignment[]).some((item) => !studentRefs.has(item.studentRef))) return { state: null, safetyRecovery: safety.recoveryState }
   return {
     safetyRecovery: safety.recoveryState,
     state: Object.freeze({
@@ -242,6 +285,7 @@ export function parseFinalFamilyPilotAppState(value: unknown): {
       activeStudentRef: value.activeStudentRef as string | null,
       sessions: Object.freeze(sessions as FinalFamilyPilotSavedSession[]),
       sourceAttachments: Object.freeze(sources as FinalFamilyPilotSourceAttachment[]),
+      assessmentAssignments: Object.freeze(assessmentAssignments as FinalFamilyPilotAssessmentAssignment[]),
       attestations: Object.freeze(attestations as FinalFamilyPilotAttestationRecord[]),
       safety: safety.state,
       pinDigests: Object.freeze(pinDigests),

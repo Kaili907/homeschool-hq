@@ -8,6 +8,7 @@ import type {
   LearnerResponseType,
   LearnerStudySegmentRole,
 } from './types'
+import { LEARNER_RESPONSE_TYPES } from './types'
 
 const SAFE_REF = /^[A-Za-z0-9][A-Za-z0-9._:#-]{0,255}$/
 const ROLES: readonly LearnerStudySegmentRole[] = ['LEARN', 'PRACTICE', 'REFLECT']
@@ -73,13 +74,14 @@ function inferredResponseType(
   item: LearnerMaterialItemDto | undefined,
   choices: readonly LearnerResponseChoice[],
 ): LearnerResponseType {
-  if (classification.mode === 'READ') return 'READ'
+  if (item?.responseKind && LEARNER_RESPONSE_TYPES.includes(item.responseKind)) return item.responseKind
   if (classification.mode === 'RUBRIC') return 'RUBRIC_REVIEW_PENDING'
   if (classification.mode === 'GUARDIAN') return 'GUARDIAN_ATTESTATION'
   if (item?.kind === 'worked-example' || item?.workedSolution) return 'READ'
   if (choices.length) return 'CHOICE'
-  if (item?.responseType && item.responseType !== 'NONE') return item.responseType
-  const itemKind = `${item?.kind ?? ''} ${item?.itemType ?? ''}`.toLowerCase()
+  if (item?.responseType && LEARNER_RESPONSE_TYPES.includes(item.responseType as LearnerResponseType) && item.responseType !== 'NONE') return item.responseType as LearnerResponseType
+  if (classification.mode === 'READ') return 'READ'
+  const itemKind = `${item?.kind ?? item?.itemKind ?? ''} ${item?.itemType ?? ''}`.toLowerCase()
   if (/numeric|number.entry|calculation/.test(itemKind)) return 'NUMERIC'
   if (/short.text|short-answer/.test(itemKind)) return 'TEXT'
   if (classification.mode === 'ACTIVITY') return 'ACTIVITY_EVIDENCE'
@@ -108,15 +110,16 @@ function mappedItem(input: {
   const parsed = splitFlattenedChoices(sourcePrompt ?? '')
   const choices = choicesFor(itemRef, input.item, parsed.labels)
   const responseType = inferredResponseType(classification, input.item, choices)
-  const instructionalExample = classification.mode === 'READ' || input.item?.kind === 'worked-example' || Boolean(input.item?.workedSolution)
+  const instructionalExample = responseType === 'READ' || input.item?.kind === 'worked-example' || input.item?.itemKind === 'worked-example' || Boolean(input.item?.workedSolution)
+  const segmentRole = classification.role === 'LEARN' && !instructionalExample ? 'PRACTICE' : classification.role
   const example = input.item?.workedSolution?.steps?.join('\n')
   return Object.freeze({
     lessonRef: input.lessonRef,
     sectionRef: input.sectionRef,
     itemRef,
-    segmentRole: classification.role,
+    segmentRole,
     responseType: instructionalExample ? 'READ' : responseType,
-    evidenceMode: instructionalExample ? null : evidenceMode(classification),
+    evidenceMode: instructionalExample ? null : evidenceMode(classification) ?? 'INDEPENDENT',
     title: input.section.title,
     ...(input.section.directions || input.section.body ? { instruction: input.section.directions ?? input.section.body } : {}),
     ...(parsed.prompt ? { prompt: parsed.prompt } : {}),
@@ -169,9 +172,17 @@ export function mapLearnerMaterialToStudySegments(material: LearnerMaterialDto):
     const sectionRefs = (material.sections ?? []).map((section, index) => sectionIdentity(lessonRef, section, index))
     if (new Set(sectionRefs).size !== sectionRefs.length) throw new Error('sectionRef values must be unique within a lesson.')
   }
+  const projectedMarkdownItems = (material.sections ?? []).flatMap((section, index) =>
+    section.items?.length ? sectionItems(lessonRef, section, index) : [])
   const items = material.format === 'structured'
     ? Object.freeze((material.sections ?? []).flatMap((section, index) => sectionItems(lessonRef, section, index)))
-    : markdownItems(material)
+    : projectedMarkdownItems.length
+      ? Object.freeze([
+          markdownItems(material)[0] as LearnerResponseItem,
+          ...projectedMarkdownItems,
+          markdownItems(material)[2] as LearnerResponseItem,
+        ])
+      : markdownItems(material)
   const itemRefs = items.map((item) => item.itemRef)
   if (new Set(itemRefs).size !== itemRefs.length) throw new Error('itemRef values must be unique within a lesson.')
   const segments = ROLES.map((role) => Object.freeze({ role, items: Object.freeze(items.filter((item) => item.segmentRole === role)) }))

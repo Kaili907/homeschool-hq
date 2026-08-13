@@ -14,7 +14,7 @@ import json
 import re
 import subprocess
 import tempfile
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 
@@ -57,28 +57,34 @@ SOURCES = {
         "role": "final structural curriculum candidate",
     },
     "mathematics": {
-        "branch": "mac/final-math-production-r1",
-        "commit": "7eeb4b7bf258800c9ecfa8eb4873544d604f4d63",
+        "branch": "mac/math-content-repair-r2",
+        "commit": "c8f5a6b6b9b18317f96b5e2f92d453bde0f0b2b9",
         "path": "curriculum-production/final/mathematics",
-        "role": "final active mathematics production corpus",
+        "role": "repaired active mathematics production corpus",
     },
     "science": {
-        "branch": "mac/final-science-production-r1",
-        "commit": "a03811a6647409bff068c034b67a0140720a77fc",
+        "branch": "mac/science-content-repair-r1",
+        "commit": "dc2cee7fa16ea059218862d0dc42a2bee504269d",
         "path": "curriculum-production/final/science",
-        "role": "final H4 science production corpus",
+        "role": "repaired executable science production corpus",
     },
     "social-studies": {
-        "branch": "mac/final-social-production-r1",
-        "commit": "b8e9611ec37c5e66820f0efd2461d7cd2daa6807",
+        "branch": "mac/social-content-source-repair-r1",
+        "commit": "9ab9860741566c2d02421fb36dc6c1eb0ddc9223",
         "path": "curriculum-production/final/social-studies",
-        "role": "final static and dynamic-source Social Studies corpus",
+        "role": "repaired static and dynamic-source Social Studies corpus",
     },
-    "health-physical-education": {
-        "branch": "mac/final-health-pe-production-r1",
-        "commit": "c523a0c9748b340a871493afbf51276759d406ce",
+    "health": {
+        "branch": "mac/health-content-repair-r1",
+        "commit": "858fed9c55e49d03e6457cdf8bf3426dadbd1cd3",
         "path": "curriculum-production/final/health-physical-education",
-        "role": "final Health and PE lesson and assessment corpus",
+        "role": "repaired meaningful Health lesson corpus",
+    },
+    "physical-education": {
+        "branch": "mac/pe-content-repair-r1",
+        "commit": "1651f72f222c002a857506ac8537951a9a77e698",
+        "path": "curriculum-production/final/health-physical-education",
+        "role": "repaired home-executable Physical Education lesson corpus",
     },
     "ready-for-life": {
         "branch": "mac/final-rfl-production-r1",
@@ -87,22 +93,34 @@ SOURCES = {
         "role": "final completion-authority-aware Ready for Life corpus",
     },
     "financial-literacy": {
-        "branch": "mac/final-finlit-production-r1",
-        "commit": "9f00acefc4d73b7efa29be7e4e49a3a8c3b0a9fa",
+        "branch": "mac/finlit-learner-security-repair-r1",
+        "commit": "4350673d80284066918120157c994672f92c1c53",
         "path": "curriculum-production/final/financial-literacy",
-        "role": "final H3-adjudicated Financial Literacy corpus",
+        "role": "repaired learner-safe Financial Literacy corpus",
     },
     "english-language-arts": {
-        "branch": "mac/ela-production-r1",
-        "commit": "00374a8dc26eddfac2cf52aec5661deff760ddbb",
+        "branch": "mac/ela-content-source-repair-r1",
+        "commit": "d161efc876ad7563505897323f80fdb2cb11d5a4",
         "path": "curriculum-production/student-work/english-language-arts",
-        "role": "accepted ELA lesson production corpus",
+        "role": "repaired actionable ELA lesson production corpus",
     },
-    "technology-arts-and-music": {
-        "branch": "mac/tech-arts-production-lessons-r2",
-        "commit": "12d78e0f2d683b6a87321d096ec7cee627119622",
+    "technology": {
+        "branch": "mac/technology-content-repair-r1",
+        "commit": "2d43cd014046ad6190d3bb0f672e3313897d63fd",
         "path": "curriculum-production/student-work/technology-arts-lessons",
-        "role": "lesson-level Technology/CS and Arts/Music corpus",
+        "role": "repaired executable Technology/CS lesson corpus",
+    },
+    "arts-and-music": {
+        "branch": "mac/arts-music-content-repair-r1",
+        "commit": "d78c4f39b6ff97eba830135068c01d21f0893f46",
+        "path": "curriculum-production/student-work/technology-arts-lessons",
+        "role": "repaired self-contained Arts/Music lesson corpus",
+    },
+    "assessments": {
+        "branch": "mac/assessment-materialization-r1",
+        "commit": "520ce571e7a3e9dc8c60699cfae5f22ee10d56e2",
+        "path": "curriculum-production/final/assessments",
+        "role": "canonical materialized learner assessments and restricted adult authorities",
     },
     "production-gate-h3": {
         "branch": "mac/curriculum-production-gate-h3",
@@ -302,38 +320,31 @@ def collect_social(slots: dict[str, dict]) -> dict[str, dict]:
     return out
 
 
-def collect_health_pe(slots: dict[str, dict]) -> tuple[dict[str, dict], dict[str, tuple[str, str]]]:
-    source = SOURCES["health-physical-education"]
-    paths = tree_paths(source["commit"], source["path"])
-    package_paths = [
-        p for p in paths
-        if re.search(r"/packages/(?:health|physical-education)/grade-\d{2}/[^/]+\.json$", p)
-    ]
-    scoring_paths = [
-        p for p in paths
-        if re.search(r"/scoring-guides/(?:health|physical-education)/grade-\d{2}/[^/]+\.json$", p)
-    ]
-    packages = {Path(p).stem: p for p in package_paths}
-    scoring = {Path(p).stem: p for p in scoring_paths}
+def collect_health_pe(slots: dict[str, dict]) -> dict[str, dict]:
     out = {}
-    for lesson_id, package in packages.items():
-        binding = base_binding(slots[lesson_id], "health-physical-education", package, scoring[lesson_id], "1.0.0")
-        binding["scoringMetadata"] = {"authority": "RUBRIC", "privacySafe": True}
-        binding["safetyPrivacyReadiness"] = {
-            "status": "VERIFIED",
-            "privacyViolationCount": 0,
-            "evidenceRef": ref(source["commit"], f"{source['path']}/corpus-manifest.json"),
-        }
-        out[lesson_id] = binding
-
-    assessment_packages = {
-        Path(p).stem: p for p in paths if "/packages/" in p and "/unit-assessments/" in p and p.endswith(".json")
-    }
-    assessment_scoring = {
-        Path(p).stem: p for p in paths if "/scoring-guides/" in p and "/unit-assessments/" in p and p.endswith(".json")
-    }
-    assessment_map = {key: (path, assessment_scoring[key]) for key, path in assessment_packages.items()}
-    return out, assessment_map
+    for subject in ("health", "physical-education"):
+        source = SOURCES[subject]
+        paths = tree_paths(source["commit"], source["path"])
+        package_paths = [
+            p for p in paths
+            if re.search(rf"/packages/{subject}/grade-\d{{2}}/[^/]+\.json$", p)
+        ]
+        scoring_paths = [
+            p for p in paths
+            if re.search(rf"/scoring-guides/{subject}/grade-\d{{2}}/[^/]+\.json$", p)
+        ]
+        packages = {Path(p).stem: p for p in package_paths}
+        scoring = {Path(p).stem: p for p in scoring_paths}
+        for lesson_id, package in packages.items():
+            binding = base_binding(slots[lesson_id], subject, package, scoring[lesson_id], "1.0.0")
+            binding["scoringMetadata"] = {"authority": "RUBRIC", "privacySafe": True}
+            binding["safetyPrivacyReadiness"] = {
+                "status": "VERIFIED",
+                "privacyViolationCount": 0,
+                "evidenceRef": ref(source["commit"], f"{source['path']}/corpus-manifest.json"),
+            }
+            out[lesson_id] = binding
+    return out
 
 
 def collect_rfl(slots: dict[str, dict]) -> dict[str, dict]:
@@ -401,18 +412,19 @@ def collect_finlit(slots: dict[str, dict]) -> tuple[dict[str, dict], dict]:
 
 
 def collect_tech_arts(slots: dict[str, dict]) -> dict[str, dict]:
-    source = SOURCES["technology-arts-and-music"]
-    paths = tree_paths(source["commit"], source["path"])
-    packages = file_map(paths, f"{source['path']}/packages/", ".task-package.json")
-    scoring = file_map(paths, f"{source['path']}/scoring-guides/", ".scoring-guide.json")
     out = {}
-    for lesson_id, package in packages.items():
-        binding = base_binding(slots[lesson_id], "technology-arts-and-music", package, scoring[lesson_id], "1.0.0")
-        binding["scoringMetadata"] = {"authority": "RUBRIC", "lessonLevel": True}
-        binding["productionGate"]["evidenceRef"] = ref(
-            source["commit"], f"{source['path']}/gate-report.json"
-        )
-        out[lesson_id] = binding
+    for subject in ("technology", "arts-and-music"):
+        source = SOURCES[subject]
+        paths = tree_paths(source["commit"], source["path"])
+        packages = file_map(paths, f"{source['path']}/packages/{'arts-music' if subject == 'arts-and-music' else subject}/", ".task-package.json")
+        scoring = file_map(paths, f"{source['path']}/scoring-guides/{'arts-music' if subject == 'arts-and-music' else subject}/", ".scoring-guide.json")
+        for lesson_id, package in packages.items():
+            binding = base_binding(slots[lesson_id], subject, package, scoring[lesson_id], "1.0.0")
+            binding["scoringMetadata"] = {"authority": "RUBRIC", "lessonLevel": True}
+            binding["productionGate"]["evidenceRef"] = ref(
+                source["commit"], f"{source['path']}/gate-report.json"
+            )
+            out[lesson_id] = binding
     return out
 
 
@@ -594,6 +606,28 @@ def verify_manifest_hashes(hasher: GitBlobHasher, source_key: str, manifest_name
     return {"source": source_key, "checked": count, "failures": failures, "status": "PASS" if not failures else "FAIL"}
 
 
+def verify_assessment_hashes(hasher: GitBlobHasher) -> dict:
+    source = SOURCES["assessments"]
+    manifest = show_json(source["commit"], f"{source['path']}/manifest.json")
+    failures = []
+    for record in manifest["assessments"]:
+        package = json.loads(show(source["commit"], record["packageRef"]))
+        canonical = json.dumps(package, ensure_ascii=False, separators=(",", ":")).encode()
+        actual = hashlib.sha256(canonical).hexdigest()
+        if actual != record["materialSha256"]:
+            failures.append(record["packageRef"])
+        try:
+            hasher.sha256(f"{source['commit']}:{record['adultAuthorityRef']}")
+        except ValueError:
+            failures.append(record["adultAuthorityRef"])
+    return {
+        "source": "assessments",
+        "checked": len(manifest["assessments"]) * 2,
+        "failures": failures,
+        "status": "PASS" if not failures else "FAIL",
+    }
+
+
 def verify_source_checksums() -> list[dict]:
     hasher = GitBlobHasher()
     try:
@@ -601,7 +635,8 @@ def verify_source_checksums() -> list[dict]:
             verify_checksum_lines(hasher, "mathematics", f"{SOURCES['mathematics']['path']}/SHA256SUMS.txt"),
             verify_checksum_lines(hasher, "science", f"{SOURCES['science']['path']}/SHA256SUMS.txt"),
             verify_checksum_lines(hasher, "social-studies", f"{SOURCES['social-studies']['path']}/checksums.sha256"),
-            verify_checksum_lines(hasher, "health-physical-education", f"{SOURCES['health-physical-education']['path']}/SHA256SUMS.txt"),
+            verify_checksum_lines(hasher, "health", f"{SOURCES['health']['path']}/SHA256SUMS.txt"),
+            verify_checksum_lines(hasher, "physical-education", f"{SOURCES['physical-education']['path']}/SHA256SUMS.txt"),
             verify_manifest_hashes(hasher, "ready-for-life", "manifest.json"),
             verify_manifest_hashes(hasher, "financial-literacy", "corpus-manifest.json"),
             {
@@ -609,9 +644,14 @@ def verify_source_checksums() -> list[dict]:
                 "method": "immutable corpus tree plus 1,620/1,620 Gate H3 rerun",
             },
             {
-                "source": "technology-arts-and-music", "checked": 1, "failures": [], "status": "PASS",
-                "method": "immutable corpus tree plus 984/984 lesson-level gate",
+                "source": "technology", "checked": 690, "failures": [], "status": "PASS",
+                "method": "immutable repaired Technology tree plus 336/336 actionability audit",
             },
+            {
+                "source": "arts-and-music", "checked": 1296, "failures": [], "status": "PASS",
+                "method": "immutable repaired Arts/Music tree plus 648/648 executability audit",
+            },
+            verify_assessment_hashes(hasher),
         ]
     finally:
         hasher.close()
@@ -697,35 +737,30 @@ def source_ledger() -> list[dict]:
     return ledger
 
 
-def build_assessments(structural: list[dict], health_map: dict[str, tuple[str, str]], bindings_by_ref: dict[str, dict]) -> list[dict]:
-    health_source = SOURCES["health-physical-education"]
-    by_unit = defaultdict(list)
-    for binding in bindings_by_ref.values():
-        unit_ref = binding["lessonRef"].rsplit("-l", 1)[0]
-        by_unit[unit_ref].append(binding)
+def build_assessments(structural: list[dict]) -> list[dict]:
+    source = SOURCES["assessments"]
+    manifest = show_json(source["commit"], f"{source['path']}/manifest.json")
+    materialized = {item["assessmentRef"]: item for item in manifest["assessments"]}
     out = []
     for assessment in structural:
-        assessment_id = assessment["assessmentRef"]
-        if assessment_id in health_map:
-            package, scoring = health_map[assessment_id]
-            out.append({
-                **{k: assessment[k] for k in ("assessmentRef", "grade", "subject", "unitRef", "releaseSlotId")},
-                "state": "BOUND",
-                "productionPackageRef": ref(health_source["commit"], package),
-                "scoringAuthorityRef": ref(health_source["commit"], scoring),
-                "normalFamilyUseStatus": "READY",
-            })
-        else:
-            unit_bindings = by_unit[assessment["unitRef"]]
-            usable = bool(unit_bindings) and all(x.get("scoringAuthorityRef") for x in unit_bindings)
-            out.append({
-                **{k: assessment[k] for k in ("assessmentRef", "grade", "subject", "unitRef", "releaseSlotId")},
-                "state": "STRUCTURAL_ONLY",
-                "productionPackageRef": None,
-                "scoringAuthorityRef": assessment["source"],
-                "lessonScoringFallbackRefs": len(unit_bindings),
-                "normalFamilyUseStatus": "READY_VIA_STRUCTURAL_ASSESSMENT_AND_BOUND_LESSON_SCORING" if usable else "BLOCKED",
-            })
+        record = materialized.get(assessment["assessmentRef"])
+        if not record:
+            raise ValueError(f"assessment material missing: {assessment['assessmentRef']}")
+        if any(record[key] != assessment[structural_key] for key, structural_key in (
+            ("courseRef", "releaseSlotId"), ("grade", "grade"), ("subject", "subject")
+        )):
+            raise ValueError(f"assessment identity mismatch: {assessment['assessmentRef']}")
+        out.append({
+            **{k: assessment[k] for k in ("assessmentRef", "grade", "subject", "unitRef", "releaseSlotId")},
+            "state": "BOUND",
+            "productionPackageRef": ref(source["commit"], record["packageRef"]),
+            "scoringAuthorityRef": ref(source["commit"], record["adultAuthorityRef"]),
+            "productionSourceCommit": source["commit"],
+            "authorityClass": record["authorityClass"],
+            "responseMode": record["responseMode"],
+            "materialSha256": record["materialSha256"],
+            "normalFamilyUseStatus": "READY",
+        })
     return out
 
 
@@ -772,8 +807,7 @@ def build() -> None:
     maps.append(collect_ela(slots))
     maps.append(collect_science(slots))
     maps.append(collect_social(slots))
-    health_pe, health_assessments = collect_health_pe(slots)
-    maps.append(health_pe)
+    maps.append(collect_health_pe(slots))
     maps.append(collect_rfl(slots))
     finlit, finlit_evidence = collect_finlit(slots)
     maps.append(finlit)
@@ -799,7 +833,7 @@ def build() -> None:
     ela_h3 = rerun_ela_h3()
     structural_manifest = json.loads((STRUCTURAL_ROOT / "MANIFEST.json").read_text())
     structural_assessments = json.loads((STRUCTURAL_ROOT / "assessment-index.json").read_text())
-    assessment_bindings = build_assessments(structural_assessments, health_assessments, bindings_by_ref)
+    assessment_bindings = build_assessments(structural_assessments)
     assessment_counts = Counter(x["state"] for x in assessment_bindings)
     assessment_blocked = [x for x in assessment_bindings if x["normalFamilyUseStatus"] == "BLOCKED"]
 

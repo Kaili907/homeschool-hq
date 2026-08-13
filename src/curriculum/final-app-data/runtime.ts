@@ -41,7 +41,9 @@ export async function loadFinalFamilyPilotCatalog(
     manifest.admissionStatus !== 'ADMITTED' ||
     manifest.classification !== 'ADMITTED_PRODUCTION_BOUND_FAMILY_PILOT_R1' ||
     manifest.counts.lessons !== 8292 ||
-    manifest.productionBindings !== 8292
+    manifest.productionBindings !== 8292 ||
+    manifest.assessmentBindings !== 699 ||
+    manifest.assessments.length !== 699
   ) throw new Error('The final Family Pilot release manifest failed its admission identity check.')
 
   const payloads = new Map<string, Promise<FinalBrowserCoursePayload>>()
@@ -52,11 +54,14 @@ export async function loadFinalFamilyPilotCatalog(
     if (cached) return cached
     const pending = json<FinalBrowserCoursePayload>(fetcher, `${root}/courses/${encodeURIComponent(courseRef)}.json`)
       .then((payload) => {
+        const expectedAssessments = manifest.assessments.filter((item) => item.courseRef === courseRef).length
         if (
           payload.courseRef !== courseRef ||
           payload.lessons.length !== course.lessonCount ||
           Object.keys(payload.bindings).length !== course.lessonCount ||
-          Object.keys(payload.materials).length !== course.lessonCount
+          Object.keys(payload.materials).length !== course.lessonCount ||
+          Object.keys(payload.assessmentBindings).length !== expectedAssessments ||
+          Object.keys(payload.assessments).length !== expectedAssessments
         ) throw new Error(`Final course payload is incomplete: ${courseRef}`)
         return payload
       })
@@ -105,6 +110,14 @@ export async function loadFinalFamilyPilotCatalog(
     if (!lesson) return null
     return (await loadCoursePayload(lesson.courseRef)).materials[lessonRef] ?? null
   }
+  const getAssessment = async (assessmentRef: string) => {
+    const binding = manifest.assessments.find((item) => item.assessmentRef === assessmentRef)
+    if (!binding) return null
+    return (await loadCoursePayload(binding.courseRef)).assessments[assessmentRef] ?? null
+  }
+  const listAssessments = (courseRef?: string) => Object.freeze(
+    manifest.assessments.filter((item) => !courseRef || item.courseRef === courseRef),
+  )
 
-  return Object.freeze({ manifest, runtime, loadCoursePayload, getBinding, getMaterial })
+  return Object.freeze({ manifest, runtime, loadCoursePayload, getBinding, getMaterial, getAssessment, listAssessments })
 }

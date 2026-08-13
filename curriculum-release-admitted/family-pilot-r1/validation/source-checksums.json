@@ -3,7 +3,7 @@
   "sources": [
     {
       "source": "mathematics",
-      "checked": 3387,
+      "checked": 3389,
       "failures": [],
       "status": "PASS"
     },
@@ -15,13 +15,19 @@
     },
     {
       "source": "social-studies",
-      "checked": 10,
+      "checked": 14,
       "failures": [],
       "status": "PASS"
     },
     {
-      "source": "health-physical-education",
-      "checked": 2874,
+      "source": "health",
+      "checked": 2877,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "source": "physical-education",
+      "checked": 2877,
       "failures": [],
       "status": "PASS"
     },
@@ -45,11 +51,24 @@
       "method": "immutable corpus tree plus 1,620/1,620 Gate H3 rerun"
     },
     {
-      "source": "technology-arts-and-music",
-      "checked": 1,
+      "source": "technology",
+      "checked": 690,
       "failures": [],
       "status": "PASS",
-      "method": "immutable corpus tree plus 984/984 lesson-level gate"
+      "method": "immutable repaired Technology tree plus 336/336 actionability audit"
+    },
+    {
+      "source": "arts-and-music",
+      "checked": 1296,
+      "failures": [],
+      "status": "PASS",
+      "method": "immutable repaired Arts/Music tree plus 648/648 executability audit"
+    },
+    {
+      "source": "assessments",
+      "checked": 1398,
+      "failures": [],
+      "status": "PASS"
     }
   ]
 }

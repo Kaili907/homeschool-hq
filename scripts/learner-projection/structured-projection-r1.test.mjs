@@ -145,15 +145,15 @@ test('all 8,292 production packages build into the audited lazy structured proje
   assert.deepEqual(manifest.structuredProjection, {
     projectionVersion: STRUCTURED_PROJECTION_VERSION,
     lessonsProjected: 8292,
-    itemsProjected: 21556,
-    choiceItemsProjected: 13480,
-    choicesPreserved: 53462,
-    sourceMetadataPreserved: 3860,
+    itemsProjected: 36328,
+    choiceItemsProjected: 13516,
+    choicesPreserved: 53606,
+    sourceMetadataPreserved: 5412,
     dynamicSourceContractsPreserved: 12,
     taskGroupsProjected: 3023,
-    taskStepsProjected: 3042,
+    taskStepsProjected: 8100,
     instructionalWorkedSolutions: 1574,
-    adultFieldsRemoved: 26352,
+    adultFieldsRemoved: 25848,
     adultResourceLocatorsRemoved: 7320,
   })
   assert.doesNotMatch(JSON.stringify(manifest), /ma-g12-financial-literacy-u07-l72|Which group takes more/)
@@ -256,11 +256,11 @@ test('all 8,292 production packages build into the audited lazy structured proje
     }
   }
   assert.equal(lessons, 8292)
-  assert.equal(items, 21556)
-  assert.equal(projectedItemRefs.size, 21556)
-  assert.equal(choices, 53462)
-  assert.equal(elaSources, 1868)
-  assert.equal(socialSources, 1992)
+  assert.equal(items, 36328)
+  assert.equal(projectedItemRefs.size, 36328)
+  assert.equal(choices, 53606)
+  assert.equal(elaSources, 1620)
+  assert.equal(socialSources, 3792)
   assert.equal(dynamicContracts, 12)
   assert.equal(finLitLocators, 0)
   assert.equal(adultLeaks, 0)

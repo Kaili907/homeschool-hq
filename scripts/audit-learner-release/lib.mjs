@@ -94,8 +94,8 @@ function projectedItems(material) {
   const items = []
   walk(material, (candidate) => {
     if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) return
-    const itemRef = candidate.itemRef ?? candidate.ref
-    const responseKind = candidate.responseKind
+    const itemRef = candidate.sourceItemRef ?? candidate.itemRef ?? candidate.ref
+    const responseKind = candidate.responseKind ?? candidate.responseType
     if (typeof itemRef === 'string' && typeof responseKind === 'string') {
       items.push({ itemRef, responseKind, choices: candidate.choices ?? [] })
     }
@@ -140,7 +140,7 @@ function elaRules(value, material, findings) {
     const delivered = [section.body, ...(section.prompts ?? [])].filter(Boolean).join('\n').trim()
     return delivered.length >= 240 &&
       !/(?:choose a grade-appropriate text|does not ship a fixed anchor text|facilitator may substitute|assigned passage)/i.test(delivered)
-  })
+  }) || String(material?.sourceMetadata?.selectionInstructions ?? '').trim().length >= 240
   if (!hasActualReading) {
     add(findings, 'MISSING_REQUIRED_READING', 'the assigned reading is not present in learner material')
     add(findings, 'MISSING_REQUIRED_SOURCE', 'source metadata/selection language is not an attached source')
@@ -157,16 +157,22 @@ function elaRules(value, material, findings) {
 function scienceRules(value, markdown, findings) {
   const isDataSheet = value.work_type === 'INVESTIGATION_DATA_SHEET'
   const materials = (value.materials ?? []).join(' ')
-  const concrete = value.grade >= 9 && isDataSheet && Boolean(value.safety_brief?.safe_order) && !GENERIC_SCIENCE_MATERIALS.test(materials)
-  const missingAlternative = value.grade <= 8
-    ? isDataSheet
-    : isDataSheet && SCIENCE_HS_EXTERNAL_ALTERNATIVE_UNITS[value.course_id]?.has(Number(value.unit_number))
+  const executable = value.executable_content
+  const concrete = executable?.inputs_complete === true && executable?.materials_complete === true &&
+    executable?.placeholder_free === true && typeof executable?.bound_task?.question === 'string' &&
+    Array.isArray(executable?.bound_task?.steps) && executable.bound_task.steps.length >= 3 &&
+    Array.isArray(executable?.supplied_evidence?.rows) && executable.supplied_evidence.rows.length >= 3
+  const missingAlternative = isDataSheet && !(
+    executable?.equal_credit_route?.complete === true &&
+    executable?.equal_credit_route?.same_scoring_ceiling === true &&
+    value.assurances?.executable_alternative_present === true
+  )
   if (!concrete) {
     add(findings, 'ZERO_ACTIONABLE_NORMAL_LESSON', 'science task is an unbound topic-substitution shell without a case, model, data set, or runnable investigation')
     add(findings, 'MISSING_REQUIRED_DATA', 'the learner package contains no bound case/model/data/prior work')
     add(findings, 'PLACEHOLDER_TEMPLATE_SHELL', 'science sheet substitutes the topic into a generic task shell')
   }
-  if (isDataSheet && (!value.materials?.length || GENERIC_SCIENCE_MATERIALS.test(materials))) {
+  if (isDataSheet && (!value.materials?.length || GENERIC_SCIENCE_MATERIALS.test(materials)) && !concrete) {
     add(findings, 'EMPTY_REQUIRED_ACTIVITY', 'investigation data sheet has no executable investigation route')
     add(findings, 'MISSING_REQUIRED_MATERIALS', 'investigation materials are generic or absent')
   }
@@ -181,9 +187,18 @@ function scienceRules(value, markdown, findings) {
 }
 
 function socialStudiesRules(binding, findings) {
-  if (binding.sourceReadinessKind === 'DYNAMIC_SOURCE_REQUIRED' || binding.sourceRuntimeState !== 'READY') {
-    add(findings, 'UNSAFE_SOURCE_STATE', 'dynamic source is pending or its full attachment contract is not satisfied')
-  } else {
+  if (binding.sourceReadinessKind === 'DYNAMIC_SOURCE_REQUIRED') {
+    const contract = binding.sourceReadinessContract
+    if (binding.sourceRuntimeState !== 'PENDING_SOURCE_ATTACHMENT' ||
+        !['BLOCKED_PENDING_SOURCE', 'DISABLED'].includes(contract?.lessonLaunch) ||
+        contract?.becomesRunnableWhen !== 'ATTACHED_SATISFIED') {
+      add(findings, 'UNSAFE_SOURCE_STATE', 'dynamic source does not fail closed on its complete attachment contract')
+    }
+    return
+  }
+  const metadata = binding.sourceMetadataProvenance
+  if (binding.sourceRuntimeState !== 'READY' || metadata?.state !== 'VERIFIED_STATIC_METADATA' ||
+      !Array.isArray(metadata?.sourceKeys) || metadata.sourceKeys.length === 0) {
     add(findings, 'MISSING_REQUIRED_SOURCE', binding.grade >= 9
       ? 'static source rests on unresolved metadata without learner-available source records'
       : 'verified static source identity/metadata is absent from learner material')
@@ -192,7 +207,15 @@ function socialStudiesRules(binding, findings) {
 
 function peRules(value, findings) {
   const cues = [...(value.movementCues ?? []), ...(value.keyPoints ?? []), ...(value.task_steps ?? [])].filter((item) => text(item))
-  const operational = JSON.stringify({ task: value.studentTask, scenario: value.privacySafeScenario, materials: value.materials, cues })
+  const operational = JSON.stringify({
+    task: value.studentTask,
+    scenario: value.privacySafeScenario,
+    materials: value.materials,
+    cues,
+    safetyRules: value.safetyRules,
+    stoppingRules: value.stoppingRules,
+    spaceSetup: value.spaceSetup,
+  })
   if (cues.length === 0) add(findings, 'MISSING_PE_MOVEMENT_CUES', 'physical activity has no movement cues or procedural steps')
   if (!PE_SAFETY.test(operational)) add(findings, 'MISSING_PE_SAFETY', 'physical activity lacks visible operational safety guidance')
   const materials = (value.materials ?? []).join(' ')
@@ -210,12 +233,17 @@ function healthRules(value, _material, findings) {
 
 function technologyRules(value, findings) {
   const missingInput = TECHNOLOGY_MISSING_INPUT_MODES.has(value.work_mode)
-  if (missingInput) {
+  const setup = value.activity_setup
+  const completeSetup = setup?.central_input &&
+    Array.isArray(setup?.expected_behavior_and_specification) && setup.expected_behavior_and_specification.length >= 4 &&
+    Array.isArray(setup?.test_cases) && setup.test_cases.length >= 3 &&
+    setup?.execution_method && setup?.debugging_target?.target && setup?.equal_credit_alternative
+  if (missingInput && !completeSetup) {
     add(findings, 'ZERO_ACTIONABLE_NORMAL_LESSON', 'central model/problem/case/artifact/assessment instrument is referenced but not supplied')
     add(findings, 'MISSING_REQUIRED_MATERIALS', 'required technology model, problem, scaffold, or environment is absent')
     add(findings, 'PLACEHOLDER_TEMPLATE_SHELL', 'phase archetype was not instantiated with its central input')
     if (TECHNOLOGY_CODE_TASKS.has(value.task_type)) add(findings, 'UNRUNNABLE_TECHNOLOGY_TASK', 'code/debug task has no runnable starter or complete paper specification')
-  } else if (value.work_mode === 'SYNTHESIZE') {
+  } else if (value.work_mode === 'SYNTHESIZE' && !completeSetup) {
     add(findings, 'PLACEHOLDER_TEMPLATE_SHELL', 'required two-concept problem is absent although a partial concept map can begin')
   }
 }

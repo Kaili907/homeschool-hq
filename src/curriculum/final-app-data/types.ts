@@ -7,9 +7,21 @@ import type {
 import type { FinalFamilyPilotCompletionAuthority } from '../../study/family-pilot/final-composition'
 
 export interface FinalLearnerMaterialSection {
+  readonly sectionRef?: string
+  readonly sectionKind?: string
   readonly title: string
   readonly body?: string
   readonly prompts: readonly string[]
+  readonly items?: readonly {
+    readonly itemRef: string
+    readonly sourceItemRef?: string
+    readonly itemKind?: string
+    readonly itemType?: string
+    readonly prompt?: string
+    readonly responseType?: string
+    readonly responseKind?: 'NONE' | 'READ' | 'CHOICE' | 'TEXT' | 'NUMERIC' | 'CONSTRUCTED_RESPONSE' | 'ACTIVITY_EVIDENCE' | 'RUBRIC_REVIEW_PENDING' | 'GUARDIAN_ATTESTATION'
+    readonly choices?: readonly string[]
+  }[]
 }
 
 export type FinalLearnerProductionMaterial = {
@@ -25,6 +37,7 @@ export type FinalLearnerProductionMaterial = {
   | {
       readonly format: 'markdown'
       readonly markdown: string
+      readonly sections?: readonly FinalLearnerMaterialSection[]
     }
 )
 
@@ -40,11 +53,65 @@ export interface FinalProductionBinding {
   readonly sourceRuntimeState: 'READY' | 'PENDING_SOURCE_ATTACHMENT'
 }
 
+export interface FinalLearnerAssessmentTask {
+  readonly taskRef: string
+  readonly kind: string
+  readonly prompt: string
+  readonly directions?: string
+  readonly choices?: readonly string[]
+  readonly responseUnit?: string
+  readonly standardRef?: string
+  readonly possiblePoints?: number
+}
+
+export interface FinalLearnerAssessmentMaterial {
+  readonly schemaVersion: '1.0'
+  readonly kind: 'canonical-learner-assessment-package'
+  readonly assessmentRef: string
+  readonly courseRef: string
+  readonly grade: number
+  readonly subject: SupportedSubject
+  readonly location: {
+    readonly unitRef: string
+    readonly unitNumber: number
+    readonly unitTitle: string
+    readonly courseTitle: string
+    readonly assessmentLessonRef: string | null
+  }
+  readonly standards: readonly string[]
+  readonly instructions: readonly string[]
+  readonly learnerTasks: readonly FinalLearnerAssessmentTask[]
+  readonly responseMode: string
+  readonly completionScoringAuthorityClass: 'AUTO_SCOREABLE' | 'RUBRIC_REQUIRED' | 'GUARDIAN_REQUIRED' | 'COMPLETION_ONLY'
+  readonly learnerSuccessCriteria: readonly string[]
+  readonly accommodations: string
+  readonly productionReadiness: {
+    readonly status: 'READY'
+    readonly structuralOnly: false
+    readonly answerMaterialIncluded: false
+    readonly requiresSourceAttachment?: boolean
+    readonly sourceResolverKey?: string | null
+  }
+}
+
+export interface FinalAssessmentBinding {
+  readonly assessmentRef: string
+  readonly courseRef: string
+  readonly unitRef: string
+  readonly grade: number
+  readonly subject: SupportedSubject
+  readonly authorityClass: FinalLearnerAssessmentMaterial['completionScoringAuthorityClass']
+  readonly responseMode: string
+  readonly state: 'BOUND'
+}
+
 export interface FinalBrowserCoursePayload {
   readonly courseRef: string
   readonly lessons: readonly FinalCourseLessonRow[]
   readonly bindings: Readonly<Record<string, FinalProductionBinding>>
   readonly materials: Readonly<Record<string, FinalLearnerProductionMaterial>>
+  readonly assessmentBindings: Readonly<Record<string, FinalAssessmentBinding>>
+  readonly assessments: Readonly<Record<string, FinalLearnerAssessmentMaterial>>
 }
 
 export interface FinalBrowserManifestDocument {
@@ -59,6 +126,8 @@ export interface FinalBrowserManifestDocument {
     readonly assessments: 699
   }
   readonly productionBindings: 8292
+  readonly assessmentBindings: 699
+  readonly assessments: readonly Omit<FinalAssessmentBinding, 'state'>[]
   readonly dynamicSocialSources: {
     readonly admitted: 12
     readonly runtimeState: 'PENDING_SOURCE_ATTACHMENT'
@@ -73,4 +142,6 @@ export interface FinalFamilyPilotCatalog {
   readonly loadCoursePayload: (courseRef: string) => Promise<FinalBrowserCoursePayload>
   readonly getBinding: (lessonRef: string) => Promise<FinalProductionBinding | null>
   readonly getMaterial: (lessonRef: string) => Promise<FinalLearnerProductionMaterial | null>
+  readonly getAssessment: (assessmentRef: string) => Promise<FinalLearnerAssessmentMaterial | null>
+  readonly listAssessments: (courseRef?: string) => readonly Omit<FinalAssessmentBinding, 'state'>[]
 }

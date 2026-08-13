@@ -20,77 +20,96 @@
   },
   {
     "sourceId": "mathematics",
-    "branch": "mac/final-math-production-r1",
-    "commitSha": "7eeb4b7bf258800c9ecfa8eb4873544d604f4d63",
+    "branch": "mac/math-content-repair-r2",
+    "commitSha": "c8f5a6b6b9b18317f96b5e2f92d453bde0f0b2b9",
     "path": "curriculum-production/final/mathematics",
-    "treeSha": "00f2144cb492686564d656b6091edb0f962f6384",
-    "role": "final active mathematics production corpus",
+    "treeSha": "d4c04d4941bcdcb6dda18da5790b2dcd4e84e159",
+    "role": "repaired active mathematics production corpus",
     "importMode": "PINNED_GIT_OBJECT_REFERENCE",
     "resolvedRefs": [
       {
-        "ref": "mac/final-math-production-r1",
-        "commitSha": "7eeb4b7bf258800c9ecfa8eb4873544d604f4d63"
+        "ref": "mac/math-content-repair-r2",
+        "commitSha": "c8f5a6b6b9b18317f96b5e2f92d453bde0f0b2b9"
       },
       {
-        "ref": "origin/mac/final-math-production-r1",
-        "commitSha": "7eeb4b7bf258800c9ecfa8eb4873544d604f4d63"
+        "ref": "origin/mac/math-content-repair-r2",
+        "commitSha": "c8f5a6b6b9b18317f96b5e2f92d453bde0f0b2b9"
       }
     ]
   },
   {
     "sourceId": "science",
-    "branch": "mac/final-science-production-r1",
-    "commitSha": "a03811a6647409bff068c034b67a0140720a77fc",
+    "branch": "mac/science-content-repair-r1",
+    "commitSha": "dc2cee7fa16ea059218862d0dc42a2bee504269d",
     "path": "curriculum-production/final/science",
-    "treeSha": "d7ba694699bcb4f57935850fc0e4e11fe377b615",
-    "role": "final H4 science production corpus",
+    "treeSha": "bac5b85e5f6fe5186787aebc91e4d1045f1c24af",
+    "role": "repaired executable science production corpus",
     "importMode": "PINNED_GIT_OBJECT_REFERENCE",
     "resolvedRefs": [
       {
-        "ref": "mac/final-science-production-r1",
-        "commitSha": "a03811a6647409bff068c034b67a0140720a77fc"
+        "ref": "mac/science-content-repair-r1",
+        "commitSha": "dc2cee7fa16ea059218862d0dc42a2bee504269d"
       },
       {
-        "ref": "origin/mac/final-science-production-r1",
-        "commitSha": "a03811a6647409bff068c034b67a0140720a77fc"
+        "ref": "origin/mac/science-content-repair-r1",
+        "commitSha": "dc2cee7fa16ea059218862d0dc42a2bee504269d"
       }
     ]
   },
   {
     "sourceId": "social-studies",
-    "branch": "mac/final-social-production-r1",
-    "commitSha": "b8e9611ec37c5e66820f0efd2461d7cd2daa6807",
+    "branch": "mac/social-content-source-repair-r1",
+    "commitSha": "9ab9860741566c2d02421fb36dc6c1eb0ddc9223",
     "path": "curriculum-production/final/social-studies",
-    "treeSha": "6056327300f09e5ae14b0ed7221c5601289dd039",
-    "role": "final static and dynamic-source Social Studies corpus",
+    "treeSha": "2bd5b0f41f51b33dffa5d9697877b831c7339e8e",
+    "role": "repaired static and dynamic-source Social Studies corpus",
     "importMode": "PINNED_GIT_OBJECT_REFERENCE",
     "resolvedRefs": [
       {
-        "ref": "mac/final-social-production-r1",
-        "commitSha": "b8e9611ec37c5e66820f0efd2461d7cd2daa6807"
+        "ref": "mac/social-content-source-repair-r1",
+        "commitSha": "9ab9860741566c2d02421fb36dc6c1eb0ddc9223"
       },
       {
-        "ref": "origin/mac/final-social-production-r1",
-        "commitSha": "b8e9611ec37c5e66820f0efd2461d7cd2daa6807"
+        "ref": "origin/mac/social-content-source-repair-r1",
+        "commitSha": "9ab9860741566c2d02421fb36dc6c1eb0ddc9223"
       }
     ]
   },
   {
-    "sourceId": "health-physical-education",
-    "branch": "mac/final-health-pe-production-r1",
-    "commitSha": "c523a0c9748b340a871493afbf51276759d406ce",
+    "sourceId": "health",
+    "branch": "mac/health-content-repair-r1",
+    "commitSha": "858fed9c55e49d03e6457cdf8bf3426dadbd1cd3",
     "path": "curriculum-production/final/health-physical-education",
-    "treeSha": "b65c4cab54814ca47697a2ef8a3e31a56375f364",
-    "role": "final Health and PE lesson and assessment corpus",
+    "treeSha": "2e40e103fe0c12df71e1b5fd8b1793ea4e5cafec",
+    "role": "repaired meaningful Health lesson corpus",
     "importMode": "PINNED_GIT_OBJECT_REFERENCE",
     "resolvedRefs": [
       {
-        "ref": "mac/final-health-pe-production-r1",
-        "commitSha": "c523a0c9748b340a871493afbf51276759d406ce"
+        "ref": "mac/health-content-repair-r1",
+        "commitSha": "858fed9c55e49d03e6457cdf8bf3426dadbd1cd3"
       },
       {
-        "ref": "origin/mac/final-health-pe-production-r1",
-        "commitSha": "c523a0c9748b340a871493afbf51276759d406ce"
+        "ref": "origin/mac/health-content-repair-r1",
+        "commitSha": "858fed9c55e49d03e6457cdf8bf3426dadbd1cd3"
+      }
+    ]
+  },
+  {
+    "sourceId": "physical-education",
+    "branch": "mac/pe-content-repair-r1",
+    "commitSha": "1651f72f222c002a857506ac8537951a9a77e698",
+    "path": "curriculum-production/final/health-physical-education",
+    "treeSha": "0e8137541a10c64bbec10782654e47d06e6873df",
+    "role": "repaired home-executable Physical Education lesson corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "mac/pe-content-repair-r1",
+        "commitSha": "1651f72f222c002a857506ac8537951a9a77e698"
+      },
+      {
+        "ref": "origin/mac/pe-content-repair-r1",
+        "commitSha": "1651f72f222c002a857506ac8537951a9a77e698"
       }
     ]
   },
@@ -115,50 +134,96 @@
   },
   {
     "sourceId": "financial-literacy",
-    "branch": "mac/final-finlit-production-r1",
-    "commitSha": "9f00acefc4d73b7efa29be7e4e49a3a8c3b0a9fa",
+    "branch": "mac/finlit-learner-security-repair-r1",
+    "commitSha": "4350673d80284066918120157c994672f92c1c53",
     "path": "curriculum-production/final/financial-literacy",
-    "treeSha": "8dde1ce55bb95b73e18e842cbd6dd12949b8e50c",
-    "role": "final H3-adjudicated Financial Literacy corpus",
+    "treeSha": "e0af88d8e0c0e6f83c20236501e41c6f15d99fe0",
+    "role": "repaired learner-safe Financial Literacy corpus",
     "importMode": "PINNED_GIT_OBJECT_REFERENCE",
     "resolvedRefs": [
       {
-        "ref": "mac/final-finlit-production-r1",
-        "commitSha": "9f00acefc4d73b7efa29be7e4e49a3a8c3b0a9fa"
+        "ref": "mac/finlit-learner-security-repair-r1",
+        "commitSha": "4350673d80284066918120157c994672f92c1c53"
       },
       {
-        "ref": "origin/mac/final-finlit-production-r1",
-        "commitSha": "9f00acefc4d73b7efa29be7e4e49a3a8c3b0a9fa"
+        "ref": "origin/mac/finlit-learner-security-repair-r1",
+        "commitSha": "4350673d80284066918120157c994672f92c1c53"
       }
     ]
   },
   {
     "sourceId": "english-language-arts",
-    "branch": "mac/ela-production-r1",
-    "commitSha": "00374a8dc26eddfac2cf52aec5661deff760ddbb",
+    "branch": "mac/ela-content-source-repair-r1",
+    "commitSha": "d161efc876ad7563505897323f80fdb2cb11d5a4",
     "path": "curriculum-production/student-work/english-language-arts",
-    "treeSha": "7f46efec2ed8cf42277f07864b93d30868394aa3",
-    "role": "accepted ELA lesson production corpus",
+    "treeSha": "f6b3d30f6581e507ffff3ec4f4f6db06be017a83",
+    "role": "repaired actionable ELA lesson production corpus",
     "importMode": "PINNED_GIT_OBJECT_REFERENCE",
     "resolvedRefs": [
       {
-        "ref": "mac/ela-production-r1",
-        "commitSha": "00374a8dc26eddfac2cf52aec5661deff760ddbb"
+        "ref": "mac/ela-content-source-repair-r1",
+        "commitSha": "d161efc876ad7563505897323f80fdb2cb11d5a4"
+      },
+      {
+        "ref": "origin/mac/ela-content-source-repair-r1",
+        "commitSha": "d161efc876ad7563505897323f80fdb2cb11d5a4"
       }
     ]
   },
   {
-    "sourceId": "technology-arts-and-music",
-    "branch": "mac/tech-arts-production-lessons-r2",
-    "commitSha": "12d78e0f2d683b6a87321d096ec7cee627119622",
+    "sourceId": "technology",
+    "branch": "mac/technology-content-repair-r1",
+    "commitSha": "2d43cd014046ad6190d3bb0f672e3313897d63fd",
     "path": "curriculum-production/student-work/technology-arts-lessons",
-    "treeSha": "669abe04832462a9ae08da1ee0164199b835911b",
-    "role": "lesson-level Technology/CS and Arts/Music corpus",
+    "treeSha": "0e76e1846ffd5e28fe015fa25eaa1fd5996fad11",
+    "role": "repaired executable Technology/CS lesson corpus",
     "importMode": "PINNED_GIT_OBJECT_REFERENCE",
     "resolvedRefs": [
       {
-        "ref": "mac/tech-arts-production-lessons-r2",
-        "commitSha": "12d78e0f2d683b6a87321d096ec7cee627119622"
+        "ref": "mac/technology-content-repair-r1",
+        "commitSha": "2d43cd014046ad6190d3bb0f672e3313897d63fd"
+      },
+      {
+        "ref": "origin/mac/technology-content-repair-r1",
+        "commitSha": "2d43cd014046ad6190d3bb0f672e3313897d63fd"
+      }
+    ]
+  },
+  {
+    "sourceId": "arts-and-music",
+    "branch": "mac/arts-music-content-repair-r1",
+    "commitSha": "d78c4f39b6ff97eba830135068c01d21f0893f46",
+    "path": "curriculum-production/student-work/technology-arts-lessons",
+    "treeSha": "31e49de3b4b3ed2e589b872f3d9bfdb02d86c935",
+    "role": "repaired self-contained Arts/Music lesson corpus",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "mac/arts-music-content-repair-r1",
+        "commitSha": "d78c4f39b6ff97eba830135068c01d21f0893f46"
+      },
+      {
+        "ref": "origin/mac/arts-music-content-repair-r1",
+        "commitSha": "d78c4f39b6ff97eba830135068c01d21f0893f46"
+      }
+    ]
+  },
+  {
+    "sourceId": "assessments",
+    "branch": "mac/assessment-materialization-r1",
+    "commitSha": "520ce571e7a3e9dc8c60699cfae5f22ee10d56e2",
+    "path": "curriculum-production/final/assessments",
+    "treeSha": "fa9d2ae456cf71b0b216d4104832d2fc6c2dc7d0",
+    "role": "canonical materialized learner assessments and restricted adult authorities",
+    "importMode": "PINNED_GIT_OBJECT_REFERENCE",
+    "resolvedRefs": [
+      {
+        "ref": "mac/assessment-materialization-r1",
+        "commitSha": "520ce571e7a3e9dc8c60699cfae5f22ee10d56e2"
+      },
+      {
+        "ref": "origin/mac/assessment-materialization-r1",
+        "commitSha": "520ce571e7a3e9dc8c60699cfae5f22ee10d56e2"
       }
     ]
   },
