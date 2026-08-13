@@ -1,0 +1,1021 @@
+{
+  "course_id": "ma-g7-science",
+  "source_commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+  "authored_against": "Grade 7 science, middle band. Keys state established science at this grade band; they are not extracted from the source, which states only a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "atomic and molecular models",
+      "fixed_facts": [
+        "Atoms are the particles that make up elements; molecules are groups of atoms bonded together."
+      ],
+      "relationships": [
+        "All matter is made of atoms, and atoms of a given element are alike in the properties that define that element.",
+        "A molecule is two or more atoms held together by chemical bonds; a compound contains atoms of more than one element in a fixed ratio.",
+        "Substances differ because their atoms differ, or because the same atoms are arranged and bonded differently."
+      ],
+      "accepted_alternative_framings": [
+        "Ball-and-stick, space-filling, and symbolic formula representations are all valid molecular models; the choice is judged on what it needs to show."
+      ],
+      "disqualifying_errors": [
+        "Claiming atoms of a compound take on the bulk properties of the compound, such as a single water molecule being wet.",
+        "Claiming a compound is a mixture of its elements that keeps their properties.",
+        "Claiming atoms can be seen directly with a school microscope."
+      ],
+      "out_of_scope": "Subatomic structure in detail, electron configuration, and bonding theory are Grade 8 and High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "pure substances and mixtures",
+      "fixed_facts": [
+        "A pure substance has a fixed composition; a mixture does not."
+      ],
+      "relationships": [
+        "A pure substance, whether an element or a compound, has a fixed composition and a characteristic set of properties.",
+        "A mixture contains two or more substances in no fixed ratio, and each keeps its own properties.",
+        "Mixtures are separated by physical means; the components of a compound are separated only by chemical change."
+      ],
+      "accepted_alternative_framings": [
+        "Homogeneous and heterogeneous, or uniform and non-uniform, are both acceptable ways to sort mixtures."
+      ],
+      "disqualifying_errors": [
+        "Classifying a compound as a mixture because it contains more than one element.",
+        "Claiming a solution is a pure substance because it looks uniform.",
+        "Claiming a mixture has a fixed composition."
+      ],
+      "out_of_scope": "Chromatographic and distillation theory, and phase diagrams, are High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "physical and chemical properties",
+      "fixed_facts": [],
+      "relationships": [
+        "A physical property can be observed without changing the substance into a different substance; a chemical property describes how it changes into one.",
+        "Characteristic properties such as melting point, boiling point, density, and solubility do not depend on how much of the substance there is, so they can identify it.",
+        "Identification is stronger when several characteristic properties agree."
+      ],
+      "accepted_alternative_framings": [
+        "Intensive and extensive, or characteristic and non-characteristic, are both acceptable ways to make the amount-independence distinction."
+      ],
+      "disqualifying_errors": [
+        "Treating mass or volume as a property that identifies a substance.",
+        "Claiming flammability or reactivity can be observed without any change occurring.",
+        "Identifying a substance from a single property and stating it as certain."
+      ],
+      "out_of_scope": "Quantitative density calculation is acceptable but not required; spectroscopic identification is High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "synthetic materials",
+      "fixed_facts": [],
+      "relationships": [
+        "Synthetic materials are made by processing natural resources so that new substances with new properties are produced.",
+        "The properties of a synthetic material come from its composition and structure, which is why they can be designed for a purpose.",
+        "Every synthetic material carries costs as well as benefits, in resources used, energy required, and what happens at the end of its life."
+      ],
+      "accepted_alternative_framings": [
+        "Plastics, alloys, synthetic fibres, and engineered ceramics are all correct examples."
+      ],
+      "disqualifying_errors": [
+        "Claiming synthetic materials are not made from natural resources.",
+        "Claiming synthetic means harmful and natural means safe.",
+        "Claiming a material's properties can be chosen independently of its structure."
+      ],
+      "out_of_scope": "Polymerisation chemistry and materials-science structure-property theory are High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "model limitations",
+      "fixed_facts": [],
+      "relationships": [
+        "Every model of matter simplifies, and the simplification determines what the model can and cannot explain.",
+        "A model is chosen for the question being asked; a model that is wrong for one purpose can be right for another.",
+        "Stating a model's limitation is part of using it correctly, not an admission of failure."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating a model's simplification as a property of the real system, such as claiming atoms are coloured spheres.",
+        "Claiming a more detailed model is always the better one.",
+        "Using a model outside the range it was built for without saying so."
+      ],
+      "out_of_scope": "Formal model validation and computational modelling are later work."
+    },
+    {
+      "unit": 1,
+      "focus": "evidence from properties",
+      "fixed_facts": [],
+      "relationships": [
+        "Measured properties are the evidence for a claim about what a substance is.",
+        "The strength of the evidence depends on how characteristic the property is and how well it was measured.",
+        "A property measurement that disagrees with the identification is reported and explained, not dropped."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an identification is confirmed while omitting a measurement that disagrees.",
+        "Using a non-characteristic property, such as mass, as identification evidence.",
+        "Reporting a property measurement with no unit or no method."
+      ],
+      "out_of_scope": "Uncertainty propagation and statistical comparison to reference values are High School work."
+    },
+
+    {
+      "unit": 2,
+      "focus": "signs of reaction",
+      "fixed_facts": [],
+      "relationships": [
+        "A chemical reaction produces one or more substances with properties different from the starting substances.",
+        "Signs that suggest a reaction include gas production, a temperature change not caused by external heating or cooling, a colour change, a precipitate, light, and a new odour.",
+        "Each sign has non-chemical explanations too, so a conclusion rests on several lines of evidence together."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating bubbling alone as proof of reaction when boiling or escaping dissolved gas explains it.",
+        "Claiming any colour change establishes a chemical reaction.",
+        "Claiming dissolving is always a chemical reaction."
+      ],
+      "out_of_scope": "Reaction classification, equilibrium, and mechanism are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "reactants and products",
+      "fixed_facts": [
+        "Reactants are the starting substances; products are the substances formed."
+      ],
+      "relationships": [
+        "Reactants are the substances present before a reaction; products are the substances present after it.",
+        "The atoms in the products are the same atoms that were in the reactants, rearranged into new combinations.",
+        "The products have their own properties, which is what distinguishes a reaction from a mixture."
+      ],
+      "accepted_alternative_framings": [
+        "Word equations and formula equations are both acceptable representations at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming new atoms are made during a chemical reaction.",
+        "Claiming the products retain the properties of the reactants.",
+        "Writing products on the reactant side of a representation, or the reverse."
+      ],
+      "out_of_scope": "Balancing equations quantitatively, the mole, and limiting reactants are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "conservation of atoms",
+      "fixed_facts": [
+        "The number of atoms of each element is the same before and after a chemical reaction, so the total mass is unchanged."
+      ],
+      "relationships": [
+        "Atoms are neither created nor destroyed in a chemical reaction; they are rearranged.",
+        "Because the atoms are conserved, the total mass of the system is the same before and after.",
+        "An apparent mass change in an open container means matter crossed the boundary, most often as a gas."
+      ],
+      "accepted_alternative_framings": [
+        "Conservation of mass and conservation of atoms are two statements of the same principle at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming mass is lost when a substance burns, without accounting for gases released or oxygen consumed.",
+        "Claiming atoms of one element convert into another element in a chemical reaction.",
+        "Concluding conservation of mass fails from an open-system measurement."
+      ],
+      "out_of_scope": "Nuclear reactions, where element identity does change, and mass-energy equivalence are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "thermal changes",
+      "fixed_facts": [
+        "An exothermic process releases energy to its surroundings; an endothermic process absorbs energy from them."
+      ],
+      "relationships": [
+        "Some reactions release energy to the surroundings and some absorb energy from them.",
+        "A container that becomes warmer indicates energy released by the reaction inside it; one that becomes cooler indicates energy absorbed.",
+        "Energy released or absorbed is transferred, not created or destroyed."
+      ],
+      "accepted_alternative_framings": [
+        "Describing a reaction as exothermic, or as releasing energy or giving out heat, are all correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming an endothermic reaction creates cold rather than absorbing energy.",
+        "Claiming a reaction generates energy from nothing.",
+        "Reading the container's temperature change as the reaction's own temperature without saying what was measured."
+      ],
+      "out_of_scope": "Bond energies, enthalpy, and calorimetric calculation are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "reaction evidence",
+      "fixed_facts": [],
+      "relationships": [
+        "Evidence that a reaction occurred is a measured or observed change in properties, recorded before and after under the same conditions.",
+        "A control, in which the suspected cause is absent, distinguishes the reaction from something else in the setup.",
+        "The strength of the conclusion depends on how many independent signs point the same way."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Concluding a reaction occurred from one ambiguous sign with no control.",
+        "Reporting only the observations that support the expected conclusion.",
+        "Comparing before and after under different conditions and attributing the difference to reaction."
+      ],
+      "out_of_scope": "Analytical confirmation methods and quantitative yield are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "designing a heat-transfer device",
+      "fixed_facts": [],
+      "relationships": [
+        "A device that releases or absorbs thermal energy works by controlling the rate of transfer between a source and its surroundings.",
+        "Insulating materials slow transfer; they do not produce warmth or cold.",
+        "The device is judged against measurable criteria, such as how far the temperature changed and how long the effect lasted."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an insulator generates warmth or cold.",
+        "Claiming a device creates thermal energy rather than releasing or transferring it.",
+        "Declaring a design successful without measuring against the stated criteria."
+      ],
+      "out_of_scope": "Thermal conductivity values, heat-transfer coefficients, and efficiency calculation are High School work."
+    },
+
+    {
+      "unit": 3,
+      "focus": "temperature and particle motion",
+      "fixed_facts": [
+        "Temperature is a measure of the average kinetic energy of the particles in a sample."
+      ],
+      "relationships": [
+        "The particles in any sample of matter are in constant motion, and temperature measures the average kinetic energy of that motion.",
+        "Temperature and total thermal energy are different: a large cool object can contain more thermal energy than a small hot one.",
+        "Adding energy to a sample generally raises its temperature, except during a change of state, when it changes the arrangement of particles instead."
+      ],
+      "accepted_alternative_framings": [
+        "Describing temperature as average particle motion or as average kinetic energy per particle are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming temperature and thermal energy are the same quantity.",
+        "Claiming particles stop moving at ordinary cold temperatures.",
+        "Claiming temperature rises steadily while a substance is melting or boiling."
+      ],
+      "out_of_scope": "Absolute zero, the kinetic theory in quantitative form, and specific heat calculations are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "conduction convection and radiation",
+      "fixed_facts": [
+        "Conduction transfers energy through direct particle contact, convection through the bulk movement of a fluid, and radiation by electromagnetic waves requiring no medium."
+      ],
+      "relationships": [
+        "Conduction transfers energy through collisions between neighbouring particles, so it needs matter in contact.",
+        "Convection transfers energy by the bulk movement of a heated fluid, so it happens in liquids and gases, not in solids.",
+        "Radiation transfers energy as electromagnetic waves and is the only mechanism that works across a vacuum."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming convection occurs within a solid.",
+        "Claiming radiation requires a medium to travel through.",
+        "Claiming energy from the Sun reaches Earth mainly by conduction or convection."
+      ],
+      "out_of_scope": "Quantitative transfer equations and emissivity are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "energy transfer",
+      "fixed_facts": [
+        "Thermal energy is transferred spontaneously from the higher-temperature object to the lower-temperature one."
+      ],
+      "relationships": [
+        "When objects at different temperatures interact, energy is transferred from the warmer to the cooler until they reach the same temperature.",
+        "The transfer is one-directional on its own; energy does not move spontaneously from cooler to warmer.",
+        "Total energy is conserved during the transfer: what one object loses, the other and the surroundings gain."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming cold flows from the cooler object into the warmer one.",
+        "Claiming energy is lost rather than transferred to the surroundings.",
+        "Claiming a warmer object can spontaneously take energy from a cooler one."
+      ],
+      "out_of_scope": "The second law stated formally, entropy, and refrigeration cycles are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "mass material and temperature change",
+      "fixed_facts": [],
+      "relationships": [
+        "For the same energy input, a larger mass of the same material changes temperature less than a smaller mass.",
+        "Different materials require different amounts of energy to change the temperature of the same mass by the same amount.",
+        "Comparing materials fairly requires the same mass, the same energy input, and the same starting temperature."
+      ],
+      "accepted_alternative_framings": [
+        "Naming this property specific heat capacity is correct but not required at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming equal energy input produces equal temperature change regardless of mass.",
+        "Claiming all materials respond identically to the same energy input.",
+        "Comparing materials tested at different masses or starting temperatures without saying so."
+      ],
+      "out_of_scope": "The specific heat equation and calorimetry calculations are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "potential and kinetic energy",
+      "fixed_facts": [
+        "Kinetic energy is energy of motion; potential energy is energy stored by position or configuration."
+      ],
+      "relationships": [
+        "Kinetic energy depends on an object's mass and speed; potential energy depends on position or arrangement relative to something else.",
+        "Energy converts between kinetic and potential forms while the total stays the same, apart from what is transferred out of the system.",
+        "Potential energy is a property of a system, such as an object and Earth together, not of the object alone."
+      ],
+      "accepted_alternative_framings": [
+        "Gravitational, elastic, and chemical potential energy are all correct examples of stored energy."
+      ],
+      "disqualifying_errors": [
+        "Claiming energy is destroyed when a moving object comes to rest, rather than transferred out.",
+        "Claiming potential energy belongs to the object by itself with no reference position or system.",
+        "Claiming kinetic energy depends only on speed, with mass making no difference."
+      ],
+      "out_of_scope": "Energy equations, and kinetic energy going with the square of speed, are High School work; a learner who uses them correctly is not wrong."
+    },
+    {
+      "unit": 3,
+      "focus": "device efficiency",
+      "fixed_facts": [
+        "No device converts all of its energy input into the useful output."
+      ],
+      "relationships": [
+        "A device's useful output is always less than its energy input, because some energy is transferred to the surroundings, usually as warming.",
+        "Improving efficiency means reducing the unwanted transfers, not eliminating them.",
+        "Efficiency claims are judged against measurements of input and useful output, not against the design intent."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a device is or could be one hundred per cent efficient.",
+        "Claiming a device produces more energy than it receives.",
+        "Reporting an efficiency without saying what was measured as input and as useful output."
+      ],
+      "out_of_scope": "Efficiency as a calculated percentage is acceptable but not required; the second law and Carnot limits are High School work."
+    },
+
+    {
+      "unit": 4,
+      "focus": "cell theory",
+      "fixed_facts": [
+        "All living things are made of one or more cells, the cell is the basic unit of structure and function, and all cells come from pre-existing cells."
+      ],
+      "relationships": [
+        "All living organisms are composed of one or more cells.",
+        "The cell is the basic unit of structure and function in living things.",
+        "All cells arise from pre-existing cells; cells do not form spontaneously from non-living material."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming some living organisms are not made of cells.",
+        "Claiming cells form spontaneously from non-living matter.",
+        "Claiming viruses are cells."
+      ],
+      "out_of_scope": "Cell-cycle detail, prokaryote-eukaryote molecular differences, and endosymbiosis are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "cell structures and functions",
+      "fixed_facts": [
+        "The nucleus contains the cell's genetic material; the cell membrane controls what enters and leaves; chloroplasts are found in plant cells and not in animal cells."
+      ],
+      "relationships": [
+        "Each cell part carries out a particular function, and the parts work together as a system.",
+        "The cell membrane controls what enters and leaves the cell; the nucleus holds the genetic material in cells that have one.",
+        "Plant cells have a cell wall and chloroplasts that animal cells lack; both have a membrane, cytoplasm, and, in eukaryotes, a nucleus."
+      ],
+      "accepted_alternative_framings": [
+        "Naming a structure's function in everyday terms is acceptable, provided the function is right."
+      ],
+      "disqualifying_errors": [
+        "Claiming animal cells contain chloroplasts or a cell wall.",
+        "Claiming the cell wall, rather than the membrane, controls what enters and leaves a plant cell.",
+        "Claiming every cell has a nucleus; bacterial cells do not."
+      ],
+      "out_of_scope": "Organelle biochemistry, membrane transport mechanisms, and the endomembrane system are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "unicellular and multicellular organisms",
+      "fixed_facts": [],
+      "relationships": [
+        "A unicellular organism carries out all life functions within a single cell.",
+        "In a multicellular organism, cells are specialised, and groups of them carry out different functions for the whole organism.",
+        "Being unicellular is not a lesser condition; unicellular organisms are complete, successful organisms."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming unicellular organisms cannot carry out all the functions of life.",
+        "Claiming a colony of identical cells is the same as a multicellular organism with specialised cells.",
+        "Claiming multicellular organisms are more advanced in a way that makes unicellular ones incomplete."
+      ],
+      "out_of_scope": "Differentiation mechanisms and stem-cell biology are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "tissues organs and systems",
+      "fixed_facts": [
+        "The levels of organisation run cells, tissues, organs, organ systems, organism."
+      ],
+      "relationships": [
+        "Similar specialised cells form tissues, tissues form organs, organs form organ systems, and systems together form the organism.",
+        "Each level does something the level below cannot do on its own; the organisation is what produces the capability.",
+        "A failure at one level affects the levels above it."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Placing the levels of organisation out of order.",
+        "Claiming an organ is made of a single kind of cell.",
+        "Claiming organ systems operate independently of one another."
+      ],
+      "out_of_scope": "Histology and developmental biology are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "microscope image interpretation",
+      "fixed_facts": [],
+      "relationships": [
+        "A microscope image is a two-dimensional view of a thin slice or a thin sample, so what is seen depends on how the sample was prepared.",
+        "Magnification and the scale bar are needed before any size can be read from an image.",
+        "Stains and preparation can introduce features that are artefacts rather than parts of the living cell."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reading a size off a micrograph with no scale or magnification given.",
+        "Claiming a structure is absent because it was not visible in one preparation.",
+        "Treating a preparation artefact as a cell structure."
+      ],
+      "out_of_scope": "Resolution limits, electron microscopy, and staining chemistry are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "structure and function",
+      "fixed_facts": [],
+      "relationships": [
+        "A cell's shape and contents relate to what it does, which is why nerve, muscle, and root-hair cells look so different.",
+        "Specialisation trades generality for capability: a specialised cell does one job well and depends on others for the rest.",
+        "Inferring function from structure is a hypothesis that must then be checked against evidence."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a cell developed a structure because the organism needed it.",
+        "Asserting a function from appearance alone with no supporting evidence.",
+        "Claiming specialised cells can carry out every function independently."
+      ],
+      "out_of_scope": "Gene regulation of differentiation is High School work."
+    },
+
+    {
+      "unit": 5,
+      "focus": "system interactions",
+      "fixed_facts": [],
+      "relationships": [
+        "Body systems interact: the digestive, circulatory, respiratory, excretory, nervous, and musculoskeletal systems each depend on the others.",
+        "A substance taken in by one system is distributed by another and used or removed by a third.",
+        "Because the systems are coupled, a change in one produces changes in others."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming each body system works independently.",
+        "Tracing a substance through the body while skipping the system that actually transports it.",
+        "Claiming an effect on one system leaves the others unchanged."
+      ],
+      "out_of_scope": "Organ physiology in detail and quantitative modelling are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "nervous system signaling",
+      "fixed_facts": [
+        "Nerve cells carry information as electrical and chemical signals."
+      ],
+      "relationships": [
+        "Sensory receptors detect a stimulus and send signals along nerve cells toward the brain and spinal cord.",
+        "Signals are processed in the brain or spinal cord, and signals are then sent out to muscles or glands to produce a response.",
+        "Signalling is fast compared with chemical messengers carried in the blood, which is why the nervous system handles rapid responses."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the pathway as receptor, processing, response, or as stimulus, integration, effector, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming nerve signals travel as a fluid pushed along the nerve.",
+        "Claiming a response occurs without any processing anywhere.",
+        "Reversing the direction, with signals travelling from muscles to receptors as the normal pathway."
+      ],
+      "out_of_scope": "Action potentials, synaptic transmission, and neurotransmitters are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "sensory receptors",
+      "fixed_facts": [],
+      "relationships": [
+        "Each type of sensory receptor responds to a particular kind of stimulus, such as light, sound, pressure, temperature, or chemicals.",
+        "An organism can only respond to stimuli it has receptors for, which is why different animals sense different things.",
+        "Receptors convert the stimulus into a signal the nervous system can carry; they do not send the stimulus itself."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming one receptor type responds equally to every stimulus.",
+        "Claiming an organism senses something it has no receptor for.",
+        "Claiming the receptor sends the light or sound itself along the nerve."
+      ],
+      "out_of_scope": "Transduction mechanisms and receptor molecular biology are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "stimulus and response",
+      "fixed_facts": [],
+      "relationships": [
+        "A response follows a stimulus through a pathway of detection, processing, and action.",
+        "The same stimulus can produce different responses in different circumstances, because processing takes context into account.",
+        "Some responses are immediate and involuntary; others involve deliberate processing and take longer."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming every response to a stimulus is identical regardless of context.",
+        "Describing a response with no stimulus identified.",
+        "Claiming involuntary responses involve no signalling at all."
+      ],
+      "out_of_scope": "Reflex arc anatomy and conditioning theory are later work."
+    },
+    {
+      "unit": 5,
+      "focus": "homeostasis concept",
+      "fixed_facts": [
+        "Homeostasis is the maintenance of internal conditions within a range, not at a single fixed value."
+      ],
+      "relationships": [
+        "Organisms maintain internal conditions such as temperature, water balance, and blood sugar within a workable range.",
+        "Maintenance requires detecting a departure from the range and acting to reverse it, which is a feedback process.",
+        "Internal conditions fluctuate within the range; homeostasis is regulation, not constancy."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the mechanism as negative feedback is correct, and describing it in plain terms as detecting and correcting is equally correct here."
+      ],
+      "disqualifying_errors": [
+        "Claiming internal conditions are held perfectly constant.",
+        "Claiming homeostasis happens without any detection of the change.",
+        "Claiming a departure from the range is corrected by a process that pushes it further in the same direction."
+      ],
+      "out_of_scope": "Endocrine signalling detail and quantitative feedback modelling are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "modeling body-system coordination",
+      "fixed_facts": [],
+      "relationships": [
+        "A model of coordination shows the systems involved, what passes between them, and in which direction.",
+        "The model has to include the detection step and the response step, or it cannot explain regulation.",
+        "A model is judged on whether it explains the coordination, not on how many parts it includes."
+      ],
+      "accepted_alternative_framings": [
+        "Flow diagrams, labelled body diagrams, and written sequences are all valid model forms."
+      ],
+      "disqualifying_errors": [
+        "Building a coordination model with no feedback path from response back to condition.",
+        "Showing systems connected with no statement of what passes between them.",
+        "Claiming the model represents the body completely."
+      ],
+      "out_of_scope": "Computational physiological modelling is later work."
+    },
+
+    {
+      "unit": 6,
+      "focus": "resource availability",
+      "fixed_facts": [],
+      "relationships": [
+        "The number of organisms an ecosystem supports is limited by the resources available: food, water, space, shelter, light, and nutrients.",
+        "When a resource becomes scarce, populations that depend on it decline or move.",
+        "The limiting resource is the one in shortest supply relative to need, and increasing any other does not remove the limit."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the idea a limiting factor is correct but not required at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming a population can grow indefinitely if food alone is plentiful.",
+        "Claiming resources are unlimited in a large ecosystem.",
+        "Claiming increasing a non-limiting resource increases the population."
+      ],
+      "out_of_scope": "Logistic growth equations and quantitative carrying capacity are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "competition and predation",
+      "fixed_facts": [],
+      "relationships": [
+        "Competition occurs when organisms use the same limited resource, whether they are of the same species or different ones.",
+        "Predation transfers matter and energy from prey to predator and affects the population sizes of both.",
+        "Predator and prey populations influence each other, so a change in one produces a change in the other, usually after a delay."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming competition only occurs between different species.",
+        "Claiming predators eliminate their prey populations entirely as the normal outcome.",
+        "Claiming predator and prey populations change simultaneously with no delay."
+      ],
+      "out_of_scope": "Lotka-Volterra models and competitive exclusion by name are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "mutualism",
+      "fixed_facts": [
+        "In mutualism both species benefit; in commensalism one benefits and the other is largely unaffected; in parasitism one benefits at the other's expense."
+      ],
+      "relationships": [
+        "In a mutualistic relationship both species gain something, such as food, protection, or transport.",
+        "Mutualism is not cooperation by intention; each species is acting in ways that happen to benefit the other.",
+        "Mutualism, commensalism, and parasitism are distinguished by who benefits and who is harmed."
+      ],
+      "accepted_alternative_framings": [
+        "Pollination, gut microbes, and lichen partnerships are all correct examples."
+      ],
+      "disqualifying_errors": [
+        "Classifying a relationship as mutualism when only one species benefits.",
+        "Claiming the species involved intend to help each other.",
+        "Claiming parasitism always kills the host."
+      ],
+      "out_of_scope": "Coevolution and symbiosis theory in depth are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "food webs",
+      "fixed_facts": [],
+      "relationships": [
+        "A food web shows feeding relationships, with arrows running from the organism that is eaten to the organism that eats it.",
+        "Because organisms appear in several chains, a change to one population can affect populations several links away.",
+        "Producers form the base of every web, and decomposers act on organisms at every level."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Drawing food-web arrows from predator to prey.",
+        "Claiming the effect of removing a species is confined to its direct neighbours in the web.",
+        "Omitting producers or decomposers and calling the web complete."
+      ],
+      "out_of_scope": "Quantitative network analysis and trophic cascade modelling are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "matter and energy flow",
+      "fixed_facts": [
+        "Matter cycles within an ecosystem; energy flows through it and is not recycled."
+      ],
+      "relationships": [
+        "Energy enters most ecosystems as sunlight, is captured by producers, and passes to consumers, with most released to the surroundings at each transfer.",
+        "Matter cycles: atoms pass between organisms and the environment repeatedly and are not used up.",
+        "Because most energy is lost at each transfer, ecosystems support far less biomass at higher feeding levels."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming energy cycles through an ecosystem the way matter does.",
+        "Claiming all the energy at one feeding level passes to the next.",
+        "Claiming matter is destroyed when an organism dies."
+      ],
+      "out_of_scope": "Specific trophic efficiency percentages and quantitative energy pyramids are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "ecosystem change",
+      "fixed_facts": [],
+      "relationships": [
+        "Ecosystems change over time through natural processes and through disturbance such as fire, flood, disease, and human activity.",
+        "After a disturbance, the community that returns may differ from the one before it.",
+        "An ecosystem's ability to recover depends on the severity of the disturbance and on what survives it."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the process succession is correct but not required at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming an undisturbed ecosystem stays permanently unchanged.",
+        "Claiming an ecosystem always returns to exactly its previous state after disturbance.",
+        "Claiming all disturbance is damaging; some species and communities depend on it."
+      ],
+      "out_of_scope": "Resilience metrics and succession modelling are High School work."
+    },
+
+    {
+      "unit": 7,
+      "focus": "water cycle driven by energy and gravity",
+      "fixed_facts": [
+        "The water cycle is driven by energy from the Sun and by gravity."
+      ],
+      "relationships": [
+        "Energy from the Sun drives evaporation and transpiration, moving water from surface to atmosphere.",
+        "Gravity drives precipitation, runoff, and the downward movement of water through the ground.",
+        "Water changes state during the cycle but the total amount of water on Earth stays essentially the same."
+      ],
+      "accepted_alternative_framings": [
+        "Including transpiration, sublimation, and infiltration among the processes is correct; naming every process is not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming the water cycle creates or destroys water.",
+        "Claiming clouds form because water becomes lighter than air rather than by condensation on particles.",
+        "Claiming the cycle runs without any energy input."
+      ],
+      "out_of_scope": "Quantitative water budgets and residence times are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "air masses and weather",
+      "fixed_facts": [
+        "Weather changes occur at the boundaries between air masses of different temperature and humidity."
+      ],
+      "relationships": [
+        "An air mass takes on the temperature and humidity of the region it forms over.",
+        "Where air masses of different properties meet, the warmer, less dense air is forced upward, it cools, water vapour condenses, and clouds and precipitation form.",
+        "The kind of weather depends on the properties of the air masses involved and on how they meet."
+      ],
+      "accepted_alternative_framings": [
+        "Warm front, cold front, and occluded front are correct terms; a plain description of the interaction is equally acceptable."
+      ],
+      "disqualifying_errors": [
+        "Claiming warm air sinks below cold air.",
+        "Claiming precipitation forms without air rising and cooling.",
+        "Claiming an air mass has the same properties wherever it forms."
+      ],
+      "out_of_scope": "Synoptic meteorology, adiabatic lapse rates, and numerical forecasting are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "ocean and atmospheric circulation",
+      "fixed_facts": [
+        "Global circulation exists because the equator receives more solar energy per unit area than the poles."
+      ],
+      "relationships": [
+        "Uneven heating of Earth's surface, with more energy per unit area near the equator, drives large-scale circulation in the atmosphere and ocean.",
+        "Circulation moves energy from lower to higher latitudes, which is why the poles are not colder and the tropics not hotter than they are.",
+        "Ocean currents and prevailing winds strongly influence the climate of the coasts they reach."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the cause as uneven heating, or as the angle at which sunlight strikes the surface, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming the equator is warmer because it is closer to the Sun.",
+        "Claiming ocean currents have no effect on coastal climate.",
+        "Claiming circulation moves air and water without transporting energy."
+      ],
+      "out_of_scope": "Coriolis dynamics, Hadley cell mathematics, and thermohaline modelling are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "regional climates",
+      "fixed_facts": [],
+      "relationships": [
+        "A region's climate depends on latitude, elevation, distance from large water bodies, ocean currents, prevailing winds, and nearby mountains.",
+        "Two regions at the same latitude can have very different climates because of these other factors.",
+        "Climate is described by long-term averages and ranges, over decades rather than seasons."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming latitude alone determines climate.",
+        "Using a single season's weather to characterise a climate.",
+        "Claiming elevation has no effect on temperature."
+      ],
+      "out_of_scope": "Köppen classification and climate reanalysis data are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "weather maps",
+      "fixed_facts": [],
+      "relationships": [
+        "Weather maps show measured conditions and analysed features such as fronts, pressure centres, and precipitation, each with its own symbol.",
+        "A map is a snapshot with a stated time; reading a forecast from it requires knowing how the features move.",
+        "Air moves from higher pressure toward lower pressure, which is why pressure patterns indicate wind."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reading a weather map with no time stamp as showing current conditions.",
+        "Claiming air moves from low pressure toward high pressure.",
+        "Treating a map symbol as a measurement rather than as an analysed feature."
+      ],
+      "out_of_scope": "Isobar spacing and geostrophic wind calculation are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "model uncertainty",
+      "fixed_facts": [],
+      "relationships": [
+        "Weather and climate models are simplifications, so their predictions carry uncertainty that grows with the length of the forecast.",
+        "Uncertainty in a forecast is a statement about the model and the data, not an admission that the science is unreliable.",
+        "A forecast is evaluated over many predictions, not by whether one turned out right."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Judging a probabilistic forecast wrong because a single day differed from it.",
+        "Claiming uncertainty means the model carries no information.",
+        "Presenting a model prediction as a measurement."
+      ],
+      "out_of_scope": "Ensemble forecasting and formal skill scores are High School work."
+    },
+
+    {
+      "unit": 8,
+      "focus": "hazard mapping",
+      "fixed_facts": [],
+      "relationships": [
+        "Natural hazards occur in patterns tied to geology, geography, and climate, so where they are likely can be mapped.",
+        "A hazard map shows likelihood and, usually, severity; it does not predict a particular event on a particular day.",
+        "Maps are built from historical records and physical understanding, and both have limits that belong in the reading."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reading a hazard map as a prediction of when an event will occur.",
+        "Claiming an area with no recorded event has no hazard.",
+        "Claiming hazards occur completely at random with no mappable pattern."
+      ],
+      "out_of_scope": "Return-period statistics and probabilistic hazard analysis are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "risk and vulnerability",
+      "fixed_facts": [],
+      "relationships": [
+        "Risk depends on the hazard, on what is exposed to it, and on how vulnerable that exposure is.",
+        "Two communities facing the same hazard can face very different risk, because exposure and vulnerability differ.",
+        "Reducing risk can act on exposure or on vulnerability, since the hazard itself cannot be prevented."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating risk and hazard as the same thing.",
+        "Claiming equal hazard means equal risk regardless of who is exposed.",
+        "Claiming risk can be reduced to zero."
+      ],
+      "out_of_scope": "Quantitative risk assessment and insurance modelling are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "resource use",
+      "fixed_facts": [],
+      "relationships": [
+        "Resources are distributed unevenly because of the geological and biological processes that formed them.",
+        "Extracting and using a resource changes the environment where it is taken and where it is used.",
+        "A renewable resource is only sustainable if the rate of use stays below the rate of replenishment."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming renewable resources cannot be depleted.",
+        "Claiming resource distribution is a matter of chance rather than of geological and biological process.",
+        "Claiming resource use can have no environmental effect."
+      ],
+      "out_of_scope": "Reserve estimation and resource economics are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "population and consumption",
+      "fixed_facts": [],
+      "relationships": [
+        "Total impact depends on both the number of people and how much each consumes, so neither alone explains it.",
+        "Per-person consumption differs greatly between regions, so equal populations can have very different impacts.",
+        "Technology can change impact per person in either direction."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Attributing environmental impact to population size alone.",
+        "Claiming per-person consumption is the same everywhere.",
+        "Claiming technological change always reduces impact."
+      ],
+      "out_of_scope": "Formal impact identities and demographic modelling are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "climate evidence",
+      "fixed_facts": [
+        "Global average surface temperature has risen since the late nineteenth century, and the increase in atmospheric carbon dioxide from burning fossil fuels is the principal cause."
+      ],
+      "relationships": [
+        "Evidence for climate change comes from many independent lines: instrument records, ice cores, sea level, glacier extent, and the timing of biological events.",
+        "Independent lines of evidence agreeing is what makes the conclusion robust; no single record carries it alone.",
+        "Climate change is a change in long-term patterns, so it is established from decades of record, not from individual seasons."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the cause as greenhouse gases from human activity, or specifically as carbon dioxide from burning fossil fuels, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Citing one cold season as evidence against long-term warming.",
+        "Claiming the observed warming has no established cause.",
+        "Confusing the greenhouse effect, which is a natural and necessary process, with the enhanced effect caused by added greenhouse gases."
+      ],
+      "out_of_scope": "Radiative forcing calculations, climate sensitivity, and attribution methodology are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "mitigation and adaptation",
+      "fixed_facts": [
+        "Mitigation reduces the cause of a problem; adaptation reduces the harm from effects that occur anyway."
+      ],
+      "relationships": [
+        "Mitigation acts on the cause, such as reducing emissions; adaptation acts on the consequences, such as changing where and how people build.",
+        "Both are needed, because some change is already committed and further change can still be limited.",
+        "Every option has costs, and who pays them and who benefits are part of the evaluation."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Using mitigation and adaptation as though they meant the same thing.",
+        "Claiming adaptation removes the need to address the cause.",
+        "Presenting an option as having benefits with no costs."
+      ],
+      "out_of_scope": "Policy instruments and cost-benefit modelling are High School work."
+    },
+
+    {
+      "unit": 9,
+      "focus": "defining criteria and constraints",
+      "fixed_facts": [],
+      "relationships": [
+        "A well-defined problem states criteria that can be measured and constraints that can be checked.",
+        "The definition comes before solution generation, so that all candidates are judged the same way.",
+        "Constraints include safety, cost, time, materials, and law, and none of them is traded away for performance."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Writing a criterion that no test could evaluate.",
+        "Generating solutions before the problem is defined and then fitting criteria to the favourite.",
+        "Treating a safety constraint as negotiable."
+      ],
+      "out_of_scope": "Formal requirements engineering is later work."
+    },
+    {
+      "unit": 9,
+      "focus": "evaluating competing solutions",
+      "fixed_facts": [],
+      "relationships": [
+        "Competing solutions are evaluated against the same criteria, using the same tests.",
+        "A solution can be better on one criterion and worse on another; the evaluation reports both rather than resolving it by preference.",
+        "A solution that fails a constraint is eliminated, not scored against the criteria."
+      ],
+      "accepted_alternative_framings": [
+        "Systematic comparison by table or by written argument are both acceptable, provided the criteria are the same for each option."
+      ],
+      "disqualifying_errors": [
+        "Comparing solutions tested under different conditions.",
+        "Declaring a winner without naming the criteria.",
+        "Retaining a solution that violates a stated constraint because it scores well elsewhere."
+      ],
+      "out_of_scope": "Weighted decision matrices with numeric weights are acceptable but not required; formal trade studies are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "test data",
+      "fixed_facts": [],
+      "relationships": [
+        "Test data is only interpretable when the test conditions, the measured quantity, and the number of trials are recorded.",
+        "Repeated trials show whether a difference between designs is larger than the variation within a design.",
+        "A test that produced an unexpected result is reported as it happened."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming one design outperforms another from a difference smaller than the variation between trials.",
+        "Reporting test results without the conditions under which they were obtained.",
+        "Omitting a trial because its result was inconvenient."
+      ],
+      "out_of_scope": "Statistical significance testing is High School work."
+    },
+    {
+      "unit": 9,
+      "focus": "iterative modeling",
+      "fixed_facts": [],
+      "relationships": [
+        "A model is revised when its prediction and the test result disagree, and the revision names what the disagreement showed.",
+        "Changing one aspect at a time keeps the effect of each change identifiable.",
+        "A model that has never been tested against data has not yet been evaluated, however reasonable it looks."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Revising a model to fit data without saying what the disagreement showed.",
+        "Changing several aspects at once and attributing the improvement to one.",
+        "Treating an untested model as validated."
+      ],
+      "out_of_scope": "Formal model calibration and parameter fitting are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "optimization",
+      "fixed_facts": [],
+      "relationships": [
+        "Optimising means improving performance against the criteria within the constraints, not improving everything at once.",
+        "Improving one criterion often worsens another, so optimisation involves choosing which trade-off to accept.",
+        "An optimum is relative to the criteria chosen; different criteria give a different optimum."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a design was optimised on every criterion simultaneously.",
+        "Optimising past a constraint and reporting the result as a solution.",
+        "Presenting an optimum without stating the criteria it is optimal for."
+      ],
+      "out_of_scope": "Mathematical optimisation methods are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "communicating tradeoffs",
+      "fixed_facts": [],
+      "relationships": [
+        "Communicating a design decision means stating the criteria, the evidence, what was given up, and why.",
+        "A trade-off that is not stated has not been avoided; it has only been hidden from the reader.",
+        "The audience decides what detail is needed, but the evidence and its limits are always included."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a chosen design as having no drawbacks.",
+        "Reporting a recommendation with no evidence behind it.",
+        "Omitting the limits of the testing from the communication."
+      ],
+      "out_of_scope": "Formal technical writing standards are later work."
+    }
+  ]
+}

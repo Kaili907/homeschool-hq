@@ -6,11 +6,40 @@
 
 ## There is no answer key, and that is deliberate
 
-Science work in this course is scored against criteria, not against a fixed answer. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong.
+Science work in this course is scored against criteria, not against a model response. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong. What it does supply, below, is a content key: the relationships this lesson's topic actually asserts, and the specific wrong claims that make work incorrect however well it is documented. A criterion tells you what to look for. The key tells you what is true.
 
 **Scoring guidance carried verbatim from the curriculum source:**
 
 > Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.
+
+## Scientific correctness authority for this topic
+
+This is the content key for this lesson's topic — what the curriculum teaches, which alternative wordings are also correct, and the specific wrong claims to catch. It is authored subject content held to the grade band, not a model answer and not a record of anything a learner did. Nothing in it states what a measurement should come out at. Read it before scoring the Scientific correctness row; that row is the one instrument here that can catch a well-argued, well-evidenced, false answer.
+
+_Topic `ma-g3-science-u07::what fossils are` · forms in force: `ACCEPTED_RELATIONSHIPS`, `EXPECTED_REASONING_CRITERIA`, `FIXED_FACTUAL`, `RUBRIC_CORRECTNESS_CONSTRAINT` · authored in `policy/correctness/ma-g3-science.correctness.json`._
+
+**Fixed for this topic.** These are settled, and work that contradicts one is `Not yet` on Scientific correctness:
+
+- A fossil is preserved evidence of an organism that lived in the past.
+
+**Accepted relationships and models.** What this lesson's learning target asserts:
+
+- A fossil is preserved evidence of an organism that lived in the past: a body part, an impression, or a trace such as a footprint or burrow.
+- Most fossils form in sedimentary rock, when remains are buried by sediment before they decay away.
+- Only a very small fraction of organisms ever become fossils, so the fossil record is incomplete.
+
+**Also correct.** Accept any of these framings — do not require the wording above:
+
+- Body fossils and trace fossils are both fossils; a learner who names only one kind is not wrong unless they deny the other.
+
+**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well the reasoning is documented and however complete the evidence is:
+
+- Claiming a fossil is the organism's actual unchanged body.
+- Claiming the fossil record contains every organism that ever lived.
+- Claiming a rock that merely looks like an organism is a fossil.
+
+**Grade boundary.** Mineral replacement chemistry, taphonomy, and index fossils are later work.
+
 
 ## What a complete response contains, question by question
 
@@ -58,7 +87,7 @@ The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is pr
 - The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.
 - The learner checks or revises the work and can identify a next step.
 
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, success criteria, and course guide — not against a fixed answer key, because this package ships none. Where the learning target names a definite relationship, work that contradicts it is Not yet however well the reasoning is documented.
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 

@@ -6,11 +6,41 @@
 
 ## There is no answer key, and that is deliberate
 
-Science work in this course is scored against criteria, not against a fixed answer. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong.
+Science work in this course is scored against criteria, not against a model response. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong. What it does supply, below, is a content key: the relationships this lesson's topic actually asserts, and the specific wrong claims that make work incorrect however well it is documented. A criterion tells you what to look for. The key tells you what is true.
 
 **Scoring guidance carried verbatim from the curriculum source:**
 
 > Score the stated learning target: accuracy, quality of evidence and reasoning, and evidence of checking or revision. Accept any valid approach that meets the criteria. Do not infer effort, motivation, diagnosis, or character from an error. Do not award credit for a numerical result that the learner did not measure, compute, or cite to a named source.
+
+## Scientific correctness authority for this topic
+
+This is the content key for this lesson's topic — what the curriculum teaches, which alternative wordings are also correct, and the specific wrong claims to catch. It is authored subject content held to the grade band, not a model answer and not a record of anything a learner did. Nothing in it states what a measurement should come out at. Read it before scoring the Scientific correctness row; that row is the one instrument here that can catch a well-argued, well-evidenced, false answer.
+
+_Topic `ma-hs11-physics-u08::wave properties and terminology` · forms in force: `ACCEPTED_RELATIONSHIPS`, `EXPECTED_REASONING_CRITERIA`, `FIXED_FACTUAL`, `INVESTIGATION_CRITERIA`, `RUBRIC_CORRECTNESS_CONSTRAINT` · authored in `policy/correctness/ma-hs11-physics.correctness.json`._
+
+**Fixed for this topic.** These are settled, and work that contradicts one is `Not yet` on Scientific correctness:
+
+- A wave transfers energy without net transport of the medium.
+- Amplitude is maximum displacement from equilibrium; wavelength is the distance between matching points on successive cycles; frequency is cycles per second; period is the time for one cycle.
+
+**Accepted relationships and models.** What this lesson's learning target asserts:
+
+- Particles of a medium oscillate about fixed positions while the wave and its energy travel through.
+- Frequency and period are reciprocals of one another.
+- In a transverse wave the oscillation is perpendicular to the direction of travel; in a longitudinal wave it is along it.
+
+**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well the reasoning is documented and however complete the evidence is:
+
+- Claiming a wave carries the medium along with it.
+- Confusing amplitude with wavelength, or frequency with wave speed.
+- Claiming sound is a transverse wave in air.
+
+**Grade boundary.** Wave equation derivation and polarisation are acceptable but not required.
+
+**Investigation day — the key bounds the conclusion, never the observations.**
+
+This is an investigation day, so the key above bounds the learner's conclusion and never their observations. Do not score any recorded measurement against it. A reading that disagrees with an accepted relationship is data: a learner who records it honestly and says what could explain it has done the work well, and a learner who quietly adjusts it has not. What the key catches here is a conclusion that states a disqualifying error as established science — Not yet on Scientific correctness even when the learner's own data is clean. A conclusion the learner's own data does not reach is Not yet on Evidence and reasoning even when it agrees with the key.
+
 
 ## What a complete response contains, question by question
 
@@ -65,7 +95,7 @@ The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is pr
 - The learner states the investigation's limitations and what the data cannot show.
 - The learner records the safety review and the supervision that was actually in place.
 
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, success criteria, and course guide — not against a fixed answer key, because this package ships none. Where the learning target names a definite relationship, work that contradicts it is Not yet however well the reasoning is documented.
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 

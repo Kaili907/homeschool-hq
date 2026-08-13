@@ -6,11 +6,32 @@
 
 ## There is no answer key, and that is deliberate
 
-Science work in this course is scored against criteria, not against a fixed answer. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong.
+Science work in this course is scored against criteria, not against a model response. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong. What it does supply, below, is a content key: the relationships this lesson's topic actually asserts, and the specific wrong claims that make work incorrect however well it is documented. A criterion tells you what to look for. The key tells you what is true.
 
 **Scoring guidance carried verbatim from the curriculum source:**
 
 > Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.
+
+## Scientific correctness authority for this topic
+
+This is the content key for this lesson's topic — what the curriculum teaches, which alternative wordings are also correct, and the specific wrong claims to catch. It is authored subject content held to the grade band, not a model answer and not a record of anything a learner did. Nothing in it states what a measurement should come out at. Read it before scoring the Scientific correctness row; that row is the one instrument here that can catch a well-argued, well-evidenced, false answer.
+
+_Topic `ma-g3-science-u05::reading trait data` · forms in force: `ACCEPTED_RELATIONSHIPS`, `EXPECTED_REASONING_CRITERIA`, `RUBRIC_CORRECTNESS_CONSTRAINT` · authored in `policy/correctness/ma-g3-science.correctness.json`._
+
+**Accepted relationships and models.** What this lesson's learning target asserts:
+
+- Trait data from many individuals can be put in a table or graph to show how common each form of the trait is.
+- The shape of the data, where most individuals fall and how spread out they are, is the evidence; no single individual is.
+- A graph of trait data shows what was recorded and nothing more.
+
+**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well the reasoning is documented and however complete the evidence is:
+
+- Drawing a conclusion about the group from one individual's measurement.
+- Reading the tallest bar as 'all' rather than 'most'.
+- Claiming a trait is absent from a group because it did not appear in a small sample.
+
+**Grade boundary.** Mean, median, spread, and the names of distributions are later work.
+
 
 ## What a complete response contains, question by question
 
@@ -58,7 +79,7 @@ The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is pr
 - The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.
 - The learner checks or revises the work and can identify a next step.
 
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, success criteria, and course guide — not against a fixed answer key, because this package ships none. Where the learning target names a definite relationship, work that contradicts it is Not yet however well the reasoning is documented.
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 

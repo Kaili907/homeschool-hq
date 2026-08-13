@@ -1,6 +1,6 @@
 # Safety gate — Science student work
 
-972 lessons · 23 checks · **PASS** (23 passed, 0 failed)
+972 lessons · 29 checks · **PASS** (29 passed, 0 failed)
 
 | Check | Status | Problems |
 | --- | --- | --- |
@@ -27,6 +27,12 @@
 | `every-lesson-covered` | PASS | 0 |
 | `objective-questions-distinct-and-mapped` | PASS | 0 |
 | `analysis-questions-cover-every-objective` | PASS | 0 |
+| `correctness-authority-on-every-lesson` | PASS | 0 |
+| `correctness-key-states-no-observation` | PASS | 0 |
+| `correctness-authority-is-adult-facing` | PASS | 0 |
+| `investigation-days-bound-conclusions-not-observations` | PASS | 0 |
+| `supplied-data-authority-pins-provenance` | PASS | 0 |
+| `rubric-correctness-criterion-bound-to-key` | PASS | 0 |
 
 ## What each check proves
 
@@ -53,3 +59,9 @@
 - `every-lesson-covered` — Every lesson in every pinned source course has exactly one package, one student sheet, and one scoring sheet.
 - `objective-questions-distinct-and-mapped` — Every stated objective is matched to a question type by exact template, and no lesson asks the same question twice.
 - `analysis-questions-cover-every-objective` — Every stated learning objective is served by at least one analysis question, and every question maps to a stated objective.
+- `correctness-authority-on-every-lesson` — Every lesson carries a scientific correctness authority whose content matches the hand-authored key for its topic, verbatim, and every authored key is used by a lesson.
+- `correctness-key-states-no-observation` — No authored correctness key, and nothing rendered from one, states a measurement a learner is expected to obtain or a result attributed to a learner.
+- `correctness-authority-is-adult-facing` — Every authored relationship and disqualifying error is printed on the adult scoring sheet, and no disqualifying error reaches the learner sheet.
+- `investigation-days-bound-conclusions-not-observations` — Every investigation day states that the content key bounds the conclusion and that a recorded observation is never scored against it; no desk day claims to be one.
+- `supplied-data-authority-pins-provenance` — Every lesson whose source names published data carries a supplied-data answer authority that pins the named resource and the source provenance verbatim, and no other lesson claims one.
+- `rubric-correctness-criterion-bound-to-key` — The Scientific correctness rubric row is judged against the topic content key, and no sheet still tells a reader that the package ships no key.

@@ -6,11 +6,43 @@
 
 ## There is no answer key, and that is deliberate
 
-Science work in this course is scored against criteria, not against a fixed answer. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong.
+Science work in this course is scored against criteria, not against a model response. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong. What it does supply, below, is a content key: the relationships this lesson's topic actually asserts, and the specific wrong claims that make work incorrect however well it is documented. A criterion tells you what to look for. The key tells you what is true.
 
 **Scoring guidance carried verbatim from the curriculum source:**
 
 > Score the stated learning target: accuracy, quality of evidence and reasoning, and evidence of checking or revision. Accept any valid approach that meets the criteria. Do not infer effort, motivation, diagnosis, or character from an error. Do not award credit for a numerical result that the learner did not measure, compute, or cite to a named source.
+
+## Scientific correctness authority for this topic
+
+This is the content key for this lesson's topic — what the curriculum teaches, which alternative wordings are also correct, and the specific wrong claims to catch. It is authored subject content held to the grade band, not a model answer and not a record of anything a learner did. Nothing in it states what a measurement should come out at. Read it before scoring the Scientific correctness row; that row is the one instrument here that can catch a well-argued, well-evidenced, false answer.
+
+_Topic `ma-hs11-physics-u09::wave-based technologies` · forms in force: `ACCEPTED_RELATIONSHIPS`, `EXPECTED_REASONING_CRITERIA`, `RUBRIC_CORRECTNESS_CONSTRAINT`, `SUPPLIED_DATA_ANSWER_AUTHORITY` · authored in `policy/correctness/ma-hs11-physics.correctness.json`._
+
+**Accepted relationships and models.** What this lesson's learning target asserts:
+
+- Wave-based technologies work by encoding information onto a wave, transmitting it, and decoding it, and each stage constrains performance.
+- The choice of frequency band is set by how the wave interacts with the environment: penetration, range, and available bandwidth all depend on it.
+- Every link has limits on range, rate, and reliability set by physics as well as by equipment.
+
+**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well the reasoning is documented and however complete the evidence is:
+
+- Claiming a communication technology has no physical limit on range or data rate.
+- Claiming frequency band choice is arbitrary rather than driven by propagation behaviour.
+- Claiming information travels without any physical carrier.
+
+**Grade boundary.** Modulation schemes, antenna theory, and link budget calculation are beyond this course.
+
+**Data the learner did not generate.**
+
+Where this lesson works from data the curriculum source names as published rather than from the learner's own measurements, the answer authority is that named source at the provenance the learner records — not this package, which prints no values, and not the adult's memory of the figure. Check three things in order: that the figure reported is the figure the named source carries, that the provenance line is complete, and that the reasoning from it is sound. A correct figure with no provenance is Not yet on Data honesty and provenance. A well-sourced figure reasoned from wrongly is Not yet on Evidence and reasoning.
+
+- Answer authority: the named published source, at the provenance the learner records.
+- Named data-source resource: `res-ma-hs11-physics-data-sources` (scope: course).
+
+Provenance the curriculum source declares for this lesson, verbatim:
+
+> Learner's own signal-strength observations across shielding materials and their own device performance trials. Published claims are evaluated, never restated as findings.
+
 
 ## What a complete response contains, question by question
 
@@ -59,7 +91,7 @@ The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is pr
 - The learner checks or revises the work and identifies one specific next step.
 - Any quantity the learner reports is one the learner measured, computed, or cited to a named published source.
 
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, success criteria, and course guide — not against a fixed answer key, because this package ships none. Where the learning target names a definite relationship, work that contradicts it is Not yet however well the reasoning is documented.
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 

@@ -6,11 +6,40 @@
 
 ## There is no answer key, and that is deliberate
 
-Science work in this course is scored against criteria, not against a fixed answer. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong.
+Science work in this course is scored against criteria, not against a model response. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong. What it does supply, below, is a content key: the relationships this lesson's topic actually asserts, and the specific wrong claims that make work incorrect however well it is documented. A criterion tells you what to look for. The key tells you what is true.
 
 **Scoring guidance carried verbatim from the curriculum source:**
 
 > Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.
+
+## Scientific correctness authority for this topic
+
+This is the content key for this lesson's topic — what the curriculum teaches, which alternative wordings are also correct, and the specific wrong claims to catch. It is authored subject content held to the grade band, not a model answer and not a record of anything a learner did. Nothing in it states what a measurement should come out at. Read it before scoring the Scientific correctness row; that row is the one instrument here that can catch a well-argued, well-evidenced, false answer.
+
+_Topic `ma-g8-science-u01::electric and magnetic fields` · forms in force: `ACCEPTED_RELATIONSHIPS`, `EXPECTED_REASONING_CRITERIA`, `FIXED_FACTUAL`, `RUBRIC_CORRECTNESS_CONSTRAINT` · authored in `policy/correctness/ma-g8-science.correctness.json`._
+
+**Fixed for this topic.** These are settled, and work that contradicts one is `Not yet` on Scientific correctness:
+
+- Electric and magnetic forces act at a distance, and both can attract or repel.
+
+**Accepted relationships and models.** What this lesson's learning target asserts:
+
+- A field is a model for how one object exerts a force on another without contact, with strength depending on distance and on properties of the objects.
+- Electric forces act between charges and magnetic forces between magnets and moving charges; both attract or repel depending on orientation or sign.
+- Electric currents produce magnetic fields, which is why electromagnets work and why electricity and magnetism are treated as one subject.
+
+**Also correct.** Accept any of these framings — do not require the wording above:
+
+- Field lines and force arrows are both acceptable representations; neither is required.
+
+**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well the reasoning is documented and however complete the evidence is:
+
+- Claiming magnetic and electric forces are the same force acting on the same property.
+- Claiming field lines are physically present in space rather than a representation.
+- Claiming gravity, like electric force, can repel.
+
+**Grade boundary.** Coulomb's law, field strength units, and Maxwell's relationships are High School work.
+
 
 ## What a complete response contains, question by question
 
@@ -58,7 +87,7 @@ The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is pr
 - The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.
 - The learner checks or revises the work and can identify a next step.
 
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, success criteria, and course guide — not against a fixed answer key, because this package ships none. Where the learning target names a definite relationship, work that contradicts it is Not yet however well the reasoning is documented.
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 

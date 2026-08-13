@@ -64,6 +64,40 @@ function requiresUnsafely(text) {
   return hits
 }
 
+/**
+ * Wording that would turn a content key into a supplied observation. A key may
+ * carry a published constant — the freezing point of water, the age of Earth —
+ * because that is a property of the world. It may never carry a value
+ * attributed to a learner, or a value a measurement is expected to produce.
+ */
+const FABRICATED_OBSERVATION_PATTERNS = [
+  /\b(?:the )?learner (?:should|will|is expected to|ought to) (?:get|obtain|measure|observe|record|find|see)\b/i,
+  /\byou (?:should|will) (?:get|obtain|measure|observe|record|find)\b/i,
+  /\bexpected (?:value|result|reading|measurement|answer|observation)\b/i,
+  /\bshould (?:come out|read|measure)\b/i,
+  /\bthe (?:result|answer|reading) (?:will|should) be\b/i,
+  /\b(?:we|i) (?:measured|observed|recorded|obtained)\b/i,
+  /\bin (?:our|my|the) (?:trial|experiment|run|test)\b/i,
+  /\btypical(?:ly)? (?:reads|measures|comes out)\b/i,
+  /\b(?:the )?(?:correct|model) answer is\b/i,
+]
+
+/** Every string a topic key carries, flattened for scanning. */
+function keyStrings(topic) {
+  return [
+    ...(topic.fixed_facts ?? []),
+    ...(topic.relationships ?? []),
+    ...(topic.accepted_alternative_framings ?? []),
+    ...(topic.disqualifying_errors ?? []),
+    topic.out_of_scope ?? '',
+  ].filter((entry) => typeof entry === 'string' && entry.length > 0)
+}
+
+function sameList(left, right) {
+  if (!Array.isArray(left) || !Array.isArray(right)) return false
+  return left.length === right.length && left.every((entry, index) => entry === right[index])
+}
+
 function fail(problems, pkg, detail) {
   problems.push(`${pkg.lesson_id}: ${detail}`)
 }
@@ -669,6 +703,261 @@ export const CHECKS = [
         }
         for (let index = 0; index < objectives; index += 1) {
           if (!covered.has(index)) fail(problems, pkg, `objective ${index + 1} has no question`)
+        }
+      }
+      return problems
+    },
+  },
+  {
+    id: 'correctness-authority-on-every-lesson',
+    description:
+      'Every lesson carries a scientific correctness authority whose content matches the hand-authored key for its topic, verbatim, and every authored key is used by a lesson.',
+    run({ packages, correctness }) {
+      const problems = []
+      const used = new Set()
+      for (const pkg of packages) {
+        const authority = pkg.scientific_correctness_authority
+        if (!authority) {
+          fail(problems, pkg, 'no scientific correctness authority')
+          continue
+        }
+        const topic = correctness.get(authority.topic_key)
+        if (!topic) {
+          fail(problems, pkg, `topic key is not authored anywhere: ${authority.topic_key}`)
+          continue
+        }
+        used.add(authority.topic_key)
+        if (topic.__courseId !== pkg.course_id) {
+          fail(problems, pkg, `topic key belongs to ${topic.__courseId}`)
+        }
+        if (topic.__sourceCommit !== pkg.source.commit) {
+          fail(problems, pkg, 'authored key was written against a different source commit')
+        }
+        for (const field of [
+          'fixed_facts',
+          'relationships',
+          'accepted_alternative_framings',
+          'disqualifying_errors',
+        ]) {
+          if (!sameList(authority[field], topic[field])) {
+            fail(problems, pkg, `${field} does not match the authored key`)
+          }
+        }
+        if (authority.out_of_scope !== topic.out_of_scope) {
+          fail(problems, pkg, 'grade boundary does not match the authored key')
+        }
+        if ((authority.relationships ?? []).length < 2) {
+          fail(problems, pkg, 'fewer than two accepted relationships authored')
+        }
+        if ((authority.disqualifying_errors ?? []).length < 2) {
+          fail(problems, pkg, 'fewer than two disqualifying errors authored')
+        }
+        if (!authority.out_of_scope) fail(problems, pkg, 'no grade boundary authored')
+      }
+      for (const key of correctness.keys()) {
+        if (!used.has(key)) problems.push(`authored key matches no lesson: ${key}`)
+      }
+      return problems
+    },
+  },
+  {
+    id: 'correctness-key-states-no-observation',
+    description:
+      'No authored correctness key, and nothing rendered from one, states a measurement a learner is expected to obtain or a result attributed to a learner.',
+    run({ packages, scoring, correctness, blocks }) {
+      const problems = []
+      for (const [key, topic] of correctness) {
+        for (const text of keyStrings(topic)) {
+          for (const pattern of FABRICATED_OBSERVATION_PATTERNS) {
+            if (pattern.test(text)) {
+              problems.push(`${key}: key attributes a result to a learner — ${text.slice(0, 70)}`)
+            }
+          }
+        }
+      }
+      for (const pkg of packages) {
+        const sheet = scoring.get(pkg.lesson_id) ?? ''
+        const start = sheet.indexOf('## Scientific correctness authority')
+        if (start === -1) {
+          fail(problems, pkg, 'scoring sheet renders no correctness authority section')
+          continue
+        }
+        const rest = sheet.slice(start)
+        const end = rest.indexOf('\n## ', 1)
+        let section = end === -1 ? rest : rest.slice(0, end)
+        // Two things in the rendered section are not authored here and must
+        // come out before scanning. The shared framing blocks state the rule
+        // being enforced — "nothing states what a measurement should come out
+        // at" — and scanning them flags the prohibition as the violation. The
+        // source's own provenance line is carried verbatim by requirement, and
+        // some of those lines disclaim an expected value in as many words.
+        // Both are covered by their own checks: `no-supplied-dataset-embedded`
+        // scans the provenance for embedded data, and
+        // `supplied-data-authority-pins-provenance` holds it to the source.
+        // What is left is what this package authored.
+        for (const id of [
+          'correctness-authority-headline',
+          'investigation-correctness-rule',
+          'supplied-data-answer-authority',
+        ]) {
+          const text = blocks.text[id]
+          if (text) section = section.split(text).join(' ')
+        }
+        const provenance = pkg.supplied_data_alternative?.source_declared_provenance
+        if (provenance) section = section.split(provenance).join(' ')
+        for (const pattern of FABRICATED_OBSERVATION_PATTERNS) {
+          if (pattern.test(section)) {
+            fail(problems, pkg, 'rendered correctness section states an expected measurement')
+          }
+        }
+      }
+      return problems
+    },
+  },
+  {
+    id: 'correctness-authority-is-adult-facing',
+    description:
+      'Every authored relationship and disqualifying error is printed on the adult scoring sheet, and no disqualifying error reaches the learner sheet.',
+    run({ packages, sheets, scoring }) {
+      const problems = []
+      for (const pkg of packages) {
+        const authority = pkg.scientific_correctness_authority
+        if (!authority) continue
+        const adult = scoring.get(pkg.lesson_id) ?? ''
+        const learner = sheets.get(pkg.lesson_id) ?? ''
+        if (!authority.adult_facing_only) {
+          fail(problems, pkg, 'authority is not marked adult-facing')
+        }
+        for (const statement of [...authority.relationships, ...authority.fixed_facts]) {
+          if (!adult.includes(statement)) {
+            fail(problems, pkg, `scoring sheet omits an authored statement: ${statement.slice(0, 60)}`)
+          }
+        }
+        for (const error of authority.disqualifying_errors) {
+          if (!adult.includes(error)) {
+            fail(problems, pkg, `scoring sheet omits a disqualifying error: ${error.slice(0, 60)}`)
+          }
+          if (learner.includes(error)) {
+            fail(problems, pkg, `disqualifying error reached the learner sheet: ${error.slice(0, 60)}`)
+          }
+        }
+        for (const statement of authority.relationships) {
+          if (learner.includes(statement)) {
+            fail(problems, pkg, `content key statement reached the learner sheet: ${statement.slice(0, 60)}`)
+          }
+        }
+      }
+      return problems
+    },
+  },
+  {
+    id: 'investigation-days-bound-conclusions-not-observations',
+    description:
+      'Every investigation day states that the content key bounds the conclusion and that a recorded observation is never scored against it; no desk day claims to be one.',
+    run({ packages, scoring, blocks }) {
+      const problems = []
+      const rule = blocks.text['investigation-correctness-rule']
+      if (!rule || !/do not score any recorded measurement against it/i.test(rule)) {
+        problems.push('the investigation rule no longer forbids scoring observations against the key')
+      }
+      for (const pkg of packages) {
+        const authority = pkg.scientific_correctness_authority
+        if (!authority) continue
+        const forms = authority.authority_forms ?? []
+        const adult = scoring.get(pkg.lesson_id) ?? ''
+        if (pkg.data_bearing) {
+          if (!forms.includes('INVESTIGATION_CRITERIA')) {
+            fail(problems, pkg, 'investigation day carries no investigation criteria')
+          }
+          if (rule && !adult.includes(rule)) {
+            fail(problems, pkg, 'investigation scoring sheet omits the observations-are-not-scored rule')
+          }
+        } else if (forms.includes('INVESTIGATION_CRITERIA')) {
+          fail(problems, pkg, 'desk day claims investigation criteria')
+        }
+      }
+      return problems
+    },
+  },
+  {
+    id: 'supplied-data-authority-pins-provenance',
+    description:
+      'Every lesson whose source names published data carries a supplied-data answer authority that pins the named resource and the source provenance verbatim, and no other lesson claims one.',
+    run({ packages, scoring, sources }) {
+      const problems = []
+      for (const pkg of packages) {
+        const authority = pkg.scientific_correctness_authority
+        if (!authority) continue
+        const supplied = authority.supplied_data_answer_authority
+        const declared = pkg.supplied_data_alternative?.published_data_named_by_source === true
+        if (!declared) {
+          if (supplied) fail(problems, pkg, 'claims supplied-data authority with no published data named')
+          continue
+        }
+        if (!supplied) {
+          fail(problems, pkg, 'source names published data but no supplied-data authority is carried')
+          continue
+        }
+        if (!supplied.data_source_resource) {
+          fail(problems, pkg, 'supplied-data authority pins no data-source resource')
+        } else {
+          const record = sources.get(pkg.lesson_id)
+          const known = new Set([
+            `res-${pkg.course_id}-data-sources`,
+            ...(record?.resource_refs ?? []),
+          ])
+          if (!known.has(supplied.data_source_resource)) {
+            fail(problems, pkg, `pinned resource is not one the source names: ${supplied.data_source_resource}`)
+          }
+          if (!(scoring.get(pkg.lesson_id) ?? '').includes(supplied.data_source_resource)) {
+            fail(problems, pkg, 'scoring sheet does not print the pinned data-source resource')
+          }
+        }
+        const provenance = pkg.supplied_data_alternative.source_declared_provenance
+        if (supplied.source_declared_provenance !== provenance) {
+          fail(problems, pkg, 'supplied-data provenance is not carried verbatim from the source')
+        }
+        if (provenance && !(scoring.get(pkg.lesson_id) ?? '').includes(provenance)) {
+          fail(problems, pkg, 'scoring sheet does not print the declared provenance')
+        }
+      }
+      return problems
+    },
+  },
+  {
+    id: 'rubric-correctness-criterion-bound-to-key',
+    description:
+      'The Scientific correctness rubric row is judged against the topic content key, and no sheet still tells a reader that the package ships no key.',
+    run({ packages, sheets, scoring, blocks }) {
+      const problems = []
+      const criterion = (blocks.rubric_criteria ?? []).find(
+        (entry) => entry.criterion === 'Scientific correctness',
+      )
+      if (!criterion) {
+        problems.push('the rubric no longer carries a Scientific correctness criterion')
+        return problems
+      }
+      if (!/topic content key/i.test(criterion.not_yet)) {
+        problems.push('the Scientific correctness Not yet level does not reference the topic content key')
+      }
+      if (!/disqualifying error/i.test(criterion.not_yet)) {
+        problems.push('the Scientific correctness Not yet level does not reference the disqualifying errors')
+      }
+      const threshold = blocks.text['rubric-threshold'] ?? ''
+      if (/ships none/i.test(threshold) || /this package ships no/i.test(threshold)) {
+        problems.push('the rubric threshold still tells the reader that no content key ships')
+      }
+      if (!/topic content key/i.test(threshold)) {
+        problems.push('the rubric threshold does not point the reader at the topic content key')
+      }
+      for (const pkg of packages) {
+        for (const [label, text] of [
+          ['student sheet', sheets.get(pkg.lesson_id) ?? ''],
+          ['scoring sheet', scoring.get(pkg.lesson_id) ?? ''],
+        ]) {
+          if (/not against a fixed answer key, because this package ships none/i.test(text)) {
+            fail(problems, pkg, `${label} still claims no content key ships`)
+          }
         }
       }
       return problems

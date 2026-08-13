@@ -30,6 +30,32 @@ export function loadSafetyFloor() {
   return loadJson('policy/safety-floor.json')
 }
 
+/**
+ * The hand-authored scientific correctness keys, read straight from
+ * `policy/correctness/` rather than from the packages that embed them. A
+ * package claiming a key it was not built from has to be detectable.
+ */
+export function loadCorrectnessKeys() {
+  const dir = join(ROOT, 'policy', 'correctness')
+  const topics = new Map()
+  const files = readdirSync(dir)
+    .filter((name) => name.endsWith('.correctness.json'))
+    .sort()
+  for (const name of files) {
+    const document = JSON.parse(readFileSync(join(dir, name), 'utf8'))
+    for (const topic of document.topics) {
+      const unit = String(topic.unit).padStart(2, '0')
+      topics.set(`${document.course_id}-u${unit}::${topic.focus}`, {
+        ...topic,
+        __file: `policy/correctness/${name}`,
+        __courseId: document.course_id,
+        __sourceCommit: document.source_commit,
+      })
+    }
+  }
+  return topics
+}
+
 export function courseIds() {
   return readdirSync(join(ROOT, 'packages'), { withFileTypes: true })
     .filter((entry) => entry.isDirectory())

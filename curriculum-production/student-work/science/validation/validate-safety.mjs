@@ -16,6 +16,7 @@ import { CHECKS } from './checks.mjs'
 import {
   ROOT,
   loadAllPackages,
+  loadCorrectnessKeys,
   loadManifest,
   loadSafetyFloor,
   loadSharedBlocks,
@@ -29,6 +30,7 @@ export function runSafetyGate(overrides = {}) {
   const floor = overrides.floor ?? loadSafetyFloor()
   const blocks = overrides.blocks ?? loadSharedBlocks()
   const allPackages = overrides.packages ?? loadAllPackages()
+  const correctness = overrides.correctness ?? loadCorrectnessKeys()
 
   const sheets = new Map()
   const scoring = new Map()
@@ -51,7 +53,16 @@ export function runSafetyGate(overrides = {}) {
     }
   }
 
-  const context = { packages: allPackages, sheets, scoring, sources, floor, blocks, manifest }
+  const context = {
+    packages: allPackages,
+    sheets,
+    scoring,
+    sources,
+    floor,
+    blocks,
+    manifest,
+    correctness,
+  }
   const results = CHECKS.map((check) => {
     const problems = check.run(context)
     return {

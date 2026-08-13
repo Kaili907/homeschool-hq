@@ -6,11 +6,40 @@
 
 ## There is no answer key, and that is deliberate
 
-Science work in this course is scored against criteria, not against a fixed answer. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong.
+Science work in this course is scored against criteria, not against a model response. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong. What it does supply, below, is a content key: the relationships this lesson's topic actually asserts, and the specific wrong claims that make work incorrect however well it is documented. A criterion tells you what to look for. The key tells you what is true.
 
 **Scoring guidance carried verbatim from the curriculum source:**
 
 > Score the stated learning target: accuracy, quality of evidence and reasoning, and evidence of checking or revision. Accept any valid approach that meets the criteria. Do not infer effort, motivation, diagnosis, or character from an error. Do not award credit for a numerical result that the learner did not measure, compute, or cite to a named source.
+
+## Scientific correctness authority for this topic
+
+This is the content key for this lesson's topic — what the curriculum teaches, which alternative wordings are also correct, and the specific wrong claims to catch. It is authored subject content held to the grade band, not a model answer and not a record of anything a learner did. Nothing in it states what a measurement should come out at. Read it before scoring the Scientific correctness row; that row is the one instrument here that can catch a well-argued, well-evidenced, false answer.
+
+_Topic `ma-hs11-physics-u02::Newton's second law as a mathematical relationship` · forms in force: `ACCEPTED_RELATIONSHIPS`, `EXPECTED_REASONING_CRITERIA`, `FIXED_FACTUAL`, `RUBRIC_CORRECTNESS_CONSTRAINT` · authored in `policy/correctness/ma-hs11-physics.correctness.json`._
+
+**Fixed for this topic.** These are settled, and work that contradicts one is `Not yet` on Scientific correctness:
+
+- Acceleration is proportional to net force and inversely proportional to mass, and it is in the direction of the net force.
+
+**Accepted relationships and models.** What this lesson's learning target asserts:
+
+- For a given mass, doubling the net force doubles the acceleration; for a given net force, doubling the mass halves it.
+- The relationship applies to the net force, not to any single force acting on the object.
+- Acceleration is always in the direction of the net force, whatever the direction of motion.
+
+**Also correct.** Accept any of these framings — do not require the wording above:
+
+- Expressing the relationship as an equation, as a proportionality, or in words are equally correct.
+
+**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well the reasoning is documented and however complete the evidence is:
+
+- Applying the relationship to one individual force rather than the net force.
+- Claiming acceleration is in the direction of motion rather than of net force.
+- Claiming force is proportional to velocity rather than to acceleration.
+
+**Grade boundary.** Variable-mass systems and the momentum form of the second law are acceptable but not required.
+
 
 ## What a complete response contains, question by question
 
@@ -59,7 +88,7 @@ The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is pr
 - The learner checks or revises the work and identifies one specific next step.
 - Any quantity the learner reports is one the learner measured, computed, or cited to a named published source.
 
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, success criteria, and course guide — not against a fixed answer key, because this package ships none. Where the learning target names a definite relationship, work that contradicts it is Not yet however well the reasoning is documented.
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 

@@ -9,7 +9,7 @@ Each lesson gets three artefacts:
 | Path | Audience | What it is |
 | --- | --- | --- |
 | `packages/<course>/student-sheets/<lesson>.md` | learner | Safety brief, blank data sheet, both alternative paths, analysis questions, rubric, reteach prompts, extension |
-| `packages/<course>/scoring/<lesson>.md` | supervising adult | Scoring authority, expected reasoning per question, non-negotiables, reteach routes, guardian safety record |
+| `packages/<course>/scoring/<lesson>.md` | supervising adult | Scoring authority, the topic content key, expected reasoning per question, non-negotiables, reteach routes, guardian safety record |
 | `packages/<course>/work-packages.jsonl` | the app | One JSON object per lesson, the machine record behind both sheets |
 
 ## The two rules everything else follows from
@@ -21,6 +21,14 @@ result, and the curriculum's own policy set forbids presenting invented measurem
 Where a lesson's analysis can be done without performing the activity, the package routes the learner
 to data the curriculum source *names* as published and makes them record its provenance. It never
 prints the data itself.
+
+**Nothing here is scored without a content key.** Every lesson's scoring sheet carries the accepted
+relationships its topic asserts, the fixed facts where the answer genuinely is fixed, the alternative
+framings that must also be accepted, and the specific wrong claims that make work incorrect however
+well it is argued. A criterion tells an adult what to look for; the key tells them what is true. The
+keys are hand-authored, adult-facing only, and they state what the curriculum teaches — never what a
+learner measured, and never what a measurement should come out at. See
+`policy/correctness/README.md`.
 
 **Nothing here requires an unsafe home experiment.** Every lesson carries a student-visible safety
 brief and an equal-credit alternative that needs no special equipment, no heat, no chemical, no mains
@@ -83,9 +91,10 @@ node curriculum-production/student-work/science/validation/mutation-test.mjs
 node curriculum-production/student-work/science/validation/verify-checksums.mjs
 ```
 
-- **`validate-safety.mjs`** runs 20 checks that re-derive their expectations from the pinned source
-  blobs and the rendered markdown, not from the packages' own assurance flags — a package cannot pass
-  by asserting that it passes. Report: `reports/safety-gate.md`.
+- **`validate-safety.mjs`** runs 29 checks that re-derive their expectations from the pinned source
+  blobs, the hand-authored correctness keys, and the rendered markdown, not from the packages' own
+  assurance flags — a package cannot pass by asserting that it passes. Report:
+  `reports/safety-gate.md`.
 - **`run-production-quality-gate.mjs`** runs the repo's own gate (`src/curriculum/production-quality`)
   over all 972 lessons. It imports the committed TypeScript directly through a small loader hook, so
   the gate that runs is the gate, not a copy. Report: `reports/production-quality-gate.md`.
@@ -95,14 +104,40 @@ node curriculum-production/student-work/science/validation/verify-checksums.mjs
 The build is deterministic: no clock, no randomness, sorted iteration. Rebuilding from the same pinned
 sources reproduces `SHA256SUMS.txt` byte for byte.
 
+## Scientific correctness authority
+
+The largest finding of the independent review — that the rubric could score reasoning and internal
+consistency but nothing could catch a scientifically false answer — is closed. 486 topic keys, one per
+`(course, unit, focus)` and 54 per course, cover all 972 lessons. Each lesson carries between two and
+five forms of authority, selected from what the lesson actually is:
+
+| Form | Lessons | Applies when |
+| --- | --- | --- |
+| `ACCEPTED_RELATIONSHIPS` | 972 | always — the relationships and models the learning target asserts |
+| `EXPECTED_REASONING_CRITERIA` | 972 | always — claim-and-evidence criteria, per analysis question |
+| `RUBRIC_CORRECTNESS_CONSTRAINT` | 972 | always — the disqualifying errors bound the `Scientific correctness` row |
+| `FIXED_FACTUAL` | 520 | the topic has an answer that genuinely is fixed |
+| `SUPPLIED_DATA_ANSWER_AUTHORITY` | 288 | the source names published data; the named source and its pinned resource are the authority |
+| `INVESTIGATION_CRITERIA` | 162 | the lesson is an investigation — method and conclusion criteria only |
+
+Three rules the keys are held to, each by a check that fails the build or the gate:
+
+- **A key never states an observation.** No expected value, no reading, nothing attributed to a
+  learner. A published constant is a property of the world and is allowed; a measurement someone is
+  supposed to obtain is not.
+- **On investigation days the key bounds the conclusion, never the observations.** A reading that
+  disagrees with an accepted relationship is data. A conclusion that restates a disqualifying error as
+  established science is `Not yet`.
+- **The key is adult-facing.** No relationship and no disqualifying error appears on any learner
+  sheet, so open explanation is not converted into a fill-in-the-blank.
+
 ## Known gaps
 
-An independent safety and scoring review of this package produced four findings that are curriculum
-decisions rather than build defects — no per-lesson content key to catch wrong science, a derived
-rather than authored alternative for Grades 3–8, a Grade 8 clause stricter than Grade 9, and notice
-volume on desk days. Each is written up in `reports/open-gaps.md` with what closing it requires. Two
-of them are deliberately left alone here, because relaxing a reviewed safety clause or trimming safety
-coverage is not a call a build should make on its own.
+The same review produced three further findings that are curriculum decisions rather than build
+defects — a derived rather than authored alternative for Grades 3–8, a Grade 8 clause stricter than
+Grade 9, and notice volume on desk days. Each is written up in `reports/open-gaps.md` with what
+closing it requires. Two of them are deliberately left alone here, because relaxing a reviewed safety
+clause or trimming safety coverage is not a call a build should make on its own.
 
 ## What the gate's three carried statuses mean
 

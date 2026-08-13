@@ -6,11 +6,44 @@
 
 ## There is no answer key, and that is deliberate
 
-Science work in this course is scored against criteria, not against a fixed answer. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong.
+Science work in this course is scored against criteria, not against a model response. This package supplies no model answer and no expected value, because the learner's own record is the evidence and inventing one would license marking a correct record wrong. What it does supply, below, is a content key: the relationships this lesson's topic actually asserts, and the specific wrong claims that make work incorrect however well it is documented. A criterion tells you what to look for. The key tells you what is true.
 
 **Scoring guidance carried verbatim from the curriculum source:**
 
 > Score the stated learning target, accuracy, evidence/reasoning, and revision. Accept multiple valid approaches when they meet the criteria. Do not infer effort, motivation, diagnosis, or character from an error.
+
+## Scientific correctness authority for this topic
+
+This is the content key for this lesson's topic — what the curriculum teaches, which alternative wordings are also correct, and the specific wrong claims to catch. It is authored subject content held to the grade band, not a model answer and not a record of anything a learner did. Nothing in it states what a measurement should come out at. Read it before scoring the Scientific correctness row; that row is the one instrument here that can catch a well-argued, well-evidenced, false answer.
+
+_Topic `ma-g8-science-u05::geologic time` · forms in force: `ACCEPTED_RELATIONSHIPS`, `EXPECTED_REASONING_CRITERIA`, `FIXED_FACTUAL`, `INVESTIGATION_CRITERIA`, `RUBRIC_CORRECTNESS_CONSTRAINT` · authored in `policy/correctness/ma-g8-science.correctness.json`._
+
+**Fixed for this topic.** These are settled, and work that contradicts one is `Not yet` on Scientific correctness:
+
+- Earth is about 4.5 billion years old.
+
+**Accepted relationships and models.** What this lesson's learning target asserts:
+
+- Earth's history spans billions of years, and most of it took place before organisms with hard parts existed.
+- Geologic time is divided into named intervals whose boundaries are marked by major changes in the rock and fossil record.
+- Relative dating orders events; radiometric dating supplies ages in years, and the two are used together.
+
+**Also correct.** Accept any of these framings — do not require the wording above:
+
+- Approximate statements such as 'about four and a half billion years' are correct; an exact figure is not required.
+
+**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well the reasoning is documented and however complete the evidence is:
+
+- Claiming Earth is thousands rather than billions of years old.
+- Claiming humans have existed for a substantial fraction of Earth's history.
+- Claiming relative dating gives ages in years.
+
+**Grade boundary.** Isotope decay equations and calibration of the geologic timescale are High School work.
+
+**Investigation day — the key bounds the conclusion, never the observations.**
+
+This is an investigation day, so the key above bounds the learner's conclusion and never their observations. Do not score any recorded measurement against it. A reading that disagrees with an accepted relationship is data: a learner who records it honestly and says what could explain it has done the work well, and a learner who quietly adjusts it has not. What the key catches here is a conclusion that states a disqualifying error as established science — Not yet on Scientific correctness even when the learner's own data is clean. A conclusion the learner's own data does not reach is Not yet on Evidence and reasoning even when it agrees with the key.
+
 
 ## What a complete response contains, question by question
 
@@ -58,7 +91,7 @@ The full four-level rubric is in `policy/scoring-and-safety-policy.md` and is pr
 - The learner gives evidence, reasoning, a model, or a documented process rather than an unsupported answer.
 - The learner checks or revises the work and can identify a next step.
 
-A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, success criteria, and course guide — not against a fixed answer key, because this package ships none. Where the learning target names a definite relationship, work that contradicts it is Not yet however well the reasoning is documented.
+A submission meets the lesson target when every criterion is at Meets or above. A single Not yet routes to the remediation path, not to a lower final mark, until the reteach has run. Scientific correctness is judged against the lesson's stated learning target, its success criteria, and the topic content key printed on the adult scoring sheet — never against a model answer or an expected measurement, because this package ships neither. Work that contradicts an established relationship in that key is Not yet however well the reasoning is documented, and an observation is never scored against it.
 
 ## Reteach routes
 

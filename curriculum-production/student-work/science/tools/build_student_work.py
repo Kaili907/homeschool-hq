@@ -19,6 +19,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import blocks  # noqa: E402
+import correctness  # noqa: E402
 import render  # noqa: E402
 from blocks import ELEMENTARY_SAFETY_VARIANTS  # noqa: E402
 from package_model import (  # noqa: E402
@@ -362,7 +363,14 @@ def safety_completeness(
     return ("VERIFIED" if not problems else "GAP"), problems
 
 
-def build_package(lesson: dict, course: dict, floor: dict, resource_ids: set[str]) -> dict:
+def build_package(
+    lesson: dict,
+    course: dict,
+    floor: dict,
+    resource_ids: set[str],
+    topics: dict,
+    topic_provenance: dict,
+) -> dict:
     register = REGISTER_BY_BAND[course["band"]]
     data_bearing = is_data_bearing(lesson["phase"])
     work_type = "INVESTIGATION_DATA_SHEET" if data_bearing else "STUDENT_WORK_SHEET"
@@ -410,6 +418,9 @@ def build_package(lesson: dict, course: dict, floor: dict, resource_ids: set[str
     extension = build_extension(lesson["raw"], lesson["unit"], course["family"])
     expected_reasoning = build_expected_reasoning(lesson, questions)
     rubric = build_rubric(lesson)
+    authority = correctness.build_authority(
+        lesson, course["course_id"], topics, topic_provenance, data_bearing, supplied
+    )
     instruction = build_instruction(lesson, lesson["unit"])
 
     covered = {question["objective_index"] for question in questions}
@@ -467,6 +478,7 @@ def build_package(lesson: dict, course: dict, floor: dict, resource_ids: set[str
         "equal_credit_safe_alternative": equal_credit,
         "analysis_questions": questions,
         "expected_reasoning": expected_reasoning,
+        "scientific_correctness_authority": authority,
         "rubric": rubric,
         "remediation": remediation,
         "extension": extension,
@@ -480,6 +492,9 @@ def build_package(lesson: dict, course: dict, floor: dict, resource_ids: set[str
             "safety_completeness": safety_status,
             "safety_problems": safety_problems,
             "objective_alignment_verified": aligned,
+            "scientific_correctness_authority_present": True,
+            "scientific_correctness_authority_forms": list(authority["authority_forms"]),
+            "supplies_no_expected_measurement": True,
             "unmapped_objective_templates": unmapped_objectives,
             "source_integrity_required": requires_source_integrity,
             "source_integrity_status": source_integrity_status,
@@ -524,6 +539,7 @@ def main() -> int:
     reader = SourceReader()
     raw_lessons, units_by_course = load_all(reader)
     floor = build_safety_floor(reader, raw_lessons)
+    topics, topic_provenance = correctness.load_topic_keys()
     resources = reader.read_json("hs912-science-h2", HS_H2_COMMIT, HS_RESOURCES_PATH)
     resource_ids = {resource["resource_id"] for resource in resources}
     shared = blocks.shared_blocks()
@@ -534,6 +550,7 @@ def main() -> int:
 
     coverage: list[dict] = []
     total = 0
+    used_topic_keys: set[str] = set()
 
     for course in COURSES:
         course_id = course["course_id"]
@@ -548,7 +565,10 @@ def main() -> int:
 
         records = []
         for lesson in lessons:
-            package = build_package(lesson, course, floor, resource_ids)
+            package = build_package(
+                lesson, course, floor, resource_ids, topics, topic_provenance
+            )
+            used_topic_keys.add(package["scientific_correctness_authority"]["topic_key"])
             records.append(package)
             (course_dir / "student-sheets" / f"{package['lesson_id']}.md").write_text(
                 render.student_sheet(package, shared, floor), encoding="utf-8"
@@ -589,8 +609,23 @@ def main() -> int:
                 "hazard_bearing": sum(
                     1 for package in records if package["safety_brief"].get("hazards")
                 ),
+                "correctness_topics": len(
+                    {
+                        package["scientific_correctness_authority"]["topic_key"]
+                        for package in records
+                    }
+                ),
+                "correctness_authority_lessons": sum(
+                    1
+                    for package in records
+                    if package["assurances"]["scientific_correctness_authority_present"]
+                ),
             }
         )
+
+    unused = correctness.coverage_problems(topics, used_topic_keys)
+    if unused:
+        raise SystemExit("correctness keys rejected:\n  " + "\n  ".join(unused))
 
     policy_dir = OUT_ROOT / "policy"
     policy_dir.mkdir(parents=True, exist_ok=True)
@@ -631,6 +666,8 @@ def main() -> int:
             "Every recording field ships blank.",
             "Every lesson carries a student-visible safety brief and an equal-credit safe alternative.",
             "High School safety content comes from the H2 package only.",
+            "Every lesson carries a scientific correctness authority for its topic, adult-facing only.",
+            "No correctness key states an expected measurement or any observation.",
         ],
     }
     (OUT_ROOT / "MANIFEST.json").write_text(

@@ -170,9 +170,42 @@ EXTENSION_NEVER = (
 )
 
 NO_FIXED_ANSWER_KEY = (
-    "Science work in this course is scored against criteria, not against a fixed answer. This "
+    "Science work in this course is scored against criteria, not against a model response. This "
     "package supplies no model answer and no expected value, because the learner's own record is "
-    "the evidence and inventing one would license marking a correct record wrong."
+    "the evidence and inventing one would license marking a correct record wrong. What it does "
+    "supply, below, is a content key: the relationships this lesson's topic actually asserts, and "
+    "the specific wrong claims that make work incorrect however well it is documented. A criterion "
+    "tells you what to look for. The key tells you what is true."
+)
+
+CORRECTNESS_AUTHORITY_HEADLINE = (
+    "This is the content key for this lesson's topic — what the curriculum teaches, which "
+    "alternative wordings are also correct, and the specific wrong claims to catch. It is authored "
+    "subject content held to the grade band, not a model answer and not a record of anything a "
+    "learner did. Nothing in it states what a measurement should come out at. Read it before "
+    "scoring the Scientific correctness row; that row is the one instrument here that can catch a "
+    "well-argued, well-evidenced, false answer."
+)
+
+INVESTIGATION_CORRECTNESS_RULE = (
+    "This is an investigation day, so the key above bounds the learner's conclusion and never their "
+    "observations. Do not score any recorded measurement against it. A reading that disagrees with "
+    "an accepted relationship is data: a learner who records it honestly and says what could "
+    "explain it has done the work well, and a learner who quietly adjusts it has not. What the key "
+    "catches here is a conclusion that states a disqualifying error as established science — Not "
+    "yet on Scientific correctness even when the learner's own data is clean. A conclusion the "
+    "learner's own data does not reach is Not yet on Evidence and reasoning even when it agrees "
+    "with the key."
+)
+
+SUPPLIED_DATA_ANSWER_AUTHORITY = (
+    "Where this lesson works from data the curriculum source names as published rather than from "
+    "the learner's own measurements, the answer authority is that named source at the provenance "
+    "the learner records — not this package, which prints no values, and not the adult's memory of "
+    "the figure. Check three things in order: that the figure reported is the figure the named "
+    "source carries, that the provenance line is complete, and that the reasoning from it is sound. "
+    "A correct figure with no provenance is Not yet on Data honesty and provenance. A well-sourced "
+    "figure reasoned from wrongly is Not yet on Evidence and reasoning."
 )
 
 SCORING_NON_NEGOTIABLES = (
@@ -254,9 +287,9 @@ RUBRIC_SCALE = ("Not yet", "Approaching", "Meets", "Exceeds")
 RUBRIC_CRITERIA = (
     {
         "criterion": "Scientific correctness",
-        "not_yet": "A factual statement contradicts the lesson's stated learning target, or is stated as established when the lesson's own materials say otherwise.",
-        "approaching": "Mostly consistent with the learning target, but one statement is wrong or is claimed more strongly than the evidence allows.",
-        "meets": "Every factual statement is consistent with the lesson's stated learning target and success criteria, in whatever wording the learner chose.",
+        "not_yet": "A factual statement contradicts an established relationship or a fixed fact in this lesson's topic content key, or restates one of that key's disqualifying errors as established science.",
+        "approaching": "Consistent with the topic content key overall, but one statement is wrong, or is claimed more strongly than the evidence allows.",
+        "meets": "Every factual statement is consistent with the topic content key, in whatever wording the learner chose, including any of the key's accepted alternative framings.",
         "exceeds": "Correct, and the learner separates what this lesson establishes from what it only suggests.",
     },
     {
@@ -292,10 +325,11 @@ RUBRIC_CRITERIA = (
 RUBRIC_THRESHOLD = (
     "A submission meets the lesson target when every criterion is at Meets or above. A single Not "
     "yet routes to the remediation path, not to a lower final mark, until the reteach has run. "
-    "Scientific correctness is judged against the lesson's stated learning target, success "
-    "criteria, and course guide — not against a fixed answer key, because this package ships none. "
-    "Where the learning target names a definite relationship, work that contradicts it is Not yet "
-    "however well the reasoning is documented."
+    "Scientific correctness is judged against the lesson's stated learning target, its success "
+    "criteria, and the topic content key printed on the adult scoring sheet — never against a model "
+    "answer or an expected measurement, because this package ships neither. Work that contradicts "
+    "an established relationship in that key is Not yet however well the reasoning is documented, "
+    "and an observation is never scored against it."
 )
 
 EXPECTED_REASONING = {
@@ -461,6 +495,9 @@ def shared_blocks() -> dict:
             "no-fixed-answer-key": NO_FIXED_ANSWER_KEY,
             "k8-derived-path-note": K8_DERIVED_PATH_NOTE,
             "rubric-threshold": RUBRIC_THRESHOLD,
+            "correctness-authority-headline": CORRECTNESS_AUTHORITY_HEADLINE,
+            "investigation-correctness-rule": INVESTIGATION_CORRECTNESS_RULE,
+            "supplied-data-answer-authority": SUPPLIED_DATA_ANSWER_AUTHORITY,
         },
         "lists": {
             "supplied-provenance-fields": list(SUPPLIED_PROVENANCE_FIELDS),

@@ -1,0 +1,1035 @@
+{
+  "course_id": "ma-g8-science",
+  "source_commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+  "authored_against": "Grade 8 science, middle band. Keys state established science at this grade band; they are not extracted from the source, which states only a focus and generic objectives.",
+  "topics": [
+    {
+      "unit": 1,
+      "focus": "Newton’s laws at middle-school level",
+      "fixed_facts": [
+        "An object's motion changes only when a net force acts on it.",
+        "Forces come in pairs: when object A pushes on object B, B pushes back on A with equal strength in the opposite direction."
+      ],
+      "relationships": [
+        "An object at rest stays at rest, and an object in motion keeps the same speed and direction, unless a net force acts on it.",
+        "A net force changes an object's motion, and for a given force a more massive object changes motion less.",
+        "Forces always act in pairs between two objects, equal in size and opposite in direction, and the two forces act on different objects."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the laws by number, or describing them in plain terms, are both correct; the numbering is not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming a force is needed to keep an object moving at constant velocity.",
+        "Claiming the two forces of an interaction pair act on the same object and therefore cancel.",
+        "Claiming a heavier object always pushes harder than a lighter one it collides with."
+      ],
+      "out_of_scope": "Vector decomposition, quantitative F equals ma problems, and frames of reference are High School work; correct use of them is not an error."
+    },
+    {
+      "unit": 1,
+      "focus": "force and mass",
+      "fixed_facts": [
+        "For the same net force, a larger mass has a smaller change in motion."
+      ],
+      "relationships": [
+        "For a given net force, the change in an object's motion decreases as its mass increases.",
+        "For a given mass, a larger net force produces a larger change in motion.",
+        "Mass is a measure of how much matter an object contains and does not change with location; weight is the gravitational force on it and does."
+      ],
+      "accepted_alternative_framings": [
+        "Describing mass as resistance to change in motion, or as amount of matter, are both acceptable here."
+      ],
+      "disqualifying_errors": [
+        "Treating mass and weight as the same quantity.",
+        "Claiming an object's mass changes when it is taken to the Moon.",
+        "Claiming force alone determines the change in motion regardless of mass."
+      ],
+      "out_of_scope": "Quantitative acceleration calculations and inertial mass versus gravitational mass are High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "motion graphs",
+      "fixed_facts": [
+        "On a distance-time graph the slope represents speed; a horizontal line means the object is not moving."
+      ],
+      "relationships": [
+        "On a distance-time graph, a steeper slope means a greater speed and a flat line means no motion.",
+        "A straight line on a distance-time graph means constant speed; a curve means the speed is changing.",
+        "A graph shows only what was measured; the axes and their units determine what can be read from it."
+      ],
+      "accepted_alternative_framings": [
+        "Position-time and distance-time graphs are both acceptable here provided the axes are labelled."
+      ],
+      "disqualifying_errors": [
+        "Reading a distance-time graph as though it showed the path the object travelled through space.",
+        "Claiming a horizontal line on a distance-time graph means motion at a constant non-zero speed rather than rest.",
+        "Reading a value off a graph with unlabelled axes."
+      ],
+      "out_of_scope": "Velocity-time graphs, area under the curve, and acceleration from slope are High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "collisions",
+      "fixed_facts": [],
+      "relationships": [
+        "In a collision the objects exert equal and opposite forces on each other for the same length of time.",
+        "Energy is transferred during a collision, and some is always transferred to sound, warming, and deformation.",
+        "Extending the time over which a collision force acts reduces the peak force, which is the principle behind crumple zones, helmets, and airbags."
+      ],
+      "accepted_alternative_framings": [
+        "Explaining protective design in terms of longer contact time, or of spreading the force over more time, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming the heavier object in a collision exerts the larger force.",
+        "Claiming energy disappears in a collision.",
+        "Claiming a protective device removes the force rather than reducing its peak."
+      ],
+      "out_of_scope": "Momentum conservation as an equation, impulse calculations, and elastic-inelastic classification are High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "gravitational interactions",
+      "fixed_facts": [
+        "Gravitational attraction acts between any two masses, increases with their masses, and decreases as the distance between them increases."
+      ],
+      "relationships": [
+        "Every mass attracts every other mass; the force increases with either mass and decreases as the separation increases.",
+        "Gravity is always attractive, never repulsive.",
+        "Gravitational forces are noticeable in everyday life only when at least one of the objects is astronomically massive."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming there is no gravity in space, or that orbiting astronauts float because gravity has stopped.",
+        "Claiming gravity can repel as well as attract.",
+        "Claiming gravity acts only on objects touching a planet's surface."
+      ],
+      "out_of_scope": "The inverse-square law stated quantitatively and orbital mechanics are High School work."
+    },
+    {
+      "unit": 1,
+      "focus": "electric and magnetic fields",
+      "fixed_facts": [
+        "Electric and magnetic forces act at a distance, and both can attract or repel."
+      ],
+      "relationships": [
+        "A field is a model for how one object exerts a force on another without contact, with strength depending on distance and on properties of the objects.",
+        "Electric forces act between charges and magnetic forces between magnets and moving charges; both attract or repel depending on orientation or sign.",
+        "Electric currents produce magnetic fields, which is why electromagnets work and why electricity and magnetism are treated as one subject."
+      ],
+      "accepted_alternative_framings": [
+        "Field lines and force arrows are both acceptable representations; neither is required."
+      ],
+      "disqualifying_errors": [
+        "Claiming magnetic and electric forces are the same force acting on the same property.",
+        "Claiming field lines are physically present in space rather than a representation.",
+        "Claiming gravity, like electric force, can repel."
+      ],
+      "out_of_scope": "Coulomb's law, field strength units, and Maxwell's relationships are High School work."
+    },
+
+    {
+      "unit": 2,
+      "focus": "wave amplitude wavelength and energy",
+      "fixed_facts": [
+        "A wave's amplitude determines the energy it carries; wavelength is the distance between matching points on successive waves."
+      ],
+      "relationships": [
+        "Amplitude is the maximum displacement from the resting position, and a larger amplitude wave carries more energy.",
+        "Wavelength is the distance from a point on one wave to the matching point on the next, and frequency is the number of waves passing a point each second.",
+        "In a given medium, wavelength and frequency vary together so that their product, the wave speed, stays the same."
+      ],
+      "accepted_alternative_framings": [
+        "Describing energy as depending on amplitude, or as increasing with amplitude, are both correct; the square relationship is not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming amplitude determines the pitch of a sound or the colour of light.",
+        "Claiming a wave transports the medium along with it.",
+        "Claiming wavelength and frequency are independent within the same medium."
+      ],
+      "out_of_scope": "The energy-amplitude-squared relationship and quantitative wave equations are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "reflection absorption and transmission",
+      "fixed_facts": [
+        "When a wave meets a boundary it is reflected, absorbed, transmitted, or some combination of the three."
+      ],
+      "relationships": [
+        "At a boundary, wave energy is divided between reflection, absorption, and transmission, and the division depends on both materials and on the wave.",
+        "Absorbed wave energy is transferred to the material, usually raising its temperature.",
+        "The same material can reflect one kind of wave and transmit another, which is why glass is transparent to visible light but not to all radiation."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a material either reflects or transmits, with no possibility of both.",
+        "Claiming absorbed wave energy disappears.",
+        "Claiming a material behaves the same way toward every kind of wave."
+      ],
+      "out_of_scope": "Refraction geometry, refractive index, and interference are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "light and sound models",
+      "fixed_facts": [
+        "Sound requires a medium; light does not."
+      ],
+      "relationships": [
+        "Sound is a mechanical wave: it is a vibration passing through matter and cannot travel through a vacuum.",
+        "Light is an electromagnetic wave and travels through a vacuum, which is how sunlight reaches Earth.",
+        "Both carry energy and both reflect, absorb, and transmit at boundaries, which is why the wave model is useful for each."
+      ],
+      "accepted_alternative_framings": [
+        "Describing light as a wave, or noting that it also has particle-like behaviour, are both acceptable; the wave model is what is required here."
+      ],
+      "disqualifying_errors": [
+        "Claiming sound travels through space.",
+        "Claiming light needs a medium to travel through.",
+        "Claiming sound and light travel at the same speed."
+      ],
+      "out_of_scope": "Wave-particle duality, photons, and the electromagnetic spectrum in detail are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "digital versus analog signals",
+      "fixed_facts": [
+        "A digital signal encodes information as discrete values; an analog signal varies continuously."
+      ],
+      "relationships": [
+        "An analog signal varies continuously and any noise added to it becomes part of the signal.",
+        "A digital signal takes discrete values, so small amounts of noise can be removed by restoring each value to the nearest allowed one.",
+        "That is why digital signals can be copied and transmitted many times with far less degradation than analog ones."
+      ],
+      "accepted_alternative_framings": [
+        "Describing digital encoding as binary, or as discrete levels, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming digital signals are immune to all noise and loss.",
+        "Claiming digital means the information itself is not physical.",
+        "Claiming an analog signal can be restored to its original form after noise is added, as a digital one can."
+      ],
+      "out_of_scope": "Sampling theory, bit depth, and error-correcting codes are High School work."
+    },
+    {
+      "unit": 2,
+      "focus": "communication technologies",
+      "fixed_facts": [],
+      "relationships": [
+        "Communication technologies encode information into a wave or a signal, transmit it, and decode it at the other end.",
+        "Every link has limits on range, rate, and reliability, set by the physics of the carrier and by the equipment.",
+        "The information is carried by the pattern, so the same message can be sent by very different physical means."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a technology transmits information with no physical carrier.",
+        "Claiming a communication link has no limits on range or rate.",
+        "Claiming the meaning of a message is a property of the wave itself rather than of the agreed encoding."
+      ],
+      "out_of_scope": "Modulation schemes, bandwidth calculation, and network protocols are later work."
+    },
+    {
+      "unit": 2,
+      "focus": "model limitations",
+      "fixed_facts": [],
+      "relationships": [
+        "A wave model represents some behaviours well and others not at all, and which those are depends on the model.",
+        "Choosing a model means choosing which behaviours matter for the question being asked.",
+        "A model's failure at the edge of its range is information about the range, not proof that the model is worthless."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating a model's representational features as physical facts, such as claiming a transverse-wave drawing shows how sound moves.",
+        "Claiming a model that fails in one regime is therefore wrong everywhere.",
+        "Using a model beyond its stated range without saying so."
+      ],
+      "out_of_scope": "Formal model validation and computational modelling are later work."
+    },
+
+    {
+      "unit": 3,
+      "focus": "sexual and asexual reproduction",
+      "fixed_facts": [
+        "Asexual reproduction produces offspring genetically identical to the single parent; sexual reproduction produces offspring with a combination of genetic material from two parents."
+      ],
+      "relationships": [
+        "Asexual reproduction involves one parent and produces genetically identical offspring apart from mutation.",
+        "Sexual reproduction involves two parents, each contributing genetic material, so offspring differ from both parents and from each other.",
+        "Sexual reproduction generates variation within a population; asexual reproduction generates far less."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the mechanisms as mitosis and meiosis is correct but not required at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming asexual offspring differ genetically from the parent as a normal outcome.",
+        "Claiming sexual reproduction produces offspring identical to one parent.",
+        "Claiming only animals reproduce sexually or only simple organisms reproduce asexually."
+      ],
+      "out_of_scope": "Meiosis in detail, crossing over, and reproductive strategy theory are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "genes chromosomes and traits",
+      "fixed_facts": [
+        "Genes are segments of DNA located on chromosomes, and they carry the instructions for proteins that affect traits."
+      ],
+      "relationships": [
+        "Chromosomes carry genes, and genes are lengths of DNA that code for proteins.",
+        "Proteins carry out and regulate the processes that produce an organism's traits, which is why a change in a gene can change a trait.",
+        "Offspring receive one set of chromosomes from each parent in sexual reproduction, which is why they show a combination of parental traits."
+      ],
+      "accepted_alternative_framings": [
+        "Describing genes as instructions or as coding for proteins are both acceptable at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming a gene is a trait rather than an instruction that influences one.",
+        "Claiming every trait is controlled by exactly one gene.",
+        "Claiming chromosomes are made of protein rather than of DNA and protein."
+      ],
+      "out_of_scope": "Transcription and translation in detail, and gene regulation, are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "mutations",
+      "fixed_facts": [
+        "A mutation is a change in the DNA sequence, and it may be harmful, beneficial, or have no noticeable effect."
+      ],
+      "relationships": [
+        "Mutations are changes to the genetic material and can arise from copying errors or from environmental agents.",
+        "A mutation's effect depends on where it occurs and what it changes; most have no noticeable effect on the organism.",
+        "Only mutations in cells that produce offspring can be inherited."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming all mutations are harmful.",
+        "Claiming mutations occur because an organism needs a particular change.",
+        "Claiming a mutation in a body cell will be passed to the organism's offspring."
+      ],
+      "out_of_scope": "Mutation types by name, repair mechanisms, and mutation rates are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "inheritance models",
+      "fixed_facts": [],
+      "relationships": [
+        "An inheritance model represents how versions of a gene from two parents can combine in offspring.",
+        "A model such as a Punnett square gives the proportions expected over many offspring, not what any individual offspring will be.",
+        "The model assumes the simple case of one gene with two versions, which many real traits do not follow."
+      ],
+      "accepted_alternative_framings": [
+        "Punnett squares, probability trees, and pedigree diagrams are all acceptable models here."
+      ],
+      "disqualifying_errors": [
+        "Reading a model's proportion as a guarantee about an individual offspring.",
+        "Claiming every trait follows a simple two-version pattern.",
+        "Claiming a model's prediction is disproved because one small family did not match it."
+      ],
+      "out_of_scope": "Linkage, incomplete dominance and codominance by name, and chi-squared testing are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "environment and trait expression",
+      "fixed_facts": [],
+      "relationships": [
+        "Many traits result from both genetic instructions and environmental conditions.",
+        "Two organisms with the same genetic instructions can differ if they develop in different environments.",
+        "An environmentally caused change in an individual is not passed on through the genetic material."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming every trait is determined by genes alone.",
+        "Claiming a change caused by the environment during an organism's life is inherited by its offspring.",
+        "Claiming the environment has no role in any trait."
+      ],
+      "out_of_scope": "Epigenetics and heritability statistics are High School work."
+    },
+    {
+      "unit": 3,
+      "focus": "probability and model limits",
+      "fixed_facts": [],
+      "relationships": [
+        "Inheritance predictions are probabilities: they describe expected proportions across many offspring.",
+        "Small samples depart from expected proportions by chance, and that departure is not evidence against the model.",
+        "A probability model is tested against large numbers of outcomes, not against individual cases."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating a three-to-one expectation as a promise about four offspring.",
+        "Claiming a model is wrong because a small sample did not match it.",
+        "Claiming earlier offspring change the probability for later ones in independent events."
+      ],
+      "out_of_scope": "Formal statistical testing and confidence intervals are High School work."
+    },
+
+    {
+      "unit": 4,
+      "focus": "fossil evidence",
+      "fixed_facts": [
+        "The fossil record shows that the kinds of organisms on Earth have changed over time and that many are now extinct."
+      ],
+      "relationships": [
+        "Fossils in successive rock layers show that the organisms living on Earth have changed over long spans of time.",
+        "The order in which groups appear in the record is consistent worldwide, which is why the record is evidence about history rather than local accident.",
+        "The fossil record is incomplete because fossilisation is rare, so absence of a fossil is weak evidence of absence of the organism."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the fossil record contains every organism that has lived.",
+        "Claiming all fossils formed at the same time.",
+        "Claiming an organism turned into another kind of organism during its own lifetime."
+      ],
+      "out_of_scope": "Cladistics, transitional-form analysis, and taphonomy are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "anatomical similarities",
+      "fixed_facts": [],
+      "relationships": [
+        "Different species can share the same underlying body structures, such as the bone pattern in the limbs of mammals, birds, and reptiles.",
+        "Shared underlying structure used for different purposes is evidence of common ancestry rather than of shared function.",
+        "Similar function achieved with quite different structures, such as insect and bird wings, is evidence of separate origins."
+      ],
+      "accepted_alternative_framings": [
+        "Naming these patterns homologous and analogous structures is correct but not required at this grade."
+      ],
+      "disqualifying_errors": [
+        "Treating any resemblance between two organisms as evidence of close relationship.",
+        "Claiming structures used for the same purpose must share an origin.",
+        "Claiming a structure changed within one organism's lifetime to suit a new purpose."
+      ],
+      "out_of_scope": "Phylogenetic tree construction and molecular homology are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "embryological evidence",
+      "fixed_facts": [],
+      "relationships": [
+        "Embryos of different vertebrate species pass through stages that resemble one another more than the adults do.",
+        "Those shared developmental patterns are evidence of shared ancestry.",
+        "Embryological similarity is one line of evidence among several, and it is strongest when it agrees with the anatomical and fossil evidence."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an embryo passes through the adult forms of its ancestors.",
+        "Treating embryological similarity as proof on its own without the other lines of evidence.",
+        "Claiming embryos of different species are indistinguishable."
+      ],
+      "out_of_scope": "Developmental genetics and evolutionary developmental biology are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "variation",
+      "fixed_facts": [
+        "Variation among individuals in a population arises from mutation and, in sexually reproducing species, from the recombination of parental genetic material."
+      ],
+      "relationships": [
+        "Individuals in a population differ in heritable traits, and that variation exists before any environmental pressure acts.",
+        "Variation arises from mutation and, in sexual reproduction, from new combinations of parental genes.",
+        "Without heritable variation there is nothing for natural selection to act on."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming variation arises in response to what the population needs.",
+        "Claiming all members of a species are essentially identical.",
+        "Claiming variation appears only after the environment changes."
+      ],
+      "out_of_scope": "Population genetics and allele frequency calculation are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "natural selection",
+      "fixed_facts": [
+        "Natural selection requires heritable variation, competition for limited resources, differences in survival and reproduction, and inheritance of the advantageous variation."
+      ],
+      "relationships": [
+        "Individuals with heritable traits that suit their environment tend to survive and reproduce more than those without them.",
+        "Because the traits are heritable, they become more common in the population over generations.",
+        "Natural selection acts on populations across generations; individual organisms do not evolve during their lifetimes."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the outcome as differential survival and reproduction, or as differences in reproductive success, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Claiming an individual organism evolves or adapts itself during its lifetime.",
+        "Claiming organisms develop traits because they need them.",
+        "Claiming natural selection has a goal or is working toward a more advanced organism."
+      ],
+      "out_of_scope": "Hardy-Weinberg reasoning, genetic drift, and speciation mechanisms are High School work."
+    },
+    {
+      "unit": 4,
+      "focus": "population change over generations",
+      "fixed_facts": [],
+      "relationships": [
+        "Evolution is a change in the traits of a population across generations, measured in the population and not in individuals.",
+        "The rate of change depends on how strong the selection is, how much heritable variation exists, and how quickly generations turn over.",
+        "A trait that is advantageous in one environment can become disadvantageous when the environment changes."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Describing evolution as change within an individual organism.",
+        "Claiming evolution always produces more complex organisms.",
+        "Claiming a population changes instantly in response to a new environment."
+      ],
+      "out_of_scope": "Quantitative evolutionary rates and phylogenetic dating are High School work."
+    },
+
+    {
+      "unit": 5,
+      "focus": "geologic time",
+      "fixed_facts": [
+        "Earth is about 4.5 billion years old."
+      ],
+      "relationships": [
+        "Earth's history spans billions of years, and most of it took place before organisms with hard parts existed.",
+        "Geologic time is divided into named intervals whose boundaries are marked by major changes in the rock and fossil record.",
+        "Relative dating orders events; radiometric dating supplies ages in years, and the two are used together."
+      ],
+      "accepted_alternative_framings": [
+        "Approximate statements such as 'about four and a half billion years' are correct; an exact figure is not required."
+      ],
+      "disqualifying_errors": [
+        "Claiming Earth is thousands rather than billions of years old.",
+        "Claiming humans have existed for a substantial fraction of Earth's history.",
+        "Claiming relative dating gives ages in years."
+      ],
+      "out_of_scope": "Isotope decay equations and calibration of the geologic timescale are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "rock strata and fossils",
+      "fixed_facts": [
+        "In undisturbed sequences, lower strata are older than the strata above them."
+      ],
+      "relationships": [
+        "Sedimentary strata are deposited in order, so in an undisturbed sequence lower means older.",
+        "Fossils within strata date the strata relative to one another, and matching fossil assemblages allow strata in different places to be correlated.",
+        "Strata can be tilted, folded, faulted, or eroded, so the sequence has to be interpreted, not simply read off."
+      ],
+      "accepted_alternative_framings": [
+        "Naming superposition and faunal succession is correct but not required."
+      ],
+      "disqualifying_errors": [
+        "Applying the lower-is-older rule to a visibly overturned sequence without accounting for it.",
+        "Claiming strata order gives an age in years directly.",
+        "Claiming a gap in the record means no time passed there."
+      ],
+      "out_of_scope": "Formal stratigraphic nomenclature and sequence stratigraphy are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "plate tectonics",
+      "fixed_facts": [
+        "Earth's lithosphere is broken into plates that move relative to one another, driven by motion in the mantle beneath."
+      ],
+      "relationships": [
+        "Earth's outer shell is divided into plates that move slowly relative to one another over the mantle.",
+        "Most earthquakes, volcanoes, and mountain belts occur at plate boundaries, which is why those features are distributed in bands rather than evenly.",
+        "Evidence for plate motion includes matching coastlines and fossils across oceans, seafloor age patterns, and directly measured plate movement."
+      ],
+      "accepted_alternative_framings": [
+        "Describing the driving mechanism as mantle convection, or as a combination including slab pull and ridge push, are both acceptable at this grade."
+      ],
+      "disqualifying_errors": [
+        "Claiming the continents float on liquid rock beneath them; the mantle is solid rock that flows very slowly.",
+        "Claiming plates move at rates people could observe directly without instruments.",
+        "Claiming earthquakes and volcanoes are distributed evenly over Earth's surface."
+      ],
+      "out_of_scope": "Quantitative plate kinematics and mantle dynamics are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "cycling of Earth materials",
+      "fixed_facts": [
+        "Rock is cycled among igneous, sedimentary, and metamorphic forms; any rock type can become any other."
+      ],
+      "relationships": [
+        "Rock material is recycled: melting and cooling, weathering and deposition, and heat and pressure convert rock between igneous, sedimentary, and metamorphic forms.",
+        "There is no fixed order to the cycle; any rock type can become any other given the right conditions.",
+        "The cycle is driven by energy from Earth's interior and from the Sun, together with gravity."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming the rock cycle runs in a single fixed sequence.",
+        "Claiming sedimentary rock can only form from igneous rock.",
+        "Claiming rock material is created or destroyed in the cycle."
+      ],
+      "out_of_scope": "Mineralogy, metamorphic facies, and igneous petrology are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "surface processes",
+      "fixed_facts": [
+        "Weathering breaks rock down in place; erosion transports the material; deposition lays it down elsewhere."
+      ],
+      "relationships": [
+        "Weathering, erosion, transport, and deposition together reshape Earth's surface continuously.",
+        "The rate depends on climate, slope, rock type, and vegetation cover, so it varies enormously between places.",
+        "Surface processes generally act to wear down elevated regions while tectonic processes build them up."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Using weathering and erosion as interchangeable terms.",
+        "Claiming surface processes act at the same rate everywhere.",
+        "Claiming landscapes only change during rare catastrophic events."
+      ],
+      "out_of_scope": "Quantitative denudation rates and landscape-evolution modelling are High School work."
+    },
+    {
+      "unit": 5,
+      "focus": "evidence for past change",
+      "fixed_facts": [],
+      "relationships": [
+        "Conclusions about Earth's past rest on several independent lines of evidence agreeing: rock type, structure, fossils, and dating.",
+        "Present-day processes are used to interpret past ones, because the same physical and chemical processes operated then.",
+        "A conclusion about the past is provisional and is revised when new evidence requires it."
+      ],
+      "accepted_alternative_framings": [
+        "Naming the assumption uniformitarianism is correct but not required."
+      ],
+      "disqualifying_errors": [
+        "Drawing a conclusion about the past from one line of evidence and presenting it as settled.",
+        "Claiming past processes must have been different in kind from those observed today, without evidence.",
+        "Treating a well-supported reconstruction as unrevisable."
+      ],
+      "out_of_scope": "Formal palaeoenvironmental proxy analysis is High School work."
+    },
+
+    {
+      "unit": 6,
+      "focus": "seasons",
+      "fixed_facts": [
+        "Seasons are caused by the tilt of Earth's rotation axis relative to its orbit, not by changes in Earth's distance from the Sun."
+      ],
+      "relationships": [
+        "Earth's axis is tilted relative to its orbital plane and keeps the same orientation in space as Earth orbits the Sun.",
+        "Because of the tilt, each hemisphere receives sunlight at a more direct angle and for longer each day during its summer.",
+        "The two hemispheres therefore have opposite seasons at the same time of year."
+      ],
+      "accepted_alternative_framings": [
+        "Explaining the effect through the angle of incoming sunlight, through day length, or through both, are all correct; both effects operate."
+      ],
+      "disqualifying_errors": [
+        "Claiming seasons are caused by Earth being closer to the Sun in summer.",
+        "Claiming Earth's axis tilts back and forth through the year.",
+        "Claiming both hemispheres experience summer at the same time."
+      ],
+      "out_of_scope": "Solar declination calculations, insolation formulas, and Milankovitch cycles are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "lunar phases and eclipses",
+      "fixed_facts": [
+        "Lunar phases are caused by the changing relative positions of the Sun, Earth, and Moon, not by Earth's shadow falling on the Moon.",
+        "A lunar eclipse occurs when Earth's shadow falls on the Moon; a solar eclipse occurs when the Moon passes between the Sun and Earth."
+      ],
+      "relationships": [
+        "Half the Moon is always lit by the Sun; the phase is how much of that lit half is visible from Earth as the Moon orbits.",
+        "The phase cycle repeats about every month as the Moon completes an orbit relative to the Sun.",
+        "Eclipses are not monthly because the Moon's orbit is tilted relative to Earth's orbit, so the three bodies line up only occasionally."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming lunar phases are caused by Earth's shadow on the Moon.",
+        "Claiming an eclipse of one kind or another should occur every month.",
+        "Claiming part of the Moon is permanently unlit by the Sun; the far side is not the dark side."
+      ],
+      "out_of_scope": "Orbital inclination geometry and eclipse prediction are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "gravity and orbital motion",
+      "fixed_facts": [
+        "Gravity is the force that holds objects in orbit; an orbiting object is continuously falling toward the body it orbits."
+      ],
+      "relationships": [
+        "Gravitational attraction between the Sun and the planets, and between planets and their moons, keeps them in orbit.",
+        "An orbiting object is accelerating toward the body it orbits while also moving sideways fast enough that it keeps missing it.",
+        "Orbital motion depends on the mass of the central body and on the orbital distance."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming astronauts in orbit are weightless because gravity is absent there.",
+        "Claiming an orbiting object is not accelerating because its speed is steady.",
+        "Claiming a force pushes orbiting objects outward from the centre."
+      ],
+      "out_of_scope": "Kepler's laws quantitatively and orbital energy are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "solar-system scale",
+      "fixed_facts": [
+        "Distances between objects in the solar system are vastly larger than the objects themselves."
+      ],
+      "relationships": [
+        "The solar system is mostly empty space: the distances between planets dwarf the planets' sizes.",
+        "No ordinary diagram shows both sizes and distances to the same scale, which is why textbook diagrams distort one of them.",
+        "Scale matters for what is physically possible, so a model that distorts it can produce wrong conclusions."
+      ],
+      "accepted_alternative_framings": [
+        "Astronomical units, kilometres, and light-travel time are all acceptable ways to express these distances."
+      ],
+      "disqualifying_errors": [
+        "Reading planetary distances or sizes off a classroom diagram as though it were to scale.",
+        "Claiming the planets are close enough together to be seen from one another as discs.",
+        "Presenting a scale model without saying which quantity it distorts."
+      ],
+      "out_of_scope": "Parallax measurement and stellar distance scales are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "technology and space data",
+      "fixed_facts": [],
+      "relationships": [
+        "Almost everything known about distant objects comes from the radiation they emit or reflect, collected by telescopes and spacecraft instruments.",
+        "Improvements in instruments have repeatedly changed what is known, because the data available sets the limits on the conclusions.",
+        "Every instrument has limits of resolution, sensitivity, and wavelength range, and those limits belong in the interpretation."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating a processed or false-colour astronomical image as a direct visual view.",
+        "Claiming an instrument's failure to detect something proves it is not there.",
+        "Claiming space data requires no interpretation."
+      ],
+      "out_of_scope": "Detector physics and spectroscopic analysis are High School work."
+    },
+    {
+      "unit": 6,
+      "focus": "model misconceptions",
+      "fixed_facts": [],
+      "relationships": [
+        "Common astronomy models introduce distortions of scale, of orbit shape, and of viewing angle, and each can produce a specific wrong conclusion.",
+        "Identifying what a model distorts is part of using it correctly.",
+        "A misconception is corrected by evidence and by a better model, not by asserting the right answer alone."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming Earth's orbit is strongly elliptical because diagrams draw it that way; it is very nearly circular.",
+        "Claiming the Moon does not rotate because the same face always points toward Earth.",
+        "Treating a model's simplification as a fact about the real system."
+      ],
+      "out_of_scope": "Orbital eccentricity values and tidal locking mechanics are High School work."
+    },
+
+    {
+      "unit": 7,
+      "focus": "resource distribution",
+      "fixed_facts": [],
+      "relationships": [
+        "Mineral, energy, water, and soil resources are distributed unevenly because of the geological and biological processes that formed them.",
+        "Where a resource is found is a consequence of past Earth processes, not of present-day political boundaries.",
+        "Uneven distribution shapes where people settle, what they trade, and where conflicts over resources arise."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming resources are distributed evenly or at random.",
+        "Claiming resource location can be explained without reference to geological history.",
+        "Claiming a resource that is abundant globally is therefore available locally."
+      ],
+      "out_of_scope": "Ore genesis and reserve economics are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "geoscience processes",
+      "fixed_facts": [],
+      "relationships": [
+        "Geoscience processes shape where hazards occur, where resources form, and where land is suitable for particular uses.",
+        "These processes operate on timescales from seconds to millions of years, and the timescale determines what human action can affect.",
+        "Understanding the process is what makes prediction and planning possible."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming geoscience processes can be halted by human action.",
+        "Treating a slow process as irrelevant because it is not visible within a human lifetime.",
+        "Claiming hazard locations are unrelated to underlying geological processes."
+      ],
+      "out_of_scope": "Quantitative process modelling is High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "population and consumption",
+      "fixed_facts": [],
+      "relationships": [
+        "Total human impact depends on population size, on consumption per person, and on the technologies used.",
+        "Per-person consumption varies greatly between regions, so population size alone does not determine impact.",
+        "Changes in any of the three factors change the total, and they can act in opposite directions."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Attributing environmental impact to population size alone.",
+        "Claiming consumption per person is roughly equal worldwide.",
+        "Claiming technological improvement always reduces total impact."
+      ],
+      "out_of_scope": "Demographic transition theory and formal impact identities are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "climate evidence",
+      "fixed_facts": [
+        "Global average surface temperature has risen since the late nineteenth century, and the rise is principally caused by greenhouse gases released by human activity, above all carbon dioxide from burning fossil fuels."
+      ],
+      "relationships": [
+        "Multiple independent records agree: surface and ocean temperatures, sea level, ice-sheet and glacier mass, and the timing of seasonal biological events.",
+        "Ice cores and other archives extend the record far beyond instruments and show that current carbon dioxide levels are far outside the range of recent geological history.",
+        "The natural greenhouse effect is necessary for life; the concern is the additional warming from gases added by human activity."
+      ],
+      "accepted_alternative_framings": [
+        "Attributing the cause to greenhouse gases from human activity, or specifically to carbon dioxide from fossil fuel burning, are both correct."
+      ],
+      "disqualifying_errors": [
+        "Citing a single cold season or year as evidence against long-term warming.",
+        "Claiming the cause of the observed warming is unknown or unestablished.",
+        "Confusing the natural greenhouse effect with the enhanced effect from added greenhouse gases."
+      ],
+      "out_of_scope": "Radiative forcing calculations, climate sensitivity, and formal attribution methods are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "mitigation adaptation and tradeoffs",
+      "fixed_facts": [
+        "Mitigation reduces the cause; adaptation reduces the harm from effects that occur anyway."
+      ],
+      "relationships": [
+        "Mitigation and adaptation address different parts of the problem, and both are needed because some change is already committed.",
+        "Every option has costs, benefits, and side effects, and these fall differently on different groups.",
+        "Delay is itself a choice, because the cause continues to operate while a decision is postponed."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Using mitigation and adaptation interchangeably.",
+        "Presenting an option as having benefits and no costs.",
+        "Claiming adaptation makes addressing the cause unnecessary."
+      ],
+      "out_of_scope": "Policy instrument design and integrated assessment modelling are High School work."
+    },
+    {
+      "unit": 7,
+      "focus": "environmental justice foundations",
+      "fixed_facts": [],
+      "relationships": [
+        "Environmental burdens and benefits are not distributed evenly across communities, and the pattern is documented rather than assumed.",
+        "Who is exposed, who decides, and who benefits are separate questions, and a full account addresses all three.",
+        "Evidence about distribution comes from data on exposure, health, and access, not from assertion."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming environmental burdens fall equally on all communities.",
+        "Treating who is affected as outside the scope of the scientific evidence.",
+        "Making a distributional claim with no data behind it."
+      ],
+      "out_of_scope": "Policy analysis and formal equity frameworks are High School work."
+    },
+
+    {
+      "unit": 8,
+      "focus": "biodiversity",
+      "fixed_facts": [],
+      "relationships": [
+        "Biodiversity includes the variety of species, the genetic variety within species, and the variety of ecosystems.",
+        "Greater genetic variety within a population generally makes it better able to withstand disease and environmental change.",
+        "Biodiversity is measured by counting and comparing, so the measurement method and the area covered determine what the number means."
+      ],
+      "accepted_alternative_framings": [
+        "Species richness and species diversity are both legitimate measures; they are not the same measure."
+      ],
+      "disqualifying_errors": [
+        "Treating biodiversity as species count alone.",
+        "Comparing biodiversity figures measured over different areas or by different methods as though they were equivalent.",
+        "Claiming genetic variety within a species has no bearing on its resilience."
+      ],
+      "out_of_scope": "Diversity indices and rarefaction are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "ecosystem services",
+      "fixed_facts": [],
+      "relationships": [
+        "Ecosystems supply people with services such as pollination, water filtration, flood control, soil formation, and climate regulation.",
+        "These services depend on the organisms and processes present, so losing them can remove the service.",
+        "A service can often be replaced by engineering only at far greater cost, and sometimes not at all."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming ecosystem services are free in the sense of requiring nothing to sustain them.",
+        "Claiming every ecosystem service can be replaced by technology.",
+        "Claiming a service continues unchanged after the organisms providing it are removed."
+      ],
+      "out_of_scope": "Valuation methods and natural capital accounting are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "disturbance and resilience",
+      "fixed_facts": [],
+      "relationships": [
+        "Disturbances such as fire, flood, storm, and disease are normal parts of ecosystem dynamics.",
+        "Resilience is an ecosystem's capacity to recover its function after disturbance, and it depends on what survives and on the severity of the disturbance.",
+        "Repeated or severe disturbance can push an ecosystem into a different state that does not return on its own."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming all disturbance is damaging; many communities depend on periodic disturbance.",
+        "Claiming an ecosystem always returns to its previous state.",
+        "Claiming resilience means an ecosystem is unaffected by disturbance."
+      ],
+      "out_of_scope": "Alternative stable states and resilience metrics are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "artificial selection",
+      "fixed_facts": [
+        "In artificial selection humans choose which individuals reproduce; in natural selection the environment determines differential reproductive success."
+      ],
+      "relationships": [
+        "Artificial selection works on the same heritable variation that natural selection acts on; only the selecting agent differs.",
+        "Selecting strongly for one trait often carries other traits with it and can reduce genetic variety in the population.",
+        "The speed of change under artificial selection shows how quickly heritable traits in a population can shift."
+      ],
+      "accepted_alternative_framings": [
+        "Selective breeding and artificial selection are the same idea."
+      ],
+      "disqualifying_errors": [
+        "Claiming artificial selection creates the desired variation rather than selecting from existing variation.",
+        "Claiming artificial selection has no unintended effects on other traits or on genetic variety.",
+        "Confusing artificial selection with direct genetic modification."
+      ],
+      "out_of_scope": "Quantitative genetics, breeding values, and genetic engineering techniques are High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "solution impacts",
+      "fixed_facts": [],
+      "relationships": [
+        "An intervention in an ecosystem has effects beyond its target, because the parts of an ecosystem are connected.",
+        "Effects can appear at a distance in space or after a delay in time, so an immediate local check is not sufficient evidence.",
+        "Monitoring after the intervention is what turns an expected effect into an observed one."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming an intervention affects only its intended target.",
+        "Declaring an intervention successful from an immediate local observation alone.",
+        "Proposing an intervention with no plan to check its effects."
+      ],
+      "out_of_scope": "Environmental impact assessment procedure is High School work."
+    },
+    {
+      "unit": 8,
+      "focus": "competing design criteria",
+      "fixed_facts": [],
+      "relationships": [
+        "Ecosystem design problems involve criteria that pull against one another, such as yield, cost, biodiversity, and resilience.",
+        "Improving one criterion usually costs something on another, and the choice of which to favour is a decision, not a measurement.",
+        "Every option is evaluated against the same criteria, including the option of doing nothing."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Presenting a solution that is best on every criterion at once with no trade-off.",
+        "Omitting the do-nothing option from the comparison without saying why.",
+        "Changing the criteria after evaluation to favour a preferred option."
+      ],
+      "out_of_scope": "Multi-criteria decision analysis is High School work."
+    },
+
+    {
+      "unit": 9,
+      "focus": "problem definition",
+      "fixed_facts": [],
+      "relationships": [
+        "A well-defined problem states what needs to change, for whom, and how success would be recognised.",
+        "Defining the problem precedes generating solutions, so that solutions are not smuggled into the definition.",
+        "A problem statement that names a solution has already foreclosed the design work."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Writing a problem statement that names the intended solution.",
+        "Defining success in terms nothing could measure.",
+        "Omitting who is affected from the problem definition."
+      ],
+      "out_of_scope": "Formal requirements engineering is later work."
+    },
+    {
+      "unit": 9,
+      "focus": "criteria constraints and stakeholders",
+      "fixed_facts": [],
+      "relationships": [
+        "Criteria say what a solution must achieve; constraints say what limits it must respect; stakeholders are those affected by either.",
+        "Different stakeholders often value the criteria differently, and that disagreement is part of the problem rather than noise.",
+        "Safety and legal constraints are not traded against performance."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Treating criteria and constraints as interchangeable.",
+        "Assuming all stakeholders share the same priorities.",
+        "Trading away a safety constraint for better performance."
+      ],
+      "out_of_scope": "Formal stakeholder analysis methods are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "data-driven comparison",
+      "fixed_facts": [],
+      "relationships": [
+        "Comparing solutions requires the same measurements under the same conditions for each option.",
+        "A difference smaller than the variation between repeated trials is not evidence that one option is better.",
+        "The comparison reports every criterion evaluated, including those where the preferred option performs badly."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Comparing options tested under different conditions.",
+        "Claiming a difference is real when it is smaller than the trial-to-trial variation.",
+        "Omitting a criterion where the preferred option performed poorly."
+      ],
+      "out_of_scope": "Statistical significance testing is High School work."
+    },
+    {
+      "unit": 9,
+      "focus": "iterative modeling",
+      "fixed_facts": [],
+      "relationships": [
+        "Each iteration tests the model or prototype, identifies a specific shortfall, and makes a change aimed at that shortfall.",
+        "Changing one thing at a time keeps each change's effect identifiable.",
+        "The record of iterations, including the failures, is the evidence that the final design was arrived at rather than guessed."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Reporting only the successful final iteration.",
+        "Changing several things at once and attributing the improvement to one of them.",
+        "Revising a model to match data without saying what the mismatch showed."
+      ],
+      "out_of_scope": "Design of experiments and formal model calibration are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "optimization",
+      "fixed_facts": [],
+      "relationships": [
+        "Optimisation improves performance against stated criteria within stated constraints; it does not improve everything at once.",
+        "An optimum depends on the criteria and their relative importance, so different priorities give different optima.",
+        "A solution optimised past a constraint is not a solution."
+      ],
+      "accepted_alternative_framings": [],
+      "disqualifying_errors": [
+        "Claiming a design was optimised on every criterion simultaneously.",
+        "Reporting an optimum with no statement of the criteria it optimises.",
+        "Violating a constraint in pursuit of a better criterion score."
+      ],
+      "out_of_scope": "Mathematical optimisation techniques are later work."
+    },
+    {
+      "unit": 9,
+      "focus": "scientific argument and communication",
+      "fixed_facts": [],
+      "relationships": [
+        "A scientific argument states a claim, presents evidence, and gives explicit reasoning linking the two.",
+        "The strongest opposing evidence or interpretation is presented and addressed rather than omitted.",
+        "The argument reaches only as far as the evidence, and it says where that limit falls."
+      ],
+      "accepted_alternative_framings": [
+        "Claim-evidence-reasoning structure, and a written argument that carries the same three elements without the labels, are equally acceptable."
+      ],
+      "disqualifying_errors": [
+        "Presenting claim and evidence with no reasoning between them.",
+        "Omitting evidence that counts against the claim.",
+        "Stating a conclusion more strongly than the evidence supports."
+      ],
+      "out_of_scope": "Formal argumentation theory and peer review process are later work."
+    }
+  ]
+}

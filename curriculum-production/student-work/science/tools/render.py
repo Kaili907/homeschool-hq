@@ -327,6 +327,76 @@ def student_sheet(package: dict, shared: dict, floor: dict) -> str:
     return "\n".join(lines)
 
 
+def _correctness_section(package: dict, shared: dict) -> str:
+    """The adult-facing content key. Never rendered on a student sheet."""
+    authority = package["scientific_correctness_authority"]
+    text = shared["text"]
+    lines = [
+        "## Scientific correctness authority for this topic",
+        "",
+        text[authority["headline_ref"]],
+        "",
+        f"_Topic `{authority['topic_key']}` · forms in force: "
+        f"{', '.join(f'`{form}`' for form in authority['authority_forms'])} · authored in "
+        f"`{authority['authored']['file']}`._",
+        "",
+    ]
+    if authority["fixed_facts"]:
+        lines += [
+            "**Fixed for this topic.** These are settled, and work that contradicts one is `Not yet` "
+            "on Scientific correctness:",
+            "",
+            _bullets(authority["fixed_facts"]),
+            "",
+        ]
+    lines += [
+        "**Accepted relationships and models.** What this lesson's learning target asserts:",
+        "",
+        _bullets(authority["relationships"]),
+        "",
+    ]
+    if authority["accepted_alternative_framings"]:
+        lines += [
+            "**Also correct.** Accept any of these framings — do not require the wording above:",
+            "",
+            _bullets(authority["accepted_alternative_framings"]),
+            "",
+        ]
+    lines += [
+        "**Disqualifying errors.** Each of these is `Not yet` on Scientific correctness however well "
+        "the reasoning is documented and however complete the evidence is:",
+        "",
+        _bullets(authority["disqualifying_errors"]),
+        "",
+        "**Grade boundary.** " + authority["out_of_scope"],
+        "",
+    ]
+    supplied = authority.get("supplied_data_answer_authority")
+    if supplied:
+        lines += [
+            "**Data the learner did not generate.**",
+            "",
+            text[supplied["rule_ref"]],
+            "",
+            f"- Answer authority: {supplied['authority_is']}.",
+            f"- Named data-source resource: `{supplied['data_source_resource']}` "
+            f"(scope: {supplied['resource_scope']}).",
+            "",
+            "Provenance the curriculum source declares for this lesson, verbatim:",
+            "",
+            f"> {supplied['source_declared_provenance']}",
+            "",
+        ]
+    if authority.get("investigation_rule_ref"):
+        lines += [
+            "**Investigation day — the key bounds the conclusion, never the observations.**",
+            "",
+            text[authority["investigation_rule_ref"]],
+            "",
+        ]
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Scoring sheet
 # ---------------------------------------------------------------------------
@@ -354,6 +424,8 @@ def scoring_sheet(package: dict, shared: dict, floor: dict) -> str:
         "**Scoring guidance carried verbatim from the curriculum source:**",
         "",
         f"> {expected['source_scoring_guidance_verbatim']}",
+        "",
+        _correctness_section(package, shared),
         "",
         "## What a complete response contains, question by question",
         "",
@@ -571,14 +643,17 @@ def coverage_report(manifest: dict) -> str:
         "",
         f"{manifest['total_lessons']} lessons across {len(manifest['courses'])} courses.",
         "",
-        "| Course | Grade | Lessons | Units | Investigation sheets | Work sheets | Hazard-bearing | Safety VERIFIED | Source |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Course | Grade | Lessons | Units | Investigation sheets | Work sheets | Hazard-bearing | "
+        "Safety VERIFIED | Correctness topics | Correctness authority | Source |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for course in manifest["courses"]:
         lines.append(
             f"| {course['title']} | {course['grade']} | {course['lessons']} | {course['units']} | "
             f"{course['investigation_data_sheets']} | {course['student_work_sheets']} | "
             f"{course['hazard_bearing']} | {course['safety_verified']}/{course['lessons']} | "
+            f"{course['correctness_topics']} | "
+            f"{course['correctness_authority_lessons']}/{course['lessons']} | "
             f"`{course['lineage']}` @ `{course['commit'][:7]}` |"
         )
     lines += [

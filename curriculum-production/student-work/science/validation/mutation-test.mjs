@@ -15,6 +15,7 @@ import { CHECKS } from './checks.mjs'
 import {
   ROOT,
   loadAllPackages,
+  loadCorrectnessKeys,
   loadSafetyFloor,
   loadSharedBlocks,
   scoringSheet,
@@ -29,6 +30,7 @@ const basePackages = loadAllPackages().map((pkg) => ({
 }))
 const baseFloor = loadSafetyFloor()
 const baseBlocks = loadSharedBlocks()
+const baseCorrectness = loadCorrectnessKeys()
 
 const find = (packages, predicate) => packages.find(predicate)
 const secondary = (packages) => packages.find((pkg) => pkg.band !== 'elementary')
@@ -268,6 +270,76 @@ const MUTATIONS = [
       )
     },
   },
+  {
+    check: 'correctness-authority-on-every-lesson',
+    description: 'ship a lesson whose content key does not match the authored file',
+    apply(state) {
+      const pkg = state.packages[0]
+      pkg.scientific_correctness_authority = {
+        ...pkg.scientific_correctness_authority,
+        relationships: ['Something the authored key does not say.'],
+      }
+    },
+  },
+  {
+    check: 'correctness-key-states-no-observation',
+    description: 'author an expected measurement into a content key',
+    apply(state) {
+      const [key, topic] = [...state.correctness][0]
+      state.correctness.set(key, {
+        ...topic,
+        relationships: [
+          ...topic.relationships,
+          'The learner should measure a value close to 24.5 and compare it.',
+        ],
+      })
+    },
+  },
+  {
+    check: 'correctness-authority-is-adult-facing',
+    description: 'leak a disqualifying error onto the learner sheet',
+    apply(state) {
+      const pkg = state.packages[0]
+      const error = pkg.scientific_correctness_authority.disqualifying_errors[0]
+      pkg.__sheet = `${pkg.__sheet}\n\nCommon mistake to avoid: ${error}\n`
+    },
+  },
+  {
+    check: 'investigation-days-bound-conclusions-not-observations',
+    description: 'drop the observations-are-not-scored rule from an investigation scoring sheet',
+    apply(state) {
+      const pkg = find(state.packages, (entry) => entry.data_bearing)
+      const rule = state.blocks.text['investigation-correctness-rule']
+      pkg.__scoring = pkg.__scoring.split(rule).join('Score the investigation against the key above.')
+    },
+  },
+  {
+    check: 'supplied-data-authority-pins-provenance',
+    description: 'drop the pinned data-source resource from a supplied-data lesson',
+    apply(state) {
+      const pkg = find(
+        state.packages,
+        (entry) => entry.scientific_correctness_authority.supplied_data_answer_authority,
+      )
+      pkg.scientific_correctness_authority = {
+        ...pkg.scientific_correctness_authority,
+        supplied_data_answer_authority: {
+          ...pkg.scientific_correctness_authority.supplied_data_answer_authority,
+          data_source_resource: '',
+        },
+      }
+    },
+  },
+  {
+    check: 'rubric-correctness-criterion-bound-to-key',
+    description: 'restore the rubric wording that told the reader no content key ships',
+    apply(state) {
+      state.blocks.text['rubric-threshold'] =
+        'A submission meets the lesson target when every criterion is at Meets or above. ' +
+        'Scientific correctness is judged against the lesson\'s stated learning target, success ' +
+        'criteria, and course guide — not against a fixed answer key, because this package ships none.'
+    },
+  },
 ]
 
 const checkIds = new Set(CHECKS.map((check) => check.id))
@@ -279,7 +351,10 @@ for (const mutation of MUTATIONS) {
   const state = {
     packages: basePackages.map((pkg) => structuredClone(pkg)),
     floor: baseFloor,
-    blocks: baseBlocks,
+    blocks: structuredClone(baseBlocks),
+    correctness: new Map(
+      [...baseCorrectness].map(([key, topic]) => [key, structuredClone(topic)]),
+    ),
   }
   mutation.apply(state)
   const sumsPath = join(ROOT, 'SHA256SUMS.txt')
@@ -293,6 +368,7 @@ for (const mutation of MUTATIONS) {
       packages: state.packages,
       floor: state.floor,
       blocks: state.blocks,
+      correctness: state.correctness,
     })
   } finally {
     if (originalSums !== null) writeFileSync(sumsPath, originalSums, 'utf8')
