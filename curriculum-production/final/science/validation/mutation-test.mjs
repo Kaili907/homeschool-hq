@@ -135,7 +135,7 @@ const MUTATIONS = [
   },
   {
     check: 'alternative-promise-matches-package',
-    description: 'promise supplied material with no clarification that none is shipped',
+    description: 'promise supplied material after removing the delivered package-alone route',
     apply(state) {
       const pkg = find(state.packages, (entry) =>
         /\b(supplied|provided)\b/i.test(entry.equal_credit_safe_alternative.text),
@@ -143,6 +143,26 @@ const MUTATIONS = [
       pkg.equal_credit_safe_alternative = {
         ...pkg.equal_credit_safe_alternative,
         clarification_ref: '',
+      }
+      pkg.executable_content = {
+        ...pkg.executable_content,
+        equal_credit_route: {
+          ...pkg.executable_content.equal_credit_route,
+          complete: false,
+          input: null,
+        },
+      }
+    },
+  },
+  {
+    check: 'package-alone-learner-content-is-executable',
+    description: 'remove the complete learner inputs from one otherwise valid lesson',
+    apply(state) {
+      const pkg = state.packages[0]
+      pkg.executable_content = {
+        ...pkg.executable_content,
+        inputs_complete: false,
+        supplied_evidence: { ...pkg.executable_content.supplied_evidence, rows: [] },
       }
     },
   },

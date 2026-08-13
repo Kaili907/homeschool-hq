@@ -19,7 +19,10 @@
 
 - course notebook or digital equivalent
 - pencil, keyboard, or other accessible response tool
-- printed or on-screen text, data table, or model for this lesson
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
 
 ## Safety — read this before you touch anything
 
@@ -81,11 +84,91 @@ This lesson is desk-based and prescribes no handling sequence.
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: mineral, energy, water, and soil resources are distributed unevenly because of the specific geological and biological processes that concentrated them.
+- Science brief: ore deposits form where particular processes concentrated an element far above its average crustal abundance.
+- Science brief: fossil fuels formed where organic material accumulated, was buried, and was heated within a particular range of conditions.
+- Science brief: a resource is economically usable only where concentration, accessibility, and extraction cost permit, so the physical presence of an element is not sufficient.
+
+### Evidence check: distribution of natural resources
+
+**Candidate claim:** A case report presents this as acceptable science: “resource distribution is random or a matter of chance.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: mineral, energy, water, and soil resources are distributed unevenly because of the specific geological and biological processes that concentrated them. |
+| E2 | established science reference | Science brief: ore deposits form where particular processes concentrated an element far above its average crustal abundance. |
+| E3 | established science reference | Science brief: fossil fuels formed where organic material accumulated, was buried, and was heated within a particular range of conditions. |
+| E4 | established science reference | Science brief: a resource is economically usable only where concentration, accessibility, and extraction cost permit, so the physical presence of an element is not sufficient. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs12-earth-space-environmental-u08::distribution of natural resources, derived from the reviewed correctness source policy/correctness/ma-hs12-earth-space-environmental.correctness.json.
+
+**Supplied unit connections:** the Great Oxidation Event and atmospheric change; coevolution of the geosphere and biosphere; distribution of natural resources; natural hazards and their causes; resource availability and human settlement; constructing arguments from geologic and biological evidence
+
+**Supplied unit performance task:** Construct an evidence-based argument about the coevolution of Earth's systems and life, and explain how resource distribution, hazards, and climate change have driven human activity.
+
+### Bound task
+
+**Question:** What does evidence E1 through E4 justify about distribution of natural resources, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Use the supplied record to build a claim-evidence-reasoning product that another reader can check line by line.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** DELIVERED_MODEL_DATA_ALTERNATIVE
+
+**Materials:**
+
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
+
+**Regional environmental decision case**
+
+| Option | Flood-risk reduction /5 | Habitat /5 | Cost /5 (5=lowest) | Displacement risk /5 (5=lowest) |
+| --- | --- | --- | --- | --- |
+| Wetland restoration | 4 | 5 | 3 | 5 |
+| Concrete barrier | 5 | 1 | 2 | 2 |
+| Managed retreat | 5 | 4 | 1 | 1 |
+| Drain expansion | 3 | 2 | 4 | 4 |
+
+**Model/source rule:** Scores are a fictional county-scale decision model. No real address, family, or identifiable community is represented.
+
+**Provenance:** Manuel Academy deterministic instructional simulation. Values are model output, not observations, measurements, or a prediction for the hands-on route.
+
+**Do this:**
+
+1. Choose this route instead of the physical route; it earns the same maximum score.
+2. Read the model rule and label every supplied quantity as MODEL OUTPUT.
+3. Set and justify weights before calculating a score, test how one changed weight affects the recommendation, and address the strongest evidence against the chosen option.
+4. Show calculations, cite row labels, state a limitation of the model, and answer the lesson analysis questions.
+5. Do not combine these model outputs with measurements from the physical route or call them observations.
+
+**Pinned H4 alternative statement (lineage evidence):** Day 7 investigation: Atmospheric change evidence and a regional resource and hazard analysis | No-special-equipment alternative: Use a supplied printed regional case study rather than searching sources, and complete the argument on paper. No online work required.
+
+The delivered model table above is the package-alone production route. It removes any need to retrieve the published input named by the source statement.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** The learner completes a new application of distribution of natural resources independently and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**The task.** Choose the package-alone model-data alternative printed above, follow its five-step procedure, label its inputs MODEL OUTPUT, and complete the analysis, provenance, and limitation work without handling physical-route materials or relying on prior work.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -147,77 +230,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Day 7 investigation: Atmospheric change evidence and a regional resource and hazard analysis | No-special-equipment alternative: Use a supplied printed regional case study rather than searching sources, and complete the argument on paper. No online work required.
-
-_About the supplied or provided material named above: this package prints none of it. Supplied means a published table, data set, diagram, sequence, case study, observation log, or reference image that an adult retrieves and that you name on the provenance line. Nothing printed here is a record of an observation, so nothing here can be mistaken for yours._
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Published atmospheric, geologic, resource, and hazard data. The argument and its evidence weighting are the learner's own.
-
-**Where to find the published data:** see `res-ma-hs12-earth-space-environmental-data-sources` in the course resource list. The family retrieves it; no third-party content is copied into this package.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Assemble performance-task evidence for distribution of natural resources that an independent reader could check without asking you a single question: the claim, the data behind it with its provenance, the reasoning between them, and the limitations. Anything a reader would have to take on trust is a gap in the evidence, not a detail.
+**Q1.** Build a checkable contribution to the supplied unit performance task — Construct an evidence-based argument about the coevolution of Earth's systems and life, and explain how resource distribution, hazards, and climate change have driven human activity. — using the case and E1-E4. Include claim, evidence, reasoning, limitation, and a recorded revision.
 
 >
 
-**Q2.** Explain distribution of natural resources in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain distribution of natural resources in your own words using at least two specifically named rows from E1-E4. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply distribution of natural resources to a case in Coevolution of Earth and Life, Resources, and Natural Hazards you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for distribution of natural resources. Decide whether E1-E4 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on distribution of natural resources against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about distribution of natural resources, revise its weakest claim with a named row from E1-E4, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using distribution of natural resources as your worked example and citing one piece of your own evidence: How have Earth and life reshaped each other, and how does that history set where people can live?
+**Q5.** Answer the printed unit question using distribution of natural resources as the example. Cite one row from E1-E4, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about distribution of natural resources? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E4 is strongest for evaluating the candidate claim about distribution of natural resources? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on distribution of natural resources cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E4, state one conclusion about distribution of natural resources that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about distribution of natural resources. Label E1-E4 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -259,4 +304,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs12-earth-space-environmental-u08-l09` · lesson `ma-hs12-earth-space-environmental-u08-l09` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs12-earth-space-environmental-u08-l09` · lesson `ma-hs12-earth-space-environmental-u08-l09` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

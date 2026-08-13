@@ -23,9 +23,11 @@
 
 ## Invariants
 
-- No observation, measurement, result, or expected value is supplied by this package.
+- Every lesson prints the complete science brief, case, evidence record, and exact task required for package-alone completion.
+- Supplied values are labelled reference information or deterministic model output, never learner observations.
+- No expected physical-investigation result is supplied before evidence collection.
 - Every recording field ships blank.
-- Every lesson carries a student-visible safety brief and an equal-credit safe alternative.
+- Every lesson carries a student-visible safety brief and an executable equal-credit safe alternative.
 - High School safety content comes from H4 only; H3 and H2 are superseded.
 - Every lesson carries a scientific correctness authority for its topic, adult-facing only.
 - No correctness key states an expected measurement or any observation.

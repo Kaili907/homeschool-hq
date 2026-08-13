@@ -11,10 +11,11 @@ the prohibitions, not a pointer to them.
 from __future__ import annotations
 
 NO_SUPPLIED_VALUES_RULE = (
-    "This package prints no measurement, no observation, and no expected result. "
-    "Every box below is blank because the record has to be yours. Any number you did not "
-    "measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill "
-    "in the provenance line so a reader can tell your evidence from someone else's."
+    "Every recording box below is blank because the record has to be yours. Reference information "
+    "and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner "
+    "observations and do not state the expected result of a physical route. Any number you did not "
+    "measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the "
+    "provenance line so a reader can tell your evidence from the package's model input."
 )
 
 EQUAL_CREDIT_RULE = (
@@ -78,15 +79,13 @@ SUPPLIED_HEADLINE = (
 )
 
 SUPPLIED_HOW = (
-    "Use data you did not collect: a published dataset, table, or reference image that the lesson "
-    "or its course data-source list names, retrieved by an adult. Then run the same analysis, "
-    "answer the same questions, and be held to the same rubric."
+    "Use the complete reference record or deterministic model table printed in the package-alone "
+    "route. Then run the stated analysis, answer the same questions, and be held to the same rubric."
 )
 
 SUPPLIES_NO_NUMBERS = (
-    "No dataset is printed in this package. Nothing here is a record of an observation, and no "
-    "expected value is given anywhere, because a printed number would be indistinguishable from a "
-    "result and this curriculum never presents invented measurements as real ones."
+    "A supplied number is explicitly labelled MODEL OUTPUT or reference information. It is never "
+    "presented as a learner observation or as the expected result of a physical investigation."
 )
 
 SUPPLIED_SCORING = (
@@ -109,10 +108,9 @@ ALTERNATIVE_GUARANTEES = (
 )
 
 SUPPLIED_MATERIAL_CLARIFICATION = (
-    "About the supplied or provided material named above: this package prints none of it. Supplied "
-    "means a published table, data set, diagram, sequence, case study, observation log, or "
-    "reference image that an adult retrieves and that you name on the provenance line. Nothing "
-    "printed here is a record of an observation, so nothing here can be mistaken for yours."
+    "About supplied or provided material: the package-alone route prints its complete reference or "
+    "model input and labels it SUPPLIED. It never presents that input as the learner's observation "
+    "or as the expected result of a physical investigation."
 )
 
 ALTERNATIVE_HOW_TO_CHOOSE = (
@@ -121,11 +119,9 @@ ALTERNATIVE_HOW_TO_CHOOSE = (
 )
 
 K8_DERIVED_PATH_NOTE = (
-    "The curriculum source for these grades names one text-only path for every lesson rather than a "
-    "lesson-specific activity, so the concrete task above is built from this lesson's own question, "
-    "focus, and success criteria. A named, lesson-specific alternative for each elementary and "
-    "middle-grade investigation is an open curriculum-authoring gap, recorded in "
-    "reports/open-gaps.md."
+    "The immutable curriculum source for these grades names one text-only policy path rather than a "
+    "lesson-specific activity. The production package closes that executable-content gap with the "
+    "complete document-evidence investigation and accessible alternative printed on the sheet."
 )
 
 PREDICTION_PROMPT = (

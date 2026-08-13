@@ -17,9 +17,9 @@
 
 **Materials:**
 
-- course notebook or digital equivalent
-- pencil, keyboard, or other accessible response tool
-- printed or on-screen text, data table, or model for this lesson
+- this complete learner sheet
+- course notebook or response space
+- accessible response tool
 
 ## Safety — read this before you touch anything
 
@@ -81,11 +81,69 @@ This lesson is desk-based and prescribes no handling sequence.
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: displacement is a vector from start point to end point; distance is the scalar path length travelled.
+- Science brief: position is stated relative to a chosen origin and reference frame, and the choice must be stated before positions mean anything.
+- Science brief: displacement depends only on start and end points; distance depends on the whole path, so the two differ whenever the path is not straight.
+- Science brief: motion described in one reference frame may be described quite differently in another, and neither description is wrong.
+
+### Evidence check: position, displacement, and reference frames
+
+**Candidate claim:** A case report presents this as acceptable science: “reporting displacement as equal to distance for a path that is not straight and one-directional.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: displacement is a vector from start point to end point; distance is the scalar path length travelled. |
+| E2 | established science reference | Science brief: position is stated relative to a chosen origin and reference frame, and the choice must be stated before positions mean anything. |
+| E3 | established science reference | Science brief: displacement depends only on start and end points; distance depends on the whole path, so the two differ whenever the path is not straight. |
+| E4 | established science reference | Science brief: motion described in one reference frame may be described quite differently in another, and neither description is wrong. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs11-physics-u01::position, displacement, and reference frames, derived from the reviewed correctness source policy/correctness/ma-hs11-physics.correctness.json.
+
+**Supplied unit connections:** position, displacement, and reference frames; velocity and acceleration; motion graphs and their slopes; uniform acceleration relationships; measurement uncertainty in motion; vectors and components
+
+**Supplied unit performance task:** Measure a real accelerating motion, produce position, velocity, and acceleration representations from your own data, and report the acceleration with an honest uncertainty.
+
+### Bound task
+
+**Question:** What does evidence E1 through E4 justify about position, displacement, and reference frames, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Write an initial explanation, then mark which evidence item would most strongly change it.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** ACCESSIBLE_RESPONSE_ROUTE
+
+**Materials:**
+
+- the supplied evidence record
+- a spoken, typed, drawn, or tactile response mode
+
+**Do this:**
+
+1. Use the same E1-E4 record and answer the same bound question.
+2. Respond in an accessible mode without changing the evidence or success criteria.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** The learner completes a new application of position, displacement, and reference frames independently and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**The task.** What does evidence E1 through E4 justify about position, displacement, and reference frames, and does it support the candidate claim? Follow the five bound steps printed above and cite the supplied evidence IDs.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -120,75 +178,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — this lesson needs no special equipment
-
-No special equipment is needed for this lesson; it is notebook and text based. The unit investigation on Day 7 carries the full alternative path.
-
-**The hands-on day in this unit, and its equal-credit alternative:** Day 7 investigation: Timing accelerated motion on a ramp | No-special-equipment alternative: Analyse a published motion dataset or a frame-numbered motion diagram supplied on paper, extracting velocity and acceleration by hand. No ramp, no timing, paper only.
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own repeated timing trials over measured distances. Acceleration is computed from the learner's data, never supplied.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Record two specific observations of the anchoring phenomenon for position, displacement, and reference frames and one thing that does not yet fit your explanation. Turn that mismatch into a testable question: state what you would change, what you would measure, and what result would count against your own current thinking.
+**Q1.** Use the printed case as today's phenomenon for position, displacement, and reference frames. Record what the candidate claim says, identify the mismatch with E1-E4, and pose a testable question naming what would change and what would be measured or classified.
 
 >
 
-**Q2.** Explain position, displacement, and reference frames in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain position, displacement, and reference frames in your own words using at least two specifically named rows from E1-E4. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply position, displacement, and reference frames to a case in Motion, Measurement, and Quantitative Reasoning you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for position, displacement, and reference frames. Decide whether E1-E4 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on position, displacement, and reference frames against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about position, displacement, and reference frames, revise its weakest claim with a named row from E1-E4, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using position, displacement, and reference frames as your worked example and citing one piece of your own evidence: How do we describe motion precisely enough that someone else can check us?
+**Q5.** Answer the printed unit question using position, displacement, and reference frames as the example. Cite one row from E1-E4, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about position, displacement, and reference frames? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E4 is strongest for evaluating the candidate claim about position, displacement, and reference frames? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on position, displacement, and reference frames cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E4, state one conclusion about position, displacement, and reference frames that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about position, displacement, and reference frames. Label E1-E4 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -230,4 +252,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs11-physics-u01-l01` · lesson `ma-hs11-physics-u01-l01` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs11-physics-u01-l01` · lesson `ma-hs11-physics-u01-l01` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

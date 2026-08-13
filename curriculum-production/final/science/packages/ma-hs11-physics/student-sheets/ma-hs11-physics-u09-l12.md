@@ -16,9 +16,9 @@
 
 **Materials:**
 
-- course notebook or digital equivalent
-- pencil, keyboard, or other accessible response tool
-- printed or on-screen text, data table, or model for this lesson
+- this complete learner sheet
+- course notebook or response space
+- accessible response tool
 
 ## Safety — read this before you touch anything
 
@@ -80,11 +80,67 @@ This lesson is desk-based and prescribes no handling sequence.
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: an energy conversion device is evaluated on measured input, measured useful output, and the difference between them.
+- Science brief: no device converts all input to useful output, so an efficiency claim of one hundred per cent indicates a measurement or accounting error.
+- Science brief: design improvements are tested one change at a time against the stated criteria.
+
+### Evidence check: energy conversion device design
+
+**Candidate claim:** A case report presents this as acceptable science: “a device produces more energy than it receives.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: an energy conversion device is evaluated on measured input, measured useful output, and the difference between them. |
+| E2 | established science reference | Science brief: no device converts all input to useful output, so an efficiency claim of one hundred per cent indicates a measurement or accounting error. |
+| E3 | established science reference | Science brief: design improvements are tested one change at a time against the stated criteria. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs11-physics-u09::energy conversion device design, derived from the reviewed correctness source policy/correctness/ma-hs11-physics.correctness.json.
+
+**Supplied unit connections:** the electromagnetic spectrum; absorption of radiation by matter; digital versus analog information; evaluating published claims about radiation; wave-based technologies; energy conversion device design
+
+**Supplied unit performance task:** Complete a physics engineering capstone: design, build, and refine a device that converts one form of energy into another or transmits information, and communicate how wave principles and evidence justify the design.
+
+### Bound task
+
+**Question:** What does evidence E1 through E3 justify about energy conversion device design, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Locate one weakness in an earlier response, revise it with a named evidence code, and state what the revision fixes.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** ACCESSIBLE_RESPONSE_ROUTE
+
+**Materials:**
+
+- the supplied evidence record
+- a spoken, typed, drawn, or tactile response mode
+
+**Do this:**
+
+1. Use the same E1-E3 record and answer the same bound question.
+2. Respond in an accessible mode without changing the evidence or success criteria.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** The learner reworks the specific items missed, using a fresh parallel task rather than the original item, and writes what changed in their thinking.
+**The task.** What does evidence E1 through E3 justify about energy conversion device design, and does it support the candidate claim? Follow the five bound steps printed above and cite the supplied evidence IDs.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -119,73 +175,35 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — this lesson needs no special equipment
-
-No special equipment is needed for this lesson; it is notebook and text based. The unit investigation on Day 7 carries the full alternative path.
-
-**The hands-on day in this unit, and its equal-credit alternative:** Day 7 investigation: Signal transmission, shielding, and an energy-conversion device build | No-special-equipment alternative: Run the shielding test with a radio and household materials only - no build - and complete the capstone as a documented paper design with a modelled energy budget rather than a physical device.
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own signal-strength observations across shielding materials and their own device performance trials. Published claims are evaluated, never restated as findings.
-
-**Where to find the published data:** see `res-ma-hs11-physics-data-sources` in the course resource list. The family retrieves it; no third-party content is copied into this package.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Explain energy conversion device design in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q1.** Explain energy conversion device design in your own words using at least two specifically named rows from E1-E3. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q2.** Apply energy conversion device design to a case in Electromagnetic Radiation, Information, and a Physics Engineering Capstone you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q2.** Treat the printed candidate claim as the fresh case for energy conversion device design. Decide whether E1-E3 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q3.** Check your work on energy conversion device design against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q3.** Check the conclusion about energy conversion device design, revise its weakest claim with a named row from E1-E3, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q4.** Answer the unit's essential question in two or three sentences, using energy conversion device design as your worked example and citing one piece of your own evidence: How do we send information reliably using something we cannot see?
+**Q4.** Answer the printed unit question using energy conversion device design as the example. Cite one row from E1-E3, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q5.** Which single piece of evidence in your record most strongly supports your conclusion about energy conversion device design? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q5.** Which one row in E1-E3 is strongest for evaluating the candidate claim about energy conversion device design? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q6.** Name one thing your work on energy conversion device design cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q6.** Using the supplied case and E1-E3, state one conclusion about energy conversion device design that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q7.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q7.** Audit the inputs used in your response about energy conversion device design. Label E1-E3 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -227,4 +245,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs11-physics-u09-l12` · lesson `ma-hs11-physics-u09-l12` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs11-physics-u09-l12` · lesson `ma-hs11-physics-u09-l12` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

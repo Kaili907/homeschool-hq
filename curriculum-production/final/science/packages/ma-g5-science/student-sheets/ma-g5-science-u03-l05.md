@@ -14,9 +14,9 @@
 
 **Materials:**
 
-- course notebook or digital equivalent
-- pencil or accessible response tool
-- unit-specific source, model, manipulatives, safe materials, or approved digital tool
+- this complete learner sheet
+- course notebook or response space
+- accessible response tool
 
 ## Safety — read this before you touch anything
 
@@ -89,11 +89,67 @@ This lesson's curriculum source prescribes no fixed procedure, so this package s
 
 Guardian-visible: this lesson includes an adult-approved hands-on option. The guardian confirms materials and supervision, or selects the text-only path. Only the confirmation is recorded.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: a closed system does not exchange matter with its surroundings; an open system does.
+- Science brief: conservation of mass is directly observable in a closed system, and in an open one only if what crosses the boundary is accounted for.
+- Science brief: defining the boundary of the system is part of the investigation, not a detail.
+
+### Evidence check: open and closed systems
+
+**Candidate claim:** A case report presents this as acceptable science: “treating an open container as a closed system.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: a closed system does not exchange matter with its surroundings; an open system does. |
+| E2 | established science reference | Science brief: conservation of mass is directly observable in a closed system, and in an open one only if what crosses the boundary is accounted for. |
+| E3 | established science reference | Science brief: defining the boundary of the system is part of the investigation, not a detail. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-g5-science-u03::open and closed systems, derived from the reviewed correctness source policy/correctness/ma-g5-science.correctness.json.
+
+**Supplied unit connections:** physical changes; mixing substances; signs of chemical change; conservation of mass; open and closed systems; evidence from measurements
+
+**Supplied unit performance task:** Conduct safe change-of-matter investigations and defend whether matter was conserved.
+
+### Bound task
+
+**Question:** What does evidence E1 through E3 justify about open and closed systems, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Build a second representation of the same evidence and identify one feature the first model hid.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** ACCESSIBLE_RESPONSE_ROUTE
+
+**Materials:**
+
+- the supplied evidence record
+- a spoken, typed, drawn, or tactile response mode
+
+**Do this:**
+
+1. Use the same E1-E3 record and answer the same bound question.
+2. Respond in an accessible mode without changing the evidence or success criteria.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** Learner completes a new application of open and closed systems and records both the result and the reasoning, evidence, process, or design choice that produced it.
+**The task.** What does evidence E1 through E3 justify about open and closed systems, and does it support the candidate claim? Follow the five bound steps printed above and cite the supplied evidence IDs.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -128,73 +184,35 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Every investigation has an equivalent text-only path: the learner may use the provided data set, written observation log, or described demonstration instead of handling materials, and receives full credit. No camera, photograph, video, or purchased material is required.
-
-_About the supplied or provided material named above: this package prints none of it. Supplied means a published table, data set, diagram, sequence, case study, observation log, or reference image that an adult retrieves and that you name on the provenance line. Nothing printed here is a record of an observation, so nothing here can be mistaken for yours._
-
-**Do this instead — the whole lesson on paper:** On paper, plan the whole investigation about open and closed systems without doing it: write your question, the one thing you would change, what you would keep the same, and what you would measure or watch for. Then write what you think would happen and why you think that. Answer every analysis question below from your plan and your reasoning. If an adult can find you a book, a table, or a chart about open and closed systems, use it and write down where it came from on the provenance line. Leave the record table empty — you did not measure anything, and saying so is the right answer.
-
-_The curriculum source for these grades names one text-only path for every lesson rather than a lesson-specific activity, so the concrete task above is built from this lesson's own question, focus, and success criteria. A named, lesson-specific alternative for each elementary and middle-grade investigation is an open curriculum-authoring gap, recorded in reports/open-gaps.md._
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Draw or write a model that shows how open and closed systems works. Label the parts. Then say which part of the worked example or demonstration you got each label from, and name one thing your model leaves out on purpose.
+**Q1.** Build a labelled model of open and closed systems that represents every supplied row in E1-E3. Annotate each model feature with its evidence ID, then show where the candidate claim fails or remains uncertain.
 
 >
 
-**Q2.** Show what you found about open and closed systems in the clearest way for this task — a labelled drawing, a table, a written explanation, or the steps you followed. Then say why you picked that way instead of just writing one sentence.
+**Q2.** Communicate what the supplied record establishes about open and closed systems in a labelled diagram, table, or paragraph. Include citations to at least two rows from E1-E3 and mark where the representation stops being supported.
 
 >
 
-**Q3.** Find one place where you checked your work about open and closed systems and changed something. Write what you changed, what made you notice it, and why the new version is better — not just different.
+**Q3.** Check your response about open and closed systems against each success criterion. Revise one sentence by adding or changing a citation to E1-E3; state exactly what the revision fixes.
 
 >
 
-**Q4.** Answer the big question for this unit in two or three sentences, using open and closed systems as your example: How can understanding changes and conservation of matter help us explain, decide, create, or solve something that matters?
+**Q4.** Answer the printed unit question using open and closed systems as the example. Cite one row from E1-E3, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q5.** Which one piece of evidence in your record best supports what you decided about open and closed systems? Say what makes it good evidence, and name one thing that would make it even stronger.
+**Q5.** Which one row in E1-E3 is strongest for evaluating the candidate claim about open and closed systems? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q6.** Name one thing your work on open and closed systems cannot tell you, even if you did everything carefully. Then say what someone would have to do differently to find that out.
+**Q6.** Using the supplied case and E1-E3, state one conclusion about open and closed systems that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q7.** Go through every number and observation in your record. For each one, write where it came from: you measured it, you worked it out, or it was given to you. Anything given to you is marked SUPPLIED with the name of the source and the date you looked it up.
+**Q7.** Audit the inputs used in your response about open and closed systems. Label E1-E3 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -235,4 +253,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-g5-science-u03-l05` · lesson `ma-g5-science-u03-l05` · built from `canonical-1.0.0` at `4056e31`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-g5-science-u03-l05` · lesson `ma-g5-science-u03-l05` · built from `canonical-1.0.0` at `4056e31`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

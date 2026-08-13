@@ -28,6 +28,10 @@
 - notebook
 - course notebook or digital equivalent
 - pencil, keyboard, or other accessible response tool
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
 
 ## Safety — read this before you touch anything
 
@@ -97,11 +101,91 @@ Read this before you touch any material. If anything here does not match what is
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: momentum is mass times velocity, and it is a vector with the same direction as the velocity.
+- Science brief: momentum depends on both mass and velocity, so a slow heavy object and a fast light one can carry the same momentum.
+- Science brief: momentum is a vector, so its direction matters and momenta in opposite directions partly cancel.
+- Science brief: momentum and kinetic energy are different quantities and are not interchangeable.
+
+### Evidence check: momentum as mass times velocity
+
+**Candidate claim:** A case report presents this as acceptable science: “treating momentum as a scalar and adding magnitudes regardless of direction.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: momentum is mass times velocity, and it is a vector with the same direction as the velocity. |
+| E2 | established science reference | Science brief: momentum depends on both mass and velocity, so a slow heavy object and a fast light one can carry the same momentum. |
+| E3 | established science reference | Science brief: momentum is a vector, so its direction matters and momenta in opposite directions partly cancel. |
+| E4 | established science reference | Science brief: momentum and kinetic energy are different quantities and are not interchangeable. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs11-physics-u03::momentum as mass times velocity, derived from the reviewed correctness source policy/correctness/ma-hs11-physics.correctness.json.
+
+**Supplied unit connections:** momentum as mass times velocity; conservation of momentum; impulse and contact time; elastic and inelastic collisions; collision analysis from data; engineering a protective device
+
+**Supplied unit performance task:** Design, test, and refine a device that minimises the force on an object during a collision, and use momentum and impulse reasoning plus your own trial data to justify each revision.
+
+### Bound task
+
+**Question:** What does evidence E1 through E4 justify about momentum as mass times velocity, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Choose the H4 physical route or the supplied model-data route, complete that route, and answer from the evidence you actually collected or calculated.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** DELIVERED_MODEL_DATA_ALTERNATIVE
+
+**Materials:**
+
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
+
+**One-dimensional collision model**
+
+| Trial | m1 (kg) | v1 before (m/s) | m2 (kg) | v2 before (m/s) | shared v after (m/s) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 1.0 | 3.0 | 1.0 | 0.0 | 1.5 |
+| 2 | 2.0 | 3.0 | 1.0 | 0.0 | 2.0 |
+| 3 | 1.0 | 2.0 | 1.0 | -1.0 | 0.5 |
+| 4 | 0.5 | 4.0 | 1.5 | 0.0 | 1.0 |
+
+**Model/source rule:** For a perfectly inelastic one-dimensional model, shared velocity is (m1v1+m2v2)/(m1+m2).
+
+**Provenance:** Manuel Academy deterministic instructional simulation. Values are model output, not observations, measurements, or a prediction for the hands-on route.
+
+**Do this:**
+
+1. Choose this route instead of the physical route; it earns the same maximum score.
+2. Read the model rule and label every supplied quantity as MODEL OUTPUT.
+3. Verify momentum before and after, calculate kinetic energy before and after, and distinguish conservation of momentum from conservation of kinetic energy.
+4. Show calculations, cite row labels, state a limitation of the model, and answer the lesson analysis questions.
+5. Do not combine these model outputs with measurements from the physical route or call them observations.
+
+**Pinned H4 alternative statement (lineage evidence):** Use a sealed water balloon, a small beanbag, or a marshmallow instead of an egg - no biological hazard, no cleanup - or run the collision strand with toy cars only and analyse published crash-test data for the protective design. Both paths meet the same momentum and impulse target.
+
+The delivered model table above is the package-alone production route. It removes any need to retrieve the published input named by the source statement.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** SAFETY FIRST - SUPERVISION: an adult must be within earshot and able to reach you. Do not start until they are. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away.
+**The task.** SAFETY FIRST - SUPERVISION: an adult must be within earshot and able to reach you. Do not start until they are. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away. OR Choose the package-alone model-data alternative printed above, follow its five-step procedure, label its inputs MODEL OUTPUT, and complete the analysis, provenance, and limitation work without handling physical-route materials or relying on prior work.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -163,73 +247,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Use a sealed water balloon, a small beanbag, or a marshmallow instead of an egg - no biological hazard, no cleanup - or run the collision strand with toy cars only and analyse published crash-test data for the protective design. Both paths meet the same momentum and impulse target.
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own survival counts, drop heights, and cart velocities. Impulse comparisons come from the learner's own trials.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Describe the investigation you actually ran on momentum as mass times velocity — or the alternative path, which is scored the same: the question, the variable you changed, the variables you held constant, what you measured, your uncertainty, and how many trials you completed. Report only values you measured or calculated yourself, or took from a source you name on the provenance line and mark SUPPLIED.
+**Q1.** Complete the route you chose. For the document/model route, use its printed procedure and input table; for the H4 physical route, use the printed safe order and your own blank record. Report the route, evidence IDs or model rows, conclusion about momentum as mass times velocity, uncertainty, and limitation.
 
 >
 
-**Q2.** Explain momentum as mass times velocity in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain momentum as mass times velocity in your own words using at least two specifically named rows from E1-E4. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply momentum as mass times velocity to a case in Momentum, Collisions, and Protective Design you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for momentum as mass times velocity. Decide whether E1-E4 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on momentum as mass times velocity against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about momentum as mass times velocity, revise its weakest claim with a named row from E1-E4, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using momentum as mass times velocity as your worked example and citing one piece of your own evidence: What is conserved in a collision, and how do we use that to keep people safe?
+**Q5.** Answer the printed unit question using momentum as mass times velocity as the example. Cite one row from E1-E4, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about momentum as mass times velocity? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E4 is strongest for evaluating the candidate claim about momentum as mass times velocity? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on momentum as mass times velocity cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E4, state one conclusion about momentum as mass times velocity that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about momentum as mass times velocity. Label E1-E4 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -273,4 +323,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs11-physics-u03-l07` · lesson `ma-hs11-physics-u03-l07` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs11-physics-u03-l07` · lesson `ma-hs11-physics-u03-l07` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

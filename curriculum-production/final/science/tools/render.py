@@ -37,6 +37,21 @@ def _blank_table(columns: list[str], rows: int) -> str:
     return "\n".join([head, rule, body])
 
 
+def _filled_table(columns: list[str], rows: list) -> str:
+    """Render supplied reference/model inputs; these are evidence, not answer rows."""
+    head = "| " + " | ".join(columns) + " |"
+    rule = "| " + " | ".join("---" for _ in columns) + " |"
+    body = []
+    for row in rows:
+        values = list(row.values()) if isinstance(row, dict) else list(row)
+        body.append(
+            "| "
+            + " | ".join(str(value).replace("|", "\\|").replace("\n", " ") for value in values)
+            + " |"
+        )
+    return "\n".join([head, rule, *body])
+
+
 def _rubric_table(shared: dict) -> str:
     columns = ["Criterion", *shared["lists"]["rubric-scale"]]
     head = "| " + " | ".join(columns) + " |"
@@ -176,70 +191,104 @@ def _data_sheet_section(package: dict, shared: dict) -> str:
     return "\n".join(lines)
 
 
-def _alternatives_section(package: dict, shared: dict) -> str:
-    supplied = package["supplied_data_alternative"]
-    equal_credit = package["equal_credit_safe_alternative"]
-    text = shared["text"]
-    lists = shared["lists"]
-
+def _executable_content_section(package: dict, shared: dict) -> str:
+    content = package["executable_content"]
+    evidence = content["supplied_evidence"]
+    bound = content["bound_task"]
     lines = [
-        "## If you are not doing the hands-on activity",
+        "## The science information and exact work for this lesson",
         "",
-        "### Path A — this lesson needs no special equipment"
-        if equal_credit.get("is_no_equipment_note")
-        else "### Path A — the alternative activity (same credit)",
+        "Everything required below is printed on this sheet. You do not need an unseen case, "
+        "model, table, prior answer, or outside source.",
         "",
-        equal_credit["text"],
+        "### Science brief",
+        "",
+        _bullets(content["science_brief"]),
+        "",
+        f"### {content['case']['title']}",
+        "",
+        f"**Candidate claim:** {content['case']['claim_to_test']}",
+        "",
+        f"_{content['case']['claim_status']}._",
+        "",
+        f"### {evidence['title']}",
+        "",
+        _filled_table(evidence["columns"], evidence["rows"]),
+        "",
+        f"**Input provenance:** {evidence['provenance']}",
+        "",
+        "**Supplied unit connections:** " + "; ".join(content["unit_connections"]),
+        "",
+        "**Supplied unit performance task:** " + content["unit_performance_task"],
+        "",
+        "### Bound task",
+        "",
+        f"**Question:** {bound['question']}",
+        "",
+        _numbered(bound["steps"]),
         "",
     ]
-    if equal_credit.get("clarification_ref"):
-        lines += [f"_{text[equal_credit['clarification_ref']]}_", ""]
-    if equal_credit.get("derived_task"):
+
+    investigation = content.get("investigation")
+    if investigation:
         lines += [
-            "**Do this instead — the whole lesson on paper:** " + equal_credit["derived_task"],
+            "### Complete document investigation",
             "",
-            f"_{text[equal_credit['derived_task_note_ref']]}_",
+            f"**Investigation question:** {investigation['question']}",
+            "",
+            "**Materials supplied or required:**",
+            "",
+            _bullets(investigation["materials"]),
+            "",
+            "**Procedure:**",
+            "",
+            _numbered(investigation["procedure"]),
+            "",
+            "**Safety for this route:**",
+            "",
+            _bullets(investigation["safety"]),
+            "",
+            "**Recording structure:** " + "; ".join(investigation["recording_columns"]),
+            "",
+            f"**Cleanup:** {investigation['cleanup']}",
             "",
         ]
-    if equal_credit.get("unit_path_text"):
-        lines += [
-            "**The hands-on day in this unit, and its equal-credit alternative:** "
-            + equal_credit["unit_path_text"],
-            "",
-        ]
+
+    alternative = content["equal_credit_route"]
     lines += [
-        _bullets(lists[equal_credit["guarantees_ref"]]),
+        "### Equal-credit route — complete and delivered here",
         "",
-        text[equal_credit["how_to_choose_ref"]],
+        f"**Route type:** {alternative['kind']}",
         "",
-        "### Path B — work from supplied data (same credit)",
+        "**Materials:**",
         "",
-        text[supplied["headline_ref"]],
-        "",
-        text[supplied["how_ref"]],
-        "",
-        f"_{text[supplied['supplies_no_numbers_ref']]}_",
-        "",
-        "For every supplied value, record all of this:",
-        "",
-        _bullets(lists[supplied["provenance_required_ref"]]),
+        _bullets(alternative["materials"]),
         "",
     ]
-    if supplied["source_declared_provenance"]:
+    model_input = alternative.get("input")
+    if model_input:
         lines += [
-            "**What this lesson's data is, according to the curriculum:** "
-            + supplied["source_declared_provenance"],
+            f"**{model_input['title']}**",
+            "",
+            _filled_table(model_input["columns"], model_input["rows"]),
+            "",
+            f"**Model/source rule:** {model_input.get('model_rule', model_input.get('provenance', ''))}",
+            "",
+            f"**Provenance:** {model_input['provenance']}",
             "",
         ]
-    if supplied["course_data_source_reference"]:
+    if alternative.get("procedure"):
+        lines += ["**Do this:**", "", _numbered(alternative["procedure"]), ""]
+    if package["data_bearing"] and package["course_id"].startswith("ma-hs"):
         lines += [
-            "**Where to find the published data:** see `"
-            + supplied["course_data_source_reference"]
-            + "` in the course resource list. The family retrieves it; no third-party content is "
-            "copied into this package.",
+            "**Pinned H4 alternative statement (lineage evidence):** "
+            + package["equal_credit_safe_alternative"]["source_text_verbatim"],
+            "",
+            "The delivered model table above is the package-alone production route. It removes "
+            "any need to retrieve the published input named by the source statement.",
             "",
         ]
-    lines += [text[supplied["scoring_ref"]], "", text[equal_credit["equal_credit_rule_ref"]], ""]
+    lines += [shared["text"][package["equal_credit_safe_alternative"]["equal_credit_rule_ref"]], ""]
     return "\n".join(lines)
 
 
@@ -306,9 +355,9 @@ def student_sheet(package: dict, shared: dict, floor: dict) -> str:
         _bullets(package["materials"]),
         "",
         _safety_section(brief),
+        _executable_content_section(package, shared),
         _data_sheet_section(package, shared),
         "",
-        _alternatives_section(package, shared),
         _questions_section(package),
         _rubric_section(package, shared),
         "## If you get stuck",
@@ -324,8 +373,9 @@ def student_sheet(package: dict, shared: dict, floor: dict) -> str:
         "---",
         "",
         f"_Package `{package['package_id']}` · lesson `{package['lesson_id']}` · built from "
-        f"`{package['source']['lineage']}` at `{package['source']['commit'][:7]}`. No observation, "
-        "measurement, or expected result is supplied anywhere in this sheet._",
+        f"`{package['source']['lineage']}` at `{package['source']['commit'][:7]}`. Supplied "
+        "reference and model inputs are labelled; physical-investigation observations and "
+        "expected results are never supplied before collection._",
         "",
     ]
     return "\n".join(lines)
@@ -546,7 +596,9 @@ def scoring_sheet(package: dict, shared: dict, floor: dict) -> str:
         "",
         "**Equal-credit alternative the learner reads:**",
         "",
-        package["equal_credit_safe_alternative"]["text"],
+        # Scoring is a pinned authority outside this repair. Preserve its exact
+        # source wording while the learner sheet renders the delivered route.
+        package["equal_credit_safe_alternative"]["source_text_verbatim"],
         "",
         "---",
         "",

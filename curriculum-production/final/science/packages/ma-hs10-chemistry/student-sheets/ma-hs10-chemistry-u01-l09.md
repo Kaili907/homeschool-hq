@@ -27,6 +27,10 @@
 - eye protection - REQUIRED for this investigation
 - course notebook or digital equivalent
 - pencil, keyboard, or other accessible response tool
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
 
 ## Safety — read this before you touch anything
 
@@ -98,11 +102,91 @@ Read this before you touch any material. If anything here does not match what is
 
 Share the lesson target, completion state, evidence type, and next instructional step. For any hands-on lesson, share the hazard list, the supervision level, the stop conditions, the safe order, the required PPE, and the disposal steps - including any step that runs unattended or overnight - BEFORE the session so the guardian can review them in advance. Do not expose raw reflections, raw answers, or diagnosis language.
 
+## The science information and exact work for this lesson
+
+Everything required below is printed on this sheet. You do not need an unseen case, model, table, prior answer, or outside source.
+
+### Science brief
+
+- Science brief: repeated trials estimate random uncertainty; they do not detect or remove systematic error.
+- Science brief: a systematic error shifts every trial in the same direction, so tightly agreeing results can still all be wrong.
+- Science brief: a reported result states the number of trials and the spread among them, or a reader cannot judge it.
+
+### Evidence check: uncertainty and repeated trials
+
+**Candidate claim:** A case report presents this as acceptable science: “repeated trials eliminate systematic error.”
+
+_candidate claim; the learner decides from the supplied record._
+
+### Complete reference-evidence record for this lesson
+
+| Evidence ID | Type | Information |
+| --- | --- | --- |
+| E1 | established science reference | Science brief: repeated trials estimate random uncertainty; they do not detect or remove systematic error. |
+| E2 | established science reference | Science brief: a systematic error shifts every trial in the same direction, so tightly agreeing results can still all be wrong. |
+| E3 | established science reference | Science brief: a reported result states the number of trials and the spread among them, or a reader cannot judge it. |
+
+**Input provenance:** Manuel Academy Science learner brief for topic ma-hs10-chemistry-u01::uncertainty and repeated trials, derived from the reviewed correctness source policy/correctness/ma-hs10-chemistry.correctness.json.
+
+**Supplied unit connections:** physical and chemical properties; measurement, precision, and significant figures; uncertainty and repeated trials; density and derived quantities; separation of mixtures; chemical safety and hazard reading
+
+**Supplied unit performance task:** Determine the density of an unknown solid or solution from your own repeated measurements, report it with an honest uncertainty, and justify every digit you kept.
+
+### Bound task
+
+**Question:** What does evidence E1 through E3 justify about uncertainty and repeated trials, and does it support the candidate claim?
+
+1. Read the science brief and the candidate claim.
+2. Use the supplied evidence IDs; do not refer to an unseen source or an activity from another lesson.
+3. Use the supplied record to build a claim-evidence-reasoning product that another reader can check line by line.
+4. Cite evidence IDs beside each conclusion and state one limit of the supplied record.
+5. Check the response against today's success criteria and revise one part.
+
+### Equal-credit route — complete and delivered here
+
+**Route type:** DELIVERED_MODEL_DATA_ALTERNATIVE
+
+**Materials:**
+
+- this supplied model-data table
+- paper
+- pencil
+- calculator if desired
+
+**Mass-volume density model for three unknown solids**
+
+| Solid | Trial | Mass (g) | Volume (mL) |
+| --- | --- | --- | --- |
+| A | 1 | 27.1 | 10.0 |
+| A | 2 | 40.4 | 15.0 |
+| A | 3 | 54.2 | 20.0 |
+| B | 1 | 18.0 | 10.0 |
+| B | 2 | 27.3 | 15.0 |
+| B | 3 | 35.8 | 20.0 |
+
+**Model/source rule:** The simulator uses density 2.70 g/mL for A and 1.80 g/mL for B, then adds fixed instrument deviations of at most 0.3 g.
+
+**Provenance:** Manuel Academy deterministic instructional simulation. Values are model output, not observations, measurements, or a prediction for the hands-on route.
+
+**Do this:**
+
+1. Choose this route instead of the physical route; it earns the same maximum score.
+2. Read the model rule and label every supplied quantity as MODEL OUTPUT.
+3. Calculate every density, mean density, range, and percent spread; decide which measurements are consistent with one material and justify the precision you report.
+4. Show calculations, cite row labels, state a limitation of the model, and answer the lesson analysis questions.
+5. Do not combine these model outputs with measurements from the physical route or call them observations.
+
+**Pinned H4 alternative statement (lineage evidence):** Determine density from a supplied set of published mass and volume measurements, computing uncertainty by hand. Paper and calculator only.
+
+The delivered model table above is the package-alone production route. It removes any need to retrieve the published input named by the source statement.
+
+The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
+
 ## Your data sheet
 
-_This package prints no measurement, no observation, and no expected result. Every box below is blank because the record has to be yours. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from someone else's._
+_Every recording box below is blank because the record has to be yours. Reference information and deterministic model outputs printed earlier are labelled SUPPLIED; they are not learner observations and do not state the expected result of a physical route. Any number you did not measure or calculate yourself is SUPPLIED: write the word SUPPLIED beside it and fill in the provenance line so a reader can tell your evidence from the package's model input._
 
-**The task.** SAFETY FIRST - SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start any step until they are there. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away.
+**The task.** SAFETY FIRST - SUPERVISION: an adult must be beside you, watching, for the whole investigation. Do not start any step until they are there. Read the safety review segment in full before you touch any material, follow the safe order in the order written, stop at once if any stop condition happens, and finish with the disposal steps. Work through the safe order in the safety review, in order, without reordering it. Stop at once if any stop condition happens. Then run the remaining trials and record your own data. No expected value is supplied beforehand and no result is ever filled in for you. If the data is messy, write down what happened and why it may have happened. Finish with the disposal steps in the safety review before anything is packed away. OR Choose the package-alone model-data alternative printed above, follow its five-step procedure, label its inputs MODEL OUTPUT, and complete the analysis, provenance, and limitation work without handling physical-route materials or relying on prior work.
 
 **Before you start, write what you expect to happen and why. This is not graded and it is not marked wrong if it turns out differently.**
 
@@ -164,77 +248,39 @@ _One line for every value you did not measure yourself. Origin is measured, calc
 >
 
 
-## If you are not doing the hands-on activity
-
-### Path A — the alternative activity (same credit)
-
-Determine density from a supplied set of published mass and volume measurements, computing uncertainty by hand. Paper and calculator only.
-
-_About the supplied or provided material named above: this package prints none of it. Supplied means a published table, data set, diagram, sequence, case study, observation log, or reference image that an adult retrieves and that you name on the provenance line. Nothing printed here is a record of an observation, so nothing here can be mistaken for yours._
-
-- No special equipment, no purchase, and no account.
-- No heat, no flame, no chemical, no mains electricity, and no cutting tool.
-- No camera, photograph, video, or voice recording is required as evidence.
-- No private disclosure about the learner, the family, the home, or its location.
-
-The learner or the supervising adult may choose this path at any point, including after starting the other one. Switching is recorded as a path choice, never as an incomplete.
-
-### Path B — work from supplied data (same credit)
-
-You can complete this lesson's analysis without performing the activity, for the same credit.
-
-Use data you did not collect: a published dataset, table, or reference image that the lesson or its course data-source list names, retrieved by an adult. Then run the same analysis, answer the same questions, and be held to the same rubric.
-
-_No dataset is printed in this package. Nothing here is a record of an observation, and no expected value is given anywhere, because a printed number would be indistinguishable from a result and this curriculum never presents invented measurements as real ones._
-
-For every supplied value, record all of this:
-
-- Source name
-- Publisher or author
-- Date you retrieved it
-- Where in the source the value appears
-
-**What this lesson's data is, according to the curriculum:** Learner's own repeated mass and volume trials. Accepted reference densities are looked up for comparison only, after the learner reports their own value.
-
-**Where to find the published data:** see `res-ma-hs10-chemistry-data-sources` in the course resource list. The family retrieves it; no third-party content is copied into this package.
-
-Scored with the same rubric as the hands-on path. The Data honesty and provenance criterion is where a supplied-data submission is checked hardest, not where it is penalised.
-
-The alternative path is scored with the same rubric and earns the same credit as the hands-on path. Choosing it is never treated as failure and never lowers the ceiling.
-
 ## Analysis questions
 
 Answer every question. Write in the space under each one.
 
-**Q1.** Assemble performance-task evidence for uncertainty and repeated trials that an independent reader could check without asking you a single question: the claim, the data behind it with its provenance, the reasoning between them, and the limitations. Anything a reader would have to take on trust is a gap in the evidence, not a detail.
+**Q1.** Build a checkable contribution to the supplied unit performance task — Determine the density of an unknown solid or solution from your own repeated measurements, report it with an honest uncertainty, and justify every digit you kept. — using the case and E1-E3. Include claim, evidence, reasoning, limitation, and a recorded revision.
 
 >
 
-**Q2.** Explain uncertainty and repeated trials in your own words and tie each claim to a specific item in your record: a measurement, a feature of your model, a documented step, or a named source. A claim with no evidence behind it is incomplete regardless of whether it is correct.
+**Q2.** Explain uncertainty and repeated trials in your own words using at least two specifically named rows from E1-E3. Then explain why the candidate claim does or does not follow.
 
 >
 
-**Q3.** Apply uncertainty and repeated trials to a case in Matter, Measurement, and Laboratory Practice you have not worked before. Show the reasoning that produced your result, not only the result, and name the single step where that reasoning is most likely to break down.
+**Q3.** Treat the printed candidate claim as the fresh case for uncertainty and repeated trials. Decide whether E1-E3 supports it, show the evidence-to-conclusion reasoning, and write a more defensible replacement claim if it does not.
 
 >
 
-**Q4.** Check your work on uncertainty and repeated trials against each stated success criterion in turn and name the one you meet least well. Revise it, then state your next step concretely enough that someone else could carry it out: what you would do, and what result would tell you it worked.
+**Q4.** Check the conclusion about uncertainty and repeated trials, revise its weakest claim with a named row from E1-E3, and name the next observation or model input that would resolve the remaining limitation.
 
 >
 
-**Q5.** Answer the unit's essential question in two or three sentences, using uncertainty and repeated trials as your worked example and citing one piece of your own evidence: How do chemists decide what a measurement actually tells them, and how do we work safely with matter at home?
+**Q5.** Answer the printed unit question using uncertainty and repeated trials as the example. Cite one row from E1-E3, connect it to the answer, and state what the supplied record cannot decide.
 
 >
 
-**Q6.** Which single piece of evidence in your record most strongly supports your conclusion about uncertainty and repeated trials? State what makes it strong — precision, repetition, independence, or directness — and name one specific change that would strengthen it further.
+**Q6.** Which one row in E1-E3 is strongest for evaluating the candidate claim about uncertainty and repeated trials? Name the row, explain why it is more direct than another supplied row, and name one input that would strengthen it.
 
 >
 
-**Q7.** Name one thing your work on uncertainty and repeated trials cannot show, however carefully it was carried out, and explain what a different design or data source would have to do to answer it. State the limitation as a property of the method, not as an apology.
+**Q7.** Using the supplied case and E1-E3, state one conclusion about uncertainty and repeated trials that the record supports and one question it cannot answer. Name the different observation, measurement, or model input the unanswered question would require.
 
 >
 
-**Q8.** Audit every quantity in your record and label its origin: measured, calculated, or supplied. Every supplied quantity carries its source name, publisher, and retrieval date on the provenance line. An unlabelled quantity earns no credit, because a reader cannot tell your evidence from someone else's.
+**Q8.** Audit the inputs used in your response about uncertainty and repeated trials. Label E1-E3 as SUPPLIED reference information with the provenance printed below the table; label any model value as MODEL OUTPUT and any value you calculate as CALCULATED.
 
 >
 
@@ -276,4 +322,4 @@ _Extension never means completing another learner's graded work, and never means
 
 ---
 
-_Package `swp-ma-hs10-chemistry-u01-l09` · lesson `ma-hs10-chemistry-u01-l09` · built from `hs912-science-h4` at `a86780a`. No observation, measurement, or expected result is supplied anywhere in this sheet._
+_Package `swp-ma-hs10-chemistry-u01-l09` · lesson `ma-hs10-chemistry-u01-l09` · built from `hs912-science-h4` at `a86780a`. Supplied reference and model inputs are labelled; physical-investigation observations and expected results are never supplied before collection._

@@ -1,6 +1,6 @@
 # Safety gate — Science student work
 
-972 lessons · 36 checks · **PASS** (36 passed, 0 failed)
+972 lessons · 37 checks · **PASS** (37 passed, 0 failed)
 
 | Check | Status | Problems |
 | --- | --- | --- |
@@ -14,6 +14,7 @@
 | `equal-credit-alternative-is-safe` | PASS | 0 |
 | `hands-on-lessons-carry-a-real-alternative` | PASS | 0 |
 | `alternative-promise-matches-package` | PASS | 0 |
+| `package-alone-learner-content-is-executable` | PASS | 0 |
 | `prohibitions-on-every-sheet` | PASS | 0 |
 | `brief-states-supervision-ppe-disposal` | PASS | 0 |
 | `chemical-hazard-needs-direct-adult` | PASS | 0 |
@@ -52,7 +53,8 @@
 - `no-unsafe-home-experimentation` — Nothing a learner is asked to gather, do, or extend requires an open flame, mains electricity, a concentrated reagent, a fume hood, a laser, a radioactive source, or dissection.
 - `equal-credit-alternative-is-safe` — Every lesson has a non-empty equal-credit alternative, and no alternative itself requires a hazardous step.
 - `hands-on-lessons-carry-a-real-alternative` — Any lesson that has the learner handle materials offers an actual alternative activity, not a note that this lesson needs no equipment.
-- `alternative-promise-matches-package` — An alternative that promises supplied or provided material is accompanied by the clarification that this package prints none of it.
+- `alternative-promise-matches-package` — An alternative that promises supplied or provided material is fulfilled by the package-alone executable route.
+- `package-alone-learner-content-is-executable` — Every lesson prints a science brief, bound evidence, exact steps, complete materials, and an executable equal-credit route.
 - `prohibitions-on-every-sheet` — Every non-disableable prohibition the pinned H4 policy set declares appears on every student sheet, in the wording for that grade band.
 - `brief-states-supervision-ppe-disposal` — Every student sheet states who must be present, what protective equipment is needed, and how to clear up.
 - `chemical-hazard-needs-direct-adult` — Any lesson declaring a chemical hazard declares direct-adult supervision, as the H4 framework requires.
