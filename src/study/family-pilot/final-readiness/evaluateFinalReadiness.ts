@@ -1,4 +1,4 @@
-import { ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject } from '../../../types'
+import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject } from '../../../types'
 import {
   FINAL_READINESS_CODES,
   HARD_BLOCKING_READINESS_CODES,
@@ -17,7 +17,7 @@ import {
 
 /** Runtime values checked by the canonical AcademyGrade type. */
 export const FAMILY_PILOT_CURRICULUM_GRADES = Object.freeze(
-  ['5', '7', '8'] as const satisfies readonly AcademyGrade[],
+  [...ACADEMY_GRADES] satisfies readonly AcademyGrade[],
 )
 
 const CODE_ORDER = new Map<FinalReadinessCode, number>(

@@ -252,7 +252,7 @@ const GRADE8_UNITS: readonly MathPracticeUnit[] = [
   },
 ]
 
-const UNITS_BY_GRADE: Readonly<Record<AcademyGrade, readonly MathPracticeUnit[]>> = {
+const UNITS_BY_GRADE: Readonly<Partial<Record<AcademyGrade, readonly MathPracticeUnit[]>>> = {
   '5': GRADE5_UNITS,
   '7': GRADE7_UNITS,
   '8': GRADE8_UNITS,

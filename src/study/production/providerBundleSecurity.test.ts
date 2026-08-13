@@ -60,6 +60,7 @@ function outputText(result: Rollup.RollupOutput | readonly Rollup.RollupOutput[]
 
 describe('production client bundle provider and preview boundary', () => {
   let bundle = ''
+  let buildOutputs: readonly Rollup.RollupOutput[] = []
 
   beforeAll(async () => {
     const previous = new Map<string, string | undefined>()
@@ -78,6 +79,7 @@ describe('production client bundle provider and preview boundary', () => {
         },
       })
       if ('on' in result) throw new Error('Production bundle scan unexpectedly started watch mode.')
+      buildOutputs = Array.isArray(result) ? result : [result]
       bundle = outputText(result)
     } finally {
       for (const [name, value] of previous) {
@@ -98,4 +100,31 @@ describe('production client bundle provider and preview boundary', () => {
       expect(bundle).not.toContain(marker)
     },
   )
+
+  it('keeps the final Family Pilot production closure free of local, test, Node, and Supabase Study providers', () => {
+    const chunks = buildOutputs.flatMap((output) =>
+      output.output.filter((entry): entry is Rollup.OutputChunk => entry.type === 'chunk'))
+    const byFile = new Map(chunks.map((chunk) => [chunk.fileName, chunk]))
+    const entry = chunks.find((chunk) => chunk.facadeModuleId?.endsWith('/src/study/family-pilot/final-app/FinalFamilyPilotApp.tsx'))
+    expect(entry, 'the feature-flagged final Family Pilot app must be emitted').toBeDefined()
+
+    const closure = new Set<Rollup.OutputChunk>()
+    const visit = (chunk: Rollup.OutputChunk | undefined) => {
+      if (!chunk || closure.has(chunk)) return
+      closure.add(chunk)
+      chunk.imports.forEach((fileName) => visit(byFile.get(fileName)))
+    }
+    visit(entry)
+
+    const moduleIds = [...closure].flatMap((chunk) => Object.keys(chunk.modules)).join('\n')
+    const closureText = [...closure].map((chunk) => chunk.code).join('\n')
+    expect(moduleIds).not.toMatch(/localDevelopmentPorts|syntheticStudyFixtures|\/testing\/|fakeIndexedDb|node_modules\/fake-indexeddb/i)
+    expect(moduleIds).not.toMatch(/source\.node|generate\.node|node-runtime|supabase.*study|study.*supabase/i)
+    // The main app's shared entry owns Supabase authentication and is a static
+    // Rollup dependency of every lazy screen. Scan the final facade itself for
+    // endpoint/provider markers, while using module ids above to prove the
+    // final Study graph did not acquire a Supabase Study implementation.
+    expect(entry?.code).not.toMatch(/node:fs|node:fs\/promises|@supabase\/supabase-js|localhost|127\.0\.0\.1/i)
+    expect(closureText).not.toContain('production-material:')
+  })
 })

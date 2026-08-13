@@ -311,7 +311,7 @@ describe('FamilyPreferences (FAMILY-PILOT-PREFS)', () => {
     await render(<FamilyPreferences {...makeProps({ onSetWorkingGrade })} />)
 
     const select = byAttr('SELECT', 'aria-label', 'Working grade for Mathematics')
-    await change(select, { value: '11' }) // not a published AcademyGrade
+    await change(select, { value: '6' }) // Grade 6 has no admitted curriculum
 
     expect(onSetWorkingGrade).not.toHaveBeenCalled()
     expect(hasText(container, 'Unsupported grade')).toBe(true)
@@ -335,7 +335,7 @@ describe('FamilyPreferences (FAMILY-PILOT-PREFS)', () => {
     const root = await render(<FamilyPreferences {...props} />)
 
     const select = byAttr('SELECT', 'aria-label', 'Working grade for Mathematics')
-    await change(select, { value: '11' }) // refused — banner should be showing
+    await change(select, { value: '6' }) // refused — banner should be showing
     expect(hasText(container, 'Unsupported grade')).toBe(true)
 
     // host reuses the same mounted instance for a different student

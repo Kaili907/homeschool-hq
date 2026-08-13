@@ -106,8 +106,13 @@ async function openStorage(options: CreateFinalFamilyPilotStudyRuntimeOptions): 
       close: () => injected.close?.(),
     })
   }
+  const indexedDb = options.indexedDb as Omit<FamilyPilotIndexedDbStudyPortsOptions, 'scope'>
   const handle = await createFamilyPilotIndexedDbStudyPorts({
-    ...(options.indexedDb as Omit<FamilyPilotIndexedDbStudyPortsOptions, 'scope'>),
+    ...indexedDb,
+    // One monotonic clock must govern both Study transitions and their durable
+    // document. A clock injected on only one side can otherwise create a valid
+    // event that the calendar correctly rejects as out of order.
+    ...(!indexedDb.now && options.now ? { now: options.now } : {}),
     scope: {
       householdRef: options.context.study.householdRef,
       learnerRef: options.context.study.learnerRef,
@@ -505,8 +510,10 @@ export async function createFinalFamilyPilotStudyRuntime(
     async startTutor(assignmentRef, session): Promise<FinalFamilyPilotTutorResult> {
       const prepared = await preparedSession(assignmentRef, session)
       if ('status' in prepared) return prepared
-      const lessonKind = prepared.lesson.kind
-      const subject = lessonKind === 'math' ? 'math' : lessonKind === 'reading' ? 'reading' : lessonKind === 'writing' ? 'writing' : 'other'
+      // The final catalog uses one completion-authority lesson kind for every
+      // subject. Subject eligibility therefore comes from the accepted launch
+      // context, not from that intentionally generic curriculum kind.
+      const subject = options.context.study.subject
       return Object.freeze({
         status: 'ok',
         step: startHelp({

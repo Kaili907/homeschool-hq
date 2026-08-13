@@ -122,14 +122,12 @@ const AdminConsoleRoute = lazy(() =>
   import('./components/admin/AdminConsoleRoute').then((module) => ({ default: module.AdminConsoleRoute })),
 )
 
-// FAMILY-PILOT: the local-first family pilot shell. Lazy for the same reason as
-// the academy chunk — the pilot's state layer loads only when an enabled
-// household opens it, never on initial application load.
-// The integrated host composes the pilot's login, student, Study, Tutor and
-// parent surfaces over that shell; the shell alone renders state custody only.
-const FamilyPilotHost = lazy(() =>
-  import('./study/family-pilot/integration/FamilyPilotHost').then((module) => ({
-    default: module.FamilyPilotHost,
+// FINAL FAMILY PILOT: production-capable, but still lazy and flag-gated. Its
+// small release manifest loads only after /family-pilot opens; each admitted
+// course and its learner-safe production packages load on selection.
+const FinalFamilyPilotApp = lazy(() =>
+  import('./study/family-pilot/final-app/FinalFamilyPilotApp').then((module) => ({
+    default: module.FinalFamilyPilotApp,
   })),
 )
 
@@ -224,11 +222,9 @@ export default function App() {
     ) {
       return { kind: 'g5MathPractice' }
     }
-    // FAMILY-PILOT (MOUNT-2 pattern): a /family-pilot deep link is honoured only
-    // with the flag on and a persisted profile; flag off or no profile falls
-    // through to the picker. The pilot's own state is device-local and is loaded
-    // by the shell, not here.
-    if (familyPilotEnabled && bootProfile && isFamilyPilotPath(window.location.pathname)) {
+    // Family Pilot owns its own local-first roster. It must therefore be able to
+    // boot on a fresh device with no legacy main-app profile.
+    if (familyPilotEnabled && isFamilyPilotPath(window.location.pathname)) {
       return { kind: 'familyPilot' }
     }
     if (bootProfile && hasEnabledAcademyProgram(bootProfile)) {
@@ -475,7 +471,7 @@ export default function App() {
   if (screen.kind === 'familyPilot' && familyPilotEnabled) {
     return (
       <Suspense fallback={<main aria-busy="true">Loading the Family Pilot.</main>}>
-        <FamilyPilotHost
+        <FinalFamilyPilotApp
           onExit={() => {
             leaveFamilyPilotPath()
             setScreen({ kind: 'home' })

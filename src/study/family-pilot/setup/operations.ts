@@ -1,4 +1,4 @@
-import { ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
+import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
 import { generateStudentRef, isValidStudentRef } from './identifiers'
 import type {
   FamilySetupMutationResult,
@@ -13,8 +13,8 @@ import type {
 /** Bounds the local roster to a size a single family setup screen can reasonably hold. */
 export const MAX_STUDENTS = 24
 
-const VALID_GRADES: readonly Grade[] = ['3', '4', '5', '6', '7', '8', '10', '12']
-const VALID_ACADEMY_GRADES: readonly AcademyGrade[] = ['5', '7', '8']
+const VALID_GRADES: readonly Grade[] = ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+const VALID_ACADEMY_GRADES: readonly AcademyGrade[] = ACADEMY_GRADES
 
 function isValidGrade(value: unknown): value is Grade {
   return typeof value === 'string' && (VALID_GRADES as readonly string[]).includes(value)

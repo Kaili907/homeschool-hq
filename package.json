@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run curriculum:build && vite",
     "build": "npm run curriculum:build && vite build && node scripts/stamp-sw.mjs",
-    "curriculum:build": "node scripts/build-curriculum.mjs",
+    "curriculum:build": "node scripts/build-curriculum.mjs && node scripts/build-final-family-pilot-data.mjs",
     "migration:check": "node scripts/check-migration-collisions.mjs",
     "migration:replay:admin": "node scripts/replay-admin-migration-union.mjs",
     "db:security:audit": "node scripts/audit-database-security.mjs",

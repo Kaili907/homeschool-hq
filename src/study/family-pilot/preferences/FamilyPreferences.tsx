@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject } from '../../../types'
+import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject } from '../../../types'
 import type { FamilySetupStudent, FamilySetupStudentRef } from '../setup'
 
 /** Only these grades have published curriculum content — see AcademyGrade. */
-const SUPPORTED_WORKING_GRADES: readonly AcademyGrade[] = ['5', '7', '8']
+const SUPPORTED_WORKING_GRADES: readonly AcademyGrade[] = ACADEMY_GRADES
 
 const SUBJECT_LABELS: Record<AcademySubject, string> = {
   mathematics: 'Mathematics',

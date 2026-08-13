@@ -1,0 +1,670 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { loadFinalFamilyPilotCatalog, type FinalLearnerProductionMaterial } from '../../../curriculum/final-app-data'
+import { ACADEMY_GRADES, ACADEMY_SUBJECTS, type AcademyGrade, type AcademySubject, type Grade } from '../../../types'
+import { FamilyPilotStudentLogin } from '../auth'
+import { exportFinalFamilyPilotBackup, downloadFinalFamilyPilotBackup, restoreFinalFamilyPilotBackup } from './backup'
+import { FamilyPilotHome } from '../home'
+import { fromStudentSelector, toStudentSelector } from '../integration/identity'
+import { FamilyPilotLessonPlayer } from '../lesson-player'
+import { FamilyPilotParentAssignPanel } from '../parent-assign'
+import { FamilyPreferences } from '../preferences'
+import { FamilyPilotRecoveryScreen } from '../recovery'
+import { buildStudentWeeklyReport, FamilyPilotProgressReport } from '../reports'
+import { buildDailySchedule, FamilyPilotDailySchedule } from '../schedule'
+import {
+  completeSetup,
+  createStudent,
+  setPinRequirement,
+  setWorkingGrade,
+  updateStudent,
+  type FamilySetupState,
+  type FamilySetupStudent,
+} from '../setup'
+import {
+  recordActiveInterval,
+  startFocusSession,
+  suggestBreak,
+  DEFAULT_FAMILY_PILOT_BREAK_GUIDANCE,
+  type FamilyPilotFocusSession,
+} from '../focus'
+import type { FamilyPilotAssignmentRecordV1, FamilyPilotSnapshot } from '../core'
+import type { FamilyPilotStudentSnapshot } from '../parent'
+import type { FamilyPilotStudySnapshot } from '../study'
+import {
+  academySubjectToStudySubject,
+  FinalFamilyPilotController,
+  type FinalFamilyPilotControllerResult,
+} from './controller'
+import { digestLocalPin } from './state'
+
+const SUBJECT_LABEL: Readonly<Record<AcademySubject, string>> = Object.freeze({
+  mathematics: 'Mathematics',
+  'english-language-arts': 'English Language Arts',
+  science: 'Science',
+  'social-studies': 'Social Studies',
+  health: 'Health',
+  'physical-education': 'Physical Education',
+  'ready-for-life': 'Ready for Life',
+  technology: 'Technology / Computer Science',
+  'arts-and-music': 'Arts / Music',
+  'financial-literacy': 'Financial Literacy',
+})
+
+type Mode = 'parent' | 'student'
+type ParentView = 'assign' | 'reports' | 'preferences' | 'backup'
+
+function messageOf(error: unknown): string {
+  return error instanceof Error ? error.message : 'That action could not be completed.'
+}
+
+export function FinalFamilyPilotApp({ onExit }: { readonly onExit: () => void }) {
+  const [catalog, setCatalog] = useState<Awaited<ReturnType<typeof loadFinalFamilyPilotCatalog>> | null>(null)
+  const [catalogError, setCatalogError] = useState<string | null>(null)
+  const [revision, setRevision] = useState(0)
+
+  useEffect(() => {
+    let live = true
+    void loadFinalFamilyPilotCatalog().then((loaded) => {
+      if (live) setCatalog(loaded)
+    }).catch((error: unknown) => {
+      if (live) setCatalogError(messageOf(error))
+    })
+    return () => { live = false }
+  }, [])
+
+  const controller = useMemo(() => catalog ? new FinalFamilyPilotController({ catalog }) : null, [catalog])
+  useEffect(() => () => controller?.close(), [controller])
+  const refresh = useCallback(() => {
+    controller?.refresh()
+    setRevision((value) => value + 1)
+  }, [controller])
+
+  if (!catalog && !catalogError) {
+    return <FinalShell onExit={onExit}><p className="rounded-xl bg-white p-6 font-semibold" role="status">Opening the admitted Family Pilot release…</p></FinalShell>
+  }
+  if (!catalog || !controller || catalogError) {
+    return <FinalShell onExit={onExit}><p className="rounded-xl border border-red-300 bg-red-50 p-6 font-semibold" role="alert">{catalogError ?? 'The final curriculum could not be loaded.'}</p></FinalShell>
+  }
+
+  return <MountedFinalFamilyPilot controller={controller} onExit={onExit} refresh={refresh} revision={revision} />
+}
+
+function FinalShell({ onExit, children }: { readonly onExit: () => void; readonly children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900" data-family-pilot-release="family-pilot-r1">
+      <header className="border-b border-slate-200 bg-slate-950 text-white">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-cyan-300">Manuel Academy</p>
+            <h1 className="text-xl font-extrabold">Family Pilot</h1>
+          </div>
+          <button type="button" className="rounded-lg border border-slate-600 px-3 py-2 font-bold" onClick={onExit}>Exit Family Pilot</button>
+        </div>
+      </header>
+      {children}
+    </div>
+  )
+}
+
+function MountedFinalFamilyPilot({
+  controller,
+  onExit,
+  refresh,
+  revision: _revision,
+}: {
+  readonly controller: FinalFamilyPilotController
+  readonly onExit: () => void
+  readonly refresh: () => void
+  /** Forces a projection refresh without remounting an open Study session. */
+  readonly revision: number
+}) {
+  const [mode, setMode] = useState<Mode>('parent')
+  const [parentView, setParentView] = useState<ParentView>('assign')
+  const [openAssignmentRef, setOpenAssignmentRef] = useState<string | null>(null)
+  const restoreInput = useRef<HTMLInputElement>(null)
+  const app = controller.appSnapshot
+  const core = controller.coreSnapshot
+
+  const doRestore = async (file: File | undefined) => {
+    if (!file) return
+    const restored = await restoreFinalFamilyPilotBackup(await file.text())
+    if (restored.status === 'rejected') window.alert(`Backup was not restored: ${restored.reasonCode}`)
+    else refresh()
+  }
+
+  if (app.status !== 'ready') {
+    const recovery: FamilyPilotSnapshot = {
+      status: app.status,
+      reasonCode: app.reasonCode as FamilyPilotSnapshot['reasonCode'],
+      state: core.state,
+    }
+    return (
+      <FinalShell onExit={onExit}>
+        <FamilyPilotRecoveryScreen
+          snapshot={recovery}
+          actions={{
+            retry: () => window.location.reload(),
+            exportBackup: () => { void exportFinalFamilyPilotBackup()
+              .then(downloadFinalFamilyPilotBackup)
+              .catch((error: unknown) => window.alert(messageOf(error))) },
+            restoreBackup: () => restoreInput.current?.click(),
+            returnHome: onExit,
+          }}
+        />
+        <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void doRestore(event.target.files?.[0])} />
+      </FinalShell>
+    )
+  }
+
+  if (!app.state.setup.completedAt) {
+    return <FinalShell onExit={onExit}><SetupScreen controller={controller} refresh={refresh} /></FinalShell>
+  }
+
+  const openStudentRef = app.state.activeStudentRef
+  if (openAssignmentRef && openStudentRef) {
+    return (
+      <FinalShell onExit={onExit}>
+        <LessonSurface
+          key={`${openStudentRef}:${openAssignmentRef}`}
+          controller={controller}
+          studentRef={openStudentRef}
+          assignmentRef={openAssignmentRef}
+          onExit={() => { setOpenAssignmentRef(null); refresh() }}
+          refresh={refresh}
+        />
+      </FinalShell>
+    )
+  }
+
+  return (
+    <FinalShell onExit={onExit}>
+      <div className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+          <p className="text-sm font-semibold text-slate-600">
+            Admitted release · 90 courses · 8,292 production-bound lessons
+          </p>
+          <div className="flex gap-2" role="group" aria-label="Family Pilot role">
+            <button type="button" className={`rounded-lg px-4 py-2 font-bold ${mode === 'parent' ? 'bg-slate-900 text-white' : 'border'}`} onClick={() => { controller.selectStudent(null); setMode('parent'); refresh() }}>Parent</button>
+            <button type="button" className={`rounded-lg px-4 py-2 font-bold ${mode === 'student' ? 'bg-cyan-700 text-white' : 'border'}`} onClick={() => { controller.selectStudent(null); setMode('student'); refresh() }}>Student</button>
+          </div>
+        </div>
+      </div>
+      {mode === 'student' ? (
+        <StudentSurface controller={controller} onOpen={setOpenAssignmentRef} refresh={refresh} />
+      ) : (
+        <ParentSurface
+          controller={controller}
+          view={parentView}
+          setView={setParentView}
+          onOpen={(studentRef, assignmentRef) => { controller.selectStudent(studentRef); setOpenAssignmentRef(assignmentRef); refresh() }}
+          refresh={refresh}
+          restoreInput={restoreInput}
+          onRestore={doRestore}
+        />
+      )}
+    </FinalShell>
+  )
+}
+
+function SetupScreen({ controller, refresh }: { readonly controller: FinalFamilyPilotController; readonly refresh: () => void }) {
+  const [setup, setSetup] = useState<FamilySetupState>(controller.appSnapshot.state.setup)
+  const [name, setName] = useState('')
+  const [grade, setGrade] = useState<Grade>('5')
+  const [error, setError] = useState('')
+
+  const add = () => {
+    const result = createStudent(setup, { displayName: name, nominalGrade: grade, enabledSubjects: ACADEMY_SUBJECTS }, new Date().toISOString())
+    if (result.status !== 'ok') { setError(result.reason); return }
+    setSetup(result.state)
+    setName('')
+    setError('')
+  }
+  const finish = () => {
+    const result = completeSetup(setup, new Date().toISOString())
+    if (result.status !== 'ok') { setError(result.reason); return }
+    try { controller.saveSetup(result.state); refresh() } catch (cause) { setError(messageOf(cause)) }
+  }
+
+  return (
+    <main className="mx-auto max-w-3xl px-4 py-8">
+      <p className="font-bold text-cyan-700">First-run family setup</p>
+      <h2 className="mt-1 text-3xl font-extrabold">Set up your learners</h2>
+      <p className="mt-2 text-slate-600">Nominal grade is the reporting grade. Working grade is configured separately by subject after setup.</p>
+      <section className="mt-6 rounded-2xl border bg-white p-5">
+        <label className="block font-bold" htmlFor="family-setup-name">Student display name</label>
+        <input id="family-setup-name" className="mt-1 w-full rounded-lg border px-3 py-2" value={name} onChange={(event) => setName(event.target.value)} />
+        <label className="mt-4 block font-bold" htmlFor="family-setup-grade">Nominal grade</label>
+        <select id="family-setup-grade" className="mt-1 rounded-lg border px-3 py-2" value={grade} onChange={(event) => setGrade(event.target.value as Grade)}>
+          {(['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] as Grade[]).map((value) => <option key={value} value={value}>Grade {value}{value === '6' ? ' (profile only; working-grade override required)' : ''}</option>)}
+        </select>
+        <button type="button" className="mt-4 rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white" onClick={add}>Add student</button>
+      </section>
+      <ul className="mt-4 space-y-2">
+        {setup.students.map((student) => <li key={student.studentRef} className="rounded-xl border bg-white p-4 font-semibold">{student.displayName} · Nominal Grade {student.nominalGrade} · {student.enabledSubjects.length} subjects enabled</li>)}
+      </ul>
+      {error ? <p className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
+      <button type="button" className="mt-6 rounded-lg bg-emerald-700 px-5 py-3 font-extrabold text-white disabled:opacity-50" disabled={setup.students.length === 0} onClick={finish}>Finish family setup</button>
+    </main>
+  )
+}
+
+function StudentSurface({ controller, onOpen, refresh }: {
+  readonly controller: FinalFamilyPilotController
+  readonly onOpen: (assignmentRef: string) => void
+  readonly refresh: () => void
+}) {
+  const app = controller.appSnapshot.state
+  const active = app.activeStudentRef
+  const students = app.setup.students
+  if (!active) {
+    return (
+      <FamilyPilotStudentLogin
+        students={students.map((student) => ({ studentRef: toStudentSelector(student.studentRef), displayName: student.displayName, avatarInitial: student.displayName.charAt(0), pinRequired: student.pinRequired }))}
+        activeStudentRef={null}
+        onSelectStudent={() => undefined}
+        onAuthenticated={(selector) => { controller.selectStudent(fromStudentSelector(selector)); refresh() }}
+        onVerifyPin={(selector, pin) => controller.appSnapshot.state.pinDigests[fromStudentSelector(selector)] === digestLocalPin(pin)}
+        onLogout={() => undefined}
+        onSwitchStudent={() => undefined}
+      />
+    )
+  }
+  const student = students.find((item) => item.studentRef === active)
+  const record = controller.coreSnapshot.state.students.find((item) => item.studentRef === active)
+  if (!student || !record) return <p className="p-6" role="alert">Student state is unavailable.</p>
+  const assignments = record.assignments.filter((item) => item.state !== 'abandoned')
+  const homeAssignments = assignments.map((item) => ({
+    assignmentRef: item.assignmentRef,
+    title: item.title,
+    subject: SUBJECT_LABEL[item.subject as AcademySubject] ?? item.subject,
+    status: item.state === 'planned' ? 'not-started' as const : item.state === 'completed' ? 'completed' as const : 'in-progress' as const,
+  }))
+  const inProgress = homeAssignments.find((item) => item.status === 'in-progress') ?? null
+  const holds = controller.openSafetyHolds(active)
+  const schedule = buildDailySchedule({
+    studentRef: active,
+    date: new Date().toISOString().slice(0, 10),
+    items: assignments.map((item) => ({ kind: 'assignment' as const, assignmentRef: item.assignmentRef, lessonRef: item.lessonRef, title: item.title, state: item.state })),
+  })
+  return (
+    <div>
+      <FamilyPilotHome
+        student={{ displayName: student.displayName, avatarInitial: student.displayName.charAt(0) }}
+        todayAssignments={homeAssignments}
+        inProgressAssignment={inProgress}
+        completedTodayCount={assignments.filter((item) => item.state === 'completed' && item.completedAt?.slice(0, 10) === new Date().toISOString().slice(0, 10)).length}
+        tutorAvailability={{ available: true, reason: 'Static curriculum help remains available if Tutor Core is offline.' }}
+        hold={holds.length ? { active: true, reason: 'A parent must clear the safety check-in for the held session.' } : null}
+        onStartAssignment={onOpen}
+        onResumeAssignment={onOpen}
+        onOpenTutor={() => inProgress && onOpen(inProgress.assignmentRef)}
+        onOpenAssignments={() => document.getElementById('family-pilot-student-schedule')?.scrollIntoView()}
+        onSwitchStudent={() => { controller.selectStudent(null); refresh() }}
+      />
+      <div id="family-pilot-student-schedule" className="mx-auto max-w-3xl px-4 pb-8">
+        <FamilyPilotDailySchedule studentRef={active} items={schedule} onStartItem={(ref) => {
+          const item = schedule.find((held) => held.scheduleItemRef === ref)
+          if (item?.assignmentRef) onOpen(item.assignmentRef)
+        }} />
+      </div>
+    </div>
+  )
+}
+
+function ParentSurface({ controller, view, setView, onOpen, refresh, restoreInput, onRestore }: {
+  readonly controller: FinalFamilyPilotController
+  readonly view: ParentView
+  readonly setView: (view: ParentView) => void
+  readonly onOpen: (studentRef: string, assignmentRef: string) => void
+  readonly refresh: () => void
+  readonly restoreInput: React.RefObject<HTMLInputElement | null>
+  readonly onRestore: (file: File | undefined) => Promise<void>
+}) {
+  const students = controller.appSnapshot.state.setup.students
+  const [selectedRef, setSelectedRef] = useState(students[0]?.studentRef ?? '')
+  const selected = students.find((item) => item.studentRef === selectedRef) ?? students[0]
+  return (
+    <main className="mx-auto max-w-6xl px-4 py-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p className="font-bold text-cyan-700">Parent Hub</p>
+          <h2 className="text-2xl font-extrabold">Household learning</h2>
+        </div>
+        <select aria-label="Parent student" className="rounded-lg border px-3 py-2 font-bold" value={selected?.studentRef ?? ''} onChange={(event) => setSelectedRef(event.target.value)}>
+          {students.map((student) => <option key={student.studentRef} value={student.studentRef}>{student.displayName}</option>)}
+        </select>
+      </div>
+      <nav className="mt-5 flex flex-wrap gap-2" aria-label="Parent Hub sections">
+        {(['assign', 'reports', 'preferences', 'backup'] as ParentView[]).map((item) => <button key={item} type="button" className={`rounded-lg px-4 py-2 font-bold ${view === item ? 'bg-slate-900 text-white' : 'border bg-white'}`} onClick={() => setView(item)}>{item === 'assign' ? 'Assignments & readiness' : item.charAt(0).toUpperCase() + item.slice(1)}</button>)}
+      </nav>
+      {!selected ? <p className="mt-6">No configured students.</p> : view === 'assign' ? (
+        <ParentAssignments controller={controller} student={selected} onOpen={onOpen} refresh={refresh} />
+      ) : view === 'reports' ? (
+        <ParentReports controller={controller} student={selected} refresh={refresh} />
+      ) : view === 'preferences' ? (
+        <PreferencesSurface controller={controller} student={selected} refresh={refresh} onClose={() => setView('assign')} />
+      ) : (
+        <section className="mt-6 rounded-2xl border bg-white p-5">
+          <h3 className="text-xl font-extrabold">Backup and recovery</h3>
+          <p className="mt-2 text-slate-600">Exports minimized roster, assignment progress, exact segment references, source metadata, attestations, preferences, and safety state. It never includes learner answers or Tutor conversations.</p>
+          <div className="mt-4 flex gap-3">
+            <button type="button" className="rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white" onClick={() => { void exportFinalFamilyPilotBackup()
+              .then(downloadFinalFamilyPilotBackup)
+              .catch((error: unknown) => window.alert(messageOf(error))) }}>Download backup</button>
+            <button type="button" className="rounded-lg border px-4 py-2 font-bold" onClick={() => restoreInput.current?.click()}>Restore validated backup</button>
+          </div>
+          <input ref={restoreInput} className="hidden" type="file" accept="application/json" onChange={(event) => void onRestore(event.target.files?.[0])} />
+        </section>
+      )}
+    </main>
+  )
+}
+
+function ParentAssignments({ controller, student, onOpen, refresh }: {
+  readonly controller: FinalFamilyPilotController
+  readonly student: FamilySetupStudent
+  readonly onOpen: (studentRef: string, assignmentRef: string) => void
+  readonly refresh: () => void
+}) {
+  const courses = controller.coursesFor(student)
+  const [courseRef, setCourseRef] = useState(courses[0]?.courseRef ?? '')
+  const [lessons, setLessons] = useState<Awaited<ReturnType<typeof controller.catalog.runtime.listLessons>>>([])
+  const [bindingByAssignment, setBindingByAssignment] = useState<Record<string, Awaited<ReturnType<typeof controller.catalog.getBinding>>>>({})
+  const [error, setError] = useState('')
+  const assignments = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)?.assignments ?? []
+  const selectedCourse = courses.find((item) => item.courseRef === courseRef) ?? courses[0]
+
+  useEffect(() => {
+    let live = true
+    if (!selectedCourse) { setLessons([]); return () => { live = false } }
+    void controller.catalog.runtime.listLessons(selectedCourse.courseRef).then((items) => { if (live) setLessons(items) })
+    return () => { live = false }
+  }, [controller, selectedCourse?.courseRef])
+  useEffect(() => {
+    let live = true
+    void Promise.all(assignments.map(async (assignment) => [assignment.assignmentRef, await controller.catalog.getBinding(assignment.lessonRef)] as const)).then((entries) => {
+      if (live) setBindingByAssignment(Object.fromEntries(entries))
+    })
+    return () => { live = false }
+  }, [controller, assignments.map((item) => `${item.assignmentRef}:${item.updatedAt}`).join('|')])
+
+  const studySubject = selectedCourse ? academySubjectToStudySubject(selectedCourse.subject) : 'other'
+  const workingGrade = selectedCourse?.grade ?? Number(student.nominalGrade)
+  const pending = controller.pendingAttestations(student.studentRef)
+  const holds = controller.openSafetyHolds(student.studentRef)
+
+  return (
+    <div className="mt-6 space-y-5">
+      <section className="rounded-2xl border bg-white p-5">
+        <label className="font-bold" htmlFor="family-final-course">Admitted course</label>
+        <select id="family-final-course" className="mt-2 w-full rounded-lg border px-3 py-2" value={selectedCourse?.courseRef ?? ''} onChange={(event) => setCourseRef(event.target.value)}>
+          {courses.map((course) => <option key={course.courseRef} value={course.courseRef}>{course.title} · Grade {course.grade} · {course.lessonCount} lessons</option>)}
+        </select>
+        {courses.length === 0 ? <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 font-semibold">No curriculum resolves for this configuration. A nominal Grade 6 student needs a supported per-subject working grade.</p> : null}
+        <p className="mt-2 text-sm text-slate-600">Every admitted lesson in this course is available; the course payload is lazy-loaded only after this course is selected.</p>
+      </section>
+      {selectedCourse ? (
+        <FamilyPilotParentAssignPanel
+          student={{ studentRef: student.studentRef, displayName: student.displayName, nominalGrade: Number(student.nominalGrade) }}
+          availableLessons={lessons.map((lesson) => ({ lessonRef: lesson.lessonRef, title: lesson.title, subject: studySubject, grade: lesson.grade }))}
+          currentAssignments={assignments.map((assignment) => ({
+            assignmentRef: assignment.assignmentRef,
+            studentRef: student.studentRef,
+            lessonRef: assignment.lessonRef,
+            lessonTitle: assignment.title,
+            subject: academySubjectToStudySubject(assignment.subject as AcademySubject),
+            status: assignment.state === 'planned' ? 'not-started' : assignment.state === 'active' ? 'in-progress' : assignment.state === 'abandoned' ? 'skipped' : assignment.state,
+            optional: false,
+          }))}
+          workingGrade={[{ subject: studySubject, grade: workingGrade }]}
+          enabledSubjects={[studySubject]}
+          onAssignLesson={async (studentRef, lessonRef) => {
+            try { await controller.assignLesson(studentRef, lessonRef); refresh() } catch (cause) { setError(messageOf(cause)) }
+          }}
+          onResumeAssignment={onOpen}
+        />
+      ) : null}
+      {assignments.filter((assignment) => bindingByAssignment[assignment.assignmentRef]?.sourceReadinessKind === 'DYNAMIC_SOURCE_REQUIRED').map((assignment) => (
+        <DynamicSourceCard key={assignment.assignmentRef} controller={controller} student={student} assignment={assignment} attached={controller.appSnapshot.state.sourceAttachments.some((item) => item.studentRef === student.studentRef && item.assignmentRef === assignment.assignmentRef)} refresh={refresh} />
+      ))}
+      {pending.map((item) => (
+        <section key={`${item.studentRef}:${item.assignmentRef}:${item.sessionRef}`} className="rounded-2xl border border-amber-300 bg-amber-50 p-5">
+          <h3 className="font-extrabold">Guardian attestation pending</h3>
+          <p className="mt-1">{assignments.find((assignment) => assignment.assignmentRef === item.assignmentRef)?.title ?? item.lessonRef} is not certified or completed yet.</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button type="button" className="rounded-lg bg-emerald-700 px-4 py-2 font-bold text-white" onClick={async () => { const result = await controller.attest(student.studentRef, item.assignmentRef, 'adult-observed'); if (result.status === 'ok') refresh(); else setError(result.message) }}>Attest: adult observed</button>
+            <button type="button" className="rounded-lg border border-emerald-700 bg-white px-4 py-2 font-bold" onClick={async () => { const result = await controller.attest(student.studentRef, item.assignmentRef, 'simulated-alternative'); if (result.status === 'ok') refresh(); else setError(result.message) }}>Equal-credit simulated alternative</button>
+          </div>
+        </section>
+      ))}
+      {holds.map((hold) => {
+        const assignment = assignments.find((item) => controller.appSnapshot.state.sessions.some((session) => session.studentRef === student.studentRef && session.assignmentRef === item.assignmentRef && session.session.sessionRef === hold.sessionRef))
+        return (
+          <section key={hold.holdRef} className="rounded-2xl border border-red-300 bg-red-50 p-5">
+            <h3 className="font-extrabold">Safety check-in</h3>
+            <p className="mt-1">Held only for {student.displayName}’s exact Study session. Siblings remain available.</p>
+            {assignment ? <button type="button" className="mt-3 rounded-lg bg-slate-900 px-4 py-2 font-bold text-white" onClick={async () => { try { await controller.clearHold(student.studentRef, assignment.assignmentRef, hold.holdRef); refresh() } catch (cause) { setError(messageOf(cause)) } }}>Parent checked in — clear hold</button> : null}
+          </section>
+        )
+      })}
+      {error ? <p className="rounded-lg border border-red-300 bg-red-50 p-3 font-semibold" role="alert">{error}</p> : null}
+    </div>
+  )
+}
+
+function DynamicSourceCard({ controller, student, assignment, attached, refresh }: {
+  readonly controller: FinalFamilyPilotController
+  readonly student: FamilySetupStudent
+  readonly assignment: FamilyPilotAssignmentRecordV1
+  readonly attached: boolean
+  readonly refresh: () => void
+}) {
+  const [title, setTitle] = useState('')
+  const [publisher, setPublisher] = useState('')
+  const [publishedAt, setPublishedAt] = useState(new Date().toISOString().slice(0, 10))
+  const [error, setError] = useState('')
+  return (
+    <section className="rounded-2xl border border-blue-300 bg-blue-50 p-5">
+      <h3 className="font-extrabold">Dynamic Social Studies source</h3>
+      <p className="mt-1 font-semibold">{assignment.title}: {attached ? 'ATTACHED_SATISFIED — start is unlocked.' : 'PENDING_SOURCE_ATTACHMENT — only this assignment is blocked.'}</p>
+      {!attached ? <div className="mt-3 grid gap-3 sm:grid-cols-3">
+        <label className="font-semibold">Source title<input className="mt-1 w-full rounded-lg border bg-white px-3 py-2" value={title} onChange={(event) => setTitle(event.target.value)} /></label>
+        <label className="font-semibold">Publisher<input className="mt-1 w-full rounded-lg border bg-white px-3 py-2" value={publisher} onChange={(event) => setPublisher(event.target.value)} /></label>
+        <label className="font-semibold">Publication date<input type="date" className="mt-1 w-full rounded-lg border bg-white px-3 py-2" value={publishedAt} onChange={(event) => setPublishedAt(event.target.value)} /></label>
+        <button type="button" className="rounded-lg bg-blue-800 px-4 py-2 font-bold text-white sm:col-span-3" onClick={() => {
+          try { controller.attachDynamicSource({ studentRef: student.studentRef, assignmentRef: assignment.assignmentRef, title, publisher, publishedAt }); refresh() } catch (cause) { setError(messageOf(cause)) }
+        }}>Attach qualifying metadata</button>
+      </div> : null}
+      <p className="mt-2 text-sm text-slate-600">Metadata only; Family Pilot does not fetch arbitrary websites or store full copyrighted source text.</p>
+      {error ? <p className="mt-2 font-semibold text-red-700" role="alert">{error}</p> : null}
+    </section>
+  )
+}
+
+function PreferencesSurface({ controller, student, refresh, onClose }: {
+  readonly controller: FinalFamilyPilotController
+  readonly student: FamilySetupStudent
+  readonly refresh: () => void
+  readonly onClose: () => void
+}) {
+  const change = (mutation: ReturnType<typeof updateStudent>) => {
+    if (mutation.status !== 'ok') { window.alert(mutation.reason); return }
+    controller.saveSetup(mutation.state)
+    refresh()
+  }
+  return (
+    <FamilyPreferences
+      student={student}
+      onUpdateDisplayName={(studentRef, displayName) => change(updateStudent(controller.appSnapshot.state.setup, studentRef, { displayName }, new Date().toISOString()))}
+      onSetWorkingGrade={(studentRef, subject, grade) => change(setWorkingGrade(controller.appSnapshot.state.setup, studentRef, subject, grade, new Date().toISOString()))}
+      onSetSubjectEnabled={(studentRef, subject, enabled) => {
+        const held = controller.appSnapshot.state.setup.students.find((item) => item.studentRef === studentRef)
+        if (!held) return
+        const enabledSubjects = enabled ? [...held.enabledSubjects, subject] : held.enabledSubjects.filter((item) => item !== subject)
+        change(updateStudent(controller.appSnapshot.state.setup, studentRef, { enabledSubjects }, new Date().toISOString()))
+      }}
+      onSetPinRequired={(studentRef, required) => {
+        const result = setPinRequirement(controller.appSnapshot.state.setup, studentRef, required, new Date().toISOString())
+        if (result.status !== 'ok') return
+        const pin = required ? window.prompt('Choose a 4-digit local access PIN for this student.') : null
+        if (required && !/^\d{4}$/.test(pin ?? '')) { window.alert('PIN was not changed. Enter exactly four digits.'); return }
+        const next = result.state
+        controller.saveSetup(next)
+        controller.setStudentPin(studentRef, required && pin ? pin : null)
+        refresh()
+      }}
+      onClose={onClose}
+    />
+  )
+}
+
+function ParentReports({ controller, student, refresh }: {
+  readonly controller: FinalFamilyPilotController
+  readonly student: FamilySetupStudent
+  readonly refresh: () => void
+}) {
+  const coreStudent = controller.coreSnapshot.state.students.find((item) => item.studentRef === student.studentRef)
+  if (!coreStudent) return <p className="mt-6">No report data.</p>
+  const workItems = coreStudent.assignments.filter((item) => item.state !== 'abandoned').map((item) => ({
+    blockRef: item.sessionRef ?? item.assignmentRef,
+    title: item.title,
+    status: item.state === 'planned' ? 'not-started' as const : item.state === 'active' ? 'in-progress' as const : item.state === 'paused' ? 'paused' as const : 'completed' as const,
+    scheduledLocalDate: item.createdAt.slice(0, 10),
+    requiredWorkCompletionPercent: item.progress.totalSegments > 0 ? Math.round(item.progress.completedSegmentRefs.length / item.progress.totalSegments * 100) : 0,
+    currentSegmentTitle: item.pause.resumeSegmentRef,
+    currentSegmentOrdinal: null,
+    totalSegments: item.progress.totalSegments,
+    completedSegmentCount: item.progress.completedSegmentRefs.length,
+    timeOnTaskSeconds: item.progress.activeSeconds,
+    pauseState: item.state === 'paused' ? { blockRef: item.sessionRef ?? item.assignmentRef, category: 'unspecified' as const } : null,
+  }))
+  const snapshot: FamilyPilotStudentSnapshot = {
+    learner: { hostProfileRef: student.studentRef, learnerRef: student.studentRef, displayName: student.displayName },
+    workItems,
+    reviewItems: [],
+    safety: { hasActiveStop: controller.openSafetyHolds(student.studentRef).length > 0, mostRecentStopAt: controller.openSafetyHolds(student.studentRef)[0]?.createdAt ?? null, historyState: controller.appSnapshot.safetyRecovery },
+    counts: {
+      notStarted: workItems.filter((item) => item.status === 'not-started').length,
+      inProgress: workItems.filter((item) => item.status === 'in-progress').length,
+      paused: workItems.filter((item) => item.status === 'paused').length,
+      completed: workItems.filter((item) => item.status === 'completed').length,
+    },
+  }
+  const report = buildStudentWeeklyReport(snapshot, { startDate: '2000-01-01', endDate: '2100-12-31' })
+  const subjectRows = Object.entries(coreStudent.assignments
+    .filter((item) => item.state !== 'abandoned')
+    .reduce<Record<string, FamilyPilotAssignmentRecordV1[]>>((groups, item) => {
+      ;(groups[item.subject] ??= []).push(item)
+      return groups
+    }, {}))
+  return (
+    <div className="mt-6 space-y-5">
+      <FamilyPilotProgressReport report={report} />
+      <section className="rounded-2xl border bg-white p-5">
+        <h3 className="text-xl font-extrabold">Subject and grade progress</h3>
+        <ul className="mt-3 space-y-2">{subjectRows.map(([subject, assignments]) => <li key={subject} className="rounded-lg bg-slate-100 p-3 font-semibold">{SUBJECT_LABEL[subject as AcademySubject] ?? subject} · Working Grade {student.workingGradeBySubject[subject as AcademySubject] ?? student.nominalGrade} · {assignments?.filter((item) => item.state === 'completed').length ?? 0}/{assignments?.length ?? 0} completed</li>)}</ul>
+        <p className="mt-3 font-semibold">Pending guardian attestations: {controller.pendingAttestations(student.studentRef).length}</p>
+        <p className="font-semibold">Open safety holds: {controller.openSafetyHolds(student.studentRef).length}</p>
+        <button type="button" className="mt-3 rounded-lg border px-3 py-2 font-bold" onClick={refresh}>Refresh report</button>
+      </section>
+    </div>
+  )
+}
+
+function MaterialView({ material }: { readonly material: FinalLearnerProductionMaterial }) {
+  return (
+    <section className="rounded-2xl border border-cyan-200 bg-white p-5" data-material-ref={material.materialRef}>
+      <p className="text-xs font-bold uppercase tracking-wide text-cyan-700">Admitted learner material · {material.subject}</p>
+      <h2 className="mt-1 text-2xl font-extrabold">{material.title}</h2>
+      {material.format === 'markdown' ? <div className="mt-4 whitespace-pre-wrap font-serif leading-7">{material.markdown}</div> : (
+        <div className="mt-4 space-y-4">{material.sections.map((section, index) => <section key={`${section.title}:${index}`} className="rounded-xl bg-slate-50 p-4"><h3 className="font-extrabold">{section.title}</h3>{section.body ? <p className="mt-2 whitespace-pre-wrap">{section.body}</p> : null}{section.prompts.length ? <ul className="mt-2 list-disc space-y-1 pl-5">{section.prompts.map((prompt, promptIndex) => <li key={`${promptIndex}:${prompt}`}>{prompt}</li>)}</ul> : null}</section>)}</div>
+      )}
+    </section>
+  )
+}
+
+function LessonSurface({ controller, studentRef, assignmentRef, onExit, refresh }: {
+  readonly controller: FinalFamilyPilotController
+  readonly studentRef: string
+  readonly assignmentRef: string
+  readonly onExit: () => void
+  readonly refresh: () => void
+}) {
+  const [result, setResult] = useState<FinalFamilyPilotControllerResult | null>(null)
+  const [busy, setBusy] = useState(true)
+  const [message, setMessage] = useState('')
+  const [tutorText, setTutorText] = useState('')
+  const [focus, setFocus] = useState<FamilyPilotFocusSession | null>(null)
+  const assignment = controller.coreSnapshot.state.students.find((item) => item.studentRef === studentRef)?.assignments.find((item) => item.assignmentRef === assignmentRef)
+
+  const run = useCallback(async (action: () => Promise<FinalFamilyPilotControllerResult>) => {
+    setBusy(true)
+    const next = await action()
+    setResult(next)
+    setMessage(next.status === 'rejected' ? next.message : '')
+    setBusy(false)
+    refresh()
+  }, [refresh])
+
+  useEffect(() => {
+    void run(() => assignment?.state === 'planned' ? controller.start(studentRef, assignmentRef) : controller.reopen(studentRef, assignmentRef))
+    // Start/reopen exactly once for this keyed assignment surface.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [studentRef, assignmentRef])
+
+  useEffect(() => {
+    if (result?.status !== 'ok' || focus) return
+    setFocus(startFocusSession({ studentRef, sessionRef: result.study.session.sessionRef, startedAt: new Date().toISOString() }))
+  }, [focus, result, studentRef])
+  useEffect(() => {
+    if (!focus || result?.status !== 'ok' || result.study.sessionStatus !== 'active') return
+    const timer = window.setInterval(() => setFocus((held) => {
+      if (!held?.activeSince) return held
+      const now = new Date().toISOString()
+      return suggestBreak(recordActiveInterval(held, { from: held.activeSince, to: now }), DEFAULT_FAMILY_PILOT_BREAK_GUIDANCE)
+    }), 60_000)
+    return () => window.clearInterval(timer)
+  }, [focus?.sessionRef, result?.status === 'ok' ? result.study.sessionStatus : null])
+
+  if (!assignment) return <main className="mx-auto max-w-4xl p-6"><p role="alert">That assignment is unavailable for this student.</p><button onClick={onExit}>Back</button></main>
+  if (!result || busy && !result) return <main className="mx-auto max-w-4xl p-6"><p role="status">Opening durable Study and production materials…</p></main>
+  if (result.status === 'rejected') return <main className="mx-auto max-w-4xl p-6"><h2 className="text-2xl font-extrabold">Lesson not ready</h2><p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-4 font-semibold" role="alert">{result.message}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Back to Home</button></main>
+
+  const pending = result.completionStatus === 'PENDING_GUARDIAN_ATTESTATION'
+  const certified = result.completionStatus === 'CERTIFIED' && result.study.assignmentState === 'completed'
+  const section = result.material.format === 'structured' ? result.material.sections[Math.max(0, (result.study.segmentOrdinal ?? 1) - 1) % Math.max(1, result.material.sections.length)] : null
+  return (
+    <main className="mx-auto grid max-w-6xl gap-5 px-4 py-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)]">
+      <MaterialView material={result.material} />
+      <section className="rounded-2xl border bg-white p-5">
+        {focus?.breakSuggested ? <p className="mb-4 rounded-lg border border-blue-300 bg-blue-50 p-3 font-semibold" role="status">Break guidance: this is a good time for a short break. This is advisory only.</p> : null}
+        {pending ? (
+          <div>
+            <h2 className="text-2xl font-extrabold">Work finished — parent sign-off pending</h2>
+            <p className="mt-2 font-semibold">This Ready for Life assignment is not completed or certified yet. A parent must attest the exact student, assignment, lesson, and session.</p>
+            <button type="button" className="mt-4 rounded-lg border px-4 py-2 font-bold" onClick={onExit}>Return Home</button>
+          </div>
+        ) : (
+          <FamilyPilotLessonPlayer
+            status={certified ? 'completed' : result.study.sessionStatus === 'paused' ? 'paused' : 'active'}
+            snapshot={result.study}
+            segmentContent={{ title: section?.title, instruction: section?.body, prompt: section?.prompts[0], responseKind: 'none' }}
+            tutorHelpAvailable
+            busy={busy}
+            errorMessage={message}
+            onSubmitAction={() => undefined}
+            onPause={() => void run(() => controller.pause(studentRef, assignmentRef))}
+            onResume={() => void run(() => controller.resume(studentRef, assignmentRef))}
+            onNext={() => void run(() => controller.completeSegment(studentRef, assignmentRef))}
+            onCompleteSegment={() => void run(() => controller.completeSegment(studentRef, assignmentRef))}
+            onOpenTutor={() => void controller.tutor(studentRef, assignmentRef).then((tutor) => setTutorText(tutor.status === 'ok' ? tutor.step.presentation.visibleText : tutor.message)).catch((error) => setTutorText(messageOf(error)))}
+            onExit={() => void controller.checkpoint(studentRef, assignmentRef).then(() => onExit())}
+          />
+        )}
+        {!pending && !certified ? <button type="button" className="mt-4 rounded-lg border border-amber-500 px-4 py-2 font-bold" onClick={() => void controller.requestAdultHelp(studentRef, assignmentRef).then(() => { setMessage('A parent check-in is now required for this exact session.'); refresh() }).catch((error) => setMessage(messageOf(error)))}>I need an adult check-in</button> : null}
+        {tutorText ? <div className="mt-4 rounded-lg border border-cyan-200 bg-cyan-50 p-3"><p className="font-bold">Tutor help</p><p className="mt-1">{tutorText}</p><p className="mt-2 text-sm text-slate-600">If Tutor Core is unavailable, this is the accepted static curriculum fallback. No conversation is persisted.</p></div> : null}
+        {message ? <p className="mt-3 font-semibold text-amber-800" role="alert">{message}</p> : null}
+      </section>
+    </main>
+  )
+}

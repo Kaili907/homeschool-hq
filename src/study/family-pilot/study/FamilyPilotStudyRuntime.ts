@@ -7,7 +7,12 @@ import {
   type StudyLifecycleToken,
 } from '../../lifecycle'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../ports'
-import { AcceptedRc1HostRuntime } from '../../runtimeFacade'
+import { assertAcceptedStudyRuntime } from '../../runtimeCompatibility'
+import type {
+  AcceptedRc1HostRuntime,
+  StudyTutorTurnInput,
+  StudyTutorTurnResult,
+} from '../../runtimeFacade'
 import { isSessionStoppedByLocalLedger, recordLocalSessionSafetyStop } from '../../safety/localStopLedger'
 import type {
   CanonicalStudyTaskType,
@@ -33,6 +38,54 @@ export const FAMILY_PILOT_STUDY_RUNTIME_LABEL =
 
 /** Same shape the durable ports enforce; drafts are references, never text. */
 const OPAQUE_REF = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,191}$/
+
+type AcceptedHostRuntime = Pick<AcceptedRc1HostRuntime, 'launch' | 'submit'>
+
+/**
+ * The admitted Manuel Academy catalog is completion-authority curriculum, so
+ * its production Study path only needs the accepted host launch boundary. The
+ * old RC1 Tutor adapter is explicitly local and drags a frozen demonstration
+ * subject package into a client bundle even when no eligible turn can reach
+ * it. Keep the same runtime compatibility, port, identity, time-zone, and date
+ * checks here without shipping that dead local adapter.
+ */
+class ProductionCompletionHostRuntime implements AcceptedHostRuntime {
+  constructor(protected readonly ports: Partial<StudyPortBundle>) {}
+
+  launch(context: HostStudyLaunchContext, entry: StudyCalendarEntry, sessionRef: string) {
+    assertAcceptedStudyRuntime()
+    assertCompleteStudyPortBundle(this.ports)
+    if (entry.learnerRef !== context.learnerRef) throw new Error('Wrong learner calendar block rejected.')
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(context.learnerLocalDate)) {
+      throw new Error('learnerLocalDate must be an ISO calendar date.')
+    }
+    new Intl.DateTimeFormat('en-US', { timeZone: context.householdTimeZone }).format(new Date(0))
+    return {
+      sessionId: sessionRef,
+      lessonId: entry.lessonRef,
+      calendarBlockId: entry.blockRef,
+      householdTimeZone: context.householdTimeZone,
+      learnerLocalDate: context.learnerLocalDate,
+      status: 'check-in' as const,
+    }
+  }
+
+  async submit(_input: StudyTutorTurnInput): Promise<StudyTutorTurnResult> {
+    return { status: 'quarantined', reasonCode: 'production-completion-authority-only' }
+  }
+}
+
+/** Legacy Tutor-receipt coverage remains available to non-production tests. */
+class TestAcceptedHostRuntime extends ProductionCompletionHostRuntime {
+  async submit(input: StudyTutorTurnInput): Promise<StudyTutorTurnResult> {
+    const { AcceptedRc1HostRuntime } = await import('../../runtimeFacade')
+    const runtime = new AcceptedRc1HostRuntime(this.ports)
+    runtime.launch(input.context, input.entry, input.scope.sessionRef)
+    return runtime.submit(input)
+  }
+
+  constructor(ports: Partial<StudyPortBundle>) { super(ports) }
+}
 
 // The Tutor Core bridge accepts only the subjects and task types mapped in
 // runtimeFacade. Work outside that set is not a new engine case: the Study
@@ -120,7 +173,7 @@ export interface FamilyPilotStudyRuntimeOptions {
 export class FamilyPilotStudyRuntime {
   readonly label = FAMILY_PILOT_STUDY_RUNTIME_LABEL
   readonly #ports: Partial<StudyPortBundle>
-  readonly #runtime: AcceptedRc1HostRuntime
+  readonly #runtime: AcceptedHostRuntime
   readonly #lifecycle: StudyLifecycleBoundary
   readonly #now: () => Date
   readonly #stopStorage: Pick<Storage, 'getItem' | 'setItem'> | undefined
@@ -128,7 +181,9 @@ export class FamilyPilotStudyRuntime {
 
   constructor(options: FamilyPilotStudyRuntimeOptions) {
     this.#ports = options.ports
-    this.#runtime = new AcceptedRc1HostRuntime(options.ports)
+    this.#runtime = import.meta.env.PROD
+      ? new ProductionCompletionHostRuntime(options.ports)
+      : new TestAcceptedHostRuntime(options.ports)
     this.#lifecycle = options.lifecycle ?? new StudyLifecycleBoundary()
     this.#now = options.now ?? (() => new Date())
     this.#stopStorage = options.safetyStopStorage
