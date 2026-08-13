@@ -160,14 +160,19 @@ describe('household-scoped persistence', () => {
     expect(loadHouseholdMeta('household-a').profiles.p1.dirty).toBe(true)
   })
 
-  it('creates a household-scoped safety backup before replacement', () => {
+  it('creates a credential-free household safety backup with educational data', () => {
     const state = defaultAppState()
     state.profiles.p1.name = 'Local child'
+    state.profiles.p1.pin = '6418'
+    state.profiles.p1.totals.questionsAnswered = 37
     const key = backupLocalForHousehold('household-a', state)
     expect(key).toContain('homeschool-hq:backup:sync:household-a:')
-    expect(JSON.parse(localStorage.getItem(key!)!).profiles.p1.name).toBe(
-      'Local child',
-    )
+    const stored = localStorage.getItem(key!)!
+    const backup = JSON.parse(stored)
+    expect(backup.profiles.p1.name).toBe('Local child')
+    expect(backup.profiles.p1.totals.questionsAnswered).toBe(37)
+    expect(Object.hasOwn(backup.profiles.p1, 'pin')).toBe(false)
+    expect(stored).not.toContain('6418')
   })
 })
 

@@ -28,10 +28,10 @@ export type LearnerCredentialKey = 'pin'
 export type PortableProfile = Omit<Profile, LearnerCredentialKey>
 
 /**
- * Compile-time drift pin. If a future credential field is added to `Profile`,
- * add it to `LearnerCredentialKey` — otherwise it silently becomes portable.
- * This alias resolves to `never` the moment `PortableProfile` stops omitting
- * exactly the declared credential set, which fails `tsc` at its use below.
+ * Compile-time check for the current declared relationship: `PortableProfile`
+ * omits every key in `LearnerCredentialKey` and no other current `Profile` key.
+ * It cannot identify the security meaning of a future field; any new local-only
+ * credential must still be deliberately added to `LearnerCredentialKey`.
  */
 export type PortableProfileOmitsExactlyCredentials =
   Exclude<keyof Profile, keyof PortableProfile> extends LearnerCredentialKey
@@ -40,7 +40,7 @@ export type PortableProfileOmitsExactlyCredentials =
       : never
     : never
 
-/** Fails to compile if the projection ever stops covering the credential set. */
+/** Fails to compile if the current declared omit relationship stops holding. */
 export const PORTABLE_PROFILE_DRIFT_PIN: PortableProfileOmitsExactlyCredentials =
   true
 

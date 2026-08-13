@@ -294,6 +294,15 @@ function rowFor(state: AppState, id = 'p1'): RemoteProfileRow {
   }
 }
 
+/** A deliberately unprojected runtime row used to prove the pull trust boundary. */
+function rawRowFor(state: AppState, id: string): RemoteProfileRow {
+  return {
+    profile_id: id,
+    data: { ...state.profiles[id] } as unknown as RemoteProfileRow['data'],
+    updated_at: '2026-07-25T12:00:00.000Z',
+  }
+}
+
 function emitAuth(event: string, user: { id: string; email: string } | null) {
   transport.sessionUser = user
   const session = user
@@ -508,6 +517,70 @@ describe('mounted useSync lifecycle and import safety', () => {
       profiles: { p1: cloud.profiles.p1 },
       activeProfileId: 'p1',
     })
+  })
+
+  it('keeps the existing local learner PIN through the real useCloud pull', async () => {
+    const local = defaultAppState()
+    local.profiles.p1.pin = '1234'
+    const cloud = structuredClone(local)
+    cloud.profiles.p1.name = 'Cloud student'
+    cloud.profiles.p1.pin = '9876'
+    transport.sessionUser = {
+      id: 'household-a',
+      email: 'household-a@example.com',
+    }
+    transport.pull.mockResolvedValue({
+      ok: true,
+      rows: [rawRowFor(cloud, 'p1')],
+      revision: '1',
+    })
+    await prepareState(null, local)
+    await mount(local)
+    await waitFor(() => latestApi?.status.decision?.cloud === 'data')
+
+    await act(async () => latestApi!.useCloud())
+
+    expect(renderedState?.profiles.p1.name).toBe('Cloud student')
+    expect(renderedState?.profiles.p1.pin).toBe('1234')
+    expect(
+      (JSON.parse(localStorage.getItem('homeschool-hq:app:v2')!) as AppState)
+        .profiles.p1.pin,
+    ).toBe('1234')
+  })
+
+  it('discards a new remote learner PIN through the real useCloud pull', async () => {
+    const local = defaultAppState()
+    local.profiles = { p1: local.profiles.p1 }
+    local.activeProfileId = 'p1'
+    const cloud = defaultAppState()
+    cloud.profiles = {
+      p2: {
+        ...cloud.profiles.p2,
+        name: 'New cloud student',
+        pin: '9876',
+      },
+    }
+    transport.sessionUser = {
+      id: 'household-a',
+      email: 'household-a@example.com',
+    }
+    transport.pull.mockResolvedValue({
+      ok: true,
+      rows: [rawRowFor(cloud, 'p2')],
+      revision: '1',
+    })
+    await prepareState(null, local)
+    await mount(local)
+    await waitFor(() => latestApi?.status.decision?.cloud === 'data')
+
+    await act(async () => latestApi!.useCloud())
+
+    expect(renderedState?.profiles.p2.name).toBe('New cloud student')
+    expect(renderedState?.profiles.p2.pin).toBe('')
+    expect(
+      (JSON.parse(localStorage.getItem('homeschool-hq:app:v2')!) as AppState)
+        .profiles.p2.pin,
+    ).toBe('')
   })
 
   it('successfully finalizes a parent-reviewed merge', async () => {

@@ -73,12 +73,12 @@ describe('the portable projection strips the learner credential', () => {
     expect(JSON.stringify(reparsed.profiles)).not.toContain(LOCAL_PIN)
   })
 
-  it('every educational field survives the projection and only pin is dropped', () => {
+  it('keeps every current Profile field except the declared pin credential', () => {
     const before = stateWithCredential().profiles.p1
     const after = toPortableProfile(before)
 
-    // Exhaustiveness, not a hand-picked subset: if a future Profile field is
-    // silently dropped by the projector, this set comparison fails.
+    // Exhaustiveness for the current Profile shape, not a claim that the type
+    // system can identify the security meaning of a future field.
     expect(new Set([...Object.keys(after), 'pin'])).toEqual(
       new Set(Object.keys(before)),
     )
