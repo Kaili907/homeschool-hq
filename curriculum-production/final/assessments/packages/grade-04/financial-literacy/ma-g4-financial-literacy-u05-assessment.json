@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-financial-literacy-u05-assessment",
+  "courseRef": "ma-g4-financial-literacy",
+  "grade": 4,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g4-financial-literacy-u05",
+    "unitNumber": 5,
+    "unitTitle": "Ads, Scams, Borrowing, and Giving",
+    "courseTitle": "Grade 4 Financial Literacy",
+    "assessmentLessonRef": "ma-g4-financial-literacy-u05-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 5 — advertising, risk, borrowing, and giving"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u05-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Read the invented message with Selin and pull out its parts: a deadline, a secrecy instruction, and a request for something private. Treat each as a signal rather than as an inconvenience.",
+      "prompt": "What are the three warning signals in the message Selin received, and why is each one a signal?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Selin has 10 minutes according to the message. Write exactly what she should do in that time, including what she should not do.",
+      "prompt": "What should Selin do about the message, and why does the deadline make no difference to the answer?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "The message told her to keep it to herself.",
+      "prompt": "Why is being told to keep something secret from a guardian, by itself, a reason to tell one?"
+    }
+  ],
+  "responseMode": "calculation-and-decision-explanation",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/financial-literacy/ma-g4-financial-literacy-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Recognising pressure signals criterion.",
+    "Provide evidence that meets the stated Choosing a non-engaging response criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-financial-literacy-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u05-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Ads, Scams, Borrowing, and Giving?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-ready-for-life-u01-assessment",
+  "courseRef": "ma-g4-ready-for-life",
+  "grade": 4,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g4-ready-for-life-u01",
+    "unitNumber": 1,
+    "unitTitle": "Home Care Routines That Last",
+    "courseTitle": "Grade 4 Ready For Life",
+    "assessmentLessonRef": "ma-g4-ready-for-life-u01-l05"
+  },
+  "standards": [
+    "Ready for Life v1, Grade 4 Unit 1: Home Care Routines That Last"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u01-l05.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "With your adult, pick two real tasks that are clearly different sizes.",
+      "prompt": "Name your two tasks and explain what makes one clearly smaller or bigger than the other."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Before starting either task, write down how many minutes you think each one will take and why.",
+      "prompt": "I wrote a specific time estimate in minutes for each task before starting either one."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Before starting either task, write down how many minutes you think each one will take and why.",
+      "prompt": "I gave a reason for each estimate based on the size or steps of the task, not a guess."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Before starting either task, write down how many minutes you think each one will take and why.",
+      "prompt": "My adult reviewed and approved both tasks before I started the timer."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Time yourself completing each task from start to finish, recording the actual minutes each one took.",
+      "prompt": "Record the actual time each task took and the difference between your estimate and the actual time for each one."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Time yourself completing each task from start to finish, recording the actual minutes each one took.",
+      "prompt": "For the task where your estimate was furthest off, explain the specific reason your estimate was too short or too long."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Compare how close your two estimates were to what actually happened.",
+      "prompt": "Explain what you will do differently next time you estimate how long a task will take, based on which of your two estimates today was more accurate and why."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/ready-for-life/ma-g4-ready-for-life-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Estimation reasoning criterion.",
+    "Provide evidence that meets the stated Accuracy analysis criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-ready-for-life-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-04/swk-rfl-g4-u01-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Home Care Routines That Last?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

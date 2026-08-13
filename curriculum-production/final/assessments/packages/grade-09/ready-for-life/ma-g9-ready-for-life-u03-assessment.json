@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-ready-for-life-u03-assessment",
+  "courseRef": "ma-g9-ready-for-life",
+  "grade": 9,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g9-ready-for-life-u03",
+    "unitNumber": 3,
+    "unitTitle": "Food Systems: Planning, Shopping, and Cooking",
+    "courseTitle": "Ready for Life 9: Personal Management and Learning Systems",
+    "assessmentLessonRef": "ma-g9-ready-for-life-u03-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before planning, think about what usually happens to leftover ingredients like these in your household.",
+      "prompt": "Describe what typically happens to an ingredient like wilting spinach or half an onion in your household if it is not used within a few days."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "short-response",
+      "directions": "Look at the five leftover ingredients and the common pantry staples list, and brainstorm two possible meals that could use at least four of the five leftovers.",
+      "prompt": "Name two possible meal ideas and list which four or more of the five leftover ingredients each one would use."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Look at the five leftover ingredients and the common pantry staples list, and brainstorm two possible meals that could use at least four of the five leftovers.",
+      "prompt": "Both meal ideas use only the provided leftovers and pantry staples, with nothing else needed."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Choose the stronger of your two meal ideas and write out a full plan for it, including how each chosen leftover ingredient is used.",
+      "prompt": "Write the name of your chosen meal and, for each leftover ingredient it uses, describe specifically how that ingredient is incorporated."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-choice",
+      "directions": "Choose the stronger of your two meal ideas and write out a full plan for it, including how each chosen leftover ingredient is used.",
+      "prompt": "How many of the five leftover ingredients does your final plan use?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Look at the provided waste-reduction habit list and choose one habit to adopt.",
+      "prompt": "Name the specific waste-reduction habit you chose from the list, and explain how it would have changed what happened to the ingredient you described in the warm-up."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/ready-for-life/ma-g9-ready-for-life-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Leftover repurposing plan criterion.",
+    "Provide evidence that meets the stated Waste-reduction habit reasoning criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-ready-for-life-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u03-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Food Systems: Planning, Shopping, and Cooking?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

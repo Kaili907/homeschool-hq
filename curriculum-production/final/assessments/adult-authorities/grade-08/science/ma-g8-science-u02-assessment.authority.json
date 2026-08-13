@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g8-science-u02-assessment",
+  "courseRef": "ma-g8-science",
+  "grade": 8,
+  "subject": "science",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/science/packages/ma-g8-science/scoring/ma-g8-science-u02-l11.md",
+  "scoringSourceAuthority": {
+    "input": "sealed_1_0_0",
+    "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+    "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/science/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-mathematics-u02-assessment",
+  "courseRef": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g4-mathematics-u02",
+    "unitNumber": 2,
+    "unitTitle": "Multi-Digit Addition and Subtraction",
+    "courseTitle": "Grade 4 Mathematics",
+    "assessmentLessonRef": "ma-g4-mathematics-u02-l16"
+  },
+  "standards": [
+    "4.OA.3",
+    "4.NBT.3",
+    "4.NBT.4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u02-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "a warehouse had 8977 visitors expected, but only 4650 attended. How many fewer people attended than expected?",
+      "choices": [
+        "4327",
+        "5327",
+        "3327",
+        "13627"
+      ],
+      "standardRef": "4.NBT.4"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A charity collected $1178 in the spring and $346 in the fall, then received an extra $711 donation. How much money is there in total?",
+      "choices": [
+        "1889",
+        "1524",
+        "813",
+        "2235"
+      ],
+      "standardRef": "4.OA.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Round 42204 to the nearest 1000.",
+      "choices": [
+        "42000",
+        "42001",
+        "43000",
+        "42204"
+      ],
+      "standardRef": "4.NBT.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "a concert raised 50765 dollars on Saturday and 38902 dollars on Sunday. What was the total number of dollars raised?",
+      "choices": [
+        "88667",
+        "89667",
+        "90667",
+        "11863"
+      ],
+      "standardRef": "4.NBT.4"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "a concert had 91563 visitors expected, but only 71531 attended. How many fewer people attended than expected?",
+      "choices": [
+        "163094",
+        "20032",
+        "21032",
+        "19032"
+      ],
+      "standardRef": "4.NBT.4"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A charity collected $9349 in the spring and $4195 in the fall, then spent $3709 on supplies. How much money remains?",
+      "choices": [
+        "9835",
+        "13058",
+        "13544",
+        "17253"
+      ],
+      "standardRef": "4.OA.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Round 741163 to the nearest 10000.",
+      "choices": [
+        "740001",
+        "740000",
+        "750000",
+        "741163"
+      ],
+      "standardRef": "4.NBT.3"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "a stadium raised 421381 dollars on Saturday and 134590 dollars on Sunday. What was the total number of dollars raised?",
+      "choices": [
+        "556971",
+        "286791",
+        "554971",
+        "555971"
+      ],
+      "standardRef": "4.NBT.4"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "a warehouse had 313767 visitors expected, but only 310567 attended. How many fewer people attended than expected?",
+      "choices": [
+        "624334",
+        "2200",
+        "4200",
+        "3200"
+      ],
+      "standardRef": "4.NBT.4"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u02-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A charity collected $10539 in the spring and $27664 in the fall, then spent $18401 on supplies. How much money remains?",
+      "choices": [
+        "38203",
+        "28940",
+        "19802",
+        "56604"
+      ],
+      "standardRef": "4.OA.3"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/mathematics/ma-g4-mathematics-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-mathematics-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u02-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Multi-Digit Addition and Subtraction?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

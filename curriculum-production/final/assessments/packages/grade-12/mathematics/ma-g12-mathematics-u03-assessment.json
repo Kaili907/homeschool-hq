@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-mathematics-u03-assessment",
+  "courseRef": "ma-g12-mathematics",
+  "grade": 12,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g12-mathematics-u03",
+    "unitNumber": 3,
+    "unitTitle": "Triangle Laws for Non-Right Triangles",
+    "courseTitle": "Precalculus with Statistics",
+    "assessmentLessonRef": "ma-g12-mathematics-u03-l16"
+  },
+  "standards": [
+    "G-SRT.9",
+    "G-SRT.10",
+    "G-SRT.11",
+    "MP.3"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u03-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "A triangle has sides a = 20 and b = 6 enclosing an angle of 30°. Find its area exactly.",
+      "choices": [
+        "30",
+        "120",
+        "61",
+        "60"
+      ],
+      "standardRef": "G-SRT.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A triangle problem gives two sides and the angle between them (SAS). Which law should be used first?",
+      "choices": [
+        "the law of sines, with a check for the ambiguous case",
+        "the law of sines",
+        "the law of cosines",
+        "the Pythagorean theorem"
+      ],
+      "standardRef": "G-SRT.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "In a triangle, sides a = 2 and b = 8 enclose an angle C = 60°. Find c², the square of the third side.",
+      "choices": [
+        "100",
+        "52",
+        "68",
+        "84"
+      ],
+      "standardRef": "G-SRT.10"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "In a triangle, angle A = 33°, angle B = 105°, and side a = 7 (opposite A). Find side b to two decimal places.",
+      "choices": [
+        "3.95",
+        "22.27",
+        "7",
+        "12.41"
+      ],
+      "standardRef": "G-SRT.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "A triangle has sides a = 8 and b = 8 enclosing an angle of 30°. Find its area exactly.",
+      "choices": [
+        "32",
+        "33",
+        "16",
+        "64"
+      ],
+      "standardRef": "G-SRT.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A triangle problem gives all three sides (SSS). Which law should be used first?",
+      "choices": [
+        "the law of sines",
+        "the Pythagorean theorem",
+        "the law of cosines",
+        "the law of sines, with a check for the ambiguous case"
+      ],
+      "standardRef": "G-SRT.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "In a triangle, sides a = 8 and b = 12 enclose an angle C = 120°. Find c², the square of the third side.",
+      "choices": [
+        "400",
+        "304",
+        "208",
+        "112"
+      ],
+      "standardRef": "G-SRT.10"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "In a triangle, angle A = 50°, angle B = 88°, and side a = 12 (opposite A). Find side b to two decimal places.",
+      "choices": [
+        "21.12",
+        "15.66",
+        "9.2",
+        "12"
+      ],
+      "standardRef": "G-SRT.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "A triangle has sides a = 4 and b = 16 enclosing an angle of 30°. Find its area exactly.",
+      "choices": [
+        "32",
+        "16",
+        "64",
+        "33"
+      ],
+      "standardRef": "G-SRT.9"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "A triangle problem gives two angles and any side (AAS or ASA). Which law should be used first?",
+      "choices": [
+        "the law of sines",
+        "the Pythagorean theorem",
+        "the law of cosines",
+        "the law of sines, with a check for the ambiguous case"
+      ],
+      "standardRef": "G-SRT.11"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "In a triangle, sides a = 10 and b = 5 enclose an angle C = 120°. Find c², the square of the third side.",
+      "choices": [
+        "225",
+        "75",
+        "125",
+        "175"
+      ],
+      "standardRef": "G-SRT.10"
+    },
+    {
+      "taskRef": "ma-g12-mathematics-u03-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "In a triangle, angle A = 66°, angle B = 37°, and side a = 15 (opposite A). Find side b to two decimal places.",
+      "choices": [
+        "9.88",
+        "15",
+        "22.77",
+        "8.41"
+      ],
+      "standardRef": "G-SRT.11"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/mathematics/ma-g12-mathematics-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-mathematics-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-12/ma-g12-mathematics-u03-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Triangle Laws for Non-Right Triangles?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

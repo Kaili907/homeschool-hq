@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-ready-for-life-u06-assessment",
+  "courseRef": "ma-g11-ready-for-life",
+  "grade": 11,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g11-ready-for-life-u06",
+    "unitNumber": 6,
+    "unitTitle": "Grade 11 Transition-Planning Capstone",
+    "courseTitle": "Ready for Life 11: Postsecondary Planning and Portfolio",
+    "assessmentLessonRef": "ma-g11-ready-for-life-u06-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before presenting, identify the part of your plan you feel least confident explaining.",
+      "prompt": "Which section of your plan do you feel least confident explaining out loud, and what's one thing you could clarify for yourself before the presentation?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+      "prompt": "A guardian was present for the full presentation."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+      "prompt": "I explained the pathway, requirements, timeline, funding outline, support needs, and contingencies sections, in whatever order made sense."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "checklist-item",
+      "directions": "Present the full plan to a guardian, section by section, explaining the reasoning behind each part.",
+      "prompt": "I explained at least one specific connection between this plan and earlier work from units 1 through 5 (for example, how the housing analysis shaped the plan's logistics, or how the decision-making practice shaped how a contingency was chosen)."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Capture the guardian's questions and feedback during and after the presentation.",
+      "prompt": "Summarize the specific questions or feedback your guardian gave on the plan, including anything they thought was missing, unclear, or worth reconsidering."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Revise the plan based on the feedback and reflect on the year's work.",
+      "prompt": "Describe at least one real change you made to the plan based on your guardian's feedback, and why that change makes the plan stronger."
+    },
+    {
+      "taskRef": "t4-p2",
+      "kind": "short-response",
+      "directions": "Revise the plan based on the feedback and reflect on the year's work.",
+      "prompt": "Looking back across the whole year, what is the single most useful thing you learned that shaped this final plan?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "GUARDIAN_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/ready-for-life/ma-g11-ready-for-life-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Integration across the year's work criterion.",
+    "Provide evidence that meets the stated Completeness of the plan presented criterion.",
+    "Provide evidence that meets the stated Genuine use of guardian feedback criterion.",
+    "Provide evidence that meets the stated Reflection on the year criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-ready-for-life-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-11-hs/swk-rfl-g11-u06-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Grade 11 Transition-Planning Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

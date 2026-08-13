@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-mathematics-u08-assessment",
+  "courseRef": "ma-g4-mathematics",
+  "grade": 4,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g4-mathematics-u08",
+    "unitNumber": 8,
+    "unitTitle": "Decimal Notation and Fraction-Decimal Connections",
+    "courseTitle": "Grade 4 Mathematics",
+    "assessmentLessonRef": "ma-g4-mathematics-u08-l16"
+  },
+  "standards": [
+    "4.NF.5",
+    "4.NF.6",
+    "4.NF.7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u08-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Find 2/10 + 17/100. Give the answer as a fraction over 100.",
+      "choices": [
+        "37/10",
+        "19/100",
+        "37/100",
+        "20/100"
+      ],
+      "standardRef": "4.NF.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Write 2/10 using decimal notation.",
+      "choices": [
+        "0.5",
+        "0.2",
+        "0.1",
+        "0.3"
+      ],
+      "standardRef": "4.NF.6"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Compare using <, >, or =: 0.39 ___ 0.12",
+      "choices": [
+        "<",
+        "=",
+        "Cannot be compared without more information",
+        ">"
+      ],
+      "standardRef": "4.NF.7"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Find 8/10 + 38/100. Give the answer as a fraction over 100.",
+      "choices": [
+        "118/10",
+        "118/100",
+        "80/100",
+        "46/100"
+      ],
+      "standardRef": "4.NF.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Write 53/100 using decimal notation.",
+      "choices": [
+        "0.56",
+        "0.53",
+        "0.52",
+        "0.54"
+      ],
+      "standardRef": "4.NF.6"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Compare using <, >, or =: 0.91 ___ 0.88",
+      "choices": [
+        "<",
+        "Cannot be compared without more information",
+        ">",
+        "="
+      ],
+      "standardRef": "4.NF.7"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Find 1/10 + 6/100. Give the answer as a fraction over 100.",
+      "choices": [
+        "16/100",
+        "7/100",
+        "16/10",
+        "10/100"
+      ],
+      "standardRef": "4.NF.5"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "Write 17/100 using decimal notation.",
+      "choices": [
+        "0.17",
+        "0.20",
+        "0.18",
+        "0.16"
+      ],
+      "standardRef": "4.NF.6"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Compare using <, >, or =: 0.10 ___ 0.94",
+      "choices": [
+        "=",
+        ">",
+        "Cannot be compared without more information",
+        "<"
+      ],
+      "standardRef": "4.NF.7"
+    },
+    {
+      "taskRef": "ma-g4-mathematics-u08-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Find 7/10 + 59/100. Give the answer as a fraction over 100.",
+      "choices": [
+        "129/100",
+        "129/10",
+        "66/100",
+        "70/100"
+      ],
+      "standardRef": "4.NF.5"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/mathematics/ma-g4-mathematics-u08-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-mathematics-u08-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-04/ma-g4-mathematics-u08-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Decimal Notation and Fraction-Decimal Connections?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

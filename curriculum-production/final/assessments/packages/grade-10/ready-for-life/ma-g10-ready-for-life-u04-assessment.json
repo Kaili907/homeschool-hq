@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-ready-for-life-u04-assessment",
+  "courseRef": "ma-g10-ready-for-life",
+  "grade": 10,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g10-ready-for-life-u04",
+    "unitNumber": 4,
+    "unitTitle": "Consumer Tasks and Everyday Agreements",
+    "courseTitle": "Ready for Life 10: Career Exploration and Workplace Communication",
+    "assessmentLessonRef": "ma-g10-ready-for-life-u04-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Read the new fictional scenario and identify the specific term at issue.",
+      "prompt": "Name the specific term or rule at issue in this scenario, not just a general description of the problem."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Document the problem using the log format from earlier this unit, then draft the escalation message requesting the specific remedy.",
+      "prompt": "Write your documentation log entry for this problem: what happened, the date, and the relevant term."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "extended-response",
+      "directions": "Document the problem using the log format from earlier this unit, then draft the escalation message requesting the specific remedy.",
+      "prompt": "Draft your escalation message, citing the term and requesting the specific remedy it supports."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Research one real, current local or regional resource that helps with consumer problems, and record what it does and how someone would reach it.",
+      "prompt": "Name the resource, what kind of help it actually provides, and how someone would reach it, citing where you found this information."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on the full unit.",
+      "prompt": "Of everything this unit covered, which single skill do you think you're most likely to actually use, and why?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/ready-for-life/ma-g10-ready-for-life-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated End-to-end coherence criterion.",
+    "Provide evidence that meets the stated Resource research quality criterion.",
+    "Provide evidence that meets the stated Unit-level synthesis criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-ready-for-life-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-10-hs/swk-rfl-g10-u04-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Consumer Tasks and Everyday Agreements?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

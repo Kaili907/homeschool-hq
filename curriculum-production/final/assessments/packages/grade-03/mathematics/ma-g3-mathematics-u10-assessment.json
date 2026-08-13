@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-mathematics-u10-assessment",
+  "courseRef": "ma-g3-mathematics",
+  "grade": 3,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g3-mathematics-u10",
+    "unitNumber": 10,
+    "unitTitle": "Perimeter, Geometry, and Integrated Capstone",
+    "courseTitle": "Grade 3 Mathematics",
+    "assessmentLessonRef": "ma-g3-mathematics-u10-l16"
+  },
+  "standards": [
+    "3.MD.8",
+    "3.G.1",
+    "3.G.2"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u10-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Which quadrilateral is defined by having four right angles, with opposite sides equal?",
+      "choices": [
+        "rhombus",
+        "trapezoid",
+        "square",
+        "rectangle"
+      ],
+      "standardRef": "3.G.1"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "A square garden plot is partitioned into 3 parts of equal area. What fraction of the plot does one part represent?",
+      "choices": [
+        "1/2",
+        "1/3",
+        "3/1",
+        "1/4"
+      ],
+      "standardRef": "3.G.2"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "A rectangular field is 7 in long and 7 in wide. What is its perimeter?",
+      "choices": [
+        "28 in",
+        "49 in",
+        "14 in",
+        "29 in"
+      ],
+      "standardRef": "3.MD.8"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "Which quadrilateral is defined by having four equal sides, but not necessarily right angles?",
+      "choices": [
+        "trapezoid",
+        "rectangle",
+        "rhombus",
+        "square"
+      ],
+      "standardRef": "3.G.1"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "A square garden plot is partitioned into 8 parts of equal area. What fraction of the plot does one part represent?",
+      "choices": [
+        "1/9",
+        "1/7",
+        "8/1",
+        "1/8"
+      ],
+      "standardRef": "3.G.2"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "A rectangular field is 3 m long and 4 m wide. What is its perimeter?",
+      "choices": [
+        "14 m",
+        "7 m",
+        "12 m",
+        "15 m"
+      ],
+      "standardRef": "3.MD.8"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Which quadrilateral is defined by having four equal sides and four right angles?",
+      "choices": [
+        "square",
+        "trapezoid",
+        "rhombus",
+        "rectangle"
+      ],
+      "standardRef": "3.G.1"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "A square garden plot is partitioned into 6 parts of equal area. What fraction of the plot does one part represent?",
+      "choices": [
+        "6/1",
+        "1/7",
+        "1/6",
+        "1/5"
+      ],
+      "standardRef": "3.G.2"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "A rectangular field is 6 cm long and 8 cm wide. What is its perimeter?",
+      "choices": [
+        "48 cm",
+        "28 cm",
+        "29 cm",
+        "14 cm"
+      ],
+      "standardRef": "3.MD.8"
+    },
+    {
+      "taskRef": "ma-g3-mathematics-u10-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Which quadrilateral is defined by having exactly one pair of parallel sides?",
+      "choices": [
+        "square",
+        "trapezoid",
+        "rectangle",
+        "rhombus"
+      ],
+      "standardRef": "3.G.1"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/mathematics/ma-g3-mathematics-u10-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-mathematics-u10-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-03/ma-g3-mathematics-u10-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Perimeter, Geometry, and Integrated Capstone?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

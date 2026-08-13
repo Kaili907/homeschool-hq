@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g8-physical-education-u06-assessment",
+  "courseRef": "ma-g8-physical-education",
+  "grade": 8,
+  "subject": "physical-education",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/health-physical-education/scoring-guides/physical-education/grade-08/unit-assessments/ma-g8-physical-education-u06-assessment.json",
+  "scoringSourceAuthority": "repo:curriculum-production/final/health-physical-education/scoring-guides/physical-education/grade-08/unit-assessments/ma-g8-physical-education-u06-assessment.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

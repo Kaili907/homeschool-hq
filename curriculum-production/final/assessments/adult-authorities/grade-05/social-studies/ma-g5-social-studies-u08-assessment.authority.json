@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g5-social-studies-u08-assessment",
+  "courseRef": "ma-g5-social-studies",
+  "grade": 5,
+  "subject": "social-studies",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/student-work/social-studies/grade-5/ma-g5-social-studies/ma-g5-social-studies-u08-l11.md",
+  "scoringSourceAuthority": {
+    "input": "sealed_1_0_0",
+    "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+    "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-5/courses/social-studies/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

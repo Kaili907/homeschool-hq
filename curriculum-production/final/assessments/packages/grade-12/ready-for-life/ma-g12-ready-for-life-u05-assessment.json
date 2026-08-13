@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-ready-for-life-u05-assessment",
+  "courseRef": "ma-g12-ready-for-life",
+  "grade": 12,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g12-ready-for-life-u05",
+    "unitNumber": 5,
+    "unitTitle": "Support Networks and Contingency Planning",
+    "courseTitle": "Ready for Life 12: Independent Adult Living Capstone",
+    "assessmentLessonRef": "ma-g12-ready-for-life-u05-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u05-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before assembling, decide who, if anyone, should ever see this plan.",
+      "prompt": "Before you finalize anything, who — if anyone — do you want to be able to see this plan, and why that choice?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Assemble the week's artifacts into one plan.",
+      "prompt": "My assembled plan includes the support-network map, early-ask scripts, threshold sorting, and urgent-help script."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Assemble the week's artifacts into one plan.",
+      "prompt": "My assembled plan includes the contingency branch from the previous lesson."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Record your chosen privacy level and a review date.",
+      "prompt": "State your chosen privacy level for this plan (for example, 'private, mine only' or 'shared with one specific trusted adult, by role'), and set a specific date to review and update it. Explain why that review date makes sense."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on what would make you actually use it.",
+      "prompt": "Honestly, what would make you actually open and update this plan on your chosen review date instead of forgetting about it?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/ready-for-life/ma-g12-ready-for-life-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Assembly completeness criterion.",
+    "Provide evidence that meets the stated Currency and privacy criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-ready-for-life-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u05-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Support Networks and Contingency Planning?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

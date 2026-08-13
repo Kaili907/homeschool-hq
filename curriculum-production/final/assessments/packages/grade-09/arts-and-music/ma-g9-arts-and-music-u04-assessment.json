@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-arts-and-music-u04-assessment",
+  "courseRef": "ma-g9-arts-and-music",
+  "grade": 9,
+  "subject": "arts-and-music",
+  "location": {
+    "unitRef": "ma-g9-arts-and-music-u04",
+    "unitNumber": 4,
+    "unitTitle": "Theatre, Direction, and Presentation Craft",
+    "courseTitle": "Foundations of Visual and Media Arts",
+    "assessmentLessonRef": "ma-g9-arts-and-music-u04-l11"
+  },
+  "standards": [
+    "Michigan Arts Education Standards: Theatre — Creating",
+    "Theatre — Performing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-09/ma-g9-arts-and-music-u04-l11.task-package.json",
+  "instructions": [
+    "Create, perform privately, analyze, or critique as directed. A written, no-audio alternative receives equal credit.",
+    "Submit original work plus process evidence and a specific revision or critique."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Complete the unit assessment task for theatre, direction, and presentation craft independently and under the unit's stated conditions. Produce the required piece or analysis, show the process or reasoning behind it, and check it against the stated criteria before submitting. Include your own judgement: what you intended, what the work actually achieves, and where the gap is. Everything submitted must be your own authorship. Presentation stays private or written; no public performance, camera, voice recording, or photograph is required to complete or pass this task. Anchor today's work inside its unit: this session's evidence is about theatre, direction, and presentation craft, and it belongs to \"Theatre, Direction, and Presentation Craft\", which also covers separate topics such as script analysis of public-domain or original text. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 9 the bar is independent work with explicit criteria set before you start, and evidence that you evaluated the finished result against those criteria rather than against how it felt."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Completed assessment piece or analysis, visible process, and a self-judgement naming intent, achievement, and gap."
+    }
+  ],
+  "responseMode": "project-performance-analysis-or-critique",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/arts-and-music/ma-g9-arts-and-music-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task on theatre, direction, and presentation craft.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-arts-and-music-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/arts-music/grade-09/ma-g9-arts-and-music-u04-l11.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Theatre, Direction, and Presentation Craft?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

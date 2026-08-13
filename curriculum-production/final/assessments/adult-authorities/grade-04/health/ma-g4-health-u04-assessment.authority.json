@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g4-health-u04-assessment",
+  "courseRef": "ma-g4-health",
+  "grade": 4,
+  "subject": "health",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy",
+    "reasoning and evidence",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/health-physical-education/scoring-guides/health/grade-04/unit-assessments/ma-g4-health-u04-assessment.json",
+  "scoringSourceAuthority": "repo:curriculum-production/final/health-physical-education/scoring-guides/health/grade-04/unit-assessments/ma-g4-health-u04-assessment.json",
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

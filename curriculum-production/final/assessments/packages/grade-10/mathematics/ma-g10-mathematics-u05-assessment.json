@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-mathematics-u05-assessment",
+  "courseRef": "ma-g10-mathematics",
+  "grade": 10,
+  "subject": "mathematics",
+  "location": {
+    "unitRef": "ma-g10-mathematics-u05",
+    "unitNumber": 5,
+    "unitTitle": "Dilations and Similarity",
+    "courseTitle": "Geometry",
+    "assessmentLessonRef": "ma-g10-mathematics-u05-l16"
+  },
+  "standards": [
+    "G-SRT.1",
+    "G-SRT.2",
+    "G-SRT.3",
+    "MP.7"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/mathematics/active/packages/grade-10/ma-g10-mathematics-u05-l16.package.json",
+  "instructions": [
+    "Work independently. Show the mathematical steps or representation that support each response.",
+    "Check each result before submitting. A response without the requested work may require adult review."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-01",
+      "kind": "multiple-choice",
+      "prompt": "Triangle ABC has ∠A = 49° and ∠B = 95°. Triangle DEF has ∠D = 49° and ∠E = 95°. Are the triangles similar, and on what grounds?",
+      "choices": [
+        "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+        "No; angle information alone never establishes similarity.",
+        "Yes, by SSS similarity.",
+        "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well."
+      ],
+      "standardRef": "G-SRT.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-02",
+      "kind": "multiple-choice",
+      "prompt": "Under a dilation, a segment not through the centre, under a dilation with scale factor k …",
+      "choices": [
+        "is mapped to a parallel segment k times as long",
+        "is mapped to a segment of the same length",
+        "is mapped to a perpendicular segment k times as long",
+        "is mapped to a segment k² times as long"
+      ],
+      "standardRef": "G-SRT.1"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-03",
+      "kind": "multiple-choice",
+      "prompt": "Dilate the point (3, 6) about the origin with scale factor 2. Give the image.",
+      "choices": [
+        "(5, 8)",
+        "(3, 12)",
+        "(6, 6)",
+        "(6, 12)"
+      ],
+      "standardRef": "G-SRT.1"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-04",
+      "kind": "multiple-choice",
+      "prompt": "A figure is dilated so that a side of length 12 becomes a side of length 24. What is the scale factor, and what happens to the figure's area?",
+      "choices": [
+        "scale factor 2; the area is multiplied by 2",
+        "scale factor 2; the area is multiplied by 4",
+        "scale factor 12; the area is multiplied by 4",
+        "scale factor 1/2; the area is multiplied by 4"
+      ],
+      "standardRef": "G-SRT.2"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-05",
+      "kind": "multiple-choice",
+      "prompt": "Triangle ABC has ∠A = 65° and ∠B = 58°. Triangle DEF has ∠D = 65° and ∠E = 58°. Are the triangles similar, and on what grounds?",
+      "choices": [
+        "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well.",
+        "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+        "No; angle information alone never establishes similarity.",
+        "Yes, by SSS similarity."
+      ],
+      "standardRef": "G-SRT.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-06",
+      "kind": "multiple-choice",
+      "prompt": "Under a dilation, a line that passes through the centre of dilation …",
+      "choices": [
+        "is mapped to a parallel line a fixed distance away",
+        "is mapped to a perpendicular line",
+        "is mapped onto itself",
+        "is mapped to a line through the origin with a different slope"
+      ],
+      "standardRef": "G-SRT.1"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-07",
+      "kind": "multiple-choice",
+      "prompt": "Dilate the point (-7, -5) about the origin with scale factor 4. Give the image.",
+      "choices": [
+        "(-3, -1)",
+        "(-28, -5)",
+        "(-7, -20)",
+        "(-28, -20)"
+      ],
+      "standardRef": "G-SRT.1"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-08",
+      "kind": "multiple-choice",
+      "prompt": "A figure is dilated so that a side of length 20 becomes a side of length 80. What is the scale factor, and what happens to the figure's area?",
+      "choices": [
+        "scale factor 4; the area is multiplied by 4",
+        "scale factor 4; the area is multiplied by 16",
+        "scale factor 60; the area is multiplied by 16",
+        "scale factor 1/4; the area is multiplied by 16"
+      ],
+      "standardRef": "G-SRT.2"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-09",
+      "kind": "multiple-choice",
+      "prompt": "Triangle ABC has ∠A = 79° and ∠B = 56°. Triangle DEF has ∠D = 79° and ∠E = 56°. Are the triangles similar, and on what grounds?",
+      "choices": [
+        "Yes, by AA similarity: two pairs of congruent angles force the third pair to be congruent as well.",
+        "Yes, but only if a pair of corresponding sides is also known to be congruent.",
+        "Yes, by SSS similarity.",
+        "No; angle information alone never establishes similarity."
+      ],
+      "standardRef": "G-SRT.3"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-10",
+      "kind": "multiple-choice",
+      "prompt": "Under a dilation, a line that does not pass through the centre of dilation …",
+      "choices": [
+        "is mapped onto itself",
+        "is mapped to a line with slope multiplied by the scale factor",
+        "is mapped to a perpendicular line",
+        "is mapped to a parallel line"
+      ],
+      "standardRef": "G-SRT.1"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-11",
+      "kind": "multiple-choice",
+      "prompt": "Dilate the point (1, 5) about the origin with scale factor 5. Give the image.",
+      "choices": [
+        "(6, 10)",
+        "(5, 25)",
+        "(1, 25)",
+        "(5, 5)"
+      ],
+      "standardRef": "G-SRT.1"
+    },
+    {
+      "taskRef": "ma-g10-mathematics-u05-l16#mc-12",
+      "kind": "multiple-choice",
+      "prompt": "A figure is dilated so that a side of length 24 becomes a side of length 120. What is the scale factor, and what happens to the figure's area?",
+      "choices": [
+        "scale factor 5; the area is multiplied by 5",
+        "scale factor 1/5; the area is multiplied by 25",
+        "scale factor 96; the area is multiplied by 25",
+        "scale factor 5; the area is multiplied by 25"
+      ],
+      "standardRef": "G-SRT.2"
+    }
+  ],
+  "responseMode": "fixed-and-work-shown",
+  "completionScoringAuthorityClass": "AUTO_SCOREABLE",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/mathematics/ma-g10-mathematics-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-mathematics-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/mathematics/active/packages/grade-10/ma-g10-mathematics-u05-l16.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Dilations and Similarity?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

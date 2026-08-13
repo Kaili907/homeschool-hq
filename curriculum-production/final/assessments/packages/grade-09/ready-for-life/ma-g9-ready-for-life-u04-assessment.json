@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-ready-for-life-u04-assessment",
+  "courseRef": "ma-g9-ready-for-life",
+  "grade": 9,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g9-ready-for-life-u04",
+    "unitNumber": 4,
+    "unitTitle": "Transportation and Trip Planning",
+    "courseTitle": "Ready for Life 9: Personal Management and Learning Systems",
+    "assessmentLessonRef": "ma-g9-ready-for-life-u04-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Think of a time a trip didn't go as planned, yours or someone else's.",
+      "prompt": "Describe what went wrong and what happened next."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Pick a route plan and identify one realistic way it could fail.",
+      "prompt": "I identified a specific failure point in my route (such as a missed connection, a closed route, or a significant delay)."
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "checklist-item",
+      "directions": "Pick a route plan and identify one realistic way it could fail.",
+      "prompt": "I wrote a specific backup plan for that failure point (an alternate route, a later departure, or a different mode)."
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "short-response",
+      "directions": "Pick a route plan and identify one realistic way it could fail.",
+      "prompt": "Explain step by step what you would do if the failure happened, from noticing the problem to arriving at your destination."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Consider one accessibility need, your own or a general one (such as using a mobility device, carrying a heavy bag, traveling with a young sibling, or a sensory sensitivity to crowds or noise), and revise your plan.",
+      "prompt": "Name the accessibility need you're considering and explain specifically how it would change your original route or your backup plan (for example, needing a route with fewer stairs or transfers, or extra time between connections)."
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "short-response",
+      "directions": "Consider one accessibility need, your own or a general one (such as using a mobility device, carrying a heavy bag, traveling with a young sibling, or a sensory sensitivity to crowds or noise), and revise your plan.",
+      "prompt": "Write the revised version of your plan that accounts for this accessibility need."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Think about what this changed about how you plan trips.",
+      "prompt": "Explain one specific way thinking about the accessibility need changed how you'll plan any transportation route in the future, not just this one."
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/ready-for-life/ma-g9-ready-for-life-u04-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Contingency plan specificity criterion.",
+    "Provide evidence that meets the stated Accessibility reasoning criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-ready-for-life-u04-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-09-hs/swk-rfl-g9-u04-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Transportation and Trip Planning?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g3-financial-literacy-u01-assessment",
+  "courseRef": "ma-g3-financial-literacy",
+  "grade": 3,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g3-financial-literacy-u01",
+    "unitNumber": 1,
+    "unitTitle": "Needs, Wants, and Choosing",
+    "courseTitle": "Grade 3 Financial Literacy",
+    "assessmentLessonRef": "ma-g3-financial-literacy-u01-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 3 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 3",
+    "Manuel Academy Financial Literacy G3 Unit 1 — needs, wants, and choosing"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u01-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Read both invented plans with Zuri. The first family put every pretend dollar into food that lasts the week. The second family kept a little back for a birthday candle. Notice what each plan protects before you say anything about which you prefer.",
+      "prompt": "Name one thing the first invented family's plan takes care of, and one thing the second family's plan takes care of."
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "extended-response",
+      "directions": "Zuri's classmate says the second family \"wasted\" money on the candle. Write what you would say back. Remember that both families finished their pretend plan and neither ran out of money.",
+      "prompt": "Explain why two families can spend the same pretend $10.00 in different ways and both plans can still be good ones."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "short-response",
+      "directions": "Money information about a real family belongs to that family.",
+      "prompt": "A friend tells you something about what their family can afford. What is the kind thing to do with what they told you?"
+    }
+  ],
+  "responseMode": "calculation-and-decision-explanation",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-03/financial-literacy/ma-g3-financial-literacy-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Respect for different family choices criterion.",
+    "Provide evidence that meets the stated Handling private money information criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g3-financial-literacy-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-03/swk-fl-g3-u01-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Needs, Wants, and Choosing?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

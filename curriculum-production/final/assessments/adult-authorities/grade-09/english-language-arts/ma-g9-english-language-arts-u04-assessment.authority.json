@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g9-english-language-arts-u04-assessment",
+  "courseRef": "ma-g9-english-language-arts",
+  "grade": 9,
+  "subject": "english-language-arts",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/student-work/english-language-arts/scoring-guides/grade-09/ma-g9-english-language-arts-u04-l16.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/english-language-arts/grade-9/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

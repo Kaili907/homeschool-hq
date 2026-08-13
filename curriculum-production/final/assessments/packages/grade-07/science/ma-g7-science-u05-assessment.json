@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g7-science-u05-assessment",
+  "courseRef": "ma-g7-science",
+  "grade": 7,
+  "subject": "science",
+  "location": {
+    "unitRef": "ma-g7-science-u05",
+    "unitNumber": 5,
+    "unitTitle": "Body Systems, Senses, and Responses",
+    "courseTitle": "Grade 7 Science",
+    "assessmentLessonRef": "ma-g7-science-u05-l11"
+  },
+  "standards": [
+    "MS-LS1-3",
+    "MS-LS1-8"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/science/assessments.json",
+  "instructions": [
+    "Use the supplied investigation, model, or data. Record observations and distinguish evidence from inference.",
+    "Follow every safety direction. If required material, adult approval, or a safe alternative is missing, stop."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "concept and vocabulary",
+      "prompt": "Explain system interactions in your own words and give or identify a valid example.",
+      "possiblePoints": 4
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "representation or source",
+      "prompt": "Use a diagram, model, quotation, data display, map, demonstration, or worked process to show understanding of nervous system signaling.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply sensory receptors in a new realistic situation. Show the process or cite evidence.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or claim analysis",
+      "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving stimulus and response; correct it and explain why.",
+      "possiblePoints": 6
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect system interactions with modeling body-system coordination. Explain how the ideas support, constrain, contrast with, or build on one another.",
+      "possiblePoints": 5
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit project: Analyze a fictional stimulus-response scenario and revise a body-systems model without diagnosing individuals.",
+      "possiblePoints": 8
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "reflection and transfer",
+      "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+      "possiblePoints": 4
+    }
+  ],
+  "responseMode": "investigation-data-and-evidence",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-07/science/ma-g7-science-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g7-science-u05-assessment",
+    "metadataRef": "repo:curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/science/assessments.json",
+    "learnerMaterialRef": "repo:curriculum-production/final/science/packages/ma-g7-science/student-sheets/ma-g7-science-u05-l11.md",
+    "unitObjective": "How can the learner demonstrate the goals of Body Systems, Senses, and Responses?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

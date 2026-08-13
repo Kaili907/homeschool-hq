@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-financial-literacy-u05-assessment",
+  "courseRef": "ma-g12-financial-literacy",
+  "grade": 12,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g12-financial-literacy-u05",
+    "unitNumber": 5,
+    "unitTitle": "PF5 — Financial Investing: Long-Horizon Investing as an Adult",
+    "courseTitle": "Financial Transition to Adulthood",
+    "assessmentLessonRef": "ma-g12-financial-literacy-u05-l10"
+  },
+  "standards": [
+    "PF5"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u05-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "A fictional account holds $31,500, receives $340 a month, and is charged an annual fee of 0.22% of the balance. Plan for a scenario in which the balance falls 28%.",
+      "prompt": "What is the balance after a 28% fall?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "A fictional account holds $31,500, receives $340 a month, and is charged an annual fee of 0.22% of the balance. Plan for a scenario in which the balance falls 28%.",
+      "prompt": "What gain on the reduced balance would restore $31,500, to two decimal places?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "A fictional account holds $31,500, receives $340 a month, and is charged an annual fee of 0.22% of the balance. Plan for a scenario in which the balance falls 28%.",
+      "prompt": "What is the annual fee at the reduced balance?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Now carry the account forward through 18 months of continued contributions.",
+      "prompt": "What is contributed over 18 months?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Now carry the account forward through 18 months of continued contributions.",
+      "prompt": "Ignoring any further movement in the balance, what does the account hold after those contributions?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Now carry the account forward through 18 months of continued contributions.",
+      "prompt": "What is the annual fee at that balance?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Now carry the account forward through 18 months of continued contributions.",
+      "prompt": "By how much has the annual fee risen?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Put the fee in the terms the policy will have to justify.",
+      "prompt": "What proportion of the 18 months of contributions does one year of the fee represent, to two decimal places?",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write the policy. Attach a figure to each part of it.",
+      "prompt": "Write the decline policy this fictional investor should set down now, before any fall occurs. Cover what happens to contributions, what would and would not count as a reason to sell, and how the policy handles anyone who contacts the investor during a decline offering to help. State plainly what your policy cannot guarantee."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/financial-literacy/ma-g12-financial-literacy-u05-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Use of evidence from the scenario criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-financial-literacy-u05-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-12/swk-flhs-g12-u05-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF5 — Financial Investing: Long-Horizon Investing as an Adult?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

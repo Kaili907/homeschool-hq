@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g7-arts-and-music-u05-assessment",
+  "courseRef": "ma-g7-arts-and-music",
+  "grade": 7,
+  "subject": "arts-and-music",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "accuracy or fidelity",
+    "evidence and reasoning",
+    "application or performance",
+    "checking and revision"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/student-work/technology-arts-lessons/scoring-guides/arts-music/grade-07/ma-g7-arts-and-music-u05-l11.scoring-guide.json",
+  "scoringSourceAuthority": {
+    "input": "sealed_1_0_0",
+    "commit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+    "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-7/courses/arts-and-music/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

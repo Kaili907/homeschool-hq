@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-physical-education-u02-assessment",
+  "courseRef": "ma-g4-physical-education",
+  "grade": 4,
+  "subject": "physical-education",
+  "location": {
+    "unitRef": "ma-g4-physical-education-u02",
+    "unitNumber": 2,
+    "unitTitle": "Locomotor Combinations, Pathways, and Dynamic Space",
+    "courseTitle": "Grade 4 Physical Education",
+    "assessmentLessonRef": "ma-g4-physical-education-u02-l11"
+  },
+  "standards": [],
+  "standardsMappingAuthority": {
+    "sourceRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-04/unit-assessments/ma-g4-physical-education-u02-assessment.json",
+    "note": "Standards remain governed by the bound production package."
+  },
+  "instructions": [
+    "Complete the safe activity or accessible equivalent and document the requested performance evidence.",
+    "Stop for pain, dizziness, breathing trouble, unsafe conditions, or missing adult supervision."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "cue and vocabulary",
+      "prompt": "Name the movement cues for combining locomotor patterns in sequence and explain what each one does."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "demonstration or representation",
+      "prompt": "Show, describe, or diagram travelling to open space. A demonstration, a spoken description, and a drawing are equally valid."
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "application",
+      "prompt": "Apply changing direction and pathway at speed in a new movement task at a challenge level you select. Control and cue use are assessed, not speed, distance, or count."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "error or decision analysis",
+      "prompt": "A made-up learner is struggling with chasing, fleeing, and dodging in shared space. Identify the likely cue or decision at fault, correct it, and explain why the correction helps."
+    },
+    {
+      "taskRef": "task-05",
+      "kind": "connection",
+      "prompt": "Connect combining locomotor patterns in sequence with reading and reacting to a moving partner. Explain how one supports the other."
+    },
+    {
+      "taskRef": "task-06",
+      "kind": "performance evidence",
+      "prompt": "Present the strongest evidence from the unit task: Perform a travel sequence through a changing space and explain how you found and used open space."
+    },
+    {
+      "taskRef": "task-07",
+      "kind": "adaptation and choice",
+      "prompt": "Describe one way you adapted a task so it worked for you, and one activity from this unit you would choose to do again. There is no wrong answer here."
+    }
+  ],
+  "responseMode": "performance-log-or-accessible-equivalent",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/physical-education/ma-g4-physical-education-u02-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated cue use and control criterion.",
+    "Provide evidence that meets the stated movement concepts and decisions criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated responsibility, safety, and inclusion criterion."
+  ],
+  "accommodations": "Access supports may change equipment, distance, speed, force, duration, setting, or response mode without changing the standard being assessed. Using the adapted alternative is a full-credit path, never a reduced one.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-physical-education-u02-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/health-physical-education/packages/physical-education/grade-04/unit-assessments/ma-g4-physical-education-u02-assessment.json",
+    "unitObjective": "How can the learner demonstrate the goals of Locomotor Combinations, Pathways, and Dynamic Space?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

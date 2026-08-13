@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g4-financial-literacy-u01-assessment",
+  "courseRef": "ma-g4-financial-literacy",
+  "grade": 4,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g4-financial-literacy-u01",
+    "unitNumber": 1,
+    "unitTitle": "Money Choices and Tradeoffs",
+    "courseTitle": "Grade 4 Financial Literacy",
+    "assessmentLessonRef": "ma-g4-financial-literacy-u01-l05"
+  },
+  "standards": [
+    "Michigan Personal Finance foundations — introductory",
+    "Grade 4 economics and mathematics connections",
+    "Manuel Academy Financial Literacy elementary sequence — Grade 4",
+    "Manuel Academy Financial Literacy G4 Unit 1 — choices, scarcity, and tradeoffs"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u01-l05.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "Step two of Omar's routine lists the options. Total the second option, which has two invented parts.",
+      "prompt": "What does the plain helmet with a light cost together?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Step three compares the costs. Put Omar's $32.00 set beside the option you just totalled, then say which is cheaper.",
+      "prompt": "How much cheaper is the second option?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-choice",
+      "directions": "Step three compares the costs. Put Omar's $32.00 set beside the option you just totalled, then say which is cheaper.",
+      "prompt": "Which option costs Omar less?"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "Step four checks what is left. Run it for both of Omar's options against his $45.00.",
+      "prompt": "What is left after the scooter helmet set?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-numeric",
+      "directions": "Step four checks what is left. Run it for both of Omar's options against his $45.00.",
+      "prompt": "What is left after the plain helmet with a light?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Cheaper is not automatically the answer.",
+      "prompt": "Omar's routine says to compare costs, not just find the smallest number. What else should he check before deciding between these two helmets?"
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-04/financial-literacy/ma-g4-financial-literacy-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Applying a decision routine criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g4-financial-literacy-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-04/swk-fl-g4-u01-l05.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Money Choices and Tradeoffs?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

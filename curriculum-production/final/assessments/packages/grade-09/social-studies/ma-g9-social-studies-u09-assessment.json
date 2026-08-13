@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g9-social-studies-u09-assessment",
+  "courseRef": "ma-g9-social-studies",
+  "grade": 9,
+  "subject": "social-studies",
+  "location": {
+    "unitRef": "ma-g9-social-studies-u09",
+    "unitNumber": 9,
+    "unitTitle": "America in a New Global Age",
+    "courseTitle": "United States History and Geography (1870 to the Present)",
+    "assessmentLessonRef": "ma-g9-social-studies-u09-l11"
+  },
+  "standards": [
+    "USHG 9.1.1",
+    "USHG 9.1.2",
+    "USHG 9.2.1",
+    "USHG 9.2.2",
+    "USHG 9.3.1",
+    "P3",
+    "P4"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/social-studies/grade-9/ma-g9-social-studies/ma-g9-social-studies-u09-l11.md",
+  "instructions": [
+    "Use only the attached, real, dated sources. Identify each source and cite specific evidence for claims.",
+    "Explain source limits or perspective. If a required source is not attached, stop and request it."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "task-01",
+      "kind": "source-evidence-task",
+      "prompt": "**Task shape for this phase (Unit assessment):** work with the sources required by the unit assessment prompts.\n\nThis unit's named, real anchor sources (attach the actual text/map/data retrieved from the named repository -- do not quote from memory):\n- Immigration and Nationality Act Amendments of 1965, the Hart-Celler Act (National Archives)\n- United States Census Bureau population and economic series (census.gov)\n- Federal Reserve Economic Data series (fred.stlouisfed.org)\n\n**Primary vs. secondary:** Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits."
+    },
+    {
+      "taskRef": "task-02",
+      "kind": "map-data-document-analysis",
+      "prompt": "Using the Source Record below, log every source consulted for \"contemporary policy debates\" (unit: America in a New Global Age).\n\n- Creator or organization\n- Title\n- Date\n- Where it was found\n- Original source or repost?\n- Evidence used\n- Reason to trust, question, or limit it\n- How it was quoted, paraphrased, or represented\n\nThen apply the Claim–Evidence–Reasoning frame: state a claim about contemporary policy debates, cite the specific evidence from the logged source(s), explain the reasoning that connects them, and name one limit -- what the evidence does not show or where it might be biased or incomplete.\n\nTie the analysis back to the unit's essential question: \"How do documented patterns since 1870 inform current policy debates?\""
+    },
+    {
+      "taskRef": "task-03",
+      "kind": "independent-response",
+      "prompt": "Complete the unit assessment prompts independently, in the order given, showing sourced evidence for every prompt that asks for it:\n\n- **concept and vocabulary** (4 pts): Explain globalization and the United States economy in your own words and give or identify a valid example.\n- **representation or source** (5 pts): Use a map, data display, timeline, document analysis, or worked process to show understanding of domestic political realignment, religion in politics, and partisanship.\n- **application** (6 pts): Apply America's changing role in the world after the Cold War in a new realistic situation. Show the reasoning and cite the evidence.\n- **error or claim analysis** (6 pts): Analyze a plausible error, unsupported claim, or misuse of a source involving September 11, 2001 and responses to terrorism; correct it and explain why.\n- **connection** (5 pts): Connect globalization and the United States economy with historical argument and public issues. Explain how the ideas support, constrain, contrast with, or build on one another.\n- **source provenance and citation** (5 pts): For one source you used, identify it as primary or secondary, state who produced it and when, explain what perspective it represents, name one thing it does not show, and cite it so another reader could find it.\n- **performance evidence** (8 pts): Present the strongest evidence from the unit project: Complete the course capstone: a researched historical argument connecting one documented pattern since 1870 to a current policy debate.\n- **reflection and transfer** (4 pts): Identify one skill you can now transfer, one check that improves accuracy or source reliability, and one next question.\n\nTotal: 43 points. Rubric dimensions: accuracy and historical or economic context, evidence, reasoning, and citation, source use, provenance, and perspective, application or performance, checking and revision.\n\nMastery interpretation -- Secure: At least 85% with accurate independent application, cited evidence, and fair treatment of perspectives. Developing: 70–84% or inconsistent explanation or citation; assign targeted review and a fresh transfer check. Not yet: Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence."
+    },
+    {
+      "taskRef": "task-04",
+      "kind": "evidence-requirements",
+      "prompt": "- Cite the sources required by the unit assessment prompts, each logged with the Source Record fields above.\n- Every claim is backed by a specific, cited piece of evidence -- not an unsupported opinion.\n- Identify each source as primary or secondary, state who produced it and when, and note what perspective it represents and what it omits.\n- Every claim offered as evidence names its source with enough detail for another reader to locate it. Quotations must be transcribed by the learner from the retrieved source; this package supplies no quoted text."
+    }
+  ],
+  "responseMode": "source-based-claim-evidence-reasoning",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-09/social-studies/ma-g9-social-studies-u09-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated accuracy or fidelity criterion.",
+    "Provide evidence that meets the stated evidence and reasoning criterion.",
+    "Provide evidence that meets the stated application or performance criterion.",
+    "Provide evidence that meets the stated checking and revision criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g9-social-studies-u09-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/social-studies/grade-9/ma-g9-social-studies/ma-g9-social-studies-u09-l11.md",
+    "unitObjective": "How can the learner demonstrate the goals of America in a New Global Age?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

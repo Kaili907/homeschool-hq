@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g10-financial-literacy-u04-assessment",
+  "courseRef": "ma-g10-financial-literacy",
+  "grade": 10,
+  "subject": "financial-literacy",
+  "authorityClass": "RUBRIC_REQUIRED",
+  "rubricDimensions": [
+    "Applying the stated criteria",
+    "Defending the tradeoff",
+    "Transfer to the new case"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/financial-literacy/scoring/grade-10/swk-flhs-g10-u04-l11.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/financial-literacy/grade-10/assessments.json"
+  },
+  "completionAuthority": null,
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

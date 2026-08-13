@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g10-technology-u01-assessment",
+  "courseRef": "ma-g10-technology",
+  "grade": 10,
+  "subject": "technology",
+  "location": {
+    "unitRef": "ma-g10-technology-u01",
+    "unitNumber": 1,
+    "unitTitle": "Data Representation and Structures",
+    "courseTitle": "Programming I",
+    "assessmentLessonRef": "ma-g10-technology-u01-l05"
+  },
+  "standards": [
+    "Michigan Computer Science: Algorithms and Programming",
+    "Data and Analysis"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u01-l05.task-package.json",
+  "instructions": [
+    "Create, test, debug, or explain the requested artifact using fictional data and no real credentials or personal information.",
+    "Record expected and actual results, include an edge case, and revise after testing."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "primary-task",
+      "kind": "primary-task",
+      "prompt": "Demonstrate data representation and structures independently, with no scaffold, prompts, or worked example in view. Produce a complete correct solution to a new problem, then prove it works: state the expected result first, run or hand-trace at least two cases including one boundary case, and show actual against expected. Then explain the reasoning in your own words well enough that a reader who has not seen data representation and structures could follow why each decision was made. Both the working result and the explanation are required — either one alone is incomplete. Anchor today's work inside its unit: this session's evidence is about data representation and structures, and it belongs to \"Data Representation and Structures\", which also covers separate topics such as numeric text and binary encoding. Close out with this check before you stop: Identify the item you are least confident about and say what would resolve it. At grade 10 the bar is independent work that justifies its approach against a named alternative you considered and rejected, with the trade-off stated concretely."
+    },
+    {
+      "taskRef": "deliverable",
+      "kind": "deliverable",
+      "prompt": "Independent complete solution, a two-case verification with expected against actual, and a self-contained written explanation."
+    }
+  ],
+  "responseMode": "project-code-debug-log-or-design",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-10/technology/ma-g10-technology-u01-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "The learner completes the central task on data representation and structures.",
+    "The learner supplies evidence, reasoning, a model, or a documented process rather than an unsupported answer.",
+    "The learner checks or revises the work and can name a next step."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g10-technology-u01-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/student-work/technology-arts-lessons/packages/technology/grade-10/ma-g10-technology-u01-l05.task-package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Data Representation and Structures?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

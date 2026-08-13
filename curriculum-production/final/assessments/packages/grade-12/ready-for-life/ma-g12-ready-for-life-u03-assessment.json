@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g12-ready-for-life-u03-assessment",
+  "courseRef": "ma-g12-ready-for-life",
+  "grade": 12,
+  "subject": "ready-for-life",
+  "location": {
+    "unitRef": "ma-g12-ready-for-life-u03",
+    "unitNumber": 3,
+    "unitTitle": "Workplace Entry and Professional Systems",
+    "courseTitle": "Ready for Life 12: Independent Adult Living Capstone",
+    "assessmentLessonRef": "ma-g12-ready-for-life-u03-l06"
+  },
+  "standards": [
+    "Manuel Academy RFL 9-12 competencies"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l06.package.json",
+  "instructions": [
+    "Complete the task or its stated simulation alternative. Do not submit photos, recordings, addresses, account details, or private household information.",
+    "Learner completion never certifies a guardian-authority task; those tasks remain pending until a guardian attests."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "short-response",
+      "directions": "Before matching, guess which of the three fictional questions would be hardest to find an answer to.",
+      "prompt": "Of the three fictional questions (overtime, a safety concern, being asked to skip a break), which do you guess would be hardest to find a reliable answer to, and why?"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "checklist-item",
+      "directions": "Assemble the week's artifacts into one packet.",
+      "prompt": "My packet includes the acceptance reply, unwritten-expectations notes, mistake-report script, and pay-statement notes."
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "extended-response",
+      "directions": "Match each fictional question to the source category most likely to answer it, and justify each match.",
+      "prompt": "For each of the three fictional questions, name the source category (employee handbook, HR, a labor-related government resource, or a posted workplace notice) most likely to have the answer, and explain why that category fits better than the others."
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "short-response",
+      "directions": "Reflect on finding versus knowing.",
+      "prompt": "Why is knowing where to look sometimes more useful than trying to memorize the answer itself?"
+    }
+  ],
+  "responseMode": "task-evidence-or-simulation",
+  "completionScoringAuthorityClass": "COMPLETION_ONLY",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-12/ready-for-life/ma-g12-ready-for-life-u03-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Packet completeness criterion.",
+    "Provide evidence that meets the stated Source matching criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g12-ready-for-life-u03-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/ready-for-life/packages/ready-for-life/grade-12-hs/swk-rfl-g12-u03-l06.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of Workplace Entry and Professional Systems?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}

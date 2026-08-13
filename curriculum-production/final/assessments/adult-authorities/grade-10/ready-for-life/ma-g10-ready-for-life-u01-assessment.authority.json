@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "restricted-adult-assessment-authority",
+  "assessmentRef": "ma-g10-ready-for-life-u01-assessment",
+  "courseRef": "ma-g10-ready-for-life",
+  "grade": 10,
+  "subject": "ready-for-life",
+  "authorityClass": "COMPLETION_ONLY",
+  "rubricDimensions": [
+    "Completeness and consistency of the findings record",
+    "Grounding in prior research",
+    "Concreteness of the revisit plan"
+  ],
+  "scoringSourceRef": "repo:curriculum-production/final/ready-for-life/scoring/ready-for-life/grade-10-hs/swk-rfl-g10-u01-l06.scoring.json",
+  "scoringSourceAuthority": {
+    "input": "hs912_normalization",
+    "commit": "42874644adc9d7eba0fe85bc712043d128ed11de",
+    "path": "curriculum-release-candidates/hs912-r1/ready-for-life/grade-10/assessments.json"
+  },
+  "completionAuthority": {
+    "kind": "learner",
+    "learnerAssertionCanCertify": true,
+    "adultAttestationRequired": false
+  },
+  "assessorBoundary": "INJECTED_PRODUCTION_ASSESSOR"
+}

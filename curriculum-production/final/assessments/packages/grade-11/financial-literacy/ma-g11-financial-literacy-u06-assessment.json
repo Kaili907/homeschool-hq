@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "canonical-learner-assessment-package",
+  "assessmentRef": "ma-g11-financial-literacy-u06-assessment",
+  "courseRef": "ma-g11-financial-literacy",
+  "grade": 11,
+  "subject": "financial-literacy",
+  "location": {
+    "unitRef": "ma-g11-financial-literacy-u06",
+    "unitNumber": 6,
+    "unitTitle": "PF6 — Protecting and Insuring: Risk Management Across a Household",
+    "courseTitle": "Investing, Insurance, and Risk Management",
+    "assessmentLessonRef": "ma-g11-financial-literacy-u06-l10"
+  },
+  "standards": [
+    "PF6"
+  ],
+  "standardsMappingAuthority": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u06-l10.package.json",
+  "instructions": [
+    "Use only the fictional or supplied figures. Do not disclose household income, accounts, balances, or spending.",
+    "Show computations for fixed items and explain the tradeoff or decision for open items."
+  ],
+  "learnerTasks": [
+    {
+      "taskRef": "t1-p1",
+      "kind": "fixed-numeric",
+      "directions": "A single covered loss of $26,700 has occurred. Policy A applies first, with a $2,000 deductible and a $15,000 limit. Policy B applies to what Policy A leaves, with a $500 deductible and a $7,000 limit. Policy C applies to what Policy B leaves, with no deductible and a $3,000 limit. Apply each policy’s deductible before its limit.",
+      "prompt": "How much does Policy A pay?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p2",
+      "kind": "fixed-numeric",
+      "directions": "A single covered loss of $26,700 has occurred. Policy A applies first, with a $2,000 deductible and a $15,000 limit. Policy B applies to what Policy A leaves, with a $500 deductible and a $7,000 limit. Policy C applies to what Policy B leaves, with no deductible and a $3,000 limit. Apply each policy’s deductible before its limit.",
+      "prompt": "How much of the loss remains after Policy A has paid?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p3",
+      "kind": "fixed-numeric",
+      "directions": "A single covered loss of $26,700 has occurred. Policy A applies first, with a $2,000 deductible and a $15,000 limit. Policy B applies to what Policy A leaves, with a $500 deductible and a $7,000 limit. Policy C applies to what Policy B leaves, with no deductible and a $3,000 limit. Apply each policy’s deductible before its limit.",
+      "prompt": "How much does Policy B pay, against what remains?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t1-p4",
+      "kind": "fixed-numeric",
+      "directions": "A single covered loss of $26,700 has occurred. Policy A applies first, with a $2,000 deductible and a $15,000 limit. Policy B applies to what Policy A leaves, with a $500 deductible and a $7,000 limit. Policy C applies to what Policy B leaves, with no deductible and a $3,000 limit. Apply each policy’s deductible before its limit.",
+      "prompt": "How much of the loss remains after Policy B has paid?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p1",
+      "kind": "fixed-numeric",
+      "directions": "Finish the claim and account for every dollar.",
+      "prompt": "How much does Policy C pay, against what remains?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p2",
+      "kind": "fixed-numeric",
+      "directions": "Finish the claim and account for every dollar.",
+      "prompt": "How much does Thelonius pay out of pocket?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p3",
+      "kind": "fixed-numeric",
+      "directions": "Finish the claim and account for every dollar.",
+      "prompt": "How much did the three policies pay between them?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p4",
+      "kind": "fixed-numeric",
+      "directions": "Finish the claim and account for every dollar.",
+      "prompt": "What share of the loss was covered? Give one decimal place.",
+      "responseUnit": "percent"
+    },
+    {
+      "taskRef": "t2-p5",
+      "kind": "fixed-numeric",
+      "directions": "Finish the claim and account for every dollar.",
+      "prompt": "The three annual premiums are $1,180, $430, and $295. What do they come to?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t2-p6",
+      "kind": "fixed-numeric",
+      "directions": "Finish the claim and account for every dollar.",
+      "prompt": "How many times the annual premium total is the amount the three policies paid? Give two decimal places.",
+      "responseUnit": "ratio"
+    },
+    {
+      "taskRef": "t3-p1",
+      "kind": "fixed-numeric",
+      "directions": "One check before the recommendation.",
+      "prompt": "What is the largest loss this arrangement could fully cover?",
+      "responseUnit": "USD"
+    },
+    {
+      "taskRef": "t3-p2",
+      "kind": "fixed-choice",
+      "directions": "One check before the recommendation.",
+      "prompt": "Which single change would have covered this $26,700 loss in full?"
+    },
+    {
+      "taskRef": "t4-p1",
+      "kind": "extended-response",
+      "directions": "Write your recommendation. Answer both.",
+      "prompt": "Recommend one change to this arrangement. State what it would have cost on this claim, what it would cost in a year with no claim, and why you chose it over the alternatives."
+    },
+    {
+      "taskRef": "t4-p2",
+      "kind": "short-response",
+      "directions": "Write your recommendation. Answer both.",
+      "prompt": "The policies paid 13.12 times the annual premium on this claim. Say why that figure is a poor measure of whether the arrangement is worth holding, and what would be a better one."
+    }
+  ],
+  "responseMode": "mixed-fixed-and-constructed",
+  "completionScoringAuthorityClass": "RUBRIC_REQUIRED",
+  "adultScoringAuthorityRef": "restricted:curriculum-production/final/assessments/adult-authorities/grade-11/financial-literacy/ma-g11-financial-literacy-u06-assessment.authority.json",
+  "learnerSuccessCriteria": [
+    "Provide evidence that meets the stated Communicating uncertainty criterion.",
+    "Provide evidence that meets the stated Applying the stated criteria criterion.",
+    "Provide evidence that meets the stated Coherence of the plan criterion.",
+    "Provide evidence that meets the stated Defending the tradeoff criterion."
+  ],
+  "accommodations": "Access supports may change format, pacing, quantity, setting, or response mode without changing the assessed objective.",
+  "provenance": {
+    "structuralAssessmentRef": "ma-g11-financial-literacy-u06-assessment",
+    "metadataRef": null,
+    "learnerMaterialRef": "repo:curriculum-production/final/financial-literacy/packages/grade-11/swk-flhs-g11-u06-l10.package.json",
+    "unitObjective": "How can the learner demonstrate the goals of PF6 — Protecting and Insuring: Risk Management Across a Household?"
+  },
+  "productionReadiness": {
+    "status": "READY",
+    "structuralOnly": false,
+    "answerMaterialIncluded": false,
+    "requiresSourceAttachment": false,
+    "sourceResolverKey": null
+  }
+}
